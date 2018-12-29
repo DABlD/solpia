@@ -37,8 +37,8 @@
 				@if(isset($route->defaults['sidebar']))
 					{{-- Check if route is for current role --}}
 					@if(in_array(Auth::user()->role, $route->defaults['roles']))
-						<li class="{{ $route->uri == request()->path() ? 'active' : '' }}">
-							<a href="{{ $route->defaults['href'] }}">
+						<li class="{{ str_contains(request()->path(), $route->uri) ? 'active' : '' }}">
+							<a href="{{ url($route->defaults['href']) }}">
 								<i class="fa {{ $route->defaults['icon'] }}"></i> 
 								<span>{{ $route->defaults['name'] }}</span>
 								{{-- <span class="pull-right-container">

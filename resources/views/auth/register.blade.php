@@ -11,63 +11,85 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" name="fname" placeholder="Enter First Name" autofocus>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="mname">Middle Name</label>
+                                <input type="text" class="form-control" name="mname" placeholder="Enter Middle Name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control" name="lname" placeholder="Enter Last Name">
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" name="address" placeholder="Enter Address">
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" placeholder="Enter Email">
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="contact">Contact Number</label>
+                                <input type="text" class="form-control" name="contact" placeholder="Enter Contact Number">
+                            </div>
+                        </div>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="birthday">Birthday</label>
+                                <input type="email" class="form-control" name="birthday" placeholder="Select Birthday">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="gender">Gender</label>
+                                <br>
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="Male" checked> Male
+                                </label>
+                                &nbsp; &nbsp;
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="Female"> Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Enter Password">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="confirm_password">Confirm Password</label>
+                                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password">
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-2 offset-md-10">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -75,3 +97,22 @@
     </div>
 </div>
 @endsection
+
+@push('after-styles')
+    <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
+@endpush
+
+@push('after-scripts')
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/flatpickr.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
+
+    <script>
+        $('[name="birthday"]').flatpickr({
+            altInput: true,
+            altFormat: 'F j, Y',
+            dateFormat: 'Y-m-d',
+            maxDate: moment().format('YYYY-MM-DD')
+        });
+    </script>
+@endpush
