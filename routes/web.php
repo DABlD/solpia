@@ -28,6 +28,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// PUBLIC ROUTES
+Route::get('validate', 'ValidationController@index');
+
 //Authenticated
 Route::group([
 		'middleware' => 'auth',
