@@ -102,7 +102,7 @@
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
 @endpush
 
-@push('after-scripts')
+@push('before-scripts')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/flatpickr.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>

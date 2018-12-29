@@ -79,6 +79,7 @@
         </main>
     </div>
 
+    @stack('before-scripts')
     @stack('after-scripts')
 </body>
 </html>
