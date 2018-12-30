@@ -55,5 +55,7 @@ Route::group([
 			->defaults('roles', array('Admin', 'Owner'))
 			->name('users.index')
 			->defaults('href', 'users');
+
+		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');
 	}
 );
