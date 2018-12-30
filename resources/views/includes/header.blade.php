@@ -147,8 +147,8 @@
               <li class="user-header">
                 <img src="{{ asset('uploads/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{ auth()->user()->fullname }}
+                  <small>Member since {{ auth()->user()->created_at->format('M. d, Y') }}</small>
                 </p>
               </li>
               <li class="user-footer">
