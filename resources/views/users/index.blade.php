@@ -50,6 +50,7 @@
 
 @push('before-scripts')
 	<script src="{{ asset('js/datatables.js') }}"></script>
+	<script src="{{ asset('js/moment.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -67,15 +68,14 @@
                 { data: 'created_at', name: 'created_at' },
                 { data: 'actions', name: 'actions' },
             ],
-            // columnDefs: [
-            //     {
-            //         targets: 6,
-            //         render: function(date)
-            //         {
-            //             return moment(date).format('MMM DD, YYYY hh:mm A');
-            //         }
-            //     },
-            // ],
+            columnDefs: [
+                {
+                    targets: [3,5],
+                    render: function(date){
+                        return moment(date).format('MMM DD, YYYY');
+                    }
+                },
+            ],
             // fnDrawCallback: function(){
             //     $('#requestsPreloader').fadeOut();
             // }
