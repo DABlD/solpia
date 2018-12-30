@@ -44,8 +44,16 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-user')
 			->defaults('name', 'Dashboard')
-			->defaults('roles', array('Admin'))
+			->defaults('roles', array('Admin', 'Owner', 'Inventory Clerk', 'Sales Clerk'))
 			->name('dashboard')
 			->defaults('href', 'dashboard');
+
+		Route::get('users', 'UsersController@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-users')
+			->defaults('name', 'Users Management')
+			->defaults('roles', array('Admin', 'Owner'))
+			->name('users.index')
+			->defaults('href', 'users');
 	}
 );
