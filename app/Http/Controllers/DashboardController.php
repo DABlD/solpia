@@ -7,7 +7,13 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    function index(){
-    	return view('dashboard')->withTitle('Dashboard');
+    public function index(){
+    	return $this->_view('dashboard', [
+    		'title' => 'Dashboard'
+    	]);
+    }
+
+    private function _view($view, $data = array()){
+    	return view($view, $data);
     }
 }
