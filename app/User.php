@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\UserAttribute;
+use Hash;
 
 class User extends Authenticatable
 {
@@ -35,4 +36,8 @@ class User extends Authenticatable
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at', 'birthday'
     ];
+
+    public function setPasswordAttribute($value) {
+        $this->attributes['password'] = Hash::make($value);
+    }
 }

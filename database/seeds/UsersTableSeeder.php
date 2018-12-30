@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             'address' => 'Rm. 628, Park Avenue Mansions, Park Avenue St.,, Barangay 81',
             'contact' => '09154590172',
             'email_verified_at' => now()->toDateTimeString(),
-            'password' => '$2y$10$c.B00sqGwH6Vg3ymlGb1LuIHnIXPq9T4CsBhu5jxbGEmiPU82eqSy'
+            'password' => '123456'
         ]);
     }
 }
