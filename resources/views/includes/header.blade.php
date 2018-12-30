@@ -140,12 +140,12 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('uploads/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+              <img src="{{ asset(auth()->user()->avatar)}}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ auth()->user()->fullname }}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <img src="{{ asset('uploads/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                <img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image">
                 <p>
                   {{ auth()->user()->fullname }}
                   <small>Member since {{ auth()->user()->created_at->format('M. d, Y') }}</small>
