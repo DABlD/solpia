@@ -5,10 +5,10 @@
 
 		<div class="user-panel">
 			<div class="pull-left image">
-				<img src="{{ asset('uploads/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+				<img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>Alexander Pierce</p>
+				<p>{{ auth()->user()->fullname }}</p>
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
 		</div>
