@@ -9,7 +9,7 @@
 
 				<div class="box-header">
 					<div class="pull-right">
-						<a href="" class="btn btn-success" data-toggle="tooltip" title="Add User" data-placement="left">
+						<a class="btn btn-success" data-toggle="tooltip" title="Add User" data-placement="left">
 							<span class="fa fa-plus"></span>
 						</a>
 					</div>
@@ -48,6 +48,7 @@
 @push('before-scripts')
 	<script src="{{ asset('js/datatables.js') }}"></script>
 	<script src="{{ asset('js/moment.js') }}"></script>
+	<script src="{{ asset('js/swal.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -74,6 +75,9 @@
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
+            },
+            initComplete: () => {
+            	initializeActions();
             }
             // order: [ [0, 'desc'] ],
         });
@@ -82,6 +86,18 @@
         	setTimeout(() => {
         		$('.preloader').fadeOut();
         	}, 800);
-        })
+        });
+
+        function initializeActions(){
+	    	$('[title="View User"]').on('click', user => {
+	    		$.ajax({
+	    			url: 'users/get/' + $(user.target).data('id'),
+	    			success: user => {
+	    				user = JSON.parse(user);
+	    				console.log(user);
+	    			}
+	    		});
+	    	});
+        };
 	</script>
 @endpush

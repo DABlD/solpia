@@ -48,6 +48,7 @@ Route::group([
 			->name('dashboard')
 			->defaults('href', 'dashboard');
 
+		// USER ROUTES
 		Route::get('users', 'UsersController@index')
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-users')
@@ -55,7 +56,9 @@ Route::group([
 			->defaults('roles', array('Admin', 'Owner'))
 			->name('users.index')
 			->defaults('href', 'users');
+		Route::get('users/get/{user}', 'UsersController@get')->name('users.get');
 
+		// DATATABLE ROUTES
 		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');
 	}
 );

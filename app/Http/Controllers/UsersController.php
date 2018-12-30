@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -10,6 +11,10 @@ class UsersController extends Controller
     	return $this->_view('index', [
     		'title' => 'User Management'
     	]);
+    }
+
+    public function get(User $user){
+    	echo json_encode($user);
     }
 
     private function _view($view, $data = array()){

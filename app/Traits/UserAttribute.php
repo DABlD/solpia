@@ -9,8 +9,8 @@ trait UserAttribute{
 	}
 
 	public function getActionsAttribute(){
-		return '<a class="btn btn-success" data-toggle="tooltip" title="View User">' .
-			        '<span class="fa fa-search"></span>' .
+		return '<a class="btn btn-success" data-toggle="tooltip" title="View User" data-id="' . $this->id . '">' .
+			        '<span class="fa fa-search fa-xs" data-id="' . $this->id . '"></span>' .
 			   '</a>';
 	}
 }
