@@ -28,9 +28,6 @@
 								<th>Action</th>
 							</tr>
 						</thead>
-						<tbody>
-							
-						</tbody>
 					</table>
 				</div>
 
@@ -55,8 +52,7 @@
 
 @push('after-scripts')
 	<script>
-		$('#table').DataTable({
-            processing: true,
+		let table = $('#table').DataTable({
             serverSide: true,
             ajax: '{{ route('datatables.users') }}',
             columns: [
@@ -76,10 +72,16 @@
                     }
                 },
             ],
-            // fnDrawCallback: function(){
-            //     $('#requestsPreloader').fadeOut();
-            // }
+            drawCallback: function(){
+                $('#table tbody').append('<div class="preloader"></div>');
+            }
             // order: [ [0, 'desc'] ],
         });
+
+        table.on('draw', () => {
+        	setTimeout(() => {
+        		$('.preloader').fadeOut();
+        	}, 800);
+        })
 	</script>
 @endpush
