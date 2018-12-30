@@ -207,6 +207,9 @@
 
                 !bool? clearError(input, temp, error) : '';
             });
+
+            // IF THERE IS NO ERROR. SUBMIT.
+            !$('.is-invalid').is(':visible')? $('#registerForm').submit() : '';
         });
 
         function showError(input, temp, error, message){
