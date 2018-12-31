@@ -12,7 +12,7 @@
 				</div>
 
 				<div class="box-body">
-					<form method="POST" action="{{ route('register') }}" id="createForm">
+					<form method="POST" action="{{ route('users.store') }}" id="createForm">
                         @csrf
 
                         <div class="row">
@@ -232,7 +232,7 @@
             });
 
             // IF THERE IS NO ERROR. SUBMIT.
-            !$('.is-invalid').is(':visible')? $('#registerForm').submit() : '';
+            !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
         });
 
         function showError(input, temp, error, message){
