@@ -52,10 +52,6 @@
   <script src="{{ asset('js/swal.js') }}"></script>
 
   <script>
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-
     @if ($errors->any())
       swal({
         type: 'error',
@@ -80,5 +76,11 @@
 
   @stack('before-scripts')
   @stack('after-scripts')
+
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+  </script>
 </body>
 </html>
