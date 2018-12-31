@@ -12,3 +12,12 @@
 .box-body{
 	margin: 0px 20px 0px 20px;
 }
+
+.invalid-feedback {
+	line-height: 1.6;
+    font-family: Nunito,sans-serif;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #e3342f;
+}
