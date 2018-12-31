@@ -8,11 +8,7 @@
 			<div class="box box-info">
 
 				<div class="box-header">
-					<div class="pull-right">
-						<a href="{{ route('users.create') }}" class="btn btn-success" data-toggle="tooltip" title="Add User" data-placement="left">
-							<span class="fa fa-plus"></span>
-						</a>
-					</div>
+					@include('users.includes.toolbar')
 				</div>
 
 				<div class="box-body">
