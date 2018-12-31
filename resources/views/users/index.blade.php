@@ -9,7 +9,7 @@
 
 				<div class="box-header">
 					<div class="pull-right">
-						<a class="btn btn-success" data-toggle="tooltip" title="Add User" data-placement="left">
+						<a href="{{ route('users.create') }}" class="btn btn-success" data-toggle="tooltip" title="Add User" data-placement="left">
 							<span class="fa fa-plus"></span>
 						</a>
 					</div>

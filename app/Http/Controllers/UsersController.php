@@ -8,8 +8,14 @@ use App\User;
 class UsersController extends Controller
 {
     public function index(){
-    	return $this->_view('index', [
-    		'title' => 'User Management'
+        return $this->_view('index', [
+            'title' => 'User Management'
+        ]);
+    }
+
+    public function create(){
+    	return $this->_view('create', [
+    		'title' => 'Add User'
     	]);
     }
 

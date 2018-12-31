@@ -56,6 +56,7 @@ Route::group([
 			->defaults('roles', array('Admin', 'Owner'))
 			->name('users.index')
 			->defaults('href', 'users');
+		Route::get('users/create', 'UsersController@create')->name('users.create');
 		Route::get('users/get/{user}', 'UsersController@get')->name('users.get');
 
 		// DATATABLE ROUTES
