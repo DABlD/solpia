@@ -16,75 +16,75 @@
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success">5</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
+              <li class="header">You have 5 messages</li>
               <li>
                 <ul class="menu">
 
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="{{ asset('uploads/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                        <img src="{{ asset('images/default_avatar.jpg')}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Support Team
+                        Test Name
                         <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>Test Message</p>
                     </a>
                   </li>
 
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="{{ asset('uploads/user3-128x128.jpg')}}" class="img-circle" alt="User Image">
+                        <img src="{{ asset('images/default_avatar.jpg')}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        AdminLTE Design Team
-                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                        Test Name
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>Test Message</p>
                     </a>
                   </li>
 
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="{{ asset('uploads/user4-128x128.jpg')}}" class="img-circle" alt="User Image">
+                        <img src="{{ asset('images/default_avatar.jpg')}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Developers
-                        <small><i class="fa fa-clock-o"></i> Today</small>
+                        Test Name
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>Test Message</p>
                     </a>
                   </li>
 
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="{{ asset('uploads/user3-128x128.jpg')}}" class="img-circle" alt="User Image">
+                        <img src="{{ asset('images/default_avatar.jpg')}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Sales Department
-                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                        Test Name
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>Test Message</p>
                     </a>
                   </li>
 
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="{{ asset('uploads/user4-128x128.jpg')}}" class="img-circle" alt="User Image">
+                        <img src="{{ asset('images/default_avatar.jpg')}}" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Reviewers
-                        <small><i class="fa fa-clock-o"></i> 2 days</small>
+                        Test Name
+                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>Test Message</p>
                     </a>
                   </li>
 
@@ -107,28 +107,27 @@
                 <ul class="menu">
                   <li>
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="fa fa-users text-aqua"></i> Test Notif
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
+                      <i class="fa fa-warning text-yellow"></i> Test Notif Test Notif Test Notif Test Notif Test Notif Test Notif Test Notif
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
+                      <i class="fa fa-users text-red"></i> Test Notif
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                      <i class="fa fa-shopping-cart text-green"></i> Test Notif
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
+                      <i class="fa fa-user text-red"></i> Test Notif
                     </a>
                   </li>
                 </ul>
