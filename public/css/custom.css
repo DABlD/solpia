@@ -8,3 +8,7 @@
 	overflow: visible; 
 	background: rgba(240,241,242,0.95) url('../svg/preloader.svg') no-repeat center center;"
 }
+
+.box-body{
+	margin: 0px 20px 0px 20px;
+}
