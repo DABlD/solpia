@@ -5,3 +5,15 @@ function toDate(timetamp){
 function toDateTime(timestamp){
 	return moment(timestamp).format('MMM. DD, YYYY h:mm A');	
 }
+
+// SWAL
+
+function swalNotification(type, title, text = ""){
+	swal({
+		type: type,
+		title: title,
+		text: text,
+		timer: 800,
+		showConfirmButton: false,
+	});
+}
