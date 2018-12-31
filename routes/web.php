@@ -56,8 +56,11 @@ Route::group([
 			->defaults('roles', array('Admin', 'Owner'))
 			->name('users.index')
 			->defaults('href', 'users');
+
 		Route::get('users/create', 'UsersController@create')->name('users.create');
+		Route::post('users/store', 'UsersController@store')->name('users.store');
 		Route::get('users/get/{user}', 'UsersController@get')->name('users.get');
+		Route::get('users/delete/{user}', 'UsersController@delete')->name('users.delete');
 
 		// DATATABLE ROUTES
 		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');

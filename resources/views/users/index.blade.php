@@ -164,6 +164,30 @@
 	    			}
 	    		});
 	    	});
+
+	    	$('[title="Delete User"]').on('click', user => {
+	    		swal({
+	    			type: 'warning',
+	    			title: 'Are you sure you want to delete?',
+	    			showCancelButton: true,
+	    			allowOutsideClick: false,
+	    			cancelButtonColor: '#f76c6b',
+	    		}).then(choice => {
+	    			if(choice.value){
+	    				$.ajax({
+	    					url: 'users/delete/' + $(user.target).data('id'),
+	    					success: result => {
+	    						$('#table').DataTable().ajax.reload();
+
+	    						swalNotification(
+	    							result? 'success' : 'error',
+	    							result? 'Successfully deleted' : 'Try Again',
+	    						);
+	    					}
+	    				});
+	    			}
+	    		});
+	    	});
         };
 	</script>
 @endpush
