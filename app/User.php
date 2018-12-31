@@ -21,7 +21,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fname', 'mname', 'lname', 'email', 'birthday', 'gender', 'address', 'contact', 'password'
+        'role', 'fname', 'mname', 
+        'lname', 'email', 'birthday', 
+        'gender', 'address', 'contact', 
+        'password', 'email_verified_at'
     ];
 
     /**
@@ -34,7 +37,7 @@ class User extends Authenticatable
     ];
 
     protected $dates = [
-        'created_at', 'updated_at', 'deleted_at', 'birthday'
+        'created_at', 'updated_at', 'deleted_at', 'birthday', 'email_verified_at'
     ];
 
     public function setPasswordAttribute($value) {
