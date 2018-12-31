@@ -99,6 +99,20 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
+                                <label for="role">Role</label>
+                                <br>
+                                <select name="role" class="form-control aeigh">
+                                	<option value=""></option>
+                                	<option value="Admin">Admin</option>
+                                </select>
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="roleError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control aeigh" name="password" placeholder="Enter Password">
                                 <span class="invalid-feedback hidden" role="alert">
@@ -138,11 +152,13 @@
 
 @push('after-styles')
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 @endpush
 
 @push('before-scripts')
     <script src="{{ asset('js/flatpickr.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
 
     <script>
         $('[name="birthday"]').flatpickr({
@@ -150,6 +166,10 @@
             altFormat: 'F j, Y',
             dateFormat: 'Y-m-d',
             maxDate: moment().format('YYYY-MM-DD')
+        });
+
+        $('[name=role]').select2({
+        	placeholder: 'Select Role'
         });
     </script>
 @endpush
@@ -162,7 +182,7 @@
         // VALIDATE ON SUBMIT
         $('.submit').click(() => {
             let inputs = $('.aeigh:not(".input")');
-            console.log(inputs);
+            
             $.each(inputs, (index, input) => {
                 let temp = $(input);
                 let error = $('#' + temp.attr('name') + 'Error');
