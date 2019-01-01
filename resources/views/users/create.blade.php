@@ -228,14 +228,23 @@
                     }
                 }
 
-                !bool? clearError(input, temp, error) : '';
+                swal('Validating');
+                swal.showLoading();
+                setTimeout(() => {
+                    !bool? clearError(input, temp, error) : '';
+                    swal.close();
+                }, 1000);
             });
 
             // IF THERE IS NO ERROR. SUBMIT.
-            !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
+            setTimeout(() => {
+                !$('.is-invalid').is(':visible')? $('#editForm').submit() : '';
+            }, 1000)
         });
 
-        function showError(input, temp, error, message){
+        async function showError(input, temp, error, message){
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
             bool = true;
 
             if(input.type != 'hidden'){
