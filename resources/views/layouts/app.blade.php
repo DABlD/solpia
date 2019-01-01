@@ -78,9 +78,10 @@
   @stack('after-scripts')
 
   <script>
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    });
+    function tooltip(){
+      $('[data-toggle="tooltip"]').tooltip();
+    }
+    tooltip();
   </script>
 </body>
 </html>

@@ -72,9 +72,11 @@
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
+                tooltip();
             },
             initComplete: () => {
             	initializeActions();
+            	tooltip;
             }
             // order: [ [0, 'desc'] ],
         });
