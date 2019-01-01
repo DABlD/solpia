@@ -215,7 +215,7 @@
 
             // IF THERE IS NO ERROR. SUBMIT.
             setTimeout(() => {
-                !$('.is-invalid').is(':visible')? $('#editForm').submit() : '';
+                !$('.is-invalid').is(':visible')? $('#registerForm').submit() : '';
             }, 1000)
         });
 
