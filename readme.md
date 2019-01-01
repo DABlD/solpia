@@ -12,4 +12,4 @@
 * #f76c6b - Color used in swal cancel button
 
 # NOTE
-* Add default user role in migration
+* Add roles in seeder
