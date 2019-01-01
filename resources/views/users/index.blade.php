@@ -72,11 +72,9 @@
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
+                // MUST NOT BE INTERCHANGED t-i
                 tooltip();
-            },
-            initComplete: () => {
             	initializeActions();
-            	tooltip;
             },
             order: [ [1, 'desc'] ],
         });
@@ -88,7 +86,7 @@
         });
 
         function initializeActions(){
-	    	$('[title="View User"]').on('click', user => {
+	    	$('[data-original-title="View User"]').on('click', user => {
 	    		$.ajax({
 	    			url: 'users/get/' + $(user.target).data('id'),
 	    			success: user => {
@@ -167,7 +165,11 @@
 	    		});
 	    	});
 
-	    	$('[title="Delete User"]').on('click', user => {
+	    	$('[data-original-title="Edit User"]').on('click', user => {
+	    		window.location.href = "users/edit/" + $(user.target).data('id');
+	    	});
+
+	    	$('[data-original-title="Delete User"]').on('click', user => {
 	    		swal({
 	    			type: 'warning',
 	    			title: 'Are you sure you want to delete?',

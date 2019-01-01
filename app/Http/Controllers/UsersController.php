@@ -19,6 +19,13 @@ class UsersController extends Controller
     	]);
     }
 
+    public function edit(User $user){
+        return $this->_view('edit', [
+            'title' => 'Edit User Details',
+            'user' => array_except($user, ['password'])
+        ]);
+    }
+
     public function store(Request $req){
         $data = $req->except(['confirm_password', '_token']);
 
@@ -28,6 +35,17 @@ class UsersController extends Controller
         }
         else{
             $req->session()->flash('error', 'There was a problem adding the user. Try again.');
+            return back();
+        }
+    }
+
+    public function update(Request $req){
+        if(User::where('id', $req->id)->update($req->except(['_token']))){
+            $req->session()->flash('success', 'User Successfully Updated.');
+            return redirect()->route('users.index');
+        }
+        else{
+            $req->session()->flash('error', 'There was a problem updating the user. Try again.');
             return back();
         }
     }

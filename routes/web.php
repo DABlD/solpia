@@ -57,9 +57,14 @@ Route::group([
 			->name('users.index')
 			->defaults('href', 'users');
 
+		Route::get('users/get/{user}', 'UsersController@get')->name('users.get');
+
 		Route::get('users/create', 'UsersController@create')->name('users.create');
 		Route::post('users/store', 'UsersController@store')->name('users.store');
-		Route::get('users/get/{user}', 'UsersController@get')->name('users.get');
+
+		Route::get('users/edit/{user}', 'UsersController@edit')->name('users.edit');
+		Route::post('users/update', 'UsersController@update')->name('users.update');
+
 		Route::get('users/delete/{user}', 'UsersController@delete')->name('users.delete');
 
 		// DATATABLE ROUTES
