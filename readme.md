@@ -12,4 +12,4 @@
 * #f76c6b - Color used in swal cancel button
 
 # NOTE
-* Add roles in seeder
+* Add roles in RoleSeeder and Role Migration
