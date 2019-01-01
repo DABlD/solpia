@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use App\Http\Composers\GlobalComposer;
+use App\Http\Composers\{GlobalComposer, RoleComposer};
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -25,11 +25,12 @@ class ComposerServiceProvider extends ServiceProvider
         );
 
         // Using Closure based composers...
-        // View::composer(
-        //     [
-        //          array of view directories
-        //     ], GlobalComposer::class
-        // );
+        View::composer(
+            [
+                'users.create',
+                'users.edit'
+            ], RoleComposer::class
+        );
     }
 
     /**

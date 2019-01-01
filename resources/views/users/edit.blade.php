@@ -100,7 +100,9 @@
                                 <label for="role">Role</label>
                                 <br>
                                 <select name="role" class="form-control aeigh">
-                                	<option value="Admin">Admin</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endforeach
                                 </select>
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="roleError"></strong>
