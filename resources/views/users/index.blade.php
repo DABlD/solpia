@@ -77,8 +77,8 @@
             initComplete: () => {
             	initializeActions();
             	tooltip;
-            }
-            // order: [ [0, 'desc'] ],
+            },
+            order: [ [1, 'desc'] ],
         });
 
         table.on('draw', () => {
