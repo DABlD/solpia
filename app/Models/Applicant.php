@@ -26,10 +26,10 @@ class Applicant extends Model
     }
 
     public function educational_background(){
-        return $this->hasOne('App\Models\EducationalBackground');
+        return $this->hasMany('App\Models\EducationalBackground');
     }
 
     public function family_data(){
-        return $this->hasOne('App\Models\FamilyData');
+        return $this->hasMany('App\Models\FamilyData');
     }
 }

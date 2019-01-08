@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
+use App\Models\Applicant;
+
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin');
+        $this->middleware('permissions:' . 'Admin/Encoder');
     }
 
     public function index(){

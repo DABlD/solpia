@@ -99,7 +99,7 @@
                                 <br>
                                 <select name="role" class="form-control aeigh">
                                 	<option></option>
-                                	@foreach($roles as $role)
+                                	@foreach($roles->except(['2']) as $role)
                                         <option value="{{ $role->name }}">{{ $role->name }}</option>
                                     @endforeach
                                 </select>
