@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\ApplicantAttribute;
 
 class Applicant extends Model
 {
-    use SoftDeletes;
+    use ApplicantAttribute,
+        SoftDeletes;
 
     protected $fillable = [
     	'user_id','birth_place','religion',

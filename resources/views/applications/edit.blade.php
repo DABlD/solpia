@@ -12,27 +12,29 @@
 				</div>
 
 				<div class="box-body">
-					<form method="POST" action="{{ route('users.store') }}" id="createForm">
+					<form method="POST" action="{{ route('users.update') }}" id="editForm">
                         @csrf
+
+                        <input type="hidden" name="id" value="{{ $user->id }}">
 
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="fname">First Name</label>
-                                <input type="text" class="form-control aeigh" name="fname" placeholder="Enter First Name" autofocus>
+                                <input type="text" class="form-control aeigh" name="fname" placeholder="Enter First Name" autofocus value="{{ $user->fname }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="fnameError"></strong>
                                 </span>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="mname">Middle Name</label>
-                                <input type="text" class="form-control aeigh" name="mname" placeholder="Enter Middle Name">
+                                <input type="text" class="form-control aeigh" name="mname" placeholder="Enter Middle Name" value="{{ $user->mname }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="mnameError"></strong>
                                 </span>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="lname">Last Name</label>
-                                <input type="text" class="form-control aeigh" name="lname" placeholder="Enter Last Name">
+                                <input type="text" class="form-control aeigh" name="lname" placeholder="Enter Last Name" value="{{ $user->lname }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="lnameError"></strong>
                                 </span>
@@ -42,7 +44,7 @@
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control aeigh" name="address" placeholder="Enter Address">
+                                <input type="text" class="form-control aeigh" name="address" placeholder="Enter Address" value="{{ $user->address }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="addressError"></strong>
                                 </span>
@@ -52,7 +54,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email">
+                                <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email" value="{{ $user->email }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="emailError"></strong>
                                 </span>
@@ -62,7 +64,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="contact">Contact Number</label>
-                                <input type="text" class="form-control aeigh" name="contact" placeholder="Enter Contact Number">
+                                <input type="text" class="form-control aeigh" name="contact" placeholder="Enter Contact Number" value="{{ $user->contact }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="contactError"></strong>
                                 </span>
@@ -98,8 +100,7 @@
                                 <label for="role">Role</label>
                                 <br>
                                 <select name="role" class="form-control aeigh">
-                                	<option></option>
-                                	@foreach($roles->except(['3']) as $role)
+                                    @foreach($roles as $role)
                                         <option value="{{ $role->name }}">{{ $role->name }}</option>
                                     @endforeach
                                 </select>
@@ -109,29 +110,9 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control aeigh" name="password" placeholder="Enter Password">
-                                <span class="invalid-feedback hidden" role="alert">
-                                    <strong id="passwordError"></strong>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="confirm_password">Confirm Password</label>
-                                <input type="password" class="form-control aeigh" name="confirm_password" placeholder="Confirm Password">
-                                <span class="invalid-feedback hidden" role="alert">
-                                    <strong id="confirm_passwordError"></strong>
-                                </span>
-                            </div>
-                        </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-2 col-md-offset-10">
-                                <a class="btn btn-primary submit pull-right">Register</a>
+                                <a class="btn btn-primary submit pull-right">Update</a>
                             </div>
                         </div>
 
@@ -163,12 +144,12 @@
             altInput: true,
             altFormat: 'F j, Y',
             dateFormat: 'Y-m-d',
-            maxDate: moment().format('YYYY-MM-DD')
+            maxDate: moment().format('YYYY-MM-DD'),
+            defaultDate: '{{ $user->birthday }}'
         });
 
-        $('[name=role]').select2({
-        	placeholder: 'Select Role'
-        });
+        $('[name=role]').val('{{ $user->role }}').select2();
+        $('[name="gender"][value="{{ $user->gender }}"]').click();
     </script>
 @endpush
 
@@ -194,7 +175,7 @@
                         url: '{{ url('validate') }}',
                         data: {
                             email: input.value,
-                            rules: 'email|unique:users'
+                            rules: 'email|unique:users,email,{{ $user->id }}'
                         },
                         success: result => {
                             result = JSON.parse(result);
@@ -209,26 +190,6 @@
                         showError(input, temp, error, 'Invalid Contact Number');
                     }
                 }
-                else if(temp.attr('name') == 'confirm_password'){
-                    if(input.value != $('[name="password"]').val()){
-                        showError(input, temp, error, 'Password do not match');
-
-                        input2 = $('[name="password"]')[0];
-                        temp2 = $(input2);
-                        error2 = $('#' + temp2.attr('name') + 'Error');
-
-                        showError(input2, temp2, error2, 'Password do not match');
-                    }
-                    else if(input.value.length < 6){
-                        showError(input, temp, error, 'Password must be at least 6 characters');
-
-                        input2 = $('[name="password"]')[0];
-                        temp2 = $(input2);
-                        error2 = $('#' + temp2.attr('name') + 'Error');
-
-                        showError(input2, temp2, error2, 'Password must be at least 6 characters');
-                    }
-                }
 
                 swal('Validating');
                 swal.showLoading();
@@ -240,7 +201,7 @@
 
             // IF THERE IS NO ERROR. SUBMIT.
             setTimeout(() => {
-                !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
+                !$('.is-invalid').is(':visible')? $('#editForm').submit() : '';
             }, 1000)
         });
 

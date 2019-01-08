@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\{Applicant, EducationalBackground, FamilyData};
 use Illuminate\Http\Request;
 use App\User;
 
-class UsersController extends Controller
+class ApplicationsController extends Controller
 {
     public function __construct(){
         $this->middleware('permissions:' . 'Admin/Encoder');
@@ -13,21 +14,14 @@ class UsersController extends Controller
 
     public function index(){
         return $this->_view('index', [
-            'title' => 'User Management'
+            'title' => 'Applications'
         ]);
     }
 
     public function create(){
     	return $this->_view('create', [
-    		'title' => 'Add User'
+    		'title' => 'Add Application'
     	]);
-    }
-
-    public function edit(User $user){
-        return $this->_view('edit', [
-            'title' => 'Edit User Details',
-            'user' => array_except($user, ['password'])
-        ]);
     }
 
     public function store(Request $req){
@@ -43,17 +37,6 @@ class UsersController extends Controller
         }
     }
 
-    public function update(Request $req){
-        if(User::where('id', $req->id)->update($req->except(['_token']))){
-            $req->session()->flash('success', 'User Successfully Updated.');
-            return redirect()->route('users.index');
-        }
-        else{
-            $req->session()->flash('error', 'There was a problem updating the user. Try again.');
-            return back();
-        }
-    }
-
     public function delete(User $user){
         $user->deleted_at = now()->toDateTimeString();
         echo $user->save();
@@ -64,6 +47,6 @@ class UsersController extends Controller
     }
 
     private function _view($view, $data = array()){
-    	return view('users.' . $view, $data);
+    	return view('applications.' . $view, $data);
     }
 }

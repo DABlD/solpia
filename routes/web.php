@@ -71,7 +71,25 @@ Route::group([
 
 		Route::get('users/delete/{user}', 'UsersController@delete')->name('users.delete');
 
+		$name = "applications";
+		// APPLICANT ROUTES
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-file-text')
+			->defaults('name', 'Applications')
+			->defaults('roles', array('Admin', 'Encoder'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
+		Route::get($name . '/get/{user}', ucfirst($name) . 'Controller@get')->name($name . '.get');
+
+		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
+		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
+
+		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+
 		// DATATABLE ROUTES
+		Route::get('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');
 	}
 );
