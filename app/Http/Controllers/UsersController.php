@@ -7,6 +7,10 @@ use App\User;
 
 class UsersController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permissions:' . 'Admin');
+    }
+
     public function index(){
         return $this->_view('index', [
             'title' => 'User Management'

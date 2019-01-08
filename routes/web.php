@@ -30,6 +30,10 @@ Route::get('/home', function() {
 	return view('welcome');
 });
 
+Route::get('not-permitted', function(){
+	return view('errors.not-permitted');
+})->name('not-permitted');
+
 Auth::routes();
 
 // PUBLIC ROUTES

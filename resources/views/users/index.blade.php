@@ -44,7 +44,6 @@
 @push('before-scripts')
 	<script src="{{ asset('js/datatables.js') }}"></script>
 	<script src="{{ asset('js/moment.js') }}"></script>
-	<script src="{{ asset('js/swal.js') }}"></script>
 	<script src="{{ asset('js/custom.js') }}"></script>
 @endpush
 
