@@ -48,7 +48,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-user')
 			->defaults('name', 'Dashboard')
-			->defaults('roles', array('Admin', 'Owner', 'Inventory Clerk', 'Sales Clerk'))
+			->defaults('roles', array('Admin', 'Encoder'))
 			->name('dashboard')
 			->defaults('href', 'dashboard');
 
@@ -57,7 +57,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-users')
 			->defaults('name', 'Users Management')
-			->defaults('roles', array('Admin', 'Owner'))
+			->defaults('roles', array('Admin', 'Encoder'))
 			->name('users.index')
 			->defaults('href', 'users');
 
