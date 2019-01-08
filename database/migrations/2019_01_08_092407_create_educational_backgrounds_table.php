@@ -19,7 +19,7 @@ class CreateEducationalBackgroundsTable extends Migration
 
             $table->enum('type', ['Elementary', 'High School', 'Vocational', 'College']);
             $table->string('course')->nullable();
-            $table->year('year');
+            $table->string('year', '10');
 
             $table->text('school');
             $table->text('address');
