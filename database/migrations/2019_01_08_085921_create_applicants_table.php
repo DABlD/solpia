@@ -15,7 +15,7 @@ class CreateApplicantsTable extends Migration
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
 
             $table->string('birth_place');
             $table->string('religion');
@@ -38,6 +38,12 @@ class CreateApplicantsTable extends Migration
             $table->double('shoes', 5, 2);
 
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 
