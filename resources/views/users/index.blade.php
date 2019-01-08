@@ -75,7 +75,7 @@
                 tooltip();
             	initializeActions();
             },
-            order: [ [1, 'desc'] ],
+            // order: [ [0, 'desc'] ],
         });
 
         table.on('draw', () => {
