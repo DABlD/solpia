@@ -13,15 +13,15 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-        	'fname' => 'David',
-            'mname' => 'Roga',
-            'lname' => 'Mendoza',
+        	'fname' => 'Admin',
+            'mname' => 'admin',
+            'lname' => 'Istrator',
             'role' => 'Admin',
-            'email' => 'davidmendozaofficial@gmail.com',
+            'email' => 'admin@admin.com',
             'birthday' => '1997-11-12',
             'gender' => 'Male',
-            'address' => 'Rm. 628, Park Avenue Mansions, Park Avenue St.,, Barangay 81',
-            'contact' => '09154590172',
+            'address' => 'Manila, Phillipines',
+            'contact' => '09123456789',
             'email_verified_at' => now()->toDateTimeString(),
             'password' => '123456'
         ]);
