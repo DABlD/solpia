@@ -40,6 +40,16 @@
 
 @push('after-styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
+	<style>
+		#table img{
+			width: 60px;
+			height: 60px;
+		}
+
+		.w50{
+			width: 60px !important;
+		}
+	</style>
 @endpush
 
 @push('before-scripts')
@@ -62,6 +72,15 @@
                 { data: 'age', name: 'age' },
                 { data: 'user.contact', name: 'user.contact' },
                 { data: 'actions', name: 'actions' },
+            ],
+            columnDefs: [
+                {
+                    targets: 1,
+                    className: "w50",
+                    render: function(link){
+                        return `<img src="${link}" alt="Applicant Photo"/>`;
+                    },
+                },
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
