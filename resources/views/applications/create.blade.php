@@ -8,12 +8,17 @@
 			<div class="box box-info">
 
 				<div class="box-header">
-					@include('users.includes.toolbar')
+					@include('applications.includes.toolbar')
 				</div>
 
 				<div class="box-body">
-					<form method="POST" action="{{ route('users.store') }}" id="createForm">
+					<form method="POST" action="{{ route('applications.store') }}" id="createForm">
                         @csrf
+
+                        <input type="hidden" name="role" value="Applicant">
+                        
+                        <h2><strong>Personal Data</strong></h2>
+                        <hr>
 
                         <div class="row">
                             <div class="form-group col-md-4">
@@ -40,21 +45,41 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-md-12">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control aeigh" name="address" placeholder="Enter Address">
+                            <div class="form-group col-md-6">
+                                <label for="birthday">Date of birth</label>
+                                <input type="text" class="form-control aeigh" name="birthday" placeholder="Select Birthday">
                                 <span class="invalid-feedback hidden" role="alert">
-                                    <strong id="addressError"></strong>
+                                    <strong id="birthdayError"></strong>
                                 </span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email">
+                                <label for="birth_place">Place of birth</label>
+                                <input type="text" class="form-control aeigh" name="birth_place" placeholder="Enter Place of Birth">
                                 <span class="invalid-feedback hidden" role="alert">
-                                    <strong id="emailError"></strong>
+                                    <strong id="birth_placeError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="religion">Religion</label>
+                                <input type="text" class="form-control aeigh" name="religion" placeholder="Enter Religion">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="religionError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control aeigh" name="address" placeholder="Enter Address">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="addressError"></strong>
                                 </span>
                             </div>
                         </div>
@@ -71,10 +96,10 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="birthday">Birthday</label>
-                                <input type="text" class="form-control aeigh" name="birthday" placeholder="Select Birthday">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email">
                                 <span class="invalid-feedback hidden" role="alert">
-                                    <strong id="birthdayError"></strong>
+                                    <strong id="emailError"></strong>
                                 </span>
                             </div>
                         </div>
@@ -95,36 +120,116 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="role">Role</label>
-                                <br>
-                                <select name="role" class="form-control aeigh">
-                                	<option></option>
-                                	@foreach($roles->except(['3']) as $role)
-                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
-                                    @endforeach
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control aeigh" name="age" placeholder="Enter Age">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="ageError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="waistline">Waistline(inch)</label>
+                                <input type="number" class="form-control aeigh" name="waistline" placeholder="Enter Waistline">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="waistlineError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="shoe_size">Shoe Size(cm)</label>
+                                <input type="number" class="form-control aeigh" name="shoe_size" placeholder="Enter Shoe Size">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="shoe_sizeError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="height">Height(cm)</label>
+                                <input type="number" class="form-control aeigh" name="height" placeholder="Enter Height">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="heightError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="weight">Weight(kg)</label>
+                                <input type="number" class="form-control aeigh" name="weight" placeholder="Enter Weight">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="weightError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="bmi">BMI</label>
+                                <input type="number" class="form-control aeigh" name="bmi" placeholder="Enter BMI">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="bmiError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="blood_type">Blood Type</label>
+                                <select name="blood_type" class="form-control aeigh">
+                                    <option readonly selected value="">Select Blood Type</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
                                 </select>
                                 <span class="invalid-feedback hidden" role="alert">
-                                    <strong id="roleError"></strong>
+                                    <strong id="blood_typeError"></strong>
                                 </span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control aeigh" name="password" placeholder="Enter Password">
+                                <label for="civil_status">Civil Status</label>
+                                <select name="civil_status" class="form-control aeigh">
+                                    <option readonly selected value="">Select Civil Status</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Widowed">Widowed</option>
+                                    <option value="Divorced">Divorced</option>
+                                </select>
                                 <span class="invalid-feedback hidden" role="alert">
-                                    <strong id="passwordError"></strong>
+                                    <strong id="civil_statusError"></strong>
                                 </span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="confirm_password">Confirm Password</label>
-                                <input type="password" class="form-control aeigh" name="confirm_password" placeholder="Confirm Password">
+                                <label for="tin">TIN No.</label>
+                                <input type="number" class="form-control aeigh" name="tin" placeholder="Enter TIN No.">
                                 <span class="invalid-feedback hidden" role="alert">
-                                    <strong id="confirm_passwordError"></strong>
+                                    <strong id="tinError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="sss">SSS No.</label>
+                                <input type="number" class="form-control aeigh" name="sss" placeholder="Enter SSS No.">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="sssError"></strong>
                                 </span>
                             </div>
                         </div>
@@ -165,10 +270,6 @@
             dateFormat: 'Y-m-d',
             maxDate: moment().format('YYYY-MM-DD')
         });
-
-        $('[name=role]').select2({
-        	placeholder: 'Select Role'
-        });
     </script>
 @endpush
 
@@ -180,6 +281,9 @@
         // VALIDATE ON SUBMIT
         $('.submit').click(() => {
             let inputs = $('.aeigh:not(".input")');
+
+            swal('Validating');
+            swal.showLoading();
             
             $.each(inputs, (index, input) => {
                 let temp = $(input);
@@ -209,43 +313,19 @@
                         showError(input, temp, error, 'Invalid Contact Number');
                     }
                 }
-                else if(temp.attr('name') == 'confirm_password'){
-                    if(input.value != $('[name="password"]').val()){
-                        showError(input, temp, error, 'Password do not match');
 
-                        input2 = $('[name="password"]')[0];
-                        temp2 = $(input2);
-                        error2 = $('#' + temp2.attr('name') + 'Error');
-
-                        showError(input2, temp2, error2, 'Password do not match');
-                    }
-                    else if(input.value.length < 6){
-                        showError(input, temp, error, 'Password must be at least 6 characters');
-
-                        input2 = $('[name="password"]')[0];
-                        temp2 = $(input2);
-                        error2 = $('#' + temp2.attr('name') + 'Error');
-
-                        showError(input2, temp2, error2, 'Password must be at least 6 characters');
-                    }
-                }
-
-                swal('Validating');
-                swal.showLoading();
-                setTimeout(() => {
-                    !bool? clearError(input, temp, error) : '';
-                    swal.close();
-                }, 1000);
+                !bool? clearError(input, temp, error) : '';
             });
 
             // IF THERE IS NO ERROR. SUBMIT.
             setTimeout(() => {
+                swal.close();
                 !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
             }, 1000)
         });
 
-        async function showError(input, temp, error, message){
-            await new Promise(resolve => setTimeout(resolve, 1000));
+        function showError(input, temp, error, message){
+            // await new Promise(resolve => setTimeout(resolve, 1000));
 
             bool = true;
 
@@ -263,6 +343,8 @@
         }
 
         function clearError(input, temp, error){
+            // await new Promise(resolve => setTimeout(resolve, 1000));
+
             if($(input).hasClass('is-invalid')){
                 if(input.type != 'hidden'){
                     temp.removeClass('is-invalid');

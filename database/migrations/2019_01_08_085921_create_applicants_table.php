@@ -35,7 +35,7 @@ class CreateApplicantsTable extends Migration
             $table->string('sss')->nullable();
 
             $table->double('waistline', 5, 2);
-            $table->double('shoes', 5, 2);
+            $table->double('shoe_size', 5, 2);
 
             $table->timestamps();
             $table->softDeletes();

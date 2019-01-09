@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
             'tin' => 17238172937,
             'sss' => 128736182736,
             'waistline' => 5.9,
-            'shoes' => 8,
+            'shoe_size' => 8,
         ]);
 
         EducationalBackground::create([
