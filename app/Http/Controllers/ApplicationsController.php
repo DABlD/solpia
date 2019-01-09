@@ -25,14 +25,27 @@ class ApplicationsController extends Controller
     }
 
     public function store(Request $req){
-        $data = $req->except(['confirm_password', '_token']);
+        $user = collect($req->only([
+            'fname','mname','lname',
+            'birthday','address','contact',
+            'email','gender'
+        ]))->put('password', '123456')->put('role', 'Applicant');
 
-        if(User::create($data)){
-            $req->session()->flash('success', 'User Successfully Added.');
-            return redirect()->route('users.index');
+        $user = User::create($user->all());
+
+        $applicant = collect($req->only([
+            'provincial_address','provincial_contact',
+            'birth_place','religion','age','waistline',
+            'shoe_size','height','weight','bmi','blood_type',
+            'civil_status', 'tin', 'sss' 
+        ]))->put('user_id', $user->id);
+
+        if(Applicant::create($applicant->all())){
+            $req->session()->flash('success', 'Applicant Successfully Added.');
+            return redirect()->route('applications.index');
         }
         else{
-            $req->session()->flash('error', 'There was a problem adding the user. Try again.');
+            $req->session()->flash('error', 'There was a problem adding the applicant. Try again.');
             return back();
         }
     }

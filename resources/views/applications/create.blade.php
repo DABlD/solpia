@@ -94,6 +94,26 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
+                                <label for="provincial_address">Provincial Address</label>
+                                <input type="text" class="form-control aeigh" name="provincial_address" placeholder="Enter Provincial Address">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="provincial_addressError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="provincial_contact">Provincial Number</label>
+                                <input type="text" class="form-control aeigh" name="provincial_contact" placeholder="Enter Provincial Contact Number">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="provincial_contacttError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email">
                                 <span class="invalid-feedback hidden" role="alert">
