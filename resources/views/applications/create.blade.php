@@ -14,8 +14,6 @@
 				<div class="box-body">
 					<form method="POST" action="{{ route('applications.store') }}" id="createForm">
                         @csrf
-
-                        <input type="hidden" name="role" value="Applicant">
                         
                         <h2><strong>Personal Data</strong></h2>
                         <hr>
