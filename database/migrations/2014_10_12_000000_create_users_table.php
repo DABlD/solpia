@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->text('address');
             $table->string('contact');
 
-            $table->boolean('applicant')->default(0);
+            $table->boolean('applicant')->default(1);
 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
