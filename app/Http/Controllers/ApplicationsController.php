@@ -6,6 +6,9 @@ use App\Models\{Applicant, EducationalBackground, FamilyData};
 use Illuminate\Http\Request;
 use App\User;
 
+use App\Exports\AllApplicant;
+use Maatwebsite\Excel\Facades\Excel;
+
 class ApplicationsController extends Controller
 {
     public function __construct(){
@@ -22,6 +25,20 @@ class ApplicationsController extends Controller
     	return $this->_view('create', [
     		'title' => 'Add Application'
     	]);
+    }
+
+    public function export(){
+        return Excel::download(new AllApplicant, 'Applicants.xlsx');
+        // return Excel::create('Applicants.xlsx', function($sheet){
+        //     $applicants = Applicant::with('user')->get();
+
+        //     foreach($applicants as $index => $applicant){
+        //         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        //         $drawing->setPath(public_path($applicant->user->avatar));
+        //         $drawing->setCoordinates('B' . $index + 2);
+        //         $drawing->setWorksheet($sheet);
+        //     }
+        // });
     }
 
     public function store(Request $req){
