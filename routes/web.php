@@ -83,7 +83,8 @@ Route::group([
 
 		Route::get($name . '/get/{user}', ucfirst($name) . 'Controller@get')->name($name . '.get');
 
-		Route::get($name . '/export', ucfirst($name) . 'Controller@export')->name($name . '.export');
+		Route::get($name . '/export/all', ucfirst($name) . 'Controller@exportAll')->name($name . '.export.all');
+		Route::get($name . '/export/{applicant}', ucfirst($name) . 'Controller@exportApplication')->name($name . '.export.applicant');
 		
 		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');

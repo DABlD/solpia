@@ -27,18 +27,13 @@ class ApplicationsController extends Controller
     	]);
     }
 
-    public function export(){
+    public function exportAll(){
         return Excel::download(new AllApplicant, 'Applicants.xlsx');
-        // return Excel::create('Applicants.xlsx', function($sheet){
-        //     $applicants = Applicant::with('user')->get();
+    }
 
-        //     foreach($applicants as $index => $applicant){
-        //         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        //         $drawing->setPath(public_path($applicant->user->avatar));
-        //         $drawing->setCoordinates('B' . $index + 2);
-        //         $drawing->setWorksheet($sheet);
-        //     }
-        // });
+    public function exportApplication(Applicant $applicant){
+        $applicant->load('user');
+        return Excel::download(new Application, $applicant->user->fname . ' ' . $applicant->user->lname);
     }
 
     public function store(Request $req){
