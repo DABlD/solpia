@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{Applicant, EducationalBackground, FamilyData};
 use Illuminate\Http\Request;
 use App\User;
+use Image;
 
 use App\Exports\AllApplicant;
 use App\Exports\Application;
@@ -46,11 +47,15 @@ class ApplicationsController extends Controller
         ]))->put('password', '123456')->put('role', 'Applicant');
 
         // UPLOAD AVATAR
-        $attachment = $req->avatar;
+        $image = $req->file('avatar');
+        $avatar = Image::make($image);
 
-        $name = $req->fname . '_' . $req->lname . '_avatar.'  . $attachment->getClientOriginalExtension();
+        $name = $req->fname . '_' . $req->lname . '_avatar.'  . $image->getClientOriginalExtension();
         $destinationPath = public_path('uploads/');
-        $attachment->move($destinationPath, $name);
+
+        $avatar->resize(209,196);
+        $avatar->save($destinationPath . $name);
+
         $user->put('avatar', 'uploads/' . $name);
 
         // SAVE USER
