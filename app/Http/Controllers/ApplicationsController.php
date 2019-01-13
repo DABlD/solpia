@@ -38,12 +38,22 @@ class ApplicationsController extends Controller
     }
 
     public function store(Request $req){
+
         $user = collect($req->only([
             'fname','mname','lname',
             'birthday','address','contact',
             'email','gender'
         ]))->put('password', '123456')->put('role', 'Applicant');
 
+        // UPLOAD AVATAR
+        $attachment = $req->avatar;
+
+        $name = $req->fname . '_' . $req->lname . '_avatar.'  . $attachment->getClientOriginalExtension();
+        $destinationPath = public_path('uploads/');
+        $attachment->move($destinationPath, $name);
+        $user->put('avatar', 'uploads/' . $name);
+
+        // SAVE USER
         $user = User::create($user->all());
 
         $applicant = collect($req->only([

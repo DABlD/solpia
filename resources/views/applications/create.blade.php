@@ -12,11 +12,34 @@
 				</div>
 
 				<div class="box-body">
-					<form method="POST" action="{{ route('applications.store') }}" id="createForm">
+					<form method="POST" action="{{ route('applications.store') }}" id="createForm" enctype="multipart/form-data">
                         @csrf
                         
                         <h2><strong>Personal Data</strong></h2>
                         <hr>
+
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="avatar">Picture</label>
+                                <input type="file" class="form-control aeigh" name="avatar" placeholder="Select Image" accept=".png, .jpg, .jpeg">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="avatarError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="avatar">Preview</label>
+                                <span style="color:red;">
+                                    (Image is automatically resized to 200x200 for system performance. Please upload image in said resolution.)
+                                </span>
+                                <br>
+                                <div class="col-md-3">
+                                    <img id="preview" alt="Select an image first" width="209px" height="196px">
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="form-group col-md-4">
@@ -378,5 +401,19 @@
                 }
             }
         }
+
+        $('[name="avatar"]').on('change', () => {
+            if(!$('#preview').is(':visible'))
+            {
+                $('#preview').fadeIn();
+            }
+
+            var fr = new FileReader();
+            fr.readAsDataURL(document.getElementsByName("avatar")[0].files[0]);
+
+            fr.onload = function (e) {
+                document.getElementById("preview").src = e.target.result;
+            };
+        });
     </script>
 @endpush
