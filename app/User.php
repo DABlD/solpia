@@ -25,7 +25,7 @@ class User extends Authenticatable
         'lname', 'email', 'birthday', 
         'gender', 'address', 'contact', 
         'password', 'email_verified_at',
-        'applicant'
+        'applicant', 'avatar'
     ];
 
     /**
