@@ -91,6 +91,16 @@ Route::group([
 
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 
+		$name = "test";
+		// APPLICANT ROUTES
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-file-text')
+			->defaults('name', 'Test')
+			->defaults('roles', array('Admin', 'Encoder'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
 		// DATATABLE ROUTES
 		Route::get('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');
