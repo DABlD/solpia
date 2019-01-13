@@ -54,6 +54,3 @@
 		@endforeach
 	</tbody>
 </table>
-
-{{-- {{ dd($drawing) }} --}}
-{{-- {{ die }} --}}

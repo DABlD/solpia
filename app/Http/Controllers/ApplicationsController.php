@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 
 use App\Exports\AllApplicant;
+use App\Exports\Application;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ApplicationsController extends Controller
@@ -33,7 +34,7 @@ class ApplicationsController extends Controller
 
     public function exportApplication(Applicant $applicant){
         $applicant->load('user');
-        return Excel::download(new Application, $applicant->user->fname . ' ' . $applicant->user->lname);
+        return Excel::download(new Application($applicant), $applicant->user->fname . '_' . $applicant->user->lname . ' Application.xlsx');
     }
 
     public function store(Request $req){
