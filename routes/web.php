@@ -23,11 +23,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/home', function() {
-	return view('welcome');
+	return redirect()->route('login');
 });
 
 Route::get('not-permitted', function(){
