@@ -100,6 +100,10 @@ class Application implements FromView, ShouldAutoSize, WithEvents, WithDrawings
 
                 $event->sheet->getDelegate()->getColumnDimension('N')->setAutoSize(false);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(6.6);
+                
+                $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(20);
+                // $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(10);
             },
         ];
     }
