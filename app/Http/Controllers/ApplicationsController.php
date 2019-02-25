@@ -37,9 +37,9 @@ class ApplicationsController extends Controller
         $applicant->load('user');
         $applicant->load('family_data');
 
-        $class = "App\\Exports\\'ucfirst($type)'";
+        $class = "App\\Exports\\" . ucfirst($type);
 
-        return Excel::download(new $class($applicant), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
+        return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
     }
 
     public function store(Request $req){
