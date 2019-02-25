@@ -39,8 +39,6 @@ class ApplicationsController extends Controller
     }
 
     public function store(Request $req){
-        dd($req->all());
-
         $user = collect($req->only([
             'fname','mname','lname',
             'birthday','address','contact',
@@ -62,6 +60,7 @@ class ApplicationsController extends Controller
         // SAVE USER
         $user = User::create($user->all());
 
+        // SAVE APPLICANT
         $applicant = collect($req->only([
             'provincial_address','provincial_contact',
             'birth_place','religion','age','waistline',
@@ -69,7 +68,15 @@ class ApplicationsController extends Controller
             'civil_status', 'tin', 'sss' 
         ]))->put('user_id', $user->id);
 
-        if(Applicant::create($applicant->all())){
+        $applicant = Applicant::create($applicant->all());
+
+        $fd = json_decode($req->fd);
+        foreach($fd as $data){
+            $data->applicant_id = $applicant->id;
+            FamilyData::create((array)$data);
+        }
+
+        if(true){
             $req->session()->flash('success', 'Applicant Successfully Added.');
             return redirect()->route('applications.index');
         }
