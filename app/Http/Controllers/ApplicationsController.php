@@ -8,7 +8,7 @@ use App\User;
 use Image;
 
 use App\Exports\AllApplicant;
-use App\Exports\Application;
+// use App\Exports\Application;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ApplicationsController extends Controller
@@ -33,9 +33,13 @@ class ApplicationsController extends Controller
         return Excel::download(new AllApplicant, 'Applicants.xlsx');
     }
 
-    public function exportApplication(Applicant $applicant){
+    public function exportApplication(Applicant $applicant, $type){
         $applicant->load('user');
-        return Excel::download(new Application($applicant), $applicant->user->fname . '_' . $applicant->user->lname . ' Application.xlsx');
+        $applicant->load('family_data');
+
+        $class = "App\\Exports\\'ucfirst($type)'";
+
+        return Excel::download(new $class($applicant), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
     }
 
     public function store(Request $req){

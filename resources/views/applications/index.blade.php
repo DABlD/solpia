@@ -12,7 +12,7 @@
 				</div>
 
 				<div class="box-body">
-					<table class="table table-hover table-bordered" id="table">
+					<table class="table table-hover table-bordered" id="table" style="width: 100%;">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -99,7 +99,29 @@
 
         function initializeActions(){
 	    	$('[data-original-title="Export Application"]').on('click', application => {
-	    		window.location.href = 'applications/export/' + $(application.target).data('id');
+                let type;
+
+                swal({
+                    title: 'Select Export Type',
+                    input: 'select',
+                    inputOptions: {
+                        'shinko': 'SHINKO',
+                        'kosco': 'KOSCO',
+                        'smtechToei': 'SMTECH & TOEI',
+                        'scMarine': 'SC MARINE',
+                        'imsco': 'IMSCO',
+                        'seyeong': 'SEYEONG',
+                        'hajoo': 'HAJOO',
+                        'western': 'WESTERN',
+                        'klcsm': 'KLCSM',
+                        'hlineDintec': 'H-LINE & DINTEC',
+                        'hmsNautica': 'HMS & NAUTICA'
+                    },
+                }).then(result => {
+                    type = result.value;
+                    window.location.href = 'applications/export/' + $(application.target).data('id') + '/' + type;
+                });
+
 	    	});
 	    }
 	</script>
