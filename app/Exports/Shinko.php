@@ -65,7 +65,6 @@ class Shinko implements FromView, ShouldAutoSize, WithEvents, WithDrawings
             [
             	'alignment' => [
             	    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
-            	    'wrap' => TRUE
             	]
             ],
             [
@@ -90,6 +89,8 @@ class Shinko implements FromView, ShouldAutoSize, WithEvents, WithDrawings
                 $event->sheet->getDelegate()->getStyle('C7:C10')->applyFromArray($headingStyle[2]);
                 $event->sheet->getDelegate()->getStyle('I7:I10')->applyFromArray($headingStyle[2]);
                 $event->sheet->getDelegate()->getStyle('A11:H11')->applyFromArray($headingStyle[0]);
+                $event->sheet->getDelegate()->getStyle('G12:I12')->applyFromArray($headingStyle[1]);
+                $event->sheet->getDelegate()->getStyle('I12')->getAlignment()->setWrapText(true);
 
                 // FILLS
                 $fills = [
@@ -99,6 +100,7 @@ class Shinko implements FromView, ShouldAutoSize, WithEvents, WithDrawings
                 	'A9:B9', 'G9:H9',
                 	'A10:B10', 'G10:H10',
                 	'A11', 'H11',
+                	'A12', 'C12', 'E12', 'G12'
                 ];
 
                 foreach($fills as $fill){
@@ -113,6 +115,7 @@ class Shinko implements FromView, ShouldAutoSize, WithEvents, WithDrawings
                 	'A9:B9', 'G9:H9', 'C9:F9', 'I9:K9', 'K9',
                 	'A10:B10', 'G10:H10', 'C10:F10', 'I10:K10', 'K10',
                 	'A11:G11', 'H11:N11',
+                	'A12:B12', 'C12:D12', 'E12:F12', 'G12:H13', 'I12:N13',
                 ];
 
                 foreach($cells as $cell){

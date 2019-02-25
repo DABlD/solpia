@@ -62,5 +62,14 @@
 			<td colspan="7">BASIC DOCUMENTATION</td>
 			<td colspan="7">ADDRESS AND PARTICULAR</td>
 		</tr>
+
+		<tr>
+			<td colspan="2">Classification</td>
+			<td colspan="2">Number</td>
+			<td colspan="2">Expiry</td>
+
+			<td colspan="2" rowspan="2">Present Address</td>
+			<td colspan="6" rowspan="2">{{ $applicant->user->address }}</td>
+		</tr>
 	</tbody>
 </table>
