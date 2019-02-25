@@ -39,6 +39,7 @@ class ApplicationsController extends Controller
     }
 
     public function store(Request $req){
+        dd($req->all());
 
         $user = collect($req->only([
             'fname','mname','lname',
