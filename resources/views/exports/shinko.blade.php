@@ -3,13 +3,13 @@
 	<tbody>
 		<tr>
 			<td colspan="14">
-				<h2>SHINKO MARITIME CO., LTD.</h2>
+				SHINKO MARITIME CO., LTD.
 			</td>
 		</tr>
 
 		<tr>
 			<td colspan="14">
-				<h3>APPLICATION FOR EMPLOYMENT</h3>
+				APPLICATION FOR EMPLOYMENT
 			</td>
 		</tr>
 
@@ -70,6 +70,145 @@
 
 			<td colspan="2" rowspan="2">Present Address</td>
 			<td colspan="6" rowspan="2">{{ $applicant->user->address }}</td>
+		</tr>
+
+		<tr>
+			<td rowspan="2">SM Book</td>
+			<td>National</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+		</tr>
+
+		<tr>
+			<td>Flag State</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2">Tel</td>
+			<td colspan="6"></td>
+		</tr>
+
+		<tr>
+			<td rowspan="2">COC</td>
+			<td>N/A</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2">Place of Birth</td>
+			<td colspan="6">{{ $applicant->birth_place }}</td>
+		</tr>
+
+		<tr>
+			<td>Flag State</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2">Religion</td>
+			<td colspan="6">{{ $applicant->religion }}</td>
+		</tr>
+
+		<tr>
+			<td rowspan="2">GOC</td>
+			<td>National</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="8">Schooling</td>
+		</tr>
+
+		<tr>
+			<td>Flag State</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2">Last School</td>
+			<td colspan="6"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Passport</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2">Period</td>
+			<td colspan="6"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2">U.S.A. Visa</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2">Specialty</td>
+			<td colspan="6"></td>
+		</tr>
+
+		<tr>
+			<td colspan="14">FAMILY STATUS</td>
+		</tr>
+
+		<tr>
+			<td>Relation</td>
+			<td colspan="2">Name</td>
+			<td colspan="2">Birth</td>
+			<td>Occupation</td>
+			<td>Relation</td>
+			<td colspan="3">Name</td>
+			<td colspan="2">Birth</td>
+			<td colspan="2">Occupation</td>
+		</tr>
+
+		@foreach($applicant->family_data as $family)
+			@if($loop->index % 2 == 0)
+				<tr>
+					<td>{{ $family->type }}</td>
+					<td colspan="2">{{ $family->name }}</td>
+					<td colspan="2">{{ $family->birthday->toDateString() != "0000-01-01"?$family->birthday->format('F j, Y') : '' }}</td>
+					<td>{{ $family->occupation }}</td>
+			@else
+					<td>{{ $family->type }}</td>
+					<td colspan="3">{{ $family->name }}</td>
+					<td colspan="2">{{ $family->birthday->toDateString() != "0000-01-01"?$family->birthday->format('F j, Y') : '' }}</td>
+					<td colspan="2">{{ $family->occupation }}</td>
+				</tr>
+			@endif
+		@endforeach
+
+		<tr>
+			<td colspan="14">S E A C A R R I E R</td>
+		</tr>
+
+		<tr>
+			<td rowspan="2">No</td>
+			<td rowspan="2" colspan="3">
+				Vessel<br>
+				Name
+			</td>
+			<td rowspan="2">
+				Wage<br>
+				(US$)
+			</td>
+			<td rowspan="2">
+				Period<br>
+				From/To
+			</td>
+			<td rowspan="2">
+				<br>
+				M
+			</td>
+			<td rowspan="2">
+				<br>
+				Rank
+			</td>
+			<td rowspan="2">
+				Vsl Type<br>
+				Eng Type
+			</td>
+			<td rowspan="2">
+				GRT<br>
+				Output
+			</td>
+			<td rowspan="2" colspan="2">
+				Agent<br>
+				Principal
+			</td>
+			<td rowspan="2" colspan="2">
+				Reason for<br>
+				Leaving
+			</td>
 		</tr>
 	</tbody>
 </table>

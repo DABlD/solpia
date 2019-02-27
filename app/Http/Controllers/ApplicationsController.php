@@ -37,6 +37,19 @@ class ApplicationsController extends Controller
         $applicant->load('user');
         $applicant->load('family_data');
 
+        // IF FAMILY_DATA IS ODD
+        if($applicant->family_data->count() % 2 != 0){
+            $fd = new FamilyData;
+            $fd->type = "";
+            $fd->name = "";
+            $fd->age = "";
+            $fd->birthday = now()->create(0, 1, 1);
+            $fd->address = "";
+            $fd->occupation = "";
+
+            $applicant->family_data->push($fd);
+        }
+
         $class = "App\\Exports\\" . ucfirst($type);
 
         return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');

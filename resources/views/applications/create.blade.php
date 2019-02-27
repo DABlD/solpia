@@ -42,6 +42,10 @@
                         </a>
                         <hr>
                         @include('applications.includes.family_data')
+                        
+                        <h2><strong>Sea Service</strong></h2>
+                        <hr>
+                        @include('applications.includes.sea_service')
 
                         <div class="form-group row mb-0">
                             <div class="col-md-2 col-md-offset-10">
