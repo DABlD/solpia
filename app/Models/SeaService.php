@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SeaService extends Model
 {
 	protected $fillable = [
-		
+		'vessel_name','rank','vessel_type','gross_tonnage','engine_type','bhp_kw','flag','trade','previous_salary','manning_agent','principal','crew_nationality','sign_on','sign_off','total_months','remarks','charterer','cargoes'
 	];
 
     protected $dates = [
