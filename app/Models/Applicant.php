@@ -34,4 +34,8 @@ class Applicant extends Model
     public function family_data(){
         return $this->hasMany('App\Models\FamilyData');
     }
+
+    public function sea_service(){
+        return $this->hasMany('App\Models\SeaService');
+    }
 }
