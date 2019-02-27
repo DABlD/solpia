@@ -1,6 +1,4 @@
-<div>
-    
-</div>
+<div></div>
 
 @push('before-scripts')
     <script>
