@@ -15,6 +15,8 @@ class CreateSeaServicesTable extends Migration
     {
         Schema::create('sea_services', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('applicant_id');
+            
             $table->string('vessel_name', 100);
             $table->string('rank', 50);
             $table->string('vessel_type', 50)->nullable();

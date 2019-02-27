@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Applicant, EducationalBackground, FamilyData};
+use App\Models\{Applicant, EducationalBackground, FamilyData, SeaService};
 use Illuminate\Http\Request;
 use App\User;
 use Image;
@@ -91,6 +91,13 @@ class ApplicationsController extends Controller
         foreach($fd as $data){
             $data->applicant_id = $applicant->id;
             FamilyData::create((array)$data);
+        }
+
+        // SAVE SEA SERVICE
+        $ss = json_decode($req->ss);
+        foreach($ss as $data){
+            $data->applicant_id = $applicant->id;
+            SeaService::create((array)$data);
         }
 
         if(true){

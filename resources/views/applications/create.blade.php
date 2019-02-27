@@ -45,6 +45,10 @@
                         
                         <h2><strong>Sea Service</strong></h2>
                         <hr>
+                        <span class="ssCount fd-count">0</span>
+                        <a class="btn btn-success" onclick="addSS()">
+                            <span class="fa fa-plus"></span>
+                        </a>
                         @include('applications.includes.sea_service')
 
                         <div class="form-group row mb-0">
@@ -104,6 +108,49 @@
             $('[name="birthday"]').flatpickr().setDate('1997-11-12', true);
             $('[name="fd-birthday1"]').flatpickr().setDate('1967-03-23', true);
             $('[name="fd-birthday2"]').flatpickr().setDate('1961-10-16', true);
+            fillSS();
+        }
+
+        function fillSS(){
+            $('#sea-services input')[0].value = "Vessel 1";
+            $('#sea-services input')[1].value = "Rank 1";
+            $('#sea-services input')[2].value = "Type 1";
+            $('#sea-services input')[3].value = "10 Tons";
+            $('#sea-services input')[4].value = "Engine 1";
+            $('#sea-services input')[5].value = "30";
+            $('#sea-services input')[6].value = "Philippines";
+            $('#sea-services input')[7].value = "Antartic";
+            $('#sea-services input')[8].value = "30000";
+            $('#sea-services input')[9].value = "Agent 1";
+            $('#sea-services input')[10].value = "Principal 1";
+            $('#sea-services input')[11].value = "Filipino";
+
+            $('[name="sign_on1"]').flatpickr().setDate('2019-02-01', true);
+            $('[name="sign_off1"]').flatpickr().setDate('2019-02-28', true);
+
+            $('#sea-services input')[14].value = "Charterer 1";
+            $('#sea-services input')[15].value = "Cargo 1, Cargo 2";
+            $('#sea-services input')[16].value = "So so";
+
+            if($('#sea-services input').length > 19){
+                $('#sea-services input')[0+17].value = "Vessel 2";
+                $('#sea-services input')[1+17].value = "Rank 2";
+                $('#sea-services input')[2+17].value = "Type 2";
+                $('#sea-services input')[3+17].value = "14 Tons";
+                $('#sea-services input')[4+17].value = "Engine 2";
+                $('#sea-services input')[5+17].value = "40";
+                $('#sea-services input')[6+17].value = "Philippines";
+                $('#sea-services input')[7+17].value = "Atlantic";
+                $('#sea-services input')[8+17].value = "40000";
+                $('#sea-services input')[9+17].value = "Agent 2";
+                $('#sea-services input')[10+17].value = "Principal 2";
+                $('#sea-services input')[11+17].value = "Filipino";
+                $('[name="sign_on2"]').flatpickr().setDate('2019-01-01', true);
+                $('[name="sign_off2"]').flatpickr().setDate('2019-02-28', true);
+                $('#sea-services input')[14+17].value = "Charterer 2";
+                $('#sea-services input')[15+17].value = "Cargo 3, Cargo 4";
+                $('#sea-services input')[16+17].value = "Not so so";
+            }
         }
 
         asd = () => {
@@ -160,6 +207,7 @@
         });
 
         function compressAndSubmit(){
+            // Compress FD
             let inputs = $('#FD input');
             let fd = [];
 
@@ -185,6 +233,55 @@
             $('#createForm').append(`
                 <input type="hidden" name="fd" value='${JSON.stringify(fd)}'>
             `);
+
+            // COMPRESS SS
+            inputs = $('#sea-services input');
+            let ss = [];
+            for(let i = 0; i < inputs.length; i+= 17){
+                let tempSS = {};
+                tempSS.vessel_name      = inputs[i].value;
+                tempSS.rank             = inputs[i+1].value;
+                tempSS.vessel_type      = inputs[i+2].value;
+                tempSS.gross_tonnage    = inputs[i+3].value;
+                tempSS.engine_type      = inputs[i+4].value;
+                tempSS.bhp_kw           = inputs[i+5].value;
+                tempSS.flag             = inputs[i+6].value;
+                tempSS.trade            = inputs[i+7].value;
+                tempSS.previous_salary  = inputs[i+8].value;
+                tempSS.manning_agent    = inputs[i+9].value;
+                tempSS.principal        = inputs[i+10].value;
+                tempSS.crew_nationality = inputs[i+11].value;
+                tempSS.sign_on          = inputs[i+12].value;
+                tempSS.sign_off         = inputs[i+13].value;
+                tempSS.charterer        = inputs[i+14].value;
+                tempSS.cargoes          = inputs[i+15].value;
+                tempSS.remarks          = inputs[i+16].value;
+                tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
+                ss.push(tempSS);
+
+                inputs[i].remove();
+                inputs[i+1].remove();
+                inputs[i+2].remove();
+                inputs[i+3].remove();
+                inputs[i+4].remove();
+                inputs[i+5].remove();
+                inputs[i+6].remove();
+                inputs[i+7].remove();
+                inputs[i+8].remove();
+                inputs[i+9].remove();
+                inputs[i+10].remove();
+                inputs[i+11].remove();
+                inputs[i+12].remove();
+                inputs[i+13].remove();
+                inputs[i+14].remove();
+                inputs[i+15].remove();
+                inputs[i+16].remove();
+
+                $('#createForm').append(`
+                    <input type="hidden" name="ss" value='${JSON.stringify(ss)}'>
+                `);
+            }
+
             swal.close();
             $('#createForm').submit()
         }
