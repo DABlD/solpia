@@ -106,7 +106,7 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $temp = $this->applicant->family_data->count() / 2;
                 $raf = 22 + $temp; //Row # After Family Data
 
-                for($i = 0, $row = 23; $i < $this->applicant->family_data->count() / 2; $i++, $row++){
+                for($i = 0, $row = 23; $i < $temp; $i++, $row++){
                 	array_push($fdRows, 'A' . $row);
                 	array_push($fdRows, 'B' . $row . ':C' . $row);
                 	array_push($fdRows, 'D' . $row . ':E' . $row);
@@ -117,14 +117,42 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 	array_push($fdRows, 'M' . $row . ':N' . $row);
                 }
 
+                // SS DATA ROWS
+                $ssRows = array();
+                $temp = $this->applicant->sea_service->count();
+                $ras = $raf + 2 + ($temp*2); //Row # after Sea Service
+
+                for($i = 0, $row = $raf + 4; $i < $temp; $i++, $row+=2){
+                    $next = $row + 1;
+                    array_push($ssRows, 'A' . $row . ':A' . $next);
+                    array_push($ssRows, 'B' . $row . ':D' . $next);
+                    array_push($ssRows, 'E' . $row . ':E' . $next);
+                    array_push($ssRows, 'F' . $row);
+                    array_push($ssRows, 'F' . $next);
+                    array_push($ssRows, 'G' . $row . ':G' . $next);
+                    array_push($ssRows, 'H' . $row . ':H' . $next);
+                    array_push($ssRows, 'I' . $row);
+                    array_push($ssRows, 'I' . $next);
+                    array_push($ssRows, 'J' . $row);
+                    array_push($ssRows, 'J' . $next);
+                    array_push($ssRows, 'K' . $row . ':L' . $row);
+                    array_push($ssRows, 'K' . $next . ':L' . $next);
+                    array_push($ssRows, 'M' . $row . ':N' . $next);
+
+                    $event->sheet->getDelegate()->getRowDimension($row)->setRowHeight(35);
+                    $event->sheet->getDelegate()->getRowDimension($row+1)->setRowHeight(35);
+                }
+
                 // FUNCTIONS
-                $x = function($let1, $inc1, $let2 = null, $inc2 = null) use ($raf){
+                $x = function($let1, $inc1, $let2 = null, $inc2 = null, $temp = null) use ($raf, $ras){
+                    $temp = $temp==null? $raf : $ras;
+
                 	if($let2 == null){
-                		return $let1 . ($raf + $inc1);
+                		return $let1 . ($temp + $inc1);
                 	}
                 	else{
                 		$inc2 = $inc2 == null? $inc1 : $inc2;
-                		return $let1 . ($raf + $inc1) . ':' . $let2 . ($raf + $inc2);
+                		return $let1 . ($temp + $inc1) . ':' . $let2 . ($temp + $inc2);
                 	}
                 };
 
@@ -136,7 +164,7 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 // VT
-                $h[1] = array_merge($fdRows, [
+                $h[1] = array_merge($fdRows, $ssRows, [
                 	'H3', 'G12:I12', 'A13:A17',
                 ]);
 
@@ -150,7 +178,7 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 	'A22:N22', $x('A', 2, 'N', 2)
                 ];
 
-                $h['wrap'] = array_merge($fdRows, [
+                $h['wrap'] = array_merge($fdRows, $ssRows, [
                 	'I12', 'A13', $x('A', 2, 'N')
                 ]);
 
@@ -185,7 +213,7 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // BORDERS
-                $cells = array_merge($fdRows, [
+                $cells = array_merge($fdRows, $ssRows, [
                     'H3:I6','J3:K6','L3:N10',
                 	'A7:B7', 'G7:H7', 'C7:F7', 'I7:K7',
                 	'A8:B8', 'G8:H8', 'C8:F8', 'I8:K8',
@@ -207,17 +235,22 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 	$x('A', 2, 'A', 3), $x('B', 2, 'D', 3), $x('E', 2, 'E', 3), $x('F', 2, 'F', 3),
                 	$x('G', 2, 'G', 3), $x('H', 2, 'H', 3), $x('I', 2, 'I', 3), $x('J', 2, 'J', 3),
                 	$x('K', 2, 'L', 3), $x('M', 2, 'N', 3),
+
+                    $x('K', 2, 'K', 2, true), $x('M', 2, 'M', 2, true)
                 ]);
+
+                // dd($x('K', 2, 'K', 2, true));
 
                 foreach($cells as $cell){
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
                 }
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('N')->setAutoSize(false);
+
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
-                // $event->sheet->getDelegate()->getColumnDimension('K')->setAutoSize(false);
+                // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(12);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
             },
         ];

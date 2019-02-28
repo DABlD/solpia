@@ -210,5 +210,65 @@
 				Leaving
 			</td>
 		</tr>
+
+		<tr></tr>
+
+		@foreach($applicant->sea_service as $service)
+			<tr>
+				<td rowspan="2">{{ $loop->index + 1 }}</td>
+				<td rowspan="2" colspan="3">{{ $service->vessel_name }}</td>
+				<td rowspan="2">${{ $service->previous_salary }}</td>
+				<td rowspan="1">{{ $service->sign_on->format('F j, Y') }}</td>
+				<td rowspan="2"></td>
+				<td rowspan="2">{{ $service->rank }}</td>
+				<td rowspan="1">{{ $service->vessel_type }}</td>
+				<td rowspan="1">{{ $service->gross_tonnage }}</td>
+				<td rowspan="1" colspan="2">{{ $service->manning_agent }}</td>
+				<td rowspan="2" colspan="2"></td>
+			</tr>
+			<tr>
+				<td rowspan="1">{{ $service->sign_off->format('F j, Y') }}</td>
+				<td rowspan="1">{{ $service->engine_type }}</td>
+				<td rowspan="1"></td>
+				<td rowspan="1" colspan="2">{{ $service->principal }}</td>
+			</tr>
+		@endforeach
+
+		<tr>
+			<td colspan="9">Have you ever been sued in court or before any Administrative body?</td>
+			<td>Yes</td>
+			<td></td>
+			<td>No</td>
+			<td></td>
+			<td></td>
+		</tr>
+
+		<tr></tr>
+
+		<tr>
+			<td colspan="7">If "yes", give particulars</td>
+			<td colspan="7"></td>
+		</tr>
+
+		<tr>
+			<td colspan="7">Who recommended you to this company?</td>
+			<td colspan="7"></td>
+		</tr>
+
+		<tr></tr>
+		<tr>
+			<td colspan="14">I, undersigned, hereby certify that all informations provided herein are true and correct.  Any misrepresentation may cause of dismissal at all the costs burden to myself.</td>
+		</tr>
+
+		<tr></tr>
+		<tr>
+			<td colspan="7"></td>
+			<td colspan="6">{{-- Border --}}</td>
+		</tr>
+		<tr>
+			<td colspan="8"></td>
+			<td colspan="4">Signature of Applicant</td>
+			<td colspan="2"></td>
+		</tr>
 	</tbody>
 </table>

@@ -35,7 +35,9 @@ class ApplicationsController extends Controller
 
     public function exportApplication(Applicant $applicant, $type){
         $applicant->load('user');
+        $applicant->load('educational_background');
         $applicant->load('family_data');
+        $applicant->load('sea_service');
 
         // IF FAMILY_DATA IS ODD
         if($applicant->family_data->count() % 2 != 0){
