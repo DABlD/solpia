@@ -175,11 +175,11 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                	'A22:N22', $x('A', 2, 'N', 2)
+                	'A22:N22', $x('A', 2, 'N', 2), $x('H', 11, 'M', 11, true),
                 ];
 
                 $h['wrap'] = array_merge($fdRows, $ssRows, [
-                	'I12', 'A13', $x('A', 2, 'N')
+                	'I12', 'A13', $x('A', 2, 'N'), $x('A', 7, 'N', 7, true),
                 ]);
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -236,10 +236,11 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 	$x('G', 2, 'G', 3), $x('H', 2, 'H', 3), $x('I', 2, 'I', 3), $x('J', 2, 'J', 3),
                 	$x('K', 2, 'L', 3), $x('M', 2, 'N', 3),
 
-                    $x('K', 2, 'K', 2, true), $x('M', 2, 'M', 2, true)
+                    $x('K', 2, 'K', 2, true), $x('M', 2, 'M', 2, true),
+                    $x('H', 4, 'N', 4, true),
+                    $x('H', 5, 'N', 5, true),
+                    $x('H', 10, 'M', 10, true),
                 ]);
-
-                // dd($x('K', 2, 'K', 2, true));
 
                 foreach($cells as $cell){
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
@@ -250,7 +251,7 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
             },
         ];
