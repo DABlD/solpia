@@ -43,6 +43,14 @@
                         <hr>
                         @include('applications.includes.family_data')
                         
+                        <h2><strong>Educational Background</strong></h2>
+                        <hr>
+                        <span class="ebCount fd-count">0</span>
+                        <a class="btn btn-success" onclick="addEB()">
+                            <span class="fa fa-plus"></span>
+                        </a>
+                        @include('applications.includes.educational_background')
+                        
                         <h2><strong>Sea Service</strong></h2>
                         <hr>
                         <span class="ssCount fd-count">0</span>
@@ -112,6 +120,8 @@
         }
 
         function fillSS(){
+            addSS();
+            addSS();
             $('#sea-services input')[0].value = "Vessel 1";
             $('#sea-services input')[1].value = "Rank 1";
             $('#sea-services input')[2].value = "Type 1";
@@ -151,6 +161,31 @@
                 $('#sea-services input')[15+17].value = "Cargo 3, Cargo 4";
                 $('#sea-services input')[16+17].value = "Not so so";
             }
+            fillEB();
+        }
+
+        function fillEB(){
+            addEB();
+            addEB();
+            addEB();
+            $('#EB .form-control')[0].value = "Elementary";
+            $('#EB .form-control')[2].value = "2003";
+            $('#EB .form-control')[3].value = "2009";
+            $('#EB .form-control')[4].value = "HRSDC";
+            $('#EB .form-control')[5].value = "Dasmarinas, Cavite";
+
+            $('#EB .form-control')[6].value = "High School";
+            $('#EB .form-control')[8].value = "2009";
+            $('#EB .form-control')[9].value = "2013";
+            $('#EB .form-control')[10].value = "UPHSD";
+            $('#EB .form-control')[11].value = "Bacoor, Cavite";
+
+            $('#EB .form-control')[12].value = "College";
+            $('#EB .form-control')[13].value = "BSITWMA";
+            $('#EB .form-control')[14].value = "2013";
+            $('#EB .form-control')[15].value = "2019";
+            $('#EB .form-control')[16].value = "FEU-IT";
+            $('#EB .form-control')[17].value = "Sampaloc, Manila";
         }
 
         asd = () => {
@@ -282,8 +317,34 @@
                 `);
             }
 
+            // Compress EB
+            inputs = $('#EB .form-control');
+            let eb = [];
+
+            for(let i = 0; i < inputs.length; i+=6){
+                let tempEb = {};
+                tempEb.type         = inputs[i].value;
+                tempEb.course       = inputs[i+1].value;
+                tempEb.year         = inputs[i+2].value + '-' + inputs[i+3].value;
+                tempEb.school     = inputs[i+4].value;
+                tempEb.address   = inputs[i+5].value;
+                eb.push(tempEb);
+
+                // REMOVE THOSE ELEMENTS
+                inputs[i].remove();
+                inputs[i+1].remove();
+                inputs[i+2].remove();
+                inputs[i+3].remove();
+                inputs[i+4].remove();
+                inputs[i+5].remove();
+
+                $('#createForm').append(`
+                    <input type="hidden" name="eb" value='${JSON.stringify(eb)}'>
+                `);
+            }
+
             swal.close();
-            $('#createForm').submit()
+            $('#createForm').submit();
         }
 
         function showError(input, temp, error, message){

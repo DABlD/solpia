@@ -102,6 +102,13 @@ class ApplicationsController extends Controller
             SeaService::create((array)$data);
         }
 
+        // SAVE EDUCATIONAL BACKGROUND
+        $eb = json_decode($req->eb);
+        foreach($eb as $data){
+            $data->applicant_id = $applicant->id;
+            EducationalBackground::create((array)$data);
+        }
+
         if(true){
             $req->session()->flash('success', 'Applicant Successfully Added.');
             return redirect()->route('applications.index');

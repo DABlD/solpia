@@ -117,7 +117,7 @@
 			<td colspan="2"></td>
 			<td colspan="2"></td>
 			<td colspan="2">Last School</td>
-			<td colspan="6"></td>
+			<td colspan="6">{{ $applicant->educational_background->last()->school }}</td>
 		</tr>
 
 		<tr>
@@ -125,7 +125,7 @@
 			<td colspan="2"></td>
 			<td colspan="2"></td>
 			<td colspan="2">Period</td>
-			<td colspan="6"></td>
+			<td colspan="6">{{ $applicant->educational_background->last()->year }}</td>
 		</tr>
 
 		<tr>
@@ -133,7 +133,7 @@
 			<td colspan="2"></td>
 			<td colspan="2"></td>
 			<td colspan="2">Specialty</td>
-			<td colspan="6"></td>
+			<td colspan="6">{{ $applicant->educational_background->last()->course }}</td>
 		</tr>
 
 		<tr>
@@ -262,7 +262,7 @@
 
 		<tr></tr>
 		<tr></tr>
-		
+
 		<tr>
 			<td colspan="7"></td>
 			<td colspan="6">{{-- Border --}}</td>
