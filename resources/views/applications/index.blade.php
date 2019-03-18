@@ -118,8 +118,10 @@
                         'hmsNautica': 'HMS & NAUTICA'
                     },
                 }).then(result => {
-                    type = result.value;
-                    window.location.href = 'applications/export/' + $(application.target).data('id') + '/' + type;
+                    if(result.value){
+                        type = result.value;
+                        window.location.href = 'applications/export/' + $(application.target).data('id') + '/' + type;
+                    }
                 });
 
 	    	});
