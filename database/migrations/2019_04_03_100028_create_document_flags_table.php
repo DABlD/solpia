@@ -15,7 +15,14 @@ class CreateDocumentFlagsTable extends Migration
     {
         Schema::create('document_flags', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('country');
+            $table->string('booklet_no');
+            $table->string('license_no');
+            $table->string('goc');
+            $table->string('sso');
+            $table->string('sdsd');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

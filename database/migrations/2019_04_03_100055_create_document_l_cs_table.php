@@ -15,7 +15,12 @@ class CreateDocumentLCsTable extends Migration
     {
         Schema::create('document_l_cs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('issuer');
+            $table->string('no');
+            $table->string('issue_date');
+            $table->string('expiry_date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
