@@ -25,6 +25,7 @@
         	let issue_date = 'docu-issue_date';
         	let expiry_date = 'docu-expiry_date';
 
+        	let country = "docu-country";
         	let booklet_no = "docu-bookletNo";
         	let license_no = "docu-licenseNo";
         	let goc = "docu-goc";
@@ -33,10 +34,11 @@
 
         	let issuer = "docu-issuer";
 
+        	//<input type="hidden" name="docu-type${count}" value="${type}">
             if(type == "ID"){
             	string = `
 	            	    <div class="row docu">
-	            	        <input type="hidden" name="docu-type${count}" value="${type}">
+
 	            	        <div class="form-group col-md-3">
 	            	            <label for="${dType}${count}">Type</label>
 	            	            <select class="${docu_class} ${dType}" name="${dType}${count}">
@@ -78,15 +80,22 @@
             else if(type == "Flag"){
             	string = `
 	            	    <div class="row docu">
-	            	        <input type="hidden" name="docu-type${count}" value="${type}">
-	            	        <div class="form-group col-md-3">
+							
+	            	        <div class="form-group col-md-2">
+	            	            <label for="${country}${count}">Country</label>
+	            	            <input type="text" class="${docu_class} ${country}" name="${country}${count}" placeholder="Enter Country">
+	            	            <span class="invalid-feedback hidden" role="alert">
+	            	                <strong id="${country}${count}Error"></strong>
+	            	            </span>
+	            	        </div>
+	            	        <div class="form-group col-md-2">
 	            	            <label for="${booklet_no}${count}">Booklet No.</label>
 	            	            <input type="text" class="${docu_class} ${booklet_no}" name="${booklet_no}${count}" placeholder="Enter Booklet No.">
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${booklet_no}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-3">
+	            	        <div class="form-group col-md-2">
 	            	            <label for="${license_no}${count}">License No.</label>
 	            	            <input type="text" class="${docu_class} ${license_no}" name="${license_no}${count}" placeholder="Enter License No.">
 	            	            <span class="invalid-feedback hidden" role="alert">
@@ -119,10 +128,9 @@
 	            	</div>`;
             }
             else{
-
             	string = `
 	            	    <div class="row docu">
-	            	        <input type="hidden" name="docu-type${count}" value="${type}">
+
 	            	        <div class="form-group col-md-3">
 	            	            <label for="${issuer}${count}">Issuer</label>
 	            	            <input type="text" class="${docu_class2} ${issuer}" name="${issuer}${count}" placeholder="Enter Issuer">
@@ -163,7 +171,7 @@
 	                altInput: true,
 	                altFormat: 'F j, Y',
 	                dateFormat: 'Y-m-d',
-	                maxDate: moment().format('YYYY-MM-DD')
+	                // maxDate: moment().format('YYYY-MM-DD')
 	            });
             }
 

@@ -137,9 +137,16 @@
         //     scrollTop: $(".SpouseCount").offset().top - 50
         // }, 2000);
         function fill(){
-            $('[name="birthday"]').flatpickr().setDate('1997-11-12', true);
-            $('[name="fd-birthday1"]').flatpickr().setDate('1967-03-23', true);
-            $('[name="fd-birthday2"]').flatpickr().setDate('1961-10-16', true);
+            let config = {
+                altInput: true,
+                altFormat: 'F j, Y',
+                dateFormat: 'Y-m-d',
+                maxDate: moment().format('YYYY-MM-DD')
+            };
+
+            $('[name="birthday"]').flatpickr(config).setDate('1997-11-12', true);
+            $('[name="fd-birthday1"]').flatpickr(config).setDate('1967-03-23', true);
+            $('[name="fd-birthday2"]').flatpickr(config).setDate('1961-10-16', true);
             fillSS();
         }
 
@@ -270,23 +277,20 @@
             let inputs = $('#FD input');
             let fd = [];
 
-            for(let i = 0; i < inputs.length; i+=6){
+            for(let i = 0; i < inputs.length; i+=7){
                 let tempFd = {};
                 tempFd.type         = inputs[i].value;
                 tempFd.name         = inputs[i+1].value;
                 tempFd.age          = inputs[i+2].value;
                 tempFd.birthday     = inputs[i+3].value;
-                tempFd.occupation   = inputs[i+4].value;
-                tempFd.address      = inputs[i+5].value;
+                tempFd.occupation   = inputs[i+5].value;
+                tempFd.address      = inputs[i+6].value;
                 fd.push(tempFd);
 
                 // REMOVE THOSE ELEMENTS
-                inputs[i].remove();
-                inputs[i+1].remove();
-                inputs[i+2].remove();
-                inputs[i+3].remove();
-                inputs[i+4].remove();
-                inputs[i+5].remove();
+                for(let j = i; j < 7; j++){
+                    inputs[j].remove();
+                }
             }
 
             $('#createForm').append(`
@@ -318,28 +322,14 @@
                 tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
                 ss.push(tempSS);
 
-                inputs[i].remove();
-                inputs[i+1].remove();
-                inputs[i+2].remove();
-                inputs[i+3].remove();
-                inputs[i+4].remove();
-                inputs[i+5].remove();
-                inputs[i+6].remove();
-                inputs[i+7].remove();
-                inputs[i+8].remove();
-                inputs[i+9].remove();
-                inputs[i+10].remove();
-                inputs[i+11].remove();
-                inputs[i+12].remove();
-                inputs[i+13].remove();
-                inputs[i+14].remove();
-                inputs[i+15].remove();
-                inputs[i+16].remove();
-
-                $('#createForm').append(`
-                    <input type="hidden" name="ss" value='${JSON.stringify(ss)}'>
-                `);
+                for(let j = i; j < 17; j++){
+                    inputs[j].remove();
+                }
             }
+
+            $('#createForm').append(`
+                <input type="hidden" name="ss" value='${JSON.stringify(ss)}'>
+            `);
 
             // Compress EB
             inputs = $('#EB .form-control');
@@ -355,17 +345,84 @@
                 eb.push(tempEb);
 
                 // REMOVE THOSE ELEMENTS
-                inputs[i].remove();
-                inputs[i+1].remove();
-                inputs[i+2].remove();
-                inputs[i+3].remove();
-                inputs[i+4].remove();
-                inputs[i+5].remove();
-
-                $('#createForm').append(`
-                    <input type="hidden" name="eb" value='${JSON.stringify(eb)}'>
-                `);
+                for(let j = i; j < 6; j++){
+                    inputs[j].remove();
+                }
             }
+
+            $('#createForm').append(`
+                <input type="hidden" name="eb" value='${JSON.stringify(eb)}'>
+            `);
+
+            // Compress Documents
+
+            // DOCUMENT ID
+            inputs = $('#docu .ID input, #docu .ID select');
+            let docu_id = [];
+
+            for(let i = 0; i < inputs.length; i+=6){
+                let tempID = {};
+                tempID.type             = inputs[i].value;
+                tempID.number           = inputs[i+1].value;
+                tempID.issue_date       = inputs[i+2].value;
+                tempID.expiry_date      = inputs[i+4].value;
+                docu_id.push(tempID);
+
+                // REMOVE THOSE ELEMENTS
+                for(let j = i; j < 6; j++){
+                    inputs[j].remove();
+                }
+            }
+
+            $('#createForm').append(`
+                <input type="hidden" name="docu_id" value='${JSON.stringify(docu_id)}'>
+            `);
+
+            // DOCUMENT FLAG
+            inputs = $('#docu .Flag input');
+            let docu_flag = [];
+
+            for(let i = 0; i < inputs.length; i+=6){
+                let tempFlag = {};
+                tempFlag.country    = inputs[i].value;
+                tempFlag.booklet_no = inputs[i+1].value;
+                tempFlag.license_no = inputs[i+2].value;
+                tempFlag.goc        = inputs[i+3].value;
+                tempFlag.sso        = inputs[i+4].value;
+                tempFlag.sdsd       = inputs[i+5].value;
+                docu_flag.push(tempFlag);
+
+                // REMOVE THOSE ELEMENTS
+                for(let j = i; j < 6; j++){
+                    inputs[j].remove();
+                }
+            }
+
+            $('#createForm').append(`
+                <input type="hidden" name="docu_flag" value='${JSON.stringify(docu_flag)}'>
+            `);
+
+            // License/Certificates/Contracts
+            inputs = $('#docu .lc input');
+            let docu_lc = [];
+
+            for(let i = 0; i < inputs.length; i+=6){
+                let tempLc = {};
+                tempLc.issuer       = inputs[i].value;
+                tempLc.no           = inputs[i+1].value;
+                tempLc.issue_date   = inputs[i+2].value;
+                tempLc.expiry_date  = inputs[i+4].value;
+                docu_lc.push(tempLc);
+
+                // REMOVE THOSE ELEMENTS
+                for(let j = i; j < 6; j++){
+                    inputs[j].remove();
+                }
+            }
+
+            $('#createForm').append(`
+                <input type="hidden" name="docu_lc" value='${JSON.stringify(docu_lc)}'>
+            `);
 
             swal.close();
             $('#createForm').submit();
