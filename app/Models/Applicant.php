@@ -38,4 +38,16 @@ class Applicant extends Model
     public function sea_service(){
         return $this->hasMany('App\Models\SeaService');
     }
+
+    public function document_id(){
+        return $this->hasMany('App\Models\DocumentId');
+    }
+
+    public function document_flag(){
+        return $this->hasMany('App\Models\DocumentFlag');
+    }
+
+    public function document_lc(){
+        return $this->hasMany('App\Models\DocumentLC');
+    }
 }

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Applicant, EducationalBackground, FamilyData, SeaService};
 use Illuminate\Http\Request;
+
+// Models
 use App\User;
+use App\Models\{Applicant, EducationalBackground, FamilyData, SeaService};
+use App\Models\{DocumentFlag, DocumentId, DocumentLC};
+
 use Image;
 
 use App\Exports\AllApplicant;
@@ -89,6 +93,7 @@ class ApplicationsController extends Controller
 
         $applicant = Applicant::create($applicant->all());
 
+        // SAVE FAMILY DATA
         $fd = json_decode($req->fd);
         foreach($fd as $data){
             $data->applicant_id = $applicant->id;
@@ -107,6 +112,27 @@ class ApplicationsController extends Controller
         foreach($eb as $data){
             $data->applicant_id = $applicant->id;
             EducationalBackground::create((array)$data);
+        }
+
+        // SAVE DOCUMENT ID
+        $docu_id = json_decode($req->docu_id);
+        foreach($docu_id as $data){
+            $data->applicant_id = $applicant->id;
+            DocumentId::create((array)$data);
+        }
+
+        // SAVE DOCUMENT FLAG
+        $docu_flag = json_decode($req->docu_flag);
+        foreach($docu_flag as $data){
+            $data->applicant_id = $applicant->id;
+            DocumentFlag::create((array)$data);
+        }
+
+        // SAVE DOCUMENT LC
+        $docu_lc = json_decode($req->docu_lc);
+        foreach($docu_lc as $data){
+            $data->applicant_id = $applicant->id;
+            DocumentLC::create((array)$data);
         }
 
         if(true){
