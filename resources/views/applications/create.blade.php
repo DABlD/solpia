@@ -15,10 +15,12 @@
 					<form method="POST" action="{{ route('applications.store') }}" id="createForm" enctype="multipart/form-data">
                         @csrf
                         
+                        {{-- PERSONAL DATA --}}
                         <h2><strong>Personal Data</strong></h2>
                         <hr>
                         @include('applications.includes.personal_data')
-
+                        
+                        {{-- FAMILY DATA --}}
                         <h2><strong>Family Data</strong></h2>
                         <span class="SpouseCount fd-count">0</span>
                         <a class="btn btn-success" onclick="addFD('Spouse')">
@@ -43,6 +45,7 @@
                         <hr>
                         @include('applications.includes.family_data')
                         
+                        {{-- EDUCATIONAL BACKGROUND --}}
                         <h2><strong>Educational Background</strong></h2>
                         <hr>
                         <span class="ebCount fd-count">0</span>
@@ -50,7 +53,28 @@
                             <span class="fa fa-plus"></span>
                         </a>
                         @include('applications.includes.educational_background')
+
+                        {{-- DOCUMENTS --}}
+                        <h2><strong>Documents</strong></h2>
+                        <span class="IDCount fd-count">0</span>
+                        <a class="btn btn-success" onclick="addDocu('ID')">
+                            <span class="fa fa-plus"></span>
+                            ID
+                        </a>
+                        <span class="FlagCount fd-count">0</span>
+                        <a class="btn btn-success" onclick="addDocu('Flag')">
+                            <span class="fa fa-plus"></span>
+                            Flag
+                        </a>
+                        <span class="lcCount fd-count">0</span>
+                        <a class="btn btn-success" onclick="addDocu('lc')">
+                            <span class="fa fa-plus"></span>
+                            License/Certificates/Contracts
+                        </a>
+                        <hr>
+                        @include('applications.includes.documents')
                         
+                        {{-- SEA SERVICE --}}
                         <h2><strong>Sea Service</strong></h2>
                         <hr>
                         <span class="ssCount fd-count">0</span>
