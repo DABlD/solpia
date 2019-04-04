@@ -15,6 +15,8 @@ class CreateDocumentIdsTable extends Migration
     {
         Schema::create('document_ids', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('applicant_id');
+            
             $table->string('type');
             $table->string('number');
             $table->date('issue_date');
