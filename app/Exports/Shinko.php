@@ -87,6 +87,7 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
+                $event->sheet->getDelegate()->setTitle('BIO DATA', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -257,15 +258,14 @@ class Shinko implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
     }
 
-
-
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
 		$drawing->setName('Logo');
 		$drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
-        $drawing->setHeight(158);
+        $drawing->setHeight(154);
+        $drawing->setOffsetX(22);
 		$drawing->setCoordinates('L3');
 
         return $drawing;
