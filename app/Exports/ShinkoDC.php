@@ -100,14 +100,33 @@ class ShinkoDC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(11);
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(18);
-                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(12);
+                $event->sheet->getDelegate()->getStyle('A42')->getFont()->setSize(10);
 
                 // ROWS
+
+                //'A:E', 'F:G', 'H:I', 'J:K', 'L:N',
                 $rows = [
-                    'A1:N1', 'A2:N2'
+                    
                 ];
 
                 // FUNCTIONS
+                for($i = 6; $i < 45; $i++){
+                    if($i < 29 || $i > 31){
+                        array_push($rows, "A$i:E$i");
+                    }
+                    else{
+                        array_push($rows, "D$i:E$i");
+                    }
+                    array_push($rows, "F$i:G$i");
+                    array_push($rows, "H$i:I$i");
+                    array_push($rows, "J$i:K$i");
+                    array_push($rows, "L$i:N$i");
+                }
+
+                array_push($rows, "A29:C31");
+                array_push($rows, "A45:E47");
+                array_push($rows, "F45:I47");
+                array_push($rows, "J45:N47");
 
                 // HEADINGS
 
@@ -118,7 +137,7 @@ class ShinkoDC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                	
+                	'A29', 'A45', 'F45', 'J45'
                 ];
 
                 // HL B
@@ -132,7 +151,7 @@ class ShinkoDC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                	
+                	'A42', 'A45', 'F45', 'J45'
                 ];
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -149,7 +168,8 @@ class ShinkoDC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills = [
-                    'A1', 'A3:A6', 'F3:F6', 'H6', 'J3:J6', 'L6'
+                    'A1', 'A3:A6', 'F3:F6', 'H6', 'J3:J6', 'L6',
+                    'A7:E45'
                 ];
 
                 foreach($fills as $fill){
@@ -157,13 +177,13 @@ class ShinkoDC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 }
 
                 // BORDERS
-                $cells = [
+                $cells = array_merge($rows, [
                     'A1:N1',
                     'A3:B3', 'C3:E3', 'F3:G3', 'H3:I3', 'J3:K3', 'L3:N3',
                     'A4:B4', 'C4:E4', 'F4:G4', 'H4:I4', 'J4:K4', 'L4:N4',
                     'A5:B5', 'C5:E5', 'F5:G5', 'H5:I5', 'J5:K5', 'L5:N5',
                     'A6:E6', 'F6:G6', 'H6:I6', 'J6:K6', 'L6:N6',
-                ];
+                ]);
 
                 foreach($cells as $cell){
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
