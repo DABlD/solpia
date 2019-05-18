@@ -75,8 +75,10 @@
 		<tr>
 			<td rowspan="2">SM Book</td>
 			<td>National</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->document_id->{'SEAMANS BOOK'}->number ?? "N/A" }}</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'SEAMANS BOOK'}->expiry_date) ? $applicant->document_id->{'SEAMANS BOOK'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 		</tr>
 
 		<tr>
@@ -90,8 +92,10 @@
 		<tr>
 			<td rowspan="2">COC</td>
 			<td>N/A</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->document_lc->COC->number ?? "N/A" }}</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->COC->expiry_date) ? $applicant->document_lc->COC->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="2">Place of Birth</td>
 			<td colspan="6">{{ $applicant->birth_place }}</td>
 		</tr>
@@ -107,8 +111,10 @@
 		<tr>
 			<td rowspan="2">GOC</td>
 			<td>National</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->document_lc->{'GDSSM GOC'}->number ?? "N/A" }}</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'GDSSM GOC'}->expiry_date) ? $applicant->document_lc->{'GDSSM GOC'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="8">Schooling</td>
 		</tr>
 
@@ -122,16 +128,19 @@
 
 		<tr>
 			<td colspan="2">Passport</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->document_id->{'PASSPORT'}->number ?? "N/A" }}</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'PASSPORT'}->expiry_date) ? $applicant->document_id->{'PASSPORT'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="2">Period</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->year }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">U.S.A. Visa</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->document_id->{'US-VISA'}->number ?? "N/A" }}</td>
+			<td colspan="2">{{ isset($applicant->document_id->{'US-VISA'}->expiry_date) ? $applicant->document_id->{'US-VISA'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="2">Specialty</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->course }}</td>
 		</tr>

@@ -43,6 +43,51 @@ class ApplicationsController extends Controller
         $applicant->load('family_data');
         $applicant->load('sea_service');
 
+        $applicant->load('document_id');
+        $applicant->load('document_flag');
+        $applicant->load('document_lc');
+
+        // DEFINE ALL DOCUMENT REQUIREMENTS
+        $r_docu_id = ['SEAMANS BOOK', 'PASSPORT', 'US-VISA'];
+        $r_docu_flag = [''];
+        $r_docu_lc = ['COC', 'GDSSM GOC'];
+    
+        // CHECK IF COMPLETE DOCUMENT_ID REQUIREMENTS
+        foreach($r_docu_id as $req){
+            $applicant->document_id->$req = "N/A";
+
+            foreach($applicant->document_id as $data){
+                if($data->type == $req){
+                    $applicant->document_id->$req = $data;
+                    break;
+                }
+            }
+        }
+        
+        // CHECK IF COMPLETE DOCUMENT_FLAG REQUIREMENTS
+        foreach($r_docu_flag as $req){
+            $applicant->document_flag->$req = "N/A";
+
+            foreach($applicant->document_flag as $data){
+                if($data->country == $req){
+                    $applicant->document_flag->$req = $data;
+                    break;
+                }
+            }
+        }
+        
+        // CHECK IF COMPLETE DOCUMENT_LC REQUIREMENTS
+        foreach($r_docu_lc as $req){
+            $applicant->document_lc->$req = "N/A";
+
+            foreach($applicant->document_lc as $data){
+                if($data->type == $req){
+                    $applicant->document_lc->$req = $data;
+                    break;
+                }
+            }
+        }
+
         // IF FAMILY_DATA IS ODD
         if($applicant->family_data->count() % 2 != 0){
             $fd = new FamilyData;

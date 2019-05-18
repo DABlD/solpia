@@ -80,6 +80,11 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             	    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
             	]
             ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                ]
+            ],
         ];
 
         return [
@@ -177,6 +182,11 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // HC
                 $h[3] = [
                 	'A22:N22', $x('A', 2, 'N', 2), $x('H', 11, 'M', 11, true),
+                ];
+
+                // HL
+                $h[4] = [
+                    'C13:E20'
                 ];
 
                 $h['wrap'] = array_merge($fdRows, $ssRows, [
