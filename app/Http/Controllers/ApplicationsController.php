@@ -53,38 +53,45 @@ class ApplicationsController extends Controller
         $r_docu_lc = ['COC', 'GDSSM GOC'];
     
         // CHECK IF COMPLETE DOCUMENT_ID REQUIREMENTS
-        foreach($r_docu_id as $req){
-            $applicant->document_id->$req = "N/A";
+        // foreach($r_docu_id as $req){
+        //     $applicant->document_id->$req = "N/A";
 
-            foreach($applicant->document_id as $data){
-                if($data->type == $req){
-                    $applicant->document_id->$req = $data;
-                    break;
-                }
-            }
-        }
+        //     foreach($applicant->document_id as $data){
+        //         if($data->type == $req){
+        //             $applicant->document_id->$req = $data;
+        //             break;
+        //         }
+        //     }
+        // }
         
         // CHECK IF COMPLETE DOCUMENT_FLAG REQUIREMENTS
-        foreach($r_docu_flag as $req){
-            $applicant->document_flag->$req = "N/A";
+        // foreach($r_docu_flag as $req){
+        //     $applicant->document_flag->$req = "N/A";
 
-            foreach($applicant->document_flag as $data){
-                if($data->country == $req){
-                    $applicant->document_flag->$req = $data;
-                    break;
-                }
-            }
-        }
+        //     foreach($applicant->document_flag as $data){
+        //         if($data->country == $req){
+        //             $applicant->document_flag->$req = $data;
+        //             break;
+        //         }
+        //     }
+        // }
         
         // CHECK IF COMPLETE DOCUMENT_LC REQUIREMENTS
-        foreach($r_docu_lc as $req){
-            $applicant->document_lc->$req = "N/A";
+        // foreach($r_docu_lc as $req){
+        //     $applicant->document_lc->$req = "N/A";
 
-            foreach($applicant->document_lc as $data){
-                if($data->type == $req){
-                    $applicant->document_lc->$req = $data;
-                    break;
-                }
+        //     foreach($applicant->document_lc as $data){
+        //         if($data->type == $req){
+        //             $applicant->document_lc->$req = $data;
+        //             break;
+        //         }
+        //     }
+        // }
+
+        foreach(['document_id', 'document_flag', 'document_lc'] as $docuType){
+            foreach($applicant->$docuType as $data){
+                $temp = $data->type;
+                $applicant->$docuType->$temp = $data;
             }
         }
 

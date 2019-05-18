@@ -35,7 +35,9 @@
 			<td colspan="2">
 				SEAMAN'S NAME
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $applicant->user->fname . ' ' . $applicant->user->mname . ' ' . $applicant->user->lname }}
+			</td>
 
 			<td colspan="2">
 				RANK
@@ -45,7 +47,9 @@
 			<td colspan="2">
 				NATIONALITY
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				FILIPINO
+			</td>
 		</tr>
 
 		<!-- 3rd Row -->
@@ -53,7 +57,9 @@
 			<td colspan="2">
 				BIRTH DATE
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $applicant->user->birthday->format('F j, Y') }}
+			</td>
 
 			<td colspan="2">
 				JOINING DATE
@@ -93,9 +99,15 @@
 				NATIONAL SEAMAN BOOK
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'SEAMANS BOOK'}) ? $applicant->document_id->{'SEAMANS BOOK'}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'SEAMANS BOOK'}->issue_date) ? $applicant->document_id->{'SEAMANS BOOK'}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'SEAMANS BOOK'}->expiry_date) ? $applicant->document_id->{'SEAMANS BOOK'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -103,10 +115,15 @@
 			<td colspan="5">
 				NATIONAL LICENSE
 			</td>
-
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -115,9 +132,11 @@
 				FLAG STATE SEAMAN BOOK (I.D BOOK)
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_flag->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_flag->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->number : "N/A" }}
+			</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -126,9 +145,11 @@
 				FLAG STATE S.Q. FOR TANKERS
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_flag->{'FLAG STATE S.Q. FOR TANKERS'}) ? $applicant->document_flag->{'FLAG STATE S.Q. FOR TANKERS'}->number : "N/A" }}
+			</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -137,9 +158,11 @@
 				FLAG STATE LICENSE
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_flag->{'FLAG STATE LICENSE'}) ? $applicant->document_flag->{'FLAG STATE LICENSE'}->number : "N/A" }}
+			</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -148,9 +171,11 @@
 				FLAG STATE SSO LICENSE
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_flag->{'FLAG STATE SSO LICENSE'}) ? $applicant->document_flag->{'FLAG STATE SSO LICENSE'}->number : "N/A" }}
+			</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -159,20 +184,28 @@
 				FLAG STATE ENDORSEMENT COOK COURSE
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_flag->{'FLAG STATE ENDORSEMENT COOK COURSE'}) ? $applicant->document_flag->{'FLAG STATE ENDORSEMENT COOK COURSE'}->number : "N/A" }}
+			</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
 		<tr>
 			<td colspan="5">
-				MEDICAL EXAMINATION
+				MEDICAL CERTIFICATE
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
