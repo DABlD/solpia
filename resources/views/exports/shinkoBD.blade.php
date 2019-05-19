@@ -76,25 +76,29 @@
 			<td rowspan="2">SM Book</td>
 			<td>National</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'SEAMANS BOOK'}) ? $applicant->document_id->{'SEAMANS BOOK'}->number : "N/A" }}
+				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->number : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'SEAMANS BOOK'}->expiry_date) ? $applicant->document_id->{'SEAMANS BOOK'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 		</tr>
 
 		<tr>
 			<td>Flag State</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="2">Tel</td>
 			<td colspan="6"></td>
 		</tr>
 
 		<tr>
 			<td rowspan="2">COC</td>
-			<td>N/A</td>
-			<td colspan="2">{{ isset($applicant->document_lc->{'COC'}) ? $applicant->document_lc->{'COC'}->number : "N/A" }}</td>
+			<td>National</td>
+			<td colspan="2">{{ isset($applicant->document_lc->{'COC'}) ? $applicant->document_lc->{'COC'}->no : "N/A" }}</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->COC) ? $applicant->document_lc->COC->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
@@ -114,25 +118,28 @@
 			<td rowspan="2">GOC</td>
 			<td>National</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'GDSSM GOC'}) ? $applicant->document_lc->{'GDSSM GOC'}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{'NATIONAL GMDSS-GOC'}) ? $applicant->document_lc->{'NATIONAL GMDSS-GOC'}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'GDSSM GOC'}) ? $applicant->document_lc->{'GDSSM GOC'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{'NATIONAL GMDSS-GOC'}) ? $applicant->document_lc->{'NATIONAL GMDSS-GOC'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="8">Schooling</td>
 		</tr>
 
 		<tr>
 			<td>Flag State</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'FLAG STATE GMDSS-GOC'}) ? $applicant->document_lc->{'FLAG STATE GMDSS-GOC'}->no : "N/A" }}</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'FLAG STATE GMDSS-GOC'}) ? $applicant->document_lc->{'FLAG STATE GMDSS-GOC'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="2">Last School</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->school }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Passport</td>
-			<td colspan="2">{{ isset($applicant->document_lc->{'PASSPORT'}) ? $applicant->document_lc->{'PASSPORT'}->number : "N/A" }}
+			<td colspan="2">{{ isset($applicant->document_lc->{'PASSPORT'}) ? $applicant->document_lc->{'PASSPORT'}->no : "N/A" }}
 			<td colspan="2">
 				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>

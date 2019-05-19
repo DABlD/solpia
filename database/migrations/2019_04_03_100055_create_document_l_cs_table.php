@@ -17,6 +17,7 @@ class CreateDocumentLCsTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id');
             
+            $table->string('type');
             $table->string('issuer');
             $table->string('no');
             $table->string('issue_date');

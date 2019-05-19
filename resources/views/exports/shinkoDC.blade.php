@@ -100,13 +100,13 @@
 			</td>
 
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'SEAMANS BOOK'}) ? $applicant->document_id->{'SEAMANS BOOK'}->number : "N/A" }}
+				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->number : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'SEAMANS BOOK'}->issue_date) ? $applicant->document_id->{'SEAMANS BOOK'}->issue_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'SEAMANS BOOK'}->expiry_date) ? $applicant->document_id->{'SEAMANS BOOK'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -133,10 +133,14 @@
 			</td>
 
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_flag->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->number : "N/A" }}
+				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->number : "N/A" }}
 			</td>
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -198,7 +202,7 @@
 			</td>
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->issue_date->format('F j, Y') : "N/A" }}
@@ -232,7 +236,7 @@
 			</td>
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->issue_date->format('F j, Y') : "N/A" }}
@@ -273,7 +277,7 @@
 			@php $doc = "NATIONAL GMDSS-GOC"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -292,7 +296,7 @@
 			@php $doc = "FLAG STATE GMDSS-GOC"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -311,7 +315,7 @@
 			@php $doc = "RADAR TRAINING COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -330,7 +334,7 @@
 			@php $doc = "ARPA TRAINING COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -349,7 +353,7 @@
 			@php $doc = "ASAFETY COURSE, BASIC"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -368,7 +372,7 @@
 			@php $doc = "SAFETY COURSE, SURVIVAL CRAFT"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -387,7 +391,7 @@
 			@php $doc = "SAFETY COURSE, FIRE FIGHTING"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -406,7 +410,7 @@
 			@php $doc = "SAFETY COURSE, FIRST AID"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -425,7 +429,7 @@
 			@php $doc = "SAFETY COURSE, RESCUE BOAT"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -444,7 +448,7 @@
 			@php $doc = "TANKER COURSE, FAMILIARIZATION"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -464,7 +468,7 @@
 
 			<td colspan="2">OIL</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -480,7 +484,7 @@
 		<tr>
 			<td colspan="2">CHEMICAL</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -496,7 +500,7 @@
 		<tr>
 			<td colspan="2">LPG</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -515,7 +519,7 @@
 			@php $doc = "VACCINATION - Y. FEVER"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -534,7 +538,7 @@
 			@php $doc = "DRUG AND ALCOHOL TEST"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -572,7 +576,7 @@
 			@php $doc = "DANGEROUS FLUID CARGO COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -591,7 +595,7 @@
 			@php $doc = "SAFETY OFFICER'S TRAINING COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -610,7 +614,7 @@
 			@php $doc = "MEDICAL CARE COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -629,7 +633,7 @@
 			@php $doc = "SHIP HANDLING SIMULATION"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -648,7 +652,7 @@
 			@php $doc = "POLLUTION PREVENTION COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -667,7 +671,7 @@
 			@php $doc = "ECDIS"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -686,7 +690,7 @@
 			@php $doc = "BRIDGE TEAM/RESOURCE MANAGEMENT"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -705,7 +709,7 @@
 			@php $doc = "RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -724,7 +728,7 @@
 			@php $doc = "ISM COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
@@ -743,7 +747,7 @@
 			@php $doc = "ISPS / SSO COURSE / SDSD"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}

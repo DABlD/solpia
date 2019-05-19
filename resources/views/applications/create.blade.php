@@ -379,7 +379,7 @@
             `);
 
             // DOCUMENT FLAG
-            inputs = $('#docu .Flag input');
+            inputs = $('#docu .Flag input, #docu .Flag select');
             let docu_flag = [];
 
             for(let i = 0; i < inputs.length; i+=6){
@@ -403,19 +403,20 @@
             `);
 
             // License/Certificates/Contracts
-            inputs = $('#docu .lc input');
+            inputs = $('#docu .lc input, #docu .lc select');
             let docu_lc = [];
 
-            for(let i = 0; i < inputs.length; i+=6){
+            for(let i = 0; i < inputs.length; i+=7){
                 let tempLc = {};
-                tempLc.issuer       = inputs[i].value;
-                tempLc.no           = inputs[i+1].value;
-                tempLc.issue_date   = inputs[i+2].value;
-                tempLc.expiry_date  = inputs[i+4].value;
+                tempLc.type         = inputs[i].value
+                tempLc.issuer       = inputs[i+1].value;
+                tempLc.no           = inputs[i+2].value;
+                tempLc.issue_date   = inputs[i+3].value;
+                tempLc.expiry_date  = inputs[i+5].value;
                 docu_lc.push(tempLc);
 
                 // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 6; j++){
+                for(let j = i; j < 7; j++){
                     inputs[j].remove();
                 }
             }
