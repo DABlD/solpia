@@ -85,6 +85,15 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ]
             ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+                // 'alignment' => [
+                //     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
+                // ]
+            ],
         ];
 
         return [
@@ -138,8 +147,13 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     
                 ];
 
+                // HC VC
+                $h[5] = [
+                    'A13:K15', 'A48', 'F48'
+                ];
+
                 $h['wrap'] = [
-                    
+                    'F14:J15'
                 ];
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
