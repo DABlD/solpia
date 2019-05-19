@@ -48,9 +48,9 @@ class ApplicationsController extends Controller
         $applicant->load('document_lc');
 
         // DEFINE ALL DOCUMENT REQUIREMENTS
-        $r_docu_id = ['SEAMANS BOOK', 'PASSPORT', 'US-VISA'];
-        $r_docu_flag = [''];
-        $r_docu_lc = ['COC', 'GDSSM GOC'];
+        // $r_docu_id = ['SEAMANS BOOK', 'PASSPORT', 'US-VISA'];
+        // $r_docu_flag = [''];
+        // $r_docu_lc = ['COC', 'GDSSM GOC'];
     
         // CHECK IF COMPLETE DOCUMENT_ID REQUIREMENTS
         // foreach($r_docu_id as $req){

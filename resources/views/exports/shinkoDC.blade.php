@@ -214,9 +214,15 @@
 				PASSPORT
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -225,9 +231,15 @@
 				NATIONAL STCW-WATCH KEEPING
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -236,9 +248,9 @@
 				N/A
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -247,9 +259,9 @@
 				N/A
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -258,9 +270,17 @@
 				NATIONAL GMDSS-GOC
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			@php $doc = "NATIONAL GMDSS-GOC"; @endphp
+
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -269,9 +289,17 @@
 				FLAG STATE GMDSS-GOC
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			@php $doc = "FLAG STATE GMDSS-GOC"; @endphp
+
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -280,9 +308,17 @@
 				RADAR TRAINING COURSE
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			@php $doc = "RADAR TRAINING COURSE"; @endphp
+
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -291,9 +327,17 @@
 				ARPA TRAINING COURSE
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			@php $doc = "ARPA TRAINING COURSE"; @endphp
+
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -302,9 +346,17 @@
 				SAFETY COURSE, BASIC
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			@php $doc = "ASAFETY COURSE, BASIC"; @endphp
+
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
