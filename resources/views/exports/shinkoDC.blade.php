@@ -364,10 +364,18 @@
 			<td colspan="5">
 				SAFETY COURSE, SURVIVAL CRAFT
 			</td>
+			
+			@php $doc = "SAFETY COURSE, SURVIVAL CRAFT"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -375,10 +383,18 @@
 			<td colspan="5">
 				SAFETY COURSE, FIRE FIGHTING
 			</td>
+			
+			@php $doc = "SAFETY COURSE, FIRE FIGHTING"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -386,10 +402,18 @@
 			<td colspan="5">
 				SAFETY COURSE, FIRST AID
 			</td>
+			
+			@php $doc = "SAFETY COURSE, FIRST AID"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -397,10 +421,18 @@
 			<td colspan="5">
 				SAFETY COURSE, RESCUE BOAT
 			</td>
+			
+			@php $doc = "SAFETY COURSE, RESCUE BOAT"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -408,10 +440,18 @@
 			<td colspan="5">
 				TANKER COURSE, FAMILIARIZATION
 			</td>
+			
+			@php $doc = "TANKER COURSE, FAMILIARIZATION"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -419,26 +459,51 @@
 			<td colspan="3" rowspan="3">
 				TANKER COURSE, ADVANCED
 			</td>
+			
+			@php $doc = "TANKER COURSE, ADVANCED - OIL"; @endphp
+
 			<td colspan="2">OIL</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
+			
+			@php $doc = "STANKER COURSE, ADVANCED - CHEMICAL"; @endphp
 
 		<tr>
 			<td colspan="2">CHEMICAL</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
+			
+			@php $doc = "STANKER COURSE, ADVANCED - LPG"; @endphp
 
 		<tr>
 			<td colspan="2">LPG</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -446,10 +511,18 @@
 			<td colspan="5">
 				VACCINATION - Y. FEVER
 			</td>
+			
+			@php $doc = "VACCINATION - Y. FEVER"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -457,10 +530,18 @@
 			<td colspan="5">
 				DRUG AND ALCOHOL TEST
 			</td>
+			
+			@php $doc = "DRUG AND ALCOHOL TEST"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -468,10 +549,18 @@
 			<td colspan="5">
 				U.S.A VISA
 			</td>
+			
+			@php $doc = "US-VISA"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -479,10 +568,18 @@
 			<td colspan="5">
 				DANGEROUS FLUID CARGO COURSE
 			</td>
+			
+			@php $doc = "DANGEROUS FLUID CARGO COURSE"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -490,10 +587,18 @@
 			<td colspan="5">
 				SAFETY OFFICER'S TRAINING COURSE
 			</td>
+			
+			@php $doc = "SAFETY OFFICER'S TRAINING COURSE"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -501,10 +606,18 @@
 			<td colspan="5">
 				MEDICAL CARE COURSE
 			</td>
+			
+			@php $doc = "MEDICAL CARE COURSE"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -512,10 +625,18 @@
 			<td colspan="5">
 				SHIP HANDLING SIMULATION
 			</td>
+			
+			@php $doc = "SHIP HANDLING SIMULATION"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -523,10 +644,18 @@
 			<td colspan="5">
 				POLLUTION PREVENTION COURSE
 			</td>
+			
+			@php $doc = "POLLUTION PREVENTION COURSE"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -534,10 +663,18 @@
 			<td colspan="5">
 				ECDIS
 			</td>
+			
+			@php $doc = "ECDIS"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -545,10 +682,18 @@
 			<td colspan="5">
 				BRIDGE TEAM/RESOURCE MANAGEMENT
 			</td>
+			
+			@php $doc = "BRIDGE TEAM/RESOURCE MANAGEMENT"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -556,10 +701,18 @@
 			<td colspan="5">
 				RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE
 			</td>
+			
+			@php $doc = "RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -567,10 +720,18 @@
 			<td colspan="5">
 				ISM COURSE
 			</td>
+			
+			@php $doc = "ISM COURSE"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -578,10 +739,18 @@
 			<td colspan="5">
 				ISPS / SSO COURSE / SDSD
 			</td>
+			
+			@php $doc = "ISPS / SSO COURSE / SDSD"; @endphp
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->number : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+			</td>
+			<td colspan="2">
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			</td>
 			<td colspan="3"></td>
 		</tr>
 

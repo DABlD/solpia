@@ -142,7 +142,7 @@
 
 		<tr>
 			<td colspan="2">U.S.A. Visa</td>
-			<td colspan="2">{{ isset($applicant->document_lc->{'US-VISA'}) ? $applicant->document_lc->{'US-VISA'}->number : "N/A" }}
+			<td colspan="2">{{ isset($applicant->document_id->{'US-VISA'}) ? $applicant->document_id->{'US-VISA'}->number : "N/A" }}
 			<td colspan="2">{{ isset($applicant->document_id->{'US-VISA'}) ? $applicant->document_id->{'US-VISA'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">Specialty</td>
