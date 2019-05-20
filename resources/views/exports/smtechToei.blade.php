@@ -90,5 +90,38 @@
 			<td>Email:</td>
 			<td colspan="2"></td>
 		</tr>
+
+		<tr>
+			<td>Birth Date:</td>
+			<td></td>
+			<td>Age:</td>
+			<td></td>
+			<td>Birth Place:</td>
+			<td colspan="2"></td>
+			<td>Nationality:</td>
+			<td></td>
+		</tr>
+
+		<tr>
+			<td>Civil Status:</td>
+			<td colspan="2"></td>
+			<td>Weight:</td>
+			<td>kg</td>
+			<td>Height:</td>
+			<td>cm</td>
+			<td>Eye Color:</td>
+			<td></td>
+		</tr>
+
+		<tr>
+			<td>SSS No.:</td>
+			<td colspan="2"></td>
+			<td>Tin:</td>
+			<td>kg</td>
+			<td>Shoes Size:</td>
+			<td>cm</td>
+			<td>Clothes Size:</td>
+			<td></td>
+		</tr>
 	</tbody>
 </table>
