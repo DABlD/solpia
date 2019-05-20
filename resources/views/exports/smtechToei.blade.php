@@ -66,10 +66,7 @@
 
 		<tr>
 			<td>Name</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="8"></td>
 		</tr>
 
 		<tr>

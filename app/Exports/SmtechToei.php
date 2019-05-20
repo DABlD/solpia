@@ -28,20 +28,29 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
     public function registerEvents(): array
     {
         $borderStyle = [
-            'borders' => [
-                'top' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'bottom' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'left' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'right' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-            ],
+        	[
+	            'borders' => [
+	                'top' => [
+	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	                ],
+	                'bottom' => [
+	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	                ],
+	                'left' => [
+	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	                ],
+	                'right' => [
+	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	                ],
+	            ]
+	        ],
+	        [
+	            'borders' => [
+	                'bottom' => [
+	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	                ],
+	            ],
+	        ]
         ];
 
         $fillStyle = [
@@ -112,6 +121,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
+                $event->sheet->getParent()->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
                 // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setName('Arial');
@@ -145,7 +155,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // HC
                 $h[3] = [
-                    
+                    'A1:I150'
                 ];
 
                 // HL
@@ -189,17 +199,28 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 }
 
                 // BORDERS
-                $cells = array_merge($rows, [
-                      
+
+                // ALL AROUND
+                $cells[0] = array_merge($rows, [
+                    'A2:B9', 'H1:I1', 'H2:I2', 'H3:H5', 'I3:I5'
                 ]);
 
-                foreach($cells as $cell){
-                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
+                // BOTTOM ONLY
+                $cells[1] = [
+                	'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'F11', 'H11:I11', 'B12:I12',
+                	'B14:F14', 'H15:I15'
+                ];
+
+
+                foreach($cells as $key => $value) {
+                    foreach($value as $cell){
+                        $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
+                    }
                 }
 
                 // COLUMN RESIZE
 
-                // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(13);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
