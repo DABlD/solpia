@@ -92,7 +92,7 @@
 				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">Tel</td>
-			<td colspan="6"></td>
+			<td colspan="6">{{ $applicant->user->contact }}</td>
 		</tr>
 
 		<tr>

@@ -35,37 +35,37 @@
 
 		<tr>
 			<td colspan="2">Family Name</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->user->lname }}</td>
 			<td colspan="5">Last School</td>
-			<td colspan="4"></td>
+			<td colspan="4">{{ $applicant->educational_background->last()->school }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">First Name</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->user->fname }}</td>
 			<td colspan="5">Course</td>
-			<td colspan="4"></td>
+			<td colspan="4">{{ $applicant->educational_background->last()->course }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Middle Name</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->user->mname }}</td>
 			<td colspan="5">Duration</td>
-			<td colspan="4"></td>
+			<td colspan="4">{{ $applicant->educational_background->last()->year }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Birth Date</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->user->birthday->format('F j, Y') }}</td>
 			<td colspan="5">Height/Weight</td>
-			<td colspan="4"></td>
+			<td colspan="4">{{ $applicant->height }}cm / {{ $applicant->weight }}kg</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Telephone</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->user->contact }}</td>
 			<td colspan="5">Civil Status</td>
-			<td colspan="4"></td>
+			<td colspan="4">{{ $applicant->civil_status }}</td>
 		</tr>
 
 		<tr>
@@ -299,7 +299,7 @@
 			<td colspan="3"></td>
 			<td colspan="5">Judgement</td>
 			<td>FIT</td>
-			<td>a</td>
+			<td></td>
 			<td>NOT FIT</td>
 			<td></td>
 		</tr>
@@ -320,21 +320,21 @@
 					(Main)
 			</td>
 			<td>Rank</td>
-			<td colspan="2"></td>
+			<td colspan="3"></td>
 		</tr>
 
 		<tr>
 			<td>Name</td>
 			<td colspan="2"></td>
 			<td>Name</td>
-			<td colspan="2"></td>
+			<td colspan="3"></td>
 		</tr>
 
 		<tr>
 			<td>Signature</td>
 			<td colspan="2"></td>
 			<td>Signature</td>
-			<td colspan="2"></td>
+			<td colspan="3"></td>
 		</tr>
 	</tbody>
 </table>

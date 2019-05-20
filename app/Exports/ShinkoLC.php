@@ -90,10 +90,12 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
-                // 'alignment' => [
-                //     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,
-                // ]
             ],
+            [
+                'font' => [
+                    'bold' => true
+                ],
+            ]
         ];
 
         return [
@@ -117,9 +119,40 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(12);
 
                 // FAMILY DATA ROWS
+                $rows = [
+
+                ];
 
                 // FUNCTIONS
+                $cellBorders = function($start, $len){
+                    $temp = array();
+                    for($i = $start; $i < ($start + $len); $i++){
+                        array_push($temp, "A$i:B$i");
+                        array_push($temp, "C$i:E$i");
+                        array_push($temp, "K$i:N$i");
 
+                        if($i < 17 || $i > 27){
+                            array_push($temp, "F$i:J$i");
+                        }
+                        else{
+                            array_push($temp, "F$i");
+                            array_push($temp, "G$i");
+                            array_push($temp, "H$i");
+                            array_push($temp, "I$i");
+                            array_push($temp, "J$i");
+                        }
+                    }
+
+                    return $temp;
+                };
+
+                $rows = array_merge($rows, $cellBorders(6, 6));
+                $rows = array_merge($rows, $cellBorders(17, 4));
+                $rows = array_merge($rows, $cellBorders(22, 6));
+                $rows = array_merge($rows, $cellBorders(29, 3));
+                $rows = array_merge($rows, $cellBorders(33, 1));
+                $rows = array_merge($rows, $cellBorders(35, 2));
+                
                 // HEADINGS
 
                 // HC B
@@ -139,7 +172,7 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    
+                    "K46:M46"
                 ];
 
                 // HL
@@ -150,6 +183,11 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // HC VC
                 $h[5] = [
                     'A13:K15', 'A48', 'F48'
+                ];
+
+                // B
+                $h[6] = [
+                    'A3:A4'
                 ];
 
                 $h['wrap'] = [
@@ -170,7 +208,8 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills = [
-
+                    'A6:A11', 'F6:F11', 'A13:N16', 'A17:C28', 'A29:A37', 'F29:F31', 'F33',
+                    'A41', 'A45:A46', 'F46:K46', 'M46', 'A47:C50', 'F48:K50'
                 ];
 
                 foreach($fills as $fill){
@@ -178,9 +217,18 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 }
 
                 // BORDERS
-                $cells = [
-                    
-                ];
+                $cells = array_merge($rows, [
+                      'A13:B15', 'C13:E15', 'F13:J13', 'K13:N15',
+                      'F14', 'G14', 'H14', 'I14', 'J14',
+                      'F15', 'G15', 'H15', 'I15', 'J15',
+                      'A16:N16', 'A21:N21', 'A28:N28', 'A32:N32', 'A34:N34', 'A37:N37',
+                      'A38:N40', 'A41:N41', 'A42:N44', 'A45:N45',
+                      'A46:B46', 'C46:E46', 'F46:J46', 'K46', 'L46', 'M46', 'N46',
+                      'A47:N47', 'A48:B50', 'F48:J50',
+                      'C48', 'D48:E48', 'K48', 'L48:N48',
+                      'C49', 'D49:E49', 'K49', 'L49:N49',
+                      'C50', 'D50:E50', 'K50', 'L50:N50',
+                ]);
 
                 foreach($cells as $cell){
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
@@ -191,8 +239,10 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
+                // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
+                // $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
+
+                $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(25);
             },
         ];
     }
