@@ -129,10 +129,22 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // FONT SIZES
 
-                // FAMILY DATA ROWS
+                // ROWS
                 $rows = [
 
                 ];
+
+                // EDUCATION BACKGROUND ROWS
+                $ebRows = array();
+                $temp = $this->applicant->educational_background->count();
+                $raf = 28 + $temp; //Row # BEFORE EDUC BACKGROUND
+
+                for($i = 0, $row = 29; $i < $temp; $i++, $row++){
+                	array_push($ebRows, "A$row");
+                	array_push($ebRows, "B$row");
+                	array_push($ebRows, "C$row:F$row");
+                	array_push($ebRows, "G$row:I$row");
+                }
 
                 // FUNCTIONS
                 
@@ -201,14 +213,17 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 // BORDERS
 
                 // ALL AROUND
-                $cells[0] = array_merge($rows, [
-                    'A2:B9', 'H1:I1', 'H2:I2', 'H3:H5', 'I3:I5'
+                $cells[0] = array_merge($rows, $ebRows, [
+                    'A2:B9', 'H1:I1', 'H2:I2', 'H3:H5', 'I3:I5',
+                	'A28:B28', 'C28:F28', 'G28:I28',
                 ]);
 
                 // BOTTOM ONLY
                 $cells[1] = [
                 	'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'F11', 'H11:I11', 'B12:I12',
-                	'B14:F14', 'H15:I15'
+                	'B14:F14', 'H15:I15', 'B16', 'D16', 'F16:G16', 'I16', 'B16:C16', 'E16',
+                	'G16', 'I16', 'B17:C17', 'E17', 'G17', 'I17', 'B18:C18', 'E18', 'G18', 'I18',
+                	'F19', 'I19', 'D20:E20', 'G21:I21', 'B22:I22', 'B24:F24', 'G26:I26',
                 ];
 
 

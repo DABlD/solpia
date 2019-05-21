@@ -123,5 +123,79 @@
 			<td>Clothes Size:</td>
 			<td></td>
 		</tr>
+
+		<tr>
+			<td colspan="4">Crew's physical condition</td>
+			<td>Diabetes</td>
+			<td></td>
+			<td></td>
+			<td>Choleith</td>
+			<td></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td colspan="2">High/Low blood pressure</td>
+			<td colspan="2"></td>
+			<td colspan="2">Renal Insufficiency</td>
+			<td></td>
+			<td></td>
+		</tr>
+
+		<tr>
+			<td colspan="5">Name and address of Wife / Nearest Relative</td>
+			<td>Relation</td>
+			<td colspan="3"></td>
+		</tr>
+
+		<tr>
+			<td>Name</td>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td colspan="2">(Surname)</td>
+			<td colspan="2">(Given Name)</td>
+			<td colspan="2">(Middle Name)</td>
+			<td colspan="2">(Number of Child)</td>
+		</tr>
+
+		<tr>
+			<td>Adress:</td>
+			<td colspan="5"></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td colspan="2"></td>
+		</tr>
+
+		<tr>
+			<td colspan="5"></td>
+			<td>E-mail:</td>
+			<td colspan="3"></td>
+		</tr>
+
+		<tr>
+			<td colspan="3">1. Educational Attainment</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Year</td>
+			<td colspan="4">School</td>
+			<td colspan="3">Course Finished</td>
+		</tr>
+
+		@foreach($applicant->educational_background as $data)
+			{{-- @if($data->course != "") --}}
+				<tr>
+					<td>{{ explode('-', $data->year)[0] }}</td>
+					<td>{{ explode('-', $data->year)[1] }}</td>
+					<td colspan="4">{{ $data->school }}</td>
+					<td colspan="3">{{ $data->course }}</td>
+				</tr>
+			{{-- @endif --}}
+		@endforeach
 	</tbody>
 </table>
