@@ -139,7 +139,7 @@
 
 		<tr>
 			<td colspan="2">Passport</td>
-			<td colspan="2">{{ isset($applicant->document_lc->{'PASSPORT'}) ? $applicant->document_lc->{'PASSPORT'}->no : "N/A" }}
+			<td colspan="2">{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->no : "N/A" }}
 			<td colspan="2">
 				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
