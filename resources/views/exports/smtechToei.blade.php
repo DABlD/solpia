@@ -197,5 +197,54 @@
 				</tr>
 			{{-- @endif --}}
 		@endforeach
+
+		<tr>
+			<td colspan="2">2. Licenses</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">LICENSE</td>
+			<td colspan="2">RANK</td>
+			<td>Number</td>
+			<td>Date Issued</td>
+			<td>Expiry Date</td>
+			<td colspan="2">Issued By</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">National License</td>
+			<td colspan="2"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td colspan="2">Philippines</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Flag License</td>
+			<td colspan="2"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td colspan="2">Panama</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Flag GOC</td>
+			<td colspan="2"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td colspan="2">Marshall Islands</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Flag SSO</td>
+			<td colspan="2"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td colspan="2">Panama</td>
+		</tr>
 	</tbody>
 </table>

@@ -124,6 +124,12 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 $event->sheet->getParent()->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                $event->sheet->getDelegate()->getStyle('E19')->getFont()->getColor()->setRGB('FF0000');
+                $event->sheet->getDelegate()->getStyle('H19')->getFont()->getColor()->setRGB('FF0000');
+                $event->sheet->getDelegate()->getStyle('B20')->getFont()->getColor()->setRGB('FF0000');
+                $event->sheet->getDelegate()->getStyle('F20')->getFont()->getColor()->setRGB('FF0000');
+
                 // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setName('Arial');
                 // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setSize(10);
 
@@ -137,13 +143,27 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 // EDUCATION BACKGROUND ROWS
                 $ebRows = array();
                 $temp = $this->applicant->educational_background->count();
-                $raf = 28 + $temp; //Row # BEFORE EDUC BACKGROUND
+                $rae = 28 + $temp; //Row # AFTER EDUC BACKGROUND
 
                 for($i = 0, $row = 29; $i < $temp; $i++, $row++){
                 	array_push($ebRows, "A$row");
                 	array_push($ebRows, "B$row");
                 	array_push($ebRows, "C$row:F$row");
                 	array_push($ebRows, "G$row:I$row");
+                }
+
+                // LICENSES ROWS
+                $lRows = array();
+                $temp = 5;
+                $ral = $rae + 2 + $temp; //Row # AFTER LICENSES
+
+                for($i = 0, $row = $rae + 2; $i < $temp; $i++, $row++){
+                	array_push($lRows, "A$row:B$row");
+                	array_push($lRows, "C$row:D$row");
+                	array_push($lRows, "E$row");
+                	array_push($lRows, "F$row");
+                	array_push($lRows, "G$row");
+                	array_push($lRows, "H$row:I$row");
                 }
 
                 // FUNCTIONS
@@ -213,8 +233,8 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 // BORDERS
 
                 // ALL AROUND
-                $cells[0] = array_merge($rows, $ebRows, [
-                    'A2:B9', 'H1:I1', 'H2:I2', 'H3:H5', 'I3:I5',
+                $cells[0] = array_merge($rows, $ebRows, $lRows, [
+                    'A2:B9', 'H1:I1', 'H2', 'I2', 'H3:H5', 'I3:I5',
                 	'A28:B28', 'C28:F28', 'G28:I28',
                 ]);
 

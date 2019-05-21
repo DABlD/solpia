@@ -209,7 +209,7 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // FILLS
                 $fills = [
                     'A6:A11', 'F6:F11', 'A13:N16', 'A17:C28', 'A29:A37', 'F29:F31', 'F33',
-                    'A41', 'A45:A46', 'F46:K46', 'M46', 'A47:C50', 'F48:K50'
+                    'F35', 'F36', 'A41', 'A45:A46', 'F46:K46', 'M46', 'A47:C50', 'F48:K50'
                 ];
 
                 foreach($fills as $fill){
