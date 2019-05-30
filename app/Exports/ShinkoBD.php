@@ -145,8 +145,8 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($ssRows, 'K' . $next . ':L' . $next);
                     array_push($ssRows, 'M' . $row . ':N' . $next);
 
-                    $event->sheet->getDelegate()->getRowDimension($row)->setRowHeight(35);
-                    $event->sheet->getDelegate()->getRowDimension($row+1)->setRowHeight(35);
+                    // $event->sheet->getDelegate()->getRowDimension($row)->setRowHeight(35);
+                    // $event->sheet->getDelegate()->getRowDimension($row+1)->setRowHeight(35);
                 }
 
                 // FUNCTIONS
@@ -262,7 +262,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(12);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
             },
         ];

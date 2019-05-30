@@ -238,7 +238,7 @@
 				<td rowspan="2">{{ $loop->index + 1 }}</td>
 				<td rowspan="2" colspan="3">{{ $service->vessel_name }}</td>
 				<td rowspan="2">${{ $service->previous_salary }}</td>
-				<td rowspan="1">{{ $service->sign_on->format('F j, Y') }}</td>
+				<td rowspan="1">{{ $service->sign_on->format('M j, Y') }}</td>
 				<td rowspan="2"></td>
 				<td rowspan="2">{{ $service->rank }}</td>
 				<td rowspan="1">{{ $service->vessel_type }}</td>
@@ -247,7 +247,7 @@
 				<td rowspan="2" colspan="2"></td>
 			</tr>
 			<tr>
-				<td rowspan="1">{{ $service->sign_off->format('F j, Y') }}</td>
+				<td rowspan="1">{{ $service->sign_off->format('M j, Y') }}</td>
 				<td rowspan="1">{{ $service->engine_type }}</td>
 				<td rowspan="1"></td>
 				<td rowspan="1" colspan="2">{{ $service->principal }}</td>
