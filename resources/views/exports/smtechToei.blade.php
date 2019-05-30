@@ -178,7 +178,7 @@
 		</tr>
 
 		<tr>
-			<td colspan="3">1. Educational Attainment</td>
+			<td colspan="3">1. EDUCATIONAL ATTAINMENT</td>
 		</tr>
 
 		<tr>
@@ -199,7 +199,7 @@
 		@endforeach
 
 		<tr>
-			<td colspan="2">2. Licenses</td>
+			<td colspan="2">2. LICENSES</td>
 		</tr>
 
 		<tr>
@@ -246,5 +246,166 @@
 			<td></td>
 			<td colspan="2">Panama</td>
 		</tr>
+
+		<tr>
+			<td colspan="2">3. CERTIFICATE</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">CERTIFICATE</td>
+			<td colspan="2"></td>
+			<td>Number</td>
+			<td>Date Issued</td>
+			<td>Expiry Date</td>
+			<td colspan="2">Issued By</td>
+		</tr>
+
+		@php
+			// CERTIFICATES
+			$array = [
+				[
+					'Passport',
+					'D.F.A'
+				],
+				[
+					'U.S. C1/D Visa',
+					'U.S EMBASSY'
+				],
+				[
+					"National Seaman's Book",
+					'MARINA'
+				],
+				[
+					"Seaman's Book/Panama",
+					'PANAMA'
+				],
+				[
+					"Australia MCV",
+					"AUSTRALIA"
+				],
+				[
+					"Japanese Visa",
+					"in case of Master & C/E"
+				]
+			];
+		@endphp
+		
+		@foreach($array as $cert)
+			<tr>
+				<td colspan="2">{{ $cert[0] }}</td>
+				<td colspan="2"></td>
+				<td>
+					@if($loop->last)
+						N/A
+					@endif
+				</td>
+				<td></td>
+				<td></td>
+				<td colspan="2">{{ $cert[1] }}</td>
+			</tr>
+		@endforeach
+	
+		<tr>
+			<td colspan="5">4. OTHER CERTIFICATES (MARINA/SOLAS/MARPOL/OTHERS)</td>
+		</tr>
+
+		<tr>
+			<td colspan="4">CERTIFICATE</td>
+			<td>Number</td>
+			<td>Date Issued</td>
+			<td>Expiry Date</td>
+			<td colspan="2">Issued By</td>
+		</tr>
+
+		@php
+			// OTHER CERTIFICATES
+			$array = [
+				[
+					'SSO (Ship Security Officer) Course',
+					'',
+					''
+				],
+				[
+					'Watchkeeping',
+					'',
+					'P.R.C.'
+				],
+				[
+					'Basic Safety Training Course  w/ PSSR',
+					'',
+					''
+				],
+				[
+					'Survival Craft & Rescue Boat',
+					'',
+					''
+				],
+				[
+					'Advance Fire Fighting Course',
+					'',
+					''
+				],
+				[
+					'Medical First Aid Course',
+					'',
+					''
+				],
+				[
+					'Radar Observer',
+					'',
+					''
+				],
+				[
+					'GMDSS (GOC)',
+					'',
+					''
+				],
+				[
+					'Satellite Communication Course',
+					'',
+					''
+				],
+				[
+					'Endorsement Certificate / COC',
+					'',
+					'P.R.C.'
+				],
+				[
+					'JRC ECDIS SPECIFIC 1',
+					'JAN-701B/901B/2000',
+					''
+				],
+				[
+					'JRC ECDIS SPECIFIC 2',
+					'JAN-9201/7201',
+					''
+				],
+				[
+					'FURUNO ECDIS FEA',
+					'FEA-2107/FEA-2807',
+					''
+				],
+				[
+					'FURUNO ECDIS FMD',
+					'FMD-3300',
+					''
+				],
+				[
+					'ECDIS GENERIC',
+					'',
+					''
+				],
+			];
+		@endphp
+		
+		@foreach($array as $cert)
+			<tr>
+				<td colspan="4">{{ $cert[0] }}</td>
+				<td>{{ $cert[1] }}</td>
+				<td></td>
+				<td></td>
+				<td colspan="2">{{ $cert[2] }}</td>
+			</tr>
+		@endforeach
 	</tbody>
 </table>

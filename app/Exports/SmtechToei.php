@@ -130,6 +130,19 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 $event->sheet->getDelegate()->getStyle('B20')->getFont()->getColor()->setRGB('FF0000');
                 $event->sheet->getDelegate()->getStyle('F20')->getFont()->getColor()->setRGB('FF0000');
 
+                $start = 31 + $this->applicant->educational_background->count();
+                for($i = $start; $i < $start + 4; $i++){
+                    $event->sheet->getDelegate()->getStyle("A$i")->getFont()->getColor()->setRGB('FF0000');
+                }
+
+                $start = $i + 2;
+                for($i = $start; $i < $start + 6; $i++){
+                    $event->sheet->getDelegate()->getStyle("A$i")->getFont()->getColor()->setRGB('FF0000');
+                    if(($i + 1) == ($start + 6)){
+                        $event->sheet->getDelegate()->getStyle("H$i")->getFont()->getColor()->setRGB('FF0000');
+                    }
+                }
+
                 // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setName('Arial');
                 // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setSize(10);
 
@@ -164,6 +177,35 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 	array_push($lRows, "F$row");
                 	array_push($lRows, "G$row");
                 	array_push($lRows, "H$row:I$row");
+                }
+
+                // CERTIFICATE ROWS
+                $cRows = array();
+                $temp = 7;
+                $rac = $ral + 1 + $temp; //Row # AFTER CERTIFICATES
+
+                for($i = 0, $row = $ral + 1; $i < $temp; $i++, $row++){
+                    array_push($cRows, "A$row:B$row");
+                    array_push($cRows, "C$row:D$row");
+                    array_push($cRows, "E$row");
+                    array_push($cRows, "F$row");
+                    array_push($cRows, "G$row");
+                    array_push($cRows, "H$row:I$row");
+                }
+
+                // OTHER CERTIFICATE ROWS
+                $ocRows = array();
+                $temp = 16;
+                $raoc = $rac + 1 + $temp; //Row # AFTER CERTIFICATES
+
+                for($i = 0, $row = $rac + 1; $i < $temp; $i++, $row++){
+                    array_push($ocRows, "A$row:D$row");
+                    array_push($ocRows, "E$row");
+                    array_push($ocRows, "F$row");
+                    array_push($ocRows, "G$row");
+                    array_push($ocRows, "H$row:I$row");
+
+                    $event->sheet->getDelegate()->getStyle("E$row")->getFont()->setSize(7);
                 }
 
                 // FUNCTIONS
@@ -233,7 +275,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 // BORDERS
 
                 // ALL AROUND
-                $cells[0] = array_merge($rows, $ebRows, $lRows, [
+                $cells[0] = array_merge($rows, $ebRows, $lRows, $cRows, $ocRows, [
                     'A2:B9', 'H1:I1', 'H2', 'I2', 'H3:H5', 'I3:I5',
                 	'A28:B28', 'C28:F28', 'G28:I28',
                 ]);
