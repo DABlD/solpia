@@ -407,5 +407,75 @@
 				<td colspan="2">{{ $cert[2] }}</td>
 			</tr>
 		@endforeach
+	
+		<tr>
+			<td colspan="5">5. PHYSICAL INSPECTION/YELLOW CARD</td>
+		</tr>
+
+		<tr>
+			<td colspan="4">CERTIFICATE</td>
+			<td>Number</td>
+			<td>Date Issued</td>
+			<td>Expiry Date</td>
+			<td colspan="2">Issued By</td>
+		</tr>
+
+		<tr>	
+			<td colspan="4" rowspan="2">PHYSICAL INSPECTION<br>YELLOW FEVER</td>
+			<td></td>
+			<td rowspan="2"></td>
+			<td rowspan="2"></td>
+			<td rowspan="2"></td>
+			<td rowspan="2"></td>
+		</tr>
+
+		<tr>
+			<td></td>
+		</tr>
+
+		{{-- end --}}
+		<tr>
+			<td colspan="4">6. ENGLISH AND JAPANESE LINGUISTICS</td>
+		</tr>
+
+		<tr>
+			<td colspan="2"></td>
+			<td colspan="5">Class</td>
+			<td>ENGLISH</td>
+			<td>JAPANESE</td>
+		</tr>
+
+		@foreach(['READ & WRITE', 'SPEAK & LISTEN'] as $row)
+			<tr>
+				<td colspan="2">{{ $row }}</td>
+				<td>Excellent</td>
+				<td>Good</td>
+				<td>Acceptable</td>
+				<td>Poor</td>
+				<td>Unsuitable</td>
+				<td></td>
+				<td></td>
+			</tr>
+		@endforeach
+
+		<tr>
+			<td colspan="5">7. TRAINING / EXPERIENCE FOR SAFETY MANAGEMENT SYSTEM</td>
+		</tr>
+
+		<tr>
+			<td colspan="4">Type</td>
+			<td>Date</td>
+			<td colspan="2">Period</td>
+			<td colspan="2">Evaluation</td>
+		</tr>
+
+		@foreach(['Training for SMS', 'Experience for SMS'] as $row)
+			<tr>
+				<td colspan="4">{{ $row }}</td>
+				<td></td>
+				<td colspan="2"></td>
+				<td colspan="2"></td>
+			</tr>
+		@endforeach
 	</tbody>
 </table>

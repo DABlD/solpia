@@ -196,7 +196,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
                 $temp = 16;
-                $raoc = $rac + 1 + $temp; //Row # AFTER CERTIFICATES
+                $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
                 for($i = 0, $row = $rac + 1; $i < $temp; $i++, $row++){
                     array_push($ocRows, "A$row:D$row");
@@ -205,10 +205,53 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                     array_push($ocRows, "G$row");
                     array_push($ocRows, "H$row:I$row");
 
-                    $event->sheet->getDelegate()->getStyle("E$row")->getFont()->setSize(7);
+                    if($i != 0){
+                        $event->sheet->getDelegate()->getStyle("E$row")->getFont()->setSize(7);
+                    }
+                }
+
+                // PIYC
+                $piycRows = array(); //WILL BE FILLED AFTER FUNCTIONS
+                $rapiyc = $raoc + 1 + 3; //Row # AFTER PIYC (3 = rows)
+
+                // EAJL CERTIFICATE ROWS
+                $eajlRows = array();
+                $temp = 3;
+                $raeajl = $rapiyc + 1 + $temp; //Row # AFTER OTHER PIYC
+
+                for($i = 0, $row = $rapiyc + 1; $i < $temp; $i++, $row++){
+                    array_push($eajlRows, "A$row:B$row");
+                    array_push($eajlRows, "C$row");
+                    array_push($eajlRows, "D$row");
+                    array_push($eajlRows, "E$row");
+                    array_push($eajlRows, "F$row");
+                    array_push($eajlRows, "G$row");
+                    array_push($eajlRows, "H$row");
+                    array_push($eajlRows, "I$row");
+                }
+
+                // TESMS CERTIFICATE ROWS
+                $tesmsRows = array();
+                $temp = 3;
+                $ratesms = $raeajl + 1 + $temp; //Row # AFTER TESMS
+
+                for($i = 0, $row = $raeajl + 1; $i < $temp; $i++, $row++){
+                    array_push($eajlRows, "A$row:D$row");
+                    array_push($eajlRows, "E$row");
+                    array_push($eajlRows, "F$row:G$row");
+                    array_push($eajlRows, "H$row:I$row");
                 }
 
                 // FUNCTIONS
+                $piyc = function($col, $inc) use($raoc){
+                    return $col . ($raoc + $inc);
+                };
+
+                $piycRows = array(
+                    $piyc('A', 1) . ':' . $piyc('D', 1), $piyc('E', 1), $piyc('F', 1), $piyc('G', 1), $piyc('H', 1) . ':' . $piyc('I', 1),
+                    $piyc('A', 2) . ':' . $piyc('D', 3), $piyc('E', 2), $piyc('E', 3), $piyc('F', 2) . ':' . $piyc('F', 3),
+                    $piyc('G', 2) . ':' . $piyc('G', 3), $piyc('H', 2) . ':' . $piyc('H', 3), $piyc('I', 2) . ':' . $piyc('I', 3),
+                );
                 
                 // HEADINGS
 
@@ -275,7 +318,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 // BORDERS
 
                 // ALL AROUND
-                $cells[0] = array_merge($rows, $ebRows, $lRows, $cRows, $ocRows, [
+                $cells[0] = array_merge($rows, $ebRows, $lRows, $cRows, $ocRows, $piycRows, $eajlRows, [
                     'A2:B9', 'H1:I1', 'H2', 'I2', 'H3:H5', 'I3:I5',
                 	'A28:B28', 'C28:F28', 'G28:I28',
                 ]);
