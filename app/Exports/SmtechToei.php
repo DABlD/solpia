@@ -242,6 +242,64 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                     array_push($eajlRows, "H$row:I$row");
                 }
 
+                // AOW CERTIFICATE ROWS
+                $aowRows = array();
+                $temp = 2;
+                $raaow = $ratesms + 1 + $temp; //Row # AFTER AOW
+
+                for($i = 0, $row = $ratesms + 1; $i < $temp; $i++, $row++){
+                    array_push($aowRows, "A$row:B$row");
+                    array_push($aowRows, "C$row");
+                    array_push($aowRows, "D$row");
+                    array_push($aowRows, "E$row");
+                    array_push($aowRows, "F$row");
+                    array_push($aowRows, "G$row");
+                    array_push($aowRows, "H$row:I$row");
+                }
+
+                // SH1 ROWS
+                $sh1Rows = array();
+                $temp = 6;
+                $rash1 = $raaow + 1 + $temp; //Row # AFTER sh1
+
+                for($i = 0, $row = $raaow + 1; $i < $temp; $i++, $row++){
+                    array_push($sh1Rows, "A$row");
+
+                    if(($i+1) == $temp){
+                        $row++;
+                        $event->sheet->getDelegate()->getStyle("D$row")->getFont()->setSize(9);
+                        $row++;
+                        $event->sheet->getDelegate()->getStyle("H$row")->getFont()->setSize(9);
+                    }
+                }
+
+                // SH2 ROWS
+                $sh2Rows = array();
+                $row = $rash1;
+                $row2 = $rash1+1;
+                $rash2 = $rash1 + 2; //Row # AFTER sh2;
+
+                array_push($sh2Rows, "A$row:B$row2");
+                array_push($sh2Rows, "C$row:C$row2");
+                array_push($sh2Rows, "D$row:E$row2");
+                array_push($sh2Rows, "F$row:F$row2");
+                array_push($sh2Rows, "G$row:G$row2");
+                array_push($sh2Rows, "H$row:I$row2");
+
+                // SH3 ROWS
+                $sh3Rows = array();
+                $temp = $this->applicant->sea_service->count();
+                $rash3 = $rash2 + ($temp * 2) + 1; //Row # AFTER sh2;
+
+                for($i = 0, $row = $rash2, $row2 = $row+1; $i < $temp; $i++, $row+=2, $row2+=2){
+                    array_push($sh3Rows, "A$row:B$row2");
+                    array_push($sh3Rows, "C$row:C$row2");
+                    array_push($sh3Rows, "D$row:E$row2");
+                    array_push($sh3Rows, "F$row:F$row2");
+                    array_push($sh3Rows, "G$row:G$row2");
+                    array_push($sh3Rows, "H$row:I$row2");
+                }
+
                 // FUNCTIONS
                 $piyc = function($col, $inc) use($raoc){
                     return $col . ($raoc + $inc);
@@ -276,9 +334,9 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 ];
 
                 // HL
-                $h[4] = [
+                $h[4] = array_merge($sh1Rows, [
                     
-                ];
+                ]);
 
                 // HC VC
                 $h[5] = [
@@ -307,9 +365,9 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 }
 
                 // FILLS
-                $fills = [
+                $fills = array_merge($sh2Rows, [
                     
-                ];
+                ]);
 
                 foreach($fills as $fill){
                     $event->sheet->getDelegate()->getStyle($fill)->applyFromArray($fillStyle);  
@@ -317,8 +375,9 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // BORDERS
 
+                // $sh3Rows = array();
                 // ALL AROUND
-                $cells[0] = array_merge($rows, $ebRows, $lRows, $cRows, $ocRows, $piycRows, $eajlRows, [
+                $cells[0] = array_merge($rows, $ebRows, $lRows, $cRows, $ocRows, $piycRows, $eajlRows, $aowRows, $sh2Rows, $sh3Rows, [
                     'A2:B9', 'H1:I1', 'H2', 'I2', 'H3:H5', 'I3:I5',
                 	'A28:B28', 'C28:F28', 'G28:I28',
                 ]);
@@ -329,6 +388,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 	'B14:F14', 'H15:I15', 'B16', 'D16', 'F16:G16', 'I16', 'B16:C16', 'E16',
                 	'G16', 'I16', 'B17:C17', 'E17', 'G17', 'I17', 'B18:C18', 'E18', 'G18', 'I18',
                 	'F19', 'I19', 'D20:E20', 'G21:I21', 'B22:I22', 'B24:F24', 'G26:I26',
+                    "C$rash3:E$rash3", "G$rash3:I$rash3"
                 ];
 
 

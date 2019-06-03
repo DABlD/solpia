@@ -477,5 +477,98 @@
 				<td colspan="2"></td>
 			</tr>
 		@endforeach
+
+		<tr>
+			<td colspan="2">8. ABILITY OF WELDING</td>
+		</tr>
+
+		<tr>
+			<td colspan="2"></td>
+			<td colspan="5">Class</td>
+			<td colspan="2">Evaluation</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">ABILITY</td>
+			<td>Excellent</td>
+			<td>Good</td>
+			<td>Acceptable</td>
+			<td>Poor</td>
+			<td>Unsuitable</td>
+			<td colspan="2"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2">9. SEAMAN'S HISTORY</td>
+		</tr>
+
+		<tr>
+			<td>Note:</td>
+		</tr>
+
+		<tr>
+			<td colspan="9">Sea service (with in the last ten years) listed most recent service last.</td>
+		</tr>
+		<tr>
+			<td colspan="9">1) Indicated wether vessel is M/V (Motor Vessel), S/S (Steam Ship) or S/T (Steam Turbine), etc.</td>
+		</tr>
+		<tr>
+			<td colspan="9">2) Under TYPE indicate wether Bulk, Log, VLCC, Chemical LPG, PCC, Reefer, etc.</td>
+		</tr>
+		<tr>
+			<td colspan="9">3) For Deck Officers / Ratings indicate Gross Tonnage of Vessel</td>
+		</tr>
+		<tr>
+			<td colspan="9">4) For Engine Officers / Rating indicate Gross Tonnage and Engine Type (example:SULZER 7RTA62) with Horsepower.</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Vessel's Name</td>
+			<td>Type</td>
+			<td>Gross Tonnage</td>
+			<td>Service Area</td>
+			<td>Manning</td>
+			<td>Sign On</td>
+			<td colspan="2">Reason Sign-Off/Notes</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Flag</td>
+			<td>Rank</td>
+			<td colspan="2">Engine Type / Power</td>
+			<td>Manager</td>
+			<td>Sign Off</td>
+			<td>Period(Y-M-D)</td>
+			<td>SMC</td>
+		</tr>
+
+		@foreach($applicant->sea_service as $data)
+			<tr>
+				<td colspan="2">{{ $data->vessel_name }}</td>
+				<td>{{ $data->vessel_type }}</td>
+				<td>{{ $data->gross_tonnage }}</td>
+				<td>(Service Area)</td>
+				<td rowspan="2">{{ $data->manning_agent }}</td>
+				<td>{{ $data->sign_on->format('M j, Y') }}</td>
+				<td colspan="2">{{ $data->remarks }}</td>
+			</tr>
+			<tr>
+				<td colspan="2">{{ $data->flag }}</td>
+				<td>{{ $data->rank }}</td>
+				<td colspan="2">{{ $data->engine_type }} / {{ $data->bhp_kw }}kw</td>
+				<td>{{ $data->sign_off->format('M j, Y') }}</td>
+				<td>(Period)</td>
+				<td>(SMC)</td>
+			</tr>
+		@endforeach
+		
+		<tr></tr>
+
+		<tr>
+			<td colspan="2">Crew's Name:</td>
+			<td colspan="3"></td>
+			<td>Presenter:</td>
+			<td colspan="3"></td>
+		</tr>
 	</tbody>
 </table>
