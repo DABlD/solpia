@@ -244,7 +244,7 @@
 				<td rowspan="1">{{ $service->vessel_type }}</td>
 				<td rowspan="1">{{ $service->gross_tonnage }}</td>
 				<td rowspan="1" colspan="2">{{ $service->manning_agent }}</td>
-				<td rowspan="2" colspan="2"></td>
+				<td rowspan="2" colspan="2">{{ $service->remarks }}</td>
 			</tr>
 			<tr>
 				<td rowspan="1">{{ $service->sign_off->format('M j, Y') }}</td>
