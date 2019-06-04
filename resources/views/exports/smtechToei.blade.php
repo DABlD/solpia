@@ -46,7 +46,7 @@
 		<tr>
 			<td colspan="4"></td>
 			<td>Date:</td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ now()->toFormattedDateString() }}</td>
 		</tr>
 
 		<tr>
@@ -66,7 +66,10 @@
 
 		<tr>
 			<td>Name</td>
-			<td colspan="8"></td>
+			<td colspan="2">{{ $applicant->user->lname }}</td>
+			<td colspan="2">{{ $applicant->user->fname }}</td>
+			<td colspan="2">{{ $applicant->user->mname }}</td>
+			<td colspan="2"></td>
 		</tr>
 
 		<tr>
@@ -79,49 +82,49 @@
 
 		<tr>
 			<td>Address:</td>
-			<td colspan="5"></td>
-			<td></td>
-			<td colspan="2"></td>
+			<td colspan="8">{{ $applicant->user->address }}</td>
+			{{-- <td></td>
+			<td colspan="2"></td> --}}
 		</tr>
 
 		<tr>
 			<td></td>
-			<td colspan="5"></td>
+			<td colspan="4"></td>
 			<td>Email:</td>
-			<td colspan="2"></td>
+			<td colspan="3">{{ $applicant->user->email }}</td>
 		</tr>
 
 		<tr>
 			<td>Birth Date:</td>
-			<td></td>
+			<td>{{ $applicant->user->birthday->toFormattedDateString() }}</td>
 			<td>Age:</td>
-			<td></td>
+			<td>{{ $applicant->age }}</td>
 			<td>Birth Place:</td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->birth_place }}</td>
 			<td>Nationality:</td>
-			<td></td>
+			<td>{{ $applicant->nationality }}</td>
 		</tr>
 
 		<tr>
 			<td>Civil Status:</td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->civil_status }}</td>
 			<td>Weight:</td>
-			<td>kg</td>
+			<td>{{ $applicant->weight }}kg</td>
 			<td>Height:</td>
-			<td>cm</td>
+			<td>{{ $applicant->height }}cm</td>
 			<td>Eye Color:</td>
-			<td></td>
+			<td>(Eye Color)</td>
 		</tr>
 
 		<tr>
 			<td>SSS No.:</td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->sss }}</td>
 			<td>Tin:</td>
-			<td>kg</td>
+			<td>{{ $applicant->tin }}</td>
 			<td>Shoes Size:</td>
-			<td>cm</td>
+			<td>{{ $applicant->shoe_size }}cm</td>
 			<td>Clothes Size:</td>
-			<td></td>
+			<td>{{ $applicant->clothes_size }}</td>
 		</tr>
 
 		<tr>
@@ -142,15 +145,31 @@
 			<td></td>
 		</tr>
 
+		@php
+			$realFam = $applicant->family_data[0];
+			$hasWife = false;
+
+			foreach($applicant->family_data as $fam){
+				if($fam->type == "Spouse"){
+					$hasWife = true;
+					$realFam = $fam;
+				}
+			}
+		@endphp
+
 		<tr>
 			<td colspan="5">Name and address of Wife / Nearest Relative</td>
 			<td>Relation</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $realFam->type }}</td>
 		</tr>
 
 		<tr>
 			<td>Name</td>
-			<td colspan="8"></td>
+			{{-- <td colspan="8"></td> --}}
+			<td colspan="2">{{ $applicant->user->lname }}</td>
+			<td colspan="2">{{ $applicant->user->fname }}</td>
+			<td colspan="2">{{ $applicant->user->mname }}</td>
+			<td colspan="2"></td>
 		</tr>
 
 		<tr>
@@ -163,7 +182,7 @@
 
 		<tr>
 			<td>Adress:</td>
-			<td colspan="5"></td>
+			<td colspan="8">{{ $realFam->address }}</td>
 		</tr>
 
 		<tr>
@@ -174,7 +193,7 @@
 		<tr>
 			<td colspan="5"></td>
 			<td>E-mail:</td>
-			<td colspan="3"></td>
+			<td colspan="3">(Email)</td>
 		</tr>
 
 		<tr>
@@ -211,37 +230,69 @@
 			<td colspan="2">Issued By</td>
 		</tr>
 
+		@php 
+			$name = "NATIONAL LICENSE";
+			$isset = isset($applicant->document_id->{$name});
+			if($isset){
+				$docu = $applicant->document_id->{$name};
+			}
+		@endphp
+
 		<tr>
 			<td colspan="2">National License</td>
 			<td colspan="2"></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>{{ $isset ? $docu->no : "N/A" }}</td>
+			<td>{{ $isset ? $docu->issue_date->toFormattedDateString() : "N/A" }}</td>
+			<td>{{ $isset ? $docu->issue_date->toFormattedDateString() : "N/A" }}</td>
 			<td colspan="2">Philippines</td>
 		</tr>
+
+		@php 
+			$name = "Panama (PA)";
+			$isset = isset($applicant->document_flag->{$name});
+			if($isset){
+				$docu = $applicant->document_flag->{$name};
+			}
+		@endphp
 
 		<tr>
 			<td colspan="2">Flag License</td>
 			<td colspan="2"></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>{{ $isset ? $docu->license_no : "N/A" }}</td>
+			<td>(Issue Date)</td>
+			<td>(Expiry Date)</td>
 			<td colspan="2">Panama</td>
 		</tr>
+
+		@php 
+			$name = "Marshall Islands (MH)";
+			$isset = isset($applicant->document_flag->{$name});
+			if($isset){
+				$docu = $applicant->document_flag->{$name};
+			}
+		@endphp
 
 		<tr>
 			<td colspan="2">Flag GOC</td>
 			<td colspan="2"></td>
-			<td></td>
+			<td>{{ $isset? $docu->goc : "N/A" }}</td>
 			<td></td>
 			<td></td>
 			<td colspan="2">Marshall Islands</td>
 		</tr>
 
+		@php 
+			$name = "Panama (PA)";
+			$isset = isset($applicant->document_flag->{$name});
+			if($isset){
+				$docu = $applicant->document_flag->{$name};
+			}
+		@endphp
+
 		<tr>
 			<td colspan="2">Flag SSO</td>
 			<td colspan="2"></td>
-			<td></td>
+			<td>{{ $isset ? $docu->sso : "N/A" }}</td>
 			<td></td>
 			<td></td>
 			<td colspan="2">Panama</td>

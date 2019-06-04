@@ -239,7 +239,7 @@
 				<td rowspan="2" colspan="3">{{ $service->vessel_name }}</td>
 				<td rowspan="2">${{ $service->previous_salary }}</td>
 				<td rowspan="1">{{ $service->sign_on->format('M j, Y') }}</td>
-				<td rowspan="2"></td>
+				<td rowspan="2">{{ $service->sign_on->diffInMonths($service->sign_off) }}</td>
 				<td rowspan="2">{{ $service->rank }}</td>
 				<td rowspan="1">{{ $service->vessel_type }}</td>
 				<td rowspan="1">{{ $service->gross_tonnage }}</td>

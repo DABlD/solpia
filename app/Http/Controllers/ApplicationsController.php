@@ -90,7 +90,7 @@ class ApplicationsController extends Controller
 
         foreach(['document_id', 'document_flag', 'document_lc'] as $docuType){
             foreach($applicant->$docuType as $data){
-                $temp = $data->type;
+                $temp = $docuType == 'document_flag' ? $data->country : $data->type;
                 $applicant->$docuType->$temp = $data;
             }
         }
