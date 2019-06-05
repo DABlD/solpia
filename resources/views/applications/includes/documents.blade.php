@@ -111,7 +111,7 @@
             	string = `
 	            	    <div class="row docu">
 							
-	            	        <div class="form-group col-md-2">
+	            	        <div class="form-group col-md-3">
 	            	            <label for="${country}${count}">Country</label>
 	            	            <select class="${docu_class} ${country}" name="${country}${count}">
 	            	            	${flag_options}
@@ -120,39 +120,53 @@
 	            	                <strong id="${country}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-2">
+	            	        <div class="form-group col-md-3">
 	            	            <label for="${booklet_no}${count}">Booklet No.</label>
 	            	            <input type="text" class="${docu_class} ${booklet_no}" name="${booklet_no}${count}" placeholder="Enter Booklet No.">
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${booklet_no}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-2">
+	            	        <div class="form-group col-md-3">
 	            	            <label for="${license_no}${count}">License No.</label>
 	            	            <input type="text" class="${docu_class} ${license_no}" name="${license_no}${count}" placeholder="Enter License No.">
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${license_no}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-2">
+	            	        <div class="form-group col-md-3">
 	            	            <label for="${goc}${count}">GOC</label>
 	            	            <input type="text" class="${docu_class} ${goc}" name="${goc}${count}" placeholder="Enter GOC">
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${goc}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-2">
+	            	        <div class="form-group col-md-3">
 	            	            <label for="${sso}${count}">SSO</label>
 	            	            <input type="text" class="${docu_class} ${sso}" name="${sso}${count}" placeholder="Enter SSO">
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${sso}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-2">
+	            	        <div class="form-group col-md-3">
 	            	            <label for="${sdsd}${count}">SDSD</label>
 	            	            <input type="text" class="${docu_class} ${sdsd}" name="${sdsd}${count}" placeholder="Enter SDSD">
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${sdsd}${count}Error"></strong>
+	            	            </span>
+	            	        </div>
+	            	        <div class="form-group col-md-3">
+	            	            <label for="${issue_date}${count}">Issue Date</label>
+	            	            <input type="text" class="${docu_class} ${issue_date}" name="${issue_date}${count}" placeholder="Select Issue Date">
+	            	            <span class="invalid-feedback hidden" role="alert">
+	            	                <strong id="${issue_date}${count}Error"></strong>
+	            	            </span>
+	            	        </div>
+	            	        <div class="form-group col-md-3">
+	            	            <label for="${expiry_date}${count}">Expiry Date</label>
+	            	            <input type="text" class="${docu_class} ${expiry_date}" name="${expiry_date}${count}" placeholder="Select Expiry Date">
+	            	            <span class="invalid-feedback hidden" role="alert">
+	            	                <strong id="${expiry_date}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
 	            	    </div>
@@ -207,14 +221,14 @@
 
             // appenddocu(string, ctr? ` .${type}` : '');
             appenddocu(string, ` .${type}`);
-            if(type != 'Flag'){
+            // if(type != 'Flag'){
 	            $(`[name="${issue_date}${count}"], [name="${expiry_date}${count}"]`).flatpickr({
 	                altInput: true,
 	                altFormat: 'F j, Y',
 	                dateFormat: 'Y-m-d',
 	                // maxDate: moment().format('YYYY-MM-DD')
 	            });
-            }
+            // }
 
             if(type == "ID"){
             	$(`[name="${dType}${count}"]`).select2({
