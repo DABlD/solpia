@@ -17,7 +17,7 @@ class Applicant extends Model
     	'age','height','weight',
     	'bmi','blood_type','civil_status',
     	'tin','sss','waistline','shoe_size',
-        'clothes_size'
+        'clothes_size', 'eye_color'
     ];
 
     protected $dates = [

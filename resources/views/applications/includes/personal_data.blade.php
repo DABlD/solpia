@@ -216,7 +216,7 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
         <label for="blood_type">Blood Type</label>
         <select name="blood_type" class="form-control aeigh">
             <option readonly selected value="">Select Blood Type</option>
@@ -233,10 +233,10 @@
             <strong id="blood_typeError"></strong>
         </span>
     </div>
-</div>
+{{-- </div>
 
-<div class="row">
-    <div class="form-group col-md-6">
+<div class="row"> --}}
+    <div class="form-group col-md-2">
         <label for="civil_status">Civil Status</label>
         <select name="civil_status" class="form-control aeigh">
             <option readonly selected value="">Select Civil Status</option>
@@ -247,6 +247,16 @@
         </select>
         <span class="invalid-feedback hidden" role="alert">
             <strong id="civil_statusError"></strong>
+        </span>
+    </div>
+{{-- </div>
+
+<div class="row"> --}}
+    <div class="form-group col-md-2">
+        <label for="eye_color">Eye Color</label>
+        <input type="text" class="form-control aeigh" name="eye_color" placeholder="Enter Eye Color">
+        <span class="invalid-feedback hidden" role="alert">
+            <strong id="eye_colorError"></strong>
         </span>
     </div>
 </div>

@@ -59,7 +59,8 @@ class UsersTableSeeder extends Seeder
             'sss' => 128736182736,
             'waistline' => 5.9,
             'shoe_size' => 8,
-            'clothes_size' => 'M'
+            'clothes_size' => 'M',
+            'eye_color' => 'Black'
         ]);
 
         EducationalBackground::create([
