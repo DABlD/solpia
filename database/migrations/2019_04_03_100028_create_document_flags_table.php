@@ -23,6 +23,8 @@ class CreateDocumentFlagsTable extends Migration
             $table->string('goc');
             $table->string('sso');
             $table->string('sdsd');
+            $table->date('issue_date');
+            $table->date('expiry_date');
             $table->timestamps();
             $table->softDeletes();
         });
