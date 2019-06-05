@@ -157,9 +157,9 @@
             <strong id="waistlineError"></strong>
         </span>
     </div>
-</div>
+{{-- </div>
 
-<div class="row">
+<div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="shoe_size">Shoe Size(cm)</label>
         <input type="number" class="form-control aeigh" name="shoe_size" placeholder="Enter Shoe Size">
@@ -167,9 +167,9 @@
             <strong id="shoe_sizeError"></strong>
         </span>
     </div>
-</div>
+{{-- </div>
 
-<div class="row">
+<div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="clothes_size">Clothes Size</label>
         <select name="clothes_size" class="form-control aeigh">
@@ -193,9 +193,9 @@
             <strong id="heightError"></strong>
         </span>
     </div>
-</div>
+{{-- </div>
 
-<div class="row">
+<div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="weight">Weight(kg)</label>
         <input type="number" class="form-control aeigh" name="weight" placeholder="Enter Weight">
@@ -203,9 +203,9 @@
             <strong id="weightError"></strong>
         </span>
     </div>
-</div>
+{{-- </div>
 
-<div class="row">
+<div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="bmi">BMI</label>
         <input type="number" class="form-control aeigh" name="bmi" placeholder="Enter BMI">
