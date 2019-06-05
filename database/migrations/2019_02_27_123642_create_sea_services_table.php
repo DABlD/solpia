@@ -19,6 +19,7 @@ class CreateSeaServicesTable extends Migration
             
             $table->string('vessel_name', 100);
             $table->string('rank', 50);
+            $table->string('smc', 50)->nullable();
             $table->string('vessel_type', 50)->nullable();
             $table->string('gross_tonnage', 100)->nullable();
             $table->string('engine_type', 100)->nullable();
