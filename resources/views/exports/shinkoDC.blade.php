@@ -132,14 +132,18 @@
 				FLAG STATE SEAMAN BOOK (I.D BOOK)
 			</td>
 
+			@php 
+				$doc = "FLAG STATE SEAMAN BOOK (I.D BOOK)"; 
+			@endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->number : "N/A" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->license_no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->number : "N/A" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->issue_date : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -149,8 +153,10 @@
 				FLAG STATE S.Q. FOR TANKERS
 			</td>
 
+			@php $doc = "FLAG STATE S.Q. FOR TANKERS"; @endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{'FLAG STATE S.Q. FOR TANKERS'}) ? $applicant->document_flag->{'FLAG STATE S.Q. FOR TANKERS'}->number : "N/A" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
 			</td>
 			<td colspan="2">N/A</td>
 			<td colspan="2">N/A</td>
@@ -162,8 +168,10 @@
 				FLAG STATE LICENSE
 			</td>
 
+			@php $doc = "FLAG STATE LICENSE"; @endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{'FLAG STATE LICENSE'}) ? $applicant->document_flag->{'FLAG STATE LICENSE'}->number : "N/A" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
 			</td>
 			<td colspan="2">N/A</td>
 			<td colspan="2">N/A</td>
@@ -175,8 +183,10 @@
 				FLAG STATE SSO LICENSE
 			</td>
 
+			@php $doc = "FLAG STATE SSO LICENSE"; @endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{'FLAG STATE SSO LICENSE'}) ? $applicant->document_flag->{'FLAG STATE SSO LICENSE'}->number : "N/A" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
 			</td>
 			<td colspan="2">N/A</td>
 			<td colspan="2">N/A</td>
@@ -188,8 +198,10 @@
 				FLAG STATE ENDORSEMENT COOK COURSE
 			</td>
 
+			@php $doc = "FLAG STATE ENDORSEMENT COOK COURSE"; @endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{'FLAG STATE ENDORSEMENT COOK COURSE'}) ? $applicant->document_flag->{'FLAG STATE ENDORSEMENT COOK COURSE'}->number : "N/A" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
 			</td>
 			<td colspan="2">N/A</td>
 			<td colspan="2">N/A</td>
@@ -201,14 +213,16 @@
 				MEDICAL CERTIFICATE
 			</td>
 
+			@php $doc = "MEDICAL CERTIFICATE"; @endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->no : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->issue_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'MEDICAL CERTIFICATE'}) ? $applicant->document_lc->{'MEDICAL CERTIFICATE'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -218,14 +232,16 @@
 				PASSPORT
 			</td>
 
+			@php $doc = "PASSPORT"; @endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->number : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->issue_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -235,14 +251,16 @@
 				NATIONAL STCW-WATCH KEEPING
 			</td>
 
+			@php $doc = "NATIONAL GMDSS-GOC"; @endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->no : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->issue_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}) ? $applicant->document_lc->{'NATIONAL STCW-WATCH KEEPING'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>

@@ -85,11 +85,16 @@
 
 		<tr>
 			<td>Flag State</td>
+
+			@php 
+				$doc = "FLAG STATE SEAMAN BOOK (I.D BOOK)"; 
+			@endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->number : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->license_no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}) ? $applicant->document_id->{'FLAG STATE SEAMAN BOOK (I.D BOOK)'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">Tel</td>
 			<td colspan="6">{{ $applicant->user->contact }}</td>
@@ -239,7 +244,10 @@
 				<td rowspan="2" colspan="3">{{ $service->vessel_name }}</td>
 				<td rowspan="2">${{ $service->previous_salary }}</td>
 				<td rowspan="1">{{ $service->sign_on->format('M j, Y') }}</td>
-				<td rowspan="2">{{ $service->sign_on->diffInMonths($service->sign_off) }}</td>
+				<td rowspan="2">
+					{{ round($service->sign_on->diffInMonths($service->sign_off) + 
+						((($service->sign_on->diffInDays($service->sign_off)) / 30) / 30), 2) }}
+				</td>
 				<td rowspan="2">{{ $service->rank }}</td>
 				<td rowspan="1">{{ $service->vessel_type }}</td>
 				<td rowspan="1">{{ $service->gross_tonnage }}</td>
