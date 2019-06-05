@@ -17,7 +17,7 @@ class CreateFamilyDatasTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id');
 
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('type');
             $table->string('name');
             $table->integer('age');
