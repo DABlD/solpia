@@ -43,6 +43,7 @@
             let birthday = 'fd-birthday';
             let occupation = 'fd-occupation';
             let address = 'fd-address';
+            let email = 'fd-email';
 
             if(type == 'Father' || type == 'Mother' || $(`.${type}`).length == 0){
                 // console.log('zxc');
@@ -84,8 +85,15 @@
                             <strong id="fd-occupation${count}Error"></strong>
                         </span>
                     </div>
+                    <div class="form-group col-md-3">
+                        <label for="fd-email${count}">Email</label>
+                        <input type="email" class="${fd_class} ${email}" name="${email}${count}" placeholder="Enter Email">
+                        <span class="invalid-feedback hidden" role="alert">
+                            <strong id="fd-email${count}Error"></strong>
+                        </span>
+                    </div>
 
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-9">
                         <label for="fd-address${count}">Address</label>
                         <input type="text" class="${fd_class} ${address}" name="${address}${count}" placeholder="Enter Address">
                         <span class="invalid-feedback hidden" role="alert">

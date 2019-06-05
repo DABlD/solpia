@@ -9,7 +9,7 @@ class FamilyData extends Model
     protected $fillable = [
     	'applicant_id','type','name',
     	'age','birthday','address',
-    	'occupation'
+    	'occupation', 'email'
     ];
 
     protected $dates = [

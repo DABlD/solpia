@@ -277,18 +277,19 @@
             let inputs = $('#FD input');
             let fd = [];
 
-            for(let i = 0; i < inputs.length; i+=7){
+            for(let i = 0; i < inputs.length; i+=8){
                 let tempFd = {};
                 tempFd.type         = inputs[i].value;
                 tempFd.name         = inputs[i+1].value;
                 tempFd.age          = inputs[i+2].value;
                 tempFd.birthday     = inputs[i+3].value;
                 tempFd.occupation   = inputs[i+5].value;
-                tempFd.address      = inputs[i+6].value;
+                tempFd.email      = inputs[i+6].value;
+                tempFd.address      = inputs[i+7].value;
                 fd.push(tempFd);
 
                 // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 7; j++){
+                for(let j = i; j < 8; j++){
                     inputs[j].remove();
                 }
             }
@@ -382,7 +383,7 @@
             inputs = $('#docu .Flag input, #docu .Flag select');
             let docu_flag = [];
 
-            for(let i = 0; i < inputs.length; i+=6){
+            for(let i = 0; i < inputs.length; i+=8){
                 let tempFlag = {};
                 tempFlag.country    = inputs[i].value;
                 tempFlag.booklet_no = inputs[i+1].value;
@@ -390,10 +391,12 @@
                 tempFlag.goc        = inputs[i+3].value;
                 tempFlag.sso        = inputs[i+4].value;
                 tempFlag.sdsd       = inputs[i+5].value;
+                tempFlag.issue_date = inputs[i+6].value;
+                tempFlag.expiry_date= inputs[i+7].value;
                 docu_flag.push(tempFlag);
 
                 // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 6; j++){
+                for(let j = i; j < 8; j++){
                     inputs[j].remove();
                 }
             }
