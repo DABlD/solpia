@@ -16,7 +16,8 @@ class Applicant extends Model
     	'provincial_address','provincial_contact',
     	'age','height','weight',
     	'bmi','blood_type','civil_status',
-    	'tin','sss','waistline','shoe_size'
+    	'tin','sss','waistline','shoe_size',
+        'clothes_size'
     ];
 
     protected $dates = [

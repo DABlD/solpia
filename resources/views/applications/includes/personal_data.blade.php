@@ -150,7 +150,7 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
         <label for="waistline">Waistline(inch)</label>
         <input type="number" class="form-control aeigh" name="waistline" placeholder="Enter Waistline">
         <span class="invalid-feedback hidden" role="alert">
@@ -160,7 +160,7 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
         <label for="shoe_size">Shoe Size(cm)</label>
         <input type="number" class="form-control aeigh" name="shoe_size" placeholder="Enter Shoe Size">
         <span class="invalid-feedback hidden" role="alert">
@@ -170,7 +170,23 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
+        <label for="clothes_size">Clothes Size</label>
+        <select name="clothes_size" class="form-control aeigh">
+            <option readonly selected value="">Select Clothes Size</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+        </select>
+        <span class="invalid-feedback hidden" role="alert">
+            <strong id="clothes_sizeError"></strong>
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-2">
         <label for="height">Height(cm)</label>
         <input type="number" class="form-control aeigh" name="height" placeholder="Enter Height">
         <span class="invalid-feedback hidden" role="alert">
@@ -180,7 +196,7 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
         <label for="weight">Weight(kg)</label>
         <input type="number" class="form-control aeigh" name="weight" placeholder="Enter Weight">
         <span class="invalid-feedback hidden" role="alert">
@@ -190,7 +206,7 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-2">
         <label for="bmi">BMI</label>
         <input type="number" class="form-control aeigh" name="bmi" placeholder="Enter BMI">
         <span class="invalid-feedback hidden" role="alert">

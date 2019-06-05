@@ -36,6 +36,7 @@ class CreateApplicantsTable extends Migration
 
             $table->double('waistline', 5, 2);
             $table->double('shoe_size', 5, 2);
+            $table->enum('clothes_size', ['S', 'M', 'L', 'XL']);
 
             $table->timestamps();
             $table->softDeletes();
