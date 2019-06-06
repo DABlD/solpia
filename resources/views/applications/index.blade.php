@@ -107,7 +107,8 @@
                     inputOptions: {
                         'shinko': 'SHINKO',
                         'kosco': 'KOSCO',
-                        'smtechToei': 'SMTECH & TOEI',
+                        'toei': 'TOEI',
+                        'smtech': 'SMTECH',
                         'scMarine': 'SC MARINE',
                         'imsco': 'IMSCO',
                         'seyeong': 'SEYEONG',

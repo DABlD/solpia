@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class Toei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
