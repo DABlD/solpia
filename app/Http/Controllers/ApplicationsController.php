@@ -22,8 +22,10 @@ class ApplicationsController extends Controller
     }
 
     public function index(){
+        $principals = Principal::select('name', 'slug')->get();
         return $this->_view('index', [
-            'title' => 'Applications'
+            'title' => 'Applications',
+            'principals' => $principals
         ]);
     }
 

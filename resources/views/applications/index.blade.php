@@ -105,19 +105,22 @@
                     title: 'Select Export Type',
                     input: 'select',
                     inputOptions: {
-                        'shinko': 'SHINKO',
-                        'kosco': 'KOSCO',
-                        'toei': 'TOEI',
-                        'smtech': 'SMTECH',
-                        'scMarine': 'SC MARINE',
-                        'imsco': 'IMSCO',
-                        'seyeong': 'SEYEONG',
-                        'hajoo': 'HAJOO',
-                        'western': 'WESTERN',
-                        'klcsm': 'KLCSM',
-                        'hlineDintec': 'H-LINE & DINTEC',
-                        'hms': 'HMS',
-                        'nautica': 'NAUTICA'
+                        @foreach($principals as $principal)
+                            '{{ $principal->slug }}': '{{ $principal->name }}',
+                        @endforeach
+                        // 'shinko': 'SHINKO',
+                        // 'kosco': 'KOSCO',
+                        // 'toei': 'TOEI',
+                        // 'smtech': 'SMTECH',
+                        // 'scMarine': 'SC MARINE',
+                        // 'imsco': 'IMSCO',
+                        // 'seyeong': 'SEYEONG',
+                        // 'hajoo': 'HAJOO',
+                        // 'western': 'WESTERN',
+                        // 'klcsm': 'KLCSM',
+                        // 'hlineDintec': 'H-LINE & DINTEC',
+                        // 'hms': 'HMS',
+                        // 'nautica': 'NAUTICA'
                     },
                 }).then(result => {
                     if(result.value){
