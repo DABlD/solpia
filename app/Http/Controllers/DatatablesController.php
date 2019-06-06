@@ -10,7 +10,9 @@ use App\Models\{Applicant};
 class DatatablesController extends Controller
 {
 	public function users(){
-		$users = User::where('deleted_at', null)->get();
+		$users = User::where('deleted_at', null)
+					->where('role', '!=', 'Applicant')
+					->get();
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		foreach($users as $user){
