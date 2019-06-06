@@ -38,7 +38,7 @@ class CreateApplicantsTable extends Migration
             $table->double('shoe_size', 5, 2);
 
             $table->enum('clothes_size', ['S', 'M', 'L', 'XL']);
-            $table->string('eye_color', 30);
+            $table->string('eye_color', 30)->nullable();
 
             $table->timestamps();
             $table->softDeletes();
