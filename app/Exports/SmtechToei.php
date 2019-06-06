@@ -59,8 +59,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 'color' => [
                     'rgb' => 'ced4da'
                 ]
-            ],
-        ];
+            ],        ];
 
         $headingStyle = [
             [
@@ -125,23 +124,23 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
 
-                $event->sheet->getDelegate()->getStyle('E19')->getFont()->getColor()->setRGB('FF0000');
-                $event->sheet->getDelegate()->getStyle('H19')->getFont()->getColor()->setRGB('FF0000');
-                $event->sheet->getDelegate()->getStyle('B20')->getFont()->getColor()->setRGB('FF0000');
-                $event->sheet->getDelegate()->getStyle('F20')->getFont()->getColor()->setRGB('FF0000');
+                // $event->sheet->getDelegate()->getStyle('E19')->getFont()->getColor()->setRGB('FF0000');
+                // $event->sheet->getDelegate()->getStyle('H19')->getFont()->getColor()->setRGB('FF0000');
+                // $event->sheet->getDelegate()->getStyle('B20')->getFont()->getColor()->setRGB('FF0000');
+                // $event->sheet->getDelegate()->getStyle('F20')->getFont()->getColor()->setRGB('FF0000');
 
-                $start = 31 + $this->applicant->educational_background->count();
-                for($i = $start; $i < $start + 4; $i++){
-                    $event->sheet->getDelegate()->getStyle("A$i")->getFont()->getColor()->setRGB('FF0000');
-                }
+                // $start = 31 + $this->applicant->educational_background->count();
+                // for($i = $start; $i < $start + 4; $i++){
+                //     $event->sheet->getDelegate()->getStyle("A$i")->getFont()->getColor()->setRGB('FF0000');
+                // }
 
-                $start = $i + 2;
-                for($i = $start; $i < $start + 6; $i++){
-                    $event->sheet->getDelegate()->getStyle("A$i")->getFont()->getColor()->setRGB('FF0000');
-                    if(($i + 1) == ($start + 6)){
-                        $event->sheet->getDelegate()->getStyle("H$i")->getFont()->getColor()->setRGB('FF0000');
-                    }
-                }
+                // $start = $i + 2;
+                // for($i = $start; $i < $start + 6; $i++){
+                //     $event->sheet->getDelegate()->getStyle("A$i")->getFont()->getColor()->setRGB('FF0000');
+                //     if(($i + 1) == ($start + 6)){
+                //         $event->sheet->getDelegate()->getStyle("H$i")->getFont()->getColor()->setRGB('FF0000');
+                //     }
+                // }
 
                 // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setName('Arial');
                 // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setSize(10);
@@ -212,7 +211,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // PIYC
                 $piycRows = array(); //WILL BE FILLED AFTER FUNCTIONS
-                $rapiyc = $raoc + 1 + 3; //Row # AFTER PIYC (3 = rows)
+                $rapiyc = $raoc + 1 + 5; //Row # AFTER PIYC (5 = rows)
 
                 // EAJL CERTIFICATE ROWS
                 $eajlRows = array();
@@ -300,15 +299,27 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                     array_push($sh3Rows, "H$row:I$row2");
                 }
 
+                // NUMBER HEADING ROWS
+                $nhr = [
+                    'A27', 'A' . ($rae + 1), 'A' . $ral, 'A' . $rac, 'A' . $raoc, 'A' . $rapiyc, 'A' . $raeajl,
+                    'A' . $ratesms, 'A' . $raaow
+                ];
+
                 // FUNCTIONS
                 $piyc = function($col, $inc) use($raoc){
                     return $col . ($raoc + $inc);
                 };
 
                 $piycRows = array(
-                    $piyc('A', 1) . ':' . $piyc('D', 1), $piyc('E', 1), $piyc('F', 1), $piyc('G', 1), $piyc('H', 1) . ':' . $piyc('I', 1),
-                    $piyc('A', 2) . ':' . $piyc('D', 3), $piyc('E', 2), $piyc('E', 3), $piyc('F', 2) . ':' . $piyc('F', 3),
-                    $piyc('G', 2) . ':' . $piyc('G', 3), $piyc('H', 2) . ':' . $piyc('H', 3), $piyc('I', 2) . ':' . $piyc('I', 3),
+                    // $piyc('A', 1) . ':' . $piyc('D', 1), $piyc('E', 1), $piyc('F', 1), $piyc('G', 1), $piyc('H', 1) . ':' . $piyc('I', 1),
+                    // $piyc('A', 2) . ':' . $piyc('D', 3), $piyc('E', 2), $piyc('E', 3), $piyc('F', 2) . ':' . $piyc('F', 3),
+                    // $piyc('G', 2) . ':' . $piyc('G', 3), $piyc('H', 2) . ':' . $piyc('H', 3), $piyc('I', 2) . ':' . $piyc('I', 3),
+
+                    $piyc('A', 1) . ':' . $piyc('D', 1), $piyc('E', 1), $piyc('F', 1), $piyc('G', 1), $piyc('H', 1), $piyc('I', 1),
+                    $piyc('A', 2) . ':' . $piyc('D', 2), $piyc('E', 2), $piyc('F', 2), $piyc('G', 2), $piyc('H', 2), $piyc('I', 2),
+                    $piyc('A', 3) . ':' . $piyc('D', 3), $piyc('E', 3), $piyc('F', 3), $piyc('G', 3), $piyc('H', 3), $piyc('I', 3),
+                    $piyc('A', 4) . ':' . $piyc('D', 4), $piyc('E', 4), $piyc('F', 4), $piyc('G', 4), $piyc('H', 4), $piyc('I', 4),
+                    $piyc('A', 5) . ':' . $piyc('D', 5), $piyc('E', 5), $piyc('F', 5), $piyc('G', 5), $piyc('H', 5), $piyc('I', 5),
                 );
                 
                 // HEADINGS
@@ -323,19 +334,19 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                     
                 ];
 
-                // HL B
-                $h[2] = [
-                    
-                ];
-
                 // HC
                 $h[3] = [
                     'A1:I150'
                 ];
 
+                // HL B
+                $h[2] = array_merge($nhr, [
+                    
+                ]);
+
                 // HL
                 $h[4] = array_merge($sh1Rows, [
-                    
+                    'A' . ($rapiyc - 4) . ':' . 'A' . ($rapiyc - 1) //A#:A# PIYC ROWS
                 ]);
 
                 // HC VC
@@ -373,6 +384,10 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                     $event->sheet->getDelegate()->getStyle($fill)->applyFromArray($fillStyle);  
                 }
 
+                foreach($nhr as $fill){
+                    $event->sheet->getDelegate()->getStyle($fill)->applyFromArray($fillStyle);  
+                }
+
                 // BORDERS
 
                 // $sh3Rows = array();
@@ -401,6 +416,7 @@ class SmtechToei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 // COLUMN RESIZE
 
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(13);
+                $event->sheet->getDelegate()->getStyle("G$rash3")->getFont()->setSize(9);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);

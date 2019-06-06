@@ -220,16 +220,19 @@
 
 		<tr>
 			<td colspan="2">Last Company</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->sea_service->last()->principal }}</td>
 			<td colspan="5">Serve Period</td>
-			<td colspan="4"></td>
+			<td colspan="4">
+				{{ $applicant->sea_service->last()->sign_on->format('M j, Y') }} - 
+				{{ $applicant->sea_service->last()->sign_off->format('M j, Y') }}
+			</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Last Rank</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->sea_service->last()->rank }}</td>
 			<td colspan="5">Last Carrier</td>
-			<td colspan="4"></td>
+			<td colspan="4">{{ $applicant->sea_service->last()->vessel_name }}</td>
 		</tr>
 
 		<tr>
@@ -314,20 +317,20 @@
 					(Sub)
 			</td>
 			<td>Rank</td>
-			<td colspan="2"></td>
+			<td colspan="2">CREWING MANAGER</td>
 			<td rowspan="3" colspan="5">
 				Interviewer
 					(Main)
 			</td>
 			<td>Rank</td>
-			<td colspan="3"></td>
+			<td colspan="3">PRESIDENT</td>
 		</tr>
 
 		<tr>
 			<td>Name</td>
-			<td colspan="2"></td>
+			<td colspan="2">JEFFREY PLANTA</td>
 			<td>Name</td>
-			<td colspan="3"></td>
+			<td colspan="3">C/E ROMANO MARIANO</td>
 		</tr>
 
 		<tr>

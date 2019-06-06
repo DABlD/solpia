@@ -34,7 +34,7 @@
 
 		<tr>
 			<td colspan="2">Manning Agent:</td>
-			<td colspan="2"></td>
+			<td colspan="2">TOEI</td>
 			<td>Presenter:</td>
 			<td colspan="2">SOLPIA</td>
 		</tr>
@@ -102,7 +102,7 @@
 			<td>Birth Place:</td>
 			<td colspan="2">{{ $applicant->birth_place }}</td>
 			<td>Nationality:</td>
-			<td>{{ $applicant->nationality }}</td>
+			<td>FILIPINO</td>
 		</tr>
 
 		<tr>
@@ -259,8 +259,8 @@
 			<td colspan="2">Flag License</td>
 			<td colspan="2"></td>
 			<td>{{ $isset ? $docu->license_no : "N/A" }}</td>
-			<td>(Issue Date)</td>
-			<td>(Expiry Date)</td>
+			<td>{{ $isset ? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $isset ? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
 			<td colspan="2">Panama</td>
 		</tr>
 
@@ -276,8 +276,8 @@
 			<td colspan="2">Flag GOC</td>
 			<td colspan="2"></td>
 			<td>{{ $isset? $docu->goc : "N/A" }}</td>
-			<td></td>
-			<td></td>
+			<td>{{ $isset ? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $isset ? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
 			<td colspan="2">Marshall Islands</td>
 		</tr>
 
@@ -293,8 +293,8 @@
 			<td colspan="2">Flag SSO</td>
 			<td colspan="2"></td>
 			<td>{{ $isset ? $docu->sso : "N/A" }}</td>
-			<td></td>
-			<td></td>
+			<td>{{ $isset ? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $isset ? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
 			<td colspan="2">Panama</td>
 		</tr>
 
@@ -465,25 +465,48 @@
 
 		<tr>
 			<td colspan="4">CERTIFICATE</td>
-			<td>Number</td>
+			<td>Experience of Measles, Chicken Pox</td>
+			<td>With Vaccine</td>
 			<td>Date Issued</td>
 			<td>Expiry Date</td>
-			<td colspan="2">Issued By</td>
+			<td>Issued By</td>
 		</tr>
 
 		<tr>	
-			<td colspan="4" rowspan="2">PHYSICAL INSPECTION<br>YELLOW FEVER</td>
+			<td colspan="4">PHYSICAL INSPECTION</td>
 			<td></td>
-			<td rowspan="2"></td>
-			<td rowspan="2"></td>
-			<td rowspan="2"></td>
-			<td rowspan="2"></td>
-		</tr>
-
-		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
 			<td></td>
 		</tr>
 
+		<tr>	
+			<td colspan="4">YELLOW FEVER</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+		<tr>	
+			<td colspan="4">MEASLES, MUMPS, RUBELLA (MMR)</td>
+			<td>YES/NO</td>
+			<td>YES/NO</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+		<tr>	
+			<td colspan="4">Chicken Pox</td>
+			<td>YES/NO</td>
+			<td>YES/NO</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
 		{{-- end --}}
 		<tr>
 			<td colspan="4">6. ENGLISH AND JAPANESE LINGUISTICS</td>
@@ -599,7 +622,7 @@
 				<td>{{ $data->vessel_type }}</td>
 				<td>{{ $data->gross_tonnage }}</td>
 				<td>(Service Area)</td>
-				<td rowspan="2">{{ $data->manning_agent }}</td>
+				<td>{{ $data->manning_agent }}</td>
 				<td>{{ $data->sign_on->format('M j, Y') }}</td>
 				<td colspan="2">{{ $data->remarks }}</td>
 			</tr>
@@ -607,6 +630,7 @@
 				<td colspan="2">{{ $data->flag }}</td>
 				<td>{{ $data->rank }}</td>
 				<td colspan="2">{{ $data->engine_type }} / {{ $data->bhp_kw }}kw</td>
+				<td>{{ $data->principal }}</td>
 				<td>{{ $data->sign_off->format('M j, Y') }}</td>
 				<td>(Period)</td>
 				<td>(SMC)</td>
@@ -619,7 +643,7 @@
 			<td colspan="2">Crew's Name:</td>
 			<td colspan="3"></td>
 			<td>Presenter:</td>
-			<td colspan="3"></td>
+			<td colspan="3">JEFFREY PLANTA / CREWING MANAGER</td>
 		</tr>
 	</tbody>
 </table>
