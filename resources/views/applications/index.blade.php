@@ -116,7 +116,8 @@
                         'western': 'WESTERN',
                         'klcsm': 'KLCSM',
                         'hlineDintec': 'H-LINE & DINTEC',
-                        'hmsNautica': 'HMS & NAUTICA'
+                        'hms': 'HMS',
+                        'nautica': 'NAUTICA'
                     },
                 }).then(result => {
                     if(result.value){

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Models\{Applicant, EducationalBackground, FamilyData};
+use App\Models\{Applicant, EducationalBackground, FamilyData, Principal};
 
 class UsersTableSeeder extends Seeder
 {
@@ -42,6 +42,36 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now()->toDateTimeString(),
             'password' => '123456'
         ]);
+
+        $principals = [
+            'SHINKO', 'KOSCO', 'TOEI', 'SMTECH', 'SC MARINE', 'IMSCO', 'SEYEONG', 'HAJOO', 'WESTERN', 'KLCSM', 'H-LINE and DINTEC',
+            'HMS', 'NAUTICA'
+        ];
+
+        foreach($principals as $name){
+            $user = new User();
+            $user->fname = $name;
+            $user->role = 'Principal';
+            $user->applicant = false;
+            $user->email = $name . '@solpia.email';
+            $user->email_verified_at = now()->toDateTimeString();
+            $user->password = '123456';
+
+            $user->mname = "";
+            $user->lname = "";
+            $user->birthday = now();
+            $user->gender = "";
+            $user->address = "";
+            $user->contact = "";
+
+            $user->save();
+
+            $principal = new Principal();
+            $principal->user_id = $user->id;
+            $principal->name = $name;
+            $principal->slug = camel_case(strtolower($name));
+            $principal->save();
+        }
 
         Applicant::create([
             'user_id' => 2,
