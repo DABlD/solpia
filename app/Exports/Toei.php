@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class Toei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
@@ -431,9 +431,11 @@ class Toei implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 		$drawing->setName('Logo');
 		$drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
-        $drawing->setHeight(154);
-        $drawing->setOffsetX(22);
-		$drawing->setCoordinates('L3');
+        // $drawing->setHeight(154);
+        // $drawing->setOffsetX(22);
+        $drawing->setWidth(100);
+        $drawing->setHeight(153);
+		$drawing->setCoordinates('A2');
 
         return $drawing;
     }
