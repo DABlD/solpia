@@ -361,16 +361,17 @@
             inputs = $('#docu .ID input, #docu .ID select');
             let docu_id = [];
 
-            for(let i = 0; i < inputs.length; i+=6){
+            for(let i = 0; i < inputs.length; i+=7){
                 let tempID = {};
                 tempID.type             = inputs[i].value;
-                tempID.number           = inputs[i+1].value;
-                tempID.issue_date       = inputs[i+2].value;
-                tempID.expiry_date      = inputs[i+4].value;
+                tempID.issuer           = inputs[i+1].value;
+                tempID.number           = inputs[i+2].value;
+                tempID.issue_date       = inputs[i+3].value;
+                tempID.expiry_date      = inputs[i+5].value;
                 docu_id.push(tempID);
 
                 // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 6; j++){
+                for(let j = i; j < 7; j++){
                     inputs[j].remove();
                 }
             }

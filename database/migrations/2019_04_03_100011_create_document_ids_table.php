@@ -18,6 +18,7 @@ class CreateDocumentIdsTable extends Migration
             $table->integer('applicant_id');
             
             $table->string('type');
+            $table->string('issuer');
             $table->string('number');
             $table->date('issue_date');
             $table->date('expiry_date');

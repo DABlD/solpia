@@ -70,7 +70,7 @@
             	string = `
 	            	    <div class="row docu">
 
-	            	        <div class="form-group col-md-3">
+	            	        <div class="form-group col-md-4">
 	            	            <label for="${dType}${count}">Type</label>
 	            	            <select class="${docu_class} ${dType}" name="${dType}${count}">
 	            	            	${id_options}
@@ -79,21 +79,28 @@
 	            	                <strong id="${dType}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-3">
+	            	        <div class="form-group col-md-4">
+	            	            <label for="${issuer}${count}">Issuer</label>
+	            	            <input type="text" class="${docu_class} ${issuer}" name="${issuer}${count}" placeholder="Enter Issuer">
+	            	            <span class="invalid-feedback hidden" role="alert">
+	            	                <strong id="${issuer}${count}Error"></strong>
+	            	            </span>
+	            	        </div>
+	            	        <div class="form-group col-md-4">
 	            	            <label for="${number}${count}">Number</label>
 	            	            <input type="text" class="${docu_class} ${number}" name="${number}${count}" placeholder="Enter Number">
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${number}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-3">
+	            	        <div class="form-group col-md-4">
 	            	            <label for="${issue_date}${count}">Issue Date</label>
 	            	            <input type="text" class="${docu_class} ${issue_date}" name="${issue_date}${count}" placeholder="Select Issue Date">
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${issue_date}${count}Error"></strong>
 	            	            </span>
 	            	        </div>
-	            	        <div class="form-group col-md-3">
+	            	        <div class="form-group col-md-4">
 	            	            <label for="${expiry_date}${count}">Expiry Date</label>
 	            	            <input type="text" class="${docu_class} ${expiry_date}" name="${expiry_date}${count}" placeholder="Select Expiry Date">
 	            	            <span class="invalid-feedback hidden" role="alert">
