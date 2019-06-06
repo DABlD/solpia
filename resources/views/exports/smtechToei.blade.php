@@ -316,44 +316,71 @@
 			$array = [
 				[
 					'Passport',
-					'D.F.A'
+					'D.F.A',
+					['PASSPORT', 'DFA'] //NAME IN DB, ISSUER
 				],
 				[
 					'U.S. C1/D Visa',
-					'U.S EMBASSY'
+					'U.S EMBASSY',
+					['US-VISA', 'US EMBASSY']
 				],
 				[
 					"National Seaman's Book",
-					'MARINA'
+					'MARINA',
+					['NATIONAL SEAMAN BOOK', 'MARINA']
 				],
 				[
 					"Seaman's Book/Panama",
-					'PANAMA'
+					'PANAMA',
+					['SEAMAN BOOK', 'PANAMA']
+
 				],
 				[
 					"Australia MCV",
-					"AUSTRALIA"
+					"AUSTRALIA",
+					['AUSTRALIA MCV', 'AUSTRALIA']
 				],
 				[
 					"Japanese Visa",
-					"in case of Master & C/E"
+					"in case of Master & C/E",
+					['JAPANESE VISA', '']
 				]
 			];
 		@endphp
 		
 		@foreach($array as $cert)
+
+			@php 
+				$name = $cert[2][0];
+				$issuer = $cert[2][1];
+
+				// FIND DOCUMENT WITH GIVEN NAME AND ISSUER
+				$isset = isset($applicant->document_id->{$name}) && $applicant->document_id->{$name}->issuer == $issuer;
+
+				// IF NO MATCH IN DOCUMENT ID, TRY IN DOCUMENT LC
+				if($isset){
+					$docu = $applicant->document_id->{$name};
+				}
+				else{
+					$isset = isset($applicant->document_lc->{$name}) && $applicant->document_lc->{$name}->issuer == $issuer;
+					if($isset){
+						$docu = $applicant->document_lc->{$name};
+					}
+				}
+			@endphp
+
 			<tr>
 				<td colspan="2">{{ $cert[0] }}</td>
 				<td colspan="2"></td>
-				<td>
-					@if($loop->last)
-						N/A
-					@endif
-				</td>
-				<td></td>
-				<td></td>
+				<td>{{ isset($docu) ? $docu->number : 'N/A' }}</td>
+				<td>{{ isset($docu) ? $docu->issue_date->format('M j, Y') : 'N/A' }}</td>
+				<td>{{ isset($docu) ? $docu->expiry_date->format('M j, Y') : 'N/A' }}</td>
 				<td colspan="2">{{ $cert[1] }}</td>
 			</tr>
+
+			@php
+				unset($docu);
+			@endphp
 		@endforeach
 	
 		<tr>
@@ -450,12 +477,39 @@
 		@endphp
 		
 		@foreach($array as $cert)
+
+			@php 
+				$name = $cert[0];
+
+				$isset = isset($applicant->id->{$name});
+				
+				if($isset){
+					$docu = $applicant->document_id->{$name};
+				}
+				else{
+					$isset = isset($applicant->document_lc->{$name});
+					if($isset){
+						$docu = $applicant->document_lc->{$name};
+					}
+				}
+			@endphp
+
 			<tr>
 				<td colspan="4">{{ $cert[0] }}</td>
-				<td>{{ $cert[1] }}</td>
-				<td></td>
-				<td></td>
-				<td colspan="2">{{ $cert[2] }}</td>
+				<td>
+					@if($cert[1] == "")
+						@if(isset($docu))
+							{{ isset($docu) ? $docu->number : 'N/A' }}
+						@endif
+					@else
+						{{ $cert[1] }}
+					@endif
+				</td>
+				<td>{{ isset($docu) ? $docu->issue_date->format('M j, Y') : 'N/A' }}</td>
+				<td>{{ isset($docu) ? $docu->expiry_date->format('M j, Y') : 'N/A' }}</td>
+				<td colspan="2">
+					{{ isset($docu) ? $docu->issuer : 'N/A' }}
+				</td>
 			</tr>
 		@endforeach
 	
