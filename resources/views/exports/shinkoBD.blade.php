@@ -224,7 +224,7 @@
 			</td>
 			<td rowspan="2">
 				GRT<br>
-				Output
+				BHP/KW
 			</td>
 			<td rowspan="2" colspan="2">
 				Agent<br>
@@ -257,7 +257,7 @@
 			<tr>
 				<td rowspan="1">{{ $service->sign_off->format('M j, Y') }}</td>
 				<td rowspan="1">{{ $service->engine_type }}</td>
-				<td rowspan="1"></td>
+				<td rowspan="1">{{ $service->bhp_kw }}</td>
 				<td rowspan="1" colspan="2">{{ $service->principal }}</td>
 			</tr>
 		@endforeach
