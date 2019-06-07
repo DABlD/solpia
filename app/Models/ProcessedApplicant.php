@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\ProcessedApplicantAttribute;
 
 class ProcessedApplicant extends Model
 {
+    use ProcessedApplicantAttribute;
+
     protected $fillable = [
     	'applicant_id', 'principal_id', 'vessel_id', 'rank_id', 'status'
     ];
@@ -13,4 +16,20 @@ class ProcessedApplicant extends Model
     protected $dates = [
     	'created_at', 'updated_at'
     ];
+
+    public function applicant(){
+        return $this->belongsTo('App\Models\Applicant');
+    }
+
+    public function principal(){
+        return $this->belongsTo('App\Models\Principal');
+    }
+
+    public function vessel(){
+    	return $this->belongsTo('App\Models\Vessel');
+    }
+
+    public function Rank(){
+    	return $this->belongsTo('App\Models\Rank');
+    }
 }

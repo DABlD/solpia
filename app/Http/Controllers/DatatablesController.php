@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\User;
-use App\Models\{Applicant};
+use App\Models\{Applicant, ProcessedApplicant};
+use App\Models\{Vessel, Rank, Principal};
 
 class DatatablesController extends Controller
 {
@@ -30,6 +31,23 @@ class DatatablesController extends Controller
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		foreach($applicants as $applicant){
 			$applicant->actions = $applicant->actions;
+		}
+
+    	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
+	}
+
+	public function processedApplicant(){
+		$applicants = ProcessedApplicant::select('*')
+						->with('applicant:id,user_id')
+						->with('vessel:id,name')
+						->with('rank:id,name')
+						// ->where('processed_applicants.status')
+						->get();
+
+		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
+		foreach($applicants as $applicant){
+			$applicant->actions = $applicant->actions;
+			$applicant->user = User::where('id', $applicant->applicant->user_id)->select('fname', 'lname', 'avatar')->first();
 		}
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);

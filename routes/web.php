@@ -112,6 +112,7 @@ Route::group([
 		// DATATABLE ROUTES
 		Route::get('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');
+		Route::get('datatables/processedApplicant', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');
 
 		$name = "vessels";
 		// VESSELS
