@@ -90,9 +90,14 @@ Route::group([
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
 
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+		Route::get($name . '/lineUp', ucfirst($name) . 'Controller@lineUp')->name($name . '.lineUp');
 
 		// DATATABLE ROUTES
 		Route::get('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');
+
+		$name = "vessels";
+		// VESSELS
+		Route::get("$name/get", 'VesselController@get')->name("$name.get");
 	}
 );

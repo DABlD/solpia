@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 // Models
 use App\User;
-use App\Models\{Applicant, EducationalBackground, FamilyData, SeaService, Principal};
+use App\Models\{ProcessedApplicant, Applicant};
+use App\Models\{EducationalBackground, FamilyData, SeaService};
+use App\Models\{Vessel, Rank, Principal};
 use App\Models\{DocumentFlag, DocumentId, DocumentLC};
 
 use Image;
@@ -22,10 +24,16 @@ class ApplicationsController extends Controller
     }
 
     public function index(){
-        $principals = Principal::select('name', 'slug')->get();
+
+        $principals = Principal::select('id', 'slug', 'name')->get();
+        $ranks = Rank::select('id', 'name')->get();
+        $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
+
         return $this->_view('index', [
             'title' => 'Applications',
-            'principals' => $principals
+            'principals' => $principals,
+            'ranks' => $ranks,
+            'vessels' => $vessels
         ]);
     }
 
@@ -197,6 +205,10 @@ class ApplicationsController extends Controller
             $req->session()->flash('error', 'There was a problem adding the applicant. Try again.');
             return back();
         }
+    }
+
+    public function lineUp(Request $req){
+        echo ProcessedApplicant::create(array_merge($req->all(), ['status' => 'Lined-Up']));
     }
 
     public function delete(User $user){

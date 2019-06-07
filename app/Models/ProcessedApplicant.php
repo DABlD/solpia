@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProcessedApplicants extends Model
+class ProcessedApplicant extends Model
 {
     protected $fillable = [
     	'applicant_id', 'principal_id', 'vessel_id', 'rank_id', 'status'
