@@ -54,7 +54,7 @@ class UsersTableSeeder extends Seeder
             $user->fname = $name;
             $user->role = 'Principal';
             $user->applicant = false;
-            $user->email = $name . '@solpia.email';
+            $user->email = camel_case(strtolower($name)) . '@solpia.email';
             $user->email_verified_at = now()->toDateTimeString();
             $user->password = '123456';
 
