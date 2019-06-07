@@ -462,19 +462,19 @@ class VesselSeeder extends Seeder
         	'status'		=> 'ACTIVE'
         ]);
 
-        Vessel::create([
-        	'principal_id'	=> 1,
-        	'name'			=> '',
-        	'flag'			=> 'PANAMA',
-        	'type'			=> '',
-        	'year_build'	=> '2017',
-        	'builder'		=> '',
-        	'engine'		=> '',
-        	'gross_tonnage'	=> '29770',
-        	'BHP'			=> '9732',
-        	'trade'			=> 'W.W',
-        	'ecdis'			=> '',
-        	'status'		=> 'ACTIVE'
-        ]);
+        // Vessel::create([
+        // 	'principal_id'	=> 1,
+        // 	'name'			=> '',
+        // 	'flag'			=> 'PANAMA',
+        // 	'type'			=> '',
+        // 	'year_build'	=> '2017',
+        // 	'builder'		=> '',
+        // 	'engine'		=> '',
+        // 	'gross_tonnage'	=> '29770',
+        // 	'BHP'			=> '9732',
+        // 	'trade'			=> 'W.W',
+        // 	'ecdis'			=> '',
+        // 	'status'		=> 'ACTIVE'
+        // ]);
     }
 }
