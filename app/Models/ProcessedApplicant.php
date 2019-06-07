@@ -29,7 +29,7 @@ class ProcessedApplicant extends Model
     	return $this->belongsTo('App\Models\Vessel');
     }
 
-    public function Rank(){
+    public function rank(){
     	return $this->belongsTo('App\Models\Rank');
     }
 }

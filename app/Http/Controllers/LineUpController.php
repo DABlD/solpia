@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ProcessedApplicant;
+use App\Models\{ProcessedApplicant, Principal};
 
 class LineUpController extends Controller
 {
@@ -13,7 +13,8 @@ class LineUpController extends Controller
 
     public function index(){
         return $this->_view('index', [
-            'title' => 'Lined-Up Applicants'
+            'title' => 'Lined-Up Applicants',
+            'principal' => camel_case(strtolower(auth()->user()->fname))
         ]);
     }
 

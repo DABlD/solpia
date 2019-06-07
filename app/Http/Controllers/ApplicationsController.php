@@ -57,46 +57,51 @@ class ApplicationsController extends Controller
         $applicant->load('document_flag');
         $applicant->load('document_lc');
 
-        // DEFINE ALL DOCUMENT REQUIREMENTS
-        // $r_docu_id = ['SEAMANS BOOK', 'PASSPORT', 'US-VISA'];
-        // $r_docu_flag = [''];
-        // $r_docu_lc = ['COC', 'GDSSM GOC'];
-    
-        // CHECK IF COMPLETE DOCUMENT_ID REQUIREMENTS
-        // foreach($r_docu_id as $req){
-        //     $applicant->document_id->$req = "N/A";
+        foreach(['document_id', 'document_flag', 'document_lc'] as $docuType){
+            foreach($applicant->$docuType as $data){
+                $temp = $docuType == 'document_flag' ? $data->country : $data->type;
+                $applicant->$docuType->$temp = $data;
+            }
+        }
 
-        //     foreach($applicant->document_id as $data){
-        //         if($data->type == $req){
-        //             $applicant->document_id->$req = $data;
-        //             break;
-        //         }
-        //     }
-        // }
-        
-        // CHECK IF COMPLETE DOCUMENT_FLAG REQUIREMENTS
-        // foreach($r_docu_flag as $req){
-        //     $applicant->document_flag->$req = "N/A";
+        // IF FAMILY_DATA IS ODD
+        if($applicant->family_data->count() % 2 != 0){
+            $fd = new FamilyData;
+            $fd->type = "";
+            $fd->name = "";
+            $fd->age = "";
+            $fd->birthday = now()->create(0, 1, 1);
+            $fd->address = "";
+            $fd->occupation = "";
 
-        //     foreach($applicant->document_flag as $data){
-        //         if($data->country == $req){
-        //             $applicant->document_flag->$req = $data;
-        //             break;
-        //         }
-        //     }
-        // }
-        
-        // CHECK IF COMPLETE DOCUMENT_LC REQUIREMENTS
-        // foreach($r_docu_lc as $req){
-        //     $applicant->document_lc->$req = "N/A";
+            $applicant->family_data->push($fd);
+        }
 
-        //     foreach($applicant->document_lc as $data){
-        //         if($data->type == $req){
-        //             $applicant->document_lc->$req = $data;
-        //             break;
-        //         }
-        //     }
-        // }
+        $class = "App\\Exports\\" . ucfirst($type);
+
+        return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
+    }
+
+    public function exportLineUpApplication(ProcessedApplicant $applicant, $type){
+        $applicant->load('applicant');
+        $applicant->load('vessel');
+        $applicant->load('rank');
+
+        // move $applicant->applicant properties to $applicant
+        foreach(array_keys($applicant->applicant->toArray()) as $property){
+            if(!in_array($property, ['id', 'created_at', 'updated_at', 'deleted_at'])){
+                $applicant->{$property} = $applicant->applicant->{$property};
+            }
+        }
+        unset($applicant->applicant);
+
+        $applicant->user                    = User::where('id', $applicant->applicant->user_id)->first();
+        $applicant->educational_background  = EducationalBackground::where('applicant_id', $applicant->applicant_id)->get();
+        $applicant->family_data             = FamilyData::where('applicant_id', $applicant->applicant_id)->get();
+        $applicant->sea_service             = SeaService::where('applicant_id', $applicant->applicant_id)->get();
+        $applicant->document_id             = DocumentId::where('applicant_id', $applicant->applicant_id)->get();
+        $applicant->document_flag           = DocumentFlag::where('applicant_id', $applicant->applicant_id)->get();
+        $applicant->document_lc             = DocumentLC::where('applicant_id', $applicant->applicant_id)->get();
 
         foreach(['document_id', 'document_flag', 'document_lc'] as $docuType){
             foreach($applicant->$docuType as $data){

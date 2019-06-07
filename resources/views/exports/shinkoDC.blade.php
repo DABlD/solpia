@@ -17,17 +17,23 @@
 			<td colspan="2">
 				VESSEL NAME
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ isset($applicant->vessel) ? $applicant->vessel->name : 'N/A' }}
+			</td>
 
 			<td colspan="2">
 				FLAG
 			</td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->vessel) ? $applicant->vessel->flag : 'N/A' }}
+			</td>
 
 			<td colspan="2">
 				TYPE
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ isset($applicant->vessel) ? $applicant->vessel->type : 'N/A' }}
+			</td>
 		</tr>
 
 		<!-- 2nd Row -->
@@ -42,7 +48,9 @@
 			<td colspan="2">
 				RANK
 			</td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ isset($applicant->rank) ? $applicant->rank->name : 'N/A' }}
+			</td>
 
 			<td colspan="2">
 				NATIONALITY

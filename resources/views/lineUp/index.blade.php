@@ -21,7 +21,7 @@
 								<th>Last Name</th>
 								<th>Vessel</th>
 								<th>Rank</th>
-                <th>Status</th>
+                				<th>Status</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
@@ -102,7 +102,11 @@
 
         function initializeActions(){
 	    	$('[data-original-title="Export Application"]').on('click', application => {
-          window.location.href = 'applications/export/' + $(application.target).data('id') + '/' + 'shinko';
+	    		swal.showLoading();
+          		window.location.href = 'applications/exportLineUp/' + $(application.target).data('id') + '/' + '{{ $principal }}';
+          		setTimeout(() => {
+          			swal.close();
+          		}, 5000);
 	    	});
 	    }
 	</script>

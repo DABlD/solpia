@@ -57,11 +57,11 @@
 			<td>Code No.:</td>
 			<td></td>
 			<td>Rank:</td>
-			<td></td>
+			<td>{{ isset($applicant->rank) ? $applicant->rank->name : 'N/A' }}</td>
 			<td>Date Employed:</td>
 			<td></td>
 			<td>Vessel:</td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ isset($applicant->vessel) ? $applicant->vessel->name : 'N/A' }}</td>
 		</tr>
 
 		<tr>
@@ -695,7 +695,7 @@
 
 		<tr>
 			<td colspan="2">Crew's Name:</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->user->fname . ' ' . $applicant->user->mname . ' ' . $applicant->user->lname }}</td>
 			<td>Presenter:</td>
 			<td colspan="3">JEFFREY PLANTA / CREWING MANAGER</td>
 		</tr>

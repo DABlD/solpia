@@ -28,9 +28,13 @@
 		{{-- START ROWS --}}
 		<tr>
 			<td colspan="2">Ship's Name</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ isset($applicant->vessel) ? $applicant->vessel->name : 'N/A' }}
+			</td>
 			<td colspan="5">Rank</td>
-			<td colspan="4"></td>
+			<td colspan="4">
+				{{ isset($applicant->rank) ? $applicant->rank->name : 'N/A' }}
+			</td>
 		</tr>
 
 		<tr>
@@ -230,7 +234,7 @@
 			<td colspan="3">{{ $isset ? $applicant->sea_service->last()->principal : 'N/A' }}</td>
 			<td colspan="5">Serve Period</td>
 			<td colspan="4">
-				{{ $isset ? ($applicant->sea_service->last()->sign_on->format('M j, Y') - $applicant->sea_service->last()->sign_off->format('M j, Y')) : 'N/A' }}
+				{{ $isset ? ($applicant->sea_service->last()->sign_on->format('M j, Y') . '-' . $applicant->sea_service->last()->sign_off->format('M j, Y')) : 'N/A' }}
 			</td>
 		</tr>
 

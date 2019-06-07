@@ -26,10 +26,14 @@
 
 		<tr>
 			<td colspan="2">Ship's Name</td>
-			<td colspan="4">{{-- FILL --}}</td>
+			<td colspan="4">
+				{{ isset($applicant->vessel) ? $applicant->vessel->name : 'N/A' }}
+			</td>
 
 			<td colspan="2">Rank</td>
-			<td colspan="3">{{-- FILL --}}</td>
+			<td colspan="3">
+				{{ isset($applicant->rank) ? $applicant->rank->name : 'N/A' }}
+			</td>
 		</tr>
 
 		<tr>
