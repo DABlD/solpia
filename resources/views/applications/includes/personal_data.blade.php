@@ -188,7 +188,7 @@
 <div class="row">
     <div class="form-group col-md-2">
         <label for="height">Height(cm)</label>
-        <input type="number" class="form-control aeigh" name="height" placeholder="Enter Height">
+        <input type="number" class="form-control aeigh" name="height" placeholder="Enter Height" value="0">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="heightError"></strong>
         </span>
@@ -198,7 +198,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="weight">Weight(kg)</label>
-        <input type="number" class="form-control aeigh" name="weight" placeholder="Enter Weight">
+        <input type="number" class="form-control aeigh" name="weight" placeholder="Enter Weight" value="0">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="weightError"></strong>
         </span>
@@ -280,3 +280,20 @@
         </span>
     </div>
 </div>
+
+@push('after-scripts')
+    <script>
+        $('[name="birthday"]').change(e => {
+            $('[name="age"]').val(moment().diff(e.target.value, 'years'));
+        });
+
+        // $('[name="weight"], [name="height"]').change(() => {
+        //     let weight = $('[name="weight"]').val();
+        //     let height = $('[name="height"]').val();
+        //     console.log(weight);
+        //     console.log(height);
+        //     console.log(height * height);
+        //     $('[name="bmi"]').val((weight) / (height * height));
+        // });
+    </script>
+@endpush
