@@ -8,7 +8,7 @@
 			<div class="box box-info">
 
 				<div class="box-header">
-					@include('lineUp.includes.toolbar')
+					{{-- @include('lineUp.includes.toolbar') --}}
 				</div>
 
 				<div class="box-body">
