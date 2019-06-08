@@ -37,6 +37,7 @@
             let ctr = 1;
 
             let fd_class = 'form-control aeigh';
+            let fd_class3 = 'form-control';
 
             let name = 'fd-name';
             let age = 'fd-age';
@@ -87,7 +88,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="fd-email${count}">Email</label>
-                        <input type="email" class="${fd_class} ${email}" name="${email}${count}" placeholder="Enter Email">
+                        <input type="email" class="${fd_class3} ${email}" name="${email}${count}" placeholder="Enter Email">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="fd-email${count}Error"></strong>
                         </span>
