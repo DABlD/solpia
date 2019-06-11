@@ -246,7 +246,7 @@
             else if(type == "Flag"){
             	$(`[name="${country}${count}"]`).select2({
             		placeholder: 'Select Flag',
-            		// tags: true
+            		tags: true
             	});
             }
             else{

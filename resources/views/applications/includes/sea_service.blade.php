@@ -2,7 +2,14 @@
 
 @push('before-scripts')
     <script>
+        var savedVessels = {};
+        var savedVesselsString = "";
+
         function addSS(){
+            savedVesselsString == "" ? getVessels() : addSS2();
+        }
+
+        function addSS2(){
             let count = parseInt($('.ssCount')[0].innerText) + 1;
 
             let string = `
@@ -10,7 +17,10 @@
 
                     <div class="form-group col-md-3">
                         <label for="vessel_name${count}">Vessel Name</label>
-                        <input type="text" class="form-control aeigh" name="vessel_name${count}" placeholder="Enter Vessel Name">
+                        <select class="form-control aeigh" name="vessel_name${count}">
+                            <option value=""></option>
+                            ${savedVesselsString}
+                        </select>
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="vessel_name${count}Error"></strong>
                         </span>
@@ -133,6 +143,26 @@
             `;
             
             $('#sea-services').append(string);
+            $(`[name="vessel_name${count}"]`).select2({
+                placeholder: 'Select or Input Vessel',
+                tags: true
+            });
+
+            $(`[name="vessel_name${count}"]`).change(() => {
+                let selectedVessel = $(`[name="vessel_name${count}"]`).val();
+                if(savedVessels[selectedVessel] != undefined){
+                    $(`[name="vessel_type${count}"]`).val(savedVessels[selectedVessel].type);
+                    $(`[name="gross_tonnage${count}"]`).val(savedVessels[selectedVessel].gross_tonnage);
+                    $(`[name="engine_type${count}"]`).val(savedVessels[selectedVessel].engine);
+                    $(`[name="bhp_kw${count}"]`).val(savedVessels[selectedVessel].BHP);
+                    $(`[name="flag${count}"]`).val(savedVessels[selectedVessel].flag);
+                    $(`[name="trade${count}"]`).val(savedVessels[selectedVessel].trade);
+                    $(`[name="manning_agent${count}"]`).val(savedVessels[selectedVessel].manning_agent);
+                    $(`[name="principal${count}"]`).val(savedVessels[selectedVessel].principal.name);
+                    $(`[name="crew_nationality${count}"]`).val(savedVessels[selectedVessel].crew_nationality);
+                }
+            });
+
             $(`[name="sign_off${count}"], [name="sign_on${count}"]`).flatpickr({
                 altInput: true,
                 altFormat: 'F j, Y',
@@ -140,6 +170,25 @@
                 maxDate: moment().format('YYYY-MM-DD')
             });
             $('.ssCount')[0].innerText = count;
+        }
+
+        function getVessels(){
+            savedVesselsString = "asd";
+
+            $.ajax({
+                url: '{{ route('vessels.getAll') }}',
+                dataType: 'json',
+                success: vessels => {
+                    vessels.forEach(vessel => {
+                        savedVessels[vessel.name] = vessel;
+                        savedVesselsString += `
+                            <option value="${vessel.name}">${vessel.name}</option>
+                        `;
+                    });
+
+                    addSS2();
+                }
+            });
         }
     </script>
 @endpush

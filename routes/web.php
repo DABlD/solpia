@@ -118,5 +118,6 @@ Route::group([
 		$name = "vessels";
 		// VESSELS
 		Route::get("$name/get", 'VesselController@get')->name("$name.get");
+		Route::get("$name/getAll", 'VesselController@getAll')->name("$name.getAll");
 	}
 );

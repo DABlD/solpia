@@ -15,6 +15,6 @@ class Vessel extends Model
     ];
 
     public function principal(){
-    	return $this->belongsTo('App\Principal');
+    	return $this->belongsTo('App\Models\Principal');
     }
 }
