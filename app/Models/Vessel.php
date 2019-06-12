@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Vessel extends Model
 {
     protected $fillable = [
-    	'principal_id', 'name', 'flag', 'type', 'year_build', 'builder', 'engine', 'gross_tonnage', 'BHP', 'trade', 'ecdis', 'status'
+    	'principal_id', 'name', 'flag', 'type', 'year_build',
+    	'builder', 'engine', 'gross_tonnage', 'BHP', 'trade',
+    	'ecdis', 'status', 'manning_agent'
     ];
 
     protected $dates = [

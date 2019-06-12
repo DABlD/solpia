@@ -17,6 +17,7 @@ class CreateVesselsTable extends Migration
             $table->increments('id');
 
             $table->integer('principal_id')->unsigned();
+            $table->string('manning_agent', 100)->default('Solpia');
             $table->string('name', 100);
             $table->string('flag', 100);
             $table->string('type', 100);
