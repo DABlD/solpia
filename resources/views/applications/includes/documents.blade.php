@@ -1,23 +1,4 @@
-<div id="docu">
-	<div class="row">
-		<div class="form-group col-md-4">
-		    <label>Rank</label>
-		    <select class="form-control" id="rank">
-		    	<option value=""></option>
-		    	@foreach($categories as $category => $ranks)
-					<optgroup label="{{ $category }}"></optgroup>
-		    		@foreach($ranks as $rank)
-						<option value="{{ $rank->id }}">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							{{ $rank->name }} ({{ $rank->abbr }})
-						</option>
-					@endforeach
-		    	@endforeach
-		    </select>
-		</div>
-	</div>
-
-</div>
+<div id="docu"></div>
 
 @push('before-scripts')
     <script>
