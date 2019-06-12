@@ -57,6 +57,16 @@
 
 <div class="row">
     <div class="form-group col-md-6">
+        <label for="age">Age</label>
+        <input type="number" class="form-control aeigh" name="age" placeholder="Enter Age">
+        <span class="invalid-feedback hidden" role="alert">
+            <strong id="ageError"></strong>
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-6">
         <label for="birth_place">Place of birth</label>
         <input type="text" class="form-control aeigh" name="birth_place" placeholder="Enter Place of Birth">
         <span class="invalid-feedback hidden" role="alert">
@@ -136,16 +146,6 @@
         <label class="radio-inline">
             <input type="radio" name="gender" value="Female"> Female
         </label>
-    </div>
-</div>
-
-<div class="row">
-    <div class="form-group col-md-6">
-        <label for="age">Age</label>
-        <input type="number" class="form-control aeigh" name="age" placeholder="Enter Age">
-        <span class="invalid-feedback hidden" role="alert">
-            <strong id="ageError"></strong>
-        </span>
     </div>
 </div>
 

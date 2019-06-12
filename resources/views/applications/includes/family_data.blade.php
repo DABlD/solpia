@@ -66,17 +66,17 @@
                         </span>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="fd-age${count}">Age</label>
-                        <input type="number" class="${fd_class} ${age}" name="${age}${count}" placeholder="Enter Age">
-                        <span class="invalid-feedback hidden" role="alert">
-                            <strong id="fd-age${count}Error"></strong>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-3">
                         <label for="fd-birthday${count}">Birthday</label>
                         <input type="text" class="${fd_class} ${birthday}" name="${birthday}${count}" placeholder="Select Birthday">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="fd-birthday${count}Error"></strong>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="fd-age${count}">Age</label>
+                        <input type="number" class="${fd_class} ${age}" name="${age}${count}" placeholder="Enter Age">
+                        <span class="invalid-feedback hidden" role="alert">
+                            <strong id="fd-age${count}Error"></strong>
                         </span>
                     </div>
                     <div class="form-group col-md-3">
@@ -112,6 +112,10 @@
                 altFormat: 'F j, Y',
                 dateFormat: 'Y-m-d',
                 maxDate: moment().format('YYYY-MM-DD')
+            });
+
+            $(`[name="${birthday}${count}"]`).change(e => {
+                $(`[name="${age}${count}"]`).val(moment().diff(e.target.value, 'years'));
             });
         }
 
