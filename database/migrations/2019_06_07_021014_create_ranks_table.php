@@ -17,6 +17,9 @@ class CreateRanksTable extends Migration
             $table->increments('id');
 
             $table->string('name', 100);
+            $table->string('abbr', 20);
+            $table->string('category', 30);
+            $table->string('type', 10);
 
             $table->timestamps();
         });
