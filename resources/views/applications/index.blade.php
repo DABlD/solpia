@@ -141,16 +141,23 @@
                     swal({
                         title: 'Select Rank',
                         input: 'select',
-                        inputOptions: {
-                            '' : '',
-                            @foreach($ranks as $rank)
-                                '{{ $rank->id }}': '{{ $rank->name }}',
-                            @endforeach
-                        },
                         allowOutsideClick: false,
                         showCancelButton: true,
                         cancelButtonColor: '#f76c6b',
                         onOpen: () => {
+                            $('.swal2-select').append(`
+                                <option></option>
+                                @foreach($categories as $category => $ranks)
+                                    <optgroup label="{{ $category }}"></optgroup>
+                                    @foreach($ranks as $rank)
+                                        <option value="{{ $rank->id }}">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            {{ $rank->name }} ({{ $rank->abbr }})
+                                        </option>
+                                    @endforeach
+                                @endforeach
+                            `);
+
                             $('.swal2-select').select2({
                                 placeholder: 'Select Rank',
                                 width: '100%',
@@ -163,6 +170,7 @@
                     }).then(rank => {
                         if(rank.value){
                             aRank = rank.value;
+                            console.log(aRank);
                             selectPrincipal();
                         }
                     });

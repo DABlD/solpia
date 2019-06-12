@@ -5,6 +5,19 @@
         var savedVessels = {};
         var savedVesselsString = "";
 
+        var availableRanksString = `
+            <option></option>
+            @foreach($categories as $category => $ranks)
+                <optgroup label="{{ $category }}"></optgroup>
+                @foreach($ranks as $rank)
+                    <option value="{{ $rank->name }}">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        {{ $rank->name }} ({{ $rank->abbr }})
+                    </option>
+                @endforeach
+            @endforeach
+        `;
+
         function addSS(){
             savedVesselsString == "" ? getVessels() : addSS2();
         }
@@ -27,7 +40,10 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="rank${count}">Rank</label>
-                        <input type="text" class="form-control aeigh" name="rank${count}" placeholder="Enter Rank">
+                        <select class="form-control aeigh" name="rank${count}">
+                            <option value=""></option>
+                            ${availableRanksString}
+                        </select>
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="rank${count}Error"></strong>
                         </span>
@@ -146,6 +162,10 @@
             $(`[name="vessel_name${count}"]`).select2({
                 placeholder: 'Select or Input Vessel',
                 tags: true
+            });
+
+            $(`[name="rank${count}"]`).select2({
+                placeholder: 'Select Rank',
             });
 
             $(`[name="vessel_name${count}"]`).change(() => {

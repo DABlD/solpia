@@ -26,20 +26,23 @@ class ApplicationsController extends Controller
     public function index(){
 
         $principals = Principal::select('id', 'slug', 'name')->get();
-        $ranks = Rank::select('id', 'name')->get();
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
 
         return $this->_view('index', [
             'title' => 'Applications',
             'principals' => $principals,
-            'ranks' => $ranks,
+            'categories' => $ranks->groupBy('category'),
             'vessels' => $vessels
         ]);
     }
 
     public function create(){
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+
     	return $this->_view('create', [
-    		'title' => 'Add Application'
+    		'title' => 'Add Application',
+            'categories' => $ranks->groupBy('category')
     	]);
     }
 
