@@ -8,6 +8,36 @@
         addFD('Father');
         addFD('Mother');
 
+        $('#FD').append(`
+            <span class="SpouseCount fd-count">0</span>
+            <a class="btn btn-success" onclick="addFD('Spouse')">
+                <span class="fa fa-plus"></span>
+                Spouse
+            </a>
+            <div class="Spouse"><u><h3><strong>Spouse</strong></h3></u></div>
+            <br><br>
+            <span class="SonCount fd-count">0</span>
+            <a class="btn btn-success" onclick="addFD('Son')">
+                <span class="fa fa-plus"></span>
+                Son
+            </a>
+            <div class="Son"><u><h3><strong>Son</strong></h3></u></div>
+            <br><br>
+            <span class="DaughterCount fd-count">0</span>
+            <a class="btn btn-success" onclick="addFD('Daughter')">
+                <span class="fa fa-plus"></span>
+                Daughter
+            </a>
+            <div class="Daughter"><u><h3><strong>Daughter</strong></h3></u></div>
+            <br><br>
+            <span class="BeneficiaryCount fd-count">0</span>
+            <a class="btn btn-success" onclick="addFD('Beneficiary')">
+                <span class="fa fa-plus"></span>
+                Beneficiary
+            </a>
+            <div class="Beneficiary"><u><h3><strong>Beneficiary</strong></h3></u></div>
+        `);
+
         function addFD(type){
             let fd_class2 = 'form-control';
 
@@ -34,7 +64,6 @@
             }
 
             let count = $('.fd').length + 1;
-            let ctr = 1;
 
             let fd_class = 'form-control aeigh';
             let fd_class3 = 'form-control';
@@ -46,14 +75,13 @@
             let address = 'fd-address';
             let email = 'fd-email';
 
-            if(type == 'Father' || type == 'Mother' || $(`.${type}`).length == 0){
-                // console.log('zxc');
+            // if(type == 'Father' || type == 'Mother' || $(`.${type}`).length == 0){
+            if(type == 'Father' || type == 'Mother'){
                 appendFD(`<div class="${type}"><u><h3><strong>${type}</strong></h3></u>`);
-                ctr = 0;
             }
-            else{
-                appendFD('<div>');
-            }
+            // else{
+            //     appendFD('<div>');
+            // }
 
             let string = `
                 <div class="row fd">
@@ -102,8 +130,8 @@
                         </span>
                     </div>
                 </div>
-                <hr>
-            </div>`;
+                <hr>`;
+            // </div>`;
 
             // appendFD(string, ctr? ` .${type}` : '');
             appendFD(string, ` .${type}`);
@@ -117,6 +145,12 @@
             $(`[name="${birthday}${count}"]`).change(e => {
                 $(`[name="${age}${count}"]`).val(moment().diff(e.target.value, 'years'));
             });
+
+            // MOVE COUNT AND BUTTON
+            // if($(`.${type}`).length == 1){
+            //     $(`.${type}Count`).next().prependTo($(`.${type}`));
+            //     $(`.${type}Count`).prependTo($(`.${type}`));
+            // }
         }
 
         function appendFD(string, addClass = ""){

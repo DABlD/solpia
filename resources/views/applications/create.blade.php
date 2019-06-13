@@ -20,31 +20,6 @@
                         <hr>
                         @include('applications.includes.personal_data')
                         
-                        {{-- FAMILY DATA --}}
-                        <h2><strong>Family Data</strong></h2>
-                        <span class="SpouseCount fd-count">0</span>
-                        <a class="btn btn-success" onclick="addFD('Spouse')">
-                            <span class="fa fa-plus"></span>
-                            Spouse
-                        </a>
-                        <span class="SonCount fd-count">0</span>
-                        <a class="btn btn-success" onclick="addFD('Son')">
-                            <span class="fa fa-plus"></span>
-                            Son
-                        </a>
-                        <span class="DaughterCount fd-count">0</span>
-                        <a class="btn btn-success" onclick="addFD('Daughter')">
-                            <span class="fa fa-plus"></span>
-                            Daughter
-                        </a>
-                        <span class="BeneficiaryCount fd-count">0</span>
-                        <a class="btn btn-success" onclick="addFD('Beneficiary')">
-                            <span class="fa fa-plus"></span>
-                            Beneficiary
-                        </a>
-                        <hr>
-                        @include('applications.includes.family_data')
-                        
                         {{-- EDUCATIONAL BACKGROUND --}}
                         <h2><strong>Educational Background</strong></h2>
                         <hr>
@@ -53,6 +28,11 @@
                             <span class="fa fa-plus"></span>
                         </a>
                         @include('applications.includes.educational_background')
+                        
+                        {{-- FAMILY DATA --}}
+                        <h2><strong>Family Data</strong></h2>
+                        <hr>
+                        @include('applications.includes.family_data')
 
                         {{-- DOCUMENTS --}}
                         <h2><strong>Documents</strong></h2>
@@ -171,46 +151,43 @@
 
         function fillSS(){
             addSS();
-            addSS();
-            $('#sea-services input')[0].value = "Vessel 1";
-            $('#sea-services input')[1].value = "Rank 1";
-            $('#sea-services input')[2].value = "Type 1";
-            $('#sea-services input')[3].value = "10 Tons";
-            $('#sea-services input')[4].value = "Engine 1";
-            $('#sea-services input')[5].value = "30";
-            $('#sea-services input')[6].value = "Philippines";
-            $('#sea-services input')[7].value = "Antartic";
-            $('#sea-services input')[8].value = "30000";
-            $('#sea-services input')[9].value = "Agent 1";
-            $('#sea-services input')[10].value = "Principal 1";
-            $('#sea-services input')[11].value = "Filipino";
 
-            $('[name="sign_on1"]').flatpickr().setDate('2019-02-01', true);
-            $('[name="sign_off1"]').flatpickr().setDate('2019-02-28', true);
+            $('[name="vessel_name1"]').select2('open');
 
-            $('#sea-services input')[14].value = "Charterer 1";
-            $('#sea-services input')[15].value = "Cargo 1, Cargo 2";
-            $('#sea-services input')[16].value = "So so";
+            setTimeout(() => {
+                $('[name="vessel_name1"]').val('M/V DK INITIO').trigger('change');
+                $('[name="rank1"]').val('DECK CADET').trigger('change');
+                $('#sea-services input')[6].value = "30000";
+                $('#sea-services input')[9].value = "Filipino";
 
-            if($('#sea-services input').length > 19){
-                $('#sea-services input')[0+17].value = "Vessel 2";
-                $('#sea-services input')[1+17].value = "Rank 2";
-                $('#sea-services input')[2+17].value = "Type 2";
-                $('#sea-services input')[3+17].value = "14 Tons";
-                $('#sea-services input')[4+17].value = "Engine 2";
-                $('#sea-services input')[5+17].value = "40";
-                $('#sea-services input')[6+17].value = "Philippines";
-                $('#sea-services input')[7+17].value = "Atlantic";
-                $('#sea-services input')[8+17].value = "40000";
-                $('#sea-services input')[9+17].value = "Agent 2";
-                $('#sea-services input')[10+17].value = "Principal 2";
-                $('#sea-services input')[11+17].value = "Filipino";
-                $('[name="sign_on2"]').flatpickr().setDate('2019-01-01', true);
-                $('[name="sign_off2"]').flatpickr().setDate('2019-02-28', true);
-                $('#sea-services input')[14+17].value = "Charterer 2";
-                $('#sea-services input')[15+17].value = "Cargo 3, Cargo 4";
-                $('#sea-services input')[16+17].value = "Not so so";
-            }
+                $('[name="sign_on1"]').flatpickr().setDate('2019-02-01', true);
+                $('[name="sign_off1"]').flatpickr().setDate('2019-02-28', true);
+
+                $('#sea-services input')[12].value = "Charterer 1";
+                $('#sea-services input')[13].value = "Cargo 1, Cargo 2";
+                $('#sea-services input')[14].value = "So so";
+            }, 2000);
+
+            setTimeout(() => {
+                addSS();
+    
+                $('[name="vessel_name2"]').select2('open');
+    
+                $('[name="vessel_name2"]').val('M/T SM NAVIGATOR').trigger('change');
+                $('[name="rank2"]').val('ABLE SEAMAN').trigger('change');
+                $('#sea-services input')[21].value = "25000";
+                $('#sea-services input')[24].value = "Filipino";
+
+                $('[name="sign_on2"]').flatpickr().setDate('2019-03-01', true);
+                $('[name="sign_off2"]').flatpickr().setDate('2019-03-30', true);
+
+                $('#sea-services input')[27].value = "Charterer 2";
+                $('#sea-services input')[28].value = "Cargo 3, Cargo 4";
+                $('#sea-services input')[29].value = "Not So so";
+
+                $('[name="vessel_name2"]').select2('close');
+            }, 2000);
+
             fillEB();
         }
 
