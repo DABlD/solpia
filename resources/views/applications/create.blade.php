@@ -306,7 +306,6 @@
                 tempFd.email      = inputs[i+6].value;
                 tempFd.address      = inputs[i+7].value;
                 fd.push(tempFd);
-                console.log(tempFd);
 
                 // REMOVE THOSE ELEMENTS
                 for(let j = i; j < 8; j++){

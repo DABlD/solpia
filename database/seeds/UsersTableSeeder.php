@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Models\{Applicant, EducationalBackground, FamilyData, Principal};
+use App\Models\{Applicant, EducationalBackground, FamilyData, Principal, DocumentId};
 
 class UsersTableSeeder extends Seeder
 {
@@ -148,6 +148,33 @@ class UsersTableSeeder extends Seeder
             'age' =>  22,
             'birthday' => '1997-11-12', 
             'address' => 'Manila, Phillipines',
+        ]);
+
+        DocumentId::create([
+            'applicant_id' => 1,
+            'type' => 'PASSPORT',
+            'issuer' => 'DFA',
+            'number' => '123456',
+            'issue_date' => now()->startOfMonth(),
+            'expiry_date' => now()->endOfMonth(),
+        ]);
+
+        DocumentId::create([
+            'applicant_id' => 1,
+            'type' => 'SEAMAN BOOK',
+            'issuer' => 'PANAMA',
+            'number' => '654321',
+            'issue_date' => now()->startOfMonth(),
+            'expiry_date' => now()->endOfMonth(),
+        ]);
+
+        DocumentId::create([
+            'applicant_id' => 1,
+            'type' => 'US-VISA',
+            'issuer' => 'US EMBASSY',
+            'number' => '756159',
+            'issue_date' => now()->startOfMonth(),
+            'expiry_date' => now()->endOfMonth(),
         ]);
     }
 }
