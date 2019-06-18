@@ -144,7 +144,7 @@
             };
 
             $('[name="birthday"]').flatpickr(config).setDate('1997-11-12', true);
-            $('[name="fd-birthday1"]').flatpickr(config).setDate('1967-03-23', true);
+            $('[name="fd-birthday1"]').flatpickr(config).setDate('1968-03-23', true);
             $('[name="fd-birthday2"]').flatpickr(config).setDate('1961-10-16', true);
             fillSS();
         }
@@ -268,6 +268,29 @@
             }, 1000)
         });
 
+        function z(){
+            let config = {
+                altInput: true,
+                altFormat: 'F j, Y',
+                dateFormat: 'Y-m-d',
+                maxDate: moment().format('YYYY-MM-DD')
+            };
+
+            addFD('Spouse');
+            addFD('Beneficiary');
+
+            $('[name="fd-name3"]').val('Airene Mendoza');
+            $('[name="fd-birthday3"]').flatpickr(config).setDate('1999-07-26', true);
+            $('[name="fd-email3"]').val("airenemendoza@gmail.com");
+            $('[name="fd-address3"]').val("Malate, Manila");
+
+            $('[name="fd-name4"]').val('Random');
+            $('[name="fd-birthday4"]').flatpickr(config).setDate('1999-06-01', true);
+            $('[name="fd-address4"]').val("Somewhere");
+            // asd();
+            fill();
+        }
+
         function compressAndSubmit(){
             // Compress FD
             let inputs = $('#FD input');
@@ -277,12 +300,13 @@
                 let tempFd = {};
                 tempFd.type         = inputs[i].value;
                 tempFd.name         = inputs[i+1].value;
-                tempFd.age          = inputs[i+2].value;
-                tempFd.birthday     = inputs[i+3].value;
+                tempFd.birthday     = inputs[i+2].value;
+                tempFd.age          = inputs[i+4].value;
                 tempFd.occupation   = inputs[i+5].value;
                 tempFd.email      = inputs[i+6].value;
                 tempFd.address      = inputs[i+7].value;
                 fd.push(tempFd);
+                console.log(tempFd);
 
                 // REMOVE THOSE ELEMENTS
                 for(let j = i; j < 8; j++){
@@ -295,7 +319,7 @@
             `);
 
             // COMPRESS SS
-            inputs = $('#sea-services input');
+            inputs = $('#sea-services input, #sea-services select');
             let ss = [];
             for(let i = 0; i < inputs.length; i+= 17){
                 let tempSS = {};

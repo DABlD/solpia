@@ -268,8 +268,5 @@
         $('#rank').select2({
         	placeholder: 'Select Rank'
         });
-        setTimeout(() => {
-        	asd();
-        }, 500);
     </script>
 @endpush
