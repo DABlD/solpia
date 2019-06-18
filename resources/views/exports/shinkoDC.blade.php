@@ -72,7 +72,9 @@
 			<td colspan="2">
 				JOINING DATE
 			</td>
-			<td colspan="2"></td>
+			<td colspan="2">
+				{{ now()->format('M j, Y') }}
+			</td>
 
 			<td colspan="2">
 				SIGN OF VERIFIER
