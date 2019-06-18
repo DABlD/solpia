@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DocumentFlag extends Model
 {
     protected $fillable = [
-    	'country', 'booklet_no', 'license_no', 'goc', 'sso', 'sdsd', 'applicant_id',
+    	'country', 'applicant_id', 'number', 'type',
     	'issue_date', 'expiry_date'
     ];
 

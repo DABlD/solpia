@@ -17,12 +17,14 @@ class CreateDocumentFlagsTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id');
             
+            $table->string('type');
             $table->string('country');
-            $table->string('booklet_no');
-            $table->string('license_no');
-            $table->string('goc');
-            $table->string('sso');
-            $table->string('sdsd');
+            $table->string('number');
+            // $table->string('booklet_no');
+            // $table->string('license_no');
+            // $table->string('goc');
+            // $table->string('sso');
+            // $table->string('sdsd');
             $table->date('issue_date');
             $table->date('expiry_date');
             $table->timestamps();
