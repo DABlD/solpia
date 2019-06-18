@@ -80,10 +80,10 @@
 			<td rowspan="2">SM Book</td>
 			<td>National</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->number : "N/A" }}
+				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->number : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 		</tr>
 

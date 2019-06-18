@@ -327,12 +327,12 @@
 				[
 					"National Seaman's Book",
 					'MARINA',
-					['NATIONAL SEAMAN BOOK', 'MARINA']
+					["SEAMAN'S BOOK", 'MARINA']
 				],
 				[
 					"Seaman's Book/Panama",
 					'PANAMA',
-					['SEAMAN BOOK', 'PANAMA']
+					["SEAMAN'S BOOK", 'PANAMA']
 
 				],
 				[

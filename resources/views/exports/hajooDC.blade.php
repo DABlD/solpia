@@ -108,13 +108,13 @@
 			</td>
 
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->number : "REVERTING" }}
+				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->number : "REVERTING" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->issue_date->format('F j, Y') : "REVERTING" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL SEAMAN BOOK'}) ? $applicant->document_id->{'NATIONAL SEAMAN BOOK'}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->expiry_date->format('F j, Y') : "REVERTING" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
