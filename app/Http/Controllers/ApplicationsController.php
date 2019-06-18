@@ -39,10 +39,15 @@ class ApplicationsController extends Controller
 
     public function create(){
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+        $issuers = array_merge(
+            DocumentId::pluck('issuer')->toArray(),
+            DocumentLC::pluck('issuer')->toArray(),
+        );
 
     	return $this->_view('create', [
     		'title' => 'Add Application',
-            'categories' => $ranks->groupBy('category')
+            'categories' => $ranks->groupBy('category'),
+            'issuers' => collect($issuers)->unique()->toArray()
     	]);
     }
 

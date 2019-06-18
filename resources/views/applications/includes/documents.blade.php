@@ -2,6 +2,13 @@
 
 @push('before-scripts')
     <script>
+		let issuerString = `
+			<option></option>
+			@foreach($issuers as $issuer)
+				<option value="{{ $issuer }}">{{ $issuer }}</option>
+			@endforeach
+		`;
+
         function addDocu(type){
             $(`.${type}Count`)[0].innerText = parseInt($(`.${type}Count`)[0].innerText) + 1;
 
@@ -81,7 +88,9 @@
 	            	        </div>
 	            	        <div class="form-group col-md-4">
 	            	            <label for="${issuer}${count}">Issuer</label>
-	            	            <input type="text" class="${docu_class} ${issuer}" name="${issuer}${count}" placeholder="Enter Issuer">
+	            	            <select class="${docu_class} ${issuer}" name="${issuer}${count}">
+	            	            	${issuerString}
+	            	            </select>
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${issuer}${count}Error"></strong>
 	            	            </span>
@@ -195,7 +204,9 @@
 	            	        </div>
 	            	        <div class="form-group col-md-4">
 	            	            <label for="${issuer}${count}">Issuer</label>
-	            	            <input type="text" class="${docu_class2} ${issuer}" name="${issuer}${count}" placeholder="Enter Issuer">
+	            	            <select class="${docu_class2} ${issuer}" name="${issuer}${count}">
+	            	            	${issuerString}
+	            	            </select>
 	            	            <span class="invalid-feedback hidden" role="alert">
 	            	                <strong id="${issuer}${count}Error"></strong>
 	            	            </span>
@@ -242,6 +253,11 @@
             		placeholder: 'Select Type',
             		tags: true
             	});
+
+            	$(`[name="${issuer}${count}"]`).select2({
+            		placeholder: 'Select or Input Issuer',
+            		tags: true
+            	});
             }
             else if(type == "Flag"){
             	$(`[name="${country}${count}"]`).select2({
@@ -252,6 +268,11 @@
             else{
             	$(`[name="${lcType}${count}"]`).select2({
             		placeholder: 'Select Type',
+            		tags: true
+            	});
+
+            	$(`[name="${issuer}${count}"]`).select2({
+            		placeholder: 'Select or Input Issuer',
             		tags: true
             	});
             }
