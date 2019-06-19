@@ -135,6 +135,12 @@
         // $('html, body').animate({
         //     scrollTop: $(".SpouseCount").offset().top - 50
         // }, 2000);
+        $('#rank').change(() => {
+            $('.docu-country').each((index, country) => {
+                $(country).trigger('change');
+            });
+        })
+
         function fill(){
             let config = {
                 altInput: true,
