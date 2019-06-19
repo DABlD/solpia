@@ -32,7 +32,7 @@
 			        </select>
 			    </div>
 			</div>
-			
+
 			<span class="FlagCount fd-count">0</span>
 			<a class="btn btn-success" onclick="addDocu('Flag')">
 			    <span class="fa fa-plus"></span>
@@ -300,8 +300,6 @@
 			   		   	</div>
 			   		</div>
 	        	`;
-
-	        	console.log(string);
 
 				if($(`.flag${fdcount}-documents`).length != 0){
 					$(`.flag${fdcount}-documents`).remove();
