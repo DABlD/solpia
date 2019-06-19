@@ -9,33 +9,40 @@
         addFD('Mother');
 
         $('#FD').append(`
+            <u><h3><strong>Spouse</strong></h3></u>
             <span class="SpouseCount fd-count">0</span>
             <a class="btn btn-success" onclick="addFD('Spouse')">
                 <span class="fa fa-plus"></span>
                 Spouse
             </a>
-            <div class="Spouse"><u><h3><strong>Spouse</strong></h3></u></div>
             <br><br>
+            <div class="Spouse"></div>
+            
+            <u><h3><strong>Son</strong></h3></u>
             <span class="SonCount fd-count">0</span>
             <a class="btn btn-success" onclick="addFD('Son')">
                 <span class="fa fa-plus"></span>
                 Son
             </a>
-            <div class="Son"><u><h3><strong>Son</strong></h3></u></div>
             <br><br>
+            <div class="Son"></div>
+            
+            <u><h3><strong>Daughter</strong></h3></u>
             <span class="DaughterCount fd-count">0</span>
             <a class="btn btn-success" onclick="addFD('Daughter')">
                 <span class="fa fa-plus"></span>
                 Daughter
             </a>
-            <div class="Daughter"><u><h3><strong>Daughter</strong></h3></u></div>
             <br><br>
+            <div class="Daughter"></div>
+            
+            <u><h3><strong>Beneficiary</strong></h3></u>
             <span class="BeneficiaryCount fd-count">0</span>
             <a class="btn btn-success" onclick="addFD('Beneficiary')">
                 <span class="fa fa-plus"></span>
                 Beneficiary
             </a>
-            <div class="Beneficiary"><u><h3><strong>Beneficiary</strong></h3></u></div>
+            <div class="Beneficiary"></div>
         `);
 
         function addFD(type){
