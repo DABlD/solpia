@@ -16,6 +16,6 @@ class GlobalComposer
     public function compose(View $view)
     {
         $year_now = now()->format('Y');
-        $view->with('cpYear', env('year_made') . (env('year_made') != $year_now ? ' - ' . $year_now : ''));
+        $view->with('cpYear', env('YEAR_MADE') . (env('YEAR_MADE') != $year_now ? ' - ' . $year_now : ''));
     }
 }
