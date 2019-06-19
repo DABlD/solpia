@@ -36,40 +36,6 @@
 
                         {{-- DOCUMENTS --}}
                         <h2><strong>Documents</strong></h2>
-
-                        {{-- SELECT RANK FOR DOCUMENTS --}}
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <select class="form-control" id="rank">
-                                    <option value=""></option>
-                                    @foreach($categories as $category => $ranks)
-                                        <optgroup label="{{ $category }}"></optgroup>
-                                        @foreach($ranks as $rank)
-                                            <option value="{{ $rank->id }}">
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                {{ $rank->name }} ({{ $rank->abbr }})
-                                            </option>
-                                        @endforeach
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <span class="IDCount fd-count">0</span>
-                        <a class="btn btn-success" onclick="addDocu('ID')">
-                            <span class="fa fa-plus"></span>
-                            ID
-                        </a>
-                        <span class="FlagCount fd-count">0</span>
-                        <a class="btn btn-success" onclick="addDocu('Flag')">
-                            <span class="fa fa-plus"></span>
-                            Flag
-                        </a>
-                        <span class="lcCount fd-count">0</span>
-                        <a class="btn btn-success" onclick="addDocu('lc')">
-                            <span class="fa fa-plus"></span>
-                            License/Certificates/Contracts
-                        </a>
                         <hr>
                         @include('applications.includes.documents')
                         

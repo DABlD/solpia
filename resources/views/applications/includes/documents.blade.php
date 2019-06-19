@@ -2,6 +2,55 @@
 
 @push('before-scripts')
     <script>
+	
+		$('#docu').append(`
+			<u><h3><strong>ID</strong></h3></u>
+			<span class="IDCount fd-count">0</span>
+			<a class="btn btn-success" onclick="addDocu('ID')">
+			    <span class="fa fa-plus"></span>
+			    ID
+			</a>
+			<br><br>
+			<div class="ID"></div>
+
+			<u><h3><strong>Flag</strong></h3></u>
+
+			{{-- SELECT RANK FOR DOCUMENTS --}}
+			<div class="row">
+			    <div class="form-group col-md-4">
+			        <select class="form-control" id="rank">
+			            <option value=""></option>
+			            @foreach($categories as $category => $ranks)
+			                <optgroup label="{{ $category }}"></optgroup>
+			                @foreach($ranks as $rank)
+			                    <option value="{{ $rank->id }}">
+			                        &nbsp;&nbsp;&nbsp;&nbsp;
+			                        {{ $rank->name }} ({{ $rank->abbr }})
+			                    </option>
+			                @endforeach
+			            @endforeach
+			        </select>
+			    </div>
+			</div>
+			
+			<span class="FlagCount fd-count">0</span>
+			<a class="btn btn-success" onclick="addDocu('Flag')">
+			    <span class="fa fa-plus"></span>
+			    Flag
+			</a>
+			<br><br>
+			<div class="Flag"></div>
+
+			<u><h3><strong>License/Certificates</strong></h3></u>
+			<span class="lcCount fd-count">0</span>
+			<a class="btn btn-success" onclick="addDocu('lc')">
+			    <span class="fa fa-plus"></span>
+			    License/Certificates
+			</a>
+			<br><br>
+			<div class="lc"></div>
+		`);
+
 		let issuerString = `
 			<option></option>
 			@foreach($issuers as $issuer)
@@ -17,13 +66,13 @@
             let docu_class = 'form-control aeigh';
             let docu_class2 = 'form-control';
 
-            if($(`.${type}`).length == 0){
-            	let temp = type == 'lc'? 'License/Certificates/Contracts' : type;
-                appenddocu(`<div class="${type}"><u><h3><strong>${temp}</strong></h3></u>`);
-            }
-            else{
-                appenddocu('<div>');
-            }
+            // if($(`.${type}`).length == 0){
+            // 	let temp = type == 'lc'? 'License/Certificates/Contracts' : type;
+            //     appenddocu(`<div class="${type}"><u><h3><strong>${temp}</strong></h3></u>`);
+            // }
+            // else{
+            //     appenddocu('<div>');
+            // }
 
             let string;
 
@@ -86,118 +135,115 @@
         	//<input type="hidden" name="docu-type${count}" value="${type}">
             if(type == "ID"){
             	string = `
-	            	    <div class="row docu">
+            	    <div class="row docu">
 
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${dType}${count}">Type</label>
-	            	            <select class="${docu_class} ${dType}" name="${dType}${count}">
-	            	            	${id_options}
-	            	            </select>
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${dType}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${issuer}${count}">Issuer</label>
-	            	            <select class="${docu_class} ${issuer}" name="${issuer}${count}">
-	            	            	${issuerString}
-	            	            </select>
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${issuer}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${number}${count}">Number</label>
-	            	            <input type="text" class="${docu_class} ${number}" name="${number}${count}" placeholder="Enter Number">
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${number}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${issue_date}${count}">Issue Date</label>
-	            	            <input type="text" class="${docu_class} ${issue_date}" name="${issue_date}${count}" placeholder="Select Issue Date">
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${issue_date}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${expiry_date}${count}">Expiry Date</label>
-	            	            <input type="text" class="${docu_class} ${expiry_date}" name="${expiry_date}${count}" placeholder="Select Expiry Date">
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${expiry_date}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	    </div>
-	            	    <hr>
-	            	</div>`;
+            	        <div class="form-group col-md-4">
+            	            <label for="${dType}${count}">Type</label>
+            	            <select class="${docu_class} ${dType}" name="${dType}${count}">
+            	            	${id_options}
+            	            </select>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${dType}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${issuer}${count}">Issuer</label>
+            	            <select class="${docu_class} ${issuer}" name="${issuer}${count}">
+            	            	${issuerString}
+            	            </select>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${issuer}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${number}${count}">Number</label>
+            	            <input type="text" class="${docu_class} ${number}" name="${number}${count}" placeholder="Enter Number">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${number}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${issue_date}${count}">Issue Date</label>
+            	            <input type="text" class="${docu_class} ${issue_date}" name="${issue_date}${count}" placeholder="Select Issue Date">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${issue_date}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${expiry_date}${count}">Expiry Date</label>
+            	            <input type="text" class="${docu_class} ${expiry_date}" name="${expiry_date}${count}" placeholder="Select Expiry Date">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${expiry_date}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	    </div>
+            	    <hr>`;
             }
             else if(type == "Flag"){
 
 	            	            // <input type="text" class="${docu_class} ${country}" name="${country}${count}" placeholder="Enter Country">
 
             	string = `
-	            	    <div class="row flag${count}">
-							<div class="row">
-		            	        <div class="form-group col-md-3">
-		            	            <label for="${country}${count}">Country</label>
-		            	            <select class="${docu_class} ${country}" name="${country}${count}" data-fdcount="${count}">
-		            	            	${flag_options}
-		            	            </select>
-		            	            <span class="invalid-feedback hidden" role="alert">
-		            	                <strong id="${country}${count}Error"></strong>
-		            	            </span>
-		            	        </div>
-		            	    </div>
+            	    <div class="row flag${count}">
+						<div class="row">
+	            	        <div class="form-group col-md-3">
+	            	            <label for="${country}${count}">Country</label>
+	            	            <select class="${docu_class} ${country}" name="${country}${count}" data-fdcount="${count}">
+	            	            	${flag_options}
+	            	            </select>
+	            	            <span class="invalid-feedback hidden" role="alert">
+	            	                <strong id="${country}${count}Error"></strong>
+	            	            </span>
+	            	        </div>
 	            	    </div>
-	            	    <hr>
-	            	</div>`;
+            	    </div>
+            	    <hr>`;
             }
             else{
             	string = `
-	            	    <div class="row docu">
-							
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${lcType}${count}">License/Certificate Type</label>
-	            	            <select class="${docu_class} ${lcType}" name="${lcType}${count}">
-	            	            	${lc_options}
-	            	            </select>
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${lcType}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${issuer}${count}">Issuer</label>
-	            	            <select class="${docu_class2} ${issuer}" name="${issuer}${count}">
-	            	            	${issuerString}
-	            	            </select>
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${issuer}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${number}${count}">Number</label>
-	            	            <input type="text" class="${docu_class2} ${number}" name="${number}${count}" placeholder="Enter Number">
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${number}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${issue_date}${count}">Issue Date</label>
-	            	            <input type="text" class="${docu_class} ${issue_date}" name="${issue_date}${count}" placeholder="Select Issue Date">
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${issue_date}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	        <div class="form-group col-md-4">
-	            	            <label for="${expiry_date}${count}">Expiry Date</label>
-	            	            <input type="text" class="${docu_class} ${expiry_date}" name="${expiry_date}${count}" placeholder="Select Expiry Date">
-	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${expiry_date}${count}Error"></strong>
-	            	            </span>
-	            	        </div>
-	            	    </div>
-	            	    <hr>
-	            	</div>`;
+            	    <div class="row docu">
+						
+            	        <div class="form-group col-md-4">
+            	            <label for="${lcType}${count}">License/Certificate Type</label>
+            	            <select class="${docu_class} ${lcType}" name="${lcType}${count}">
+            	            	${lc_options}
+            	            </select>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${lcType}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${issuer}${count}">Issuer</label>
+            	            <select class="${docu_class2} ${issuer}" name="${issuer}${count}">
+            	            	${issuerString}
+            	            </select>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${issuer}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${number}${count}">Number</label>
+            	            <input type="text" class="${docu_class2} ${number}" name="${number}${count}" placeholder="Enter Number">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${number}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${issue_date}${count}">Issue Date</label>
+            	            <input type="text" class="${docu_class} ${issue_date}" name="${issue_date}${count}" placeholder="Select Issue Date">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${issue_date}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${expiry_date}${count}">Expiry Date</label>
+            	            <input type="text" class="${docu_class} ${expiry_date}" name="${expiry_date}${count}" placeholder="Select Expiry Date">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${expiry_date}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	    </div>
+            	    <hr>`;
             }
 
             // appenddocu(string, ctr? ` .${type}` : '');
@@ -245,8 +291,6 @@
 	        	let fdcount = $(e.target).data('fdcount');
 	        	$(`.flag${fdcount}-documents`).hide();
 
-	        	console.log(getDocuments($('#rank').val(), $(e.target).val(), fdcount));
-	        	
 	        	let string = `
 					<div class="row docu flag${fdcount}-documents" style="display: none;">
 					   	<div class="panel panel-default" style="margin: 0 15px 0 15px; border-color: #777">
@@ -256,6 +300,8 @@
 			   		   	</div>
 			   		</div>
 	        	`;
+
+	        	console.log(string);
 
 				if($(`.flag${fdcount}-documents`).length != 0){
 					$(`.flag${fdcount}-documents`).remove();
