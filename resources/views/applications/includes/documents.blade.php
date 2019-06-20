@@ -307,6 +307,18 @@
 
 				$(`.flag${fdcount}`).append(string);
 	        	$(`.flag${fdcount}-documents`).slideDown();
+
+	        	let pickr = $(`.flag${fdcount}-documents .form-group:nth-child(4n+3)`);
+	        	pickr = pickr.add(`.flag${fdcount}-documents .form-group:nth-child(4n+4)`);
+
+	        	pickr.each((index, input) => {
+	        		input = $(input).find('input');
+	        		input.flatpickr({
+	        			altInput: true,
+	        			altFormat: 'F j, Y',
+	        			dateFormat: 'Y-m-d',
+	        		});
+	        	});
 	        });
         }
 
