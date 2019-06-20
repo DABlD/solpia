@@ -69,6 +69,7 @@
             $(`.${type}Count`)[0].innerText = parseInt($(`.${type}Count`)[0].innerText) + 1;
 
             let count = $('.docu').length + 1;
+            let count2 = $('.docu-country').length + 1;
 
             let docu_class = 'form-control aeigh';
             let docu_class2 = 'form-control';
@@ -192,12 +193,12 @@
             	    <div class="row flag${count}">
 						<div class="row">
 	            	        <div class="form-group col-md-3">
-	            	            <label for="${country}${count}">Country</label>
-	            	            <select class="${docu_class} ${country}" name="${country}${count}" data-fdcount="${count}">
+	            	            <label for="${country}${count2}">Country</label>
+	            	            <select class="${docu_class} ${country}" name="${country}${count2}" data-fdcount="${count2}">
 	            	            	${flag_options}
 	            	            </select>
 	            	            <span class="invalid-feedback hidden" role="alert">
-	            	                <strong id="${country}${count}Error"></strong>
+	            	                <strong id="${country}${count2}Error"></strong>
 	            	            </span>
 	            	        </div>
 	            	    </div>
@@ -283,10 +284,14 @@
             	});
             }
             else if(type == "Flag"){
-            	$(`[name="${country}${count}"]`).select2({
+            	$(`[name="${country}${count2}"]`).select2({
             		placeholder: 'Select Flag',
             		tags: true
             	});
+
+            	setTimeout(() => {
+            		$(`[name="${country}${count2}"]`).trigger('change');
+            	}, 200);
             }
             else{
             	$(`[name="${lcType}${count}"]`).select2({
