@@ -19,6 +19,7 @@ class CreateDocumentLCsTable extends Migration
             
             $table->string('type');
             $table->string('issuer');
+            $table->string('regulation')->nullable();
             $table->string('no');
             $table->date('issue_date');
             $table->date('expiry_date');
