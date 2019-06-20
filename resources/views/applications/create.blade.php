@@ -104,11 +104,6 @@
         // $('html, body').animate({
         //     scrollTop: $(".SpouseCount").offset().top - 50
         // }, 2000);
-        $('#rank').change(() => {
-            $('.docu-country').each((index, country) => {
-                $(country).trigger('change');
-            });
-        })
 
         function fill(){
             let config = {
@@ -358,6 +353,7 @@
             // DOCUMENT FLAG
             // inputs = $('#docu .Flag input, #docu .Flag select');
             countries = $('.docu-country');
+            let rank = $('#rank').val();
             let docu_flag = [];
 
             countries.each((index, country) => {
@@ -366,6 +362,7 @@
                 for(let i = 0; i < inputs.length; i+=6){
                     let tempFlag = {};
                     tempFlag.country    = country.value;
+                    tempFlag.rank       = rank;
                     tempFlag.type       = inputs[i].value;
                     tempFlag.number     = inputs[i+1].value;
                     tempFlag.issue_date = inputs[i+2].value;
@@ -385,6 +382,7 @@
             for(let i = 0; i < inputs.length; i+=9){
                 let tempLc = {};
                 tempLc.type         = inputs[i].value
+                tempLc.rank         = rank;
                 tempLc.issuer       = inputs[i+1].value;
                 tempLc.regulation   = $(inputs[i+2]).val();
                 tempLc.no           = inputs[i+4].value;

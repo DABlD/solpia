@@ -554,5 +554,121 @@
         $('#rank').select2({
         	placeholder: 'Select Rank'
         });
+
+        let list = [
+        	{
+        		range: [1, 2],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE', 'GOC'
+        		],
+        		regulation: [
+        			['II/2', 'IV/2'],
+        			['II/2', 'IV/2'],
+        			['IV/2'],
+        		]
+        	},
+        	{
+        		range: [3, 4],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE', 'GOC'
+        		],
+        		regulation: [
+        			['II/1', 'IV/2'],
+        			['II/1', 'IV/2'],
+        			['IV/2'],
+        		]
+        	},
+        	{
+        		range: [5, 6],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE'
+        		],
+        		regulation: [
+        			['III/2'],
+        			['III/2']
+        		]
+        	},
+        	{
+        		range: [7, 8],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE'
+        		],
+        		regulation: [
+        			['III/1'],
+        			['III/1']
+        		]
+        	},
+        	{
+        		range: [9, 14],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE'
+        		],
+        		regulation: [
+        			['II/4'],
+        			['II/5']
+        		]
+        	},
+        	{
+        		range: [22, 27],
+        		issuer: 'TESDA',
+        		documents: [
+        			'NCI', 'NCII', 'NCIII'
+        		],
+        		regulation: [
+        			['--'],
+        			['--'],
+        			['--']
+        		]
+        	}
+        ];
+
+        $('#rank').change(e => {
+        	let rank = e.target.value;
+
+            $('.docu-country').each((index, country) => {
+                $(country).trigger('change');
+            });
+
+            list.every(row => {
+            	if(rank >= row.range[0] && rank <= row.range[1]){
+            		row.documents.forEach((docu, index) => {
+            			let count = $('.docu').length + 1;
+            			addDocu('lc');
+            			
+        				if($(`[name="docu-lctype${count}"]`).find(`option[value="${docu}"]`).length){
+        					$(`[name="docu-lctype${count}"]`).val(docu).trigger('change');
+        				}
+        				else{
+        					let option = new Option(docu, docu, true, true);
+        					$(`[name="docu-lctype${count}"]`).append(option).trigger('change');
+        				}
+            			
+        				if($(`[name="docu-issuer${count}"]`).find(`option[value="${row.issuer}"]`).length){
+        					$(`[name="docu-issuer${count}"]`).val(row.issuer).trigger('change');
+        				}
+        				else{
+        					let option = new Option(row.issuer, row.issuer, true, true);
+        					$(`[name="docu-issuer${count}"]`).append(option).trigger('change');
+        				}
+
+        				row.regulation[index].forEach(tempOption => {
+        					if(!$(`[name="docu-regulation${count}"]`).find(`option[value="${row.regulation}"]`).length){
+        						let option = new Option(tempOption, tempOption, true, true);
+        						$(`[name="docu-regulation${count}"]`).append(option).trigger('change');
+        					}
+        				});
+        				// $(`[name="docu-regulation${count}"]`).val(row.regulation[index]).trigger('change');
+
+            		});
+            		return false;
+            	}
+            	return true;
+            });
+        })
     </script>
 @endpush
