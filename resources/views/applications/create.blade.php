@@ -278,11 +278,6 @@
                 tempFd.email      = inputs[i+6].value;
                 tempFd.address      = inputs[i+7].value;
                 fd.push(tempFd);
-
-                // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 8; j++){
-                    inputs[j].remove();
-                }
             }
 
             $('#createForm').append(`
@@ -313,10 +308,6 @@
                 tempSS.remarks          = inputs[i+16].value;
                 tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
                 ss.push(tempSS);
-
-                for(let j = i; j < 17; j++){
-                    inputs[j].remove();
-                }
             }
 
             $('#createForm').append(`
@@ -335,11 +326,6 @@
                 tempEb.school     = inputs[i+4].value;
                 tempEb.address   = inputs[i+5].value;
                 eb.push(tempEb);
-
-                // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 6; j++){
-                    inputs[j].remove();
-                }
             }
 
             $('#createForm').append(`
@@ -360,11 +346,6 @@
                 tempID.issue_date       = inputs[i+3].value;
                 tempID.expiry_date      = inputs[i+5].value;
                 docu_id.push(tempID);
-
-                // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 7; j++){
-                    inputs[j].remove();
-                }
             }
 
             $('#createForm').append(`
@@ -372,26 +353,23 @@
             `);
 
             // DOCUMENT FLAG
-            inputs = $('#docu .Flag input, #docu .Flag select');
+            // inputs = $('#docu .Flag input, #docu .Flag select');
+            countries = $('.docu-country');
             let docu_flag = [];
 
-            for(let i = 0; i < inputs.length; i+=8){
-                let tempFlag = {};
-                tempFlag.country    = inputs[i].value;
-                tempFlag.booklet_no = inputs[i+1].value;
-                tempFlag.license_no = inputs[i+2].value;
-                tempFlag.goc        = inputs[i+3].value;
-                tempFlag.sso        = inputs[i+4].value;
-                tempFlag.sdsd       = inputs[i+5].value;
-                tempFlag.issue_date = inputs[i+6].value;
-                tempFlag.expiry_date= inputs[i+7].value;
-                docu_flag.push(tempFlag);
+            countries.each((index, country) => {
+                inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
 
-                // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 8; j++){
-                    inputs[j].remove();
+                for(let i = 0; i < inputs.length; i+=6){
+                    let tempFlag = {};
+                    tempFlag.country    = country.value;
+                    tempFlag.type       = inputs[i].value;
+                    tempFlag.number     = inputs[i+1].value;
+                    tempFlag.issue_date = inputs[i+2].value;
+                    tempFlag.expiry_date= inputs[i+4].value;
+                    docu_flag.push(tempFlag);
                 }
-            }
+            });
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_flag" value='${JSON.stringify(docu_flag)}'>
@@ -409,11 +387,6 @@
                 tempLc.issue_date   = inputs[i+3].value;
                 tempLc.expiry_date  = inputs[i+5].value;
                 docu_lc.push(tempLc);
-
-                // REMOVE THOSE ELEMENTS
-                for(let j = i; j < 7; j++){
-                    inputs[j].remove();
-                }
             }
 
             $('#createForm').append(`
