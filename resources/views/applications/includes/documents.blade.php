@@ -637,9 +637,15 @@
             list.every(row => {
             	if(rank >= row.range[0] && rank <= row.range[1]){
             		row.documents.forEach((docu, index) => {
+            			// IF DOCUMENT IS EXISTING IN LC, SKIP
+            			if($(`[name^="docu-lctype"] [value="${docu}"]`).length){
+            				return
+            			}
+
             			let count = $('.docu').length + 1;
             			addDocu('lc');
             			
+            			// CHECK IF DOCUMENT IS IN OPTION, IF NOT ADD OPTION AND PRESELECT IT
         				if($(`[name="docu-lctype${count}"]`).find(`option[value="${docu}"]`).length){
         					$(`[name="docu-lctype${count}"]`).val(docu).trigger('change');
         				}
