@@ -8,7 +8,7 @@ class DocumentFlag extends Model
 {
     protected $fillable = [
     	'country', 'applicant_id', 'number', 'type',
-    	'issue_date', 'expiry_date'
+    	'issue_date', 'expiry_date', 'rank'
     ];
 
     protected $dates = [

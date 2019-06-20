@@ -18,6 +18,7 @@ class CreateDocumentFlagsTable extends Migration
             $table->integer('applicant_id');
             
             $table->string('type');
+            $table->string('rank')->nullable();
             $table->string('country');
             $table->string('number');
             // $table->string('booklet_no');

@@ -18,6 +18,7 @@ class CreateDocumentLCsTable extends Migration
             $table->integer('applicant_id');
             
             $table->string('type');
+            $table->string('rank')->nullable();
             $table->string('issuer');
             $table->string('regulation')->nullable();
             $table->string('no');
