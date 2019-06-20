@@ -58,6 +58,13 @@
 			@endforeach
 		`;
 
+		let regulationString = `
+			<option></option>
+			@foreach($regulations as $regulation)
+				<option value="{{ $regulation }}">{{ $regulation }}</option>
+			@endforeach
+		`;
+
         function addDocu(type){
             $(`.${type}Count`)[0].innerText = parseInt($(`.${type}Count`)[0].innerText) + 1;
 
@@ -85,6 +92,7 @@
         	let country = "docu-country";
 
         	let issuer = "docu-issuer";
+        	let regulation = "docu-regulation";
 
         	// CREATE ID OPTIONS
         	var id_options = "";
@@ -180,9 +188,6 @@
             	    <hr>`;
             }
             else if(type == "Flag"){
-
-	            	            // <input type="text" class="${docu_class} ${country}" name="${country}${count}" placeholder="Enter Country">
-
             	string = `
             	    <div class="row flag${count}">
 						<div class="row">
@@ -219,6 +224,15 @@
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${issuer}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${regulation}${count}">Regulation</label>
+            	            <select class="${docu_class2} ${regulation}" name="${regulation}${count}" multiple>
+            	            	${regulationString}
+            	            </select>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${regulation}${count}Error"></strong>
             	            </span>
             	        </div>
             	        <div class="form-group col-md-4">
@@ -282,6 +296,11 @@
 
             	$(`[name="${issuer}${count}"]`).select2({
             		placeholder: 'Select or Input Issuer',
+            		tags: true
+            	});
+
+            	$(`[name="${regulation}${count}"]`).select2({
+            		placeholder: 'Select or Input Regulation',
             		tags: true
             	});
             }

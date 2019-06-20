@@ -79,6 +79,9 @@
         .fd-count:not(:first-child){
             margin-left: 20px;
         }
+        .select2-selection--multiple .select2-selection__choice{
+            color: #444 !important;
+        }
     </style>
 @endpush
 
@@ -375,17 +378,18 @@
                 <input type="hidden" name="docu_flag" value='${JSON.stringify(docu_flag)}'>
             `);
 
-            // License/Certificates/Contracts
+            // License/Certificates
             inputs = $('#docu .lc input, #docu .lc select');
             let docu_lc = [];
 
-            for(let i = 0; i < inputs.length; i+=7){
+            for(let i = 0; i < inputs.length; i+=9){
                 let tempLc = {};
                 tempLc.type         = inputs[i].value
                 tempLc.issuer       = inputs[i+1].value;
-                tempLc.no           = inputs[i+2].value;
-                tempLc.issue_date   = inputs[i+3].value;
-                tempLc.expiry_date  = inputs[i+5].value;
+                tempLc.regulation   = $(inputs[i+2]).val();
+                tempLc.no           = inputs[i+4].value;
+                tempLc.issue_date   = inputs[i+5].value;
+                tempLc.expiry_date  = inputs[i+7].value;
                 docu_lc.push(tempLc);
             }
 

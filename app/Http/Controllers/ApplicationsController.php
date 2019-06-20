@@ -43,11 +43,21 @@ class ApplicationsController extends Controller
             DocumentId::pluck('issuer')->toArray(),
             DocumentLC::pluck('issuer')->toArray(),
         );
+        $tempRegulations = DocumentLC::pluck('regulation')->toArray();
+        $regulations = array();
+
+        foreach($tempRegulations as $tempRegulation){
+            $temps = json_decode($tempRegulation);
+            foreach($temps as $temp){
+                array_push($regulations, $temp);
+            }
+        }
 
     	return $this->_view('create', [
-    		'title' => 'Add Application',
-            'categories' => $ranks->groupBy('category'),
-            'issuers' => collect($issuers)->unique()->toArray()
+            'title'         => 'Add Application',
+            'categories'    => $ranks->groupBy('category'),
+            'issuers'       => collect($issuers)->unique()->toArray(),
+            'regulations'   => collect($regulations)->unique()->toArray()
     	]);
     }
 
@@ -207,6 +217,7 @@ class ApplicationsController extends Controller
         $docu_lc = json_decode($req->docu_lc);
         foreach($docu_lc as $data){
             $data->applicant_id = $applicant->id;
+            $data->regulation = json_encode($data->regulation);
             DocumentLC::create((array)$data);
         }
 
