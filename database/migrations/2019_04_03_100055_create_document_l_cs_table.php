@@ -20,8 +20,8 @@ class CreateDocumentLCsTable extends Migration
             $table->string('type');
             $table->string('issuer');
             $table->string('no');
-            $table->string('issue_date');
-            $table->string('expiry_date');
+            $table->date('issue_date');
+            $table->date('expiry_date');
             $table->timestamps();
             $table->softDeletes();
         });
