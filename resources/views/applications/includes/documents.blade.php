@@ -41,11 +41,11 @@
 			<br><br>
 			<div class="Flag"></div>
 
-			<u><h3><strong>License/Certificates</strong></h3></u>
+			<u><h3><strong>License/Certificates/Contracts</strong></h3></u>
 			<span class="lcCount fd-count">0</span>
 			<a class="btn btn-success" onclick="addDocu('lc')">
 			    <span class="fa fa-plus"></span>
-			    License/Certificates
+			    License/Certificates/Contracts
 			</a>
 			<br><br>
 			<div class="lc"></div>
@@ -107,13 +107,34 @@
 
 			//CREATE LC OPTIONS
 			var lc_options = "";
+			// var lcOptions = [
+			// 	'', 'NATIONAL LICENSE', 'MEDICAL CERTIFICATE', 'NATIONAL STCW-WATCH KEEPING', 'NATIONAL GMDSS-GOC', 'RADAR TRAINING COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'TANKER COURSE, FAMILIARIZATION', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'DANGEROUS FLUID CARGO COURSE', 'SAFETY OFFICER\'S TRAINING COURSE', 'MEDICAL CARE COURSE', 'SHIP HANDLING SIMULATION', 'POLLUTION PREVENTION COURSE', 'ECDIS', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE', 'ISM COURSE', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG'
+			// ];
 			var lcOptions = [
-				'', 'NATIONAL LICENSE', 'MEDICAL CERTIFICATE', 'NATIONAL STCW-WATCH KEEPING', 'NATIONAL GMDSS-GOC', 'RADAR TRAINING COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'TANKER COURSE, FAMILIARIZATION', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'DANGEROUS FLUID CARGO COURSE', 'SAFETY OFFICER\'S TRAINING COURSE', 'MEDICAL CARE COURSE', 'SHIP HANDLING SIMULATION', 'POLLUTION PREVENTION COURSE', 'ECDIS', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE', 'ISM COURSE', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG'
+				'', 'NATIONAL LICENSE', 'WATCHKEEPING', 'GMDSS-GOC', 'RADAR TRAINING COURSE', 'RADAR SIMULATOR COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'TANKER COURSE, FAMILIARIZATION', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'DANGEROUS FLUID CARGO COURSE', 'SAFETY OFFICER\'S TRAINING COURSE', 'MEDICAL CARE COURSE', 'SHIP HANDLING SIMULATION', 'POLLUTION PREVENTION COURSE', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE', 'ISM COURSE', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'MARPOL 73/78', 'ERS WITH ERM', 'SSBT', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'ANTI PIRACY', 'GENERAL TRAINING RECORD BOOK', 'PDOS', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
 			];
 
         	lcOptions.forEach(docu => {
 				lc_options += `<option value="${docu}">${docu}</option>`
 			});
+
+			lc_options += `
+				<optgroup label="ECDIS GENERIC"></optgroup>
+					<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2107</option>
+					<option value="ECDIS FURUNO 3200">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3200</option>
+					<option value="ECDIS FURUNO 3300">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3300</option>
+					<option value="ECDIS JRC 701B">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 701B</option>
+					<option value="ECDIS JRC 7201">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 7201</option>
+					<option value="ECDIS JRC 901B">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 901B</option>
+					<option value="ECDIS JRC 9201">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 9201</option>
+					<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
+					<option value="ECDIS MECYS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MECYS</option>
+					<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
+				<optgroup label="MEDICAL"></optgroup>
+					<option value="MEDICAL CERTIFICATE">&nbsp;&nbsp;&nbsp&nbsp;MEDICAL CERTIFICATE</option>
+					<option value="FLAG MEDICAL">&nbsp;&nbsp;&nbsp&nbsp;FLAG MEDICAL</option>
+					<option value="YELLOW FEVER">&nbsp;&nbsp;&nbsp&nbsp;YELLOW FEVER</option>				
+			`;
 
 			// 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE S.Q. FOR TANKERS', 'FLAG STATE LICENSE', 'FLAG STATE SSO LICENSE', 'FLAG STATE ENDORSEMENT COOK COURSE', 'FLAG STATE GMDSS-GOC', 
 
@@ -210,7 +231,7 @@
             	    <div class="row docu">
 						
             	        <div class="form-group col-md-4">
-            	            <label for="${lcType}${count}">License/Certificate Type</label>
+            	            <label for="${lcType}${count}">License/Certificate/Contract Type</label>
             	            <select class="${docu_class} ${lcType}" name="${lcType}${count}">
             	            	${lc_options}
             	            </select>
@@ -624,6 +645,23 @@
         			['--'],
         			['--']
         		]
+        	},
+        	{
+        		range: [1, 27],
+        		issuer: 'MARINA',
+        		documents: [
+        			'BASIC TRAINING - BT','PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB','FAST RESCUE BOAT - FRB','ADVANCE FIRE FIGHTING - AFF','MEDICAL FIRST AID - MEFA','MEDICAL CARE - MECA','SHIP SECURITY OFFICER - SSO','SHIP SECURITY AWARENESS TRAINING AND SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD'
+        		],
+        		regulation: [
+		        	['VI/1'],
+		        	['VI/2.1'],
+		        	['VI/2.2'],
+		        	['VI/3'],
+		        	['VI/4.1'],
+		        	['VI/4.2'],
+		        	['VI/5'],
+		        	['VI/6']
+        		]
         	}
         ];
 
@@ -671,7 +709,6 @@
         				// $(`[name="docu-regulation${count}"]`).val(row.regulation[index]).trigger('change');
 
             		});
-            		return false;
             	}
             	return true;
             });
