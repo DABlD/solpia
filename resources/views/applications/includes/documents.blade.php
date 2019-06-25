@@ -49,6 +49,15 @@
 			</a>
 			<br><br>
 			<div class="lc"></div>
+
+			<u><h3><strong>Medical History</strong></h3></u>
+			<span class="MedCount fd-count">0</span>
+			<a class="btn btn-success" onclick="addDocu('Med')">
+			    <span class="fa fa-plus"></span>
+			    Medical History
+			</a>
+			<br><br>
+			<div class="Med"></div>
 		`);
 
 		let issuerString = `
@@ -86,6 +95,9 @@
 
             let dType = "docu-dtype";
             let lcType = "docu-lctype";
+            let medType = "docu-medtype";
+            let medCase = "docu-case";
+            let year = "docu-year";
             let number = 'docu-number';
         	let issue_date = 'docu-issue_date';
         	let expiry_date = 'docu-expiry_date';
@@ -162,6 +174,16 @@
 				flag_options += "<option value='" + value + "'>&nbsp;&nbsp;&nbsp;&nbsp;" + docu + "</option>";
 			});
 
+        	// CREATE MED OPTIONS
+        	var med_options = "";
+        	var medOptions = [
+        		'', 'HYPERTENSION', 'DIABETES', "POLYPS", 'GALLSTONE'
+        	];
+
+        	medOptions.forEach(docu => {
+				med_options += `<option value="${docu}">${docu}</option>`
+			});
+
         	//<input type="hidden" name="docu-type${count}" value="${type}">
             if(type == "ID"){
             	string = `
@@ -211,7 +233,7 @@
             }
             else if(type == "Flag"){
             	string = `
-            	    <div class="row flag${count}">
+            	    <div class="row flag${count2}">
 						<div class="row">
 	            	        <div class="form-group col-md-3">
 	            	            <label for="${country}${count2}">Country</label>
@@ -223,6 +245,41 @@
 	            	            </span>
 	            	        </div>
 	            	    </div>
+            	    </div>
+            	    <hr>`;
+            }
+            else if(type == "Med"){
+            	
+            	string = `
+            	    <div class="row docu">
+
+            	        <div class="form-group col-md-4">
+            	            <label for="${medType}${count}">Type</label>
+            	            <select class="${docu_class} ${medType}" name="${medType}${count}">
+            	            	<option></option>
+            	            	<option value="OPERATION">OPERATION</option>
+            	            	<option value="MEDICATION">MEDICATION</option>
+            	            </select>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${medType}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${medCase}${count}">CASE</label>
+            	            <select class="${docu_class} ${medCase}" name="${medCase}${count}">
+            	            	${med_options}
+            	            </select>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${medCase}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-4">
+            	            <label for="${year}${count}">Year</label>
+            	            <input type="text" class="${docu_class} ${year}" name="${year}${count}" placeholder="Enter Year">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${year}${count}Error"></strong>
+            	            </span>
+            	        </div>
             	    </div>
             	    <hr>`;
             }
@@ -314,6 +371,16 @@
             		$(`[name="${country}${count2}"]`).trigger('change');
             	}, 200);
             }
+            else if(type == "Med"){
+            	$(`[name="${medType}${count}"]`).select2({
+            		placeholder: 'Select Type',
+            	});
+
+            	$(`[name="${medCase}${count}"]`).select2({
+            		placeholder: 'Select Type',
+            		tags: true
+            	});
+            }
             else{
             	$(`[name="${lcType}${count}"]`).select2({
             		placeholder: 'Select Type',
@@ -334,6 +401,7 @@
 	        // IF FLAG COUNTRY CHANGE
 	        $(`.docu-country`).change(e => {
 	        	let fdcount = $(e.target).data('fdcount');
+	        	console.log(fdcount);
 	        	$(`.flag${fdcount}-documents`).hide();
 
 	        	let string = `
@@ -706,7 +774,6 @@
         						$(`[name="docu-regulation${count}"]`).append(option).trigger('change');
         					}
         				});
-        				// $(`[name="docu-regulation${count}"]`).val(row.regulation[index]).trigger('change');
 
             		});
             	}

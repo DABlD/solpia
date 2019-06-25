@@ -395,6 +395,22 @@
                 <input type="hidden" name="docu_lc" value='${JSON.stringify(docu_lc)}'>
             `);
 
+            // Med
+            inputs = $('#docu .Med input, #docu .Med select');
+            let docu_med = [];
+
+            for(let i = 0; i < inputs.length; i+=3){
+                let tempMed = {};
+                tempMed.type         = inputs[i].value;
+                tempMed.case         = inputs[i+1].value;
+                tempMed.year         = inputs[i+2].value;
+                docu_med.push(tempMed);
+            }
+
+            $('#createForm').append(`
+                <input type="hidden" name="docu_med" value='${JSON.stringify(docu_med)}'>
+            `);
+
             swal.close();
             $('#createForm').submit();
         }
