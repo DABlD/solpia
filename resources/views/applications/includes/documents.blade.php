@@ -401,7 +401,6 @@
 	        // IF FLAG COUNTRY CHANGE
 	        $(`.docu-country`).change(e => {
 	        	let fdcount = $(e.target).data('fdcount');
-	        	console.log(fdcount);
 	        	$(`.flag${fdcount}-documents`).hide();
 
 	        	let string = `
