@@ -52,4 +52,15 @@ class DatatablesController extends Controller
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
 	}
+
+	public function vessels(){
+		$vessels = Vessel::select('vessels.*')->with('principal')->get();
+
+		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
+		foreach($vessels as $vessel){
+			$vessel->actions = $vessel->actions;
+		}
+
+    	return Datatables::of($vessels)->rawColumns(['actions'])->make(true);
+	}
 }

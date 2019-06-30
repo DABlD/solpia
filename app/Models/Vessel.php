@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\VesselAttribute;
 
 class Vessel extends Model
 {
+    use VesselAttribute;
+
     protected $fillable = [
     	'principal_id', 'name', 'flag', 'type', 'year_build',
     	'builder', 'engine', 'gross_tonnage', 'BHP', 'trade',

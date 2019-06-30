@@ -170,7 +170,6 @@
                     }).then(rank => {
                         if(rank.value){
                             aRank = rank.value;
-                            console.log(aRank);
                             selectPrincipal();
                         }
                     });

@@ -71,8 +71,8 @@ Route::group([
 
 		Route::get('users/delete/{user}', 'UsersController@delete')->name('users.delete');
 
-		$name = "applications";
 		// APPLICANT ROUTES
+		$name = "applications";
 		Route::get($name, ucfirst($name) . 'Controller@index')
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-file-text')
@@ -93,8 +93,26 @@ Route::group([
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 		Route::get($name . '/lineUp', ucfirst($name) . 'Controller@lineUp')->name($name . '.lineUp');
 
-		$name = "lineUp";
 		// Line Up ROUTES
+		$name = "vessels";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-ship')
+			->defaults('name', 'Vessels')
+			->defaults('roles', array('Admin'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
+		Route::get($name . '/get/{id?}', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::get("$name/getAll", 'VesselController@getAll')->name("$name.getAll");
+		
+		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
+		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
+
+		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+
+		// Line Up ROUTES
+		$name = "lineUp";
 		Route::get($name, ucfirst($name) . 'Controller@index')
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-arrow-up')
@@ -114,10 +132,6 @@ Route::group([
 		Route::get('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');
 		Route::get('datatables/processedApplicant', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');
-
-		$name = "vessels";
-		// VESSELS
-		Route::get("$name/get", 'VesselController@get')->name("$name.get");
-		Route::get("$name/getAll", 'VesselController@getAll')->name("$name.getAll");
+		Route::get('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');
 	}
 );
