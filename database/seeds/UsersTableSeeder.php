@@ -162,7 +162,7 @@ class UsersTableSeeder extends Seeder
         DocumentId::create([
             'applicant_id' => 1,
             'type' => "SEAMAN'S BOOK",
-            'issuer' => 'PANAMA',
+            'issuer' => 'MARINA',
             'number' => '654321',
             'issue_date' => now()->startOfMonth(),
             'expiry_date' => now()->endOfMonth(),
