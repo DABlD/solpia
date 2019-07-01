@@ -108,7 +108,8 @@ class ShinkoDC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A42')->getFont()->setSize(10);
 
                 // CHEAT
-                if($this->applicant->document_id->PASSPORT->issue_date->diffInMonths(now()) > 18){
+
+                if(isset($this->applicant->document_id->PASSPORT) && $this->applicant->document_id->PASSPORT->issue_date->diffInMonths(now()) > 18){
                     $event->sheet->getDelegate()->getStyle('F15:J15')->getFont()->getColor()->setRGB('FF0000');
                 }
 
