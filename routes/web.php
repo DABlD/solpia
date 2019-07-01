@@ -93,7 +93,7 @@ Route::group([
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 		Route::get($name . '/lineUp', ucfirst($name) . 'Controller@lineUp')->name($name . '.lineUp');
 
-		// Line Up ROUTES
+		// Vessels ROUTES
 		$name = "vessels";
 		Route::get($name, ucfirst($name) . 'Controller@index')
 			->defaults('sidebar', 1)
@@ -104,7 +104,7 @@ Route::group([
 			->defaults('href', $name);
 
 		Route::get($name . '/get/{id?}', ucfirst($name) . 'Controller@get')->name($name . '.get');
-		Route::get("$name/getAll", 'VesselController@getAll')->name("$name.getAll");
+		Route::get("$name/getAll", ucfirst($name) . 'Controller@getAll')->name("$name.getAll");
 		
 		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
