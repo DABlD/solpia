@@ -131,7 +131,7 @@
 			});
 
 			lc_options += `
-				<optgroup label="ECDIS GENERIC"></optgroup>
+				<optgroup label="ECDIS SPECIFIC"></optgroup>
 					<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2107</option>
 					<option value="ECDIS FURUNO 3200">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3200</option>
 					<option value="ECDIS FURUNO 3300">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3300</option>
@@ -586,6 +586,13 @@
         		return matched ? false : true;
         	});
 
+        	setTimeout(() => {
+        		$('.Flag .docu-dtype').prop('disabled', true).css({
+        			"cursor": 'not-allowed',
+        			"border-color": 'rgba(247,108,107, 0.8)'
+        		});
+        	}, 300);
+
         	return documentString;
         }
 
@@ -773,11 +780,22 @@
         						$(`[name="docu-regulation${count}"]`).append(option).trigger('change');
         					}
         				});
-
             		});
             	}
             	return true;
             });
+
+            setTimeout(() => {
+            	$(`[name^="docu-lctype"]`).prop('disabled', true);
+            	$(`[name^="docu-issuer"]`).prop('disabled', true);
+            	$(`[name^="docu-regulation"]`).prop('disabled', true);
+
+            	setTimeout(() => {
+            		let selection = $('.select2-container--disabled .select2-selection__rendered');
+            		selection.css('cursor', 'not-allowed');
+            		selection.parent().css('border-color', 'rgba(247,108,107, 0.8)');
+            	}, 100);
+            }, 400);
         })
     </script>
 @endpush
