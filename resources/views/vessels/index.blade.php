@@ -114,7 +114,6 @@
                             'name', 'principal.name', 'flag', "type", "manning_agent", "year_build", "builder", "engine", "gross_tonnage", "BHP", "trade", "ecdis", "status"
                         ];
 
-                        console.log(vessel);
                         $.each(Object.keys(vessel), (index, key) => {
                             let temp = columns.indexOf(key);
                             if(temp >= 0){
