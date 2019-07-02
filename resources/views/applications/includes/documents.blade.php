@@ -58,6 +58,15 @@
 			</a>
 			<br><br>
 			<div class="Med"></div>
+
+			<u><h3><strong>CHECKLIST</strong></h3></u>
+			<span class="MedExpCount fd-count">0</span>
+			<a class="btn btn-success" onclick="addDocu('MedExp')">
+			    <span class="fa fa-plus"></span>
+			    Checklist
+			</a>
+			<br><br>
+			<div class="MedExp"></div>
 		`);
 
 		let issuerString = `
@@ -96,6 +105,9 @@
             let dType = "docu-dtype";
             let lcType = "docu-lctype";
             let medType = "docu-medtype";
+            let medExpType = "docu-medexptype";
+            let had = "docu-had";
+            let vaccine = "docu-vaccine";
             let medCase = "docu-case";
             let year = "docu-year";
             let number = 'docu-number';
@@ -281,7 +293,7 @@
             	string = `
             	    <div class="row docu">
 
-            	        <div class="form-group col-md-4">
+            	        <div class="form-group col-md-3">
             	            <label for="${medType}${count}">Type</label>
             	            <select class="${docu_class} ${medType}" name="${medType}${count}">
             	            	<option></option>
@@ -292,7 +304,7 @@
             	                <strong id="${medType}${count}Error"></strong>
             	            </span>
             	        </div>
-            	        <div class="form-group col-md-4">
+            	        <div class="form-group col-md-3">
             	            <label for="${medCase}${count}">CASE</label>
             	            <select class="${docu_class} ${medCase}" name="${medCase}${count}">
             	            	${med_options}
@@ -301,11 +313,46 @@
             	                <strong id="${medCase}${count}Error"></strong>
             	            </span>
             	        </div>
-            	        <div class="form-group col-md-4">
+            	        <div class="form-group col-md-3">
             	            <label for="${year}${count}">Year</label>
             	            <input type="text" class="${docu_class} ${year}" name="${year}${count}" placeholder="Enter Year">
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${year}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	    </div>
+            	    <hr>`;
+            }
+            else if(type == "MedExp"){
+            	
+            	string = `
+            	    <div class="row docu">
+
+            	        <div class="form-group col-md-2">
+            	            <label for="${medExpType}${count}">Type</label>
+            	            <select class="${docu_class} ${medExpType}" name="${medExpType}${count}">
+            	            	<option></option>
+            	            	<option value="MEASLES">MEASLES</option>
+            	            	<option value="CHICKEN POX">CHICKEN POX</option>
+            	            </select>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${medExpType}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-2">
+            	            <label for="${had}${count}">Check if experienced</label>
+            	            <br>
+            	            <input type="checkbox" class="${had}" name="${had}${count}"/>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${had}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-2">
+            	            <label for="${vaccine}${count}">Check if with vaccine</label>
+            	            <br>
+            	            <input type="checkbox" class="${vaccine}" name="${vaccine}${count}"/>
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${vaccine}${count}Error"></strong>
             	            </span>
             	        </div>
             	    </div>
@@ -407,6 +454,11 @@
             	$(`[name="${medCase}${count}"]`).select2({
             		placeholder: 'Select Type',
             		tags: true
+            	});
+            }
+            else if(type == "MedExp"){
+            	$(`[name="${medExpType}${count}"]`).select2({
+            		placeholder: 'Select Type',
             	});
             }
             else{

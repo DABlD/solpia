@@ -9,7 +9,7 @@ use App\User;
 use App\Models\{ProcessedApplicant, Applicant};
 use App\Models\{EducationalBackground, FamilyData, SeaService};
 use App\Models\{Vessel, Rank, Principal};
-use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMed};
+use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMed, DocumentMedExp};
 
 use Image;
 
@@ -227,6 +227,13 @@ class ApplicationsController extends Controller
         foreach($docu_med as $data){
             $data->applicant_id = $applicant->id;
             DocumentMed::create((array)$data);
+        }
+
+        // SAVE DOCUMENT MED
+        $docu_med_exp = json_decode('$req->docu_med_exp');
+        foreach($docu_med_exp as $data){
+            $data->applicant_id = $applicant->id;
+            DocumentMedExp::create((array)$data);
         }
 
         if(true){

@@ -411,6 +411,22 @@
                 <input type="hidden" name="docu_med" value='${JSON.stringify(docu_med)}'>
             `);
 
+            // Med
+            inputs = $('#docu .MedExp input, #docu .MedExp select');
+            let docu_med_exp = [];
+
+            for(let i = 0; i < inputs.length; i+=3){
+                let tempMedExp = {};
+                tempMedExp.type         = inputs[i].value;
+                tempMedExp.had         = inputs[i+1].checked;
+                tempMedExp.vaccine         = inputs[i+2].checked;
+                docu_med_exp.push(tempMedExp);
+            }
+
+            $('#createForm').append(`
+                <input type="hidden" name="docu_med_exp" value='${JSON.stringify(docu_med_exp)}'>
+            `);
+
             swal.close();
             $('#createForm').submit();
         }
