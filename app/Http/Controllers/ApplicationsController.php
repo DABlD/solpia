@@ -43,6 +43,7 @@ class ApplicationsController extends Controller
             DocumentId::pluck('issuer')->toArray(),
             DocumentLC::pluck('issuer')->toArray(),
         );
+
         $tempRegulations = DocumentLC::pluck('regulation')->toArray();
         $regulations = array();
 
