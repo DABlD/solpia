@@ -55,4 +55,8 @@ class Applicant extends Model
     public function document_med(){
         return $this->hasMany('App\Models\DocumentMed');
     }
+
+    public function document_med_exp(){
+        return $this->hasMany('App\Models\DocumentMedExp');
+    }
 }
