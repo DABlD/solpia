@@ -200,8 +200,7 @@
 					<option value="Panama">&nbsp;&nbsp;&nbsp;&nbsp;Panama (PA)</option>
 					<option value="Marshall Islands">&nbsp;&nbsp;&nbsp;&nbsp;Marshall Islands (MH)</option>
 					<option value="Malaysia">&nbsp;&nbsp;&nbsp;&nbsp;Malaysia (MY)</option>
-					<option value="South Korea">&nbsp;&nbsp;&nbsp;&nbsp;South Korea (KR)</option>
-					<option value="North Korea">&nbsp;&nbsp;&nbsp;&nbsp;North Korea (KP)</option>
+					<option value="Korea">&nbsp;&nbsp;&nbsp;&nbsp;Korea (KR)</option>
 				<optgroup label="Others"></optgroup>
 			`;
  
@@ -584,20 +583,7 @@
         			]
         		},
         		{
-        			country: 'South Korea',
-        			details: [
-        				{
-        					range: [
-        						[1,8]
-        					],
-        					documents: [
-        						'LICENSE', 'BOOKLET'
-        					]
-        				}
-        			]
-        		},
-        		{
-        			country: 'North Korea',
+        			country: 'Korea',
         			details: [
         				{
         					range: [
