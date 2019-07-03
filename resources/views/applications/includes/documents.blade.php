@@ -126,7 +126,7 @@
         	];
 
         	idOptions.forEach(docu => {
-        		docu = docu == "SEAMAN BOOK" ? "SEAMAN'S BOOK" : docu;
+        		docu2 = docu == "SEAMAN BOOK" ? "SEAMAN'S BOOK" : docu;
 				id_options += `<option value="${docu}">${docu2}</option>`
 			});
 
