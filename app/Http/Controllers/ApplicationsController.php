@@ -148,7 +148,6 @@ class ApplicationsController extends Controller
     }
 
     public function store(Request $req){
-        dd($req->all());
         $user = collect($req->only([
             'fname','mname','lname',
             'birthday','address','contact',
@@ -231,8 +230,8 @@ class ApplicationsController extends Controller
             DocumentMed::create((array)$data);
         }
 
-        // SAVE DOCUMENT MED
-        $docu_med_exp = json_decode('$req->docu_med_exp');
+        // SAVE DOCUMENT MED EXP
+        $docu_med_exp = json_decode($req->docu_med_exp);
         foreach($docu_med_exp as $data){
             $data->applicant_id = $applicant->id;
             DocumentMedExp::create((array)$data);

@@ -854,7 +854,7 @@
 
             setTimeout(() => {
             	$(`[name^="docu-lctype"]`).prop('disabled', true);
-            	$(`[name^="docu-issuer"]`).prop('disabled', true);
+            	$(`.lc [name^="docu-issuer"]`).prop('disabled', true);
             	$(`[name^="docu-regulation"]`).prop('disabled', true);
 
             	setTimeout(() => {
