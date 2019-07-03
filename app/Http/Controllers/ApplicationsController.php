@@ -224,6 +224,7 @@ class ApplicationsController extends Controller
         // SAVE DOCUMENT FLAG
         $docu_flag = json_decode($req->docu_flag);
         foreach($docu_flag as $data){
+            $data->type = $data->type == "SHIP COOK ENDORSEMENT" ? "SHIP'S COOK ENDORSEMENT" : $data->type;
             $data->applicant_id = $applicant->id;
             DocumentFlag::create((array)$data);
         }

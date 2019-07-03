@@ -367,6 +367,11 @@
                     tempFlag.number     = inputs[i+1].value;
                     tempFlag.issue_date = inputs[i+2].value;
                     tempFlag.expiry_date= inputs[i+4].value;
+
+                    // FOR REMOVING ' in "SHIP'S COOK ENDORSEMENT"
+                    if(tempFlag.type == "SHIP'S COOK ENDORSEMENT"){
+                        tempFlag.type = "SHIP COOK ENDORSEMENT";
+                    }
                     docu_flag.push(tempFlag);
                 }
             });
