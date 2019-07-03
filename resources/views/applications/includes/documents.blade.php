@@ -776,6 +776,17 @@
         		]
         	},
         	{
+        		range: [15, 21],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE'
+        		],
+        		regulation: [
+        			['III/4'],
+        			['III/5']
+        		]
+        	},
+        	{
         		range: [22, 27],
         		issuer: 'TESDA',
         		documents: [
@@ -813,12 +824,23 @@
                 $(country).trigger('change');
             });
 
+            let ctr = 0;
+
             list.every(row => {
             	if(rank >= row.range[0] && rank <= row.range[1]){
+
             		row.documents.forEach((docu, index) => {
             			// IF DOCUMENT IS EXISTING IN LC, SKIP
-            			if($(`[name^="docu-lctype"] [value="${docu}"]`).length){
-            				return
+            			// if($(`[name^="docu-lctype"] [value="${docu}"]`).length){
+            			// 	return
+            			// }
+            			// $(`[name^="docu-lctype"] [value="${docu}"]`).parent().hide();
+            			let match = $(`.lc [value="${docu}"]`);
+            			if(match.length > 0){
+            				ctr += 1;
+            				let row = $(match[match.length - 1]).parent().parent().parent();
+            				row.next().hide();
+            				row.hide();
             			}
 
             			let count = $('.docu').length + 1;
@@ -851,6 +873,8 @@
             	}
             	return true;
             });
+
+            $(`.lcCount`)[0].innerText = parseInt($(`.lcCount`)[0].innerText) - ctr;
 
             setTimeout(() => {
             	$(`[name^="docu-lctype"]`).prop('disabled', true);
