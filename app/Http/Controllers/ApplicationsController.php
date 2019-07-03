@@ -75,10 +75,23 @@ class ApplicationsController extends Controller
         $applicant->load('document_id');
         $applicant->load('document_flag');
         $applicant->load('document_lc');
+        $applicant->load('document_lc');
+        $applicant->load('document_med');
+        $applicant->load('document_med_exp');
 
-        foreach(['document_id', 'document_flag', 'document_lc'] as $docuType){
+        foreach(['document_id', 'document_lc', 'document_med', 'document_med_exp'] as $docuType){
             foreach($applicant->$docuType as $data){
-                $temp = $docuType == 'document_flag' ? $data->country : $data->type;
+
+                if($docuType == 'document_flag'){
+                    $temp = $data->country;
+                }
+                elseif($docuType == 'document_med'){
+                    $temp = $data->case;
+                }
+                else{
+                    $temp = $data->type;
+                }
+
                 $applicant->$docuType->$temp = $data;
             }
         }
