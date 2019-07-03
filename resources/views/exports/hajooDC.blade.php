@@ -108,13 +108,13 @@
 			</td>
 
 			<td colspan="2">
-				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->number : "REVERTING" }}
+				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->number : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -124,13 +124,13 @@
 				NATIONAL LICENSE
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->number : "REVERTING" }}
+				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->number : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -145,13 +145,13 @@
 			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->license_no : "REVERTING" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->license_no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->issue_date : "REVERTING" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->issue_date : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -164,10 +164,10 @@
 			@php $doc = "FLAG STATE S.Q. FOR TANKERS"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "REVERTING" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
 			</td>
-			<td colspan="2">REVERTING</td>
-			<td colspan="2">REVERTING</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -179,10 +179,10 @@
 			@php $doc = "FLAG STATE LICENSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "REVERTING" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
 			</td>
-			<td colspan="2">REVERTING</td>
-			<td colspan="2">REVERTING</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -194,10 +194,10 @@
 			@php $doc = "FLAG STATE SSO LICENSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "REVERTING" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
 			</td>
-			<td colspan="2">REVERTING</td>
-			<td colspan="2">REVERTING</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -209,10 +209,10 @@
 			@php $doc = "FLAG STATE ENDORSEMENT COOK COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "REVERTING" }}
+				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
 			</td>
-			<td colspan="2">REVERTING</td>
-			<td colspan="2">REVERTING</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -224,13 +224,13 @@
 			@php $doc = "MEDICAL CERTIFICATE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -243,13 +243,13 @@
 			@php $doc = "PASSPORT"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "REVERTING" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -262,36 +262,36 @@
 			@php $doc = "NATIONAL GMDSS-GOC"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
 
 		<tr>
 			<td colspan="5">
-				REVERTING
+				N/A
 			</td>
 
-			<td colspan="2">REVERTING</td>
-			<td colspan="2">REVERTING</td>
-			<td colspan="2">REVERTING</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
 		<tr>
 			<td colspan="5">
-				REVERTING
+				N/A
 			</td>
 
-			<td colspan="2">REVERTING</td>
-			<td colspan="2">REVERTING</td>
-			<td colspan="2">REVERTING</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
+			<td colspan="2">N/A</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -303,13 +303,13 @@
 			@php $doc = "NATIONAL GMDSS-GOC"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -322,13 +322,13 @@
 			@php $doc = "FLAG STATE GMDSS-GOC"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -341,13 +341,13 @@
 			@php $doc = "RADAR TRAINING COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -360,13 +360,13 @@
 			@php $doc = "ARPA TRAINING COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -379,13 +379,13 @@
 			@php $doc = "ASAFETY COURSE, BASIC"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -398,13 +398,13 @@
 			@php $doc = "SAFETY COURSE, SURVIVAL CRAFT"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -417,13 +417,13 @@
 			@php $doc = "SAFETY COURSE, FIRE FIGHTING"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -436,13 +436,13 @@
 			@php $doc = "SAFETY COURSE, FIRST AID"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -455,13 +455,13 @@
 			@php $doc = "SAFETY COURSE, RESCUE BOAT"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -474,13 +474,13 @@
 			@php $doc = "TANKER COURSE, FAMILIARIZATION"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -494,13 +494,13 @@
 
 			<td colspan="2">OIL</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -510,13 +510,13 @@
 		<tr>
 			<td colspan="2">CHEMICAL</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -526,13 +526,13 @@
 		<tr>
 			<td colspan="2">LPG</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -545,13 +545,13 @@
 			@php $doc = "VACCINATION - Y. FEVER"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -564,13 +564,13 @@
 			@php $doc = "DRUG AND ALCOHOL TEST"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -583,13 +583,13 @@
 			@php $doc = "US-VISA"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "REVERTING" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -602,13 +602,13 @@
 			@php $doc = "DANGEROUS FLUID CARGO COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -621,13 +621,13 @@
 			@php $doc = "SAFETY OFFICER'S TRAINING COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -640,13 +640,13 @@
 			@php $doc = "MEDICAL CARE COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -659,13 +659,13 @@
 			@php $doc = "SHIP HANDLING SIMULATION"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -678,13 +678,13 @@
 			@php $doc = "POLLUTION PREVENTION COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -697,13 +697,13 @@
 			@php $doc = "ECDIS"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -716,13 +716,13 @@
 			@php $doc = "BRIDGE TEAM/RESOURCE MANAGEMENT"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -735,13 +735,13 @@
 			@php $doc = "RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -754,13 +754,13 @@
 			@php $doc = "ISM COURSE"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -773,13 +773,13 @@
 			@php $doc = "ISPS / SSO COURSE / SDSD"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "REVERTING" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="3"></td>
 		</tr>
