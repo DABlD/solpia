@@ -148,6 +148,7 @@ class ApplicationsController extends Controller
     }
 
     public function store(Request $req){
+        dd($req->all());
         $user = collect($req->only([
             'fname','mname','lname',
             'birthday','address','contact',
@@ -203,6 +204,7 @@ class ApplicationsController extends Controller
         // SAVE DOCUMENT ID
         $docu_id = json_decode($req->docu_id);
         foreach($docu_id as $data){
+            $data->type = $data->type == "SEAMAN BOOK" ? "SEAMAN'S BOOK" : $data->type;
             $data->applicant_id = $applicant->id;
             DocumentId::create((array)$data);
         }

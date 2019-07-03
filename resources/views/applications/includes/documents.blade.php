@@ -122,11 +122,12 @@
         	// CREATE ID OPTIONS
         	var id_options = "";
         	var idOptions = [
-        		'', 'PASSPORT', 'US-VISA', "SEAMAN'S BOOK", 'MCV'
+        		'', 'PASSPORT', 'US-VISA', "SEAMAN BOOK", 'MCV'
         	];
 
         	idOptions.forEach(docu => {
-				id_options += `<option value="${docu}">${docu}</option>`
+        		docu = docu == "SEAMAN BOOK" ? "SEAMAN'S BOOK" : docu;
+				id_options += `<option value="${docu}">${docu2}</option>`
 			});
 
 			//CREATE LC OPTIONS
