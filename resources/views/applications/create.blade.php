@@ -393,6 +393,11 @@
                 tempLc.no           = inputs[i+4].value;
                 tempLc.issue_date   = inputs[i+5].value;
                 tempLc.expiry_date  = inputs[i+7].value;
+
+                // FOR REMOVING ' in "SAFETY OFFICER'S TRAINING COURSE"
+                if(tempLc.type == "SAFETY OFFICER'S TRAINING COURSE"){
+                    tempLc.type = "SAFETY OFFICER TRAINING COURSE";
+                }
                 docu_lc.push(tempLc);
             }
 

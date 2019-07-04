@@ -121,8 +121,8 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('L48:L49')->getFont()->setSize(7);
                 $event->sheet->getDelegate()->getStyle('D48:D49')->getFont()->getColor()->setRGB('2f5596');
                 $event->sheet->getDelegate()->getStyle('L48:L49')->getFont()->getColor()->setRGB('2f5596');
-                $event->sheet->getDelegate()->getStyle('D48:D49')->getFont()->setItalic(true);
-                $event->sheet->getDelegate()->getStyle('L48:L49')->getFont()->setItalic(true);
+                // $event->sheet->getDelegate()->getStyle('D48:D49')->getFont()->setItalic(true);
+                // $event->sheet->getDelegate()->getStyle('L48:L49')->getFont()->setItalic(true);
 
                 // FAMILY DATA ROWS
                 $rows = [

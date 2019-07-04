@@ -232,6 +232,7 @@ class ApplicationsController extends Controller
         // SAVE DOCUMENT LC
         $docu_lc = json_decode($req->docu_lc);
         foreach($docu_lc as $data){
+            $data->type = $data->type == "SAFETY OFFICER TRAINING COURSE" ? "SAFETY OFFICER'S TRAINING COURSE" : $data->type;
             $data->applicant_id = $applicant->id;
             $data->regulation = json_encode($data->regulation);
             DocumentLC::create((array)$data);

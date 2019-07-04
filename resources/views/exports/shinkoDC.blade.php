@@ -125,14 +125,19 @@
 			<td colspan="5">
 				NATIONAL LICENSE
 			</td>
+
+			@php
+				$docu = isset($applicant->document_lc->{'COC'}) ? $applicant->document_lc->{'COC'} : false;
+			@endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->number : "N/A" }}
+				{{ $docu ? $docu->no : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{'NATIONAL LICENSE'}) ? $applicant->document_id->{'NATIONAL LICENSE'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -142,18 +147,23 @@
 				FLAG STATE SEAMAN BOOK (I.D BOOK)
 			</td>
 
-			@php 
-				$doc = "FLAG STATE SEAMAN BOOK (I.D BOOK)"; 
+			@php
+				$docu = false;
+				foreach($applicant->document_flag as $document){
+				    if($document->country == "Panama" && $document->type == "Booklet"){
+				        $docu = $document;
+				    }
+				}
 			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->license_no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->issue_date : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -163,13 +173,9 @@
 				FLAG STATE S.Q. FOR TANKERS
 			</td>
 
-			@php $doc = "FLAG STATE S.Q. FOR TANKERS"; @endphp
-
-			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
-			</td>
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -178,13 +184,18 @@
 				FLAG STATE LICENSE
 			</td>
 
-			@php $doc = "FLAG STATE LICENSE"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_flag as $document){
+				    if($document->country == "Panama" && $document->type == "License"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
-			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
-			</td>
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
+			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -193,13 +204,18 @@
 				FLAG STATE SSO LICENSE
 			</td>
 
-			@php $doc = "FLAG STATE SSO LICENSE"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_flag as $document){
+				    if($document->country == "Panama" && $document->type == "SSO"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
-			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
-			</td>
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
+			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -208,13 +224,18 @@
 				FLAG STATE ENDORSEMENT COOK COURSE
 			</td>
 
-			@php $doc = "FLAG STATE ENDORSEMENT COOK COURSE"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_flag as $document){
+				    if($document->country == "Panama" && $document->type == "SHIP'S COOK ENDORSEMENT"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
-			<td colspan="2">
-				{{ isset($applicant->document_flag->{$doc}) ? $applicant->document_flag->{$doc}->number : "N/A" }}
-			</td>
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
+			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -223,17 +244,18 @@
 				MEDICAL CERTIFICATE
 			</td>
 
-			@php $doc = "MEDICAL CERTIFICATE"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_flag as $document){
+				    if($document->country == "Panama" && $document->type == "MEDICAL CERTIFICATE"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
-			</td>
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
-			</td>
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
-			</td>
+			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -261,39 +283,44 @@
 				NATIONAL STCW-WATCH KEEPING
 			</td>
 
-			@php $doc = "NATIONAL GMDSS-GOC"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+					$regulation = json_decode($document->regulation);
+					$size = sizeof($regulation);
+					$haystack = ["II/4", "III/4"];
 
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
-			</td>
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
-			</td>
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
-			</td>
+				    if($document->type == "COC" && $size == 1 && in_array($regulation[0], $haystack)){
+				        $docu = $document;
+				    }
+				}
+			@endphp
+
+			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
 			<td colspan="3"></td>
 		</tr>
 
 		<tr>
 			<td colspan="5">
-				N/A
+				
 			</td>
 
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
 			<td colspan="3"></td>
 		</tr>
 
 		<tr>
 			<td colspan="5">
-				N/A
+				
 			</td>
 
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
-			<td colspan="2">N/A</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
 			<td colspan="3"></td>
 		</tr>
 
@@ -302,7 +329,7 @@
 				NATIONAL GMDSS-GOC
 			</td>
 
-			@php $doc = "NATIONAL GMDSS-GOC"; @endphp
+			@php $doc = "GOC"; @endphp
 
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
@@ -321,7 +348,14 @@
 				FLAG STATE GMDSS-GOC
 			</td>
 
-			@php $doc = "FLAG STATE GMDSS-GOC"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_flag as $document){
+				    if(in_array($document->country, ["Panama", "Marshall Islands"]) && $document->type == "GOC"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
@@ -340,16 +374,23 @@
 				RADAR TRAINING COURSE
 			</td>
 
-			@php $doc = "RADAR TRAINING COURSE"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "RADAR TRAINING COURSE"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -359,16 +400,23 @@
 				ARPA TRAINING COURSE
 			</td>
 
-			@php $doc = "ARPA TRAINING COURSE"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "ARPA TRAINING COURSE"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -378,16 +426,23 @@
 				SAFETY COURSE, BASIC
 			</td>
 
-			@php $doc = "ASAFETY COURSE, BASIC"; @endphp
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "BASIC TRAINING - BT"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -396,17 +451,24 @@
 			<td colspan="5">
 				SAFETY COURSE, SURVIVAL CRAFT
 			</td>
-			
-			@php $doc = "SAFETY COURSE, SURVIVAL CRAFT"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -415,17 +477,24 @@
 			<td colspan="5">
 				SAFETY COURSE, FIRE FIGHTING
 			</td>
-			
-			@php $doc = "SAFETY COURSE, FIRE FIGHTING"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "ADVANCE FIRE FIGHTING - AFF"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -434,17 +503,24 @@
 			<td colspan="5">
 				SAFETY COURSE, FIRST AID
 			</td>
-			
-			@php $doc = "SAFETY COURSE, FIRST AID"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "MEDICAL FIRST AID - MEFA"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -453,17 +529,24 @@
 			<td colspan="5">
 				SAFETY COURSE, RESCUE BOAT
 			</td>
-			
-			@php $doc = "SAFETY COURSE, RESCUE BOAT"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "FAST RESCUE BOAT - FRB"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -472,17 +555,24 @@
 			<td colspan="5">
 				TANKER COURSE, FAMILIARIZATION
 			</td>
-			
-			@php $doc = "TANKER COURSE, FAMILIARIZATION"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "TANKER COURSE, FAMILIARIZATION"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -491,50 +581,62 @@
 			<td colspan="3" rowspan="3">
 				TANKER COURSE, ADVANCED
 			</td>
-			
-			@php $doc = "TANKER COURSE, ADVANCED - OIL"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "TANKER COURSE, ADVANCED - OIL"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">OIL</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
-			
-			@php $doc = "STANKER COURSE, ADVANCED - CHEMICAL"; @endphp
 
 		<tr>
 			<td colspan="2">CHEMICAL</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
-			
-			@php $doc = "STANKER COURSE, ADVANCED - LPG"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "TANKER COURSE, ADVANCED - LPG"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 		<tr>
 			<td colspan="2">LPG</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -543,38 +645,54 @@
 			<td colspan="5">
 				VACCINATION - Y. FEVER
 			</td>
-			
-			@php $doc = "VACCINATION - Y. FEVER"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "YELLOW FEVER"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "N/A"}}
+			</td>
 		</tr>
 
 		<tr>
 			<td colspan="5">
 				DRUG AND ALCOHOL TEST
 			</td>
-			
-			@php $doc = "DRUG AND ALCOHOL TEST"; @endphp
 
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "DRUG AND ALCOHOL TEST"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
+
+			<td colspan="2"></td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "N/A"}}
 			</td>
-			<td colspan="3"></td>
 		</tr>
 
 		<tr>
@@ -600,17 +718,24 @@
 			<td colspan="5">
 				DANGEROUS FLUID CARGO COURSE
 			</td>
-			
-			@php $doc = "DANGEROUS FLUID CARGO COURSE"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "DANGEROUS FLUID CARGO COURSE"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -619,17 +744,24 @@
 			<td colspan="5">
 				SAFETY OFFICER'S TRAINING COURSE
 			</td>
-			
-			@php $doc = "SAFETY OFFICER'S TRAINING COURSE"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "SAFETY OFFICER'S TRAINING COURSE"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -638,17 +770,24 @@
 			<td colspan="5">
 				MEDICAL CARE COURSE
 			</td>
-			
-			@php $doc = "MEDICAL CARE COURSE"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "MEDICAL CARE - MECA"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -657,17 +796,24 @@
 			<td colspan="5">
 				SHIP HANDLING SIMULATION
 			</td>
-			
-			@php $doc = "SHIP HANDLING SIMULATION"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "SHIP HANDLING SIMULATION"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -676,17 +822,24 @@
 			<td colspan="5">
 				POLLUTION PREVENTION COURSE
 			</td>
-			
-			@php $doc = "POLLUTION PREVENTION COURSE"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "POLLUTION PREVENTION COURSE"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -695,17 +848,24 @@
 			<td colspan="5">
 				ECDIS
 			</td>
-			
-			@php $doc = "ECDIS"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "ECDIS"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -714,17 +874,24 @@
 			<td colspan="5">
 				BRIDGE TEAM/RESOURCE MANAGEMENT
 			</td>
-			
-			@php $doc = "BRIDGE TEAM/RESOURCE MANAGEMENT"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "BRIDGE TEAM/RESOURCE MANAGEMENT"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -733,17 +900,24 @@
 			<td colspan="5">
 				RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE
 			</td>
-			
-			@php $doc = "RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "RISK ASSESMENT/INCIDENT INVESTIGATION COURSE"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -752,17 +926,24 @@
 			<td colspan="5">
 				ISM COURSE
 			</td>
-			
-			@php $doc = "ISM COURSE"; @endphp
+
+			@php
+				$docu = false;
+				foreach($applicant->document_lc as $document){
+				    if($document->type == "IN HOUSE TRAINING CERT WITH ISM"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
@@ -771,17 +952,15 @@
 			<td colspan="5">
 				ISPS / SSO COURSE / SDSD
 			</td>
-			
-			@php $doc = "ISPS / SSO COURSE / SDSD"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				
 			</td>
 			<td colspan="3"></td>
 		</tr>
