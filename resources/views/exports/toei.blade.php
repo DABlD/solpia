@@ -57,7 +57,7 @@
 			<td>Code No.:</td>
 			<td></td>
 			<td>Rank:</td>
-			<td>{{ isset($applicant->rank) ? $applicant->rank->name : 'N/A' }}</td>
+			<td>{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
 			<td>Date Employed:</td>
 			<td></td>
 			<td>Vessel:</td>
@@ -181,7 +181,7 @@
 		</tr>
 
 		<tr>
-			<td>Adress:</td>
+			<td>Address:</td>
 			<td colspan="8">{{ $realFam->address }}</td>
 		</tr>
 
@@ -310,78 +310,100 @@
 			<td>Expiry Date</td>
 			<td colspan="2">Issued By</td>
 		</tr>
-
-		@php
-			// CERTIFICATES
-			$array = [
-				[
-					'Passport',
-					'D.F.A',
-					['PASSPORT', 'DFA'] //NAME IN DB, ISSUER
-				],
-				[
-					'U.S. C1/D Visa',
-					'U.S EMBASSY',
-					['US-VISA', 'US EMBASSY']
-				],
-				[
-					"National Seaman's Book",
-					'MARINA',
-					["SEAMAN'S BOOK", 'MARINA']
-				],
-				[
-					"Seaman's Book/Panama",
-					'PANAMA',
-					["SEAMAN'S BOOK", 'PANAMA']
-
-				],
-				[
-					"Australia MCV",
-					"AUSTRALIA",
-					['AUSTRALIA MCV', 'AUSTRALIA']
-				],
-				[
-					"Japanese Visa",
-					"in case of Master & C/E",
-					['JAPANESE VISA', '']
-				]
-			];
-		@endphp
 		
-		@foreach($array as $cert)
+		{{-- 1ST --}}
+		@php 
+			$name = "PASSPORT";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
 
-			@php 
-				$name = $cert[2][0];
-				$issuer = $cert[2][1];
+		<tr>
+			<td colspan="2">Passport</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
+			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">Philippines</td>
+		</tr>
+		
+		{{-- 2ND --}}
+		@php 
+			$name = "US-VISA";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
 
-				// FIND DOCUMENT WITH GIVEN NAME AND ISSUER
-				$isset = isset($applicant->document_id->{$name}) && $applicant->document_id->{$name}->issuer == $issuer;
+		<tr>
+			<td colspan="2">U.S. C1/D Visa</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
+			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">U.S EMBASSY</td>
+		</tr>
+		
+		{{-- 3RD --}}
+		@php 
+			$name = "SEAMAN'S BOOK";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
 
-				// IF NO MATCH IN DOCUMENT ID, TRY IN DOCUMENT LC
-				if($isset){
-					$docu = $applicant->document_id->{$name};
-				}
-				else{
-					$isset = isset($applicant->document_lc->{$name}) && $applicant->document_lc->{$name}->issuer == $issuer;
-					if($isset){
-						$docu = $applicant->document_lc->{$name};
-					}
-				}
-			@endphp
+		<tr>
+			<td colspan="2">National Seaman's Book</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
+			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">MARINA</td>
+		</tr>
+		
+		{{-- 4TH --}}
+		@php
+			$docu = false;
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Panama" && $document->type == "Booklet"){
+			        $docu = $document;
+			    }
+			}
+		@endphp
 
-			<tr>
-				<td colspan="2">{{ $cert[0] }}</td>
-				<td colspan="2"></td>
-				<td>{{ isset($docu) ? $docu->number : 'N/A' }}</td>
-				<td>{{ isset($docu) ? $docu->issue_date->format('M j, Y') : 'N/A' }}</td>
-				<td>{{ isset($docu) ? $docu->expiry_date->format('M j, Y') : 'N/A' }}</td>
-				<td colspan="2">{{ $cert[1] }}</td>
-			</tr>
+		<tr>
+			<td colspan="2">Seaman's Book/Panama</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
+			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">PANAMA</td>
+		</tr>
+		
+		{{-- 5TH --}}
+		@php 
+			$name = "MCV";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
 
-			@php
-				unset($docu);
-			@endphp
-		@endforeach
+		<tr>
+			<td colspan="2">AUSTRALIA MCV</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
+			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">AUSTRALIA</td>
+		</tr>
+		
+		{{-- 6TH --}}
+		@php 
+			$name = "JAPANESE VISA";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="2">Japanese Visa</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
+			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
+			<td colspan="2">in case of Master and C/E</td>
+		</tr>
 	
 		<tr>
 			<td colspan="5">4. OTHER CERTIFICATES (MARINA/SOLAS/MARPOL/OTHERS)</td>
@@ -396,122 +418,257 @@
 		</tr>
 
 		@php
-			// OTHER CERTIFICATES
-			$array = [
-				[
-					'SSO (Ship Security Officer) Course',
-					'',
-					''
-				],
-				[
-					'Watchkeeping',
-					'',
-					'P.R.C.'
-				],
-				[
-					'Basic Safety Training Course  w/ PSSR',
-					'',
-					''
-				],
-				[
-					'Survival Craft & Rescue Boat',
-					'',
-					''
-				],
-				[
-					'Advance Fire Fighting Course',
-					'',
-					''
-				],
-				[
-					'Medical First Aid Course',
-					'',
-					''
-				],
-				[
-					'Radar Observer',
-					'',
-					''
-				],
-				[
-					'GMDSS (GOC)',
-					'',
-					''
-				],
-				[
-					'Satellite Communication Course',
-					'',
-					''
-				],
-				[
-					'Endorsement Certificate / COC',
-					'',
-					'P.R.C.'
-				],
-				[
-					'JRC ECDIS SPECIFIC 1',
-					'JAN-701B/901B/2000',
-					''
-				],
-				[
-					'JRC ECDIS SPECIFIC 2',
-					'JAN-9201/7201',
-					''
-				],
-				[
-					'FURUNO ECDIS FEA',
-					'FEA-2107/FEA-2807',
-					''
-				],
-				[
-					'FURUNO ECDIS FMD',
-					'FMD-3300',
-					''
-				],
-				[
-					'ECDIS GENERIC',
-					'',
-					''
-				],
-			];
+			unset($name);
+			unset($docu);
 		@endphp
-		
-		@foreach($array as $cert)
 
-			@php 
-				$name = $cert[0];
+		{{-- 1ST --}}
+		@php 
+			$name = 'SHIP SECURITY OFFICER - SSO';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
 
-				$isset = isset($applicant->id->{$name});
-				
-				if($isset){
-					$docu = $applicant->document_id->{$name};
-				}
-				else{
-					$isset = isset($applicant->document_lc->{$name});
-					if($isset){
-						$docu = $applicant->document_lc->{$name};
-					}
-				}
-			@endphp
+		<tr>
+			<td colspan="4">SSO (Ship Security Officer) Course</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
 
-			<tr>
-				<td colspan="4">{{ $cert[0] }}</td>
-				<td>
-					@if($cert[1] == "")
-						@if(isset($docu))
-							{{ isset($docu) ? $docu->number : 'N/A' }}
-						@endif
-					@else
-						{{ $cert[1] }}
-					@endif
-				</td>
-				<td>{{ isset($docu) ? $docu->issue_date->format('M j, Y') : 'N/A' }}</td>
-				<td>{{ isset($docu) ? $docu->expiry_date->format('M j, Y') : 'N/A' }}</td>
-				<td colspan="2">
-					{{ isset($docu) ? $docu->issuer : 'N/A' }}
-				</td>
-			</tr>
-		@endforeach
+		{{-- 2ND --}}
+		@php
+			$docu = false;
+			if(isset($applicant->document_lc->{"COC"})){
+				$regulation = json_decode($applicant->document_lc->regulation);
+				$size = sizeof($regulation);
+				$haystack = ["II/4", "III/4"];
+
+			    if($size == 1 && in_array($regulation[0], $haystack)){
+			        $docu = $document;
+			    }
+			}
+		@endphp
+
+		<tr>
+			<td colspan="4">Watchkeeping</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 3RD --}}
+		@php 
+			$name = 'BASIC TRAINING - BT';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">Basic Safety Training Course  w/ PSSR</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 4TH --}}
+		@php 
+			$name = 'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">Survival Craft and Rescue Boat</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 5TH --}}
+		@php 
+			$name = 'ADVANCE FIRE FIGHTING - AFF';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">Advance Fire Fighting Course</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 6TH --}}
+		@php 
+			$name = 'MEDICAL FIRST AID - MEFA';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">Medical First Aid Course</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 7TH --}}
+		@php 
+			$name = 'RADAR TRAINING COURSE';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">Radar Observer</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 8TH --}}
+		@php 
+			$name = 'GOC';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">GMDSS (GOC)</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 9TH --}}
+		@php 
+			$name = 'SATELLITE COMMUNICATION COURSE';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">Satellite Communication Course</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 10TH --}}
+		@php 
+			$name = 'COC';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">Endorsement Certificate / COC</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 11TH --}}
+		@php 
+			$name = 'ECDIS JRC 701B';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">JRC ECDIS SPECIFIC 1</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 12TH --}}
+		@php 
+			$name = 'ECDIS JRC 9201';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">JRC ECDIS SPECIFIC 2</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 13TH --}}
+		@php 
+			$name = 'ECDIS FURUNO 2107';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">FURUNO ECDIS FEA</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 14TH --}}
+		@php 
+			$name = 'ECDIS FURUNO 3300';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">FURUNO ECDIS FMD</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
+
+		{{-- 15TH --}}
+		@php 
+			$name = 'ECDIS';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">ECDIS GENERIC</td>
+			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
+			<td>
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+			</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+		</tr>
 	
 		<tr>
 			<td colspan="5">5. PHYSICAL INSPECTION/YELLOW CARD</td>

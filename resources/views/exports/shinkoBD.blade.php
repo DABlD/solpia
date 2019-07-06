@@ -32,7 +32,7 @@
 
 			<td colspan="2">Rank</td>
 			<td colspan="3">
-				{{ isset($applicant->rank) ? $applicant->rank->name : 'N/A' }}
+				{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}
 			</td>
 		</tr>
 
