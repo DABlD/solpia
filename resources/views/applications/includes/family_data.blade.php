@@ -92,6 +92,8 @@
 
             let string = `
                 <div class="row fd">
+                    
+                    <span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
                     <input type="hidden" name="fd-type${count}" value="${type}">
                     <div class="form-group col-md-3">
                         <label for="fd-name${count}">Name</label>

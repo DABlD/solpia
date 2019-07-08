@@ -82,6 +82,26 @@
         .select2-selection--multiple .select2-selection__choice{
             color: #444 !important;
         }
+
+        #EB .row, #FD .row, #docu .row, #sea-services .row{
+            position: relative;
+        }
+
+        .fa-times{
+            top: -5px;
+            right: 10px;
+            color: #dd4b39;
+            z-index: 999;
+            position: absolute;
+            transition: all .2s ease-in-out;
+        }
+
+        .fa-times:hover{
+            color: #f13f28;
+            transform: scale(1.3);
+        }
+
+
     </style>
 @endpush
 
@@ -234,8 +254,16 @@
             setTimeout(() => {
                 // swal.close();
                 // !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
-                !$('.is-invalid').is(':visible')? compressAndSubmit() : swal.close();
-            }, 1000)
+                if(!$('.is-invalid').is(':visible')){
+                    compressAndSubmit();
+                }
+                else{
+                    swal.close();
+                    $('html, body').animate({
+                        scrollTop: $($('[id$="Error"]:visible')[0]).offset().top - 100
+                    }, 1000);
+                }
+            }, 1500)
         });
 
         function z(){
@@ -275,6 +303,13 @@
                 tempFd.occupation   = inputs[i+5].value;
                 tempFd.email      = inputs[i+6].value;
                 tempFd.address      = inputs[i+7].value;
+                console.log(i);
+                console.log(i+1);
+                console.log(i+2);
+                console.log(i+4);
+                console.log(i+5);
+                console.log(i+6);
+                console.log(i+7);
                 fd.push(tempFd);
             }
 
@@ -491,5 +526,11 @@
                 document.getElementById("preview").src = e.target.result;
             };
         });
+
+        function deleteRow(e, type) {
+            $(e).parent().next().addClass('hidden');
+            $(e).parent().addClass('hidden');
+            $(`.${type}Count`)[0].innerText -= 1;
+        };
     </script>
 @endpush

@@ -229,7 +229,8 @@
             if(type == "ID"){
             	string = `
             	    <div class="row docu">
-
+						
+						<span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
             	        <div class="form-group col-md-4">
             	            <label for="${dType}${count}">Type</label>
             	            <select class="${docu_class} ${dType}" name="${dType}${count}">
@@ -275,6 +276,7 @@
             else if(type == "Flag"){
             	string = `
             	    <div class="row flag${count2}">
+						<span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
 						<div class="row">
 	            	        <div class="form-group col-md-3">
 	            	            <label for="${country}${count2}">Country</label>
@@ -293,7 +295,8 @@
             	
             	string = `
             	    <div class="row docu">
-
+						
+						<span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
             	        <div class="form-group col-md-3">
             	            <label for="${medType}${count}">Type</label>
             	            <select class="${docu_class} ${medType}" name="${medType}${count}">
@@ -328,7 +331,8 @@
             	
             	string = `
             	    <div class="row docu">
-
+						
+						<span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
             	        <div class="form-group col-md-2">
             	            <label for="${medExpType}${count}">Type</label>
             	            <select class="${docu_class} ${medExpType}" name="${medExpType}${count}">
@@ -360,9 +364,11 @@
             	    <hr>`;
             }
             else{
+                    
             	string = `
             	    <div class="row docu">
 						
+						<span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
             	        <div class="form-group col-md-4">
             	            <label for="${lcType}${count}">License/Certificate/Contract Type</label>
             	            <select class="${docu_class} ${lcType}" name="${lcType}${count}">

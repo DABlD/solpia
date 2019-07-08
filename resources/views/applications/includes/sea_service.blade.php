@@ -27,7 +27,8 @@
 
             let string = `
                 <div class="row ss">
-
+                    
+                    <span class="fa fa-times fa-2x" onclick="deleteRow(this, 'ss')"></span>
                     <div class="form-group col-md-3">
                         <label for="vessel_name${count}">Vessel Name</label>
                         <select class="form-control aeigh" name="vessel_name${count}">
