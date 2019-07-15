@@ -150,10 +150,10 @@
 			<td rowspan="2">GOC</td>
 			<td>National</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'GOC'}) ? $applicant->document_lc->{'GOC'}->no : "N/A" }}
+				{{ isset($applicant->document_lc->{'GMDSS/GOC'}) ? $applicant->document_lc->{'GMDSS/GOC'}->no : "N/A" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{'GOC'}) ? $applicant->document_lc->{'GOC'}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{'GMDSS/GOC'}) ? $applicant->document_lc->{'GMDSS/GOC'}->expiry_date->format('F j, Y') : "N/A" }}
 			</td>
 			<td colspan="8">Schooling</td>
 		</tr>
@@ -161,7 +161,7 @@
 		@php
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "GOC"){
+			    if($document->country == "Panama" && $document->type == "GMDSS/GOC"){
 			        $docu = $document;
 			    }
 			}

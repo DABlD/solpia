@@ -136,7 +136,7 @@
 			// 	'', 'NATIONAL LICENSE', 'MEDICAL CERTIFICATE', 'NATIONAL STCW-WATCH KEEPING', 'NATIONAL GMDSS-GOC', 'RADAR TRAINING COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'TANKER COURSE, FAMILIARIZATION', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'DANGEROUS FLUID CARGO COURSE', 'SAFETY OFFICER\'S TRAINING COURSE', 'MEDICAL CARE COURSE', 'SHIP HANDLING SIMULATION', 'POLLUTION PREVENTION COURSE', 'ECDIS', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE', 'ISM COURSE', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG'
 			// ];
 			var lcOptions = [
-				'', 'NATIONAL LICENSE', 'WATCHKEEPING', 'GMDSS-GOC', 'RADAR TRAINING COURSE', 'RADAR SIMULATOR COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'SAFETY OFFICER\'S TRAINING COURSE', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'MARPOL 73/78', 'ERS WITH ERM', 'SSBT', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
+				'', 'NATIONAL LICENSE', 'WATCHKEEPING', 'GMDSS/GOC', 'RADAR SIMULATOR COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'SAFETY OFFICER\'S TRAINING COURSE', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'MARPOL 73/78', 'ERS WITH ERM', 'SSBT', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
 			];
 
         	lcOptions.forEach(docu => {
@@ -531,7 +531,7 @@
 	        					[1,4]
 	        				],
 	        				documents: [
-	        					'LICENSE', 'BOOKLET', 'GOC', 'GOC BOOKLET', 'SSO', 'SDSD'
+	        					'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'GMDSS/GOC BOOKLET', 'SSO', 'SDSD'
 	        				]
 	        			},
 	        			{
@@ -569,7 +569,7 @@
         						[1,4]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET', 'GOC', 'SSO', 'SDSD'
+        						'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'GMDSS/GOC BOOKLET', 'SSO', 'SDSD'
         					]
         				},
         				{
@@ -577,7 +577,7 @@
         						[5,8]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET', ' SDSD'
+        						'LICENSE', 'BOOKLET', 'SDSD'
         					]
         				},
         				{
@@ -603,19 +603,19 @@
         				}
         			]
         		},
-        		{
-        			country: 'Malaysia',
-        			details: [
-        				{
-        					range: [
-        						[1,8]
-        					],
-        					documents: [
-        						'LICENSE'
-        					]
-        				}
-        			]
-        		},
+        		// {
+        		// 	country: 'Malaysia',
+        		// 	details: [
+        		// 		{
+        		// 			range: [
+        		// 				[1,8]
+        		// 			],
+        		// 			documents: [
+        		// 				'LICENSE'
+        		// 			]
+        		// 		}
+        		// 	]
+        		// },
         		{
         			country: 'General',
         			details: [
@@ -729,7 +729,7 @@
         		range: [1, 2],
         		issuer: 'MARINA',
         		documents: [
-        			'COC', 'COE', 'GOC'
+        			'COC', 'COE', 'GMDSS/GOC'
         		],
         		regulation: [
         			['II/2', 'IV/2'],
@@ -741,7 +741,7 @@
         		range: [3, 4],
         		issuer: 'MARINA',
         		documents: [
-        			'COC', 'COE', 'GOC'
+        			'COC', 'COE', 'GMDSS/GOC'
         		],
         		regulation: [
         			['II/1', 'IV/2'],

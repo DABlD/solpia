@@ -113,7 +113,7 @@
 			<td>Height:</td>
 			<td>{{ $applicant->height }}cm</td>
 			<td>Eye Color:</td>
-			<td>(Eye Color)</td>
+			<td>Black</td>
 		</tr>
 
 		<tr>

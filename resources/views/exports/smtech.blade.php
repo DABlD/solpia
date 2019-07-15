@@ -113,7 +113,7 @@
 			<td>Height:</td>
 			<td>{{ $applicant->height }}cm</td>
 			<td>Eye Color:</td>
-			<td>(Eye Color)</td>
+			<td>Black</td>
 		</tr>
 
 		<tr>
@@ -141,7 +141,7 @@
 			<td colspan="2">High/Low blood pressure</td>
 			<td colspan="2"></td>
 			<td colspan="2">Renal Insufficiency</td>
-			<td></td>
+			<td>No</td>
 			<td></td>
 		</tr>
 

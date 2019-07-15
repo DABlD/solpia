@@ -329,7 +329,7 @@
 				NATIONAL GMDSS-GOC
 			</td>
 
-			@php $doc = "GOC"; @endphp
+			@php $doc = "GMDSS/GOC"; @endphp
 
 			<td colspan="2">
 				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
@@ -351,7 +351,7 @@
 			@php
 				$docu = false;
 				foreach($applicant->document_flag as $document){
-				    if(in_array($document->country, ["Panama", "Marshall Islands"]) && $document->type == "GOC"){
+				    if(in_array($document->country, ["Panama", "Marshall Islands"]) && $document->type == "GMDSS/GOC"){
 				        $docu = $document;
 				    }
 				}
@@ -953,14 +953,34 @@
 				ISPS / SSO COURSE / SDSD
 			</td>
 
+			@php
+				$docu = false;
+				if(isset($applicant->rank)){
+					if($applicant->rank->type == "OFFICER"){
+						foreach($applicant->document_lc as $document){
+						    if($document->type == "SHIP SECURITY OFFICER - SSO"){
+						        $docu = $document;
+						    }
+						}
+					}
+					else{
+						foreach($applicant->document_lc as $document){
+						    if($document->type == "SHIP SECURITY AWARENESS TRAINING AND SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD"){
+						        $docu = $document;
+						    }
+						}
+					}
+				}
+			@endphp
+
 			<td colspan="2">
-				
+				{{ $docu ? $docu->number : "N/A"}}
 			</td>
 			<td colspan="2">
-				
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="2">
-				
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
 			</td>
 			<td colspan="3"></td>
 		</tr>
