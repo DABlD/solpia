@@ -132,9 +132,6 @@
 
 			//CREATE LC OPTIONS
 			var lc_options = "";
-			// var lcOptions = [
-			// 	'', 'NATIONAL LICENSE', 'MEDICAL CERTIFICATE', 'NATIONAL STCW-WATCH KEEPING', 'NATIONAL GMDSS-GOC', 'RADAR TRAINING COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'TANKER COURSE, FAMILIARIZATION', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'DANGEROUS FLUID CARGO COURSE', 'SAFETY OFFICER\'S TRAINING COURSE', 'MEDICAL CARE COURSE', 'SHIP HANDLING SIMULATION', 'POLLUTION PREVENTION COURSE', 'ECDIS', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE', 'ISM COURSE', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG'
-			// ];
 			var lcOptions = [
 				'', 'NATIONAL LICENSE', 'WATCHKEEPING', 'GMDSS/GOC', 'RADAR SIMULATOR COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'SAFETY OFFICER\'S TRAINING COURSE', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'MARPOL 73/78', 'ERS WITH ERM', 'SSBT', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
 			];
@@ -466,6 +463,7 @@
             else if(type == "MedExp"){
             	$(`[name="${medExpType}${count}"]`).select2({
             		placeholder: 'Select Type',
+            		tags: true
             	});
             }
             else{
@@ -725,6 +723,7 @@
         });
 
         let list = [
+        // LICENSES
         	{
         		range: [1, 2],
         		issuer: 'MARINA',
@@ -805,23 +804,166 @@
         			['--']
         		]
         	},
+        // CERTIFICATES
+        	// ALL
         	{
         		range: [1, 27],
         		issuer: 'MARINA',
         		documents: [
-        			'BASIC TRAINING - BT','PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB','FAST RESCUE BOAT - FRB','ADVANCE FIRE FIGHTING - AFF','MEDICAL FIRST AID - MEFA','MEDICAL CARE - MECA','SHIP SECURITY OFFICER - SSO','SHIP SECURITY AWARENESS TRAINING AND SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD'
+        			'BASIC TRAINING - BT', 
+        			'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
+        			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
+        			'HAZMAT', 
+        			'ENGLISH TEST', 
+        			'ANTI PIRACY', 
+        			'IN HOUSE TRAINING CERT WITH ISM', 
+        			'GENERAL TRAINING RECORD BOOK', 
+        			'PDOS'
         		],
         		regulation: [
-		        	['VI/1'],
-		        	['VI/2.1'],
-		        	['VI/2.2'],
-		        	['VI/3'],
-		        	['VI/4.1'],
-		        	['VI/4.2'],
-		        	['VI/5'],
-		        	['VI/6']
+        			['VI/1'],
+        			['VI/2.1'],
+        			['VI/6'],
+        			[],[],[],
+        			[],[],[],
         		]
-        	}
+        	},
+        	// OFFICERS
+        	{
+        		range: [1, 8],
+        		issuer: 'MARINA',
+        		documents: [
+        			'FAST RESCUE BOAT - FRB',
+        			'ADVANCE FIRE FIGHTING - AFF',
+        			'MEDICAL FIRST AID - MEFA',
+        			'MEDICAL CARE - MECA',
+        			'SHIP SECURITY OFFICER - SSO',
+        			'MARPOL 73/78',
+        			'KML TRAINING',
+        			'ECDIS TRANSAS',
+        			'MLC TRAINING F1',
+        			'MLC TRAINING F2',
+        			'MLC TRAINING F3',
+        			'MLC TRAINING F4',
+        		],
+        		regulation: [
+        			['VI/2.2'],
+        			['VI/3'],
+        			['VI/4.1'],
+        			['VI/4.2'],
+        			['VI/5'],
+        			[],[],[],[],
+        			[],[],[],
+
+        		]
+        	},
+        	// DECK OFFICERS
+        	{
+        		range: [1, 4],
+        		issuer: 'MARINA',
+        		documents: [
+        			'RADAR SIMULATOR COURSE',
+        			'BRIDGE TEAM/RESOURCE MANAGEMENT',
+        			'SHIP SAFETY OFFICER',
+        			// 'GMDSS/GOC',
+        			'SSBT',
+        			'ARPA TRAINING COURSE',
+        			'ECDIS',
+					'ECDIS FURUNO 2107',
+					'ECDIS FURUNO 3200',
+					'ECDIS FURUNO 3300',
+					'ECDIS JRC 701B',
+					'ECDIS JRC 7201',
+					'ECDIS JRC 901B',
+					'ECDIS JRC 9201',
+					'ECDIS MARTEK',
+					'ECDIS MECYS',
+					'CARGO HANDLING',
+					'STABILITY AND TRIM',
+					'COLLISION AVOIDANCE',
+					'DANGEROUS FLUID CARGO COURSE',
+					'SHIP HANDLING SIMULATION',
+					'POLLUTION PREVENTION COURSE',
+					'RISK ASSESMENT/INCIDENT INVESTIGATION COURSE',
+					'ADVANCE NAVIGATION',
+					'ADVANCE SHIPBOARD OPERATION AND MGT.',
+					'SATELLITE COMMUNICATION COURSE',
+        		],
+        		regulation: [
+        			[],[],[],[],[],[],
+        			[],[],[],[],[],[],
+        			[],[],[],[],[],[],
+        			[],[],[],[],[],[],
+        			[],[],
+        		]
+        	},
+        	// ENGINE OFFICERS
+        	{
+        		range: [5, 8],
+        		issuer: 'MARINA',
+        		documents: [
+        			'ERS WITH ERM',
+					'AUXILIARY MACHINERY SYSTEM',
+					'CONTROL ENGINEERING',
+					'HYDRAULICS/PNEUMATICS',
+					'MARINE ELECTRO TECH',
+					'ELECTRONIC EQUIPMENT',
+					'MARINE ELECTRICAL',
+					'MARINE REFRIGIRATION/AIRCONDITIONING',
+        		],
+        		regulation: [
+        			[],[],[],[],
+        			[],[],[],[],
+        		]
+        	},
+        	// 2/0, 3/0
+        	{
+        		range: [5, 6],
+        		issuer: 'MARINA',
+        		documents: [
+        			'OLC TRAINING F1',
+        			'OLC TRAINING F2',
+        			'OLC TRAINING F3',
+        		],
+        		regulation: [
+        			[],[],[]
+        		]
+        	},
+        	// 2AE, 3AE
+        	{
+        		range: [7,8],
+        		issuer: 'MARINA',
+        		documents: [
+        			'OLC TRAINING F1',
+        			'OLC TRAINING F2',
+        			'OLC TRAINING F3',
+        		],
+        		regulation: [
+        			[],[],[]
+        		]
+        	},
+        	// ENGINE RATINGS
+        	{
+        		range: [15, 21],
+        		issuer: 'MARINA',
+        		documents: [
+        			'WELDING CERT/SMAW'
+        		],
+        		regulation: [
+        			[]
+        		]
+        	},
+        	// GALLEY
+        	{
+        		range: [22, 27],
+        		issuer: 'MARINA',
+        		documents: [
+        			'CATERING TRAINING CERT'
+        		],
+        		regulation: [
+        			[]
+        		]
+        	},
         ];
 
         $('#rank').change(e => {
@@ -842,14 +984,14 @@
             			// 	return
             			// }
             			// $(`[name^="docu-lctype"] [value="${docu}"]`).parent().hide();
-            			let match = $(`.lc [value="${docu}"]`);
-            			if(match.length > 0){
-            				ctr += 1;
-            				let row = $(match[match.length - 1]).parent().parent().parent();
-            				row.next().hide();
-            				row.hide();
-            			}
-
+            			// let match = $(`.lc [value="${docu}"]`);
+            			// if(match.length > 0){
+            			// 	ctr += 1;
+            			// 	let row = $(match[match.length - 1]).parent().parent().parent();
+            			// 	row.next().hide();
+            			// 	row.hide();
+            			// }
+            			
             			let count = $('.docu').length + 1;
             			addDocu('lc');
             			
