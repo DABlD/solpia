@@ -918,7 +918,7 @@
         	},
         	// 2/0, 3/0
         	{
-        		range: [5, 6],
+        		range: [3, 4],
         		issuer: 'MARINA',
         		documents: [
         			'OLC TRAINING F1',
@@ -967,6 +967,14 @@
         ];
 
         $('#rank').change(e => {
+        	swal.showLoading();
+        	setTimeout(() => {
+        		asdasd(e);
+        	}, 100);
+        });
+
+        function asdasd(e){
+
         	let rank = e.target.value;
 
             $('.docu-country').each((index, country) => {
@@ -991,7 +999,7 @@
             			// 	row.next().hide();
             			// 	row.hide();
             			// }
-            			
+
             			let count = $('.docu').length + 1;
             			addDocu('lc');
             			
@@ -1036,6 +1044,8 @@
             		selection.parent().css('border-color', 'rgba(247,108,107, 0.8)');
             	}, 100);
             }, 400);
-        })
+
+            swal.close();
+        }
     </script>
 @endpush
