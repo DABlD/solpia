@@ -231,70 +231,70 @@
 		</tr>
 
 		@php 
-			$name = "NATIONAL LICENSE";
-			$isset = isset($applicant->document_id->{$name});
-			if($isset){
-				$docu = $applicant->document_id->{$name};
-			}
+			$name = 'COC';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 		@endphp
 
 		<tr>
 			<td colspan="2">National License</td>
 			<td colspan="2"></td>
-			<td>{{ $isset ? $docu->no : "N/A" }}</td>
-			<td>{{ $isset ? $docu->issue_date->toFormattedDateString() : "N/A" }}</td>
-			<td>{{ $isset ? $docu->issue_date->toFormattedDateString() : "N/A" }}</td>
+			<td>{{ $docu ? $docu->number : "N/A" }}</td>
+			<td>{{ $docu ? $docu->issue_date->toFormattedDateString() : "N/A" }}</td>
+			<td>{{ $docu ? $docu->issue_date->toFormattedDateString() : "N/A" }}</td>
 			<td colspan="2">Philippines</td>
 		</tr>
 
 		@php 
-			$name = "Panama (PA)";
-			$isset = isset($applicant->document_flag->{$name});
-			if($isset){
-				$docu = $applicant->document_flag->{$name};
+			$docu = false;
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Panama" && $document->type == "License"){
+			        $docu = $document;
+			    }
 			}
 		@endphp
 
 		<tr>
 			<td colspan="2">Flag License</td>
 			<td colspan="2"></td>
-			<td>{{ $isset ? $docu->license_no : "N/A" }}</td>
-			<td>{{ $isset ? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
-			<td>{{ $isset ? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $docu ? $docu->number : "N/A" }}</td>
+			<td>{{ $docu ? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $docu ? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
 			<td colspan="2">Panama</td>
 		</tr>
 
 		@php 
-			$name = "Marshall Islands (MH)";
-			$isset = isset($applicant->document_flag->{$name});
-			if($isset){
-				$docu = $applicant->document_flag->{$name};
+			$docu = false;
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Marshall Islands" && $document->type == "GMDSS/GOC"){
+			        $docu = $document;
+			    }
 			}
 		@endphp
 
 		<tr>
 			<td colspan="2">Flag GOC</td>
 			<td colspan="2"></td>
-			<td>{{ $isset? $docu->goc : "N/A" }}</td>
-			<td>{{ $isset ? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
-			<td>{{ $isset ? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $docu? $docu->number : "N/A" }}</td>
+			<td>{{ $docu? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $docu? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
 			<td colspan="2">Marshall Islands</td>
 		</tr>
 
 		@php 
-			$name = "Panama (PA)";
-			$isset = isset($applicant->document_flag->{$name});
-			if($isset){
-				$docu = $applicant->document_flag->{$name};
+			$docu = false;
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Panama" && $document->type == "SSO"){
+			        $docu = $document;
+			    }
 			}
 		@endphp
 
 		<tr>
 			<td colspan="2">Flag SSO</td>
 			<td colspan="2"></td>
-			<td>{{ $isset ? $docu->sso : "N/A" }}</td>
-			<td>{{ $isset ? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
-			<td>{{ $isset ? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $docu ? $docu->number : "N/A" }}</td>
+			<td>{{ $docu ? $docu->issue_date->format('M j, Y') : "N/A" }}</td>
+			<td>{{ $docu ? $docu->expiry_date->format('M j, Y') : "N/A" }}</td>
 			<td colspan="2">Panama</td>
 		</tr>
 
@@ -544,7 +544,7 @@
 
 		{{-- 8TH --}}
 		@php 
-			$name = 'GOC';
+			$name = 'GMDSS/GOC';
 			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 		@endphp
 
