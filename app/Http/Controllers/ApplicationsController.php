@@ -77,9 +77,8 @@ class ApplicationsController extends Controller
         $applicant->load('document_lc');
         $applicant->load('document_med_cert');
         $applicant->load('document_med');
-        $applicant->load('document_med_exp');
 
-        foreach(['document_id', 'document_lc', 'document_med', 'document_med_exp'] as $docuType){
+        foreach(['document_id', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
             foreach($applicant->$docuType as $data){
 
                 if($docuType == 'document_flag'){
@@ -250,13 +249,6 @@ class ApplicationsController extends Controller
         foreach($docu_med as $data){
             $data->applicant_id = $applicant->id;
             DocumentMed::create((array)$data);
-        }
-
-        // SAVE DOCUMENT MED EXP
-        $docu_med_exp = json_decode($req->docu_med_exp);
-        foreach($docu_med_exp as $data){
-            $data->applicant_id = $applicant->id;
-            DocumentMedExp::create((array)$data);
         }
 
         if(true){

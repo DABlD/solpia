@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DocumentMed extends Model
 {
 	protected $fillable = [
-		'type', 'case', 'year', 'applicant_id'
+		'type', 'with_mv', 'year', 'case_remarks', 'applicant_id'
 	];
 
     protected $dates = [

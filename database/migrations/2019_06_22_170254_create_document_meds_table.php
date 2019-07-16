@@ -18,8 +18,9 @@ class CreateDocumentMedsTable extends Migration
             $table->integer('applicant_id');
 
             $table->string('type');
-            $table->string('case');
+            $table->string('with_mv');
             $table->year('year');
+            $table->string('case_remarks');
             $table->timestamps();
             $table->softDeletes();
         });

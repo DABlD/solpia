@@ -67,15 +67,6 @@
 			</a>
 			<br><br>
 			<div class="Med"></div>
-
-			<u><h3><strong>CHECKLIST</strong></h3></u>
-			<span class="MedExpCount fd-count">0</span>
-			<a class="btn btn-success" onclick="addDocu('MedExp')">
-			    <span class="fa fa-plus"></span>
-			    Checklist
-			</a>
-			<br><br>
-			<div class="MedExp"></div>
 		`);
 
 		let issuerString = `
@@ -115,15 +106,13 @@
             let lcType = "docu-lctype";
             let mcType = "docu-mctype";
             let medType = "docu-medtype";
-            let medExpType = "docu-medexptype";
-            let had = "docu-had";
-            let vaccine = "docu-vaccine";
             let medCase = "docu-case";
             let year = "docu-year";
             let clinic = "docu-clinic";
             let number = 'docu-number';
         	let issue_date = 'docu-issue_date';
         	let expiry_date = 'docu-expiry_date';
+        	let with_mv = 'docu-with_mv';
 
         	let country = "docu-country";
 
@@ -224,7 +213,7 @@
         	// CREATE MED OPTIONS
         	var med_options = "";
         	var medOptions = [
-        		'', 'HYPERTENSION', 'DIABETES', "POLYPS", 'GALLSTONE'
+        		'', 'HYPERTENSION', 'DIABETES', "POLYPS", 'GALLSTONE', 'MEASLES', 'CHICKEN POX'
         	];
 
         	medOptions.forEach(docu => {
@@ -355,24 +344,25 @@
             	    <div class="row docu">
 						
 						<span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
+
             	        <div class="form-group col-md-3">
-            	            <label for="${medType}${count}">Type</label>
+            	            <label for="${medType}${count}">TYPE</label>
             	            <select class="${docu_class} ${medType}" name="${medType}${count}">
-            	            	<option></option>
-            	            	<option value="OPERATION">OPERATION</option>
-            	            	<option value="MEDICATION">MEDICATION</option>
+            	            	${med_options}
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${medType}${count}Error"></strong>
             	            </span>
             	        </div>
             	        <div class="form-group col-md-3">
-            	            <label for="${medCase}${count}">CASE</label>
-            	            <select class="${docu_class} ${medCase}" name="${medCase}${count}">
-            	            	${med_options}
+            	            <label for="${with_mv}${count}">WITH VACCINE/MEDICATION</label>
+            	            <select class="${docu_class} ${with_mv}" name="${with_mv}${count}">
+            	            	<option></option>
+            	            	<option value="YES">YES</option>
+            	            	<option value="NO">NO</option>
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
-            	                <strong id="${medCase}${count}Error"></strong>
+            	                <strong id="${with_mv}${count}Error"></strong>
             	            </span>
             	        </div>
             	        <div class="form-group col-md-3">
@@ -382,40 +372,11 @@
             	                <strong id="${year}${count}Error"></strong>
             	            </span>
             	        </div>
-            	    </div>
-            	    <hr>`;
-            }
-            else if(type == "MedExp"){
-            	
-            	string = `
-            	    <div class="row docu">
-						
-						<span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
-            	        <div class="form-group col-md-2">
-            	            <label for="${medExpType}${count}">Type</label>
-            	            <select class="${docu_class} ${medExpType}" name="${medExpType}${count}">
-            	            	<option></option>
-            	            	<option value="MEASLES">MEASLES</option>
-            	            	<option value="CHICKEN POX">CHICKEN POX</option>
-            	            </select>
+            	        <div class="form-group col-md-3">
+            	            <label for="${medCase}${count}">Case/Remark</label>
+            	            <input type="text" class="${docu_class2} ${medCase}" name="${medCase}${count}" placeholder="Enter Case/Remark">
             	            <span class="invalid-feedback hidden" role="alert">
-            	                <strong id="${medExpType}${count}Error"></strong>
-            	            </span>
-            	        </div>
-            	        <div class="form-group col-md-2">
-            	            <label for="${had}${count}">Check if experienced</label>
-            	            <br>
-            	            <input type="checkbox" class="${had}" name="${had}${count}"/>
-            	            <span class="invalid-feedback hidden" role="alert">
-            	                <strong id="${had}${count}Error"></strong>
-            	            </span>
-            	        </div>
-            	        <div class="form-group col-md-2">
-            	            <label for="${vaccine}${count}">Check if with vaccine</label>
-            	            <br>
-            	            <input type="checkbox" class="${vaccine}" name="${vaccine}${count}"/>
-            	            <span class="invalid-feedback hidden" role="alert">
-            	                <strong id="${vaccine}${count}Error"></strong>
+            	                <strong id="${medCase}${count}Error"></strong>
             	            </span>
             	        </div>
             	    </div>
@@ -525,17 +486,10 @@
             else if(type == "Med"){
             	$(`[name="${medType}${count}"]`).select2({
             		placeholder: 'Select Type',
-            	});
-
-            	$(`[name="${medCase}${count}"]`).select2({
-            		placeholder: 'Select Type',
             		tags: true
             	});
-            }
-            else if(type == "MedExp"){
-            	$(`[name="${medExpType}${count}"]`).select2({
-            		placeholder: 'Select Type',
-            		tags: true
+            	$(`[name="${with_mv}${count}"]`).select2({
+            		placeholder: 'YES/NO',
             	});
             }
             else{
