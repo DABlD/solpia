@@ -102,7 +102,7 @@
         }
 
         .navbar .container{
-            max-width: 90%;
+            max-width: 900px;
             box-shadow: none;
         }
 
