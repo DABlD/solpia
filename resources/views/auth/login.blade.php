@@ -78,6 +78,8 @@
     <style>
         body{
             background-image: url('images/bg.jpg');
+			background-size: cover;
+			height: 100vh;
         }
 
         .navbar-laravel{
@@ -98,17 +100,17 @@
         }
 
         .container{
-            max-width: 30%;
+            max-width: 900px;
         }
 
         .navbar .container{
-            max-width: 900px;
+            max-width: 90%;
             box-shadow: none;
         }
 
         img{
-            width: 200px;
-            height: 200px;
+            width: 130px;
+            height: 130px;
             margin-right: 20px;
         }
 
