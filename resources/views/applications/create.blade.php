@@ -303,13 +303,6 @@
                 tempFd.occupation   = inputs[i+5].value;
                 tempFd.email      = inputs[i+6].value;
                 tempFd.address      = inputs[i+7].value;
-                console.log(i);
-                console.log(i+1);
-                console.log(i+2);
-                console.log(i+4);
-                console.log(i+5);
-                console.log(i+6);
-                console.log(i+7);
                 fd.push(tempFd);
             }
 
@@ -438,6 +431,23 @@
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_lc" value='${JSON.stringify(docu_lc)}'>
+            `);
+
+            // MedCert
+            inputs = $('#docu .MedCert input, #docu .MedCert select');
+            let docu_med_cert = [];
+
+            for(let i = 0; i < inputs.length; i+= 6){
+                let tempMedCert = {};
+                tempMedCert.type        = inputs[i].value;
+                tempMedCert.clinic      = inputs[i+1].value;
+                tempMedCert.issue_date  = inputs[i+2].value;
+                tempMedCert.expiry_date  = inputs[i+4].value;
+                docu_med_cert.push(tempMedCert);
+            }
+
+            $('#createForm').append(`
+                <input type="hidden" name="docu_med_cert" value='${JSON.stringify(docu_med_cert)}'>
             `);
 
             // Med

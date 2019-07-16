@@ -52,6 +52,10 @@ class Applicant extends Model
         return $this->hasMany('App\Models\DocumentLC');
     }
 
+    public function document_med_cert(){
+        return $this->hasMany('App\Models\DocumentMedCert');
+    }
+
     public function document_med(){
         return $this->hasMany('App\Models\DocumentMed');
     }

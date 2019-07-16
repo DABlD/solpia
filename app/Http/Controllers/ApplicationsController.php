@@ -9,7 +9,7 @@ use App\User;
 use App\Models\{ProcessedApplicant, Applicant};
 use App\Models\{EducationalBackground, FamilyData, SeaService};
 use App\Models\{Vessel, Rank, Principal};
-use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMed, DocumentMedExp};
+use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMedCert, DocumentMed, DocumentMedExp};
 
 use Image;
 
@@ -75,7 +75,7 @@ class ApplicationsController extends Controller
         $applicant->load('document_id');
         $applicant->load('document_flag');
         $applicant->load('document_lc');
-        $applicant->load('document_lc');
+        $applicant->load('document_med_cert');
         $applicant->load('document_med');
         $applicant->load('document_med_exp');
 
@@ -236,6 +236,13 @@ class ApplicationsController extends Controller
             $data->applicant_id = $applicant->id;
             $data->regulation = json_encode($data->regulation);
             DocumentLC::create((array)$data);
+        }
+
+        // SAVE DOCUMENT MED CERT
+        $docu_med_cert = json_decode($req->docu_med_cert);
+        foreach($docu_med_cert as $data){
+            $data->applicant_id = $applicant->id;
+            DocumentMedCert::create((array)$data);
         }
 
         // SAVE DOCUMENT MED
