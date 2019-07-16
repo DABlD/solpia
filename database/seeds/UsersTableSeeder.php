@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
             'fname' => 'Admin',
             'mname' => 'admin',
             'lname' => 'Istrator',
+            'username' => 'admin',
             'role' => 'Admin',
             'email' => 'admin@admin.com',
             'birthday' => '1997-11-12',
@@ -52,6 +53,7 @@ class UsersTableSeeder extends Seeder
         foreach($principals as $name){
             $user = new User();
             $user->fname = $name;
+            $user->username = strtolower($name);
             $user->role = 'Principal';
             $user->applicant = false;
             $user->email = camel_case(strtolower($name)) . '@solpia.email';
