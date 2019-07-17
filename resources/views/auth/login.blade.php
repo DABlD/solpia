@@ -85,6 +85,7 @@
         .navbar-laravel{
             background-color: rgba(255, 255, 255, 0);
             border-color: rgba(255, 255, 255, 0);
+            box-shadow: none;
         }
 
         .navbar-brand{
@@ -105,7 +106,6 @@
 
         .navbar .container{
             max-width: 90%;
-            box-shadow: none;
         }
 
         img{
