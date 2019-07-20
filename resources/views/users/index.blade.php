@@ -93,13 +93,13 @@
 	    				let fields = "";
 
 	    				let names = [
-	    					'First Name', 'Middle Name', 'Last Name', 
+	    					'First Name', 'Middle Name', 'Last Name', 'Username',
 	    					'Birthday', 'Gender', 'Role',
 	    					'Contact', 'Created At'
 	    				];
 
 	    				let columns = [
-	    					'fname', 'mname', 'lname',
+	    					'fname', 'mname', 'lname', 'username',
 	    					'birthday', 'gender', 'role',
 	    					'contact', 'created_at'
 	    				];

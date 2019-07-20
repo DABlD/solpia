@@ -50,6 +50,16 @@
                         </div>
 
                         <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control aeigh" name="username" placeholder="Enter Username">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="usernameError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email">
