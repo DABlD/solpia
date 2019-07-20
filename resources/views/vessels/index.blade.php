@@ -61,7 +61,10 @@
 	<script>
 		let table = $('#table').DataTable({
             serverSide: true,
-            ajax: '{{ route('datatables.vessels') }}',
+            ajax: {
+                url: '{{ route('datatables.vessels') }}',
+                type: 'POST',
+            },
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },

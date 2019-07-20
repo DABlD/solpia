@@ -65,7 +65,10 @@
 	<script>
 		let table = $('#table').DataTable({
             serverSide: true,
-            ajax: '{{ route('datatables.processedApplicant') }}',
+            ajax: {
+            	url: '{{ route('datatables.processedApplicant') }}',
+            	type: 'POST',
+            },
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'user.avatar', name: 'user.avatar' },

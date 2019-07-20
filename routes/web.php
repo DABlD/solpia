@@ -131,9 +131,9 @@ Route::group([
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 
 		// DATATABLE ROUTES
-		Route::get('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
-		Route::get('datatables/users', 'DatatablesController@users')->name('datatables.users');
-		Route::get('datatables/processedApplicant', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');
-		Route::get('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');
+		Route::post('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
+		Route::post('datatables/users', 'DatatablesController@users')->name('datatables.users');
+		Route::post('datatables/processedApplicant', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');
+		Route::post('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');
 	}
 );

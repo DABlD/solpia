@@ -51,7 +51,10 @@
 	<script>
 		let table = $('#table').DataTable({
             serverSide: true,
-            ajax: '{{ route('datatables.users') }}',
+            ajax: {
+            	url: '{{ route('datatables.users') }}',
+            	type: 'POST',
+            },
             columns: [
                 { data: 'fullname', name: 'fullname' },
                 { data: 'role', name: 'role' },
