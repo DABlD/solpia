@@ -8,7 +8,7 @@ use App\User;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin/Encoder');
+        $this->middleware('permissions:' . 'Admin');
     }
 
     public function index(){
