@@ -1,8 +1,11 @@
 
   <header class="main-header">
     <a href="index2.html" class="logo">
-      <span class="logo-mini">Logo</span>
-      <span class="logo-lg">{{ env('app_name') }}</span>
+      <span class="logo-mini">
+        <img src="{{ asset('images/logo.png') }}" alt="Solpia Logo" width="30px" height="30px">
+      </span>
+      {{-- <span class="logo-lg">{{ env('app_name') }}</span> --}}
+      <span class="logo-lg">Solpia</span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

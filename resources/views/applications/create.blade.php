@@ -345,6 +345,10 @@
             let eb = [];
 
             for(let i = 0; i < inputs.length; i+=6){
+                if(checkIfVisible(inputs[i])){
+                    return
+                }
+
                 let tempEb = {};
                 tempEb.type         = inputs[i].value;
                 tempEb.course       = inputs[i+1].value;
@@ -527,5 +531,9 @@
             $(e).parent().addClass('hidden');
             $(`.${type}Count`)[0].innerText -= 1;
         };
+
+        function checkIfVisible(element){
+            $(element).parent().parent().find('.fa-times').is(':visible');
+        }
     </script>
 @endpush
