@@ -59,7 +59,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email">
@@ -67,12 +67,12 @@
                                     <strong id="emailError"></strong>
                                 </span>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="contact">Contact Number</label>
-                                <input type="text" class="form-control aeigh" name="contact" placeholder="Enter Contact Number">
+                                <input type="text" class="form-control" name="contact" placeholder="Enter Contact Number">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="contactError"></strong>
                                 </span>

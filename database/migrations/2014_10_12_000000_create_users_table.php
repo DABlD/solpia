@@ -22,11 +22,12 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default('images/default_avatar.jpg');
             $table->enum('role', ['Admin', 'Encoder', 'Applicant', 'Principal'])->nullable();
             
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
+            // $table->string('email')->unique();
             $table->date('birthday');
             $table->string('gender');
             $table->text('address');
-            $table->string('contact');
+            $table->string('contact')->nullable();
 
             $table->boolean('applicant')->default(1);
 
