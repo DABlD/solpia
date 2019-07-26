@@ -53,7 +53,7 @@ class UsersTableSeeder extends Seeder
         foreach($principals as $name){
             $user = new User();
             $user->fname = $name;
-            $user->username = strtolower($name);
+            $user->username = strtolower(camel_case($name));
             $user->role = 'Principal';
             $user->applicant = false;
             $user->email = camel_case(strtolower($name)) . '@solpia.email';
