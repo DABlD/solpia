@@ -5,13 +5,12 @@
 	
 		$('#docu').append(`
 			<u><h3><strong>ID</strong></h3></u>
+			<div class="ID"></div>
 			<span class="IDCount fd-count">0</span>
 			<a class="btn btn-success" onclick="addDocu('ID')">
 			    <span class="fa fa-plus"></span>
 			    ID
 			</a>
-			<br><br>
-			<div class="ID"></div>
 
 			<u><h3><strong>Flag</strong></h3></u>
 
@@ -33,40 +32,36 @@
 			    </div>
 			</div>
 
+			<div class="Flag"></div>
 			<span class="FlagCount fd-count">0</span>
 			<a class="btn btn-success" onclick="addDocu('Flag')">
 			    <span class="fa fa-plus"></span>
 			    Flag
 			</a>
-			<br><br>
-			<div class="Flag"></div>
 
 			<u><h3><strong>License/Certificates</strong></h3></u>
+			<div class="lc"></div>
 			<span class="lcCount fd-count">0</span>
 			<a class="btn btn-success" onclick="addDocu('lc')">
 			    <span class="fa fa-plus"></span>
 			    License/Certificates
 			</a>
-			<br><br>
-			<div class="lc"></div>
 
 			<u><h3><strong>Medical Certificates</strong></h3></u>
+			<div class="MedCert"></div>
 			<span class="MedCertCount fd-count">0</span>
 			<a class="btn btn-success" onclick="addDocu('MedCert')">
 			    <span class="fa fa-plus"></span>
 			    Medical Certificates
 			</a>
-			<br><br>
-			<div class="MedCert"></div>
 
 			<u><h3><strong>Medical History</strong></h3></u>
+			<div class="Med"></div>
 			<span class="MedCount fd-count">0</span>
 			<a class="btn btn-success" onclick="addDocu('Med')">
 			    <span class="fa fa-plus"></span>
 			    Medical History
 			</a>
-			<br><br>
-			<div class="Med"></div>
 		`);
 
 		let issuerString = `

@@ -23,11 +23,11 @@
                         {{-- EDUCATIONAL BACKGROUND --}}
                         <h2><strong>Educational Background</strong></h2>
                         <hr>
+                        @include('applications.includes.educational_background')
                         <span class="ebCount fd-count">0</span>
                         <a class="btn btn-success" onclick="addEB()">
                             <span class="fa fa-plus"></span>
                         </a>
-                        @include('applications.includes.educational_background')
                         
                         {{-- FAMILY DATA --}}
                         <h2><strong>Family Data</strong></h2>
@@ -42,11 +42,11 @@
                         {{-- SEA SERVICE --}}
                         <h2><strong>Sea Service</strong></h2>
                         <hr>
+                        @include('applications.includes.sea_service')
                         <span class="ssCount fd-count">0</span>
                         <a class="btn btn-success" onclick="addSS()">
                             <span class="fa fa-plus"></span>
                         </a>
-                        @include('applications.includes.sea_service')
 
                         <div class="form-group row mb-0">
                             <div class="col-md-2 col-md-offset-10">
