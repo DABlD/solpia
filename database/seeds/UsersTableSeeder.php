@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
 
         $principals = [
             'SHINKO', 'KOSCO', 'TOEI', 'SMTECH', 'SC MARINE',
-            'IMSCO', 'SEYEONG', 'HAJOO', 'WESTERN', 'KLCSM', 
+            'IMSCO', 'SEYEONG', 'HANJOO', 'WESTERN', 'KLCSM', 
             'H-LINE', 'DINTEC', 'HMS', 'NAUTICA'
         ];
 

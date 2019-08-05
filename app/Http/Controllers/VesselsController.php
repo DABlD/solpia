@@ -4,9 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Vessel, Principal};
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\VesselsImport;
 
 class VesselsController extends Controller
 {
+    public function import(Request $req){
+        Excel::import(new VesselsImport, $req->file('file'));
+
+        if(true){
+            $req->session()->flash('success', 'Vessels successfully imported');
+            return back();
+        }
+        else{
+            $req->session()->flash('error', 'There was a problem importing the vessels. Please try again.');
+            return back();
+        }
+    }
+
     public function get(Request $req, $id = null){
     	echo json_encode(
             !$id ?

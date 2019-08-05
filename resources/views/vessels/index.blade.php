@@ -156,6 +156,22 @@
                     }
                 });
             });
+
+            $('[data-original-title="Import Vessels"]').on('click', () => {
+                swal({
+                    title: 'Select Excel File with Vessel Data',
+                    html: `
+                        <form id="vesselForm" method="POST" action="{{ route('vessels.import') }}" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="file" class="swal2-file">
+                        </form>
+                    `
+                }).then(file => {
+                    if(file.value){
+                        $('#vesselForm').submit();
+                    }
+                });
+            });
 	    }
 	</script>
 @endpush
