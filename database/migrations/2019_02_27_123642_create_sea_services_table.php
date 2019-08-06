@@ -34,8 +34,6 @@ class CreateSeaServicesTable extends Migration
             $table->date('sign_off');
             $table->integer('total_months');
             $table->text('remarks')->nullable();
-            $table->string('charterer', 100)->nullable();
-            $table->text('cargoes')->nullable();
             $table->timestamps();
         });
     }

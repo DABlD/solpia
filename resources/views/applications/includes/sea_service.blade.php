@@ -133,20 +133,6 @@
                             <strong id="sign_off${count}Error"></strong>
                         </span>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="charterer${count}">Charterer</label>
-                        <input type="text" class="form-control" name="charterer${count}" placeholder="Charterer">
-                        <span class="invalid-feedback hidden" role="alert">
-                            <strong id="charterer${count}Error"></strong>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="cargoes${count}">Cargoes</label>
-                        <input type="text" class="form-control" name="cargoes${count}" placeholder="Cargoes">
-                        <span class="invalid-feedback hidden" role="alert">
-                            <strong id="cargoes${count}Error"></strong>
-                        </span>
-                    </div>
                     <div class="form-group col-md-12">
                         <label for="remarks${count}">Remarks</label>
                         <input type="text" class="form-control" name="remarks${count}" placeholder="Remarks">

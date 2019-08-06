@@ -153,9 +153,7 @@
                 $('[name="sign_on1"]').flatpickr().setDate('2019-02-01', true);
                 $('[name="sign_off1"]').flatpickr().setDate('2019-02-28', true);
 
-                $('#sea-services input')[12].value = "Charterer 1";
-                $('#sea-services input')[13].value = "Cargo 1, Cargo 2";
-                $('#sea-services input')[14].value = "So so";
+                $('#sea-services input')[12].value = "So so";
             }, 2000);
 
             setTimeout(() => {
@@ -171,9 +169,7 @@
                 $('[name="sign_on2"]').flatpickr().setDate('2019-03-01', true);
                 $('[name="sign_off2"]').flatpickr().setDate('2019-03-30', true);
 
-                $('#sea-services input')[27].value = "Charterer 2";
-                $('#sea-services input')[28].value = "Cargo 3, Cargo 4";
-                $('#sea-services input')[29].value = "Not So so";
+                $('#sea-services input')[27].value = "Not So so";
 
                 $('[name="vessel_name2"]').select2('close');
             }, 2000);
@@ -317,7 +313,7 @@
             // COMPRESS SS
             inputs = $('#sea-services input, #sea-services select');
             let ss = [];
-            for(let i = 0; i < inputs.length; i+= 17){
+            for(let i = 0; i < inputs.length; i+= 15){
                 if(!checkIfVisible(inputs[i])){
                     continue;
                 }
@@ -337,9 +333,7 @@
                 tempSS.crew_nationality = inputs[i+11].value;
                 tempSS.sign_on          = inputs[i+12].value;
                 tempSS.sign_off         = inputs[i+13].value;
-                tempSS.charterer        = inputs[i+14].value;
-                tempSS.cargoes          = inputs[i+15].value;
-                tempSS.remarks          = inputs[i+16].value;
+                tempSS.remarks          = inputs[i+14].value;
                 tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
                 ss.push(tempSS);
             }
