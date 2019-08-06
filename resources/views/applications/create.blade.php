@@ -295,6 +295,10 @@
             let fd = [];
 
             for(let i = 0; i < inputs.length; i+=8){
+                if(!checkIfVisible(inputs[i])){
+                    continue;
+                }
+
                 let tempFd = {};
                 tempFd.type         = inputs[i].value;
                 tempFd.name         = inputs[i+1].value;
@@ -314,6 +318,10 @@
             inputs = $('#sea-services input, #sea-services select');
             let ss = [];
             for(let i = 0; i < inputs.length; i+= 17){
+                if(!checkIfVisible(inputs[i])){
+                    continue;
+                }
+
                 let tempSS = {};
                 tempSS.vessel_name      = inputs[i].value;
                 tempSS.rank             = inputs[i+1].value;
@@ -345,8 +353,8 @@
             let eb = [];
 
             for(let i = 0; i < inputs.length; i+=6){
-                if(checkIfVisible(inputs[i])){
-                    return
+                if(!checkIfVisible(inputs[i])){
+                    continue;
                 }
 
                 let tempEb = {};
@@ -369,6 +377,10 @@
             let docu_id = [];
 
             for(let i = 0; i < inputs.length; i+=7){
+                if(!checkIfVisible(inputs[i])){
+                    continue;
+                }
+
                 let tempID = {};
                 tempID.type             = inputs[i].value;
                 tempID.issuer           = inputs[i+1].value;
@@ -392,6 +404,10 @@
                 inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
 
                 for(let i = 0; i < inputs.length; i+=6){
+                    if(!checkIfVisible($(inputs[i]).parent().parent().parent())){
+                        continue;
+                    }
+
                     let tempFlag = {};
                     tempFlag.country    = country.value;
                     tempFlag.rank       = rank;
@@ -417,6 +433,10 @@
             let docu_lc = [];
 
             for(let i = 0; i < inputs.length; i+=9){
+                if(!checkIfVisible(inputs[i])){
+                    continue;
+                }
+
                 let tempLc = {};
                 tempLc.type         = inputs[i].value
                 tempLc.rank         = rank;
@@ -442,6 +462,10 @@
             let docu_med_cert = [];
 
             for(let i = 0; i < inputs.length; i+= 6){
+                if(!checkIfVisible(inputs[i])){
+                    continue;
+                }
+
                 let tempMedCert = {};
                 tempMedCert.type        = inputs[i].value;
                 tempMedCert.clinic      = inputs[i+1].value;
@@ -459,6 +483,10 @@
             let docu_med = [];
 
             for(let i = 0; i < inputs.length; i+=4){
+                if(!checkIfVisible(inputs[i])){
+                    continue;
+                }
+                
                 let tempMed = {};
                 tempMed.type            = inputs[i].value;
                 tempMed.with_mv         = inputs[i+1].value;
@@ -533,7 +561,7 @@
         };
 
         function checkIfVisible(element){
-            $(element).parent().parent().find('.fa-times').is(':visible');
+            return $(element).parent().parent().find('.fa-times').is(':visible');
         }
     </script>
 @endpush
