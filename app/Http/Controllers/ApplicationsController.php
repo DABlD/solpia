@@ -161,7 +161,7 @@ class ApplicationsController extends Controller
 
     public function store(Request $req){
         $user = collect($req->only([
-            'fname','mname','lname',
+            'fname','mname','lname', 'suffix',
             'birthday','address','contact',
             'email','gender'
         ]))->put('password', '123456')->put('role', 'Applicant');

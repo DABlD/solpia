@@ -22,25 +22,32 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-2">
+        <label for="lname">Last Name</label>
+        <input type="text" class="form-control aeigh" name="lname" placeholder="Enter Last Name">
+        <span class="invalid-feedback hidden" role="alert">
+            <strong id="lnameError"></strong>
+        </span>
+    </div>
+    <div class="form-group col-md-2">
         <label for="fname">First Name</label>
         <input type="text" class="form-control aeigh" name="fname" placeholder="Enter First Name" autofocus>
         <span class="invalid-feedback hidden" role="alert">
             <strong id="fnameError"></strong>
         </span>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-2">
         <label for="mname">Middle Name</label>
         <input type="text" class="form-control aeigh" name="mname" placeholder="Enter Middle Name">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="mnameError"></strong>
         </span>
     </div>
-    <div class="form-group col-md-4">
-        <label for="lname">Last Name</label>
-        <input type="text" class="form-control aeigh" name="lname" placeholder="Enter Last Name">
+    <div class="form-group col-md-1">
+        <label for="suffix">Suffix</label>
+        <input type="text" class="form-control" name="suffix" placeholder="Enter Suffix">
         <span class="invalid-feedback hidden" role="alert">
-            <strong id="lnameError"></strong>
+            <strong id="suffixError"></strong>
         </span>
     </div>
 </div>

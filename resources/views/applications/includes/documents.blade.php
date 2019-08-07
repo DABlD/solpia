@@ -744,245 +744,290 @@
         });
 
         let list = [
-        // LICENSES
+     //    // LICENSES
+     //    	{
+     //    		range: [1, 2],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'COC', 'COE', 'GMDSS/GOC'
+     //    		],
+     //    		regulation: [
+     //    			['II/2', 'IV/2'],
+     //    			['II/2', 'IV/2'],
+     //    			['IV/2'],
+     //    		]
+     //    	},
+     //    	{
+     //    		range: [3, 4],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'COC', 'COE', 'GMDSS/GOC'
+     //    		],
+     //    		regulation: [
+     //    			['II/1', 'IV/2'],
+     //    			['II/1', 'IV/2'],
+     //    			['IV/2'],
+     //    		]
+     //    	},
+     //    	{
+     //    		range: [5, 6],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'COC', 'COE'
+     //    		],
+     //    		regulation: [
+     //    			['III/2'],
+     //    			['III/2']
+     //    		]
+     //    	},
+     //    	{
+     //    		range: [7, 8],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'COC', 'COE'
+     //    		],
+     //    		regulation: [
+     //    			['III/1'],
+     //    			['III/1']
+     //    		]
+     //    	},
+     //    	{
+     //    		range: [9, 14],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'COC', 'COE'
+     //    		],
+     //    		regulation: [
+     //    			['II/4'],
+     //    			['II/5']
+     //    		]
+     //    	},
+     //    	{
+     //    		range: [15, 21],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'COC', 'COE'
+     //    		],
+     //    		regulation: [
+     //    			['III/4'],
+     //    			['III/5']
+     //    		]
+     //    	},
+     //    	{
+     //    		range: [22, 27],
+     //    		issuer: 'TESDA',
+     //    		documents: [
+     //    			'NCI', 'NCII', 'NCIII'
+     //    		],
+     //    		regulation: [
+     //    			['--'],
+     //    			['--'],
+     //    			['--']
+     //    		]
+     //    	},
+     //    // CERTIFICATES
+     //    	// ALL
+     //    	{
+     //    		range: [1, 27],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'BASIC TRAINING - BT', 
+     //    			'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
+     //    			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
+     //    			'HAZMAT', 
+     //    			'ENGLISH TEST', 
+     //    			'ANTI PIRACY', 
+     //    			'IN HOUSE TRAINING CERT WITH ISM', 
+     //    			'GENERAL TRAINING RECORD BOOK', 
+     //    			'PDOS'
+     //    		],
+     //    		regulation: [
+     //    			['VI/1'],
+     //    			['VI/2.1'],
+     //    			['VI/6'],
+     //    			[],[],[],
+     //    			[],[],[],
+     //    		]
+     //    	},
+     //    	// OFFICERS
+     //    	{
+     //    		range: [1, 8],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'FAST RESCUE BOAT - FRB',
+     //    			'ADVANCE FIRE FIGHTING - AFF',
+     //    			'MEDICAL FIRST AID - MEFA',
+     //    			'MEDICAL CARE - MECA',
+     //    			'SHIP SECURITY OFFICER - SSO',
+     //    			'MARPOL 73/78',
+     //    			'KML TRAINING',
+     //    			'ECDIS TRANSAS',
+     //    			'MLC TRAINING F1',
+     //    			'MLC TRAINING F2',
+     //    			'MLC TRAINING F3',
+     //    			'MLC TRAINING F4',
+     //    		],
+     //    		regulation: [
+     //    			['VI/2.2'],
+     //    			['VI/3'],
+     //    			['VI/4.1'],
+     //    			['VI/4.2'],
+     //    			['VI/5'],
+     //    			[],[],[],[],
+     //    			[],[],[],
+
+     //    		]
+     //    	},
+     //    	// DECK OFFICERS
+     //    	{
+     //    		range: [1, 4],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'RADAR SIMULATOR COURSE',
+     //    			'BRIDGE TEAM/RESOURCE MANAGEMENT',
+     //    			'SHIP SAFETY OFFICER',
+     //    			// 'GMDSS/GOC',
+     //    			'SSBT',
+     //    			'ARPA TRAINING COURSE',
+     //    			'ECDIS',
+					// 'ECDIS FURUNO 2107',
+					// 'ECDIS FURUNO 3200',
+					// 'ECDIS FURUNO 3300',
+					// 'ECDIS JRC 701B',
+					// 'ECDIS JRC 7201',
+					// 'ECDIS JRC 901B',
+					// 'ECDIS JRC 9201',
+					// 'ECDIS MARTEK',
+					// 'ECDIS MECYS',
+					// 'CARGO HANDLING',
+					// 'STABILITY AND TRIM',
+					// 'COLLISION AVOIDANCE',
+					// 'DANGEROUS FLUID CARGO COURSE',
+					// 'SHIP HANDLING SIMULATION',
+					// 'POLLUTION PREVENTION COURSE',
+					// 'RISK ASSESMENT/INCIDENT INVESTIGATION COURSE',
+					// 'ADVANCE NAVIGATION',
+					// 'ADVANCE SHIPBOARD OPERATION AND MGT.',
+					// 'SATELLITE COMMUNICATION COURSE',
+     //    		],
+     //    		regulation: [
+     //    			[],[],[],[],[],[],
+     //    			[],[],[],[],[],[],
+     //    			[],[],[],[],[],[],
+     //    			[],[],[],[],[],[],
+     //    			[],[],
+     //    		]
+     //    	},
+     //    	// ENGINE OFFICERS
+     //    	{
+     //    		range: [5, 8],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'ERS WITH ERM',
+					// 'AUXILIARY MACHINERY SYSTEM',
+					// 'CONTROL ENGINEERING',
+					// 'HYDRAULICS/PNEUMATICS',
+					// 'MARINE ELECTRO TECH',
+					// 'ELECTRONIC EQUIPMENT',
+					// 'MARINE ELECTRICAL',
+					// 'MARINE REFRIGIRATION/AIRCONDITIONING',
+     //    		],
+     //    		regulation: [
+     //    			[],[],[],[],
+     //    			[],[],[],[],
+     //    		]
+     //    	},
+     //    	// 2/0, 3/0
+     //    	{
+     //    		range: [3, 4],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'OLC TRAINING F1',
+     //    			'OLC TRAINING F2',
+     //    			'OLC TRAINING F3',
+     //    		],
+     //    		regulation: [
+     //    			[],[],[]
+     //    		]
+     //    	},
+     //    	// 2AE, 3AE
+     //    	{
+     //    		range: [7,8],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'OLC TRAINING F1',
+     //    			'OLC TRAINING F2',
+     //    			'OLC TRAINING F3',
+     //    		],
+     //    		regulation: [
+     //    			[],[],[]
+     //    		]
+     //    	},
+     //    	// ENGINE RATINGS
+     //    	{
+     //    		range: [15, 21],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'WELDING CERT/SMAW'
+     //    		],
+     //    		regulation: [
+     //    			[]
+     //    		]
+     //    	},
+     //    	// GALLEY
+     //    	{
+     //    		range: [22, 27],
+     //    		issuer: 'MARINA',
+     //    		documents: [
+     //    			'CATERING TRAINING CERT'
+     //    		],
+     //    		regulation: [
+     //    			[]
+     //    		]
+     //    	},
+        // NEW
         	{
-        		range: [1, 2],
-        		issuer: 'MARINA',
+        		range: [1, 4],
+        		issuer: '',
         		documents: [
-        			'COC', 'COE', 'GMDSS/GOC'
-        		],
-        		regulation: [
-        			['II/2', 'IV/2'],
-        			['II/2', 'IV/2'],
-        			['IV/2'],
-        		]
-        	},
-        	{
-        		range: [3, 4],
-        		issuer: 'MARINA',
-        		documents: [
-        			'COC', 'COE', 'GMDSS/GOC'
-        		],
-        		regulation: [
-        			['II/1', 'IV/2'],
-        			['II/1', 'IV/2'],
-        			['IV/2'],
-        		]
-        	},
-        	{
-        		range: [5, 6],
-        		issuer: 'MARINA',
-        		documents: [
-        			'COC', 'COE'
-        		],
-        		regulation: [
-        			['III/2'],
-        			['III/2']
-        		]
-        	},
-        	{
-        		range: [7, 8],
-        		issuer: 'MARINA',
-        		documents: [
-        			'COC', 'COE'
-        		],
-        		regulation: [
-        			['III/1'],
-        			['III/1']
-        		]
-        	},
-        	{
-        		range: [9, 14],
-        		issuer: 'MARINA',
-        		documents: [
-        			'COC', 'COE'
-        		],
-        		regulation: [
-        			['II/4'],
-        			['II/5']
-        		]
-        	},
-        	{
-        		range: [15, 21],
-        		issuer: 'MARINA',
-        		documents: [
-        			'COC', 'COE'
-        		],
-        		regulation: [
-        			['III/4'],
-        			['III/5']
-        		]
-        	},
-        	{
-        		range: [22, 27],
-        		issuer: 'TESDA',
-        		documents: [
-        			'NCI', 'NCII', 'NCIII'
-        		],
-        		regulation: [
-        			['--'],
-        			['--'],
-        			['--']
-        		]
-        	},
-        // CERTIFICATES
-        	// ALL
-        	{
-        		range: [1, 27],
-        		issuer: 'MARINA',
-        		documents: [
+        			'COC', 
+        			'COE', 
+        			'GMDSS/GOC',
         			'BASIC TRAINING - BT', 
         			'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
-        			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
-        			'HAZMAT', 
-        			'ENGLISH TEST', 
-        			'ANTI PIRACY', 
-        			'IN HOUSE TRAINING CERT WITH ISM', 
-        			'GENERAL TRAINING RECORD BOOK', 
-        			'PDOS'
-        		],
-        		regulation: [
-        			['VI/1'],
-        			['VI/2.1'],
-        			['VI/6'],
-        			[],[],[],
-        			[],[],[],
-        		]
-        	},
-        	// OFFICERS
-        	{
-        		range: [1, 8],
-        		issuer: 'MARINA',
-        		documents: [
-        			'FAST RESCUE BOAT - FRB',
         			'ADVANCE FIRE FIGHTING - AFF',
         			'MEDICAL FIRST AID - MEFA',
         			'MEDICAL CARE - MECA',
-        			'SHIP SECURITY OFFICER - SSO',
-        			'MARPOL 73/78',
-        			'KML TRAINING',
-        			'ECDIS TRANSAS',
-        			'MLC TRAINING F1',
-        			'MLC TRAINING F2',
-        			'MLC TRAINING F3',
-        			'MLC TRAINING F4',
+        			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
         		],
         		regulation: [
-        			['VI/2.2'],
-        			['VI/3'],
-        			['VI/4.1'],
-        			['VI/4.2'],
-        			['VI/5'],
-        			[],[],[],[],
-        			[],[],[],
-
+        			[],[],[],[],[],[],[],[],[],
         		]
         	},
-        	// DECK OFFICERS
-        	{
-        		range: [1, 4],
-        		issuer: 'MARINA',
-        		documents: [
-        			'RADAR SIMULATOR COURSE',
-        			'BRIDGE TEAM/RESOURCE MANAGEMENT',
-        			'SHIP SAFETY OFFICER',
-        			// 'GMDSS/GOC',
-        			'SSBT',
-        			'ARPA TRAINING COURSE',
-        			'ECDIS',
-					'ECDIS FURUNO 2107',
-					'ECDIS FURUNO 3200',
-					'ECDIS FURUNO 3300',
-					'ECDIS JRC 701B',
-					'ECDIS JRC 7201',
-					'ECDIS JRC 901B',
-					'ECDIS JRC 9201',
-					'ECDIS MARTEK',
-					'ECDIS MECYS',
-					'CARGO HANDLING',
-					'STABILITY AND TRIM',
-					'COLLISION AVOIDANCE',
-					'DANGEROUS FLUID CARGO COURSE',
-					'SHIP HANDLING SIMULATION',
-					'POLLUTION PREVENTION COURSE',
-					'RISK ASSESMENT/INCIDENT INVESTIGATION COURSE',
-					'ADVANCE NAVIGATION',
-					'ADVANCE SHIPBOARD OPERATION AND MGT.',
-					'SATELLITE COMMUNICATION COURSE',
-        		],
-        		regulation: [
-        			[],[],[],[],[],[],
-        			[],[],[],[],[],[],
-        			[],[],[],[],[],[],
-        			[],[],[],[],[],[],
-        			[],[],
-        		]
-        	},
-        	// ENGINE OFFICERS
         	{
         		range: [5, 8],
-        		issuer: 'MARINA',
+        		issuer: '',
         		documents: [
-        			'ERS WITH ERM',
-					'AUXILIARY MACHINERY SYSTEM',
-					'CONTROL ENGINEERING',
-					'HYDRAULICS/PNEUMATICS',
-					'MARINE ELECTRO TECH',
-					'ELECTRONIC EQUIPMENT',
-					'MARINE ELECTRICAL',
-					'MARINE REFRIGIRATION/AIRCONDITIONING',
+        			'COC', 
+        			'COE', 
+        			'BASIC TRAINING - BT', 
+        			'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
+        			'ADVANCE FIRE FIGHTING - AFF',
+        			'MEDICAL FIRST AID - MEFA',
+        			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
         		],
         		regulation: [
-        			[],[],[],[],
-        			[],[],[],[],
+        			[],[],[],[],[],[],[]
         		]
         	},
-        	// 2/0, 3/0
         	{
-        		range: [3, 4],
-        		issuer: 'MARINA',
+        		range: [1, 3],
+        		issuer: '',
         		documents: [
-        			'OLC TRAINING F1',
-        			'OLC TRAINING F2',
-        			'OLC TRAINING F3',
+        			'SHIP SECURITY OFFICER - SSO',
         		],
         		regulation: [
-        			[],[],[]
-        		]
-        	},
-        	// 2AE, 3AE
-        	{
-        		range: [7,8],
-        		issuer: 'MARINA',
-        		documents: [
-        			'OLC TRAINING F1',
-        			'OLC TRAINING F2',
-        			'OLC TRAINING F3',
-        		],
-        		regulation: [
-        			[],[],[]
-        		]
-        	},
-        	// ENGINE RATINGS
-        	{
-        		range: [15, 21],
-        		issuer: 'MARINA',
-        		documents: [
-        			'WELDING CERT/SMAW'
-        		],
-        		regulation: [
-        			[]
-        		]
-        	},
-        	// GALLEY
-        	{
-        		range: [22, 27],
-        		issuer: 'MARINA',
-        		documents: [
-        			'CATERING TRAINING CERT'
-        		],
-        		regulation: [
-        			[]
+        			[],
         		]
         	},
         ];
@@ -1056,8 +1101,8 @@
 
             setTimeout(() => {
             	$(`[name^="docu-lctype"]`).prop('disabled', true);
-            	$(`.lc [name^="docu-issuer"]`).prop('disabled', true);
-            	$(`[name^="docu-regulation"]`).prop('disabled', true);
+            	// $(`.lc [name^="docu-issuer"]`).prop('disabled', true);
+            	// $(`[name^="docu-regulation"]`).prop('disabled', true);
 
             	setTimeout(() => {
             		let selection = $('.select2-container--disabled .select2-selection__rendered');

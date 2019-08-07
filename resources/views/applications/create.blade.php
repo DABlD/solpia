@@ -163,13 +163,13 @@
     
                 $('[name="vessel_name2"]').val('M/T SM NAVIGATOR').trigger('change');
                 $('[name="rank2"]').val('ABLE SEAMAN').trigger('change');
-                $('#sea-services input')[21].value = "25000";
-                $('#sea-services input')[24].value = "Filipino";
+                $('#sea-services input')[19].value = "25000";
+                $('#sea-services input')[22].value = "Filipino";
 
                 $('[name="sign_on2"]').flatpickr().setDate('2019-03-01', true);
                 $('[name="sign_off2"]').flatpickr().setDate('2019-03-30', true);
 
-                $('#sea-services input')[27].value = "Not So so";
+                $('#sea-services input')[25].value = "Not So so";
 
                 $('[name="vessel_name2"]').select2('close');
             }, 2000);
