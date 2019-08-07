@@ -217,7 +217,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="bmi">BMI</label>
-        <input type="number" class="form-control aeigh" name="bmi" placeholder="Enter BMI">
+        <input type="number" class="form-control aeigh" name="bmi" placeholder="Enter BMI" value="0">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="bmiError"></strong>
         </span>
@@ -296,13 +296,10 @@
             $('[name="age"]').val(moment().diff(e.target.value, 'years'));
         });
 
-        // $('[name="weight"], [name="height"]').change(() => {
-        //     let weight = $('[name="weight"]').val();
-        //     let height = $('[name="height"]').val();
-        //     console.log(weight);
-        //     console.log(height);
-        //     console.log(height * height);
-        //     $('[name="bmi"]').val((weight) / (height * height));
-        // });
+        $('[name="weight"], [name="height"]').change(() => {
+            let weight = $('[name="weight"]').val();
+            let height = $('[name="height"]').val() / 100;
+            $('[name="bmi"]').val(Math.round( (weight / (height * height)) * 10 ) / 10);
+        });
     </script>
 @endpush
