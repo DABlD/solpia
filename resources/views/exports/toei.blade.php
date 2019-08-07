@@ -442,7 +442,7 @@
 		@php
 			$docu = false;
 			if(isset($applicant->document_lc->{"COC"})){
-				$regulation = json_decode($applicant->document_lc->regulation);
+				$regulation = json_decode($applicant->document_lc->{"COC"}->regulation);
 				$size = sizeof($regulation);
 				$haystack = ["II/4", "III/4"];
 

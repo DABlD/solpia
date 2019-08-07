@@ -46,7 +46,7 @@
 
 		<tr>
 			<td colspan="2">First Name</td>
-			<td colspan="3">{{ $applicant->user->fname }}</td>
+			<td colspan="3">{{ $applicant->user->fname . ' ' . $applicant->user->suffix }}</td>
 			<td colspan="5">Course</td>
 			<td colspan="4">{{ $applicant->educational_background->last()->course }}</td>
 		</tr>

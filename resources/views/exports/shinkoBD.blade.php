@@ -46,7 +46,7 @@
 
 		<tr>
 			<td colspan="2">First Name</td>
-			<td colspan="4">{{ $applicant->user->fname }}</td>
+			<td colspan="4">{{ $applicant->user->fname . ' ' . $applicant->user->suffix }}</td>
 
 			<td colspan="2">Height</td>
 			<td colspan="2">{{ $applicant->height }}</td>

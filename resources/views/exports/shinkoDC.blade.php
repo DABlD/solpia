@@ -42,7 +42,7 @@
 				SEAMAN'S NAME
 			</td>
 			<td colspan="3">
-				{{ $applicant->user->fname . ' ' . $applicant->user->mname . ' ' . $applicant->user->lname }}
+				{{ $applicant->user->fname . ' ' . $applicant->user->mname . ' ' . $applicant->user->lname . ' ' . $applicant->user->suffix }}
 			</td>
 
 			<td colspan="2">
