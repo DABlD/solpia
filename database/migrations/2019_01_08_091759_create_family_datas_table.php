@@ -18,12 +18,12 @@ class CreateFamilyDatasTable extends Migration
             $table->integer('applicant_id');
 
             $table->string('email')->nullable();
-            $table->string('type');
-            $table->string('name');
-            $table->integer('age');
+            $table->string('type')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('age')->nullable();
 
-            $table->date('birthday');
-            $table->text('address');
+            $table->date('birthday')->nullable();
+            $table->text('address')->nullable();
             $table->string('occupation')->nullable();
 
             $table->timestamps();

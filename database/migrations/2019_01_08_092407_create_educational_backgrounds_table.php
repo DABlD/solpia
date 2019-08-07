@@ -17,12 +17,12 @@ class CreateEducationalBackgroundsTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id');
 
-            $table->enum('type', ['Elementary', 'High School', 'Vocational', 'College']);
+            $table->enum('type', ['Elementary', 'High School', 'Vocational', 'College'])->nullable();
             $table->string('course')->nullable();
-            $table->string('year', '10');
+            $table->string('year', '10')->nullable();
 
-            $table->text('school');
-            $table->text('address');
+            $table->text('school')->nullable();
+            $table->text('address')->nullable();
 
             $table->timestamps();
         });

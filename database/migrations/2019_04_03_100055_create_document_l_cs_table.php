@@ -17,13 +17,13 @@ class CreateDocumentLCsTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id');
             
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->string('rank')->nullable();
-            $table->string('issuer');
+            $table->string('issuer')->nullable();
             $table->string('regulation')->nullable();
-            $table->string('no');
-            $table->date('issue_date');
-            $table->date('expiry_date');
+            $table->string('no')->nullable();
+            $table->date('issue_date')->nullable();
+            $table->date('expiry_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

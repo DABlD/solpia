@@ -17,10 +17,10 @@ class CreateDocumentMedsTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id');
 
-            $table->string('type');
-            $table->string('with_mv');
-            $table->year('year');
-            $table->string('case_remarks');
+            $table->string('type')->nullable();
+            $table->string('with_mv')->nullable();
+            $table->year('year')->nullable();
+            $table->string('case_remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -17,9 +17,9 @@ class CreateDocumentMedExpsTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id');
 
-            $table->string('type');
-            $table->boolean('had');
-            $table->boolean('vaccine');
+            $table->string('type')->nullable();
+            $table->boolean('had')->nullable();
+            $table->boolean('vaccine')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

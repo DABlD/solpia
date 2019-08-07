@@ -17,10 +17,10 @@ class CreateDocumentMedCertsTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id');
 
-            $table->string('type');
-            $table->string('clinic');
-            $table->date('issue_date');
-            $table->date('expiry_date');
+            $table->string('type')->nullable();
+            $table->string('clinic')->nullable();
+            $table->date('issue_date')->nullable();
+            $table->date('expiry_date')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
