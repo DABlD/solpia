@@ -130,7 +130,7 @@
 			var lcOptions = 
 			[
 
-				'', 'NATIONAL LICENSE', 'WATCHKEEPING', 'GMDSS/GOC', 'RADAR SIMULATOR COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'SAFETY OFFICER\'S TRAINING COURSE', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'MARPOL 73/78', 'ERS WITH ERM', 'SSBT', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
+				'', 'NATIONAL LICENSE', 'WATCHKEEPING', 'RADAR SIMULATOR COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'SAFETY OFFICER\'S TRAINING COURSE', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'MARPOL 73/78', 'ERS WITH ERM', 'SSBT', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
 			];
 
         	lcOptions.forEach(docu => {
@@ -1054,17 +1054,17 @@
 
             		row.documents.forEach((docu, index) => {
             			// IF DOCUMENT IS EXISTING IN LC, SKIP
-            			// if($(`[name^="docu-lctype"] [value="${docu}"]`).length){
-            			// 	return
-            			// }
-            			// $(`[name^="docu-lctype"] [value="${docu}"]`).parent().hide();
-            			// let match = $(`.lc [value="${docu}"]`);
-            			// if(match.length > 0){
-            			// 	ctr += 1;
-            			// 	let row = $(match[match.length - 1]).parent().parent().parent();
-            			// 	row.next().hide();
-            			// 	row.hide();
-            			// }
+            			if($(`[name^="docu-lctype"] [value="${docu}"]`).length){
+            				return
+            			}
+            			$(`[name^="docu-lctype"] [value="${docu}"]`).parent().hide();
+            			let match = $(`.lc [value="${docu}"]`);
+            			if(match.length > 0){
+            				ctr += 1;
+            				let row = $(match[match.length - 1]).parent().parent().parent();
+            				row.next().hide();
+            				row.hide();
+            			}
 
             			let count = $('.docu').length + 1;
             			addDocu('lc');
