@@ -84,7 +84,7 @@
             let count = $('.docu').length + 1;
             let count2 = $('.docu-country').length + 1;
 
-            let docu_class = 'form-control aeigh';
+            let docu_class = 'form-control';
             let docu_class2 = 'form-control';
 
             // if($(`.${type}`).length == 0){
@@ -690,7 +690,7 @@
         }
 
         function flag(count, value = ""){
-        	let docu_class = "form-control aeigh";
+        	let docu_class = "form-control";
             let dType = "docu-dtype";
             let number = 'docu-number';
         	let issue_date = 'docu-issue_date';

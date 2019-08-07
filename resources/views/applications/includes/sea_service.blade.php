@@ -31,7 +31,7 @@
                     <span class="fa fa-times fa-2x" onclick="deleteRow(this, 'ss')"></span>
                     <div class="form-group col-md-3">
                         <label for="vessel_name${count}">Vessel Name</label>
-                        <select class="form-control aeigh" name="vessel_name${count}">
+                        <select class="form-control" name="vessel_name${count}">
                             <option value=""></option>
                             ${savedVesselsString}
                         </select>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="rank${count}">Rank</label>
-                        <select class="form-control aeigh" name="rank${count}">
+                        <select class="form-control" name="rank${count}">
                             <option value=""></option>
                             ${availableRanksString}
                         </select>
@@ -121,14 +121,14 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="sign_on${count}">Sign On</label>
-                        <input type="text" class="form-control aeigh" name="sign_on${count}" placeholder="Sign On Date">
+                        <input type="text" class="form-control" name="sign_on${count}" placeholder="Sign On Date">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="sign_on${count}Error"></strong>
                         </span>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="sign_off${count}">Sign Off</label>
-                        <input type="text" class="form-control aeigh" name="sign_off${count}" placeholder="Sign Off Date">
+                        <input type="text" class="form-control" name="sign_off${count}" placeholder="Sign Off Date">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="sign_off${count}Error"></strong>
                         </span>

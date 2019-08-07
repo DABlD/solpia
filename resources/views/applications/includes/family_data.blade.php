@@ -63,13 +63,10 @@
 
                 $(`.${type}Count`)[0].innerText = count + 1;
             }
-            else{
-                fd_class2 += ' aeigh';
-            }
 
             let count = $('.fd').length + 1;
 
-            let fd_class = 'form-control aeigh';
+            let fd_class = 'form-control';
             let fd_class3 = 'form-control';
 
             let name = 'fd-name';
