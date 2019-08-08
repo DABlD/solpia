@@ -195,6 +195,8 @@ class ApplicationsController extends Controller
         $fd = json_decode($req->fd);
         foreach($fd as $data){
             $data->applicant_id = $applicant->id;
+            $data->birthday = $data->birthday == "" ? null : $data->birthday;
+            $data->age = $data->birthday == "" ? null : 0;
             FamilyData::create((array)$data);
         }
 
@@ -202,6 +204,9 @@ class ApplicationsController extends Controller
         $ss = json_decode($req->ss);
         foreach($ss as $data){
             $data->applicant_id = $applicant->id;
+            $data->sign_on = $data->sign_on == "" ? null : $data->sign_on;
+            $data->sign_off = $data->sign_off == "" ? null : $data->sign_off;
+            $data->previous_salary = $data->previous_salary == "" ? null : $data->previous_salary;
             SeaService::create((array)$data);
         }
 
@@ -217,6 +222,8 @@ class ApplicationsController extends Controller
         foreach($docu_id as $data){
             $data->type = $data->type == "SEAMAN BOOK" ? "SEAMAN'S BOOK" : $data->type;
             $data->applicant_id = $applicant->id;
+            $data->issue_date = $data->issue_date == "" ? null : $data->issue_date;
+            $data->expiry_date = $data->expiry_date == "" ? null : $data->expiry_date;
             DocumentId::create((array)$data);
         }
 
@@ -225,6 +232,8 @@ class ApplicationsController extends Controller
         foreach($docu_flag as $data){
             $data->type = $data->type == "SHIP COOK ENDORSEMENT" ? "SHIP'S COOK ENDORSEMENT" : $data->type;
             $data->applicant_id = $applicant->id;
+            $data->issue_date = $data->issue_date == "" ? null : $data->issue_date;
+            $data->expiry_date = $data->expiry_date == "" ? null : $data->expiry_date;
             DocumentFlag::create((array)$data);
         }
 
@@ -234,6 +243,8 @@ class ApplicationsController extends Controller
             $data->type = $data->type == "SAFETY OFFICER TRAINING COURSE" ? "SAFETY OFFICER'S TRAINING COURSE" : $data->type;
             $data->applicant_id = $applicant->id;
             $data->regulation = json_encode($data->regulation);
+            $data->issue_date = $data->issue_date == "" ? null : $data->issue_date;
+            $data->expiry_date = $data->expiry_date == "" ? null : $data->expiry_date;
             DocumentLC::create((array)$data);
         }
 
@@ -241,6 +252,8 @@ class ApplicationsController extends Controller
         $docu_med_cert = json_decode($req->docu_med_cert);
         foreach($docu_med_cert as $data){
             $data->applicant_id = $applicant->id;
+            $data->issue_date = $data->issue_date == "" ? null : $data->issue_date;
+            $data->expiry_date = $data->expiry_date == "" ? null : $data->expiry_date;
             DocumentMedCert::create((array)$data);
         }
 
@@ -248,6 +261,7 @@ class ApplicationsController extends Controller
         $docu_med = json_decode($req->docu_med);
         foreach($docu_med as $data){
             $data->applicant_id = $applicant->id;
+            $data->year = $data->year == "" ? null : $data->year;
             DocumentMed::create((array)$data);
         }
 

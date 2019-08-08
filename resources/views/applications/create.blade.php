@@ -301,7 +301,7 @@
                 tempFd.birthday     = inputs[i+2].value;
                 tempFd.age          = inputs[i+4].value;
                 tempFd.occupation   = inputs[i+5].value;
-                tempFd.email      = inputs[i+6].value;
+                tempFd.email        = inputs[i+6].value;
                 tempFd.address      = inputs[i+7].value;
                 fd.push(tempFd);
             }
@@ -313,7 +313,7 @@
             // COMPRESS SS
             inputs = $('#sea-services input, #sea-services select');
             let ss = [];
-            for(let i = 0; i < inputs.length; i+= 15){
+            for(let i = 0; i < inputs.length; i+= 17){
                 if(!checkIfVisible(inputs[i])){
                     continue;
                 }
