@@ -30,9 +30,9 @@ class CreateSeaServicesTable extends Migration
             $table->string('manning_agent', 100)->nullable();
             $table->string('principal', 100)->nullable();
             $table->string('crew_nationality', 50)->nullable();
-            $table->date('sign_on');
-            $table->date('sign_off');
-            $table->integer('total_months');
+            $table->date('sign_on')->nullable();
+            $table->date('sign_off')->nullable();
+            $table->integer('total_months')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
         });
