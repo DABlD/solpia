@@ -8,10 +8,13 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class ShinkoDC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
@@ -214,6 +217,13 @@ class ShinkoDC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11);
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(25);
             },
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'F' => NumberFormat::FORMAT_NUMBER,
         ];
     }
 }

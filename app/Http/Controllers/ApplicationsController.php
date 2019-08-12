@@ -121,22 +121,57 @@ class ApplicationsController extends Controller
         $applicant->load('document_med_cert');
         $applicant->load('document_med');
 
-        foreach(['document_id', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
-            foreach($applicant->$docuType as $data){
+        foreach(['document_id', 'document_flag', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
+            foreach($applicant->$docuType as $key => $data){
 
-                if($docuType == 'document_flag'){
-                    $temp = $data->country;
-                }
-                elseif($docuType == 'document_med'){
+                // if($docuType == 'document_flag'){
+                //     $temp = $data->country;
+                // }
+                if($docuType == 'document_med'){
                     $temp = $data->case;
                 }
                 else{
                     $temp = $data->type;
                 }
 
+                if(isset($data->no)){
+                    if($data->no == ""){
+                        $applicant->$docuType->forget($key);
+                        continue;
+                    }
+                }
+                elseif(isset($data->number)){
+                    if($data->number == ""){
+                        $applicant->$docuType->forget($key);
+                        continue;
+                    }
+                }
+
+                if(isset($data->expiry_date)){
+                    if($data->expiry_date == "" || $data->expiry_date == null){
+                        $data->expiry_date == "NO EXPIRY";
+                    }
+                }
+
                 $applicant->$docuType->$temp = $data;
             }
         }
+
+        // REMOVE DOCUMENTS WITHOUT NUMBER
+        // foreach(['document_id', 'document_flag', 'document_lc'] as $type){
+        //     foreach($applicant->$type as $key => $data){
+        //         $type2 = $data->type;
+        //         $col = 'number';
+
+        //         if($type == 'document_lc'){
+        //             $col = 'no';
+        //         }
+
+        //         if($applicant->$type->$type2->$col == ""){
+        //             $applicant->$type->$type2->forget($key);
+        //         }
+        //     }
+        // }
 
         // IF NAME IS EMPTY, REMOVE
         foreach($applicant->family_data as $key => $value){

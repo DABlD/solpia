@@ -1,3 +1,16 @@
+@php
+	function checkDate3($date){
+		if($date == "NO EXPIRY"){
+			return $date;
+		}
+		elseif($date == "" || $date == null){
+			return 'NO EXPIRY';
+		}
+		else{
+			return $date->format('F j, Y');
+		}
+	}
+@endphp
 
 <table>
 	<tbody>
@@ -27,12 +40,12 @@
 		<tr>
 			<td colspan="2">Ship's Name</td>
 			<td colspan="4">
-				{{ isset($applicant->vessel) ? $applicant->vessel->name : 'N/A' }}
+				{{ isset($applicant->vessel) ? $applicant->vessel->name : '-----' }}
 			</td>
 
 			<td colspan="2">Rank</td>
 			<td colspan="3">
-				{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}
+				{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}
 			</td>
 		</tr>
 
@@ -76,15 +89,16 @@
 			<td colspan="6" rowspan="2">{{ $applicant->user->address }}</td>
 		</tr>
 
+		@php 
+			$name = "SEAMAN'S BOOK";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
+
 		<tr>
 			<td rowspan="2">SM Book</td>
 			<td>National</td>
-			<td colspan="2">
-				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->number : "N/A" }}
-			</td>
-			<td colspan="2">
-				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->expiry_date->format('F j, Y') : "N/A" }}
-			</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
 		</tr>
 
 		<tr>
@@ -100,31 +114,25 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A" }}
+				{{ $docu ? $docu->number : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----" }}
 			</td>
 			<td colspan="2">Tel</td>
 			<td colspan="6">{{ $applicant->user->contact }}</td>
 		</tr>
 
-		@php
-			$docu = false;
-			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "BOOKLET"){
-			        $docu = $document;
-			    }
-			}
+		@php 
+			$name = 'COC';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 		@endphp
 
 		<tr>
 			<td rowspan="2">COC</td>
 			<td>National</td>
-			<td colspan="2">{{ isset($applicant->document_lc->{'COC'}) ? $applicant->document_lc->{'COC'}->no : "N/A" }}</td>
-			<td colspan="2">
-				{{ isset($applicant->document_lc->COC) ? $applicant->document_lc->COC->expiry_date->format('F j, Y') : "N/A" }}
-			</td>
+			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
 			<td colspan="2">Place of Birth</td>
 			<td colspan="6">{{ $applicant->birth_place }}</td>
 		</tr>
@@ -140,21 +148,22 @@
 
 		<tr>
 			<td>Flag State</td>
-			<td colspan="2">{{ $docu ? $docu->number : "N/A" }}</td>
-			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----" }}</td>
 			<td colspan="2">Religion</td>
 			<td colspan="6">{{ $applicant->religion }}</td>
 		</tr>
 
+		@php 
+			$name = 'GMDSS/GOC';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
 		<tr>
 			<td rowspan="2">GOC</td>
 			<td>National</td>
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{'GMDSS/GOC'}) ? $applicant->document_lc->{'GMDSS/GOC'}->no : "N/A" }}
-			</td>
-			<td colspan="2">
-				{{ isset($applicant->document_lc->{'GMDSS/GOC'}) ? $applicant->document_lc->{'GMDSS/GOC'}->expiry_date->format('F j, Y') : "N/A" }}
-			</td>
+			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
 			<td colspan="8">Schooling</td>
 		</tr>
 
@@ -170,29 +179,36 @@
 		<tr>
 			<td>Flag State</td>
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A" }}
+				{{ $docu ? $docu->number : "-----" }}
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----" }}
 			</td>
 			<td colspan="2">Last School</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->school }}</td>
 		</tr>
 
+		@php 
+			$name = 'PASSPORT';
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
+
 		<tr>
 			<td colspan="2">Passport</td>
-			<td colspan="2">{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->number : "N/A" }}
-			<td colspan="2">
-				{{ isset($applicant->document_id->{'PASSPORT'}) ? $applicant->document_id->{'PASSPORT'}->expiry_date->format('F j, Y') : "N/A" }}
-			</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
 			<td colspan="2">Period</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->year }}</td>
 		</tr>
 
+		@php 
+			$name = 'US-VISA';
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
+
 		<tr>
 			<td colspan="2">U.S.A. Visa</td>
-			<td colspan="2">{{ isset($applicant->document_id->{'US-VISA'}) ? $applicant->document_id->{'US-VISA'}->number : "N/A" }}
-			<td colspan="2">{{ isset($applicant->document_id->{'US-VISA'}) ? $applicant->document_id->{'US-VISA'}->expiry_date->format('F j, Y') : "N/A" }}
-			</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
 			<td colspan="2">Specialty</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->course }}</td>
 		</tr>
