@@ -1,13 +1,18 @@
 @php
-	function checkDate3($date){
+	function checkDate3($date, $type){
 		if($date == "NO EXPIRY"){
 			return $date;
 		}
 		elseif($date == "" || $date == null){
-			return 'NO EXPIRY';
+			if($type == "E"){
+				return 'NO EXPIRY';
+			}
+			else{
+				return '-----';
+			}
 		}
 		else{
-			return $date->format('F j, Y');
+			echo $date->format('F j, Y');
 		}
 	}
 @endphp
@@ -98,7 +103,7 @@
 			<td rowspan="2">SM Book</td>
 			<td>National</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 		</tr>
 
 		<tr>
@@ -132,7 +137,7 @@
 			<td rowspan="2">COC</td>
 			<td>National</td>
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Place of Birth</td>
 			<td colspan="6">{{ $applicant->birth_place }}</td>
 		</tr>
@@ -163,7 +168,7 @@
 			<td rowspan="2">GOC</td>
 			<td>National</td>
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="8">Schooling</td>
 		</tr>
 
@@ -195,7 +200,7 @@
 		<tr>
 			<td colspan="2">Passport</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Period</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->year }}</td>
 		</tr>
@@ -208,7 +213,7 @@
 		<tr>
 			<td colspan="2">U.S.A. Visa</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Specialty</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->course }}</td>
 		</tr>

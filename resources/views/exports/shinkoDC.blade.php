@@ -1,13 +1,18 @@
 @php
-	function checkDate2($date){
+	function checkDate2($date, $type){
 		if($date == "NO EXPIRY"){
 			return $date;
 		}
 		elseif($date == "" || $date == null){
-			return 'NO EXPIRY';
+			if($type == "E"){
+				return 'NO EXPIRY';
+			}
+			else{
+				return '-----';
+			}
 		}
 		else{
-			return $date->format('F j, Y');
+			echo $date->format('F j, Y');
 		}
 	}
 @endphp
@@ -131,10 +136,10 @@
 				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? checkDate2($docu->issue_date) : "-----"}}
+				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}
+				{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}
 			</td>
 			<td colspan="3">
 				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
@@ -152,8 +157,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -175,10 +180,10 @@
 				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? checkDate2($docu->issue_date) : "-----"}}
+				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}
+				{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}
 			</td>
 			<td colspan="3">
 				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
@@ -211,8 +216,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
 			<td colspan="3">
 				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
 			</td>
@@ -233,8 +238,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
 			<td colspan="3">
 				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
 			</td>
@@ -255,8 +260,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
 			<td colspan="3">
 				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
 			</td>
@@ -277,8 +282,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
 		</tr>
 
@@ -293,8 +298,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
 		</tr>
 
@@ -317,8 +322,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
 			<td colspan="3">
 				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
 			</td>
@@ -335,8 +340,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -351,8 +356,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -367,8 +372,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -411,8 +416,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -427,8 +432,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -445,8 +450,8 @@
 
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -461,8 +466,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -477,8 +482,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -493,8 +498,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -509,8 +514,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -525,8 +530,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -542,8 +547,8 @@
 
 			<td colspan="2">OIL</td>
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -555,8 +560,8 @@
 
 			<td colspan="2">CHEMICAL</td>
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -568,8 +573,8 @@
 
 			<td colspan="2">LPG</td>
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -584,8 +589,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -600,8 +605,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -616,8 +621,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
 		</tr>
 
@@ -632,8 +637,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -648,8 +653,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -664,8 +669,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -680,8 +685,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -696,8 +701,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -712,8 +717,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -728,8 +733,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -744,8 +749,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -760,8 +765,8 @@
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date) : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date) : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
@@ -794,10 +799,10 @@
 				{{ $docu ? $docu->no : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? checkDate2($docu->issue_date) : "-----"}}
+				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? checkDate2($docu->expiry_date) : "-----"}}
+				{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}
 			</td>
 			<td colspan="3">
 				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
