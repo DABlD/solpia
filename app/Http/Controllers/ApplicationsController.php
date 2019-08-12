@@ -62,6 +62,49 @@ class ApplicationsController extends Controller
     	]);
     }
 
+    public function edit(Applicant $applicant){
+        $applicant->load('user');
+        $applicant->load('educational_background');
+        $applicant->load('family_data');
+        $applicant->load('sea_service');
+        $applicant->load('document_id');
+        $applicant->load('document_flag');
+        $applicant->load('document_lc');
+        $applicant->load('document_med_cert');
+        $applicant->load('document_med');
+        // $applicant->load('document_med_exp'); //NOT USED ANYMORE
+        
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+        $issuers = array_merge(
+            DocumentId::pluck('issuer')->toArray(),
+            DocumentLC::pluck('issuer')->toArray(),
+        );
+
+        $tempRegulations = DocumentLC::pluck('regulation')->toArray();
+        $regulations = array();
+
+        foreach($tempRegulations as $tempRegulation){
+            $temps = json_decode($tempRegulation);
+            foreach($temps as $temp){
+                array_push($regulations, $temp);
+            }
+        }        
+
+        // IF HAS 'EDIT' VALUE, WILL LOAD SCRIPT THAT WILL POPULATE THE FIELD WITH APPLICANT DETAILS FOR EDITING
+        return $this->_view('create', [
+            'title'         => 'Edit Application',
+            'categories'    => $ranks->groupBy('category'),
+            'issuers'       => collect($issuers)->unique()->toArray(),
+            'regulations'   => collect($regulations)->unique()->toArray(),
+            'applicant'     => $applicant,
+            'edit'          => true
+        ]);
+    }
+
+    public function update(Request $req){
+        dd($req->all());
+    }
+
     public function exportAll(){
         return Excel::download(new AllApplicant, 'Applicants.xlsx');
     }
@@ -95,7 +138,14 @@ class ApplicationsController extends Controller
             }
         }
 
-        // IF FAMILY_DATA IS ODD
+        // IF NAME IS EMPTY, REMOVE
+        foreach($applicant->family_data as $key => $value){
+            if($value->name == ""){
+                $applicant->family_data->forget($key);
+            }
+        }
+
+        // IF FAMILY_DATA IS ODD ADD EMPTY TO FILL
         if($applicant->family_data->count() % 2 != 0){
             $fd = new FamilyData;
             $fd->type = "";
@@ -186,7 +236,7 @@ class ApplicationsController extends Controller
             'provincial_address','provincial_contact',
             'birth_place','religion','age','waistline',
             'shoe_size','height','weight','bmi','blood_type',
-            'civil_status', 'tin', 'sss' 
+            'civil_status', 'tin', 'sss', 'eye_color'
         ]))->put('user_id', $user->id);
 
         $applicant = Applicant::create($applicant->all());

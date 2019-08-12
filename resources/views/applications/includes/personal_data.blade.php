@@ -263,7 +263,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="eye_color">Eye Color</label>
-        <input type="text" class="form-control aeigh" name="eye_color" placeholder="Enter Eye Color">
+        <input type="text" class="form-control aeigh" name="eye_color" placeholder="Enter Eye Color" value="Black">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="eye_colorError"></strong>
         </span>

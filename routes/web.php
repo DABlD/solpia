@@ -39,7 +39,8 @@ Route::get('not-permitted', function(){
 Auth::routes();
 
 // PUBLIC ROUTES
-Route::get('validate', 'ValidationController@index');
+Route::get('validate', 'ValidationController@index')->name('validate');
+Route::get('validate/update', 'ValidationController@update')->name('validate.update');
 
 //Authenticated
 Route::group([
@@ -90,6 +91,8 @@ Route::group([
 		Route::get($name . '/exportLineUp/{applicant}/{type}', ucfirst($name) . 'Controller@exportLineUpApplication')->name($name . '.export.applicant');
 		
 		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
+		Route::get($name . '/edit/{applicant}', ucfirst($name) . 'Controller@edit')->name($name . '.edit');
+		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
 
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');

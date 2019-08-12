@@ -240,7 +240,7 @@
 			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "N/A" }}</td>
 			<td>{{ $docu ? $docu->issue_date->toFormattedDateString() : "N/A" }}</td>
-			<td>{{ $docu ? $docu->issue_date->toFormattedDateString() : "N/A" }}</td>
+			<td>{{ $docu ? $docu->expiry_date->toFormattedDateString() : "N/A" }}</td>
 			<td colspan="2">Philippines</td>
 		</tr>
 

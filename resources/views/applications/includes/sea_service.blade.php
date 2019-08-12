@@ -180,7 +180,7 @@
         }
 
         function getVessels(){
-            savedVesselsString = "asd";
+            savedVesselsString = "";
 
             $.ajax({
                 url: '{{ route('vessels.getAll') }}',
@@ -192,7 +192,6 @@
                             <option value="${vessel.name}">${vessel.name}</option>
                         `;
                     });
-
                     addSS2();
                 }
             });

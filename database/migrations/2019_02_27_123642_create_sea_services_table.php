@@ -35,6 +35,7 @@ class CreateSeaServicesTable extends Migration
             $table->integer('total_months')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

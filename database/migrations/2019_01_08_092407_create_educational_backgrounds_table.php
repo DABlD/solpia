@@ -25,6 +25,7 @@ class CreateEducationalBackgroundsTable extends Migration
             $table->text('address')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

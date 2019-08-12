@@ -18,21 +18,21 @@
 				VESSEL NAME
 			</td>
 			<td colspan="3">
-				{{ isset($applicant->vessel) ? $applicant->vessel->name : 'N/A' }}
+				{{ isset($applicant->vessel) ? $applicant->vessel->name : 'TBA' }}
 			</td>
 
 			<td colspan="2">
 				FLAG
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->vessel) ? $applicant->vessel->flag : 'N/A' }}
+				{{ isset($applicant->vessel) ? $applicant->vessel->flag : 'TBA' }}
 			</td>
 
 			<td colspan="2">
 				TYPE
 			</td>
 			<td colspan="3">
-				{{ isset($applicant->vessel) ? $applicant->vessel->type : 'N/A' }}
+				{{ isset($applicant->vessel) ? $applicant->vessel->type : 'TBA' }}
 			</td>
 		</tr>
 
@@ -42,14 +42,14 @@
 				SEAMAN'S NAME
 			</td>
 			<td colspan="3">
-				{{ $applicant->user->fname . ' ' . $applicant->user->mname . ' ' . $applicant->user->lname . ' ' . $applicant->user->suffix }}
+				{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname[0] }}
 			</td>
 
 			<td colspan="2">
 				RANK
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->rank) ? $applicant->rank->name : 'N/A' }}
+				{{ isset($applicant->rank) ? $applicant->rank->name : 'TBA' }}
 			</td>
 
 			<td colspan="2">
@@ -109,16 +109,22 @@
 				NATIONAL SEAMAN BOOK
 			</td>
 
+			@php
+				$docu = isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"} : false;
+			@endphp
+
 			<td colspan="2">
-				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->number : "N/A" }}
+				{{ $docu ? $docu->no : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->issue_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -131,15 +137,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->no : "N/A"}}
+				{{ $docu ? $docu->no : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -157,15 +165,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -193,10 +203,12 @@
 				}
 			@endphp
 
-			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="3"></td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -213,10 +225,12 @@
 				}
 			@endphp
 
-			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="3"></td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -233,10 +247,12 @@
 				}
 			@endphp
 
-			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="3"></td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -253,10 +269,12 @@
 				}
 			@endphp
 
-			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="3"></td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -267,15 +285,17 @@
 			@php $doc = "PASSPORT"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "-----" }}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -296,32 +316,44 @@
 				}
 			@endphp
 
-			<td colspan="2">{{ $docu ? $docu->number : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}</td>
-			<td colspan="3"></td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}</td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
 			<td colspan="5">
-				
+				NATIONAL LICENSE - COC
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="3"></td>
+			@php 
+				$name = 'COC';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
+
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----" }}</td>
+			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="5">
-				
+				NATIONAL LICENSE - COE
 			</td>
 
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="3"></td>
+			@php 
+				$name = 'COE';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
+
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issue_date->format('F j, Y') : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----" }}</td>
+			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
 		<tr>
@@ -332,15 +364,17 @@
 			@php $doc = "GMDSS/GOC"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "-----" }}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -358,15 +392,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->no : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->issue_date->format('F j, Y') : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_lc->{$doc}) ? $applicant->document_lc->{$doc}->expiry_date->format('F j, Y') : "-----" }}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -384,15 +420,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -410,15 +448,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -436,15 +476,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -462,15 +504,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -488,15 +532,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -514,15 +560,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -540,15 +588,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -566,15 +616,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -593,29 +645,33 @@
 
 			<td colspan="2">OIL</td>
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">CHEMICAL</td>
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 			@php
@@ -630,15 +686,17 @@
 		<tr>
 			<td colspan="2">LPG</td>
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -659,13 +717,13 @@
 				
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="3">
-				{{ $docu ? $docu->issuer : "N/A"}}
+				{{ $docu ? $docu->issuer : "-----"}}
 			</td>
 		</tr>
 
@@ -685,13 +743,13 @@
 
 			<td colspan="2"></td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="3">
-				{{ $docu ? $docu->issuer : "N/A"}}
+				{{ $docu ? $docu->issuer : "-----"}}
 			</td>
 		</tr>
 
@@ -703,15 +761,17 @@
 			@php $doc = "US-VISA"; @endphp
 
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->number : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->issue_date->format('F j, Y') : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "N/A" }}
+				{{ isset($applicant->document_id->{$doc}) ? $applicant->document_id->{$doc}->expiry_date->format('F j, Y') : "-----" }}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -729,15 +789,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -755,15 +817,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -781,15 +845,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -807,15 +873,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -833,15 +901,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -859,15 +929,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -885,15 +957,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -911,15 +985,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -937,15 +1013,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>
@@ -974,15 +1052,17 @@
 			@endphp
 
 			<td colspan="2">
-				{{ $docu ? $docu->number : "N/A"}}
+				{{ $docu ? $docu->number : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->issue_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->issue_date->format('F j, Y') : "-----"}}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "N/A"}}
+				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----"}}
 			</td>
-			<td colspan="3"></td>
+			<td colspan="3">
+				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
+			</td>
 		</tr>
 
 		<tr>

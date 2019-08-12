@@ -14,9 +14,9 @@
 		</tr>
 
 		<tr>
-			<td rowspan="4" colspan="7"></td>
+			<td rowspan="4" colspan="6"></td>
 			<td rowspan="4" colspan="2">Name in Chinese</td>
-			<td rowspan="4" colspan="2">{{-- FILL --}}</td>
+			<td rowspan="4" colspan="3">{{-- FILL --}}</td>
 			<td rowspan="8" colspan="3"></td>
 		</tr>
 
@@ -213,16 +213,20 @@
 		</tr>
 
 		@foreach($applicant->family_data as $family)
+			@if($family->name == "")
+				@php continue; @endphp
+			@endif
+
 			@if($loop->index % 2 == 0)
 				<tr>
 					<td>{{ $family->type }}</td>
 					<td colspan="2">{{ $family->name }}</td>
-					<td colspan="2">{{ $family->birthday->toDateString() != "0000-01-01"?$family->birthday->format('F j, Y') : '' }}</td>
+					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('F j, Y') : '' }}</td>
 					<td>{{ $family->occupation }}</td>
 			@else
 					<td>{{ $family->type }}</td>
 					<td colspan="3">{{ $family->name }}</td>
-					<td colspan="2">{{ $family->birthday->toDateString() != "0000-01-01"?$family->birthday->format('F j, Y') : '' }}</td>
+					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('F j, Y') : '' }}</td>
 					<td colspan="2">{{ $family->occupation }}</td>
 				</tr>
 			@endif
@@ -260,7 +264,7 @@
 			</td>
 			<td rowspan="2">
 				GRT<br>
-				BHP/KW
+				Output
 			</td>
 			<td rowspan="2" colspan="2">
 				Agent<br>
@@ -278,8 +282,8 @@
 			<tr>
 				<td rowspan="2">{{ $loop->index + 1 }}</td>
 				<td rowspan="2" colspan="3">{{ $service->vessel_name }}</td>
-				<td rowspan="2">${{ $service->previous_salary }}</td>
-				<td rowspan="1">{{ $service->sign_on->format('M j, Y') }}</td>
+				<td rowspan="2">{{ $service->previous_salary }}</td>
+				<td rowspan="1">{{ $service->sign_on->format('d.M.y') }}</td>
 				<td rowspan="2">
 					{{ round($service->sign_on->diffInMonths($service->sign_off) + 
 						((($service->sign_on->diffInDays($service->sign_off)) / 30) / 30), 2) }}
@@ -291,7 +295,7 @@
 				<td rowspan="2" colspan="2">{{ $service->remarks }}</td>
 			</tr>
 			<tr>
-				<td rowspan="1">{{ $service->sign_off->format('M j, Y') }}</td>
+				<td rowspan="1">{{ $service->sign_off->format('d.M.y') }}</td>
 				<td rowspan="1">{{ $service->engine_type }}</td>
 				<td rowspan="1">{{ $service->bhp_kw }}</td>
 				<td rowspan="1" colspan="2">{{ $service->principal }}</td>

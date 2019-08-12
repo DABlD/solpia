@@ -106,6 +106,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(11);
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(18);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(12);
+                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(12);
 
                 // FAMILY DATA ROWS
                 $fdRows = array();
@@ -147,7 +148,10 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                     // $event->sheet->getDelegate()->getRowDimension($row)->setRowHeight(35);
                     // $event->sheet->getDelegate()->getRowDimension($row+1)->setRowHeight(35);
+                    $event->sheet->getDelegate()->getStyle('I' . $next)->getFont()->setSize(8);
+                    $event->sheet->getDelegate()->getRowDimension($next)->setRowHeight(25);
                 }
+
 
                 // FUNCTIONS
                 $x = function($let1, $inc1, $let2 = null, $inc2 = null, $temp = null) use ($raf, $ras){
@@ -171,7 +175,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = array_merge($fdRows, $ssRows, [
-                	'H3', 'G12:I12', 'A13:A17',
+                	'G3', 'G12:I12', 'A13:A17',
                 ]);
 
                 // HL B
@@ -207,7 +211,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills = [
-                	'H3:I6',
+                	'G3:H6',
                 	'A7:B7', 'G7:H7',
                 	'A8:B8', 'G8:H8',
                 	'A9:B9', 'G9:H9',
@@ -225,7 +229,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BORDERS
                 $cells = array_merge($fdRows, $ssRows, [
-                    'H3:I6','J3:K6','L3:N10',
+                    'G3:H6','I3:K6','L3:N10',
                 	'A7:B7', 'G7:H7', 'C7:F7', 'I7:K7',
                 	'A8:B8', 'G8:H8', 'C8:F8', 'I8:K8',
                 	'A9:B9', 'G9:H9', 'C9:F9', 'I9:K9', 'K9',
@@ -240,7 +244,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 	'C18:D18', 'E18:F18', 'G18:H18', 'I18:N18',
                 	'A19:B19', 'C19:D19', 'E19:F19', 'G19:H19', 'I19:N19',
                 	'A20:B20', 'C20:D20', 'E20:F20', 'G20:H20', 'I20:N20',
-                	'A21', 'A22', 'B22:C22', 'D22:E22', 'F22', 'G22', 'H22:J22', 'K22:L22', 'M22:N22',
+                	'A21:N21', 'A22', 'B22:C22', 'D22:E22', 'F22', 'G22', 'H22:J22', 'K22:L22', 'M22:N22',
                 	$x('A', 1, 'N'),
 
                 	$x('A', 2, 'A', 3), $x('B', 2, 'D', 3), $x('E', 2, 'E', 3), $x('F', 2, 'F', 3),
@@ -262,7 +266,12 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6.8);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(5.5);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
             },
         ];
@@ -275,7 +284,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 		$drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
         $drawing->setHeight(154);
-        $drawing->setOffsetX(22);
+        $drawing->setOffsetX(10);
 		$drawing->setCoordinates('L3');
 
         return $drawing;

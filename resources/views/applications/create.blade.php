@@ -12,7 +12,7 @@
 				</div>
 
 				<div class="box-body">
-					<form method="POST" action="{{ route('applications.store') }}" id="createForm" enctype="multipart/form-data">
+					<form method="POST" action="{{ !isset($edit) ? route('applications.store') : route('applications.update') }}" id="createForm" enctype="multipart/form-data">
                         @csrf
                         
                         {{-- PERSONAL DATA --}}
@@ -223,19 +223,37 @@
                     showError(input, temp, error, 'This field is required');
                 }
                 else if(input.type == 'email'){
-                    $.ajax({
-                        url: '{{ url('validate') }}',
-                        data: {
-                            email: input.value,
-                            rules: 'email|unique:users'
-                        },
-                        success: result => {
-                            result = JSON.parse(result);
-                            if(typeof result[temp.attr('name')] != 'undefined'){
-                                showError(input, temp, error, result[temp.attr('name')][0]);
+                    @if(!isset($edit))
+                        $.ajax({
+                            url: '{{ url('validate') }}',
+                            data: {
+                                email: input.value,
+                                rules: 'email|unique:users'
+                            },
+                            success: result => {
+                                result = JSON.parse(result);
+                                if(typeof result[temp.attr('name')] != 'undefined'){
+                                    showError(input, temp, error, result[temp.attr('name')][0]);
+                                }
                             }
-                        }
-                    });
+                        });
+                    @else
+                        $.ajax({
+                            url: '{{ route('validate.update') }}',
+                            data: {
+                                email: input.value,
+                                column: 'email',
+                                table: 'users',
+                                id: '{{ $applicant->user->id }}'
+                            },
+                            success: result => {
+                                result = JSON.parse(result);
+                                if(typeof result[temp.attr('name')] != 'undefined'){
+                                    showError(input, temp, error, result[temp.attr('name')][0]);
+                                }
+                            }
+                        });
+                    @endif
                 }
                 else if(temp.attr('name') == 'contact'){
                     if(!/^[0-9]*$/.test(input.value)){
@@ -290,21 +308,40 @@
             let inputs = $('#FD input');
             let fd = [];
 
-            for(let i = 0; i < inputs.length; i+=8){
-                if(!checkIfVisible(inputs[i])){
-                    continue;
-                }
+            @if(!isset($edit))
+                for(let i = 0; i < inputs.length; i+=8){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
 
-                let tempFd = {};
-                tempFd.type         = inputs[i].value;
-                tempFd.name         = inputs[i+1].value;
-                tempFd.birthday     = inputs[i+2].value;
-                tempFd.age          = inputs[i+4].value;
-                tempFd.occupation   = inputs[i+5].value;
-                tempFd.email        = inputs[i+6].value;
-                tempFd.address      = inputs[i+7].value;
-                fd.push(tempFd);
-            }
+                    let tempFd = {};
+                    tempFd.type         = inputs[i].value;
+                    tempFd.name         = inputs[i+1].value;
+                    tempFd.birthday     = inputs[i+2].value;
+                    tempFd.age          = inputs[i+4].value;
+                    tempFd.occupation   = inputs[i+5].value;
+                    tempFd.email        = inputs[i+6].value;
+                    tempFd.address      = inputs[i+7].value;
+                    fd.push(tempFd);
+                }
+            @else
+                for(let i = 0; i < inputs.length; i+=9){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
+
+                    let tempFd = {};
+                    tempFd.id           = inputs[i].value;
+                    tempFd.type         = inputs[i+1].value;
+                    tempFd.name         = inputs[i+2].value;
+                    tempFd.birthday     = inputs[i+3].value;
+                    tempFd.age          = inputs[i+5].value;
+                    tempFd.occupation   = inputs[i+6].value;
+                    tempFd.email        = inputs[i+7].value;
+                    tempFd.address      = inputs[i+8].value;
+                    fd.push(tempFd);
+                }
+            @endif
 
             $('#createForm').append(`
                 <input type="hidden" name="fd" value='${JSON.stringify(fd)}'>
@@ -313,52 +350,97 @@
             // COMPRESS SS
             inputs = $('#sea-services input, #sea-services select');
             let ss = [];
-            for(let i = 0; i < inputs.length; i+= 17){
-                if(!checkIfVisible(inputs[i])){
-                    continue;
-                }
+            @if(!isset($edit))
+                for(let i = 0; i < inputs.length; i+= 17){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
 
-                let tempSS = {};
-                tempSS.vessel_name      = inputs[i].value;
-                tempSS.rank             = inputs[i+1].value;
-                tempSS.vessel_type      = inputs[i+2].value;
-                tempSS.gross_tonnage    = inputs[i+3].value;
-                tempSS.engine_type      = inputs[i+4].value;
-                tempSS.bhp_kw           = inputs[i+5].value;
-                tempSS.flag             = inputs[i+6].value;
-                tempSS.trade            = inputs[i+7].value;
-                tempSS.previous_salary  = inputs[i+8].value;
-                tempSS.manning_agent    = inputs[i+9].value;
-                tempSS.principal        = inputs[i+10].value;
-                tempSS.crew_nationality = inputs[i+11].value;
-                tempSS.sign_on          = inputs[i+12].value;
-                tempSS.sign_off         = inputs[i+13].value;
-                tempSS.remarks          = inputs[i+14].value;
-                tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
-                ss.push(tempSS);
-            }
+                    let tempSS = {};
+                    tempSS.vessel_name      = inputs[i].value;
+                    tempSS.rank             = inputs[i+1].value;
+                    tempSS.vessel_type      = inputs[i+2].value;
+                    tempSS.gross_tonnage    = inputs[i+3].value;
+                    tempSS.engine_type      = inputs[i+4].value;
+                    tempSS.bhp_kw           = inputs[i+5].value;
+                    tempSS.flag             = inputs[i+6].value;
+                    tempSS.trade            = inputs[i+7].value;
+                    tempSS.previous_salary  = inputs[i+8].value;
+                    tempSS.manning_agent    = inputs[i+9].value;
+                    tempSS.principal        = inputs[i+10].value;
+                    tempSS.crew_nationality = inputs[i+11].value;
+                    tempSS.sign_on          = inputs[i+12].value;
+                    tempSS.sign_off         = inputs[i+14].value;
+                    tempSS.remarks          = inputs[i+16].value;
+                    tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
+                    ss.push(tempSS);
+                }
+            @else
+                for(let i = 0; i < inputs.length; i+= 18){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
+
+                    let tempSS = {};
+                    tempSS.id               = inputs[i].value;
+                    tempSS.vessel_name      = inputs[i+1].value;
+                    tempSS.rank             = inputs[i+2].value;
+                    tempSS.vessel_type      = inputs[i+3].value;
+                    tempSS.gross_tonnage    = inputs[i+4].value;
+                    tempSS.engine_type      = inputs[i+5].value;
+                    tempSS.bhp_kw           = inputs[i+6].value;
+                    tempSS.flag             = inputs[i+7].value;
+                    tempSS.trade            = inputs[i+8].value;
+                    tempSS.previous_salary  = inputs[i+9].value;
+                    tempSS.manning_agent    = inputs[i+10].value;
+                    tempSS.principal        = inputs[i+11].value;
+                    tempSS.crew_nationality = inputs[i+12].value;
+                    tempSS.sign_on          = inputs[i+13].value;
+                    tempSS.sign_off         = inputs[i+15].value;
+                    tempSS.remarks          = inputs[i+17].value;
+                    tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
+                    ss.push(tempSS);
+                }
+            @endif
 
             $('#createForm').append(`
                 <input type="hidden" name="ss" value='${JSON.stringify(ss)}'>
             `);
 
             // Compress EB
-            inputs = $('#EB .form-control');
+            inputs = $('#EB input, #EB select');
             let eb = [];
 
-            for(let i = 0; i < inputs.length; i+=6){
-                if(!checkIfVisible(inputs[i])){
-                    continue;
-                }
+            @if(!isset($edit))
+                for(let i = 0; i < inputs.length; i+=6){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
 
-                let tempEb = {};
-                tempEb.type         = inputs[i].value;
-                tempEb.course       = inputs[i+1].value;
-                tempEb.year         = inputs[i+2].value + '-' + inputs[i+3].value;
-                tempEb.school     = inputs[i+4].value;
-                tempEb.address   = inputs[i+5].value;
-                eb.push(tempEb);
-            }
+                    let tempEb = {};
+                    tempEb.type         = inputs[i].value;
+                    tempEb.course       = inputs[i+1].value;
+                    tempEb.year         = inputs[i+2].value + '-' + inputs[i+3].value;
+                    tempEb.school       = inputs[i+4].value;
+                    tempEb.address      = inputs[i+5].value;
+                    eb.push(tempEb);
+                }
+            @else
+                for(let i = 0; i < inputs.length; i+=7){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
+
+                    let tempEb = {};
+                    tempEb.id           = inputs[i].value;
+                    tempEb.type         = inputs[i+1].value;
+                    tempEb.course       = inputs[i+2].value;
+                    tempEb.year         = inputs[i+3].value + '-' + inputs[i+4].value;
+                    tempEb.school       = inputs[i+5].value;
+                    tempEb.address      = inputs[i+6].value;
+                    eb.push(tempEb);
+                }
+            @endif
 
             $('#createForm').append(`
                 <input type="hidden" name="eb" value='${JSON.stringify(eb)}'>
@@ -369,20 +451,36 @@
             // DOCUMENT ID
             inputs = $('#docu .ID input, #docu .ID select');
             let docu_id = [];
+            @if(!isset($edit))
+                for(let i = 0; i < inputs.length; i+=7){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
 
-            for(let i = 0; i < inputs.length; i+=7){
-                if(!checkIfVisible(inputs[i])){
-                    continue;
+                    let tempID = {};
+                    tempID.type             = inputs[i].value;
+                    tempID.issuer           = inputs[i+1].value;
+                    tempID.number           = inputs[i+2].value;
+                    tempID.issue_date       = inputs[i+3].value;
+                    tempID.expiry_date      = inputs[i+5].value;
+                    docu_id.push(tempID);
                 }
+            @else
+                for(let i = 0; i < inputs.length; i+=8){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
 
-                let tempID = {};
-                tempID.type             = inputs[i].value;
-                tempID.issuer           = inputs[i+1].value;
-                tempID.number           = inputs[i+2].value;
-                tempID.issue_date       = inputs[i+3].value;
-                tempID.expiry_date      = inputs[i+5].value;
-                docu_id.push(tempID);
-            }
+                    let tempID = {};
+                    tempID.id               = inputs[i].value;
+                    tempID.type             = inputs[i+1].value;
+                    tempID.issuer           = inputs[i+2].value;
+                    tempID.number           = inputs[i+3].value;
+                    tempID.issue_date       = inputs[i+4].value;
+                    tempID.expiry_date      = inputs[i+6].value;
+                    docu_id.push(tempID);
+                }
+            @endif
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_id" value='${JSON.stringify(docu_id)}'>
@@ -455,18 +553,34 @@
             inputs = $('#docu .MedCert input, #docu .MedCert select');
             let docu_med_cert = [];
 
-            for(let i = 0; i < inputs.length; i+= 6){
-                if(!checkIfVisible(inputs[i])){
-                    continue;
-                }
+            @if(!isset($edit))
+                for(let i = 0; i < inputs.length; i+= 6){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
 
-                let tempMedCert = {};
-                tempMedCert.type        = inputs[i].value;
-                tempMedCert.clinic      = inputs[i+1].value;
-                tempMedCert.issue_date  = inputs[i+2].value;
-                tempMedCert.expiry_date  = inputs[i+4].value;
-                docu_med_cert.push(tempMedCert);
-            }
+                    let tempMedCert = {};
+                    tempMedCert.type        = inputs[i].value;
+                    tempMedCert.clinic      = inputs[i+1].value;
+                    tempMedCert.issue_date  = inputs[i+2].value;
+                    tempMedCert.expiry_date  = inputs[i+4].value;
+                    docu_med_cert.push(tempMedCert);
+                }
+            @else
+                for(let i = 0; i < inputs.length; i+= 7){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
+
+                    let tempMedCert = {};
+                    tempMedCert.id          = inputs[i].value;
+                    tempMedCert.type        = inputs[i+1].value;
+                    tempMedCert.clinic      = inputs[i+2].value;
+                    tempMedCert.issue_date  = inputs[i+3].value;
+                    tempMedCert.expiry_date = inputs[i+5].value;
+                    docu_med_cert.push(tempMedCert);
+                }
+            @endif
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_med_cert" value='${JSON.stringify(docu_med_cert)}'>
@@ -476,18 +590,34 @@
             inputs = $('#docu .Med input, #docu .Med select');
             let docu_med = [];
 
-            for(let i = 0; i < inputs.length; i+=4){
-                if(!checkIfVisible(inputs[i])){
-                    continue;
+            @if(!isset($edit))
+                for(let i = 0; i < inputs.length; i+=4){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
+                    
+                    let tempMed = {};
+                    tempMed.type            = inputs[i].value;
+                    tempMed.with_mv         = inputs[i+1].value;
+                    tempMed.year            = inputs[i+2].value;
+                    tempMed.case_remarks    = inputs[i+3].value;
+                    docu_med.push(tempMed);
                 }
-                
-                let tempMed = {};
-                tempMed.type            = inputs[i].value;
-                tempMed.with_mv         = inputs[i+1].value;
-                tempMed.year            = inputs[i+2].value;
-                tempMed.case_remarks    = inputs[i+3].value;
-                docu_med.push(tempMed);
-            }
+            @else
+                for(let i = 0; i < inputs.length; i+=5){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
+                    
+                    let tempMed = {};
+                    tempMed.id              = inputs[i].value;
+                    tempMed.type            = inputs[i+1].value;
+                    tempMed.with_mv         = inputs[i+2].value;
+                    tempMed.year            = inputs[i+3].value;
+                    tempMed.case_remarks    = inputs[i+4].value;
+                    docu_med.push(tempMed);
+                }
+            @endif
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_med" value='${JSON.stringify(docu_med)}'>
@@ -558,4 +688,8 @@
             return $(element).parent().parent().find('.fa-times').is(':visible');
         }
     </script>
+
+    @if(isset($edit))
+        @include('applications.includes.populate_data')
+    @endif
 @endpush

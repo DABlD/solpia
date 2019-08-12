@@ -245,7 +245,7 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
-                // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(14);
                 // $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
 
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(25);

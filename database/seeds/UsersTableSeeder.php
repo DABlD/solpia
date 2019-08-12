@@ -143,14 +143,14 @@ class UsersTableSeeder extends Seeder
             'occupation' => 'Housewife',
         ]);
 
-        FamilyData::create([
-            'applicant_id' => 1,
-            'type' => 'Brother',
-            'name' => 'Bro Ther Cant',
-            'age' =>  22,
-            'birthday' => '1997-11-12', 
-            'address' => 'Manila, Phillipines',
-        ]);
+        // FamilyData::create([
+        //     'applicant_id' => 1,
+        //     'type' => 'Brother',
+        //     'name' => 'Bro Ther Cant',
+        //     'age' =>  22,
+        //     'birthday' => '1997-11-12', 
+        //     'address' => 'Manila, Phillipines',
+        // ]);
 
         DocumentId::create([
             'applicant_id' => 1,

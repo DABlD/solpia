@@ -134,6 +134,10 @@
                 });
 	    	});
 
+            $('[data-original-title="Edit Application"]').on('click', application => {
+                window.location.href = 'applications/edit/' + $(application.target).data('id');
+            });
+
             $('[data-original-title="Line-Up"]').on('click', application => {
                 let id = $(application.target).data('id');
                 let aRank, aVessel, aPrincipal;

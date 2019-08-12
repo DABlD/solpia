@@ -27,6 +27,7 @@ class CreateFamilyDatasTable extends Migration
             $table->string('occupation')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

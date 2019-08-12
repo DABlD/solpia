@@ -1032,12 +1032,12 @@
         	},
         ];
 
-        $('#rank').change(e => {
-        	swal.showLoading();
-        	setTimeout(() => {
-        		asdasd(e);
-        	}, 100);
-        });
+		$('#rank').change(e => {
+			swal.showLoading();
+			setTimeout(() => {
+				asdasd(e);
+			}, 100);
+		});
 
         function asdasd(e){
 
@@ -1070,6 +1070,8 @@
             			addDocu('lc');
             			
             			// CHECK IF DOCUMENT IS IN OPTION, IF NOT ADD OPTION AND PRESELECT IT
+        				// checkIfExisting($(`[name="docu-lctype${count}"]`), docu);
+        				// checkIfExisting($(`[name="docu-issuer${count}"]`), docu);
         				if($(`[name="docu-lctype${count}"]`).find(`option[value="${docu}"]`).length){
         					$(`[name="docu-lctype${count}"]`).val(docu).trigger('change');
         				}
@@ -1077,7 +1079,6 @@
         					let option = new Option(docu, docu, true, true);
         					$(`[name="docu-lctype${count}"]`).append(option).trigger('change');
         				}
-            			
         				if($(`[name="docu-issuer${count}"]`).find(`option[value="${row.issuer}"]`).length){
         					$(`[name="docu-issuer${count}"]`).val(row.issuer).trigger('change');
         				}
@@ -1112,6 +1113,21 @@
             }, 400);
 
             swal.close();
+        }
+
+        // ADD OPTION
+        function checkIfExisting(element, docu){
+			if(element.find(`option[value="${docu}"]`).length){
+				element.val(docu).trigger('change');
+			}
+			else{
+				addOption(element, docu);
+			}
+        }
+
+        function addOption(element, docu){
+        	let option = new Option(docu, docu, true, true);
+			$(element).append(option).trigger('change');
         }
     </script>
 @endpush

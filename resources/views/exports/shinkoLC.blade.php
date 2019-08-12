@@ -62,7 +62,7 @@
 			<td colspan="2">Birth Date</td>
 			<td colspan="3">{{ $applicant->user->birthday->format('F j, Y') }}</td>
 			<td colspan="5">Height/Weight</td>
-			<td colspan="4">{{ $applicant->height }}cm / {{ $applicant->weight }}kg</td>
+			<td colspan="4">{{ $applicant->height }} cm / {{ $applicant->weight }} kg</td>
 		</tr>
 
 		<tr>
@@ -176,7 +176,7 @@
 
 		<tr>
 			<td colspan="2">Social life</td>
-			<td colspan="3">Social activity andCarrier</td>
+			<td colspan="3">Social activity and Carrier</td>
 			<td></td>
 			<td></td>
 			<td></td>
@@ -227,27 +227,30 @@
 			if($applicant->sea_service->count() == 0){
 				$isset = false;
 			}
+			else{
+				$last = $applicant->sea_service->sortBy('sign_off')->last();
+			}
 		@endphp
 
 		<tr>
 			<td colspan="2">Last Company</td>
-			<td colspan="3">{{ $isset ? $applicant->sea_service->last()->principal : 'N/A' }}</td>
+			<td colspan="3">{{ $isset ? $last->manning_agent : 'N/A' }}</td>
 			<td colspan="5">Serve Period</td>
 			<td colspan="4">
-				{{ $isset ? ($applicant->sea_service->last()->sign_on->format('M j, Y') . '-' . $applicant->sea_service->last()->sign_off->format('M j, Y')) : 'N/A' }}
+				{{ $isset ? ($last->sign_on->format('M j, Y') . '-' . $last->sign_off->format('M j, Y')) : 'N/A' }}
 			</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Last Rank</td>
-			<td colspan="3">{{ $isset ? $applicant->sea_service->last()->rank : 'N/A' }}</td>
+			<td colspan="3">{{ $isset ? $last->rank : 'N/A' }}</td>
 			<td colspan="5">Last Carrier</td>
-			<td colspan="4">{{ $isset ? $applicant->sea_service->last()->vessel_name : 'N/A' }}</td>
+			<td colspan="4">{{ $isset ? $last->vessel_type : 'N/A' }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Own Disembark</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $isset? $last->remarks : 'N/A' }}</td>
 			<td colspan="5">Reward/Punish</td>
 			<td colspan="4"></td>
 		</tr>
