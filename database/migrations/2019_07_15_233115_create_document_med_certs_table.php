@@ -18,6 +18,7 @@ class CreateDocumentMedCertsTable extends Migration
             $table->integer('applicant_id');
 
             $table->string('type')->nullable();
+            $table->string('number')->nullable();
             $table->string('clinic')->nullable();
             $table->date('issue_date')->nullable();
             $table->date('expiry_date')->nullable();

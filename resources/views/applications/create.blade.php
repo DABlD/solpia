@@ -554,7 +554,7 @@
             let docu_med_cert = [];
 
             @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+= 6){
+                for(let i = 0; i < inputs.length; i+= 7){
                     if(!checkIfVisible(inputs[i])){
                         continue;
                     }
@@ -562,12 +562,13 @@
                     let tempMedCert = {};
                     tempMedCert.type        = inputs[i].value;
                     tempMedCert.clinic      = inputs[i+1].value;
-                    tempMedCert.issue_date  = inputs[i+2].value;
-                    tempMedCert.expiry_date  = inputs[i+4].value;
+                    tempMedCert.number      = inputs[i+2].value;
+                    tempMedCert.issue_date  = inputs[i+3].value;
+                    tempMedCert.expiry_date  = inputs[i+5].value;
                     docu_med_cert.push(tempMedCert);
                 }
             @else
-                for(let i = 0; i < inputs.length; i+= 7){
+                for(let i = 0; i < inputs.length; i+= 8){
                     if(!checkIfVisible(inputs[i])){
                         continue;
                     }
@@ -576,8 +577,9 @@
                     tempMedCert.id          = inputs[i].value;
                     tempMedCert.type        = inputs[i+1].value;
                     tempMedCert.clinic      = inputs[i+2].value;
-                    tempMedCert.issue_date  = inputs[i+3].value;
-                    tempMedCert.expiry_date = inputs[i+5].value;
+                    tempMedCert.number      = inputs[i+3].value;
+                    tempMedCert.issue_date  = inputs[i+4].value;
+                    tempMedCert.expiry_date = inputs[i+6].value;
                     docu_med_cert.push(tempMedCert);
                 }
             @endif

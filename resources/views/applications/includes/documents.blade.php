@@ -287,7 +287,7 @@
             	    <div class="row docu">
 						
 						<span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
-            	        <div class="form-group col-md-3">
+            	        <div class="form-group col-md-2">
             	            <label for="${mcType}${count}">Type</label>
             	            <select class="${docu_class} ${mcType}" name="${mcType}${count}">
             	            	<option></option>
@@ -302,8 +302,8 @@
             	                <strong id="${mcType}${count}Error"></strong>
             	            </span>
             	        </div>
-            	        <div class="form-group col-md-3">
-            	            <label for="${clinic}${count}">Type</label>
+            	        <div class="form-group col-md-2">
+            	            <label for="${clinic}${count}">Clinic</label>
             	            <select class="${docu_class} ${clinic}" name="${clinic}${count}">
             	            	<option></option>
             	            	<option value="MICAH">MICAH</option>
@@ -316,14 +316,22 @@
             	                <strong id="${clinic}${count}Error"></strong>
             	            </span>
             	        </div>
-            	        <div class="form-group col-md-3">
+            	        <div class="form-group col-md-2">
+            	            <label for="${number}${count}">Number</label>
+            	            <input type="text" class="${docu_class} ${number}" name="${number}${count}" placeholder="Enter Number">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${number}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="col-md-6"></div>
+            	        <div class="form-group col-md-2">
             	            <label for="${issue_date}${count}">Issue Date</label>
             	            <input type="text" class="${docu_class} ${issue_date}" name="${issue_date}${count}" placeholder="Select Issue Date">
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${issue_date}${count}Error"></strong>
             	            </span>
             	        </div>
-            	        <div class="form-group col-md-3">
+            	        <div class="form-group col-md-2">
             	            <label for="${expiry_date}${count}">Expiry Date</label>
             	            <input type="text" class="${docu_class} ${expiry_date}" name="${expiry_date}${count}" placeholder="Select Expiry Date">
             	            <span class="invalid-feedback hidden" role="alert">
