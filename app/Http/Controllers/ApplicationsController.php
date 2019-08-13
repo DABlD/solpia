@@ -23,8 +23,9 @@ class ApplicationsController extends Controller
         $this->middleware('permissions:' . 'Admin/Encoder/Principal');
     }
 
-    public function index(){
-
+    public function index(Request $req){
+        // dd(request()->getClientIp());
+        // dd(gethostname());
         $principals = Principal::select('id', 'slug', 'name')->get();
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
