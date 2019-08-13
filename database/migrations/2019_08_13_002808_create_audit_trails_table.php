@@ -19,6 +19,9 @@ class CreateAuditTrailsTable extends Migration
             $table->string('action');
             $table->string('ip')->nullable();
             $table->string('hostname')->nullable();
+            $table->string('device')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('platform')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -7,6 +7,7 @@ use Yajra\Datatables\Datatables;
 use App\User;
 use App\Models\{Applicant, ProcessedApplicant};
 use App\Models\{Vessel, Rank, Principal};
+use App\Models\AuditTrail;
 
 class DatatablesController extends Controller
 {
@@ -60,6 +61,17 @@ class DatatablesController extends Controller
 		foreach($vessels as $vessel){
 			$vessel->actions = $vessel->actions;
 		}
+
+    	return Datatables::of($vessels)->rawColumns(['actions'])->make(true);
+	}
+
+	public function auditTrail(){
+		$vessels = AuditTrail::all();
+
+		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
+		// foreach($vessels as $vessel){
+		// 	$vessel->actions = $vessel->actions;
+		// }
 
     	return Datatables::of($vessels)->rawColumns(['actions'])->make(true);
 	}

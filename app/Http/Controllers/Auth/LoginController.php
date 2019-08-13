@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\Models\AuditTrail;
+use Browser;
 
 class LoginController extends Controller
 {
@@ -35,5 +38,38 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $req, $user)
+    {
+        dd(Browser::deviceFamily(), Browser::deviceModel());
+        AuditTrail::create([
+            'user_id'   => $user->id,
+            'action'    => 'logged in.',
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+    }
+
+    public function logout(Request $req)
+    {
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => 'logged out.',
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
+        $this->guard()->logout();
+
+        $req->session()->invalidate();
+
+        return $this->loggedOut($req) ?: redirect('/');
     }
 }

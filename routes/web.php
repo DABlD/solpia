@@ -129,10 +129,21 @@ Route::group([
 
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 
+		// AUDIT TRAIL ROUTES
+		$name = "auditTrail";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-history')
+			->defaults('name', 'Audit Trail')
+			->defaults('roles', array('Admin'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
 		// DATATABLE ROUTES
 		Route::post('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::post('datatables/users', 'DatatablesController@users')->name('datatables.users');
 		Route::post('datatables/processedApplicant', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');
 		Route::post('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');
+		Route::post('datatables/auditTrail', 'DatatablesController@auditTrail')->name('datatables.auditTrail');
 	}
 );
