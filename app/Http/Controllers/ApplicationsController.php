@@ -74,6 +74,7 @@ class ApplicationsController extends Controller
         $applicant->load('document_med_cert');
         $applicant->load('document_med');
         // $applicant->load('document_med_exp'); //NOT USED ANYMORE
+        // dd($applicant)
         
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $issuers = array_merge(
@@ -89,7 +90,22 @@ class ApplicationsController extends Controller
             foreach($temps as $temp){
                 array_push($regulations, $temp);
             }
-        }        
+        }
+
+        $countries = array();
+        foreach($applicant->document_flag as $key => $data){
+            $country = $data->country;
+            if(!isset($countries[$country])){
+                $countries[$country] = array();
+            }
+
+            array_push($countries[$country], $data);
+            $applicant->document_flag->forget($key);
+        }
+
+        foreach($countries as $key => $country){
+            $applicant->document_flag->put($key, $country);
+        }
 
         // IF HAS 'EDIT' VALUE, WILL LOAD SCRIPT THAT WILL POPULATE THE FIELD WITH APPLICANT DETAILS FOR EDITING
         return $this->_view('create', [
@@ -128,13 +144,6 @@ class ApplicationsController extends Controller
                 // if($docuType == 'document_flag'){
                 //     $temp = $data->country;
                 // }
-                if($docuType == 'document_med'){
-                    $temp = $data->case;
-                }
-                else{
-                    $temp = $data->type;
-                }
-
                 if(isset($data->no)){
                     if($data->no == ""){
                         $applicant->$docuType->forget($key);
@@ -147,6 +156,14 @@ class ApplicationsController extends Controller
                         continue;
                     }
                 }
+
+                if($docuType == 'document_med'){
+                    $temp = $data->case;
+                }
+                else{
+                    $temp = $data->type;
+                }
+
 
                 if(isset($data->expiry_date)){
                     if($data->expiry_date == "" || $data->expiry_date == null){

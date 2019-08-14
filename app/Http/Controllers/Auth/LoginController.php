@@ -42,7 +42,6 @@ class LoginController extends Controller
 
     protected function authenticated(Request $req, $user)
     {
-        dd(Browser::deviceFamily(), Browser::deviceModel());
         AuditTrail::create([
             'user_id'   => $user->id,
             'action'    => 'logged in.',

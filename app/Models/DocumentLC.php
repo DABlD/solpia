@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentLC extends Model
 {
+	protected $table = 'document_l_cs';
+
 	protected $fillable = [
 		'type', 'issuer', 'no', 'issue_date', 'expiry_date', 
 		'applicant_id', 'regulation', 'rank'

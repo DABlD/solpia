@@ -495,25 +495,48 @@
             countries.each((index, country) => {
                 inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
 
-                for(let i = 0; i < inputs.length; i+=6){
-                    if(!checkIfVisible($(inputs[i]).parent().parent().parent())){
-                        continue;
-                    }
+                @if(!isset($edit))
+                    for(let i = 0; i < inputs.length; i+=6){
+                        if(!checkIfVisible($(inputs[i]).parent().parent().parent())){
+                            continue;
+                        }
 
-                    let tempFlag = {};
-                    tempFlag.country    = country.value;
-                    tempFlag.rank       = rank;
-                    tempFlag.type       = inputs[i].value;
-                    tempFlag.number     = inputs[i+1].value;
-                    tempFlag.issue_date = inputs[i+2].value;
-                    tempFlag.expiry_date= inputs[i+4].value;
+                        let tempFlag = {};
+                        tempFlag.country    = country.value;
+                        tempFlag.rank       = rank;
+                        tempFlag.type       = inputs[i].value;
+                        tempFlag.number     = inputs[i+1].value;
+                        tempFlag.issue_date = inputs[i+2].value;
+                        tempFlag.expiry_date= inputs[i+4].value;
 
-                    // FOR REMOVING ' in "SHIP'S COOK ENDORSEMENT"
-                    if(tempFlag.type == "SHIP'S COOK ENDORSEMENT"){
-                        tempFlag.type = "SHIP COOK ENDORSEMENT";
+                        // FOR REMOVING ' in "SHIP'S COOK ENDORSEMENT"
+                        if(tempFlag.type == "SHIP'S COOK ENDORSEMENT"){
+                            tempFlag.type = "SHIP COOK ENDORSEMENT";
+                        }
+                        docu_flag.push(tempFlag);
                     }
-                    docu_flag.push(tempFlag);
-                }
+                @else
+                    for(let i = 0; i < inputs.length; i+=7){
+                        if(!checkIfVisible($(inputs[i]).parent().parent().parent())){
+                            continue;
+                        }
+
+                        let tempFlag = {};
+                        tempFlag.country    = country.value;
+                        tempFlag.rank       = rank;
+                        tempFlag.id         = inputs[i].value;
+                        tempFlag.type       = inputs[i+1].value;
+                        tempFlag.number     = inputs[i+2].value;
+                        tempFlag.issue_date = inputs[i+3].value;
+                        tempFlag.expiry_date= inputs[i+5].value;
+
+                        // FOR REMOVING ' in "SHIP'S COOK ENDORSEMENT"
+                        if(tempFlag.type == "SHIP'S COOK ENDORSEMENT"){
+                            tempFlag.type = "SHIP COOK ENDORSEMENT";
+                        }
+                        docu_flag.push(tempFlag);
+                    }
+                @endif
             });
 
             $('#createForm').append(`
@@ -524,26 +547,50 @@
             inputs = $('#docu .lc input, #docu .lc select');
             let docu_lc = [];
 
-            for(let i = 0; i < inputs.length; i+=9){
-                if(!checkIfVisible(inputs[i])){
-                    continue;
-                }
+            @if(!isset($edit))
+                for(let i = 0; i < inputs.length; i+=9){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
 
-                let tempLc = {};
-                tempLc.type         = inputs[i].value
-                tempLc.rank         = rank;
-                tempLc.issuer       = inputs[i+1].value;
-                tempLc.regulation   = $(inputs[i+2]).val();
-                tempLc.no           = inputs[i+4].value;
-                tempLc.issue_date   = inputs[i+5].value;
-                tempLc.expiry_date  = inputs[i+7].value;
+                    let tempLc = {};
+                    tempLc.type         = inputs[i].value
+                    tempLc.rank         = rank;
+                    tempLc.issuer       = inputs[i+1].value;
+                    tempLc.regulation   = $(inputs[i+2]).val();
+                    tempLc.no           = inputs[i+4].value;
+                    tempLc.issue_date   = inputs[i+5].value;
+                    tempLc.expiry_date  = inputs[i+7].value;
 
-                // FOR REMOVING ' in "SAFETY OFFICER'S TRAINING COURSE"
-                if(tempLc.type == "SAFETY OFFICER'S TRAINING COURSE"){
-                    tempLc.type = "SAFETY OFFICER TRAINING COURSE";
+                    // FOR REMOVING ' in "SAFETY OFFICER'S TRAINING COURSE"
+                    if(tempLc.type == "SAFETY OFFICER'S TRAINING COURSE"){
+                        tempLc.type = "SAFETY OFFICER TRAINING COURSE";
+                    }
+                    docu_lc.push(tempLc);
                 }
-                docu_lc.push(tempLc);
-            }
+            @else
+                for(let i = 0; i < inputs.length; i+=10){
+                    if(!checkIfVisible(inputs[i])){
+                        continue;
+                    }
+
+                    let tempLc = {};
+                    tempLc.id           = inputs[i].value
+                    tempLc.type         = inputs[i+1].value
+                    tempLc.rank         = rank;
+                    tempLc.issuer       = inputs[i+2].value;
+                    tempLc.regulation   = $(inputs[i+3]).val();
+                    tempLc.no           = inputs[i+5].value;
+                    tempLc.issue_date   = inputs[i+6].value;
+                    tempLc.expiry_date  = inputs[i+8].value;
+
+                    // FOR REMOVING ' in "SAFETY OFFICER'S TRAINING COURSE"
+                    if(tempLc.type == "SAFETY OFFICER'S TRAINING COURSE"){
+                        tempLc.type = "SAFETY OFFICER TRAINING COURSE";
+                    }
+                    docu_lc.push(tempLc);
+                }
+            @endif
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_lc" value='${JSON.stringify(docu_lc)}'>

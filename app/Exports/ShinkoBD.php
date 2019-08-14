@@ -294,7 +294,8 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 		$drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
         $drawing->setHeight(154);
-        $drawing->setOffsetX(10);
+        $drawing->setWidth(167);
+        $drawing->setOffsetX(1);
 		$drawing->setCoordinates('L3');
 
         return $drawing;

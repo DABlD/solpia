@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FamilyData extends Model
 {
 	use SoftDeletes;
+
+    protected $table = "family_datas";
 	
     protected $fillable = [
     	'applicant_id','type','name',

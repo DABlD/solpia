@@ -122,7 +122,7 @@
 				{{ $docu ? $docu->number : "-----" }}
 			</td>
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----" }}
+				{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}
 			</td>
 			<td colspan="2">Tel</td>
 			<td colspan="6">{{ $applicant->user->contact }}</td>
@@ -154,7 +154,7 @@
 		<tr>
 			<td>Flag State</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Religion</td>
 			<td colspan="6">{{ $applicant->religion }}</td>
 		</tr>
@@ -186,7 +186,7 @@
 			<td colspan="2">
 				{{ $docu ? $docu->number : "-----" }}
 			<td colspan="2">
-				{{ $docu ? $docu->expiry_date->format('F j, Y') : "-----" }}
+				{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}
 			</td>
 			<td colspan="2">Last School</td>
 			<td colspan="6">{{ $applicant->educational_background->last()->school }}</td>

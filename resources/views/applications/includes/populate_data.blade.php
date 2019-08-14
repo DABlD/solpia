@@ -87,7 +87,7 @@
         inputs[i+1].value = "{{ $data->name }}";
         // inputs[i+2].value = start;
         $(inputs[i+2]).flatpickr(config).setDate("{{ $data->birthday }}", true);
-        inputs[i+4].value = {{ $data->age }};
+        inputs[i+4].value = "{{ $data->age }}";
         inputs[i+5].value = "{{ $data->occupation }}";
         inputs[i+6].value = "{{ $data->email }}";
         inputs[i+7].value = "{{ $data->address }}";
@@ -148,7 +148,7 @@
 		i = (index * 8);
 
 	    $(inputs[i]).val("{!! str_replace("'S", "", $data->type) !!}").trigger('change');
-	    $(inputs[i+1]).val("{{ $data->issuer }}").trigger('change');
+	    $(inputs[i+1]).val("{!! $data->issuer !!}").trigger('change');
 
 	    inputs[i+2].value 	= "{{ $data->number }}";
 
@@ -170,8 +170,8 @@
 		inputs = $('#docu .MedCert input, #docu .MedCert select');
 		i = (index * 8);
 
-		$(inputs[i]).val("{{ $data->type }}").trigger('change');
-		$(inputs[i+1]).val("{{ $data->clinic }}").trigger('change');
+		$(inputs[i]).val("{!! $data->type !!}").trigger('change');
+		$(inputs[i+1]).val("{!! $data->clinic !!}").trigger('change');
 
 		inputs[i+2].value = "{{ $data->number }}";
 
@@ -193,7 +193,7 @@
 		inputs = $('#docu .Med input, #docu .Med select');
 		i = (index * 5);
 
-		$(inputs[i]).val("{{ $data->type }}").trigger('change');
+		$(inputs[i]).val("{!! $data->type !!}").trigger('change');
 		$(inputs[i+1]).val("{{ $data->with_mv }}").trigger('change');
 
         inputs[i+2].value 	= '{{ $data->year }}';
@@ -219,8 +219,8 @@
 		inputs = $('#docu .lc input, #docu .lc select');
 		i = (index * 10);
 
-		checkIfExisting($(inputs[i]), "{{ $data->type }}");
-		checkIfExisting($(inputs[i+1]), "{{ $data->issuer }}");
+		checkIfExisting($(inputs[i]), "{!! $data->type !!}");
+		checkIfExisting($(inputs[i+1]), "{!! $data->issuer !!}");
 
         regulations = JSON.parse('{!! $data->regulation !!}');
         regulations.forEach(option => {
@@ -238,8 +238,41 @@
 		index++;
 	@endforeach
 
+	var flags = [];
+	@foreach($applicant->document_flag as $key => $datas)
+		addDocu('Flag');
+		country = $($('.docu-country')[{{ $loop->index }}]);
+		$(country).val("{{ $key }}").trigger('change');
+		// countries.push("{{ $key }}");
+		flags["{{ $key }}"] = [];
+		flags["{{ $key }}"].push(JSON.parse('{!! json_encode($datas) !!}'));
+	@endforeach
+
+	// console.log(flags);
+	for(datas in flags){
+		console.log(datas);
+		console.log(flags[datas]);
+		for(data in datas){
+			// console.log(data);
+		}
+	}
+	// index = 0;
+	// 	inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
+	// 	i = (index * 7);
+
+	// 	checkIfExisting($(inputs[i]), "{!! $data->type !!}");
+		
+ //    	inputs[i+1].value = '{{ $data->number }}';
+
+	//     $(inputs[i+2]).flatpickr(config).setDate("{{ $data->issue_date }}", true);
+	// 	$(inputs[i+4]).flatpickr(config2).setDate("{{ $data->expiry_date }}", true);
+
+	// 	index++;
+
+	document.getElementById("preview").src = "{!! asset($applicant->user->avatar) !!}";
+	// console.log("{ $data->avatar !!}");
 
 	$('html, body').animate({
-        scrollTop: $(".lc").offset().top - 200
+        scrollTop: $(".Flag").offset().top - 200
     }, 2000);
 </script>
