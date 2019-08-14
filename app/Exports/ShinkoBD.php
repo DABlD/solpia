@@ -107,9 +107,8 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 // FONT SIZES
 
                 $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(11);
-                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(18);
-                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(12);
-                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(12);
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(28);
+                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(20);
 
                 // FAMILY DATA ROWS
                 $fdRows = array();
@@ -155,7 +154,6 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                     $event->sheet->getDelegate()->getRowDimension($next)->setRowHeight(25);
                 }
 
-
                 // FUNCTIONS
                 $x = function($let1, $inc1, $let2 = null, $inc2 = null, $temp = null) use ($raf, $ras){
                     $temp = $temp==null? $raf : $ras;
@@ -189,6 +187,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 // HC
                 $h[3] = [
                 	'A22:N22', $x('A', 2, 'N', 2), $x('H', 11, 'M', 11, true),
+                    'E' . ($raf + 4) . ':' . 'N' . $ras
                 ];
 
                 // HL

@@ -248,14 +248,29 @@
 		flags["{{ $key }}"].push(JSON.parse('{!! json_encode($datas) !!}'));
 	@endforeach
 
-	// console.log(flags);
-	for(datas in flags){
-		console.log(datas);
-		console.log(flags[datas]);
-		for(data in datas){
-			// console.log(data);
-		}
-	}
+	setTimeout(() => {
+		$(document).ready(() => {
+			for(datas in flags){
+				flags[datas].forEach((a,b) => {
+					
+					index = 0;
+					a.forEach(data => {
+						inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
+						i = (index * 7);
+
+						checkIfExisting($(inputs[i]), data.type);
+						
+				    	inputs[i+1].value = data.number;
+
+					    $(inputs[i+2]).flatpickr(config).setDate(data.issue_date, true);
+						$(inputs[i+4]).flatpickr(config2).setDate(data.expiry_date, true);
+
+						index++;
+					});
+				});
+			}
+		});
+	});
 	// index = 0;
 	// 	inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
 	// 	i = (index * 7);

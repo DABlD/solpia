@@ -254,7 +254,7 @@
 		@endforeach
 
 		<tr>
-			<td colspan="14">S E A C A R R I E R</td>
+			<td colspan="14">{!! "S E A    C A R R I E R" !!}</td>
 		</tr>
 
 		<tr>
@@ -306,10 +306,9 @@
 				<td rowspan="2">{{ $service->previous_salary }}</td>
 				<td rowspan="1">{{ $service->sign_on->format('d.M.y') }}</td>
 				<td rowspan="2">
-					{{ round($service->sign_on->diffInMonths($service->sign_off) + 
-						((($service->sign_on->diffInDays($service->sign_off)) / 30) / 30), 2) }}
+					{{ round($service->sign_on->floatDiffInMonths($service->sign_off), 1) }}
 				</td>
-				<td rowspan="2">{{ $service->rank }}</td>
+				<td rowspan="2">{{ $applicant->ranks[$service->rank] }}</td>
 				<td rowspan="1">{{ $service->vessel_type }}</td>
 				<td rowspan="1">{{ $service->gross_tonnage }}</td>
 				<td rowspan="1" colspan="2">{{ $service->manning_agent }}</td>

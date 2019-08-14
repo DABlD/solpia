@@ -24,8 +24,6 @@ class ApplicationsController extends Controller
     }
 
     public function index(Request $req){
-        // dd(request()->getClientIp());
-        // dd(gethostname());
         $principals = Principal::select('id', 'slug', 'name')->get();
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
@@ -74,7 +72,6 @@ class ApplicationsController extends Controller
         $applicant->load('document_med_cert');
         $applicant->load('document_med');
         // $applicant->load('document_med_exp'); //NOT USED ANYMORE
-        // dd($applicant)
         
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $issuers = array_merge(
@@ -137,6 +134,8 @@ class ApplicationsController extends Controller
         $applicant->load('document_lc');
         $applicant->load('document_med_cert');
         $applicant->load('document_med');
+
+        $applicant->ranks = Rank::pluck('abbr', 'name');
 
         foreach(['document_id', 'document_flag', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
             foreach($applicant->$docuType as $key => $data){

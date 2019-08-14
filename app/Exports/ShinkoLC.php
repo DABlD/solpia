@@ -114,7 +114,7 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // FONT SIZES
 
-                $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(12);
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(18);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(12);
                 $event->sheet->getDelegate()->getStyle('D48:D49')->getFont()->setSize(7);

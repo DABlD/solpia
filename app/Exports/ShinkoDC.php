@@ -106,8 +106,8 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // FONT SIZES
 
-                $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(11);
-                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(18);
+                $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(12);
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(22);
                 $event->sheet->getDelegate()->getStyle('A42')->getFont()->setSize(10);
 
                 // CHEAT

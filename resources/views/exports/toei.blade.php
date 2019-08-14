@@ -854,7 +854,7 @@
 			<td colspan="2">Crew's Name:</td>
 			<td colspan="3">{{ $applicant->user->fname . ' ' . $applicant->user->mname . ' ' . $applicant->user->lname }}</td>
 			<td>Presenter:</td>
-			<td colspan="3">JEFFREY PLANTA / CREWING MANAGER</td>
+			<td colspan="3">NEIL ROMANO / CREWING MANAGER</td>
 		</tr>
 	</tbody>
 </table>
