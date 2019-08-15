@@ -136,6 +136,7 @@ class ApplicationsController extends Controller
         $applicant->load('document_med');
 
         $applicant->ranks = Rank::pluck('abbr', 'name');
+        $applicant->ranks[''] = '';
 
         foreach(['document_id', 'document_flag', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
             foreach($applicant->$docuType as $key => $data){
