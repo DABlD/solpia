@@ -28,7 +28,7 @@ class CreateApplicantsTable extends Migration
             $table->double('weight', 5, 2);
             $table->double('bmi', 5, 2);
 
-            $table->string('blood_type', 5);
+            $table->string('blood_type', 5)->nullable();
             $table->enum('civil_status', ['Single', 'Married', 'Widowed', 'Divorced']);
 
             $table->string('tin')->nullable();
