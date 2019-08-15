@@ -125,7 +125,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="provincial_contact">Provincial Number</label>
-        <input type="text" class="form-control aeigh" name="provincial_contact" placeholder="Enter Provincial Contact Number">
+        <input type="text" class="form-control" name="provincial_contact" placeholder="Enter Provincial Contact Number">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="provincial_contacttError"></strong>
         </span>
@@ -135,7 +135,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="email">Email</label>
-        <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email">
+        <input type="email" class="form-control" name="email" placeholder="Enter Email">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="emailError"></strong>
         </span>
@@ -159,7 +159,7 @@
 <div class="row">
     <div class="form-group col-md-2">
         <label for="waistline">Waistline(inch)</label>
-        <input type="number" class="form-control aeigh" name="waistline" placeholder="Enter Waistline">
+        <input type="number" class="form-control" name="waistline" placeholder="Enter Waistline">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="waistlineError"></strong>
         </span>
@@ -169,7 +169,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="shoe_size">Shoe Size(cm)</label>
-        <input type="number" class="form-control aeigh" name="shoe_size" placeholder="Enter Shoe Size">
+        <input type="number" class="form-control" name="shoe_size" placeholder="Enter Shoe Size">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="shoe_sizeError"></strong>
         </span>
@@ -227,7 +227,7 @@
 <div class="row">
     <div class="form-group col-md-2">
         <label for="blood_type">Blood Type</label>
-        <select name="blood_type" class="form-control aeigh">
+        <select name="blood_type" class="form-control">
             <option readonly selected value="">Select Blood Type</option>
             <option value="O+">O+</option>
             <option value="O-">O-</option>
@@ -273,7 +273,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="tin">TIN No.</label>
-        <input type="number" class="form-control aeigh" name="tin" placeholder="Enter TIN No.">
+        <input type="number" class="form-control" name="tin" placeholder="Enter TIN No.">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="tinError"></strong>
         </span>
@@ -283,7 +283,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="sss">SSS No.</label>
-        <input type="number" class="form-control aeigh" name="sss" placeholder="Enter SSS No.">
+        <input type="number" class="form-control" name="sss" placeholder="Enter SSS No.">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="sssError"></strong>
         </span>

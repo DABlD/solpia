@@ -40,6 +40,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // OVERRIDEN FUNCTIONS FROM AuthenticatesUsers
     protected function authenticated(Request $req, $user)
     {
         AuditTrail::create([

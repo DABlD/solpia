@@ -609,7 +609,7 @@
 
 			@php 
 				$name = 'US-VISA';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
