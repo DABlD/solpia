@@ -17,11 +17,11 @@ class CreateApplicantsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
 
-            $table->string('birth_place');
-            $table->string('religion');
+            $table->string('birth_place')->nullable();
+            $table->string('religion')->nullable();
 
-            $table->text('provincial_address');
-            $table->string('provincial_contact');
+            $table->text('provincial_address')->nullable();
+            $table->string('provincial_contact')->nullable();
 
             $table->integer('age');
             $table->double('height', 5, 2);
@@ -34,10 +34,10 @@ class CreateApplicantsTable extends Migration
             $table->string('tin')->nullable();
             $table->string('sss')->nullable();
 
-            $table->double('waistline', 5, 2);
-            $table->double('shoe_size', 5, 2);
+            $table->double('waistline', 5, 2)->nullable();
+            $table->double('shoe_size', 5, 2)->nullable();
 
-            $table->enum('clothes_size', ['S', 'M', 'L', 'XL']);
+            $table->enum('clothes_size', ['S', 'M', 'L', 'XL'])->nullable();
             $table->string('eye_color', 30)->nullable();
 
             $table->timestamps();
