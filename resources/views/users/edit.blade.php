@@ -27,7 +27,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="mname">Middle Name</label>
-                                <input type="text" class="form-control aeigh" name="mname" placeholder="Enter Middle Name" value="{{ $user->mname }}">
+                                <input type="text" class="form-control" name="mname" placeholder="Enter Middle Name" value="{{ $user->mname }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="mnameError"></strong>
                                 </span>
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control aeigh" name="address" placeholder="Enter Address" value="{{ $user->address }}">
+                                <input type="text" class="form-control" name="address" placeholder="Enter Address" value="{{ $user->address }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="addressError"></strong>
                                 </span>
@@ -64,7 +64,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email" value="{{ $user->email }}">
+                                <input type="email" class="form-control" name="email" placeholder="Enter Email" value="{{ $user->email }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="emailError"></strong>
                                 </span>
@@ -74,7 +74,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="contact">Contact Number</label>
-                                <input type="text" class="form-control aeigh" name="contact" placeholder="Enter Contact Number" value="{{ $user->contact }}">
+                                <input type="text" class="form-control" name="contact" placeholder="Enter Contact Number" value="{{ $user->contact }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="contactError"></strong>
                                 </span>
@@ -84,7 +84,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="birthday">Birthday</label>
-                                <input type="text" class="form-control aeigh" name="birthday" placeholder="Select Birthday">
+                                <input type="text" class="form-control" name="birthday" placeholder="Select Birthday">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="birthdayError"></strong>
                                 </span>

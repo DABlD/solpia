@@ -17,7 +17,7 @@
 							<tr>
 								<th>Name</th>
 								<th>Role</th>
-								<th>Email</th>
+								<th>Email / Username</th>
 								<th>Birthday</th>
 								<th>Contact</th>
 								<th>Created At</th>
@@ -69,6 +69,12 @@
                     targets: [3,5],
                     render: function(date){
                         return toDate(date);
+                    }
+                },
+                {
+                    targets: 2,
+                    render: function(email, type, row){
+                        return email + " / " + row.username;
                     }
                 },
             ],
