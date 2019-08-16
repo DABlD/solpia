@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
 class CreateUsersTable extends Migration
 {
     /**
@@ -21,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('suffix')->nullable();
             $table->string('username')->nullable();
             $table->string('avatar')->default('images/default_avatar.jpg');
-            $table->enum('role', ['Admin', 'Encoder', 'Applicant', 'Principal'])->nullable();
+            $table->enum('role', ['Admin', 'Cadet' ,'Encoder', 'Applicant', 'Principal'])->nullable();
             
             $table->string('email')->nullable();
             // $table->string('email')->unique();
@@ -31,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('contact')->nullable();
 
             $table->boolean('applicant')->default(1);
+            $table->boolean('status')->default(0);
 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

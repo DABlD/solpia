@@ -145,5 +145,8 @@ Route::group([
 		Route::post('datatables/processedApplicant', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');
 		Route::post('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');
 		Route::post('datatables/auditTrail', 'DatatablesController@auditTrail')->name('datatables.auditTrail');
+
+		// MISC
+		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
 	}
 );

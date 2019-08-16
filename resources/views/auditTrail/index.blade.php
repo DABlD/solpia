@@ -85,7 +85,7 @@
                 {
                     targets: 1,
                     render: function(id, a, row){
-                        return id + " " + row.action;
+                        return row.username + " " + row.action;
                     },
                 },
                 {
@@ -99,7 +99,7 @@
                 $('#table tbody').append('<div class="preloader"></div>');
                 // MUST NOT BE INTERCHANGED t-i
                 tooltip();
-            	initializeActions();
+            	// initializeActions();
             },
             order: [ [0, 'desc'] ],
         });
@@ -109,78 +109,5 @@
         		$('.preloader').fadeOut();
         	}, 800);
         });
-
-        function initializeActions(){
-            $('[data-original-title="View Vessel Details"]').on('click', vessel => {
-                $.ajax({
-                    url: 'vessels/get/' + $(vessel.target).data('id'),
-                    success: vessel => {
-                        vessel = JSON.parse(vessel);
-                        let fields = "";
-
-                        let names = [
-                            "Vessel Name", "Principal", "Flag", "Type", "Manning Agent", "Year Built", "Builder", "Engine", "Gross Tonnage", "BHP", "Trade", "ECDIS", "Status"
-                        ];
-
-                        let columns = [
-                            'name', 'principal.name', 'flag', "type", "manning_agent", "year_build", "builder", "engine", "gross_tonnage", "BHP", "trade", "ecdis", "status"
-                        ];
-
-                        $.each(Object.keys(vessel), (index, key) => {
-                            let temp = columns.indexOf(key);
-                            if(temp >= 0){
-                                fields += `
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <h5><strong>` + names[temp] + `</strong></h5>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control" value="` + vessel[key]+ `" readonly/>
-                                        </div>
-                                    </div>
-                                    <br id="` + key + `">
-                                `;
-                            }
-                        });
-
-                        swal({
-                            title: 'Vessel Details',
-                            width: '50%',
-                            html: `
-                                <br><br>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        ` + fields + `
-                                    </div>
-                                </div>
-                            `,
-                            onBeforeOpen: () => {
-                                // CUSTOM FIELDS
-
-                                // OPTIONAL
-
-                                // MODIFIERS
-                            }
-                        });
-                    }
-                });
-            });
-
-            $('[data-original-title="Import Vessels"]').on('click', () => {
-                swal({
-                    title: 'Select Excel File with Vessel Data',
-                    html: `
-                        <form id="vesselForm" method="POST" action="{{ route('vessels.import') }}" enctype="multipart/form-data">
-                            @csrf
-                            <input type="file" name="file" class="swal2-file">
-                        </form>
-                    `
-                }).then(file => {
-                    if(file.value){
-                        $('#vesselForm').submit();
-                    }
-                });
-            });
-	    }
 	</script>
 @endpush

@@ -26,6 +26,7 @@ class UsersTableSeeder extends Seeder
             'contact' => '09123456789',
             'applicant' => false,
             'email_verified_at' => now()->toDateTimeString(),
+            'status' => 0,
             'password' => '123456'
         ]);
 

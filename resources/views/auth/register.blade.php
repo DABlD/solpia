@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" id="registerForm">
@@ -110,8 +109,9 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-2 offset-md-10">
-                                <a class="btn btn-primary submit">Register</a>
+                            <div class="col-md-8 offset-md-4 align-right">
+                                <a class="btn btn-success submit">Register</a>
+                                <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
                             </div>
                         </div>
 
@@ -254,4 +254,74 @@
             }
         }
     </script>
+@endpush
+
+@push('after-styles')
+    <style>
+        body{
+            background-image: url('images/bg.jpg');
+            background-size: cover;
+            height: 100vh;
+        }
+
+        .btn-success{
+            color: white !important;
+        }
+
+        .navbar-laravel{
+            background-color: rgba(255, 255, 255, 0);
+            border-color: rgba(255, 255, 255, 0);
+            box-shadow: none;
+        }
+
+        .navbar-brand{
+            font-size: 30px;
+        }
+
+        .navbar-brand b{
+            color: #f0f1f2;
+        }
+
+        .navbar-brand b span{
+            text-decoration: underline;
+        }
+
+        .container{
+            max-width: 900px;
+        }
+
+        .navbar .container{
+            max-width: 90%;
+        }
+
+        img{
+            width: 130px;
+            height: 130px;
+            margin-right: 20px;
+        }
+
+        .card{
+            background-color: rgba(255,255,255,0.3);
+            box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+            border-color: #d0d0d0;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: .25rem;
+        }
+
+        .align-right{
+            text-align: right;
+        }
+
+        .form-group label{
+            font-family: Nunito,sans-serif;
+        }
+
+        .form-group b{
+            font-size: 16px;
+        }
+
+        label{
+            font-weight: 900;
+        }
+    </style>
 @endpush

@@ -15,11 +15,15 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right"><b>Email Or Username</b></label>
 
                             <div class="col-md-7">
-                                <input id="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-    
+                                <input id="email" type="text" class="form-control{{ $errors->has('email') || $errors->has('status') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @elseif ($errors->has('status'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->all()[0] }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -55,9 +59,11 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-7 offset-md-4 align-right">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Login') }}
                                 </button>
+
+                                <a href="{{ route('register') }}" class="btn btn-primary pull-right">Register</a>
 
                                 {{-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">

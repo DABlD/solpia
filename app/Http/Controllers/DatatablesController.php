@@ -66,8 +66,9 @@ class DatatablesController extends Controller
 	}
 
 	public function auditTrail(){
-		$vessels = AuditTrail::all();
-
+		$vessels = AuditTrail::join('users', 'audit_trails.user_id', '=', 'users.id')
+							->select('audit_trails.*', 'users.username')
+							->get();
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		// foreach($vessels as $vessel){
 		// 	$vessel->actions = $vessel->actions;
