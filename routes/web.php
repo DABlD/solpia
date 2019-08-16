@@ -80,7 +80,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-file-text')
 			->defaults('name', 'Applications')
-			->defaults('roles', array('Admin', 'Encoder'))
+			->defaults('roles', array('Admin', 'Encoder', 'Cadet'))
 			->name($name . '.index')
 			->defaults('href', $name);
 

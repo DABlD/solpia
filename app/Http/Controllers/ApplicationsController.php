@@ -20,7 +20,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ApplicationsController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin/Encoder/Principal');
+        $this->middleware('permissions:' . 'Admin/Encoder/Principal/Cadet');
     }
 
     public function index(Request $req){
