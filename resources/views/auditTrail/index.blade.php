@@ -8,7 +8,7 @@
 			<div class="box box-info">
 
 				<div class="box-header">
-					@include('vessels.includes.toolbar')
+					@include('auditTrail.includes.toolbar')
 				</div>
 
 				<div class="box-body">
@@ -91,7 +91,7 @@
                 {
                     targets: 7,
                     render: function(created_at){
-                        return toDate(created_at);
+                        return toDateTime(created_at);
                     },
                 },
             ],
@@ -99,7 +99,7 @@
                 $('#table tbody').append('<div class="preloader"></div>');
                 // MUST NOT BE INTERCHANGED t-i
                 tooltip();
-            	// initializeActions();
+            	initializeActions();
             },
             order: [ [0, 'desc'] ],
         });
@@ -109,5 +109,20 @@
         		$('.preloader').fadeOut();
         	}, 800);
         });
+
+        function initializeActions(){
+            $('[data-original-title="Export Logs"]').on('click', () => {
+                swal({
+                    title: 'Do you want to export',
+                    type: 'question',
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b'
+                }).then(result => {
+                    if(result.value){
+                        window.location.href = "{{ route('auditTrail.export') }}";
+                    };
+                });
+            });
+        }
 	</script>
 @endpush
