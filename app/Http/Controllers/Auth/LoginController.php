@@ -47,7 +47,7 @@ class LoginController extends Controller
     {
         AuditTrail::create([
             'user_id'   => $user->id,
-            'action'    => 'logged in.',
+            'action'    => 'logged in',
             'ip'        => $req->getClientIp(),
             'hostname'  => gethostname(),
             'device'    => Browser::deviceFamily(),
@@ -60,7 +60,7 @@ class LoginController extends Controller
     {
         AuditTrail::create([
             'user_id'   => auth()->user()->id,
-            'action'    => 'logged out.',
+            'action'    => 'logged out',
             'ip'        => $req->getClientIp(),
             'hostname'  => gethostname(),
             'device'    => Browser::deviceFamily(),
@@ -94,7 +94,7 @@ class LoginController extends Controller
                 // dd($request->getClientIp());
                 AuditTrail::create([
                     'user_id'   => $user->id,
-                    'action'    => 'tried to access outside.',
+                    'action'    => 'tried to access outside',
                     'ip'        => $request->getClientIp(),
                     'hostname'  => gethostname(),
                     'device'    => Browser::deviceFamily(),
