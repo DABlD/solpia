@@ -52,3 +52,15 @@
 		</ul>
 	</section>
 </aside>
+
+@push('after-scripts')
+	<script>
+		@if(Auth::user()->role == "")
+			swal({
+				type: 'warning',
+				title: 'Access limited',
+				text: 'No system role has been set for this account'
+			});
+		@endif
+	</script>
+@endpush
