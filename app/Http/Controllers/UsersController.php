@@ -59,6 +59,10 @@ class UsersController extends Controller
         }
     }
 
+    public function ajaxUpdate(Request $req){
+        echo User::where('id', $req->id)->update([$req->column => $req->value]);
+    }
+
     public function delete(User $user){
         $user->deleted_at = now()->toDateTimeString();
         echo $user->save();
