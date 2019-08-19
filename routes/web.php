@@ -139,6 +139,8 @@ Route::group([
 			->name($name . '.index')
 			->defaults('href', $name);
 
+		Route::get($name . '/export', ucfirst($name) . 'Controller@export')->name($name . '.export');
+
 		// DATATABLE ROUTES
 		Route::post('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::post('datatables/users', 'DatatablesController@users')->name('datatables.users');

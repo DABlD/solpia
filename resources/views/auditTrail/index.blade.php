@@ -120,6 +120,7 @@
                 }).then(result => {
                     if(result.value){
                         window.location.href = "{{ route('auditTrail.export') }}";
+                        table.ajax.reload();
                     };
                 });
             });

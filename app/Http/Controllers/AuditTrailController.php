@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\AuditTrail;
 
 class AuditTrailController extends Controller
 {
@@ -14,6 +16,27 @@ class AuditTrailController extends Controller
         return $this->_view('index', [
             'title' => 'Audit Trail'
         ]);
+    }
+
+    public function export(){
+        $data = AuditTrail::all();
+        
+        $class = "App\\Exports\\Logs";
+        $first = "NA";
+        $last = "NA";
+
+        if($data->count()){
+            $first = $data->first()->created_at->format('F j, Y');
+            $last = $data->last()->created_at->format('F j, Y');
+        }
+
+        $datas = AuditTrail::join('users', 'audit_trails.user_id', '=', 'users.id')
+                        ->select('audit_trails.*', 'users.username')
+                        ->limit(1000)
+                        ->get()
+                        ->reverse();
+
+        return Excel::download(new $class($datas), $first . ' - ' . $last . '.xlsx');
     }
 
     public function delete(User $user){
