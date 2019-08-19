@@ -190,6 +190,9 @@
         // VALIDATE ON SUBMIT
         $('.submit').click(() => {
             let inputs = $('.aeigh:not(".input")');
+
+            swal('Validating');
+            swal.showLoading();
             
             $.each(inputs, (index, input) => {
                 let temp = $(input);
@@ -205,6 +208,21 @@
                         data: {
                             email: input.value,
                             rules: 'email|unique:users'
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            if(typeof result[temp.attr('name')] != 'undefined'){
+                                showError(input, temp, error, result[temp.attr('name')][0]);
+                            }
+                        }
+                    });
+                }
+                else if(temp.attr('name') == 'username'){
+                    $.ajax({
+                        url: '{{ url('validate') }}',
+                        data: {
+                            username: input.value,
+                            rules: 'unique:users'
                         },
                         success: result => {
                             result = JSON.parse(result);
@@ -238,20 +256,25 @@
 
                         showError(input2, temp2, error2, 'Password must be at least 6 characters');
                     }
-                }
 
-                swal('Validating');
-                swal.showLoading();
-                setTimeout(() => {
                     !bool? clearError(input, temp, error) : '';
-                    swal.close();
-                }, 1000);
+                }
             });
 
             // IF THERE IS NO ERROR. SUBMIT.
             setTimeout(() => {
-                !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
-            }, 1000)
+                // swal.close();
+                // !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
+                if(!$('.is-invalid').is(':visible')){
+                    $('#createForm').submit();
+                }
+                else{
+                    swal.close();
+                    $('html, body').animate({
+                        scrollTop: $($('[id$="Error"]:visible')[0]).offset().top - 100
+                    }, 1000);
+                }
+            }, 1500)
         });
 
         async function showError(input, temp, error, message){

@@ -33,6 +33,11 @@ class UsersController extends Controller
     public function store(Request $req){
         $data = $req->except(['confirm_password', '_token']);
 
+        if($data['role'] != "Applicant"){
+            $data['applicant'] = 0;
+            $data['status'] = 1;
+        }
+
         if(User::create($data)){
             $req->session()->flash('success', 'User Successfully Added.');
             return redirect()->route('users.index');

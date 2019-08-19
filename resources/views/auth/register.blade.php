@@ -1,6 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -20,7 +21,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="mname">Middle Name</label>
-                                <input type="text" class="form-control aeigh" name="mname" placeholder="Enter Middle Name">
+                                <input type="text" class="form-control" name="mname" placeholder="Enter Middle Name">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="mnameError"></strong>
                                 </span>
@@ -37,7 +38,7 @@
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control aeigh" name="address" placeholder="Enter Address">
+                                <input type="text" class="form-control" name="address" placeholder="Enter Address">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="addressError"></strong>
                                 </span>
@@ -45,9 +46,19 @@
                         </div>
 
                         <div class="row">
+                            <div class="form-group col-md-12">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control aeigh" name="username" placeholder="Enter Username">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="usernameError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control aeigh" name="email" placeholder="Enter Email">
+                                <input type="email" class="form-control" name="email" placeholder="Enter Email">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="emailError"></strong>
                                 </span>
@@ -57,7 +68,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="contact">Contact Number</label>
-                                <input type="text" class="form-control aeigh" name="contact" placeholder="Enter Contact Number">
+                                <input type="text" class="form-control" name="contact" placeholder="Enter Contact Number">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="contactError"></strong>
                                 </span>
@@ -67,7 +78,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="birthday">Birthday</label>
-                                <input type="text" class="form-control aeigh" name="birthday" placeholder="Select Birthday">
+                                <input type="text" class="form-control" name="birthday" placeholder="Select Birthday">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="birthdayError"></strong>
                                 </span>
@@ -137,6 +148,7 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/flatpickr.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/swal.js') }}"></script>
 
     <script>
         $('[name="birthday"]').flatpickr({
@@ -155,6 +167,9 @@
         // VALIDATE ON SUBMIT
         $('.submit').click(() => {
             let inputs = $('.aeigh:not(".input")');
+
+            swal('Validating');
+            swal.showLoading();
             
             $.each(inputs, (index, input) => {
                 let temp = $(input);
@@ -170,6 +185,21 @@
                         data: {
                             email: input.value,
                             rules: 'email|unique:users'
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            if(typeof result[temp.attr('name')] != 'undefined'){
+                                showError(input, temp, error, result[temp.attr('name')][0]);
+                            }
+                        }
+                    });
+                }
+                else if(temp.attr('name') == 'username'){
+                    $.ajax({
+                        url: '{{ url('validate') }}',
+                        data: {
+                            username: input.value,
+                            rules: 'unique:users'
                         },
                         success: result => {
                             result = JSON.parse(result);
@@ -203,20 +233,26 @@
 
                         showError(input2, temp2, error2, 'Password must be at least 6 characters');
                     }
-                }
 
-                swal('Validating');
-                swal.showLoading();
-                setTimeout(() => {
-                    !bool? clearError(input, temp, error) : '';
-                    swal.close();
-                }, 1000);
+                }
+                
+                !bool? clearError(input, temp, error) : '';
             });
 
             // IF THERE IS NO ERROR. SUBMIT.
             setTimeout(() => {
-                !$('.is-invalid').is(':visible')? $('#registerForm').submit() : '';
-            }, 1000)
+                // swal.close();
+                // !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
+                if(!$('.is-invalid').is(':visible')){
+                    $('#registerForm').submit();
+                }
+                else{
+                    swal.close();
+                    $('html, body').animate({
+                        scrollTop: $($('[id$="Error"]:visible')[0]).offset().top - 100
+                    }, 1000);
+                }
+            }, 1500)
         });
 
         async function showError(input, temp, error, message){
