@@ -23,13 +23,13 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('applications.index');
-    // return redirect()->route('login');
+    // return redirect()->route('applications.index');
+    return redirect()->route('dashboard');
 });
 
 Route::get('/home', function() {
-	return redirect()->route('applications.index');
-	// return redirect()->route('login');
+	// return redirect()->route('applications.index');
+	return redirect()->route('dashboard');
 });
 
 Route::get('not-permitted', function(){
