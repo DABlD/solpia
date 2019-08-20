@@ -56,6 +56,14 @@ class LoginController extends Controller
         ]);
     }
 
+    public function showLoginForm(Request $req)
+    {
+        // if(Str::contains(URL::previous()), 'register'){
+            // URL::previous()
+        // }
+        return view('auth.login');
+    }
+
     public function logout(Request $req)
     {
         AuditTrail::create([

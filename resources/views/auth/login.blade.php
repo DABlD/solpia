@@ -1,6 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -44,18 +45,6 @@
                             </div>
                             <br>
                         </div>
-
-                        {{-- <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div> --}}
 
                         <div class="form-group row mb-0">
                             <div class="col-md-7 offset-md-4 align-right">
@@ -140,4 +129,21 @@
             font-size: 16px;
         }
     </style>
+@endpush
+
+@push('after-scripts')
+    <script src="{{ asset('js/swal.js') }}"></script>
+
+    <script>
+    @if(session('success'))
+        swal({
+            type: 'success',
+            title: '{{ session('success') }}',
+            text: 'Wait for your account to be confirmed'
+        });
+        @php
+            session()->forget('success');
+        @endphp
+    @endif
+    </script>
 @endpush
