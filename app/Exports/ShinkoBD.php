@@ -93,6 +93,12 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
+            ],
+            [
+                'alignment' => [
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                ],
             ]
         ];
 
@@ -112,7 +118,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 // FONT SIZES
 
-                $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A4:O60')->getFont()->setSize(11);
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(28);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(20);
 
@@ -122,14 +128,14 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 $raf = 22 + $temp; //Row # After Family Data
 
                 for($i = 0, $row = 23; $i < $temp; $i++, $row++){
-                	array_push($fdRows, 'A' . $row);
-                	array_push($fdRows, 'B' . $row . ':C' . $row);
-                	array_push($fdRows, 'D' . $row . ':E' . $row);
-                	array_push($fdRows, 'F' . $row);
+                	array_push($fdRows, 'A' . $row . ':B' . $row);
+                	array_push($fdRows, 'C' . $row . ':D' . $row);
+                	array_push($fdRows, 'E' . $row . ':F' . $row);
                 	array_push($fdRows, 'G' . $row);
-                	array_push($fdRows, 'H' . $row . ':J' . $row);
-                	array_push($fdRows, 'K' . $row . ':L' . $row);
-                	array_push($fdRows, 'M' . $row . ':N' . $row);
+                	array_push($fdRows, 'H' . $row);
+                	array_push($fdRows, 'I' . $row . ':K' . $row);
+                	array_push($fdRows, 'L' . $row . ':M' . $row);
+                	array_push($fdRows, 'N' . $row . ':O' . $row);
                 }
 
                 // SS DATA ROWS
@@ -146,17 +152,17 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                     array_push($ssRows, 'F' . $next);
                     array_push($ssRows, 'G' . $row . ':G' . $next);
                     array_push($ssRows, 'H' . $row . ':H' . $next);
-                    array_push($ssRows, 'I' . $row);
-                    array_push($ssRows, 'I' . $next);
-                    array_push($ssRows, 'J' . $row);
-                    array_push($ssRows, 'J' . $next);
-                    array_push($ssRows, 'K' . $row . ':L' . $row);
-                    array_push($ssRows, 'K' . $next . ':L' . $next);
-                    array_push($ssRows, 'M' . $row . ':N' . $next);
+                    array_push($ssRows, 'I' . $row . ':J' . $row);
+                    array_push($ssRows, 'I' . $next . ':J' . $next);
+                    array_push($ssRows, 'K' . $row);
+                    array_push($ssRows, 'K' . $next);
+                    array_push($ssRows, 'L' . $row . ':M' . $row);
+                    array_push($ssRows, 'L' . $next . ':M' . $next);
+                    array_push($ssRows, 'N' . $row . ':O' . $next);
 
                     // $event->sheet->getDelegate()->getRowDimension($row)->setRowHeight(35);
                     // $event->sheet->getDelegate()->getRowDimension($row+1)->setRowHeight(35);
-                    $event->sheet->getDelegate()->getStyle('I' . $next)->getFont()->setSize(8);
+                    $event->sheet->getDelegate()->getStyle('I' . $next)->getFont()->setSize(10);
                     $event->sheet->getDelegate()->getRowDimension($next)->setRowHeight(25);
                 }
 
@@ -177,37 +183,38 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 // HC B
                 $h[0] = [
-                	'A1:A2', 'A11:H11', 'G17', 'A21', $x('A', 1),
+                	'A1:A2', 'A11:I11', 'H17', 'B21', $x('A', 1),
                 ];
 
                 // VT
                 $h[1] = array_merge($fdRows, $ssRows, [
-                	'G3', 'G12:I12', 'A13:A17',
+                	'H3', 'H12:J12', 'B13:B17',
                 ]);
 
                 // HL B
                 $h[2] = [
-                	'C7:C10', 'I7:I10',
+                	'D7:D10', 'J7:J10',
                 ];
 
                 // HC
                 $h[3] = [
-                	'A22:N22', $x('A', 2, 'N', 2), $x('H', 11, 'M', 11, true),
-                    'E' . ($raf + 4) . ':' . 'N' . ($ras + 1)
+                	'A22:O22', $x('A', 2, 'O', 2), $x('I', 11, 'N', 11, true),
+                    'A' . ($raf + 4) . ':' . 'A' . ($ras + 1),
+                    'E' . ($raf + 4) . ':' . 'O' . ($ras + 1)
                 ];
 
                 // HL
                 $h[4] = [
-                    'C13:E20'
+                    'D13:F20'
                 ];
 
-                // HL
+                // VC
                 $h[5] = [
-                    
+                    'A' . ($raf + 4) . ':' . 'B' . ($ras + 1)
                 ];
 
                 $h['wrap'] = array_merge($fdRows, $ssRows, [
-                	'I12', 'A13', $x('A', 2, 'N'), $x('A', 7, 'N', 7, true),
+                	'J12', 'B13', $x('A', 2, 'O'), $x('A', 7, 'O', 7, true),
                 ]);
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -224,16 +231,16 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 // FILLS
                 $fills = [
-                	'G3:H6',
-                	'A7:B7', 'G7:H7',
-                	'A8:B8', 'G8:H8',
-                	'A9:B9', 'G9:H9',
-                	'A10:B10', 'G10:H10',
-                	'A11', 'H11',
-                	'A12', 'C12', 'E12', 'G12',
-                	'A13:A21', 'B13:B18', 'G14:G20',
-                	'A22:N22',
-                	$x('A', 1, 'N', 2)
+                	'H3:I6',
+                	'A7:C7', 'H7:I7',
+                	'A8:C8', 'H8:I8',
+                	'A9:C9', 'H9:I9',
+                	'A10:C10', 'H10:I10',
+                	'A11', 'I11',
+                	'A12', 'D12', 'F12', 'H12',
+                	'A13:A21', 'C13:C18', 'H14:H20',
+                	'A22:O22',
+                	$x('A', 1, 'O', 2)
                 ];
 
                 foreach($fills as $fill){
@@ -242,32 +249,32 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 // BORDERS
                 $cells = array_merge($fdRows, $ssRows, [
-                    'G3:H6','I3:K6','L3:N10',
-                	'A7:B7', 'G7:H7', 'C7:F7', 'I7:K7',
-                	'A8:B8', 'G8:H8', 'C8:F8', 'I8:K8',
-                	'A9:B9', 'G9:H9', 'C9:F9', 'I9:K9', 'K9',
-                	'A10:B10', 'G10:H10', 'C10:F10', 'I10:K10', 'K10',
-                	'A11:G11', 'H11:N11',
-                	'A12:B12', 'C12:D12', 'E12:F12', 'G12:H13', 'I12:N13',
-                	'A13:A14', 'B13', 'C13:D13', 'E13:F14',
-                	'B14', 'C14:D14', 'E14:F14', 'G14:H14', 'I14:N14',
-                	'A15:A16', 'B15', 'B16', 'C15:D15', 'E15:F15', 'G15:H15', 'I15:N15',
-                	'C16:D16', 'E16:F16', 'G16:H16', 'I16:N16',
-                	'A17:A18', 'B17', 'B18', 'C17:D17', 'E17:F17', 'G17:H17', 'I17:N17',
-                	'C18:D18', 'E18:F18', 'G18:H18', 'I18:N18',
-                	'A19:B19', 'C19:D19', 'E19:F19', 'G19:H19', 'I19:N19',
-                	'A20:B20', 'C20:D20', 'E20:F20', 'G20:H20', 'I20:N20',
-                	'A21:N21', 'A22', 'B22:C22', 'D22:E22', 'F22', 'G22', 'H22:J22', 'K22:L22', 'M22:N22',
-                	$x('A', 1, 'N'),
+                    'H3:I6','J3:L6','M3:O10',
+                	'A7:C7', 'H7:I7', 'D7:G7', 'J7:L7',
+                	'A8:C8', 'H8:I8', 'D8:G8', 'J8:L8',
+                	'A9:C9', 'H9:I9', 'D9:G9', 'J9:L9', 'L9',
+                	'A10:C10', 'H10:I10', 'D10:G10', 'J10:L10', 'L10',
+                	'A11:H11', 'I11:O11',
+                	'A12:C12', 'D12:E12', 'F12:G12', 'H12:I13', 'J12:O13',
+                	'A13:C14', 'C13', 'D13:E13', 'F13:G14',
+                	'C14', 'D14:E14', 'F14:G14', 'H14:I14', 'J14:O14',
+                	'A15:B16', 'C15', 'C16', 'D15:E15', 'F15:G15', 'H15:I15', 'J15:O15',
+                	'D16:E16', 'F16:G16', 'H16:I16', 'J16:O16',
+                	'A17:B18', 'C17', 'C18', 'D17:E17', 'F17:G17', 'H17:I17', 'J17:O17',
+                	'D18:E18', 'F18:G18', 'H18:I18', 'J18:O18',
+                	'A19:C19', 'D19:E19', 'F19:G19', 'H19:I19', 'J19:O19',
+                	'A20:C20', 'D20:E20', 'F20:G20', 'H20:I20', 'J20:O20',
+                	'A21:O21', 'A22:B22', 'C22:D22', 'E22:F22', 'G22', 'H22', 'I22:K22', 'L22:M22', 'N22:O22',
+                	$x('A', 1, 'O'),
 
                 	$x('A', 2, 'A', 3), $x('B', 2, 'D', 3), $x('E', 2, 'E', 3), $x('F', 2, 'F', 3),
-                	$x('G', 2, 'G', 3), $x('H', 2, 'H', 3), $x('I', 2, 'I', 3), $x('J', 2, 'J', 3),
-                	$x('K', 2, 'L', 3), $x('M', 2, 'N', 3),
+                	$x('G', 2, 'G', 3), $x('H', 2, 'H', 3), $x('I', 2, 'J', 3), $x('K', 2, 'K', 3),
+                	$x('L', 2, 'M', 3), $x('N', 2, 'O', 3),
 
-                    $x('K', 2, 'K', 2, true), $x('M', 2, 'M', 2, true),
-                    $x('H', 4, 'N', 4, true),
-                    $x('H', 5, 'N', 5, true),
-                    $x('H', 10, 'M', 10, true),
+                    $x('L', 2, 'L', 2, true), $x('N', 2, 'N', 2, true),
+                    $x('I', 4, 'O', 4, true),
+                    $x('I', 5, 'O', 5, true),
+                    $x('I', 10, 'N', 10, true),
                 ]);
 
                 foreach($cells as $cell){
@@ -279,13 +286,14 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6.8);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(5.5);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(6.8);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(5.5);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(4);
             },
         ];
     }
@@ -293,7 +301,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
     public function columnFormats(): array
     {
         return [
-            'C' => NumberFormat::FORMAT_NUMBER,
+            'D' => NumberFormat::FORMAT_NUMBER,
         ];
     }
 
@@ -303,10 +311,11 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 		$drawing->setName('Logo');
 		$drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
-        $drawing->setHeight(154);
-        $drawing->setWidth(167);
+        $drawing->setHeight(150);
+        // $drawing->setWidth(165);
         $drawing->setOffsetX(1);
-		$drawing->setCoordinates('L3');
+        $drawing->setOffsetY(3);
+		$drawing->setCoordinates('M3');
 
         return $drawing;
     }

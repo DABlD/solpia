@@ -20,19 +20,19 @@
 <table>
 	<tbody>
 		<tr>
-			<td colspan="14">
+			<td colspan="15">
 				SHINKO MARITIME CO., LTD.
 			</td>
 		</tr>
 
 		<tr>
-			<td colspan="14">
+			<td colspan="15">
 				APPLICATION FOR EMPLOYMENT
 			</td>
 		</tr>
 
 		<tr>
-			<td rowspan="4" colspan="6"></td>
+			<td rowspan="4" colspan="7"></td>
 			<td rowspan="4" colspan="2">Name in Chinese</td>
 			<td rowspan="4" colspan="3">{{-- FILL --}}</td>
 			<td rowspan="8" colspan="3"></td>
@@ -43,7 +43,7 @@
 		<tr></tr>
 
 		<tr>
-			<td colspan="2">Ship's Name</td>
+			<td colspan="3">Ship's Name</td>
 			<td colspan="4">
 				{{ isset($applicant->vessel) ? $applicant->vessel->name : '-----' }}
 			</td>
@@ -55,7 +55,7 @@
 		</tr>
 
 		<tr>
-			<td colspan="2">Family Name</td>
+			<td colspan="3">Family Name</td>
 			<td colspan="4">{{ $applicant->user->lname }}</td>
 
 			<td colspan="2">Birth Date</td>
@@ -63,7 +63,7 @@
 		</tr>
 
 		<tr>
-			<td colspan="2">First Name</td>
+			<td colspan="3">First Name</td>
 			<td colspan="4">{{ $applicant->user->fname . ' ' . $applicant->user->suffix }}</td>
 
 			<td colspan="2">Height</td>
@@ -72,7 +72,7 @@
 		</tr>
 
 		<tr>
-			<td colspan="2">Middle Name</td>
+			<td colspan="3">Middle Name</td>
 			<td colspan="4">{{ $applicant->user->mname }}</td>
 
 			<td colspan="2">Weight</td>
@@ -81,12 +81,12 @@
 		</tr>
 
 		<tr>
-			<td colspan="7">BASIC DOCUMENTATION</td>
+			<td colspan="8">BASIC DOCUMENTATION</td>
 			<td colspan="7">ADDRESS AND PARTICULAR</td>
 		</tr>
 
 		<tr>
-			<td colspan="2">Classification</td>
+			<td colspan="3">Classification</td>
 			<td colspan="2">Number</td>
 			<td colspan="2">Expiry</td>
 
@@ -100,7 +100,7 @@
 		@endphp
 
 		<tr>
-			<td rowspan="2">SM Book</td>
+			<td rowspan="2" colspan="2">SM Book</td>
 			<td>National</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
@@ -134,7 +134,7 @@
 		@endphp
 
 		<tr>
-			<td rowspan="2">COC</td>
+			<td rowspan="2" colspan="2">COC</td>
 			<td>National</td>
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
@@ -165,7 +165,7 @@
 		@endphp
 
 		<tr>
-			<td rowspan="2">GOC</td>
+			<td rowspan="2" colspan="2">GOC</td>
 			<td>National</td>
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
@@ -198,7 +198,7 @@
 		@endphp
 
 		<tr>
-			<td colspan="2">Passport</td>
+			<td colspan="3">Passport</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Period</td>
@@ -211,7 +211,7 @@
 		@endphp
 
 		<tr>
-			<td colspan="2">U.S.A. Visa</td>
+			<td colspan="3">U.S.A. Visa</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Specialty</td>
@@ -219,11 +219,11 @@
 		</tr>
 
 		<tr>
-			<td colspan="14">FAMILY STATUS</td>
+			<td colspan="15">FAMILY STATUS</td>
 		</tr>
 
 		<tr>
-			<td>Relation</td>
+			<td colspan="2">Relation</td>
 			<td colspan="2">Name</td>
 			<td colspan="2">Birth</td>
 			<td>Occupation</td>
@@ -240,7 +240,7 @@
 
 			@if($loop->index % 2 == 0)
 				<tr>
-					<td>{{ $family->type }}</td>
+					<td colspan="2">{{ $family->type }}</td>
 					<td colspan="2">{{ $family->name }}</td>
 					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('F j, Y') : '' }}</td>
 					<td>{{ $family->occupation }}</td>
@@ -254,7 +254,7 @@
 		@endforeach
 
 		<tr>
-			<td colspan="14">{!! "S E A    C A R R I E R" !!}</td>
+			<td colspan="15">{!! "S E A    C A R R I E R" !!}</td>
 		</tr>
 
 		<tr>
@@ -279,7 +279,7 @@
 				<br>
 				Rank
 			</td>
-			<td rowspan="2">
+			<td rowspan="2" colspan="2">
 				Vsl Type<br>
 				Eng Type
 			</td>
@@ -309,21 +309,21 @@
 					{{ round($service->sign_on->floatDiffInMonths($service->sign_off), 1) }}
 				</td>
 				<td rowspan="2">{{ $applicant->ranks[$service->rank] }}</td>
-				<td rowspan="1">{{ $service->vessel_type }}</td>
+				<td rowspan="1" colspan="2">{{ $service->vessel_type }}</td>
 				<td rowspan="1">{{ $service->gross_tonnage }}</td>
 				<td rowspan="1" colspan="2">{{ $service->manning_agent }}</td>
 				<td rowspan="2" colspan="2">{{ $service->remarks }}</td>
 			</tr>
 			<tr>
 				<td rowspan="1">{{ $service->sign_off->format('d.M.y') }}</td>
-				<td rowspan="1">{{ $service->engine_type }}</td>
+				<td rowspan="1" colspan="2">{{ $service->engine_type }}</td>
 				<td rowspan="1">{{ $service->bhp_kw }}</td>
 				<td rowspan="1" colspan="2">{{ $service->principal }}</td>
 			</tr>
 		@endforeach
 
 		<tr>
-			<td colspan="9">Have you ever been sued in court or before any Administrative body?</td>
+			<td colspan="10">Have you ever been sued in court or before any Administrative body?</td>
 			<td>Yes</td>
 			<td></td>
 			<td>No</td>
@@ -334,29 +334,29 @@
 		<tr></tr>
 
 		<tr>
-			<td colspan="7">If "yes", give particulars</td>
+			<td colspan="8">If "yes", give particulars</td>
 			<td colspan="7"></td>
 		</tr>
 
 		<tr>
-			<td colspan="7">Who recommended you to this company?</td>
+			<td colspan="8">Who recommended you to this company?</td>
 			<td colspan="7"></td>
 		</tr>
 
 		<tr></tr>
 		<tr>
-			<td colspan="14" rowspan="2">I, undersigned, hereby certify that all informations provided herein are true and correct.  Any misrepresentation may cause of dismissal at all the costs burden to myself.</td>
+			<td colspan="15" rowspan="2">I, undersigned, hereby certify that all informations provided herein are true and correct.  Any misrepresentation may cause of dismissal at all the costs burden to myself.</td>
 		</tr>
 
 		<tr></tr>
 		<tr></tr>
 
 		<tr>
-			<td colspan="7"></td>
+			<td colspan="8"></td>
 			<td colspan="6">{{-- Border --}}</td>
 		</tr>
 		<tr>
-			<td colspan="8"></td>
+			<td colspan="9"></td>
 			<td colspan="4">Signature of Applicant</td>
 			<td colspan="2"></td>
 		</tr>
