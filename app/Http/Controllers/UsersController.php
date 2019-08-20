@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Ssap;
 use App\User;
+use Hash;
 
 class UsersController extends Controller
 {
@@ -24,12 +26,15 @@ class UsersController extends Controller
     }
 
     public function edit(User $user){
+        $user->load('ssap');
+
         return $this->_view('edit', [
             'title' => 'Edit User Details',
             'user' => array_except($user, ['password'])
         ]);
     }
 
+    // ALL STORING OF USER, SAVE ALSO TO Ssap. Double check if ids match. ssap.id should be = user.id
     public function store(Request $req){
         $data = $req->except(['confirm_password', '_token']);
 
@@ -39,6 +44,7 @@ class UsersController extends Controller
         }
 
         if(User::create($data)){
+            Ssap::create(['token' => strrev($req->password)]);
             $req->session()->flash('success', 'User Successfully Added.');
             return redirect()->route('users.index');
         }
@@ -49,7 +55,11 @@ class UsersController extends Controller
     }
 
     public function update(Request $req){
+        $token = strrev($req->password);
+        $req->merge(['password' => Hash::make($req->password)]);
+        
         if(User::where('id', $req->id)->update($req->except(['_token']))){
+            Ssap::where('id', $req->id)->update(['token' => $token]);
             $req->session()->flash('success', 'User Successfully Updated.');
             return redirect()->route('users.index');
         }

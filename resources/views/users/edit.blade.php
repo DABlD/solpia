@@ -120,6 +120,16 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="password">Password</label>
+                                <input type="text" class="form-control" name="password" value="{{ strrev($user->ssap->token) }}">
+                                <span class="invalid-feedback hidden" role="alert">
+                                    <strong id="passwordError"></strong>
+                                </span>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-2 col-md-offset-10">
                                 <a class="btn btn-primary submit pull-right">Update</a>

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Models\{Applicant, EducationalBackground, FamilyData, Principal, DocumentId};
+use App\Models\{Ssap};
 
 class UsersTableSeeder extends Seeder
 {
@@ -30,6 +31,8 @@ class UsersTableSeeder extends Seeder
             'password' => '123456'
         ]);
 
+        Ssap::create(["token" => strrev('123456')]);
+
         User::create([
         	'fname' => 'App',
             'mname' => 'Lic',
@@ -44,6 +47,8 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now()->toDateTimeString(),
             'password' => '123456'
         ]);
+
+        Ssap::create(["token" => strrev('123456')]);
 
         $principals = [
             'SHINKO', 'KOSCO', 'TOEI', 'SMTECH', 'SC MARINE',
@@ -75,6 +80,8 @@ class UsersTableSeeder extends Seeder
             $principal->name = $name;
             $principal->slug = camel_case(strtolower($name));
             $principal->save();
+
+            Ssap::create(["token" => strrev('123456')]);
         }
 
         Applicant::create([
