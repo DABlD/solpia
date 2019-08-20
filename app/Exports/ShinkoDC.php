@@ -51,7 +51,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                 'color' => [
-                    'rgb' => 'ced4da'
+                    'rgb' => 'EEECE1'
                 ]
             ],
         ];
@@ -107,12 +107,12 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 // FONT SIZES
 
                 $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(12);
-                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(22);
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(28);
                 $event->sheet->getDelegate()->getStyle('A42')->getFont()->setSize(10);
 
                 // CHEAT
 
-                if(isset($this->applicant->document_id->PASSPORT) && $this->applicant->document_id->PASSPORT->issue_date->diffInMonths(now()) < 18){
+                if(isset($this->applicant->document_id->PASSPORT) && $this->applicant->document_id->PASSPORT->issue_date->diffInMonths($this->applicant->document_id->PASSPORT->expiry_date) < 18){
                     $event->sheet->getDelegate()->getStyle('F15:J15')->getFont()->getColor()->setRGB('FF0000');
                 }
 
@@ -215,7 +215,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11);
-                $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(35);
             },
         ];
     }

@@ -51,7 +51,8 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                 'color' => [
-                    'rgb' => 'ced4da'
+                    // 'rgb' => 'ced4da'
+                    'rgb' => 'EEECE1'
                 ]
             ],
         ];
@@ -88,6 +89,11 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ]
             ],
+            [
+                'alignment' => [
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+            ]
         ];
 
         return [
@@ -187,12 +193,17 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 // HC
                 $h[3] = [
                 	'A22:N22', $x('A', 2, 'N', 2), $x('H', 11, 'M', 11, true),
-                    'E' . ($raf + 4) . ':' . 'N' . $ras
+                    'E' . ($raf + 4) . ':' . 'N' . ($ras + 1)
                 ];
 
                 // HL
                 $h[4] = [
                     'C13:E20'
+                ];
+
+                // HL
+                $h[5] = [
+                    
                 ];
 
                 $h['wrap'] = array_merge($fdRows, $ssRows, [
