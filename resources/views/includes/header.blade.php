@@ -5,7 +5,10 @@
         <img src="{{ asset('images/logo.png') }}" alt="Solpia Logo" width="30px" height="30px">
       </span>
       {{-- <span class="logo-lg">{{ env('app_name') }}</span> --}}
-      <span class="logo-lg">Solpia</span>
+      {{-- <span class="logo-lg">Solpia</span> --}}
+      <span class="logo-lg">
+        <img src="{{ asset('images/logo.png') }}" alt="Solpia Logo" width="70%" height="45px">
+      </span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
