@@ -405,6 +405,16 @@
 			@php 
 				$name = 'RADAR TRAINING COURSE';
 				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+				if(!$docu){
+					$name = 'RADAR SIMULATOR COURSE';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
+
+				if(!$docu){
+					$name = 'RADAR OPERATOR PLOTTING AID';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
