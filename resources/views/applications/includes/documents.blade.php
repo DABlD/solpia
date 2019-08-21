@@ -130,7 +130,7 @@
 			var lcOptions = 
 			[
 
-				'', 'NATIONAL LICENSE', 'WATCHKEEPING', 'RADAR SIMULATOR COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'SAFETY OFFICER\'S TRAINING COURSE', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'ERS WITH ERM', 'SSBT', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
+				'', 'NATIONAL LICENSE', 'WATCHKEEPING', 'RADAR SIMULATOR COURSE', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'SAFETY OFFICER\'S TRAINING COURSE', 'BRIDGE TEAM/RESOURCE MANAGEMENT', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'ERS', 'ERM', 'ERS WITH ERM', 'SSBT', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
 			];
 
         	lcOptions.forEach(docu => {
@@ -446,13 +446,32 @@
             // appenddocu(string, ctr? ` .${type}` : '');
             appenddocu(string, ` .${type}`);
             // if(type != 'Flag'){
-	            $(`[name="${issue_date}${count}"], [name="${expiry_date}${count}"]`).flatpickr({
+            	let config = {
 	                altInput: true,
 	                altFormat: 'F j, Y',
 	                dateFormat: 'Y-m-d',
-	                // maxDate: moment().format('YYYY-MM-DD')
+	            };
+
+	            $(`[name="${issue_date}${count}"]`).flatpickr({
+	            	...config,
+	            	...{
+	            		maxDate: moment().format('YYYY-MM-DD')
+	            	}
 	            });
+	            $(`[name="${expiry_date}${count}"]`).flatpickr(config);
             // }
+			
+			// IF ISSUE DATE SELECTED MODIFY MIN EXPIRY DATE
+			$(`[name="${issue_date}${count}"]`).on('change', e => {
+				let expiry = $(e.target).parent().parent().find('.docu-expiry_date');
+				
+				$(expiry[0]).flatpickr({
+	            	...config,
+	            	...{
+	            		minDate: moment(e.target.value).add(1, 'day').format('YYYY-MM-DD')
+	            	}
+	            });
+			})
 
             if(type == "ID"){
             	$(`[name="${dType}${count}"]`).select2({
@@ -546,6 +565,81 @@
 	        		});
 	        	});
 	        });
+
+	        // EXPIRY NOTIFICATIONS
+	        $('.ID .docu-dtype').change(e => {
+	        	if(e.target.value == "PASSPORT" || e.target.value == "SEAMAN BOOK"){
+	        		let input = $(e.target).parent().parent().find('.docu-number');
+
+	        		let length = e.target.value == "PASSPORT" ? 9 : 8;
+
+        			input.off('change');
+
+        			input.change(e => {
+        				if(e.target.value.length != length){
+        					swal({
+        						type: 'error',
+        						title: 'Invalid input. Check length.',
+        					}).then(() => {
+        						showError(input, $(input), $('#' + input.attr('name') + 'Error'), 'Invalid input');
+        					})
+        				}
+        				else{
+        					clearError(input, $(input), $('#' + input.attr('name') + 'Error'));
+        				}
+        			});
+
+        			checkExpiry(e);
+
+        			$($(e.target).parent().parent().find('.docu-expiry_date')).change(() => {
+        				checkExpiry(e);
+        			});
+
+        			if(input.val() != ""){
+        				input.trigger('change');
+        			}
+	        	}
+	        });
+        }
+
+        function checkExpiry(e){
+    		let issue = $(e.target).parent().parent().find('.docu-issue_date');
+    		let expiry = $(e.target).parent().parent().find('.docu-expiry_date');
+
+			let array = [];
+			[issue, expiry].forEach(inputDate => {
+				let date = inputDate[0].value;
+				if(date != ""){
+					array.push(date);
+				}
+			});
+
+        	if(array.length == 2){
+        		let now = moment().startOf('day');
+        		
+        		let years = moment(array[1]).diff(now, 'years');
+        		now = now.add(years, 'years');
+
+        		let months = moment(array[1]).diff(now, 'months');
+        		now = now.add(months, 'months');
+
+        		let days = moment(array[1]).diff(now, 'days');
+
+        		let length = e.target.value == "PASSPORT" ? 18 : 12;
+
+        		if(months <= 0 && days <= 0 && years <= 0){
+        			swal({
+        				type: 'info',
+        				title: e.target.value + ` is expired`,
+        			})
+        		}
+        		else if((months + (years * 12)) < length){
+        			swal({
+        				type: 'info',
+        				title: e.target.value + ` will expire in\n${months + (years * 12)} month/s ${days} day/s`,
+        			})
+        		}
+        	}
         }
 
         function getDocuments(rank, country, count){

@@ -680,7 +680,7 @@
             // await new Promise(resolve => setTimeout(resolve, 1000));
 
             bool = true;
-
+            
             if(input.type != 'hidden'){
                 temp.addClass('is-invalid');
             }
