@@ -124,7 +124,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 ];
 
                 // FUNCTIONS
-                for($i = 6; $i < 45; $i++){
+                for($i = 6; $i < 46; $i++){
                     if($i < 29 || $i > 31){
                         array_push($rows, "A$i:E$i");
                     }
@@ -138,9 +138,9 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 }
 
                 array_push($rows, "A29:C31");
-                array_push($rows, "A45:E47");
-                array_push($rows, "F45:I47");
-                array_push($rows, "J45:N47");
+                array_push($rows, "A46:E48");
+                array_push($rows, "F46:I48");
+                array_push($rows, "J46:N48");
 
                 // HEADINGS
 
@@ -151,7 +151,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // VT
                 $h[1] = [
-                	'A29', 'A45', 'F45', 'J45'
+                	'A29', 'A46', 'F46', 'J46'
                 ];
 
                 // HL B
@@ -170,7 +170,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 ];
 
                 $h['wrap'] = [
-                	'A42', 'A45', 'F45', 'J45'
+                	'A42', 'A46', 'F46', 'J46'
                 ];
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -188,7 +188,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 // FILLS
                 $fills = [
                     'A1', 'A3:A6', 'F3:F6', 'H6', 'J3:J6', 'L6',
-                    'A7:E45'
+                    'A7:E46'
                 ];
 
                 foreach($fills as $fill){

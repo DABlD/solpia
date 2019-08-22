@@ -37,25 +37,29 @@
 			</td>
 		</tr>
 
+		@php
+			$lastSchool = sizeof($applicant->educational_background) ? : false;
+		@endphp
+
 		<tr>
 			<td colspan="2">Family Name</td>
 			<td colspan="3">{{ $applicant->user->lname }}</td>
 			<td colspan="5">Last School</td>
-			<td colspan="4">{{ $applicant->educational_background->last()->school }}</td>
+			<td colspan="4">{{ $lastSchool ? $applicant->educational_background->last()->school : "N/A" }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">First Name</td>
 			<td colspan="3">{{ $applicant->user->fname . ' ' . $applicant->user->suffix }}</td>
 			<td colspan="5">Course</td>
-			<td colspan="4">{{ $applicant->educational_background->last()->course }}</td>
+			<td colspan="4">{{ $lastSchool ? $applicant->educational_background->last()->course : "N/A" }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Middle Name</td>
 			<td colspan="3">{{ $applicant->user->mname }}</td>
 			<td colspan="5">Duration</td>
-			<td colspan="4">{{ $applicant->educational_background->last()->year }}</td>
+			<td colspan="4">{{ $lastSchool ? $applicant->educational_background->last()->year : "N/A" }}</td>
 		</tr>
 
 		<tr>

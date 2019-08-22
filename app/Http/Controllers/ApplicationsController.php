@@ -193,7 +193,7 @@ class ApplicationsController extends Controller
 
         // IF NAME IS EMPTY, REMOVE
         foreach($applicant->family_data as $key => $value){
-            if($value->name == ""){
+            if($value->lname == ""){
                 $applicant->family_data->forget($key);
             }
         }

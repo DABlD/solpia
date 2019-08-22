@@ -181,6 +181,10 @@
 			}
 		@endphp
 
+		@php
+			$lastSchool = sizeof($applicant->educational_background) ? : false;
+		@endphp
+
 		<tr>
 			<td>Flag State</td>
 			<td colspan="2">
@@ -189,7 +193,7 @@
 				{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}
 			</td>
 			<td colspan="2">Last School</td>
-			<td colspan="6">{{ $applicant->educational_background->last()->school }}</td>
+			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->school : "N/A" }}</td>
 		</tr>
 
 		@php 
@@ -202,7 +206,7 @@
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Period</td>
-			<td colspan="6">{{ $applicant->educational_background->last()->year }}</td>
+			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->year : "N/A" }}</td>
 		</tr>
 
 		@php 
@@ -215,7 +219,7 @@
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Specialty</td>
-			<td colspan="6">{{ $applicant->educational_background->last()->course }}</td>
+			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->course : "N/A" }}</td>
 		</tr>
 
 		<tr>
@@ -234,14 +238,14 @@
 		</tr>
 
 		@foreach($applicant->family_data as $family)
-			@if($family->name == "")
+			@if($family->lname == "")
 				@php continue; @endphp
 			@endif
 
 			@if($loop->index % 2 == 0)
 				<tr>
 					<td colspan="2">{{ $family->type }}</td>
-					<td colspan="2">{{ $family->name }}</td>
+					<td colspan="2">{{ $family->lname . ', ' . $family->fname . ' ' . $family->suffix . ' ' . $family->mname }}</td>
 					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('F j, Y') : '' }}</td>
 					<td>{{ $family->occupation }}</td>
 			@else
