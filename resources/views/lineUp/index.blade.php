@@ -66,7 +66,7 @@
 		let table = $('#table').DataTable({
             serverSide: true,
             ajax: {
-            	url: '{{ route('datatables.processedApplicant') }}',
+            	url: '{{ route('datatables.processedApplicant', ['id' => $principal->id]) }}',
             	type: 'POST',
             },
             columns: [
@@ -106,7 +106,7 @@
         function initializeActions(){
 	    	$('[data-original-title="Export Application"]').on('click', application => {
 	    		swal.showLoading();
-          		window.location.href = 'applications/exportLineUp/' + $(application.target).data('id') + '/' + '{{ $principal }}';
+          		window.location.href = 'applications/exportLineUp/' + $(application.target).data('id') + '/' + '{{ $principal->slug }}';
           		setTimeout(() => {
           			swal.close();
           		}, 5000);

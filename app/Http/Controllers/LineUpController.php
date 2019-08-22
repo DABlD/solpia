@@ -14,7 +14,8 @@ class LineUpController extends Controller
     public function index(){
         return $this->_view('index', [
             'title' => 'Lined-Up Applicants',
-            'principal' => camel_case(strtolower(auth()->user()->fname))
+            'principal' => Principal::where('user_id', auth()->user()->id)->first()
+            // 'principal' => camel_case(strtolower(auth()->user()->fname))
         ]);
     }
 

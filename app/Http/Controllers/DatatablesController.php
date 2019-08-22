@@ -38,11 +38,12 @@ class DatatablesController extends Controller
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
 	}
 
-	public function processedApplicant(){
+	public function processedApplicant($id){
 		$applicants = ProcessedApplicant::select('*')
 						->with('applicant:id,user_id')
 						->with('vessel:id,name')
 						->with('rank:id,name')
+						->where('principal_id', $id)
 						// ->where('processed_applicants.status')
 						->get();
 
