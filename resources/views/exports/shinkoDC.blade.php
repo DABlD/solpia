@@ -698,7 +698,7 @@
 			</td>
 
 			@php 
-				$name = "POLLUTION PREVENTION COURSE";
+				$name = "CONSOLIDATED MARPOL";
 				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 			@endphp
 
@@ -730,8 +730,34 @@
 			</td>
 
 			@php 
-				$name = "BRIDGE TEAM/RESOURCE MANAGEMENT";
+				$name = "SSBT WITH BRM";
 				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
+
+			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+		</tr>
+
+		<tr>
+			<td colspan="5">
+				ENGINE SIMULATOR/RESOURCE MANAGEMENT
+			</td>
+
+			@php
+				$name = "ERS WITH ERM";
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+				if(!$docu){
+					$name = "ERS";
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
+
+				if(!$docu){
+					$name = "ERM";
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
@@ -778,22 +804,12 @@
 			</td>
 
 			@php
-				$docu = false;
-				if(isset($applicant->rank)){
-					if($applicant->rank->type == "OFFICER"){
-						foreach($applicant->document_lc as $document){
-						    if($document->type == "SHIP SECURITY OFFICER - SSO"){
-						        $docu = $document;
-						    }
-						}
-					}
-					else{
-						foreach($applicant->document_lc as $document){
-						    if($document->type == "SHIP SECURITY AWARENESS TRAINING AND SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD"){
-						        $docu = $document;
-						    }
-						}
-					}
+				$name = "SHIP SECURITY OFFICER - SSO";
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+				if(!$docu){
+					$name = "SHIP SECURITY AWARENESS TRAINING AND SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD";
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				}
 			@endphp
 
