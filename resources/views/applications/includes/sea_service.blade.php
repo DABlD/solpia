@@ -1,7 +1,10 @@
 <div id="sea-services"></div>
 
 @push('before-scripts')
+    <script src="{{ asset('js/moment-range.js') }}"></script>
+
     <script>
+        window['moment-range'].extendMoment(moment);
         var savedVessels = {};
         var savedVesselsString = "";
 
@@ -121,14 +124,14 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="sign_on${count}">Sign On</label>
-                        <input type="text" class="form-control" name="sign_on${count}" placeholder="Sign On Date">
+                        <input type="text" class="form-control sign-on" name="sign_on${count}" placeholder="Sign On Date">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="sign_on${count}Error"></strong>
                         </span>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="sign_off${count}">Sign Off</label>
-                        <input type="text" class="form-control" name="sign_off${count}" placeholder="Sign Off Date">
+                        <input type="text" class="form-control sign-off" name="sign_off${count}" placeholder="Sign Off Date">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="sign_off${count}Error"></strong>
                         </span>
@@ -177,6 +180,75 @@
                 maxDate: moment().format('YYYY-MM-DD')
             });
             $('.ssCount')[0].innerText = count;
+
+            // CHECK IF NO CONFLICT IN DATES
+            $(`[name="sign_off${count}"], [name="sign_on${count}"]`).change(e => {
+                checkOverlap(e.target, $(e.target).hasClass('sign-on') ? 'sign-on' : 'sign-off');
+            });
+        }
+
+        function checkOverlap(input, type){ 
+            let on = "";
+            let off = "";
+
+            let conflict = 0;
+            let conflicts = [];
+
+            if(type == "sign-on"){
+                let temp = $(input).parent().parent().find('.sign-off')[0]; 
+
+                on = input.value;
+                off = temp.value;
+                conflicts.push($(input));
+                conflicts.push($(temp));
+            }
+            else{
+                let temp = $(input).parent().parent().find('.sign-on')[0]; 
+
+                off = input.value;
+                on = temp.value;
+                conflicts.push($(temp));
+                conflicts.push($(input));
+            }
+
+
+            if(on != "" && off != ""){
+                let sign_ons = $('.sign-on:not(:visible)');
+                let sign_offs = $('.sign-off:not(:visible)');
+
+                let length = sign_ons.length;
+                
+                for(let i = 0; i < length; i++){
+                    let on2 = sign_ons[i].value;
+                    let off2 = sign_offs[i].value;
+
+                    clearError(sign_ons[i], $(sign_ons[i]), $('#' + $(sign_ons[i]).attr('name') + 'Error'));
+                    clearError(sign_offs[i], $(sign_offs[i]), $('#' + $(sign_offs[i]).attr('name') + 'Error'));
+
+                    if(on2 != "" && off2 != ""){
+                        let range1 = moment().range(on, off);
+                        let range2 = moment().range(on2, off2);
+
+                        if(range1.overlaps(range2)){
+                            conflict++;
+
+                            conflicts.push($(sign_ons[i]));
+                            conflicts.push($(sign_offs[i]));
+                        }
+                    }
+                }
+            }
+
+            if(conflict > 1){
+                swal({
+                    type: 'error',
+                    title: 'Conflict in dates',
+                })
+
+                conflicts.forEach(input => {
+                    showError(input[0], input, $('#' + input.attr('name') + 'Error'), 'Date range conflict');
+                });
+            }
         }
 
         function getVessels(){

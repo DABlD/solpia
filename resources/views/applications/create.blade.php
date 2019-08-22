@@ -107,15 +107,6 @@
 
 @push('before-scripts')
     <script src="{{ asset('js/select2.min.js') }}"></script>
-
-    <script>
-        $('[name="birthday"]').flatpickr({
-            altInput: true,
-            altFormat: 'F j, Y',
-            dateFormat: 'Y-m-d',
-            maxDate: moment().format('YYYY-MM-DD')
-        });
-    </script>
 @endpush
 
 @push('after-scripts')

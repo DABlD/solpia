@@ -292,6 +292,13 @@
 
 @push('after-scripts')
     <script>
+        $('[name="birthday"]').flatpickr({
+            altInput: true,
+            altFormat: 'F j, Y',
+            dateFormat: 'Y-m-d',
+            maxDate: moment().format('YYYY-MM-DD')
+        });
+        
         $('[name="birthday"]').change(e => {
             $('[name="age"]').val(moment().diff(e.target.value, 'years'));
         });
