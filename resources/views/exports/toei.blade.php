@@ -12,7 +12,8 @@
 			}
 		}
 		else{
-			echo $date->format('F j, Y');
+			// echo $date->format('F j, Y');
+			echo $date->toFormattedDateString();
 		}
 	}
 @endphp
@@ -593,75 +594,129 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
 		</tr>
 
-		{{-- 11TH --}}
-		@php 
-			$name = 'ECDIS JRC 701B';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-		@endphp
+		@if($applicant->rank->id >=5 && $applicant->rank->id <= 8)
+			{{-- 11TH --}}
+			@php 
+				$name = 'ERS WITH ERM';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
 
-		<tr>
-			<td colspan="4">JRC ECDIS SPECIFIC 1</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
-			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
-		</tr>
+			<tr>
+				<td colspan="4">ERS WITH ERM</td>
+				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			</tr>
 
-		{{-- 12TH --}}
-		@php 
-			$name = 'ECDIS JRC 9201';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-		@endphp
+			{{-- 12TH --}}
+			@php 
+				$name = 'ERS';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
 
-		<tr>
-			<td colspan="4">JRC ECDIS SPECIFIC 2</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
-			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
-		</tr>
+			<tr>
+				<td colspan="4">ERS</td>
+				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			</tr>
 
-		{{-- 13TH --}}
-		@php 
-			$name = 'ECDIS FURUNO 2107';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-		@endphp
+			{{-- 13TH --}}
+			@php 
+				$name = 'ERM';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
 
-		<tr>
-			<td colspan="4">FURUNO ECDIS FEA</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
-			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
-		</tr>
+			<tr>
+				<td colspan="4">ERM</td>
+				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			</tr>
 
-		{{-- 14TH --}}
-		@php 
-			$name = 'ECDIS FURUNO 3300';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-		@endphp
+			{{-- 14TH --}}
+			<tr>
+				<td colspan="4"></td><td></td><td></td><td></td><td colspan="2"></td>
+			</tr>
 
-		<tr>
-			<td colspan="4">FURUNO ECDIS FMD</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
-			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
-		</tr>
+			{{-- 15TH --}}
+			<tr>
+				<td colspan="4"></td><td></td><td></td><td></td><td colspan="2"></td>
+			</tr>
+		@else
+			{{-- 11TH --}}
+			@php 
+				$name = 'ECDIS JRC 701B';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
 
-		{{-- 15TH --}}
-		@php 
-			$name = 'ECDIS';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-		@endphp
+			<tr>
+				<td colspan="4">JRC ECDIS SPECIFIC 1</td>
+				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			</tr>
 
-		<tr>
-			<td colspan="4">ECDIS GENERIC</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
-			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
-		</tr>
+			{{-- 12TH --}}
+			@php 
+				$name = 'ECDIS JRC 9201';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
+
+			<tr>
+				<td colspan="4">JRC ECDIS SPECIFIC 2</td>
+				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			</tr>
+
+			{{-- 13TH --}}
+			@php 
+				$name = 'ECDIS FURUNO 2107';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
+
+			<tr>
+				<td colspan="4">FURUNO ECDIS FEA</td>
+				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			</tr>
+
+			{{-- 14TH --}}
+			@php 
+				$name = 'ECDIS FURUNO 3300';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
+
+			<tr>
+				<td colspan="4">FURUNO ECDIS FMD</td>
+				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			</tr>
+
+			{{-- 15TH --}}
+			@php 
+				$name = 'ECDIS';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			@endphp
+
+			<tr>
+				<td colspan="4">ECDIS GENERIC</td>
+				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			</tr>
+		@endif
 	
 		<tr>
 			<td colspan="5">5. PHYSICAL INSPECTION/YELLOW CARD</td>
