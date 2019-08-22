@@ -19,8 +19,12 @@ class CreateFamilyDatasTable extends Migration
 
             $table->string('email')->nullable();
             $table->string('type')->nullable();
-            $table->string('name')->nullable();
             $table->integer('age')->nullable();
+            
+            $table->string('fname')->nullable();
+            $table->string('mname')->nullable();
+            $table->string('lname')->nullable();
+            $table->string('suffix')->nullable();
 
             $table->date('birthday')->nullable();
             $table->text('address')->nullable();

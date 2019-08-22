@@ -134,7 +134,9 @@ class UsersTableSeeder extends Seeder
         FamilyData::create([
             'applicant_id' => 1,
             'type' => 'Father',
-            'name' => 'Fa Ther Cant',
+            'fname' => 'Fa',
+            'mname' => 'Ther',
+            'lname' => 'Cant',
             'age' =>  40,
             'birthday' => '1997-11-12', 
             'address' => 'Manila, Phillipines',
@@ -144,7 +146,9 @@ class UsersTableSeeder extends Seeder
         FamilyData::create([
             'applicant_id' => 1,
             'type' => 'Mother',
-            'name' => 'Mo Ther Cant',
+            'fname' => 'Mo',
+            'mname' => 'Ther',
+            'lname' => 'Cant',
             'age' =>  38,
             'birthday' => '1997-11-12', 
             'address' => 'Manila, Phillipines',

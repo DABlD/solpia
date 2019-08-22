@@ -69,7 +69,10 @@
             let fd_class = 'form-control';
             let fd_class3 = 'form-control';
 
-            let name = 'fd-name';
+            let fname = 'fd-fname';
+            let mname = 'fd-mname';
+            let lname = 'fd-lname';
+            let suffix = 'fd-suffix';
             let age = 'fd-age';
             let birthday = 'fd-birthday';
             let occupation = 'fd-occupation';
@@ -90,10 +93,31 @@
                     <span class="fa fa-times fa-2x" onclick="deleteRow(this, '${type}')"></span>
                     <input type="hidden" name="fd-type${count}" value="${type}">
                     <div class="form-group col-md-3">
-                        <label for="fd-name${count}">Name</label>
-                        <input type="text" class="${fd_class} ${name}" name="${name}${count}" placeholder="Enter Name">
+                        <label for="fd-lname${count}">Last Name</label>
+                        <input type="text" class="${fd_class} ${lname}" name="${lname}${count}" placeholder="Enter Last Name">
                         <span class="invalid-feedback hidden" role="alert">
-                            <strong id="fd-name${count}Error"></strong>
+                            <strong id="fd-lname${count}Error"></strong>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="fd-fname${count}">First Name</label>
+                        <input type="text" class="${fd_class} ${fname}" name="${fname}${count}" placeholder="Enter First Name">
+                        <span class="invalid-feedback hidden" role="alert">
+                            <strong id="fd-fname${count}Error"></strong>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="fd-mname${count}">Middle Name</label>
+                        <input type="text" class="${fd_class} ${mname}" name="${mname}${count}" placeholder="Enter Middle Name">
+                        <span class="invalid-feedback hidden" role="alert">
+                            <strong id="fd-mname${count}Error"></strong>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="fd-suffix${count}">Suffix</label>
+                        <input type="text" class="${fd_class} ${suffix}" name="${suffix}${count}" placeholder="Enter Suffix">
+                        <span class="invalid-feedback hidden" role="alert">
+                            <strong id="fd-suffix${count}Error"></strong>
                         </span>
                     </div>
                     <div class="form-group col-md-3">
@@ -125,7 +149,7 @@
                         </span>
                     </div>
 
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-12">
                         <label for="fd-address${count}">Address</label>
                         <input type="text" class="${fd_class} ${address}" name="${address}${count}" placeholder="Enter Address">
                         <span class="invalid-feedback hidden" role="alert">

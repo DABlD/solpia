@@ -82,17 +82,20 @@
 
 	@foreach($applicant->family_data as $data)
 		inputs = $('#FD input');
-		i = (index * 9);
+		i = (index * 12);
 
-        inputs[i+1].value = "{{ $data->name }}";
+        inputs[i+1].value = "{{ $data->lname }}";
+        inputs[i+2].value = "{{ $data->fname }}";
+        inputs[i+3].value = "{{ $data->mname }}";
+        inputs[i+4].value = "{{ $data->suffix }}";
         // inputs[i+2].value = start;
-        $(inputs[i+2]).flatpickr(config).setDate("{{ $data->birthday }}", true);
-        inputs[i+4].value = "{{ $data->age }}";
-        inputs[i+5].value = "{{ $data->occupation }}";
-        inputs[i+6].value = "{{ $data->email }}";
-        inputs[i+7].value = "{{ $data->address }}";
+        $(inputs[i+5]).flatpickr(config).setDate("{{ $data->birthday }}", true);
+        inputs[i+7].value = "{{ $data->age }}";
+        inputs[i+8].value = "{{ $data->occupation }}";
+        inputs[i+9].value = "{{ $data->email }}";
+        inputs[i+10].value = "{{ $data->address }}";
 
-        $($(inputs[i+7]).parent().parent()).prepend(`
+        $($(inputs[i+10]).parent().parent()).prepend(`
         	<input type="hidden" name="id-{{ $data->id }}" value="{{ $data->id }}" data-type="id">
         `);
         index++;

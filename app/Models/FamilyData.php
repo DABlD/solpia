@@ -12,8 +12,9 @@ class FamilyData extends Model
     protected $table = "family_datas";
 	
     protected $fillable = [
-    	'applicant_id','type','name',
-    	'age','birthday','address',
+    	'applicant_id','type','fname',
+    	'mname','lname','suffix',
+        'age','birthday','address',
     	'occupation', 'email'
     ];
 

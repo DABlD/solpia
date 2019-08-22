@@ -300,23 +300,26 @@
             let fd = [];
 
             @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+=8){
+                for(let i = 0; i < inputs.length; i+=11){
                     if(!checkIfVisible(inputs[i])){
                         continue;
                     }
 
                     let tempFd = {};
                     tempFd.type         = inputs[i].value;
-                    tempFd.name         = inputs[i+1].value;
-                    tempFd.birthday     = inputs[i+2].value;
-                    tempFd.age          = inputs[i+4].value;
-                    tempFd.occupation   = inputs[i+5].value;
-                    tempFd.email        = inputs[i+6].value;
-                    tempFd.address      = inputs[i+7].value;
+                    tempFd.lname        = inputs[i+1].value;
+                    tempFd.fname        = inputs[i+2].value;
+                    tempFd.mname        = inputs[i+3].value;
+                    tempFd.suffix       = inputs[i+4].value;
+                    tempFd.birthday     = inputs[i+5].value;
+                    tempFd.age          = inputs[i+7].value;
+                    tempFd.occupation   = inputs[i+8].value;
+                    tempFd.email        = inputs[i+9].value;
+                    tempFd.address      = inputs[i+10].value;
                     fd.push(tempFd);
                 }
             @else
-                for(let i = 0; i < inputs.length; i+=9){
+                for(let i = 0; i < inputs.length; i+=12){
                     if(!checkIfVisible(inputs[i])){
                         continue;
                     }
@@ -324,12 +327,15 @@
                     let tempFd = {};
                     tempFd.id           = inputs[i].value;
                     tempFd.type         = inputs[i+1].value;
-                    tempFd.name         = inputs[i+2].value;
-                    tempFd.birthday     = inputs[i+3].value;
-                    tempFd.age          = inputs[i+5].value;
-                    tempFd.occupation   = inputs[i+6].value;
-                    tempFd.email        = inputs[i+7].value;
-                    tempFd.address      = inputs[i+8].value;
+                    tempFd.lname        = inputs[i+2].value;
+                    tempFd.fname        = inputs[i+3].value;
+                    tempFd.mname        = inputs[i+4].value;
+                    tempFd.suffix       = inputs[i+5].value;
+                    tempFd.birthday     = inputs[i+6].value;
+                    tempFd.age          = inputs[i+8].value;
+                    tempFd.occupation   = inputs[i+9].value;
+                    tempFd.email        = inputs[i+10].value;
+                    tempFd.address      = inputs[i+11].value;
                     fd.push(tempFd);
                 }
             @endif
