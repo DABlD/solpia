@@ -308,9 +308,13 @@
 				<td rowspan="2">{{ $loop->index + 1 }}</td>
 				<td rowspan="2" colspan="3">{{ $service->vessel_name }}</td>
 				<td rowspan="2">{{ $service->previous_salary }}</td>
-				<td rowspan="1">{{ $service->sign_on->format('d.M.y') }}</td>
+				<td rowspan="1">{{ $service->sign_on != "" ? $service->sign_on->format('d.M.y') : "N/A" }}</td>
 				<td rowspan="2">
-					{{ round($service->sign_on->floatDiffInMonths($service->sign_off), 1) }}
+					@if($service->sign_on != "" && $service->sign_off != "")
+						{{ round($service->sign_on->floatDiffInMonths($service->sign_off), 1) }}
+					@else
+						Insufficient data
+					@endif
 				</td>
 				<td rowspan="2">{{ $applicant->ranks[$service->rank] }}</td>
 				<td rowspan="1" colspan="2">{{ $service->vessel_type }}</td>
@@ -319,7 +323,7 @@
 				<td rowspan="2" colspan="2">{{ $service->remarks }}</td>
 			</tr>
 			<tr>
-				<td rowspan="1">{{ $service->sign_off->format('d.M.y') }}</td>
+				<td rowspan="1">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
 				<td rowspan="1" colspan="2">{{ $service->engine_type }}</td>
 				<td rowspan="1">{{ $service->bhp_kw }}</td>
 				<td rowspan="1" colspan="2">{{ $service->principal }}</td>

@@ -241,7 +241,12 @@
 			<td colspan="3">{{ $isset ? $last->manning_agent : 'N/A' }}</td>
 			<td colspan="5">Serve Period</td>
 			<td colspan="4">
-				{{ $isset ? ($last->sign_on->format('M j, Y') . '-' . $last->sign_off->format('M j, Y')) : 'N/A' }}
+
+				@if($isset && $last->sign_on != "" && $last->sign_off != "")
+					{{ ($last->sign_on->format('M j, Y') . '-' . $last->sign_off->format('M j, Y')) }}
+				@else
+					Insufficient data
+				@endif
 			</td>
 		</tr>
 
