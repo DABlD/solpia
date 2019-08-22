@@ -170,7 +170,7 @@
 			@php
 				$docu = false;
 				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "Booklet"){
+				    if($document->country == "Panama" && $document->type == "BOOKLET"){
 				        $docu = $document;
 				    }
 				}
@@ -209,7 +209,7 @@
 			@php
 				$docu = false;
 				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "License"){
+				    if($document->country == "Panama" && $document->type == "LICENSE"){
 				        $docu = $document;
 				    }
 				}

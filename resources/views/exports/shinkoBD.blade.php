@@ -145,7 +145,7 @@
 		@php
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "COC"){
+			    if($document->country == "Panama" && $document->type == "LICENSE"){
 			        $docu = $document;
 			    }
 			}
@@ -250,7 +250,7 @@
 					<td>{{ $family->occupation }}</td>
 			@else
 					<td>{{ $family->type }}</td>
-					<td colspan="3">{{ $family->name }}</td>
+					<td colspan="3">{{ $family->lname . ', ' . $family->fname . ' ' . $family->suffix . ' ' . $family->mname }}</td>
 					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('F j, Y') : '' }}</td>
 					<td colspan="2">{{ $family->occupation }}</td>
 				</tr>
