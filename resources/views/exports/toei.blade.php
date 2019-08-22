@@ -173,9 +173,10 @@
 				$hasWife = false;
 
 				foreach($applicant->family_data as $fam){
-					if($fam->type == "Spouse"){
+					if($fam->type == "Beneficiary"){
 						$hasWife = true;
 						$realFam = $fam;
+						break;
 					}
 				}
 			}
@@ -206,7 +207,9 @@
 
 		<tr>
 			<td>Address:</td>
-			<td colspan="8">{{ $realFam ? $realFam->address : "N/A" }}</td>
+			{{-- <td colspan="8">{{ $realFam ? $realFam->address : "N/A" }}</td> --}}
+			{{-- GUEVARRA SUGGESTED THAT THIS ONE SHOULD JUST BE THE SAME AS THE APPLICANTS ADDRESS --}}
+			<td colspan="8">{{ $applicant->user->address }}</td>
 		</tr>
 
 		<tr>
@@ -260,7 +263,12 @@
 		@endphp
 
 		<tr>
-			<td colspan="2">National License</td>
+			<td colspan="2">
+				National License
+				@if($applicant->rank->id >= 9 && $applicant->rank->id <= 21)
+					(II/4)
+				@endif
+			</td>
 			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "N/A" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
@@ -276,7 +284,7 @@
 			    }
 			}
 		@endphp
-
+	
 		<tr>
 			<td colspan="2">Flag License</td>
 			<td colspan="2"></td>
@@ -587,7 +595,14 @@
 		@endphp
 
 		<tr>
-			<td colspan="4">Endorsement Certificate / COC</td>
+			<td colspan="4">
+				Endorsement Certificate /
+				@if($applicant->rank->id >= 1 && $applicant->rank->id <= 8)
+					COE
+				@else
+					COC
+				@endif
+			</td>
 			<td>{{ $docu ? $docu->no : "N/A"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
