@@ -122,7 +122,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getParent()->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(11);
 
                 // $event->sheet->getDelegate()->getStyle('E19')->getFont()->getColor()->setRGB('FF0000');
                 // $event->sheet->getDelegate()->getStyle('H19')->getFont()->getColor()->setRGB('FF0000');
@@ -205,7 +205,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($ocRows, "H$row:I$row");
 
                     if($i != 0){
-                        $event->sheet->getDelegate()->getStyle("E$row")->getFont()->setSize(7);
+                        $event->sheet->getDelegate()->getStyle("E$row")->getFont()->setSize(10);
                     }
                 }
 
@@ -297,6 +297,11 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($sh3Rows, "F$row:F$row2");
                     array_push($sh3Rows, "G$row:G$row2");
                     array_push($sh3Rows, "H$row:I$row2");
+
+                    $event->sheet->getDelegate()->getStyle("D$row2")->getFont()->setSize(10);
+                    $event->sheet->getDelegate()->getStyle("C$row")->getFont()->setSize(10);
+                    $event->sheet->getDelegate()->getStyle("D$row2")->getAlignment()->setWrapText(true);
+                    $event->sheet->getDelegate()->getRowDimension($row2)->setRowHeight(25);
                 }
 
                 // NUMBER HEADING ROWS
@@ -417,8 +422,10 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(13);
                 $event->sheet->getDelegate()->getStyle("G$rash3")->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle("G$rash3")->getFont()->setSize(9);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
-                // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
+                // $event->sheet->getDelegate()->getColumnDimension('C')->setAutoSize(true);
+                // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(true);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
                 // $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
             },
@@ -433,8 +440,10 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setPath(public_path($this->applicant->user->avatar));
         // $drawing->setHeight(154);
         // $drawing->setOffsetX(22);
-        $drawing->setWidth(100);
-        $drawing->setHeight(153);
+        $drawing->setWidth(175);
+        // $drawing->setHeight(153);
+        $drawing->setOffsetX(1);
+        $drawing->setOffsetY(3);
 		$drawing->setCoordinates('A2');
 
         return $drawing;

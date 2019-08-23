@@ -792,7 +792,8 @@
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td>{{ $docu ? $docu->clinic : "N/A" }}</td>
+			{{-- <td>{{ $docu ? $docu->clinic : "N/A" }}</td> --}}
+			<td>QUARANTINE</td>
 		</tr>
 
 		@php 
@@ -943,7 +944,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">{{ $data->flag }}</td>
-				<td>{{ $data->rank }}</td>
+				<td>{{ $applicant->ranks[$data->rank] }}</td>
 				<td colspan="2">{{ $data->engine_type }} / {{ $data->bhp_kw }}kw</td>
 				<td>{{ $data->principal }}</td>
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "N/A" }}</td>
