@@ -158,21 +158,6 @@
                 placeholder: 'Select Rank',
             });
 
-            $(`[name="vessel_name${count}"]`).change(() => {
-                let selectedVessel = $(`[name="vessel_name${count}"]`).val();
-                if(savedVessels[selectedVessel] != undefined){
-                    $(`[name="vessel_type${count}"]`).val(savedVessels[selectedVessel].type);
-                    $(`[name="gross_tonnage${count}"]`).val(savedVessels[selectedVessel].gross_tonnage);
-                    $(`[name="engine_type${count}"]`).val(savedVessels[selectedVessel].engine);
-                    $(`[name="bhp_kw${count}"]`).val(savedVessels[selectedVessel].BHP);
-                    $(`[name="flag${count}"]`).val(savedVessels[selectedVessel].flag);
-                    $(`[name="trade${count}"]`).val(savedVessels[selectedVessel].trade);
-                    $(`[name="manning_agent${count}"]`).val(savedVessels[selectedVessel].manning_agent);
-                    $(`[name="principal${count}"]`).val(savedVessels[selectedVessel].principal.name);
-                    $(`[name="crew_nationality${count}"]`).val(savedVessels[selectedVessel].crew_nationality);
-                }
-            });
-
             $(`[name="sign_off${count}"], [name="sign_on${count}"]`).flatpickr({
                 altInput: true,
                 altFormat: 'F j, Y',
@@ -184,6 +169,41 @@
             // CHECK IF NO CONFLICT IN DATES
             $(`[name="sign_off${count}"], [name="sign_on${count}"]`).change(e => {
                 checkOverlap(e.target, $(e.target).hasClass('sign-on') ? 'sign-on' : 'sign-off');
+            });
+
+            let count2 = $('.ss').length;
+            // AUTO FILL SEA SERVICE
+            $(`[name="vessel_name${count}"]`).change(e => {
+
+                // let vessel = $(`[name="vessel_name${count}"]`);
+                let vessel = $(e.target);
+                console.log(vessel);
+                let selectedVessel = vessel.val();
+                console.log(selectedVessel);
+                let parent = vessel.parent().parent();
+                console.log(parent);
+
+                
+                if(savedVessels[selectedVessel] != undefined){
+                    parent.find('[name^="vessel_type"]').val(savedVessels[selectedVessel].type);
+                    parent.find(`[name^="gross_tonnage"]`).val(savedVessels[selectedVessel].gross_tonnage);
+                    parent.find(`[name^="engine_type"]`).val(savedVessels[selectedVessel].engine);
+                    parent.find(`[name^="bhp_kw"]`).val(savedVessels[selectedVessel].BHP);
+                    parent.find(`[name^="flag"]`).val(savedVessels[selectedVessel].flag);
+                    parent.find(`[name^="trade"]`).val(savedVessels[selectedVessel].trade);
+                    parent.find(`[name^="manning_agent"]`).val(savedVessels[selectedVessel].manning_agent);
+                    parent.find(`[name^="principal"]`).val(savedVessels[selectedVessel].principal.name);
+                    parent.find(`[name^="crew_nationality"]`).val(savedVessels[selectedVessel].crew_nationality);
+                    // $(`[name="vessel_type${count}"]`).val(savedVessels[selectedVessel].type);
+                    // $(`[name="gross_tonnage${count}"]`).val(savedVessels[selectedVessel].gross_tonnage);
+                    // $(`[name="engine_type${count}"]`).val(savedVessels[selectedVessel].engine);
+                    // $(`[name="bhp_kw${count}"]`).val(savedVessels[selectedVessel].BHP);
+                    // $(`[name="flag${count}"]`).val(savedVessels[selectedVessel].flag);
+                    // $(`[name="trade${count}"]`).val(savedVessels[selectedVessel].trade);
+                    // $(`[name="manning_agent${count}"]`).val(savedVessels[selectedVessel].manning_agent);
+                    // $(`[name="principal${count}"]`).val(savedVessels[selectedVessel].principal.name);
+                    // $(`[name="crew_nationality${count}"]`).val(savedVessels[selectedVessel].crew_nationality);
+                }
             });
         }
 
