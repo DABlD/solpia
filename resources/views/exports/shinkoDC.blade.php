@@ -309,11 +309,20 @@
 			</td>
 
 			@php
+			// FIX. IF DECK RATING. II/4. ELSE IF ENGINE RATING. III/4
 				$docu = false;
 				foreach($applicant->document_lc as $document){
 					$regulation = json_decode($document->regulation);
 					$size = sizeof($regulation);
-					$haystack = ["II/4", "III/4"];
+					// $haystack = ["II/4", "III/4"];
+					$haystack = [];
+					
+					if($applicant->rank >= 9 && $applicant->rank <= 14){
+						array_push($haystack, "II/4");
+					}
+					elseif($applicant->rank >= 15 && $applicant->rank <= 21){
+						array_push($haystack, "III/4");
+					}
 
 				    if($document->type == "COC" && $size == 1 && in_array($regulation[0], $haystack)){
 				        $docu = $document;
