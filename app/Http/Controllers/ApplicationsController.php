@@ -157,12 +157,12 @@ class ApplicationsController extends Controller
                     }
                 }
 
-                if($docuType == 'document_med'){
-                    $temp = $data->case;
-                }
-                else{
+                // if($docuType == 'document_med'){
+                //     $temp = $data->case;
+                // }
+                // else{
                     $temp = $data->type;
-                }
+                // }
 
 
                 if(isset($data->expiry_date)){

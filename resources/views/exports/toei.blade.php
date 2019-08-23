@@ -220,7 +220,7 @@
 		<tr>
 			<td colspan="5"></td>
 			<td>E-mail:</td>
-			<td colspan="3">(Email nino?)</td>
+			<td colspan="3">{{ $realFam ? $realFam->email : "N/A" }}</td>
 		</tr>
 
 		<tr>
@@ -265,12 +265,12 @@
 		<tr>
 			<td colspan="2">
 				National License
-				@if($applicant->rank->id >= 9 && $applicant->rank->id <= 21)
+				@if(isset($applicant->rank) && $applicant->rank->id >= 9 && $applicant->rank->id <= 21)
 					(II/4)
 				@endif
 			</td>
 			<td colspan="2"></td>
-			<td>{{ $docu ? $docu->number : "N/A" }}</td>
+			<td>{{ $docu ? $docu->no : "N/A" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Philippines</td>
@@ -279,7 +279,7 @@
 		@php 
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "License"){
+			    if($document->country == "Panama" && $document->type == "LICENSE"){
 			        $docu = $document;
 			    }
 			}
@@ -291,7 +291,7 @@
 			<td>{{ $docu ? $docu->number : "N/A" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">Panama</td>
+			<td colspan="2">{{ $docu ? "Panama" : "N/A" }}</td>
 		</tr>
 
 		@php 
@@ -309,7 +309,8 @@
 			<td>{{ $docu? $docu->number : "N/A" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">Marshall Islands</td>
+			{{-- <td colspan="2">Marshall Islands</td> --}}
+			<td colspan="2">{{ $docu ? "Marshall Islands" : "N/A" }}</td>
 		</tr>
 
 		@php 
@@ -392,7 +393,7 @@
 		@php
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "Booklet"){
+			    if($document->country == "Panama" && $document->type == "BOOKLET"){
 			        $docu = $document;
 			    }
 			}
@@ -470,13 +471,23 @@
 
 		{{-- 2ND --}}
 		@php
+		// FIX. IF DECK RATING. II/4. ELSE IF ENGINE RATING. III/4
+		// OK NA
 			$docu = false;
-			if(isset($applicant->document_lc->{"COC"})){
-				$regulation = json_decode($applicant->document_lc->{"COC"}->regulation);
+			foreach($applicant->document_lc as $document){
+				$regulation = json_decode($document->regulation);
 				$size = sizeof($regulation);
-				$haystack = ["II/4", "III/4"];
+				// $haystack = ["II/4", "III/4"];
+				$haystack = [];
+				
+				if($applicant->rank >= 9 && $applicant->rank <= 14){
+					array_push($haystack, "II/4");
+				}
+				elseif($applicant->rank >= 15 && $applicant->rank <= 21){
+					array_push($haystack, "III/4");
+				}
 
-			    if($size == 1 && in_array($regulation[0], $haystack)){
+			    if($document->type == "COC" && $size == 1 && in_array($regulation[0], $haystack)){
 			        $docu = $document;
 			    }
 			}
@@ -550,6 +561,16 @@
 		@php 
 			$name = 'RADAR TRAINING COURSE';
 			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+			if(!$docu){
+				$name = 'RADAR SIMULATOR COURSE';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
+
+			if(!$docu){
+				$name = 'RADAR OPERATOR PLOTTING AID';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
 		@endphp
 
 		<tr>
@@ -597,7 +618,7 @@
 		<tr>
 			<td colspan="4">
 				Endorsement Certificate /
-				@if($applicant->rank->id >= 1 && $applicant->rank->id <= 8)
+				@if(isset($applicant->rank) && $applicant->rank->id >= 1 && $applicant->rank->id <= 8)
 					COE
 				@else
 					COC
@@ -609,7 +630,7 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
 		</tr>
 
-		@if($applicant->rank->id >=5 && $applicant->rank->id <= 8)
+		@if(isset($applicant->rank) && $applicant->rank->id >=5 && $applicant->rank->id <= 8)
 			{{-- 11TH --}}
 			@php 
 				$name = 'ERS WITH ERM';
@@ -746,40 +767,60 @@
 			<td>Issued By</td>
 		</tr>
 
+		@php 
+			$name = 'MEDICAL CERTIFICATE';
+			$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
+		@endphp
+
 		<tr>	
 			<td colspan="4">PHYSICAL INSPECTION</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td>{{ $docu ? $docu->clinic : "N/A" }}</td>
 		</tr>
+
+		@php 
+			$name = 'YELLOW FEVER';
+			$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
+		@endphp
 
 		<tr>	
 			<td colspan="4">YELLOW FEVER</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td>{{ $docu ? $docu->clinic : "N/A" }}</td>
 		</tr>
+
+		@php 
+			$name = 'MEASLES';
+			$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
+		@endphp
 
 		<tr>	
 			<td colspan="4">MEASLES, MUMPS, RUBELLA (MMR)</td>
-			<td>YES/NO</td>
-			<td>YES/NO</td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>{{ $docu ? $docu->with_mv : "-----"}}</td>
+			<td>-----</td>
+			<td>-----</td>
+			<td>{{ $docu ? $docu->case_remarks : "N/A" }}</td>
 		</tr>
+
+		@php 
+			$name = 'CHICKEN POX';
+			$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
+		@endphp
 
 		<tr>	
 			<td colspan="4">Chicken Pox</td>
-			<td>YES/NO</td>
-			<td>YES/NO</td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>{{ $docu ? $docu->with_mv : "-----"}}</td>
+			<td>-----</td>
+			<td>-----</td>
+			<td>{{ $docu ? $docu->case_remarks : "N/A" }}</td>
 		</tr>
 		{{-- end --}}
 		<tr>

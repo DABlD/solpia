@@ -309,7 +309,8 @@
 			</td>
 
 			@php
-			// FIX. IF DECK RATING. II/4. ELSE IF ENGINE RATING. III/4
+			// FIX. IF DECK RATING. II/4. ELSE IF ENGINE RATING. III/
+			// OK NA
 				$docu = false;
 				foreach($applicant->document_lc as $document){
 					$regulation = json_decode($document->regulation);
