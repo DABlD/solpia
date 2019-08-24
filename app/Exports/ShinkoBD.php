@@ -287,6 +287,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setAutoSize(true);
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(9.7);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(9);

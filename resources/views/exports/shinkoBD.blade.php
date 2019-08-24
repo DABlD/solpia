@@ -258,7 +258,15 @@
 		@endforeach
 
 		<tr>
-			<td colspan="15">{!! "S E A    C A R R I E R" !!}</td>
+			<td colspan="15">
+				<span>
+					S E A
+				</span>
+				<span></span>
+				<span>
+					C A R R I E R
+				</span>
+			</td>
 		</tr>
 
 		<tr>
@@ -325,7 +333,7 @@
 			<tr>
 				<td rowspan="1">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
 				<td rowspan="1" colspan="2">{{ $service->engine_type }}</td>
-				<td rowspan="1">{{ $service->bhp_kw }}</td>
+				<td rowspan="1">{{ ceil(($service->bhp_kw * 0.745) / 5) * 5 }}</td>
 				<td rowspan="1" colspan="2">{{ $service->principal }}</td>
 			</tr>
 		@endforeach
