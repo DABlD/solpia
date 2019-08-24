@@ -172,6 +172,10 @@
                     }
                 });
             });
+
+            $('[data-original-title="Export Vessels"]').on('click', () => {
+                window.location.href = "{{ route('vessels.export') }}";
+            });
 	    }
 	</script>
 @endpush

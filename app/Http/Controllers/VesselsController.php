@@ -22,6 +22,14 @@ class VesselsController extends Controller
         }
     }
 
+    public function export(Request $req){
+        $class = "App\\Exports\\Vessels";
+        $datas = Vessel::all();
+        $datas->load('principal');
+
+        return Excel::download(new $class($datas), 'Vessels.xlsx');
+    }
+
     public function get(Request $req, $id = null){
     	echo json_encode(
             !$id ?
