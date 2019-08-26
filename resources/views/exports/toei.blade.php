@@ -148,20 +148,27 @@
 		</tr>
 
 		<tr>
-			<td colspan="4">Crew's physical condition</td>
+			<td colspan="3">Crew's physical condition</td>
+			<td>NORMAL</td>
 			<td>Diabetes</td>
-			<td></td>
+
+			@php
+				$name = 'DIABETES';
+				$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
+			@endphp
+
+			<td>{{ !$docu ? 'YES' : 'NO' }}</td>
 			<td></td>
 			<td>Choleith</td>
-			<td></td>
+			<td>NO</td>
 		</tr>
 
 		<tr>
 			<td></td>
 			<td colspan="2">High/Low blood pressure</td>
-			<td colspan="2"></td>
+			<td colspan="2">NORMAL</td>
 			<td colspan="2">Renal Insufficiency</td>
-			<td></td>
+			<td>NO</td>
 			<td></td>
 		</tr>
 
@@ -185,15 +192,17 @@
 		<tr>
 			<td colspan="5">Name and address of Wife / Nearest Relative</td>
 			<td>Relation</td>
-			<td colspan="3">{{ $realFam ? $realFam->type : "N/A" }}</td>
+			<td></td>
+			<td>{{ $realFam ? $realFam->type : "N/A" }}</td>
+			<td></td>
 		</tr>
 
 		<tr>
 			<td>Name</td>
 			{{-- <td colspan="8"></td> --}}
-			<td colspan="2">{{ $realFam ? $realFam->name : "N/A" }}</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $realFam ? $realFam->lname : "N/A" }}</td>
+			<td colspan="2">{{ $realFam ? $realFam->fname . ' ' . $realFam->suffix : "N/A" }}</td>
+			<td colspan="2">{{ $realFam ? $realFam->mname : "N/A" }}</td>
 			<td colspan="2"></td>
 		</tr>
 
@@ -755,7 +764,7 @@
 		@endif
 	
 		<tr>
-			<td colspan="5">5. PHYSICAL INSPECTION/YELLOW CARD</td>
+			<td colspan="4">5. PHYSICAL INSPECTION/YELLOW CARD</td>
 		</tr>
 
 		<tr>
@@ -849,7 +858,7 @@
 		@endforeach
 
 		<tr>
-			<td colspan="5">7. TRAINING / EXPERIENCE FOR SAFETY MANAGEMENT SYSTEM</td>
+			<td colspan="6">7. TRAINING / EXPERIENCE FOR SAFETY MANAGEMENT SYSTEM</td>
 		</tr>
 
 		<tr>
@@ -937,7 +946,7 @@
 				<td colspan="2">{{ $data->vessel_name }}</td>
 				<td>{{ $data->vessel_type }}</td>
 				<td>{{ $data->gross_tonnage }}</td>
-				<td>(Service Area)</td>
+				<td>{{ $data->trade }}</td>
 				<td>{{ $data->manning_agent }}</td>
 				<td>{{ $data->sign_on != "" ? $data->sign_on->format('M j, Y') : "N/A" }}</td>
 				<td colspan="2">{{ $data->remarks }}</td>
@@ -948,8 +957,13 @@
 				<td colspan="2">{{ $data->engine_type }} / {{ $data->bhp_kw }}kw</td>
 				<td>{{ $data->principal }}</td>
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "N/A" }}</td>
-				<td>(Period)</td>
-				<td>(SMC)</td>
+				<td colspan="2">
+					@if($data->sign_on != "" && $data->sign_off != "")
+						{{ $data->sign_on->diff($data->sign_off)->format('%yyr, %mmos and %ddays') }}
+					@else
+						Not enough data
+					@endif
+				</td>
 			</tr>
 		@endforeach
 		
