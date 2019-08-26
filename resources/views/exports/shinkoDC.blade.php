@@ -273,18 +273,14 @@
 			</td>
 
 			@php
-				$docu = false;
-				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "MEDICAL CERTIFICATE"){
-				        $docu = $document;
-				    }
-				}
+				$name = 'MEDICAL CERTIFICATE';
+				$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
 			@endphp
 
 			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
 			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
 			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
+			<td colspan="3">{{ $docu ? $docu->clinic : "NOT APPLICABLE"}}</td>
 		</tr>
 
 		<tr>
