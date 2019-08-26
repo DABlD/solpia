@@ -65,12 +65,13 @@ class ApplicationsController extends Controller
         $applicant->load('user');
         $applicant->load('educational_background');
         $applicant->load('family_data');
-        $applicant->load('sea_service');
         $applicant->load('document_id');
-        $applicant->load('document_flag');
-        $applicant->load('document_lc');
         $applicant->load('document_med_cert');
         $applicant->load('document_med');
+        // $applicant->load('sea_service');
+        // $applicant->load('document_flag');
+        // $applicant->load('document_lc');
+
         // $applicant->load('document_med_exp'); //NOT USED ANYMORE
         
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
@@ -87,21 +88,6 @@ class ApplicationsController extends Controller
             foreach($temps as $temp){
                 array_push($regulations, $temp);
             }
-        }
-
-        $countries = array();
-        foreach($applicant->document_flag as $key => $data){
-            $country = $data->country;
-            if(!isset($countries[$country])){
-                $countries[$country] = array();
-            }
-
-            array_push($countries[$country], $data);
-            $applicant->document_flag->forget($key);
-        }
-
-        foreach($countries as $key => $country){
-            $applicant->document_flag->put($key, $country);
         }
 
         // IF HAS 'EDIT' VALUE, WILL LOAD SCRIPT THAT WILL POPULATE THE FIELD WITH APPLICANT DETAILS FOR EDITING
@@ -389,6 +375,29 @@ class ApplicationsController extends Controller
 
     public function get(User $user){
     	echo json_encode($user);
+    }
+
+    public function getAddDetails(Applicant $applicant){
+        $applicant->load('sea_service');
+        $applicant->load('document_flag');
+        $applicant->load('document_lc');
+
+        $countries = array();
+        foreach($applicant->document_flag as $key => $data){
+            $country = $data->country;
+            if(!isset($countries[$country])){
+                $countries[$country] = array();
+            }
+
+            array_push($countries[$country], $data);
+            $applicant->document_flag->forget($key);
+        }
+
+        foreach($countries as $key => $country){
+            $applicant->document_flag->put($key, $country);
+        }
+
+        echo json_encode($applicant);
     }
 
     private function _view($view, $data = array()){

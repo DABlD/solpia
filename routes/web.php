@@ -87,6 +87,7 @@ Route::group([
 			->defaults('href', $name);
 
 		Route::get($name . '/get/{user}', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::get($name . '/getAddDetails/{applicant}', ucfirst($name) . 'Controller@getAddDetails')->name($name . '.getAddDetails');
 
 		Route::get($name . '/export/all', ucfirst($name) . 'Controller@exportAll')->name($name . '.export.all');
 		Route::get($name . '/export/{applicant}/{type}', ucfirst($name) . 'Controller@exportApplication')->name($name . '.export.applicant');

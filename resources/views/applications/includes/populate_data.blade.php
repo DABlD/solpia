@@ -12,6 +12,13 @@
         dateFormat: 'Y-m-d',
     };
 
+    swal({
+    	title: 'Loading Data...',
+    	allowOutsideClick: false,
+    	allowEscapeKey: false,
+    });
+    swal.showLoading();
+
 	$('#createForm').append(`<input type="hidden" name="applicant_id" value='{{ $applicant->id }}'>`);
 
 	$('[name="lname"]').val('{{ $applicant->user->lname }}');
@@ -101,46 +108,6 @@
         index++;
 	@endforeach
 
-	// SEA SERVICE
-	@foreach($applicant->sea_service as $data)
-		addSS();
-	@endforeach
-	$('[name="vessel_name1"]').select2('open');
-    
-    setTimeout(() => {
-	index = 0;
-		@foreach($applicant->sea_service as $data)
-        	inputs = $('#sea-services input, #sea-services select');
-	        i = (index * 18);
-
-	        $(inputs[i]).val("{{ $data->vessel_name }}").trigger('change');
-	        $(inputs[i+1]).val("{{ $data->rank }}").trigger('change');
-
-			inputs[i+2].value       = "{{ $data->vessel_type }}";
-			inputs[i+3].value       = "{{ $data->gross_tonnage }}";
-			inputs[i+4].value       = "{!! $data->engine_type !!}";
-			inputs[i+5].value       = "{{ $data->bhp_kw }}";
-			inputs[i+6].value       = "{{ $data->flag }}";
-			inputs[i+7].value       = "{{ $data->trade }}";
-			inputs[i+8].value       = "{{ $data->previous_salary }}";
-			inputs[i+9].value       = "{{ $data->manning_agent }}";
-			inputs[i+10].value      = "{{ $data->principal }}";
-			inputs[i+11].value      = "{{ $data->crew_nationality }}";
-
-			$(inputs[i+12]).flatpickr(config).setDate("{{ $data->sign_on }}", true);
-			$(inputs[i+14]).flatpickr(config).setDate("{{ $data->sign_off }}", true);
-
-			inputs[i+16].value      = "{{ $data->remarks }}";
-
-	    	$(inputs[i]).select2('close');
-
-			$($(inputs[i+16]).parent().parent()).prepend(`
-		        <input type="hidden" name="id-{{ $data->id }}" value="{{ $data->id }}" data-type="id">
-			`);
-			index++;
-		@endforeach
-	}, 2000);
-
     // DOCUMENT ID
 	index = 0;
 	@foreach($applicant->document_id as $data)
@@ -208,87 +175,141 @@
 		index++;
 	@endforeach
 
-	// RANK
-	@if(sizeof($applicant->document_lc) > 0)
-		$('#rank').val('{{ $applicant->document_lc[0]->rank }}').trigger('change');
-	@endif
-
-	// DOCUMENT LC
-	index = 0;
-	@foreach($applicant->document_lc as $data)
-		addDocu('lc');
-	@endforeach
-	@foreach($applicant->document_lc as $data)
-		inputs = $('#docu .lc input, #docu .lc select');
-		i = (index * 10);
-
-		checkIfExisting($(inputs[i]), "{!! $data->type !!}");
-		checkIfExisting($(inputs[i+1]), "{!! $data->issuer !!}");
-
-        regulations = JSON.parse('{!! $data->regulation !!}');
-        regulations.forEach(option => {
-        	checkIfExisting($(inputs[i+2]), option);
-        });
-
-        inputs[i+4].value = '{{ $data->no }}';
-
-	    $(inputs[i+5]).flatpickr(config).setDate("{{ $data->issue_date }}", true);
-		$(inputs[i+7]).flatpickr(config2).setDate("{{ $data->expiry_date }}", true);
-
-		$($(inputs[i+7]).parent().parent()).prepend(`
-	        <input type="hidden" name="id-{{ $data->id }}" value="{{ $data->id }}" data-type="id">
-		`);
-		index++;
-	@endforeach
-
-	var flags = [];
-	@foreach($applicant->document_flag as $key => $datas)
-		addDocu('Flag');
-		country = $($('.docu-country')[{{ $loop->index }}]);
-		$(country).val("{{ $key }}").trigger('change');
-		// countries.push("{{ $key }}");
-		flags["{{ $key }}"] = [];
-		flags["{{ $key }}"].push(JSON.parse('{!! json_encode($datas) !!}'));
-	@endforeach
-
-	setTimeout(() => {
-		$(document).ready(() => {
-			for(datas in flags){
-				flags[datas].forEach((a,b) => {
-					
-					index = 0;
-					a.forEach(data => {
-						inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
-						i = (index * 7);
-
-						checkIfExisting($(inputs[i]), data.type);
-						
-				    	inputs[i+1].value = data.number;
-
-					    $(inputs[i+2]).flatpickr(config).setDate(data.issue_date, true);
-						$(inputs[i+4]).flatpickr(config2).setDate(data.expiry_date, true);
-
-						index++;
-					});
-				});
-			}
-		});
-	});
-	// index = 0;
-	// 	inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
-	// 	i = (index * 7);
-
-	// 	checkIfExisting($(inputs[i]), "{!! $data->type !!}");
-		
- //    	inputs[i+1].value = '{{ $data->number }}';
-
-	//     $(inputs[i+2]).flatpickr(config).setDate("{{ $data->issue_date }}", true);
-	// 	$(inputs[i+4]).flatpickr(config2).setDate("{{ $data->expiry_date }}", true);
-
-	// 	index++;
-
 	document.getElementById("preview").src = "{!! asset($applicant->user->avatar) !!}";
-	// console.log("{ $data->avatar !!}");
+
+	//getAddDetails
+	$.ajax({
+		url: '{{ route("applications.getAddDetails", ['applicant' => $applicant->id]) }}',
+		success: result => {
+			result = JSON.parse(result);
+			
+			let flags = result.document_flag;
+			let lcs   = result.document_lc;
+			let sss   = result.sea_service;
+
+			if(lcs.length > 0){
+				$('#rank').val(lcs[0].rank).trigger('change');
+			}
+
+			let size = lcs.length;
+			index = 0;
+
+			for(let ctr = 0; ctr < lcs.length; ctr++){
+				addDocu('lc');
+
+				let inputs = $('#docu .lc input, #docu .lc select');
+
+				i = (index * 10);
+
+				checkIfExisting($(inputs[i]), lcs[ctr].type);
+				checkIfExisting($(inputs[i+1]), lcs[ctr].issuer);
+
+		        regulations = JSON.parse(lcs[ctr].regulation);
+		        
+		        $(inputs[i+2]).val(regulations);
+		        $(inputs[i+2]).trigger('change');
+
+		        inputs[i+4].value = lcs[ctr].no;
+
+			    $(inputs[i+5]).flatpickr(config).setDate(lcs[ctr].issue_date, true);
+				$(inputs[i+7]).flatpickr(config2).setDate(lcs[ctr].expiry_date, true);
+
+				$($(inputs[i+7]).parent().parent()).prepend(`
+			        <input type="hidden" name="id-${lcs[ctr].id}" value="${lcs[ctr].id}" data-type="id">
+				`);
+				index++;
+			}
+
+			let keys = Object.keys(flags);
+			length = keys.length;
+			
+			let flagDocu = [];
+			for(let ctr = 0; ctr < length; ctr++){
+				addDocu('Flag');
+
+				let country = $($('.docu-country')[ctr]);
+				$(country).val(keys[ctr]).trigger('change');
+			}
+
+			setTimeout(() => {
+				$(document).ready(() => {
+					index = 0;
+					for(let ctr = 0; ctr < length; ctr++){
+						flags[keys[ctr]].forEach((data, ctr2) => {
+							let country = $(`[name="docu-country${(ctr + 1)}"]`);
+
+							inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
+							i = (index * 7);
+
+							checkIfExisting($(inputs[i]), flags[keys[ctr]][ctr2].type);
+							
+							inputs[i+1].value = flags[keys[ctr]][ctr2].number;
+
+							$(inputs[i+2]).flatpickr(config).setDate(flags[keys[ctr]][ctr2].issue_date, true);
+							$(inputs[i+4]).flatpickr(config2).setDate(flags[keys[ctr]][ctr2].expiry_date, true);
+
+							$($(inputs[i+4]).parent().parent()).prepend(`
+						        <input type="hidden" name="id-{{ $data->id }}" value="{{ $data->id }}" data-type="id">
+							`);
+							index++;
+						});
+					}
+
+					length = sss.length;
+					for(let ctr = 0; ctr < length; ctr++){
+						addSS();
+					}
+
+					length ? $('[name="vessel_name1"]').select2('open') : '';
+
+					swal({
+						title: 'Loading Sea Services...',
+						allowOutsideClick: false,
+						allowEscapeKey: false,
+					});
+					swal.showLoading();
+
+					setTimeout(() => {
+						index = 0;
+						for(let ctr = 0; ctr < length; ctr++){
+				        	inputs = $('#sea-services input, #sea-services select');
+					        i = (index * 18);
+
+					        $(inputs[i]).val(sss[ctr].vessel_name).trigger('change');
+					        $(inputs[i+1]).val(sss[ctr].rank).trigger('change');
+
+							inputs[i+2].value       = sss[ctr].vessel_type;
+							inputs[i+3].value       = sss[ctr].gross_tonnage;
+							inputs[i+4].value       = sss[ctr].engine_type;
+							inputs[i+5].value       = sss[ctr].bhp_kw;
+							inputs[i+6].value       = sss[ctr].flag;
+							inputs[i+7].value       = sss[ctr].trade;
+							inputs[i+8].value       = sss[ctr].previous_salary;
+							inputs[i+9].value       = sss[ctr].manning_agent;
+							inputs[i+10].value      = sss[ctr].principal;
+							inputs[i+11].value      = sss[ctr].crew_nationality;
+
+							$(inputs[i+12]).flatpickr(config).setDate(sss[ctr].sign_on, true);
+							$(inputs[i+14]).flatpickr(config).setDate(sss[ctr].sign_off, true);
+
+							inputs[i+16].value      = sss[ctr].remarks;
+
+					    	$(inputs[i]).select2('close');
+
+							$($(inputs[i+16]).parent().parent()).prepend(`
+						        <input type="hidden" name="id-${sss[ctr].id}" value="${sss[ctr].id}" data-type="id">
+							`);
+							index++;
+						}
+
+						swal.close();
+					}, (sss.length * 1000));
+				});
+			}, 1000);
+		}
+	})
+
+
 
 	$('html, body').animate({
         scrollTop: $(".Flag").offset().top - 200

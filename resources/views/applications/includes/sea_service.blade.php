@@ -177,11 +177,8 @@
 
                 // let vessel = $(`[name="vessel_name${count}"]`);
                 let vessel = $(e.target);
-                console.log(vessel);
                 let selectedVessel = vessel.val();
-                console.log(selectedVessel);
                 let parent = vessel.parent().parent();
-                console.log(parent);
 
                 
                 if(savedVessels[selectedVessel] != undefined){
