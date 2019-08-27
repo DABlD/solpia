@@ -249,7 +249,7 @@
 							$(inputs[i+4]).flatpickr(config2).setDate(flags[keys[ctr]][ctr2].expiry_date, true);
 
 							$($(inputs[i+4]).parent().parent()).prepend(`
-						        <input type="hidden" name="id-{{ $data->id }}" value="{{ $data->id }}" data-type="id">
+						        <input type="hidden" name="id-${flags[keys[ctr]][ctr2].id}" value="${flags[keys[ctr]][ctr2].id}" data-type="id">
 							`);
 							index++;
 						});
