@@ -297,7 +297,7 @@
 			</td>
 			<td rowspan="2">
 				GRT<br>
-				Output
+				Output/BHP
 			</td>
 			<td rowspan="2" colspan="2">
 				Agent<br>

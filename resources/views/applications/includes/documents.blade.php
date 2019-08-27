@@ -130,7 +130,7 @@
 			var lcOptions = 
 			[
 
-				'', 'NATIONAL LICENSE', 'SHIP SECURITY AWARENESS TRAINING AND SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 'WATCHKEEPING', 'RADAR SIMULATOR COURSE', 'RADAR TRAINING COURSE', 'RADAR OPERATOR PLOTTING AID', 'ARPA TRAINING COURSE', 'SAFETY COURSE, BASIC', 'SAFETY COURSE, SURVIVAL CRAFT', 'SAFETY COURSE, FIRE FIGHTING', 'SAFETY COURSE, FIRST AID', 'SAFETY COURSE, RESCUE BOAT', 'VACCINATION - Y. FEVER', 'DRUG AND ALCOHOL TEST', 'SAFETY OFFICER\'S TRAINING COURSE', 'ISPS / SSO COURSE / SDSD', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'ERS', 'ERM', 'ERS WITH ERM', 'SSBT WITH BRM', 'MLC TRAINING F1', 'MLC TRAINING F2', 'MLC TRAINING F3', 'MLC TRAINING F4', 'OLC TRAINING F1', 'OLC TRAINING F2', 'OLC TRAINING F3', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
+				'', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
 			];
 
         	lcOptions.forEach(docu => {
@@ -138,6 +138,41 @@
 			});
 
 			lc_options += `
+				<optgroup label="NATIONAL LICENSES"></optgroup>
+					<option value="COC">&nbsp;&nbsp;&nbsp;&nbsp;COC</option>
+					<option value="COE">&nbsp;&nbsp;&nbsp;&nbsp;COE</option>
+					<option value="GMDSS-GOC">&nbsp;&nbsp;&nbsp;&nbsp;GMDSS-GOC</option>
+					<option value="NCI">&nbsp;&nbsp;&nbsp;&nbsp;NCI</option>
+					<option value="NCIII">&nbsp;&nbsp;&nbsp;&nbsp;NCIII</option>
+				<optgroup label="COP"></optgroup>
+
+					<option value="BASIC TRAINING - BT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING - BT</option>
+					<option value="PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB">&nbsp;&nbsp;&nbsp;&nbsp;PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB</option>
+					<option value="ADVANCE FIRE FIGHTING - AFF">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE FIRE FIGHTING - AFF</option>
+					<option value="MEDICAL FIRST AID - MEFA">&nbsp;&nbsp;&nbsp;&nbsp;MEDICAL FIRST AID - MEFA</option>
+					<option value="FAST RESCUE BOAT - FRB">&nbsp;&nbsp;&nbsp;&nbsp;FAST RESCUE BOAT - FRB</option>
+					<option value="MEDICAL CARE - MECA">&nbsp;&nbsp;&nbsp;&nbsp;MEDICAL CARE - MECA</option>
+					<option value="SHIP SECURITY OFFICER - SSO">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SECURITY OFFICER - SSO</option>
+					<option value="SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD">&nbsp;&nbsp;&nbsp;&nbsp;COC</option>
+
+				<optgroup label="OTHER CERTIFICATES"></optgroup>
+				<option value="CONSOLIDATED MARPOL">&nbsp;&nbsp;&nbsp;&nbsp;CONSOLIDATED MARPOL</option>
+				<option value="RADAR SIMULATOR COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR SIMULATOR COURSE</option>
+				<option value="RADAR TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR TRAINING COURSE</option>
+				<option value="RADAR OPERATOR PLOTTING AID">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OPERATOR PLOTTING AID</option>
+				<option value="SSBT WITH BRM">&nbsp;&nbsp;&nbsp;&nbsp;SSBT WITH BRM</option>
+				<option value="ERS">&nbsp;&nbsp;&nbsp;&nbsp;ERS</option>
+				<option value="ERM">&nbsp;&nbsp;&nbsp;&nbsp;ERM</option>
+				<option value="ERS WITH ERM">&nbsp;&nbsp;&nbsp;&nbsp;ERS WITH ERM</option>
+				<option value="ARPA TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;ARPA TRAINING COURSE</option>
+				<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
+				<option value="MLC TRAINING F1">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F1</option>
+				<option value="MLC TRAINING F2">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F2</option>
+				<option value="MLC TRAINING F3">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F3</option>
+				<option value="MLC TRAINING F4">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F4</option>
+				<option value="OLC TRAINING F1">&nbsp;&nbsp;&nbsp;&nbsp;OLC TRAINING F1</option>
+				<option value="OLC TRAINING F2">&nbsp;&nbsp;&nbsp;&nbsp;OLC TRAINING F2</option>
+				<option value="OLC TRAINING F3">&nbsp;&nbsp;&nbsp;&nbsp;OLC TRAINING F3</option>
 				<option value="ECDIS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS</option>
 				<optgroup label="ECDIS SPECIFIC"></optgroup>
 					<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2107</option>
@@ -150,26 +185,27 @@
 					<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
 					<option value="ECDIS MECYS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MECYS</option>
 					<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
-				<optgroup label="SPECIAL CERTIFICATE"></optgroup>
-					<option value="ENGLISH TEST">&nbsp;&nbsp;&nbsp;&nbsp;ENGLISH TEST</option>
-					<option value="WELDING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;WELDING COURSE</option>
-					<option value="CARGO HANDLING">&nbsp;&nbsp;&nbsp;&nbsp;CARGO HANDLING</option>
-					<option value="STABILITY AND TRIM">&nbsp;&nbsp;&nbsp;&nbsp;STABILITY AND TRIM</option>
-					<option value="COLLISION AVOIDANCE">&nbsp;&nbsp;&nbsp;&nbsp;COLLISION AVOIDANCE</option>
-					<option value="AUXILIARY MACHINERY SYSTEM">&nbsp;&nbsp;&nbsp;&nbsp;AUXILIARY MACHINERY SYSTEM</option>
-					<option value="CONTROL ENGINEERING">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL ENGINEERING</option>
-					<option value="HYDRAULICS/PNEUMATICS">&nbsp;&nbsp;&nbsp;&nbsp;HYDRAULICS/PNEUMATICS</option>
-					<option value="MARINE ELECTRO TECH">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRO TECH</option>
-					<option value="ELECTRONIC EQUIPMENT">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRONIC EQUIPMENT</option>
-					<option value="MARINE ELECTRICAL">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRICAL</option>
-					<option value="MARINE REFRIGIRATION/AIRCONDITIONING">&nbsp;&nbsp;&nbsp;&nbsp;MARINE REFRIGIRATION/AIRCONDITIONING</option>
-					<option value="DANGEROUS FLUID CARGO COURSE">&nbsp;&nbsp;&nbsp;&nbsp;DANGEROUS FLUID CARGO COURSE</option>
-					<option value="SHIP HANDLING SIMULATION">&nbsp;&nbsp;&nbsp;&nbsp;SHIP HANDLING SIMULATION</option>
-					<option value="CONSOLIDATED MARPOL">&nbsp;&nbsp;&nbsp;&nbsp;CONSOLIDATED MARPOL</option>
-					<option value="RISK ASSESMENT/INCIDENT INVESTIGATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RISK ASSESMENT/INCIDENT INVESTIGATION COURSE</option>
-					<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
-					<option value="ADVANCE SHIPBOARD OPERATION AND MGT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE SHIPBOARD OPERATION AND MGT</option>
-					<option value="SATELLITE COMMUNICATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SATELLITE COMMUNICATION COURSE</option>
+
+				<optgroup label="SPECIAL CERTIFICATES"></optgroup>
+				<option value="WELDING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;WELDING COURSE</option>
+				<option value="CARGO HANDLING">&nbsp;&nbsp;&nbsp;&nbsp;CARGO HANDLING</option>
+				<option value="COLLISION AVOIDANCE">&nbsp;&nbsp;&nbsp;&nbsp;COLLISION AVOIDANCE</option>
+				<option value="AUXILIARY MACHINERY SYSTEM">&nbsp;&nbsp;&nbsp;&nbsp;AUXILIARY MACHINERY SYSTEM</option>
+				<option value="CONTROL ENGINEERING">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL ENGINEERING</option>
+				<option value="HYDRAULICS/PNEUMATICS">&nbsp;&nbsp;&nbsp;&nbsp;HYDRAULICS/PNEUMATICS</option>
+				<option value="MARINE ELECTRO TECH">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRO TECH</option>
+				<option value="ELECTRONIC EQUIPMENT">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRONIC EQUIPMENT</option>
+				<option value="MARINE ELECTRICAL">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRICAL</option>
+				<option value="MARINE REFRIGIRATION/AIRCONDITIONING">&nbsp;&nbsp;&nbsp;&nbsp;MARINE REFRIGIRATION/AIRCONDITIONING</option>
+				<option value="STABILITY AND TRIM">&nbsp;&nbsp;&nbsp;&nbsp;STABILITY AND TRIM</option>
+				<option value="ENGLISH TEST">&nbsp;&nbsp;&nbsp;&nbsp;ENGLISH TEST</option>
+				<option value="DANGEROUS FLUID CARGO COURSE">&nbsp;&nbsp;&nbsp;&nbsp;DANGEROUS FLUID CARGO COURSE</option>
+				<option value="SHIP HANDLING SIMULATION">&nbsp;&nbsp;&nbsp;&nbsp;SHIP HANDLING SIMULATION</option>
+				<option value="RISK ASSESMENT/INCIDENT INVESTIGATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RISK ASSESMENT/INCIDENT INVESTIGATION COURSE</option>
+				<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
+				<option value="ADVANCE SHIPBOARD OPERATION AND MGT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE SHIPBOARD OPERATION AND MGT</option>
+				<option value="SATELLITE COMMUNICATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SATELLITE COMMUNICATION COURSE</option>
+
 				<optgroup label="IN HOUSE CERTIFICATE/SPECIAL TRAINING"></optgroup>
 					<option value="ANTI PIRACY">&nbsp;&nbsp;&nbsp;&nbsp;ANTI PIRACY</option>
 					<option value="IN HOUSE TRAINING CERT WITH ISM">&nbsp;&nbsp;&nbsp;&nbsp;IN HOUSE TRAINING CERT WITH ISM</option>
@@ -846,152 +882,139 @@
         });
 
         let list = [
-     //    // LICENSES
-     //    	{
-     //    		range: [1, 2],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'COC', 'COE', 'GMDSS/GOC'
-     //    		],
-     //    		regulation: [
-     //    			['II/2', 'IV/2'],
-     //    			['II/2', 'IV/2'],
-     //    			['IV/2'],
-     //    		]
-     //    	},
-     //    	{
-     //    		range: [3, 4],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'COC', 'COE', 'GMDSS/GOC'
-     //    		],
-     //    		regulation: [
-     //    			['II/1', 'IV/2'],
-     //    			['II/1', 'IV/2'],
-     //    			['IV/2'],
-     //    		]
-     //    	},
-     //    	{
-     //    		range: [5, 6],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'COC', 'COE'
-     //    		],
-     //    		regulation: [
-     //    			['III/2'],
-     //    			['III/2']
-     //    		]
-     //    	},
-     //    	{
-     //    		range: [7, 8],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'COC', 'COE'
-     //    		],
-     //    		regulation: [
-     //    			['III/1'],
-     //    			['III/1']
-     //    		]
-     //    	},
-     //    	{
-     //    		range: [9, 14],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'COC', 'COE'
-     //    		],
-     //    		regulation: [
-     //    			['II/4'],
-     //    			['II/5']
-     //    		]
-     //    	},
-     //    	{
-     //    		range: [15, 21],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'COC', 'COE'
-     //    		],
-     //    		regulation: [
-     //    			['III/4'],
-     //    			['III/5']
-     //    		]
-     //    	},
-     //    	{
-     //    		range: [22, 27],
-     //    		issuer: 'TESDA',
-     //    		documents: [
-     //    			'NCI', 'NCII', 'NCIII'
-     //    		],
-     //    		regulation: [
-     //    			['--'],
-     //    			['--'],
-     //    			['--']
-     //    		]
-     //    	},
-     //    // CERTIFICATES
-     //    	// ALL
-     //    	{
-     //    		range: [1, 27],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'BASIC TRAINING - BT', 
-     //    			'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
-     //    			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
-     //    			'HAZMAT', 
-     //    			'ENGLISH TEST', 
-     //    			'ANTI PIRACY', 
-     //    			'IN HOUSE TRAINING CERT WITH ISM', 
-     //    			'GENERAL TRAINING RECORD BOOK', 
-     //    			'PDOS'
-     //    		],
-     //    		regulation: [
-     //    			['VI/1'],
-     //    			['VI/2.1'],
-     //    			['VI/6'],
-     //    			[],[],[],
-     //    			[],[],[],
-     //    		]
-     //    	},
-     //    	// OFFICERS
-     //    	{
-     //    		range: [1, 8],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'FAST RESCUE BOAT - FRB',
-     //    			'ADVANCE FIRE FIGHTING - AFF',
-     //    			'MEDICAL FIRST AID - MEFA',
-     //    			'MEDICAL CARE - MECA',
-     //    			'SHIP SECURITY OFFICER - SSO',
-     //    			'MARPOL 73/78',
-     //    			'KML TRAINING',
-     //    			'ECDIS TRANSAS',
-     //    			'MLC TRAINING F1',
-     //    			'MLC TRAINING F2',
-     //    			'MLC TRAINING F3',
-     //    			'MLC TRAINING F4',
-     //    		],
-     //    		regulation: [
-     //    			['VI/2.2'],
-     //    			['VI/3'],
-     //    			['VI/4.1'],
-     //    			['VI/4.2'],
-     //    			['VI/5'],
-     //    			[],[],[],[],
-     //    			[],[],[],
+        // LICENSES
+        	{
+        		range: [1, 2],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE', 'GMDSS/GOC'
+        		],
+        		regulation: [
+        			['II/2', 'IV/2'],
+        			['II/2', 'IV/2'],
+        			['IV/2'],
+        		]
+        	},
+        	{
+        		range: [3, 4],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE', 'GMDSS/GOC'
+        		],
+        		regulation: [
+        			['II/1', 'IV/2'],
+        			['II/1', 'IV/2'],
+        			['IV/2'],
+        		]
+        	},
+        	{
+        		range: [5, 6],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE'
+        		],
+        		regulation: [
+        			['III/2'],
+        			['III/2']
+        		]
+        	},
+        	{
+        		range: [7, 8],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE'
+        		],
+        		regulation: [
+        			['III/1'],
+        			['III/1']
+        		]
+        	},
+        	{
+        		range: [9, 14],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE'
+        		],
+        		regulation: [
+        			['II/4'],
+        			['II/5']
+        		]
+        	},
+        	{
+        		range: [15, 21],
+        		issuer: 'MARINA',
+        		documents: [
+        			'COC', 'COE'
+        		],
+        		regulation: [
+        			['III/4'],
+        			['III/5']
+        		]
+        	},
+        	{
+        		range: [22, 27],
+        		issuer: 'TESDA',
+        		documents: [
+        			'NCI', 'NCII', 'NCIII'
+        		],
+        		regulation: [
+        			[],[],[]
+        		]
+        	},
+        // CERTIFICATES
+        	// ALL
+        	{
+        		range: [1, 27],
+        		issuer: 'MARINA',
+        		documents: [
+        			'BASIC TRAINING - BT',
+        			'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB',
+        			'ADVANCE FIRE FIGHTING - AFF',
+        			'MEDICAL FIRST AID - MEFA',
+        			'FAST RESCUE BOAT - FRB',
+        			'MEDICAL CARE - MECA',
+        			'SHIP SECURITY OFFICER - SSO',
+        			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD',
+        		],
+        		regulation: [
+        			['VI/1'], ['VI/2.1'],
+        			['VI/3'], ['VI/4.1'],
+        			['VI/2.2'], ['VI/4.2'],
+        			['VI/5'], ['VI/6'],
+        		]
+        	},
+        	// OFFICERS
+        	{
+        		range: [1, 8],
+        		issuer: 'MARINA',
+        		documents: [
+        			'CONSOLIDATED MARPOL',
+        			'KML TRAINING',
+        			'ECDIS TRANSAS',
+        			'MLC TRAINING F1',
+        			'MLC TRAINING F2',
+        			'MLC TRAINING F3',
+        			'MLC TRAINING F4',
+        		],
+        		regulation: [
+        			[],[],[],[],
+        			[],[],[],
 
-     //    		]
-     //    	},
-     //    	// DECK OFFICERS
-     //    	{
-     //    		range: [1, 4],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'RADAR SIMULATOR COURSE',
-     //    			'BRIDGE TEAM/RESOURCE MANAGEMENT',
-     //    			'SHIP SAFETY OFFICER',
-     //    			// 'GMDSS/GOC',
-     //    			'SSBT',
-     //    			'ARPA TRAINING COURSE',
-     //    			'ECDIS',
+        		]
+        	},
+        	// DECK OFFICERS
+        	{
+        		range: [1, 4],
+        		issuer: 'MARINA',
+        		documents: [
+        			'SSBT WITH BRM',
+        			// 'BRIDGE TEAM/RESOURCE MANAGEMENT',
+        			// 'GMDSS/GOC',
+					// 'RADAR SIMULATOR COURSE',
+					// 'SHIP SAFETY OFFICER',
+					// 'SSBT',
+					// 'ARPA TRAINING COURSE',
+					// 'ECDIS',
 					// 'ECDIS FURUNO 2107',
 					// 'ECDIS FURUNO 3200',
 					// 'ECDIS FURUNO 3300',
@@ -1011,21 +1034,17 @@
 					// 'ADVANCE NAVIGATION',
 					// 'ADVANCE SHIPBOARD OPERATION AND MGT.',
 					// 'SATELLITE COMMUNICATION COURSE',
-     //    		],
-     //    		regulation: [
-     //    			[],[],[],[],[],[],
-     //    			[],[],[],[],[],[],
-     //    			[],[],[],[],[],[],
-     //    			[],[],[],[],[],[],
-     //    			[],[],
-     //    		]
-     //    	},
-     //    	// ENGINE OFFICERS
-     //    	{
-     //    		range: [5, 8],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'ERS WITH ERM',
+        		],
+        		regulation: [
+        			[],
+        		]
+        	},
+        	// ENGINE OFFICERS
+        	{
+        		range: [5, 8],
+        		issuer: 'MARINA',
+        		documents: [
+        			'ERS WITH ERM',
 					// 'AUXILIARY MACHINERY SYSTEM',
 					// 'CONTROL ENGINEERING',
 					// 'HYDRAULICS/PNEUMATICS',
@@ -1033,105 +1052,136 @@
 					// 'ELECTRONIC EQUIPMENT',
 					// 'MARINE ELECTRICAL',
 					// 'MARINE REFRIGIRATION/AIRCONDITIONING',
-     //    		],
-     //    		regulation: [
-     //    			[],[],[],[],
-     //    			[],[],[],[],
-     //    		]
-     //    	},
-     //    	// 2/0, 3/0
-     //    	{
-     //    		range: [3, 4],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'OLC TRAINING F1',
-     //    			'OLC TRAINING F2',
-     //    			'OLC TRAINING F3',
-     //    		],
-     //    		regulation: [
-     //    			[],[],[]
-     //    		]
-     //    	},
-     //    	// 2AE, 3AE
-     //    	{
-     //    		range: [7,8],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'OLC TRAINING F1',
-     //    			'OLC TRAINING F2',
-     //    			'OLC TRAINING F3',
-     //    		],
-     //    		regulation: [
-     //    			[],[],[]
-     //    		]
-     //    	},
-     //    	// ENGINE RATINGS
-     //    	{
-     //    		range: [15, 21],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'WELDING CERT/SMAW'
-     //    		],
-     //    		regulation: [
-     //    			[]
-     //    		]
-     //    	},
-     //    	// GALLEY
-     //    	{
-     //    		range: [22, 27],
-     //    		issuer: 'MARINA',
-     //    		documents: [
-     //    			'CATERING TRAINING CERT'
-     //    		],
-     //    		regulation: [
-     //    			[]
-     //    		]
-     //    	},
-        // NEW
-        	{
-        		range: [1, 4],
-        		issuer: '',
-        		documents: [
-        			'COC', 
-        			'COE', 
-        			'GMDSS/GOC',
-        			'BASIC TRAINING - BT', 
-        			'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
-        			'ADVANCE FIRE FIGHTING - AFF',
-        			'MEDICAL FIRST AID - MEFA',
-        			'MEDICAL CARE - MECA',
-        			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
-        		],
-        		regulation: [
-        			[],[],[],[],[],[],[],[],[],
-        		]
-        	},
-        	{
-        		range: [5, 8],
-        		issuer: '',
-        		documents: [
-        			'COC', 
-        			'COE', 
-        			'BASIC TRAINING - BT', 
-        			'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
-        			'ADVANCE FIRE FIGHTING - AFF',
-        			'MEDICAL FIRST AID - MEFA',
-        			'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
-        		],
-        		regulation: [
-        			[],[],[],[],[],[],[]
-        		]
-        	},
-        	{
-        		range: [1, 3],
-        		issuer: '',
-        		documents: [
-        			'SHIP SECURITY OFFICER - SSO',
         		],
         		regulation: [
         			[],
         		]
         	},
+        	// 2/0, 3/0
+        	{
+        		range: [3, 4],
+        		issuer: 'MARINA',
+        		documents: [
+        			'OLC TRAINING F1',
+        			'OLC TRAINING F2',
+        			'OLC TRAINING F3',
+        		],
+        		regulation: [
+        			[],[],[]
+        		]
+        	},
+        	// 2AE, 3AE
+        	{
+        		range: [7,8],
+        		issuer: 'MARINA',
+        		documents: [
+        			'OLC TRAINING F1',
+        			'OLC TRAINING F2',
+        			'OLC TRAINING F3',
+        		],
+        		regulation: [
+        			[],[],[]
+        		]
+        	},
+        	// ENGINE RATINGS
+        	{
+        		range: [15, 21],
+        		issuer: 'MARINA',
+        		documents: [
+        			'WELDING CERT/SMAW'
+        		],
+        		regulation: [
+        			[]
+        		]
+        	},
+        	// GALLEY
+        	{
+        		range: [22, 27],
+        		issuer: 'MARINA',
+        		documents: [
+        			'CATERING TRAINING CERT'
+        		],
+        		regulation: [
+        			[]
+        		]
+        	},
+        // NEW
+        	// {
+        	// 	range: [1, 4],
+        	// 	issuer: '',
+        	// 	documents: [
+        	// 		'COC', 
+        	// 		'COE', 
+        	// 		'GMDSS/GOC',
+        	// 		'BASIC TRAINING - BT', 
+        	// 		'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
+        	// 		'ADVANCE FIRE FIGHTING - AFF',
+        	// 		'MEDICAL FIRST AID - MEFA',
+        	// 		'MEDICAL CARE - MECA',
+        	// 		'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
+        	// 	],
+        	// 	regulation: [
+        	// 		["II/2", "IV/2"],
+        	// 		["II/2", "IV/2"],
+        	// 		["IV/2"],
+        	// 		["VI/1"],
+        	// 		["VI/2.1"],
+        	// 		["VI/3"],
+        	// 		["VI/4.1"],
+        	// 		["VI/5"],
+        	// 	]
+        	// },
+        	// {
+        	// 	range: [5, 8],
+        	// 	issuer: '',
+        	// 	documents: [
+        	// 		'COC', 
+        	// 		'COE', 
+        	// 		'BASIC TRAINING - BT', 
+        	// 		'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
+        	// 		'ADVANCE FIRE FIGHTING - AFF',
+        	// 		'MEDICAL FIRST AID - MEFA',
+        	// 		'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 
+        	// 	],
+        	// 	regulation: [
+        	// 		[],[],[],[],[],[],[]
+        	// 	]
+        	// },
+        	// {
+        	// 	range: [1, 3],
+        	// 	issuer: '',
+        	// 	documents: [
+        	// 		'SHIP SECURITY OFFICER - SSO',
+        	// 	],
+        	// 	regulation: [
+        	// 		[],
+        	// 	]
+        	// },
+        // NEWER
+        	// {
+        	// 	range: [1, 2],
+        	// 	issuer: '',
+        	// 	documents: [
+        	// 		'COC', 
+        	// 		'COE', 
+        	// 		'GMDSS/GOC',
+        	// 		'BASIC TRAINING - BT', 
+        	// 		'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 
+        	// 		'ADVANCE FIRE FIGHTING - AFF',
+        	// 		'MEDICAL FIRST AID - MEFA',
+        	// 		'SHIP SECURITY OFFICER - SSO', 
+        	// 	],
+        	// 	regulation: [
+        	// 		["II/2", "IV/2"],
+        	// 		["II/2", "IV/2"],
+        	// 		["IV/2"],
+        	// 		["VI/1"],
+        	// 		["VI/2.1"],
+        	// 		["VI/3"],
+        	// 		["VI/4.1"],
+        	// 		["VI/5"],
+        	// 	]
+        	// },
         ];
 
 		$('#rank').change(e => {
@@ -1151,43 +1201,48 @@
 
             let ctr = 0;
 
+            $('.lc .row, .lc hr').remove();
+            $(`.lcCount`)[0].innerText = 0;
+
             list.every(row => {
             	if(rank >= row.range[0] && rank <= row.range[1]){
-
             		row.documents.forEach((docu, index) => {
+            			
             			// IF DOCUMENT IS EXISTING IN LC, SKIP
-            			if($(`[name^="docu-lctype"] [value="${docu}"]`).length){
-            				return
-            			}
-            			$(`[name^="docu-lctype"] [value="${docu}"]`).parent().hide();
-            			let match = $(`.lc [value="${docu}"]`);
-            			if(match.length > 0){
-            				ctr += 1;
-            				let row = $(match[match.length - 1]).parent().parent().parent();
-            				row.next().hide();
-            				row.hide();
-            			}
+            			// if($(`[name^="docu-lctype"] [value="${docu}"]`).length){
+            			// 	return
+            			// }
+
+            			// $(`[name^="docu-lctype"] [value="${docu}"]`).parent().hide();
+            			// let match = $(`.lc [value="${docu}"]`);
+
+            			// if(match.length > 0){
+            			// 	ctr += 1;
+            			// 	let row = $(match[match.length - 1]).parent().parent().parent();
+            			// 	row.next().hide();
+            			// 	row.hide();
+            			// }
 
             			let count = $('.docu').length + 1;
             			addDocu('lc');
             			
             			// CHECK IF DOCUMENT IS IN OPTION, IF NOT ADD OPTION AND PRESELECT IT
-        				// checkIfExisting($(`[name="docu-lctype${count}"]`), docu);
-        				// checkIfExisting($(`[name="docu-issuer${count}"]`), docu);
-        				if($(`[name="docu-lctype${count}"]`).find(`option[value="${docu}"]`).length){
-        					$(`[name="docu-lctype${count}"]`).val(docu).trigger('change');
-        				}
-        				else{
-        					let option = new Option(docu, docu, true, true);
-        					$(`[name="docu-lctype${count}"]`).append(option).trigger('change');
-        				}
-        				if($(`[name="docu-issuer${count}"]`).find(`option[value="${row.issuer}"]`).length){
-        					$(`[name="docu-issuer${count}"]`).val(row.issuer).trigger('change');
-        				}
-        				else{
-        					let option = new Option(row.issuer, row.issuer, true, true);
-        					$(`[name="docu-issuer${count}"]`).append(option).trigger('change');
-        				}
+        				checkIfExisting($(`[name="docu-lctype${count}"]`), docu);
+        				checkIfExisting($(`[name="docu-issuer${count}"]`), row.issuer);
+        				// if($(`[name="docu-lctype${count}"]`).find(`option[value="${docu}"]`).length){
+        				// 	$(`[name="docu-lctype${count}"]`).val(docu).trigger('change');
+        				// }
+        				// else{
+        				// 	let option = new Option(docu, docu, true, true);
+        				// 	$(`[name="docu-lctype${count}"]`).append(option).trigger('change');
+        				// }
+        				// if($(`[name="docu-issuer${count}"]`).find(`option[value="${row.issuer}"]`).length){
+        				// 	$(`[name="docu-issuer${count}"]`).val(row.issuer).trigger('change');
+        				// }
+        				// else{
+        				// 	let option = new Option(row.issuer, row.issuer, true, true);
+        				// 	$(`[name="docu-issuer${count}"]`).append(option).trigger('change');
+        				// }
 
         				row.regulation[index].forEach(tempOption => {
         					if(!$(`[name="docu-regulation${count}"]`).find(`option[value="${row.regulation}"]`).length){
