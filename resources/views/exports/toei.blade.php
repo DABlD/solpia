@@ -1,11 +1,11 @@
 @php
 	function checkDate2($date, $type){
 		if($date == "NO EXPIRY"){
-			return $date;
+			return 'UNLIMITED';
 		}
 		elseif($date == "" || $date == null){
 			if($type == "E"){
-				return 'NO EXPIRY';
+				return 'UNLIMITED';
 			}
 			else{
 				return '-----';
@@ -77,11 +77,11 @@
 			<td>Code No.:</td>
 			<td></td>
 			<td>Rank:</td>
-			<td>{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
+			<td>{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
 			<td>Date Employed:</td>
 			<td></td>
 			<td>Vessel:</td>
-			<td colspan="2">{{ isset($applicant->vessel) ? $applicant->vessel->name : 'N/A' }}</td>
+			<td colspan="2">{{ isset($applicant->vessel) ? $applicant->vessel->name : '-----' }}</td>
 		</tr>
 
 		<tr>
@@ -111,12 +111,12 @@
 			<td></td>
 			<td colspan="4"></td>
 			<td>Email:</td>
-			<td colspan="3">{{ $applicant->user->email ? $applicant->user->email : 'N/A' }}</td>
+			<td colspan="3">{{ $applicant->user->email ? $applicant->user->email : '-----' }}</td>
 		</tr>
 
 		<tr>
 			<td>Birth Date:</td>
-			<td>{{ $applicant->user->birthday->format('F j, Y') }}</td>
+			<td>{{ $applicant->user->birthday->format('M j, Y') }}</td>
 			<td>Age:</td>
 			<td>{{ $applicant->age }}</td>
 			<td>Birth Place:</td>
@@ -138,13 +138,13 @@
 
 		<tr>
 			<td>SSS No.:</td>
-			<td colspan="2">{{ $applicant->sss ? $applicant->sss : 'N/A' }}</td>
+			<td colspan="2">{{ $applicant->sss ? $applicant->sss : '-----' }}</td>
 			<td>Tin:</td>
-			<td>{{ $applicant->tin ? $applicant->tin : 'N/A' }}</td>
+			<td>{{ $applicant->tin ? $applicant->tin : '-----' }}</td>
 			<td>Shoes Size:</td>
-			<td>{{ $applicant->shoe_size ? $applicant->shoe_size : 'N/A' }}cm</td>
+			<td>{{ $applicant->shoe_size ? $applicant->shoe_size : '-----' }}cm</td>
 			<td>Clothes Size:</td>
-			<td>{{ $applicant->clothes_size ? $applicant->clothes_size : 'N/A' }}</td>
+			<td>{{ $applicant->clothes_size ? $applicant->clothes_size : '-----' }}</td>
 		</tr>
 
 		<tr>
@@ -193,16 +193,16 @@
 			<td colspan="5">Name and address of Wife / Nearest Relative</td>
 			<td>Relation</td>
 			<td></td>
-			<td>{{ $realFam ? $realFam->type : "N/A" }}</td>
+			<td>{{ $realFam ? $realFam->type : "-----" }}</td>
 			<td></td>
 		</tr>
 
 		<tr>
 			<td>Name</td>
 			{{-- <td colspan="8"></td> --}}
-			<td colspan="2">{{ $realFam ? $realFam->lname : "N/A" }}</td>
-			<td colspan="2">{{ $realFam ? $realFam->fname . ' ' . $realFam->suffix : "N/A" }}</td>
-			<td colspan="2">{{ $realFam ? $realFam->mname : "N/A" }}</td>
+			<td colspan="2">{{ $realFam ? $realFam->lname : "-----" }}</td>
+			<td colspan="2">{{ $realFam ? $realFam->fname . ' ' . $realFam->suffix : "-----" }}</td>
+			<td colspan="2">{{ $realFam ? $realFam->mname : "-----" }}</td>
 			<td colspan="2"></td>
 		</tr>
 
@@ -216,7 +216,7 @@
 
 		<tr>
 			<td>Address:</td>
-			{{-- <td colspan="8">{{ $realFam ? $realFam->address : "N/A" }}</td> --}}
+			{{-- <td colspan="8">{{ $realFam ? $realFam->address : "-" }}</td> --}}
 			{{-- GUEVARRA SUGGESTED THAT THIS ONE SHOULD JUST BE THE SAME AS THE APPLICANTS ADDRESS --}}
 			<td colspan="8">{{ $applicant->user->address }}</td>
 		</tr>
@@ -229,7 +229,7 @@
 		<tr>
 			<td colspan="5"></td>
 			<td>E-mail:</td>
-			<td colspan="3">{{ $realFam ? $realFam->email : "N/A" }}</td>
+			<td colspan="3">{{ $realFam ? $realFam->email : "-----" }}</td>
 		</tr>
 
 		<tr>
@@ -279,10 +279,10 @@
 				@endif
 			</td>
 			<td colspan="2"></td>
-			<td>{{ $docu ? $docu->no : "N/A" }}</td>
+			<td>{{ $docu ? $docu->no : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">Philippines</td>
+			<td colspan="2">MARINA</td>
 		</tr>
 
 		@php 
@@ -295,34 +295,43 @@
 		@endphp
 	
 		<tr>
-			<td colspan="2">Flag License</td>
+			<td colspan="2">Flag License</td> 
 			<td colspan="2"></td>
-			<td>{{ $docu ? $docu->number : "N/A" }}</td>
+			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? "Panama" : "N/A" }}</td>
+			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
+			<td colspan="2">PANAMA</td>
 		</tr>
 
-		@php 
+		{{-- @php 
 			$docu = false;
 			foreach($applicant->document_flag as $document){
 			    if($document->country == "Marshall Islands" && $document->type == "GMDSS/GOC"){
 			        $docu = $document;
 			    }
 			}
-		@endphp
+		@endphp --}}
 
-		<tr>
+		{{-- <tr>
 			<td colspan="2">Flag GOC</td>
 			<td colspan="2"></td>
-			<td>{{ $docu? $docu->number : "N/A" }}</td>
+			<td>{{ $docu? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			{{-- <td colspan="2">Marshall Islands</td> --}}
-			<td colspan="2">{{ $docu ? "Marshall Islands" : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? "Marshall Islands" : "-" }}</td>
+		</tr> --}}
+
+		<tr>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td colspan="2"></td>
 		</tr>
 
-		@php 
+		{{-- @php 
 			$docu = false;
 			foreach($applicant->document_flag as $document){
 			    if($document->country == "Panama" && $document->type == "SSO"){
@@ -334,10 +343,19 @@
 		<tr>
 			<td colspan="2">Flag SSO</td>
 			<td colspan="2"></td>
-			<td>{{ $docu ? $docu->number : "N/A" }}</td>
+			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">Panama</td>
+			<td colspan="2">PANAMA</td>
+		</tr> --}}
+
+		<tr>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td colspan="2"></td>
 		</tr>
 
 		<tr>
@@ -361,11 +379,11 @@
 
 		<tr>
 			<td colspan="2">Passport</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
-			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">Philippines</td>
+			<td colspan="2">D.F.A</td>
 		</tr>
 		
 		{{-- 2ND --}}
@@ -376,8 +394,8 @@
 
 		<tr>
 			<td colspan="2">U.S. C1/D Visa</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
-			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">U.S EMBASSY</td>
@@ -391,8 +409,8 @@
 
 		<tr>
 			<td colspan="2">National Seaman's Book</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
-			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">MARINA</td>
@@ -410,8 +428,8 @@
 
 		<tr>
 			<td colspan="2">Seaman's Book/Panama</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
-			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">PANAMA</td>
@@ -425,11 +443,11 @@
 
 		<tr>
 			<td colspan="2">AUSTRALIA MCV</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
-			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">AUSTRALIA</td>
+			<td colspan="2">AU-EMBASSY</td>
 		</tr>
 		
 		{{-- 6TH --}}
@@ -440,11 +458,11 @@
 
 		<tr>
 			<td colspan="2">Japanese Visa</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'N/A' }}</td>
-			<td>{{ $docu ? $docu->number : "N/A"}}</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">in case of Master and C/E</td>
+			<td colspan="2">{{ $docu ? 'JP-EMBASSY' : 'NOT APPLICABLE' }}</td>
 		</tr>
 	
 		<tr>
@@ -472,10 +490,10 @@
 
 		<tr>
 			<td colspan="4">SSO (Ship Security Officer) Course</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 2ND --}}
@@ -504,10 +522,10 @@
 
 		<tr>
 			<td colspan="4">Watchkeeping</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 3RD --}}
@@ -518,10 +536,10 @@
 
 		<tr>
 			<td colspan="4">Basic Safety Training Course  w/ PSSR</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 4TH --}}
@@ -532,10 +550,10 @@
 
 		<tr>
 			<td colspan="4">Survival Craft and Rescue Boat</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 5TH --}}
@@ -546,10 +564,10 @@
 
 		<tr>
 			<td colspan="4">Advance Fire Fighting Course</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 6TH --}}
@@ -560,10 +578,10 @@
 
 		<tr>
 			<td colspan="4">Medical First Aid Course</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 7TH --}}
@@ -584,10 +602,10 @@
 
 		<tr>
 			<td colspan="4">Radar Observer</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 8TH --}}
@@ -598,10 +616,10 @@
 
 		<tr>
 			<td colspan="4">GMDSS (GOC)</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 9TH --}}
@@ -612,10 +630,10 @@
 
 		<tr>
 			<td colspan="4">Satellite Communication Course</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		{{-- 10TH --}}
@@ -633,10 +651,10 @@
 					COC
 				@endif
 			</td>
-			<td>{{ $docu ? $docu->no : "N/A"}}</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		@if(isset($applicant->rank) && $applicant->rank->id >=5 && $applicant->rank->id <= 8)
@@ -648,10 +666,10 @@
 
 			<tr>
 				<td colspan="4">ERS WITH ERM</td>
-				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? $docu->no : "-----"}}</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 			</tr>
 
 			{{-- 12TH --}}
@@ -662,10 +680,10 @@
 
 			<tr>
 				<td colspan="4">ERS</td>
-				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? $docu->no : "-----"}}</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 			</tr>
 
 			{{-- 13TH --}}
@@ -676,10 +694,10 @@
 
 			<tr>
 				<td colspan="4">ERM</td>
-				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? $docu->no : "-----"}}</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 			</tr>
 
 			{{-- 14TH --}}
@@ -700,10 +718,11 @@
 
 			<tr>
 				<td colspan="4">JRC ECDIS SPECIFIC 1</td>
-				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				{{-- <td>{{ $docu ? $docu->no : "-----"}}</td> --}}
+				<td>JAN-701B/901B/2000</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 			</tr>
 
 			{{-- 12TH --}}
@@ -714,10 +733,11 @@
 
 			<tr>
 				<td colspan="4">JRC ECDIS SPECIFIC 2</td>
-				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				{{-- <td>{{ $docu ? $docu->no : "-----"}}</td> --}}
+				<td>JAN-9201/7201</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 			</tr>
 
 			{{-- 13TH --}}
@@ -728,10 +748,11 @@
 
 			<tr>
 				<td colspan="4">FURUNO ECDIS FEA</td>
-				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				{{-- <td>{{ $docu ? $docu->no : "-----"}}</td> --}}
+				<td>FEA-2107/FEA-2807</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 			</tr>
 
 			{{-- 14TH --}}
@@ -742,10 +763,11 @@
 
 			<tr>
 				<td colspan="4">FURUNO ECDIS FMD</td>
-				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				{{-- <td>{{ $docu ? $docu->no : "-----"}}</td> --}}
+				<td>FMD-3300</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 			</tr>
 
 			{{-- 15TH --}}
@@ -756,10 +778,10 @@
 
 			<tr>
 				<td colspan="4">ECDIS GENERIC</td>
-				<td>{{ $docu ? $docu->no : "N/A"}}</td>
+				<td>{{ $docu ? $docu->no : "-----"}}</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "N/A" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 			</tr>
 		@endif
 	
@@ -787,7 +809,7 @@
 			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td>{{ $docu ? $docu->clinic : "N/A" }}</td>
+			<td>{{ $docu ? $docu->clinic : "-----" }}</td>
 		</tr>
 
 		@php 
@@ -801,7 +823,7 @@
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			{{-- <td>{{ $docu ? $docu->clinic : "N/A" }}</td> --}}
+			{{-- <td>{{ $docu ? $docu->clinic : "-----" }}</td> --}}
 			<td>QUARANTINE</td>
 		</tr>
 
@@ -816,7 +838,7 @@
 			<td>{{ $docu ? $docu->with_mv : "-----"}}</td>
 			<td>-----</td>
 			<td>-----</td>
-			<td>{{ $docu ? $docu->case_remarks : "N/A" }}</td>
+			<td>{{ $docu ? $docu->case_remarks : "-----" }}</td>
 		</tr>
 
 		@php 
@@ -830,7 +852,7 @@
 			<td>{{ $docu ? $docu->with_mv : "-----"}}</td>
 			<td>-----</td>
 			<td>-----</td>
-			<td>{{ $docu ? $docu->case_remarks : "N/A" }}</td>
+			<td>{{ $docu ? $docu->case_remarks : "-----" }}</td>
 		</tr>
 		{{-- end --}}
 		<tr>
@@ -948,18 +970,18 @@
 				<td>{{ $data->gross_tonnage }}</td>
 				<td>{{ $data->trade }}</td>
 				<td>{{ $data->manning_agent }}</td>
-				<td>{{ $data->sign_on != "" ? $data->sign_on->format('M j, Y') : "N/A" }}</td>
+				<td>{{ $data->sign_on != "" ? $data->sign_on->format('M j, Y') : "-----" }}</td>
 				<td colspan="2">{{ $data->remarks }}</td>
 			</tr>
 			<tr>
 				<td colspan="2">{{ $data->flag }}</td>
 				<td>{{ $applicant->ranks[$data->rank] }}</td>
-				<td colspan="2">{{ $data->engine_type }} / {{ $data->bhp_kw }}kw</td>
+				<td colspan="2">{{ $data->engine_type }} / {{ $data->bhp_kw }}</td>
 				<td>{{ $data->principal }}</td>
-				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "N/A" }}</td>
+				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "-----" }}</td>
 				<td colspan="2">
 					@if($data->sign_on != "" && $data->sign_off != "")
-						{{ $data->sign_on->diff($data->sign_off)->format('%yyr, %mmos and %ddays') }}
+						{{ $data->sign_on->diff($data->sign_off)->format('%yyr, %mmos, %ddays') }}
 					@else
 						Not enough data
 					@endif
