@@ -274,7 +274,7 @@
 		<tr>
 			<td colspan="2">
 				National License
-				@if(isset($applicant->rank) && $applicant->rank->id >= 9 && $applicant->rank->id <= 21)
+				@if(isset($applicant->rank) && $applicant->rank_id >= 9 && $applicant->rank_id <= 21)
 					(II/4)
 				@endif
 			</td>
@@ -507,10 +507,10 @@
 				// $haystack = ["II/4", "III/4"];
 				$haystack = [];
 				
-				if($applicant->rank >= 9 && $applicant->rank <= 14){
+				if($applicant->rank_id >= 9 && $applicant->rank_id <= 14){
 					array_push($haystack, "II/4");
 				}
-				elseif($applicant->rank >= 15 && $applicant->rank <= 21){
+				elseif($applicant->rank_id >= 15 && $applicant->rank_id <= 21){
 					array_push($haystack, "III/4");
 				}
 
@@ -645,7 +645,7 @@
 		<tr>
 			<td colspan="4">
 				Endorsement Certificate /
-				@if(isset($applicant->rank) && $applicant->rank->id >= 1 && $applicant->rank->id <= 8)
+				@if(isset($applicant->rank) && $applicant->rank_id >= 1 && $applicant->rank_id <= 8)
 					COE
 				@else
 					COC
@@ -657,7 +657,7 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
-		@if(isset($applicant->rank) && $applicant->rank->id >=5 && $applicant->rank->id <= 8)
+		@if(isset($applicant->rank) && $applicant->rank_id >=5 && $applicant->rank_id <= 8)
 			{{-- 11TH --}}
 			@php 
 				$name = 'ERS WITH ERM';

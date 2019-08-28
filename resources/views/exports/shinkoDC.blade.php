@@ -118,7 +118,7 @@
 				EXPIRY
 			</td>
 			<td colspan="3">
-				REMARK
+				Issuing Authority / Remarks
 			</td>
 		</tr>
 
@@ -132,18 +132,10 @@
 				$docu = isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"} : false;
 			@endphp
 
-			<td colspan="2">
-				{{ $docu ? $docu->number : "-----"}}
-			</td>
-			<td colspan="2">
-				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}
-			</td>
-			<td colspan="2">
-				{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}
-			</td>
-			<td colspan="3">
-				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
-			</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
+			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
 		</tr>
 
 		<tr>
@@ -176,18 +168,10 @@
 				}
 			@endphp
 
-			<td colspan="2">
-				{{ $docu ? $docu->number : "-----"}}
-			</td>
-			<td colspan="2">
-				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}
-			</td>
-			<td colspan="2">
-				{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}
-			</td>
-			<td colspan="3">
-				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
-			</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
+			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
+			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
 		</tr>
 
 		<tr>
@@ -314,10 +298,10 @@
 					// $haystack = ["II/4", "III/4"];
 					$haystack = [];
 					
-					if($applicant->rank >= 9 && $applicant->rank <= 14){
+					if($applicant->rank_id >= 9 && $applicant->rank_id <= 14){
 						array_push($haystack, "II/4");
 					}
-					elseif($applicant->rank >= 15 && $applicant->rank <= 21){
+					elseif($applicant->rank_id >= 15 && $applicant->rank_id <= 21){
 						array_push($haystack, "III/4");
 					}
 

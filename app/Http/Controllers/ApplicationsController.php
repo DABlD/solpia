@@ -71,8 +71,6 @@ class ApplicationsController extends Controller
         // $applicant->load('sea_service');
         // $applicant->load('document_flag');
         // $applicant->load('document_lc');
-
-        // $applicant->load('document_med_exp'); //NOT USED ANYMORE
         
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $issuers = array_merge(
@@ -205,7 +203,9 @@ class ApplicationsController extends Controller
     public function exportLineUpApplication(ProcessedApplicant $applicant, $type){
         $applicant->load('applicant');
         $applicant->load('vessel');
-        $applicant->load('rank');
+        
+        $applicant->ranks = Rank::pluck('abbr', 'name');
+        $applicant->ranks[''] = '';
 
         // move $applicant->applicant properties to $applicant
         foreach(array_keys($applicant->applicant->toArray()) as $property){
@@ -213,6 +213,7 @@ class ApplicationsController extends Controller
                 $applicant->{$property} = $applicant->applicant->{$property};
             }
         }
+
         unset($applicant->applicant);
 
         $applicant->user                    = User::where('id', $applicant->applicant->user_id)->first();
@@ -222,15 +223,45 @@ class ApplicationsController extends Controller
         $applicant->document_id             = DocumentId::where('applicant_id', $applicant->applicant_id)->get();
         $applicant->document_flag           = DocumentFlag::where('applicant_id', $applicant->applicant_id)->get();
         $applicant->document_lc             = DocumentLC::where('applicant_id', $applicant->applicant_id)->get();
+        $applicant->document_med        = DocumentMed::where('applicant_id', $applicant->applicant_id)->get();
+        $applicant->document_med_cert       = DocumentMedCert::where('applicant_id', $applicant->applicant_id)->get();
 
-        foreach(['document_id', 'document_flag', 'document_lc'] as $docuType){
-            foreach($applicant->$docuType as $data){
-                $temp = $docuType == 'document_flag' ? $data->country : $data->type;
+        foreach(['document_id', 'document_flag', 'document_lc', 'document_med', 'document_med_cert'] as $docuType){
+            foreach($applicant->$docuType as $key => $data){
+
+                if(isset($data->no)){
+                    if($data->no == ""){
+                        $applicant->$docuType->forget($key);
+                        continue;
+                    }
+                }
+                elseif(isset($data->number)){
+                    if($data->number == ""){
+                        $applicant->$docuType->forget($key);
+                        continue;
+                    }
+                }
+
+                $temp = $data->type;
+
+                if(isset($data->expiry_date)){
+                    if($data->expiry_date == "" || $data->expiry_date == null){
+                        $data->expiry_date == "NO EXPIRY";
+                    }
+                }
+
                 $applicant->$docuType->$temp = $data;
             }
         }
 
-        // IF FAMILY_DATA IS ODD
+        // IF NAME IS EMPTY, REMOVE
+        foreach($applicant->family_data as $key => $value){
+            if($value->lname == ""){
+                $applicant->family_data->forget($key);
+            }
+        }
+
+        // IF FAMILY_DATA IS ODD ADD EMPTY TO FILL
         if($applicant->family_data->count() % 2 != 0){
             $fd = new FamilyData;
             $fd->type = "";
