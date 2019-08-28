@@ -9,6 +9,10 @@ use App\Imports\VesselsImport;
 
 class VesselsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permissions:' . 'Admin');
+    }
+
     public function import(Request $req){
         Excel::import(new VesselsImport, $req->file('file'));
 
