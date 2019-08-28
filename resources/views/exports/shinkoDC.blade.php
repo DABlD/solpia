@@ -1,5 +1,5 @@
 @php
-	function checkDate2($date, $type){
+	$checkDate2 = function($date, $type){
 		if($date == "NO EXPIRY"){
 			return $date;
 		}
@@ -12,8 +12,116 @@
 			}
 		}
 		else{
-			echo $date->format('F j, Y');
+			return $date->format('F j, Y');
 		}
+	};
+
+	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null) use ($applicant, $checkDate2) {
+		$name   = !$name ? $docu : $name;
+
+		if(in_array($type, ['id', 'lc', 'med_cert'])){
+
+			// CHECK IF WATCHKEEPING AND HAS RANK AND IS DECK OR ENGINE RATING
+			if($type == "lc" && ($docu == "COC" || $docu == "COE") && $applicant->rank_id > 0 && $regulation){
+
+				$tempDocu = $docu;
+				$docu = false;
+
+				if($applicant->rank_id >= 9 && $applicant->rank_id <= 21){
+					foreach($applicant->document_lc as $document){
+						$regulation = json_decode($document->regulation);
+						
+						if($applicant->rank_id >= 9 && $applicant->rank_id <= 14){
+							$tempName = "COC";
+							$temp = $tempDocu == $tempName ? 'II/4' : 'II/5';
+						}
+						elseif($applicant->rank_id >= 15 && $applicant->rank_id <= 21){
+							$tempName = "COE";
+							$temp = $tempDocu == $tempName ? 'III/4' : 'III/5';
+						}
+
+					    if($document->type == $tempName && in_array($temp, $regulation)){
+					        $docu = $document;
+					        break; 
+					    }
+					}
+
+					$name .= " ($temp)";
+				}
+			}
+			else{
+
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+
+				if(!$docu && $temp == "RADAR"){
+					$name = 'RADAR TRAINING COURSE';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+					if(!$docu){
+						$name = 'RADAR SIMULATOR COURSE';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+
+					if(!$docu){
+						$name = 'RADAR OPERATOR PLOTTING AID';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+				}
+			}
+
+		}
+		elseif($type == 'flag'){
+
+			$temp = $docu;
+			$docu = false;
+
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Panama" && $document->type == $temp){
+			        $docu = $document;
+			    }
+			}
+		}
+
+		$noNum  = $type == 'lc' ? 'no' : 'number';
+
+		$number = $docu ? $docu->$noNum : '-----';
+		$issue  = $docu ? $checkDate2($docu->issue_date, 'I') : '-----';
+		$expiry = $docu ? $checkDate2($docu->expiry_date, 'E') : '-----';
+
+		// $issuer = $issuer != null ? $issuer : $docu ? $docu->issuer : 'NOT APPLICABLE';
+		if($issuer != ""){
+			$issuer = $issuer;
+		}
+		else{
+			$issuer = $type == "med_cert" ? 'clinic' : 'issuer';
+			$issuer = $docu ? $docu->$issuer : 'NOT APPLICABLE';
+		}
+
+		echo "
+			<tr>
+				<td colspan='5'>
+					- $name
+				</td>
+
+				<td colspan='2'>$number</td>
+				<td colspan='2'>$issue</td>
+				<td colspan='2'>$expiry</td>
+				<td colspan='3'>$issuer</td>
+			</tr>
+		";
+	};
+
+	function addS($name){
+		echo "
+			<tr>
+				<td colspan='5'>$name</td>
+				<td colspan='2'></td>
+				<td colspan='2'></td>
+				<td colspan='2'></td>
+				<td colspan='3'></td>
+			</tr>
+		";
 	}
 @endphp
 
@@ -103,6 +211,11 @@
 
 		<!-- 4th Row -->
 		<tr>
+			<td colspan="14"></td>
+		</tr>
+
+		<!-- 5th Row -->
+		<tr>
 			<td colspan="5">
 				DOCUMENTS
 			</td>
@@ -122,701 +235,68 @@
 			</td>
 		</tr>
 
-		<!-- 5th Row -->
-		<tr>
-			<td colspan="5">
-				NATIONAL SEAMAN BOOK
-			</td>
-
-			@php
-				$docu = isset($applicant->document_id->{"SEAMAN'S BOOK"}) ? $applicant->document_id->{"SEAMAN'S BOOK"} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				NATIONAL LICENSE
-			</td>
-
-			@php 
-				$name = 'COC';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				FLAG STATE SEAMAN BOOK (I.D BOOK)
-			</td>
-
-			@php
-				$docu = false;
-				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "BOOKLET"){
-				        $docu = $document;
-				    }
-				}
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				FLAG STATE S.Q. FOR TANKERS
-			</td>
-
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="3"></td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				FLAG STATE LICENSE
-			</td>
-
-			@php
-				$docu = false;
-				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "LICENSE"){
-				        $docu = $document;
-				    }
-				}
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">
-				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
-			</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				FLAG STATE SSO LICENSE
-			</td>
-
-			@php
-				$docu = false;
-				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "SSO"){
-				        $docu = $document;
-				    }
-				}
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">
-				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
-			</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				FLAG STATE ENDORSEMENT COOK COURSE
-			</td>
-
-			@php
-				$docu = false;
-				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "SHIP'S COOK ENDORSEMENT"){
-				        $docu = $document;
-				    }
-				}
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">
-				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
-			</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				MEDICAL CERTIFICATE
-			</td>
-
-			@php
-				$name = 'MEDICAL CERTIFICATE';
-				$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">{{ $docu ? $docu->clinic : "NOT APPLICABLE"}}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				PASSPORT
-			</td>
-
-			@php 
-				$name = 'PASSPORT';
-				$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				NATIONAL STCW-WATCH KEEPING
-			</td>
-
-			@php
-			// FIX. IF DECK RATING. II/4. ELSE IF ENGINE RATING. III/
-			// OK NA
-				$docu = false;
-				foreach($applicant->document_lc as $document){
-					$regulation = json_decode($document->regulation);
-					$size = sizeof($regulation);
-					// $haystack = ["II/4", "III/4"];
-					$haystack = [];
-					
-					if($applicant->rank_id >= 9 && $applicant->rank_id <= 14){
-						array_push($haystack, "II/4");
-					}
-					elseif($applicant->rank_id >= 15 && $applicant->rank_id <= 21){
-						array_push($haystack, "III/4");
-					}
-
-				    if($document->type == "COC" && $size == 1 && in_array($regulation[0], $haystack)){
-				        $docu = $document;
-				    }
-				}
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">
-				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
-			</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				NATIONAL LICENSE - COC
-			</td>
-
-			@php 
-				$name = 'COC';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				NATIONAL LICENSE - COE
-			</td>
-
-			@php 
-				$name = 'COE';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				NATIONAL GMDSS-GOC
-			</td>
-
-			@php 
-				$name = 'GMDSS/GOC';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				FLAG STATE GMDSS-GOC
-			</td>
-
-			@php
-				$docu = false;
-				foreach($applicant->document_flag as $document){
-				    if(in_array($document->country, ["Panama", "Marshall Islands"]) && $document->type == "GMDSS/GOC"){
-				        $docu = $document;
-				    }
-				}
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				RADAR TRAINING COURSE
-			</td>
-
-			@php 
-				$name = 'RADAR TRAINING COURSE';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-
-				if(!$docu){
-					$name = 'RADAR SIMULATOR COURSE';
-					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-				}
-
-				if(!$docu){
-					$name = 'RADAR OPERATOR PLOTTING AID';
-					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-				}
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				ARPA TRAINING COURSE
-			</td>
-
-			@php 
-				$name = 'ARPA TRAINING COURSE';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				SAFETY COURSE, BASIC
-			</td>
-
-			@php 
-				$name = 'BASIC TRAINING - BT';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				SAFETY COURSE, SURVIVAL CRAFT
-			</td>
-
-			@php 
-				$name = 'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				SAFETY COURSE, FIRE FIGHTING
-			</td>
-
-			@php 
-				$name = 'ADVANCE FIRE FIGHTING - AFF';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				SAFETY COURSE, FIRST AID
-			</td>
-
-			@php 
-				$name = 'MEDICAL FIRST AID - MEFA';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				SAFETY COURSE, RESCUE BOAT
-			</td>
-
-			@php 
-				$name = 'FAST RESCUE BOAT - FRB';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				TANKER COURSE, FAMILIARIZATION
-			</td>
-
-			@php 
-				$name = 'TANKER COURSE, FAMILIARIZATION';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="3" rowspan="3">
-				TANKER COURSE, ADVANCED
-			</td>
-
-			@php 
-				$name = 'TANKER COURSE, ADVANCED - OIL';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">OIL</td>
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			@php 
-				$name = 'TANKER COURSE, ADVANCED - CHEMICAL';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">CHEMICAL</td>
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			@php 
-				$name = 'TANKER COURSE, ADVANCED - LPG';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">LPG</td>
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				VACCINATION - Y. FEVER
-			</td>
-
-			@php 
-				$name = 'YELLOW FEVER';
-				$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->clinic : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				DRUG AND ALCOHOL TEST
-			</td>
-
-			@php 
-				$name = 'DRUG AND ALCOHOL TEST';
-				$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				U.S.A VISA
-			</td>
-
-			@php 
-				$name = 'US-VISA';
-				$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->number : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				DANGEROUS FLUID CARGO COURSE
-			</td>
-
-			@php 
-				$name = 'DANGEROUS FLUID CARGO COURSE';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				SAFETY OFFICER'S TRAINING COURSE
-			</td>
-
-			@php 
-				$name = "SAFETY OFFICER'S TRAINING COURSE";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				MEDICAL CARE COURSE
-			</td>
-
-			@php 
-				$name = "MEDICAL CARE - MECA";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				SHIP HANDLING SIMULATION
-			</td>
-
-			@php 
-				$name = "SHIP HANDLING SIMULATION";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				POLLUTION PREVENTION COURSE
-			</td>
-
-			@php 
-				$name = "CONSOLIDATED MARPOL";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				ECDIS
-			</td>
-
-			@php 
-				$name = "ECDIS";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				BRIDGE TEAM/RESOURCE MANAGEMENT
-			</td>
-
-			@php 
-				$name = "SSBT WITH BRM";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				ENGINE SIMULATOR/RESOURCE MANAGEMENT
-			</td>
-
-			@php
-				$name = "ERS WITH ERM";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-
-				if(!$docu){
-					$name = "ERS";
-					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-				}
-
-				if(!$docu){
-					$name = "ERM";
-					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-				}
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				RISK ASSESSMENT/INCIDENT INVESTIGATION COURSE
-			</td>
-
-			@php 
-				$name = "RISK ASSESMENT/INCIDENT INVESTIGATION COURSE";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				ISM COURSE
-			</td>
-
-			@php 
-				$name = "IN HOUSE TRAINING CERT WITH ISM";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="3">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="5">
-				ISPS / SSO COURSE / SDSD
-			</td>
-
-			@php
-				$name = "SHIP SECURITY OFFICER - SSO";
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-
-				if(!$docu){
-					$name = "SHIP SECURITY AWARENESS TRAINING AND SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD";
-					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-				}
-			@endphp
-
-			<td colspan="2">
-				{{ $docu ? $docu->no : "-----"}}
-			</td>
-			<td colspan="2">
-				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----"}}
-			</td>
-			<td colspan="2">
-				{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----"}}
-			</td>
-			<td colspan="3">
-				{{ $docu ? $docu->issuer : "NOT APPLICABLE"}}
-			</td>
-		</tr>
-
+		{{-- DOCUMENTS --}}
+		{{ addS('IDENTIFICATION') }}
+
+		{{ $getDocument('PASSPORT', 	'id', 		'DFA'													)}}
+		{{ $getDocument("SEAMAN'S BOOK",'id', 		'MARINA', 		'NATIONAL SEAMAN BOOK'					)}}
+		{{ $getDocument("US-VISA", 		'id', 		'US EMBASSY', 	'U.S.A. VISA'							)}}
+
+		{{ addS('NATIONAL LICENSES') }}
+
+		{{ $getDocument('COC', 			'lc', 		'MARINA', 		'NATIONAL LICENSE - COC'				)}}
+		{{ $getDocument('COE', 			'lc', 		'MARINA', 		'NATIONAL LICENSE - COE'				)}}
+		{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'NATIONAL GMDSS-GOC'					)}}
+		{{ $getDocument('COC', 			'lc',		'MARINA', 		'NATIONAL LICENSE - RATINGS', 		true)}}
+		{{ $getDocument('COE', 			'lc', 		'MARINA', 		'NATIONAL LICENSE - RATINGS', 		true)}}
+		{{ $getDocument('NCIII', 		'lc', 		'TESDA', 		'NATIONAL LICENSE - CCK (NCIII)', 	true)}}
+		{{ $getDocument('NCI', 			'lc',	 	'TESDA', 		'NATIONAL LICENSE - MSM (NCI)', 	true)}}
+
+		{{ addS('FLAG STATE CERTIFICATES') }}
+
+		{{-- ($docu, $type, $issuer = null, $name = null, $regulation = null) --}}
+
+		{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'FLAG STATE LICENSE'					)}}
+		{{ $getDocument('GMDSS/GOC', 	'flag', 	'PANAMA', 		'FLAG STATE GMDSS-GOC'					)}}
+		{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 		'FLAG STATE SEAMAN BOOK (I.D. BOOK)'	)}}
+		{{ $getDocument('SSO', 			'flag', 	'PANAMA', 		'FLAG STATE SSO LICENSE'				)}}
+		{{ $getDocument("SHIP'S COOK ENDORSEMENT", 'flag', 'PANAMA', 'FLAG STATE ENDORSEMENT COOK COURSE')}}
+
+		{{ addS('TRAINING CERTIFICATES') }}
+		
+		{{ $getDocument('BASIC TRAINING - BT', 'lc', 'MARINA', 'BASIC TRAINING (BT)')}}
+		{{ $getDocument('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'lc', 'MARINA', 'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT (PSCRB)')}}
+		{{ $getDocument('ADVANCE FIRE FIGHTING - AFF', 'lc', 'MARINA', 'ADVANCE FIRE FIGHTING (AFF)')}}
+		{{ $getDocument('MEDICAL FIRST AID - MEFA', 'lc', 'MARINA', 'MEDICAL FIRST AID (MEFA)')}}
+		{{ $getDocument('MEDICAL CARE (MECA)', 'lc', 'MARINA', 'MEDICAL CARE (MECA)')}}
+		{{ $getDocument('SHIP SECURITY OFFICER - SSO', 'lc', 'MARINA', 'SHIP SECURITY OFFICER (SSO)')}}
+		{{ $getDocument("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'MARINA', 'SHIP SECURITY AWARENESS w/ SDSD')}}
+		{{ $getDocument('FAST RESCUE BOAT - FRB', 'lc', 'MARINA', 'FAST RESCUE BOAT (FRB)')}}
+
+		{{ $getDocument('ECDIS', 'lc', '', 'ECDIS GENERIC')}}
+		{{ $getDocument('ECDIS SPECIFIC', 'lc', '', 'ECDIS SPECIFIC')}}
+		{{ $getDocument('SSBT WITH BRM', 'lc', '', 'BRIDGE TEAM/RESOURCE MANAGEMENT')}}
+		{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'SHIP HANDLING SIMULATION')}}
+		{{ $getDocument('ERS WITH ERM', 'lc', '', 'ENGINE ROOM SIMULATOR w/ ENGINE')}}
+		{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA TRAINING COURSE')}}
+		{{ $getDocument('RADAR', 'lc', '', 'RADAR TRAINING COURSE')}}
+		{{ $getDocument('CONSOLIDATED MARPOL', 'lc', '', 'MARPOL')}}
+		{{ $getDocument('ISM/ISPS COURSE', 'lc', '', 'IN HOUSE TRAINING CERT WITH ISM')}}
+		{{ $getDocument('ANTI PIRACY', 'lc', '', 'ANTI-PIRACY AWARENESS TRAINING')}}
+		{{ $getDocument('WELDING COURSE', 'lc', '', 'WELDING CERTIFICATE')}}
+		{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc')}}
+		{{ $getDocument('DANGEROUS FLUID CARGO COURSE', 'lc')}}
+		{{ $getDocument('CARGO HANDLING', 'lc', '')}}
+		{{ $getDocument('CARGO HANDLING', 'lc', '')}}
+		{{ $getDocument('RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE', 'lc', '', 'RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE')}}
+
+		{{ addS('MEDICAL CERTIFICATES') }}
+
+		{{ $getDocument('MEDICAL CERTIFICATE', 'med_cert', '', 'MEDICAL EXAMINATION')}}
+		{{ $getDocument('YELLOW FEVER', 'med_cert', '', 'VACCINATION - YELLOW FEVER')}}
+		{{ $getDocument('DRUG AND ALCOHOL TEST', 'med_cert')}}
+
+		
 		<tr>
 			<td colspan="5" rowspan="3">
 				AUTHENTICATION FOR LICENSES

@@ -143,6 +143,7 @@
 					<option value="COE">&nbsp;&nbsp;&nbsp;&nbsp;COE</option>
 					<option value="GMDSS-GOC">&nbsp;&nbsp;&nbsp;&nbsp;GMDSS-GOC</option>
 					<option value="NCI">&nbsp;&nbsp;&nbsp;&nbsp;NCI</option>
+					<option value="NCII">&nbsp;&nbsp;&nbsp;&nbsp;NCII</option>
 					<option value="NCIII">&nbsp;&nbsp;&nbsp;&nbsp;NCIII</option>
 				<optgroup label="COP"></optgroup>
 
@@ -199,7 +200,7 @@
 					<option value="ENGLISH TEST">&nbsp;&nbsp;&nbsp;&nbsp;ENGLISH TEST</option>
 					<option value="DANGEROUS FLUID CARGO COURSE">&nbsp;&nbsp;&nbsp;&nbsp;DANGEROUS FLUID CARGO COURSE</option>
 					<option value="SHIP HANDLING SIMULATION">&nbsp;&nbsp;&nbsp;&nbsp;SHIP HANDLING SIMULATION</option>
-					<option value="RISK ASSESMENT/INCIDENT INVESTIGATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RISK ASSESMENT/INCIDENT INVESTIGATION COURSE</option>
+					<option value="RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE</option>
 					<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
 					<option value="ADVANCE SHIPBOARD OPERATION AND MGT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE SHIPBOARD OPERATION AND MGT</option>
 					<option value="SATELLITE COMMUNICATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SATELLITE COMMUNICATION COURSE</option>

@@ -31,19 +31,37 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
     public function registerEvents(): array
     {
         $borderStyle = [
-            'borders' => [
-                'top' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'bottom' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'left' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'right' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
             ],
         ];
 
@@ -196,7 +214,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 }
 
                 // BORDERS
-                $cells = array_merge($rows, [
+                $cells[0] = array_merge($rows, [
                     'A1:N1',
                     'A3:B3', 'C3:E3', 'F3:G3', 'H3:I3', 'J3:K3', 'L3:N3',
                     'A4:B4', 'C4:E4', 'F4:G4', 'H4:I4', 'J4:K4', 'L4:N4',
@@ -204,8 +222,14 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                     'A6:E6', 'F6:G6', 'H6:I6', 'J6:K6', 'L6:N6',
                 ]);
 
-                foreach($cells as $cell){
-                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
+                $cells[1] = [
+                    'A3:N5', 'A7:N7'
+                ];
+
+                foreach($cells as $key => $cell){
+                    foreach($cell as $mitochondria){
+                        $event->sheet->getDelegate()->getStyle($mitochondria)->applyFromArray($borderStyle[$key]);
+                    }
                 }
 
                 // COLUMN RESIZE
