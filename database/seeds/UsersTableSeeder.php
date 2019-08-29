@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Models\{Applicant, EducationalBackground, FamilyData, Principal, DocumentId};
-use App\Models\{Ssap};
+use App\Models\{Ssap, ProcessedApplicant};
 
 class UsersTableSeeder extends Seeder
 {
@@ -190,5 +190,10 @@ class UsersTableSeeder extends Seeder
             'issue_date' => now()->startOfMonth(),
             'expiry_date' => now()->endOfMonth(),
         ]);
+
+        ProcessedApplicant::create([
+            'applicant_id' => 1,
+            'status' => 'Vacation'
+        ])
     }
 }
