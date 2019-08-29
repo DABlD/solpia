@@ -251,6 +251,10 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
                 }
 
+                // FOR THE CHECK
+                $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('N46')->getFont()->setName('Marlett');
+
                 // COLUMN RESIZE
 
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);

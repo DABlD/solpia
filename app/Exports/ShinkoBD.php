@@ -136,6 +136,12 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 	array_push($fdRows, 'I' . $row . ':K' . $row);
                 	array_push($fdRows, 'L' . $row . ':M' . $row);
                 	array_push($fdRows, 'N' . $row . ':O' . $row);
+
+                    $event->sheet->getDelegate()->getStyle("A$row:O$row")->applyFromArray([
+                        'alignment' => [
+                            'shrinkToFit' => true
+                        ],
+                    ]);
                 }
 
                 // SS DATA ROWS
@@ -200,7 +206,8 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 $h[3] = [
                 	'A22:O22', $x('A', 2, 'O', 2), $x('I', 11, 'N', 11, true),
                     'A' . ($raf + 4) . ':' . 'A' . ($ras + 1),
-                    'E' . ($raf + 4) . ':' . 'O' . ($ras + 1)
+                    'E' . ($raf + 4) . ':' . 'O' . ($ras + 1),
+                    $x('K', 2, 'N', 2, true),
                 ];
 
                 // HL
@@ -281,6 +288,10 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
                 }
 
+                // FOR THE CHECK
+                $event->sheet->getDelegate()->getStyle($x('L', 2, 'L', 2, true))->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle($x('N', 2, 'N', 2, true))->getFont()->setName('Marlett');
+
                 // COLUMN RESIZE
 
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(false);
@@ -290,7 +301,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(9.7);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(6.8);
                 $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(5.5);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(10);

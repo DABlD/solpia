@@ -115,7 +115,7 @@
 	function addS($name){
 		echo "
 			<tr>
-				<td colspan='5'>$name</td>
+				<td colspan='5'>$name:</td>
 				<td colspan='2'></td>
 				<td colspan='2'></td>
 				<td colspan='2'></td>
@@ -286,7 +286,6 @@
 		{{ $getDocument('WELDING COURSE', 'lc', '', 'WELDING CERTIFICATE')}}
 		{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc')}}
 		{{ $getDocument('DANGEROUS FLUID CARGO COURSE', 'lc')}}
-		{{ $getDocument('CARGO HANDLING', 'lc', '')}}
 		{{ $getDocument('CARGO HANDLING', 'lc', '')}}
 		{{ $getDocument('RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE', 'lc', '', 'RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE')}}
 

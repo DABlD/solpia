@@ -324,7 +324,7 @@
 			<td colspan="3"></td>
 			<td colspan="5">Judgement</td>
 			<td>FIT</td>
-			<td></td>
+			<td>a</td>
 			<td>NOT FIT</td>
 			<td></td>
 		</tr>

@@ -106,6 +106,17 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ]
             ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+                ]
+            ],
+            [
+                'alignment' => [
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+                ]
+            ],
         ];
 
         return [
@@ -126,7 +137,6 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(12);
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(28);
-                $event->sheet->getDelegate()->getStyle('A43')->getFont()->setSize(10);
 
                 // CHEAT
 
@@ -142,29 +152,19 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 ];
 
                 // FUNCTIONS
-                for($i = 6; $i < 46; $i++){
-                    if($i < 29 || $i > 31){
-                        array_push($rows, "A$i:E$i");
-                    }
-                    else{
-                        array_push($rows, "D$i:E$i");
-                    }
+                for($i = 6; $i < 57; $i++){
+                    array_push($rows, "A$i:E$i");
                     array_push($rows, "F$i:G$i");
                     array_push($rows, "H$i:I$i");
                     array_push($rows, "J$i:K$i");
                     array_push($rows, "L$i:N$i");
                 }
 
-                array_push($rows, "A29:C31");
-                array_push($rows, "A46:E48");
-                array_push($rows, "F46:I48");
-                array_push($rows, "J46:N48");
-
                 // HEADINGS
 
                 // HC B
                 $h[0] = [
-                	'A1:N1'
+                	'A1:N1', 'A7:N7'
                 ];
 
                 // VT
@@ -179,16 +179,26 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // HC
                 $h[3] = [
-                	'A6:N6'
+                	'F8:L53'
                 ];
 
                 // HL
                 $h[4] = [
-                    'F7:L44'
+                    
+                ];
+
+                // HC VC
+                $h[5] = [
+                    'A7:N7'
+                ];
+
+                // VC
+                $h[6] = [
+                    'A54:J54'
                 ];
 
                 $h['wrap'] = [
-                	'A42', 'A46', 'F46', 'J46'
+                	'N7', 'A54', 'F54', 'J54'
                 ];
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -203,10 +213,16 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
             		}
                 }
 
+                $event->sheet->getDelegate()->getStyle("A8:N53")->applyFromArray([
+                    'alignment' => [
+                        'shrinkToFit' => true
+                    ],
+                ]);
+
                 // FILLS
                 $fills = [
-                    'A1', 'A3:A6', 'F3:F6', 'H6', 'J3:J6', 'L6',
-                    'A7:E46'
+                    'A1', 'A3:A5', 'F3:F6', 'H6', 'J3:J6', 'L6',
+                    'A7:A56', 'A7:N7'
                 ];
 
                 foreach($fills as $fill){
@@ -223,7 +239,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 ]);
 
                 $cells[1] = [
-                    'A3:N5', 'A7:N7'
+                    'A3:N5', 'A7:N7', 'A7:N56'
                 ];
 
                 foreach($cells as $key => $cell){
@@ -231,6 +247,20 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                         $event->sheet->getDelegate()->getStyle($mitochondria)->applyFromArray($borderStyle[$key]);
                     }
                 }
+
+                // SET SEPARATOR COLOR
+                foreach(['A8', 'A12', 'A20', 'A26', 'A50'] as $cell){
+                    $event->sheet->getDelegate()->getStyle($cell)->getFont()->getColor()->setRGB('FF0000');
+                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray([
+                        'font' => [
+                            'bold' => true
+                        ],
+                    ]);
+
+                }
+
+                // COLOR FOR ISSUER
+                $event->sheet->getDelegate()->getStyle('L8:L53')->getFont()->getColor()->setRGB('002060');
 
                 // COLUMN RESIZE
 
@@ -240,6 +270,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11);
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension('7')->setRowHeight(20);
             },
         ];
     }
