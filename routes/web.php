@@ -81,7 +81,7 @@ Route::group([
 		Route::get($name, ucfirst($name) . 'Controller@index')
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-file-text')
-			->defaults('name', 'Applications')
+			->defaults('name', 'Crew Database')
 			->defaults('roles', array('Admin', 'Encoder', 'Cadet'))
 			->name($name . '.index')
 			->defaults('href', $name);

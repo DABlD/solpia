@@ -1186,7 +1186,9 @@
 		$('#rank').change(e => {
 			swal.showLoading();
 			setTimeout(() => {
-				asdasd(e);
+				@if(!isset($edit))
+					asdasd(e);
+				@endif
 			}, 100);
 		});
 
@@ -1227,7 +1229,6 @@
             			
             			// CHECK IF DOCUMENT IS IN OPTION, IF NOT ADD OPTION AND PRESELECT IT
         				checkIfExisting($(`[name="docu-lctype${count}"]`), docu);
-        				checkIfExisting($(`[name="docu-issuer${count}"]`), row.issuer);
         				// if($(`[name="docu-lctype${count}"]`).find(`option[value="${docu}"]`).length){
         				// 	$(`[name="docu-lctype${count}"]`).val(docu).trigger('change');
         				// }
@@ -1243,6 +1244,7 @@
         				// 	$(`[name="docu-issuer${count}"]`).append(option).trigger('change');
         				// }
 
+        				checkIfExisting($(`[name="docu-issuer${count}"]`), row.issuer);
         				row.regulation[index].forEach(tempOption => {
         					if(!$(`[name="docu-regulation${count}"]`).find(`option[value="${row.regulation}"]`).length){
         						let option = new Option(tempOption, tempOption, true, true);

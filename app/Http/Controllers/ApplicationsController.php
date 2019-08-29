@@ -29,7 +29,7 @@ class ApplicationsController extends Controller
         $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
 
         return $this->_view('index', [
-            'title' => 'Applications',
+            'title' => 'Crew Database',
             'principals' => $principals,
             'categories' => $ranks->groupBy('category'),
             'vessels' => $vessels
@@ -54,7 +54,7 @@ class ApplicationsController extends Controller
         }
 
     	return $this->_view('create', [
-            'title'         => 'Add Application',
+            'title'         => 'Add Crew',
             'categories'    => $ranks->groupBy('category'),
             'issuers'       => collect($issuers)->unique()->toArray(),
             'regulations'   => collect($regulations)->unique()->toArray()
@@ -90,7 +90,7 @@ class ApplicationsController extends Controller
 
         // IF HAS 'EDIT' VALUE, WILL LOAD SCRIPT THAT WILL POPULATE THE FIELD WITH APPLICANT DETAILS FOR EDITING
         return $this->_view('create', [
-            'title'         => 'Edit Application',
+            'title'         => 'Edit Crew Data',
             'categories'    => $ranks->groupBy('category'),
             'issuers'       => collect($issuers)->unique()->toArray(),
             'regulations'   => collect($regulations)->unique()->toArray(),
