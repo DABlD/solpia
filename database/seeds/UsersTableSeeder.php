@@ -194,6 +194,6 @@ class UsersTableSeeder extends Seeder
         ProcessedApplicant::create([
             'applicant_id' => 1,
             'status' => 'Vacation'
-        ])
+        ]);
     }
 }
