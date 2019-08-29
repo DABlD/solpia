@@ -281,7 +281,7 @@
 		{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA TRAINING COURSE')}}
 		{{ $getDocument('RADAR', 'lc', '', 'RADAR TRAINING COURSE')}}
 		{{ $getDocument('CONSOLIDATED MARPOL', 'lc', '', 'MARPOL')}}
-		{{ $getDocument('ISM/ISPS COURSE', 'lc', '', 'IN HOUSE TRAINING CERT WITH ISM')}}
+		{{ $getDocument('IN HOUSE TRAINING CERT WITH ISM', 'lc', '', 'ISM/ISPS COURSE')}}
 		{{ $getDocument('ANTI PIRACY', 'lc', '', 'ANTI-PIRACY AWARENESS TRAINING')}}
 		{{ $getDocument('WELDING COURSE', 'lc', '', 'WELDING CERTIFICATE')}}
 		{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc')}}
