@@ -1,6 +1,6 @@
 @php
 	function checkDate2($date, $type){
-		if($date == "NO EXPIRY"){
+		if($date == "UNLIMITED"){
 			return 'UNLIMITED';
 		}
 		elseif($date == "" || $date == null){

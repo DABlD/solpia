@@ -151,7 +151,7 @@ class ApplicationsController extends Controller
 
                 if(isset($data->expiry_date)){
                     if($data->expiry_date == "" || $data->expiry_date == null){
-                        $data->expiry_date == "NO EXPIRY";
+                        $data->expiry_date == "UNLIMITED";
                     }
                 }
 
@@ -246,7 +246,7 @@ class ApplicationsController extends Controller
 
                 if(isset($data->expiry_date)){
                     if($data->expiry_date == "" || $data->expiry_date == null){
-                        $data->expiry_date == "NO EXPIRY";
+                        $data->expiry_date == "UNLIMITED";
                     }
                 }
 
@@ -384,6 +384,11 @@ class ApplicationsController extends Controller
             $data->year = $data->year == "" ? null : $data->year;
             DocumentMed::create((array)$data);
         }
+
+        ProcessedApplicant::create([
+            'applicant_id' => $applicant->id,
+            'status' => 'Vacation'
+        ]);
 
         if(true){
             $req->session()->flash('success', 'Applicant Successfully Added.');

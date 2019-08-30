@@ -1,6 +1,6 @@
 @php
 	function checkDate2($date, $type){
-		if($date == "NO EXPIRY"){
+		if($date == "UNLIMITED"){
 			return 'UNLIMITED';
 		}
 		elseif($date == "" || $date == null){
@@ -118,7 +118,7 @@
 			<td>Birth Date:</td>
 			<td>{{ $applicant->user->birthday->format('M j, Y') }}</td>
 			<td>Age:</td>
-			<td>{{ $applicant->age }}</td>
+			<td>{{ $applicant->user->birthday->diffInYears(now()) }}</td>
 			<td>Birth Place:</td>
 			<td colspan="2">{{ $applicant->birth_place }}</td>
 			<td>Nationality:</td>

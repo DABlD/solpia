@@ -1,11 +1,11 @@
 @php
 	function checkDate3($date, $type){
-		if($date == "NO EXPIRY"){
+		if($date == "UNLIMITED"){
 			return $date;
 		}
 		elseif($date == "" || $date == null){
 			if($type == "E"){
-				return 'NO EXPIRY';
+				return 'UNLIMITED';
 			}
 			else{
 				return '-----';
