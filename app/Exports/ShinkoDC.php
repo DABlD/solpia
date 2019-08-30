@@ -3,7 +3,10 @@
 namespace App\Exports;
 
 use App\Models\{Applicant};
+
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
+
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithDrawings;
@@ -151,14 +154,22 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                     
                 ];
 
+                $ecdisRows = 0;
+                foreach($this->applicant->document_lc as $key => $docu){
+                    if(Str::startsWith($docu->type, 'ECDIS ') && $key > 0){
+                        $ecdisRows++;
+                    }
+                }
+
                 // FUNCTIONS
-                for($i = 6; $i < 57; $i++){
+                for($i = 6; $i < (57 + $ecdisRows); $i++){
                     array_push($rows, "A$i:E$i");
                     array_push($rows, "F$i:G$i");
                     array_push($rows, "H$i:I$i");
                     array_push($rows, "J$i:K$i");
                     array_push($rows, "L$i:N$i");
                 }
+
 
                 // HEADINGS
 
@@ -169,7 +180,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // VT
                 $h[1] = [
-                	'A29', 'A46', 'F46', 'J46'
+                	'A29', 'A' . (46 + $ecdisRows), 'F' . (46 + $ecdisRows), 'J' . (46 + $ecdisRows)
                 ];
 
                 // HL B
@@ -179,7 +190,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // HC
                 $h[3] = [
-                	'F8:L53'
+                	'F8:L' . (53 + $ecdisRows)
                 ];
 
                 // HL
@@ -194,11 +205,11 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // VC
                 $h[6] = [
-                    'A54:J54'
+                    'A' . (54 + $ecdisRows) . ':J' . (54 + $ecdisRows)
                 ];
 
                 $h['wrap'] = [
-                	'N7', 'A54', 'F54', 'J54'
+                	'N7', 'A' . (54 + $ecdisRows), 'F' . (54 + $ecdisRows), 'J' . (54 + $ecdisRows)
                 ];
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -213,7 +224,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
             		}
                 }
 
-                $event->sheet->getDelegate()->getStyle("A8:N53")->applyFromArray([
+                $event->sheet->getDelegate()->getStyle("A8:N" . (53 + $ecdisRows))->applyFromArray([
                     'alignment' => [
                         'shrinkToFit' => true
                     ],
@@ -222,7 +233,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 // FILLS
                 $fills = [
                     'A1', 'A3:A5', 'F3:F6', 'H6', 'J3:J6', 'L6',
-                    'A7:A56', 'A7:N7'
+                    'A7:A' . (56 + $ecdisRows), 'A7:N7'
                 ];
 
                 foreach($fills as $fill){
@@ -239,7 +250,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 ]);
 
                 $cells[1] = [
-                    'A3:N5', 'A7:N7', 'A7:N56'
+                    'A3:N5', 'A7:N7', 'A7:N' . (56 + $ecdisRows)
                 ];
 
                 foreach($cells as $key => $cell){
@@ -249,7 +260,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 }
 
                 // SET SEPARATOR COLOR
-                foreach(['A8', 'A12', 'A20', 'A26', 'A50'] as $cell){
+                foreach(['A8', 'A12', 'A20', 'A26', 'A' . (50 + $ecdisRows)] as $cell){
                     $event->sheet->getDelegate()->getStyle($cell)->getFont()->getColor()->setRGB('FF0000');
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray([
                         'font' => [
@@ -260,7 +271,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 }
 
                 // COLOR FOR ISSUER
-                $event->sheet->getDelegate()->getStyle('L8:L53')->getFont()->getColor()->setRGB('002060');
+                $event->sheet->getDelegate()->getStyle('L8:L' . (53 + $ecdisRows))->getFont()->getColor()->setRGB('002060');
 
                 // COLUMN RESIZE
 

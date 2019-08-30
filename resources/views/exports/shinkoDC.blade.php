@@ -1,11 +1,11 @@
 @php
 	$checkDate2 = function($date, $type){
-		if($date == "NO EXPIRY"){
+		if($date == "UNLIMITED"){
 			return $date;
 		}
 		elseif($date == "" || $date == null){
 			if($type == "E"){
-				return 'NO EXPIRY';
+				return 'UNLIMITED';
 			}
 			else{
 				return '-----';
@@ -47,6 +47,58 @@
 					}
 
 					$name .= " ($temp)";
+				}
+			}
+			elseif ($docu == 'ECDIS SPECIFIC') {
+				$array = [
+					'ECDIS FURUNO 2107',
+					'ECDIS FURUNO 3200',
+					'ECDIS FURUNO 3300',
+					'ECDIS JRC 701B',
+					'ECDIS JRC 7201',
+					'ECDIS JRC 901B',
+					'ECDIS JRC 9201',
+					'ECDIS MARTEK',
+					'ECDIS MECYS',
+					'ECDIS TRANSAS',
+				];
+
+				$string = "";
+				foreach($array as $ecdis){
+					$docu = isset($applicant->{"document_$type"}->$ecdis) ? $applicant->{"document_$type"}->$ecdis : false;
+
+					$number = $docu ? $docu->no : '-----';
+					$issue  = $docu ? $checkDate2($docu->issue_date, 'I') : '-----';
+					$expiry = $docu ? $checkDate2($docu->expiry_date, 'E') : '-----';
+
+					// $issuer = $issuer != null ? $issuer : $docu ? $docu->issuer : 'NOT APPLICABLE';
+					if($issuer != ""){
+						$issuer = $issuer;
+					}
+					else{
+						$issuer = $docu ? $docu->issuer : 'NOT APPLICABLE';
+					}
+
+					if($docu){
+						$string .= "
+							<tr>
+								<td colspan='5'>
+									- $ecdis
+								</td>
+
+								<td colspan='2'>$number</td>
+								<td colspan='2'>$issue</td>
+								<td colspan='2'>$expiry</td>
+								<td colspan='3'>$issuer</td>
+							</tr>
+						";
+					}
+
+				}
+
+				if($string != ""){
+					echo $string;
+					return;
 				}
 			}
 			else{
@@ -275,6 +327,7 @@
 
 		{{ $getDocument('ECDIS', 'lc', '', 'ECDIS GENERIC')}}
 		{{ $getDocument('ECDIS SPECIFIC', 'lc', '', 'ECDIS SPECIFIC')}}
+
 		{{ $getDocument('SSBT WITH BRM', 'lc', '', 'BRIDGE TEAM/RESOURCE MANAGEMENT')}}
 		{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'SHIP HANDLING SIMULATION')}}
 		{{ $getDocument('ERS WITH ERM', 'lc', '', 'ENGINE ROOM SIMULATOR w/ ENGINE')}}
