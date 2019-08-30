@@ -127,7 +127,7 @@
 
 			//CREATE LC OPTIONS
 			var lc_options = "";
-			var lcOptions = [];
+			var lcOptions = [''];
 
         	lcOptions.forEach(docu => {
 				lc_options += `<option value="${docu}">${docu}</option>`
