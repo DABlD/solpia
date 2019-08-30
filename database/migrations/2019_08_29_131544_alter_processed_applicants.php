@@ -17,6 +17,7 @@ class AlterProcessedApplicants extends Migration
             $table->string('principal_id')->nullable()->change(); 
             $table->string('vessel_id')->nullable()->change(); 
             $table->string('rank_id')->nullable()->change(); 
+            
             $table->text('remarks')->after('status')->nullable();
         });
     }
