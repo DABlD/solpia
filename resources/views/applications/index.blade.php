@@ -16,13 +16,15 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Avatar</th>
-								<th>First Name</th>
-								<th>Middle Name</th>
+								<th>Status</th>
+                                <th>Pic</th>
 								<th>Last Name</th>
+								<th>First Name</th>
 								<th>Age</th>
 								<th>Contact</th>
-								<th>Actions</th>
+                                <th>Last Vessel</th>
+								<th>Remarks</th>
+                                <th>Actions</th>
 							</tr>
 						</thead>
 					</table>
@@ -71,17 +73,19 @@
             },
             columns: [
                 { data: 'id', name: 'id' },
+                { data: 'status', name: 'status' },
                 { data: 'user.avatar', name: 'user.avatar' },
-                { data: 'user.fname', name: 'user.fname' },
-                { data: 'user.mname', name: 'user.mname' },
                 { data: 'user.lname', name: 'user.lname' },
+                { data: 'user.fname', name: 'user.fname' },
                 { data: 'age', name: 'age' },
                 { data: 'user.contact', name: 'user.contact' },
+                { data: 'last_vessel', name: 'last_vessel' },
+                { data: 'remarks', name: 'remarks' },
                 { data: 'actions', name: 'actions' },
             ],
             columnDefs: [
                 {
-                    targets: 1,
+                    targets: 2,
                     className: "w50",
                     render: function(link){
                         return `<img src="${link}" alt="Applicant Photo"/>`;
