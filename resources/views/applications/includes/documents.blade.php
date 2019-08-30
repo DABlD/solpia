@@ -1015,10 +1015,7 @@
         	},
         	// ALL SENIOR OFFICERS
         	{
-        		range: [
-        			[1, 2],
-        			[5, 6]
-        		],
+        		range: [1, 2],
         		issuer: '',
         		documents: [
         			'MLC TRAINING F1',
@@ -1031,10 +1028,34 @@
         		]
         	},
         	{
-        		range: [
-        			[3, 4],
-        			[7, 8]
+        		range: [5, 6],
+        		issuer: '',
+        		documents: [
+        			'MLC TRAINING F1',
+        			'MLC TRAINING F2',
+        			'MLC TRAINING F3',
+        			'MLC TRAINING F4'
         		],
+        		regulation: [
+        			[], [], [], []
+        		]
+        	},
+        	// ALL JUNIOR OFFICER
+        	{
+        		range: [3, 4],
+        		issuer: '',
+        		documents: [
+        			'OLC TRAINING F1',
+        			'OLC TRAINING F2',
+        			'OLC TRAINING F3',
+        			'OLC TRAINING F4'
+        		],
+        		regulation: [
+        			[], [], [], []
+        		]
+        	},
+        	{
+        		range: [7, 8],
         		issuer: '',
         		documents: [
         			'OLC TRAINING F1',
