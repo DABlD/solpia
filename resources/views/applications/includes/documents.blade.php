@@ -127,11 +127,7 @@
 
 			//CREATE LC OPTIONS
 			var lc_options = "";
-			var lcOptions = 
-			[
-
-				'', 'TANKER COURSE, FAMILIARIZATION', 'TANKER COURSE, ADVANCED - OIL', 'TANKER COURSE, ADVANCED - CHEMICAL', 'TANKER COURSE, ADVANCED - LPG', 'POEA CONTRACT', 'MLC/CBA CONTRACT'
-			];
+			var lcOptions = [];
 
         	lcOptions.forEach(docu => {
 				lc_options += `<option value="${docu}">${docu}</option>`
@@ -154,17 +150,24 @@
 					<option value="FAST RESCUE BOAT - FRB">&nbsp;&nbsp;&nbsp;&nbsp;FAST RESCUE BOAT - FRB</option>
 					<option value="MEDICAL CARE - MECA">&nbsp;&nbsp;&nbsp;&nbsp;MEDICAL CARE - MECA</option>
 					<option value="SHIP SECURITY OFFICER - SSO">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SECURITY OFFICER - SSO</option>
-					<option value="SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD">&nbsp;&nbsp;&nbsp;&nbsp;COC</option>
+					<option value="SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD</option>
 
 				<optgroup label="OTHER CERTIFICATES"></optgroup>
-					<option value="CONSOLIDATED MARPOL">&nbsp;&nbsp;&nbsp;&nbsp;CONSOLIDATED MARPOL</option>
 					<option value="ARPA TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;ARPA TRAINING COURSE</option>
-					<option value="RADAR SIMULATOR COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR SIMULATOR COURSE</option>
-					<option value="RADAR TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR TRAINING COURSE</option>
-					<option value="RADAR OPERATOR PLOTTING AID">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OPERATOR PLOTTING AID</option>
-					<option value="SSBT WITH BRM">&nbsp;&nbsp;&nbsp;&nbsp;SSBT WITH BRM</option>
+					<option value="CONSOLIDATED MARPOL">&nbsp;&nbsp;&nbsp;&nbsp;CONSOLIDATED MARPOL</option>
+					<option value="ECDIS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS GENERIC</option>
+					<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;ECDIS SPECIFIC"></optgroup>
+						<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2107</option>
+						<option value="ECDIS FURUNO 3200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3200</option>
+						<option value="ECDIS FURUNO 3300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3300</option>
+						<option value="ECDIS JRC 701B">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 701B</option>
+						<option value="ECDIS JRC 7201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 7201</option>
+						<option value="ECDIS JRC 901B">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 901B</option>
+						<option value="ECDIS JRC 9201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 9201</option>
+						<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
+						<option value="ECDIS MECYS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MECYS</option>
+						<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
 					<option value="ERS WITH ERM">&nbsp;&nbsp;&nbsp;&nbsp;ERS WITH ERM</option>
-					<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
 					<option value="MLC TRAINING F1">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F1</option>
 					<option value="MLC TRAINING F2">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F2</option>
 					<option value="MLC TRAINING F3">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F3</option>
@@ -172,44 +175,46 @@
 					<option value="OLC TRAINING F1">&nbsp;&nbsp;&nbsp;&nbsp;OLC TRAINING F1</option>
 					<option value="OLC TRAINING F2">&nbsp;&nbsp;&nbsp;&nbsp;OLC TRAINING F2</option>
 					<option value="OLC TRAINING F3">&nbsp;&nbsp;&nbsp;&nbsp;OLC TRAINING F3</option>
-					<option value="ECDIS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS</option>
-					<optgroup label="ECDIS SPECIFIC"></optgroup>
-						<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2107</option>
-						<option value="ECDIS FURUNO 3200">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3200</option>
-						<option value="ECDIS FURUNO 3300">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3300</option>
-						<option value="ECDIS JRC 701B">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 701B</option>
-						<option value="ECDIS JRC 7201">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 7201</option>
-						<option value="ECDIS JRC 901B">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 901B</option>
-						<option value="ECDIS JRC 9201">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 9201</option>
-						<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
-						<option value="ECDIS MECYS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MECYS</option>
-						<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
+					<option value="RADAR SIMULATOR COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR SIMULATOR COURSE</option>
+					<option value="RADAR TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR TRAINING COURSE</option>
+					<option value="RADAR OPERATOR PLOTTING AID">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OPERATOR PLOTTING AID</option>
+					<option value="SSBT WITH BRM">&nbsp;&nbsp;&nbsp;&nbsp;SSBT WITH BRM</option>
+					<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
 
 				<optgroup label="SPECIAL CERTIFICATES"></optgroup>
-					<option value="WELDING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;WELDING COURSE</option>
-					<option value="CARGO HANDLING">&nbsp;&nbsp;&nbsp;&nbsp;CARGO HANDLING</option>
-					<option value="COLLISION AVOIDANCE">&nbsp;&nbsp;&nbsp;&nbsp;COLLISION AVOIDANCE</option>
-					<option value="AUXILIARY MACHINERY SYSTEM">&nbsp;&nbsp;&nbsp;&nbsp;AUXILIARY MACHINERY SYSTEM</option>
-					<option value="CONTROL ENGINEERING">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL ENGINEERING</option>
-					<option value="HYDRAULICS/PNEUMATICS">&nbsp;&nbsp;&nbsp;&nbsp;HYDRAULICS/PNEUMATICS</option>
-					<option value="MARINE ELECTRO TECH">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRO TECH</option>
-					<option value="ELECTRONIC EQUIPMENT">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRONIC EQUIPMENT</option>
-					<option value="MARINE ELECTRICAL">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRICAL</option>
-					<option value="MARINE REFRIGIRATION/AIRCONDITIONING">&nbsp;&nbsp;&nbsp;&nbsp;MARINE REFRIGIRATION/AIRCONDITIONING</option>
-					<option value="STABILITY AND TRIM">&nbsp;&nbsp;&nbsp;&nbsp;STABILITY AND TRIM</option>
-					<option value="ENGLISH TEST">&nbsp;&nbsp;&nbsp;&nbsp;ENGLISH TEST</option>
-					<option value="DANGEROUS FLUID CARGO COURSE">&nbsp;&nbsp;&nbsp;&nbsp;DANGEROUS FLUID CARGO COURSE</option>
-					<option value="SHIP HANDLING SIMULATION">&nbsp;&nbsp;&nbsp;&nbsp;SHIP HANDLING SIMULATION</option>
-					<option value="RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE</option>
 					<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
 					<option value="ADVANCE SHIPBOARD OPERATION AND MGT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE SHIPBOARD OPERATION AND MGT</option>
+					<option value="AUXILIARY MACHINERY SYSTEM">&nbsp;&nbsp;&nbsp;&nbsp;AUXILIARY MACHINERY SYSTEM</option>
+					<option value="CARGO HANDLING">&nbsp;&nbsp;&nbsp;&nbsp;CARGO HANDLING</option>
+					<option value="COLLISION AVOIDANCE">&nbsp;&nbsp;&nbsp;&nbsp;COLLISION AVOIDANCE</option>
+					<option value="CONTROL ENGINEERING">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL ENGINEERING</option>
+					<option value="DANGEROUS FLUID CARGO COURSE">&nbsp;&nbsp;&nbsp;&nbsp;DANGEROUS FLUID CARGO COURSE</option>
+					<option value="ELECTRONIC EQUIPMENT">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRONIC EQUIPMENT</option>
+					<option value="ENGLISH TEST">&nbsp;&nbsp;&nbsp;&nbsp;ENGLISH TEST</option>
+					<option value="HYDRAULICS/PNEUMATICS">&nbsp;&nbsp;&nbsp;&nbsp;HYDRAULICS/PNEUMATICS</option>
+					<option value="MARINE ELECTRICAL">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRICAL</option>
+					<option value="MARINE ELECTRO TECH">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRO TECH</option>
+					<option value="MARINE REFRIGIRATION/AIRCONDITIONING">&nbsp;&nbsp;&nbsp;&nbsp;MARINE REFRIGIRATION/AIRCONDITIONING</option>
+					<option value="RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE</option>
 					<option value="SATELLITE COMMUNICATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SATELLITE COMMUNICATION COURSE</option>
+					<option value="SHIP HANDLING SIMULATION">&nbsp;&nbsp;&nbsp;&nbsp;SHIP HANDLING SIMULATION</option>
+					<option value="STABILITY AND TRIM">&nbsp;&nbsp;&nbsp;&nbsp;STABILITY AND TRIM</option>
+					<option value="WELDING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;WELDING COURSE</option>
+
+				<optgroup label="TANKER CERTIFICATES"></optgroup>
+					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
+					<option value="ADVANCE TRAINING FOR OIL TANKER - ATOT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE TRAINING FOR OIL TANKER - ATOT</option>
+					<option value="ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT</option>
 
 				<optgroup label="IN HOUSE CERTIFICATE/SPECIAL TRAINING"></optgroup>
 					<option value="ANTI PIRACY">&nbsp;&nbsp;&nbsp;&nbsp;ANTI PIRACY</option>
-					<option value="IN HOUSE TRAINING CERT WITH ISM">&nbsp;&nbsp;&nbsp;&nbsp;IN HOUSE TRAINING CERT WITH ISM</option>
 					<option value="GENERAL TRAINING RECORD BOOK">&nbsp;&nbsp;&nbsp;&nbsp;GENERAL TRAINING RECORD BOOK</option>
+					<option value="IN HOUSE TRAINING CERT WITH ISM">&nbsp;&nbsp;&nbsp;&nbsp;IN HOUSE TRAINING CERT WITH ISM</option>
 					<option value="PDOS">&nbsp;&nbsp;&nbsp;&nbsp;PDOS</option>
+
+				<optgroup label="CONTRACTS"></optgroup>
+					<option value="POEA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;POEA CONTRACT</option>
+					<option value="MLC/CBA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;MLC/CBA CONTRACT</option>
 			`;
 
 			// 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE S.Q. FOR TANKERS', 'FLAG STATE LICENSE', 'FLAG STATE SSO LICENSE', 'FLAG STATE ENDORSEMENT COOK COURSE', 'FLAG STATE GMDSS-GOC', 
