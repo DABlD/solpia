@@ -94,107 +94,9 @@
 			<td colspan="6" rowspan="2">{{ $applicant->user->address }}</td>
 		</tr>
 
-		@php 
-			$name = "SEAMAN'S BOOK";
-			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-		@endphp
-
-		<tr>
-			<td rowspan="2" colspan="2">SM Book</td>
-			<td>National</td>
-			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
-		</tr>
-
-		<tr>
-			<td>Flag State</td>
-
-			@php 
-				$docu = false;
-				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "BOOKLET"){
-				        $docu = $document;
-				    }
-				}
-			@endphp
-
-			<td colspan="2">
-				{{ $docu ? $docu->number : "-----" }}
-			</td>
-			<td colspan="2">
-				{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}
-			</td>
-			<td colspan="2">Tel</td>
-			<td colspan="6">{{ $applicant->user->contact }}</td>
-		</tr>
-
-		@php 
-			$name = 'COC';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-		@endphp
-
-		<tr>
-			<td rowspan="2" colspan="2">COC</td>
-			<td>National</td>
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">Place of Birth</td>
-			<td colspan="6">{{ $applicant->birth_place }}</td>
-		</tr>
-
-		@php
-			$docu = false;
-			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "LICENSE"){
-			        $docu = $document;
-			    }
-			}
-		@endphp
-
-		<tr>
-			<td>Flag State</td>
-			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">Religion</td>
-			<td colspan="6">{{ $applicant->religion }}</td>
-		</tr>
-
-		@php 
-			$name = 'GMDSS/GOC';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-		@endphp
-
-		<tr>
-			<td rowspan="2" colspan="2">GOC</td>
-			<td>National</td>
-			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
-			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="8">Schooling</td>
-		</tr>
-
-		@php
-			$docu = false;
-			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "GMDSS/GOC"){
-			        $docu = $document;
-			    }
-			}
-		@endphp
-
 		@php
 			$lastSchool = sizeof($applicant->educational_background) ? : false;
 		@endphp
-
-		<tr>
-			<td>Flag State</td>
-			<td colspan="2">
-				{{ $docu ? $docu->number : "-----" }}
-			<td colspan="2">
-				{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}
-			</td>
-			<td colspan="2">Last School</td>
-			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->school : "N/A" }}</td>
-		</tr>
 
 		@php 
 			$name = 'PASSPORT';
@@ -205,8 +107,6 @@
 			<td colspan="3">Passport</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">Period</td>
-			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->year : "N/A" }}</td>
 		</tr>
 
 		@php 
@@ -228,6 +128,99 @@
 
 		<tr>
 			<td colspan="3">U.S.A. Visa</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">Tel</td>
+			<td colspan="6">{{ $applicant->user->contact }}</td>
+		</tr>
+
+		@php 
+			$name = "SEAMAN'S BOOK";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
+
+		<tr>
+			<td rowspan="2" colspan="2">SM Book</td>
+			<td>National</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">Place of Birth</td>
+			<td colspan="6">{{ $applicant->birth_place }}</td>
+		</tr>
+
+		<tr>
+			<td>Flag State</td>
+
+			@php 
+				$docu = false;
+				foreach($applicant->document_flag as $document){
+				    if($document->country == "Panama" && $document->type == "BOOKLET"){
+				        $docu = $document;
+				    }
+				}
+			@endphp
+
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">Religion</td>
+			<td colspan="6">{{ $applicant->religion }}</td>
+		</tr>
+
+		@php 
+			$name = 'COC';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td rowspan="2" colspan="2">COC</td>
+			<td>National</td>
+			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="8">Schooling</td>
+		</tr>
+
+		@php
+			$docu = false;
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Panama" && $document->type == "LICENSE"){
+			        $docu = $document;
+			    }
+			}
+		@endphp
+
+		<tr>
+			<td>Flag State</td>
+			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">Last School</td>
+			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->school : "N/A" }}</td>
+		</tr>
+
+		@php 
+			$name = 'GMDSS/GOC';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td rowspan="2" colspan="2">GOC</td>
+			<td>National</td>
+			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
+			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">Period</td>
+			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->year : "N/A" }}</td>
+		</tr>
+
+		@php
+			$docu = false;
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Panama" && $document->type == "GMDSS/GOC"){
+			        $docu = $document;
+			    }
+			}
+		@endphp
+
+		<tr>
+			<td>Flag State</td>
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Specialty</td>
@@ -276,7 +269,7 @@
 				</span>
 				<span></span>
 				<span>
-					C A R R I E R
+					C A R E E R
 				</span>
 			</td>
 		</tr>
@@ -350,16 +343,15 @@
 			</tr>
 		@endforeach
 
-		<tr>
-			<td colspan="10">Have you ever been sued in court or before any Administrative body?</td>
-			<td>Yes</td>
-			<td></td>
-			<td>No</td>
-			<td>a</td>
-			<td></td>
-		</tr>
-
 		<tr></tr>
+
+		<tr>
+			<td colspan="8">Do you have any Medical History or Medication</td>
+			<td colspan="3">Yes</td>
+			<td></td>
+			<td colspan="2">No</td>
+			<td>a</td>
+		</tr>
 
 		<tr>
 			<td colspan="8">If "yes", give particulars</td>
@@ -382,6 +374,7 @@
 		<tr>
 			<td colspan="8"></td>
 			<td colspan="6">{{-- Border --}}</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td colspan="9"></td>

@@ -321,7 +321,7 @@
 
 		<tr>
 			<td colspan="2">Evaluation</td>
-			<td colspan="3"></td>
+			<td colspan="3">PASSED/RECOMMENDED</td>
 			<td colspan="5">Judgement</td>
 			<td>FIT</td>
 			<td>a</td>

@@ -22,20 +22,27 @@
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
 
 			// CHECK IF WATCHKEEPING AND HAS RANK AND IS DECK OR ENGINE RATING
-			if($type == "lc" && ($docu == "COC" || $docu == "COE") && $applicant->rank_id > 0 && $regulation){
+			if(isset($applicant->rank_id)){
+				$rank = $applicant->rank_id;
+			}
+			else{
+				$rank = $applicant->rank->id;
+			}
+
+			if($type == "lc" && ($docu == "COC" || $docu == "COE") && $rank > 0 && $regulation){
 
 				$tempDocu = $docu;
 				$docu = false;
 
-				if($applicant->rank_id >= 9 && $applicant->rank_id <= 21){
+				if($rank >= 9 && $rank <= 21){
 					foreach($applicant->document_lc as $document){
 						$regulation = json_decode($document->regulation);
 						
-						if($applicant->rank_id >= 9 && $applicant->rank_id <= 14){
+						if($rank >= 9 && $rank <= 14){
 							$tempName = "COC";
 							$temp = $tempDocu == $tempName ? 'II/4' : 'II/5';
 						}
-						elseif($applicant->rank_id >= 15 && $applicant->rank_id <= 21){
+						elseif($rank >= 15 && $rank <= 21){
 							$tempName = "COE";
 							$temp = $tempDocu == $tempName ? 'III/4' : 'III/5';
 						}
@@ -47,6 +54,9 @@
 					}
 
 					$name .= " ($temp)";
+				}
+				else{
+					$docu = false;
 				}
 			}
 			elseif ($docu == 'ECDIS SPECIFIC') {
@@ -200,11 +210,19 @@
 				{{ isset($applicant->vessel) ? $applicant->vessel->name : 'TBA' }}
 			</td>
 
+			{{-- GET FLAG --}}
+			@php
+				$flag = "-----";
+				if(sizeof($applicant->document_flag)){
+					$flag = $applicant->document_flag->first()->country;
+				}
+			@endphp
+
 			<td colspan="2">
 				FLAG
 			</td>
 			<td colspan="2">
-				{{ isset($applicant->vessel) ? $applicant->vessel->flag : 'TBA' }}
+				{{ $flag }}
 			</td>
 
 			<td colspan="2">
@@ -252,7 +270,7 @@
 				JOINING DATE
 			</td>
 			<td colspan="2">
-				{{ now()->format('M j, Y') }}
+				-----
 			</td>
 
 			<td colspan="2">
@@ -331,7 +349,7 @@
 
 		{{ $getDocument('SSBT WITH BRM', 'lc', '', 'BRIDGE TEAM/RESOURCE MANAGEMENT')}}
 		{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'SHIP HANDLING SIMULATION')}}
-		{{ $getDocument('ERS WITH ERM', 'lc', '', 'ENGINE ROOM SIMULATOR w/ ENGINE')}}
+		{{ $getDocument('ERS WITH ERM', 'lc', '', 'ENGINE ROOM SIMULATOR w/ ENGINE RESOURCE MGT.')}}
 		{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA TRAINING COURSE')}}
 		{{ $getDocument('RADAR', 'lc', '', 'RADAR TRAINING COURSE')}}
 		{{ $getDocument('CONSOLIDATED MARPOL', 'lc', '', 'MARPOL')}}
