@@ -189,7 +189,7 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HL
                 $h[4] = [
-                    
+                    'K9'
                 ];
 
                 // HC VC
@@ -265,6 +265,10 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(35);
                 $event->sheet->getDelegate()->getRowDimension('12')->setRowHeight(25);
+
+                for($i = 17; $i < 36; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(20);
+                }
             },
         ];
     }

@@ -293,6 +293,7 @@
 		{{ $getDocument('PASSPORT', 	'id', 		'DFA'													)}}
 		{{ $getDocument("SEAMAN'S BOOK",'id', 		'MARINA', 		'NATIONAL SEAMAN BOOK'					)}}
 		{{ $getDocument("US-VISA", 		'id', 		'US EMBASSY', 	'U.S.A. VISA'							)}}
+		{{ $getDocument("MCV", 			'id', 		'DIBP - AUSTRALIA'										)}}
 
 		{{ addS('NATIONAL LICENSES') }}
 

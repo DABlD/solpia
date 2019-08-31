@@ -144,7 +144,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 // CHEAT
 
                 if(isset($this->applicant->document_id->PASSPORT) && $this->applicant->document_id->PASSPORT->issue_date->diffInMonths($this->applicant->document_id->PASSPORT->expiry_date) < 18){
-                    $event->sheet->getDelegate()->getStyle('F15:J15')->getFont()->getColor()->setRGB('FF0000');
+                    $event->sheet->getDelegate()->getStyle('F9:J9')->getFont()->getColor()->setRGB('FF0000');
                 }
 
                 // ROWS
@@ -180,7 +180,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // VT
                 $h[1] = [
-                	'A29', 'A' . (46 + $ecdisRows), 'F' . (46 + $ecdisRows), 'J' . (46 + $ecdisRows)
+                	'A' . (47 + $ecdisRows), 'F' . (47 + $ecdisRows), 'J' . (47 + $ecdisRows)
                 ];
 
                 // HL B
@@ -190,7 +190,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // HC
                 $h[3] = [
-                	'F8:L' . (53 + $ecdisRows)
+                	'F8:L' . (54 + $ecdisRows)
                 ];
 
                 // HL
@@ -205,11 +205,11 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
 
                 // VC
                 $h[6] = [
-                    'A' . (54 + $ecdisRows) . ':J' . (54 + $ecdisRows)
+                    'A' . (55 + $ecdisRows) . ':J' . (55 + $ecdisRows)
                 ];
 
                 $h['wrap'] = [
-                	'N7', 'A' . (54 + $ecdisRows), 'F' . (54 + $ecdisRows), 'J' . (54 + $ecdisRows)
+                	'N7', 'A' . (55 + $ecdisRows), 'F' . (55 + $ecdisRows), 'J' . (55 + $ecdisRows)
                 ];
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -224,7 +224,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
             		}
                 }
 
-                $event->sheet->getDelegate()->getStyle("A8:N" . (53 + $ecdisRows))->applyFromArray([
+                $event->sheet->getDelegate()->getStyle("A8:N" . (54 + $ecdisRows))->applyFromArray([
                     'alignment' => [
                         'shrinkToFit' => true
                     ],
@@ -233,7 +233,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 // FILLS
                 $fills = [
                     'A1', 'A3:A5', 'F3:F6', 'H6', 'J3:J6', 'L6',
-                    'A7:A' . (56 + $ecdisRows), 'A7:N7'
+                    'A7:A' . (57 + $ecdisRows), 'A7:N7'
                 ];
 
                 foreach($fills as $fill){
@@ -250,7 +250,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 ]);
 
                 $cells[1] = [
-                    'A3:N5', 'A7:N7', 'A7:N' . (56 + $ecdisRows)
+                    'A3:N5', 'A7:N7', 'A7:N' . (57 + $ecdisRows)
                 ];
 
                 foreach($cells as $key => $cell){
@@ -260,7 +260,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 }
 
                 // SET SEPARATOR COLOR
-                foreach(['A8', 'A12', 'A20', 'A26', 'A' . (50 + $ecdisRows)] as $cell){
+                foreach(['A8', 'A13', 'A21', 'A27', 'A' . (51 + $ecdisRows)] as $cell){
                     $event->sheet->getDelegate()->getStyle($cell)->getFont()->getColor()->setRGB('FF0000');
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray([
                         'font' => [
@@ -271,7 +271,7 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 }
 
                 // COLOR FOR ISSUER
-                $event->sheet->getDelegate()->getStyle('L8:L' . (53 + $ecdisRows))->getFont()->getColor()->setRGB('002060');
+                $event->sheet->getDelegate()->getStyle('L8:L' . (54 + $ecdisRows))->getFont()->getColor()->setRGB('002060');
 
                 // COLUMN RESIZE
 
