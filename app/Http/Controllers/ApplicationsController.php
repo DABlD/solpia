@@ -176,11 +176,17 @@ class ApplicationsController extends Controller
         // }
 
         // IF NAME IS EMPTY, REMOVE
+        $applicant->family_data = $applicant->family_data->sortBy('type');
         foreach($applicant->family_data as $key => $value){
             if($value->lname == ""){
                 $applicant->family_data->forget($key);
             }
         }
+
+        // FILTER FAMILY DATA. REMOVE BENEFICIARY (SIR JEFF)
+        $applicant->family_data = $applicant->family_data->filter(function($fd){
+            return $fd->type != "Beneficiary";
+        });
 
         // IF FAMILY_DATA IS ODD ADD EMPTY TO FILL
         if($applicant->family_data->count() % 2 != 0){
@@ -196,6 +202,17 @@ class ApplicationsController extends Controller
         }
 
         $class = "App\\Exports\\" . ucfirst($type);
+
+        $temp = ProcessedApplicant::where('applicant_id', $applicant->id)->first();
+        if($temp->status == "Lined-Up"){
+            $applicant->rank = Rank::find($temp->rank_id);
+        }
+        else{
+            if($applicant->sea_service->count()){
+                $name = $applicant->sea_service->sortByDesc('sign_off')->first()->rank;
+                $applicant->rank = Rank::where('name', $name)->first();
+            }
+        }
 
         return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
     }

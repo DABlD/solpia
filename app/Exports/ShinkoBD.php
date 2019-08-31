@@ -31,20 +31,42 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
     public function registerEvents(): array
     {
         $borderStyle = [
-            'borders' => [
-                'top' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'bottom' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'left' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'right' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
                 ],
             ],
+            [
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => [
+                            'rgb' => '808080'
+                        ]
+                    ],
+                ],
+            ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => [
+                            'rgb' => '808080'
+                        ]
+                    ],
+                ],
+            ]
         ];
 
         $fillStyle = [
@@ -170,6 +192,12 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                     // $event->sheet->getDelegate()->getRowDimension($row+1)->setRowHeight(35);
                     $event->sheet->getDelegate()->getStyle('I' . $next)->getFont()->setSize(10);
                     $event->sheet->getDelegate()->getRowDimension($next)->setRowHeight(25);
+
+                    $event->sheet->getDelegate()->getStyle("I$row:J$row")->applyFromArray([
+                        'alignment' => [
+                            'shrinkToFit' => true
+                        ],
+                    ]);
                 }
 
                 // FUNCTIONS
@@ -212,7 +240,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 // HL
                 $h[4] = [
-                    'D13:F20'
+                    'D13:F20', 'J19'
                 ];
 
                 // VC
@@ -238,7 +266,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 // FILLS
                 $fills = [
-                	'H3:I6',
+                	// 'H3:I6',
                 	'A7:C7', 'H7:I7',
                 	'A8:C8', 'H8:I8',
                 	'A9:C9', 'H9:I9',
@@ -256,7 +284,8 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 // BORDERS
                 $cells = array_merge($fdRows, $ssRows, [
-                    'H3:I6','J3:L6','M3:O10',
+                    // 'H3:I6','J3:L6',
+                    'M3:O10',
                 	'A7:C7', 'H7:I7', 'D7:G7', 'J7:L7',
                 	'A8:C8', 'H8:I8', 'D8:G8', 'J8:L8',
                 	'A9:C9', 'H9:I9', 'D9:G9', 'J9:L9', 'L9',
@@ -285,7 +314,31 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 ]);
 
                 foreach($cells as $cell){
-                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
+                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[0]);
+                }
+
+                $size = sizeof($ssRows);
+
+                for($i = 0; $i < $size; $i+=14){
+                    $event->sheet->getDelegate()->getStyle($ssRows[($i + 3)])->applyFromArray($borderStyle[1]);
+                    $event->sheet->getDelegate()->getStyle($ssRows[($i + 7)])->applyFromArray($borderStyle[1]);
+                    $event->sheet->getDelegate()->getStyle($ssRows[($i + 9)])->applyFromArray($borderStyle[1]);
+                    $event->sheet->getDelegate()->getStyle($ssRows[($i + 11)])->applyFromArray($borderStyle[1]);
+                    // echo $ssRows[$i + 3] . '<br>';
+                    // echo $ssRows[$i + 7] . '<br>';
+                    // echo $ssRows[$i + 9] . '<br>';
+                    // echo $ssRows[$i + 11] . '<br>';
+                }
+
+                for($i = 0; $i < $size; $i+=14){
+                    $event->sheet->getDelegate()->getStyle($ssRows[($i + 4)])->applyFromArray($borderStyle[2]);
+                    $event->sheet->getDelegate()->getStyle($ssRows[($i + 8)])->applyFromArray($borderStyle[2]);
+                    $event->sheet->getDelegate()->getStyle($ssRows[($i + 10)])->applyFromArray($borderStyle[2]);
+                    $event->sheet->getDelegate()->getStyle($ssRows[($i + 12)])->applyFromArray($borderStyle[2]);
+                    // echo $ssRows[$i + 3] . '<br>';
+                    // echo $ssRows[$i + 7] . '<br>';
+                    // echo $ssRows[$i + 9] . '<br>';
+                    // echo $ssRows[$i + 11] . '<br>';
                 }
 
                 // FOR THE CHECK

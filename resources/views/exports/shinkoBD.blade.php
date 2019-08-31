@@ -33,8 +33,8 @@
 
 		<tr>
 			<td rowspan="4" colspan="7"></td>
-			<td rowspan="4" colspan="2">Name in Chinese</td>
-			<td rowspan="4" colspan="3">{{-- FILL --}}</td>
+			<td rowspan="4" colspan="2"></td>
+			<td rowspan="4" colspan="3"></td>
 			<td rowspan="8" colspan="3"></td>
 		</tr>
 
@@ -212,6 +212,15 @@
 		@php 
 			$name = 'US-VISA';
 			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+
+			$course = "N/A";
+			if($lastSchool){
+				$course = $applicant->educational_background->last()->course;
+			}
+
+			if($course == "BSMT"){
+				$course = "Bachelor of Science in Marine Transportation";
+			}
 		@endphp
 
 		<tr>
@@ -219,7 +228,7 @@
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Specialty</td>
-			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->course : "N/A" }}</td>
+			<td colspan="6">{{ $course }}</td>
 		</tr>
 
 		<tr>
@@ -246,12 +255,12 @@
 				<tr>
 					<td colspan="2">{{ $family->type }}</td>
 					<td colspan="2">{{ $family->lname . ', ' . $family->fname . ' ' . $family->suffix . ' ' . $family->mname }}</td>
-					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('F j, Y') : '' }}</td>
+					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('M j, Y') : '' }}</td>
 					<td>{{ $family->occupation }}</td>
 			@else
 					<td>{{ $family->type }}</td>
 					<td colspan="3">{{ $family->lname . ', ' . $family->fname . ' ' . $family->suffix . ' ' . $family->mname }}</td>
-					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('F j, Y') : '' }}</td>
+					<td colspan="2">{{ $family->birthday != ""?$family->birthday->format('M j, Y') : '' }}</td>
 					<td colspan="2">{{ $family->occupation }}</td>
 				</tr>
 			@endif
