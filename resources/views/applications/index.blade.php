@@ -65,7 +65,7 @@
 
 @push('after-scripts')
 	<script>
-		let table = $('#table').DataTable({
+		var table = $('#table').DataTable({
             serverSide: true,
             ajax: {
                 url: '{{ route('datatables.applications') }}',
@@ -220,6 +220,9 @@
                 function selectVessel(){
                     let vessels = [];
 
+                    swal('Loading Vessels');
+                    swal.showLoading();
+
                     $.ajax({
                         url: '{{ route('vessels.get') }}',
                         data: {id: aPrincipal},
@@ -277,6 +280,8 @@
                                                     title: 'Applicant Successfully Lined-Up to Principal',
                                                     timer: 800,
                                                     showConfirmButton: false
+                                                }).then(() => {
+                                                    table.ajax.reload();
                                                 });
                                             }
                                             else{
@@ -294,6 +299,13 @@
                         });
                     }
                 }
+            });
+
+            $('[data-original-title="Lined-Up"]').on('click', () => {
+                swal({
+                    type: 'warning',
+                    title: 'This applicant is already Lined-Up',
+                });
             });
 	    }
 	</script>

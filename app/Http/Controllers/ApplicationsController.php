@@ -418,7 +418,9 @@ class ApplicationsController extends Controller
     }
 
     public function lineUp(Request $req){
-        echo ProcessedApplicant::create(array_merge($req->all(), ['status' => 'Lined-Up']));
+        $id = $req->applicant_id;
+        Applicant::where('id', $id)->update(['status' => 'Lined-Up']);
+        echo ProcessedApplicant::where('applicant_id', $id)->update(array_merge($req->all(), ['status' => 'Lined-Up']));
     }
 
     public function delete(User $user){

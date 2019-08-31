@@ -218,8 +218,11 @@
 				$course = $applicant->educational_background->last()->course;
 			}
 
-			if($course == "BSMT"){
+			if(strtoupper($course) == "BSMT"){
 				$course = "Bachelor of Science in Marine Transportation";
+			}
+			elseif(strtoupper($course) == "BSMARE"){
+				$course = "Bachelor of Science in Marine Engineering";
 			}
 		@endphp
 
