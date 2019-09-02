@@ -10,7 +10,7 @@ use App\Imports\VesselsImport;
 class VesselsController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin');
+        $this->middleware('permissions:' . 'Admin/Encoder/Cadet');
     }
 
     public function import(Request $req){
