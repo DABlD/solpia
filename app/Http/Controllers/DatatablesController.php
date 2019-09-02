@@ -37,7 +37,13 @@ class DatatablesController extends Controller
 			$applicant->age = $applicant->user->birthday->diffInYears();
 
 			$vessels = SeaService::select('vessel_name', 'sign_off')->where('applicant_id', $applicant->id)->get();
-			$applicant->last_vessel = $vessels->sortBy('sign_off')->last()->vessel_name;
+
+			if($vessels->count()){
+				$applicant->last_vessel = $vessels->sortBy('sign_off')->last()->vessel_name;
+			}
+			else{
+				$applicant->last_vessel = "-----";
+			}
 		}
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
