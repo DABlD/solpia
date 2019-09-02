@@ -7,7 +7,7 @@ use Yajra\Datatables\Datatables;
 use App\User;
 use App\Models\{Applicant, ProcessedApplicant};
 use App\Models\{Vessel, Rank, Principal};
-use App\Models\AuditTrail;
+use App\Models\{AuditTrail, SeaService};
 
 class DatatablesController extends Controller
 {
@@ -27,12 +27,17 @@ class DatatablesController extends Controller
 	}
 
 	public function applications(){
-		$applicants = Applicant::select('id', 'age', 'user_id')
-						->with('user:id,avatar,fname,mname,lname,contact')->get();
+		$applicants = Applicant::select('id', 'user_id', 'status', 'remarks')
+						->with('user:id,avatar,fname,lname,contact,birthday')
+						->get();
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		foreach($applicants as $applicant){
 			$applicant->actions = $applicant->actions;
+			$applicant->age = $applicant->user->birthday->diffInYears();
+
+			$vessels = SeaService::select('vessel_name', 'sign_off')->where('applicant_id', $applicant->id)->get();
+			$applicant->last_vessel = $vessels->sortBy('sign_off')->last()->vessel_name;
 		}
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
