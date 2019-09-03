@@ -323,7 +323,7 @@ class ApplicationsController extends Controller
             'provincial_address','provincial_contact',
             'birth_place','religion','age','waistline',
             'shoe_size','height','weight','bmi','blood_type',
-            'civil_status', 'tin', 'sss', 'eye_color'
+            'civil_status', 'tin', 'sss', 'eye_color', 'clothes_size'
         ]))->put('user_id', $user->id);
 
         $applicant = Applicant::create($applicant->all());
