@@ -16,6 +16,13 @@
 			echo $date->toFormattedDateString();
 		}
 	}
+
+	if(isset($applicant->rank_id)){
+		$rank = $applicant->rank_id;
+	}
+	else{
+		$rank = $applicant->rank->id;
+	}
 @endphp
 
 <table>
@@ -274,7 +281,7 @@
 		<tr>
 			<td colspan="2">
 				National License
-				@if(isset($applicant->rank) && $applicant->rank_id >= 9 && $applicant->rank_id <= 21)
+				@if($rank >= 9 && $rank <= 21)
 					(II/4)
 				@endif
 			</td>
@@ -507,10 +514,10 @@
 				// $haystack = ["II/4", "III/4"];
 				$haystack = [];
 				
-				if($applicant->rank_id >= 9 && $applicant->rank_id <= 14){
+				if($rank >= 9 && $rank <= 14){
 					array_push($haystack, "II/4");
 				}
-				elseif($applicant->rank_id >= 15 && $applicant->rank_id <= 21){
+				elseif($rank >= 15 && $rank <= 21){
 					array_push($haystack, "III/4");
 				}
 
@@ -645,7 +652,7 @@
 		<tr>
 			<td colspan="4">
 				Endorsement Certificate /
-				@if(isset($applicant->rank) && $applicant->rank_id >= 1 && $applicant->rank_id <= 8)
+				@if($rank >= 1 && $rank <= 8)
 					COE
 				@else
 					COC
@@ -657,7 +664,7 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
-		@if(isset($applicant->rank) && $applicant->rank_id >=5 && $applicant->rank_id <= 8)
+		@if($rank >=5 && $rank <= 8)
 			{{-- 11TH --}}
 			@php 
 				$name = 'ERS WITH ERM';
@@ -981,7 +988,7 @@
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "-----" }}</td>
 				<td colspan="2">
 					@if($data->sign_on != "" && $data->sign_off != "")
-						{{ $data->sign_on->diff($data->sign_off)->format('%yyr, %mmos, %ddays') }}
+						{{ $data->sign_on->diff($data->sign_off->addDay())->format('%yyr, %mmos, %ddays') }}
 					@else
 						Not enough data
 					@endif

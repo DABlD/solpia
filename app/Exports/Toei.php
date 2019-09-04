@@ -336,6 +336,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     
                     $event->sheet->getDelegate()->getStyle("A$row")->applyFromArray($headingStyle[7]);
                     $event->sheet->getDelegate()->getStyle("D$row2")->applyFromArray($headingStyle[7]);
+                    $event->sheet->getDelegate()->getStyle("F$row:F$row2")->applyFromArray($headingStyle[7]);
                     // $event->sheet->getDelegate()->getStyle("D$row2")->getAlignment()->setWrapText(true);
                     // $event->sheet->getDelegate()->getRowDimension($row2)->setRowHeight(25);
 
