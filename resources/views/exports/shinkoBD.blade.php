@@ -331,14 +331,28 @@
 				</td>
 				<td rowspan="2">{{ $applicant->ranks[$service->rank] }}</td>
 				<td rowspan="1" colspan="2">{{ $service->vessel_type }}</td>
-				<td rowspan="1">{{ number_format($service->gross_tonnage) }}</td>
+				@php 
+					$temp = $service->gross_tonnage;
+					$temp = $temp == "" ? 0 : $temp; 
+				@endphp
+				<td rowspan="1">{{ is_numeric($temp) ? number_format($temp) : $temp}}</td>
 				<td rowspan="1" colspan="2">{{ $service->manning_agent }}</td>
 				<td rowspan="2" colspan="2">{{ $service->remarks }}</td>
 			</tr>
 			<tr>
 				<td rowspan="1">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
 				<td rowspan="1" colspan="2">{{ $service->engine_type }}</td>
-				<td rowspan="1">{{ number_format(ceil(($service->bhp_kw * 0.745) / 5) * 5) }}</td>
+				@php 
+					$temp = $service->bhp_kw;
+					$temp = $temp == "" ? 0 : $temp; 
+					if($temp == ""){
+						$temp = 0;
+					}
+					else{
+						$temp = number_format(ceil(($service->bhp_kw * 0.745) / 5) * 5);
+					}
+				@endphp
+				<td rowspan="1">{{ $temp }}</td>
 				<td rowspan="1" colspan="2">{{ $service->principal }}</td>
 			</tr>
 		@endforeach

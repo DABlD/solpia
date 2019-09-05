@@ -21,7 +21,12 @@
 		$rank = $applicant->rank_id;
 	}
 	else{
-		$rank = $applicant->rank->id;
+		if(isset($applicant->rank)){
+			$rank = $applicant->rank->id;
+		}
+		else{
+			$rank = 0;
+		}
 	}
 @endphp
 

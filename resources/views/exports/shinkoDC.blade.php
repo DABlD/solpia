@@ -26,37 +26,46 @@
 				$rank = $applicant->rank_id;
 			}
 			else{
-				$rank = $applicant->rank->id;
-			}
-
-			if($type == "lc" && ($docu == "COC" || $docu == "COE") && $rank > 0 && $regulation){
-
-				$tempDocu = $docu;
-				$docu = false;
-
-				if($rank >= 9 && $rank <= 21){
-					foreach($applicant->document_lc as $document){
-						$regulation = json_decode($document->regulation);
-						
-						if($rank >= 9 && $rank <= 14){
-							$tempName = "COC";
-							$temp = $tempDocu == $tempName ? 'II/4' : 'II/5';
-						}
-						elseif($rank >= 15 && $rank <= 21){
-							$tempName = "COE";
-							$temp = $tempDocu == $tempName ? 'III/4' : 'III/5';
-						}
-
-					    if($document->type == $tempName && in_array($temp, $regulation)){
-					        $docu = $document;
-					        break; 
-					    }
-					}
-
-					$name .= " ($temp)";
+				if(isset($applicant->rank)){
+					$rank = $applicant->rank->id;
 				}
 				else{
+					$rank = 0;
+				}
+			}
+
+			if($type == "lc" && ($docu == "COC" || $docu == "COE")){
+				if($rank > 0 && $regulation){
+					$tempDocu = $docu;
 					$docu = false;
+
+					if($rank >= 9 && $rank <= 21){
+						foreach($applicant->document_lc as $document){
+							$regulation = json_decode($document->regulation);
+							
+							if($rank >= 9 && $rank <= 14){
+								$tempName = "COC";
+								$temp = $tempDocu == $tempName ? 'II/4' : 'II/5';
+							}
+							elseif($rank >= 15 && $rank <= 21){
+								$tempName = "COE";
+								$temp = $tempDocu == $tempName ? 'III/4' : 'III/5';
+							}
+
+						    if($document->type == $tempName && in_array($temp, $regulation)){
+						        $docu = $document;
+						        break; 
+						    }
+						}
+
+						$name .= " ($temp)";
+					}
+					else{
+						$docu = false;
+					}
+				}
+				else{
+					return;
 				}
 			}
 			elseif ($docu == 'ECDIS SPECIFIC') {
