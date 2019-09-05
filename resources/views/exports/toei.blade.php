@@ -669,7 +669,7 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
-		@if($rank >=5 && $rank <= 8)
+		@if(($rank >=5 && $rank <= 8) || ($rank >= 15 && $rank <= 21))
 			{{-- 11TH --}}
 			@php 
 				$name = 'ERS WITH ERM';
