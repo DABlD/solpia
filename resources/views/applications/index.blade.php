@@ -18,6 +18,7 @@
 								<th>#</th>
 								<th>Status</th>
                                 <th>Pic</th>
+                                <th>Rank</th>
 								<th>Last Name</th>
 								<th>First Name</th>
 								<th>Age</th>
@@ -75,6 +76,7 @@
                 { data: 'id', name: 'id' },
                 { data: 'status', name: 'status' },
                 { data: 'user.avatar', name: 'user.avatar' },
+                { data: 'rank', name: 'rank' },
                 { data: 'user.lname', name: 'user.lname' },
                 { data: 'user.fname', name: 'user.fname' },
                 { data: 'age', name: 'age' },

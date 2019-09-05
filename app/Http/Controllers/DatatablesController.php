@@ -44,6 +44,21 @@ class DatatablesController extends Controller
 			else{
 				$applicant->last_vessel = "-----";
 			}
+
+			$temp = ProcessedApplicant::where('applicant_id', $applicant->id)->first();
+
+			if($temp->status == "Lined-Up"){
+			    $applicant->rank = Rank::find($temp->rank_id)->abbr;
+			}
+			else{
+			    if($applicant->sea_service->count()){
+			        $name = $applicant->sea_service->sortByDesc('sign_off')->first()->rank;
+			        $applicant->rank = Rank::where('name', $name)->first()->abbr;
+			    }
+			    else{
+			    	$applicant->rank = "N/A";
+			    }
+			}
 		}
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
