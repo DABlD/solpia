@@ -302,7 +302,7 @@
 			</td>
 			<td rowspan="2">
 				GRT<br>
-				Output/BHP
+				Output
 			</td>
 			<td rowspan="2" colspan="2">
 				Agent<br>
@@ -331,14 +331,14 @@
 				</td>
 				<td rowspan="2">{{ $applicant->ranks[$service->rank] }}</td>
 				<td rowspan="1" colspan="2">{{ $service->vessel_type }}</td>
-				<td rowspan="1">{{ $service->gross_tonnage }}</td>
+				<td rowspan="1">{{ number_format($service->gross_tonnage) }}</td>
 				<td rowspan="1" colspan="2">{{ $service->manning_agent }}</td>
 				<td rowspan="2" colspan="2">{{ $service->remarks }}</td>
 			</tr>
 			<tr>
 				<td rowspan="1">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
 				<td rowspan="1" colspan="2">{{ $service->engine_type }}</td>
-				<td rowspan="1">{{ ceil(($service->bhp_kw * 0.745) / 5) * 5 }}</td>
+				<td rowspan="1">{{ number_format(ceil(($service->bhp_kw * 0.745) / 5) * 5) }}</td>
 				<td rowspan="1" colspan="2">{{ $service->principal }}</td>
 			</tr>
 		@endforeach

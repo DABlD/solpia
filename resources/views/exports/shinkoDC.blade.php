@@ -317,7 +317,7 @@
 
 		{{ $getDocument('COC', 			'lc', 		'MARINA', 		'NATIONAL LICENSE - COC'				)}}
 		{{ $getDocument('COE', 			'lc', 		'MARINA', 		'NATIONAL LICENSE - COE'				)}}
-		{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'NATIONAL GMDSS-GOC'					)}}
+		{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'NATIONAL GMDSS - GOC'					)}}
 		{{ $getDocument('COC', 			'lc',		'MARINA', 		'NATIONAL LICENSE - RATINGS', 		true)}}
 		{{ $getDocument('COE', 			'lc', 		'MARINA', 		'NATIONAL LICENSE - RATINGS', 		true)}}
 		{{ $getDocument('NCIII', 		'lc', 		'TESDA', 		'NATIONAL LICENSE - CCK (NCIII)', 	true)}}
