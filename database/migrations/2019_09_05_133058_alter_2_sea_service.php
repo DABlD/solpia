@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterSeaService extends Migration
+class Alter2SeaService extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AlterSeaService extends Migration
     public function up()
     {
         Schema::table('sea_services', function (Blueprint $table){
-            $table->string('bhp_kw', 100)->default(0)->nullable(false)->change();
+            $table->string('gross_tonnage', 100)->nullable(false)->default(0)->change();
         });
     }
 
@@ -26,7 +26,7 @@ class AlterSeaService extends Migration
     public function down()
     {   
         Schema::table('sea_services', function (Blueprint $table){
-            $table->string('bhp_kw', 100)->nullable()->change();
+            $table->string('gross_tonnage', 100)->nullable()->change();
         });
     }
 }
