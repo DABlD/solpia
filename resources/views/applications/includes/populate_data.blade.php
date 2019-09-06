@@ -286,7 +286,8 @@
 				        	inputs = $('#sea-services input, #sea-services select');
 					        i = (index * 18);
 
-					        $(inputs[i]).val(sss[ctr].vessel_name).trigger('change');
+					        // $(inputs[i]).val(sss[ctr].vessel_name).trigger('change');
+					        checkIfExisting($(inputs[i]), sss[ctr].vessel_name);
 					        $(inputs[i+1]).val(sss[ctr].rank).trigger('change');
 
 							inputs[i+2].value       = sss[ctr].vessel_type;
