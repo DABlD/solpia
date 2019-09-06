@@ -44,7 +44,9 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="school${count}">School</label>
-                        <input type="text" class="form-control" name="school${count}" placeholder="Enter School">
+                        <select name="school${count}" class="form-control">
+                            <option value=""></option>
+                        </select>
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="school${count}Error"></strong>
                         </span>
@@ -63,6 +65,12 @@
             
             $('#EB').append(string);
             $('.ebCount')[0].innerText = count;
+
+            $(`[name="school${count}"]`).select2({
+                placeholder: 'Select School',
+                tags: true,
+                data: JSON.parse('{!! $schools !!}')
+            });
         }
     </script>
 @endpush

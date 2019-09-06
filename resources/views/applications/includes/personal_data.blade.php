@@ -85,7 +85,11 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="religion">Religion</label>
-        <input type="text" class="form-control aeigh" name="religion" placeholder="Enter Religion">
+        {{-- <input type="text" class="form-control aeigh" name="religion" placeholder="Enter Religion"> --}}
+        <select class="form-control aeigh" name="religion">
+            <option></option>
+        </select>
+
         <span class="invalid-feedback hidden" role="alert">
             <strong id="religionError"></strong>
         </span>
@@ -307,6 +311,23 @@
             let weight = $('[name="weight"]').val();
             let height = $('[name="height"]').val() / 100;
             $('[name="bmi"]').val(Math.round( (weight / (height * height)) * 10 ) / 10);
+        });
+
+        let religions = JSON.parse('{!! $religions !!}');
+        religions = religions.concat([
+            'ROMAN CATHOLIC',
+            'CATHOLIC',
+            'BORN AGAIN CHRISTIAN',
+            'PROTESTANTS',
+            'MUSLIMS',
+            'IGLESIA NI CRISTO',
+            'BUDDHISTS'
+        ]);
+
+        $('[name="religion"]').select2({
+            placeholder: 'Select Religion',
+            data: Array.from(new Set(religions)),
+            tags: true,
         });
     </script>
 @endpush

@@ -57,7 +57,9 @@ class ApplicationsController extends Controller
             'title'         => 'Add Crew',
             'categories'    => $ranks->groupBy('category'),
             'issuers'       => collect($issuers)->unique()->toArray(),
-            'regulations'   => collect($regulations)->unique()->toArray()
+            'regulations'   => collect($regulations)->unique()->toArray(),
+            'religions'     => Applicant::pluck('religion')->unique(),
+            'schools'       => EducationalBackground::pluck('school')->unique()
     	]);
     }
 
@@ -100,6 +102,7 @@ class ApplicationsController extends Controller
     }
 
     public function update(Request $req){
+        dd(json_decode($req->fd));
         dd($req->all());
     }
 
