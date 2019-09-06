@@ -126,6 +126,10 @@
         form input:not([type='email']){
             text-transform: uppercase;
         }
+
+        ::placeholder{
+            text-transform: none;
+        };
     </style>
 @endpush
 
