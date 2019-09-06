@@ -247,12 +247,6 @@
 							i = (index * 7);
 
 							checkIfExisting($(inputs[i]), flags[keys[ctr]][ctr2].type);
-							
-							console.log(flags);
-							console.log(flags[keys]);
-							console.log(flags[keys[ctr]]);
-							console.log(flags[keys[ctr]][ctr2]);
-							console.log(flags[keys[ctr]][ctr2].number);
 
 							inputs[i+1].value = flags[keys[ctr]][ctr2].number;
 
