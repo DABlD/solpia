@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
+<div class="scroller">
+    <span class="fa fa-arrow-down fa-2x arrow"></span>
+</div>
+
 <section class="content">
 
 	<div class="row">
@@ -72,6 +76,24 @@
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 
     <style>
+        .scroller{
+            background-color: #00c0ef;
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            z-index: 1000;
+            border-radius: 50%;
+            bottom: 30px;
+            right: 50px;
+            text-align: center;
+            line-height: 45px;
+        }
+
+        .scroller .fa{
+            color: white;
+            vertical-align: middle;
+        }
+
         .fd-count{
             margin-right: 10px;
         }
@@ -117,6 +139,30 @@
         // $('html, body').animate({
         //     scrollTop: $(".SpouseCount").offset().top - 50
         // }, 2000);
+        var scrollIndex = 0;
+        var scrollDivs = ['#createForm', '#FD', '.Flag', '#sea-services', '.box-footer'];
+
+        $('.arrow').on('click', e => {
+            if($(e.target).hasClass('fa-arrow-down')){
+                scrollIndex += 1;
+            }
+            else{
+                scrollIndex -= 1;
+            }
+
+            if(scrollIndex == 4){
+                $(e.target).removeClass('fa-arrow-down');
+                $(e.target).addClass('fa-arrow-up');
+            }
+            else if(scrollIndex == 0){
+                $(e.target).removeClass('fa-arrow-up');
+                $(e.target).addClass('fa-arrow-down');
+            }
+
+            $('html, body').animate({
+                scrollTop: $(scrollDivs[scrollIndex]).offset().top - 150
+            }, 500);
+        });
 
         function fill(){
             let config = {
