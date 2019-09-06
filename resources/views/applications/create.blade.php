@@ -140,9 +140,6 @@
 @push('after-scripts')
 
     <script>
-        // $('html, body').animate({
-        //     scrollTop: $(".SpouseCount").offset().top - 50
-        // }, 2000);
         var scrollIndex = 0;
         var scrollDivs = ['#createForm', '#FD', '.Flag', '#sea-services', '.box-footer'];
 
@@ -167,86 +164,6 @@
                 scrollTop: $(scrollDivs[scrollIndex]).offset().top - 150
             }, 500);
         });
-
-        function fill(){
-            let config = {
-                altInput: true,
-                altFormat: 'F j, Y',
-                dateFormat: 'Y-m-d',
-                maxDate: moment().format('YYYY-MM-DD')
-            };
-
-            $('[name="birthday"]').flatpickr(config).setDate('1997-11-12', true);
-            $('[name="fd-birthday1"]').flatpickr(config).setDate('1968-03-23', true);
-            $('[name="fd-birthday2"]').flatpickr(config).setDate('1961-10-16', true);
-            fillSS();
-        }
-
-        function fillSS(){
-            addSS();
-
-            $('[name="vessel_name1"]').select2('open');
-
-            setTimeout(() => {
-                $('[name="vessel_name1"]').val('M/V DK INITIO').trigger('change');
-                $('[name="rank1"]').val('DECK CADET').trigger('change');
-                $('#sea-services input')[6].value = "30000";
-                $('#sea-services input')[9].value = "Filipino";
-
-                $('[name="sign_on1"]').flatpickr().setDate('2019-02-01', true);
-                $('[name="sign_off1"]').flatpickr().setDate('2019-02-28', true);
-
-                $('#sea-services input')[12].value = "So so";
-            }, 2000);
-
-            setTimeout(() => {
-                addSS();
-    
-                $('[name="vessel_name2"]').select2('open');
-    
-                $('[name="vessel_name2"]').val('M/T SM NAVIGATOR').trigger('change');
-                $('[name="rank2"]').val('ABLE SEAMAN').trigger('change');
-                $('#sea-services input')[19].value = "25000";
-                $('#sea-services input')[22].value = "Filipino";
-
-                $('[name="sign_on2"]').flatpickr().setDate('2019-03-01', true);
-                $('[name="sign_off2"]').flatpickr().setDate('2019-03-30', true);
-
-                $('#sea-services input')[25].value = "Not So so";
-
-                $('[name="vessel_name2"]').select2('close');
-            }, 2000);
-
-            fillEB();
-        }
-
-        function fillEB(){
-            addEB();
-            addEB();
-            addEB();
-            $('#EB .form-control')[0].value = "Elementary";
-            $('#EB .form-control')[2].value = "2003";
-            $('#EB .form-control')[3].value = "2009";
-            $('#EB .form-control')[4].value = "HRSDC";
-            $('#EB .form-control')[5].value = "Dasmarinas, Cavite";
-
-            $('#EB .form-control')[6].value = "High School";
-            $('#EB .form-control')[8].value = "2009";
-            $('#EB .form-control')[9].value = "2013";
-            $('#EB .form-control')[10].value = "UPHSD";
-            $('#EB .form-control')[11].value = "Bacoor, Cavite";
-
-            $('#EB .form-control')[12].value = "College";
-            $('#EB .form-control')[13].value = "BSITWMA";
-            $('#EB .form-control')[14].value = "2013";
-            $('#EB .form-control')[15].value = "2019";
-            $('#EB .form-control')[16].value = "FEU-IT";
-            $('#EB .form-control')[17].value = "Sampaloc, Manila";
-        }
-
-        asd = () => {
-            window.scrollTo(0,document.body.scrollHeight);
-        }
 
         let bool;
 
@@ -322,29 +239,6 @@
                 }
             }, 1500)
         });
-
-        function z(){
-            let config = {
-                altInput: true,
-                altFormat: 'F j, Y',
-                dateFormat: 'Y-m-d',
-                maxDate: moment().format('YYYY-MM-DD')
-            };
-
-            addFD('Spouse');
-            addFD('Beneficiary');
-
-            $('[name="fd-name3"]').val('Airene Mendoza');
-            $('[name="fd-birthday3"]').flatpickr(config).setDate('1999-07-26', true);
-            $('[name="fd-email3"]').val("airenemendoza@gmail.com");
-            $('[name="fd-address3"]').val("Malate, Manila");
-
-            $('[name="fd-name4"]').val('Random');
-            $('[name="fd-birthday4"]').flatpickr(config).setDate('1999-06-01', true);
-            $('[name="fd-address4"]').val("Somewhere");
-            // asd();
-            fill();
-        }
 
         function compressAndSubmit(){
             // Compress FD
