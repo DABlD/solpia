@@ -253,15 +253,15 @@
 
                     let tempFd = {};
                     tempFd.type         = inputs[i].value;
-                    tempFd.lname        = inputs[i+1].value;
-                    tempFd.fname        = inputs[i+2].value;
-                    tempFd.mname        = inputs[i+3].value;
-                    tempFd.suffix       = inputs[i+4].value;
+                    tempFd.lname        = inputs[i+1].value.toUpperCase();
+                    tempFd.fname        = inputs[i+2].value.toUpperCase();
+                    tempFd.mname        = inputs[i+3].value.toUpperCase();
+                    tempFd.suffix       = inputs[i+4].value.toUpperCase();
                     tempFd.birthday     = inputs[i+5].value;
                     tempFd.age          = inputs[i+7].value;
-                    tempFd.occupation   = inputs[i+8].value;
+                    tempFd.occupation   = inputs[i+8].value.toUpperCase();
                     tempFd.email        = inputs[i+9].value;
-                    tempFd.address      = inputs[i+10].value;
+                    tempFd.address      = inputs[i+10].value.toUpperCase();
                     fd.push(tempFd);
                 }
             @else
@@ -273,15 +273,15 @@
                     let tempFd = {};
                     tempFd.id           = inputs[i].value;
                     tempFd.type         = inputs[i+1].value;
-                    tempFd.lname        = inputs[i+2].value;
-                    tempFd.fname        = inputs[i+3].value;
-                    tempFd.mname        = inputs[i+4].value;
-                    tempFd.suffix       = inputs[i+5].value;
+                    tempFd.lname        = inputs[i+2].value.toUpperCase();
+                    tempFd.fname        = inputs[i+3].value.toUpperCase();
+                    tempFd.mname        = inputs[i+4].value.toUpperCase();
+                    tempFd.suffix       = inputs[i+5].value.toUpperCase();
                     tempFd.birthday     = inputs[i+6].value;
                     tempFd.age          = inputs[i+8].value;
-                    tempFd.occupation   = inputs[i+9].value;
+                    tempFd.occupation   = inputs[i+9].value.toUpperCase();
                     tempFd.email        = inputs[i+10].value;
-                    tempFd.address      = inputs[i+11].value;
+                    tempFd.address      = inputs[i+11].value.toUpperCase();
                     fd.push(tempFd);
                 }
             @endif
@@ -300,21 +300,21 @@
                     }
 
                     let tempSS = {};
-                    tempSS.vessel_name      = inputs[i].value;
+                    tempSS.vessel_name      = inputs[i].value.toUpperCase();
                     tempSS.rank             = inputs[i+1].value;
-                    tempSS.vessel_type      = inputs[i+2].value;
+                    tempSS.vessel_type      = inputs[i+2].value.toUpperCase();
                     tempSS.gross_tonnage    = inputs[i+3].value;
-                    tempSS.engine_type      = inputs[i+4].value;
+                    tempSS.engine_type      = inputs[i+4].value.toUpperCase();
                     tempSS.bhp_kw           = inputs[i+5].value;
-                    tempSS.flag             = inputs[i+6].value;
-                    tempSS.trade            = inputs[i+7].value;
+                    tempSS.flag             = inputs[i+6].value.toUpperCase();
+                    tempSS.trade            = inputs[i+7].value.toUpperCase();
                     tempSS.previous_salary  = inputs[i+8].value;
-                    tempSS.manning_agent    = inputs[i+9].value;
-                    tempSS.principal        = inputs[i+10].value;
-                    tempSS.crew_nationality = inputs[i+11].value;
+                    tempSS.manning_agent    = inputs[i+9].value.toUpperCase();
+                    tempSS.principal        = inputs[i+10].value.toUpperCase();
+                    tempSS.crew_nationality = inputs[i+11].value.toUpperCase();
                     tempSS.sign_on          = inputs[i+12].value;
                     tempSS.sign_off         = inputs[i+14].value;
-                    tempSS.remarks          = inputs[i+16].value;
+                    tempSS.remarks          = inputs[i+16].value.toUpperCase();
                     tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
                     ss.push(tempSS);
                 }
@@ -326,21 +326,21 @@
 
                     let tempSS = {};
                     tempSS.id               = inputs[i].value;
-                    tempSS.vessel_name      = inputs[i+1].value;
+                    tempSS.vessel_name      = inputs[i+1].value.toUpperCase();
                     tempSS.rank             = inputs[i+2].value;
-                    tempSS.vessel_type      = inputs[i+3].value;
+                    tempSS.vessel_type      = inputs[i+3].value.toUpperCase();
                     tempSS.gross_tonnage    = inputs[i+4].value;
-                    tempSS.engine_type      = inputs[i+5].value;
+                    tempSS.engine_type      = inputs[i+5].value.toUpperCase();
                     tempSS.bhp_kw           = inputs[i+6].value;
-                    tempSS.flag             = inputs[i+7].value;
-                    tempSS.trade            = inputs[i+8].value;
+                    tempSS.flag             = inputs[i+7].value.toUpperCase();
+                    tempSS.trade            = inputs[i+8].value.toUpperCase();
                     tempSS.previous_salary  = inputs[i+9].value;
-                    tempSS.manning_agent    = inputs[i+10].value;
-                    tempSS.principal        = inputs[i+11].value;
-                    tempSS.crew_nationality = inputs[i+12].value;
+                    tempSS.manning_agent    = inputs[i+10].value.toUpperCase();
+                    tempSS.principal        = inputs[i+11].value.toUpperCase();
+                    tempSS.crew_nationality = inputs[i+12].value.toUpperCase();
                     tempSS.sign_on          = inputs[i+13].value;
                     tempSS.sign_off         = inputs[i+15].value;
-                    tempSS.remarks          = inputs[i+17].value;
+                    tempSS.remarks          = inputs[i+17].value.toUpperCase();
                     tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
                     ss.push(tempSS);
                 }
@@ -362,10 +362,10 @@
 
                     let tempEb = {};
                     tempEb.type         = inputs[i].value;
-                    tempEb.course       = inputs[i+1].value;
+                    tempEb.course       = inputs[i+1].value.toUpperCase();
                     tempEb.year         = inputs[i+2].value + '-' + inputs[i+3].value;
-                    tempEb.school       = inputs[i+4].value;
-                    tempEb.address      = inputs[i+5].value;
+                    tempEb.school       = inputs[i+4].value.toUpperCase();
+                    tempEb.address      = inputs[i+5].value.toUpperCase();
                     eb.push(tempEb);
                 }
             @else
@@ -377,10 +377,10 @@
                     let tempEb = {};
                     tempEb.id           = inputs[i].value;
                     tempEb.type         = inputs[i+1].value;
-                    tempEb.course       = inputs[i+2].value;
+                    tempEb.course       = inputs[i+2].value.toUpperCase();
                     tempEb.year         = inputs[i+3].value + '-' + inputs[i+4].value;
-                    tempEb.school       = inputs[i+5].value;
-                    tempEb.address      = inputs[i+6].value;
+                    tempEb.school       = inputs[i+5].value.toUpperCase();
+                    tempEb.address      = inputs[i+6].value.toUpperCase();
                     eb.push(tempEb);
                 }
             @endif
@@ -401,8 +401,8 @@
                     }
 
                     let tempID = {};
-                    tempID.type             = inputs[i].value;
-                    tempID.issuer           = inputs[i+1].value;
+                    tempID.type             = inputs[i].value.toUpperCase();
+                    tempID.issuer           = inputs[i+1].value.toUpperCase();
                     tempID.number           = inputs[i+2].value;
                     tempID.issue_date       = inputs[i+3].value;
                     tempID.expiry_date      = inputs[i+5].value;
@@ -416,8 +416,8 @@
 
                     let tempID = {};
                     tempID.id               = inputs[i].value;
-                    tempID.type             = inputs[i+1].value;
-                    tempID.issuer           = inputs[i+2].value;
+                    tempID.type             = inputs[i+1].value.toUpperCase();
+                    tempID.issuer           = inputs[i+2].value.toUpperCase();
                     tempID.number           = inputs[i+3].value;
                     tempID.issue_date       = inputs[i+4].value;
                     tempID.expiry_date      = inputs[i+6].value;
@@ -445,9 +445,9 @@
                         }
 
                         let tempFlag = {};
-                        tempFlag.country    = country.value;
+                        tempFlag.country    = country.value.toUpperCase();
                         tempFlag.rank       = rank;
-                        tempFlag.type       = inputs[i].value;
+                        tempFlag.type       = inputs[i].value.toUpperCase();
                         tempFlag.number     = inputs[i+1].value;
                         tempFlag.issue_date = inputs[i+2].value;
                         tempFlag.expiry_date= inputs[i+4].value;
@@ -465,9 +465,9 @@
                         }
 
                         let tempFlag = {};
-                        tempFlag.country    = country.value;
+                        tempFlag.country    = country.value.toUpperCase();
                         tempFlag.rank       = rank;
-                        tempFlag.id         = inputs[i].value;
+                        tempFlag.id         = inputs[i].value.toUpperCase();
                         tempFlag.type       = inputs[i+1].value;
                         tempFlag.number     = inputs[i+2].value;
                         tempFlag.issue_date = inputs[i+3].value;
@@ -497,9 +497,9 @@
                     }
 
                     let tempLc = {};
-                    tempLc.type         = inputs[i].value
+                    tempLc.type         = inputs[i].value.toUpperCase();
                     tempLc.rank         = rank;
-                    tempLc.issuer       = inputs[i+1].value;
+                    tempLc.issuer       = inputs[i+1].value.toUpperCase();
                     tempLc.regulation   = $(inputs[i+2]).val();
                     tempLc.no           = inputs[i+4].value;
                     tempLc.issue_date   = inputs[i+5].value;
@@ -519,9 +519,9 @@
 
                     let tempLc = {};
                     tempLc.id           = inputs[i].value
-                    tempLc.type         = inputs[i+1].value
+                    tempLc.type         = inputs[i+1].value.toUpperCase();
                     tempLc.rank         = rank;
-                    tempLc.issuer       = inputs[i+2].value;
+                    tempLc.issuer       = inputs[i+2].value.toUpperCase();
                     tempLc.regulation   = $(inputs[i+3]).val();
                     tempLc.no           = inputs[i+5].value;
                     tempLc.issue_date   = inputs[i+6].value;
@@ -550,8 +550,8 @@
                     }
 
                     let tempMedCert = {};
-                    tempMedCert.type        = inputs[i].value;
-                    tempMedCert.clinic      = inputs[i+1].value;
+                    tempMedCert.type        = inputs[i].value.toUpperCase();
+                    tempMedCert.clinic      = inputs[i+1].value.toUpperCase();
                     tempMedCert.number      = inputs[i+2].value;
                     tempMedCert.issue_date  = inputs[i+3].value;
                     tempMedCert.expiry_date  = inputs[i+5].value;
@@ -565,8 +565,8 @@
 
                     let tempMedCert = {};
                     tempMedCert.id          = inputs[i].value;
-                    tempMedCert.type        = inputs[i+1].value;
-                    tempMedCert.clinic      = inputs[i+2].value;
+                    tempMedCert.type        = inputs[i+1].value.toUpperCase();
+                    tempMedCert.clinic      = inputs[i+2].value.toUpperCase();
                     tempMedCert.number      = inputs[i+3].value;
                     tempMedCert.issue_date  = inputs[i+4].value;
                     tempMedCert.expiry_date = inputs[i+6].value;
@@ -589,7 +589,7 @@
                     }
                     
                     let tempMed = {};
-                    tempMed.type            = inputs[i].value;
+                    tempMed.type            = inputs[i].value.toUpperCase();
                     tempMed.with_mv         = inputs[i+1].value;
                     tempMed.year            = inputs[i+2].value;
                     tempMed.case_remarks    = inputs[i+3].value;
@@ -603,7 +603,7 @@
                     
                     let tempMed = {};
                     tempMed.id              = inputs[i].value;
-                    tempMed.type            = inputs[i+1].value;
+                    tempMed.type            = inputs[i+1].value.toUpperCase();
                     tempMed.with_mv         = inputs[i+2].value;
                     tempMed.year            = inputs[i+3].value;
                     tempMed.case_remarks    = inputs[i+4].value;

@@ -308,6 +308,11 @@ class ApplicationsController extends Controller
             'email','gender'
         ]))->put('password', '123456')->put('role', 'Applicant');
 
+        $user->fname = strtoupper($user->fname);
+        $user->mname = strtoupper($user->mname);
+        $user->lname = strtoupper($user->lname);
+        $user->suffix = strtoupper($user->suffix);
+
         // UPLOAD AVATAR
         $image = $req->file('avatar');
         $avatar = Image::make($image);
@@ -330,6 +335,10 @@ class ApplicationsController extends Controller
             'shoe_size','height','weight','bmi','blood_type',
             'civil_status', 'tin', 'sss', 'eye_color', 'clothes_size'
         ]))->put('user_id', $user->id);
+
+        $applicant->provincial_address = strtoupper($applicant->provincial_address);
+        $applicant->birth_place = strtoupper($applicant->birth_place);
+        $applicant->religion = strtoupper($applicant->religion);
 
         $applicant = Applicant::create($applicant->all());
 
