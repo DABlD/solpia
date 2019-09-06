@@ -101,7 +101,9 @@
             transform: scale(1.3);
         }
 
-
+        form input:not([type='email']){
+            text-transform: uppercase;
+        }
     </style>
 @endpush
 
