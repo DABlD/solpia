@@ -240,7 +240,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 // HC B
                 $h[0] = [
-                	'A1:A2', 'A11:I11', 'H17', 'B21', $x('A', 1),
+                	'A1:A2', 'A11:I11', 'A21','H17', 'B21', $x('A', 1),
                 ];
 
                 // VT
@@ -327,7 +327,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 	'A17:B18', 'C17', 'C18', 'D15:E15', 'F15:G15', 'H15:I15', 'J15:O15',
                 	'D16:E16', 'F16:G16', 'H16:I16', 'J16:O16',
 
-                	'A17:B18', 'C17', 'C18', 'D17:E17', 'F17:G17', 'H17:I17', 'J17:O17',
+                	'A19:B20', 'C19', 'C20', 'D17:E17', 'F17:G17', 'H17:I17', 'J17:O17',
                 	'D18:E18', 'F18:G18', 'H18:I18', 'J18:O18',
 
                 	'A13:C13', 'D19:E19', 'F19:G19', 'H19:I19', 'J19:O19',
