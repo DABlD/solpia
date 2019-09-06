@@ -151,8 +151,8 @@
 		<tr>
 			<td>SSS No.:</td>
 			<td colspan="2">{{ $applicant->sss ? $applicant->sss : '-----' }}</td>
-			<td>Tin:</td>
-			<td>{{ $applicant->tin ? $applicant->tin : '-----' }}</td>
+			<td>BMI:</td>
+			<td>{{ $applicant->bmi ? $applicant->bmi : '-----' }}</td>
 			<td>Shoes Size:</td>
 			<td>{{ $applicant->shoe_size ? $applicant->shoe_size : '-----' }}cm</td>
 			<td>Clothes Size:</td>
