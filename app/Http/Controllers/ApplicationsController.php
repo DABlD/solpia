@@ -97,6 +97,8 @@ class ApplicationsController extends Controller
             'issuers'       => collect($issuers)->unique()->toArray(),
             'regulations'   => collect($regulations)->unique()->toArray(),
             'applicant'     => $applicant,
+            'religions'     => Applicant::pluck('religion')->unique(),
+            'schools'       => EducationalBackground::pluck('school')->unique(),
             'edit'          => true
         ]);
     }

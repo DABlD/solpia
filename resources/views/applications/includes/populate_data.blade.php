@@ -28,7 +28,9 @@
 
 	$('[name="birthday"]').flatpickr(config).setDate('{{ $applicant->user->birthday }}', true);
 	$('[name="birth_place"]').val('{{ $applicant->birth_place }}');
-	$('[name="religion"]').val('{{ $applicant->religion }}');
+
+	$('[name="religion"]').val('{{ $applicant->religion }}').trigger('change');
+
 	$('[name="address"]').val('{{ $applicant->user->address }}');
 	$('[name="contact"]').val('{{ $applicant->user->contact }}');
 	$('[name="provincial_address"]').val('{{ $applicant->provincial_address }}');
@@ -70,7 +72,9 @@
         inputs[i+1].value = "{{ $data->course }}";
         inputs[i+2].value = start;
         inputs[i+3].value = end;
-        inputs[i+4].value = "{{ $data->school }}";
+
+        $(inputs[i+4]).val("{{ $data->school }}").trigger('change');
+
         inputs[i+5].value = "{{ $data->address }}";
 
         $($(inputs[i+5]).parent().parent()).prepend(`
@@ -176,6 +180,7 @@
 	@endforeach
 
 	document.getElementById("preview").src = "{!! asset($applicant->user->avatar) !!}";
+	$('[type="file"]').removeClass('aeigh');
 
 	//getAddDetails
 	$.ajax({
@@ -243,6 +248,12 @@
 
 							checkIfExisting($(inputs[i]), flags[keys[ctr]][ctr2].type);
 							
+							console.log(flags);
+							console.log(flags[keys]);
+							console.log(flags[keys[ctr]]);
+							console.log(flags[keys[ctr]][ctr2]);
+							console.log(flags[keys[ctr]][ctr2].number);
+
 							inputs[i+1].value = flags[keys[ctr]][ctr2].number;
 
 							$(inputs[i+2]).flatpickr(config).setDate(flags[keys[ctr]][ctr2].issue_date, true);
@@ -311,7 +322,7 @@
 
 
 
-	$('html, body').animate({
-        scrollTop: $(".Flag").offset().top - 200
-    }, 2000);
+	// $('html, body').animate({
+ //        scrollTop: $(".Flag").offset().top - 200
+ //    }, 2000);
 </script>
