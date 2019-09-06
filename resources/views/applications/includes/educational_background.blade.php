@@ -69,7 +69,7 @@
             $(`[name="school${count}"]`).select2({
                 placeholder: 'Select School',
                 tags: true,
-                data: JSON.parse('{!! $schools !!}')
+                data: Object.values(JSON.parse('{!! $schools !!}'))
             });
         }
     </script>

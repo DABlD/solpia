@@ -313,7 +313,7 @@
             $('[name="bmi"]').val(Math.round( (weight / (height * height)) * 10 ) / 10);
         });
 
-        let religions = JSON.parse('{!! $religions !!}');
+        let religions = Object.values(JSON.parse('{!! $religions !!}'));
         religions = religions.concat([
             'ROMAN CATHOLIC',
             'CATHOLIC',
