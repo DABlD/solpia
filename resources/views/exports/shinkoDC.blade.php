@@ -34,7 +34,7 @@
 				}
 			}
 
-			if($type == "lc" && ($docu == "COC" || $docu == "COE")){
+			if($type == "lc" && ($docu == "COC" || $docu == "COE") && $name == "NATIONAL LICENSE - RATINGS"){
 				if($rank > 0 && $regulation){
 					$tempDocu = $docu;
 					$docu = false;
