@@ -7,16 +7,16 @@
 
 <section class="content">
 
-	<div class="row">
-		<section class="col-lg-12">
-			<div class="box box-info">
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-info">
 
-				<div class="box-header">
-					@include('applications.includes.toolbar')
-				</div>
+                <div class="box-header">
+                    @include('applications.includes.toolbar')
+                </div>
 
-				<div class="box-body">
-					<form method="POST" action="{{ !isset($edit) ? route('applications.store') : route('applications.update') }}" id="createForm" enctype="multipart/form-data">
+                <div class="box-body">
+                    <form method="POST" action="{{ !isset($edit) ? route('applications.store') : route('applications.update') }}" id="createForm" enctype="multipart/form-data">
                         @csrf
                         
                         {{-- PERSONAL DATA --}}
@@ -59,14 +59,14 @@
                         </div>
 
                     </form>
-				</div>
+                </div>
 
-				<div class="box-footer clearfix">
-				</div>
+                <div class="box-footer clearfix">
+                </div>
 
-			</div>
-		</section>
-	</div>
+            </div>
+        </section>
+    </div>
 
 </section>
 @endsection
@@ -445,7 +445,7 @@
                         }
 
                         let tempFlag = {};
-                        tempFlag.country    = country.value.toUpperCase();
+                        tempFlag.country    = country.value;
                         tempFlag.rank       = rank;
                         tempFlag.type       = inputs[i].value.toUpperCase();
                         tempFlag.number     = inputs[i+1].value;
@@ -465,7 +465,7 @@
                         }
 
                         let tempFlag = {};
-                        tempFlag.country    = country.value.toUpperCase();
+                        tempFlag.country    = country.value;
                         tempFlag.rank       = rank;
                         tempFlag.id         = inputs[i].value.toUpperCase();
                         tempFlag.type       = inputs[i+1].value;
