@@ -349,7 +349,8 @@
 						$temp = 0;
 					}
 					else{
-						$temp = number_format(ceil(($service->bhp_kw * 0.745) / 5) * 5);
+						$temp = str_replace(',', '', $service->bhp_kw);
+						$temp = number_format(ceil(($temp * 0.745) / 5) * 5);
 					}
 				@endphp
 				<td rowspan="1">{{ $temp }}</td>
