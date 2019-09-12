@@ -278,6 +278,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
 
                 $h['wrap'] = array_merge([
                 	'J12', $x('A', 2, 'O'), //'B13', $x('A', 7, 'O', 7, true),
+                    $x('A', 7, 'O', 7,true)
                 ]);
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
