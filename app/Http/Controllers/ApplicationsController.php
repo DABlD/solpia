@@ -494,6 +494,7 @@ class ApplicationsController extends Controller
         $temp = ProcessedApplicant::where('applicant_id', $applicant->id)->first();
         if($temp->status == "Lined-Up"){
             $applicant->rank = Rank::find($temp->rank_id);
+            $applicant->vessel = Vessel::find($temp->vessel_id);
         }
         else{
             if($applicant->sea_service->count()){
