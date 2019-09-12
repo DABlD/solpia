@@ -194,17 +194,19 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[5] = [
-                    'A13:K15', 'A48', 'F48'
+                    'A13:K15', 'A48', 'F48',
+                    'F17:J20', 'F22:J27'
                 ];
 
                 // B
                 $h[6] = [
-                    'A3:A4'
+                    'A3:A4',
+                    'F17:J20', 'F22:J27'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A12'
+                    'A12', 'A38', 'A42'
                 ];
 
                 $h['wrap'] = [
