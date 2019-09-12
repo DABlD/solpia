@@ -320,7 +320,7 @@
 		{{ $getDocument('PASSPORT', 	'id', 		'DFA'													)}}
 		{{ $getDocument("SEAMAN'S BOOK",'id', 		'MARINA', 		'NATIONAL SEAMAN BOOK'					)}}
 		{{ $getDocument("US-VISA", 		'id', 		'US EMBASSY', 	'U.S.A. VISA'							)}}
-		{{ $getDocument("MCV", 			'id', 		'DIBP - AUSTRALIA'										)}}
+		{{ $getDocument("MCV", 			'id', 		'DHA - AUSTRALIA'										)}}
 
 		{{ addS('NATIONAL LICENSES') }}
 
@@ -362,8 +362,8 @@
 		{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA TRAINING COURSE')}}
 		{{ $getDocument('RADAR', 'lc', '', 'RADAR TRAINING COURSE')}}
 		{{ $getDocument('CONSOLIDATED MARPOL', 'lc', '', 'MARPOL')}}
-		{{ $getDocument('IN HOUSE TRAINING CERT WITH ISM', 'lc', '', 'ISM/ISPS COURSE')}}
-		{{ $getDocument('ANTI PIRACY', 'lc', '', 'ANTI-PIRACY AWARENESS TRAINING')}}
+		{{ $getDocument('IN HOUSE TRAINING CERT WITH ISM', 'lc', 'SOLPIA', 'ISM/ISPS COURSE')}}
+		{{ $getDocument('ANTI PIRACY', 'lc', 'SOLPIA', 'ANTI-PIRACY AWARENESS TRAINING')}}
 		{{ $getDocument('WELDING COURSE', 'lc', '', 'WELDING CERTIFICATE')}}
 		{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc')}}
 		{{ $getDocument('DANGEROUS FLUID CARGO COURSE', 'lc')}}
@@ -391,7 +391,9 @@
 				ADMINISTRATION
 			</td>
 			<td colspan="5" rowspan="3">
-				CONFIRMED BY:
+				CONFIRMED BY: JEFFREY R. PLANTA
+				<br>
+				(Crewing Manager)
 			</td>
 		</tr>
 	</tbody>

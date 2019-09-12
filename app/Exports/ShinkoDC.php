@@ -161,17 +161,16 @@ class ShinkoDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                     }
                 }
 
-                $ecdisRows = $ecdisRows == 1 ? 0 : $ecdisRows;
+                $ecdisRows = $ecdisRows <= 1 ? 0 : $ecdisRows - 1;
 
                 // FUNCTIONS
-                for($i = 6; $i < (57 + $ecdisRows); $i++){
+                for($i = 6; $i <= (57 + $ecdisRows); $i++){
                     array_push($rows, "A$i:E$i");
                     array_push($rows, "F$i:G$i");
                     array_push($rows, "H$i:I$i");
                     array_push($rows, "J$i:K$i");
                     array_push($rows, "L$i:N$i");
                 }
-
 
                 // HEADINGS
 
