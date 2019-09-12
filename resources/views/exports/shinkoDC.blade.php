@@ -16,23 +16,23 @@
 		}
 	};
 
-	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null) use ($applicant, $checkDate2) {
+	// CHECK IF WATCHKEEPING AND HAS RANK AND IS DECK OR ENGINE RATING
+	if(isset($applicant->rank_id)){
+		$rank = $applicant->rank_id;
+	}
+	else{
+		if(isset($applicant->rank)){
+			$rank = $applicant->rank->id;
+		}
+		else{
+			$rank = 0;
+		}
+	}
+
+	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null) use ($applicant, $checkDate2, $rank) {
 		$name   = !$name ? $docu : $name;
 
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
-
-			// CHECK IF WATCHKEEPING AND HAS RANK AND IS DECK OR ENGINE RATING
-			if(isset($applicant->rank_id)){
-				$rank = $applicant->rank_id;
-			}
-			else{
-				if(isset($applicant->rank)){
-					$rank = $applicant->rank->id;
-				}
-				else{
-					$rank = 0;
-				}
-			}
 
 			if($type == "lc" && ($docu == "COC" || $docu == "COE") && $name == "NATIONAL LICENSE - RATINGS"){
 				if($rank > 0 && $regulation){
@@ -146,6 +146,12 @@
 
 			$temp = $docu;
 			$docu = false;
+
+			if($rank >= 22 && $rank <= 24){
+				if($temp == 'LICENSE'){
+					$temp = "SHIP'S COOK ENDORSEMENT";
+				}
+			}
 
 			foreach($applicant->document_flag as $document){
 			    if($document->country == "Panama" && $document->type == $temp){
