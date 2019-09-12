@@ -173,6 +173,10 @@
 		else{
 			$issuer = $type == "med_cert" ? 'clinic' : 'issuer';
 			$issuer = $docu ? $docu->$issuer : 'NOT APPLICABLE';
+
+			if($issuer == "NOT APPLICABLE" && $type == "med_cert"){
+				$issuer = "REVERTING";
+			}
 		}
 
 		echo "
