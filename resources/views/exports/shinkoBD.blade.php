@@ -234,11 +234,11 @@
 		<tr>
 			<td colspan="2">Relation</td>
 			<td colspan="2">Name</td>
-			<td colspan="2">Birth</td>
+			<td colspan="2">Birthday</td>
 			<td>Occupation</td>
 			<td>Relation</td>
 			<td colspan="3">Name</td>
-			<td colspan="2">Birth</td>
+			<td colspan="2">Birthday</td>
 			<td colspan="2">Occupation</td>
 		</tr>
 
