@@ -93,6 +93,12 @@
                         return `<img src="${link}" alt="Applicant Photo"/>`;
                     },
                 },
+                {
+                    targets: 0,
+                    render: function(id, display, data){
+                        return data.row;
+                    },
+                },
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
