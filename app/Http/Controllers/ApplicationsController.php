@@ -464,7 +464,12 @@ class ApplicationsController extends Controller
         // }
 
         // IF NAME IS EMPTY, REMOVE
-        $applicant->family_data = $applicant->family_data->sortBy('type');
+        $order = ['Father', 'Mother', 'Spouse', 'Son', 'Daughter', 'Beneficiary'];
+        
+        $applicant->family_data = $applicant->family_data->sortBy(function($model) use ($order){
+            return array_search($model->type, $order);
+        });
+
         foreach($applicant->family_data as $key => $value){
             if($value->lname == ""){
                 $applicant->family_data->forget($key);
