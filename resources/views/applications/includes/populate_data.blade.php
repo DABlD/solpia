@@ -253,7 +253,9 @@
 							$(inputs[i+2]).flatpickr(config).setDate(flags[keys[ctr]][ctr2].issue_date, true);
 							$(inputs[i+4]).flatpickr(config2).setDate(flags[keys[ctr]][ctr2].expiry_date, true);
 
-							$($(inputs[i+4]).parent().parent()).prepend(`
+							$loc = $($($(inputs[i+4]).parent().parent()).children()[(ctr2 * 4) + ctr2]);
+
+							$loc.before(`
 						        <input type="hidden" name="id-${flags[keys[ctr]][ctr2].id}" value="${flags[keys[ctr]][ctr2].id}" data-type="id">
 							`);
 							index++;
@@ -309,7 +311,7 @@
 						}
 
 						swal.close();
-					}, (sss.length * 1000));
+					}, (sss.length *350));
 				});
 			}, 1000);
 		}
