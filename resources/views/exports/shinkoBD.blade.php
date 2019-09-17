@@ -333,7 +333,7 @@
 				<td rowspan="1" colspan="2">{{ $service->vessel_type }}</td>
 				@php 
 					$temp = $service->gross_tonnage;
-					$temp = $temp == "" ? 0 : $temp; 
+					$temp = $temp == "" ? '---' : $temp; 
 				@endphp
 				<td rowspan="1">{{ is_numeric($temp) ? number_format($temp) : $temp}}</td>
 				<td rowspan="1" colspan="2">{{ $service->manning_agent }}</td>
@@ -344,12 +344,12 @@
 				<td rowspan="1" colspan="2">{{ $service->engine_type }}</td>
 				@php 
 					$temp = $service->bhp_kw;
-					$temp = $temp == "" ? 0 : $temp; 
 					if($temp == ""){
-						$temp = 0;
+						$temp = '---';
 					}
 					else{
 						$temp = str_replace(',', '', $service->bhp_kw);
+						$temp = str_replace(' ', '', $temp);
 						$temp = number_format(ceil(($temp * 0.745) / 5) * 5);
 					}
 				@endphp
