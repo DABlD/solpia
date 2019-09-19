@@ -38,6 +38,7 @@
 				if($rank > 0 && $regulation){
 					$tempDocu = $docu;
 					$docu = false;
+					$temp = "";
 
 					if($rank >= 9 && $rank <= 23){
 						foreach($applicant->document_lc as $document){
