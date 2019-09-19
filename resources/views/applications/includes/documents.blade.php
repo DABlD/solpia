@@ -706,8 +706,8 @@
 	        			},
 	        			{
 	        				range: [
-	        					[9,21],
-	        					[25,27]
+	        					[9,23],
+	        					[27,29]
 	        				],
 	        				documents: [
 	        					'BOOKLET', 'SDSD'
@@ -715,7 +715,7 @@
 	        			},
 	        			{
 	        				range: [
-	        					[22,24]
+	        					[24,26]
 	        				],
 	        				documents: [
 	        					'BOOKLET', 'SDSD', "SHIP'S COOK ENDORSEMENT"
@@ -744,7 +744,7 @@
         				},
         				{
         					range: [
-        						[9,27]
+        						[9,29]
         					],
         					documents: [
         						'BOOKLET', 'SDSD'
@@ -783,7 +783,7 @@
         			details: [
         				{
         					range: [
-        						[1,27]
+        						[1,29]
         					],
         					documents: [
         						'LICENSE'
@@ -946,7 +946,7 @@
         		]
         	},
         	{
-        		range: [15, 21],
+        		range: [15, 23],
         		issuer: 'MARINA',
         		documents: [
         			'COC', 'COE'
@@ -957,7 +957,7 @@
         		]
         	},
         	{
-        		range: [22, 27],
+        		range: [24, 29],
         		issuer: 'TESDA',
         		documents: [
         			'NCI', 'NCII', 'NCIII'
@@ -1069,7 +1069,7 @@
         	},
         	// ALL RATINGS
         	{
-        		range: [9, 21],
+        		range: [9, 23],
         		issuer: 'MARINA',
         		documents: [
         			'BASIC TRAINING - BT',

@@ -39,7 +39,7 @@
 					$tempDocu = $docu;
 					$docu = false;
 
-					if($rank >= 9 && $rank <= 21){
+					if($rank >= 9 && $rank <= 23){
 						foreach($applicant->document_lc as $document){
 							$regulation = json_decode($document->regulation);
 							
@@ -47,7 +47,7 @@
 								$tempName = "COC";
 								$temp = $tempDocu == $tempName ? 'II/4' : 'II/5';
 							}
-							elseif($rank >= 15 && $rank <= 21){
+							elseif($rank >= 15 && $rank <= 23){
 								$tempName = "COE";
 								$temp = $tempDocu == $tempName ? 'III/4' : 'III/5';
 							}
@@ -147,7 +147,7 @@
 			$temp = $docu;
 			$docu = false;
 
-			if($rank >= 22 && $rank <= 24){
+			if($rank >= 24 && $rank <= 26){
 				if($temp == 'LICENSE'){
 					$temp = "SHIP'S COOK ENDORSEMENT";
 				}
