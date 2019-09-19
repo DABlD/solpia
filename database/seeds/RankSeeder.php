@@ -140,6 +140,18 @@ class RankSeeder extends Seeder
                 'RATING'
             ],
             [
+                'ELECTRICIAN',
+                'ELECT',
+                'ENGINE RATING',
+                'RATING'
+            ],
+            [
+                'TRAINEE ELECT',
+                'T/ELECT',
+                'ENGINE RATING',
+                'RATING'
+            ],
+            [
                 'CHIEF COOK',
                 'CCK',
                 'GALLEY',
