@@ -54,6 +54,7 @@ class DatatablesController extends Controller
 
 			if($temp->status == "Lined-Up"){
 			    $applicant->rank = Rank::find($temp->rank_id)->abbr;
+			    $applicant->vessel = Vessel::find($temp->vessel_id)->name;
 			}
 			else{
 			    if($applicant->sea_service->count()){

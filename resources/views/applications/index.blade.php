@@ -54,6 +54,10 @@
 		.w50{
 			width: 60px !important;
 		}
+
+        .dt-status b{
+            color: red;
+        }
 	</style>
 @endpush
 
@@ -86,6 +90,17 @@
                 { data: 'actions', name: 'actions' },
             ],
             columnDefs: [
+                {
+                    targets: 1,
+                    className: "dt-status",
+                    render: function(status, display, row){
+                        if(status == "Lined-Up"){
+                            status += `<br><b>${row.vessel}</b>`;
+                        }
+
+                        return status;
+                    },
+                },
                 {
                     targets: 2,
                     className: "w50",
