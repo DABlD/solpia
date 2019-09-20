@@ -350,7 +350,11 @@
 					else{
 						$temp = str_replace(',', '', $service->bhp_kw);
 						$temp = str_replace(' ', '', $temp);
-						$temp = number_format(ceil(($temp * 0.745) / 5) * 5);
+						try {
+							$temp = number_format(ceil(($temp * 0.745) / 5) * 5);
+						} catch (Exception $e) {
+							$temp = "(Invalid)";
+						}
 					}
 				@endphp
 				<td rowspan="1">{{ $temp }}</td>
