@@ -82,7 +82,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-file-text')
 			->defaults('name', 'Crew Database')
-			->defaults('roles', array('Admin', 'Encoder', 'Cadet'))
+			->defaults('roles', array('Admin', 'Encoder', 'Cadet', 'Crewing Manager', 'Crewing Officer'))
 			->name($name . '.index')
 			->defaults('href', $name);
 
@@ -95,7 +95,7 @@ Route::group([
 		
 		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
 		Route::get($name . '/edit/{applicant}', ucfirst($name) . 'Controller@edit')->name($name . '.edit');
-		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
+		Route::post($name . '/update/{id}', ucfirst($name) . 'Controller@update')->name($name . '.update');
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
 
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
@@ -154,5 +154,17 @@ Route::group([
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
+
+		// 
+
+		// TEMP ROUTE FOR ONBOARDING
+		$name = "onBoard";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-ship')
+			->defaults('name', 'Temp Onboarding')
+			->defaults('roles', array('Admin', 'Cadet', 'Encoder', 'Crewing Manager', 'Crewing Officer'))
+			->name($name . '.index')
+			->defaults('href', $name);
 	}
 );

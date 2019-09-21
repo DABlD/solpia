@@ -63,4 +63,8 @@ class Applicant extends Model
     public function document_med_exp(){
         return $this->hasMany('App\Models\DocumentMedExp');
     }
+
+    public function pro_app(){
+        return $this->hasOne('App\Models\ProcessedApplicant');
+    }
 }

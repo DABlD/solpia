@@ -285,6 +285,21 @@
                 }
             });
         }
+
+        @if(isset($edit))
+            $.ajax({
+                url: '{{ route('vessels.getAll') }}',
+                dataType: 'json',
+                success: vessels => {
+                    vessels.forEach(vessel => {
+                        savedVessels[vessel.name] = vessel;
+                        savedVesselsString += `
+                            <option value="${vessel.name}">${vessel.name}</option>
+                        `;
+                    });
+                }
+            });
+        @endif
     </script>
 @endpush
 

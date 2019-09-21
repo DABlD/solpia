@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="box-body">
-                    <form method="POST" action="{{ !isset($edit) ? route('applications.store') : route('applications.update') }}" id="createForm" enctype="multipart/form-data">
+                    <form method="POST" action="{{ !isset($edit) ? route('applications.store') : route('applications.update', ['id' => $applicant->user->id]) }}" id="createForm" enctype="multipart/form-data">
                         @csrf
                         
                         {{-- PERSONAL DATA --}}
@@ -233,6 +233,7 @@
                 }
                 else{
                     swal.close();
+                    scrollIndex = 1;
                     $('html, body').animate({
                         scrollTop: $($('[id$="Error"]:visible')[0]).offset().top - 100
                     }, 1000);
@@ -245,46 +246,33 @@
             let inputs = $('#FD input');
             let fd = [];
 
-            @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+=11){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+            for(let i = 0; i < inputs.length; i+=12){
+                let tempFd = {};
 
-                    let tempFd = {};
-                    tempFd.type         = inputs[i].value;
-                    tempFd.lname        = inputs[i+1].value.toUpperCase();
-                    tempFd.fname        = inputs[i+2].value.toUpperCase();
-                    tempFd.mname        = inputs[i+3].value.toUpperCase();
-                    tempFd.suffix       = inputs[i+4].value.toUpperCase();
-                    tempFd.birthday     = inputs[i+5].value;
-                    tempFd.age          = inputs[i+7].value;
-                    tempFd.occupation   = inputs[i+8].value.toUpperCase();
-                    tempFd.email        = inputs[i+9].value;
-                    tempFd.address      = inputs[i+10].value.toUpperCase();
-                    fd.push(tempFd);
+                if($(inputs[i]).is("[data-type]")){
+                    tempFd.id = inputs[i].value;
                 }
-            @else
-                for(let i = 0; i < inputs.length; i+=12){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+                else{
+                    i -= 1;
+                }
 
-                    let tempFd = {};
-                    tempFd.id           = inputs[i].value;
-                    tempFd.type         = inputs[i+1].value;
-                    tempFd.lname        = inputs[i+2].value.toUpperCase();
-                    tempFd.fname        = inputs[i+3].value.toUpperCase();
-                    tempFd.mname        = inputs[i+4].value.toUpperCase();
-                    tempFd.suffix       = inputs[i+5].value.toUpperCase();
-                    tempFd.birthday     = inputs[i+6].value;
-                    tempFd.age          = inputs[i+8].value;
-                    tempFd.occupation   = inputs[i+9].value.toUpperCase();
-                    tempFd.email        = inputs[i+10].value;
-                    tempFd.address      = inputs[i+11].value.toUpperCase();
-                    fd.push(tempFd);
+                if(!checkIfVisible(inputs[i+11])){
+                    continue;
                 }
-            @endif
+
+                tempFd.type         = inputs[i+1].value;
+                tempFd.lname        = inputs[i+2].value.toUpperCase();
+                tempFd.fname        = inputs[i+3].value.toUpperCase();
+                tempFd.mname        = inputs[i+4].value.toUpperCase();
+                tempFd.suffix       = inputs[i+5].value.toUpperCase();
+                tempFd.birthday     = inputs[i+6].value;
+                tempFd.age          = inputs[i+8].value;
+                tempFd.occupation   = inputs[i+9].value.toUpperCase();
+                tempFd.email        = inputs[i+10].value;
+                tempFd.address      = inputs[i+11].value.toUpperCase();
+                fd.push(tempFd);
+            }
+
 
             $('#createForm').append(`
                 <input type="hidden" name="fd" value='${JSON.stringify(fd)}'>
@@ -293,58 +281,39 @@
             // COMPRESS SS
             inputs = $('#sea-services input, #sea-services select');
             let ss = [];
-            @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+= 17){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
 
-                    let tempSS = {};
-                    tempSS.vessel_name      = inputs[i].value.toUpperCase();
-                    tempSS.rank             = inputs[i+1].value;
-                    tempSS.vessel_type      = inputs[i+2].value.toUpperCase();
-                    tempSS.gross_tonnage    = inputs[i+3].value;
-                    tempSS.engine_type      = inputs[i+4].value.toUpperCase();
-                    tempSS.bhp_kw           = inputs[i+5].value;
-                    tempSS.flag             = inputs[i+6].value.toUpperCase();
-                    tempSS.trade            = inputs[i+7].value.toUpperCase();
-                    tempSS.previous_salary  = inputs[i+8].value;
-                    tempSS.manning_agent    = inputs[i+9].value.toUpperCase();
-                    tempSS.principal        = inputs[i+10].value.toUpperCase();
-                    tempSS.crew_nationality = inputs[i+11].value.toUpperCase();
-                    tempSS.sign_on          = inputs[i+12].value;
-                    tempSS.sign_off         = inputs[i+14].value;
-                    tempSS.remarks          = inputs[i+16].value.toUpperCase();
-                    tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
-                    ss.push(tempSS);
-                }
-            @else
-                for(let i = 0; i < inputs.length; i+= 18){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+            for(let i = 0; i < inputs.length; i+= 18){
+                let tempSS = {};
 
-                    let tempSS = {};
-                    tempSS.id               = inputs[i].value;
-                    tempSS.vessel_name      = inputs[i+1].value.toUpperCase();
-                    tempSS.rank             = inputs[i+2].value;
-                    tempSS.vessel_type      = inputs[i+3].value.toUpperCase();
-                    tempSS.gross_tonnage    = inputs[i+4].value;
-                    tempSS.engine_type      = inputs[i+5].value.toUpperCase();
-                    tempSS.bhp_kw           = inputs[i+6].value;
-                    tempSS.flag             = inputs[i+7].value.toUpperCase();
-                    tempSS.trade            = inputs[i+8].value.toUpperCase();
-                    tempSS.previous_salary  = inputs[i+9].value;
-                    tempSS.manning_agent    = inputs[i+10].value.toUpperCase();
-                    tempSS.principal        = inputs[i+11].value.toUpperCase();
-                    tempSS.crew_nationality = inputs[i+12].value.toUpperCase();
-                    tempSS.sign_on          = inputs[i+13].value;
-                    tempSS.sign_off         = inputs[i+15].value;
-                    tempSS.remarks          = inputs[i+17].value.toUpperCase();
-                    tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
-                    ss.push(tempSS);
+                if($(inputs[i]).is("[data-type]")){
+                    tempSS.id = inputs[i].value;
                 }
-            @endif
+                else{
+                    i -= 1;
+                }
+
+                if(!checkIfVisible(inputs[i+17])){
+                    continue;
+                }
+
+                tempSS.vessel_name      = inputs[i+1].value.toUpperCase();
+                tempSS.rank             = inputs[i+2].value;
+                tempSS.vessel_type      = inputs[i+3].value.toUpperCase();
+                tempSS.gross_tonnage    = inputs[i+4].value;
+                tempSS.engine_type      = inputs[i+5].value.toUpperCase();
+                tempSS.bhp_kw           = inputs[i+6].value;
+                tempSS.flag             = inputs[i+7].value.toUpperCase();
+                tempSS.trade            = inputs[i+8].value.toUpperCase();
+                tempSS.previous_salary  = inputs[i+9].value;
+                tempSS.manning_agent    = inputs[i+10].value.toUpperCase();
+                tempSS.principal        = inputs[i+11].value.toUpperCase();
+                tempSS.crew_nationality = inputs[i+12].value.toUpperCase();
+                tempSS.sign_on          = inputs[i+13].value;
+                tempSS.sign_off         = inputs[i+15].value;
+                tempSS.remarks          = inputs[i+17].value.toUpperCase();
+                tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
+                ss.push(tempSS);
+            }
 
             $('#createForm').append(`
                 <input type="hidden" name="ss" value='${JSON.stringify(ss)}'>
@@ -354,36 +323,27 @@
             inputs = $('#EB input, #EB select');
             let eb = [];
 
-            @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+=6){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+            for(let i = 0; i < inputs.length; i+=7){
+                let tempEb = {};
 
-                    let tempEb = {};
-                    tempEb.type         = inputs[i].value;
-                    tempEb.course       = inputs[i+1].value.toUpperCase();
-                    tempEb.year         = inputs[i+2].value + '-' + inputs[i+3].value;
-                    tempEb.school       = inputs[i+4].value.toUpperCase();
-                    tempEb.address      = inputs[i+5].value.toUpperCase();
-                    eb.push(tempEb);
+                if($(inputs[i]).is("[data-type]")){
+                    tempEb.id = inputs[i].value;
                 }
-            @else
-                for(let i = 0; i < inputs.length; i+=7){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+                else{
+                    i -= 1;
+                }
 
-                    let tempEb = {};
-                    tempEb.id           = inputs[i].value;
-                    tempEb.type         = inputs[i+1].value;
-                    tempEb.course       = inputs[i+2].value.toUpperCase();
-                    tempEb.year         = inputs[i+3].value + '-' + inputs[i+4].value;
-                    tempEb.school       = inputs[i+5].value.toUpperCase();
-                    tempEb.address      = inputs[i+6].value.toUpperCase();
-                    eb.push(tempEb);
+                if(!checkIfVisible(inputs[i+6])){
+                    continue;
                 }
-            @endif
+
+                tempEb.type         = inputs[i+1].value;
+                tempEb.course       = inputs[i+2].value.toUpperCase();
+                tempEb.year         = inputs[i+3].value + '-' + inputs[i+4].value;
+                tempEb.school       = inputs[i+5].value.toUpperCase();
+                tempEb.address      = inputs[i+6].value.toUpperCase();
+                eb.push(tempEb);
+            }
 
             $('#createForm').append(`
                 <input type="hidden" name="eb" value='${JSON.stringify(eb)}'>
@@ -394,36 +354,29 @@
             // DOCUMENT ID
             inputs = $('#docu .ID input, #docu .ID select');
             let docu_id = [];
-            @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+=7){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
 
-                    let tempID = {};
-                    tempID.type             = inputs[i].value.toUpperCase();
-                    tempID.issuer           = inputs[i+1].value.toUpperCase();
-                    tempID.number           = inputs[i+2].value;
-                    tempID.issue_date       = inputs[i+3].value;
-                    tempID.expiry_date      = inputs[i+5].value;
-                    docu_id.push(tempID);
-                }
-            @else
-                for(let i = 0; i < inputs.length; i+=8){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+            for(let i = 0; i < inputs.length; i+=8){
 
-                    let tempID = {};
-                    tempID.id               = inputs[i].value;
-                    tempID.type             = inputs[i+1].value.toUpperCase();
-                    tempID.issuer           = inputs[i+2].value.toUpperCase();
-                    tempID.number           = inputs[i+3].value;
-                    tempID.issue_date       = inputs[i+4].value;
-                    tempID.expiry_date      = inputs[i+6].value;
-                    docu_id.push(tempID);
+                let tempID = {};
+
+                if($(inputs[i]).is("[data-type]")){
+                    tempID.id = inputs[i].value;
                 }
-            @endif
+                else{
+                    i -= 1;
+                }
+
+                if(!checkIfVisible(inputs[i+6])){
+                    continue;
+                }
+
+                tempID.type             = inputs[i+1].value.toUpperCase();
+                tempID.issuer           = inputs[i+2].value.toUpperCase();
+                tempID.number           = inputs[i+3].value;
+                tempID.issue_date       = inputs[i+4].value;
+                tempID.expiry_date      = inputs[i+6].value;
+                docu_id.push(tempID);
+            }
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_id" value='${JSON.stringify(docu_id)}'>
@@ -438,48 +391,54 @@
             countries.each((index, country) => {
                 inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
 
-                @if(!isset($edit))
-                    for(let i = 0; i < inputs.length; i+=6){
-                        if(!checkIfVisible($(inputs[i]).parent().parent().parent())){
-                            continue;
-                        }
+                for(let i = 0; i < inputs.length; i+=7){
 
-                        let tempFlag = {};
-                        tempFlag.country    = country.value;
-                        tempFlag.rank       = rank;
-                        tempFlag.type       = inputs[i].value.toUpperCase();
-                        tempFlag.number     = inputs[i+1].value;
-                        tempFlag.issue_date = inputs[i+2].value;
-                        tempFlag.expiry_date= inputs[i+4].value;
+                    let tempFlag = {};
 
-                        // FOR REMOVING ' in "SHIP'S COOK ENDORSEMENT"
-                        if(tempFlag.type == "SHIP'S COOK ENDORSEMENT"){
-                            tempFlag.type = "SHIP COOK ENDORSEMENT";
-                        }
-                        docu_flag.push(tempFlag);
+                    if($(inputs[i]).is("[data-type]")){
+                        tempFlag.id = inputs[i].value;
                     }
-                @else
-                    for(let i = 0; i < inputs.length; i+=7){
-                        if(!checkIfVisible($(inputs[i]).parent().parent().parent())){
-                            continue;
-                        }
-
-                        let tempFlag = {};
-                        tempFlag.country    = country.value;
-                        tempFlag.rank       = rank;
-                        tempFlag.id         = inputs[i].value.toUpperCase();
-                        tempFlag.type       = inputs[i+1].value;
-                        tempFlag.number     = inputs[i+2].value;
-                        tempFlag.issue_date = inputs[i+3].value;
-                        tempFlag.expiry_date= inputs[i+5].value;
-
-                        // FOR REMOVING ' in "SHIP'S COOK ENDORSEMENT"
-                        if(tempFlag.type == "SHIP'S COOK ENDORSEMENT"){
-                            tempFlag.type = "SHIP COOK ENDORSEMENT";
-                        }
-                        docu_flag.push(tempFlag);
+                    else{
+                        i -= 1;
                     }
-                @endif
+
+                    if(!checkIfVisible($(inputs[i+5]))){
+                        continue;
+                    }
+
+                    tempFlag.country    = country.value;
+                    tempFlag.rank       = rank;
+                    tempFlag.type       = inputs[i+1].value;
+                    tempFlag.number     = inputs[i+2].value;
+                    tempFlag.issue_date = inputs[i+3].value;
+                    tempFlag.expiry_date= inputs[i+5].value;
+
+
+                    // FOR REMOVING ' in "SHIP'S COOK ENDORSEMENT"
+                    if(tempFlag.type == "SHIP'S COOK ENDORSEMENT"){
+                        tempFlag.type = "SHIP COOK ENDORSEMENT";
+                    }
+                    docu_flag.push(tempFlag);
+                }
+
+                // for(let i = 0; i < inputs.length; i+=7){
+                //     if(!checkIfVisible($(inputs[i]).parent().parent().parent())){
+                //         continue;
+                //     }
+                //     let tempFlag = {};
+                //     tempFlag.country    = country.value.toUpperCase();
+                //     tempFlag.rank       = rank;
+                //     tempFlag.id         = inputs[i].value.toUpperCase();
+                //     tempFlag.type       = inputs[i+1].value;
+                //     tempFlag.number     = inputs[i+2].value;
+                //     tempFlag.issue_date = inputs[i+3].value;
+                //     tempFlag.expiry_date= inputs[i+5].value;
+                //     // FOR REMOVING ' in "SHIP'S COOK ENDORSEMENT"
+                //     if(tempFlag.type == "SHIP'S COOK ENDORSEMENT"){
+                //         tempFlag.type = "SHIP COOK ENDORSEMENT";
+                //     }
+                //     docu_flag.push(tempFlag);
+                // }
             });
 
             $('#createForm').append(`
@@ -490,50 +449,35 @@
             inputs = $('#docu .lc input, #docu .lc select');
             let docu_lc = [];
 
-            @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+=9){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+            for(let i = 0; i < inputs.length; i+=10){
 
-                    let tempLc = {};
-                    tempLc.type         = inputs[i].value.toUpperCase();
-                    tempLc.rank         = rank;
-                    tempLc.issuer       = inputs[i+1].value.toUpperCase();
-                    tempLc.regulation   = $(inputs[i+2]).val();
-                    tempLc.no           = inputs[i+4].value;
-                    tempLc.issue_date   = inputs[i+5].value;
-                    tempLc.expiry_date  = inputs[i+7].value;
+                let tempLc = {};
 
-                    // FOR REMOVING ' in "SAFETY OFFICER'S TRAINING COURSE"
-                    if(tempLc.type == "SAFETY OFFICER'S TRAINING COURSE"){
-                        tempLc.type = "SAFETY OFFICER TRAINING COURSE";
-                    }
-                    docu_lc.push(tempLc);
+                if($(inputs[i]).is("[data-type]")){
+                    tempLc.id = inputs[i].value;
                 }
-            @else
-                for(let i = 0; i < inputs.length; i+=10){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
-
-                    let tempLc = {};
-                    tempLc.id           = inputs[i].value
-                    tempLc.type         = inputs[i+1].value.toUpperCase();
-                    tempLc.rank         = rank;
-                    tempLc.issuer       = inputs[i+2].value.toUpperCase();
-                    tempLc.regulation   = $(inputs[i+3]).val();
-                    tempLc.no           = inputs[i+5].value;
-                    tempLc.issue_date   = inputs[i+6].value;
-                    tempLc.expiry_date  = inputs[i+8].value;
-
-                    // FOR REMOVING ' in "SAFETY OFFICER'S TRAINING COURSE"
-                    if(tempLc.type == "SAFETY OFFICER'S TRAINING COURSE"){
-                        tempLc.type = "SAFETY OFFICER TRAINING COURSE";
-                    }
-                    docu_lc.push(tempLc);
+                else{
+                    i -= 1;
                 }
-            @endif
+
+                if(!checkIfVisible(inputs[i+8])){
+                    continue;
+                }
+
+                tempLc.type         = inputs[i+1].value.toUpperCase();
+                tempLc.rank         = rank;
+                tempLc.issuer       = inputs[i+2].value.toUpperCase();
+                tempLc.regulation   = $(inputs[i+3]).val();
+                tempLc.no           = inputs[i+5].value;
+                tempLc.issue_date   = inputs[i+6].value;
+                tempLc.expiry_date  = inputs[i+8].value;
+
+                // FOR REMOVING ' in "SAFETY OFFICER'S TRAINING COURSE"
+                if(tempLc.type == "SAFETY OFFICER'S TRAINING COURSE"){
+                    tempLc.type = "SAFETY OFFICER TRAINING COURSE";
+                }
+                docu_lc.push(tempLc);
+            }
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_lc" value='${JSON.stringify(docu_lc)}'>
@@ -543,36 +487,28 @@
             inputs = $('#docu .MedCert input, #docu .MedCert select');
             let docu_med_cert = [];
 
-            @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+= 7){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+            for(let i = 0; i < inputs.length; i+= 8){
 
-                    let tempMedCert = {};
-                    tempMedCert.type        = inputs[i].value.toUpperCase();
-                    tempMedCert.clinic      = inputs[i+1].value.toUpperCase();
-                    tempMedCert.number      = inputs[i+2].value;
-                    tempMedCert.issue_date  = inputs[i+3].value;
-                    tempMedCert.expiry_date  = inputs[i+5].value;
-                    docu_med_cert.push(tempMedCert);
-                }
-            @else
-                for(let i = 0; i < inputs.length; i+= 8){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
+                let tempMedCert = {};
 
-                    let tempMedCert = {};
-                    tempMedCert.id          = inputs[i].value;
-                    tempMedCert.type        = inputs[i+1].value.toUpperCase();
-                    tempMedCert.clinic      = inputs[i+2].value.toUpperCase();
-                    tempMedCert.number      = inputs[i+3].value;
-                    tempMedCert.issue_date  = inputs[i+4].value;
-                    tempMedCert.expiry_date = inputs[i+6].value;
-                    docu_med_cert.push(tempMedCert);
+                if($(inputs[i]).is("[data-type]")){
+                    tempMedCert.id = inputs[i].value;
                 }
-            @endif
+                else{
+                    i -= 1;
+                }
+
+                if(!checkIfVisible(inputs[i+6])){
+                    continue;
+                }
+
+                tempMedCert.type        = inputs[i+1].value.toUpperCase();
+                tempMedCert.clinic      = inputs[i+2].value.toUpperCase();
+                tempMedCert.number      = inputs[i+3].value;
+                tempMedCert.issue_date  = inputs[i+4].value;
+                tempMedCert.expiry_date = inputs[i+6].value;
+                docu_med_cert.push(tempMedCert);
+            }
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_med_cert" value='${JSON.stringify(docu_med_cert)}'>
@@ -582,34 +518,27 @@
             inputs = $('#docu .Med input, #docu .Med select');
             let docu_med = [];
 
-            @if(!isset($edit))
-                for(let i = 0; i < inputs.length; i+=4){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
-                    
-                    let tempMed = {};
-                    tempMed.type            = inputs[i].value.toUpperCase();
-                    tempMed.with_mv         = inputs[i+1].value;
-                    tempMed.year            = inputs[i+2].value;
-                    tempMed.case_remarks    = inputs[i+3].value;
-                    docu_med.push(tempMed);
+            for(let i = 0; i < inputs.length; i+=5){
+                
+                let tempMed = {};
+
+                if($(inputs[i]).is("[data-type]")){
+                    tempMed.id = inputs[i].value;
                 }
-            @else
-                for(let i = 0; i < inputs.length; i+=5){
-                    if(!checkIfVisible(inputs[i])){
-                        continue;
-                    }
-                    
-                    let tempMed = {};
-                    tempMed.id              = inputs[i].value;
-                    tempMed.type            = inputs[i+1].value.toUpperCase();
-                    tempMed.with_mv         = inputs[i+2].value;
-                    tempMed.year            = inputs[i+3].value;
-                    tempMed.case_remarks    = inputs[i+4].value;
-                    docu_med.push(tempMed);
+                else{
+                    i -= 1;
                 }
-            @endif
+
+                if(!checkIfVisible(inputs[i+4])){
+                    continue;
+                }
+
+                tempMed.type            = inputs[i+1].value.toUpperCase();
+                tempMed.with_mv         = inputs[i+2].value;
+                tempMed.year            = inputs[i+3].value;
+                tempMed.case_remarks    = inputs[i+4].value;
+                docu_med.push(tempMed);
+            }
 
             $('#createForm').append(`
                 <input type="hidden" name="docu_med" value='${JSON.stringify(docu_med)}'>

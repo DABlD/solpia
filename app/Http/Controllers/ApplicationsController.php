@@ -117,7 +117,7 @@ class ApplicationsController extends Controller
         $applicant['birth_place'] = strtoupper($applicant['birth_place']);
         $applicant['religion'] = strtoupper($applicant['religion']);
 
-        // $applicant = Applicant::where('user_id', $id)->update($applicant->all());
+        $applicant = Applicant::where('user_id', $id)->update($applicant->all());
 
         $user = collect($req->only([
             'fname','mname','lname', 'suffix',
@@ -145,7 +145,7 @@ class ApplicationsController extends Controller
         }
 
         // SAVE USER
-        // $user = User::where('id', $id)->update($user->all());
+        $user = User::where('id', $id)->update($user->all());
 
         $applicant = Applicant::where('user_id', $id)->first();
         $applicant->load('educational_background');
@@ -166,20 +166,15 @@ class ApplicationsController extends Controller
             $data->age = $data->birthday == "" ? null : 0;
 
             if(isset($data->id)){
-                echo $data->id . ' - ' . 'Update<br>';
-                // FamilyData::where('id', $data->id)->update((array)$data);
+                FamilyData::where('id', $data->id)->update((array)$data);
             }
             else{
-                echo 'Create<br>';
-                // FamilyData::create((array)$data);
+                FamilyData::create((array)$data);
             }
         }
 
-
         // DELETE FAMILY DATA
         $this->clearData($applicant->family_data, $req->fd, 'family_datas');
-
-        die;
 
         // SAVE SEA SERVICE
         $ss = json_decode($req->ss);
@@ -347,7 +342,7 @@ class ApplicationsController extends Controller
         }
 
         // DELETE DOCUMENT MED CERT
-        $this->clearData($applicant->document_med_cert, $req->docu_med_cert, 'docu_med_certs');
+        $this->clearData($applicant->document_med_cert, $req->docu_med_cert, 'document_med_certs');
 
         // SAVE DOCUMENT MED
         $docu_med = json_decode($req->docu_med);
@@ -381,13 +376,8 @@ class ApplicationsController extends Controller
         $b = collect(json_decode($new))->pluck('id')->toArray();
         $ids = array_diff($a, array_intersect($a, $b));
 
-        // dd($a, $b, array_intersect($a, $b), $ids);
-
-        echo '<br>';
-
         foreach($ids as $id){
-            echo 'Deleting' . ' - id# ' . $id . '<br>';
-            // DB::table($table)->where('id', $id)->delete();
+            DB::table($table)->where('id', $id)->delete();
         }
     }
 
