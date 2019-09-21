@@ -1082,8 +1082,8 @@
         ];
 
 		$('#rank').change(e => {
-			swal.showLoading();
 			setTimeout(() => {
+				swal.showLoading();
 				@if(!isset($edit))
 					asdasd(e);
 				@endif
@@ -1091,7 +1091,7 @@
 		});
 
         function asdasd(e){
-
+        	console.log('asdasdasd');
         	let rank = e.target.value;
 
             $('.docu-country').each((index, country) => {
