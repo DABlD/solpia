@@ -212,7 +212,7 @@ class ShinkoBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                     // $event->sheet->getDelegate()->getRowDimension($row)->setRowHeight(35);
                     // $event->sheet->getDelegate()->getRowDimension($row+1)->setRowHeight(35);
                     $event->sheet->getDelegate()->getStyle('I' . $next)->getFont()->setSize(10);
-                    $event->sheet->getDelegate()->getRowDimension($next)->setRowHeight(25);
+                    // $event->sheet->getDelegate()->getRowDimension($next)->setRowHeight(25);
 
                     $event->sheet->getDelegate()->getStyle("N$row")->getAlignment()->setWrapText(true);
 
