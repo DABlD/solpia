@@ -91,7 +91,9 @@
 			<td colspan="2">Expiry</td>
 
 			<td colspan="2" rowspan="2">Present Address</td>
-			<td colspan="6" rowspan="2">{{ $applicant->user->address }}</td>
+			<td colspan="6" rowspan="2">
+				{{ $applicant->provincial_address ?? $applicant->user->address}}
+			</td>
 		</tr>
 
 		@php
