@@ -92,8 +92,14 @@ class DatatablesController extends Controller
 		$vessels = Vessel::select('vessels.*')->with('principal')->get();
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
-		foreach($vessels as $vessel){
-			$vessel->actions = $vessel->actions;
+		$principals = Principal::where('active', 1)->pluck('id')->toArray();
+		foreach($vessels as $key => $vessel){
+			if(!in_array($vessel->principal_id, $principals)){
+				$vessels->forget($key);
+			}
+			else{
+				$vessel->actions = $vessel->actions;
+			}
 		}
 
     	return Datatables::of($vessels)->rawColumns(['actions'])->make(true);
