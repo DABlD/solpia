@@ -26,10 +26,17 @@ class VesselsController extends Controller
         }
     }
 
-    public function export(Request $req){
+    public function export(Request $req, $type = ""){
         $class = "App\\Exports\\Vessels";
-        $datas = Vessel::all();
+        $datas = Vessel::where('status', 'LIKE', $type . '%')->get();
         $datas->load('principal');
+
+        $principals = Principal::where('active', 1)->pluck('id')->toArray();
+        foreach($datas as $key => $vessel){
+            if(!in_array($vessel->principal_id, $principals)){
+                $datas->forget($key);
+            }
+        }
 
         return Excel::download(new $class($datas), 'Vessels.xlsx');
     }

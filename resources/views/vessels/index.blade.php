@@ -174,7 +174,19 @@
             });
 
             $('[data-original-title="Export Vessels"]').on('click', () => {
-                window.location.href = "{{ route('vessels.export') }}";
+                swal({
+                    title: 'Please select',
+                    input: 'select',
+                    inputOptions: {
+                        '': 'All',
+                        ACTIVE: 'Active',
+                        INACTIVE: 'Inactive'
+                    },
+                }).then(result => {
+                    if(!result.dismiss){
+                        window.location.href = "{{ route('vessels.export') }}/" + result.value;
+                    }
+                })
             });
 	    }
 	</script>
