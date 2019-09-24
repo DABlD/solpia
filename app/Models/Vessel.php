@@ -19,6 +19,10 @@ class Vessel extends Model
     	'created_at', 'updated_at'
     ];
 
+    public function setBHPAttribute($value) {
+        $this->attributes['BHP'] = $value == ""? 0 : $value;
+    }
+
     public function principal(){
     	return $this->belongsTo('App\Models\Principal');
     }
