@@ -25,7 +25,7 @@ class ApplicationsController extends Controller
     }
 
     public function index(Request $req){
-        $principals = Principal::select('id', 'slug', 'name')->get();
+        $principals = Principal::select('id', 'slug', 'name')->where('active', 1)->get();
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
 
