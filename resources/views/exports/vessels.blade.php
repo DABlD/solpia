@@ -32,7 +32,22 @@
 			<td>{{ $data->builder }}</td>
 			<td>{{ $data->engine }}</td>
 			<td>{{ $data->gross_tonnage }}</td>
-			<td>{{ ceil(($data->BHP * 0.745) / 5) * 5 }}</td>
+			@php 
+				$temp = $data->bhp_kw;
+				if($temp == ""){
+					$temp = '---';
+				}
+				else{
+					$temp = str_replace(',', '', $data->bhp_kw);
+					$temp = str_replace(' ', '', $temp);
+					try {
+						$temp = number_format(ceil(($temp * 0.745) / 5) * 5);
+					} catch (Exception $e) {
+						$temp = "(Invalid)";
+					}
+				}
+			@endphp
+			<td>{{ $temp }}</td>
 			<td>{{ $data->BHP }}</td>
 			<td>{{ $data->trade }}</td>
 			<td>{{ $data->ecdis }}</td>
