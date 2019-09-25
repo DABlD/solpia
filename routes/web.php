@@ -90,7 +90,7 @@ Route::group([
 		Route::get($name . '/getAddDetails/{applicant}', ucfirst($name) . 'Controller@getAddDetails')->name($name . '.getAddDetails');
 
 		Route::get($name . '/export/all', ucfirst($name) . 'Controller@exportAll')->name($name . '.export.all');
-		Route::get($name . '/export/{applicant}/{type}', ucfirst($name) . 'Controller@exportApplication')->name($name . '.export.applicant');
+		Route::get($name . '/export/{applicant}/{type?}', ucfirst($name) . 'Controller@exportApplication')->name($name . '.export.applicant');
 		Route::get($name . '/exportLineUp/{applicant}/{type}', ucfirst($name) . 'Controller@exportLineUpApplication')->name($name . '.export.applicant');
 		
 		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');

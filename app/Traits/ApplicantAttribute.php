@@ -7,7 +7,7 @@ trait ApplicantAttribute{
 		// return '<a class="btn btn-success" data-toggle="tooltip" title="View Applicant" data-id="' . $this->id . '">' .
 		// 	        '<span class="fa fa-search" data-id="' . $this->id . '"></span>' .
 		// 	   '</a>&nbsp;' . 
-		$string = '<a class="btn btn-warning" data-toggle="tooltip" title="Export Application" data-id="' . $this->id . '">' .
+		$string = '<a class="btn btn-warning" data-toggle="tooltip" title="Export Application" data-status="' . $this->status . '" data-id="' . $this->id . '">' .
 			        '<span class="fa fa-download" data-id="' . $this->id . '"></span>' .
 			   '</a>&nbsp;' .
 			   '<a class="btn btn-primary" data-toggle="tooltip" title="Edit Application" data-id="' . $this->id . '">' .

@@ -385,7 +385,11 @@ class ApplicationsController extends Controller
         return Excel::download(new AllApplicant, 'Applicants.xlsx');
     }
 
-    public function exportApplication(Applicant $applicant, $type){
+    public function exportApplication(Applicant $applicant, $type = null){
+        if(!$type){
+            $type = Principal::find(ProcessedApplicant::where('applicant_id', $applicant->id)->first()->principal_id)->slug;
+        }
+
         $applicant->load('user');
         $applicant->load('educational_background');
         $applicant->load('family_data');
