@@ -167,9 +167,70 @@
 
             $('[data-original-title="Line-Up"]').on('click', application => {
                 let id = $(application.target).data('id');
+                let status = $(application.target).data('status');
                 let aRank, aVessel, aPrincipal;
 
-                selectRank();
+                if(status == "Lined-Up"){
+                    swal({
+                        type: 'info',
+                        title: 'This crew is already Lined-Up',
+                        text: 'Choose action',
+                        confirmButtonText: 'Change Line-Up',
+                        cancelButtonText: 'Remove Line-Up',
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                        allowOutsideClick: false,
+                    }).then(result => {
+                        if(result.dismiss == 'cancel'){
+                            swal({
+                                type: 'warning',
+                                title: 'Confirmation',
+                                text: "Are you sure you want to remove the crew's Line-Up?",
+                                showCancelButton: true,
+                                cancelButtonColor: '#f76c6b',
+                                allowOutsideClick: false,
+                            }).then(result => {
+                                if(result.value){
+                                    swal.showLoading();
+                                    $.ajax({
+                                        url: '{{ route('lineUp.remove') }}',
+                                        data: {id: id},
+                                        success: result => {
+                                            setTimeout(() => {
+                                                if(result){
+                                                    swal({
+                                                        type: 'success',
+                                                        title: 'Line-Up successfully removed',
+                                                        timer: 800,
+                                                        showConfirmButton: false
+                                                    }).then(() => {
+                                                        table.ajax.reload(null, false);
+                                                    });
+                                                }
+                                                else{
+                                                    swal({
+                                                        type: 'error',
+                                                        title: 'Try Again',
+                                                        timer: 800,
+                                                        showConfirmButton: false
+                                                    });
+                                                }
+                                            }, 500);
+                                        }
+                                    })
+                                }
+                            })
+                            return;
+                        }
+                        else if(result.value){
+                            selectRank();
+                        }
+                    });
+                }
+                else{
+                    selectRank();
+                }
+
 
                 function selectRank(){
                     swal({
@@ -304,7 +365,7 @@
                                                     timer: 800,
                                                     showConfirmButton: false
                                                 }).then(() => {
-                                                    table.ajax.reload();
+                                                    table.ajax.reload(null, false);
                                                 });
                                             }
                                             else{
@@ -315,20 +376,13 @@
                                                     showConfirmButton: false
                                                 });
                                             }
-                                        }, 1000);
+                                        }, 500);
                                     }
                                 })
                             }
                         });
                     }
                 }
-            });
-
-            $('[data-original-title="Lined-Up"]').on('click', () => {
-                swal({
-                    type: 'warning',
-                    title: 'This applicant is already Lined-Up',
-                });
             });
 	    }
 	</script>

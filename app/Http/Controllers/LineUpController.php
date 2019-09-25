@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{ProcessedApplicant, Principal};
+use App\Models\{ProcessedApplicant, Principal, Applicant};
 
 class LineUpController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Principal');
+        $this->middleware('permissions:' . 'Admin/Crewing Manager');
     }
 
     public function index(){
@@ -16,6 +16,18 @@ class LineUpController extends Controller
             'title' => 'Lined-Up Applicants',
             'principal' => Principal::where('user_id', auth()->user()->id)->first()
             // 'principal' => camel_case(strtolower(auth()->user()->fname))
+        ]);
+    }
+
+    public function remove(Request $req){
+        Applicant::where('id', $req->id)->update(['status' => 'Vacation']);
+
+        return ProcessedApplicant::where('applicant_id', $req->id)->update([
+            'principal_id' => null,
+            'vessel_id' => null,
+            'rank_id' => null,
+            'status' => 'Vacation',
+            'remarks' => null
         ]);
     }
 

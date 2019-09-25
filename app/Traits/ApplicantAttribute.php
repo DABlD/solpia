@@ -7,7 +7,6 @@ trait ApplicantAttribute{
 		// return '<a class="btn btn-success" data-toggle="tooltip" title="View Applicant" data-id="' . $this->id . '">' .
 		// 	        '<span class="fa fa-search" data-id="' . $this->id . '"></span>' .
 		// 	   '</a>&nbsp;' . 
-		$status = $this->status == "Lined-Up" ? $this->status : 'Line-Up';
 		$string = '<a class="btn btn-warning" data-toggle="tooltip" title="Export Application" data-id="' . $this->id . '">' .
 			        '<span class="fa fa-download" data-id="' . $this->id . '"></span>' .
 			   '</a>&nbsp;' .
@@ -16,9 +15,7 @@ trait ApplicantAttribute{
 			   '</a>&nbsp;';
 
 		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager'])){
-			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="' . $status . '" data-id="' . $this->id . '">' .
-					        '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' .
-					   '</a>&nbsp;';
+			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '<span data-status="' . $this->status . '" class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 		}
 
 		return $string;

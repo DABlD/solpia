@@ -129,6 +129,7 @@ Route::group([
 		Route::get($name . '/get/{user}', ucfirst($name) . 'Controller@get')->name($name . '.get');
 		
 		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
+		Route::get($name . '/remove', ucfirst($name) . 'Controller@remove')->name($name . '.remove');
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
 
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
