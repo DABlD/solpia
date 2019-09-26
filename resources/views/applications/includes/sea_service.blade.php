@@ -268,7 +268,7 @@
             }
         }
 
-        function getVessels(){
+        function getVessels(flag = true){
             savedVesselsString = "";
 
             $.ajax({
@@ -276,30 +276,17 @@
                 dataType: 'json',
                 success: vessels => {
                     vessels.forEach(vessel => {
-                        savedVessels[vessel.name] = vessel;
-                        savedVesselsString += `
-                            <option value="${vessel.name}">${vessel.name}</option>
-                        `;
+                        if(savedVessels[vessel.name] == undefined){
+                            savedVessels[vessel.name] = vessel;
+                            savedVesselsString += `
+                                <option value="${vessel.name}">${vessel.name}</option>
+                            `;
+                        }
                     });
                     addSS2();
                 }
             });
         }
-
-        @if(isset($edit))
-            $.ajax({
-                url: '{{ route('vessels.getAll') }}',
-                dataType: 'json',
-                success: vessels => {
-                    vessels.forEach(vessel => {
-                        savedVessels[vessel.name] = vessel;
-                        savedVesselsString += `
-                            <option value="${vessel.name}">${vessel.name}</option>
-                        `;
-                    });
-                }
-            });
-        @endif
     </script>
 @endpush
 
