@@ -21,7 +21,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class ApplicationsController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin/Encoder/Principal/Cadet');
+        $this->middleware('permissions:' . 'Admin/Encoder/Principal/Cadet/Crewing Officer');
     }
 
     public function index(Request $req){
@@ -501,6 +501,13 @@ class ApplicationsController extends Controller
                 $applicant->rank = Rank::where('name', $name)->first();
             }
         }
+
+        // FIX MINIMUM VESSELS
+        // if(sizeof($applicant->sea_service) < 5){
+        //     for($i = sizeof($applicant->sea_service); $i <= 5; $i++){
+                
+        //     }
+        // }
 
         return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
     }
