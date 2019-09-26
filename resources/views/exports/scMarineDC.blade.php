@@ -230,19 +230,11 @@
 				{{ isset($applicant->vessel) ? $applicant->vessel->name : 'TBA' }}
 			</td>
 
-			{{-- GET FLAG --}}
-			@php
-				$flag = "-----";
-				if(sizeof($applicant->document_flag)){
-					$flag = $applicant->document_flag->first()->country;
-				}
-			@endphp
-
 			<td colspan="2">
 				FLAG
 			</td>
 			<td colspan="2">
-				{{ $flag }}
+				{{ isset($applicant->vessel) ? $applicant->vessel->flag : 'TBA' }}
 			</td>
 
 			<td colspan="2">
