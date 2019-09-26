@@ -121,6 +121,25 @@
 					return;
 				}
 			}
+			elseif ($docu == 'SSBT WITH BRM') {
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+
+				if(!$docu){
+					$name = 'SSBT';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+					if(!$docu){
+						$name = 'BRM';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+
+					if(!$docu){
+						$name = 'BTM';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+				}
+			}
 			else{
 
 				$temp = $docu;
