@@ -8,7 +8,7 @@ trait ApplicantAttribute{
 		// 	        '<span class="fa fa-search" data-id="' . $this->id . '"></span>' .
 		// 	   '</a>&nbsp;' . 
 		$string = '<a class="btn btn-warning" data-toggle="tooltip" title="Export Application" data-status="' . $this->status . '" data-id="' . $this->id . '">' .
-			        '<span class="fa fa-download" data-id="' . $this->id . '"></span>' .
+			        '<span class="fa fa-download" data-id="' . $this->id . '" data-status="' . $this->status . '"></span>' .
 			   '</a>&nbsp;' .
 			   '<a class="btn btn-primary" data-toggle="tooltip" title="Edit Application" data-id="' . $this->id . '">' .
 			        '<span class="fa fa-pencil" data-id="' . $this->id . '"></span>' .
