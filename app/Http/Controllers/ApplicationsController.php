@@ -503,11 +503,24 @@ class ApplicationsController extends Controller
         }
 
         // FIX MINIMUM VESSELS
-        // if(sizeof($applicant->sea_service) < 5){
-        //     for($i = sizeof($applicant->sea_service); $i <= 5; $i++){
-                
-        //     }
-        // }
+        if(sizeof($applicant->sea_service) < 5){
+            for($i = sizeof($applicant->sea_service); $i < 5; $i++){
+                $applicant->sea_service->push((object)[
+                    'vessel_name' => null,
+                    'previous_salary' => null,
+                    'sign_on' => null,
+                    'sign_off' => null,
+                    'rank' => null,
+                    'vessel_type' => null,
+                    'gross_tonnage' => null,
+                    'manning_agent' => null,
+                    'remarks' => null,
+                    'engine_type' => null,
+                    'bhp_kw' => null,
+                    'principal' => null
+                ]);
+            }
+        }
 
         return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
     }
