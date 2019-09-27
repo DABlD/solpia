@@ -517,7 +517,9 @@ class ApplicationsController extends Controller
                     'remarks' => null,
                     'engine_type' => null,
                     'bhp_kw' => null,
-                    'principal' => null
+                    'principal' => null,
+                    'trade' => null,
+                    'flag' => null
                 ]);
             }
         }
