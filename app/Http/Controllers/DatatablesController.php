@@ -59,7 +59,10 @@ class DatatablesController extends Controller
 			else{
 			    if($applicant->sea_service->count()){
 			        $name = $applicant->sea_service->sortByDesc('sign_off')->first()->rank;
-			        $applicant->rank = Rank::where('name', $name)->first()->abbr;
+			        $rank = Rank::where('name', $name)->first();
+					if($rank){
+						$applicant->rank = $rank->abbr;
+					}
 			    }
 			    else{
 			    	$applicant->rank = "N/A";
