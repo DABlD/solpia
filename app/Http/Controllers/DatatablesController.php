@@ -63,6 +63,9 @@ class DatatablesController extends Controller
 					if($rank){
 						$applicant->rank = $rank->abbr;
 					}
+					else{
+						$applicant->rank = "N/A";
+					}
 			    }
 			    else{
 			    	$applicant->rank = "N/A";
