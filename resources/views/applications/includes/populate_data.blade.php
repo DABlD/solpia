@@ -311,7 +311,7 @@
 						}
 
 						swal.close();
-					}, (sss.length *350));
+					}, (sss.length 500));
 				});
 			}, 1000);
 		}
