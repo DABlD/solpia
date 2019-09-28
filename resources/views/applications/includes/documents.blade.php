@@ -1091,7 +1091,6 @@
 		});
 
         function asdasd(e){
-        	console.log('asdasdasd');
         	let rank = e.target.value;
 
             $('.docu-country').each((index, country) => {

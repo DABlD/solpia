@@ -545,7 +545,7 @@
             `);
 
             swal.close();
-            $('#createForm').submit();
+            // $('#createForm').submit();
         }
 
         function showError(input, temp, error, message){
@@ -606,7 +606,7 @@
         };
 
         function checkIfVisible(element){
-            return $(element).parent().parent().find('.fa-times').is(':visible');
+            return $(element).parent().is(':visible');
         }
     </script>
 
