@@ -377,7 +377,7 @@ class ApplicationsController extends Controller
         $ids = array_diff($a, array_intersect($a, $b));
 
         foreach($ids as $id){
-            DB::table($table)->where('id', $id)->delete();
+            DB::table($table)->where('id', $id)->update(['deleted_at' => now()]);
         }
     }
 
