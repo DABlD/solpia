@@ -5,10 +5,23 @@
     <script src="{{ asset('js/flatpickr.js') }}"></script>
 
     <script>
-        addFD('Father');
-        addFD('Mother');
-
         $('#FD').append(`
+            <u><h3><strong>Father</strong></h3></u>
+            <div class="Father"></div>
+            <span class="FatherCount fd-count">0</span>
+            <a class="btn btn-success" onclick="addFD('Father')">
+                <span class="fa fa-plus"></span>
+                Father
+            </a>
+
+            <u><h3><strong>Mother</strong></h3></u>
+            <div class="Mother"></div>
+            <span class="MotherCount fd-count">0</span>
+            <a class="btn btn-success" onclick="addFD('Mother')">
+                <span class="fa fa-plus"></span>
+                Mother
+            </a>
+
             <u><h3><strong>Spouse</strong></h3></u>
             <div class="Spouse"></div>
             <span class="SpouseCount fd-count">0</span>
@@ -45,26 +58,35 @@
         function addFD(type){
             let fd_class2 = 'form-control';
 
-            if(type == 'Spouse' || type == 'Son' || type == 'Daughter' || type == 'Beneficiary'){
-                let count = parseInt($(`.${type}Count`)[0].innerText);
+            let count = parseInt($(`.${type}Count`)[0].innerText);
 
-                if(type == 'Spouse'){
-                    if(count != 0){
-                        swal({
-                            type: 'error',
-                            title: 'Only 1 spouse is allowed',
-                            showConfirmButton: false,
-                            timer: 800
-                        });
+            if(type == 'Spouse'){
+                if(count != 0){
+                    swal({
+                        type: 'error',
+                        title: 'Only 1 spouse is allowed',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
 
-                        return;
-                    }
+                    return;
                 }
+            }
+            else if(type == 'Mother' || type == 'Father'){
+                if(count != 0){
+                    swal({
+                        type: 'error',
+                        showConfirmButton: false,
+                        timer: 800
+                    });
 
-                $(`.${type}Count`)[0].innerText = count + 1;
+                    return;
+                }
             }
 
-            let count = $('.fd').length + 1;
+            $(`.${type}Count`)[0].innerText = count + 1;
+
+            count = $('.fd').length + 1;
 
             let fd_class = 'form-control';
             let fd_class3 = 'form-control';
@@ -78,14 +100,6 @@
             let occupation = 'fd-occupation';
             let address = 'fd-address';
             let email = 'fd-email';
-
-            // if(type == 'Father' || type == 'Mother' || $(`.${type}`).length == 0){
-            if(type == 'Father' || type == 'Mother'){
-                appendFD(`<div class="${type}"><u><h3><strong>${type}</strong></h3></u>`);
-            }
-            // else{
-            //     appendFD('<div>');
-            // }
 
             let string = `
                 <div class="row fd">

@@ -74,6 +74,11 @@ class ApplicationsController extends Controller
         // $applicant->load('sea_service');
         // $applicant->load('document_flag');
         // $applicant->load('document_lc');
+        $order = ['Father', 'Mother', 'Spouse', 'Son', 'Daughter', 'Beneficiary'];
+        
+        $applicant->family_data = $applicant->family_data->sortBy(function($model) use ($order){
+            return array_search($model->type, $order);
+        });
         
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $issuers = array_merge(

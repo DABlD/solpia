@@ -545,7 +545,7 @@
             `);
 
             swal.close();
-            // $('#createForm').submit();
+            $('#createForm').submit();
         }
 
         function showError(input, temp, error, message){

@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DocumentMed extends Model
 {
+	use SoftDeletes;
+	
 	protected $fillable = [
 		'type', 'with_mv', 'year', 'case_remarks', 'applicant_id'
 	];

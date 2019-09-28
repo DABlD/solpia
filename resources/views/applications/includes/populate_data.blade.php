@@ -86,9 +86,7 @@
 	// FAMILY DATA
 	index = 0;
 	@foreach($applicant->family_data as $data)
-		@if($loop->index > 1)
-			addFD("{{ $data->type }}");
-		@endif
+		addFD("{{ $data->type }}");
 	@endforeach
 
 	@foreach($applicant->family_data as $data)

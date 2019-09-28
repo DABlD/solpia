@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DocumentMedCert extends Model
 {
+	use SoftDeletes;
+	
 	protected $fillable = [
 		'clinic', 'issue_date', 'expiry_date', 'applicant_id', 'type', 'number'
 	];
