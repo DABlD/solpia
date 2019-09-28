@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DocumentFlag extends Model
 {
+	use SoftDeletes;
+	
     protected $fillable = [
     	'country', 'applicant_id', 'number', 'type',
     	'issue_date', 'expiry_date', 'rank'
