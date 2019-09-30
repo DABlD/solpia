@@ -413,7 +413,7 @@
 				ADMINISTRATION
 			</td>
 			<td colspan="5" rowspan="3">
-				CONFIRMED BY: JEFFREY R. PLANTA
+				CONFIRMED BY: THEA GUERRA
 				<br>
 				(Crewing Manager)
 			</td>
