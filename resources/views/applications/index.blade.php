@@ -75,6 +75,9 @@
             ajax: {
                 url: '{{ route('datatables.applications') }}',
                 type: 'POST',
+                data: () => {
+                    return $('#formFilter').serialize();
+                }
             },
             columns: [
                 { data: 'id', name: 'id' },

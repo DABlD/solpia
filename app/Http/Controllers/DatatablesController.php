@@ -30,7 +30,7 @@ class DatatablesController extends Controller
     	return Datatables::of($users)->rawColumns(['actions'])->make(true);
 	}
 
-	public function applications(){
+	public function applications(Request $req){
 		$applicants = Applicant::select('id', 'user_id', 'status', 'remarks')
 						->with('user:id,avatar,fname,lname,contact,birthday')
 						->get();
