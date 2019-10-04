@@ -10,7 +10,8 @@ use App\Models\{ProcessedApplicant, Applicant};
 use App\Models\{EducationalBackground, FamilyData, SeaService};
 use App\Models\{Vessel, Rank, Principal};
 use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMedCert, DocumentMed, DocumentMedExp};
-use App\Models\AuditTrail;
+
+use App\Models\{AuditTrail, Statistic};
 
 use Image;
 use Browser;
@@ -550,6 +551,8 @@ class ApplicationsController extends Controller
             'browser'   => Browser::browserName(),
             'platform'  => Browser::platformName()
         ]);
+
+        Statistic::where('name', 'export')->increment('count');
 
         return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
     }
