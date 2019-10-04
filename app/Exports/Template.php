@@ -27,20 +27,30 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
     public function registerEvents(): array
     {
-        $borderStyle = [
-            'borders' => [
-                'top' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        $borderStyle = 
+        [
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
                 ],
-                'bottom' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'left' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
-                'right' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
+            ],
+            [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
             ],
         ];
 
@@ -202,8 +212,10 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 ]);
 
-                foreach($cells as $cell){
-                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle);
+                foreach($cells as $key => $value){
+                    foreach($value as $cell){
+                        $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
+                    }
                 }
 
                 // FOR THE CHECK
