@@ -10,8 +10,10 @@ use App\Models\{ProcessedApplicant, Applicant};
 use App\Models\{EducationalBackground, FamilyData, SeaService};
 use App\Models\{Vessel, Rank, Principal};
 use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMedCert, DocumentMed, DocumentMedExp};
+use App\Models\AuditTrail;
 
 use Image;
+use Browser;
 use DB;
 
 use App\Exports\AllApplicant;
@@ -373,6 +375,16 @@ class ApplicationsController extends Controller
             $req->session()->flash('error', 'There was a problem updating the applicant. Try again.');
         }
 
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "updated " . $req->lname . ', ' . $req->fname,
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
         return back();
     }
 
@@ -390,7 +402,7 @@ class ApplicationsController extends Controller
         return Excel::download(new AllApplicant, 'Applicants.xlsx');
     }
 
-    public function exportApplication(Applicant $applicant, $type = null){
+    public function exportApplication(Applicant $applicant, $type = null, Request $req){
         if(!$type){
             $type = Principal::find(ProcessedApplicant::where('applicant_id', $applicant->id)->first()->principal_id)->slug;
         }
@@ -528,6 +540,16 @@ class ApplicationsController extends Controller
                 ]);
             }
         }
+
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "exported " . $applicant->user->lname . ', ' . $applicant->user->fname,
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
 
         return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
     }
@@ -786,6 +808,16 @@ class ApplicationsController extends Controller
         ProcessedApplicant::create([
             'applicant_id' => $applicant->id,
             'status' => 'Vacation'
+        ]);
+
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "encoded " . $user['lname'] . ', ' . $user['fname'],
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
         ]);
 
         if(true){
