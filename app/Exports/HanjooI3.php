@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
@@ -52,6 +52,13 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
 	        ],
+            [
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
         ];
 
         $fillStyle = [
@@ -118,7 +125,7 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('INTERVIEW CHECKLIST.INTERGES', false);
+                $event->sheet->getDelegate()->setTitle('INTERVIEW CHECKLIST.INTERGES 2', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -130,7 +137,6 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // FONT SIZES
                 $event->sheet->getDelegate()->getStyle('A1:Q36')->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A1:Q36')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('A5')->getFont()->setSize(16);
 
                 // HEADINGS
 
@@ -156,31 +162,31 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HL
                 $h[4] = [
-                    
+                    'A10'
                 ];
 
                 // HC VC
                 $h[5] = [
-                    'A1:O33'
+                    'A1:O9', 'A11:O33'
                 ];
 
                 // B
                 $h[6] = [
-                    'A12', 'A17'//, 'D32', 'M32'
+                    
                 ];
 
                 // VC
                 $h[7] = [
-                    
+                    'A10'
                 ];
 
                 $h['wrap'] = [
-                    'D26:D27', 'F7:F9', 'C10'
+                    'A4', 'C4', 'A12', 'A18', 'A24', 'L4'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                	'D22:D24', 'B15', 'E13:E15',
+                	
                 ];
 
                 foreach($h as $key => $value) {
@@ -202,8 +208,6 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // ROTATE TEXT
-                $event->sheet->getDelegate()->getStyle('A12')->getAlignment()->setTextRotation(-90);
-                $event->sheet->getDelegate()->getStyle('A17')->getAlignment()->setTextRotation(-90);
 
                 // FILLS
                 $fills = [
@@ -220,7 +224,11 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ]);
 
                 $cells[1] = array_merge([
-                	'A7:O33'
+                	'A4:O6', 'A11:O29'
+                ]);
+
+                $cells[2] = array_merge([
+                    'A8:O8'
                 ]);
 
                 foreach($cells as $key => $value){
@@ -249,31 +257,11 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(8);
                 $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(8);
 
-                $event->sheet->getDelegate()->getRowDimension('5')->setRowHeight(33);
-                $event->sheet->getDelegate()->getRowDimension('6')->setRowHeight(28.5);
+                $event->sheet->getDelegate()->getRowDimension('4')->setRowHeight(29.25);
+                $event->sheet->getDelegate()->getRowDimension('5')->setRowHeight(26.25);
+                $event->sheet->getDelegate()->getRowDimension('6')->setRowHeight(32.25);
 
-                $event->sheet->getDelegate()->getRowDimension('11')->setRowHeight(22.5);
-                $event->sheet->getDelegate()->getRowDimension('12')->setRowHeight(22.5);
-                $event->sheet->getDelegate()->getRowDimension('13')->setRowHeight(27.75);
-                $event->sheet->getDelegate()->getRowDimension('14')->setRowHeight(26.25);
-                $event->sheet->getDelegate()->getRowDimension('15')->setRowHeight(28.5);
-
-                $event->sheet->getDelegate()->getRowDimension('26')->setRowHeight(29.25);
-                $event->sheet->getDelegate()->getRowDimension('27')->setRowHeight(27);
-                $event->sheet->getDelegate()->getRowDimension('28')->setRowHeight(22.5);
-                $event->sheet->getDelegate()->getRowDimension('29')->setRowHeight(21);
-                $event->sheet->getDelegate()->getRowDimension('30')->setRowHeight(19.5);
-                $event->sheet->getDelegate()->getRowDimension('31')->setRowHeight(21);
-                $event->sheet->getDelegate()->getRowDimension('32')->setRowHeight(21);
-                $event->sheet->getDelegate()->getRowDimension('33')->setRowHeight(27.5);
-
-                for($i = 7; $i <= 10; $i++){
-                	$event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(27);
-                }
-
-                for($i = 16; $i <= 25; $i++){
-                	$event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(22.5);
-                }
+                $event->sheet->getDelegate()->getRowDimension('10')->setRowHeight(24);
             },
         ];
     }
@@ -291,27 +279,16 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setCoordinates('A2');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('YN1');
-        $drawing2->setDescription('YN1');
-        $drawing2->setPath(public_path('images/yn1.jpg'));
-        $drawing2->setCoordinates('D32');
-        $drawing2->setOffsetX(7);
-        $drawing2->setOffsetY(3);
+        $drawing2->setName('EU');
+        $drawing2->setDescription('EU');
+        $drawing2->setPath(public_path('images/eu.png'));
+        $drawing2->setCoordinates('C6');
+        $drawing2->setOffsetX(10);
+        $drawing2->setOffsetY(5);
         $drawing2->setResizeProportional(false);
-        $drawing2->setWidth(130);
-        $drawing2->setHeight(23);
+        $drawing2->setWidth(210);
+        $drawing2->setHeight(35);
 
-        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing3->setName('YN2');
-        $drawing3->setDescription('YN2');
-        $drawing3->setPath(public_path('images/yn2.jpg'));
-        $drawing3->setCoordinates('M32');
-        $drawing3->setOffsetX(7);
-        $drawing3->setOffsetY(3);
-        $drawing3->setResizeProportional(false);
-        $drawing3->setWidth(130);
-        $drawing3->setHeight(23);
-
-        return [$drawing, $drawing2, $drawing3];
+        return [$drawing, $drawing2];
     }
 }
