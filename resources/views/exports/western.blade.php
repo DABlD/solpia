@@ -287,7 +287,7 @@
 		<td colspan="2">Rank:</td>
 		<td colspan="4">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'TBA' }}</td>
 		<td colspan="5">Date Employed:</td>
-		<td colspan="4">{{ $applicant->created_at->format('F j, Y') }}</td>
+		<td colspan="4">{{ $applicant->created_at->format('M j, Y') }}</td>
 		<td colspan="3">Vessel:</td>
 		<td colspan="8">{{ isset($applicant->vessel) ? $applicant->vessel->name : 'TBA' }}</td>
 	</tr>
@@ -336,7 +336,7 @@
 			$weight = $applicant->weight;
 			$height = $applicant->height;
 		@endphp
-		<td colspan="5">{{ round(( ($weight / ($height * $height)) * 10 ) / 10) }}</td>
+		<td colspan="5">{{ $applicant->bmi }}</td>
 	</tr>
 
 	<tr>
@@ -562,6 +562,14 @@
 	{{-- MEDS --}}
 	{{ addS('5. PHYSICAL INSPECTION / YELLOW CARD') }}
 
+	<tr>
+		<td colspan="10">Certificate</td>
+		<td colspan="6">Number</td>
+		<td colspan="6">Date Issued</td>
+		<td colspan="6">Expiry Date</td>
+		<td colspan="6">Remarks</td>
+	</tr>
+
 	{{ $getDocument('MEDICAL CERTIFICATE', 'med_cert', '', 'Physical Inspection')}}
 	{{ $getDocument('YELLOW FEVER', 'med_cert', '', 'Yellow Fever')}}
 	{{ $getDocument('CHOLERA', 'med_cert', '', 'Cholera')}}
@@ -605,7 +613,14 @@
 		<td colspan="6"></td>
 	</tr>
 
-	{{ addS('TRAINING / EXPERIENCE FOR SAFETY AND MANAGEMENT SYSTEM') }}
+	{{ addS('7. TRAINING / EXPERIENCE FOR SAFETY AND MANAGEMENT SYSTEM') }}
+
+	<tr>
+		<td colspan="11">Type</td>
+		<td colspan="11">Date</td>
+		<td colspan="6">Period</td>
+		<td colspan="6">Evaluation</td>
+	</tr>
 
 	<tr>
 		<td colspan="11">Training for SMS</td>
@@ -634,6 +649,11 @@
 		<td rowspan="2" colspan="6">Welding</td>
 		<td colspan="22">Class</td>
 		<td colspan="6">Evaluation</td>
+	</tr>
+
+	<tr>
+		<td colspan="22">Good / Acceptable / Poor</td>
+		<td colspan="6"></td>
 	</tr>
 
 	{{ addS('9. Evaluation by previous company') }}
@@ -668,7 +688,7 @@
 		<td colspan="6"></td>
 	</tr>
 
-	{{ addS("SEAMAN'S HISTORY") }}
+	{{ addS("10. SEAMAN'S HISTORY") }}
 
 	<tr>
 		<td colspan="6">Vessel's Name</td>
