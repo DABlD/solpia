@@ -59,6 +59,32 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
+            [
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOTTED,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
         ];
 
         $fillStyle = [
@@ -160,6 +186,11 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getStyle('A1:AJ150')->getFont()->setSize(10);
                 $event->sheet->getParent()->getActiveSheet()->getProtection()->setSheet(true);
+
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+
                 // FONT SIZES
 
                 // EDUCATION ROWS
@@ -173,9 +204,28 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SEA SERVICE ROWS
                 $ssSize = sizeof($this->applicant->sea_service);
                 $ssRows = '';
+                $sSsRows = [];
+                $sSsRows2 = [];
 
                 if($ssSize){
                     $ssRows = 'A' . (93 + $ebSize) . ':' . 'AH' . (92 + $ebSize + ($ssSize * 2));
+                }
+
+                $ctr = 91;
+                for($i = 0; $i <= sizeof($this->applicant->sea_service); $i++){
+                    array_push($sSsRows, 'A' . ($ctr + $ebSize) . ':' . 'F' . ($ctr + $ebSize));
+                    array_push($sSsRows, 'G' . ($ctr + $ebSize) . ':' . 'J' . ($ctr + $ebSize));
+                    array_push($sSsRows, 'K' . ($ctr + $ebSize) . ':' . 'P' . ($ctr + $ebSize));
+                    array_push($sSsRows, 'W' . ($ctr + $ebSize) . ':' . 'AB' . ($ctr + $ebSize));
+
+                    array_push($sSsRows2, 'A' . ($ctr + $ebSize + 1) . ':' . 'F' . ($ctr + $ebSize + 1));
+                    array_push($sSsRows2, 'G' . ($ctr + $ebSize + 1) . ':' . 'J' . ($ctr + $ebSize + 1));
+                    array_push($sSsRows2, 'K' . ($ctr + $ebSize + 1) . ':' . 'P' . ($ctr + $ebSize + 1));
+                    array_push($sSsRows2, 'Q' . ($ctr + $ebSize) . ':' . 'V' . ($ctr + $ebSize + 1));
+                    array_push($sSsRows2, 'W' . ($ctr + $ebSize + 1) . ':' . 'AB' . ($ctr + $ebSize + 1));
+                    array_push($sSsRows2, 'AC' . ($ctr + $ebSize) . ':' . 'AH' . ($ctr + $ebSize + 1));
+
+                    $ctr+=2;
                 }
 
                 // FUNCTIONS
@@ -231,7 +281,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = array_merge($fills[1], $fillables, [
-                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 35), $ar('A', 55), $ar('A', (92 + ($ssSize * 2) + 6)), $ar('A', (92 + ($ssSize * 2) + 8)), $ar('P', (92 + ($ssSize * 2) + 8))
+                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 35), $ar('A', 55), $ar('A', (92 + ($ssSize * 2) + 6)), $ar('A', (92 + ($ssSize * 2) + 8)), $ar('P', (92 + ($ssSize * 2) + 8)), $ar('A', 31, 'AH', 31), $ar('A', 39, 'AH', 39), $ar('A', 65, 'AH', 65), $ar('A', 70, 'AH', 70), $ar('A', 73, 'AH', 73), $ar('A', 77, 'AH', 77), $ar('A', 82, 'AH', 82), $ar('A', 91, 'AH', 92)
                 ]);
 
                 // HL
@@ -288,16 +338,19 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BORDERS
                 $cells[0] = array_merge([
-                    'A1:H11'
+                    'A1:H11', $ar('A', (92 + ($ssSize *2) + 4), 'AH', (92 + ($ssSize *2) + 8))
                 ]);
 
                 $cells[1] = array_merge([
-                    'AA1:AH4', 'A22:' . $ar('AH', (92 + ($ssSize *2) + 8))
+                    'AA1:AH4', 'A22:' . $ar('AH', 90), $ar('A', (92 + ($ssSize *2) + 1), 'AH', (92 + ($ssSize *2) + 4))
                 ]);
 
-                $cells[2] = array_merge(([
+                $cells[2] = array_merge([
                     'P9:AA9', 'AA11:AH11', 'E13:H13', 'K13:N13', 'T13:W13', 'AA13:AH13', 'C14:L14', 'N14:W14', 'Y14:AH14', 'D16:Y16', 'AD16:AH16', 'D17:Y17', 'AD17:AH17', 'E18:J18', 'M18:N18', 'S18:Y18', 'AD18:AH18', 'E19:J19', 'N19:P19', 'U19:W19', 'AD19:AH19', 'D20:J20', 'M20:Q20', 'V20:W20', 'AE20:AH20'
-                ]));
+                ]);
+
+                $cells[3] = $sSsRows;
+                $cells[4] = $sSsRows2;
 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
@@ -337,6 +390,9 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // FORMAT CELLS
                 $event->sheet->getDelegate()->getStyle('D20')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
                 $event->sheet->getDelegate()->getStyle('M20')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
+
+                // SETTING PRINT AREA
+                $event->sheet->getDelegate()->getPageSetup()->setPrintArea('A1:' . $ar('AH', (92 + ($ssSize * 2)) + 8));
             },
         ];
     }
@@ -348,8 +404,8 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(218);
-        $drawing->setWidth(183);
+        $drawing->setHeight(219);
+        $drawing->setWidth(186);
         // $drawing->setOffsetX(3);
         // $drawing->setOffsetY(3);
         $drawing->setCoordinates('A1');

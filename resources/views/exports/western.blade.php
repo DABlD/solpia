@@ -276,7 +276,7 @@
 	<tr>
 		<td colspan="15"></td>
 		<td colspan="3">Date:</td>
-		<td colspan="8">{{ now()->format('F j, Y') }}</td>
+		<td colspan="8">{{ $applicant->created_at->format('M j, Y') }}</td>
 	</tr>
 
 	<tr></tr>
@@ -286,8 +286,19 @@
 		<td colspan="4"></td>
 		<td colspan="2">Rank:</td>
 		<td colspan="4">{{ isset($applicant->rank) ? $applicant->rank->abbr : 'TBA' }}</td>
+
+		{{-- GET FIRST SOLPIA SEA SERVICE --}}
+		@php
+			$date_employed = $applicant->created_at->format('M j, Y');
+			foreach($applicant->sea_service as $service){
+				if(strpos(strtoupper($service->manning_agent), 'SOLPIA') !== false){
+					$date_employed = $service->sign_on->format('M j, Y');
+				}
+			}
+		@endphp
+
 		<td colspan="5">Date Employed:</td>
-		<td colspan="4">{{ $applicant->created_at->format('M j, Y') }}</td>
+		<td colspan="4">{{ $date_employed }}</td>
 		<td colspan="3">Vessel:</td>
 		<td colspan="8">{{ isset($applicant->vessel) ? $applicant->vessel->name : 'TBA' }}</td>
 	</tr>
@@ -705,6 +716,10 @@
 		<td colspan="6">Engine Type/KW</td>
 		<td colspan="6">Sign off</td>
 	</tr>
+
+	@php
+		$date_employed = $applicant->created_at->format('M j, Y');
+	@endphp
 
 	@foreach($applicant->sea_service as $service)
 		<tr>
