@@ -437,8 +437,8 @@
 		<td rowspan="3" colspan="2">VISA</td>
 		<td colspan="8">USA Visa</td>
 		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
 	
@@ -450,8 +450,8 @@
 	<tr>
 		<td colspan="8">Aus. MCV Visa</td>
 		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
 
@@ -512,8 +512,8 @@
 		<td rowspan="3" colspan="2">ECDIS</td>
 		<td colspan="8">Specific Training(JRC)</td>
 		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
 
@@ -534,8 +534,8 @@
 	<tr>
 		<td colspan="8">Specific Training(FURUNO)</td>
 		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
 	
@@ -547,8 +547,8 @@
 	<tr>
 		<td colspan="8">Generic Training</td>
 		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
 
