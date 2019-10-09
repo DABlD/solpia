@@ -127,6 +127,7 @@
                 },
                 {
                     targets: 9,
+                    width: 85,
                     render: function(remarks, display, data){
                         remarks = remarks;
                         let selected = "";
