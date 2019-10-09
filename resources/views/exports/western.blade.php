@@ -32,7 +32,19 @@
 	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null, $riri = null) use ($applicant, $checkDate2, $rank) {
 		$name   = !$name ? $docu : $name;
 
-		$dRank = isset($applicant->rank) ? $applicant->rank->abbr : '----';
+		if($rank >= 1 && $rank <= 4){
+			$dRank = isset($applicant->rank) ? $applicant->rank->abbr : '----';
+
+			if($docu == "GMDSS/GOC"){
+				$dRank = "GMDSS OPERATOR";
+			}
+			elseif($docu == "SSO"){
+				$dRank = "SHIP SAFETY OFFICER";
+			}
+		}
+		else{
+			$dRank = '-----';
+		}
 
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
 
@@ -178,6 +190,7 @@
 			foreach($applicant->document_flag as $document){
 			    if($document->country == "Panama" && $document->type == $temp){
 			        $docu = $document;
+			        $docu->issuer = $docu->country;
 			    }
 			}
 		}
@@ -416,11 +429,11 @@
 		<td colspan="6">Issued By</td>
 	</tr>
 
-	{{ $getDocument('COC', 			'lc', 		'', 		'National License'	,'',true			)}}
-	{{ $getDocument('GMDSS/GOC', 	'lc', 		'', 		'National GMDSS'	,'',true			)}}
-	{{ $getDocument('LICENSE', 		'flag', 	'', 		'Panama License'	,'',true			)}}
-	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 		'Panama GMDSS'		,'',true			)}}
-	{{ $getDocument('SSO', 			'flag', 	'', 		'Panama SSO'		,'',true			)}}
+	{{ $getDocument('COC', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
+	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'National GMDSS'	,'',true			)}}
+	{{ $getDocument('LICENSE', 		'flag', 	'', 			'Panama License'	,'',true			)}}
+	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Panama GMDSS'		,'',true			)}}
+	{{ $getDocument('SSO', 			'flag', 	'', 			'Panama SSO'		,'',true			)}}
 	
 	{{-- CERTIFICATES --}}
 	{{ addS('3. CERTIFICATE') }}
@@ -447,7 +460,7 @@
 	<tr>
 		<td rowspan="3" colspan="2">VISA</td>
 		<td colspan="8">USA Visa</td>
-		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
+		<td colspan="6">{{ $docu ? $docu->number : "-----"}}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
@@ -460,7 +473,7 @@
 
 	<tr>
 		<td colspan="8">Aus. MCV Visa</td>
-		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
+		<td colspan="6">{{ $docu ? $docu->number : "-----"}}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
@@ -468,10 +481,10 @@
 
 	<tr>
 		<td colspan="8">Other Visa</td>
-		<td colspan="6"></td>
-		<td colspan="6"></td>
-		<td colspan="6"></td>
-		<td colspan="6"></td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
 	</tr>
 
 	{{ addS('4. OTHER CERTIFICATES (MARINA/SOLAS/MARPOL/OTHERS') }}
@@ -552,7 +565,7 @@
 	
 	@php 
 		$name = "ECDIS";
-		$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 	@endphp
 
 	<tr>
@@ -563,11 +576,11 @@
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
 
-	{{ $getDocument('IDK', 	'lc', 		'',	'Navigation at the Management Level')}}
-	{{ $getDocument('IDK', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
-	{{ $getDocument('IDK', 	'lc', 		'',	'Practical Assessment in Management Level')}}
-	{{ $getDocument('NCIII','lc', 		'',	'National Certificate III (NC III)')}}
+	{{ $getDocument('MLC TRAINING F1', 	'lc', 		'',	'Navigation at the Management Level')}}
+	{{ $getDocument('MLC TRAINING F3', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
+	{{ $getDocument('PRACTIAL ASSESSMENT IN MANAGEMENT LEVEL', 	'lc', 		'',	'Practical Assessment in Management Level')}}
 	{{ $getDocument('IDK', 	'lc', 		'',	'Catering Training Cert.')}}
+	{{ $getDocument('NCIII','lc', 		'',	'National Certificate III (NC III)')}}
 	{{ $getDocument('NCI', 	'lc', 		'',	'National Certificate I (NC I)')}}
 
 	{{-- MEDS --}}
@@ -633,6 +646,10 @@
 		<td colspan="6">Evaluation</td>
 	</tr>
 
+	@php 
+		$name = "ECDIS";
+		$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+	@endphp
 	<tr>
 		<td colspan="11">Training for SMS</td>
 		<td colspan="11"></td>

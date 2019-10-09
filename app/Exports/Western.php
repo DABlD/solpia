@@ -310,7 +310,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    $ar('K', 93, 'K', (93 + ($ssSize * 2))), 
+                    $ar('K', 93, 'K', (93 + ($ssSize * 2))), 'S18', $ar('AC', 25, 'AC', 92), $ar('F', 25, 'F', 32), $ar('A', 92, 'A', (92 + ($ssSize * 2))), $ar('G', 92, 'G', (92 + ($ssSize * 2))), $ar('Q', 92, 'V', (92 + ($ssSize * 2)))
                 ];
 
                 foreach($h as $key => $value) {
@@ -390,6 +390,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // FORMAT CELLS
                 $event->sheet->getDelegate()->getStyle('D20')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
                 $event->sheet->getDelegate()->getStyle('M20')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
+                $event->sheet->getDelegate()->getStyle($ar('K', 40, 'AH', 63))->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
 
                 // SETTING PRINT AREA
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea('A1:' . $ar('AH', (92 + ($ssSize * 2)) + 8));
