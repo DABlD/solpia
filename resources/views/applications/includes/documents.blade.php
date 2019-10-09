@@ -168,6 +168,7 @@
 						<option value="ECDIS MECYS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MECYS</option>
 						<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
 					<option value="ERS WITH ERM">&nbsp;&nbsp;&nbsp;&nbsp;ERS WITH ERM</option>
+					<option value="PRACTIAL ASSESSMENT IN MANAGEMENT LEVEL">&nbsp;&nbsp;&nbsp;&nbsp;PRACTIAL ASSESSMENT IN MANAGEMENT LEVEL</option>
 					<option value="MLC TRAINING F1">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F1</option>
 					<option value="MLC TRAINING F2">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F2</option>
 					<option value="MLC TRAINING F3">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F3</option>
