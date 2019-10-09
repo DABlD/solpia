@@ -839,6 +839,10 @@ class ApplicationsController extends Controller
         echo ProcessedApplicant::where('applicant_id', $id)->update(array_merge($req->all(), ['status' => 'Lined-Up']));
     }
 
+    public function updateData(Request $req){
+        echo Applicant::where('id', $req->id)->update($req->except('_token'));
+    }
+
     public function delete(User $user){
         $user->deleted_at = now()->toDateTimeString();
         echo $user->save();

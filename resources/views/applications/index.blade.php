@@ -58,6 +58,14 @@
         .dt-status b{
             color: red;
         }
+
+        .select2-selection__choice{
+            background-color: #f76c6b !important;
+        }
+
+        .select2-selection__choice__remove{
+            color: black !important;
+        }
 	</style>
 @endpush
 
@@ -117,15 +125,56 @@
                         return data.row;
                     },
                 },
+                {
+                    targets: 9,
+                    render: function(remarks, display, data){
+                        remarks = remarks;
+                        let selected = "";
+
+                        remarks.forEach(remark => {
+                            selected += `
+                                <option value="${remark}" selected>${remark}</option>
+                            `;
+                        });
+
+                        return `
+                            <select id="table-select-${data.id}" data-id="${data.id}" multiple>
+                                ${selected}
+                            </select>
+                        `;
+                    },
+                },
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
                 // MUST NOT BE INTERCHANGED t-i
+                $('select').select2({
+                    tags: true,
+                    class: 'table-select',
+                });
+
+                $('[id^=table-select] + .select2-container').css('width', '100%');
+                $('[id^=table-select] + .select2-container .select2-selection').css('border', 'none');
+
+                $('[id^=table-select]').on('change', e => {
+                    let input = $(e.target);
+                    let id = input.data('id');
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('applications.updateData') }}",
+                        data: {
+                            id: id,
+                            remarks: JSON.stringify(input.val())
+                        },
+                    });
+                });
+
                 tooltip();
             	initializeActions();
             },
             // order: [ [0, 'desc'] ],
         });
+
 
         table.on('draw', () => {
         	setTimeout(() => {

@@ -101,6 +101,8 @@ Route::group([
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 		Route::get($name . '/lineUp', ucfirst($name) . 'Controller@lineUp')->name($name . '.lineUp');
 
+		Route::post($name . '/updateData', ucfirst($name) . 'Controller@updateData')->name($name . '.updateData');
+
 		// Vessels ROUTES
 		$name = "vessels";
 		Route::get($name, ucfirst($name) . 'Controller@index')

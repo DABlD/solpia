@@ -37,6 +37,7 @@ class DatatablesController extends Controller
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		foreach($applicants as $key => $applicant){
+			$applicant->remarks = json_decode($applicant->remarks);
 			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->actions;
 			$applicant->age = $applicant->user->birthday->diffInYears();
