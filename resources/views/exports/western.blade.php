@@ -320,7 +320,7 @@
 		<td colspan="2">Name:</td>
 		<td colspan="10">{{ $applicant->user->lname }}</td>
 		<td></td>
-		<td colspan="10">{{ $applicant->user->fname . $applicant->user->suffix }}</td>
+		<td colspan="10">{{ $applicant->user->fname . ' ' . $applicant->user->suffix }}</td>
 		<td></td>
 		<td colspan="10">{{ $applicant->user->mname }}</td>
 	</tr>
