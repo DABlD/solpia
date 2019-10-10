@@ -173,6 +173,13 @@
                 });
             });
 
+            $('[data-original-title="View Line-Up"]').on('click', vessel => {
+                console.log($(vessel.target));
+                swal({
+                    title: 'LIST OF LINED-UP CREW'
+                });
+            });
+
             $('[data-original-title="Export Vessels"]').on('click', () => {
                 swal({
                     title: 'Please select',
