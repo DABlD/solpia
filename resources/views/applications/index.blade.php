@@ -152,6 +152,7 @@
                 $('select').select2({
                     tags: true,
                     class: 'table-select',
+                    disabled: {{ !in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) ? 'true' : 'false' }}
                 });
 
                 $('[id^=table-select] + .select2-container').css('width', '100%');
