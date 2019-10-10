@@ -782,7 +782,7 @@
 		<td colspan="7">Managing Director:</td>
 		<td colspan="8"></td>
 		<td colspan="7">Crew's Name:</td>
-		<td colspan="9"></td>
+		<td colspan="9">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname }}</td>
 		<td colspan="3"></td>
 	</tr>
 
