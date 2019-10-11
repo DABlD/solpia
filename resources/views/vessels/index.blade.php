@@ -39,6 +39,7 @@
 
 @push('after-styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 
 	<style>
 		#table img{
@@ -49,12 +50,30 @@
 		.w50{
 			width: 60px !important;
 		}
+
+        .select2-selection__choice{
+            background-color: #f76c6b !important;
+        }
+
+        .select2-selection__choice__remove{
+            color: black !important;
+        }
+
+        .head1{
+            background-color: #00a65a !important;
+        }
+
+        .head2{
+            background-color: #00a7d0 !important;
+        }
 	</style>
 @endpush
 
 @push('before-scripts')
 	<script src="{{ asset('js/datatables.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
 	<script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/select2.min.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -174,9 +193,50 @@
             });
 
             $('[data-original-title="View Line-Up"]').on('click', vessel => {
-                console.log($(vessel.target));
-                swal({
-                    title: 'LIST OF LINED-UP CREW'
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('applications.getLinedUp') }}',
+                    data: {id: $(vessel.target).data('id')},
+                    dataType: 'json',
+                    success: result => {
+                        // console.log(result);
+                        showModal("", result);
+                        $('#linedUp').on('show.bs.modal', e => {
+                            $('select').select2({
+                                tags: true,
+                                class: 'table-select',
+                                disabled: {{ !in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) ? 'true' : 'false' }}
+                            });
+
+                            $('[id^=table-select] + .select2-container').css('width', '100%');
+                            $('[id^=table-select] + .select2-container .select2-selection').css('border', 'none');
+                            $('#linedUp .modal-dialog').css('width', '95%');
+                            $('.remarks').css({
+                                width: '300px',
+                                'max-width': '300px'
+                            });
+                            $('.actions').css('width', '100px');
+
+                            $('[id^=table-select]').on('change', e => {
+                                let input = $(e.target);
+                                let id = input.data('id');
+                                $.ajax({
+                                    type: "POST",
+                                    url: "{{ route('applications.updateData') }}",
+                                    data: {
+                                        id: id,
+                                        remarks: JSON.stringify(input.val())
+                                    },
+                                });
+                            });
+
+                            $('#linedUp').on('hidden.bs.modal', () => {
+                                $('#linedUp').remove();
+                            });
+                        });
+
+                        $('#linedUp').modal('show');
+                    }
                 });
             });
 
@@ -196,5 +256,133 @@
                 })
             });
 	    }
+
+        function showModal(onBoard, linedUp){
+            let table = `
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <td>No.</td>
+                        <td>Rank</td>
+                        <td>Name</td>
+                        <td>Age</td>
+                        <td>Passport Exp.</td>
+                        <td>Sbook Exp.</td>
+                        <td>US Visa Exp.</td>
+                        <td>Status</td>
+                        <td>Remarks</td>
+                        <td>Actions</td>
+                    </tr>
+            `;
+
+            let table2 = `
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <td>No.</td>
+                        <td>Rank</td>
+                        <td>Name</td>
+                        <td>Age</td>
+                        <td>Date Joined</td>
+                        <td>MOB</td>
+                        <td>Contract Duration</td>
+                        <td>End of Contract</td>
+                        <td>Passport Exp.</td>
+                        <td>Sbook Exp.</td>
+                        <td>US Visa Exp.</td>
+                        <td>Joining Port</td>
+                        <td>Reliever</td>
+                        <td>Remarks</td>
+                        <td>Actions</td>
+                    </tr>
+            `;
+
+            linedUp.forEach((crew, index) => {
+                console.log(crew);
+                crew.remarks = JSON.parse(crew.remarks);
+                let selected = "";
+
+                crew.remarks.forEach(remark => {
+                    selected += `
+                        <option value="${remark}" selected>${remark}</option>
+                    `;
+                });
+
+                crew.remarks = `
+                    <select id="table-select-${crew.applicant_id}" data-id="${crew.applicant_id}" multiple>
+                        ${selected}
+                    </select>
+                `;
+
+                table += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${crew.abbr}</td>
+                        <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+                        <td>${crew.age}</td>
+                        <td>${moment(crew.PASSPORT).format('MMM DD, YYYY')}</td>
+                        <td>${moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY')}</td>
+                        <td>${moment(crew["US-VISA"]).format('MMM DD, YYYY')}</td>
+                        <td>${crew.status2}</td>
+                        <td class="remarks">${crew.remarks}</td>
+                        <td class="actions">
+                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" data-id="${crew.applicant_id}">
+                                <span class="fa fa-file-text" data-id="${crew.applicant_id}"></span>
+                            </a>
+                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board" data-id="${crew.applicant_id}">
+                                <span class="fa fa-ship" data-id="${crew.applicant_id}"></span>
+                            </a>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            table += "</table>";
+            table2 += "</table>";
+
+            $('body').append(`
+                <div class="modal fade" id="linedUp">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header head1">
+                                
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+
+                                <h4 class="modal-title">
+                                    <b>On Board</b>
+                                </h4>
+                            </div>
+
+                            <div class="modal-body">
+                                ${table2}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header head2">
+                                
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+
+                                <h4 class="modal-title">
+                                    <b>Line Up</b>
+                                </h4>
+                            </div>
+
+                            <div class="modal-body">
+                                ${table}
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+            );
+        }
 	</script>
 @endpush

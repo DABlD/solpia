@@ -843,6 +843,38 @@ class ApplicationsController extends Controller
         echo Applicant::where('id', $req->id)->update($req->except('_token'));
     }
 
+    public function getLinedUp(Request $req){
+        $linedUps = ProcessedApplicant::where('processed_applicants.vessel_id', $req->id)
+                        ->where('processed_applicants.status', 'Lined-Up')
+
+                        ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
+                        ->join('users as u', 'u.id', '=', 'a.user_id')
+                        ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
+                        // ->join('document_ids as d', 'd.applicant_id', '=', 'processed_applicants.applicant_id')
+                        // ->join('sea_services as s', 's.applicant_id', '=', 'processed_applicants.applicant_id')
+                        ->select('processed_applicants.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
+                        ->get();
+
+        foreach($linedUps as $linedUp){
+            $temp = DocumentId::where('applicant_id', $linedUp->applicant_id)->select('type', 'expiry_date')->get();
+            $linedUp->age = now()->parse($linedUp->birthday)->diff(now())->format('%y');
+            $linedUp->status2 = "NEW-HIRE";
+
+            foreach($temp as $docu){
+                $linedUp->{$docu->type} = $docu->expiry_date;
+            }
+            
+            $sea_services = SeaService::where('applicant_id', $linedUp->applicant_id)->get();
+            foreach($sea_services as $service){
+                if(strpos(strtoupper($service->manning_agent), 'SOLPIA') !== false){
+                    $linedUp->status2 = 'EX-CREW';
+                }
+            }
+        }
+
+        echo json_encode($linedUps);
+    }
+
     public function delete(User $user){
         $user->deleted_at = now()->toDateTimeString();
         echo $user->save();

@@ -102,6 +102,7 @@ Route::group([
 		Route::get($name . '/lineUp', ucfirst($name) . 'Controller@lineUp')->name($name . '.lineUp');
 
 		Route::post($name . '/updateData', ucfirst($name) . 'Controller@updateData')->name($name . '.updateData');
+		Route::post("$name/getLinedUp", ucfirst($name) . 'Controller@getLinedUp')->name("$name.getLinedUp");
 
 		// Vessels ROUTES
 		$name = "vessels";
