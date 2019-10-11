@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 // Models
 use App\User;
-use App\Models\{ProcessedApplicant, Applicant};
+use App\Models\{ProcessedApplicant, Applicant, LineUpContract};
 use App\Models\{EducationalBackground, FamilyData, SeaService};
 use App\Models\{Vessel, Rank, Principal};
 use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMedCert, DocumentMed, DocumentMedExp};
@@ -843,7 +843,7 @@ class ApplicationsController extends Controller
         echo Applicant::where('id', $req->id)->update($req->except('_token'));
     }
 
-    public function getLinedUp(Request $req){
+    public function getVesselCrew(Request $req){
         $linedUps = ProcessedApplicant::where('processed_applicants.vessel_id', $req->id)
                         ->where('processed_applicants.status', 'Lined-Up')
 
@@ -872,7 +872,36 @@ class ApplicationsController extends Controller
             }
         }
 
-        echo json_encode($linedUps);
+        $onBoards = LineUpContract::where('vessel_id', $req->id)
+                                ->where('line_up_contracts.status', 'On Board')
+                                ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
+                                ->join('users as u', 'u.id', '=', 'a.user_id')
+                                ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
+                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
+                                ->get();
+
+        foreach($onBoards as $onBoard){
+            $temp = DocumentId::where('applicant_id', $onBoard->applicant_id)->select('type', 'expiry_date')->get();
+            $onBoard->age = now()->parse($onBoard->birthday)->diff(now())->format('%y');
+
+            foreach($temp as $docu){
+                $onBoard->{$docu->type} = $docu->expiry_date;
+            }
+        }
+
+        echo json_encode([$onBoards, $linedUps]);
+    }
+
+    public function onBoard(Request $req){
+        $temp = ProcessedApplicant::where('applicant_id', $req->id)->first();
+        $temp->joining_port = $req->port;
+        $temp->joining_date = $req->date;
+        $temp->months = $req->months;
+
+        ProcessedApplicant::where('applicant_id', $req->id)->update(['status' => 'On Board']);
+        Applicant::where('id', $req->id)->update(['status' => 'On Board']);
+
+        echo LineUpContract::create($temp->toArray());
     }
 
     public function delete(User $user){

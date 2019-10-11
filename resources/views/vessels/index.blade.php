@@ -40,6 +40,7 @@
 @push('after-styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
 
 	<style>
 		#table img{
@@ -66,6 +67,16 @@
         .head2{
             background-color: #00a7d0 !important;
         }
+
+        .clabel{
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .clabel2{
+            margin-top: 5px;
+            text-align: right;
+        }
 	</style>
 @endpush
 
@@ -74,6 +85,7 @@
     <script src="{{ asset('js/moment.js') }}"></script>
 	<script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script src="{{ asset('js/flatpickr.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -195,12 +207,11 @@
             $('[data-original-title="View Line-Up"]').on('click', vessel => {
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route('applications.getLinedUp') }}',
+                    url: '{{ route('applications.getVesselCrew') }}',
                     data: {id: $(vessel.target).data('id')},
                     dataType: 'json',
                     success: result => {
-                        // console.log(result);
-                        showModal("", result);
+                        showModal(result[0], result[1]);
                         $('#linedUp').on('show.bs.modal', e => {
                             $('select').select2({
                                 tags: true,
@@ -235,6 +246,10 @@
                             });
                         });
 
+                        $('#linedUp').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        });
                         $('#linedUp').modal('show');
                     }
                 });
@@ -295,8 +310,8 @@
                     </tr>
             `;
 
+            // LINE UP TABLE
             linedUp.forEach((crew, index) => {
-                console.log(crew);
                 crew.remarks = JSON.parse(crew.remarks);
                 let selected = "";
 
@@ -324,11 +339,56 @@
                         <td>${crew.status2}</td>
                         <td class="remarks">${crew.remarks}</td>
                         <td class="actions">
-                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" data-id="${crew.applicant_id}">
-                                <span class="fa fa-file-text" data-id="${crew.applicant_id}"></span>
+                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" onClick="onBoard(${crew.applicant_id})">
+                                <span class="fa fa-file-text"></span>
                             </a>
-                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board" data-id="${crew.applicant_id}">
-                                <span class="fa fa-ship" data-id="${crew.applicant_id}"></span>
+                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id})">
+                                <span class="fa fa-ship"></span>
+                            </a>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // ON BOARD TABLE
+            onBoard.forEach((crew, index) => {
+                crew.remarks = JSON.parse(crew.remarks);
+                let selected = "";
+
+                crew.remarks.forEach(remark => {
+                    selected += `
+                        <option value="${remark}" selected>${remark}</option>
+                    `;
+                });
+
+                crew.remarks = `
+                    <select id="table-select-${crew.applicant_id}" data-id="${crew.applicant_id}" multiple>
+                        ${selected}
+                    </select>
+                `;
+
+                table2 += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${crew.abbr}</td>
+                        <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+                        <td>${crew.age}</td>
+                        <td></td>
+                        <td></td>
+                        <td>${crew.months}</td>
+                        <td>${moment(crew.joining_date).add(crew.months, 'months').format('DD-MMM-YY')}</td>
+                        <td>${moment(crew.PASSPORT).format('MMM DD, YYYY')}</td>
+                        <td>${moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY')}</td>
+                        <td>${moment(crew["US-VISA"]).format('MMM DD, YYYY')}</td>
+                        <td>${crew.joining_port}</td>
+                        <td></td>
+                        <td class="remarks">${crew.remarks}</td>
+                        <td class="actions">
+                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" onClick="onBoard(${crew.applicant_id})">
+                                <span class="fa fa-file-text"></span>
+                            </a>
+                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id})">
+                                <span class="fa fa-ship"></span>
                             </a>
                         </td>
                     </tr>
@@ -384,5 +444,85 @@
                 </div>`
             );
         }
+
+        function onBoard(id){
+            swal({
+                title: 'Contract Details',
+                html: `
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Joining Port</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="port" class="swal2-input" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Joining Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="date" class="swal2-input" placeholder="Select Date"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel2">Months of Contract</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" min="1" id="months" class="form-control" />
+                        </div>
+                    </div>
+                    <br>
+                `,
+                width: '30%',
+                onOpen: () => {
+                    $('#date').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                        minDate: moment().format('YYYY-MM-DD')
+                    })
+                },
+                confirmButtonText: "Create Contract",
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let a = $('#port').val();
+                            let b = $('#date').val();
+                            let c = $('#months').val();
+
+                            if(a == "" || b == "" || c == ""){
+                                swal.showValidationError('All fields is required');
+                            }
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('applications.onBoard') }}',
+                        data: {
+                            id: id,
+                            port: $('#port').val(),
+                            date: $('#date').val(),
+                            months: $('#months').val(),
+                        },
+                        success: () => {
+                            swal({
+                                type: 'success',
+                                title: 'Successfully Onboarded',
+                                showConfirmButton: false,
+                                timer: 800
+                            })
+                        }
+                    });
+                }
+            });
+        };
 	</script>
 @endpush
