@@ -171,6 +171,15 @@
                     });
                 });
 
+                // DISABLE SHOWING OF SELECTION OPTIONS WHEN UNSELECTING
+                $("[id^=table-select]").on("select2:unselect", function (evt) {
+                  if (!evt.params.originalEvent) {
+                    return;
+                  }
+
+                  evt.params.originalEvent.stopPropagation();
+                });
+
                 tooltip();
             	initializeActions();
             },
