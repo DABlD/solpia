@@ -64,10 +64,6 @@
             background-color: #00a65a !important;
         }
 
-        .head2{
-            background-color: #00a7d0 !important;
-        }
-
         .clabel{
             margin-top: 20px;
             text-align: right;
@@ -76,6 +72,10 @@
         .clabel2{
             margin-top: 5px;
             text-align: right;
+        }
+
+        .table-striped>tbody>tr:nth-of-type(odd) {
+            background-color: #bdb9b9;
         }
 	</style>
 @endpush
@@ -205,54 +205,7 @@
             });
 
             $('[data-original-title="View Line-Up"]').on('click', vessel => {
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ route('applications.getVesselCrew') }}',
-                    data: {id: $(vessel.target).data('id')},
-                    dataType: 'json',
-                    success: result => {
-                        showModal(result[0], result[1]);
-                        $('#linedUp').on('show.bs.modal', e => {
-                            $('select').select2({
-                                tags: true,
-                                class: 'table-select',
-                                disabled: {{ !in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) ? 'true' : 'false' }}
-                            });
-
-                            $('[id^=table-select] + .select2-container').css('width', '100%');
-                            $('[id^=table-select] + .select2-container .select2-selection').css('border', 'none');
-                            $('#linedUp .modal-dialog').css('width', '95%');
-                            $('.remarks').css({
-                                width: '300px',
-                                'max-width': '300px'
-                            });
-                            $('.actions').css('width', '100px');
-
-                            $('[id^=table-select]').on('change', e => {
-                                let input = $(e.target);
-                                let id = input.data('id');
-                                $.ajax({
-                                    type: "POST",
-                                    url: "{{ route('applications.updateData') }}",
-                                    data: {
-                                        id: id,
-                                        remarks: JSON.stringify(input.val())
-                                    },
-                                });
-                            });
-
-                            $('#linedUp').on('hidden.bs.modal', () => {
-                                $('#linedUp').remove();
-                            });
-                        });
-
-                        $('#linedUp').modal({
-                            backdrop: 'static',
-                            keyboard: false
-                        });
-                        $('#linedUp').modal('show');
-                    }
-                });
+                getVesselCrew(vessel);
             });
 
             $('[data-original-title="Export Vessels"]').on('click', () => {
@@ -272,7 +225,73 @@
             });
 	    }
 
-        function showModal(onBoard, linedUp){
+        function getVesselCrew(vessel, bul = false){
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('applications.getVesselCrew') }}',
+                data: {id: !bul ? $(vessel.target).data('id') : vessel},
+                dataType: 'json',
+                success: result => {
+                    if(!$('#linedUp').is(':visible')){
+                        createModal();
+                    }
+                    showTables(result[0], result[1]);
+                    $('#linedUp').on('show.bs.modal', e => {
+                        $('select').select2({
+                            tags: true,
+                            class: 'table-select',
+                            disabled: {{ !in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) ? 'true' : 'false' }}
+                        });
+
+                        $('[id^=table-select] + .select2-container').css('width', '100%');
+                        $('[id^=table-select] + .select2-container .select2-selection').css('border', 'none');
+                        $('#linedUp .modal-dialog').css('width', '95%');
+                        $('.remarks').css({
+                            width: '120px',
+                            'max-width': '120px'
+                        });
+                        $('.actions').css('width', '100px');
+
+                        $('[id^=table-select]').on('change', e => {
+                            let input = $(e.target);
+                            let id = input.data('id');
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ route('applications.updateData') }}",
+                                data: {
+                                    id: id,
+                                    remarks: JSON.stringify(input.val())
+                                },
+                            });
+                        });
+
+                        // DISABLE SHOWING OF SELECTION OPTIONS WHEN UNSELECTING
+                        $("[id^=table-select]").on("select2:unselect", function (evt) {
+                          if (!evt.params.originalEvent) {
+                            return;
+                          }
+
+                          evt.params.originalEvent.stopPropagation();
+                        });
+
+                        $('#linedUp').on('hidden.bs.modal', () => {
+                            $('#linedUp').remove();
+                        });
+                    });
+
+                    $('#linedUp').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                    $('#linedUp').modal('show');
+                    $('.linedUp .select2-selection.select2-selection--multiple:odd').css('background-color', '#bdb9b9');
+                    $('.onBoard .select2-selection.select2-selection--multiple:odd').css('background-color', '#bdb9b9');
+
+                }
+            });
+        }
+
+        function showTables(onBoard, linedUp){
             let table = `
                 <table class="table table-bordered table-striped">
                     <tr>
@@ -339,7 +358,7 @@
                         <td>${crew.status2}</td>
                         <td class="remarks">${crew.remarks}</td>
                         <td class="actions">
-                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" onClick="onBoard(${crew.applicant_id})">
+                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" onClick="getContract(${crew.applicant_id})">
                                 <span class="fa fa-file-text"></span>
                             </a>
                             <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id})">
@@ -384,10 +403,10 @@
                         <td></td>
                         <td class="remarks">${crew.remarks}</td>
                         <td class="actions">
-                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" onClick="onBoard(${crew.applicant_id})">
+                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract">
                                 <span class="fa fa-file-text"></span>
                             </a>
-                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id})">
+                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board">
                                 <span class="fa fa-ship"></span>
                             </a>
                         </td>
@@ -395,54 +414,8 @@
                 `;
             });
 
-            table += "</table>";
-            table2 += "</table>";
-
-            $('body').append(`
-                <div class="modal fade" id="linedUp">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header head1">
-                                
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-
-                                <h4 class="modal-title">
-                                    <b>On Board</b>
-                                </h4>
-                            </div>
-
-                            <div class="modal-body">
-                                ${table2}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header head2">
-                                
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-
-                                <h4 class="modal-title">
-                                    <b>Line Up</b>
-                                </h4>
-                            </div>
-
-                            <div class="modal-body">
-                                ${table}
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>`
-            );
+            $('.tab-pane.linedUp').html(table + "</table>");
+            $('.tab-pane.onBoard').html(table2 + "</table>");
         }
 
         function onBoard(id){
@@ -483,7 +456,6 @@
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
-                        minDate: moment().format('YYYY-MM-DD')
                     })
                 },
                 confirmButtonText: "Create Contract",
@@ -512,17 +484,68 @@
                             date: $('#date').val(),
                             months: $('#months').val(),
                         },
-                        success: () => {
+                        success: vessel => {
                             swal({
                                 type: 'success',
                                 title: 'Successfully Onboarded',
                                 showConfirmButton: false,
                                 timer: 800
-                            })
+                            }).then(() => {
+                                getVesselCrew(vessel, true);
+                                $('[href=".onBoard"]').click();
+                            });
                         }
                     });
                 }
             });
         };
+
+        function getContract(id){
+            swal({
+                title: 'Choose Contract Type',
+                input: 'select',
+                inputOptions: {
+                    'MLC CONTRACT': 'MLC CONTRACT',
+                    'POEA CONTRACT': 'POEA CONTRACT'
+                },
+                inputPlaceholder: 'Select Contract',
+            })
+        }
+
+        function createModal(){
+            $('body').append(`
+                <div class="modal fade" id="linedUp">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header head1">
+                                
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+
+                                <h4 class="modal-title">
+                                    <b>Crew Details</b>
+                                </h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <ul class="nav nav-pills" role="tablist">
+                                    <li role="presentation" class="active"><a href=".linedUp" role="tab" data-toggle="pill">Lined Up</a>
+                                    </li>
+                                    <li role="presentation"><a href=".onBoard" role="tab" data-toggle="pill">On Board</a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in linedUp active"></div>
+                                    <div role="tabpanel" class="tab-pane fade onBoard"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+            );
+        }
 	</script>
 @endpush

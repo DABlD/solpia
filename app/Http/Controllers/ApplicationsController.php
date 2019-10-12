@@ -900,8 +900,9 @@ class ApplicationsController extends Controller
 
         ProcessedApplicant::where('applicant_id', $req->id)->update(['status' => 'On Board']);
         Applicant::where('id', $req->id)->update(['status' => 'On Board']);
+        LineUpContract::create($temp->toArray());
 
-        echo LineUpContract::create($temp->toArray());
+        echo $temp->vessel_id;
     }
 
     public function delete(User $user){
