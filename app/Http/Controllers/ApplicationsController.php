@@ -844,7 +844,7 @@ class ApplicationsController extends Controller
     }
 
     public function getVesselCrew(Request $req){
-        $linedUps = ProcessedApplicant::where('processed_applicants.vessel_id', $req->id)
+        $linedUps = ProcessedApplicant::where('processed_applicants.vessel_id', 4)
                         ->where('processed_applicants.status', 'Lined-Up')
 
                         ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
@@ -855,13 +855,29 @@ class ApplicationsController extends Controller
                         ->select('processed_applicants.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
                         ->get();
 
+        $temp = collect();
+        $ranks = Rank::pluck('abbr');
+
+        // SORT BY RANK
+        foreach($ranks as $abbr){
+            foreach($linedUps as $key => $linedUp){
+                if($linedUp->abbr == $abbr){
+                    $temp->push($linedUp);
+                    $linedUps->pull($key);
+                }
+            }
+        }
+
+        $linedUps = $temp;
+
         foreach($linedUps as $linedUp){
-            $temp = DocumentId::where('applicant_id', $linedUp->applicant_id)->select('type', 'expiry_date')->get();
+            $temp = DocumentId::where('applicant_id', $linedUp->applicant_id)->select('type', 'expiry_date', 'number')->get();
             $linedUp->age = now()->parse($linedUp->birthday)->diff(now())->format('%y');
             $linedUp->status2 = "NEW-HIRE";
 
             foreach($temp as $docu){
                 $linedUp->{$docu->type} = $docu->expiry_date;
+                $linedUp->{$docu->type . 'n'} = $docu->number;
             }
             
             $sea_services = SeaService::where('applicant_id', $linedUp->applicant_id)->get();
@@ -872,37 +888,146 @@ class ApplicationsController extends Controller
             }
         }
 
-        $onBoards = LineUpContract::where('vessel_id', $req->id)
-                                ->where('line_up_contracts.status', 'On Board')
+        $crews = LineUpContract::where('vessel_id', $req->id)
+                                ->where('line_up_contracts.status','On Board')
                                 ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
                                 ->join('users as u', 'u.id', '=', 'a.user_id')
                                 ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
                                 ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
                                 ->get();
 
-        foreach($onBoards as $onBoard){
-            $temp = DocumentId::where('applicant_id', $onBoard->applicant_id)->select('type', 'expiry_date')->get();
-            $onBoard->age = now()->parse($onBoard->birthday)->diff(now())->format('%y');
+        $temp = collect();
 
-            foreach($temp as $docu){
-                $onBoard->{$docu->type} = $docu->expiry_date;
+        // SORT BY RANK
+        foreach($ranks as $abbr){
+            foreach($crews as $key => $crew){
+                if($crew->abbr == $abbr){
+                    $temp->push($crew);
+                    $crews->pull($key);
+                }
             }
         }
 
-        echo json_encode([$onBoards, $linedUps]);
+        $crews = $temp;
+
+        $onBoards = array();
+        $onSigners = array();
+
+        foreach($crews as $crew){
+            $temp = DocumentId::where('applicant_id', $crew->applicant_id)->select('type', 'expiry_date', 'number')->get();
+            $crew->age = now()->parse($crew->birthday)->diff(now())->format('%y');
+
+            foreach($temp as $docu){
+                $crew->{$docu->type} = $docu->expiry_date;
+                $crew->{$docu->type . 'n'} = $docu->number;
+            }
+
+            array_push($onBoards, $crew);
+        }
+
+        $vname = Vessel::find($req->id)->name;
+
+        echo json_encode([$onBoards, $linedUps, $vname]);
     }
 
-    public function onBoard(Request $req){
-        $temp = ProcessedApplicant::where('applicant_id', $req->id)->first();
-        $temp->joining_port = $req->port;
-        $temp->joining_date = $req->date;
-        $temp->months = $req->months;
+    public function updateStatus($id, $status, $vessel_id = null, Request $req){
+        $pas = ['status' => $status];
+        $lucs = ['status' => $status];
+        $as = ['status' => $status];
 
-        ProcessedApplicant::where('applicant_id', $req->id)->update(['status' => 'On Board']);
-        Applicant::where('id', $req->id)->update(['status' => 'On Board']);
-        LineUpContract::create($temp->toArray());
+        $temp = ProcessedApplicant::where('applicant_id', $id)->first();
+        $temp->status = $status;
+        $temp->save();
 
-        echo $temp->vessel_id;
+        if($status == "On Board"){
+            $temp->joining_port = $req->port;
+            $temp->joining_date = $req->date;
+            $temp->months = $req->months;
+
+            LineUpContract::create($temp->toArray());
+        }
+
+        $lin_con = LineUpContract::where('applicant_id', $id)->orderBy('id', 'desc')->first();
+
+        // IF DISEMBARKATION
+        if(in_array($status, ['VACATION', 'OWN WILL', 'DISMISSAL' ,'MEDICAL REPAT'])){
+            $pas['principal_id'] = null;
+            $pas['vessel_id'] = null;
+            $pas['rank_id'] = null;
+
+            $lucs['status'] = 'Finished';
+
+            $vessel     = Vessel::find($vessel_id);
+            $pro_app    = ProcessedApplicant::where('applicant_id', $id)->first();
+
+            // SAVE SEA SERVICE
+            SeaService::create([
+                'applicant_id'      => $id,
+                'vessel_name'       => $vessel->name,
+                'rank'              => Rank::find($pro_app->rank_id)->name,
+                'vessel_type'       => $vessel->type,
+                'gross_tonnage'     => $vessel->gross_tonnage,
+                'engine_type'       => $vessel->engine,
+                'bhp_kw'            => $vessel->BHP,
+                'flag'              => $vessel->flag,
+                'trade'             => $vessel->trade,
+                'manning_agent'     => $vessel->manning_agent,
+                'principal'         => Principal::find($vessel->principal_id)->name,
+                // 'crew_nationality'  => $
+                'sign_on'           => $lin_con->joining_date,
+                'sign_off'          => now()->parse($lin_con->joining_date)->addMonths($lin_con->months),
+                'total_months'      => $lin_con->months,
+                'remarks'           => $status
+            ]);
+        }
+
+        // LineUpContract::where('applicant_id', $id)->where('status', 'On Board')->update($lucs);
+        $lin_con->status = $status;
+        $lin_con->save();
+
+        Applicant::where('id', $id)->update($as);
+
+        echo $vessel_id ?? '';
+    }
+
+    public function updateLineUpContract(Request $req){
+        LineUpContract::where('applicant_id', $req->id)->where('status', 'On Board')->update($req->all());
+    }
+
+    function exportOnOff($id, $type){
+        $vessel = Vessel::find($id);
+        $crews = LineUpContract::where('vessel_id', $vessel->id)
+                                ->where('line_up_contracts.status','On Board')
+                                ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
+                                ->join('users as u', 'u.id', '=', 'a.user_id')
+                                ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
+                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
+                                ->get();
+
+        $onSigners = array();
+        $offSigners = array();
+
+        foreach($crews as $crew){
+            $temp = DocumentId::where('applicant_id', $crew->applicant_id)->select('type', 'expiry_date', 'number')->get();
+
+            foreach($temp as $docu){
+                $crew->{$docu->type} = $docu->expiry_date;
+                $crew->{$docu->type . 'n'} = $docu->number;
+            }
+
+            if($crew->status == "On Board"){
+                if($crew->reliever != ""){
+                    array_push($offSigners, $crew);
+                }
+            }
+        }
+
+
+        $class = "App\\Exports\\" . $type;
+
+        $name = substr($vessel->name, 4);
+
+        return Excel::download(new $class($onSigners, $offSigners, $type), "$name Onsigners and Offsigners.xlsx");
     }
 
     public function delete(User $user){

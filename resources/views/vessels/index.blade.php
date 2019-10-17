@@ -3,54 +3,54 @@
 
 <section class="content">
 
-	<div class="row">
-		<section class="col-lg-12">
-			<div class="box box-info">
+    <div class="row">
+        <section class="col-lg-12">
+            <div class="box box-info">
 
-				<div class="box-header">
-					@include('vessels.includes.toolbar')
-				</div>
+                <div class="box-header">
+                    @include('vessels.includes.toolbar')
+                </div>
 
-				<div class="box-body">
-					<table class="table table-hover table-bordered" id="table" style="width: 100%;">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Vessel Name</th>
-								<th>Principal</th>
-								<th>Flag</th>
-								<th>Type</th>
+                <div class="box-body">
+                    <table class="table table-hover table-bordered" id="table" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Vessel Name</th>
+                                <th>Principal</th>
+                                <th>Flag</th>
+                                <th>Type</th>
                                 <th>Status</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-					</table>
-				</div>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
 
-				<div class="box-footer clearfix">
-				</div>
+                <div class="box-footer clearfix">
+                </div>
 
-			</div>
-		</section>
-	</div>
+            </div>
+        </section>
+    </div>
 
 </section>
 @endsection
 
 @push('after-styles')
-	<link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
 
-	<style>
-		#table img{
-			width: 60px;
-			height: 60px;
-		}
+    <style>
+        #table img{
+            width: 60px;
+            height: 60px;
+        }
 
-		.w50{
-			width: 60px !important;
-		}
+        .w50{
+            width: 60px !important;
+        }
 
         .select2-selection__choice{
             background-color: #f76c6b !important;
@@ -77,20 +77,62 @@
         .table-striped>tbody>tr:nth-of-type(odd) {
             background-color: #bdb9b9;
         }
-	</style>
+
+        .modal thead tr{
+            background-color: #ffddcc !important;
+        }
+
+        .custom-striped tr:nth-child(4n+1), .custom-striped tr:nth-child(4n+2) {
+            background-color: #bdb9b9;
+        }
+
+        .custom-striped td{
+            padding-top: 1px !important;
+            padding-bottom: 1px !important;
+        }
+
+        .custom-striped .cs1{
+            width: 5%;
+        }
+
+        .custom-striped .cs2{
+            width: 5%;
+        }
+
+        .custom-striped .cs3{
+            width: 30%;
+        }
+
+        .custom-striped .cs4{
+            width: 15%;
+        }
+
+        .custom-striped .cs5{
+            width: 15%;
+        }
+
+        .custom-striped .cs6{
+            width: 15%;
+        }
+
+        .custom-striped .cs7{
+            width: 15%;
+        }
+
+    </style>
 @endpush
 
 @push('before-scripts')
-	<script src="{{ asset('js/datatables.js') }}"></script>
+    <script src="{{ asset('js/datatables.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
-	<script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/flatpickr.js') }}"></script>
 @endpush
 
 @push('after-scripts')
-	<script>
-		let table = $('#table').DataTable({
+    <script>
+        let table = $('#table').DataTable({
             serverSide: true,
             ajax: {
                 url: '{{ route('datatables.vessels') }}',
@@ -116,20 +158,24 @@
                         `;
                     }
                 },
+                {
+                    targets: 6,
+                    width: '50px'
+                },
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
                 // MUST NOT BE INTERCHANGED t-i
                 tooltip();
-            	initializeActions();
+                initializeActions();
             },
             // order: [ [0, 'desc'] ],
         });
 
         table.on('draw', () => {
-        	setTimeout(() => {
-        		$('.preloader').fadeOut();
-        	}, 800);
+            setTimeout(() => {
+                $('.preloader').fadeOut();
+            }, 800);
         });
 
         function initializeActions(){
@@ -223,7 +269,7 @@
                     }
                 })
             });
-	    }
+        }
 
         function getVesselCrew(vessel, bul = false){
             $.ajax({
@@ -233,10 +279,14 @@
                 dataType: 'json',
                 success: result => {
                     if(!$('#linedUp').is(':visible')){
-                        createModal();
+                        createModal(result[2],!bul ? $(vessel.target).data('id') : vessel);
                     }
                     showTables(result[0], result[1]);
                     $('#linedUp').on('show.bs.modal', e => {
+
+                        // REMOVE ALL EVENTS
+                        $('[id^=table-select]').unbind();
+
                         $('select').select2({
                             tags: true,
                             class: 'table-select',
@@ -250,9 +300,10 @@
                             width: '120px',
                             'max-width': '120px'
                         });
+
                         $('.actions').css('width', '100px');
 
-                        $('[id^=table-select]').on('change', e => {
+                        $('[id^=table-select-]').on('change', e => {
                             let input = $(e.target);
                             let id = input.data('id');
                             $.ajax({
@@ -265,8 +316,33 @@
                             });
                         });
 
+                        // SELECT RELIEVER
+                        $('[id^=table-selectR]').on('change', e => {
+                            let input = $(e.target);
+                            let id = input.data('id');
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ route('applications.updateLineUpContract') }}",
+                                data: {
+                                    id: id,
+                                    reliever: input.val()
+                                },
+                                success: () => {
+                                    swal({
+                                        type: 'success',
+                                        title: 'Success',
+                                        timer: 800,
+                                        showConfirmButton: false
+                                    }).then(() => {
+                                        getVesselCrew(!bul ? $(vessel.target).data('id') : vessel, true);
+                                        $('[href=".onBoard"]').click();
+                                    });
+                                }
+                            });
+                        });
+
                         // DISABLE SHOWING OF SELECTION OPTIONS WHEN UNSELECTING
-                        $("[id^=table-select]").on("select2:unselect", function (evt) {
+                        $("[id^=table-select-]").on("select2:unselect", function (evt) {
                           if (!evt.params.originalEvent) {
                             return;
                           }
@@ -286,6 +362,7 @@
                     $('#linedUp').modal('show');
                     $('.linedUp .select2-selection.select2-selection--multiple:odd').css('background-color', '#bdb9b9');
                     $('.onBoard .select2-selection.select2-selection--multiple:odd').css('background-color', '#bdb9b9');
+                    $('.summary .select2-selection.select2-selection--multiple:odd').css('background-color', '#bdb9b9');
 
                 }
             });
@@ -294,39 +371,61 @@
         function showTables(onBoard, linedUp){
             let table = `
                 <table class="table table-bordered table-striped">
-                    <tr>
-                        <td>No.</td>
-                        <td>Rank</td>
-                        <td>Name</td>
-                        <td>Age</td>
-                        <td>Passport Exp.</td>
-                        <td>Sbook Exp.</td>
-                        <td>US Visa Exp.</td>
-                        <td>Status</td>
-                        <td>Remarks</td>
-                        <td>Actions</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <td><b>No.</b></td>
+                            <td><b>Rank</b></td>
+                            <td><b>Name</b></td>
+                            <td><b>Age</b></td>
+                            <td><b>Passport Exp.</b></td>
+                            <td><b>Sbook Exp.</b></td>
+                            <td><b>US Visa Exp.</b></td>
+                            <td><b>Status</b></td>
+                            <td><b>Remarks</b></td>
+                            <td><b>Actions</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
             `;
 
             let table2 = `
                 <table class="table table-bordered table-striped">
-                    <tr>
-                        <td>No.</td>
-                        <td>Rank</td>
-                        <td>Name</td>
-                        <td>Age</td>
-                        <td>Date Joined</td>
-                        <td>MOB</td>
-                        <td>Contract Duration</td>
-                        <td>End of Contract</td>
-                        <td>Passport Exp.</td>
-                        <td>Sbook Exp.</td>
-                        <td>US Visa Exp.</td>
-                        <td>Joining Port</td>
-                        <td>Reliever</td>
-                        <td>Remarks</td>
-                        <td>Actions</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <td><b>No.</b></td>
+                            <td><b>Rank</b></td>
+                            <td><b>Name</b></td>
+                            <td><b>Age</b></td>
+                            <td><b>Date Joined</b></td>
+                            <td><b>MOB</b></td>
+                            <td><b>Contract<br>Duration</b></td>
+                            <td><b>End of<br>Contract</b></td>
+                            <td><b>Passport Exp.</b></td>
+                            <td><b>Sbook Exp.</b></td>
+                            <td><b>US Visa Exp.</b></td>
+                            <td><b>Joining<br>Port</b></td>
+                            <td><b>Reliever</b></td>
+                            <td><b>Remarks</b></td>
+                            <td><b>Actions</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            let table3 = `
+                <table class="table table-bordered custom-striped">
+                    <thead>
+                        <tr>
+                            <td class="cs1"><b>No.</b></td>
+                            <td class="cs2"><b>Rank</b></td>
+                            <td class="cs3"><b>Name</b></td>
+                            <td class="cs4"><b>DOB</b></td>
+                            <td class="cs5"><b>PASSPORT<br>EXPIRY DATE</b></td>
+                            <td class="cs6"><b>SBOOK<br>EXPIRY DATE</b></td>
+                            <td class="cs7"><b>US VISA<br>EXPIRY DATE</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
             `;
 
             // LINE UP TABLE
@@ -352,22 +451,59 @@
                         <td>${crew.abbr}</td>
                         <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
-                        <td>${moment(crew.PASSPORT).format('MMM DD, YYYY')}</td>
-                        <td>${moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY')}</td>
-                        <td>${moment(crew["US-VISA"]).format('MMM DD, YYYY')}</td>
+                        <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
                         <td>${crew.status2}</td>
                         <td class="remarks">${crew.remarks}</td>
                         <td class="actions">
                             <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" onClick="getContract(${crew.applicant_id})">
                                 <span class="fa fa-file-text"></span>
                             </a>
-                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id})">
+                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-ship"></span>
                             </a>
                         </td>
                     </tr>
                 `;
+
+                table3 += `
+                    <tr>
+                        <td rowspan="2">${index + 1}</td>
+                        <td rowspan="2">${crew.abbr}</td>
+                        <td rowspan="2">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+                        <td rowspan="2">${moment(crew.joining_date).format('MMM DD, YYYY')}</td>
+
+                        <td>${crew.PASSPORTn ? crew.PASSPORTn : '-----'}</td>
+                        <td>${crew["SEAMAN'S BOOKn"] ? crew["SEAMAN'S BOOKn"] : '-----'}</td>
+                        <td>${crew["US-VISAn"] ? crew["US-VISAn"] : '-----'}</td>
+                    </tr>
+
+                    <tr>
+                        <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
+                    </tr>
+                `;
             });
+
+            table3 += `
+                </tbody></table>
+
+                <table class="table table-bordered custom-striped">
+                    <thead>
+                        <tr>
+                            <td class="cs1"><b>No.</b></td>
+                            <td class="cs2"><b>Rank</b></td>
+                            <td class="cs3"><b>Name</b></td>
+                            <td class="cs4"><b>DOB</b></td>
+                            <td class="cs5"><b>PASSPORT<br>EXPIRY DATE</b></td>
+                            <td class="cs6"><b>SBOOK<br>EXPIRY DATE</b></td>
+                            <td class="cs7"><b>US VISA<br>EXPIRY DATE</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
 
             // ON BOARD TABLE
             onBoard.forEach((crew, index) => {
@@ -386,41 +522,79 @@
                     </select>
                 `;
 
+                let reliever = `
+                    <select id="table-selectR-${crew.applicant_id}" data-id="${crew.applicant_id}">
+                    <option value="">Select Reliever</option>
+                    <option value="No Reliever"${crew.reliever == "No Reliever" ? ' selected' : ''}>No Reliever</option>
+                `;
+
+                onBoard.forEach(rengiSno => {
+                    if(crew.abbr == rengiSno.abbr && crew.id != rengiSno.id){
+                        let name = `${rengiSno.lname + ', ' + rengiSno.fname + ' ' + (rengiSno.suffix || "") + ' ' + rengiSno.mname}`;
+
+                        reliever += `
+                            <option value="${rengiSno.id}"${rengiSno.id == crew.reliever ? ' selected' : ''}>${rengiSno.abbr} - ${name}</option>
+                        `;
+                    }
+                });
+
                 table2 += `
                     <tr>
                         <td>${index + 1}</td>
                         <td>${crew.abbr}</td>
                         <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
-                        <td></td>
-                        <td></td>
+                        <td>${moment(crew.joining_date).format('MMM DD, YYYY')}</td>
+                        <td>${crew.months}</td>
                         <td>${crew.months}</td>
                         <td>${moment(crew.joining_date).add(crew.months, 'months').format('DD-MMM-YY')}</td>
-                        <td>${moment(crew.PASSPORT).format('MMM DD, YYYY')}</td>
-                        <td>${moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY')}</td>
-                        <td>${moment(crew["US-VISA"]).format('MMM DD, YYYY')}</td>
+                        <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
                         <td>${crew.joining_port}</td>
-                        <td></td>
+                        <td>${reliever}</td>
                         <td class="remarks">${crew.remarks}</td>
                         <td class="actions">
-                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract">
-                                <span class="fa fa-file-text"></span>
-                            </a>
-                            <a class="btn btn-success" data-toggle="tooltip" title="On-Board">
+                            <a class="btn btn-danger" data-toggle="tooltip" title="Off-Board" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-ship"></span>
                             </a>
                         </td>
                     </tr>
                 `;
+
+                table3 += `
+                    <tr>
+                        <td rowspan="2">${index + 1}</td>
+                        <td rowspan="2">${crew.abbr}</td>
+                        <td rowspan="2">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+                        <td rowspan="2">${moment(crew.joining_date).format('MMM DD, YYYY')}</td>
+                        <td>
+                            ${crew.PASSPORTn ? crew.PASSPORTn : '-----'}
+                        </td>
+                        <td>
+                            ${crew["SEAMAN'S BOOKn"] ? crew["SEAMAN'S BOOKn"] : '-----'}
+                        </td>
+                        <td>
+                            ${crew["US-VISAn"] ? crew["US-VISAn"] : '-----'}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
+                    </tr>
+                `;
             });
 
-            $('.tab-pane.linedUp').html(table + "</table>");
+            $('.tab-pane.linedUp').html(table + "</tbody></table>");
             $('.tab-pane.onBoard').html(table2 + "</table>");
+            $('.tab-pane.summary').html(table3 + "</table>");
         }
 
-        function onBoard(id){
+        function onBoard(id, vessel_id){
             swal({
-                title: 'Contract Details',
+                title: 'Onboarding Details',
                 html: `
                     <div class="row">
                         <div class="col-md-5">
@@ -458,7 +632,9 @@
                         dateFormat: 'Y-m-d',
                     })
                 },
-                confirmButtonText: "Create Contract",
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                confirmButtonText: "Onboard Crew",
                 preConfirm: () => {
                     swal.showLoading();
                     return new Promise(resolve => {
@@ -477,7 +653,7 @@
                 if(result.value){
                     $.ajax({
                         type: 'POST',
-                        url: '{{ route('applications.onBoard') }}',
+                        url: `{{ route('applications.updateStatus') }}/${id}/On Board/${vessel_id}`,
                         data: {
                             id: id,
                             port: $('#port').val(),
@@ -487,7 +663,7 @@
                         success: vessel => {
                             swal({
                                 type: 'success',
-                                title: 'Successfully Onboarded',
+                                title: 'Successfully Boarded',
                                 showConfirmButton: false,
                                 timer: 800
                             }).then(() => {
@@ -499,6 +675,49 @@
                 }
             });
         };
+
+        function offBoard(id, vessel_id){
+            swal({
+                type: 'info',
+                title: 'Choose Remark',
+                input: 'select',
+                inputOptions: {
+                    'Vacation'      : 'VACATION',
+                    'DISMISSAL'     : 'DISMISSAL',
+                    'OWN WILL'      : 'OWN WILL',
+                    'MEDICAL REPAT' : 'MEDICAL REPAT'
+                },
+                inputPlaceholder: 'Select Remark',
+                preConfirm: input => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            if(input == ""){
+                                swal.showValidationError('Must select remark >.<');
+                            }
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        type: 'POST',
+                        url: `{{ route('applications.updateStatus') }}/${id}/${result.value}/${vessel_id}`,
+                        success: result => {
+                            swal({
+                                type: 'success',
+                                title: 'Successfully Disembarked',
+                                showConfirmButton: false,
+                                timer: 800
+                            }).then(() => {
+                                getVesselCrew(vessel_id, true);
+                                $('[href=".onBoard"]').click();
+                            });
+                        }
+                    })
+                }
+            });
+        }
 
         function getContract(id){
             swal({
@@ -512,7 +731,7 @@
             })
         }
 
-        function createModal(){
+        function createModal(name, id){
             $('body').append(`
                 <div class="modal fade" id="linedUp">
                     <div class="modal-dialog">
@@ -524,15 +743,20 @@
                                 </button>
 
                                 <h4 class="modal-title">
-                                    <b>Crew Details</b>
+                                    <b><span style="color: #ca0032;">${name}</span> - Crew Details</b>
                                 </h4>
                             </div>
 
                             <div class="modal-body">
                                 <ul class="nav nav-pills" role="tablist">
-                                    <li role="presentation" class="active"><a href=".linedUp" role="tab" data-toggle="pill">Lined Up</a>
+                                    <li role="presentation" class="active">
+                                        <a href=".linedUp" role="tab" data-toggle="pill">Lined Up</a>
                                     </li>
-                                    <li role="presentation"><a href=".onBoard" role="tab" data-toggle="pill">On Board</a>
+                                    <li role="presentation">
+                                        <a href=".onBoard" role="tab" data-toggle="pill">On Board</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href=".summary" role="tab" data-toggle="pill">Summary</a>
                                     </li>
                                 </ul>
 
@@ -540,12 +764,34 @@
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade in linedUp active"></div>
                                     <div role="tabpanel" class="tab-pane fade onBoard"></div>
+                                    <div role="tabpanel" class="tab-pane fade summary"></div>
                                 </div>
+                            </div>
+
+                            <div class="modal-footer" style="background-color: transparent;">
+                                <button type="button" class="btn btn-info" onClick="exportOnOff(${id})">Export On/Off Signers</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
+
                 </div>`
             );
         }
-	</script>
+
+        function exportOnOff(id){
+            swal({
+                title: 'Choose Format',
+                input: 'select',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                inputOptions: {
+                    ShinkoOnOff: 'Shinko/All',
+                    WesternOnOff: 'Western'
+                },
+            }).then(result => {
+                window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}`;
+            })
+        }
+    </script>
 @endpush

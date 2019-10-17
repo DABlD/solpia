@@ -12,7 +12,7 @@ class LineUpContract extends Model
     protected $fillable = [
     	'applicant_id','principal_id','vessel_id',
     	'rank_id','joining_port','joining_date',
-    	'months'
+    	'months', 'status', 'reliever'
     ];
 
     protected $dates = [

@@ -103,7 +103,14 @@ Route::group([
 
 		Route::post($name . '/updateData', ucfirst($name) . 'Controller@updateData')->name($name . '.updateData');
 		Route::post("$name/getVesselCrew", ucfirst($name) . 'Controller@getVesselCrew')->name("$name.getVesselCrew");
-		Route::post("$name/onBoard", ucfirst($name) . 'Controller@onBoard')->name("$name.onBoard");
+		Route::get("$name/exportOnOff/{id?}/{type?}", ucfirst($name) . 'Controller@exportOnOff')->name("$name.exportOnOff");
+
+		// ON BOARD, ETC.
+		Route::post("$name/updateStatus/{id?}/{status?}/{vessel_id?}", ucfirst($name) . 'Controller@updateStatus')->name("$name.updateStatus");
+
+		// SELECTING RELIEVER
+		Route::post("$name/updateLineUpContract", ucfirst($name) . 'Controller@updateLineUpContract')->name("$name.updateLineUpContract");
+		
 
 		// Vessels ROUTES
 		$name = "vessels";
