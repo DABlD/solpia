@@ -755,7 +755,7 @@
 		<tr>
 			<td colspan="6">{{ $service->flag }}</td>
 			<td colspan="4">{{ $applicant->ranks[$service->rank] }}</td>
-			<td colspan="6">{{ $service->engine_type }}</td>
+			<td colspan="6">{{ $service->engine_type }} / {{ $service->bhp_kw }}</td>
 			<td colspan="6">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
 		</tr>
 	@endforeach
