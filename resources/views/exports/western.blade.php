@@ -628,13 +628,13 @@
 	<tr>
 		<td colspan="6">Read and Write</td>
 		<td colspan="22">Good / Acceptable / Poor</td>
-		<td colspan="6">GOOD</td>
+		<td colspan="6"></td>
 	</tr>
 
 	<tr>
 		<td colspan="6">Speak and Listen</td>
 		<td colspan="22">Good / Acceptable / Poor</td>
-		<td colspan="6">GOOD</td>
+		<td colspan="6"></td>
 	</tr>
 
 	{{ addS('7. TRAINING / EXPERIENCE FOR SAFETY AND MANAGEMENT SYSTEM') }}
@@ -689,31 +689,31 @@
 	<tr>
 		<td colspan="14">Professional/Technical knowledge</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">Good</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">English Language Ability</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">Good</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">Attitude</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">Good</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">Sense of Responsibility</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">Good</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">General Health</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">Good</td>
 	</tr>
 
 	{{ addS("10. SEAMAN'S HISTORY") }}
