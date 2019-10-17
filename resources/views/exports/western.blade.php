@@ -610,13 +610,13 @@
 	<tr>
 		<td colspan="6">Read and Write</td>
 		<td colspan="22">Good / Acceptable / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="6">Speak and Listen</td>
 		<td colspan="22">Good / Acceptable / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
@@ -628,13 +628,13 @@
 	<tr>
 		<td colspan="6">Read and Write</td>
 		<td colspan="22">Good / Acceptable / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="6">Speak and Listen</td>
 		<td colspan="22">Good / Acceptable / Poor</td>
-		<td colspan="6"></td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	{{ addS('7. TRAINING / EXPERIENCE FOR SAFETY AND MANAGEMENT SYSTEM') }}
