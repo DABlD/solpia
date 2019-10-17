@@ -689,31 +689,31 @@
 	<tr>
 		<td colspan="14">Professional/Technical knowledge</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6">Good</td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">English Language Ability</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6">Good</td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">Attitude</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6">Good</td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">Sense of Responsibility</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6">Good</td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">General Health</td>
 		<td colspan="14">Good / Acceptible / Poor</td>
-		<td colspan="6">Good</td>
+		<td colspan="6">GOOD</td>
 	</tr>
 
 	{{ addS("10. SEAMAN'S HISTORY") }}
