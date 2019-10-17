@@ -157,7 +157,13 @@
 			}
 			else{
 				$temp = $docu;
-				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+
+				if($docu == "MLC TRAINING F1" && $rank > 4){
+					$docu = false;
+				}
+				else{
+					$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+				}
 
 				if(!$docu && $temp == "RADAR"){
 					$name = 'RADAR TRAINING COURSE';
@@ -476,7 +482,7 @@
 		<td colspan="6">{{ $docu ? $docu->number : "-----"}}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+		<td colspan="6">DHA - AUSTRALIA</td>
 	</tr>
 
 	<tr>
@@ -575,9 +581,14 @@
 		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
-
+	
 	{{ $getDocument('MLC TRAINING F1', 	'lc', 		'',	'Navigation at the Management Level')}}
-	{{ $getDocument('MLC TRAINING F3', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
+
+	@if($rank >= 1 && $rank <= 4)
+		{{ $getDocument('MLC TRAINING F3', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
+	@elseif($rank >= 5 && $rank <= 8)
+		{{ $getDocument('MLC TRAINING F4', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
+	@endif
 	{{ $getDocument('PRACTIAL ASSESSMENT IN MANAGEMENT LEVEL', 	'lc', 		'',	'Practical Assessment in Management Level')}}
 	{{ $getDocument('IDK', 	'lc', 		'',	'Catering Training Cert.')}}
 	{{ $getDocument('NCIII','lc', 		'',	'National Certificate III (NC III)')}}
