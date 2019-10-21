@@ -514,6 +514,7 @@
 	{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'Ship Simulator')}}
 	{{ $getDocument('MEDICAL CARE - MECA', 'lc', 'MARINA', 'Medical Care Course (MCC)')}}
 	{{ $getDocument('SHIP SECURITY OFFICER - SSO', 'lc', 'MARINA', 'Ship Security Officer (SSO)')}}
+	{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc', '', 'Safety Officer')}}
 	{{ $getDocument("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'MARINA', 'Security Awareness')}}
 	{{ $getDocument('CONSOLIDATED MARPOL', 'lc', '', 'Marpol')}}
 	{{ $getDocument('ERS WITH ERM', 'lc', '', 'ERM')}}

@@ -386,7 +386,7 @@ class ApplicationsController extends Controller
             'platform'  => Browser::platformName()
         ]);
 
-        return back();
+        return redirect()->route('applications.index');
     }
 
     public function clearData($old, $new, $table){
@@ -649,16 +649,21 @@ class ApplicationsController extends Controller
         $user['suffix'] = strtoupper($user['suffix']);
 
         // UPLOAD AVATAR
-        $image = $req->file('avatar');
-        $avatar = Image::make($image);
+        if($req->hasFile('avatar')){
+            $image = $req->file('avatar');
+            $avatar = Image::make($image);
 
-        $name = $req->fname . '_' . $req->lname . '_avatar.'  . $image->getClientOriginalExtension();
-        $destinationPath = public_path('uploads/');
+            $name = $req->fname . '_' . $req->lname . '_avatar.'  . $image->getClientOriginalExtension();
+            $destinationPath = public_path('uploads/');
 
-        $avatar->resize(209,196);
-        $avatar->save($destinationPath . $name);
+            $avatar->resize(209,196);
+            $avatar->save($destinationPath . $name);
+            $user->put('avatar', 'uploads/' . $name);
+        }
+        else{
+            $user->put('avatar', 'images/default_avatar.jpg');
+        }
 
-        $user->put('avatar', 'uploads/' . $name);
 
         // SAVE USER
         $user = User::create($user->all());
@@ -843,8 +848,8 @@ class ApplicationsController extends Controller
         echo Applicant::where('id', $req->id)->update($req->except('_token'));
     }
 
-    public function getVesselCrew(Request $req){
-        $linedUps = ProcessedApplicant::where('processed_applicants.vessel_id', 4)
+    public function getVesselCrew(Request $req, $id = null){
+        $linedUps = ProcessedApplicant::where('processed_applicants.vessel_id', $id ?? $req->id)
                         ->where('processed_applicants.status', 'Lined-Up')
 
                         ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
@@ -888,7 +893,7 @@ class ApplicationsController extends Controller
             }
         }
 
-        $crews = LineUpContract::where('vessel_id', $req->id)
+        $crews = LineUpContract::where('vessel_id', $id ?? $req->id)
                                 ->where('line_up_contracts.status','On Board')
                                 ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
                                 ->join('users as u', 'u.id', '=', 'a.user_id')
@@ -925,9 +930,15 @@ class ApplicationsController extends Controller
             array_push($onBoards, $crew);
         }
 
-        $vname = Vessel::find($req->id)->name;
+        $vname = Vessel::find($id ?? $req->id)->name;
 
-        echo json_encode([$onBoards, $linedUps, $vname]);
+        if($id){
+            return [$onBoards, $linedUps, $vname];
+        }
+        else{
+            echo json_encode([$onBoards, $linedUps, $vname]);
+        }
+
     }
 
     public function updateStatus($id, $status, $vessel_id = null, Request $req){
@@ -995,39 +1006,19 @@ class ApplicationsController extends Controller
     }
 
     function exportOnOff($id, $type){
-        $vessel = Vessel::find($id);
-        $crews = LineUpContract::where('vessel_id', $vessel->id)
-                                ->where('line_up_contracts.status','On Board')
-                                ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
-                                ->join('users as u', 'u.id', '=', 'a.user_id')
-                                ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
-                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
-                                ->get();
+        $vesselCrew = $this->getVesselCrew(new Request(), $id);
 
-        $onSigners = array();
-        $offSigners = array();
+        $onBoards = array_filter($vesselCrew[0], function($vesselCrew){
+            return $vesselCrew->reliever;
+        });
 
-        foreach($crews as $crew){
-            $temp = DocumentId::where('applicant_id', $crew->applicant_id)->select('type', 'expiry_date', 'number')->get();
-
-            foreach($temp as $docu){
-                $crew->{$docu->type} = $docu->expiry_date;
-                $crew->{$docu->type . 'n'} = $docu->number;
-            }
-
-            if($crew->status == "On Board"){
-                if($crew->reliever != ""){
-                    array_push($offSigners, $crew);
-                }
-            }
-        }
-
+        $linedUps = $vesselCrew[1];
 
         $class = "App\\Exports\\" . $type;
 
-        $name = substr($vessel->name, 4);
+        $name = substr($vesselCrew[2], 4);
 
-        return Excel::download(new $class($onSigners, $offSigners, $type), "$name Onsigners and Offsigners.xlsx");
+        return Excel::download(new $class($linedUps, $onBoards, $type), "$name Onsigners and Offsigners.xlsx");
     }
 
     public function delete(User $user){
