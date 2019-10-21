@@ -40,7 +40,7 @@ class DatatablesController extends Controller
 			$applicant->remarks = json_decode($applicant->remarks);
 			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->actions;
-			$applicant->age = $applicant->user->birthday->diffInYears();
+			$applicant->age = $applicant->user->birthday ? $applicant->user->birthday->diffInYears() : '-';
 
 			$vessels = SeaService::select('vessel_name', 'sign_off')->where('applicant_id', $applicant->id)->get();
 

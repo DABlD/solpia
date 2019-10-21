@@ -1,7 +1,7 @@
 <div class="row">
     <div class="form-group col-md-3">
         <label for="avatar">Picture</label>
-        <input type="file" class="form-control aeigh" name="avatar" placeholder="Select Image" accept=".png, .jpg, .jpeg">
+        <input type="file" class="form-control" name="avatar" placeholder="Select Image" accept=".png, .jpg, .jpeg">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="avatarError"></strong>
         </span>
@@ -55,7 +55,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="birthday">Date of birth</label>
-        <input type="text" class="form-control aeigh" name="birthday" placeholder="Select Birthday">
+        <input type="text" class="form-control" name="birthday" placeholder="Select Birthday">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="birthdayError"></strong>
         </span>
@@ -65,7 +65,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="age">Age</label>
-        <input type="number" class="form-control aeigh" name="age" placeholder="Enter Age">
+        <input type="number" class="form-control" name="age" placeholder="Enter Age">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="ageError"></strong>
         </span>
@@ -75,7 +75,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="birth_place">Place of birth</label>
-        <input type="text" class="form-control aeigh" name="birth_place" placeholder="Enter Place of Birth">
+        <input type="text" class="form-control" name="birth_place" placeholder="Enter Place of Birth">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="birth_placeError"></strong>
         </span>
@@ -85,8 +85,8 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="religion">Religion</label>
-        {{-- <input type="text" class="form-control aeigh" name="religion" placeholder="Enter Religion"> --}}
-        <select class="form-control aeigh" name="religion">
+        {{-- <input type="text" class="form-control" name="religion" placeholder="Enter Religion"> --}}
+        <select class="form-control" name="religion">
             <option></option>
         </select>
 
@@ -99,7 +99,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="address">Address</label>
-        <input type="text" class="form-control aeigh" name="address" placeholder="Enter Address">
+        <input type="text" class="form-control" name="address" placeholder="Enter Address">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="addressError"></strong>
         </span>
@@ -109,7 +109,7 @@
 <div class="row">
     <div class="form-group col-md-6">
         <label for="contact">Contact Number</label>
-        <input type="text" class="form-control aeigh" name="contact" placeholder="Enter Contact Number">
+        <input type="text" class="form-control" name="contact" placeholder="Enter Contact Number">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="contactError"></strong>
         </span>
@@ -183,7 +183,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="clothes_size">Clothes Size</label>
-        <select name="clothes_size" class="form-control aeigh">
+        <select name="clothes_size" class="form-control">
             <option readonly selected value="">Select Clothes Size</option>
             <option value="S">S</option>
             <option value="M">M</option>
@@ -201,7 +201,7 @@
 <div class="row">
     <div class="form-group col-md-2">
         <label for="height">Height(cm)</label>
-        <input type="number" class="form-control aeigh" name="height" placeholder="Enter Height" value="0">
+        <input type="number" class="form-control" name="height" placeholder="Enter Height" value="0">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="heightError"></strong>
         </span>
@@ -211,7 +211,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="weight">Weight(kg)</label>
-        <input type="number" class="form-control aeigh" name="weight" placeholder="Enter Weight" value="0">
+        <input type="number" class="form-control" name="weight" placeholder="Enter Weight" value="0">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="weightError"></strong>
         </span>
@@ -221,7 +221,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="bmi">BMI</label>
-        <input type="number" class="form-control aeigh" name="bmi" placeholder="Enter BMI" value="0">
+        <input type="number" class="form-control" name="bmi" placeholder="Enter BMI" value="0">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="bmiError"></strong>
         </span>
@@ -251,7 +251,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="civil_status">Civil Status</label>
-        <select name="civil_status" class="form-control aeigh">
+        <select name="civil_status" class="form-control">
             <option readonly selected value="">Select Civil Status</option>
             <option value="Single">Single</option>
             <option value="Married">Married</option>
@@ -267,7 +267,7 @@
 <div class="row"> --}}
     <div class="form-group col-md-2">
         <label for="eye_color">Eye Color</label>
-        <input type="text" class="form-control aeigh" name="eye_color" placeholder="Enter Eye Color" value="Black">
+        <input type="text" class="form-control" name="eye_color" placeholder="Enter Eye Color" value="Black">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="eye_colorError"></strong>
         </span>
