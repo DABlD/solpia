@@ -74,16 +74,20 @@
             text-align: right;
         }
 
-        .table-striped>tbody>tr:nth-of-type(odd) {
-            background-color: #bdb9b9;
+        .table-striped>tbody>tr:nth-of-type(even) {
+            background-color: #fdeee6;
+        }
+
+        .onBoard{
+            overflow-x: scroll;
         }
 
         .modal thead tr{
             background-color: #ffddcc !important;
         }
 
-        .custom-striped tr:nth-child(4n+1), .custom-striped tr:nth-child(4n+2) {
-            background-color: #bdb9b9;
+        .custom-striped tr:nth-child(4n+3), .custom-striped tr:nth-child(4n+4) {
+            background-color: #fdeee6;
         }
 
         .custom-striped td{
@@ -360,9 +364,6 @@
                         keyboard: false
                     });
                     $('#linedUp').modal('show');
-                    $('.linedUp .select2-selection.select2-selection--multiple:odd').css('background-color', '#bdb9b9');
-                    $('.onBoard .select2-selection.select2-selection--multiple:odd').css('background-color', '#bdb9b9');
-                    $('.summary .select2-selection.select2-selection--multiple:odd').css('background-color', '#bdb9b9');
 
                 }
             });
@@ -528,7 +529,10 @@
                     <option value="No Reliever"${crew.reliever == "No Reliever" ? ' selected' : ''}>No Reliever</option>
                 `;
 
-                onBoard.forEach(rengiSno => {
+                console.log(linedUp);
+                console.log(onBoard);
+                console.log(onBoard.concat(linedUp));
+                linedUp.concat(onBoard).forEach(rengiSno => {
                     if(crew.abbr == rengiSno.abbr && crew.id != rengiSno.id){
                         let name = `${rengiSno.lname + ', ' + rengiSno.fname + ' ' + (rengiSno.suffix || "") + ' ' + rengiSno.mname}`;
 
@@ -544,47 +548,50 @@
                         <td>${crew.abbr}</td>
                         <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
-                        <td>${moment(crew.joining_date).format('MMM DD, YYYY')}</td>
+                        <td>${moment(crew.joining_date).format('DD-MMM-YY')}</td>
                         <td>${crew.months}</td>
                         <td>${crew.months}</td>
                         <td>${moment(crew.joining_date).add(crew.months, 'months').format('DD-MMM-YY')}</td>
-                        <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('MMM DD, YYYY') : '-----'}</td>
-                        <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
-                        <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
+                        <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('DD-MMM-YY') : '-----'}</td>
+                        <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('DD-MMM-YY') : '-----'}</td>
+                        <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew.joining_port}</td>
                         <td>${reliever}</td>
                         <td class="remarks">${crew.remarks}</td>
                         <td class="actions">
-                            <a class="btn btn-danger" data-toggle="tooltip" title="Off-Board" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
+                            <a class="btn btn-danger" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-ship"></span>
                             </a>
                         </td>
                     </tr>
                 `;
 
-                table3 += `
-                    <tr>
-                        <td rowspan="2">${index + 1}</td>
-                        <td rowspan="2">${crew.abbr}</td>
-                        <td rowspan="2">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
-                        <td rowspan="2">${moment(crew.joining_date).format('MMM DD, YYYY')}</td>
-                        <td>
-                            ${crew.PASSPORTn ? crew.PASSPORTn : '-----'}
-                        </td>
-                        <td>
-                            ${crew["SEAMAN'S BOOKn"] ? crew["SEAMAN'S BOOKn"] : '-----'}
-                        </td>
-                        <td>
-                            ${crew["US-VISAn"] ? crew["US-VISAn"] : '-----'}
-                        </td>
-                    </tr>
+                if(crew.reliever){
+                    table3 += `
+                        <tr>
+                            <td rowspan="2">${index + 1}</td>
+                            <td rowspan="2">${crew.abbr}</td>
+                            <td rowspan="2">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+                            <td rowspan="2">${moment(crew.joining_date).format('MMM DD, YYYY')}</td>
+                            <td>
+                                ${crew.PASSPORTn ? crew.PASSPORTn : '-----'}
+                            </td>
+                            <td>
+                                ${crew["SEAMAN'S BOOKn"] ? crew["SEAMAN'S BOOKn"] : '-----'}
+                            </td>
+                            <td>
+                                ${crew["US-VISAn"] ? crew["US-VISAn"] : '-----'}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('MMM DD, YYYY') : '-----'}</td>
-                        <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
-                        <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
-                    </tr>
-                `;
+                        <tr>
+                            <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('MMM DD, YYYY') : '-----'}</td>
+                            <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
+                            <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
+                        </tr>
+                    `;
+                }
+
             });
 
             $('.tab-pane.linedUp').html(table + "</tbody></table>");
