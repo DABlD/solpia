@@ -5,23 +5,21 @@ namespace App\Exports;
 use App\Models\{Applicant};
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithDrawings;
 
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
 class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($applicant,$type){
-        $this->applicant = $applicant;
-        $this->type = $type;
+    public function __construct($data, $type){
+        $this->data     = $data;
+        $this->type     = $type;
     }
 
     public function view(): View
     {
-        return view('exports.' . $this->type, [
-            'applicant' => $this->applicant
+        return view('exports.' . lcfirst($this->type), [
+            'data' => $this->data,
         ]);
     }
 
@@ -29,6 +27,13 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
     {
         $borderStyle = 
         [
+            [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
             [
                 'borders' => [
                     'top' => [
@@ -43,24 +48,43 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
-                ],
+                ]
             ],
             [
                 'borders' => [
-                    'allBorders' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
                     ],
                 ]
             ],
         ];
 
         $fillStyle = [
-            'fill' => [
-                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                'color' => [
-                    'rgb' => 'EEECE1'
-                ]
+            [
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => [
+                        'rgb' => '26b36c'
+                    ]
+                ],
             ],
+            [
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => [
+                        'rgb' => 'ced4da'
+                    ]
+                ],
+            ]
         ];
 
         $headingStyle = [
@@ -118,7 +142,7 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('DOCUMENT CHECKLIST.INTERGES', false);
+                $event->sheet->getDelegate()->setTitle('TITLE', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -126,6 +150,21 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+
+                // FUNCTIONS
+                // $osSize = sizeof($this->linedUps);
+                // $ofsSize = sizeof($this->onBoards);
+
+                // GET AFTER ONSIGNERS
+                // $ar = function($c1, $r1, $c2 = null, $r2 = null, $ofs = false) use($osSize, $ofsSize){
+                //     $size = $osSize;
+                //     $temp = $c1 . ($r1 + $size);
+                //     if($c2 != null){
+                //         $temp .= ':' . $c2 . ($r2 + ($size + ($ofs ? $ofsSize : 0)));
+                //     }
+
+                //     return $temp;
+                // };
 
                 // FONT SIZES
 
@@ -199,17 +238,33 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 }
 
                 // FILLS
-                $fills = [
+                $fills[0] = [
                     
                 ];
 
-                foreach($fills as $fill){
-                    $event->sheet->getDelegate()->getStyle($fill)->applyFromArray($fillStyle);  
+                $fills[1] = [
+                    
+                ];
+
+                foreach($fills as $key => $value){
+                    foreach($value as $cell){
+                        $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($fillStyle[$key]);
+                    }
                 }
 
                 // BORDERS
-                $cells = array_merge([
+                $cells[0] = array_merge([
+                    
+                ]);
 
+
+                $cells[1] = array_merge([
+
+                ]);
+
+
+                $cells[2] = array_merge([
+                    // 'A2:H3', 'A4:' . $ar('H', 3), $ar('A', 6, 'H', 7), $ar('A', 8,'H', 7, true)
                 ]);
 
                 foreach($cells as $key => $value){
@@ -222,8 +277,7 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(14);
-                // $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(35);
+                // $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(7);
             },
         ];
     }
