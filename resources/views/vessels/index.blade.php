@@ -546,7 +546,7 @@
                         <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
                         <td>${moment(crew.joining_date).format('DD-MMM-YY')}</td>
-                        <td>${crew.months}</td>
+                        <td>${moment(crew.joining_date).diff(moment(), 'months')}</td>
                         <td>${crew.months}</td>
                         <td>${moment(crew.joining_date).add(crew.months, 'months').format('DD-MMM-YY')}</td>
                         <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('DD-MMM-YY') : '-----'}</td>
@@ -628,7 +628,6 @@
                     </div>
                     <br>
                 `,
-                width: '30%',
                 onOpen: () => {
                     $('#date').flatpickr({
                         altInput: true,
@@ -682,31 +681,91 @@
 
         function offBoard(id, vessel_id){
             swal({
-                type: 'info',
-                title: 'Choose Remark',
-                input: 'select',
-                inputOptions: {
-                    'Vacation'      : 'VACATION',
-                    'DISMISSAL'     : 'DISMISSAL',
-                    'OWN WILL'      : 'OWN WILL',
-                    'MEDICAL REPAT' : 'MEDICAL REPAT'
+                title: 'Disembarkation Details',
+                html: `
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Disembarkation Port</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="port" class="swal2-input" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Disembarkation Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="date" class="swal2-input" placeholder="Select Date"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel2">Remarks</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <select id="remark" class="swal2-input">
+                                <option></option>
+                                <option value="Vacation">VACATION</option>
+                                <option value="DISMISSAL">DISMISSAL</option>
+                                <option value="OWN WILL">OWN WILL</option>
+                                <option value="MEDICAL REPAT">MEDICAL REPAT</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                `,
+                onOpen: () => {
+                    $('#remark').select2({
+                        placeholder: 'Select Remark',
+                        tags: true
+                    });
+
+                    $('#date').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    });
+
+                    $('#remark').on('select2:open', () => {
+                        $('.select2-container').css('z-index', 1060);
+                    });
                 },
-                inputPlaceholder: 'Select Remark',
+                width: '50%',
                 preConfirm: input => {
                     swal.showLoading();
                     return new Promise(resolve => {
                         setTimeout(() => {
-                            if(input == ""){
-                                swal.showValidationError('Must select remark >.<');
+                            let a = $('#port').val();
+                            let b = $('#date').val();
+                            let c = $('#remark').val();
+
+                            if(a == "" || b == "" || c == ""){
+                                swal.showValidationError('All fields is required');
                             }
                         resolve()}, 500);
                     });
                 },
             }).then(result => {
                 if(result.value){
+
+                    // SAVE DISEMBARKATION DETAILS
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('applications.updateLineUpContract') }}",
+                        data: {
+                            id: id,
+                            disembarkation_port: $('#port').val(),
+                            disembarkation_date: $('#date').val()
+                        }
+                    });
+
+                    // UPDATE STATUS
                     $.ajax({
                         type: 'POST',
-                        url: `{{ route('applications.updateStatus') }}/${id}/${result.value}/${vessel_id}`,
+                        url: `{{ route('applications.updateStatus') }}/${id}/${$('#remark').val()}/${vessel_id}`,
                         success: result => {
                             swal({
                                 type: 'success',
@@ -718,7 +777,7 @@
                                 $('[href=".onBoard"]').click();
                             });
                         }
-                    })
+                    });
                 }
             });
         }
