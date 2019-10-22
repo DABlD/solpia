@@ -529,9 +529,6 @@
                     <option value="No Reliever"${crew.reliever == "No Reliever" ? ' selected' : ''}>No Reliever</option>
                 `;
 
-                console.log(linedUp);
-                console.log(onBoard);
-                console.log(onBoard.concat(linedUp));
                 linedUp.concat(onBoard).forEach(rengiSno => {
                     if(crew.abbr == rengiSno.abbr && crew.id != rengiSno.id){
                         let name = `${rengiSno.lname + ', ' + rengiSno.fname + ' ' + (rengiSno.suffix || "") + ' ' + rengiSno.mname}`;
