@@ -1085,8 +1085,8 @@
 		$('#rank').change(e => {
 			setTimeout(() => {
 				swal.showLoading();
-				@if(!isset($edit))
 					asdasd(e);
+				@if(!isset($edit))
 				@endif
 			}, 100);
 		});
