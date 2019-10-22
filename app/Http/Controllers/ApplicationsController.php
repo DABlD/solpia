@@ -520,6 +520,13 @@ class ApplicationsController extends Controller
             }
         }
 
+        if(in_array($type, ['western'])){
+            $applicant->sea_service = $applicant->sea_service->sortBy('sign_off');
+        }
+        else{
+            $applicant->sea_service = $applicant->sea_service->sortByDesc('sign_off');
+        }
+
         // FIX MINIMUM VESSELS
         if(sizeof($applicant->sea_service) < 5){
             for($i = sizeof($applicant->sea_service); $i < 5; $i++){
