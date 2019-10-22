@@ -146,6 +146,7 @@ class ApplicationsController extends Controller
             $name = $req->fname . '_' . $req->lname . '_avatar.'  . $image->getClientOriginalExtension();
             $destinationPath = public_path('uploads/');
 
+            $name = str_replace('Ñ', 'N', $name);
             $avatar->resize(209,196);
             $avatar->save($destinationPath . $name);
 
@@ -664,6 +665,7 @@ class ApplicationsController extends Controller
             $destinationPath = public_path('uploads/');
 
             $avatar->resize(209,196);
+            $name = str_replace('Ñ', 'N', $name);
             $avatar->save($destinationPath . $name);
             $user->put('avatar', 'uploads/' . $name);
         }
