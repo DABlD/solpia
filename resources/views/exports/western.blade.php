@@ -162,6 +162,13 @@
 					$docu = false;
 				}
 				else{
+					if($docu == "MLC TRAINING F" && ($rank >= 1 && $rank <= 4)){
+						$docu .= '3';
+					}
+					elseif($docu == "MLC TRAINING F" && ($rank >= 5 && $rank <= 8)){
+						$docu .= '4';
+					}
+					
 					$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
 				}
 
@@ -584,12 +591,7 @@
 	</tr>
 	
 	{{ $getDocument('MLC TRAINING F1', 	'lc', 		'',	'Navigation at the Management Level')}}
-
-	@if($rank >= 1 && $rank <= 4)
-		{{ $getDocument('MLC TRAINING F3', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
-	@elseif($rank >= 5 && $rank <= 8)
-		{{ $getDocument('MLC TRAINING F4', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
-	@endif
+	{{ $getDocument('MLC TRAINING F', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
 	{{ $getDocument('PRACTIAL ASSESSMENT IN MANAGEMENT LEVEL', 	'lc', 		'',	'Practical Assessment in Management Level')}}
 	{{ $getDocument('IDK', 	'lc', 		'',	'Catering Training Cert.')}}
 	{{ $getDocument('NCIII','lc', 		'',	'National Certificate III (NC III)')}}
