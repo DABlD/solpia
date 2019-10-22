@@ -748,8 +748,9 @@
 
 	@php
 		$date_employed = $applicant->created_at->format('M j, Y');
+		$applicant->sea_service = $applicant->sea_service->reverse();
 	@endphp
-
+	
 	@foreach($applicant->sea_service as $service)
 		<tr>
 			<td colspan="6">{{ $service->vessel_name }}</td>
