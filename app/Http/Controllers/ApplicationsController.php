@@ -1023,6 +1023,11 @@ class ApplicationsController extends Controller
 
         $linedUps = $vesselCrew[1];
 
+        foreach($linedUps as $linedUp){
+            $count = SeaService::where('applicant_id', $linedUp->applicant_id)->where('manning_agent', 'LIKE', '%SOLPIA%')->count();
+            $linedUp->lastShip = $count ? 'EX-SOLPIA' : 'NEW HIRE';
+        }
+
         $class = "App\\Exports\\" . $type;
 
         $name = substr($vesselCrew[2], 4);
