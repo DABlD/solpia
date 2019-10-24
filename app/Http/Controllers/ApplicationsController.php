@@ -1035,6 +1035,15 @@ class ApplicationsController extends Controller
         return Excel::download(new $class($linedUps, $onBoards, $type), "$name Onsigners and Offsigners.xlsx");
     }
 
+    function exportDocument($id, $type){
+        $applicant = Applicant::find($id)->load('user');
+
+        $fileName = $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
+        $class = "App\\Exports\\" . $type;
+        
+        return Excel::download(new $class($applicant, $type), "$fileName.xlsx");
+    }
+
     public function delete(User $user){
         $user->deleted_at = now()->toDateTimeString();
         echo $user->save();

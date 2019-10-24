@@ -194,39 +194,28 @@
         });
 
         function initializeActions(){
-	    	$('[data-original-title="Export Application"]').on('click', application => {
-                let type;
-
-                if($(application.target).data('status') == "Lined-Up"){
-                    window.location.href = 'applications/export/' + $(application.target).data('id');
-                }
-                else{
-                    swal({
-                        title: 'Select Export Type',
-                        input: 'select',
-                        inputOptions: {
-                            '' : '',
-                            @foreach($principals as $principal)
-                                '{{ $principal->slug }}': '{{ $principal->name }}',
-                            @endforeach
-                        },
-                        onOpen: () => {
-                            $('.swal2-select').select2({
-                                placeholder: 'Select Principal',
-                                width: '100%',
-                            });
-
-                            $('.swal2-select').on('select2:open', function (e) {
-                                $('.select2-dropdown--below').css('z-index', 1060);
-                            });
+	    	$('[data-original-title="Export"]').on('click', application => {
+                swal({
+                    title: 'Select Export Type',
+                    input: 'select',
+                    inputOptions: {
+                        Biodata:        'Biodata',
+                        WalangLagay:    'Walang Lagay',
+                        HistoryCheck:   'History Check',
+                    },
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b'
+                }).then(result => {
+                    if(result.value){
+                        application = $(application.target);
+                        if(result.value == 'Biodata'){
+                            exportBiodata(application);
                         }
-                    }).then(result => {
-                        if(result.value){
-                            type = result.value;
-                            window.location.href = 'applications/export/' + $(application.target).data('id') + '/' + type;
+                        else{
+                            window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
                         }
-                    });
-                }
+                    }
+                })
 	    	});
 
             $('[data-original-title="Edit Application"]').on('click', application => {
@@ -453,5 +442,40 @@
                 }
             });
 	    }
+
+        function exportBiodata(application){
+            let type;
+
+            if($(application.target).data('status') == "Lined-Up"){
+                window.location.href = 'applications/export/' + $(application.target).data('id');
+            }
+            else{
+                swal({
+                    title: 'Select Export Type',
+                    input: 'select',
+                    inputOptions: {
+                        '' : '',
+                        @foreach($principals as $principal)
+                            '{{ $principal->slug }}': '{{ $principal->name }}',
+                        @endforeach
+                    },
+                    onOpen: () => {
+                        $('.swal2-select').select2({
+                            placeholder: 'Select Principal',
+                            width: '100%',
+                        });
+
+                        $('.swal2-select').on('select2:open', function (e) {
+                            $('.select2-dropdown--below').css('z-index', 1060);
+                        });
+                    }
+                }).then(result => {
+                    if(result.value){
+                        type = result.value;
+                        window.location.href = 'applications/export/' + $(application.target).data('id') + '/' + type;
+                    }
+                });
+            }
+        }
 	</script>
 @endpush

@@ -104,6 +104,7 @@ Route::group([
 		Route::post($name . '/updateData', ucfirst($name) . 'Controller@updateData')->name($name . '.updateData');
 		Route::post("$name/getVesselCrew", ucfirst($name) . 'Controller@getVesselCrew')->name("$name.getVesselCrew");
 		Route::get("$name/exportOnOff/{id?}/{type?}", ucfirst($name) . 'Controller@exportOnOff')->name("$name.exportOnOff");
+		Route::get("$name/exportDocument/{id?}/{type?}", ucfirst($name) . 'Controller@exportDocument')->name("$name.exportDocument");
 
 		// ON BOARD, ETC.
 		Route::post("$name/updateStatus/{id?}/{status?}/{vessel_id?}", ucfirst($name) . 'Controller@updateStatus')->name("$name.updateStatus");
