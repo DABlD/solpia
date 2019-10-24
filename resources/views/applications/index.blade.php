@@ -446,8 +446,8 @@
         function exportBiodata(application){
             let type;
 
-            if($(application.target).data('status') == "Lined-Up"){
-                window.location.href = 'applications/export/' + $(application.target).data('id');
+            if(application.data('status') == "Lined-Up"){
+                window.location.href = 'applications/export/' + application.data('id');
             }
             else{
                 swal({
@@ -472,7 +472,7 @@
                 }).then(result => {
                     if(result.value){
                         type = result.value;
-                        window.location.href = 'applications/export/' + $(application.target).data('id') + '/' + type;
+                        window.location.href = 'applications/export/' + application.data('id') + '/' + type;
                     }
                 });
             }
