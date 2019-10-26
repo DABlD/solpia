@@ -34,9 +34,9 @@
 
 	<tr>
 		<td>Ex-crew:</td>
-		<td colspan="4"></td>
+		<td colspan="4">{{ $data->exCrew }}</td>
 		<td colspan="2">New Applicant:</td>
-		<td colspan="4"></td>
+		<td colspan="4">{{ $data->newHire }}</td>
 	</tr>
 
 	<tr>

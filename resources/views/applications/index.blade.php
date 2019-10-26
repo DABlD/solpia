@@ -66,6 +66,18 @@
         .select2-selection__choice__remove{
             color: black !important;
         }
+
+        .clabel{
+            text-align: right;
+        }
+
+        .clabel2{
+            text-align: right;
+        }
+
+        .col-md-7 .select2{
+            margin-top: 8px;
+        }
 	</style>
 @endpush
 
@@ -212,7 +224,99 @@
                             exportBiodata(application);
                         }
                         else{
-                            window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
+                            let data = {};
+                            if($(application).data('status') != "Lined-Up"){
+                                let savedVessels = {};
+                                let savedVesselsString = "";
+
+                                swal({
+                                    title: 'Enter Details',
+                                    html: '',
+                                    onOpen: () => {
+                                        swal.showLoading();
+
+                                        $.ajax({
+                                            url: '{{ route('vessels.getAll') }}',
+                                            dataType: 'json',
+                                            success: vessels => {
+                                                vessels.forEach(vessel => {
+                                                    if(savedVessels[vessel.name] == undefined){
+                                                        savedVessels[vessel.name] = vessel;
+                                                        savedVesselsString += `
+                                                            <option value="${vessel.name}">${vessel.name}</option>
+                                                        `;
+                                                    }
+                                                });
+
+                                                $('#swal2-content').html(`
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <h4 class="clabel">Vessel Name</h4>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <select id="vessel" class="swal2-input">
+                                                                <option></option>
+                                                                ${savedVesselsString}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <h4 class="clabel">Rank</h4>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <select id="rank" class="swal2-input">
+                                                                <option></option>
+                                                                @foreach($categories as $category => $ranks)
+                                                                    <optgroup label="{{ $category }}"></optgroup>
+                                                                    @foreach($ranks as $rank)
+                                                                        <option value="{{ $rank->name }}">
+                                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            {{ $rank->name }} ({{ $rank->abbr }})
+                                                                        </option>
+                                                                    @endforeach
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <br>
+                                                `);
+                                            }
+                                        }).then(() => {
+                                            $("#vessel").select2({
+                                                placeholder: 'Select Vessel'
+                                            });
+
+                                            $("#rank").select2({
+                                                placeholder: 'Select Rank'
+                                            });
+
+                                            $('#vessel, #rank').on('select2:open', () => {
+                                                $('.select2-container').css('z-index', 1060);
+                                            });
+
+                                            $('#swal2-content').show();
+                                            $('.select2-container').css('width', '100%');
+                                            swal.hideLoading();
+                                        });
+                                    },
+                                    width: '400px',
+                                    showCancelButton: true,
+                                    cancelButtonColor: '#f76c6b',
+                                }).then(result2 => {
+                                    if(result2.value){
+                                        data.vessel = $('#vessel').val();
+                                        data.rank = $('#rank').val();
+
+                                        window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}?` + $.param(data);
+                                    }
+                                })
+                            }
+                            else{
+                                window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}?` + $.param(data);
+                            }
                         }
                     }
                 })

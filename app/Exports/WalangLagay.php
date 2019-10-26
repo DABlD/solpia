@@ -8,13 +8,14 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-use App\Models\{Vessel, Rank};
+use App\Models\{Vessel, Rank, SeaService};
 
 class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($applicant, $type){
+    public function __construct($applicant, $type, $req){
         $this->applicant    = $applicant;
         $this->type         = $type;
+        $this->req          = $req;
     }
 
     public function view(): View
@@ -24,17 +25,27 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
         $this->applicant->load('sea_service');
         $this->applicant->load('document_med');
 
-        $this->applicant->vessel = Vessel::find($this->applicant->pro_app->vessel_id)->first()->name;
-        $this->applicant->rank = Rank::find($this->applicant->pro_app->rank_id)->first()->abbr;
-
         $sea_services = $this->applicant->sea_service->sortBy('sign_off');
-        $exCrew = "";
-        $newHire = "";
 
-        foreach($sea_services as $ss){
-            if($exCrew != ""){
-                break;
-            }
+        if($this->applicant->pro_app->vessel_id){
+            $this->applicant->vessel = Vessel::find($this->applicant->pro_app->vessel_id)->first()->name;
+            $this->applicant->rank = Rank::find($this->applicant->pro_app->rank_id)->first()->abbr;
+        }
+        else{
+            $this->applicant->vessel = $this->req['vessel'] ?? "";
+            $this->applicant->rank = Rank::where('name', $this->req['rank'] ?? $sea_services->last()->rank)->first()->abbr;
+        }
+
+        $this->applicant->exCrew = "";
+        $this->applicant->newHire = "";
+
+        $count = SeaService::where('applicant_id', $this->applicant->id)->where('manning_agent', 'LIKE', '%SOLPIA%')->count();
+        $count ? 'EX-SOLPIA' : 'NEW HIRE';
+        if($count){
+            $this->applicant->exCrew = $sea_services->last()->vessel_name;
+        }
+        else{
+            $this->applicant->newHire = $sea_services->last()->manning_agent;
         }
 
         return view('exports.' . lcfirst($this->type), [
@@ -199,6 +210,13 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 $event->sheet->getDelegate()->getStyle('A21')->getFont()->setSize(9);
                 $event->sheet->getDelegate()->getStyle('A19')->getFont()->setSize(9);
                 $event->sheet->getDelegate()->getStyle('E19:E20')->getFont()->setSize(8);
+
+                $event->sheet->getDelegate()->getStyle('B3:B7')->getFont()->getColor()->setRGB('4badcc');
+                $event->sheet->getDelegate()->getStyle('D5')->getFont()->getColor()->setRGB('4badcc');
+                $event->sheet->getDelegate()->getStyle('I3:I5')->getFont()->getColor()->setRGB('4badcc');
+                $event->sheet->getDelegate()->getStyle('K3:K5')->getFont()->getColor()->setRGB('4badcc');
+                $event->sheet->getDelegate()->getStyle('H7')->getFont()->getColor()->setRGB('4badcc');
+
 
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
