@@ -28,8 +28,8 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
         $sea_services = $this->applicant->sea_service->sortBy('sign_off');
 
         if($this->applicant->pro_app->vessel_id){
-            $this->applicant->vessel = Vessel::find($this->applicant->pro_app->vessel_id)->first()->name;
-            $this->applicant->rank = Rank::find($this->applicant->pro_app->rank_id)->first()->abbr;
+            $this->applicant->vessel = Vessel::find($this->applicant->pro_app->vessel_id)->name;
+            $this->applicant->rank = Rank::find($this->applicant->pro_app->rank_id)->abbr;
         }
         else{
             $this->applicant->vessel = $this->req['vessel'] ?? "";

@@ -458,7 +458,7 @@
                         <td>${crew.status2}</td>
                         <td class="remarks">${crew.remarks}</td>
                         <td class="actions">
-                            <a class="btn btn-info" data-toggle="tooltip" title="Export Contract" onClick="getContract(${crew.applicant_id})">
+                            <a class="btn btn-info" data-toggle="tooltip" title="Export Documents" onClick="getContract(${crew.applicant_id})">
                                 <span class="fa fa-file-text"></span>
                             </a>
                             <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id}, ${crew.vessel_id})">
@@ -784,13 +784,19 @@
 
         function getContract(id){
             swal({
-                title: 'Choose Contract Type',
+                title: 'Select Document',
                 input: 'select',
                 inputOptions: {
-                    'MLC CONTRACT': 'MLC CONTRACT',
-                    'POEA CONTRACT': 'POEA CONTRACT'
+                    'WalangLagay': 'Walang Lagay',
+                    'MLC CONTRACT': 'MLC Contract',
+                    'POEA CONTRACT': 'POEA Contract',
                 },
-                inputPlaceholder: 'Select Contract',
+                inputPlaceholder: '',
+            }).then(result => {
+                if(result.value){
+                    
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
+                }
             })
         }
 
