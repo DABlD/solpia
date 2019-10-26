@@ -254,7 +254,7 @@
                 });
             });
 
-            $('[data-original-title="View Line-Up"]').on('click', vessel => {
+            $('[data-original-title="View Crew List"]').on('click', vessel => {
                 getVesselCrew(vessel);
             });
 
