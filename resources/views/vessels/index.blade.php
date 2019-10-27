@@ -788,16 +788,101 @@
                 input: 'select',
                 inputOptions: {
                     'WalangLagay': 'Walang Lagay',
-                    'MLC CONTRACT': 'MLC Contract',
-                    'POEA CONTRACT': 'POEA Contract',
+                    'MLCContract': 'MLC Contract',
+                    'POEAContract': 'POEA Contract',
                 },
                 inputPlaceholder: '',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
             }).then(result => {
                 if(result.value){
-                    
-                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
+                    if(result.value == "MLCContract"){
+                        getMLCData(id, result.value);
+                    }
+                    else{
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
+                    }
                 }
             })
+        }
+
+        function getMLCData(id, type){
+            let data = {};
+            swal({
+                title: 'Fill all details',
+                html: `
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Date Processed</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="date_processed" class="swal2-input" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Effective Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="effective_date" class="swal2-input" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Med Cert Issue Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="med_date" class="swal2-input" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Months of employment</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" id="employment_months" class="form-control" />
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '40%',
+                onOpen: () => {
+                    $('#date_processed, #effective_date, #med_date').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    })
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let a = $('#date_processed').val();
+                            let b = $('#effective_date').val();
+                            let c = $('#med_date').val();
+                            let d = $('#employment_months').val();
+
+                            if(a == "" || b == "" || c == "" || d == ""){
+                                swal.showValidationError('All fields is required');
+                            }
+                        resolve()}, 800);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    data.date_processed     = $('#date_processed').val();
+                    data.effective_date     = $('#effective_date').val();
+                    data.valid_till         = moment(data.effective_date).add('months', 9).subtract('day', 1).format('YYYY-MM-DD');
+                    data.med_date           = $('#med_date').val();
+                    data.employment_months  = $('#employment_months').val();
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                }
+            });
         }
 
         function createModal(name, id){
