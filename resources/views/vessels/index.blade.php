@@ -450,7 +450,7 @@
                     <tr>
                         <td>${index + 1}</td>
                         <td>${crew.abbr}</td>
-                        <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+                        <td class="LUN" data-id="${crew.applicant_id}">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
                         <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('MMM DD, YYYY') : '-----'}</td>
                         <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
@@ -787,9 +787,10 @@
                 title: 'Select Document',
                 input: 'select',
                 inputOptions: {
-                    'WalangLagay': 'Walang Lagay',
-                    'MLCContract': 'MLC Contract',
-                    'POEAContract': 'POEA Contract',
+                    'WalangLagay':      'Walang Lagay',
+                    'MLCContract':      'MLC Contract',
+                    'POEAContract':     'POEA Contract',
+                    'RequestToProcess': 'Request To Process'
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
@@ -876,7 +877,7 @@
                 if(result.value){
                     data.date_processed     = $('#date_processed').val();
                     data.effective_date     = $('#effective_date').val();
-                    data.valid_till         = moment(data.effective_date).add('months', 9).subtract('day', 1).format('YYYY-MM-DD');
+                    data.valid_till         = moment(data.effective_date).add(9, 'months').subtract(1, 'day').format('YYYY-MM-DD');
                     data.med_date           = $('#med_date').val();
                     data.employment_months  = $('#employment_months').val();
 
@@ -924,6 +925,7 @@
 
                             <div class="modal-footer" style="background-color: transparent;">
                                 <button type="button" class="btn btn-info" onClick="exportOnOff(${id})">Export On/Off Signers</button>
+                                <button type="button" class="btn btn-warning" onClick="RTP(${id})">Request to Process</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -945,6 +947,201 @@
                 },
             }).then(result => {
                 window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}`;
+            })
+        }
+
+        function RTP(id){
+            let crews = [];
+            let docus = [];
+
+            let temp = $('.LUN');
+            let crewString = "";
+            let docuString = "";
+
+            let docuArray = [
+                {name: 'USA VISA REFUND',},
+                {name: 'FLAG'},
+                {name: 'VESSEL / PRINCIPAL ENROLLMENT / AMENDMENT'},
+                {name: 'IHT CERT'},
+                {name: 'CONTRACT'}
+            ];
+
+            temp.each((index, value) => {
+                let temp2 = $(value);
+
+                crewString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${temp2[0].innerText}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            docuArray.forEach((value, index) => {
+                docuString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="docu-checklist" data-id="${index}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${value.name}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let config = {
+                confirmButtonText: 'Next',
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+            }
+
+            swal.queue([
+                {
+                    ...config,
+                    title: 'Select Crew',
+                    html: '<br><br>' + crewString,
+                    width: '20%',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+                        $('#swal2-content .col-md-10').css('text-align', 'left');
+                        $('#swal2-content .col-md-10 label').css({
+                            "font-size": '20px',
+                            "text-align": 'left'
+                        });
+                        $('#swal2-content input[type=checkbox]').css({
+                            'zoom': '1.7',
+                            'margin': '1px 0 0'
+                        });
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let temp3 = $(".crew-checklist:checked");
+                                
+                                temp3.each((index, value) => {
+                                    crews.push($(value).data('id'));
+                                });
+                            resolve()}, 500);
+                        });
+                    },
+                },
+                {
+                    ...config,
+                    title: 'Select Documents',
+                    html: '<br><br>' + docuString,
+                    width: '20%',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+                        $('#swal2-content .col-md-10').css('text-align', 'left');
+                        $('#swal2-content .col-md-10 label').css({
+                            "font-size": '20px',
+                            "text-align": 'left'
+                        });
+                        $('#swal2-content input[type=checkbox]').css({
+                            'zoom': '1.7',
+                            'margin': '1px 0 0'
+                        });
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let temp3 = $(".docu-checklist:checked");
+                                
+                                temp3.each((index, value) => {
+                                    docus.push($(value).data('id'));
+                                });
+                            resolve()}, 500);
+                        });
+                    },
+                },
+                {
+                    ...config,
+                    title: 'Fill Details',
+                    html: '<br><br>' + `
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Deparment</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="department" class="swal2-input" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Port / Country</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="port" class="swal2-input" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Departure</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="departure" class="swal2-input" />
+                            </div>
+                        </div>
+                    `,
+                    width: '20%',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+
+                        $('#departure').flatpickr({
+                            altInput: true,
+                            altFormat: 'F j, Y',
+                            dateFormat: 'Y-m-d',
+                        })
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let a = $('#department').val();
+                                let b = $('#port').val();
+                                let c = $('#departure').val();
+
+                                if(a == "" || b == "" || c == ""){
+                                    swal.showValidationError('All fields is required');
+                                }
+                            resolve()}, 500);
+                        });
+                    },
+                },
+            ]).then(result => {
+                let data = {
+                    crews: crews,
+                    docus: docus,
+                    department: $('#department').val(),
+                    port: $('#port').val(),
+                    departure: $('#departure').val(),
+                    filename: $('.modal-title span')[0].innerText + ' - Request To Process'
+                };
+
+                window.location.href = `{{ route('applications.exportDocument') }}/1/RequestToProcess?` + $.param(data);
             })
         }
     </script>
