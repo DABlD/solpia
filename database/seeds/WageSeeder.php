@@ -187,7 +187,7 @@ class WageSeeder extends Seeder
         	Wage::create([
         		'rank_id'		=> Rank::where('abbr', $arr['rank'])->first()->id,
         		'principal_id'	=> 9,
-        		'currency'		=> 'DOLLAR',
+        		'currency'		=> '$',
         		'basic'			=> $arr['basic'] ?? '0',
         		'leave_pay'		=> $arr['leave_pay'] ?? '0',
         		'fot'			=> $arr['fot'] ?? '0',
