@@ -96,7 +96,7 @@ class DatatablesController extends Controller
 	}
 
 	public function vessels(){
-		$vessels = Vessel::select('vessels.*')->with('principal')->get();
+		$vessels = Vessel::where('status', 'ACTIVE')->select('vessels.*')->with('principal')->get();
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		$principals = Principal::where('active', 1)->pluck('id')->toArray();
