@@ -277,6 +277,9 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // COLUMN RESIZE
                 // $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(7);
+
+                // ROW RESIZE
+                // $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(8.25);
             },
         ];
     }
