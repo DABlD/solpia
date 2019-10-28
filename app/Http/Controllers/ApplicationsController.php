@@ -1036,9 +1036,10 @@ class ApplicationsController extends Controller
     }
 
     function exportDocument($id, $type, Request $req){
-        $applicant = Applicant::find($id)->load('user');
+        $applicant = Applicant::withTrashed()->find($id)->load('user');
 
-        $fileName = $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
+        $fileName = $req->filename ?? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
+
         $class = "App\\Exports\\" . $type;
         
         return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");

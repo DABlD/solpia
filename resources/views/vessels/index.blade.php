@@ -1010,7 +1010,7 @@
                     ...config,
                     title: 'Select Crew',
                     html: '<br><br>' + crewString,
-                    width: '20%',
+                    width: '450px',
                     onOpen: () => {
                         $('#swal2-title').css({
                             'font-size': '28px',
@@ -1043,7 +1043,7 @@
                     ...config,
                     title: 'Select Documents',
                     html: '<br><br>' + docuString,
-                    width: '20%',
+                    width: '450px',
                     onOpen: () => {
                         $('#swal2-title').css({
                             'font-size': '28px',
@@ -1103,7 +1103,7 @@
                             </div>
                         </div>
                     `,
-                    width: '20%',
+                    width: '450px',
                     onOpen: () => {
                         $('#swal2-title').css({
                             'font-size': '28px',
@@ -1132,16 +1132,19 @@
                     },
                 },
             ]).then(result => {
-                let data = {
-                    crews: crews,
-                    docus: docus,
-                    department: $('#department').val(),
-                    port: $('#port').val(),
-                    departure: $('#departure').val(),
-                    filename: $('.modal-title span')[0].innerText + ' - Request To Process'
-                };
+                if(result.value){
+                    let data = {
+                        crews: crews,
+                        docus: docus,
+                        department: $('#department').val(),
+                        port: $('#port').val(),
+                        departure: $('#departure').val(),
+                        filename: $('.modal-title span')[0].innerText.substring(4) + ' - Request To Process',
+                        isApplicant: false
+                    };
 
-                window.location.href = `{{ route('applications.exportDocument') }}/1/RequestToProcess?` + $.param(data);
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/RequestToProcess?` + $.param(data);
+                }
             })
         }
     </script>
