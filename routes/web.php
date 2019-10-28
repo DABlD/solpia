@@ -111,6 +111,10 @@ Route::group([
 
 		// SELECTING RELIEVER
 		Route::post("$name/updateLineUpContract", ucfirst($name) . 'Controller@updateLineUpContract')->name("$name.updateLineUpContract");
+
+		// FILES
+		Route::post("$name/getFiles", ucfirst($name) . 'Controller@getFiles')->name("$name.getFiles");
+		Route::post("$name/uploadFiles", ucfirst($name) . 'Controller@uploadFiles')->name("$name.uploadFiles");
 		
 
 		// Vessels ROUTES

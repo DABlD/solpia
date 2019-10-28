@@ -55,6 +55,10 @@
 			width: 60px !important;
 		}
 
+        .w100{
+            width: 75px !important;
+        }
+
         .dt-status b{
             color: red;
         }
@@ -77,6 +81,10 @@
 
         .col-md-7 .select2{
             margin-top: 8px;
+        }
+
+        #table .btn{
+            margin-bottom: 3px !important;
         }
 	</style>
 @endpush
@@ -130,6 +138,10 @@
                     render: function(link){
                         return `<img src="${link}" alt="Applicant Photo"/>`;
                     },
+                },
+                {
+                    targets: 10,
+                    className: "w100"
                 },
                 {
                     targets: 0,
@@ -544,6 +556,91 @@
                         });
                     }
                 }
+            });
+
+            $('[data-original-title="View Files"]').on('click', application => {
+                let id = $(application.target).data('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('applications.getFiles') }}',
+                    data:{id: id},
+                    dataType: 'json',
+                    success: result => {
+                        let files = result[0];
+                        let html = "<br><br>";
+
+                        files.forEach((file, index) => {
+                            html += `
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>${index + 1}.) ${file}</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a class="btn btn-success" href="files/${result[1]}/${file}" target="_blank">
+                                            <span class="fa fa-download"></span>
+                                        </a>&nbsp;
+                                        <a class="btn btn-danger">
+                                            <span class="fa fa-trash"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            `;
+                        })
+
+                        html = html == "<br><br>" ? "<br>No Files" : html;
+
+                        swal({
+                            title: result[1] + "'s Files",
+                            showCancelButton: true,
+                            cancelButtonColor: '#f76c6b',
+                            cancelButtonText: 'Exit',
+                            confirmButtonText: 'Upload Files',
+                            width: '40%',
+                            html: html + '<br>'
+                        }).then(result2 => {
+                            if(result2.value){
+                                swal({
+                                    title: 'Select Files',
+                                    html: `
+                                        <form action="{{ route('applications.uploadFiles') }}" enctype="multipart/form-data" method="POST" target="_blank">
+                                            @csrf
+                                            <input type="file" name="files[]" multiple id="files" class="swal2-file"/>
+                                            <input type="hidden" name="name" value="${result[1]}" />
+                                            <input type="hidden" name="id" value="${id}" />
+                                        </form>
+                                    `,
+                                    showCancelButton: true,
+                                    cancelButtonColor: '#f76c6b',
+                                    cancelButtonText: 'Cancel',
+                                    preConfirm: () => {
+                                        swal.showLoading();
+                                        return new Promise(resolve => {
+                                            setTimeout(() => {
+                                                if(!$('#files').val()){
+                                                    swal.showValidationError('No file Selected');
+                                                }
+                                            resolve()}, 500);
+                                        });
+                                    },
+                                }).then(result2 => {
+                                    if(result2.value){
+                                        $('.swal2-content form').submit();
+                                    }
+                                }).then(() => {
+                                    swal({
+                                        type: 'success',
+                                        title: 'File successfully uploaded',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    }).then(() => {
+                                        $(`[data-original-title="View Files"] [data-id="${id}"]`).click();
+                                    })
+                                });
+                            }
+                        });
+                    }
+                })
             });
 	    }
 

@@ -11,7 +11,7 @@ use App\Models\{EducationalBackground, FamilyData, SeaService};
 use App\Models\{Vessel, Rank, Principal};
 use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMedCert, DocumentMed, DocumentMedExp};
 
-use App\Models\{AuditTrail, Statistic};
+use App\Models\{AuditTrail, Statistic, File as Fileszxc};
 
 use Image;
 use Browser;
@@ -1043,6 +1043,35 @@ class ApplicationsController extends Controller
         $class = "App\\Exports\\" . $type;
         
         return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");
+    }
+
+    function getFiles(Request $req){
+        $files = Fileszxc::where('applicant_id', $req->id)->pluck('name');
+
+        $temp = Applicant::find($req->id);
+        $temp->load('user');
+
+        $full_name = $temp->user->fname . ' ' . $temp->user->lname;
+
+        echo json_encode(
+            [$files, $full_name]
+        );
+    }
+
+    function uploadFiles(Request $req){
+        $files = $req->file('files');
+
+        foreach($files as $file){
+            $name = $file->getClientOriginalName();
+            $file->move(public_path().'/files/' . $req->name . '/', $name);
+
+            Fileszxc::create([
+                'applicant_id' => $req->id,
+                'name' => $name
+            ]);
+        }
+
+        echo "<script>window.close();</script>";
     }
 
     public function delete(User $user){
