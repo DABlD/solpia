@@ -59,12 +59,10 @@
 							$regulation = json_decode($document->regulation);
 							
 							if($rank >= 9 && $rank <= 14){
-								$tempName = "COC";
-								$temp = $tempDocu == $tempName ? 'II/4' : 'II/5';
+								$temp = 'II/4';
 							}
 							elseif($rank >= 15 && $rank <= 23){
-								$tempName = "COE";
-								$temp = $tempDocu == $tempName ? 'III/4' : 'III/5';
+								$temp = 'III/4';
 							}
 
 						    if($document->type == $tempName && in_array($temp, $regulation)){
