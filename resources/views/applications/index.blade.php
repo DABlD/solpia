@@ -86,6 +86,14 @@
         #table .btn{
             margin-bottom: 3px !important;
         }
+
+        .swal2-content .col-md-6 h4{
+            text-align: left;
+        }
+
+        .file-buttons{
+            text-align: right;
+        }
 	</style>
 @endpush
 
@@ -560,6 +568,8 @@
 
             $('[data-original-title="View Files"]').on('click', application => {
                 let id = $(application.target).data('id');
+                swal('Loading Files');
+                swal.showLoading('Loading Files');
 
                 $.ajax({
                     type: 'POST',
@@ -567,82 +577,97 @@
                     data:{id: id},
                     dataType: 'json',
                     success: result => {
-                        let files = result[0];
-                        let html = "<br><br>";
-
-                        files.forEach((file, index) => {
-                            html += `
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h4>${index + 1}.) ${file}</h4>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a class="btn btn-success" href="files/${result[1]}/${file}" target="_blank">
-                                            <span class="fa fa-download"></span>
-                                        </a>&nbsp;
-                                        <a class="btn btn-danger">
-                                            <span class="fa fa-trash"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            `;
-                        })
-
-                        html = html == "<br><br>" ? "<br>No Files" : html;
-
-                        swal({
-                            title: result[1] + "'s Files",
-                            showCancelButton: true,
-                            cancelButtonColor: '#f76c6b',
-                            cancelButtonText: 'Exit',
-                            confirmButtonText: 'Upload Files',
-                            width: '40%',
-                            html: html + '<br>'
-                        }).then(result2 => {
-                            if(result2.value){
-                                swal({
-                                    title: 'Select Files',
-                                    html: `
-                                        <form action="{{ route('applications.uploadFiles') }}" enctype="multipart/form-data" method="POST" target="_blank">
-                                            @csrf
-                                            <input type="file" name="files[]" multiple id="files" class="swal2-file"/>
-                                            <input type="hidden" name="name" value="${result[1]}" />
-                                            <input type="hidden" name="id" value="${id}" />
-                                        </form>
-                                    `,
-                                    showCancelButton: true,
-                                    cancelButtonColor: '#f76c6b',
-                                    cancelButtonText: 'Cancel',
-                                    preConfirm: () => {
-                                        swal.showLoading();
-                                        return new Promise(resolve => {
-                                            setTimeout(() => {
-                                                if(!$('#files').val()){
-                                                    swal.showValidationError('No file Selected');
-                                                }
-                                            resolve()}, 500);
-                                        });
-                                    },
-                                }).then(result2 => {
-                                    if(result2.value){
-                                        $('.swal2-content form').submit();
-                                    }
-                                }).then(() => {
-                                    swal({
-                                        type: 'success',
-                                        title: 'File successfully uploaded',
-                                        showConfirmButton: false,
-                                        timer: 2000
-                                    }).then(() => {
-                                        $(`[data-original-title="View Files"] [data-id="${id}"]`).click();
-                                    })
-                                });
-                            }
-                        });
+                        setTimeout(() => {
+                            showFiles(id, result[1], result[0]);
+                        }, 500);
                     }
                 })
             });
 	    }
+
+        function showFiles(id, name, files){
+            let html = "<br><br>";
+
+            files.forEach((file, index) => {
+                html += `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>${index + 1}.) ${file}</h4>
+                        </div>
+                        <div class="col-md-6 file-buttons">
+                            <a class="btn btn-success" href="files/${name}/${file}" target="_blank">
+                                <span class="fa fa-download"></span>
+                            </a>&nbsp;
+                            <a class="btn btn-danger">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            })
+
+            html = html == "<br><br>" ? "<br>No Files" : html;
+
+            swal({
+                title: name + "'s Files",
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                cancelButtonText: 'Exit',
+                confirmButtonText: 'Upload Files',
+                width: '500px',
+                html: html + '<br>'
+            }).then(result2 => {
+                if(result2.value){
+                    uploadFile(id, name);
+                }
+            });
+        }
+
+        function uploadFile(id, name){
+            swal({
+                title: 'Select Files',
+                html: `
+                    <form action="{{ route('applications.uploadFiles') }}" enctype="multipart/form-data" method="POST" target="_blank">
+                        @csrf
+                        <input type="file" name="files[]" multiple id="files" class="swal2-file"/>
+                        <input type="hidden" name="name" value="${name}" />
+                        <input type="hidden" name="id" value="${id}" />
+                    </form>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                cancelButtonText: 'Cancel',
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            if(!$('#files').val()){
+                                swal.showValidationError('No file Selected');
+                            }
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result2 => {
+                if(result2.value){
+                    $('.swal2-content form').submit();
+
+                    swal('Uploading Files');
+                    swal.showLoading();
+
+                    // UPDATE TO KNOW IF FORM SUCCESSFULLY SUBMITTED THEN DO THE SUCCESS
+                    setTimeout(() => {
+                        swal({
+                            type: 'success',
+                            title: 'File successfully uploaded',
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            $(`[data-original-title="View Files"] [data-id="${id}"]`).click();
+                        })
+                    }, 500);
+                }
+            });
+        }
 
         function exportBiodata(application){
             let type;
