@@ -530,11 +530,11 @@
                 `;
 
                 linedUp.concat(onBoard).forEach(rengiSno => {
-                    if(crew.abbr == rengiSno.abbr && crew.id != rengiSno.id){
+                    if(crew.abbr == rengiSno.abbr && crew.applicant_id != rengiSno.applicant_id){
                         let name = `${rengiSno.lname + ', ' + rengiSno.fname + ' ' + (rengiSno.suffix || "") + ' ' + rengiSno.mname}`;
 
                         reliever += `
-                            <option value="${rengiSno.id}"${rengiSno.id == crew.reliever ? ' selected' : ''}>${rengiSno.abbr} - ${name}</option>
+                            <option value="${rengiSno.applicant_id}"${rengiSno.applicant_id == crew.reliever ? ' selected' : ''}>${rengiSno.abbr} - ${name}</option>
                         `;
                     }
                 });
@@ -925,6 +925,7 @@
 
                             <div class="modal-footer" style="background-color: transparent;">
                                 <button type="button" class="btn btn-info" onClick="exportOnOff(${id})">Export On/Off Signers</button>
+                                <button type="button" class="btn btn-success" onClick="exportOnBoard(${id}, '${name}')">Export Onboard</button>
                                 <button type="button" class="btn btn-warning" onClick="RTP(${id})">Request to Process</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
@@ -946,8 +947,18 @@
                     WesternOnOff: 'Western'
                 },
             }).then(result => {
-                window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}`;
+                if(result.value){
+                    window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}`;
+                }
             })
+        }
+
+        function exportOnBoard(id, name){
+            let data = {};
+            data.id = id;
+            data.filename = name.substring(4) + " - Onboard";
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel?` + $.param(data);
         }
 
         function RTP(id){
