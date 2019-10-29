@@ -249,8 +249,12 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $fills[1] = array_merge($fillables, [
-                    'P9:AA9', 'AA11:AH11', 'E13:H13', 'K13:N13', 'T13:W13', 'AA13:AH13', 'C14:L14', 'N14:W14', 'Y14:AH14', 'D16:Y16', 'AD16:AH16', 'D17:Y17', 'AD17:AH16', 'E18:J18', 'M18:N18', 'S18:Y18', 'AD18:AH18', 'E19:J19', 'N19:P19', 'U19:W19', 'AD19:AH19', 'D20:J20', 'M20:Q20', 'V20:W20', 'AE20:AH20', $ebRows, $ar('K', 67, 'AH', 69), $ar('AC', 72, 'AC', 73), $ar('AC', 75, 'AC', 76), $ar('L', 79, 'AH', 81), $ar('AC', 84), $ar('AC', 86, 'AC', 90), $ssRows, $ar('A', (95 + ($ssSize * 2))), $ar('K', (99 + ($ssSize * 2))), $ar('H', (101 + ($ssSize * 2))), $ar('W', (101 + ($ssSize * 2)))
+                    'P9:AA9', 'AA11:AH11', 'E13:H13', 'K13:N13', 'T13:W13', 'AA13:AH13', 'C14:L14', 'N14:W14', 'Y14:AH14', 'D16:Y16', 'AD16:AH16', 'D17:Y17', 'AD17:AH16', 'E18:J18', 'M18:N18', 'S18:Y18', 'AD18:AH18', 'E19:J19', 'N19:P19', 'U19:W19', 'AD19:AH19', 'D20:J20', 'M20:Q20', 'V20:W20', 'AE20:AH20', $ar('K', 67, 'AH', 69), $ar('AC', 72, 'AC', 73), $ar('AC', 75, 'AC', 76), $ar('L', 79, 'AH', 81), $ar('AC', 84), $ar('AC', 86, 'AC', 90), $ssRows, $ar('A', (95 + ($ssSize * 2))), $ar('K', (99 + ($ssSize * 2))), $ar('H', (101 + ($ssSize * 2))), $ar('W', (101 + ($ssSize * 2)))
                 ]);
+
+                if($ebRows != ""){
+                    array_push($fills[1], $ebRows);
+                }
 
                 $fills[2] = [
                     'AA1:AH1', 'A22:AH22', $ar('A', 24, 'AH', 24), $ar('A', 31, 'AH', 31), $ar('A', 39, 'AH', 39), $ar('A', 66, 'AH', 66), $ar('A', 71, 'AH', 71), $ar('A', 74, 'AH', 74), $ar('A', 78, 'AH', 78), $ar('A', 83, 'AH', 83), $ar('A', 86, 'N', 90), $ar('A', 92, 'AH', 93)
