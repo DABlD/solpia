@@ -1046,7 +1046,7 @@ class ApplicationsController extends Controller
     }
 
     function getFiles(Request $req){
-        $files = Fileszxc::where('applicant_id', $req->id)->pluck('name');
+        $files = Fileszxc::where('applicant_id', $req->id)->select('name', 'type')->get()->groupBy('type')->toArray();
 
         $temp = Applicant::find($req->id);
         $temp->load('user');
@@ -1067,7 +1067,8 @@ class ApplicationsController extends Controller
 
             Fileszxc::create([
                 'applicant_id' => $req->id,
-                'name' => $name
+                'name' => $name,
+                'type' => $req->type
             ]);
         }
 

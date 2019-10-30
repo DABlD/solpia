@@ -586,28 +586,6 @@
 	    }
 
         function showFiles(id, name, files){
-            let html = "<br><br>";
-
-            files.forEach((file, index) => {
-                html += `
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>${index + 1}.) ${file}</h4>
-                        </div>
-                        <div class="col-md-6 file-buttons">
-                            <a class="btn btn-success" href="files/${name}/${file}" target="_blank">
-                                <span class="fa fa-download"></span>
-                            </a>&nbsp;
-                            <a class="btn btn-danger">
-                                <span class="fa fa-trash"></span>
-                            </a>
-                        </div>
-                    </div>
-                `;
-            })
-
-            html = html == "<br><br>" ? "<br>No Files" : html;
-
             swal({
                 title: name + "'s Files",
                 showCancelButton: true,
@@ -615,15 +593,73 @@
                 cancelButtonText: 'Exit',
                 confirmButtonText: 'Upload Files',
                 width: '500px',
-                html: html + '<br>'
+                // html: html + '<br>'
+                html: `
+                    <ul class="nav nav-pills" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href=".idFiles" role="tab" data-toggle="pill">ID</a>
+                        </li>
+                        <li role="presentation">
+                            <a href=".certificateFiles" role="tab" data-toggle="pill">Certificate</a>
+                        </li>
+                        <li role="presentation">
+                            <a href=".medicalFiles" role="tab" data-toggle="pill">Medical</a>
+                        </li>
+                        <li role="presentation">
+                            <a href=".principalFiles" role="tab" data-toggle="pill">Principal</a>
+                        </li>
+                        <li role="presentation">
+                            <a href=".evaluationFiles" role="tab" data-toggle="pill">Evaluation</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in idFiles active"><h3>NO FILES</h3></div>
+                        <div role="tabpanel" class="tab-pane fade certificateFiles"><h3>NO FILES</h3></div>
+                        <div role="tabpanel" class="tab-pane fade medicalFiles"><h3>NO FILES</h3></div>
+                        <div role="tabpanel" class="tab-pane fade principalFiles"><h3>NO FILES</h3></div>
+                        <div role="tabpanel" class="tab-pane fade evaluationFiles"><h3>NO FILES</h3></div>
+                    </div>
+                `,
+                onOpen: () => {
+                    swal.showLoading();
+
+                    Object.keys(files).forEach(key => {
+                        let string = "";
+                        files[key].forEach((file, index) => {
+                            string += `
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4>${index + 1}.) ${file.name}</h4>
+                                    </div>
+                                    <div class="col-md-6 file-buttons">
+                                        <a class="btn btn-success" href="files/${name}/${file.name}" target="_blank">
+                                            <span class="fa fa-download"></span>
+                                        </a>&nbsp;
+                                        <a class="btn btn-danger">
+                                            <span class="fa fa-trash"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        $(`.${key.toLowerCase()}Files`).html(string);
+                    });
+
+                    setTimeout(() => {
+                        swal.hideLoading();
+                    }, 500);
+                }
             }).then(result2 => {
                 if(result2.value){
-                    uploadFile(id, name);
+                    uploadFile(id, name, $('[role="presentation"].active [role="tab"]')[0].innerText);
                 }
             });
         }
 
-        function uploadFile(id, name){
+        function uploadFile(id, name, type){
             swal({
                 title: 'Select Files',
                 html: `
@@ -632,6 +668,7 @@
                         <input type="file" name="files[]" multiple id="files" class="swal2-file"/>
                         <input type="hidden" name="name" value="${name}" />
                         <input type="hidden" name="id" value="${id}" />
+                        <input type="hidden" name="type" value="${type}" />
                     </form>
                 `,
                 showCancelButton: true,
