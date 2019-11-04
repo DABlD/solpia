@@ -23,6 +23,7 @@
                                 <th>Browser</th>
 								<th>Platform</th>
                                 <th>Datetime</th>
+                                <th>Never Column</th>
 							</tr>
 						</thead>
 					</table>
@@ -69,13 +70,14 @@
             },
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'user_id', name: 'user_id' },
+                { data: 'username', name: 'username' },
                 { data: 'ip', name: 'ip' },
                 { data: 'hostname', name: 'hostname' },
                 { data: 'device', name: 'device' },
                 { data: 'browser', name: 'browser' },
                 { data: 'platform', name: 'platform' },
                 { data: 'created_at', name: 'created_at' },
+                { data: 'action', name: 'action' },
             ],
             columnDefs: [
                 {
@@ -93,6 +95,10 @@
                     render: function(created_at){
                         return toDateTime(created_at);
                     },
+                },
+                {
+                    targets: 8,
+                    visible: false
                 },
             ],
             drawCallback: function(){
