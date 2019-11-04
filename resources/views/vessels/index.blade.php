@@ -164,7 +164,7 @@
                 },
                 {
                     targets: 6,
-                    width: '50px'
+                    width: '75px'
                 },
             ],
             drawCallback: function(){
