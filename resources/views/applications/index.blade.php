@@ -684,52 +684,79 @@
 
                     let items = [];
                     let imageFormats = ['JPEG', 'JPG', 'PNG', 'GIF'];
+                    let string = [];
 
                     Object.keys(files).forEach(key => {
-                        let string = "<br>";
+                        string[key] = "<br>";
                         files[key].forEach((file, index) => {
-
+                            // GET IMAGE DIMENSIONS
                             if(imageFormats.includes(file.name.split('.').pop().toUpperCase())){
-                                items.push({
-                                    src: `files/${name}/${file.name}`,
-                                    w: screen.width * .7,
-                                    h: screen.height * .7
-                                });
+                                let img = new Image();
+                                img.onload = function() {
+                                    items.push({
+                                        src: `files/${name}/${file.name}`,
+                                        w: img.width,
+                                        h: img.height
+                                    });
 
+                                    data = `data-link="files/${name}/${file.name}" data-index="${items.length}"`;
+
+                                    string[key] += `
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4>${index + 1}.) ${file.name}</h4>
+                                            </div>
+                                            <div class="col-md-6 file-buttons">
+                                                <a class="btn btn-info preview" ${data} target="_blank">
+                                                    <span class="fa fa-search" ${data}}></span>
+                                                </a>&nbsp;
+                                                <a class="btn btn-success" href="files/${name}/${file.name}" download>
+                                                    <span class="fa fa-download"></span>
+                                                </a>&nbsp;
+                                                <a class="btn btn-danger">
+                                                    <span class="fa fa-trash"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    `;
+
+                                    if((index + 1) == files[key].length){
+                                        $(`.${key.toLowerCase()}Files`).html(string[key]);
+
+                                        $('.preview').on('click', e => {
+                                            let file = $(e.target);
+                                            
+                                            if(imageFormats.includes(file.data('link').split('.').pop().toUpperCase())){
+                                                let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {index:file.data('index') - 1});
+                                                gallery.init();
+                                            }
+                                        });
+                                    }
+                                }
+                                img.src = `files/${name}/${file.name}`;
                             }
+                            else{
+                                data = `data-link="files/${name}/${file.name}" data-index="${items.length}"`;
 
-                            data = `data-link="files/${name}/${file.name}" data-index="${items.length}"`;
-
-                            string += `
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h4>${index + 1}.) ${file.name}</h4>
+                                string[key] += `
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>${index + 1}.) ${file.name}</h4>
+                                        </div>
+                                        <div class="col-md-6 file-buttons">
+                                            <a class="btn btn-success" href="files/${name}/${file.name}" download>
+                                                <span class="fa fa-download"></span>
+                                            </a>&nbsp;
+                                            <a class="btn btn-danger">
+                                                <span class="fa fa-trash"></span>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 file-buttons">
-                                        <a class="btn btn-info preview" ${data} target="_blank">
-                                            <span class="fa fa-search" ${data}}></span>
-                                        </a>&nbsp;
-                                        <a class="btn btn-success" href="files/${name}/${file.name}" download>
-                                            <span class="fa fa-download"></span>
-                                        </a>&nbsp;
-                                        <a class="btn btn-danger">
-                                            <span class="fa fa-trash"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            `;
+                                `;
+                            }
                         });
 
-                        $(`.${key.toLowerCase()}Files`).html(string);
-                    });
-
-                    $('.preview').on('click', e => {
-                        let file = $(e.target);
-                        
-                        // if(imageFormats.includes(file.data('link').split('.').pop().toUpperCase())){
-                            let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {index:file.data('index') - 1});
-                            gallery.init();
-                        // }
+                        $(`.${key.toLowerCase()}Files`).html(string[key]);
                     });
 
                     setTimeout(() => {
