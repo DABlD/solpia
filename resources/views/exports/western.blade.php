@@ -65,7 +65,7 @@
 								$temp = 'III/4';
 							}
 
-						    if($document->type == $tempName && in_array($temp, $regulation)){
+						    if(in_array($temp, $regulation)){
 						        $docu = $document;
 						        break; 
 						    }
