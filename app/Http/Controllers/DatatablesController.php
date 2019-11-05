@@ -39,7 +39,7 @@ class DatatablesController extends Controller
 							'pa.status', 'pa.rank_id', 'pa.vessel_id',
 						)
 						->join('users as u', 'u.id', '=', 'applicants.user_id')
-						->join('processed_applicants as pa', 'pa.id', '=', 'applicants.id')
+						->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
 						->get();
 
 		$ranks = [];
