@@ -33,21 +33,24 @@ class DatatablesController extends Controller
 	}
 
 	public function applications(Request $req){
-		DB::enableQueryLog();
-
 		$applicants = Applicant::select(
 							'applicants.id', 'applicants.remarks',
 							'avatar', 'fname', 'lname', 'contact', 'birthday',
-							'pa.status', 'pa.rank_id', 'pa.vessel_id'
+							'pa.status', 'pa.rank_id', 'pa.vessel_id',
 						)
 						->join('users as u', 'u.id', '=', 'applicants.user_id')
 						->join('processed_applicants as pa', 'pa.id', '=', 'applicants.id')
 						->get();
-						// ->with('user:id,avatar,fname,lname,contact,birthday')
-						// ->with('pro_app:applicant_id,status,rank_id,vessel_id')
 
-		$ranks = Rank::pluck('abbr', 'id');
-		$ranks2 = (object)Rank::pluck('abbr', 'name')->toArray();
+		$ranks = [];
+		$ranks2 = [];
+		$temps = Rank::select('id', 'abbr', 'name')->get();
+
+		foreach($temps as $temp){
+			$ranks[$temp->id] = $temp->abbr;
+			$ranks2[$temp->name] = $temp->abbr;
+		}
+
 		$vesselszxc = Vessel::pluck('name', 'id');
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
@@ -57,10 +60,10 @@ class DatatablesController extends Controller
 			$applicant->actions = $applicant->actions;
 			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
 
-			$vessels = SeaService::select('vessel_name', 'sign_off')->where('applicant_id', $applicant->id)->get();
+			$vessels = SeaService::select('vessel_name', 'sign_off')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
 
 			if($vessels->count()){
-				$applicant->last_vessel = $vessels->sortBy('sign_off')->last()->vessel_name;
+				$applicant->last_vessel = $vessels->last()->vessel_name;
 			}
 			else{
 				$applicant->last_vessel = "-----";
@@ -72,14 +75,8 @@ class DatatablesController extends Controller
 			}
 			else{
 			    if($vessels->count()){
-			        $name = $vessels->sortByDesc('sign_off')->first()->rank;
-			        $rank = $name != "" ? $ranks2->{$name} : '';
-					if($rank){
-						$applicant->rank = $rank;
-					}
-					else{
-						$applicant->rank = "N/A";
-					}
+			        $name = $vessels->last()->rank;
+			        $applicant->rank = $name != "" ? ($ranks2[$name] ? $rank : 'N/A') : 'N/A';
 			    }
 			    else{
 			    	$applicant->rank = "N/A";
