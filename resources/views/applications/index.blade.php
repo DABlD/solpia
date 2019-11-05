@@ -38,12 +38,64 @@
 		</section>
 	</div>
 
+    {{-- PHOTO VIEWER --}}
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+
+            <div class="pswp__ui pswp__ui--hidden">
+
+                <div class="pswp__top-bar">
+
+                    <div class="pswp__counter"></div>
+
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Share"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                          <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div> 
+                </div>
+
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 @endsection
 
 @push('after-styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
+    {{-- PHOTO VIWER --}}
+    <link rel="stylesheet" href="{{ asset('css/photoswipe.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/photoswipe-default-skin.css') }}">
 
 	<style>
 		#table img{
@@ -102,6 +154,10 @@
 	<script src="{{ asset('js/moment.js') }}"></script>
 	<script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
+
+    {{-- PHOTOVIEWER --}}
+    <script src="{{ asset('js/photoswipe.js') }}"></script>
+    <script src="{{ asset('js/photoswipe-ui-default.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -118,12 +174,12 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'status', name: 'status' },
-                { data: 'user.avatar', name: 'user.avatar' },
+                { data: 'avatar', name: 'avatar' },
                 { data: 'rank', name: 'rank' },
-                { data: 'user.lname', name: 'user.lname' },
-                { data: 'user.fname', name: 'user.fname' },
+                { data: 'lname', name: 'lname' },
+                { data: 'fname', name: 'fname' },
                 { data: 'age', name: 'age' },
-                { data: 'user.contact', name: 'user.contact' },
+                { data: 'contact', name: 'contact' },
                 { data: 'last_vessel', name: 'last_vessel' },
                 { data: 'remarks', name: 'remarks' },
                 { data: 'actions', name: 'actions' },
@@ -593,8 +649,9 @@
                 cancelButtonText: 'Exit',
                 confirmButtonText: 'Upload Files',
                 width: '500px',
-                // html: html + '<br>'
+                allowOutsideClick: false,
                 html: `
+                    <hr style="margin: 5px 0px 5px 0px;" />
                     <ul class="nav nav-pills" role="tablist">
                         <li role="presentation" class="active">
                             <a href=".idFiles" role="tab" data-toggle="pill">ID</a>
@@ -625,16 +682,34 @@
                 onOpen: () => {
                     swal.showLoading();
 
+                    let items = [];
+                    let imageFormats = ['JPEG', 'JPG', 'PNG', 'GIF'];
+
                     Object.keys(files).forEach(key => {
-                        let string = "";
+                        let string = "<br>";
                         files[key].forEach((file, index) => {
+
+                            if(imageFormats.includes(file.name.split('.').pop().toUpperCase())){
+                                items.push({
+                                    src: `files/${name}/${file.name}`,
+                                    w: screen.width * .7,
+                                    h: screen.height * .7
+                                });
+
+                            }
+
+                            data = `data-link="files/${name}/${file.name}" data-index="${items.length}"`;
+
                             string += `
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h4>${index + 1}.) ${file.name}</h4>
                                     </div>
                                     <div class="col-md-6 file-buttons">
-                                        <a class="btn btn-success" href="files/${name}/${file.name}" target="_blank">
+                                        <a class="btn btn-info preview" ${data} target="_blank">
+                                            <span class="fa fa-search" ${data}}></span>
+                                        </a>&nbsp;
+                                        <a class="btn btn-success" href="files/${name}/${file.name}" download>
                                             <span class="fa fa-download"></span>
                                         </a>&nbsp;
                                         <a class="btn btn-danger">
@@ -648,9 +723,18 @@
                         $(`.${key.toLowerCase()}Files`).html(string);
                     });
 
+                    $('.preview').on('click', e => {
+                        let file = $(e.target);
+                        
+                        // if(imageFormats.includes(file.data('link').split('.').pop().toUpperCase())){
+                            let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {index:file.data('index') - 1});
+                            gallery.init();
+                        // }
+                    });
+
                     setTimeout(() => {
                         swal.hideLoading();
-                    }, 500);
+                    }, 300);
                 }
             }).then(result2 => {
                 if(result2.value){

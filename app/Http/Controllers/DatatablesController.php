@@ -9,6 +9,8 @@ use App\Models\{Applicant, ProcessedApplicant};
 use App\Models\{Vessel, Rank, Principal};
 use App\Models\{AuditTrail, SeaService};
 
+use DB;
+
 class DatatablesController extends Controller
 {
 	public function users(){
@@ -31,16 +33,29 @@ class DatatablesController extends Controller
 	}
 
 	public function applications(Request $req){
-		$applicants = Applicant::select('id', 'user_id', 'status', 'remarks')
-						->with('user:id,avatar,fname,lname,contact,birthday')
+		DB::enableQueryLog();
+
+		$applicants = Applicant::select(
+							'applicants.id', 'applicants.remarks',
+							'avatar', 'fname', 'lname', 'contact', 'birthday',
+							'pa.status', 'pa.rank_id', 'pa.vessel_id'
+						)
+						->join('users as u', 'u.id', '=', 'applicants.user_id')
+						->join('processed_applicants as pa', 'pa.id', '=', 'applicants.id')
 						->get();
+						// ->with('user:id,avatar,fname,lname,contact,birthday')
+						// ->with('pro_app:applicant_id,status,rank_id,vessel_id')
+
+		$ranks = Rank::pluck('abbr', 'id');
+		$ranks2 = (object)Rank::pluck('abbr', 'name')->toArray();
+		$vesselszxc = Vessel::pluck('name', 'id');
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		foreach($applicants as $key => $applicant){
 			$applicant->remarks = json_decode($applicant->remarks);
 			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->actions;
-			$applicant->age = $applicant->user->birthday ? $applicant->user->birthday->diffInYears() : '-';
+			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
 
 			$vessels = SeaService::select('vessel_name', 'sign_off')->where('applicant_id', $applicant->id)->get();
 
@@ -51,18 +66,16 @@ class DatatablesController extends Controller
 				$applicant->last_vessel = "-----";
 			}
 
-			$temp = ProcessedApplicant::where('applicant_id', $applicant->id)->first();
-
-			if($temp->status == "Lined-Up"){
-			    $applicant->rank = Rank::find($temp->rank_id)->abbr;
-			    $applicant->vessel = Vessel::find($temp->vessel_id)->name;
+			if($applicant->pro_app->status == "Lined-Up"){
+			    $applicant->rank = $ranks[$applicant->pro_app->rank_id];
+			    $applicant->vessel = $vesselszxc[$applicant->pro_app->vessel_id];
 			}
 			else{
-			    if($applicant->sea_service->count()){
-			        $name = $applicant->sea_service->sortByDesc('sign_off')->first()->rank;
-			        $rank = Rank::where('name', $name)->first();
+			    if($vessels->count()){
+			        $name = $vessels->sortByDesc('sign_off')->first()->rank;
+			        $rank = $name != "" ? $ranks2->{$name} : '';
 					if($rank){
-						$applicant->rank = $rank->abbr;
+						$applicant->rank = $rank;
 					}
 					else{
 						$applicant->rank = "N/A";
