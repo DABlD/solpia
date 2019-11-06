@@ -692,11 +692,12 @@
                             // GET IMAGE DIMENSIONS
                             if(imageFormats.includes(file.name.split('.').pop().toUpperCase())){
                                 let img = new Image();
-                                img.onload = function() {
+                                img.onload = () => {
                                     items.push({
                                         src: `files/${name}/${file.name}`,
                                         w: img.width,
-                                        h: img.height
+                                        h: img.height,
+                                        i: index
                                     });
 
                                     data = `data-link="files/${name}/${file.name}" data-index="${items.length}"`;
