@@ -402,6 +402,20 @@
                 window.location.href = 'applications/edit/' + $(application.target).data('id');
             });
 
+            $('[data-original-title="Go to Toei"]').on('click', application => {
+                $.ajax({
+                    url: `{{ route('applications.selectToei') }}/${$(application.target).data('id')}`,
+                    success: result => {
+                        swal({
+                            type: 'success',
+                            title: 'success',
+                            timer: 800,
+                            showConfirmButton: false
+                        })
+                    }
+                })
+            });
+
             $('[data-original-title="Line-Up"]').on('click', application => {
                 let id = $(application.target).data('id');
                 let status = $(application.target).data('status');

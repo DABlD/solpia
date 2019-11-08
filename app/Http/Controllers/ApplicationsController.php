@@ -1075,6 +1075,12 @@ class ApplicationsController extends Controller
         echo "<script>window.close();</script>";
     }
 
+    public function selectToei(Applicant $applicant){
+        $user = User::find($applicant->user_id);
+        $user->applicant = 2;
+        echo $user->save();
+    }
+
     public function delete(User $user){
         $user->deleted_at = now()->toDateTimeString();
         echo $user->save();

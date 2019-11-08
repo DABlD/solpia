@@ -106,6 +106,8 @@ Route::group([
 		Route::get("$name/exportOnOff/{id?}/{type?}", ucfirst($name) . 'Controller@exportOnOff')->name("$name.exportOnOff");
 		Route::get("$name/exportDocument/{id?}/{type?}", ucfirst($name) . 'Controller@exportDocument')->name("$name.exportDocument");
 
+		Route::get("$name/selectToei/{applicant?}", ucfirst($name) . 'Controller@selectToei')->name("$name.selectToei");
+
 		// ON BOARD, ETC.
 		Route::post("$name/updateStatus/{id?}/{status?}/{vessel_id?}", ucfirst($name) . 'Controller@updateStatus')->name("$name.updateStatus");
 

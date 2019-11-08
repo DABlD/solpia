@@ -23,6 +23,10 @@ trait ApplicantAttribute{
 			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '<span data-status="' . $this->status . '" class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 		}
 
+		if(auth()->user()->status == 2){
+			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Go to Toei" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-right" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+		}
+
 		return $string;
 	}
 }
