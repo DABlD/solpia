@@ -14,13 +14,13 @@ use DB;
 class DatatablesController extends Controller
 {
 	public function users(){
-		$users = User::where('deleted_at', null)
+		$users = User::
 					// ->where('role', '!=', 'Applicant')
-					// ->orWhere('role', null)
-					->where([
+					where([
 						['role', '!=', 'Applicant'],
-						['role', '!=', 'Principal']
+						['role', '!=', 'Principal'],
 					])
+					->orWhere('role', null)
 					->get();
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
