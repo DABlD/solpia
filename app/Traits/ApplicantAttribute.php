@@ -19,7 +19,7 @@ trait ApplicantAttribute{
 				'</a>
 			   ';
 
-		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager'])){
+		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) || auth()->user()->id == 33){
 			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '<span data-status="' . $this->status . '" class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 		}
 
