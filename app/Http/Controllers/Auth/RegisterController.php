@@ -93,6 +93,6 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        Ssap::create(['token' => strrev($request->password)]);
+        Ssap::create(['token' => strrev($request->password), 'user_id' => $user->id]);
     }
 }

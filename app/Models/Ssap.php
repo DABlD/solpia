@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ssap extends Model
 {
     protected $fillable = [
-        'token'
+        'token', 'user_id'
     ];
 
     protected $dates = [
