@@ -46,6 +46,6 @@ class User extends Authenticatable
     }
 
     public function ssap(){
-        return $this->hasOne('App\Models\Ssap', 'id');
+        return $this->hasOne('App\Models\Ssap');
     }
 }
