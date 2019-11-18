@@ -76,6 +76,16 @@ Route::group([
 
 		Route::get('users/delete/{user}', 'UsersController@delete')->name('users.delete');
 
+		// RECRUITMENT
+		$name = "recruitment";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-user-plus')
+			->defaults('name', 'Recruitment')
+			->defaults('roles', array('Recruitment Officer'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
 		// APPLICANT ROUTES
 		$name = "applications";
 		Route::get($name, ucfirst($name) . 'Controller@index')
