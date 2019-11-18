@@ -175,17 +175,5 @@ Route::group([
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
-
-		// 
-
-		// TEMP ROUTE FOR ONBOARDING
-		$name = "onBoard";
-		Route::get($name, ucfirst($name) . 'Controller@index')
-			->defaults('sidebar', 1)
-			->defaults('icon', 'fa-ship')
-			->defaults('name', 'Temp Onboarding')
-			->defaults('roles', array('Admin', 'Cadet', 'Encoder', 'Crewing Manager', 'Crewing Officer'))
-			->name($name . '.index')
-			->defaults('href', $name);
 	}
 );
