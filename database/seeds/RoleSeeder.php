@@ -28,7 +28,8 @@ class RoleSeeder extends Seeder
             'Principal',
             'Crewing Manager',
             'Crewing Officer',
-            'Processing'
+            'Processing',
+            'Recruitment Officer'
         ];
 
         foreach($roles as $role){
