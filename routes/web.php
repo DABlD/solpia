@@ -177,7 +177,9 @@ Route::group([
 		Route::get($name . '/export', ucfirst($name) . 'Controller@export')->name($name . '.export');
 
 		// DATATABLE ROUTES
+		Route::post('datatables/recruitments', 'DatatablesController@recruitments')->name('datatables.recruitments');
 		Route::post('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
+		
 		Route::post('datatables/users', 'DatatablesController@users')->name('datatables.users');
 		Route::post('datatables/processedApplicant/{id}', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');
 		Route::post('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');

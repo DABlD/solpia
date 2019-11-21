@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
-use App\User;
 use App\Models\{Applicant, ProcessedApplicant};
 use App\Models\{Vessel, Rank, Principal};
 use App\Models\{AuditTrail, SeaService};
+
+use App\Models\{TempApplicant, TempSeaService};
+
+use App\{User, TempUser};
 
 use DB;
 
@@ -30,6 +33,50 @@ class DatatablesController extends Controller
 		}
 
     	return Datatables::of($users)->rawColumns(['actions'])->make(true);
+	}
+
+	public function recruitments(Request $req){
+		$applicants = TempApplicant::select(
+							'temp_applicants.id',
+							'avatar', 'fname', 'lname', 'contact', 'birthday',
+						)
+						->join('temp_users as u', 'u.id', '=', 'temp_applicants.user_id')
+						->get();
+
+		$rank = [];
+		$temps = Rank::select('id', 'abbr', 'name')->get();
+
+		foreach($temps as $temp){
+			$rank[$temp->name] = $temp->abbr;
+		}
+
+		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
+		foreach($applicants as $key => $applicant){
+			$applicant->row = ($key + 1);
+			$applicant->actions = $applicant->actions;
+			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
+
+			$vessels = TempSeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
+
+			// GET LAST VESSEL
+			if($vessels->count()){
+				$applicant->last_vessel = $vessels->last()->vessel_name;
+			}
+			else{
+				$applicant->last_vessel = "-----";
+			}
+
+			// GET RANK
+		    if($vessels->count()){
+		        $name = $vessels->last()->rank;
+		        $applicant->rank = $rank[$name] ?? 'N/A';
+		    }
+		    else{
+		    	$applicant->rank = "N/A";
+		    }
+		}
+
+    	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
 	}
 
 	public function applications(Request $req){
