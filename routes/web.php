@@ -116,7 +116,7 @@ Route::group([
 		Route::get("$name/exportOnOff/{id?}/{type?}", ucfirst($name) . 'Controller@exportOnOff')->name("$name.exportOnOff");
 		Route::get("$name/exportDocument/{id?}/{type?}", ucfirst($name) . 'Controller@exportDocument')->name("$name.exportDocument");
 
-		Route::get("$name/selectToei/{applicant?}", ucfirst($name) . 'Controller@selectToei')->name("$name.selectToei");
+		Route::get("$name/goToPrincipal/{applicant?}", ucfirst($name) . 'Controller@goToPrincipal')->name("$name.goToPrincipal");
 
 		// ON BOARD, ETC.
 		Route::post("$name/updateStatus/{id?}/{status?}/{vessel_id?}", ucfirst($name) . 'Controller@updateStatus')->name("$name.updateStatus");
@@ -150,8 +150,8 @@ Route::group([
 		$name = "lineUp";
 		Route::get($name, ucfirst($name) . 'Controller@index')
 			->defaults('sidebar', 1)
-			->defaults('icon', 'fa-arrow-up')
-			->defaults('name', 'Line-Up')
+			->defaults('icon', 'fa-file-text')
+			->defaults('name', 'Crew Database')
 			->defaults('roles', array('Principal'))
 			->name($name . '.index')
 			->defaults('href', $name);

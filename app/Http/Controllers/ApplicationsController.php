@@ -1075,9 +1075,9 @@ class ApplicationsController extends Controller
         echo "<script>window.close();</script>";
     }
 
-    public function selectToei(Applicant $applicant){
+    public function goToPrincipal(Applicant $applicant, Request $req){
         $user = User::find($applicant->user_id);
-        $user->applicant = 2;
+        $user->applicant = $req->principal;
         echo $user->save();
     }
 

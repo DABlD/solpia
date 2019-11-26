@@ -135,18 +135,27 @@ class DatatablesController extends Controller
 	}
 
 	public function processedApplicant($id){
-		$applicants = ProcessedApplicant::select('*')
-						->with('applicant:id,user_id')
-						->with('vessel:id,name')
-						->with('rank:id,name')
-						->where('principal_id', $id)
-						// ->where('processed_applicants.status')
+		// $applicants = Applicant::join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
+		// 				->join('vessels as v', 'v.id', '=', 'pa.vessel_id')
+		// 				->join('ranks as r', 'r.id', '=', 'pa.rank_id')
+		// 				->join('users as u', 'u.id', '=', 'applicants.user_id')
+		// 				->select('pa.*', 'v.name as vname', 'r.name as rname', 'u.fname', 'u.lname', 'u.avatar', 'paa.ctions as paa')
+		// 				->where('pa.principal_id', $id)
+		// 				->get();
+
+		$pa = "processed_applicants";
+
+		$applicants = ProcessedApplicant::join('applicants as a', 'a.id', '=', "$pa.applicant_id")
+						->join('vessels as v', 'v.id', '=', "$pa.vessel_id")
+						->join('ranks as r', 'r.id', '=', "$pa.rank_id")
+						->join('users as u', 'u.id', '=', 'a.user_id')
+						->select("$pa.*", 'v.name as vname', 'r.name as rname', 'u.fname', 'u.lname', 'u.avatar', 'a.id')
+						->where("$pa.principal_id", $id)
 						->get();
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		foreach($applicants as $applicant){
-			$applicant->actions = $applicant->actions;
-			$applicant->user = User::where('id', $applicant->applicant->user_id)->select('fname', 'lname', 'avatar')->first();
+			$applicant->actions = $applicant->paa;
 		}
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);

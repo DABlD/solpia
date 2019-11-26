@@ -143,7 +143,7 @@
                 {
                     targets: 4,
                     render: function(status, type, row){
-                    	checked = status == 1 ? " checked" : "";
+                    	checked = status > 0 ? " checked" : "";
                     	id = ` data-id=${row.id}`;
                     	status = ` data-status=${row.status}`;
 

@@ -7,17 +7,23 @@ use App\Http\Controllers\Controller;
 
 use App\Models\{Applicant, LineUpContract};
 
-use DB;
-
 class DashboardController extends Controller
 {
     public function index(){
-        $condition = array();
-        if(auth()->user()->status == 2){
-            $condition = ['u.applicant', '=', 2];
+        if($this->checkIfNotAllowed()){
+            return redirect()->route('applications.index');
         }
-        elseif(auth()->user()->status > 0){
+
+        $condition = array();
+
+        // STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
+        $status = auth()->user()->status;
+
+        if($status == 1){
             $condition = ['u.applicant', '>', 0];
+        }
+        elseif($status > 1){
+            $condition = ['u.applicant', '=', $status];
         }
 
     	$onBoard = LineUpContract::join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
@@ -38,6 +44,11 @@ class DashboardController extends Controller
     		'applicants'	=> $applicants,
     		'onBoard' 		=> $onBoard,
     	]);
+    }
+
+    function checkIfNotAllowed(){
+        $toDatabase = ['Cadet', 'Encoder', 'Crewing Officer', 'Processing'];
+        return in_array(auth()->user()->role, $toDatabase);
     }
 
     private function _view($view, $data = array()){

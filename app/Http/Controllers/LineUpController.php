@@ -8,7 +8,7 @@ use App\Models\{ProcessedApplicant, Principal, Applicant};
 class LineUpController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin/Crewing Manager');
+        $this->middleware('permissions:' . 'Admin/Crewing Manager/Principal');
     }
 
     public function index(){

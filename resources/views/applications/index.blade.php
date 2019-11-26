@@ -402,9 +402,14 @@
                 window.location.href = 'applications/edit/' + $(application.target).data('id');
             });
 
-            $('[data-original-title="Go to Toei"]').on('click', application => {
+            $('[data-original-title="Go to Principal"]').on('click', application => {
+                let e = $(application.target);
+
                 $.ajax({
-                    url: `{{ route('applications.selectToei') }}/${$(application.target).data('id')}`,
+                    url: `{{ route('applications.goToPrincipal') }}/${$(application.target).data('id')}`,
+                    data: {
+                        principal: e.data('principal')
+                    },
                     success: result => {
                         swal({
                             type: 'success',

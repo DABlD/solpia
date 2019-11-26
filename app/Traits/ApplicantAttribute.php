@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Models\Principal;
+
 trait ApplicantAttribute{
 	public function getActionsAttribute(){
 		// return '<a class="btn btn-success" data-toggle="tooltip" title="View Applicant" data-id="' . $this->id . '">' .
@@ -18,13 +20,16 @@ trait ApplicantAttribute{
 				     '<span class="fa fa-file" data-id="' . $this->id . '"></span>' .
 				'</a>
 			   ';
-
+			   																//	SALUTIN
 		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) || auth()->user()->id == 33){
 			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '<span data-status="' . $this->status . '" class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 		}
 
-		if(auth()->user()->status == 2){
-			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Go to Toei" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-right" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+		// STATUS SHOULD BE EQUAL TO PRINCIPAL ID SO I USED THIS
+		$status = auth()->user()->status;
+
+		if($status > 1){
+			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Go to Principal" data-id="' . $this->id  . '" data-principal="' . $status . '">' . '<span class="fa fa-arrow-right" data-id="' . $this->id  . '" data-principal="' . $status . '"></span>' . '</a>&nbsp;';
 		}
 
 		return $string;
