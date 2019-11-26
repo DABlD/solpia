@@ -28,9 +28,9 @@ trait ApplicantAttribute{
 		// STATUS SHOULD BE EQUAL TO PRINCIPAL ID SO I USED THIS
 		$status = auth()->user()->status;
 
-		if($status > 1){
-			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Go to Principal" data-id="' . $this->id  . '" data-principal="' . $status . '">' . '<span class="fa fa-arrow-right" data-id="' . $this->id  . '" data-principal="' . $status . '"></span>' . '</a>&nbsp;';
-		}
+		// if($status > 1){
+		// 	$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Go to Principal" data-id="' . $this->id  . '" data-principal="' . $status . '">' . '<span class="fa fa-arrow-right" data-id="' . $this->id  . '" data-principal="' . $status . '"></span>' . '</a>&nbsp;';
+		// }
 
 		return $string;
 	}
