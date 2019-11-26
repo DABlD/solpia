@@ -80,6 +80,16 @@ class DatatablesController extends Controller
 	}
 
 	public function applications(Request $req){
+		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
+		$status = auth()->user()->status;
+
+		if($status == 1){
+		    $condition = ['u.applicant', '>', 0];
+		}
+		elseif($status > 1){
+		    $condition = ['u.applicant', '=', $status];
+		}
+
 		$applicants = Applicant::select(
 							'applicants.id', 'applicants.remarks',
 							'avatar', 'fname', 'lname', 'contact', 'birthday',
@@ -87,6 +97,7 @@ class DatatablesController extends Controller
 						)
 						->join('users as u', 'u.id', '=', 'applicants.user_id')
 						->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
+						->where([$condition])
 						->get();
 
 		$ranks = [];
