@@ -655,6 +655,7 @@ class ApplicationsController extends Controller
         $user['mname'] = strtoupper($user['mname']);
         $user['lname'] = strtoupper($user['lname']);
         $user['suffix'] = strtoupper($user['suffix']);
+        $user['applicant'] = auth()->user()->status;
 
         // UPLOAD AVATAR
         if($req->hasFile('avatar')){
