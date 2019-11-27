@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Models\{Applicant, ProcessedApplicant};
 use App\Models\{Vessel, Rank, Principal};
-use App\Models\{AuditTrail, SeaService};
+use App\Models\{AuditTrail, SeaService, Opening};
 
 use App\Models\{TempApplicant, TempSeaService};
 
@@ -199,5 +199,15 @@ class DatatablesController extends Controller
 		// }
 
     	return Datatables::of($vessels)->rawColumns(['actions'])->make(true);
+	}
+
+	public function openings(){
+		$openings = Opening::all();
+
+		foreach($openings as $opening){
+			$opening->actions = $opening->actions;
+		}
+
+		return Datatables::of($openings)->rawColumns(['actions'])->make(true);
 	}
 }

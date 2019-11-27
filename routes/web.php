@@ -164,6 +164,20 @@ Route::group([
 
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 
+		// OPENINGS ROUTES
+		$name = "opening";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-briefcase')
+			->defaults('name', 'Job Openings')
+			->defaults('roles', array('Admin'))
+			->name($name . '.index')
+			->defaults('href', $name);
+			
+		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
+		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+		Route::get($name . '/statusUpdate', ucfirst($name) . 'Controller@statusUpdate')->name($name . '.statusUpdate');
+
 		// AUDIT TRAIL ROUTES
 		$name = "auditTrail";
 		Route::get($name, ucfirst($name) . 'Controller@index')
@@ -183,6 +197,7 @@ Route::group([
 		Route::post('datatables/users', 'DatatablesController@users')->name('datatables.users');
 		Route::post('datatables/processedApplicant/{id}', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');
 		Route::post('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');
+		Route::post('datatables/openings', 'DatatablesController@openings')->name('datatables.openings');
 		Route::post('datatables/auditTrail', 'DatatablesController@auditTrail')->name('datatables.auditTrail');
 
 		// MISC
