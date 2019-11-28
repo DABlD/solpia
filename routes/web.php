@@ -36,6 +36,10 @@ Route::get('not-permitted', function(){
 	return view('errors.not-permitted');
 })->name('not-permitted');
 
+Route::group(['middleware' => 'cors'], function() {
+	Route::get('getOpenings','OpeningController@getOpenings' );
+});
+
 Auth::routes();
 
 // PUBLIC ROUTES

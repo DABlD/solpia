@@ -7,8 +7,11 @@ use App\Models\{Opening, Rank};
 
 class OpeningController extends Controller
 {
-    public function __construct(){
-        $this->middleware('permissions:' . 'Admin');
+    // public function __construct(){
+    //     $this->middleware('permissions:' . 'Admin');
+    // }
+    public function getOpenings(){
+    	echo Opening::where('status', '1')->get();
     }
 
     public function index(){
