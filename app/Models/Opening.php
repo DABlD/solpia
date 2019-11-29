@@ -13,10 +13,11 @@ class Opening extends Model
     protected $fillable = [
     	'user_id','fleet','rank',
     	'type','remarks',
-    	'status'
+    	'status', 'engine_type',
+    	'joining_date'
     ];
 
     protected $dates = [
-        'created_at', 'updated_at', 'deleted_at'
+        'created_at', 'updated_at', 'deleted_at', 'joining_date'
     ];
 }

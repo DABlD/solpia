@@ -21,6 +21,8 @@ class CreateOpeningsTable extends Migration
 
             $table->string('rank')->nullable();
             $table->string('type')->nullable();
+            $table->string('engine_type')->nullable();
+            $table->string('joining_date')->nullable();
             $table->string('remarks')->nullable();
 
             $table->boolean('status')->default(1);
