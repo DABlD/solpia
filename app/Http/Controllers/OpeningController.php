@@ -11,7 +11,12 @@ class OpeningController extends Controller
     //     $this->middleware('permissions:' . 'Admin');
     // }
     public function getOpenings(){
-    	echo Opening::where('status', '1')->get();
+    	$openings = Opening::where('status', '1')->get();
+
+    	return $this->_view('popup', [
+    	    'title' 	=> 'Job Openings',
+    	    'openings' 	=> $openings
+    	]);
     }
 
     public function index(){

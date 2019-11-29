@@ -277,7 +277,7 @@
 
                     <div class="row">
                         <div class="col-md-5">
-                            <h4 class="clabel">Type</h4>
+                            <h4 class="clabel"> Vessel Type</h4>
                         </div>
                         <div class="col-md-7">
                             <input type="text" id="type" class="swal2-input" />
@@ -286,10 +286,28 @@
 
                     <div class="row">
                         <div class="col-md-5">
+                            <h4 class="clabel"> Engine Type</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="engine_type" class="swal2-input" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel"> Joining Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="Joining_date" class="swal2-input" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
                             <h4 class="clabel">Remarks</h4>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" id="remarks" class="swal2-input" />
+                            <textarea id="remarks" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                 `,
@@ -314,11 +332,9 @@
                     return new Promise(resolve => {
                         setTimeout(() => {
                             let a = $('#rank').val();
-                            let b = $('#type').val();
-                            let c = $('#remarks').val();
 
-                            if(a == "" || b == "" || c == ""){
-                                swal.showValidationError('All fields is required');
+                            if(a == ""){
+                                swal.showValidationError('Rank is required');
                             }
                         resolve()}, 500);
                     });
@@ -332,6 +348,8 @@
                             rank: $('#rank').val(),
                             type: $('#type').val(),
                             remarks: $('#remarks').val(),
+                            engine_type: $('#engine_type').val(),
+                            joining_date: $('#joining_date').val(),
                         },
                         success: result => {
                             console.log("Storing: " + result);
