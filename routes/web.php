@@ -86,7 +86,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-user-plus')
 			->defaults('name', 'Recruitment')
-			->defaults('roles', array('Recruitment Officer'))
+			->defaults('roles', array('Admin', 'Recruitment Officer'))
 			->name($name . '.index')
 			->defaults('href', $name);
 
