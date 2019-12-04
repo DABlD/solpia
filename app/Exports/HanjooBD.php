@@ -409,10 +409,11 @@ class HanjooBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
         $drawing->setName('Logo');
         $drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
-        $drawing->setHeight(150);
-        // $drawing->setWidth(165);
+        $drawing->setResizeProportional(false);
+        $drawing->setHeight(164);
+        $drawing->setWidth(155);
         $drawing->setOffsetX(1);
-        $drawing->setOffsetY(3);
+        $drawing->setOffsetY(1);
         $drawing->setCoordinates('M3');
 
         return $drawing;
