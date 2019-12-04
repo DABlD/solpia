@@ -958,7 +958,7 @@
 		<tr>
 			<td colspan="2">Vessel's Name</td>
 			<td>Type</td>
-			<td>Gross Tonnage</td>
+			<td>GRT</td>
 			<td>Service Area</td>
 			<td>Manning</td>
 			<td>Sign On</td>
@@ -1009,5 +1009,13 @@
 			<td>Presenter:</td>
 			<td colspan="3">NEIL ROMANO / CREWING MANAGER</td>
 		</tr>
+
+		<tr>
+			<td colspan="2"></td>
+			<td colspan="3"></td>
+			<td></td>
+			<td colspan="3"></td>
+		</tr>
+
 	</tbody>
 </table>
