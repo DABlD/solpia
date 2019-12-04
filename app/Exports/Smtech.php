@@ -497,8 +497,8 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
         $drawing->setResizeProportional(false);
-        $drawing->setWidth(173);
-        $drawing->setHeight(150);
+        $drawing->setWidth(152);
+        $drawing->setHeight(134);
         $drawing->setOffsetX(2);
         $drawing->setOffsetY(1);
         $drawing->setCoordinates('A2');
