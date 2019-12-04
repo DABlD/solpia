@@ -467,7 +467,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // COLUMN RESIZE
 
-                for($i = 11; $i < $rash3; $i++){
+                for($i = 11; $i <= $rash3; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(17);
                 }
 

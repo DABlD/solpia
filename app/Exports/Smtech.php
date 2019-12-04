@@ -125,11 +125,6 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'bold' => true
                 ],
             ],
-            [
-                'alignment' => [
-                    'shrinkToFit' => true
-                ],
-            ]
         ];
 
         return [
@@ -148,7 +143,11 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getParent()->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(11);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
                 // $event->sheet->getDelegate()->getStyle('E19')->getFont()->getColor()->setRGB('FF0000');
                 // $event->sheet->getDelegate()->getStyle('H19')->getFont()->getColor()->setRGB('FF0000');
@@ -205,8 +204,6 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($lRows, "F$row");
                     array_push($lRows, "G$row");
                     array_push($lRows, "H$row:I$row");
-
-                    $event->sheet->getDelegate()->getStyle("E$row")->applyFromArray($headingStyle[7]);
                 }
 
                 // CERTIFICATE ROWS
@@ -221,8 +218,6 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($cRows, "F$row");
                     array_push($cRows, "G$row");
                     array_push($cRows, "H$row:I$row");
-
-                    $event->sheet->getDelegate()->getStyle("E$row")->applyFromArray($headingStyle[7]);
                 }
 
                 // OTHER CERTIFICATE ROWS
@@ -236,10 +231,6 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($ocRows, "F$row");
                     array_push($ocRows, "G$row");
                     array_push($ocRows, "H$row:I$row");
-
-                    if($i != 0){
-                        $event->sheet->getDelegate()->getStyle("E$row")->applyFromArray($headingStyle[7]);
-                    }
                 }
 
                 // PIYC
@@ -333,11 +324,6 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                     $event->sheet->getDelegate()->getStyle("D$row2")->getFont()->setSize(10);
                     $event->sheet->getDelegate()->getStyle("C$row")->getFont()->setSize(10);
-                    
-                    $event->sheet->getDelegate()->getStyle("A$row")->applyFromArray($headingStyle[7]);
-                    $event->sheet->getDelegate()->getStyle("D$row2")->applyFromArray($headingStyle[7]);
-                    // $event->sheet->getDelegate()->getStyle("D$row2")->getAlignment()->setWrapText(true);
-                    // $event->sheet->getDelegate()->getRowDimension($row2)->setRowHeight(25);
 
                     // FOR BOTTOM BORDER
                     array_push($cells[2], "A$row:I$row");
@@ -407,6 +393,10 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     
                 ];
 
+                $h['stf'] = [
+                    "A1:I$rash3"
+                ];
+
                 $h['wrap'] = [
                     ('E' . ($rapiyc - 5))
                 ];
@@ -416,6 +406,13 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     foreach($value as $col){
                         if($key === 'wrap'){
                             $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(true);
+                        }
+                        elseif($key == 'stf'){
+                            $event->sheet->getDelegate()->getStyle($col)->applyFromArray([
+                                'alignment' => [
+                                    'shrinkToFit' => true
+                                ],
+                            ]);
                         }
                         else{
                             $event->sheet->getDelegate()->getStyle($col)->applyFromArray($headingStyle[$key]);
@@ -477,6 +474,18 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(true);
                 // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
                 // $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
+
+                for($i = 11; $i <= ($rash3 + 1); $i++){
+                    if($i = ($rapiyc - 5)){
+                        return;
+                    }
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(15);
+                }
+
+                $rash3 += 1;
+
+                // SET PRINT AREA
+                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
             },
         ];
     }
@@ -487,12 +496,11 @@ class Smtech implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setName('Logo');
         $drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
-        // $drawing->setHeight(154);
-        // $drawing->setOffsetX(22);
-        $drawing->setWidth(175);
-        // $drawing->setHeight(153);
-        $drawing->setOffsetX(1);
-        $drawing->setOffsetY(3);
+        $drawing->setResizeProportional(false);
+        $drawing->setWidth(173);
+        $drawing->setHeight(150);
+        $drawing->setOffsetX(2);
+        $drawing->setOffsetY(1);
         $drawing->setCoordinates('A2');
 
         return $drawing;

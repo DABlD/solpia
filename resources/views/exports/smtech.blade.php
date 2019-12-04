@@ -16,6 +16,18 @@
 			echo $date->toFormattedDateString();
 		}
 	}
+
+	if(isset($applicant->rank_id)){
+		$rank = $applicant->rank_id;
+	}
+	else{
+		if(isset($applicant->rank)){
+			$rank = $applicant->rank->id;
+		}
+		else{
+			$rank = 0;
+		}
+	}
 @endphp
 
 <table>
@@ -118,7 +130,7 @@
 			<td>Birth Date:</td>
 			<td>{{ $applicant->user->birthday->format('M j, Y') }}</td>
 			<td>Age:</td>
-			<td>{{ $applicant->age }}</td>
+			<td>{{ $applicant->user->birthday->diffInYears(now()) }}</td>
 			<td>Birth Place:</td>
 			<td colspan="2">{{ $applicant->birth_place }}</td>
 			<td>Nationality:</td>
@@ -139,8 +151,8 @@
 		<tr>
 			<td>SSS No.:</td>
 			<td colspan="2">{{ $applicant->sss ? $applicant->sss : '-----' }}</td>
-			<td>Tin:</td>
-			<td>{{ $applicant->tin ? $applicant->tin : '-----' }}</td>
+			<td>BMI:</td>
+			<td>{{ $applicant->bmi ? $applicant->bmi : '-----' }}</td>
 			<td>Shoes Size:</td>
 			<td>{{ $applicant->shoe_size ? $applicant->shoe_size : '-----' }}cm</td>
 			<td>Clothes Size:</td>
@@ -274,7 +286,7 @@
 		<tr>
 			<td colspan="2">
 				National License
-				@if(isset($applicant->rank) && $applicant->rank->id >= 9 && $applicant->rank->id <= 21)
+				@if($rank >= 9 && $rank <= 21)
 					(II/4)
 				@endif
 			</td>
@@ -507,10 +519,10 @@
 				// $haystack = ["II/4", "III/4"];
 				$haystack = [];
 				
-				if($applicant->rank >= 9 && $applicant->rank <= 14){
+				if($rank >= 9 && $rank <= 14){
 					array_push($haystack, "II/4");
 				}
-				elseif($applicant->rank >= 15 && $applicant->rank <= 21){
+				elseif($rank >= 15 && $rank <= 21){
 					array_push($haystack, "III/4");
 				}
 
@@ -645,7 +657,7 @@
 		<tr>
 			<td colspan="4">
 				Endorsement Certificate /
-				@if(isset($applicant->rank) && $applicant->rank->id >= 1 && $applicant->rank->id <= 8)
+				@if($rank >= 1 && $rank <= 8)
 					COE
 				@else
 					COC
@@ -657,7 +669,7 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
-		@if(isset($applicant->rank) && $applicant->rank->id >=5 && $applicant->rank->id <= 8)
+		@if(($rank >=5 && $rank <= 8) || ($rank >= 15 && $rank <= 21))
 			{{-- 11TH --}}
 			@php 
 				$name = 'ERS WITH ERM';
@@ -946,7 +958,7 @@
 		<tr>
 			<td colspan="2">Vessel's Name</td>
 			<td>Type</td>
-			<td>Gross Tonnage</td>
+			<td>GRT</td>
 			<td>Service Area</td>
 			<td>Manning</td>
 			<td>Sign On</td>
@@ -981,7 +993,7 @@
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "-----" }}</td>
 				<td colspan="2">
 					@if($data->sign_on != "" && $data->sign_off != "")
-						{{ $data->sign_on->diff($data->sign_off)->format('%yyr, %mmos, %ddays') }}
+						{{ $data->sign_on->diff($data->sign_off->addDay())->format('%yyr, %mmos, %ddays') }}
 					@else
 						Not enough data
 					@endif
@@ -993,9 +1005,17 @@
 
 		<tr>
 			<td colspan="2">Crew's Name:</td>
-			<td colspan="3">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->lname }}</td>
+			<td colspan="3">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname }}</td>
 			<td>Presenter:</td>
-			<td colspan="3">NEIL ROMANO / CREWING MANAGER</td>
+			<td colspan="3">JEFFREY PLANTA / CREWING MANAGER</td>
 		</tr>
+
+		<tr>
+			<td colspan="2"></td>
+			<td colspan="3"></td>
+			<td></td>
+			<td colspan="3"></td>
+		</tr>
+
 	</tbody>
 </table>
