@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+// use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
@@ -304,4 +305,20 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
             },
         ];
     }
+
+    // public function drawings()
+    // {
+    //     $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+    //     $drawing->setName('Logo');
+    //     $drawing->setDescription('Logo');
+    //     $drawing->setPath(public_path($this->applicant->user->avatar));
+    //     $drawing->setResizeProportional(false);
+    //     $drawing->setHeight(164);
+    //     $drawing->setWidth(155);
+    //     $drawing->setOffsetX(1);
+    //     $drawing->setOffsetY(1);
+    //     $drawing->setCoordinates('M3');
+
+    //     return $drawing;
+    // }
 }
