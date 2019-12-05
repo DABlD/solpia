@@ -150,6 +150,18 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
+                // DEFAULT FONT AND STYLE FOR WHOLE PAGE
+                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
+                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setSize(10);
+                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
+
+                // SET PAGE BREAK PREVIEW
+                // $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                // $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+
                 // FUNCTIONS
                 // $osSize = sizeof($this->linedUps);
                 // $ofsSize = sizeof($this->onBoards);
@@ -280,6 +292,9 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(8.25);
+                
+                // SET PRINT AREA
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
             },
         ];
     }
