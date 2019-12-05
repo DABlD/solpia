@@ -162,6 +162,12 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 // $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
+                // CELL COLOR
+                // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
+
+                // TEXT ROTATION
+                // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
+
                 // FUNCTIONS
                 // $osSize = sizeof($this->linedUps);
                 // $ofsSize = sizeof($this->onBoards);
