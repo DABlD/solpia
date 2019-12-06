@@ -141,7 +141,7 @@ Route::group([
 			->defaults('name', 'Vessels')
 			->defaults('roles', array('Admin'))
 			// USER ID OF SPECIAL PERMISSION
-			->defaults('sped', array(33))
+			->defaults('sped', array(33, 34, 461, 462, 506))
 			->name($name . '.index')
 			->defaults('href', $name);
 
