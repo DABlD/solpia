@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+// use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
@@ -150,6 +151,24 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
+                // DEFAULT FONT AND STYLE FOR WHOLE PAGE
+                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
+                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setSize(10);
+                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
+
+                // SET PAGE BREAK PREVIEW
+                // $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                // $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+
+                // CELL COLOR
+                // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
+
+                // TEXT ROTATION
+                // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
+
                 // FUNCTIONS
                 // $osSize = sizeof($this->linedUps);
                 // $ofsSize = sizeof($this->onBoards);
@@ -280,7 +299,26 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(8.25);
+                
+                // SET PRINT AREA
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
             },
         ];
     }
+
+    // public function drawings()
+    // {
+    //     $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+    //     $drawing->setName('Logo');
+    //     $drawing->setDescription('Logo');
+    //     $drawing->setPath(public_path($this->applicant->user->avatar));
+    //     $drawing->setResizeProportional(false);
+    //     $drawing->setHeight(164);
+    //     $drawing->setWidth(155);
+    //     $drawing->setOffsetX(1);
+    //     $drawing->setOffsetY(1);
+    //     $drawing->setCoordinates('M3');
+
+    //     return $drawing;
+    // }
 }
