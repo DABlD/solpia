@@ -139,7 +139,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-ship')
 			->defaults('name', 'Vessels')
-			->defaults('roles', array('Admin'))
+			->defaults('roles', array('Admin', 'Crewing Manager'))
 			// USER ID OF SPECIAL PERMISSION
 			->defaults('sped', array(33))
 			->name($name . '.index')
