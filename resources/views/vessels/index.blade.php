@@ -389,7 +389,9 @@
                             <td><b>US Visa Exp.</b></td>
                             <td><b>Status</b></td>
                             <td><b>Remarks</b></td>
+                            @if(auth()->user()->role != "Principal")
                             <td><b>Actions</b></td>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -413,7 +415,9 @@
                             <td><b>Joining<br>Port</b></td>
                             <td><b>Reliever</b></td>
                             <td><b>Remarks</b></td>
+                            @if(auth()->user()->role != "Principal")
                             <td><b>Actions</b></td>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -463,6 +467,7 @@
                         <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
                         <td>${crew.status2}</td>
                         <td class="remarks">${crew.remarks}</td>
+                        @if(auth()->user()->role != "Principal")
                         <td class="actions">
                             <a class="btn btn-info" data-toggle="tooltip" title="Export Documents" onClick="getContract(${crew.applicant_id})">
                                 <span class="fa fa-file-text"></span>
@@ -471,6 +476,7 @@
                                 <span class="fa fa-ship"></span>
                             </a>
                         </td>
+                        @endif
                     </tr>
                 `;
 
@@ -561,11 +567,13 @@
                         <td>${crew.joining_port}</td>
                         <td>${reliever}</td>
                         <td class="remarks">${crew.remarks}</td>
+                        @if(auth()->user()->role != "Principal")
                         <td class="actions">
                             <a class="btn btn-danger" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-ship"></span>
                             </a>
                         </td>
+                        @endif
                     </tr>
                 `;
 
@@ -932,7 +940,9 @@
                             <div class="modal-footer" style="background-color: transparent;">
                                 <button type="button" class="btn btn-info" onClick="exportOnOff(${id})">Export On/Off Signers</button>
                                 <button type="button" class="btn btn-success" onClick="exportOnBoard(${id}, '${name}')">Export Onboard</button>
+                                @if(auth()->user()->role != "Principal")
                                 <button type="button" class="btn btn-warning" onClick="RTP(${id})">Request to Process</button>
+                                @endif
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
