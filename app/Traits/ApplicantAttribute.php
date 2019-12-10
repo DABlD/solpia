@@ -20,8 +20,12 @@ trait ApplicantAttribute{
 				     '<span class="fa fa-file" data-id="' . $this->id . '"></span>' .
 				'</a>
 			   ';
-			   																//	SALUTIN
-		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) || auth()->user()->id == 33){
+			   
+		//SALUTIN, MARCELLANA, FADRIQUELA, GARCIA, REYES
+		$cadets = [33, 34, 461, 462, 506];
+			   																//	TOEI CADETS
+		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) || in_array(auth()->user()->id, $cadets)){
+		// if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) || auth()->user()->id = 33){
 			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '<span data-status="' . $this->status . '" class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 		}
 
