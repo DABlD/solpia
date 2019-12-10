@@ -173,11 +173,25 @@ class DatatablesController extends Controller
 	}
 
 	public function vessels(){
-		$vessels = Vessel::where('status', 'ACTIVE')->select('vessels.*')->with('principal')->get();
+		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
+		$status = auth()->user()->status;
+
+		if($status == 1){
+		    $condition = ['vessels.principal_id', '>', 0];
+		}
+		elseif($status > 1){
+		    $condition = ['vessels.principal_id', '=', ($status - 1)];
+		}
+
+		$vessels = Vessel::where([$condition, ['status', '=', 'ACTIVE']])
+						->join('principals as p', 'p.id', '=', 'vessels.principal_id')
+						->select('vessels.*', 'p.name as pname')
+						->get();
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		$principals = Principal::where('active', 1)->pluck('id')->toArray();
 		foreach($vessels as $key => $vessel){
+			$vessel->row = ($key + 1);
 			if(!in_array($vessel->principal_id, $principals)){
 				$vessels->forget($key);
 			}
