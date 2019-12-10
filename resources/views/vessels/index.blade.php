@@ -145,13 +145,19 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
-                { data: 'principal.name', name: 'principal.name' },
+                { data: 'pname', name: 'pname' },
                 { data: 'flag', name: 'flag' },
                 { data: 'type', name: 'type' },
                 { data: 'status', name: 'status' },
                 { data: 'actions', name: 'actions' },
             ],
             columnDefs: [
+                {
+                    targets: 0,
+                    render: function(id, display, data){
+                        return data.row;
+                    },
+                },
                 {
                     targets: 5,
                     render: function(status){
