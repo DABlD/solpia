@@ -97,7 +97,7 @@ class DatatablesController extends Controller
 						)
 						->join('users as u', 'u.id', '=', 'applicants.user_id')
 						->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
-						->where([$condition])
+						->where([$condition, ['u.deleted_at', '=', null]])
 						->get();
 
 		$ranks = [];
@@ -165,7 +165,8 @@ class DatatablesController extends Controller
 						->get();
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
-		foreach($applicants as $applicant){
+		foreach($applicants as $key => $applicant){
+			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->paa;
 		}
 

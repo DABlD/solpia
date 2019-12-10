@@ -102,7 +102,13 @@
                 {
                 	targets: 7,
                     className: "w70",
-                }
+                },
+                {
+                    targets: 0,
+                    render: function(id, display, data){
+                        return data.row;
+                    },
+                },
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
