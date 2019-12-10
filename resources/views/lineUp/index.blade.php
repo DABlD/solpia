@@ -244,8 +244,11 @@
                     let imageFormats = ['JPEG', 'JPG', 'PNG', 'GIF'];
                     let string = [];
 
+                    let total = 0;
+
                     Object.keys(files).forEach(key => {
                         string[key] = "<br>";
+                        total += files[key].length;
                         files[key].forEach((file, index) => {
                             // GET IMAGE DIMENSIONS
                             if(imageFormats.includes(file.name.split('.').pop().toUpperCase())){
@@ -287,6 +290,7 @@
                                             
                                             if(imageFormats.includes(file.data('link').split('.').pop().toUpperCase())){
                                                 let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {index:file.data('index') - 1});
+
                                                 gallery.init();
                                             }
                                         });
@@ -314,13 +318,15 @@
                                 `;
                             }
                         });
-
-                        $(`.${key.toLowerCase()}Files`).html(string[key]);
+						
+						setTimeout(() => {
+                        	$(`.${key.toLowerCase()}Files`).html(string[key]);
+						}, (total * 120));
                     });
 
                     setTimeout(() => {
                         swal.hideLoading();
-                    }, 300);
+                    }, 500);
                 }
             });
         }
