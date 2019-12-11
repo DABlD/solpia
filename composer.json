@@ -10,7 +10,6 @@
     "require": {
         "php": "^7.1.3",
         "barryvdh/laravel-cors": "^0.11.4",
-        "barryvdh/laravel-debugbar": "^3.2",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
         "hisorange/browser-detect": "^3.1",
