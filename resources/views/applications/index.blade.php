@@ -669,6 +669,7 @@
                 confirmButtonText: 'Upload Files',
                 width: '500px',
                 allowOutsideClick: false,
+                allowEscapeKey: false,
                 html: `
                     <hr style="margin: 5px 0px 5px 0px;" />
                     <ul class="nav nav-pills" role="tablist">
@@ -705,8 +706,16 @@
                     let imageFormats = ['JPEG', 'JPG', 'PNG', 'GIF'];
                     let string = [];
 
+                    let total = 0;
+
                     Object.keys(files).forEach(key => {
                         string[key] = "<br>";
+
+                        let length = files[key].length;
+
+                        total += length;
+                        let temp = [];
+
                         files[key].forEach((file, index) => {
                             // GET IMAGE DIMENSIONS
                             if(imageFormats.includes(file.name.split('.').pop().toUpperCase())){
@@ -721,7 +730,7 @@
 
                                     data = `data-link="files/${name}/${file.name}" data-index="${items.length}"`;
 
-                                    string[key] += `
+                                    temp[index] = `
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <h4>${index + 1}.) ${file.name}</h4>
@@ -741,16 +750,17 @@
                                     `;
 
                                     if((index + 1) == files[key].length){
-                                        $(`.${key.toLowerCase()}Files`).html(string[key]);
+                                        setTimeout(() => {
+                                            $('.preview').on('click', e => {
+                                                let file = $(e.target);
+                                                
+                                                if(imageFormats.includes(file.data('link').split('.').pop().toUpperCase())){
+                                                    let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {index:file.data('index') - 1});
 
-                                        $('.preview').on('click', e => {
-                                            let file = $(e.target);
-                                            
-                                            if(imageFormats.includes(file.data('link').split('.').pop().toUpperCase())){
-                                                let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {index:file.data('index') - 1});
-                                                gallery.init();
-                                            }
-                                        });
+                                                    gallery.init();
+                                                }
+                                            });
+                                        }, (total * 120));
                                     }
                                 }
                                 img.src = `files/${name}/${file.name}`;
@@ -758,7 +768,7 @@
                             else{
                                 data = `data-link="files/${name}/${file.name}" data-index="${items.length}"`;
 
-                                string[key] += `
+                                temp[index] = `
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h4>${index + 1}.) ${file.name}</h4>
@@ -775,13 +785,21 @@
                                 `;
                             }
                         });
+                        
+                        setTimeout(() => {
+                            temp.forEach(tempString => {
+                                string[key] += tempString;
+                            });
 
-                        $(`.${key.toLowerCase()}Files`).html(string[key]);
+                            $(`.${key.toLowerCase()}Files`).html(string[key]);
+                            $('.swal2-content .tab-content .first-row').css('text-align', 'left');
+                            $('.swal2-content .tab-content .file-buttons').css('text-align', 'right');
+                        }, (total * 120));
                     });
 
                     setTimeout(() => {
                         swal.hideLoading();
-                    }, 300);
+                    }, total * 120);
                 }
             }).then(result2 => {
                 if(result2.value){
