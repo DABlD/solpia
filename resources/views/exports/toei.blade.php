@@ -169,7 +169,7 @@
 				$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
 			@endphp
 
-			<td>{{ !$docu ? 'YES' : 'NO' }}</td>
+			<td>{{ $docu ? 'YES' : 'NO' }}</td>
 			<td></td>
 			<td>Choleith</td>
 			<td>NO</td>
