@@ -448,7 +448,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // BOTTOM ONLY
                 $cells[1] = [
                     'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'D19', 'H20', 'F11', 'H11:I11', 'B12:I12',
-                    'B14:F14', 'G15:I15', 'B16', 'D16', 'F16:G16', 'I16', 'B16:C16', 'E16',
+                    'B14:F14', 'G15:I15', 'B16', 'D16', 'F16:G16', 'I16',
                     'G16', 'I16', 'B17:C17', 'E17', 'G17', 'I17', 'B18:C18', 'E18', 'G18', 'I18',
                     'F19', 'I19', 'D20:E20', 'G21:I21', 'B22:I22', 'B24:F24', 'G26:I26',
                     "C$rash3:E$rash3", "G$rash3:I$rash3"
