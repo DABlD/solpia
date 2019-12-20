@@ -131,6 +131,7 @@ Route::group([
 		// FILES
 		Route::post("$name/getFiles", ucfirst($name) . 'Controller@getFiles')->name("$name.getFiles");
 		Route::post("$name/uploadFiles", ucfirst($name) . 'Controller@uploadFiles')->name("$name.uploadFiles");
+		Route::post("$name/deleteFile", ucfirst($name) . 'Controller@deleteFile')->name("$name.deleteFile");
 		
 
 		// Vessels ROUTES

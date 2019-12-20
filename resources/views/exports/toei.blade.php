@@ -169,7 +169,7 @@
 				$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
 			@endphp
 
-			<td>{{ !$docu ? 'YES' : 'NO' }}</td>
+			<td>{{ $docu ? 'YES' : 'NO' }}</td>
 			<td></td>
 			<td>Choleith</td>
 			<td>NO</td>
@@ -391,7 +391,7 @@
 
 		<tr>
 			<td colspan="2">Passport</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -406,7 +406,7 @@
 
 		<tr>
 			<td colspan="2">U.S. C1/D Visa</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -421,7 +421,7 @@
 
 		<tr>
 			<td colspan="2">National Seaman's Book</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -455,7 +455,7 @@
 
 		<tr>
 			<td colspan="2">AUSTRALIA MCV</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -470,7 +470,7 @@
 
 		<tr>
 			<td colspan="2">Japanese Visa</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>

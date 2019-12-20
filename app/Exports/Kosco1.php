@@ -13,7 +13,7 @@ use App\Models\Vessel;
 
 use Illuminate\Support\Str;
 
-class Imsco implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;

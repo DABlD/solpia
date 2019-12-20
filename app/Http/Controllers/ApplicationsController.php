@@ -16,6 +16,7 @@ use App\Models\{AuditTrail, Statistic, File as Fileszxc};
 use Image;
 use Browser;
 use DB;
+use File;
 
 use App\Exports\AllApplicant;
 // use App\Exports\Application;
@@ -529,8 +530,17 @@ class ApplicationsController extends Controller
         }
 
         // FIX MINIMUM VESSELS
-        if(sizeof($applicant->sea_service) < 5){
-            for($i = sizeof($applicant->sea_service); $i < 5; $i++){
+        $minVessels = 0;
+
+        if(in_array($type, ['kosco', 'imsco'])){
+            $minVessels = 12;
+        }
+        else{
+            $minVessels = 5;
+        }
+
+        if(sizeof($applicant->sea_service) < $minVessels){
+            for($i = sizeof($applicant->sea_service); $i < $minVessels; $i++){
                 $applicant->sea_service->push((object)[
                     'vessel_name' => null,
                     'previous_salary' => null,
@@ -887,6 +897,7 @@ class ApplicationsController extends Controller
 
         foreach($linedUps as $linedUp){
             $temp = DocumentId::where('applicant_id', $linedUp->applicant_id)->select('type', 'expiry_date', 'number')->get();
+
             $linedUp->age = now()->parse($linedUp->birthday)->diff(now())->format('%y');
             $linedUp->status2 = "NEW-HIRE";
 
@@ -1074,6 +1085,21 @@ class ApplicationsController extends Controller
         }
 
         echo "<script>window.close();</script>";
+    }
+
+    public function deleteFile(Request $req){
+        $newName = time() . '_' . $req->file;
+
+        echo Fileszxc::where([
+            ['applicant_id', '=', $req->id],
+            ['name', '=', $req->file]
+        ])->update(['name' => $newName, 'deleted_at' => now()]);
+
+        if(!file_exists(public_path("files\\DEL\\" . $req->name))){
+            mkdir(public_path("files\\DEL\\" . $req->name));
+        }
+
+        rename(public_path("files\\" . $req->name . "\\" . $req->file), public_path("files\\DEL\\" . $req->name . "\\" . $newName));
     }
 
     public function goToPrincipal(Applicant $applicant, Request $req){

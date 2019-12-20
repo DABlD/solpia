@@ -742,8 +742,8 @@
                                                 <a class="btn btn-success" href="files/${name}/${file.name}" download>
                                                     <span class="fa fa-download"></span>
                                                 </a>&nbsp;
-                                                <a class="btn btn-danger">
-                                                    <span class="fa fa-trash"></span>
+                                                <a class="btn btn-danger delete" data-id="${id}" data-name="${name}" data-filename="${file.name}">
+                                                    <span class="fa fa-trash" data-id="${id}" data-name="${name}" data-filename="${file.name}"></span>
                                                 </a>
                                             </div>
                                         </div>
@@ -759,6 +759,17 @@
 
                                                     gallery.init();
                                                 }
+                                            });
+
+                                            $('.delete').on('click', e => {
+                                                let temp = $(e.target);
+                                                let data = [
+                                                    $('[role="presentation"].active [role="tab"]')[0].innerText,
+                                                    id,
+                                                    name,
+                                                    files
+                                                ];
+                                                deleteFile(temp.data('id'), temp.data('name'), temp.data('filename'), data);
                                             });
                                         }, (total * 200));
                                     }
@@ -777,8 +788,8 @@
                                             <a class="btn btn-success" href="files/${name}/${file.name}" download>
                                                 <span class="fa fa-download"></span>
                                             </a>&nbsp;
-                                            <a class="btn btn-danger">
-                                                <span class="fa fa-trash"></span>
+                                            <a class="btn btn-danger delete" data-id="${id}" data-name="${name}" data-filename="${file.name}">
+                                                    <span class="fa fa-trash" data-id="${id}" data-name="${name}" data-filename="${file.name}"></span>
                                             </a>
                                         </div>
                                     </div>
@@ -803,12 +814,55 @@
                 }
             }).then(result2 => {
                 if(result2.value){
-                    uploadFile(id, name, $('[role="presentation"].active [role="tab"]')[0].innerText);
+                    let data = [
+                        $('[role="presentation"].active [role="tab"]')[0].innerText,
+                        id,
+                        name,
+                        files
+                    ];
+
+                    uploadFile(id, name, $('[role="presentation"].active [role="tab"]')[0].innerText, data);
                 }
             });
         }
 
-        function uploadFile(id, name, type){
+        function deleteFile(id, name, filename, data){
+            swal({
+                type: 'question',
+                title: 'Are you sure?',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                cancelButtonText: 'Cancel',
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('applications.deleteFile') }}',
+                        type: 'POST',
+                        data: {id: id, name: name, file: filename},
+                        success: result => {
+                            swal({
+                                type: 'success',
+                                title: 'File Deleted Successfully',
+                                showConfirmButton: false,
+                                timer: 800
+                            }).then(() => {
+                                reShowFiles(data);
+                            });
+                        }
+                    });
+                }
+                else{
+                    reShowFiles(data);
+                }
+            });
+        }
+
+        function reShowFiles(data){
+            showFiles(data[1], data[2], data[3]);
+            $(`[href=".${data[0].toLowerCase()}Files"]`).tab('show');
+        }
+
+        function uploadFile(id, name, type, data){
             swal({
                 title: 'Select Files',
                 html: `
@@ -848,9 +902,12 @@
                             showConfirmButton: false,
                             timer: 2000
                         }).then(() => {
-                            $(`[data-original-title="View Files"] [data-id="${id}"]`).click();
+                            reShowFiles(data);
                         })
                     }, 500);
+                }
+                else{
+                    reShowFiles(data);
                 }
             });
         }

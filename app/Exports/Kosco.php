@@ -2,15 +2,28 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class Kosco implements FromCollection
+class Kosco implements WithMultipleSheets
 {
+    use Exportable;
+    
+    public function __construct($applicant,$type){
+        $this->applicant = $applicant;
+        $this->type = $type;
+    }
+
     /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+     * @return array
+     */
+    public function sheets(): array
     {
-        //
+        $sheets = [];
+
+        array_push($sheets, new Kosco1($this->applicant, $this->type . '1'));
+        array_push($sheets, new Kosco2($this->applicant, $this->type . '2'));
+
+        return $sheets;
     }
 }

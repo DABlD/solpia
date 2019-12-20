@@ -182,6 +182,9 @@
 					<option value="RADAR OPERATOR PLOTTING AID">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OPERATOR PLOTTING AID</option>
 					<option value="SSBT WITH BRM">&nbsp;&nbsp;&nbsp;&nbsp;SSBT WITH BRM</option>
 					<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
+					<option value="SRC">SRC</option>
+					<option value="ENGINE WATCH">ENGINE WATCH</option>
+					<option value="DECK WATCH">DECH WATCH</option>
 
 				<optgroup label="SPECIAL CERTIFICATES"></optgroup>
 					<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
@@ -336,6 +339,7 @@
             	            	<option value="MEDICAL CERTIFICATE">MEDICAL CERTIFICATE</option>
             	            	<option value="FLAG MEDICAL">FLAG MEDICAL</option>
             	            	<option value="YELLOW FEVER">YELLOW FEVER</option>
+            	            	<option value="POLIO VACCINE (IPV)">POLIO VACCINE (IPV)</option>
             	            	<option value="CHOLERA">CHOLERA</option>
             	            	<option value="CHEMICAL TEST">CHEMICAL TEST</option>
             	            	<option value="DRUG AND ALCOHOL TEST">DRUG AND ALCOHOL TEST</option>
