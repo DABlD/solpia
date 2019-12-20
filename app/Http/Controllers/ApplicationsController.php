@@ -16,6 +16,7 @@ use App\Models\{AuditTrail, Statistic, File as Fileszxc};
 use Image;
 use Browser;
 use DB;
+use File;
 
 use App\Exports\AllApplicant;
 // use App\Exports\Application;
@@ -1084,6 +1085,21 @@ class ApplicationsController extends Controller
         }
 
         echo "<script>window.close();</script>";
+    }
+
+    public function deleteFile(Request $req){
+        $newName = time() . '_' . $req->file;
+
+        echo Fileszxc::where([
+            ['applicant_id', '=', $req->id],
+            ['name', '=', $req->file]
+        ])->update(['name' => $newName, 'deleted_at' => now()]);
+
+        if(!file_exists(public_path("files\\DEL\\" . $req->name))){
+            mkdir(public_path("files\\DEL\\" . $req->name));
+        }
+
+        rename(public_path("files\\" . $req->name . "\\" . $req->file), public_path("files\\DEL\\" . $req->name . "\\" . $newName));
     }
 
     public function goToPrincipal(Applicant $applicant, Request $req){
