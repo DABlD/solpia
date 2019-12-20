@@ -1085,7 +1085,8 @@
 		$('#rank').change(e => {
 			setTimeout(() => {
 				swal.showLoading();
-				@if(!isset($edit))
+				// ADD TEMPORARY ID FOR THOSE USERS WHO NEED TO EDIT
+				@if(!isset($edit) || auth()->user()->id = 462)
 					asdasd(e);
 				@endif
 			}, 100);

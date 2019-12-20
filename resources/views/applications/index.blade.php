@@ -760,7 +760,7 @@
                                                     gallery.init();
                                                 }
                                             });
-                                        }, (total * 120));
+                                        }, (total * 200));
                                     }
                                 }
                                 img.src = `files/${name}/${file.name}`;
@@ -794,12 +794,12 @@
                             $(`.${key.toLowerCase()}Files`).html(string[key]);
                             $('.swal2-content .tab-content .first-row').css('text-align', 'left');
                             $('.swal2-content .tab-content .file-buttons').css('text-align', 'right');
-                        }, (total * 120));
+                        }, (total * 200));
                     });
 
                     setTimeout(() => {
                         swal.hideLoading();
-                    }, total * 120);
+                    }, total * 200);
                 }
             }).then(result2 => {
                 if(result2.value){
