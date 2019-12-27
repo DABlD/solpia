@@ -274,10 +274,22 @@
             // order: [ [0, 'desc'] ],
         });
 
+        $('#table_filter input').unbind();
+        $('#table_filter input').bind('keyup.DT', e => {
+            if(e.which == 13){
+                swal('Searching...');
+                swal.showLoading();
+
+                table.search($(e.target).val()).draw();
+            }
+        });
 
         table.on('draw', () => {
         	setTimeout(() => {
         		$('.preloader').fadeOut();
+                if(swal.isVisible()){
+                    swal.close();
+                }
         	}, 800);
         });
 
