@@ -1090,7 +1090,7 @@
 			setTimeout(() => {
 				swal.showLoading();
 				// ADD TEMPORARY ID FOR THOSE USERS WHO NEED TO EDIT
-				@if(!isset($edit) || auth()->user()->id = 462)
+				@if(!isset($edit))
 					asdasd(e);
 				@endif
 			}, 100);
