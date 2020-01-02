@@ -137,7 +137,7 @@
 				<optgroup label="NATIONAL LICENSES"></optgroup>
 					<option value="COC">&nbsp;&nbsp;&nbsp;&nbsp;COC</option>
 					<option value="COE">&nbsp;&nbsp;&nbsp;&nbsp;COE</option>
-					<option value="GMDSS-GOC">&nbsp;&nbsp;&nbsp;&nbsp;GMDSS-GOC</option>
+					<option value="GMDSS/GOC">&nbsp;&nbsp;&nbsp;&nbsp;GMDSS/GOC</option>
 					<option value="NCI">&nbsp;&nbsp;&nbsp;&nbsp;NCI</option>
 					<option value="NCII">&nbsp;&nbsp;&nbsp;&nbsp;NCII</option>
 					<option value="NCIII">&nbsp;&nbsp;&nbsp;&nbsp;NCIII</option>
@@ -1089,9 +1089,7 @@
 		$('#rank').change(e => {
 			setTimeout(() => {
 				swal.showLoading();
-				@if(!isset($edit))
-					asdasd(e);
-				@endif
+				asdasd(e);
 			}, 100);
 		});
 
@@ -1104,27 +1102,36 @@
 
             let ctr = 0;
 
-            $('.lc .row, .lc hr').remove();
-            $(`.lcCount`)[0].innerText = 0;
+            // ERASE ALL LC DOCUMENTS
+			@if(!isset($edit))
+	            $('.lc .row, .lc hr').remove();
+	            $(`.lcCount`)[0].innerText = 0;
+			@endif
 
             list.every(row => {
             	if(rank >= row.range[0] && rank <= row.range[1]){
             		row.documents.forEach((docu, index) => {
             			
+            			console.log($(`select.docu-lctype [value="${docu}"]:selected`));
+            			console.log(docu);
             			// IF DOCUMENT IS EXISTING IN LC, SKIP
-            			// if($(`[name^="docu-lctype"] [value="${docu}"]`).length){
-            			// 	return
-            			// }
+						@if(isset($edit))
+	            			if($(`select.docu-lctype [value="${docu}"]:selected`).length){
+	            				return
+	            			}
+	            			// else{
+		            		// 	$(`[name^="docu-lctype"] [value="${docu}"]`).parent().hide();
+		            		// 	let match = $(`.lc [value="${docu}"]`);
 
-            			// $(`[name^="docu-lctype"] [value="${docu}"]`).parent().hide();
-            			// let match = $(`.lc [value="${docu}"]`);
-
-            			// if(match.length > 0){
-            			// 	ctr += 1;
-            			// 	let row = $(match[match.length - 1]).parent().parent().parent();
-            			// 	row.next().hide();
-            			// 	row.hide();
-            			// }
+		            		// 	if(match.length > 0){
+		            		// 		ctr += 1;
+		            		// 		let row = $(match[match.length - 1]).parent().parent().parent();
+		            		// 		row.next().hide();
+		            		// 		row.hide();
+		            		// 	}
+	            			// }
+	            		@endif
+            			// END
 
             			let count = $('.docu').length + 1;
             			addDocu('lc');
