@@ -1087,8 +1087,8 @@
         ];
 
 		$('#rank').change(e => {
+			swal.showLoading();
 			setTimeout(() => {
-				swal.showLoading();
 				asdasd(e);
 			}, 100);
 		});
