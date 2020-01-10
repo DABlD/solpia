@@ -720,7 +720,7 @@
 
                     let total = 0;
 
-                    Object.keys(files).forEach(key => {
+                    Object.keys(files).forEach((key, aub) => {
                         string[key] = "<br>";
 
                         let length = files[key].length;
@@ -761,13 +761,18 @@
                                         </div>
                                     `;
 
-                                    if((index + 1) == files[key].length){
+                                    if((index + 1) == files[key].length && Object.keys(files).length == (aub + 1)){
                                         setTimeout(() => {
                                             $('.preview').on('click', e => {
                                                 let file = $(e.target);
                                                 
                                                 if(imageFormats.includes(file.data('link').split('.').pop().toUpperCase())){
-                                                    let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {index:file.data('index') - 1});
+                                                    let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {
+                                                        index: file.data('index') - 1,
+                                                        allowPanToNext: true,
+                                                        escKey: true,
+                                                        arrowKeys: true
+                                                    });
 
                                                     gallery.init();
                                                 }

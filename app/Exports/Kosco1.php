@@ -193,7 +193,7 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToPage(false);
-                $event->sheet->getDelegate()->getPageSetup()->setScale(75);
+                $event->sheet->getDelegate()->getPageSetup()->setScale(60);
 
                 $event->sheet->getDelegate()->setTitle('BIO_DATA', false);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
@@ -205,18 +205,18 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(8);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('E3:E4')->getFont()->setSize(11);
-                $event->sheet->getDelegate()->getStyle('P3')->getFont()->setSize(11);
-                $event->sheet->getDelegate()->getStyle('B11')->getFont()->setSize(5);
-                $event->sheet->getDelegate()->getStyle('L14:L25')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('M13')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('R13')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('A26:V26')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('A28:A34')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setSize(16);
+                $event->sheet->getDelegate()->getStyle('E3:E4')->getFont()->setSize(13);
+                $event->sheet->getDelegate()->getStyle('P3')->getFont()->setSize(13);
+                $event->sheet->getDelegate()->getStyle('B11')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('L14:L25')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('M13')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('R13')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('A26:V26')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('A28:A34')->getFont()->setSize(10);
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // CELL COLOR
@@ -384,15 +384,15 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3.7);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(5.8);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11.2);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(9);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(3.5);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(6.4);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(8.5);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(5.2);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(5.5);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6);
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(6.1);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(6.5);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(1.8);
                 $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(10.5);
@@ -404,42 +404,42 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('V')->setWidth(9);
 
                 // ROW RESIZE
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(23.25);
-                $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(33);
-                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(15.75);
-                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(15.75);
-                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(14.25);
-                $event->sheet->getDelegate()->getRowDimension(7)->setRowHeight(26.25);
-                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(15.75);
-                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(15.75);
-                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(13.50);
-                $event->sheet->getDelegate()->getRowDimension(11)->setRowHeight(13);
-                $event->sheet->getDelegate()->getRowDimension(12)->setRowHeight(13);
-                $event->sheet->getDelegate()->getRowDimension(13)->setRowHeight(18);
-                $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(15)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(16)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(18)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(20)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(23)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(29.25);
-                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(31.50);
-                $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(13.50);
-                $event->sheet->getDelegate()->getRowDimension(29)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(30)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(15);
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(24.25);
+                $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(16.75);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(16.75);
+                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(15.25);
+                $event->sheet->getDelegate()->getRowDimension(7)->setRowHeight(27.25);
+                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(16.75);
+                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(16.75);
+                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(14.50);
+                $event->sheet->getDelegate()->getRowDimension(11)->setRowHeight(14);
+                $event->sheet->getDelegate()->getRowDimension(12)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(13)->setRowHeight(22);
+                $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(15)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(16)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(18)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(20)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(23)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(30.25);
+                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(32.50);
+                $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(14.50);
+                $event->sheet->getDelegate()->getRowDimension(29)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(30)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(16);
 
                 for($i = 38; $i <= 52; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(24.75);                    
