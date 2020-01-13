@@ -78,7 +78,11 @@
 					}
 				}
 				else{
-					return;
+					// return;
+					$docu->no = "";
+					$docu->issue_date = "";
+					$docu->expiry_date = "";
+					$docu->issuer = "";
 				}
 			}
 			elseif ($docu == 'ECDIS SPECIFIC') {
