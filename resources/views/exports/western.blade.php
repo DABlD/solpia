@@ -47,7 +47,6 @@
 		}
 
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
-
 			if($type == "lc" && $docu == "COC" && $name == "Watchkeeping"){
 				if($rank > 0 && $regulation){
 					$tempDocu = $docu;
@@ -78,7 +77,12 @@
 					}
 				}
 				else{
-					return;
+					if($name == "Watchkeeping"){
+						$docu = null;
+					}
+					else{
+						return;
+					}
 				}
 			}
 			elseif ($docu == 'ECDIS SPECIFIC') {
