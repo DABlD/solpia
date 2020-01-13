@@ -47,7 +47,6 @@
 		}
 
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
-
 			if($type == "lc" && $docu == "COC" && $name == "Watchkeeping"){
 				if($rank > 0 && $regulation){
 					$tempDocu = $docu;
@@ -78,7 +77,12 @@
 					}
 				}
 				else{
-					return;
+					if($name == "Watchkeeping"){
+						$docu = null;
+					}
+					else{
+						return;
+					}
 				}
 			}
 			elseif ($docu == 'ECDIS SPECIFIC') {
@@ -508,8 +512,7 @@
 		<td colspan="6">Issued By</td>
 	</tr>
 
-	{{-- {{ $getDocument('COC', 			'lc',		'MARINA', 		'Watchkeeping', 		true)}} --}}
-	{{ $getDocument('RADAR', 'lc', '', 'Radar Observer')}}
+	{{ $getDocument('COC', 			'lc',		'MARINA', 		'Watchkeeping', 		true)}}
 	{{ $getDocument('BASIC TRAINING - BT', 'lc', 'MARINA', 'Basic Safety Training Course')}}
 	{{ $getDocument('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'lc', 'MARINA', 'Survival Craft And Rescue Boat')}}
 	{{ $getDocument('ADVANCE FIRE FIGHTING - AFF', 'lc', 'MARINA', 'Fire-Fighting Course')}}
