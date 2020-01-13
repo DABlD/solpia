@@ -78,11 +78,7 @@
 					}
 				}
 				else{
-					// return;
-					$docu->no = "";
-					$docu->issue_date = "";
-					$docu->expiry_date = "";
-					$docu->issuer = "";
+					return;
 				}
 			}
 			elseif ($docu == 'ECDIS SPECIFIC') {
@@ -512,7 +508,8 @@
 		<td colspan="6">Issued By</td>
 	</tr>
 
-	{{ $getDocument('COC', 			'lc',		'MARINA', 		'Watchkeeping', 		true)}}
+	{{-- {{ $getDocument('COC', 			'lc',		'MARINA', 		'Watchkeeping', 		true)}} --}}
+	{{ $getDocument('RADAR', 'lc', '', 'Radar Observer')}}
 	{{ $getDocument('BASIC TRAINING - BT', 'lc', 'MARINA', 'Basic Safety Training Course')}}
 	{{ $getDocument('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'lc', 'MARINA', 'Survival Craft And Rescue Boat')}}
 	{{ $getDocument('ADVANCE FIRE FIGHTING - AFF', 'lc', 'MARINA', 'Fire-Fighting Course')}}
