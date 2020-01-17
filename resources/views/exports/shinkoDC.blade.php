@@ -412,7 +412,7 @@
 				ADMINISTRATION
 			</td>
 			<td colspan="5" rowspan="3">
-				CONFIRMED BY: JEFFREY R. PLANTA
+				CONFIRMED BY: CAPTAIN DIAMANTE
 				<br>
 				(Crewing Manager)
 			</td>
