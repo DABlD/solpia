@@ -11,3 +11,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+database/seeds/FillPA_NOT_WORKING.php
+database/seeds/FillVessel_NOT_WORKING.php
+public/backup/*
+rootCA.key

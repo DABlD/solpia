@@ -788,7 +788,6 @@
                                                 ];
                                                 deleteFile(temp.data('id'), temp.data('name'), temp.data('filename'), data);
                                             });
-
                                         }, (total * 200));
                                     }
                                 }
