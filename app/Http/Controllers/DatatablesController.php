@@ -118,7 +118,7 @@ class DatatablesController extends Controller
 			$applicant->actions = $applicant->actions;
 			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
 
-			$vessels = SeaService::select('vessel_name', 'sign_off')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
+			$vessels = SeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
 
 			if($vessels->count()){
 				$applicant->last_vessel = $vessels->last()->vessel_name;
@@ -134,7 +134,7 @@ class DatatablesController extends Controller
 			else{
 			    if($vessels->count()){
 			        $name = $vessels->last()->rank;
-			        $applicant->rank = $name != "" ? ($ranks2[$name] ? $rank : 'N/A') : 'N/A';
+			        $applicant->rank = $name != "" ? ($ranks2[$name] ?? 'N/A') : 'N/A';
 			    }
 			    else{
 			    	$applicant->rank = "N/A";
