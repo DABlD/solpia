@@ -13,6 +13,7 @@ use App\Models\{LineUpContract, Rank, DocumentId, Applicant};
 class OnBoardVessel implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type, $req){
+        $this->data     = $data;
         $this->type     = $type;
         $this->req      = $req;
         $this->size     = 0;
@@ -20,14 +21,7 @@ class OnBoardVessel implements FromView, WithEvents//, WithDrawings//, ShouldAut
 
     public function view(): View
     {
-        $onBoards = LineUpContract::where('vessel_id', $this->req['id'])
-                                    ->where('line_up_contracts.status','On Board')
-                                    ->whereNotNull('line_up_contracts.reliever')
-                                    ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
-                                    ->join('users as u', 'u.id', '=', 'a.user_id')
-                                    ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
-                                    ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
-                                    ->get();
+        $onBoards = $this->data;
 
         $this->size = sizeof($onBoards);
 
@@ -45,34 +39,6 @@ class OnBoardVessel implements FromView, WithEvents//, WithDrawings//, ShouldAut
         }
 
         $onBoards = $temp;
-
-        // GET DOCUMENT details
-        foreach($onBoards as $crew){
-            $crew->age = now()->parse($crew->birthday)->diff(now())->format('%y');
-
-            // GET RELIEVER DETAILS
-            if(is_numeric($crew->reliever)){
-                $reliever = Applicant::find($crew->reliever);
-                $reliever->load('user');
-                $reliever->load('pro_app');
-
-                $crew->reliever = Rank::find($reliever->pro_app->rank_id)->abbr . ' - ' . $reliever->user->lname . ', ' . $reliever->user->fname . ' ' . ($reliever->user->suffix ?? "") . ' ' . $reliever->user->mname;
-            }
-
-            $temp = json_decode($crew->remarks);
-            $remarks = "";
-
-            foreach($temp as $remark){
-                $remarks .= $remark . ', ';
-            }
-
-            $crew->remarks = $remarks;
- 
-            $temp = DocumentId::where('applicant_id', $crew->applicant_id)->select('type', 'expiry_date', 'number')->get();
-            foreach($temp as $docu){
-                $crew->{$docu->type} = $docu->expiry_date;
-            }
-        }
 
         return view('exports.' . lcfirst($this->type), [
             'data'      => $onBoards,

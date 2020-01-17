@@ -173,7 +173,7 @@ class ApplicationsController extends Controller
         foreach($fd as $data){
             $data->applicant_id = $applicant->id;
             $data->birthday = $data->birthday == "" ? null : $data->birthday;
-            $data->age = $data->birthday == "" ? null : 0;
+            $data->age = $data->birthday == "" ? null : now()->parse($data->birthday)->age;
 
             if(isset($data->id)){
                 FamilyData::where('id', $data->id)->update((array)$data);
@@ -707,7 +707,7 @@ class ApplicationsController extends Controller
         foreach($fd as $data){
             $data->applicant_id = $applicant->id;
             $data->birthday = $data->birthday == "" ? null : $data->birthday;
-            $data->age = $data->birthday == "" ? null : 0;
+            $data->age = $data->birthday == "" ? null : now()->parse($data->birthday)->age;
             FamilyData::create((array)$data);
         }
 
@@ -1048,7 +1048,32 @@ class ApplicationsController extends Controller
     }
 
     function exportDocument($id, $type, Request $req){
-        $applicant = Applicant::withTrashed()->find($id)->load('user');
+        if($type == "OnBoardVessel"){
+            $ad = ['a.id', 'a.remarks'];
+            $cd = ['fname', 'lname', 'suffix', 'mname', 'birthday'];
+            $lud = ['joining_date', 'joining_port', 'months', 'reliever'];
+            $rd = ['abbr'];
+
+            $applicant = LineUpContract::where([
+                ['line_up_contracts.status', '=', 'On Board'],
+                ['vessel_id', '=', $req->id]
+            ])
+            ->join('applicants as a', 'a.id', 'line_up_contracts.applicant_id')
+            ->join('users as u', 'u.id', '=', 'a.id')
+            ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
+            ->select(array_merge($ad, $cd, $lud, $rd))
+            ->get();
+
+            foreach($applicant as $crew){
+                $temp = DocumentId::where('applicant_id', $crew->id)->select('type', 'expiry_date', 'number')->get();
+                foreach($temp as $docu){
+                    $crew->{$docu->type} = $docu->expiry_date;
+                }
+            }
+        }
+        else{
+            $applicant = Applicant::withTrashed()->find($id)->load('user');
+        }
 
         $fileName = $req->filename ?? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
 
