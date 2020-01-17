@@ -134,11 +134,11 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('BIODATA', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
                 $event->sheet->getParent()->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
@@ -235,7 +235,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // PIYC
                 $piycRows = array(); //WILL BE FILLED AFTER FUNCTIONS
-                $rapiyc = $raoc + 1 + 5; //Row # AFTER PIYC (5 = rows)
+                $rapiyc = $raoc + 1 + 6; //Row # AFTER PIYC (5 = rows)
 
                 // EAJL CERTIFICATE ROWS
                 $eajlRows = array();
@@ -350,6 +350,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $piyc('A', 3) . ':' . $piyc('D', 3), $piyc('E', 3), $piyc('F', 3), $piyc('G', 3), $piyc('H', 3), $piyc('I', 3),
                     $piyc('A', 4) . ':' . $piyc('D', 4), $piyc('E', 4), $piyc('F', 4), $piyc('G', 4), $piyc('H', 4), $piyc('I', 4),
                     $piyc('A', 5) . ':' . $piyc('D', 5), $piyc('E', 5), $piyc('F', 5), $piyc('G', 5), $piyc('H', 5), $piyc('I', 5),
+                    $piyc('A', 6) . ':' . $piyc('D', 6), $piyc('E', 6), $piyc('F', 6), $piyc('G', 6), $piyc('H', 6), $piyc('I', 6),
                 );
                 
                 // HEADINGS
@@ -376,7 +377,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HL
                 $h[4] = array_merge($sh1Rows, [
-                    ('A' . ($rapiyc - 4) . ':' . 'A' . ($rapiyc - 1)), //A#:A# PIYC ROWS
+                    ('A' . ($rapiyc - 5) . ':' . 'A' . ($rapiyc - 1)), //A#:A# PIYC ROWS
                     ('A' . ($raeajl - 2) . ':' . 'A' . ($raeajl - 1)), //A#:A# PIYC ROWS
                     ('A' . ($ratesms - 2) . ':' . 'A' . ($ratesms - 1)), //A#:A# PIYC ROWS
                     ('A' . ($raaow - 1)), //A#:A# PIYC ROWS
@@ -385,7 +386,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[5] = [
-                    ('A' . ($rapiyc - 5) . ':' . 'I' . ($rapiyc - 5))
+                    ('A' . ($rapiyc - 6) . ':' . 'I' . ($rapiyc - 6))
                 ];
 
                 // B
@@ -398,7 +399,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    ('E' . ($rapiyc - 5))
+                    ('E' . ($rapiyc - 6))
                 ];
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -476,7 +477,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
 
                 for($i = 11; $i <= ($rash3 + 1); $i++){
-                    if($i = ($rapiyc - 5)){
+                    if($i = ($rapiyc - 6)){
                         return;
                     }
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(15);

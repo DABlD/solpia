@@ -866,6 +866,21 @@
 			<td>-----</td>
 			<td>{{ $docu ? $docu->case_remarks : "-----" }}</td>
 		</tr>
+
+		@php 
+			$name = 'POLIO VACCINE (IPV)';
+			$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
+		@endphp
+
+		<tr>	
+			<td colspan="4">POLIO VACCINE (IPV)</td>
+			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td>{{ $docu ? $docu->clinic : "-----" }}</td>
+		</tr>
+
 		{{-- end --}}
 		<tr>
 			<td colspan="4">6. ENGLISH AND JAPANESE LINGUISTICS</td>
