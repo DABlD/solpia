@@ -220,6 +220,10 @@
 				<optgroup label="CONTRACTS"></optgroup>
 					<option value="POEA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;POEA CONTRACT</option>
 					<option value="MLC/CBA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;MLC/CBA CONTRACT</option>
+
+				<optgroup label="TRAININGS"></optgroup>
+					<option value="CATERING TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;CATERING TRAINING</option>
+					<option value="HIGH VOLTAGE TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;HIGH VOLTAGE TRAINING</option>
 			`;
 
 			// 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE S.Q. FOR TANKERS', 'FLAG STATE LICENSE', 'FLAG STATE SSO LICENSE', 'FLAG STATE ENDORSEMENT COOK COURSE', 'FLAG STATE GMDSS-GOC', 
