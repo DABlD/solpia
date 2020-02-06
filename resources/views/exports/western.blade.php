@@ -138,23 +138,22 @@
 					return;
 				}
 			}
-			elseif ($docu == 'SSBT WITH BRM') {
+			elseif ($docu == 'BTM') {
 				$temp = $docu;
 				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
 
 				if(!$docu){
-					$name = 'SSBT';
+					$name = 'ETM';
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
+			}
+			elseif ($docu == 'BRM') {
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
 
-					if(!$docu){
-						$name = 'BRM';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-					}
-
-					if(!$docu){
-						$name = 'BTM';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-					}
+				if(!$docu){
+					$name = 'ERM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				}
 			}
 			else{
@@ -446,9 +445,9 @@
 
 	{{ $getDocument('COC', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
 	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'National GMDSS'	,'',true			)}}
-	{{ $getDocument('LICENSE', 		'flag', 	'', 			'Panama License'	,'',true			)}}
-	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Panama GMDSS'		,'',true			)}}
-	{{ $getDocument('SSO', 			'flag', 	'', 			'Panama SSO'		,'',true			)}}
+	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flag License'		,'',true			)}}
+	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Flag GMDSS'		,'',true			)}}
+	{{ $getDocument('SSO', 			'flag', 	'', 			'Flag SSO / SDSD'	,'',true			)}}
 	
 	{{-- CERTIFICATES --}}
 	{{ addS('3. CERTIFICATE') }}
@@ -461,9 +460,9 @@
 		<td colspan="6">Issued By</td>
 	</tr>
 
-	{{ $getDocument('PASSPORT', 	'id', 		''													)}}
+	{{ $getDocument('PASSPORT', 	'id', 		'',			"National Passport"						)}}
 	{{ $getDocument("SEAMAN'S BOOK",'id', 		'', 		"National Seaman's book"				)}}
-	{{ $getDocument('BOOKLET', 		'flag', 	'', 		"Panama Seaman's book"					)}}
+	{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 	"Flag Seaman's book"					)}}
 
 	{{-- VISAS --}}
 	
@@ -478,7 +477,7 @@
 		<td colspan="6">{{ $docu ? $docu->number : "-----"}}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+		<td colspan="6">USA Embassy</td>
 	</tr>
 	
 	@php 
@@ -491,7 +490,7 @@
 		<td colspan="6">{{ $docu ? $docu->number : "-----"}}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-		<td colspan="6">DHA - AUSTRALIA</td>
+		<td colspan="6">AUS Embassy</td>
 	</tr>
 
 	<tr>
@@ -519,15 +518,14 @@
 	{{ $getDocument('MEDICAL FIRST AID - MEFA', 'lc', 'MARINA', 'Medical First Aid Course')}}
 	{{ $getDocument('RADAR', 'lc', '', 'Radar Observer')}}
 	{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA')}}
-	{{ $getDocument('SSBT WITH BRM', 'lc', '', 'BTM/BRM')}}
+	{{ $getDocument('BTM', 'lc', '', 'BTM/ETM')}}
+	{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
 	{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'Ship Simulator')}}
+
 	{{ $getDocument('MEDICAL CARE - MECA', 'lc', 'MARINA', 'Medical Care Course (MCC)')}}
 	{{ $getDocument('SHIP SECURITY OFFICER - SSO', 'lc', 'MARINA', 'Ship Security Officer (SSO)')}}
-	{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc', '', 'Shipboard Safety Officer Course')}}
-	{{ $getDocument("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'MARINA', 'Security Awareness')}}
-	{{ $getDocument('CONSOLIDATED MARPOL', 'lc', '', 'Marpol')}}
-	{{ $getDocument('ERS WITH ERM', 'lc', '', 'ERM')}}
-	{{ $getDocument('EDH', 'lc', '', 'EDH')}}
+	{{ $getDocument("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'MARINA', 'Security Awareness (SDSD)')}}
+	{{ $getDocument('CONSOLIDATED MARPOL', 'lc', '', 'Marpol 1 73/78')}}
 
 	{{-- ECDIS --}}
 	@php
@@ -591,13 +589,55 @@
 		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
+
+	{{-- CATERING --}}
+	@php
+		$name = "CATERING TRAINING";
+		$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+	@endphp
+
+	<tr>
+		<td rowspan="3" colspan="2">Catering</td>
+		<td colspan="8">Catering Training</td>
+		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+	</tr>
+
+	@php
+		$name = "NCI";
+		$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+	@endphp
+
+	<tr>
+		<td colspan="8">National Certificate I</td>
+		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+	</tr>
 	
-	{{ $getDocument('MLC TRAINING F1', 	'lc', 		'',	'Navigation at the Management Level')}}
-	{{ $getDocument('MLC TRAINING F', 	'lc', 		'',	'Controlling the Operation of the ship and Care for Persons On Board at the Management Level')}}
-	{{ $getDocument('PRACTIAL ASSESSMENT IN MANAGEMENT LEVEL', 	'lc', 		'',	'Practical Assessment in Management Level')}}
-	{{ $getDocument('IDK', 	'lc', 		'',	'Catering Training Cert.')}}
-	{{ $getDocument('NCIII','lc', 		'',	'National Certificate III (NC III)')}}
-	{{ $getDocument('NCI', 	'lc', 		'',	'National Certificate I (NC I)')}}
+	@php 
+		$name = "NCIII";
+		$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+	@endphp
+
+	<tr>
+		<td colspan="8">National Certificate III</td>
+		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+	</tr>
+
+	{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc', '', 'Safety Officer')}}
+	{{ $getDocument("HIGH VOLTAGE TRAINING", 'lc', '', 'High Voltage Training')}}
+
+	{{-- FILLERS --}}
+	{{ $getDocument("", 'lc', '', '')}}
+	{{ $getDocument("", 'lc', '', '')}}
+	{{ $getDocument("", 'lc', '', '')}}
 
 	{{-- MEDS --}}
 	{{ addS('5. PHYSICAL INSPECTION / YELLOW CARD') }}
@@ -804,6 +844,6 @@
 
 	<tr>
 		<td colspan="27"></td>
-		<td colspan="7">Revised by 2016.07.20</td>
+		<td colspan="7">Revised by 2020.01.29</td>
 	</tr>
 </table>
