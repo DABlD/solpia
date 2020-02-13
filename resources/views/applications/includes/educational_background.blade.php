@@ -15,6 +15,7 @@
                             <option value="Elementary">Elementary</option>
                             <option value="High School">High School</option>
                             <option value="Vocational">Vocational</option>
+                            <option value="Undergraduate">Undergrad</option>
                             <option value="College">College</option>
                         </select>
                         <span class="invalid-feedback hidden" role="alert">
