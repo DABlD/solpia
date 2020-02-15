@@ -358,6 +358,7 @@
             	            <select class="${docu_class} ${clinic}" name="${clinic}${count}">
             	            	<option></option>
             	            	<option value="MICAH">MICAH</option>
+            	            	<option value="SUPERCARE">SUPERCARE</option>
             	            	<option value="SM LAZO">SM LAZO</option>
             	            	<option value="PHYSICIAN">PHYSICIAN</option>
             	            	<option value="HALCION">HALCION</option>
