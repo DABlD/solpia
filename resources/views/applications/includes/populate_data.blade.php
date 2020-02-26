@@ -309,7 +309,7 @@
 						}
 
 						swal.close();
-					}, (sss.length * 500));
+					}, (sss.length * 1000));
 				});
 			}, 1000);
 		}
