@@ -257,7 +257,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 $fills[2] = [
-                    'AA1:AH1', 'A22:AH22', $ar('A', 24, 'AH', 24), $ar('A', 31, 'AH', 31), $ar('A', 39, 'AH', 39), $ar('A', 66, 'AH', 66), $ar('A', 71, 'AH', 71), $ar('A', 74, 'AH', 74), $ar('A', 78, 'AH', 78), $ar('A', 83, 'AH', 83), $ar('A', 86, 'N', 90), $ar('A', 92, 'AH', 93)
+                    'AA1:AH1', 'A22:AH22', $ar('A', 24, 'AH', 24), $ar('A', 31, 'AH', 31), $ar('A', 39, 'AH', 39), $ar('A', 51, 'AH', 51), $ar('A', 66, 'AH', 66), $ar('A', 71, 'AH', 71), $ar('A', 74, 'AH', 74), $ar('A', 78, 'AH', 78), $ar('A', 83, 'AH', 83), $ar('A', 86, 'N', 90), $ar('A', 92, 'AH', 93)
                 ];
 
                 foreach($fills as $key => $value){
@@ -285,7 +285,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = array_merge($fills[1], $fillables, [
-                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 35), $ar('A', 55), $ar('A', (93 + ($ssSize * 2) + 6)), $ar('A', (93 + ($ssSize * 2) + 8)), $ar('P', (93 + ($ssSize * 2) + 8)), $ar('A', 31, 'AH', 31), $ar('A', 39, 'AH', 39), $ar('A', 66, 'AH', 66), $ar('A', 71, 'AH', 71), $ar('A', 74, 'AH', 74), $ar('A', 78, 'AH', 78), $ar('A', 83, 'AH', 83), $ar('A', 92, 'AH', 93)
+                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 35), $ar('A', 55), $ar('A', (93 + ($ssSize * 2) + 6)), $ar('A', (93 + ($ssSize * 2) + 8)), $ar('P', (93 + ($ssSize * 2) + 8)), $ar('A', 31, 'AH', 31), $ar('A', 39, 'AH', 39), $ar('A', 51, 'AH', 51), $ar('A', 66, 'AH', 66), $ar('A', 71, 'AH', 71), $ar('A', 74, 'AH', 74), $ar('A', 78, 'AH', 78), $ar('A', 83, 'AH', 83), $ar('A', 92, 'AH', 93)
                 ]);
 
                 // HL
@@ -300,7 +300,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // B
                 $h[6] = [
-                    'A21', $ar('A', 23), $ar('A', 30), $ar('A', 38), $ar('A', 65), $ar('A', 70), $ar('A', 77), $ar('A', 82), $ar('A', 85), $ar('A', 91), $ar('A', (93 + ($ssSize * 2) + 1)), $ar('A', (93 + ($ssSize * 2) + 6)), $ar('AB', (93 + ($ssSize * 2) + 9))
+                    'A21', $ar('A', 23), $ar('A', 30), $ar('A', 38), $ar('A', 50), $ar('A', 65), $ar('A', 70), $ar('A', 77), $ar('A', 82), $ar('A', 85), $ar('A', 91), $ar('A', (93 + ($ssSize * 2) + 1)), $ar('A', (93 + ($ssSize * 2) + 6)), $ar('AB', (93 + ($ssSize * 2) + 9))
                 ];
 
                 // VC

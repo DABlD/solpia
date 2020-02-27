@@ -523,6 +523,18 @@
 	{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
 	{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'Ship Simulator')}}
 
+
+	{{-- 2ND fOUR 4 --}}
+	{{ addS('4. OTHER CERTIFICATES (MARINA/SOLAS/MARPOL/OTHERS') }}
+
+	<tr>
+		<td colspan="10">Certificate</td>
+		<td colspan="6">Number</td>
+		<td colspan="6">Date Issued</td>
+		<td colspan="6">Expiry Date</td>
+		<td colspan="6">Issued By</td>
+	</tr>
+
 	{{ $getDocument('MEDICAL CARE - MECA', 'lc', 'MARINA', 'Medical Care Course (MCC)')}}
 	{{ $getDocument('SHIP SECURITY OFFICER - SSO', 'lc', 'MARINA', 'Ship Security Officer (SSO)')}}
 	{{ $getDocument("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'MARINA', 'Security Awareness (SDSD)')}}
@@ -634,11 +646,13 @@
 
 	{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc', '', 'Safety Officer')}}
 	{{ $getDocument("HIGH VOLTAGE TRAINING", 'lc', '', 'High Voltage Training')}}
-	{{ $getDocument("EMS TRAINING CERTIFICATE", 'lc', '', 'EMS Training Certificate')}}
-	{{ $getDocument("NEW ENGINE ROOM MACHINERY - WESTERN", 'lc', '', 'Trainings for New Type Engine Room Machinery for New Vessels')}}
+
+	{{-- REMOVE DAW SABI NI MA'AM JOSA 2/27/20 --}}
+	{{-- {{ $getDocument("EMS TRAINING CERTIFICATE", 'lc', '', 'EMS Training Certificate')}}
+	{{ $getDocument("NEW ENGINE ROOM MACHINERY - WESTERN", 'lc', '', 'Trainings for New Type Engine Room Machinery for New Vessels')}} --}}
 
 	{{-- FILLERS --}}
-	{{ $getDocument("", 'lc', '', '')}}
+	{{ $getDocument("", 'lc', '-----', '')}}
 
 	{{-- MEDS --}}
 	{{ addS('5. PHYSICAL INSPECTION / YELLOW CARD') }}
