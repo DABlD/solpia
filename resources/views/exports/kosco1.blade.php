@@ -532,7 +532,7 @@
 		if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
 		{
 			$docu = 'SSBT WITH BRM';
-			$docu = isset($applicant->document_lc->$docu) ? $applicant->{"document_$type"}->$docu : false;
+			$docu = isset($applicant->document_lc->$docu) ? $applicant->document_lc->{$docu} : false;
 
 			if(!$docu){
 				$docu = 'SSBT';
