@@ -648,14 +648,20 @@
 		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
 	</tr>
 
-	{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc', '', 'Safety Officer')}}
-	{{ $getDocument("HIGH VOLTAGE TRAINING", 'lc', '', 'High Voltage Training')}}
+	{{ $getDocument("SAFETY OFFICER'S TRAINING COURSE", 'lc', 'for C/E, C/O', 'Safety Officer')}}
+	{{ $getDocument("HIGH VOLTAGE TRAINING", 'lc', 'over 3,000 volt', 'High Voltage Training')}}
 
 	{{-- REMOVE DAW SABI NI MA'AM JOSA 2/27/20 --}}
 	{{-- {{ $getDocument("EMS TRAINING CERTIFICATE", 'lc', '', 'EMS Training Certificate')}}
 	{{ $getDocument("NEW ENGINE ROOM MACHINERY - WESTERN", 'lc', '', 'Trainings for New Type Engine Room Machinery for New Vessels')}} --}}
 
 	{{-- FILLERS --}}
+	{{ $getDocument("", 'lc', '-----', '')}}
+	{{ $getDocument("", 'lc', '-----', '')}}
+	{{ $getDocument("", 'lc', '-----', '')}}
+	{{ $getDocument("", 'lc', '-----', '')}}
+	{{ $getDocument("", 'lc', '-----', '')}}
+	{{ $getDocument("", 'lc', '-----', '')}}
 	{{ $getDocument("", 'lc', '-----', '')}}
 
 	{{-- MEDS --}}
