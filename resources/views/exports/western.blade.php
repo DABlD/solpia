@@ -146,6 +146,8 @@
 					$name = 'ETM';
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				}
+
+				$name = 'BTM/ETM';
 			}
 			elseif ($docu == 'BRM') {
 				$temp = $docu;
@@ -155,6 +157,8 @@
 					$name = 'ERM';
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				}
+
+				$name = 'BRM/ERM';
 			}
 			else{
 				$temp = $docu;
