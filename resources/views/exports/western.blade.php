@@ -437,7 +437,7 @@
 	@endforeach
 	
 	{{-- LICENSES --}}
-	{{ addS('2. LICENCES') }}
+	{{ addS('2. LICENSES') }}
 
 	<tr>
 		<td colspan="5">License</td>
