@@ -5,8 +5,8 @@
 
     <script>
         window['moment-range'].extendMoment(moment);
-        var savedVessels = {};
-        var savedVesselsString = "";
+        var imo = {};
+        var imoString = "";
 
         var availableRanksString = `
             <option></option>
@@ -22,7 +22,7 @@
         `;
 
         function addSS(){
-            savedVesselsString == "" ? getVessels() : addSS2();
+            imoString == "" ? getVessels() : addSS2();
         }
 
         function addSS2(){
@@ -32,16 +32,28 @@
                 <div class="row ss">
                     
                     <span class="fa fa-times fa-2x" onclick="deleteRow(this, 'ss')"></span>
+
+                    <div class="form-group col-md-3">
+                        <label for="imo${count}">IMO Number</label>
+                        <select class="form-control" name="imo${count}">
+                            <option value=""></option>
+                            ${imoString}
+                        </select>
+                        <span class="invalid-feedback hidden" role="alert">
+                            <strong id="imo${count}Error"></strong>
+                        </span>
+                    </div>
+
+                    <div class="col-md-9" style="width: 100%;"></div>
+                    
                     <div class="form-group col-md-3">
                         <label for="vessel_name${count}">Vessel Name</label>
-                        <select class="form-control" name="vessel_name${count}">
-                            <option value=""></option>
-                            ${savedVesselsString}
-                        </select>
+                        <input type="text" class="form-control" name="vessel_name${count}" placeholder="Enter Vessel Name">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="vessel_name${count}Error"></strong>
                         </span>
                     </div>
+
                     <div class="form-group col-md-3">
                         <label for="rank${count}">Rank</label>
                         <select class="form-control" name="rank${count}">
@@ -52,6 +64,7 @@
                             <strong id="rank${count}Error"></strong>
                         </span>
                     </div>
+
                     <div class="form-group col-md-3">
                         <label for="vessel_type${count}">Vessel Type</label>
                         <input type="text" class="form-control" name="vessel_type${count}" placeholder="Enter Vessel Type">
@@ -59,6 +72,7 @@
                             <strong id="vessel_type${count}Error"></strong>
                         </span>
                     </div>
+
                     <div class="form-group col-md-3">
                         <label for="gross_tonnage${count}">Gross Tonnage</label>
                         <input type="text" class="form-control" name="gross_tonnage${count}" placeholder="Enter Gross Tonnage">
@@ -149,10 +163,15 @@
             `;
             
             $('#sea-services').append(string);
-            $(`[name="vessel_name${count}"]`).select2({
-                placeholder: 'Select or Input Vessel',
+            $(`[name="imo${count}"]`).select2({
+                placeholder: 'Select or Input IMO',
                 tags: true
             });
+
+            // $(`[name="vessel_name${count}"]`).select2({
+            //     placeholder: 'Select or Input Vessel',
+            //     tags: true
+            // });
 
             $(`[name="rank${count}"]`).select2({
                 placeholder: 'Select Rank',
@@ -172,34 +191,49 @@
             });
 
             let count2 = $('.ss').length;
+
             // AUTO FILL SEA SERVICE
-            $(`[name="vessel_name${count}"]`).change(e => {
+            // $(`[name="vessel_name${count}"]`).change(e => {
+
+                // let vessel = $(`[name="vessel_name${count}"]`);
+            //     let vessel = $(e.target);
+            //     let selectedVessel = vessel.val();
+            //     let parent = vessel.parent().parent();
+
+                
+            //     if(savedVessels[selectedVessel] != undefined){
+            //         parent.find('[name^="imo"]').val(savedVessels[selectedVessel].imo);
+            //         parent.find('[name^="vessel_type"]').val(savedVessels[selectedVessel].type);
+            //         parent.find(`[name^="gross_tonnage"]`).val(savedVessels[selectedVessel].gross_tonnage);
+            //         parent.find(`[name^="engine_type"]`).val(savedVessels[selectedVessel].engine);
+            //         parent.find(`[name^="bhp_kw"]`).val(savedVessels[selectedVessel].BHP);
+            //         parent.find(`[name^="flag"]`).val(savedVessels[selectedVessel].flag);
+            //         parent.find(`[name^="trade"]`).val(savedVessels[selectedVessel].trade);
+            //         parent.find(`[name^="manning_agent"]`).val(savedVessels[selectedVessel].manning_agent);
+            //         parent.find(`[name^="principal"]`).val(savedVessels[selectedVessel].principal.name);
+            //         parent.find(`[name^="crew_nationality"]`).val(savedVessels[selectedVessel].crew_nationality);
+            //     }
+            // });
+
+            $(`[name="imo${count}"]`).change(e => {
 
                 // let vessel = $(`[name="vessel_name${count}"]`);
                 let vessel = $(e.target);
                 let selectedVessel = vessel.val();
                 let parent = vessel.parent().parent();
-
                 
-                if(savedVessels[selectedVessel] != undefined){
-                    parent.find('[name^="vessel_type"]').val(savedVessels[selectedVessel].type);
-                    parent.find(`[name^="gross_tonnage"]`).val(savedVessels[selectedVessel].gross_tonnage);
-                    parent.find(`[name^="engine_type"]`).val(savedVessels[selectedVessel].engine);
-                    parent.find(`[name^="bhp_kw"]`).val(savedVessels[selectedVessel].BHP);
-                    parent.find(`[name^="flag"]`).val(savedVessels[selectedVessel].flag);
-                    parent.find(`[name^="trade"]`).val(savedVessels[selectedVessel].trade);
-                    parent.find(`[name^="manning_agent"]`).val(savedVessels[selectedVessel].manning_agent);
-                    parent.find(`[name^="principal"]`).val(savedVessels[selectedVessel].principal.name);
-                    parent.find(`[name^="crew_nationality"]`).val(savedVessels[selectedVessel].crew_nationality);
-                    // $(`[name="vessel_type${count}"]`).val(savedVessels[selectedVessel].type);
-                    // $(`[name="gross_tonnage${count}"]`).val(savedVessels[selectedVessel].gross_tonnage);
-                    // $(`[name="engine_type${count}"]`).val(savedVessels[selectedVessel].engine);
-                    // $(`[name="bhp_kw${count}"]`).val(savedVessels[selectedVessel].BHP);
-                    // $(`[name="flag${count}"]`).val(savedVessels[selectedVessel].flag);
-                    // $(`[name="trade${count}"]`).val(savedVessels[selectedVessel].trade);
-                    // $(`[name="manning_agent${count}"]`).val(savedVessels[selectedVessel].manning_agent);
-                    // $(`[name="principal${count}"]`).val(savedVessels[selectedVessel].principal.name);
-                    // $(`[name="crew_nationality${count}"]`).val(savedVessels[selectedVessel].crew_nationality);
+                if(imo[selectedVessel] != undefined){
+
+                    parent.find('[name^="vessel_name"]').val(imo[selectedVessel].name);
+                    parent.find('[name^="vessel_type"]').val(imo[selectedVessel].type);
+                    parent.find(`[name^="gross_tonnage"]`).val(imo[selectedVessel].gross_tonnage);
+                    parent.find(`[name^="engine_type"]`).val(imo[selectedVessel].engine);
+                    parent.find(`[name^="bhp_kw"]`).val(imo[selectedVessel].BHP);
+                    parent.find(`[name^="flag"]`).val(imo[selectedVessel].flag);
+                    parent.find(`[name^="trade"]`).val(imo[selectedVessel].trade);
+                    parent.find(`[name^="manning_agent"]`).val(imo[selectedVessel].manning_agent);
+                    parent.find(`[name^="principal"]`).val(imo[selectedVessel].principal.name);
+                    parent.find(`[name^="crew_nationality"]`).val(imo[selectedVessel].crew_nationality);
                 }
             });
         }
@@ -269,18 +303,20 @@
         }
 
         function getVessels(flag = true){
-            savedVesselsString = "";
+            imoString = "";
 
             $.ajax({
                 url: '{{ route('vessels.getAll') }}',
                 dataType: 'json',
                 success: vessels => {
                     vessels.forEach(vessel => {
-                        if(savedVessels[vessel.name] == undefined){
-                            savedVessels[vessel.name] = vessel;
-                            savedVesselsString += `
-                                <option value="${vessel.name}">${vessel.name}</option>
-                            `;
+                        if(imo[vessel.imo] == undefined){
+                            if(vessel.imo != null){
+                                imo[vessel.imo] = vessel;
+                                imoString += `
+                                    <option value="${vessel.imo}">${vessel.imo}</option>
+                                `;
+                            }
                         }
                     });
                     addSS2();

@@ -1,0 +1,300 @@
+[1mdiff --git a/app/Exports/Seyeong.php b/app/Exports/Seyeong.php[m
+[1mindex 58bd44c..158b13c 100644[m
+[1m--- a/app/Exports/Seyeong.php[m
+[1m+++ b/app/Exports/Seyeong.php[m
+[36m@@ -2,15 +2,422 @@[m
+ [m
+ namespace App\Exports;[m
+ [m
+[31m-use Maatwebsite\Excel\Concerns\FromCollection;[m
+[32m+[m[32muse App\Models\{Applicant};[m
+[32m+[m[32muse Illuminate\Contracts\View\View;[m
+[32m+[m[32muse Maatwebsite\Excel\Concerns\FromView;[m
+[32m+[m[32muse Maatwebsite\Excel\Concerns\ShouldAutoSize;[m
+[32m+[m[32muse Maatwebsite\Excel\Concerns\WithDrawings;[m
+ [m
+[31m-class Seyeong implements FromCollection[m
+[32m+[m[32muse Maatwebsite\Excel\Concerns\WithEvents;[m
+[32m+[m[32muse Maatwebsite\Excel\Events\AfterSheet;[m
+[32m+[m
+[32m+[m[32mclass Seyeong implements FromView, WithEvents, WithDrawings//, ShouldAutoSize[m
+ {[m
+[31m-    /**[m
+[31m-    * @return \Illuminate\Support\Collection[m
+[31m-    */[m
+[31m-    public function collection()[m
+[32m+[m[32m    public function __construct($applicant,$type){[m
+[32m+[m[32m        $this->applicant = $applicant;[m
+[32m+[m[32m        $this->type = $type;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function view(): View[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return view('exports.' . $this->type, [[m
+[32m+[m[32m            'applicant' => $this->applicant[m
+[32m+[m[32m        ]);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function registerEvents(): array[m
+[32m+[m[32m    {[m
+[32m+[m[32m        $borderStyle =[m[41m [m
+[32m+[m[32m        [[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'borders' => [[m
+[32m+[m[32m                    'top' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                    'bottom' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                    'left' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                    'right' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                ],[m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'borders' => [[m
+[32m+[m[32m                    'allBorders' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'borders' => [[m
+[32m+[m[32m                    'bottom' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'borders' => [[m
+[32m+[m[32m                    'bottom' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOTTED,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                    'left' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                    'right' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'borders' => [[m
+[32m+[m[32m                    'bottom' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                    'left' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                    'right' => [[m
+[32m+[m[32m                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m        ];[m
+[32m+[m
+[32m+[m[32m        $fillStyle = [[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'fill' => [[m
+[32m+[m[32m                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,[m
+[32m+[m[32m                    'color' => [[m
+[32m+[m[32m                        'rgb' => 'FFCC99'[m
+[32m+[m[32m                    ][m
+[32m+[m[32m                ],[m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'fill' => [[m
+[32m+[m[32m                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,[m
+[32m+[m[32m                    'color' => [[m
+[32m+[m[32m                        'rgb' => 'CCFFCC'[m
+[32m+[m[32m                    ][m
+[32m+[m[32m                ],[m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'fill' => [[m
+[32m+[m[32m                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,[m
+[32m+[m[32m                    'color' => [[m
+[32m+[m[32m                        'rgb' => 'CCCCCC'[m
+[32m+[m[32m                    ][m
+[32m+[m[32m                ],[m
+[32m+[m[32m            ],[m
+[32m+[m[32m        ];[m
+[32m+[m
+[32m+[m[32m        $headingStyle = [[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'font' => [[m
+[32m+[m[32m                    'bold' => true[m
+[32m+[m[32m                ],[m
+[32m+[m[32m                'alignment' => [[m
+[32m+[m[32m                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'alignment' => [[m
+[32m+[m[32m                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP,[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'font' => [[m
+[32m+[m[32m                    'bold' => true[m
+[32m+[m[32m                ],[m
+[32m+[m[32m                'alignment' => [[m
+[32m+[m[32m                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'alignment' => [[m
+[32m+[m[32m                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'alignment' => [[m
+[32m+[m[32m                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,[m
+[32m+[m[32m                ][m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'alignment' => [[m
+[32m+[m[32m                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,[m
+[32m+[m[32m                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,[m
+[32m+[m[32m                ],[m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'font' => [[m
+[32m+[m[32m                    'bold' => true[m
+[32m+[m[32m                ],[m
+[32m+[m[32m            ],[m
+[32m+[m[32m            [[m
+[32m+[m[32m                'alignment' => [[m
+[32m+[m[32m                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,[m
+[32m+[m[32m                ],[m
+[32m+[m[32m            ][m
+[32m+[m[32m        ];[m
+[32m+[m
+[32m+[m[32m        return [[m
+[32m+[m[32m            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {[m
+[32m+[m[32m                // SHEET SETTINGS[m
+[32m+[m[32m                $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;[m
+[32m+[m[32m                $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);[m
+[32m+[m[32m                $event->sheet->getDelegate()->setTitle('Bio Data', false);[m
+[32m+[m[32m                $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);[m
+[32m+[m[32m                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);[m
+[32m+[m[32m                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);[m
+[32m+[m[32m                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);[m
+[32m+[m[32m                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);[m
+[32m+[m[32m                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);[m
+[32m+[m[32m                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);[m
+[32m+[m
+[32m+[m[32m                $event->sheet->getDelegate()->getStyle('A1:AJ150')->getFont()->setSize(10);[m
+[32m+[m
+[32m+[m[32m                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;[m
+[32m+[m[41m                [m
+[32m+[m[32m                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));[m
+[32m+[m
+[32m+[m[32m                // FONT SIZES[m
+[32m+[m
+[32m+[m[32m                // EDUCATION ROWS[m
+[32m+[m[32m                $ebSize = sizeof($this->applicant->educational_background);[m
+[32m+[m[32m                $ebRows = '';[m
+[32m+[m
+[32m+[m[32m                if($ebSize){[m
+[32m+[m[32m                    $ebRows = 'A35:' . 'AH' . (34 + $ebSize);[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                // SEA SERVICE ROWS[m
+[32m+[m[32m                $ssSize = sizeof($this->applicant->sea_service);[m
+[32m+[m[32m                $ssRows = '';[m
+[32m+[m[32m                $sSsRows = [];[m
+[32m+[m[32m                $sSsRows2 = [];[m
+[32m+[m
+[32m+[m[32m                if($ssSize){[m
+[32m+[m[32m                    $ssRows = 'A' . (106 + $ebSize) . ':' . 'AH' . (105 + $ebSize + ($ssSize * 2));[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                $ctr = 104;[m
+[32m+[m[32m                for($i = 0; $i <= sizeof($this->applicant->sea_service); $i++){[m
+[32m+[m[32m                    array_push($sSsRows, 'A' . ($ctr + $ebSize) . ':' . 'F' . ($ctr + $ebSize));[m
+[32m+[m[32m                    array_push($sSsRows, 'G' . ($ctr + $ebSize) . ':' . 'J' . ($ctr + $ebSize));[m
+[32m+[m[32m                    array_push($sSsRows, 'K' . ($ctr + $ebSize) . ':' . 'P' . ($ctr + $ebSize));[m
+[32m+[m[32m                    array_push($sSsRows, 'W' . ($ctr + $ebSize) . ':' . 'AB' . ($ctr + $ebSize));[m
+[32m+[m
+[32m+[m[32m                    array_push($sSsRows2, 'A' . ($ctr + $ebSize + 1) . ':' . 'F' . ($ctr + $ebSize + 1));[m
+[32m+[m[32m                    array_push($sSsRows2, 'G' . ($ctr + $ebSize + 1) . ':' . 'J' . ($ctr + $ebSize + 1));[m
+[32m+[m[32m                    array_push($sSsRows2, 'K' . ($ctr + $ebSize + 1) . ':' . 'P' . ($ctr + $ebSize + 1));[m
+[32m+[m[32m                    array_push($sSsRows2, 'Q' . ($ctr + $ebSize) . ':' . 'V' . ($ctr + $ebSize + 1));[m
+[32m+[m[32m                    array_push($sSsRows2, 'W' . ($ctr + $ebSize + 1) . ':' . 'AB' . ($ctr + $ebSize + 1));[m
+[32m+[m[32m                    array_push($sSsRows2, 'AC' . ($ctr + $ebSize) . ':' . 'AH' . ($ctr + $ebSize + 1));[m
+[32m+[m
+[32m+[m[32m                    $ctr+=2;[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                // FUNCTIONS[m
+[32m+[m[32m                $ar = function($c1, $r1, $c2 = null, $r2 = null) use($ebSize){[m
+[32m+[m[32m                    $temp = $c1 . ($r1 + $ebSize);[m
+[32m+[m[32m                    if($c2 != null){[m
+[32m+[m[32m                        $temp .= ':' . $c2 . ($r2 + $ebSize);[m
+[32m+[m[32m                    }[m
+[32m+[m
+[32m+[m[32m                    return $temp;[m
+[32m+[m[32m                };[m
+[32m+[m
+[32m+[m[32m                $fillables = [[m
+[32m+[m[32m                    // $ar('F', 25, 'AH', 29), $ar('K', 32, 'AH', 37),[m
+[32m+[m[32m                    // $ar('K', 40, 'AH', 70)[m
+[32m+[m[32m                ];[m
+[32m+[m
+[32m+[m[32m                // FILLS[m
+[32m+[m[32m                $fills[0] = [[m
+[32m+[m[32m                    'A1:AH11', 'A12:' . $ar('AH', (111 + ($ssSize *2) + 8))[m
+[32m+[m[32m                ];[m
+[32m+[m
+[32m+[m[32m                $fills[1] = array_merge($fillables, [[m
+[32m+[m[32m                    'O9', 'AA9', 'AA11', 'D13', 'K13', 'T13', 'AA13', 'D15', 'N15', 'Y15', 'D17', 'D19', 'AD19', 'D21', 'M21', 'R21', 'AD21', 'D23', 'M23', 'U23', 'AD23', 'D25', 'L25', 'V25', 'AD25', 'V27', 'C29', 'N29', 'Y29', 'D31', 'AD31',[m
+[32m+[m
+[32m+[m[32m                    $ar('F', 37, 'AC', 40),[m
+[32m+[m[32m                    $ar('K', 42, 'AC', 45),[m
+[32m+[m[32m                    $ar('K', 48, 'AC', 73),[m
+[32m+[m[32m                    $ar('K', 76, 'AC', 77),[m
+[32m+[m[32m                    $ar('K', 80, 'AC', 82),[m
+[32m+[m[32m                    $ar('AC', 85), $ar('AC', 86),[m
+[32m+[m[32m                    $ar('AC', 89), $ar('AC', 90),[m
+[32m+[m[32m                    $ar('L', 93, 'AC', 94),[m
+[32m+[m[32m                ]);[m
+[32m+[m
+[32m+[m[32m                if($ebRows != ""){[m
+[32m+[m[32m                    array_push($fills[1], $ebRows);[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                // $fills[2] = [[m
+[32m+[m[32m                //     'AA1:AH1', 'A22:AH22', $ar('A', 24, 'AH', 24), $ar('A', 31, 'AH', 31), $ar('A', 39, 'AH', 39), $ar('A', 51, 'AH', 51), $ar('A', 72, 'AH', 72), $ar('A', 77, 'AH', 77), $ar('A', 80, 'AH', 80), $ar('A', 84, 'AH', 84), $ar('A', 89, 'AH', 89), $ar('A', 92, 'N', 96), $ar('A', 98, 'AH', 99)[m
+[32m+[m[32m                // ];[m
+[32m+[m
+[32m+[m[32m                foreach($fills as $key => $value){[m
+[32m+[m[32m                    foreach($value as $fill){[m
+[32m+[m[32m                        $event->sheet->getDelegate()->getStyle($fill)->applyFromArray($fillStyle[$key]);[m[41m  [m
+[32m+[m[32m                    }[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                // HEADINGS[m
+[32m+[m
+[32m+[m[32m                // HC B[m
+[32m+[m[32m                $h[0] = [[m
+[32m+[m[41m                    [m
+[32m+[m[32m                ];[m
+[32m+[m
+[32m+[m[32m                // VT[m
+[32m+[m[32m                $h[1] = [[m
+[32m+[m[41m                    [m
+[32m+[m[32m                ];[m
+[32m+[m
+[32m+[m[32m                // HL B[m
+[32m+[m[32m                $h[2] = [[m
+[32m+[m[41m                    [m
+[32m+[m[32m                ];[m
+[32m+[m
+[32m+[m[32m                // HC[m
+[32m+[m[32m                $h[3] = array_merge($fills[1], $fillables, [[m
+[32m+[m[32m                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 35), $ar('A', 55), $ar('A', (99 + ($ssSize * 2) + 6)), $ar('A', (99 + ($ssSize * 2) + 8)), $ar('P', (99 + ($ssSize * 2) + 8)), $ar('A', 31, 'AH', 31), $ar('A', 39, 'AH', 39)//, $ar('A', 51, 'AH', 51), $ar('A', 72, 'AH', 72), $ar('A', 77, 'AH', 77), $ar('A', 80, 'AH', 80), $ar('A', 85, 'AH', 84), $ar('A', 89, 'AH', 89), $ar('A', 98, 'A
