@@ -282,7 +282,7 @@
             inputs = $('#sea-services input, #sea-services select');
             let ss = [];
 
-            for(let i = 0; i < inputs.length; i+= 18){
+            for(let i = 0; i < inputs.length; i+= 19){
                 let tempSS = {};
 
                 if($(inputs[i]).is("[data-type]")){
@@ -292,7 +292,7 @@
                     i -= 1;
                 }
 
-                if(!checkIfVisible(inputs[i+17])){
+                if(!checkIfVisible(inputs[i+18])){
                     continue;
                 }
 

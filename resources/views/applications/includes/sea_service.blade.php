@@ -26,6 +26,7 @@
         }
 
         function addSS2(){
+            console.log('asdzzz');
             let count = parseInt($('.ssCount')[0].innerText) + 1;
 
             let string = `
@@ -319,7 +320,7 @@
                             }
                         }
                     });
-                    addSS2();
+                    // addSS2();
                 }
             });
         }

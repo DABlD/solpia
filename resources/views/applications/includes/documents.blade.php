@@ -1118,8 +1118,6 @@
             	if(rank >= row.range[0] && rank <= row.range[1]){
             		row.documents.forEach((docu, index) => {
             			
-            			console.log($(`select.docu-lctype [value="${docu}"]:selected`));
-            			console.log(docu);
             			// IF DOCUMENT IS EXISTING IN LC, SKIP
 						@if(isset($edit))
 	            			if($(`select.docu-lctype [value="${docu}"]:selected`).length){

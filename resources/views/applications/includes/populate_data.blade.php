@@ -280,7 +280,7 @@
 				setTimeout(() => {
 				
 					index = 0;
-
+					console.log(length);
 					for(let ctr = 0; ctr < length; ctr++){
 						inputs = $('#sea-services input, #sea-services select');
 						i = (index * 19);
@@ -306,14 +306,16 @@
 
 						inputs[i+17].value      = sss[ctr].remarks;
 
-						$(inputs[i]).select2('close');
+						// $(inputs[i]).select2('close');
 
 						$($(inputs[i+17]).parent().parent()).prepend(`
 							<input type="hidden" name="id-${sss[ctr].id}" value="${sss[ctr].id}" data-type="id">
 						`);
 						index++;
 					}
-				}, sss.length * 4000);
+
+					swal.close();
+				}, 2000);
 			}
 		})
 	})
