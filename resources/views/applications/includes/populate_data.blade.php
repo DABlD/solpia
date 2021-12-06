@@ -187,7 +187,7 @@
 			url: '{{ route("applications.getAddDetails", ['applicant' => $applicant->id]) }}',
 			success: result => {
 				result = JSON.parse(result);
-				
+
 				let flags = result.document_flag;
 				let lcs   = result.document_lc;
 				let sss   = result.sea_service;
@@ -227,7 +227,7 @@
 
 				let keys = Object.keys(flags);
 				length = keys.length;
-				
+
 				let flagDocu = [];
 				for(let ctr = 0; ctr < length; ctr++){
 					addDocu('Flag');
@@ -238,8 +238,9 @@
 				
 				setTimeout(() => {
 					index = 0;
-					for(let ctr = 0; ctr < length; ctr++){
-						flags[keys[ctr]].forEach((data, ctr2) => {
+				
+					for(let ctr = 0; ctr < keys.length; ctr++){
+						flags[keys[ctr]].forEach((data, ctr2) => {0
 							let country = $(`[name="docu-country${(ctr + 1)}"]`);
 
 							inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
@@ -267,8 +268,8 @@
 					addSS();
 				}
 
-				length ? $('[name="vessel_name1"]').select2('open') : '';
-				
+				// length ? $('[name="imo1"]').select2('open') : '';
+
 				swal({
 					title: 'Loading Sea Services...',
 					allowOutsideClick: false,
@@ -277,41 +278,44 @@
 				swal.showLoading();
 
 				setTimeout(() => {
+				
 					index = 0;
+
 					for(let ctr = 0; ctr < length; ctr++){
 						inputs = $('#sea-services input, #sea-services select');
-						i = (index * 18);
+						i = (index * 19);
 
-						// $(inputs[i]).val(sss[ctr].vessel_name).trigger('change');
-						checkIfExisting($(inputs[i]), sss[ctr].vessel_name);
-						$(inputs[i+1]).val(sss[ctr].rank).trigger('change');
+						$(inputs[i]).val(sss[ctr].imo).trigger('change');
+						// checkIfExisting($(inputs[i+1]), sss[ctr].vessel_name);
+						$(inputs[i+1]).val(sss[ctr].vessel_name);
+						$(inputs[i+2]).val(sss[ctr].rank).trigger('change');
 						
-						inputs[i+2].value       = sss[ctr].vessel_type;
-						inputs[i+3].value       = sss[ctr].gross_tonnage;
-						inputs[i+4].value       = sss[ctr].engine_type;
-						inputs[i+5].value       = sss[ctr].bhp_kw;
-						inputs[i+6].value       = sss[ctr].flag;
-						inputs[i+7].value       = sss[ctr].trade;
-						inputs[i+8].value       = sss[ctr].previous_salary;
-						inputs[i+9].value       = sss[ctr].manning_agent;
-						inputs[i+10].value      = sss[ctr].principal;
-						inputs[i+11].value      = sss[ctr].crew_nationality;
+						inputs[i+3].value       = sss[ctr].vessel_type;
+						inputs[i+4].value       = sss[ctr].gross_tonnage;
+						inputs[i+5].value       = sss[ctr].engine_type;
+						inputs[i+6].value       = sss[ctr].bhp_kw;
+						inputs[i+7].value       = sss[ctr].flag;
+						inputs[i+8].value       = sss[ctr].trade;
+						inputs[i+9].value       = sss[ctr].previous_salary;
+						inputs[i+10].value       = sss[ctr].manning_agent;
+						inputs[i+11].value      = sss[ctr].principal;
+						inputs[i+12].value      = sss[ctr].crew_nationality;
 
-						$(inputs[i+12]).flatpickr(config).setDate(sss[ctr].sign_on, true);
-						$(inputs[i+14]).flatpickr(config).setDate(sss[ctr].sign_off, true);
+						$(inputs[i+13]).flatpickr(config).setDate(sss[ctr].sign_on, true);
+						$(inputs[i+15]).flatpickr(config).setDate(sss[ctr].sign_off, true);
 
-						inputs[i+16].value      = sss[ctr].remarks;
+						inputs[i+17].value      = sss[ctr].remarks;
 
 						$(inputs[i]).select2('close');
 
-						$($(inputs[i+16]).parent().parent()).prepend(`
+						$($(inputs[i+17]).parent().parent()).prepend(`
 							<input type="hidden" name="id-${sss[ctr].id}" value="${sss[ctr].id}" data-type="id">
 						`);
 						index++;
 					}
-				});
-			}, sss.length * 3000);
-		}
+				}, 2000);
+			}
+		})
 	})
 
 
