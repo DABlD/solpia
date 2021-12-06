@@ -23,6 +23,7 @@
                                 <th>Age</th>
                                 <th>Contact</th>
                                 <th>Last Vessel</th>
+                                <th>Date Applied</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -60,12 +61,17 @@
         .w50{
             width: 60px !important;
         }
+
+        .w150{
+            width: 150px !important;
+        }
     </style>
 @endpush
 
 @push('before-scripts')
     <script src="{{ asset('js/datatables.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -84,7 +90,8 @@
                 { data: 'fname', name: 'fname' },
                 { data: 'age', name: 'age' },
                 { data: 'contact', name: 'contact' },
-                { data: 'last_vessel', name: 'last_vessel' },
+                { data: 'last_vessel', name: 'last_vessel'},
+                { data: 'created_at', name: 'created_at'},
                 { data: 'actions', name: 'actions' },
             ],
             columnDefs: [
@@ -95,6 +102,13 @@
                         return `<img src="${link}" alt="Applicant Photo"/>`;
                     },
                 },
+                {
+                    className: "w150",
+                    targets: 8,
+                    render: function(date){
+                        return moment(date).format('MMM DD, YYYY HH:MM:SS');
+                    },
+                },
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
@@ -102,7 +116,7 @@
                 tooltip();
                 initializeActions();
             },
-            // order: [ [0, 'desc'] ],
+            order: [ [8, 'desc'] ],
         });
 
         table.on('draw', () => {

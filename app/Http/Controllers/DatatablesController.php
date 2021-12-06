@@ -38,7 +38,7 @@ class DatatablesController extends Controller
 	public function recruitments(Request $req){
 		$applicants = TempApplicant::select(
 							'temp_applicants.id',
-							'avatar', 'fname', 'lname', 'contact', 'birthday'
+							'avatar', 'fname', 'lname', 'contact', 'birthday', 'temp_applicants.created_at', 'temp_applicants.rank'
 						)
 						->join('temp_users as u', 'u.id', '=', 'temp_applicants.user_id')
 						->get();
@@ -71,9 +71,6 @@ class DatatablesController extends Controller
 		        $name = $vessels->last()->rank;
 		        $applicant->rank = $rank[$name] ?? 'N/A';
 		    }
-		    else{
-		    	$applicant->rank = "N/A";
-		    }
 		}
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
@@ -100,7 +97,7 @@ class DatatablesController extends Controller
 						)
 						->join('users as u', 'u.id', '=', 'applicants.user_id')
 						->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-						->join('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
+						->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
 						->where([$condition, ['u.deleted_at', '=', null]])
 						->groupBy('id')
 						->get();
