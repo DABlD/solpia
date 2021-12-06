@@ -40,7 +40,7 @@
   </div>
 
   <footer class="main-footer">
-    <strong>Copyright &copy; {{ $cpYear }} <a href="https://github.com/DABlD/" target="_blank">David Mendoza</a>.</strong> All rights
+    <strong>Copyright &copy; {{ $cpYear }} <a href="http://solpiamarine.com" target="_blank">Solpia Marine and Ship Management Inc.</a>.</strong> All rights
     reserved.
   </footer>
 </div>
