@@ -296,21 +296,22 @@
                     continue;
                 }
 
-                tempSS.vessel_name      = inputs[i+1].value.toUpperCase();
-                tempSS.rank             = inputs[i+2].value;
-                tempSS.vessel_type      = inputs[i+3].value.toUpperCase();
-                tempSS.gross_tonnage    = inputs[i+4].value;
-                tempSS.engine_type      = inputs[i+5].value.toUpperCase();
-                tempSS.bhp_kw           = inputs[i+6].value;
-                tempSS.flag             = inputs[i+7].value.toUpperCase();
-                tempSS.trade            = inputs[i+8].value.toUpperCase();
-                tempSS.previous_salary  = inputs[i+9].value;
-                tempSS.manning_agent    = inputs[i+10].value.toUpperCase();
-                tempSS.principal        = inputs[i+11].value.toUpperCase();
-                tempSS.crew_nationality = inputs[i+12].value.toUpperCase();
-                tempSS.sign_on          = inputs[i+13].value;
-                tempSS.sign_off         = inputs[i+15].value;
-                tempSS.remarks          = inputs[i+17].value.toUpperCase();
+				tempSS.imo      		= inputs[i+1].value;
+                tempSS.vessel_name      = inputs[i+2].value.toUpperCase();
+                tempSS.rank             = inputs[i+3].value;
+                tempSS.vessel_type      = inputs[i+4].value.toUpperCase();
+                tempSS.gross_tonnage    = inputs[i+5].value;
+                tempSS.engine_type      = inputs[i+6].value.toUpperCase();
+                tempSS.bhp_kw           = inputs[i+7].value;
+                tempSS.flag             = inputs[i+6].value.toUpperCase();
+                tempSS.trade            = inputs[i+7].value.toUpperCase();
+                tempSS.previous_salary  = inputs[i+10].value;
+                tempSS.manning_agent    = inputs[i+11].value.toUpperCase();
+                tempSS.principal        = inputs[i+12].value.toUpperCase();
+                tempSS.crew_nationality = inputs[i+13].value.toUpperCase();
+                tempSS.sign_on          = inputs[i+14].value;
+                tempSS.sign_off         = inputs[i+16].value;
+                tempSS.remarks          = inputs[i+18].value.toUpperCase();
                 tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
                 ss.push(tempSS);
             }

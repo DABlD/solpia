@@ -201,7 +201,8 @@ class ApplicationsController extends Controller
                 SeaService::create((array)$data);
             }
 
-            if(Vessel::where('name', $data->vessel_name)->count() == 0){
+			if(Vessel::where('imo', $data->imo)->count() == 0){
+            // if(Vessel::where('name', $data->vessel_name)->count() == 0){
                 $principal = Principal::where('name', $data->principal)->get();
                 if($principal->count()){
                     Vessel::create([
@@ -213,7 +214,8 @@ class ApplicationsController extends Controller
                         'engine'        => $data->engine_type,
                         'gross_tonnage' => $data->gross_tonnage,
                         'BHP'           => $data->bhp_kw,
-                        'trade'         => $data->trade
+                        'trade'         => $data->trade,
+						'imo'			=> $data->imo
                     ]);
                 }
                 else{
@@ -252,7 +254,8 @@ class ApplicationsController extends Controller
                         'engine'        => $data->engine_type,
                         'gross_tonnage' => $data->gross_tonnage,
                         'BHP'           => $data->bhp_kw,
-                        'trade'         => $data->trade
+                        'trade'         => $data->trade,
+						'imo'			=> $data->imo
                     ]);
                 }
             }
@@ -659,7 +662,7 @@ class ApplicationsController extends Controller
         $user = collect($req->only([
             'fname','mname','lname', 'suffix',
             'birthday','address','contact',
-            'email','gender', 'imo'
+            'email','gender'
         ]))->put('password', '123456')->put('role', 'Applicant');
 
         $user['fname'] = strtoupper($user['fname']);
@@ -709,7 +712,7 @@ class ApplicationsController extends Controller
             $data->applicant_id = $applicant->id;
             $data->birthday = $data->birthday == "" ? null : $data->birthday;
             $data->age = $data->birthday == "" ? null : now()->parse($data->birthday)->age;
-            FamilyData::create((array)$data);
+            // FamilyData::create((array)$data);
         }
 
         // SAVE SEA SERVICE
@@ -723,6 +726,7 @@ class ApplicationsController extends Controller
             SeaService::create((array)$data);
             
             if(Vessel::where('imo', $data->imo)->count() == 0){
+            // if(Vessel::where('name', $data->vessel_name)->count() == 0){
                 $principal = Principal::where('name', $data->principal)->get();
                 if($principal->count()){
                     Vessel::create([
