@@ -767,7 +767,7 @@
 
                     // SAVE DISEMBARKATION DETAILS
                     $.ajax({
-                        type: "POST",
+                        type: 'POST',
                         url: "{{ route('applications.updateLineUpContract') }}",
                         data: {
                             id: id,

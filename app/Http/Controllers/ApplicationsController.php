@@ -45,7 +45,7 @@ class ApplicationsController extends Controller
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $issuers = array_merge(
             DocumentId::pluck('issuer')->toArray(),
-            DocumentLC::pluck('issuer')->toArray(),
+            DocumentLC::pluck('issuer')->toArray()
         );
 
         $tempRegulations = DocumentLC::pluck('regulation')->toArray();
@@ -87,7 +87,7 @@ class ApplicationsController extends Controller
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $issuers = array_merge(
             DocumentId::pluck('issuer')->toArray(),
-            DocumentLC::pluck('issuer')->toArray(),
+            DocumentLC::pluck('issuer')->toArray()
         );
 
         $tempRegulations = DocumentLC::pluck('regulation')->toArray();
@@ -213,7 +213,7 @@ class ApplicationsController extends Controller
                         'engine'        => $data->engine_type,
                         'gross_tonnage' => $data->gross_tonnage,
                         'BHP'           => $data->bhp_kw,
-                        'trade'         => $data->trade,
+                        'trade'         => $data->trade
                     ]);
                 }
                 else{
@@ -252,7 +252,7 @@ class ApplicationsController extends Controller
                         'engine'        => $data->engine_type,
                         'gross_tonnage' => $data->gross_tonnage,
                         'BHP'           => $data->bhp_kw,
-                        'trade'         => $data->trade,
+                        'trade'         => $data->trade
                     ]);
                 }
             }
@@ -659,7 +659,7 @@ class ApplicationsController extends Controller
         $user = collect($req->only([
             'fname','mname','lname', 'suffix',
             'birthday','address','contact',
-            'email','gender'
+            'email','gender', 'imo'
         ]))->put('password', '123456')->put('role', 'Applicant');
 
         $user['fname'] = strtoupper($user['fname']);
@@ -722,7 +722,7 @@ class ApplicationsController extends Controller
 
             SeaService::create((array)$data);
             
-            if(Vessel::where('name', $data->vessel_name)->count() == 0){
+            if(Vessel::where('imo', $data->imo)->count() == 0){
                 $principal = Principal::where('name', $data->principal)->get();
                 if($principal->count()){
                     Vessel::create([
@@ -735,6 +735,7 @@ class ApplicationsController extends Controller
                         'gross_tonnage' => $data->gross_tonnage,
                         'BHP'           => $data->bhp_kw,
                         'trade'         => $data->trade,
+                        'imo'           => $data->imo
                     ]);
                 }
                 else{
@@ -774,6 +775,7 @@ class ApplicationsController extends Controller
                         'gross_tonnage' => $data->gross_tonnage,
                         'BHP'           => $data->bhp_kw,
                         'trade'         => $data->trade,
+                        'imo'           => $data->imo
                     ]);
                 }
             }
@@ -1024,7 +1026,7 @@ class ApplicationsController extends Controller
     }
 
     public function updateLineUpContract(Request $req){
-        LineUpContract::where('applicant_id', $req->id)->where('status', 'On Board')->update($req->all());
+        LineUpContract::where('applicant_id', $req->id)->where('status', 'On Board')->update(["reliever" => $req->reliever]);
     }
 
     function exportOnOff($id, $type){

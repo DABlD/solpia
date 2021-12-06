@@ -298,7 +298,7 @@
                             <h4 class="clabel"> Joining Date</h4>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" id="Joining_date" class="swal2-input" />
+                            <input type="text" id="joining_date" class="swal2-input" />
                         </div>
                     </div>
 
@@ -318,6 +318,8 @@
                         'font-size': '28px',
                         'color': '#00c0ef'
                     });
+
+                    // $('#joining_date').flatpickr()
 
                     $('#rank').select2({
                         placeholder: 'Select Rank',

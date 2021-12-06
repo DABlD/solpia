@@ -38,7 +38,7 @@ class DatatablesController extends Controller
 	public function recruitments(Request $req){
 		$applicants = TempApplicant::select(
 							'temp_applicants.id',
-							'avatar', 'fname', 'lname', 'contact', 'birthday',
+							'avatar', 'fname', 'lname', 'contact', 'birthday'
 						)
 						->join('temp_users as u', 'u.id', '=', 'temp_applicants.user_id')
 						->get();
@@ -81,6 +81,9 @@ class DatatablesController extends Controller
 	}
 
 	public function applications2(Request $req){
+	// public function applications(Request $req){
+		DB::connection()->enableQueryLog();
+		
 		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
 		$status = auth()->user()->status;
 
@@ -94,11 +97,14 @@ class DatatablesController extends Controller
 		$applicants = Applicant::select(
 							'applicants.id', 'applicants.remarks',
 							'avatar', 'fname', 'lname', 'contact', 'birthday',
-							'pa.status', 'pa.rank_id', 'pa.vessel_id',
+							'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
+							'vessel_name as last_vessel', 'sign_off', 'rank'
 						)
 						->join('users as u', 'u.id', '=', 'applicants.user_id')
-						->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
+						->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+						->join('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
 						->where([$condition, ['u.deleted_at', '=', null]])
+						->groupBy('id')
 						->get();
 
 		$ranks = [];
@@ -119,28 +125,42 @@ class DatatablesController extends Controller
 			$applicant->actions = $applicant->actions;
 			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
 
-			$vessels = SeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
+			// $vessels = SeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
 
-			if($vessels->count()){
-				$applicant->last_vessel = $vessels->last()->vessel_name;
+			$applicant->last_vessel = $applicant->last_vessel == "" ? "-----" : $applicant->last_vessel;
+
+			if($applicant->pa_s == "Lined-Up"){
+			    $applicant->rank = $ranks[$applicant->pa_ri];
+			    $applicant->vessel = $vesselszxc[$applicant->pa_vid];
 			}
 			else{
-				$applicant->last_vessel = "-----";
-			}
-
-			if($applicant->pro_app->status == "Lined-Up"){
-			    $applicant->rank = $ranks[$applicant->pro_app->rank_id];
-			    $applicant->vessel = $vesselszxc[$applicant->pro_app->vessel_id];
-			}
-			else{
-			    if($vessels->count()){
-			        $name = $vessels->last()->rank;
-			        $applicant->rank = $name != "" ? ($ranks2[$name] ?? 'N/A') : 'N/A';
+			    if($applicant->last_vessel != ""){
+			        $applicant->rank = $applicant->rank != "" ? ($ranks2[$applicant->rank] ?? 'N/A') : 'N/A';
 			    }
 			    else{
 			    	$applicant->rank = "N/A";
 			    }
 			}
+			// if($vessels->count()){
+			// 	$applicant->last_vessel = $vessels->last()->vessel_name;
+			// }
+			// else{
+			// 	$applicant->last_vessel = "-----";
+			// }
+
+			// if($applicant->pro_app->status == "Lined-Up"){
+			//     $applicant->rank = $ranks[$applicant->pro_app->rank_id];
+			//     $applicant->vessel = $vesselszxc[$applicant->pro_app->vessel_id];
+			// }
+			// else{
+			//     if($vessels->count()){
+			//         $name = $vessels->last()->rank;
+			//         $applicant->rank = $name != "" ? ($ranks2[$name] ?? 'N/A') : 'N/A';
+			//     }
+			//     else{
+			//     	$applicant->rank = "N/A";
+			//     }
+			// }
 		}
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);

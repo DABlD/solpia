@@ -162,6 +162,11 @@
 
 @push('after-scripts')
 	<script>
+        swal({
+            title: 'Loading',
+            timer: 1500
+        });
+        swal.showLoading();
 		var table = $('#table').DataTable({
             serverSide: true,
             ajax: {
@@ -173,7 +178,7 @@
             },
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'status', name: 'status' },
+                { data: 'pa_s', name: 'pa_s' },
                 { data: 'avatar', name: 'avatar' },
                 { data: 'rank', name: 'rank' },
                 { data: 'lname', name: 'lname' },
@@ -270,7 +275,8 @@
 
                 tooltip();
             	initializeActions();
-            },
+            }
+
             // order: [ [0, 'desc'] ],
         });
 
