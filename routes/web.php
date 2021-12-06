@@ -198,6 +198,7 @@ Route::group([
 		// DATATABLE ROUTES
 		Route::post('datatables/recruitments', 'DatatablesController@recruitments')->name('datatables.recruitments');
 		Route::post('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
+		Route::get('datatables/applications2', 'DatatablesController@applications2');
 		
 		Route::post('datatables/users', 'DatatablesController@users')->name('datatables.users');
 		Route::post('datatables/processedApplicant/{id}', 'DatatablesController@processedApplicant')->name('datatables.processedApplicant');

@@ -55,6 +55,7 @@ class DatatablesController extends Controller
 			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->actions;
 			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
+			$applicant->status = $applicant->pa_s;
 
 			$vessels = TempSeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
 
@@ -72,13 +73,14 @@ class DatatablesController extends Controller
 		        $applicant->rank = $rank[$name] ?? 'N/A';
 		    }
 		}
-
+		
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
 	}
 
-	public function applications(Request $req){
+	public function applications2(Request $req){
+	// public function applications(Request $req){
 		DB::connection()->enableQueryLog();
-
+		
 		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
 		$status = auth()->user()->status;
 
@@ -201,9 +203,9 @@ class DatatablesController extends Controller
 		}
 
 		$vessels = Vessel::where([$condition, ['status', '=', 'ACTIVE']])
-						->join('principals as p', 'p.id', '=', 'vessels.principal_id')
-						->select('vessels.*', 'p.name as pname')
-						->get();
+			->join('principals as p', 'p.id', '=', 'vessels.principal_id')
+			->select('vessels.*', 'p.name as pname')
+			->get();
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		$principals = Principal::where('active', 1)->pluck('id')->toArray();
@@ -218,6 +220,92 @@ class DatatablesController extends Controller
 		}
 
     	return Datatables::of($vessels)->rawColumns(['actions'])->make(true);
+	}
+	
+	public function applications(Request $req){
+		DB::connection()->enableQueryLog();
+
+		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
+		$status = auth()->user()->status;
+
+		if($status == 1){
+		    $condition = ['u.applicant', '>', 0];
+		}
+		elseif($status > 1){
+		    $condition = ['u.applicant', '=', $status];
+		}
+		
+		$applicants = Applicant::select(
+							'applicants.id', 'applicants.remarks',
+							'avatar', 'fname', 'lname', 'contact', 'birthday',
+							'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
+							'vessel_name as last_vessel', 'sign_off', 'rank'
+						)
+						->join('users as u', 'u.id', '=', 'applicants.user_id')
+						->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+						->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
+						->where([$condition, ['u.deleted_at', '=', null]])
+						->groupBy('id')
+						->get();
+		
+		$ranks = [];
+		$ranks2 = [];
+		$temps = Rank::select('id', 'abbr', 'name')->get();
+
+		foreach($temps as $temp){
+			$ranks[$temp->id] = $temp->abbr;
+			$ranks2[$temp->name] = $temp->abbr;
+		}
+
+		$vesselszxc = Vessel::pluck('name', 'id');
+
+		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
+		foreach($applicants as $key => $applicant){
+			$applicant->remarks = json_decode($applicant->remarks);
+			$applicant->row = ($key + 1);
+			$applicant->actions = $applicant->actions;
+			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
+			$applicant->status = $applicant->pa_s;
+
+			// $vessels = SeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
+
+			$applicant->last_vessel = $applicant->last_vessel == "" ? "-----" : $applicant->last_vessel;
+
+			if($applicant->pa_s == "Lined-Up"){
+			    $applicant->rank = $ranks[$applicant->pa_ri];
+			    $applicant->vessel = $vesselszxc[$applicant->pa_vid];
+			}
+			else{
+			    if($applicant->last_vessel != ""){
+			        $applicant->rank = $applicant->rank != "" ? ($ranks2[$applicant->rank] ?? 'N/A') : 'N/A';
+			    }
+			    else{
+			    	$applicant->rank = "N/A";
+			    }
+			}
+			// if($vessels->count()){
+			// 	$applicant->last_vessel = $vessels->last()->vessel_name;
+			// }
+			// else{
+			// 	$applicant->last_vessel = "-----";
+			// }
+
+			// if($applicant->pro_app->status == "Lined-Up"){
+			//     $applicant->rank = $ranks[$applicant->pro_app->rank_id];
+			//     $applicant->vessel = $vesselszxc[$applicant->pro_app->vessel_id];
+			// }
+			// else{
+			//     if($vessels->count()){
+			//         $name = $vessels->last()->rank;
+			//         $applicant->rank = $name != "" ? ($ranks2[$name] ?? 'N/A') : 'N/A';
+			//     }
+			//     else{
+			//     	$applicant->rank = "N/A";
+			//     }
+			// }
+		}
+		
+    	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
 	}
 
 	public function auditTrail(){
