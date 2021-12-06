@@ -22,11 +22,10 @@
         `;
 
         function addSS(){
-            imoString == "" ? getVessels() : addSS2();
+            // imoString == "" ? getVessels() : addSS2();
         }
 
         function addSS2(){
-            console.log('asdzzz');
             let count = parseInt($('.ssCount')[0].innerText) + 1;
 
             let string = `

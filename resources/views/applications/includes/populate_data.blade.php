@@ -264,27 +264,27 @@
 				}, 1000);
 				
 				length = sss.length;
-				for(let ctr = 0; ctr < length; ctr++){
-					addSS();
-				}
-
-				// length ? $('[name="imo1"]').select2('open') : '';
-
 				swal({
 					title: 'Loading Sea Services...',
 					allowOutsideClick: false,
 					allowEscapeKey: false,
 				});
 				swal.showLoading();
-
+				
+				getVessels();
 				setTimeout(() => {
+					for(let ctr = 0; ctr < length; ctr++){
+						addSS2();
+					}
+
+					// length ? $('[name="imo1"]').select2('open') : '';
 				
 					index = 0;
 					console.log(length);
 					for(let ctr = 0; ctr < length; ctr++){
 						inputs = $('#sea-services input, #sea-services select');
 						i = (index * 19);
-
+						
 						$(inputs[i]).val(sss[ctr].imo).trigger('change');
 						// checkIfExisting($(inputs[i+1]), sss[ctr].vessel_name);
 						$(inputs[i+1]).val(sss[ctr].vessel_name);
