@@ -20,9 +20,11 @@
                 @endforeach
             @endforeach
         `;
-
+		
+		// INIT GET VESSELS
+		getVessels(true);
         function addSS(){
-            // imoString == "" ? getVessels() : addSS2();
+            imoString == "" ? getVessels(false) : addSS2();
         }
 
         function addSS2(){
@@ -319,7 +321,10 @@
                             }
                         }
                     });
-                    // addSS2();
+					console.log(flag);
+					if(!flag){
+						addSS2();
+					}
                 }
             });
         }

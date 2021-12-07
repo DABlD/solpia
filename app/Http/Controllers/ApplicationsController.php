@@ -391,8 +391,8 @@ class ApplicationsController extends Controller
             'platform'  => Browser::platformName()
         ]);
 
-        // return redirect()->route('applications.index');
-        return back();
+        return redirect()->route('applications.index');
+        // return back();
     }
 
     public function clearData($old, $new, $table){
