@@ -175,7 +175,8 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-briefcase')
 			->defaults('name', 'Job Openings')
-			->defaults('roles', array('Admin', 'Crewing Manager', 'Crewing Officer'))
+			// ->defaults('roles', array('Admin', 'Crewing Manager', 'Crewing Officer'))
+			->defaults('roles', array('Admin', 'Crewing Manager'))
 			->name($name . '.index')
 			->defaults('href', $name);
 			
