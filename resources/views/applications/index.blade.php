@@ -678,10 +678,12 @@
             });
 
             // AFTER FINISHED INIT
-            $('.preloader').fadeOut();
-            if(swal.isVisible()){
-                swal.close();
-            }
+            setTimeout(() => {
+                $('.preloader').fadeOut();
+                if(swal.isVisible()){
+                    swal.close();
+                }
+            }, 10000);
 	    }
 
         function showFiles(id, name, files){
