@@ -290,14 +290,14 @@
             }
         });
 
-        // table.on('draw', () => {
-        // 	setTimeout(() => {
-        // 		$('.preloader').fadeOut();
-        //         if(swal.isVisible()){
-        //             swal.close();
-        //         }
-        // 	}, 800);
-        // });
+        table.on('draw', () => {
+        	setTimeout(() => {
+        		$('.preloader').fadeOut();
+                if(swal.isVisible()){
+                    swal.close();
+                }
+        	}, 800);
+        });
 
         function initializeActions(){
 	    	$('[data-original-title="Export"]').on('click', application => {
@@ -676,14 +676,6 @@
                     }
                 })
             });
-
-            // AFTER FINISHED INIT
-            setTimeout(() => {
-                $('.preloader').fadeOut();
-                if(swal.isVisible()){
-                    swal.close();
-                }
-            }, 10000);
 	    }
 
         function showFiles(id, name, files){
