@@ -25,11 +25,11 @@
 
 	<tr>
 		<td colspan="16">Personal Record</td>
-		<td colspan="6">(Date today?)</td>
+		<td colspan="6"></td>
 	</tr>
 
 	<tr>
-		<td rowspan="23">P<span></span><span></span>E<span></span><span></span>R<span></span><span></span>S<span></span><span></span>O<span></span><span></span>N<span></span><span></span>A<span></span><span></span>L<span></span><span></span><span></span><span></span>R<span></span><span></span>E<span></span><span></span>C<span></span><span></span>O<span></span><span></span>R<span></span><span></span>D</td>
+		<td rowspan="23">P<span></span>E<span></span>R<span></span>S<span></span>O<span></span>N<span></span>A<span></span>L<span></span>R<span></span>E<span></span>C<span></span>O<span></span>R<span></span>D</td>
 		<td colspan="3">Rank</td>
 		<td colspan="9">{{ $applicant->rank->name ?? '---' }}</td>
 		<td colspan="2">VESSEL</td>
@@ -151,7 +151,20 @@
 		<td colspan="2">Remarks</td>
 	</tr>
 
+	@php
+		$ctr = 0;
+	@endphp
+
 	@foreach($applicant->sea_service as $service)
+		@php
+			if($ctr == 12){
+				break;
+			}
+			else{
+				$ctr++;
+			}
+		@endphp
+
 		<tr>
 			<td colspan="3"></td>
 			<td>{{ $applicant->ranks[$service->rank] }}</td>
@@ -291,7 +304,7 @@
 			FIT FOR DUTY
 			<span></span><span></span><span></span>
 			(
-			<span></span><span></span><span></span><span></span>
+			<span></span><span></span>✔<span></span><span></span>
 			)
 		</td>
 	</tr>

@@ -240,7 +240,7 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A35:A36')->getFont()->getColor()->setRGB('FF0000');
 
                 // TEXT ROTATION
-                $event->sheet->getDelegate()->getStyle('A3')->getAlignment()->setTextRotation(-90);
+                $event->sheet->getDelegate()->getStyle('A3')->getAlignment()->setTextRotation(90);
                 $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(-90);
 
                 // SET PAGE BREAK PREVIEW
@@ -312,7 +312,7 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $h['wrap'] = [
                     'E7', 'B11', 'M13', 'N8', 'U14:U25', 'L14:L25', 'I14:I25', 'F14:F25',
-                    'A26:V26', 'A29:A36', 'A41:E52', 'O42:O52', 'J42:J52'
+                    'A26:V26', 'A29:A36', 'A41:E52', 'O42:O52', 'J42:J52', 'S14:T25', 'A3'
                 ];
 
                 // SHRINK TO FIT
