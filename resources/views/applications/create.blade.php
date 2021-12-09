@@ -303,8 +303,8 @@
                 tempSS.gross_tonnage    = inputs[i+5].value;
                 tempSS.engine_type      = inputs[i+6].value.toUpperCase();
                 tempSS.bhp_kw           = inputs[i+7].value;
-                tempSS.flag             = inputs[i+6].value.toUpperCase();
-                tempSS.trade            = inputs[i+7].value.toUpperCase();
+                tempSS.flag             = inputs[i+8].value.toUpperCase();
+                tempSS.trade            = inputs[i+9].value.toUpperCase();
                 tempSS.previous_salary  = inputs[i+10].value;
                 tempSS.manning_agent    = inputs[i+11].value.toUpperCase();
                 tempSS.principal        = inputs[i+12].value.toUpperCase();
