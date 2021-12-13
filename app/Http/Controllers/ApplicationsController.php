@@ -524,6 +524,9 @@ class ApplicationsController extends Controller
                 $name = $applicant->sea_service->sortByDesc('sign_off')->first()->rank;
                 $applicant->rank = Rank::where('name', $name)->first();
             }
+			else{
+				$applicant->rank = null;
+			}
         }
 
         if(in_array($type, ['western'])){
@@ -575,7 +578,7 @@ class ApplicationsController extends Controller
         ]);
 
         Statistic::where('name', 'export')->increment('count');
-
+		
         return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
     }
 

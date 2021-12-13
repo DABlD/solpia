@@ -388,10 +388,12 @@
 
 	@php
 		$docu = false;
-		if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
-		{
-			$name = 'COC';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		if($applicant->rank){				
+			if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
+			{
+				$name = 'COC';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
 		}
 	@endphp
 
@@ -406,10 +408,12 @@
 
 	@php
 		$docu = false;
-		if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
-		{
-			$name = 'GMDSS/GOC';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		if($applicant->rank){
+			if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
+			{
+				$name = 'GMDSS/GOC';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
 		}
 	@endphp
 
@@ -423,15 +427,17 @@
 
 	@php
 		$docu = false;
-		if(($applicant->rank->id >= 1 && $applicant->rank->id <= 8) || ($applicant->rank->id >= 15 && $applicant->rank->id <= 21))
-		{
-			$temp = 'LICENSE';
-			$docu = false;
+		if($applicant->rank){
+			if(($applicant->rank->id >= 1 && $applicant->rank->id <= 8) || ($applicant->rank->id >= 15 && $applicant->rank->id <= 21))
+			{
+				$temp = 'LICENSE';
+				$docu = false;
 
-			foreach($applicant->document_flag as $document){
-			    if($document->country == "Korea" && $document->type == $temp){
-			        $docu = $document;
-			    }
+				foreach($applicant->document_flag as $document){
+					if($document->country == "Korea" && $document->type == $temp){
+						$docu = $document;
+					}
+				}
 			}
 		}
 	@endphp
@@ -459,10 +465,12 @@
 
 	@php
 		$docu = false;
-		if(($applicant->rank->id >= 1 && $applicant->rank->id <= 8) || ($applicant->rank->id >= 15 && $applicant->rank->id <= 21) || in_array($applicant->rank->id, [9, 10, 15]))
-		{
-			$name = 'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		if($applicant->rank){
+			if(($applicant->rank->id >= 1 && $applicant->rank->id <= 8) || ($applicant->rank->id >= 15 && $applicant->rank->id <= 21) || in_array($applicant->rank->id, [9, 10, 15]))
+			{
+				$name = 'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
 		}
 	@endphp
 
@@ -476,22 +484,24 @@
 
 	@php
 		$docu = false;
-		if(in_array($applicant->rank->id, [9, 10, 11, 15, 16, 17]))
-		{
-			foreach($applicant->document_lc as $document){
-				$regulation = json_decode($document->regulation);
-				
-				if($$applicant->rank->id >= 9 && $$applicant->rank->id <= 11){
-					$temp = 'II/4';
-				}
-				elseif($$applicant->rank->id >= 15 && $$applicant->rank->id <= 17){
-					$temp = 'III/4';
-				}
+		if($applicant->rank){
+			if(in_array($applicant->rank->id, [9, 10, 11, 15, 16, 17]))
+			{
+				foreach($applicant->document_lc as $document){
+					$regulation = json_decode($document->regulation);
+					
+					if($applicant->rank->id >= 9 && $applicant->rank->id <= 11){
+						$temp = 'II/4';
+					}
+					elseif($applicant->rank->id >= 15 && $applicant->rank->id <= 17){
+						$temp = 'III/4';
+					}
 
-			    if(in_array($temp, $regulation)){
-			        $docu = $document;
-			        break;
-			    }
+					if(in_array($temp, $regulation)){
+						$docu = $document;
+						break;
+					}
+				}
 			}
 		}
 	@endphp
@@ -506,15 +516,17 @@
 
 	@php
 		$docu = false;
-		if($applicant->rank->id >= 1 && $applicant->rank->id <= 8)
-		{
-			$temp = 'LICENSE';
-			$docu = false;
+		if($applicant->rank){
+			if($applicant->rank->id >= 1 && $applicant->rank->id <= 8)
+			{
+				$temp = 'LICENSE';
+				$docu = false;
 
-			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == $temp){
-			        $docu = $document;
-			    }
+				foreach($applicant->document_flag as $document){
+					if($document->country == "Panama" && $document->type == $temp){
+						$docu = $document;
+					}
+				}
 			}
 		}
 	@endphp
@@ -542,24 +554,26 @@
 
 	@php
 		$docu = false;
-		if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
-		{
-			$docu = 'SSBT WITH BRM';
-			$docu = isset($applicant->document_lc->$docu) ? $applicant->document_lc->{$docu} : false;
+		if($applicant->rank){
+			if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
+			{
+				$docu = 'SSBT WITH BRM';
+				$docu = isset($applicant->document_lc->$docu) ? $applicant->document_lc->{$docu} : false;
 
-			if(!$docu){
-				$docu = 'SSBT';
-				$docu = isset($applicant->document_lc->{$docu}) ? $applicant->document_lc->{$docu} : false;
-			}
+				if(!$docu){
+					$docu = 'SSBT';
+					$docu = isset($applicant->document_lc->{$docu}) ? $applicant->document_lc->{$docu} : false;
+				}
 
-			if(!$docu){
-				$docu = 'BRM';
-				$docu = isset($applicant->document_lc->{$docu}) ? $applicant->document_lc->{$docu} : false;
-			}
+				if(!$docu){
+					$docu = 'BRM';
+					$docu = isset($applicant->document_lc->{$docu}) ? $applicant->document_lc->{$docu} : false;
+				}
 
-			if(!$docu){
-				$docu = 'BTM';
-				$docu = isset($applicant->document_lc->{$docu}) ? $applicant->document_lc->{$docu} : false;
+				if(!$docu){
+					$docu = 'BTM';
+					$docu = isset($applicant->document_lc->{$docu}) ? $applicant->document_lc->{$docu} : false;
+				}
 			}
 		}
 	@endphp
@@ -574,10 +588,12 @@
 
 	@php
 		$docu = false;
-		if(($applicant->rank->id >= 5 && $applicant->rank->id <= 8) || ($applicant->rank->id >= 15 && $applicant->rank->id <= 21))
-		{
-			$name = 'ERS WITH ERM';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		if($applicant->rank){
+			if(($applicant->rank->id >= 5 && $applicant->rank->id <= 8) || ($applicant->rank->id >= 15 && $applicant->rank->id <= 21))
+			{
+				$name = 'ERS WITH ERM';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
 		}
 	@endphp
 
@@ -591,10 +607,12 @@
 
 	@php
 		$docu = false;
-		if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
-		{
-			$name = 'ECDIS';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		if($applicant->rank){
+			if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
+			{
+				$name = 'ECDIS';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
 		}
 	@endphp
 

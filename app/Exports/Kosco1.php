@@ -30,7 +30,7 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
     	foreach($this->data->sea_service as $ss){
     		if($ss->vessel_name != ""){
-    			$ss->year_built = Vessel::where('name', $ss->vessel_name)->first()->year_build;
+    			$ss->year_built = Vessel::where('name', $ss->vessel_name)->first()->year_build ?? null;
     		}
     		else{
     			$ss->year_built = null;

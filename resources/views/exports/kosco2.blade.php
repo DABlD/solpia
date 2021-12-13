@@ -55,10 +55,12 @@
 
 	@php
 		$docu = false;
-		if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
-		{
-			$name = 'COC';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		if($applicant->rank){
+			if($applicant->rank->id >= 1 && $applicant->rank->id <= 4)
+			{
+				$name = 'COC';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
 		}
 	@endphp
 
@@ -153,10 +155,10 @@
 	<tr>
 		<td>{{ $docu1 ? $checkDate2($docu1->expiry_date, 'E') : 'N/A' }}</td>
 		<td colspan="2">{{ $docu2 ? $checkDate2($docu2->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="2">{{ $docu3 ? $checkDate2($docu2->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="2">{{ $docu4 ? $checkDate2($docu2->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="2">{{ $docu5 ? $checkDate2($docu2->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="3">{{ $docu6 ? $checkDate2($docu2->expiry_date, 'E') : 'FOR MEDICAL' }}</td>
+		<td colspan="2">{{ $docu3 ? $checkDate2($docu3->expiry_date, 'E') : 'N/A' }}</td>
+		<td colspan="2">{{ $docu4 ? $checkDate2($docu4->expiry_date, 'E') : 'N/A' }}</td>
+		<td colspan="2">{{ $docu5 ? $checkDate2($docu5->expiry_date, 'E') : 'N/A' }}</td>
+		<td colspan="3">{{ $docu6 ? $checkDate2($docu6->expiry_date, 'E') : 'FOR MEDICAL' }}</td>
 	</tr>
 
 	{{-- 2nd 2 ROW --}}
@@ -220,10 +222,10 @@
 	<tr>
 		<td>{{ $docu1 ? $checkDate2($docu1->expiry_date, 'E') : 'N/A' }}</td>
 		<td colspan="2">{{ $docu2 ? $checkDate2($docu2->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="2">{{ $docu3 ? $checkDate2($docu2->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="2">{{ $docu4 ? $checkDate2($docu2->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="2">{{ $docu5 ? $checkDate2($docu2->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="3">{{ $docu6 ? $checkDate2($docu2->expiry_date, 'E') : 'FOR MEDICAL' }}</td>
+		<td colspan="2">{{ $docu3 ? $checkDate2($docu3->expiry_date, 'E') : 'N/A' }}</td>
+		<td colspan="2">{{ $docu4 ? $checkDate2($docu4->expiry_date, 'E') : 'N/A' }}</td>
+		<td colspan="2">{{ $docu5 ? $checkDate2($docu5->expiry_date, 'E') : 'N/A' }}</td>
+		<td colspan="3">{{ $docu6 ? $checkDate2($docu6->expiry_date, 'E') : 'FOR MEDICAL' }}</td>
 	</tr>
 
 	<tr>

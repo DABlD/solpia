@@ -20,7 +20,6 @@ class Kosco implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-
         array_push($sheets, new Kosco1($this->applicant, $this->type . '1'));
         array_push($sheets, new Kosco2($this->applicant, $this->type . '2'));
 
