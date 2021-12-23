@@ -715,7 +715,7 @@ class ApplicationsController extends Controller
             $data->applicant_id = $applicant->id;
             $data->birthday = $data->birthday == "" ? null : $data->birthday;
             $data->age = $data->birthday == "" ? null : now()->parse($data->birthday)->age;
-            // FamilyData::create((array)$data);
+            FamilyData::create((array)$data);
         }
 
         // SAVE SEA SERVICE
