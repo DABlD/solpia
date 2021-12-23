@@ -8,12 +8,12 @@ function toDateTime(timestamp){
 
 // SWAL
 
-function swalNotification(type, title, text = ""){
+function swalNotification(type, title, text = "", timer = null){
 	swal({
 		type: type,
 		title: title,
 		text: text,
-		timer: 800,
+		timer: timer ?? 800,
 		showConfirmButton: false,
 	});
 }

@@ -676,6 +676,38 @@
                     }
                 })
             });
+
+            $('[data-original-title="Delete Applicant"]').on('click', application => {
+                let id = $(application.target).data('id');
+
+                swal({
+                    type: 'warning',
+                    title: 'Are you sure you want to delete this applicant?',
+                    text: "His data will still be stored in the database but you will not be able to interact with it.",
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b',
+                    allowOutsideClick: false,
+                    width: '80vh'
+                }).then(result => {
+                    if(result.value){
+                        $.ajax({
+                            type: 'POST',
+                            url: '{{ route('applications.updateData') }}',
+                            data:{
+                                id: id,
+                                deleted_at: moment().format("YYYY-MM-DD hh:mm:ss")
+                            },
+                            success: result => {
+                                console.log(result);
+                                if(result){
+                                    swalNotification('success', 'Application Successfully Deleted');
+                                    table.ajax.reload(null, false);
+                                }
+                            }
+                        })
+                    }
+                })
+            });
 	    }
 
         function showFiles(id, name, files){
