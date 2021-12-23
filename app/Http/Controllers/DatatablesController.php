@@ -223,7 +223,8 @@ class DatatablesController extends Controller
 	}
 	
 	public function applications(Request $req){
-		DB::connection()->enableQueryLog();
+		// DB::connection()->enableQueryLog();
+		// dd($req->draw, $req->length);
 
 		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
 		$status = auth()->user()->status;
@@ -260,29 +261,35 @@ class DatatablesController extends Controller
 		$vesselszxc = Vessel::pluck('name', 'id');
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
+
 		foreach($applicants as $key => $applicant){
-			$applicant->remarks = json_decode($applicant->remarks);
-			$applicant->row = ($key + 1);
-			$applicant->actions = $applicant->actions;
-			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
-			$applicant->status = $applicant->pa_s;
+			if((($key + 1) >= (($req->draw-1) * $req->length) + 1) && (($key + 1)) <= ($req->draw * $req->length)){
+				$applicant->remarks = json_decode($applicant->remarks);
+				$applicant->row = ($key + 1);
+				$applicant->actions = $applicant->actions;
+				$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
+				$applicant->status = $applicant->pa_s;
+
+				$applicant->last_vessel = $applicant->last_vessel == "" ? "-----" : $applicant->last_vessel;
+
+				if($applicant->pa_s == "Lined-Up"){
+				    $applicant->rank = $ranks[$applicant->pa_ri];
+				    $applicant->vessel = $vesselszxc[$applicant->pa_vid];
+				}
+				else{
+				    if($applicant->last_vessel != ""){
+				        $applicant->rank = $applicant->rank != "" ? ($ranks2[$applicant->rank] ?? 'N/A') : 'N/A';
+				    }
+				    else{
+				    	$applicant->rank = "N/A";
+				    }
+				}
+			}
+
+			//-----------------------------------------
 
 			// $vessels = SeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
 
-			$applicant->last_vessel = $applicant->last_vessel == "" ? "-----" : $applicant->last_vessel;
-
-			if($applicant->pa_s == "Lined-Up"){
-			    $applicant->rank = $ranks[$applicant->pa_ri];
-			    $applicant->vessel = $vesselszxc[$applicant->pa_vid];
-			}
-			else{
-			    if($applicant->last_vessel != ""){
-			        $applicant->rank = $applicant->rank != "" ? ($ranks2[$applicant->rank] ?? 'N/A') : 'N/A';
-			    }
-			    else{
-			    	$applicant->rank = "N/A";
-			    }
-			}
 			// if($vessels->count()){
 			// 	$applicant->last_vessel = $vessels->last()->vessel_name;
 			// }
@@ -304,7 +311,7 @@ class DatatablesController extends Controller
 			//     }
 			// }
 		}
-		
+
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
 	}
 

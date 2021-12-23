@@ -297,7 +297,7 @@
 						inputs[i+7].value       = sss[ctr].flag;
 						inputs[i+8].value       = sss[ctr].trade;
 						inputs[i+9].value       = sss[ctr].previous_salary;
-						inputs[i+10].value       = sss[ctr].manning_agent;
+						inputs[i+10].value      = sss[ctr].manning_agent;
 						inputs[i+11].value      = sss[ctr].principal;
 						inputs[i+12].value      = sss[ctr].crew_nationality;
 
