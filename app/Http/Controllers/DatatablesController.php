@@ -231,6 +231,7 @@ class DatatablesController extends Controller
 
 		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
 		$status = auth()->user()->status;
+		$search = $req->search["value"];
 
 		if($status == 1){
 		    $condition = ['u.applicant', '>', 0];
@@ -242,13 +243,13 @@ class DatatablesController extends Controller
 		$applicants = Applicant::select(
 							'applicants.id', 'applicants.remarks',
 							'avatar', 'fname', 'lname', 'contact', 'birthday',
-							'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
+							'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
 							// 'vessel_name as last_vessel', 'sign_off', 'rank'
 						)
 						->join('users as u', 'u.id', '=', 'applicants.user_id')
 						->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 						// ->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
-						// ->where([$condition, ['u.deleted_at', '=', null]])
+						->where([$condition, ['u.deleted_at', '=', null]])
 						->groupBy('id')
 						->get();
 		
@@ -267,40 +268,91 @@ class DatatablesController extends Controller
 		$start = $req->start;
 		$end = $start + $req->length;
 
-		for($i = $start; $i < $end && $i <= (sizeof($applicants) - 1);$i++){
-			// Getting sea service
-			$ss = SeaService::where('applicant_id', $applicants[$i]->id)->latest('sign_off')->first();
-			if($ss){
-				$applicants[$i]->last_vessel = $ss->vessel_name;
-				$applicants[$i]->sign_off = $ss->sign_off;
-				$applicants[$i]->rank = $ss->rank;
-			}
-			// end
-			
-			$applicants[$i]->remarks = json_decode($applicants[$i]->remarks);
-			$applicants[$i]->row = $i+1;
-			$applicants[$i]->actions = $applicants[$i]->actions;
-			$applicants[$i]->age = $applicants[$i]->birthday ? now()->parse($applicants[$i]->birthday)->diffInYears(now()) : '-';
-			$applicants[$i]->status = $applicants[$i]->pa_s;
+		if($search){
+			foreach($applicants as $i => $applicant){
+				$bool = false;
 
-			$applicants[$i]->last_vessel = $applicants[$i]->last_vessel == "" ? "-----" : $applicants[$i]->last_vessel;
+				if(str_starts_with($applicant->lname, $search)){
+					$bool = true;
+				}
+				else if(str_starts_with($applicant->fname, $search)){
+					$bool = true;
+				}
+				else if(str_starts_with($applicant->remarks, $search)){
+					$bool = true;
+				}
+				else if(str_starts_with($applicant->pa_s, $search)){
+					$bool = true;
+				}
 
-			if($applicants[$i]->pa_s == "Lined-Up"){
-			    $applicants[$i]->rank = $ranks[$applicants[$i]->pa_ri];
-			    $applicants[$i]->vessel = $vesselszxc[$applicants[$i]->pa_vid];
+				if($bool){
+					$ss = SeaService::where('applicant_id', $applicant->id)->latest('sign_off')->first();
+					if($ss){
+						$applicant->last_vessel = $ss->vessel_name;
+						$applicant->sign_off = $ss->sign_off;
+						$applicant->rank = $ss->rank;
+					}
+					// end
+					
+					$applicant->remarks = json_decode($applicant->remarks);
+					$applicant->row = $i+1;
+					$applicant->actions = $applicant->actions;
+					$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
+					$applicant->status = $applicant->pa_s;
+
+					$applicant->last_vessel = $applicant->last_vessel == "" ? "-----" : $applicant->last_vessel;
+
+					if($applicant->pa_s == "Lined-Up"){
+					    $applicant->rank = $ranks[$applicant->pa_ri];
+					    $applicant->vessel = $vesselszxc[$applicant->pa_vid];
+					}
+					else{
+					    if($applicant->last_vessel != ""){
+					        $applicant->rank = $applicant->rank != "" ? ($ranks2[$applicant->rank] ?? 'N/A') : 'N/A';
+					    }
+					    else{
+					    	$applicant->rank = "N/A";
+					    }
+					}
+				}
 			}
-			else{
-			    if($applicants[$i]->last_vessel != ""){
-			        $applicants[$i]->rank = $applicants[$i]->rank != "" ? ($ranks2[$applicants[$i]->rank] ?? 'N/A') : 'N/A';
-			    }
-			    else{
-			    	$applicants[$i]->rank = "N/A";
-			    }
+		}
+		else{
+			for($i = $start; ($i < $end && $i <= (sizeof($applicants) - 1)); $i++){
+				// Getting sea service
+				$ss = SeaService::where('applicant_id', $applicants[$i]->id)->latest('sign_off')->first();
+				if($ss){
+					$applicants[$i]->last_vessel = $ss->vessel_name;
+					$applicants[$i]->sign_off = $ss->sign_off;
+					$applicants[$i]->rank = $ss->rank;
+				}
+				// end
+				
+				$applicants[$i]->remarks = json_decode($applicants[$i]->remarks);
+				$applicants[$i]->row = $i+1;
+				$applicants[$i]->actions = $applicants[$i]->actions;
+				$applicants[$i]->age = $applicants[$i]->birthday ? now()->parse($applicants[$i]->birthday)->diffInYears(now()) : '-';
+				$applicants[$i]->status = $applicants[$i]->pa_s;
+
+				$applicants[$i]->last_vessel = $applicants[$i]->last_vessel == "" ? "-----" : $applicants[$i]->last_vessel;
+
+				if($applicants[$i]->pa_s == "Lined-Up"){
+				    $applicants[$i]->rank = $ranks[$applicants[$i]->pa_ri];
+				    $applicants[$i]->vessel = $vesselszxc[$applicants[$i]->pa_vid];
+				}
+				else{
+				    if($applicants[$i]->last_vessel != ""){
+				        $applicants[$i]->rank = $applicants[$i]->rank != "" ? ($ranks2[$applicants[$i]->rank] ?? 'N/A') : 'N/A';
+				    }
+				    else{
+				    	$applicants[$i]->rank = "N/A";
+				    }
+				}
 			}
 		}
 
 		// dd($time_end - $time_start, $applicants);
-		// dd(Datatables::of($applicants)->rawColumns(['actions'])->make(true));
+		// dd(Datatables::of($applicants)->rawColumns(['actions'])->setFilteredRecords(100)->make(true));
 		// die;
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
