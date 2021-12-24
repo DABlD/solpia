@@ -272,16 +272,16 @@ class DatatablesController extends Controller
 			foreach($applicants as $i => $applicant){
 				$bool = false;
 
-				if(str_starts_with($applicant->lname, $search)){
+				if(stringStartsWith($applicant->lname, $search)){
 					$bool = true;
 				}
-				else if(str_starts_with($applicant->fname, $search)){
+				else if(stringStartsWith($applicant->fname, $search)){
 					$bool = true;
 				}
-				else if(str_starts_with($applicant->remarks, $search)){
+				else if(stringStartsWith($applicant->remarks, $search)){
 					$bool = true;
 				}
-				else if(str_starts_with($applicant->pa_s, $search)){
+				else if(stringStartsWith($applicant->pa_s, $search)){
 					$bool = true;
 				}
 
@@ -356,6 +356,14 @@ class DatatablesController extends Controller
 		// die;
 
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
+	}
+
+	public function stringStartsWith($haystack,$needle,$case=true) {
+	    if ($case){
+	        return strpos($haystack, $needle, 0) === 0;
+	    }
+		
+		return stripos($haystack, $needle, 0) === 0;
 	}
 
 	public function auditTrail(){
