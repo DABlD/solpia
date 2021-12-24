@@ -272,16 +272,16 @@ class DatatablesController extends Controller
 			foreach($applicants as $i => $applicant){
 				$bool = false;
 
-				if(stringStartsWith($applicant->lname, $search)){
+				if(str_contains($applicant->lname, $search)){
 					$bool = true;
 				}
-				else if(stringStartsWith($applicant->fname, $search)){
+				else if(str_contains($applicant->fname, $search)){
 					$bool = true;
 				}
-				else if(stringStartsWith($applicant->remarks, $search)){
+				else if(str_contains($applicant->remarks, $search)){
 					$bool = true;
 				}
-				else if(stringStartsWith($applicant->pa_s, $search)){
+				else if(str_contains($applicant->pa_s, $search)){
 					$bool = true;
 				}
 
