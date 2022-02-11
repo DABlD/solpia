@@ -415,7 +415,9 @@ class ApplicationsController extends Controller
         }
 
         $applicant->load('user');
-        $applicant->load('educational_background');
+        $applicant->load(['educational_background' => function ($query) {
+            $query->orderBy('year', 'desc');
+        }]);
         $applicant->load('family_data');
         $applicant->load('sea_service');
 
@@ -487,6 +489,7 @@ class ApplicationsController extends Controller
         $applicant->family_data = $applicant->family_data->sortBy(function($model) use ($order){
             return array_search($model->type, $order);
         });
+
 
         foreach($applicant->family_data as $key => $value){
             if($value->lname == ""){
