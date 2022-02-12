@@ -77,12 +77,13 @@ class DatatablesController extends Controller
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
 	}
 
-	public function applications2(Request $req){
+	public function applications(Request $req){
 	// public function applications(Request $req){
 		DB::connection()->enableQueryLog();
 		
 		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
 		$status = auth()->user()->status;
+		$search = $req->search["value"];
 
 		if($status == 1){
 		    $condition = ['u.applicant', '>', 0];
@@ -100,7 +101,7 @@ class DatatablesController extends Controller
 						->join('users as u', 'u.id', '=', 'applicants.user_id')
 						->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 						->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
-						->where([$condition, ['u.deleted_at', '=', null]])
+						->where([$condition, ['u.deleted_at', '=', null], ['applicants.remarks', 'LIKE', "%" . $search . "%"]])
 						->groupBy('id')
 						->get();
 
@@ -117,6 +118,7 @@ class DatatablesController extends Controller
 
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		foreach($applicants as $key => $applicant){
+			$applicant->search = $search;
 			$applicant->remarks = json_decode($applicant->remarks);
 			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->actions;
@@ -222,7 +224,7 @@ class DatatablesController extends Controller
     	return Datatables::of($vessels)->rawColumns(['actions'])->make(true);
 	}
 	
-	public function applications(Request $req){
+	public function applications3(Request $req){
 		DB::connection()->enableQueryLog();
 		
 		// $time_start = microtime(true); 

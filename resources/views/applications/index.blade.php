@@ -188,6 +188,7 @@
                 { data: 'last_vessel', name: 'last_vessel' },
                 { data: 'remarks', name: 'remarks' },
                 { data: 'actions', name: 'actions' },
+                { data: 'search', name: 'search', visible: false }
             ],
             columnDefs: [
                 {
