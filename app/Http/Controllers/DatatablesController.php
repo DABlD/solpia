@@ -80,6 +80,17 @@ class DatatablesController extends Controller
 	public function applications(Request $req){
 	// public function applications(Request $req){
 		DB::connection()->enableQueryLog();
+
+		$ranks = [];
+		$ranks2 = [];
+		$temps = Rank::select('id', 'abbr', 'name')->get()->keyBy('abbr')->toArray();
+
+		foreach($temps as $temp){
+			$ranks[$temp['id']] = $temp['abbr'];
+			$ranks2[$temp['name']] = $temp['abbr'];
+		}
+
+		$vesselszxc = Vessel::pluck('name', 'id');
 		
 		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
 		$status = auth()->user()->status;
@@ -92,33 +103,58 @@ class DatatablesController extends Controller
 		    $condition = ['u.applicant', '=', $status];
 		}
 
-		$applicants = Applicant::select(
-							'applicants.id', 'applicants.remarks',
-							'avatar', 'fname', 'lname', 'contact', 'birthday',
-							'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
-							'vessel_name as last_vessel', 'sign_off', 'rank'
-						)
-						->join('users as u', 'u.id', '=', 'applicants.user_id')
-						->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-						->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
-						->where([$condition, ['u.deleted_at', '=', null], ['applicants.remarks', 'LIKE', "%" . $search . "%"]])
-						->groupBy('id')
-						->get();
+		// if($search){
+		// 	$condition = [
+		// 		$condition, 
+		// 		['u.deleted_at', '=', null], 
+		// 		['applicants.remarks', 'LIKE', "%" . $search . "%"],
+		// 		['fname', 'LIKE', "%" . $search . "%"],
+		// 		['lname', 'LIKE', "%" . $search . "%"],
+		// 		['pro_app.status', 'LIKE', "%" . $search . "%"]
+		// 	];
+		// }
 
-		$ranks = [];
-		$ranks2 = [];
-		$temps = Rank::select('id', 'abbr', 'name')->get();
-
-		foreach($temps as $temp){
-			$ranks[$temp->id] = $temp->abbr;
-			$ranks2[$temp->name] = $temp->abbr;
+		if($search){
+			$applicants = Applicant::select(
+					'applicants.id', 'applicants.remarks',
+					'avatar', 'fname', 'lname', 'contact', 'birthday',
+					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
+					'vessel_name as last_vessel', 'sign_off', 'rank'
+					,'r.id as rid', 'r.abbr', 'r.name as rname'
+				)
+				->join('users as u', 'u.id', '=', 'applicants.user_id')
+				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+				->join('ranks as r', 'r.id', '=', 'pro_app.rank_id')
+				->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
+				->where([$condition, ['applicants.remarks', 'LIKE', "%" . $search . "%"]])
+				->orWhere('fname', 'LIKE', "%" . $search . "%")
+				->orWhere('lname', 'LIKE', "%" . $search . "%")
+				->orWhere('pro_app.status', 'LIKE', "%" . $search . "%")
+				->orWhere('vessel_name', 'LIKE', "%" . $search . "%")
+				->orWhere('rank', 'LIKE', "%" . $search . "%")
+				->orWhere('r.abbr', '=', $search)
+				->groupBy('id')
+				->get();
+		}
+		else{
+			$applicants = Applicant::select(
+					'applicants.id', 'applicants.remarks',
+					'avatar', 'fname', 'lname', 'contact', 'birthday',
+					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
+					'vessel_name as last_vessel', 'sign_off', 'rank'
+				)
+				->join('users as u', 'u.id', '=', 'applicants.user_id')
+				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+				->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
+				->where([$condition])
+				->groupBy('id')
+				->get();
 		}
 
-		$vesselszxc = Vessel::pluck('name', 'id');
-
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
+		// RANK IS FETCHED ON LINED-UP/ON BOARD VESSEL. IF NONE, ON LAST VESSEL
 		foreach($applicants as $key => $applicant){
-			$applicant->search = $search;
+			$applicant->search = $search . $applicant->abbr;
 			$applicant->remarks = json_decode($applicant->remarks);
 			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->actions;
@@ -128,9 +164,12 @@ class DatatablesController extends Controller
 
 			$applicant->last_vessel = $applicant->last_vessel == "" ? "-----" : $applicant->last_vessel;
 
-			if($applicant->pa_s == "Lined-Up"){
+			if($applicant->pa_s == "Lined-Up" || $applicant->pa_s == "On Board"){
 			    $applicant->rank = $ranks[$applicant->pa_ri];
 			    $applicant->vessel = $vesselszxc[$applicant->pa_vid];
+
+			    // SEARCH
+			    $applicant->search .= $applicant->rank . $applicant->vessel;
 			}
 			else{
 			    if($applicant->last_vessel != ""){

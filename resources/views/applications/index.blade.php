@@ -195,7 +195,7 @@
                     targets: 1,
                     className: "dt-status",
                     render: function(status, display, row){
-                        if(status == "Lined-Up"){
+                        if(status == "Lined-Up" || status == "On Board"){
                             status += `<br><b>${row.vessel}</b>`;
                         }
 
@@ -217,6 +217,12 @@
                     targets: 0,
                     render: function(id, display, data){
                         return data.row;
+                    },
+                },
+                {
+                    targets: 4,
+                    render: function(row){
+                        return row;
                     },
                 },
                 {
