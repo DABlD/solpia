@@ -121,10 +121,12 @@ class DatatablesController extends Controller
 					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
 					'vessel_name as last_vessel', 'sign_off', 'rank'
 					,'r.id as rid', 'r.abbr', 'r.name as rname'
+					,'v.name as vname'
 				)
 				->join('users as u', 'u.id', '=', 'applicants.user_id')
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 				->join('ranks as r', 'r.id', '=', 'pro_app.rank_id')
+				->join('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
 				->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
 				->where([$condition, ['applicants.remarks', 'LIKE', "%" . $search . "%"]])
 				->orWhere('fname', 'LIKE', "%" . $search . "%")
@@ -133,6 +135,7 @@ class DatatablesController extends Controller
 				->orWhere('vessel_name', 'LIKE', "%" . $search . "%")
 				->orWhere('rank', 'LIKE', "%" . $search . "%")
 				->orWhere('r.abbr', '=', $search)
+				->orWhere('v.name', 'LIKE', "%" . $search . "%")
 				->groupBy('id')
 				->get();
 		}
@@ -154,7 +157,7 @@ class DatatablesController extends Controller
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		// RANK IS FETCHED ON LINED-UP/ON BOARD VESSEL. IF NONE, ON LAST VESSEL
 		foreach($applicants as $key => $applicant){
-			$applicant->search = $search . $applicant->abbr;
+			$applicant->search = $search . $applicant->abbr . $applicant->vname;
 			$applicant->remarks = json_decode($applicant->remarks);
 			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->actions;
