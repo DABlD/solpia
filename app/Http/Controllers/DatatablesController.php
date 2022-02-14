@@ -120,13 +120,13 @@ class DatatablesController extends Controller
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
 					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
 					'vessel_name as last_vessel', 'sign_off', 'rank'
-					,'r.id as rid', 'r.abbr', 'r.name as rname'
-					,'v.name as vname'
+					,'r.abbr'
+					,'v.name'
 				)
 				->join('users as u', 'u.id', '=', 'applicants.user_id')
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				->join('ranks as r', 'r.id', '=', 'pro_app.rank_id')
-				->join('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
+				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
+				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
 				->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
 				->where([$condition, ['applicants.remarks', 'LIKE', "%" . $search . "%"]])
 				->orWhere('fname', 'LIKE', "%" . $search . "%")
