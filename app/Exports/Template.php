@@ -7,9 +7,10 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
-// use Maatwebsite\Excel\Concerns\WithDrawings;
+use Maatwebsite\Excel\Concerns\WithDrawings;
+// use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class Hms1 implements FromView, WithEvents, //WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -66,6 +67,45 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
         ];
 
         $fillStyle = [
@@ -73,7 +113,7 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => '26b36c'
+                        'rgb' => 'bdb9b9'
                     ]
                 ],
             ],
@@ -81,7 +121,7 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'ced4da'
+                        'rgb' => 'ebf8a4'
                     ]
                 ],
             ]
@@ -116,14 +156,14 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
             ],
             [
                 'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
-                ]
-            ],
-            [
-                'alignment' => [
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
+            ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                ]
             ],
             [
                 'font' => [
@@ -152,16 +192,16 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
-                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(12);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setSize(10);
+                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);;
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
-                // $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
-                // $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
@@ -208,33 +248,27 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     
                 ];
 
-                // HL
+                // HC VC
                 $h[4] = [
-                    
                 ];
 
-                // HC VC
+                // HL
                 $h[5] = [
-                    
                 ];
 
                 // B
                 $h[6] = [
-                    
                 ];
 
                 // VC
                 $h[7] = [
-                    
                 ];
 
                 $h['wrap'] = [
-                    
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-
                 ];
 
                 foreach($h as $key => $value) {
@@ -257,7 +291,6 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    
                 ];
 
                 $fills[1] = [
@@ -271,18 +304,39 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 }
 
                 // BORDERS
+
+                // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    
                 ]);
 
-
+                // OUTSIDE BORDER THIN
                 $cells[1] = array_merge([
+                ]);
+
+                // OUTSIDE THICK BORDER
+                $cells[2] = array_merge([
+                ]);
+
+                // TOP REMOVE BORDER
+                $cells[3] = array_merge([
+                ]);
+
+                // BRB
+                $cells[4] = array_merge([
 
                 ]);
 
+                // LRB
+                $cells[5] = array_merge([
 
-                $cells[2] = array_merge([
-                    // 'A2:H3', 'A4:' . $ar('H', 3), $ar('A', 6, 'H', 7), $ar('A', 8,'H', 7, true)
+                ]);
+
+                // RRB
+                $cells[6] = array_merge([
+                ]);
+
+                // TRB
+                $cells[7] = array_merge([
                 ]);
 
                 foreach($cells as $key => $value){
@@ -295,30 +349,41 @@ class Template implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(7);
+                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(8.25);
+                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
                 
                 // SET PRINT AREA
-                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
             },
         ];
     }
 
-    // public function drawings()
-    // {
-    //     $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-    //     $drawing->setName('Logo');
-    //     $drawing->setDescription('Logo');
-    //     $drawing->setPath(public_path($this->applicant->user->avatar));
-    //     $drawing->setResizeProportional(false);
-    //     $drawing->setHeight(164);
-    //     $drawing->setWidth(155);
-    //     $drawing->setOffsetX(1);
-    //     $drawing->setOffsetY(1);
-    //     $drawing->setCoordinates('M3');
+    public function drawings()
+    {
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('Letter Head');
+        $drawing->setDescription('Letter Head');
+        $drawing->setPath(public_path("images/letter_head.jpg"));
+        $drawing->setResizeProportional(false);
+        $drawing->setHeight(115);
+        $drawing->setWidth(2200);
+        $drawing->setOffsetX(4);
+        $drawing->setOffsetY(4);
+        $drawing->setCoordinates('C1');
 
-    //     return $drawing;
-    // }
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setName('Avatar');
+        $drawing2->setDescription('Avatar');
+        $drawing2->setPath(public_path($this->data->user->avatar));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(230);
+        $drawing2->setWidth(230);
+        $drawing2->setOffsetX(5);
+        $drawing2->setOffsetY(2);
+        $drawing2->setCoordinates('C3');
+
+        return [$drawing, $drawing2];
+    }
 }
