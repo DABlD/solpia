@@ -226,7 +226,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(12);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);;
+                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
@@ -307,6 +307,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                             $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(true);
                         }
                         elseif($key == 'stf'){
+                            $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(false);
                             $event->sheet->getDelegate()->getStyle($col)->applyFromArray([
                                 'alignment' => [
                                     'shrinkToFit' => true
