@@ -210,6 +210,7 @@
 					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
 					<option value="ADVANCE TRAINING FOR OIL TANKER - ATOT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE TRAINING FOR OIL TANKER - ATOT</option>
 					<option value="ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT</option>
+					<option value="HAZMAT">&nbsp;&nbsp;&nbsp;&nbsp;HAZMAT</option>
 
 				<optgroup label="IN HOUSE CERTIFICATE/SPECIAL TRAINING"></optgroup>
 					<option value="ANTI PIRACY">&nbsp;&nbsp;&nbsp;&nbsp;ANTI PIRACY</option>
