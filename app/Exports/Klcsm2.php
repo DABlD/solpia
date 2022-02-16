@@ -37,6 +37,20 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
             ],
             [
                 'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
@@ -48,6 +62,22 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
                     ],
                 ]
             ],
@@ -113,7 +143,7 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'bdb9b9'
+                        'rgb' => 'BFBFBF'
                     ]
                 ],
             ],
@@ -121,7 +151,7 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'ebf8a4'
+                        'rgb' => '5BCDCD'
                     ]
                 ],
             ]
@@ -182,7 +212,7 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
+                $event->sheet->getDelegate()->setTitle('Book Info', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -193,10 +223,17 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(12);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(9);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);;
+                $event->sheet->getDelegate()->getStyle('A1:H1')->getFont()->setSize(12);
+                $event->sheet->getDelegate()->getStyle('A3')->getFont()->setSize(12);
+                $event->sheet->getDelegate()->getStyle('A10')->getFont()->setSize(12);
+                $event->sheet->getDelegate()->getStyle('A20')->getFont()->setSize(12);
+
+                for ($i=23; $i <= 43; $i++) { 
+                    $event->sheet->getDelegate()->getStyle("B$i")->getFont()->setSize(8);
+                }
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
@@ -250,14 +287,17 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
+                    'A1:H43'
                 ];
 
                 // HL
                 $h[5] = [
+                    'A3', 'A10', 'A20'
                 ];
 
                 // B
                 $h[6] = [
+                    'A1:H1', 'A3', 'A10', 'A20', 'A4:G4', 'A11:G11', 'A21:G22'
                 ];
 
                 // VC
@@ -265,10 +305,12 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
+                    'B23:B43', 'C21', 'F21'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'B1', 'C5:G8', 'C12:G18', 'C23:G43'
                 ];
 
                 foreach($h as $key => $value) {
@@ -291,10 +333,11 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
+                    'A3', 'A10', 'A20'
                 ];
 
                 $fills[1] = [
-                    
+                    'A1', 'F1'
                 ];
 
                 foreach($fills as $key => $value){
@@ -307,36 +350,51 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'A1:C1', 'F1:G1', 'A5:G7', 'A12:G18', 'A23:G43'
                 ]);
 
-                // OUTSIDE BORDER THIN
+                // ALL BORDER MEDIUM
                 $cells[1] = array_merge([
+                    'A4:G4', 'A11:G11', 'A21:G22'
                 ]);
 
-                // OUTSIDE THICK BORDER
+                // ALL BORDER THICK
                 $cells[2] = array_merge([
                 ]);
 
-                // TOP REMOVE BORDER
+                // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
                 ]);
 
-                // BRB
+                // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
+                    'A4:G8', 'A11:G18', 'A21:G43'
+                ]);
+
+                // OUTSIDE BORDER THICK
+                $cells[5] = array_merge([
+                ]);
+
+                // TOP REMOVE BORDER
+                $cells[6] = array_merge([
+                ]);
+
+                // BRB
+                $cells[7] = array_merge([
 
                 ]);
 
                 // LRB
-                $cells[5] = array_merge([
+                $cells[8] = array_merge([
 
                 ]);
 
                 // RRB
-                $cells[6] = array_merge([
+                $cells[9] = array_merge([
                 ]);
 
                 // TRB
-                $cells[7] = array_merge([
+                $cells[10] = array_merge([
                 ]);
 
                 foreach($cells as $key => $value){
@@ -349,13 +407,29 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(12);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                for ($i = 0; $i <= 22; $i++) { 
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(18);
+                }
+
+                for ($i = 23; $i <= 43; $i++) { 
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(22);
+                }
+
+                $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(8);
+                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(8);
+                $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(8);
                 
                 // SET PRINT AREA
-                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:G43");
             },
         ];
     }
