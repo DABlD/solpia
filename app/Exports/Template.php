@@ -37,6 +37,20 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
             ],
             [
                 'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
@@ -48,6 +62,22 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
                     ],
                 ]
             ],
@@ -309,34 +339,45 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $cells[0] = array_merge([
                 ]);
 
-                // OUTSIDE BORDER THIN
+                // ALL BORDER MEDIUM
                 $cells[1] = array_merge([
                 ]);
 
-                // OUTSIDE THICK BORDER
+                // ALL BORDER THICK
                 $cells[2] = array_merge([
                 ]);
 
-                // TOP REMOVE BORDER
+                // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
                 ]);
 
-                // BRB
+                // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
+                ]);
 
+                // OUTSIDE BORDER THICK
+                $cells[5] = array_merge([
+                ]);
+
+                // TOP REMOVE BORDER
+                $cells[6] = array_merge([
+                ]);
+
+                // BRB
+                $cells[7] = array_merge([
                 ]);
 
                 // LRB
-                $cells[5] = array_merge([
+                $cells[8] = array_merge([
 
                 ]);
 
                 // RRB
-                $cells[6] = array_merge([
+                $cells[9] = array_merge([
                 ]);
 
                 // TRB
-                $cells[7] = array_merge([
+                $cells[10] = array_merge([
                 ]);
 
                 foreach($cells as $key => $value){
