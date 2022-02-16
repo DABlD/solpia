@@ -184,7 +184,7 @@
 					<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
 					<option value="SRC">SRC</option>
 					<option value="ENGINE WATCH">ENGINE WATCH</option>
-					<option value="DECK WATCH">DECH WATCH</option>
+					<option value="DECK WATCH">DECK WATCH</option>
 
 				<optgroup label="SPECIAL CERTIFICATES"></optgroup>
 					<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
