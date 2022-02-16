@@ -164,6 +164,7 @@
 						<option value="ECDIS JRC 7201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 7201</option>
 						<option value="ECDIS JRC 901B">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 901B</option>
 						<option value="ECDIS JRC 9201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 9201</option>
+						<option value="ECDIS PM3D">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS PM3D</option>
 						<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
 						<option value="ECDIS MECYS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MECYS</option>
 						<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
