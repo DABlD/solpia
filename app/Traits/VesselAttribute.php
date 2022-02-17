@@ -10,7 +10,7 @@ trait VesselAttribute{
 		    '</a>&nbsp;' . 
 			'<a class="btn btn-info" data-toggle="tooltip" title="View Crew List" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '
 				<span data-status="' . $this->status . '" class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . 
-			'</a>&nbsp;<br>';
+			'</a>&nbsp;';
 
 		if($this->status == "ACTIVE"){
 			$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Remove" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '
