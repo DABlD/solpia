@@ -17,6 +17,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Vessel Name</th>
+                                <th>Fleet</th>
                                 <th>Principal</th>
                                 <th>Flag</th>
                                 <th>Type</th>
@@ -149,6 +150,7 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
+                { data: 'fleet', name: 'fleet' },
                 { data: 'pname', name: 'pname' },
                 { data: 'flag', name: 'flag' },
                 { data: 'type', name: 'type' },
@@ -163,7 +165,7 @@
                     },
                 },
                 {
-                    targets: 5,
+                    targets: 6,
                     render: function(status){
                         console.log(status);
                         let color = status == "ACTIVE" ? '#00a65a' : '#dd4b39';
@@ -174,7 +176,7 @@
                     }
                 },
                 {
-                    targets: 6,
+                    targets: 7,
                     width: '120px'
                 },
             ],
