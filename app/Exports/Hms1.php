@@ -19,7 +19,7 @@ class Hms1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
     public function view(): View
     {
-        return view('exports.' . lcfirst($this->type), [
+        return view('exports.' . 'hms1', [
             'data' => $this->data,
         ]);
     }
