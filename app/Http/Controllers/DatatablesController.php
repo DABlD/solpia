@@ -235,18 +235,18 @@ class DatatablesController extends Controller
     	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
 	}
 
-	public function vessels(){
+	public function vessels(Request $req){
 		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
 		$status = auth()->user()->status;
 
-		if($status == 1){
-		    $condition = ['vessels.principal_id', '>', 0];
-		}
-		elseif($status > 1){
-		    $condition = ['vessels.principal_id', '=', ($status - 1)];
-		}
+		// if($status == 1){
+		//     $condition = ['vessels.principal_id', '>', 0];
+		// }
+		// elseif($status > 1){
+		//     $condition = ['vessels.principal_id', '=', ($status - 1)];
+		// }
 
-		$vessels = Vessel::where([$condition, ['status', '=', 'ACTIVE']])
+		$vessels = Vessel::where('status', 'LIKE', str_contains($req->search['value'], ' -A') ? '%%' : 'ACTIVE')
 			->join('principals as p', 'p.id', '=', 'vessels.principal_id')
 			->select('vessels.*', 'p.name as pname')
 			->get();

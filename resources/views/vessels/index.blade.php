@@ -123,6 +123,10 @@
             width: 15%;
         }
 
+        td .btn{
+            margin-top: 3px;
+        }
+
     </style>
 @endpush
 
@@ -161,6 +165,7 @@
                 {
                     targets: 5,
                     render: function(status){
+                        console.log(status);
                         let color = status == "ACTIVE" ? '#00a65a' : '#dd4b39';
 
                         return `
@@ -181,10 +186,23 @@
             },
             // order: [ [0, 'desc'] ],
         });
+        
+        $('#table_filter input').unbind();
+        $('#table_filter input').bind('keyup.DT', e => {
+            if(e.which == 13){
+                swal('Searching...');
+                swal.showLoading();
+
+                table.search($(e.target).val()).draw();
+            }
+        });
 
         table.on('draw', () => {
             setTimeout(() => {
                 $('.preloader').fadeOut();
+                if(swal.isVisible()){
+                    swal.close();
+                }
             }, 800);
         });
 
@@ -276,6 +294,70 @@
                 }).then(result => {
                     if(!result.dismiss){
                         window.location.href = "{{ route('vessels.export') }}/" + result.value;
+                    }
+                })
+            });
+
+            $('[data-original-title="Remove"]').on('click', vessel => {
+                let id = $(vessel.target).data('id');
+
+                swal({
+                    type: 'question',
+                    title: 'Are you sure you want to remove?',
+                    text: 'Vessel will not appear here but info will still be in the database',
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b'
+                }).then(result => {
+                    if(result.value){
+                        $.ajax({
+                            url: '{{ route('vessels.update') }}',
+                            data: {
+                                id: id,
+                                column: 'status',
+                                value: 'INACTIVE'
+                            },
+                            success: () => {
+                                console.log();
+                                table.ajax.reload(null, false);
+                                swal({
+                                    type: 'success',
+                                    title: 'Vessel Successfully Removed',
+                                    timer: 1000,
+                                    showConfirmButton: false
+                                })
+                            }
+                        })
+                    }
+                })
+            });
+
+            $('[data-original-title="Activate"]').on('click', vessel => {
+                let id = $(vessel.target).data('id');
+
+                swal({
+                    type: 'question',
+                    title: 'Are you sure you want to activate?',
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b'
+                }).then(result => {
+                    if(result.value){
+                        $.ajax({
+                            url: '{{ route('vessels.update') }}',
+                            data: {
+                                id: id,
+                                column: 'status',
+                                value: 'ACTIVE'
+                            },
+                            success: () => {
+                                console.log();
+                                table.ajax.reload(null, false);
+                                swal({
+                                    type: 'success',
+                                    timer: 1000,
+                                    showConfirmButton: false
+                                })
+                            }
+                        })
                     }
                 })
             });

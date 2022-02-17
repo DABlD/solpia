@@ -286,7 +286,7 @@
 
             // order: [ [0, 'desc'] ],
         });
-
+        
         $('#table_filter input').unbind();
         $('#table_filter input').bind('keyup.DT', e => {
             if(e.which == 13){

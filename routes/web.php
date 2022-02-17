@@ -150,6 +150,7 @@ Route::group([
 		Route::get("$name/getAll", ucfirst($name) . 'Controller@getAll')->name("$name.getAll");
 		Route::post("$name/import", ucfirst($name) . 'Controller@import')->name("$name.import");
 		Route::get("$name/export/{type?}", ucfirst($name) . 'Controller@export')->name("$name.export");
+		Route::get("$name/update", ucfirst($name) . 'Controller@update')->name("$name.update");
 
 		// Line Up ROUTES
 		$name = "lineUp";

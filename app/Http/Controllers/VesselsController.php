@@ -59,6 +59,10 @@ class VesselsController extends Controller
     	);
     }
 
+    public function update(Request $req){
+        echo Vessel::where('id', $req->id)->update([$req->column => $req->value]);
+    }
+
     public function index(){
         return $this->_view('index', [
             'title' => "Vessels"
