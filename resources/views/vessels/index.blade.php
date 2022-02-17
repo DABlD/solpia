@@ -167,7 +167,6 @@
                 {
                     targets: 6,
                     render: function(status){
-                        console.log(status);
                         let color = status == "ACTIVE" ? '#00a65a' : '#dd4b39';
 
                         return `
@@ -177,7 +176,7 @@
                 },
                 {
                     targets: 7,
-                    width: '120px'
+                    width: '160px'
                 },
             ],
             drawCallback: function(){
@@ -319,7 +318,6 @@
                                 value: 'INACTIVE'
                             },
                             success: () => {
-                                console.log();
                                 table.ajax.reload(null, false);
                                 swal({
                                     type: 'success',
@@ -362,6 +360,45 @@
                         })
                     }
                 })
+            });
+
+            $('[data-original-title="Assign to a Fleet"]').on('click', vessel => {
+                let id = $(vessel.target).data('id');
+
+                swal({
+                    title: 'Select Fleet',
+                    input: 'select',
+                    inputOptions: {
+                        'FLEET A' : 'FLEET A',
+                        'FLEET B' : 'FLEET B',
+                        'FLEET C' : 'FLEET C',
+                        'FLEET D' : 'FLEET D',
+                        'TOEI' : 'TOEI',
+                        'FISHING' : 'FISHING',
+                    },
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b'
+                }).then(result => {
+                    if(result.value){
+                        $.ajax({
+                            url: '{{ route('vessels.update') }}',
+                            data: {
+                                id: id,
+                                column: 'fleet',
+                                value: result.value
+                            },
+                            success: () => {
+                                table.ajax.reload(null, false);
+                                swal({
+                                    type: 'success',
+                                    title: 'Fleet Successfully Updated',
+                                    timer: 800,
+                                    showConfirmButton: false
+                                })
+                            }
+                        })
+                    }
+                });
             });
         }
 

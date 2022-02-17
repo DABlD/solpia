@@ -121,6 +121,7 @@ Route::group([
 		Route::get("$name/exportDocument/{id?}/{type?}", ucfirst($name) . 'Controller@exportDocument')->name("$name.exportDocument");
 
 		Route::get("$name/goToPrincipal/{applicant?}", ucfirst($name) . 'Controller@goToPrincipal')->name("$name.goToPrincipal");
+		Route::get("$name/getAllInfo", ucfirst($name) . 'Controller@getAllInfo')->name("$name.getAllInfo");
 
 		// ON BOARD, ETC.
 		Route::post("$name/updateStatus/{id?}/{status?}/{vessel_id?}", ucfirst($name) . 'Controller@updateStatus')->name("$name.updateStatus");

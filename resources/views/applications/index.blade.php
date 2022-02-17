@@ -108,7 +108,7 @@
 		}
 
         .w100{
-            width: 75px !important;
+            width: 110px !important;
         }
 
         .dt-status b{
@@ -145,6 +145,11 @@
 
         .file-buttons{
             text-align: right;
+        }
+
+        .btn-search{
+            background-color: #abaab4 !important;
+            border-color: #abaab4 !important;
         }
 	</style>
 @endpush
@@ -216,7 +221,7 @@
                 {
                     targets: 0,
                     render: function(id, display, data){
-                        return data.row;
+                        return id;
                     },
                 },
                 {
@@ -714,6 +719,24 @@
                         })
                     }
                 })
+            });
+
+            $('[data-original-title="View Info"]').on('click', application => {
+                let id = $(application.target).data('id');
+
+                $.ajax({
+                    url: '{{ route('applications.getAllInfo') }}',
+                    data: {id: id},
+                    success: applicant => {
+                        applicant = JSON.parse(applicant);
+                        console.log(applicant);
+                    }
+                })
+
+                swal({
+                    width: '80%',
+                    text: 'asd'
+                });
             });
 	    }
 

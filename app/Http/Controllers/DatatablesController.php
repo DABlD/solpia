@@ -118,8 +118,7 @@ class DatatablesController extends Controller
 			$applicants = Applicant::select(
 					'applicants.id', 'applicants.remarks',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
-					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
-					'vessel_name as last_vessel', 'sign_off', 'rank'
+					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
 					,'r.abbr'
 					,'v.name'
 				)
@@ -127,41 +126,97 @@ class DatatablesController extends Controller
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
 				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-				->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
 				->where([$condition, ['applicants.remarks', 'LIKE', "%" . $search . "%"]])
 				->orWhere('fname', 'LIKE', "%" . $search . "%")
 				->orWhere('lname', 'LIKE', "%" . $search . "%")
 				->orWhere('pro_app.status', 'LIKE', "%" . $search . "%")
-				->orWhere('vessel_name', 'LIKE', "%" . $search . "%")
-				->orWhere('rank', 'LIKE', "%" . $search . "%")
+				// ->orWhere('vessel_name', 'LIKE', "%" . $search . "%")
+				// ->orWhere('rank', 'LIKE', "%" . $search . "%")
 				->orWhere('r.abbr', '=', $search)
 				->orWhere('v.name', 'LIKE', "%" . $search . "%")
-				->groupBy('id')
 				->get();
-		}
-		else{
-			$applicants = Applicant::select(
+
+			$temp = Vessel::where('name', 'LIKE', '%' . $search . "%")->pluck('name')->toArray();
+			// $sss = SeaService::whereIn('vessel_name', $temp)->get();
+			// $sss = SeaService::orderByDesc('sign_on')->groupBy('applicant_id')->whereIn('vessel_name', $temp)->pluck('applicant_id');
+
+			$sss = SeaService::whereIn('vessel_name', $temp)->groupBy('applicant_id')->pluck('applicant_id');
+			$sss2 = [];
+			
+			foreach ($sss as $key => $id) {
+				$ss = SeaService::where('applicant_id', $id)->orderByDesc('sign_on')->first();
+				if(in_array($ss->vessel_name, $temp)){
+					// $temp2 = $sss->splice($key);
+					// $temp2->shift();
+					// $sss->merge($temp2);
+					// $sss = collect(array_merge($sss->toArray(), $temp2->toArray()));
+					array_push($sss2, $id);
+				}
+				else{
+					// $sss2[$id]["abbr"] = $ss->abbr;
+					// $sss2[$id]["name"] = $ss->name;
+				}
+
+			}
+
+			$diff = collect($sss2)->diff($applicants->pluck('id'));
+			foreach($diff as $id){
+				$temp = Applicant::select(
 					'applicants.id', 'applicants.remarks',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
-					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s',
-					'vessel_name as last_vessel', 'sign_off', 'rank'
+					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
+					,'r.abbr'
+					,'v.name'
 				)
 				->join('users as u', 'u.id', '=', 'applicants.user_id')
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				->leftJoin('sea_services as ss', 'ss.applicant_id', '=', 'applicants.id')
+				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
+				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
+				->where('applicants.id', $id)
+				->first();
+
+				// IF NOT DELETED
+				if($temp){
+					// $temp->abbr = $sss2[$id]["abbr"];
+					// $temp->name = $sss2[$id]["name"];
+
+					$applicants = $applicants->push($temp);
+				}
+			};
+		}
+		else{
+			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')->where([$condition])->count();
+
+			$applicants = Applicant::select(
+					'applicants.id', 'applicants.remarks',
+					'avatar', 'fname', 'lname', 'contact', 'birthday',
+					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
+				)
+				->join('users as u', 'u.id', '=', 'applicants.user_id')
+				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 				->where([$condition])
-				->groupBy('id')
+				->offset($req->start)
+				->limit($req->length)
 				->get();
 		}
 
+
+		$applicants = collect($applicants->sortBy('id'));
+		
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		// RANK IS FETCHED ON LINED-UP/ON BOARD VESSEL. IF NONE, ON LAST VESSEL
 		foreach($applicants as $key => $applicant){
-			$applicant->search = $search . $applicant->abbr . $applicant->vname;
+			$applicant->search = $search . $applicant->abbr;
 			$applicant->remarks = json_decode($applicant->remarks);
 			$applicant->row = ($key + 1);
 			$applicant->actions = $applicant->actions;
 			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
+
+			$temp = SeaService::where('applicant_id', $applicant->id)->orderByDesc('sign_on')->first();
+
+			$applicant->last_vessel = $temp->vessel_name ?? null;
+			$applicant->sign_off = $temp->sign_off ?? null;
+			$applicant->rank = $temp->rank ?? null;
 
 			// $vessels = SeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
 
@@ -204,7 +259,24 @@ class DatatablesController extends Controller
 			// }
 		}
 
-    	return Datatables::of($applicants)->rawColumns(['actions'])->make(true);
+		$applicants = $applicants->toArray();
+
+		if($search){
+			return Datatables::of($applicants)
+				->rawColumns(['actions'])
+				->make(true);
+		}
+		else{
+			for ($i=0; $i < $req->start; $i++) { 
+				array_push($applicants, "");
+			}
+
+	    	return Datatables::of($applicants)
+	    		->setTotalRecords($tc)
+	            ->setFilteredRecords($tc)
+	    		->rawColumns(['actions'])
+	    		->make(true);
+		}
 	}
 
 	public function processedApplicant($id){
@@ -246,10 +318,26 @@ class DatatablesController extends Controller
 		//     $condition = ['vessels.principal_id', '=', ($status - 1)];
 		// }
 
-		$vessels = Vessel::where('status', 'LIKE', str_contains($req->search['value'], ' -A') ? '%%' : 'ACTIVE')
-			->join('principals as p', 'p.id', '=', 'vessels.principal_id')
-			->select('vessels.*', 'p.name as pname')
-			->get();
+		$fleet = array();
+		$fleet[1] = "TOEI";
+		$fleet[23] = "TOEI";
+
+		if(array_key_exists(auth()->user()->id, $fleet) && !str_contains($req->search['value'], '-A')){
+			$vessels = Vessel::where([
+					['status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE'],
+					['fleet', '=', $fleet[auth()->user()->id]]
+
+				])
+				->join('principals as p', 'p.id', '=', 'vessels.principal_id')
+				->select('vessels.*', 'p.name as pname')
+				->get();			
+		}
+		else{
+			$vessels = Vessel::where('status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE')
+				->join('principals as p', 'p.id', '=', 'vessels.principal_id')
+				->select('vessels.*', 'p.name as pname')
+				->get();
+		}
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		$principals = Principal::where('active', 1)->pluck('id')->toArray();

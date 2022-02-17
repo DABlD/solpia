@@ -1178,6 +1178,26 @@ class ApplicationsController extends Controller
         echo json_encode($applicant);
     }
 
+    public function getAllInfo(Request $req){
+        $applicant = Applicant::find($req->id);
+        $applicant->load('user');
+        $applicant->load(['educational_background' => function ($query) {
+            $query->orderBy('year', 'desc');
+        }]);
+        $applicant->load('family_data');
+        $applicant->load(['sea_service' => function ($query) {
+            $query->orderBy('sign_on', 'desc');
+        }]);
+        $applicant->load('document_id');
+        $applicant->load('document_flag');
+        $applicant->load('document_lc');
+        $applicant->load('document_med_cert');
+        $applicant->load('document_med');
+        $applicant->load('document_med_exp');
+
+        echo json_encode($applicant);
+    }
+
     private function _view($view, $data = array()){
     	return view('applications.' . $view, $data);
     }
