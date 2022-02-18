@@ -201,6 +201,29 @@
 			</tr>
 		";
 	};
+
+	function isBlank(){
+		echo "
+			<tr>
+				<td></td>
+				<td></td>
+				<td rowspan='2'></td>
+				<td rowspan='2'></td>
+				<td rowspan='2'></td>
+				<td></td>
+				<td rowspan='2'></td>
+				<td></td>
+				<td rowspan='2'></td>
+			</tr>
+
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		";
+	}
 @endphp
 
 <table>

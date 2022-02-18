@@ -1081,7 +1081,7 @@ class ApplicationsController extends Controller
                 $temp = DocumentId::where('applicant_id', $crew->id)->select('type', 'expiry_date', 'number')->get();
                 $crew->age = now()->parse($crew->birthday)->age;
 
-                if($crew->reliever != "No Reliever"){
+                if($crew->reliever != "No Reliever" && $crew->reliever != ""){
                     $temp2 = Applicant::find($crew->reliever)->load('user');
                     $crew->reliever = $temp2->user->lname . ', ' . $temp2->user->fname;
                 }
