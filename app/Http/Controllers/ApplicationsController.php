@@ -1072,13 +1072,20 @@ class ApplicationsController extends Controller
                 ['vessel_id', '=', $req->id]
             ])
             ->join('applicants as a', 'a.id', 'line_up_contracts.applicant_id')
-            ->join('users as u', 'u.id', '=', 'a.id')
+            ->join('users as u', 'u.id', '=', 'a.user_id')
             ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
             ->select(array_merge($ad, $cd, $lud, $rd))
             ->get();
 
             foreach($applicant as $crew){
                 $temp = DocumentId::where('applicant_id', $crew->id)->select('type', 'expiry_date', 'number')->get();
+                $crew->age = now()->parse($crew->birthday)->age;
+
+                if($crew->reliever != "No Reliever"){
+                    $temp2 = Applicant::find($crew->reliever)->load('user');
+                    $crew->reliever = $temp2->user->lname . ', ' . $temp2->user->fname;
+                }
+
                 foreach($temp as $docu){
                     $crew->{$docu->type} = $docu->expiry_date;
                 }

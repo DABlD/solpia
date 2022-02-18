@@ -935,6 +935,9 @@
                     if(result.value == "MLCContract"){
                         getMLCData(id, result.value);
                     }
+                    else if(result.value == "RequestToProcess"){
+                        RTP(id);
+                    }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
                     }

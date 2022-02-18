@@ -48,7 +48,7 @@ class VesselsController extends Controller
     			->where('status', 'ACTIVE')
     			->get()
             :
-            Vessel::select('vessels.*')->where('id', $id)->with('principal')->first()
+            Vessel::select('vessels.*')->where('id', $id)->where('status', 'ACTIVE')->with('principal')->first()
     	);
     }
 

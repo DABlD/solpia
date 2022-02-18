@@ -44,7 +44,7 @@
 	{{-- OFFSIGNERS --}}
 	<tr>
 		<td colspan="4">
-			ON-SIGNERS ({{ sizeof($onBoards) }} CREW)
+			OFF-SIGNERS ({{ sizeof($onBoards) }} CREW)
 		</td>
 	</tr>
 
