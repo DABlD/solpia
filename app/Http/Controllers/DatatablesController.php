@@ -224,6 +224,52 @@ class DatatablesController extends Controller
 					}
 				};
 			}
+
+			// IF HAS SPACES CHECK IF NAME
+			$arr = explode(' ', $search);
+			if(sizeof($arr) > 1){
+				$temp1 = Applicant::select(
+					'applicants.id', 'applicants.remarks',
+					'avatar', 'fname', 'lname', 'contact', 'birthday',
+					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
+					,'r.abbr'
+					,'v.name'
+				)
+				->join('users as u', 'u.id', '=', 'applicants.user_id')
+				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
+				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
+				->where([
+					['u.fname', '=', $arr[0]],
+					['u.lname', '=', $arr[1]]
+				])
+				->get();
+
+				$temp2 = Applicant::select(
+					'applicants.id', 'applicants.remarks',
+					'avatar', 'fname', 'lname', 'contact', 'birthday',
+					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
+					,'r.abbr'
+					,'v.name'
+				)
+				->join('users as u', 'u.id', '=', 'applicants.user_id')
+				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
+				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
+				->where([
+					['u.lname', '=', $arr[0]],
+					['u.fname', '=', $arr[1]]
+				])
+				->get();
+
+				foreach ($temp1 as $a) {
+					$applicants = $applicants->push($a);
+				}
+
+				foreach ($temp2 as $a) {
+					$applicants = $applicants->push($a);
+				}
+			}
 		}
 		else{
 			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')->where([$condition])->count();

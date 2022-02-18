@@ -545,6 +545,7 @@
             `;
 
             let table3 = `
+                <b style="color: red;">Onsigners</b>
                 <table class="table table-bordered custom-striped">
                     <thead>
                         <tr>
@@ -624,6 +625,7 @@
             table3 += `
                 </tbody></table>
 
+                <b style="color: red;">Offsigners</b>
                 <table class="table table-bordered custom-striped">
                     <thead>
                         <tr>
