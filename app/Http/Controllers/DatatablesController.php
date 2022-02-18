@@ -140,6 +140,7 @@ class DatatablesController extends Controller
 			// $sss = SeaService::whereIn('vessel_name', $temp)->get();
 			// $sss = SeaService::orderByDesc('sign_on')->groupBy('applicant_id')->whereIn('vessel_name', $temp)->pluck('applicant_id');
 
+			// GET ALL CREW WHOSE LAST SEA SERVICE = SEARCH
 			$sss = SeaService::whereIn('vessel_name', $temp)->groupBy('applicant_id')->pluck('applicant_id');
 			$sss2 = [];
 			
@@ -156,9 +157,9 @@ class DatatablesController extends Controller
 					// $sss2[$id]["abbr"] = $ss->abbr;
 					// $sss2[$id]["name"] = $ss->name;
 				}
-
 			}
 
+			// REMOVE DUPLICATES
 			$diff = collect($sss2)->diff($applicants->pluck('id'));
 			foreach($diff as $id){
 				$temp = Applicant::select(
@@ -183,6 +184,46 @@ class DatatablesController extends Controller
 					$applicants = $applicants->push($temp);
 				}
 			};
+
+			// IF SEARCH TERM IS A RANK. GET ALL CREW WHOSE LAST SEA SERVICE IS THE SEARCH TERM
+			if(in_array($search, array_keys($temps))){
+				$sss = SeaService::where('rank', $temps[$search]['name'])->groupBy('applicant_id')->pluck('applicant_id');
+				$sss2 = [];
+
+				foreach ($sss as $id) {
+					$temp = SeaService::where('applicant_id', $id)->orderByDesc('sign_on')->first();
+					if($temp->rank == $temps[$search]['name']){
+						array_push($sss2, $id);
+					}
+				}
+
+				// REMOVE DUPLICATE
+				// dd($sss);
+				$diff = collect($sss2)->diff($applicants->pluck('id'));
+				foreach($diff as $id){
+					$temp = Applicant::select(
+						'applicants.id', 'applicants.remarks',
+						'avatar', 'fname', 'lname', 'contact', 'birthday',
+						'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
+						,'r.abbr'
+						,'v.name'
+					)
+					->join('users as u', 'u.id', '=', 'applicants.user_id')
+					->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+					->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
+					->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
+					->where('applicants.id', $id)
+					->first();
+
+					// IF NOT DELETED
+					if($temp){
+						// $temp->abbr = $sss2[$id]["abbr"];
+						// $temp->name = $sss2[$id]["name"];
+
+						$applicants = $applicants->push($temp);
+					}
+				};
+			}
 		}
 		else{
 			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')->where([$condition])->count();
@@ -202,7 +243,7 @@ class DatatablesController extends Controller
 
 
 		$applicants = collect($applicants->sortBy('id'));
-		
+
 		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		// RANK IS FETCHED ON LINED-UP/ON BOARD VESSEL. IF NONE, ON LAST VESSEL
 		foreach($applicants as $key => $applicant){
