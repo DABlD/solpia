@@ -63,6 +63,19 @@ class VesselsController extends Controller
         echo Vessel::where('id', $req->id)->update([$req->column => $req->value]);
     }
 
+    public function getParticular(Request $req){
+        echo Vessel::where('id', $req->id)->select('particulars')->first()->particulars;
+    }
+
+    public function updateParticular(Request $req){
+        $file = $req->file('file')[0];
+        $name = $file->getClientOriginalName();
+        $file->move(public_path().'/particulars/', $name);
+
+        Vessel::where('id', $req->id)->update(['particulars' => $name]);
+        echo "<script>window.close();</script>";
+    }
+
     public function index(){
         return $this->_view('index', [
             'title' => "Vessels"

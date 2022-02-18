@@ -15,8 +15,13 @@ trait VesselAttribute{
 		if(auth()->user()->role == "Admin"){
 			$string .= '<a class="btn btn-primary" data-toggle="tooltip" title="Assign to a Fleet" data-id="' . $this->id . '">' . '
 				<span class="fa fa-ship" data-id="' . $this->id . '"></span>' . 
-			'</a>&nbsp;';
+			'</a>';
 		}
+
+		$string .= '<a class="btn btn-success" data-toggle="tooltip" title="Ships Particular" data-id="' . $this->id . '">' . '
+			<span class="fa fa-list" data-id="' . $this->id . '"></span>' . 
+		'</a>&nbsp;';
+
 		if($this->status == "ACTIVE"){
 			$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Remove" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '
 				<span data-status="' . $this->status . '" class="fa fa-times" data-id="' . $this->id . '"></span>' . 

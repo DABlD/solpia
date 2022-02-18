@@ -12,7 +12,7 @@ class Vessel extends Model
     protected $fillable = [
     	'principal_id', 'name', 'flag', 'type', 'year_build',
     	'builder', 'engine', 'gross_tonnage', 'BHP', 'trade',
-    	'ecdis', 'status', 'manning_agent', 'imo'
+    	'ecdis', 'status', 'manning_agent', 'imo', 'fleet', 'particulars'
     ];
 
     protected $dates = [

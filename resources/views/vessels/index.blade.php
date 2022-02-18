@@ -176,7 +176,7 @@
                 },
                 {
                     targets: 7,
-                    width: '160px'
+                    width: '115px'
                 },
             ],
             drawCallback: function(){
@@ -400,6 +400,84 @@
                     }
                 });
             });
+
+            $('[data-original-title="Ships Particular"]').on('click', vessel => {
+                let id = $(vessel.target).data('id');
+                $.ajax({
+                    url: '{{ route('vessels.getParticular') }}',
+                    data: {id: id},
+                    success: particular => {
+                        if(particular != ""){
+                            swal({
+                                html: `
+                                    <a href="particulars/${particular}" download>
+                                        <h3>Download Here</h3>
+                                    </a>
+                                `,
+                                confirmButtonText: 'Upload New',
+                                showCancelButton: true,
+                                cancelButtonColor: '#f76c6b',
+                                cancelButtonText: 'Close'
+                            }).then(result => {
+                                if(result.value){
+                                    uploadParticular(id);
+                                }
+                            });
+                        }
+                        else{
+                            swal({
+                                html: `
+                                    <h3 style="color: red;">No File Yet</h3>
+                                `,
+                                confirmButtonText: 'Upload',
+                                showCancelButton: true,
+                                cancelButtonColor: '#f76c6b',
+                                cancelButtonText: 'Close'
+                            }).then(result => {
+                                if(result.value){
+                                    uploadParticular(id);
+                                }
+                            })
+                        }
+                    }
+                })
+            });
+        }
+
+        function uploadParticular(id){
+            swal({
+                title: 'Select File',
+                html: `
+                    <form action="{{ route('vessels.updateParticular') }}" enctype="multipart/form-data" method="POST" target="_blank">
+                        @csrf
+                        <input type="file" name="file[]" id="file" class="swal2-file"/>
+                        <input type="hidden" name="id" value="${id}">
+                    </form>
+                `,
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            if(!$('#file').val()){
+                                swal.showValidationError('No file Selected');
+                            }
+                        resolve()}, 500);
+                    });
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                cancelButtonText: 'Close'
+            }).then(result => {
+                if(result.value){
+                    $('.swal2-content form').submit();
+                    swal({
+                        type: 'success',
+                        title: 'Successful Upload',
+                        timer: 1000,
+                        showConfirmButton: false
+                    })
+                }
+            })
         }
 
         function getVesselCrew(vessel, bul = false){
