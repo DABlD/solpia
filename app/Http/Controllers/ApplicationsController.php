@@ -1036,7 +1036,37 @@ class ApplicationsController extends Controller
     }
 
     public function updateLineUpContract(Request $req){
-        LineUpContract::where('applicant_id', $req->id)->where('status', 'On Board')->update(["reliever" => $req->reliever]);
+        if($req->type == "Embark"){
+            LineUpContract::where('applicant_id', $req->id)->where('status', 'On Board')->update(["reliever" => $req->reliever]);
+        }
+        else{
+            $lineup = LineUpContract::where('applicant_id', $req->id)->where('status', 'On Board')->first();
+            $vessel = Vessel::find($lineup->vessel_id);
+            $principal = Principal::find($lineup->principal_id);
+
+            SeaService::create([
+                'applicant_id' => $req->id,
+                'vessel_name' => $vessel->name,
+                'imo' => $vessel->imo,
+                'rank' => Rank::find($lineup->rank_id)->name,
+                'vessel_type' => $vessel->type,
+                'gross_tonnage' => $vessel->gross_tonnage,
+                'engine_type' => $vessel->engine,
+                'bhp_kw' => $vessel->BHP,
+                'flag' => $vessel->flag,
+                'trade' => $vessel->trade,
+                'manning_agent' => $vessel->manning_agent,
+                'principal' => $principal->name,
+                'sign_on' => $lineup->joining_date,
+                'sign_off' => $req->disembarkation_date,
+                'total_months' => $lineup->months,
+                'remarks' => $req->remark == "Vacation" ? 'FINISHED CONTRACT' : $req->remark
+            ]);
+
+            $lineup->disembarkation_date = $req->disembarkation_date;
+            $lineup->disembarkation_port = $req->disembarkation_port;
+            $lineup->save();
+        }
     }
 
     function exportOnOff($id, $type){

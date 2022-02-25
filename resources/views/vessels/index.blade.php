@@ -664,7 +664,8 @@
                                 url: "{{ route('applications.updateLineUpContract') }}",
                                 data: {
                                     id: id,
-                                    reliever: input.val()
+                                    reliever: input.val(),
+                                    type: 'Embark'
                                 },
                                 success: () => {
                                     swal({
@@ -991,7 +992,7 @@
                             let b = $('#date').val();
                             let c = $('#months').val();
 
-                            if(a == "" || b == "" || c == ""){
+                            if(b == "" || c == ""){
                                 swal.showValidationError('All fields is required');
                             }
                         resolve()}, 500);
@@ -1087,7 +1088,7 @@
                             let b = $('#date').val();
                             let c = $('#remark').val();
 
-                            if(a == "" || b == "" || c == ""){
+                            if(b == "" || c == ""){
                                 swal.showValidationError('All fields is required');
                             }
                         resolve()}, 500);
@@ -1103,7 +1104,9 @@
                         data: {
                             id: id,
                             disembarkation_port: $('#port').val(),
-                            disembarkation_date: $('#date').val()
+                            disembarkation_date: $('#date').val(),
+                            type: 'Disembark',
+                            remark: $('#remark').val()
                         }
                     });
 

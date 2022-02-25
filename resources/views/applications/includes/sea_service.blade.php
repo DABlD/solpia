@@ -311,6 +311,7 @@
                 url: '{{ route('vessels.getAll') }}',
                 dataType: 'json',
                 success: vessels => {
+                    console.log(vessels);
                     vessels.forEach(vessel => {
                         if(imo[vessel.imo] == undefined){
                             if(vessel.imo != null){
