@@ -8,4 +8,7 @@
 	<a class="btn btn-warning" data-toggle="tooltip" title="Export Vessels">
 		<span class="fa fa-download"></span>
 	</a>
+	<a class="btn btn-primary" data-toggle="tooltip" title="Add Vessel">
+		<span class="fa fa-plus"></span>
+	</a>
 </div>

@@ -154,6 +154,7 @@ Route::group([
 		Route::get("$name/update", ucfirst($name) . 'Controller@update')->name("$name.update");
 		Route::get("$name/getParticular", ucfirst($name) . 'Controller@getParticular')->name("$name.getParticular");
 		Route::post("$name/updateParticular", ucfirst($name) . 'Controller@updateParticular')->name("$name.updateParticular");
+		Route::get($name . '/add', ucfirst($name) . 'Controller@add')->name($name . '.add');
 
 		// Line Up ROUTES
 		$name = "lineUp";
@@ -210,6 +211,10 @@ Route::group([
 		Route::post('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');
 		Route::post('datatables/openings', 'DatatablesController@openings')->name('datatables.openings');
 		Route::post('datatables/auditTrail', 'DatatablesController@auditTrail')->name('datatables.auditTrail');
+
+		// PRINCIPAL
+		$name = "principal";
+		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');

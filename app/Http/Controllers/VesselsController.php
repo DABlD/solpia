@@ -76,6 +76,24 @@ class VesselsController extends Controller
         echo "<script>window.close();</script>";
     }
 
+    public function add(Request $req){
+        echo Vessel::create([
+            'principal_id' => $req->principal_id,
+            'manning_agent' => $req->manning_agent,
+            'name' => $req->name,
+            'imo' => $req->imo,
+            'flag' => $req->flag,
+            'type' => $req->type,
+            'year_build' => $req->year_build,
+            'builder' => $req->builder,
+            'engine' => $req->engine,
+            'gross_tonnage' => $req->gross_tonnage,
+            'bhp' => $req->bhp,
+            'trade' => $req->trade,
+            'ecdis' => $req->ecdis
+        ]);
+    }
+
     public function index(){
         return $this->_view('index', [
             'title' => "Vessels"
