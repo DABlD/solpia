@@ -915,8 +915,10 @@ class ApplicationsController extends Controller
             $linedUp->status2 = "NEW-HIRE";
 
             foreach($temp as $docu){
-                $linedUp->{$docu->type} = $docu->expiry_date;
-                $linedUp->{$docu->type . 'n'} = $docu->number;
+                if($docu->type != ""){
+                    $linedUp->{$docu->type} = $docu->expiry_date;
+                    $linedUp->{$docu->type . 'n'} = $docu->number;
+                }
             }
             
             $sea_services = SeaService::where('applicant_id', $linedUp->applicant_id)->get();
