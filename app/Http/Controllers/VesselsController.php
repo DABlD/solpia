@@ -90,7 +90,8 @@ class VesselsController extends Controller
             'gross_tonnage' => $req->gross_tonnage,
             'bhp' => $req->bhp,
             'trade' => $req->trade,
-            'ecdis' => $req->ecdis
+            'ecdis' => $req->ecdis,
+            'status' => 'INACTIVE'
         ]);
     }
 
