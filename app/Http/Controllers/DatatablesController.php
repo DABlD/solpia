@@ -408,7 +408,7 @@ class DatatablesController extends Controller
 		$fleet = array();
 		// $fleet[23] = "TOEI";
 
-		if(if(auth()->user()->fleet != "") && !str_contains($req->search['value'], '-A')){
+		if(auth()->user()->fleet != "" && !str_contains($req->search['value'], '-A')){
 			$vessels = Vessel::where([
 					['status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE'],
 					['fleet', '=', auth()->user()->fleet]
