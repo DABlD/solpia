@@ -413,7 +413,6 @@ class DatatablesController extends Controller
 			$vessels = Vessel::where([
 					['status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE'],
 					['fleet', '=', $fleet[auth()->user()->id]]
-
 				])
 				->join('principals as p', 'p.id', '=', 'vessels.principal_id')
 				->select('vessels.*', 'p.name as pname')

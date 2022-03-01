@@ -959,8 +959,10 @@ class ApplicationsController extends Controller
             $crew->age = now()->parse($crew->birthday)->diff(now())->format('%y');
 
             foreach($temp as $docu){
-                $crew->{$docu->type} = $docu->expiry_date;
-                $crew->{$docu->type . 'n'} = $docu->number;
+                if($docu->type != ""){
+                    $crew->{$docu->type} = $docu->expiry_date;
+                    $crew->{$docu->type . 'n'} = $docu->number;
+                }
             }
 
             array_push($onBoards, $crew);
