@@ -17,6 +17,7 @@
 							<tr>
 								<th>Name</th>
 								<th>Role</th>
+								<th>Fleet</th>
 								<th>Email / Username</th>
 								<th>Birthday</th>
 								<th>Status</th>
@@ -122,6 +123,7 @@
             columns: [
                 { data: 'fullname', name: 'fullname' },
                 { data: 'role', name: 'role' },
+                { data: 'fleet', name: 'fleet' },
                 { data: 'email', name: 'email' },
                 { data: 'birthday', name: 'birthday' },
                 { data: 'status', name: 'status' },
@@ -129,19 +131,25 @@
             ],
             columnDefs: [
                 {
-                    targets: 3,
+                    targets: 4,
                     render: function(date){
                         return toDate(date);
                     }
                 },
                 {
-                    targets: 2,
+                    targets: 3,
                     render: function(email, type, row){
                         return email + " / " + row.username;
                     }
                 },
                 {
-                    targets: 4,
+                    targets: 2,
+                    render: function(fleet){
+                        return fleet ?? '---';
+                    }
+                },
+                {
+                    targets: 5,
                     render: function(status, type, row){
                     	checked = status > 0 ? " checked" : "";
                     	id = ` data-id=${row.id}`;
@@ -314,6 +322,45 @@
 	    			}
 	    		});
 	    	});
+
+            $('[data-original-title="Assign to a Fleet"]').on('click', user => {
+                let id = $(user.target).data('id');
+
+                swal({
+                    title: 'Select Fleet',
+                    input: 'select',
+                    inputOptions: {
+                        'FLEET A' : 'FLEET A',
+                        'FLEET B' : 'FLEET B',
+                        'FLEET C' : 'FLEET C',
+                        'FLEET D' : 'FLEET D',
+                        'TOEI' : 'TOEI',
+                        'FISHING' : 'FISHING',
+                    },
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b'
+                }).then(result => {
+                    if(result.value){
+                        $.ajax({
+                            url: '{{ route('users.ajaxUpdate') }}',
+                            data: {
+                                id: id,
+                                column: 'fleet',
+                                value: result.value
+                            },
+                            success: () => {
+                                table.ajax.reload(null, false);
+                                swal({
+                                    type: 'success',
+                                    title: 'User Successfully Updated',
+                                    timer: 800,
+                                    showConfirmButton: false
+                                })
+                            }
+                        })
+                    }
+                });
+            });
         };
 	</script>
 @endpush
