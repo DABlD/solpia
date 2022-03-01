@@ -123,7 +123,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="password">Password</label>
-                                <input type="text" class="form-control" name="password" value="{{ strrev($user->ssap->token) }}">
+                                <input type="text" class="form-control" name="password" value="{{ strrev($user->ssap->token ?? '') }}">
                                 <span class="invalid-feedback hidden" role="alert">
                                     <strong id="passwordError"></strong>
                                 </span>

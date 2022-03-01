@@ -59,7 +59,17 @@ class UsersController extends Controller
         $req->merge(['password' => Hash::make($req->password)]);
         
         if(User::where('id', $req->id)->update($req->except(['_token']))){
-            Ssap::where('id', $req->id)->update(['token' => $token]);
+            $ssap = Ssap::where('user_id', $req->id)->first();
+            if($ssap){
+                Ssap::where('id', $req->id)->update(['token' => $token]);
+            }
+            else{
+                Ssap::create([
+                    'user_id' => $req->id,
+                    'token' => $token
+                ]);
+            }
+            
             $req->session()->flash('success', 'User Successfully Updated.');
             return redirect()->route('users.index');
         }
