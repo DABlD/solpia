@@ -192,14 +192,16 @@
 @push('before-scripts')
   <script src="{{ asset('js/datatables.js') }}"></script>
   <script src="{{ asset('js/charts.min.js') }}"></script>
+  <script src="{{ asset('js/moment.js') }}"></script>
 @endpush
 
 @push('after-scripts')
   <script>
-    // $('.tbody').html('<div class="preloader"></div>');
     $('.cwed').css({
       'position': 'relative'
     });
+    var crewDocs = [];
+
     {{-- CREW CATEGORY --}}
     initCrewCategory();
 
@@ -243,7 +245,6 @@
         success: cwed => {
           // CREW WITH EXPIRING DOCUMENT
           cwed = JSON.parse(cwed);
-
           let fleets = [];
 
           Object.keys(cwed).forEach((fleet,key) => {
@@ -254,10 +255,9 @@
               <span class="badge">${cwedpf.length}</span>
             `);
 
-            console.log($(`[href=".${nof}"]`));
-
             cwedpf.forEach((id, i) => {
               let crew = cwed[fleet][id];
+              crewDocs[id] = crew.docs;
 
               table += `
                 <tr>
@@ -266,7 +266,9 @@
                   <td>${crew.lname}</td>
                   <td>${crew.contact}</td>
                   <td>${crew.docs.length}</td>
-                  <td>test</td>
+                  <td>
+                    <a class="btn btn-success" data-toggle="tooltip" title="View Expiring Documents" data-id="${id}"><span class="fa fa-search" data-id="${id}"></span></a>
+                  </td>
                 </tr>
               `;
 
@@ -287,8 +289,56 @@
           });
 
           $('.preloader').fadeOut();
+          initViewButtons();
         }
       })
+    }
+
+    function initViewButtons(){
+      $('[title="View Expiring Documents"]').on('click', crew => {
+        let id = $(crew.target).data('id');
+        let docs = crewDocs[id];
+        console.log(docs);
+
+        let list = "";
+
+        docs.forEach(doc => {
+          let days = moment(doc.expiry).diff(moment(), 'days');
+          list += `
+            <tr>
+              <td>
+                ${doc.type}
+              </td>
+              <td>
+                ${moment(doc.expiry).format('MMM DD, YYYY')}
+              </td>
+              <td>
+                ${days} day/s
+              </td>
+            </tr>
+          `;
+        });
+
+        swal({
+          title: 'Expiring Docs',
+          html: `
+            <table class="table">
+              <thead>
+                <tr>
+                  <td>Document</td>
+                  <td>Expiry</td>
+                  <td>Remaining Days</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                ${list}
+              </tbody>
+            </table>
+          `,
+          width: '400px'
+        });
+      });
     }
   </script>
 @endpush

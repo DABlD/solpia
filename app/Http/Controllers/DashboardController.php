@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\{Applicant, LineUpContract, ProcessedApplicant, Vessel, DocumentId};
+use App\Models\{AuditTrail};
+use Browser;
 use DB;
 
 class DashboardController extends Controller
@@ -56,11 +58,11 @@ class DashboardController extends Controller
         return in_array(auth()->user()->role, $toDatabase);
     }
 
-    function getCrewWithExpiredDocs(){
+    function getCrewWithExpiredDocs(Request $req){
         $vacation = ProcessedApplicant::where('status', 'Vacation')->select('id', 'applicant_id')->get()->keyBy('applicant_id');
         $fleets;
 
-        $crew =  DocumentId::where('expiry_date', '<=', now()->subMonths(2)->toDateString())
+        $crew =  DocumentId::where('expiry_date', '<=', now()->addMonths(2)->toDateString())
                         ->select('applicant_id', 'expiry_date', 'type', 'u.fname', 'u.lname', 'u.contact')
                         ->join('applicants as a', 'a.id', '=', 'document_ids.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
@@ -80,6 +82,7 @@ class DashboardController extends Controller
                         "type" => $doc->type, 
                         "expiry" => $doc->expiry_date->toDateString()
                     ];
+                    // echo $id . ' - ' . $doc->expiry_date . '<br>';
                     $bool = true;
                 }
             }
@@ -89,10 +92,12 @@ class DashboardController extends Controller
             }
         }
 
+        // die;
+
         foreach($fleets['Vacation'] as $id => $crew){
             if(!array_key_exists($id, $vacation->toArray())){
                 $fleet = Vessel::where('pa.applicant_id', $id)
-                                    ->select('vessels.fleet')
+                                    ->select('vessels.fleet', 'vessels.name')
                                     ->join('processed_applicants as pa', 'pa.vessel_id', '=', 'vessels.id')
                                     ->first();
 
@@ -100,8 +105,24 @@ class DashboardController extends Controller
                     $fleets[$fleet->fleet] = [];
                 }
 
-                $fleets[$fleet->fleet][$id] = $fleets['Vacation'][$id];
-                unset($fleets['Vacation'][$id]);
+                if(!$fleet->fleet == ""){
+                    $fleets[$fleet->fleet][$id] = $fleets['Vacation'][$id];
+                    unset($fleets['Vacation'][$id]);
+                }
+                else{
+                    $name = $fleet->name;
+
+                    AuditTrail::create([
+                        'user_id'   => auth()->user()->id,
+                        'action'    => "WARNING: VESSEL $name HAS NO FLEET ASSIGNMENT",
+                        'ip'        => $req->getClientIp(),
+                        'hostname'  => gethostname(),
+                        'device'    => Browser::deviceFamily(),
+                        'browser'   => Browser::browserName(),
+                        'platform'  => Browser::platformName()
+                    ]);
+                }
+
             }
         }
 
