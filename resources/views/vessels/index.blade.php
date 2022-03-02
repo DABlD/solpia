@@ -159,12 +159,6 @@
             ],
             columnDefs: [
                 {
-                    targets: 0,
-                    render: function(id, display, data){
-                        return data.row;
-                    },
-                },
-                {
                     targets: 6,
                     render: function(status){
                         let color = status == "ACTIVE" ? '#00a65a' : '#dd4b39';
