@@ -218,5 +218,6 @@ Route::group([
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
+		Route::get('clean', 'DashboardController@clean');
 	}
 );
