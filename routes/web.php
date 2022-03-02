@@ -59,6 +59,9 @@ Route::group([
 			->name('dashboard')
 			->defaults('href', 'dashboard');
 
+		Route::get('clean', 'DashboardController@clean');
+		Route::get('getCrewWithExpiredDocs', 'DashboardController@getCrewWithExpiredDocs')->name('dashboard.getCrewWithExpiredDocs');
+
 		// USER ROUTES
 		Route::get('users', 'UsersController@index')
 			->defaults('sidebar', 1)
@@ -218,6 +221,5 @@ Route::group([
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
-		Route::get('clean', 'DashboardController@clean');
 	}
 );

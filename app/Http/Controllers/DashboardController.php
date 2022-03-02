@@ -28,20 +28,6 @@ class DashboardController extends Controller
         // elseif($status > 1){
         //     $condition = ['u.applicant', '=', $status];
         // }
-
-    	// $onBoard = LineUpContract::join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
-     //        ->join('users as u', 'u.id', '=', 'a.user_id')
-     //        ->where([
-     //            ['line_up_contracts.status', '=', 'On Board'], 
-     //            $condition
-                
-     //        ])
-     //        ->get();
-
-
-    	// $applicants = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')
-     //                            ->where([$condition])
-     //                            ->get();
         $applicants = Applicant::select('applicants.id', 'u.fname', 'u.lname', 'u.contact')
                             ->join('users as u', 'u.id', '=', 'applicants.user_id')
                             ->get()->keyBy('id');
@@ -51,8 +37,28 @@ class DashboardController extends Controller
         $linedUp = ProcessedApplicant::where('status', 'Lined-Up')->select('id', 'applicant_id')->get()->keyBy('applicant_id');
         $vessels = Vessel::where('status', 'ACTIVE')->select('id', 'name')->count();
 
+        $fleets = array_keys(Vessel::where('fleet', '!=', "")->get()->groupBy('fleet')->toArray());
+        sort($fleets);
+
+    	return $this->_view('dashboard', [
+    		'title' 		=> 'Dashboard',
+    		'applicants'	=> sizeof($applicants),
+            'vacation'       => $vacation->count(),
+    		'onBoard' 		=> $onBoard->count(),
+            'linedUp'       => $linedUp->count(),
+            'vessels'       => $vessels,
+            'fleets'        => array_merge($fleets, ["Vacation"])
+    	]);
+    }
+
+    function checkIfNotAllowed(){
+        $toDatabase = ['Cadet', 'Encoder', 'Crewing Officer', 'Processing'];
+        return in_array(auth()->user()->role, $toDatabase);
+    }
+
+    function getCrewWithExpiredDocs(){
+        $vacation = ProcessedApplicant::where('status', 'Vacation')->select('id', 'applicant_id')->get()->keyBy('applicant_id');
         $fleets;
-        // $fleets['Vacation'] = [];
 
         $crew =  DocumentId::where('expiry_date', '<=', now()->subMonths(2)->toDateString())
                         ->select('applicant_id', 'expiry_date', 'type', 'u.fname', 'u.lname', 'u.contact')
@@ -99,55 +105,7 @@ class DashboardController extends Controller
             }
         }
 
-        // foreach($vacation as $id => $crew){
-        //     $docs = DocumentId::where('applicant_id', $id)
-        //                     ->whereIn('type', ['PASSPORT', 'US-VISA', "SEAMAN'S BOOK"])
-        //                     ->select('applicant_id', 'expiry_date', 'type')
-        //                     ->get();
-
-        //     $temp = [];
-        //     $bool = false;
-
-        //     foreach($docs as $key => $doc){
-        //         $exp = $doc->expiry_date;
-        //         if($exp){
-        //             $temp[$doc->type][0] = $exp->toDateString();
-
-        //             if($exp >= now()){
-        //                 $temp2 = now()->diffInMonths($doc->exp);
-        //                 $temp[$doc->type][1] = $temp2 == 1 ? 2 : $temp2 == 2 ? 1 : 0;
-        //             }
-        //             else{
-        //                 $temp[$doc->type][1] = 3;
-        //             }
-
-        //             $bool = $temp[$doc->type][1] ? true : false;
-        //         }
-        //     }
-
-        //     if($bool){
-        //         $temp["applicant"] = $applicants[$id]->toArray();
-        //         $fleets['Vacation'][$id] = $temp;
-        //     }
-        // }
-
-        // dd(DB::connection()->getQuerylog());
-
-
-    	return $this->_view('dashboard', [
-    		'title' 		=> 'Dashboard',
-    		'applicants'	=> sizeof($applicants),
-            'vacation'       => $vacation->count(),
-    		'onBoard' 		=> $onBoard->count(),
-            'linedUp'       => $linedUp->count(),
-            'vessels'       => $vessels,
-            'fleets'        => $fleets
-    	]);
-    }
-
-    function checkIfNotAllowed(){
-        $toDatabase = ['Cadet', 'Encoder', 'Crewing Officer', 'Processing'];
-        return in_array(auth()->user()->role, $toDatabase);
+        echo json_encode($fleets);
     }
 
     function clean(){

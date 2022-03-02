@@ -66,15 +66,56 @@
             <div class="box-header">
               <i class="fa fa-file"></i>
 
-              <h3 class="box-title">Expiring Documents</h3>
+              <h3 class="box-title">Crew With Expiring Documents</h3>
             </div>
-            <div class="box-body">
-              
+            <div class="box-body" id="cwed">
+
+              <ul class="nav nav-pills" role="tablist">
+                @foreach($fleets as $key => $fleet)
+                  @php
+                    $fleet_ = str_replace(" ", "_", $fleet);
+                  @endphp
+                  <li role="presentation" class="{{ $key == 0 ? 'active' : "" }}">
+                      <a href=".{{ $fleet_ }}" role="tab" data-toggle="pill">{{ $fleet }}</a>
+                  </li>
+                @endforeach
+              </ul>
+
+              <br>
+              <!-- Tab panes -->
+              <div class="tab-content">
+                @foreach($fleets as $key => $fleet)
+                  @php
+                    $fleet_ = str_replace(" ", "_", $fleet);
+                  @endphp
+                    <div role="tabpanel" class="cwed tab-pane fade {{ $fleet_ }} {{ $key == 0 ? 'in active' : "" }}">
+                      <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <td><b>ID</b></td>
+                            <td><b>First Name</b></td>
+                            <td><b>Last Name</b></td>
+                            <td><b>Contact</b></td>
+                            <td><b>No. of docs</b></td>
+                            <td><b>Actions</b></td>
+                          </tr>
+                        </thead>
+                        <tbody id="{{ $fleet_ }}" class="tbody">
+                          <div class="preloader"></div>
+                          <tr><td colspan="6"></td></tr>
+                          <tr><td colspan="6"></td></tr>
+                          <tr><td colspan="6" class="ncwed">
+                            No Crew With Expiring Document
+                          </td></tr>
+                          <tr><td colspan="6"></td></tr>
+                          <tr><td colspan="6"></td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  @endforeach
+              </div>
             </div>
-            <div class="box-footer clearfix">
-              <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
-                <i class="fa fa-arrow-circle-right"></i></button>
-            </div>
+            {{-- BODY --}}
           </div>
         </section>
 
@@ -95,14 +136,76 @@
     </section>
 @endsection
 
+@push('after-styles')
+  <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
+  <style>
+    .nav-pills>li>a {
+      border-top: 3px solid !important;
+    }
+
+    .tbody{
+      position: relative;
+    }
+
+    table{
+      width: 100% !important;
+    }
+
+    .tbody td, thead td{
+      height: 25px !important;
+      vertical-align: middle;
+      text-align: center;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .ncwed{
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    tr td:nth-child(1n+1) {
+      width: 10%;
+    }
+
+    tr td:nth-child(2n+2) {
+      width: 30%;
+    }
+
+    tr td:nth-child(3n+3) {
+      width: 30%;
+    }
+
+    tr td:nth-child(4n+4) {
+      width: 15%;
+    }
+
+    tr td:nth-child(5n+5) {
+      width: 15%;
+    }
+
+    .badge{
+      background-color: #f76c6b;
+    }
+  </style>
+@endpush
 @push('before-scripts')
+  <script src="{{ asset('js/datatables.js') }}"></script>
   <script src="{{ asset('js/charts.min.js') }}"></script>
 @endpush
 
 @push('after-scripts')
   <script>
+    // $('.tbody').html('<div class="preloader"></div>');
+    $('.cwed').css({
+      'position': 'relative'
+    });
     {{-- CREW CATEGORY --}}
     initCrewCategory();
+
+    $(document).ready(() => {
+      initCrewWithExpiredDocs();
+    });
 
     function initCrewCategory(){
       const ctx = document.getElementById('crewCategory').getContext('2d');
@@ -132,6 +235,60 @@
             }
           }
       });
+    }
+
+    function initCrewWithExpiredDocs(){
+      $.ajax({
+        url: '{{ route('dashboard.getCrewWithExpiredDocs') }}',
+        success: cwed => {
+          // CREW WITH EXPIRING DOCUMENT
+          cwed = JSON.parse(cwed);
+
+          let fleets = [];
+
+          Object.keys(cwed).forEach((fleet,key) => {
+            let table = "";
+            let cwedpf = Object.keys(cwed[fleet]);
+            let nof = fleet.replace(" ", "_");
+            $(`[href=".${nof}"]`).append(`
+              <span class="badge">${cwedpf.length}</span>
+            `);
+
+            console.log($(`[href=".${nof}"]`));
+
+            cwedpf.forEach((id, i) => {
+              let crew = cwed[fleet][id];
+
+              table += `
+                <tr>
+                  <td>${id}</td>
+                  <td>${crew.fname}</td>
+                  <td>${crew.lname}</td>
+                  <td>${crew.contact}</td>
+                  <td>${crew.docs.length}</td>
+                  <td>test</td>
+                </tr>
+              `;
+
+              fleets[nof] = table;
+            });
+          });
+
+          Object.keys(fleets).forEach(fleet => {
+            $(`#${fleet}`).html(fleets[fleet]);
+            $(`#${fleet}`).parent('table').DataTable({
+              height: '100%'
+            });
+          })
+
+          $('.tbody td').css({
+            'vertical-align': 'middle',
+            'text-align': 'center'
+          });
+
+          $('.preloader').fadeOut();
+        }
+      })
     }
   </script>
 @endpush
