@@ -131,6 +131,7 @@
             <div class="box-body">
               <div class="preloader report1"></div>
               <canvas id="report1" width="100%" height="100%"></canvas>
+              <a class="btn btn-success reportBtn" onclick="initReport1()">Show Report</a>
             </div>
           </div>
         </section>
@@ -206,6 +207,21 @@
     .badge{
       background-color: #f76c6b;
     }
+
+    .reportBtn{
+      width: 200px;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transform: translateY(-50%);
+    }
+
+    .report1{
+      display: none;
+    }
   </style>
 @endpush
 
@@ -226,7 +242,7 @@
 
     $(document).ready(() => {
       initCrewWithExpiredDocs();
-      initReport1();
+      // initReport1();
       setTimeout(() => {
         initCrewCategory();
       }, 4000);
@@ -368,6 +384,8 @@
     }
 
     function initReport1(){
+      $('.reportBtn').remove();
+      $('.preloader.report1').fadeIn("slow");
       const ctx = document.getElementById('report1').getContext('2d');
 
       // LINED UP, ON BOARD, DISEMBARKED
