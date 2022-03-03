@@ -228,6 +228,16 @@ class DashboardController extends Controller
             array_push($data['Disembarked'], $dCtr);
             $ctr++;
         }
+
+        // $data["Disembarked"] = [
+        //     33,55,20,30,43,
+        //     28,49,15,25,38,
+        //     25,46,12,22,35,
+        //     22,43,9,19,32,
+        //     19,40,6,10,14,
+        //     12,3
+        // ];
+        
         echo json_encode(['names' => $names, 'data' => $data]);
     }
 

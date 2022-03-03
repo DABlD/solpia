@@ -1026,7 +1026,25 @@
                 }).then(result => {
                     if(result.value){
                         type = result.value;
-                        window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                        if(type == "klcsm"){
+                            swal({
+                                title: 'Select Type',
+                                input: 'select',
+                                inputOptions: {
+                                    klcsm: 'Tanker',
+                                    klcsmBulk: 'Bulk'
+                                }
+                            }).then(result => {
+                                if(result.value){
+                                    type = result.value;
+                                    window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                                }
+                            })
+                        }
+                        else{
+                            console.log('export');
+                            window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                        }
                     }
                 });
             }
