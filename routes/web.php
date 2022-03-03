@@ -55,12 +55,13 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-user')
 			->defaults('name', 'Dashboard')
-			->defaults('roles', array('Admin', 'Principal'))
+			->defaults('roles', array('Admin', 'Principal', 'Crewing Officer', "Crewing Manager"))
 			->name('dashboard')
 			->defaults('href', 'dashboard');
 
 		Route::get('clean', 'DashboardController@clean');
 		Route::get('getCrewWithExpiredDocs', 'DashboardController@getCrewWithExpiredDocs')->name('dashboard.getCrewWithExpiredDocs');
+		Route::get('report1', 'DashboardController@report1')->name('dashboard.report1');
 
 		// USER ROUTES
 		Route::get('users', 'UsersController@index')
@@ -144,7 +145,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-ship')
 			->defaults('name', 'Vessels')
-			->defaults('roles', array('Admin', 'Crewing Manager', 'Cadet', 'Encoder'))
+			->defaults('roles', array('Admin', 'Crewing Manager', 'Cadet', 'Encoder', 'Crewing Officer'))
 			// USER ID OF SPECIAL PERMISSION
 			->defaults('sped', array(33, 34, 461, 462, 506, 5))
 			->name($name . '.index')
