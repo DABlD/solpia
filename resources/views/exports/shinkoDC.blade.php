@@ -412,9 +412,9 @@
 				ADMINISTRATION
 			</td>
 			<td colspan="5" rowspan="3">
-				CONFIRMED BY: CAPTAIN DIAMANTE
+				CONFIRMED BY: Ms. Precian Marie Cervantes
 				<br>
-				(Crewing Manager)
+				(ASST. CREWING MANAGER)
 			</td>
 		</tr>
 	</tbody>
