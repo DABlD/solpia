@@ -367,6 +367,7 @@
                         'FLEET B' : 'FLEET B',
                         'FLEET C' : 'FLEET C',
                         'FLEET D' : 'FLEET D',
+                        'FLEET E' : 'FLEET E',
                         'TOEI' : 'TOEI',
                         'FISHING' : 'FISHING',
                     },
