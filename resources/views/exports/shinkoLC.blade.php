@@ -339,7 +339,7 @@
 					(Sub)
 			</td>
 			<td>Rank</td>
-			<td colspan="2">CREWING MANAGER</td>
+			<td colspan="2">ASST. CREWING MANAGER</td>
 			<td rowspan="3" colspan="5">
 				Interviewer
 					(Main)
@@ -350,7 +350,7 @@
 
 		<tr>
 			<td>Name</td>
-			<td colspan="2">CAPTAIN DIAMANTE</td>
+			<td colspan="2">MS. PRECIAN MARIE CERVANTES</td>
 			<td>Name</td>
 			<td colspan="3">C/E ROMANO MARIANO</td>
 		</tr>
