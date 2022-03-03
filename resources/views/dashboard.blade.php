@@ -372,12 +372,12 @@
 
       // LINED UP, ON BOARD, DISEMBARKED
       const color = [[],[],[]];
-      color[0].bc1 = 'rgb(85,182,221)';
-      color[0].bc2 = 'rgba(85,182,221,0.1)';
-      color[1].bc1 = 'rgb(0,166,90)';
-      color[1].bc2 = 'rgba(0,166,90,0.1)';
-      color[2].bc1 = 'rgb(247,108,107)';
-      color[2].bc2 = 'rgba(247,108,107,0.1)';
+      // color[0].bc1 = 'rgb(85,182,221)';
+      // color[0].bc2 = 'rgba(85,182,221,0.1)';
+      color[0].bc1 = 'rgb(0,166,90)';
+      color[0].bc2 = 'rgba(0,166,90,0.1)';
+      color[1].bc1 = 'rgb(247,108,107)';
+      color[1].bc2 = 'rgba(247,108,107,0.1)';
 
       let data = {type: 'Weekly'};
 
