@@ -300,7 +300,7 @@
 	<tr>
 		<td></td>
 		<td colspan="6">Principal Company:</td>
-		<td colspan="12">WESTERN SHIPPING CORP.</td>
+		<td colspan="12">TOEI JAPAN LTD.</td>
 	</tr>
 
 	<tr></tr>
