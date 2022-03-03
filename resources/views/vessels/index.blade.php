@@ -805,12 +805,13 @@
                     </tr>
                 `;
 
+                console.log(crew);
                 table3 += `
                     <tr>
                         <td rowspan="2">${index + 1}</td>
                         <td rowspan="2">${crew.abbr}</td>
                         <td rowspan="2">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
-                        <td rowspan="2">${moment(crew.joining_date).format('MMM DD, YYYY')}</td>
+                        <td rowspan="2">${moment(crew.birthday).format('MMM DD, YYYY')}</td>
 
                         <td>${crew.PASSPORTn ? crew.PASSPORTn : '-----'}</td>
                         <td>${crew["SEAMAN'S BOOKn"] ? crew["SEAMAN'S BOOKn"] : '-----'}</td>
