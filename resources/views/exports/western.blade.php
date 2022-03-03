@@ -677,8 +677,32 @@
 
 	{{ $getDocument('MEDICAL CERTIFICATE', 'med_cert', '', 'Physical Inspection')}}
 	{{ $getDocument('YELLOW FEVER', 'med_cert', '', 'Yellow Fever')}}
-	{{ $getDocument('CHOLERA', 'med_cert', '', 'Cholera')}}
+	{{ $getDocument('POLIO VACCINE (IPV)', 'med_cert', '', 'POLIO VACCINE')}}
 
+	<tr>
+		<td colspan="7" rowspan="3">Covid Vaccine Certificate</td>
+		<td colspan="3">1st Dose</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">NOT APPLICABLE</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">2nd Dose</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">NOT APPLICABLE</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">2nd Dose</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">-----</td>
+		<td colspan="6">NOT APPLICABLE</td>
+	</tr>
 	{{-- LINGUISTIC --}}
 	{{ addS('6. LINGUISTIC') }}
 
