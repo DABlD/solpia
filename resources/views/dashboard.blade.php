@@ -61,7 +61,7 @@
 
       {{-- ROW --}}
       <div class="row">
-        <section class="col-lg-8 connectedSortable">
+        <section class="col-lg-12 connectedSortable">
           <div class="box box-info">
             <div class="box-header">
               <i class="fa fa-file"></i>
@@ -118,7 +118,25 @@
             {{-- BODY --}}
           </div>
         </section>
+      </div>
 
+      <div class="row">
+        <section class="col-lg-12 connectedSortable">
+          <div class="box box-info">
+            <div class="box-header">
+              <i class="fa fa-line-chart"></i>
+
+              <h3 class="box-title">On Board And Disembark Reports</h3>
+            </div>
+            <div class="box-body">
+              <div class="preloader report1"></div>
+              <canvas id="report1" width="100%" height="100%"></canvas>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="row">
         <section class="col-lg-4 connectedSortable">
           <div class="box box-info">
             <div class="box-header">
@@ -127,6 +145,7 @@
               <h3 class="box-title">Crew Category</h3>
             </div>
             <div class="box-body">
+              <div class="preloader crewCategory"></div>
               <canvas id="crewCategory" width="100%" height="100%"></canvas>
             </div>
           </div>
@@ -189,6 +208,7 @@
     }
   </style>
 @endpush
+
 @push('before-scripts')
   <script src="{{ asset('js/datatables.js') }}"></script>
   <script src="{{ asset('js/charts.min.js') }}"></script>
@@ -203,10 +223,13 @@
     var crewDocs = [];
 
     {{-- CREW CATEGORY --}}
-    initCrewCategory();
 
     $(document).ready(() => {
       initCrewWithExpiredDocs();
+      initReport1();
+      setTimeout(() => {
+        initCrewCategory();
+      }, 4000);
     });
 
     function initCrewCategory(){
@@ -219,24 +242,26 @@
       ];
 
       const myChart = new Chart(ctx, {
-          type: 'pie',
-          data: {
-              labels: ['Vacation', 'On-Board', 'Lined-Up'],
-              datasets: [{
-                  label: 'Crew Category',
-                  data: [{{ $vacation }}, {{ $onBoard }}, {{ $linedUp }}],
-                  backgroundColor: color,
-                  borderColor: ['white','white','white'],
-                  borderWidth: 3,
-                  hoverOffset: 30,
-              }]
-          },
-          options: {
-            layout: {
-                padding: 20
-            }
+        type: 'pie',
+        data: {
+            labels: ['Vacation', 'On-Board', 'Lined-Up'],
+            datasets: [{
+                label: 'Crew Category',
+                data: [{{ $vacation }}, {{ $onBoard }}, {{ $linedUp }}],
+                backgroundColor: color,
+                borderColor: ['white','white','white'],
+                borderWidth: 3,
+                hoverOffset: 30,
+            }]
+        },
+        options: {
+          layout: {
+              padding: 20
           }
+        }
       });
+
+      $('.preloader.crewCategory').fadeOut();
     }
 
     function initCrewWithExpiredDocs(){
@@ -279,7 +304,10 @@
           Object.keys(fleets).forEach(fleet => {
             $(`#${fleet}`).html(fleets[fleet]);
             $(`#${fleet}`).parent('table').DataTable({
-              height: '100%'
+              height: '100%',
+              drawCallback: function(){
+                  initViewButtons();
+              },
             });
           })
 
@@ -288,7 +316,7 @@
             'text-align': 'center'
           });
 
-          $('.preloader').fadeOut();
+          $('.cwed .preloader').fadeOut();
           initViewButtons();
         }
       })
@@ -298,8 +326,6 @@
       $('[title="View Expiring Documents"]').on('click', crew => {
         let id = $(crew.target).data('id');
         let docs = crewDocs[id];
-        console.log(docs);
-
         let list = "";
 
         docs.forEach(doc => {
@@ -338,6 +364,63 @@
           `,
           width: '400px'
         });
+      });
+    }
+
+    function initReport1(){
+      const ctx = document.getElementById('report1').getContext('2d');
+
+      // LINED UP, ON BOARD, DISEMBARKED
+      const color = [[],[],[]];
+      color[0].bc1 = 'rgb(85,182,221)';
+      color[0].bc2 = 'rgba(85,182,221,0.1)';
+      color[1].bc1 = 'rgb(0,166,90)';
+      color[1].bc2 = 'rgba(0,166,90,0.1)';
+      color[2].bc1 = 'rgb(247,108,107)';
+      color[2].bc2 = 'rgba(247,108,107,0.1)';
+
+      let data = {type: 'Weekly'};
+
+      $.ajax({
+        url: '{{ route('dashboard.report1') }}',
+        data: data,
+        success: data => {
+          data = JSON.parse(data);
+          let datasets = [];
+
+          Object.keys(data.data).forEach((label, i) => {
+            datasets.push({
+              label: label,
+              data: data.data[label],
+              borderColor: color[i]['bc1'],
+              backgroundColor: color[i]['bc2'],
+              fill: true,
+              lineTension: 0.1,
+              hoverRadius: 10
+            });
+          });
+          
+          var myChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: data.names,
+                  datasets: datasets
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: true,
+                    text: 'Weekly Reports'
+                  }
+                }
+              }
+          });
+
+          myChart.canvas.parentNode.style.height = '500px';
+          $('.report1.preloader').fadeOut();
+        }
       });
     }
   </script>
