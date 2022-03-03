@@ -92,7 +92,7 @@
 
 			<td colspan="2" rowspan="2">Present Address</td>
 			<td colspan="6" rowspan="2">
-				{{ $applicant->provincial_address ?? $applicant->user->address}}
+				{{ $applicant->provincial_address == "" ? $applicant->user->address : $applicant->provincial_address}}
 			</td>
 		</tr>
 
