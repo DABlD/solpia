@@ -581,8 +581,8 @@ class ApplicationsController extends Controller
         ]);
 
         Statistic::where('name', 'export')->increment('count');
-		
-        return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
+		$pname = $type == "western" ? "NITTA_TOEI" : $type;
+        return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . $pname . '.xlsx');
     }
 
     public function exportLineUpApplication(ProcessedApplicant $applicant, $type){
@@ -661,7 +661,8 @@ class ApplicationsController extends Controller
 
         $class = "App\\Exports\\" . ucfirst($type);
 
-        return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . ucfirst($type) . '.xlsx');
+        $pname = $type == "western" ? "NITTA_TOEI" : $type;
+        return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . $pname . '.xlsx');
     }
 
     public function store(Request $req){
