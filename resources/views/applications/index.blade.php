@@ -151,6 +151,10 @@
             background-color: #abaab4 !important;
             border-color: #abaab4 !important;
         }
+
+        .form-group{
+            text-align: left;
+        }
 	</style>
 @endpush
 
@@ -729,16 +733,683 @@
                     data: {id: id},
                     success: applicant => {
                         applicant = JSON.parse(applicant);
-                        console.log(applicant);
+                        swal({
+                            width: '70%',
+                            html: `
+                                <ul class="nav nav-pills" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href=".pinfo" role="tab" data-toggle="pill">Personal Info</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href=".educbg" role="tab" data-toggle="pill">Educational Background</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href=".docs" role="tab" data-toggle="pill">Flag Documents</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href=".docs2" role="tab" data-toggle="pill">Documents</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href=".meds" role="tab" data-toggle="pill">Medical Certificates</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href=".meds2" role="tab" data-toggle="pill">Medical History</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href=".ss" role="tab" data-toggle="pill">Sea Services</a>
+                                    </li>
+                                </ul>
+                                <br><br>
+
+                                <div class="tab-content">
+                                  <div role="tabpanel" class="tab-pane fade in pinfo active">a</div>
+                                  <div role="tabpanel" class="tab-pane fade educbg">b</div>
+                                  <div role="tabpanel" class="tab-pane fade docs">c</div>
+                                  <div role="tabpanel" class="tab-pane fade docs2">c</div>
+                                  <div role="tabpanel" class="tab-pane fade meds">d</div>
+                                  <div role="tabpanel" class="tab-pane fade meds2">d</div>
+                                  <div role="tabpanel" class="tab-pane fade ss">d</div>
+                                </div>
+                            `,
+                            onOpen: () => {
+                                fillTab1(applicant);
+                                fillTab2(applicant);
+                                fillTab3(applicant);
+                                fillTab4(applicant);
+                                fillTab5(applicant);
+                                fillTab6(applicant);
+                                fillTab7(applicant);
+                            }
+                        });
                     }
                 })
 
-                swal({
-                    width: '80%',
-                    text: 'asd'
-                });
             });
 	    }
+
+        // CREW INFO
+        function fillTab1(applicant){
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+
+                        <div class="row">
+                        <br>
+                            <div class="col-md-2">
+                                <img src="${applicant.user.avatar}" width="200px;" height="200px;">
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" id="fname" value="${applicant.user.fname}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="mname">Middle Name</label>
+                                    <input type="text" class="form-control" id="mname" value="${applicant.user.mname}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" value="${applicant.user.lname}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="suffix">Suffix</label>
+                                    <input type="text" class="form-control" id="suffix" value="${applicant.user.suffix ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="birthday">Birth Date</label>
+                                    <input type="text" class="form-control" id="birthday" value="${moment(applicant.user.birthday).format('MMM DD, YYYY')}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <input type="text" class="form-control" id="age" value="${moment().diff(moment(applicant.user.birthday), 'years')}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="birth_place">Birth Place</label>
+                                    <input type="text" class="form-control" id="birth_place" value="${applicant.birth_place ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="religion">Religion</label>
+                                    <input type="text" class="form-control" id="religion" value="${applicant.religion ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" value="${applicant.user.address ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="contact">Contact Number</label>
+                                    <input type="text" class="form-control" id="contact" value="${applicant.user.contact ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="provincial_address">Provincial Address</label>
+                                    <input type="text" class="form-control" id="provincial_address" value="${applicant.provincial_address ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="provincial_contact">Provincial Contact Number</label>
+                                    <input type="text" class="form-control" id="provincial_contact" value="${applicant.provincial_contact ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" value="${applicant.user.email ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2" style="text-align: left;">
+                                <label for="gender">Gender</label>
+                                </br>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" id="male" ${applicant.user.gener == "Male" ? "Checked" : ""}> Male
+                                </label>
+                                &nbsp; &nbsp;
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" id="female" ${applicant.user.gener == "Male" ? "Checked" : ""}> Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="waistline">Waistline (inch)</label>
+                                    <input type="text" class="form-control" id="waistline" value="${applicant.waistline ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="shoe_size">Shoe Size (cm)</label>
+                                    <input type="text" class="form-control" id="shoe_size" value="${applicant.shoe_size ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="clothes_size">Clothes Size (cm)</label>
+                                    <input type="text" class="form-control" id="clothes_size" value="${applicant.clothes_size ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="height">Height (cm)</label>
+                                    <input type="text" class="form-control" id="height" value="${applicant.height ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Weight">Weight (kg)</label>
+                                    <input type="text" class="form-control" id="Weight" value="${applicant.Weight ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="bmi">BMI</label>
+                                    <input type="text" class="form-control" id="bmi" value="${Math.round((applicant.weight / (applicant.height * applicant.height)) * 10 ) / 1}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="blood_type">Blood Type</label>
+                                    <input type="text" class="form-control" id="blood_type" value="${applicant.blood_type ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="civil_status">Civil Status</label>
+                                    <input type="text" class="form-control" id="civil_status" value="${applicant.civil_status ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="eye_color">Eye Color</label>
+                                    <input type="text" class="form-control" id="eye_color" value="${applicant.eye_color ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="tin">TIN</label>
+                                    <input type="text" class="form-control" id="tin" value="${applicant.tin ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="sss">SSS</label>
+                                    <input type="text" class="form-control" id="sss" value="${applicant.sss ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            `;
+
+            $('.pinfo').html(string);
+        }
+
+        function fillTab2(applicant){
+            let ebs = Object.entries(applicant.educational_background);
+            let temp = ``;
+
+            ebs.forEach(eb => {
+                eb = eb[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${eb.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="course">Course</label>
+                                <input type="text" class="form-control" id="course" value="${eb.course ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="year">Year</label>
+                                <input type="text" class="form-control" id="year" value="${eb.year ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="school">School</label>
+                                <input type="text" class="form-control" id="school" value="${eb.school ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" value="${eb.address ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            })
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Educational Background</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.educbg').html(string);
+        }
+
+        function fillTab3(applicant){
+            let flags = Object.entries(applicant.document_flag);
+            let temp = ``;
+
+            flags.forEach(flag => {
+                flag = flag[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${flag.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control" id="country" value="${flag.country ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="number">Number</label>
+                                <input type="text" class="form-control" id="number" value="${flag.number ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issue_date">Issue Date</label>
+                                <input type="text" class="form-control" id="issue_date" value="${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="expiry_date">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" value="${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Flag Documents</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.docs').html(string);
+        }
+
+        function fillTab4(applicant){
+            let lcs = Object.entries(applicant.document_lc);
+            let temp = ``;
+
+            lcs.forEach(lc => {
+                lc = lc[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${lc.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issuer">Issuer</label>
+                                <input type="text" class="form-control" id="issuer" value="${lc.issuer ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="no">Number</label>
+                                <input type="text" class="form-control" id="no" value="${lc.no ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issue_date">Issue Date</label>
+                                <input type="text" class="form-control" id="issue_date" value="${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="expiry_date">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" value="${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="regulation">Regulation</label>
+                                <input type="text" class="form-control" id="regulation" value="${lc.regulation != "[]" ? JSON.parse(lc.regulation) : "---"}" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Licenses</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.docs2').html(string);
+        }
+
+        function fillTab5(applicant){
+            let mcs = Object.entries(applicant.document_med_cert);
+            let temp = ``;
+
+            mcs.forEach(mc => {
+                mc = mc[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${mc.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="number">Number</label>
+                                <input type="text" class="form-control" id="number" value="${mc.number ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="clinic">Clinic/Hospital</label>
+                                <input type="text" class="form-control" id="clinic" value="${mc.clinic ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issue_date">Issue Date</label>
+                                <input type="text" class="form-control" id="issue_date" value="${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="expiry_date">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" value="${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Medical Certificate</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.meds').html(string);
+        }
+
+        function fillTab6(applicant){
+            let mhs = Object.entries(applicant.document_med);
+            let temp = "";
+
+            mhs.forEach(mh => {
+                mh = mh[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${mh.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="with_mv">With Medication/Vaccine</label>
+                                <input type="text" class="form-control" id="with_mv" value="${mh.with_mv == "Yes" ? mh.with_mv : '---'}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="year">Year</label>
+                                <input type="text" class="form-control" id="year" value="${mh.year ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="case_remarks">Remarks</label>
+                                <input type="text" class="form-control" id="case_remarks" value="${mh.case_remarks ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : "<h2><b>NO RECORDED HISTORY</b></h2>"}
+                    </div>
+                </div>
+            `;
+
+            $('.meds2').html(string);
+        }
+
+        function fillTab7(applicant){
+            let sss = Object.entries(applicant.sea_service);
+            let temp = ``;
+
+            sss.forEach((ss, i) => {
+                ss = ss[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${i+1 + ".) " + ss.vessel_name}</b></h3>
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="rank">Rank</label>
+                                <input type="text" class="form-control" id="rank" value="${ss.rank ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="vessel_type">Vessel Type</label>
+                                <input type="text" class="form-control" id="vessel_type" value="${ss.vessel_type ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="gross_tonnage">Gross Tonnage</label>
+                                <input type="text" class="form-control" id="gross_tonnage" value="${ss.gross_tonnage ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="engine_type">Engine Type</label>
+                                <input type="text" class="form-control" id="engine_type" value="${ss.engine_type ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bhp_kw">BHP/KW</label>
+                                <input type="text" class="form-control" id="bhp_kw" value="${ss.bhp_kw ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="flag">FLAG</label>
+                                <input type="text" class="form-control" id="flag" value="${ss.flag ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="trade">Trade</label>
+                                <input type="text" class="form-control" id="trade" value="${ss.trade ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="previous_salary">Previous Salary</label>
+                                <input type="text" class="form-control" id="previous_salary" value="${ss.previous_salary ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="manning_agent">Manning Agent</label>
+                                <input type="text" class="form-control" id="manning_agent" value="${ss.manning_agent ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="principal">Principal</label>
+                                <input type="text" class="form-control" id="principal" value="${ss.principal ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="crew_nationality">Crew Nationality</label>
+                                <input type="text" class="form-control" id="crew_nationality" value="${ss.crew_nationality ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="sign_on">Sign On</label>
+                                <input type="text" class="form-control" id="sign_on" value="${ss.sign_on != null ? moment(ss.sign_on).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="sign_off">Sign Off</label>
+                                <input type="text" class="form-control" id="sign_off" value="${ss.issue_date != null ? moment(ss.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="total_months">Total Months</label>
+                                <input type="text" class="form-control" id="total_months" value="${ss.total_months ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="remarks">Remarks</label>
+                                <input type="text" class="form-control" id="remarks" value="${ss.remarks ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Sea Service</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.ss').html(string);
+        }
+
+        // CREW INFO END
 
         function showFiles(id, name, files){
             swal({
