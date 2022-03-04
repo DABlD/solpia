@@ -895,12 +895,12 @@ class ApplicationsController extends Controller
                         ->get();
 
         $temp = collect();
-        $ranks = Rank::pluck('abbr');
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
 
         // SORT BY RANK
         foreach($ranks as $abbr){
             foreach($linedUps as $key => $linedUp){
-                if($linedUp->abbr == $abbr){
+                if($linedUp->abbr == $abbr->abbr){
                     $temp->push($linedUp);
                     $linedUps->pull($key);
                 }
@@ -943,7 +943,7 @@ class ApplicationsController extends Controller
         // SORT BY RANK
         foreach($ranks as $abbr){
             foreach($crews as $key => $crew){
-                if($crew->abbr == $abbr){
+                if($crew->abbr == $abbr->abbr){
                     $temp->push($crew);
                     $crews->pull($key);
                 }
@@ -975,7 +975,7 @@ class ApplicationsController extends Controller
             return [$onBoards, $linedUps, $vname];
         }
         else{
-            echo json_encode([$onBoards, $linedUps, $vname]);
+            echo json_encode([$onBoards, $linedUps, $vname, $ranks->keyBy('id')]);
         }
 
     }
@@ -987,6 +987,9 @@ class ApplicationsController extends Controller
 
         $temp = ProcessedApplicant::where('applicant_id', $id)->first();
         $temp->status = $status;
+        if($req->rank){
+            $temp->rank_id = $req->rank;
+        }
         $temp->save();
 
         if($status == "On Board"){
@@ -1049,6 +1052,10 @@ class ApplicationsController extends Controller
             $vessel = Vessel::find($lineup->vessel_id);
             $principal = Principal::find($lineup->principal_id);
 
+            $months = now()->parse($req->disembarkation_date)->diffInDays(now()->parse($lineup->joining_date)) / 30;
+            $lineup->months = $months;
+            $lineup->save();
+
             SeaService::create([
                 'applicant_id' => $req->id,
                 'vessel_name' => $vessel->name,
@@ -1064,12 +1071,15 @@ class ApplicationsController extends Controller
                 'principal' => $principal->name,
                 'sign_on' => $lineup->joining_date,
                 'sign_off' => $req->disembarkation_date,
-                'total_months' => $lineup->months,
+                'total_months' => $months,
                 'remarks' => $req->remark == "Vacation" ? 'FINISHED CONTRACT' : $req->remark
             ]);
 
             $lineup->disembarkation_date = $req->disembarkation_date;
             $lineup->disembarkation_port = $req->disembarkation_port;
+            if($req->type = "On Board Promotion"){
+                $lineup->status = "On Board Promotion";
+            }
             $lineup->save();
         }
     }

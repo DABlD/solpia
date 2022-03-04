@@ -615,7 +615,7 @@
                     if(!$('#linedUp').is(':visible')){
                         createModal(result[2],!bul ? $(vessel.target).data('id') : vessel);
                     }
-                    showTables(result[0], result[1]);
+                    showTables(result[0], result[1], result[3]);
                     $('#linedUp').on('show.bs.modal', e => {
 
                         // REMOVE ALL EVENTS
@@ -700,7 +700,7 @@
             });
         }
 
-        function showTables(onBoard, linedUp){
+        function showTables(onBoard, linedUp, ranks){
             let table = `
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -846,9 +846,23 @@
             `;
 
             // ON BOARD TABLE
+            let onBoardReliever = [];
+            let relieverRank = [];
             onBoard.forEach((crew, index) => {
                 crew.remarks = JSON.parse(crew.remarks);
                 let selected = "";
+                let crewRankID = crew.rank_id;
+                let crewRankCategory = ranks[crewRankID].category;
+
+                if(crewRankCategory.startsWith("DECK")){
+                    crewRankCategory = "DECK";
+                }
+                else if(crewRankCategory.startsWith("ENGINE")){
+                    crewRankCategory = "ENGINE";
+                }
+                else{
+                    crewRankCategory = "GALLEY";
+                }
 
                 crew.remarks.forEach(remark => {
                     selected += `
@@ -869,14 +883,41 @@
                 `;
 
                 linedUp.concat(onBoard).forEach(rengiSno => {
-                    if(crew.abbr == rengiSno.abbr && crew.applicant_id != rengiSno.applicant_id){
+                    let curRankID = rengiSno.rank_id;
+                    let curCategory = ranks[curRankID].category;
+
+                    if(curCategory.startsWith("DECK")){
+                        curCategory = "DECK";
+                    }
+                    else if(curCategory.startsWith("ENGINE")){
+                        curCategory = "ENGINE";
+                    }
+                    else{
+                        curCategory = "GALLEY";
+                    }
+
+                    if(crew.abbr == rengiSno.abbr && crew.applicant_id != rengiSno.applicant_id || (curRankID > crewRankID && crewRankCategory == curCategory)){
                         let name = `${rengiSno.lname + ', ' + rengiSno.fname + ' ' + (rengiSno.suffix || "") + ' ' + rengiSno.mname}`;
 
                         reliever += `
                             <option value="${rengiSno.applicant_id}"${rengiSno.applicant_id == crew.reliever ? ' selected' : ''}>${rengiSno.abbr} - ${name}</option>
                         `;
+
+                        if(rengiSno.applicant_id == crew.reliever && curRankID != crewRankID){
+                            onBoardReliever.push(rengiSno.applicant_id);
+                            relieverRank[rengiSno.applicant_id] = crewRankID;
+                        }
                     }
                 });
+
+                let onBoardButton = "";
+                if(onBoardReliever.includes(crew.applicant_id)){
+                    onBoardButton = `
+                        &nbsp;&nbsp;<a class="btn btn-sm btn-success" data-toggle="tooltip" title="On Board Promotion" onClick="onBoardPromote(${crew.applicant_id}, ${crew.vessel_id}, ${relieverRank[crew.applicant_id]})">
+                            <span class="fa fa-level-up fa-sm"></span>
+                        </a>
+                    `;
+                }
 
                 table2 += `
                     <tr>
@@ -891,14 +932,15 @@
                         <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('DD-MMM-YY') : '-----'}</td>
-                        <td>${crew.joining_port}</td>
+                        <td>${crew.joining_port ?? "---"}</td>
                         <td>${reliever}</td>
                         <td class="remarks">${crew.remarks}</td>
                         @if(auth()->user()->role != "Principal")
                         <td class="actions">
-                            <a class="btn btn-danger" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
-                                <span class="fa fa-ship"></span>
+                            <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
+                                <span class="fa fa-ship fa-sm"></span>
                             </a>
+                            ${onBoardButton}
                         </td>
                         @endif
                     </tr>
@@ -1123,6 +1165,51 @@
                     });
                 }
             });
+        }
+
+        function onBoardPromote(applicant_id, vessel_id, rank_id){
+            swal({
+                title: "Enter Months of New Contract",
+                input: 'number',
+            }).then(result => {
+                if(result.value && result.value != ""){
+                    // DISEMBARK
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('applications.updateLineUpContract') }}",
+                        data: {
+                            id: applicant_id,
+                            disembarkation_date: moment().format("YYYY-MM-DD"),
+                            type: 'On Board Promotion',
+                            remark: "On Board Promotion"
+                        },
+                        success: result2 => {
+                            console.log('on board update lineup: ' + result.value);
+                            // UPDATE STATUS
+                            $.ajax({
+                                type: 'POST',
+                                url: `{{ route('applications.updateStatus') }}/${applicant_id}/${"On Board"}/${vessel_id}`,
+                                data: {
+                                    date: moment().format("YYYY-MM-DD"),
+                                    months: result.value,
+                                    rank: rank_id
+                                },
+                                success: result => {
+                                    swal({
+                                        type: 'success',
+                                        title: 'Successfully Promoted On Board',
+                                        showConfirmButton: false,
+                                        timer: 800
+                                    }).then(() => {
+                                        getVesselCrew(vessel_id, true);
+                                        $('[href=".onBoard"]').click();
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            })
         }
 
         function getContract(id){
