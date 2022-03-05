@@ -268,28 +268,34 @@
 		} 
 	};
 
-	$ss = function($ss, $vr) use($checkDate2){
-		$on = $checkDate2($ss->sign_on, 'in');
-		$off = $checkDate2($ss->sign_off, 'in');
-		$eng = str_replace('&', '&#38;', $ss->engine_type);
-		$dura = $ss->sign_on->diffInDays($ss->sign_off);
+	$total = 0;
+	// &$total is passing value by reference
+	$ss = function($ss, $vr) use($checkDate2, &$total){
+		if($ss->vessel_name != null && $ss->vessel_type != null){
+			$on = $checkDate2($ss->sign_on, 'in');
+			$off = $checkDate2($ss->sign_off, 'in');
+			$eng = str_replace('&', '&#38;', $ss->engine_type);
+			$dura = $ss->sign_on->diffInDays($ss->sign_off);
 
-		echo "
-			<td>$ss->flag</td>
-			<td colspan='2'>$ss->vessel_name</td>
-			<td>$ss->gross_tonnage</td>
-			<td>$ss->bhp_kw</td>
-			<td>$ss->vessel_type</td>
-			<td>$vr</td>
-			<td>$eng</td>
-			<td>$on</td>
-			<td>$off</td>
-			<td>$dura</td>
-			<td>$ss->remarks</td>
-			<td>$ss->crew_nationality</td>
-			<td>$ss->manning_agent</td>
-			<td>$ss->principal</td>
-		";
+			$total += $ss->sign_on->diffInDays($ss->sign_off);
+
+			echo "
+				<td>$ss->flag</td>
+				<td colspan='2'>$ss->vessel_name</td>
+				<td>$ss->gross_tonnage</td>
+				<td>$ss->bhp_kw</td>
+				<td>$ss->vessel_type</td>
+				<td>$vr</td>
+				<td>$eng</td>
+				<td>$on</td>
+				<td>$off</td>
+				<td>$dura</td>
+				<td>$ss->remarks</td>
+				<td>$ss->crew_nationality</td>
+				<td>$ss->manning_agent</td>
+				<td>$ss->principal</td>
+			";
+		}
 	};
 	$fd = function($fd, $i2) use($checkDate2){
 		$i2++;
@@ -514,7 +520,6 @@
 			$i = 0;
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -527,7 +532,6 @@
 			$i = 1; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -539,7 +543,6 @@
 			$i = 2; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -552,7 +555,6 @@
 			$i = 3; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -564,7 +566,6 @@
 			$i = 4; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -581,7 +582,6 @@
 			$i = 5; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -596,7 +596,6 @@
 			$i = 6; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -611,7 +610,6 @@
 			$i = 7; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -626,7 +624,6 @@
 			$i = 8; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -641,7 +638,6 @@
 			$i = 9; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -656,7 +652,6 @@
 			$i = 10; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
@@ -671,7 +666,6 @@
 			$i = 11; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-				$total += $data->sea_service[$i]->sign_on->diffInDays($data->sea_service[$i]->sign_off);
 			}
 		@endphp
 	</tr>
