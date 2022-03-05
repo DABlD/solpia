@@ -155,6 +155,10 @@
         .form-group{
             text-align: left;
         }
+
+        .puwy{
+            margin-top: 20px !important;
+        }
 	</style>
 @endpush
 
@@ -734,7 +738,7 @@
                     success: applicant => {
                         applicant = JSON.parse(applicant);
                         swal({
-                            width: '70%',
+                            width: '80%',
                             animation: false,
                             html: `
                                 <ul class="nav nav-pills" role="tablist">
@@ -743,6 +747,9 @@
                                     </li>
                                     <li role="presentation">
                                         <a href=".educbg" role="tab" data-toggle="pill">Educational Background</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href=".ids" role="tab" data-toggle="pill">Document ID</a>
                                     </li>
                                     <li role="presentation">
                                         <a href=".docs" role="tab" data-toggle="pill">Flag Documents</a>
@@ -765,6 +772,7 @@
                                 <div class="tab-content">
                                   <div role="tabpanel" class="tab-pane fade in pinfo active">a</div>
                                   <div role="tabpanel" class="tab-pane fade educbg">b</div>
+                                  <div role="tabpanel" class="tab-pane fade ids">c</div>
                                   <div role="tabpanel" class="tab-pane fade docs">c</div>
                                   <div role="tabpanel" class="tab-pane fade docs2">c</div>
                                   <div role="tabpanel" class="tab-pane fade meds">d</div>
@@ -780,6 +788,7 @@
                                 fillTab5(applicant);
                                 fillTab6(applicant);
                                 fillTab7(applicant);
+                                fillTab8(applicant);
                             }
                         });
                     }
@@ -1027,28 +1036,30 @@
                 temp += `
                     <h3 style="text-align: left;"><b>${eb.type}</b></h3>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="course">Course</label>
                                 <input type="text" class="form-control" id="course" value="${eb.course ?? "---"}" readonly>
                             </div>
                         </div>
 
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="year">Year</label>
                                 <input type="text" class="form-control" id="year" value="${eb.year ?? "---"}" readonly>
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="school">School</label>
                                 <input type="text" class="form-control" id="school" value="${eb.school ?? "---"}" readonly>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-10">
                             <div class="form-group">
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" id="address" value="${eb.address ?? "---"}" readonly>
@@ -1070,6 +1081,81 @@
         }
 
         function fillTab3(applicant){
+            let ids = Object.entries(applicant.document_id);
+            let temp = ``;
+
+            ids.forEach(id => {
+                id = id[1];
+                file = "";
+
+                if(id.file){
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View">
+                            <span class="fa fa-search">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete" data-id="${id.id}" data-filename="${id.file}">
+                            <span class="fa fa-times" data-id="${id.id}" data-filename="${id.file}">
+                        </span></a>&nbsp;&nbsp;`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
+                        <span class="fa fa-arrow-up">
+                    </span></a>
+                `;
+
+                temp += `
+                    <h3 style="text-align: left;"><b>${id.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issuer">Issuer</label>
+                                <input type="text" class="form-control" id="issuer" value="${id.issuer ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="number">Number</label>
+                                <input type="text" class="form-control" id="number" value="${id.number ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issue_date">Issue Date</label>
+                                <input type="text" class="form-control" id="issue_date" value="${id.issue_date != null ? moment(id.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="expiry_date">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" value="${id.expiry_date != null ? moment(id.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Flag Documents</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.ids').html(string);
+        }
+
+        function fillTab4(applicant){
             let flags = Object.entries(applicant.document_flag);
             let temp = ``;
 
@@ -1120,7 +1206,7 @@
             $('.docs').html(string);
         }
 
-        function fillTab4(applicant){
+        function fillTab5(applicant){
             let lcs = Object.entries(applicant.document_lc);
             let temp = ``;
 
@@ -1129,14 +1215,14 @@
                 temp += `
                     <h3 style="text-align: left;"><b>${lc.type}</b></h3>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="issuer">Issuer</label>
                                 <input type="text" class="form-control" id="issuer" value="${lc.issuer ?? "---"}" readonly>
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="no">Number</label>
                                 <input type="text" class="form-control" id="no" value="${lc.no ?? "---"}" readonly>
@@ -1157,7 +1243,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <label for="regulation">Regulation</label>
                                 <input type="text" class="form-control" id="regulation" value="${lc.regulation != "[]" ? JSON.parse(lc.regulation) : "---"}" readonly>
@@ -1179,7 +1265,7 @@
             $('.docs2').html(string);
         }
 
-        function fillTab5(applicant){
+        function fillTab6(applicant){
             let mcs = Object.entries(applicant.document_med_cert);
             let temp = ``;
 
@@ -1230,7 +1316,7 @@
             $('.meds').html(string);
         }
 
-        function fillTab6(applicant){
+        function fillTab7(applicant){
             let mhs = Object.entries(applicant.document_med);
             let temp = "";
 
@@ -1274,7 +1360,7 @@
             $('.meds2').html(string);
         }
 
-        function fillTab7(applicant){
+        function fillTab8(applicant){
             let sss = Object.entries(applicant.sea_service);
             let temp = ``;
 
@@ -1412,6 +1498,62 @@
         }
 
         // CREW INFO END
+        function uploadFile(id, aId, type){
+            swal({
+                title: 'Select File',
+                html: `
+                    <form action="{{ route('applications.uploadFiles') }}" enctype="multipart/form-data" method="POST" target="_blank">
+                        @csrf
+                        <input type="file" name="file" id="file" class="swal2-file"/>
+                        <input type="hidden" name="id" value="${id}" />
+                        <input type="hidden" name="aId" value="${aId}" />
+                        <input type="hidden" name="type" value="${type}" />
+                    </form>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                cancelButtonText: 'Cancel',
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            if(!$('#file').val()){
+                                swal.showValidationError('No file Selected');
+                            }
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result2 => {
+                if(result2.value){
+                    $('.swal2-content form').submit();
+
+                    swal('Uploading Files');
+                    swal.showLoading();
+
+                    // UPDATE TO KNOW IF FORM SUCCESSFULLY SUBMITTED THEN DO THE SUCCESS
+                    setTimeout(() => {
+                        swal({
+                            type: 'success',
+                            title: 'File successfully uploaded',
+                            showConfirmButton: false,
+                            timer: 1000
+                        }).then(() => {
+                            reloadTab(id, aId, type);
+                        })
+                    }, 1000);
+                }
+                else{
+                    reloadTab(id, aId, type);
+                }
+            });
+        }
+
+        function reloadTab(id, aId, type){
+            $(`[data-id="${aId}"].btn-search`).click();
+            setTimeout(() => {
+                $(`[href='.${type}']`).click();
+            }, 1000)
+        }
 
         function showFiles(id, name, files){
             swal({
@@ -1471,6 +1613,7 @@
 
                         files[key].forEach((file, index) => {
                             // GET IMAGE DIMENSIONS
+                            console.log(file);
                             if(imageFormats.includes(file.name.split('.').pop().toUpperCase())){
                                 let img = new Image();
                                 img.onload = () => {
@@ -1620,7 +1763,7 @@
             $(`[href=".${data[0].toLowerCase()}Files"]`).tab('show');
         }
 
-        function uploadFile(id, name, type, data){
+        function uploadFile2(id, name, type, data){
             swal({
                 title: 'Select Files',
                 html: `

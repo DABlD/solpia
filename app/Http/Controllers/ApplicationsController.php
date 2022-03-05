@@ -1161,18 +1161,17 @@ class ApplicationsController extends Controller
     }
 
     function uploadFiles(Request $req){
-        $files = $req->file('files');
+        $file = $req->file('file');
 
-        foreach($files as $file){
-            $name = $file->getClientOriginalName();
-            $file->move(public_path().'/files/' . $req->name . '/', $name);
+        $name = $file->getClientOriginalName();
+        $file->move(public_path().'/files/' . $req->aId . '/', $name);
 
-            Fileszxc::create([
-                'applicant_id' => $req->id,
-                'name' => $name,
-                'type' => $req->type
-            ]);
-        }
+        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => 'files/' . $req->aId . '/' . $name]);
+        // Fileszxc::create([
+        //     'applicant_id' => $req->id,
+        //     'name' => $name,
+        //     'type' => $req->type
+        // ]);
 
         echo "<script>window.close();</script>";
     }
