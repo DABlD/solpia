@@ -54,7 +54,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-2 col-md-offset-10">
-                                <a class="btn btn-primary submit pull-right">Register</a>
+                                <a class="btn btn-primary submit pull-right">Save</a>
                             </div>
                         </div>
 
