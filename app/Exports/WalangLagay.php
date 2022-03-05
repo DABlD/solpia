@@ -39,13 +39,18 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
         $this->applicant->exCrew = "";
         $this->applicant->newHire = "";
 
-        $count = SeaService::where('applicant_id', $this->applicant->id)->where('manning_agent', 'LIKE', '%SOLPIA%')->count();
-        $count ? 'EX-SOLPIA' : 'NEW HIRE';
-        if($count){
-            $this->applicant->exCrew = $sea_services->last()->vessel_name;
-        }
-        else{
-            $this->applicant->newHire = $sea_services->last()->manning_agent;
+        $count = SeaService::where('applicant_id', $this->applicant->id)->count();
+
+        if($count != 0){
+            $count = SeaService::where('applicant_id', $this->applicant->id)->where('manning_agent', 'LIKE', '%SOLPIA%')->count();
+            $count ? 'EX-SOLPIA' : 'NEW HIRE';
+
+            if($count){
+                $this->applicant->exCrew = $sea_services->last()->vessel_name;
+            }
+            else{
+                $this->applicant->newHire = $sea_services->last()->manning_agent;
+            }
         }
 
         return view('exports.' . lcfirst($this->type), [
