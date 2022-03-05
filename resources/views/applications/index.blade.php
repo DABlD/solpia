@@ -735,6 +735,7 @@
                         applicant = JSON.parse(applicant);
                         swal({
                             width: '70%',
+                            animation: false,
                             html: `
                                 <ul class="nav nav-pills" role="tablist">
                                     <li role="presentation" class="active">
@@ -864,7 +865,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <input type="text" class="form-control" id="address" value="${applicant.user.address ?? "---"}" readonly>
@@ -882,7 +883,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="provincial_address">Provincial Address</label>
                                     <input type="text" class="form-control" id="provincial_address" value="${applicant.provincial_address ?? "---"}" readonly>
@@ -900,7 +901,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" class="form-control" id="email" value="${applicant.user.email ?? "---"}" readonly>
@@ -914,12 +915,13 @@
                                 </br>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="male" ${applicant.user.gener == "Male" ? "Checked" : ""}> Male
+                                    <input type="radio" name="gender" id="male" ${applicant.user.gender == "Male" ? "Checked" : ""}> Male
                                 </label>
                                 &nbsp; &nbsp;
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" id="female" ${applicant.user.gener == "Male" ? "Checked" : ""}> Female
+                                    <input type="radio" name="gender" id="female" ${applicant.user.gender == "Female" ? "Checked" : ""}> Female
                                 </label>
+                                <br>
                             </div>
                         </div>
 
