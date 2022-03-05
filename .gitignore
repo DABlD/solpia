@@ -15,3 +15,4 @@ database/seeds/FillPA_NOT_WORKING.php
 database/seeds/FillVessel_NOT_WORKING.php
 public/backup/*
 rootCA.key
+public/particulars
