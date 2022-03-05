@@ -98,13 +98,14 @@
 				if($i == $ctr){
 					$name = $fd->fname . ' ' . $fd->mname . ' ' . $fd->lname;
 					$dob = $checkDate2($fd->birthday, 'in');
+					$address = str_replace('&', '&#38;', $fd->address);
 
 					echo "
 						<td>$type</td>
 						<td colspan='2'>$name</td>
 						<td>$dob</td>
 						<td>$fd->occupation</td>
-						<td colspan='3'>$fd->address</td>
+						<td colspan='3'>$address</td>
 					";
 
 					return false;

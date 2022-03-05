@@ -17,32 +17,35 @@
 	};
 
 	$ss = function($ss) use($checkDate2){
-		$on = $checkDate2($ss->sign_on, 'a');
-		$off = $checkDate2($ss->sign_off, 'a');
-		$diff = $ss->sign_on->diffInDays($ss->sign_off);
-		$eng = str_replace('&', '&#38;', $ss->engine_type);
 
-		echo "
-			<tr>
-				<td rowspan='2'>$ss->flag</td>
-				<td>$ss->manning_agent</td>
-				<td>$ss->vessel_type</td>
-				<td>$ss->trade</td>
-				<td>$eng</td>
-				<td>$on</td>
-				<td rowspan='2'>$diff</td>
-				<td rowspan='2'>$ss->remarks</td>
-				<td rowspan='2'></td>
-			</tr>
+		if($ss->vessel_name != null && $ss->vessel_type != null){
+			$on = $checkDate2($ss->sign_on, 'a');
+			$off = $checkDate2($ss->sign_off, 'a');
+			$diff = $ss->sign_on->diffInDays($ss->sign_off);
+			$eng = str_replace('&', '&#38;', $ss->engine_type);
 
-			<tr>
-				<td>$ss->vessel_name</td>
-				<td>$ss->rank</td>
-				<td>$ss->gross_tonnage</td>
-				<td>$ss->bhp_kw</td>
-				<td>$off</td>
-			</tr>
-		";
+			echo "
+				<tr>
+					<td rowspan='2'>$ss->flag</td>
+					<td>$ss->manning_agent</td>
+					<td>$ss->vessel_type</td>
+					<td>$ss->trade</td>
+					<td>$eng</td>
+					<td>$on</td>
+					<td rowspan='2'>$diff</td>
+					<td rowspan='2'>$ss->remarks</td>
+					<td rowspan='2'></td>
+				</tr>
+
+				<tr>
+					<td>$ss->vessel_name</td>
+					<td>$ss->rank</td>
+					<td>$ss->gross_tonnage</td>
+					<td>$ss->bhp_kw</td>
+					<td>$off</td>
+				</tr>
+			";
+		}
 	};
 
 	function isBlank2(){
