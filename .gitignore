@@ -16,3 +16,5 @@ database/seeds/FillVessel_NOT_WORKING.php
 public/backup/*
 rootCA.key
 public/particulars
+public/del
+
