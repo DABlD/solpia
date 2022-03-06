@@ -738,7 +738,7 @@
                     success: applicant => {
                         applicant = JSON.parse(applicant);
                         swal({
-                            width: '80%',
+                            width: '90%',
                             animation: false,
                             html: `
                                 <ul class="nav nav-pills" role="tablist">
@@ -752,16 +752,16 @@
                                         <a href=".ids" role="tab" data-toggle="pill">Document ID</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".docs" role="tab" data-toggle="pill">Flag Documents</a>
+                                        <a href=".flags" role="tab" data-toggle="pill">Flag Documents</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".docs2" role="tab" data-toggle="pill">Documents</a>
+                                        <a href=".l_cs" role="tab" data-toggle="pill">Documents</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".meds" role="tab" data-toggle="pill">Medical Certificates</a>
+                                        <a href=".med_certs" role="tab" data-toggle="pill">Medical Certificates</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".meds2" role="tab" data-toggle="pill">Medical History</a>
+                                        <a href=".meds" role="tab" data-toggle="pill">Medical History</a>
                                     </li>
                                     <li role="presentation">
                                         <a href=".ss" role="tab" data-toggle="pill">Sea Services</a>
@@ -773,10 +773,10 @@
                                   <div role="tabpanel" class="tab-pane fade in pinfo active">a</div>
                                   <div role="tabpanel" class="tab-pane fade educbg">b</div>
                                   <div role="tabpanel" class="tab-pane fade ids">c</div>
-                                  <div role="tabpanel" class="tab-pane fade docs">c</div>
-                                  <div role="tabpanel" class="tab-pane fade docs2">c</div>
+                                  <div role="tabpanel" class="tab-pane fade flags">c</div>
+                                  <div role="tabpanel" class="tab-pane fade l_cs">c</div>
+                                  <div role="tabpanel" class="tab-pane fade med_certs">d</div>
                                   <div role="tabpanel" class="tab-pane fade meds">d</div>
-                                  <div role="tabpanel" class="tab-pane fade meds2">d</div>
                                   <div role="tabpanel" class="tab-pane fade ss">d</div>
                                 </div>
                             `,
@@ -1090,17 +1090,20 @@
 
                 if(id.file){
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View">
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${id.file}', ${applicant.id})">
                             <span class="fa fa-search">
                         </span></a>&nbsp;&nbsp;
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete" data-id="${id.id}" data-filename="${id.file}">
-                            <span class="fa fa-times" data-id="${id.id}" data-filename="${id.file}">
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, '${id.file}', 'ids')">
+                            <span class="fa fa-times">
                         </span></a>&nbsp;&nbsp;`;
                 }
 
                 file += `
                     <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
-                        <span class="fa fa-arrow-up">
+                        <span class="fa fa-upload">
                     </span></a>
                 `;
 
@@ -1161,6 +1164,27 @@
 
             flags.forEach(flag => {
                 flag = flag[1];
+                file = "";
+
+                if(flag.file){
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.file}', ${applicant.id})">
+                            <span class="fa fa-search">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.id}, '${flag.file}', 'flags')">
+                            <span class="fa fa-times">
+                        </span></a>&nbsp;&nbsp;`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
                 temp += `
                     <h3 style="text-align: left;"><b>${flag.type}</b></h3>
                     <div class="row">
@@ -1191,6 +1215,12 @@
                                 <input type="text" class="form-control" id="expiry_date" value="${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
                             </div>
                         </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
                     </div>
                 `;
             });
@@ -1203,7 +1233,7 @@
                 </div>
             `;
 
-            $('.docs').html(string);
+            $('.flags').html(string);
         }
 
         function fillTab5(applicant){
@@ -1212,6 +1242,27 @@
 
             lcs.forEach(lc => {
                 lc = lc[1];
+                file = "";
+
+                if(lc.file){
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${lc.file}', ${applicant.id})">
+                            <span class="fa fa-search">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, '${lc.file}', 'l_cs')">
+                            <span class="fa fa-times">
+                        </span></a>&nbsp;&nbsp;`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
                 temp += `
                     <h3 style="text-align: left;"><b>${lc.type}</b></h3>
                     <div class="row">
@@ -1222,7 +1273,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="no">Number</label>
                                 <input type="text" class="form-control" id="no" value="${lc.no ?? "---"}" readonly>
@@ -1250,6 +1301,11 @@
                             </div>
                         </div>
 
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
                     </div>
                 `;
             });
@@ -1262,7 +1318,7 @@
                 </div>
             `;
 
-            $('.docs2').html(string);
+            $('.l_cs').html(string);
         }
 
         function fillTab6(applicant){
@@ -1271,6 +1327,27 @@
 
             mcs.forEach(mc => {
                 mc = mc[1];
+                file = "";
+
+                if(mc.file){
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mc.file}', ${applicant.id})">
+                            <span class="fa fa-search">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, '${mc.file}', 'med_certs')">
+                            <span class="fa fa-times">
+                        </span></a>&nbsp;&nbsp;`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
                 temp += `
                     <h3 style="text-align: left;"><b>${mc.type}</b></h3>
                     <div class="row">
@@ -1301,6 +1378,12 @@
                                 <input type="text" class="form-control" id="expiry_date" value="${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
                             </div>
                         </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
                     </div>
                 `;
             });
@@ -1313,7 +1396,7 @@
                 </div>
             `;
 
-            $('.meds').html(string);
+            $('.med_certs').html(string);
         }
 
         function fillTab7(applicant){
@@ -1322,6 +1405,27 @@
 
             mhs.forEach(mh => {
                 mh = mh[1];
+                file = "";
+
+                if(mh.file){
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mh.file}', ${applicant.id})">
+                            <span class="fa fa-search">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>&nbsp;&nbsp;
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, '${mh.file}', 'meds')">
+                            <span class="fa fa-times">
+                        </span></a>&nbsp;&nbsp;`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
                 temp += `
                     <h3 style="text-align: left;"><b>${mh.type}</b></h3>
                     <div class="row">
@@ -1345,6 +1449,12 @@
                                 <input type="text" class="form-control" id="case_remarks" value="${mh.case_remarks ?? "---"}" readonly>
                             </div>
                         </div>
+                        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
                     </div>
                 `;
             });
@@ -1357,7 +1467,7 @@
                 </div>
             `;
 
-            $('.meds2').html(string);
+            $('.meds').html(string);
         }
 
         function fillTab8(applicant){
@@ -1548,6 +1658,72 @@
             });
         }
 
+        function viewFile(file, aId){
+            let imageFormats = ['JPEG', 'JPG', 'PNG', 'GIF'];
+            console.log(`files/${aId}/${file}`);
+            console.log(file);
+            if(imageFormats.includes(file.split('.').pop().toUpperCase())){
+                let img = new Image();
+                img.src = `files/${aId}/${file}`;
+                img.onload = () => {
+                    console.log(img.src);
+                    let gallery = new PhotoSwipe(
+                        $('.pswp')[0], 
+                        PhotoSwipeUI_Default, 
+                        [{
+                            src: img.src,
+                            w: img.width,
+                            h: img.height,
+                        }], 
+                        {
+                            allowPanToNext: true,
+                            escKey: true,
+                            arrowKeys: true,
+                            closeOnScroll: false,
+                            tapToClose: false,
+                            maxSpreadZoom: 6
+                        }
+                    );
+
+                    gallery.init();
+                };
+            }
+            else if(file.split('.').pop().toUpperCase() == "PDF"){
+                window.open(file);
+            }
+        }
+
+        function deleteFile(id, aId, file, type){
+            swal({
+                type: 'warning',
+                title: 'Are you sure you want to delete?',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                cancelButtonText: 'Cancel',
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('applications.deleteFile') }}',
+                        type: 'POST',
+                        data: {id: id, aId: aId, file: file, type: type},
+                        success: result => {
+                            swal({
+                                type: 'success',
+                                title: 'File Deleted Successfully',
+                                showConfirmButton: false,
+                                timer: 800
+                            }).then(() => {
+                                reloadTab(id, aId, type)
+                            });
+                        }
+                    });
+                }
+                else{
+                    reloadTab(id, aId, type)
+                }
+            });
+        }
+
         function reloadTab(id, aId, type){
             $(`[data-id="${aId}"].btn-search`).click();
             setTimeout(() => {
@@ -1613,7 +1789,6 @@
 
                         files[key].forEach((file, index) => {
                             // GET IMAGE DIMENSIONS
-                            console.log(file);
                             if(imageFormats.includes(file.name.split('.').pop().toUpperCase())){
                                 let img = new Image();
                                 img.onload = () => {
@@ -1727,7 +1902,7 @@
             });
         }
 
-        function deleteFile(id, name, filename, data){
+        function deleteFile2(id, name, filename, data){
             swal({
                 type: 'question',
                 title: 'Are you sure?',

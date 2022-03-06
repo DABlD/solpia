@@ -1166,7 +1166,7 @@ class ApplicationsController extends Controller
         $name = $file->getClientOriginalName();
         $file->move(public_path().'/files/' . $req->aId . '/', $name);
 
-        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => 'files/' . $req->aId . '/' . $name]);
+        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => $name]);
         // Fileszxc::create([
         //     'applicant_id' => $req->id,
         //     'name' => $name,
@@ -1177,18 +1177,13 @@ class ApplicationsController extends Controller
     }
 
     public function deleteFile(Request $req){
-        $newName = time() . '_' . $req->file;
+        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => null]);
 
-        echo Fileszxc::where([
-            ['applicant_id', '=', $req->id],
-            ['name', '=', $req->file]
-        ])->update(['name' => $newName, 'deleted_at' => now()]);
-
-        if(!file_exists(public_path("files\\DEL\\" . $req->name))){
-            mkdir(public_path("files\\DEL\\" . $req->name));
+        if(!file_exists(public_path("del\\" . $req->aId))){
+            mkdir(public_path("del\\files\\" . $req->aId));
         }
 
-        rename(public_path("files\\" . $req->name . "\\" . $req->file), public_path("files\\DEL\\" . $req->name . "\\" . $newName));
+        rename(public_path("files\\" . $req->aId . "\\" . $req->file), public_path("del\\files\\" . $req->aId . "\\" . time() . '_' . $req->file));
     }
 
     public function goToPrincipal(Applicant $applicant, Request $req){
