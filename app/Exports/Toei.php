@@ -183,9 +183,9 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // EDUCATION BACKGROUND ROWS
                 $ebRows = array();
                 $temp = $this->applicant->educational_background->count();
-                $rae = 28 + $temp; //Row # AFTER EDUC BACKGROUND
+                $rae = 27 + $temp; //Row # AFTER EDUC BACKGROUND
 
-                for($i = 0, $row = 29; $i < $temp; $i++, $row++){
+                for($i = 0, $row = 28; $i < $temp; $i++, $row++){
                     array_push($ebRows, "A$row");
                     array_push($ebRows, "B$row");
                     array_push($ebRows, "C$row:F$row");
@@ -331,7 +331,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // NUMBER HEADING ROWS
                 $nhr = [
-                    'A27', 'A' . ($rae + 1), 'A' . $ral, 'A' . $rac, 'A' . $raoc, 'A' . $rapiyc, 'A' . $raeajl,
+                    'A26', 'A' . ($rae + 1), 'A' . $ral, 'A' . $rac, 'A' . $raoc, 'A' . $rapiyc, 'A' . $raeajl,
                     'A' . $ratesms, 'A' . $raaow
                 ];
 
@@ -381,7 +381,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ('A' . ($raeajl - 2) . ':' . 'A' . ($raeajl - 1)), //A#:A# PIYC ROWS
                     ('A' . ($ratesms - 2) . ':' . 'A' . ($ratesms - 1)), //A#:A# PIYC ROWS
                     ('A' . ($raaow - 1)), //A#:A# PIYC ROWS
-                    'B14', 'B24'
+                    'B15', 'B25'
                 ]);
 
                 // HC VC
@@ -443,15 +443,15 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // ALL AROUND
                 $cells[0] = array_merge($rows, $ebRows, $lRows, $cRows, $ocRows, $piycRows, $eajlRows, $aowRows, $sh2Rows, $sh3Rows, [
                     'A2:B9', 'H1:I1', 'H2', 'I2', 'H3:H5', 'I3:I5',
-                    'A28:B28', 'C28:F28', 'G28:I28',
+                    'A27:B27', 'C27:F27', 'G27:I27',
                 ]);
 
                 // BOTTOM ONLY
                 $cells[1] = [
-                    'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'D19', 'H20', 'F11', 'H11:I11', 'B12:I12',
-                    'B14:F14', 'G15:I15', 'B16', 'D16', 'F16:G16', 'I16',
-                    'G16', 'I16', 'B17:C17', 'E17', 'G17', 'I17', 'B18:C18', 'E18', 'G18', 'I18',
-                    'F19', 'I19', 'D20:E20', 'G21:I21', 'B22:I22', 'B24:F24', 'G26:I26',
+                    'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'D19', 'H20', 'F11', 'H11:I11', 'B12:G12',
+                    'B15:F15', 'H15:I15', 'H16:I16', 'B17', 'D17', 'F17:G17', 'I17',
+                    'G17', 'I17', 'B18:C18', 'E18', 'G18', 'B19:C19', 'E19', 'G19', 'I19',
+                    'F20', 'I20', 'D21:E21', 'G22:I22', 'B23:I23', 'B25:F25', 'G25:I25',
                     "C$rash3:E$rash3", "G$rash3:I$rash3"
                 ];
 

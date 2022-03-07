@@ -78,8 +78,8 @@
 		<tr>
 			<td colspan="4"></td>
 			<td>Date:</td>
-			<td colspan="2">{{ now()->toFormattedDateString() }}</td>
-		</tr>
+			<td colspan="2">{{ now()->format('d-M-y') }}</td>
+		</tr>	
 
 		<tr>
 			<td colspan="9"></td>
@@ -109,26 +109,30 @@
 			<td colspan="2">(Surname)</td>
 			<td colspan="2">(Given Name)</td>
 			<td colspan="2">(Middle Name)</td>
-			<td colspan="2">(Chinese Character)</td>
+			<td colspan="2"></td>
+		</tr>
+
+		<tr>
+			<td colspan="10"></td>
 		</tr>
 
 		<tr>
 			<td>Address:</td>
-			<td colspan="8">{{ $applicant->user->address }}</td>
-			{{-- <td></td>
-			<td colspan="2"></td> --}}
+			<td colspan="5">{{ $applicant->user->address }}</td>
+			<td>Telephone:</td>
+			<td colspan="2">{{ $applicant->contact }}</td>
 		</tr>
 
 		<tr>
 			<td></td>
-			<td colspan="4"></td>
+			<td colspan="5"></td>
 			<td>Email:</td>
-			<td colspan="3">{{ $applicant->user->email ? $applicant->user->email : '-----' }}</td>
+			<td colspan="2">{{ $applicant->user->email ? $applicant->user->email : '-----' }}</td>
 		</tr>
 
 		<tr>
 			<td>Birth Date:</td>
-			<td>{{ $applicant->user->birthday->format('M j, Y') }}</td>
+			<td>{{ $applicant->user->birthday->format('d-M-y') }}</td>
 			<td>Age:</td>
 			<td>{{ $applicant->user->birthday->diffInYears(now()) }}</td>
 			<td>Birth Place:</td>
@@ -140,12 +144,12 @@
 		<tr>
 			<td>Civil Status:</td>
 			<td colspan="2">{{ $applicant->civil_status }}</td>
-			<td>Weight:</td>
-			<td>{{ $applicant->weight }}kg</td>
-			<td>Height:</td>
-			<td>{{ $applicant->height }}cm</td>
-			<td>Eye Color:</td>
-			<td>Black</td>
+			<td>Weight(kg):</td>
+			<td>{{ $applicant->weight }}</td>
+			<td>Height(cm):</td>
+			<td>{{ $applicant->height }}</td>
+			{{-- <td>Eye Color:</td>
+			<td>Black</td> --}}
 		</tr>
 
 		<tr>
@@ -153,15 +157,15 @@
 			<td colspan="2">{{ $applicant->sss ? $applicant->sss : '-----' }}</td>
 			<td>BMI:</td>
 			<td>{{ $applicant->bmi ? $applicant->bmi : '-----' }}</td>
-			<td>Shoes Size:</td>
-			<td>{{ $applicant->shoe_size ? $applicant->shoe_size : '-----' }}cm</td>
+			<td>Shoe Size(cm):</td>
+			<td>{{ $applicant->shoe_size ? $applicant->shoe_size : '-----' }}</td>
 			<td>Clothes Size:</td>
 			<td>{{ $applicant->clothes_size ? $applicant->clothes_size : '-----' }}</td>
 		</tr>
 
 		<tr>
-			<td colspan="3">Crew's physical condition</td>
-			<td>NORMAL</td>
+			<td colspan="2">Crew's physical condition</td>
+			<td colspan="2">FIT FOR DUTY</td>
 			<td>Diabetes</td>
 
 			@php
@@ -186,12 +190,17 @@
 
 		@php
 			$realFam = false;
+			$numOfChild = 0;
 
 			if(sizeof($applicant->family_data)){
 				$realFam = $applicant->family_data->first();
 				$hasWife = false;
 
 				foreach($applicant->family_data as $fam){
+					if($fam->type == "Son" || $fam->type == "Daughter"){
+						$numOfChild++;
+					}
+
 					if($fam->type == "Beneficiary"){
 						$hasWife = true;
 						$realFam = $fam;
@@ -202,7 +211,8 @@
 		@endphp
 
 		<tr>
-			<td colspan="5">Name and address of Wife / Nearest Relative</td>
+			<td colspan="2">Spouse/Next of Kin</td>
+			<td colspan="3"></td>
 			<td>Relation</td>
 			<td></td>
 			<td>{{ $realFam ? $realFam->type : "-----" }}</td>
@@ -215,7 +225,8 @@
 			<td colspan="2">{{ $realFam ? $realFam->lname : "-----" }}</td>
 			<td colspan="2">{{ $realFam ? $realFam->fname . ' ' . $realFam->suffix : "-----" }}</td>
 			<td colspan="2">{{ $realFam ? $realFam->mname : "-----" }}</td>
-			<td colspan="2"></td>
+			<td rowspan="2">Number of Children</td>
+			<td rowspan="2">{{ $numOfChild }}</td>
 		</tr>
 
 		<tr>
@@ -223,25 +234,13 @@
 			<td colspan="2">(Surname)</td>
 			<td colspan="2">(Given Name)</td>
 			<td colspan="2">(Middle Name)</td>
-			<td colspan="2">(Number of Child)</td>
 		</tr>
 
 		<tr>
 			<td>Address:</td>
 			{{-- <td colspan="8">{{ $realFam ? $realFam->address : "-" }}</td> --}}
 			{{-- GUEVARRA SUGGESTED THAT THIS ONE SHOULD JUST BE THE SAME AS THE APPLICANTS ADDRESS --}}
-			<td colspan="8">{{ $applicant->user->address }}</td>
-		</tr>
-
-		<tr>
-			<td></td>
-			<td colspan="2"></td>
-		</tr>
-
-		<tr>
-			<td colspan="5"></td>
-			<td>E-mail:</td>
-			<td colspan="3">{{ $realFam ? $realFam->email : "-----" }}</td>
+			<td colspan="6">{{ $applicant->user->address }}</td>
 		</tr>
 
 		<tr>
@@ -257,8 +256,7 @@
 		@foreach($applicant->educational_background as $data)
 			{{-- @if($data->course != "") --}}
 				<tr>
-					<td>{{ explode('-', $data->year)[0] }}</td>
-					<td>{{ explode('-', $data->year)[1] }}</td>
+					<td>{{ explode('-', $data->year)[0] . " - " . explode('-', $data->year)[1] }}</td>
 					<td colspan="4">{{ $data->school }}</td>
 					<td colspan="3">{{ $data->course }}</td>
 				</tr>
