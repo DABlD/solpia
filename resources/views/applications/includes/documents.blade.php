@@ -58,6 +58,7 @@
 		let issuerString = "<option></option>";
 		let regulationString = "<option></option>";
 		let rankString = "<option></option>";
+		let rankString2 = "<option></option>";
 
         // LOAD ISSUER OPTIONS
         $(document).ready(() => {
@@ -84,6 +85,9 @@
 		        			rankString += `
 		        				<option value="${rank.id}">&nbsp;&nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})</option>
 		        			`;
+		        			rankString2 += `
+		        				<option value="${rank.name}">&nbsp;&nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})</option>
+		        			`;
 		        		});
 	        		});
 
@@ -100,6 +104,8 @@
 	        				<option value="${regulation}">${regulation}</option>
 	        			`;
 	        		});
+
+	        		populate_data();
 	        	}
 	        });
 	    });

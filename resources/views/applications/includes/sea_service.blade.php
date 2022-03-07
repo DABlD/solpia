@@ -7,8 +7,6 @@
         window['moment-range'].extendMoment(moment);
         var imo = {};
         var imoString = "";
-
-        var availableRanksString = rankString;
 		
 		// INIT GET VESSELS
 		getVessels(true);
@@ -49,7 +47,7 @@
                         <label for="rank${count}">Rank</label>
                         <select class="form-control" name="rank${count}">
                             <option value=""></option>
-                            ${rankString}
+                            ${rankString2}
                         </select>
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="rank${count}Error"></strong>

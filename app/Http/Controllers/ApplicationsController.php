@@ -42,11 +42,23 @@ class ApplicationsController extends Controller
     }
 
     public function create(){
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+        $issuers = array_merge(
+           DocumentId::pluck('issuer')->toArray(),
+           DocumentLC::pluck('issuer')->toArray()
+        );
+
+        $tempRegulations = DocumentLC::pluck('regulation')->toArray();
+        $regulations = array();
+               
     	return $this->_view('create', [
             'title'         => 'Add Crew',
+            'categories'    => $ranks->groupBy('category'),
+            'issuers'       => collect($issuers)->unique()->toArray(),
+            'regulations'   => collect($regulations)->unique()->toArray(),
             'religions'     => Applicant::pluck('religion')->unique(),
             'schools'       => EducationalBackground::pluck('school')->unique()
-    	]);
+        ]);
     }
 
     public function getIssuers(){
