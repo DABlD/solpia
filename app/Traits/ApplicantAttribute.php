@@ -16,10 +16,11 @@ trait ApplicantAttribute{
 			        '<span class="fa fa-pencil" data-id="' . $this->id . '"></span>' .
 			   '</a>
 				
-				<a class="btn btn-success" data-toggle="tooltip" title="View Files" data-id="' . $this->id . '">' .
-				     '<span class="fa fa-file" data-id="' . $this->id . '"></span>' .
-				'</a>
+				
 			   ';
+			 //   <a class="btn btn-success" data-toggle="tooltip" title="View Files" data-id="' . $this->id . '">' .
+				//      '<span class="fa fa-file" data-id="' . $this->id . '"></span>' .
+				// '</a>
 			   
 		//SALUTIN, MARCELLANA, FADRIQUELA, GARCIA, REYES
 		$cadets = [33, 34, 461, 462, 506];
