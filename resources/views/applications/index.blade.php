@@ -170,6 +170,11 @@
             padding-right: 10px;
         }
 
+        .tab-pane .col-md-6{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
         .tab-pane h3{
             margin-left: -20px;
         }
@@ -982,14 +987,14 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="Weight">Weight (kg)</label>
-                                    <input type="text" class="form-control" id="Weight" value="${applicant.Weight ?? "---"}" readonly>
+                                    <input type="text" class="form-control" id="Weight" value="${applicant.weight ?? "---"}" readonly>
                                 </div>
                             </div>
 
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="bmi">BMI</label>
-                                    <input type="text" class="form-control" id="bmi" value="${Math.round((applicant.weight / (applicant.height * applicant.height)) * 10 ) / 1}" readonly>
+                                    <input type="text" class="form-control" id="bmi" value="${Math.round( (applicant.weight / ((applicant.height / 100) * (applicant.height / 100))) * 10 ) / 10}" readonly>
                                 </div>
                             </div>
                         </div>
