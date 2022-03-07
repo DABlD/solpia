@@ -8,18 +8,7 @@
         var imo = {};
         var imoString = "";
 
-        var availableRanksString = `
-            <option></option>
-            @foreach($categories as $category => $ranks)
-                <optgroup label="{{ $category }}"></optgroup>
-                @foreach($ranks as $rank)
-                    <option value="{{ $rank->name }}">
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        {{ $rank->name }} ({{ $rank->abbr }})
-                    </option>
-                @endforeach
-            @endforeach
-        `;
+        var availableRanksString = rankString;
 		
 		// INIT GET VESSELS
 		getVessels(true);

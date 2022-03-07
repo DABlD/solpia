@@ -32,7 +32,7 @@ trait ApplicantAttribute{
 			// DELETE
 			$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-times" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			// SEARCH
-			$string .= '<a class="btn btn-success" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+			$string .= '<a class="btn btn-success btn-search" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 		}
 
 		// STATUS SHOULD BE EQUAL TO PRINCIPAL ID SO I USED THIS

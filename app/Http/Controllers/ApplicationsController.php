@@ -42,12 +42,29 @@ class ApplicationsController extends Controller
     }
 
     public function create(){
-        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+    	return $this->_view('create', [
+            'title'         => 'Add Crew',
+            'religions'     => Applicant::pluck('religion')->unique(),
+            'schools'       => EducationalBackground::pluck('school')->unique()
+    	]);
+    }
+
+    public function getIssuers(){
         $issuers = array_merge(
             DocumentId::pluck('issuer')->toArray(),
             DocumentLC::pluck('issuer')->toArray()
         );
 
+        echo json_encode(collect($issuers)->unique());
+    }
+
+    public function getRanks(){
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+
+        echo json_encode($ranks->groupBy('category'));
+    }
+
+    public function getRegulations(){
         $tempRegulations = DocumentLC::pluck('regulation')->toArray();
         $regulations = array();
 
@@ -58,14 +75,7 @@ class ApplicationsController extends Controller
             }
         }
 
-    	return $this->_view('create', [
-            'title'         => 'Add Crew',
-            'categories'    => $ranks->groupBy('category'),
-            'issuers'       => collect($issuers)->unique()->toArray(),
-            'regulations'   => collect($regulations)->unique()->toArray(),
-            'religions'     => Applicant::pluck('religion')->unique(),
-            'schools'       => EducationalBackground::pluck('school')->unique()
-    	]);
+        echo json_encode(collect($regulations)->unique());
     }
 
     public function edit(Applicant $applicant){
@@ -1147,7 +1157,7 @@ class ApplicationsController extends Controller
         return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");
     }
 
-    function getFiles(Request $req){
+    function getFiles_old(Request $req){
         $files = Fileszxc::where('applicant_id', $req->id)->select('name', 'type')->get()->groupBy('type')->toArray();
 
         $temp = Applicant::find($req->id);
@@ -1160,23 +1170,36 @@ class ApplicationsController extends Controller
         );
     }
 
-    function uploadFiles(Request $req){
+    function getFiles(Request $req){
+        echo json_encode(DB::table('document_' . $req->type)->where('id', $req->id)->select('file')->first());
+    }
+
+    function uploadFiles_old(Request $req){
         $file = $req->file('file');
 
         $name = $file->getClientOriginalName();
         $file->move(public_path().'/files/' . $req->aId . '/', $name);
 
         DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => $name]);
-        // Fileszxc::create([
-        //     'applicant_id' => $req->id,
-        //     'name' => $name,
-        //     'type' => $req->type
-        // ]);
 
         echo "<script>window.close();</script>";
     }
 
-    public function deleteFile(Request $req){
+    function uploadFiles(Request $req){
+        $files = $req->file('files');
+        $filenames = [];
+
+        foreach($files as $file){
+            $name = $file->getClientOriginalName();
+            $file->move(public_path().'/files/' . $req->aId . '/', $name);
+            array_push($filenames, $name);
+        }
+        
+        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => json_encode($filenames)]);
+        echo "<script>window.close();</script>";
+    }
+
+    public function deleteFile_old(Request $req){
         DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => null]);
 
         if(!file_exists(public_path("del\\" . $req->aId))){
@@ -1184,6 +1207,23 @@ class ApplicationsController extends Controller
         }
 
         rename(public_path("files\\" . $req->aId . "\\" . $req->file), public_path("del\\files\\" . $req->aId . "\\" . time() . '_' . $req->file));
+    }
+
+    public function deleteFile(Request $req){
+        $files = DB::table('document_' . $req->type)->where('id', $req->id)->first();
+
+        // if(!file_exists(public_path("del\\" . $req->aId))){
+        //     mkdir(public_path("del\\files\\" . $req->aId));
+        // }
+
+        foreach (json_decode($files->file) as $file) {
+            rename(public_path("files\\" . $req->aId . "\\" . $file), public_path("del\\files\\" . $req->aId . "\\" . time() . '_' . $file));
+        }
+
+        // die;
+
+        $files->file = null;
+        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => null]);
     }
 
     public function goToPrincipal(Applicant $applicant, Request $req){

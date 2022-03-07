@@ -147,17 +147,31 @@
             text-align: right;
         }
 
-        .btn-search{
-            background-color: #abaab4 !important;
-            border-color: #abaab4 !important;
-        }
-
         .form-group{
             text-align: left;
         }
 
         .puwy{
             margin-top: 20px !important;
+        }
+
+        .tab-pane .col-md-1{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
+        .tab-pane .col-md-2{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
+        .tab-pane .col-md-3{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
+        .tab-pane h3{
+            margin-left: -20px;
         }
 	</style>
 @endpush
@@ -1090,15 +1104,15 @@
 
                 if(id.file){
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${id.file}', ${applicant.id})">
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
                             <span class="fa fa-search">
-                        </span></a>&nbsp;&nbsp;
+                        </span></a>
                         <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
                             <span class="fa fa-download">
-                        </span></a>&nbsp;&nbsp;
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, '${id.file}', 'ids')">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, 'ids')">
                             <span class="fa fa-times">
-                        </span></a>&nbsp;&nbsp;`;
+                        </span></a>`;
                 }
 
                 file += `
@@ -1168,15 +1182,15 @@
 
                 if(flag.file){
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.file}', ${applicant.id})">
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, flags')">
                             <span class="fa fa-search">
-                        </span></a>&nbsp;&nbsp;
+                        </span></a>
                         <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
                             <span class="fa fa-download">
-                        </span></a>&nbsp;&nbsp;
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.id}, '${flag.file}', 'flags')">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.ifile}', 'flags')">
                             <span class="fa fa-times">
-                        </span></a>&nbsp;&nbsp;`;
+                        </span></a>`;
                 }
 
                 file += `
@@ -1246,15 +1260,15 @@
 
                 if(lc.file){
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${lc.file}', ${applicant.id})">
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
                             <span class="fa fa-search">
-                        </span></a>&nbsp;&nbsp;
+                        </span></a>
                         <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
                             <span class="fa fa-download">
-                        </span></a>&nbsp;&nbsp;
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, '${lc.file}', 'l_cs')">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, 'l_cs')">
                             <span class="fa fa-times">
-                        </span></a>&nbsp;&nbsp;`;
+                        </span></a>`;
                 }
 
                 file += `
@@ -1331,15 +1345,15 @@
 
                 if(mc.file){
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mc.file}', ${applicant.id})">
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
                             <span class="fa fa-search">
-                        </span></a>&nbsp;&nbsp;
+                        </span></a>
                         <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
                             <span class="fa fa-download">
-                        </span></a>&nbsp;&nbsp;
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, '${mc.file}', 'med_certs')">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, 'med_certs')">
                             <span class="fa fa-times">
-                        </span></a>&nbsp;&nbsp;`;
+                        </span></a>`;
                 }
 
                 file += `
@@ -1409,15 +1423,15 @@
 
                 if(mh.file){
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mh.file}', ${applicant.id})">
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
                             <span class="fa fa-search">
-                        </span></a>&nbsp;&nbsp;
+                        </span></a>
                         <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
                             <span class="fa fa-download">
-                        </span></a>&nbsp;&nbsp;
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, '${mh.file}', 'meds')">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, 'meds')">
                             <span class="fa fa-times">
-                        </span></a>&nbsp;&nbsp;`;
+                        </span></a>`;
                 }
 
                 file += `
@@ -1614,7 +1628,7 @@
                 html: `
                     <form action="{{ route('applications.uploadFiles') }}" enctype="multipart/form-data" method="POST" target="_blank">
                         @csrf
-                        <input type="file" name="file" id="file" class="swal2-file"/>
+                        <input type="file" name="files[]" multiple id="file" class="swal2-file"/>
                         <input type="hidden" name="id" value="${id}" />
                         <input type="hidden" name="aId" value="${aId}" />
                         <input type="hidden" name="type" value="${type}" />
@@ -1658,42 +1672,84 @@
             });
         }
 
-        function viewFile(file, aId){
+        function viewFile(id, aId, type){
             let imageFormats = ['JPEG', 'JPG', 'PNG', 'GIF'];
-            console.log(`files/${aId}/${file}`);
-            console.log(file);
-            if(imageFormats.includes(file.split('.').pop().toUpperCase())){
-                let img = new Image();
-                img.src = `files/${aId}/${file}`;
-                img.onload = () => {
-                    console.log(img.src);
-                    let gallery = new PhotoSwipe(
-                        $('.pswp')[0], 
-                        PhotoSwipeUI_Default, 
-                        [{
-                            src: img.src,
-                            w: img.width,
-                            h: img.height,
-                        }], 
-                        {
-                            allowPanToNext: true,
-                            escKey: true,
-                            arrowKeys: true,
-                            closeOnScroll: false,
-                            tapToClose: false,
-                            maxSpreadZoom: 6
-                        }
-                    );
+            
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('applications.getFiles') }}',
+                data: {id: id, type: type},
+                success: files => {
+                    files = JSON.parse(JSON.parse(files).file);
 
-                    gallery.init();
-                };
-            }
-            else if(file.split('.').pop().toUpperCase() == "PDF"){
-                window.open(file);
-            }
+                    if(type != "med_certs"){
+                        if(imageFormats.includes(files[0].split('.').pop().toUpperCase())){
+                            let img = new Image();
+                            img.src = `files/${aId}/${files[0]}`;
+                            img.onload = () => {
+                                let gallery = new PhotoSwipe(
+                                    $('.pswp')[0], 
+                                    PhotoSwipeUI_Default, 
+                                    [{
+                                        src: img.src,
+                                        w: img.width,
+                                        h: img.height,
+                                    }], 
+                                    {
+                                        allowPanToNext: true,
+                                        escKey: true,
+                                        arrowKeys: true,
+                                        closeOnScroll: false,
+                                        tapToClose: false,
+                                        maxSpreadZoom: 6
+                                    }
+                                );
+
+                                gallery.init();
+                            };
+                        }
+                        else if(files[0].split('.').pop().toUpperCase() == "PDF"){
+                            window.open(`files/${aId}/${files[0]}`);
+                        }
+                    }
+                    else{
+                        images = [];
+                        files.forEach(file => {
+                            console.log(file);
+                            let img = new Image();
+                            img.src = `files/${aId}/${file}`;
+                            img.onload = () => {
+                                images.push({
+                                    src: img.src,
+                                    w: img.width,
+                                    h: img.height,
+                                });
+                            };
+                        });
+
+                        setTimeout(() => {
+                            let gallery = new PhotoSwipe(
+                                $('.pswp')[0], 
+                                PhotoSwipeUI_Default, 
+                                images, 
+                                {
+                                    allowPanToNext: true,
+                                    escKey: true,
+                                    arrowKeys: true,
+                                    closeOnScroll: false,
+                                    tapToClose: false,
+                                    maxSpreadZoom: 6
+                                }
+                            );
+
+                            gallery.init();
+                        }, files.length * 500);
+                    }
+                }
+            })
         }
 
-        function deleteFile(id, aId, file, type){
+        function deleteFile(id, aId, type){
             swal({
                 type: 'warning',
                 title: 'Are you sure you want to delete?',
@@ -1705,7 +1761,7 @@
                     $.ajax({
                         url: '{{ route('applications.deleteFile') }}',
                         type: 'POST',
-                        data: {id: id, aId: aId, file: file, type: type},
+                        data: {id: id, aId: aId, type: type},
                         success: result => {
                             swal({
                                 type: 'success',
@@ -1725,6 +1781,7 @@
         }
 
         function reloadTab(id, aId, type){
+            console.log(id, aId, type);
             $(`[data-id="${aId}"].btn-search`).click();
             setTimeout(() => {
                 $(`[href='.${type}']`).click();

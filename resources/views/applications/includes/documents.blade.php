@@ -18,16 +18,7 @@
 			<div class="row">
 			    <div class="form-group col-md-4">
 			        <select class="form-control" id="rank">
-			            <option value=""></option>
-			            @foreach($categories as $category => $ranks)
-			                <optgroup label="{{ $category }}"></optgroup>
-			                @foreach($ranks as $rank)
-			                    <option value="{{ $rank->id }}">
-			                        &nbsp;&nbsp;&nbsp;&nbsp;
-			                        {{ $rank->name }} ({{ $rank->abbr }})
-			                    </option>
-			                @endforeach
-			            @endforeach
+			            // AJAX INSERT RANK STRING HERE
 			        </select>
 			    </div>
 			</div>
@@ -64,19 +55,54 @@
 			</a>
 		`);
 
-		let issuerString = `
-			<option></option>
-			@foreach($issuers as $issuer)
-				<option value="{{ $issuer }}">{{ $issuer }}</option>
-			@endforeach
-		`;
+		let issuerString = "<option></option>";
+		let regulationString = "<option></option>";
+		let rankString = "<option></option>";
 
-		let regulationString = `
-			<option></option>
-			@foreach($regulations as $regulation)
-				<option value="{{ $regulation }}">{{ $regulation }}</option>
-			@endforeach
-		`;
+        // LOAD ISSUER OPTIONS
+        $(document).ready(() => {
+	        $.ajax({
+	        	url: '{{ route('applications.getIssuers') }}',
+	        	success: issuers => {
+	        		issuers = JSON.parse(issuers);
+	        		Object.values(issuers).forEach(issuer => {
+	        			issuerString += `
+	        				<option value="${issuer}">${issuer}</option>
+	        			`;
+	        		});
+	        	}
+	        });
+
+	        $.ajax({
+	        	url: '{{ route('applications.getRanks') }}',
+	        	success: categories => {
+	        		categories = JSON.parse(categories);
+
+	        		Object.values(categories).forEach((ranks, category) => {
+	        			rankString += `<optgroup label="${category}"></optgroup>`;
+	        			Object.values(ranks).forEach(rank => {
+		        			rankString += `
+		        				<option value="${rank.id}">${rank.name} (${rank.abbr})</option>
+		        			`;
+		        		});
+	        		});
+
+	        		$('#rank').append(rankString);
+	        	}
+	        });
+
+	        $.ajax({
+	        	url: '{{ route('applications.getRegulations') }}',
+	        	success: regulations => {
+	        		regulations = JSON.parse(regulations);
+	        		Object.values(regulations).forEach(regulation => {
+	        			regulationString += `
+	        				<option value="${regulation}">${regulation}</option>
+	        			`;
+	        		});
+	        	}
+	        });
+	    });
 
         function addDocu(type){
             $(`.${type}Count`)[0].innerText = parseInt($(`.${type}Count`)[0].innerText) + 1;
@@ -351,6 +377,9 @@
             	            	<option value="CHOLERA">CHOLERA</option>
             	            	<option value="CHEMICAL TEST">CHEMICAL TEST</option>
             	            	<option value="DRUG AND ALCOHOL TEST">DRUG AND ALCOHOL TEST</option>
+            	            	<option value="COVID-19 1ST DOSE">COVID-19 1ST DOSE</option>
+            	            	<option value="COVID-19 2ND DOSE">COVID-19 2ND DOSE</option>
+            	            	<option value="COVID-19 3RD DOSE">COVID-19 3RD DOSE</option>
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${mcType}${count}Error"></strong>

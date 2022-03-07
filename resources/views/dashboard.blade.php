@@ -241,11 +241,11 @@
     {{-- CREW CATEGORY --}}
 
     $(document).ready(() => {
-      initCrewWithExpiredDocs();
-      // initReport1();
       setTimeout(() => {
-        initCrewCategory();
-      }, 4000);
+        initCrewWithExpiredDocs();
+      }, 2000);
+      initCrewCategory();
+      // initReport1();
     });
 
     function initCrewCategory(){
@@ -283,6 +283,7 @@
     function initCrewWithExpiredDocs(){
       $.ajax({
         url: '{{ route('dashboard.getCrewWithExpiredDocs') }}',
+        async: true,
         success: cwed => {
           // CREW WITH EXPIRING DOCUMENT
           cwed = JSON.parse(cwed);

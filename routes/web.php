@@ -127,6 +127,11 @@ Route::group([
 		Route::get("$name/goToPrincipal/{applicant?}", ucfirst($name) . 'Controller@goToPrincipal')->name("$name.goToPrincipal");
 		Route::get("$name/getAllInfo", ucfirst($name) . 'Controller@getAllInfo')->name("$name.getAllInfo");
 
+		// DETAILS FOR CREATE/EDIT
+		Route::get("$name/getIssuers", ucfirst($name) . 'Controller@getIssuers')->name("$name.getIssuers");
+		Route::get("$name/getRegulations", ucfirst($name) . 'Controller@getRegulations')->name("$name.getRegulations");
+		Route::get("$name/getRanks", ucfirst($name) . 'Controller@getRanks')->name("$name.getRanks");
+
 		// ON BOARD, ETC.
 		Route::post("$name/updateStatus/{id?}/{status?}/{vessel_id?}", ucfirst($name) . 'Controller@updateStatus')->name("$name.updateStatus");
 

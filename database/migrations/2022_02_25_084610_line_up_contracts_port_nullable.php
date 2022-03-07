@@ -26,7 +26,7 @@ class LineUpContractsPortNullable extends Migration
     public function down()
     {
         Schema::table('line_up_contracts', function (Blueprint $table) {
-            $table->dropColumn('particulars');
+            $table->string('joining_port')->change();
         });
     }
 }
