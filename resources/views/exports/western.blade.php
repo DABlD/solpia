@@ -234,9 +234,9 @@
 		}
 
 		if(!$riri){
-			echo "
-				<tr>
-					<td colspan='10'>
+			if($name == "COVID-19 1ST DOSE" || $name == "COVID-19 2ND DOSE" || $name == "COVID-19 1ST BOOSTER"){
+				echo "
+					<td colspan='3'>
 						$name
 					</td>
 
@@ -244,8 +244,22 @@
 					<td colspan='6'>$issue</td>
 					<td colspan='6'>$expiry</td>
 					<td colspan='6'>$issuer</td>
-				</tr>
-			";
+				";
+			}
+			else{
+				echo "
+					<tr>
+						<td colspan='10'>
+							$name
+						</td>
+
+						<td colspan='6'>$number</td>
+						<td colspan='6'>$issue</td>
+						<td colspan='6'>$expiry</td>
+						<td colspan='6'>$issuer</td>
+					</tr>
+				";
+			}
 		}
 		else{
 			echo "
@@ -680,29 +694,16 @@
 	{{ $getDocument('POLIO VACCINE (IPV)', 'med_cert', '', 'POLIO VACCINE')}}
 
 	<tr>
-		<td colspan="7" rowspan="3">Covid Vaccine Certificate</td>
-		<td colspan="3">1st Dose</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">NOT APPLICABLE</td>
+		<td colspan="8" rowspan="3">Covid Vaccine Certificate</td>
+		{{ $getDocument('COVID-19 1ST DOSE', 'med_cert', '', '1st Dose')}}
 	</tr>
-
 	<tr>
-		<td colspan="3">2nd Dose</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">NOT APPLICABLE</td>
+		{{ $getDocument('COVID-19 2ND DOSE', 'med_cert', '', '2nd Dose')}}
 	</tr>
-
 	<tr>
-		<td colspan="3">2nd Dose</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">-----</td>
-		<td colspan="6">NOT APPLICABLE</td>
+		{{ $getDocument('COVID-19 BOOSTER', 'med_cert', '', 'Booster')}}
 	</tr>
+	
 	{{-- LINGUISTIC --}}
 	{{ addS('6. LINGUISTIC') }}
 
