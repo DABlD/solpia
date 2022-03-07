@@ -1212,7 +1212,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                                <input type="text" class="form-control" id="expiry_date" value="${flag.expiry_date != null ? moment(flag.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
                             </div>
                         </div>
 
@@ -1290,7 +1290,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                                <input type="text" class="form-control" id="expiry_date" value="${lc.expiry_date != null ? moment(lc.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
                             </div>
                         </div>
 
@@ -1375,7 +1375,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                                <input type="text" class="form-control" id="expiry_date" value="${mc.expiry_date != null ? moment(mc.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
                             </div>
                         </div>
 
@@ -1573,7 +1573,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="sign_off">Sign Off</label>
-                                <input type="text" class="form-control" id="sign_off" value="${ss.issue_date != null ? moment(ss.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                                <input type="text" class="form-control" id="sign_off" value="${ss.sign_off != null ? moment(ss.sign_off).format("MMM DD, YYYY") : "---"}" readonly>
                             </div>
                         </div>
 
