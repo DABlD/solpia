@@ -79,10 +79,10 @@
 	        		categories = JSON.parse(categories);
 
 	        		Object.values(categories).forEach((ranks, category) => {
-	        			rankString += `<optgroup label="${category}"></optgroup>`;
+	        			rankString += `<optgroup label="${ranks[0].category}"></optgroup>`;
 	        			Object.values(ranks).forEach(rank => {
 		        			rankString += `
-		        				<option value="${rank.id}">${rank.name} (${rank.abbr})</option>
+		        				<option value="${rank.id}">&nbsp;&nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})</option>
 		        			`;
 		        		});
 	        		});

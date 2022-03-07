@@ -49,7 +49,7 @@
                         <label for="rank${count}">Rank</label>
                         <select class="form-control" name="rank${count}">
                             <option value=""></option>
-                            ${availableRanksString}
+                            ${rankString}
                         </select>
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="rank${count}Error"></strong>
