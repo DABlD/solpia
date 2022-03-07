@@ -234,7 +234,7 @@
 		}
 
 		if(!$riri){
-			if($name == "COVID-19 1ST DOSE" || $name == "COVID-19 2ND DOSE" || $name == "COVID-19 1ST BOOSTER"){
+			if($name == "1st Dose" || $name == "2nd Dose" || $name == "3rd Dose"){
 				echo "
 					<td colspan='3'>
 						$name
@@ -694,14 +694,14 @@
 	{{ $getDocument('POLIO VACCINE (IPV)', 'med_cert', '', 'POLIO VACCINE')}}
 
 	<tr>
-		<td colspan="8" rowspan="3">Covid Vaccine Certificate</td>
+		<td colspan="7" rowspan="3">Covid Vaccine Certificate</td>
 		{{ $getDocument('COVID-19 1ST DOSE', 'med_cert', '', '1st Dose')}}
 	</tr>
 	<tr>
 		{{ $getDocument('COVID-19 2ND DOSE', 'med_cert', '', '2nd Dose')}}
 	</tr>
 	<tr>
-		{{ $getDocument('COVID-19 BOOSTER', 'med_cert', '', 'Booster')}}
+		{{ $getDocument('COVID-19 3RD DOSE', 'med_cert', '', '3rd Dose')}}
 	</tr>
 	
 	{{-- LINGUISTIC --}}
