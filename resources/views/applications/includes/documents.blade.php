@@ -549,12 +549,14 @@
 			$(`[name="${issue_date}${count}"]`).on('change', e => {
 				let expiry = $(e.target).parent().parent().find('.docu-expiry_date');
 				
-				$(expiry[0]).flatpickr({
-	            	...config,
-	            	...{
-	            		minDate: moment(e.target.value).add(1, 'day').format('YYYY-MM-DD')
-	            	}
-	            });
+				if(e.target.value != ""){
+					$(expiry[0]).flatpickr({
+		            	...config,
+		            	...{
+		            		minDate: moment(e.target.value).add(1, 'day').format('YYYY-MM-DD')
+		            	}
+		            });
+				}
 			})
 
             if(type == "ID"){
