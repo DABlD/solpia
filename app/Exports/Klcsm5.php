@@ -420,7 +420,7 @@ class Klcsm5 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 
                 $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(20);
                 $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(22);
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
             },

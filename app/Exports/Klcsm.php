@@ -10,7 +10,13 @@ class Klcsm implements WithMultipleSheets
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
         $this->type = $type;
-        $this->applicant->sea_service;
+
+        $temp = [];
+
+        foreach($applicant->sea_service as $ss){
+            array_push($temp, $ss);
+        }
+        $this->applicant->sea_service = $temp;
     }
 
     /**

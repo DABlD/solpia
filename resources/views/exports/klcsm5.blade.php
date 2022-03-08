@@ -1,12 +1,3 @@
-@php
-	$temp = [];
-
-	foreach($data->sea_service as $ss){
-		array_push($temp, $ss);
-	}
-	$data->sea_service = $temp;
-@endphp
-
 <table>
 	<tr>
 		<td colspan="12">KLCSM CO., LTD.</td>
