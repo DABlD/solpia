@@ -27,14 +27,18 @@
 			echo "
 				<tr>
 					<td rowspan='2'>$ss->flag</td>
-					<td>$ss->manning_agent</td>
+					<td>$ss->principal</td>
 					<td>$ss->vessel_type</td>
 					<td>$ss->trade</td>
 					<td>$eng</td>
 					<td>$on</td>
 					<td rowspan='2'>$diff</td>
 					<td rowspan='2'>$ss->remarks</td>
-					<td rowspan='2'></td>
+					<td rowspan='2'>
+						AGENCY: $ss->manning_agent 
+						" . PHP_EOL . "
+						COMBINED CREW: $ss->crew_nationality
+					</td>
 				</tr>
 
 				<tr>
@@ -43,7 +47,7 @@
 					<td>$ss->gross_tonnage</td>
 					<td>$ss->bhp_kw</td>
 					<td>$off</td>
-				</tr>
+				</tr>;
 			";
 		}
 	};

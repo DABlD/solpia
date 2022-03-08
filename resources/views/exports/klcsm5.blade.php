@@ -245,12 +245,12 @@
 		<td>Last Rank</td>
 		<td colspan="2">{{ $data->sea_service[0]->rank }}</td>
 		<td colspan="5">Last Carrier</td>
-		<td colspan="4">{{ $data->sea_service[0]->vessel_name }}</td>
+		<td colspan="4">{{ $data->sea_service[0]->vessel_type }}</td>
 	</tr>
 
 	<tr>
 		<td>Own Disembark</td>
-		<td colspan="2"></td>
+		<td colspan="2">{{ $data->sea_service[0]->remarks }}</td>
 		<td colspan="5">Previous Records</td>
 		<td colspan="4"></td>
 	</tr>
@@ -321,19 +321,19 @@
 	<tr>
 		<td>Interviewer</td>
 		<td>Rank</td>
-		<td></td>
+		<td>CREWING MANAGER</td>
 		<td colspan="5">Interviewer</td>
 		<td>Rank</td>
-		<td colspan="3"></td>
+		<td colspan="3">PORT CAPTAIN</td>
 	</tr>
 
 	<tr>
 		<td>(Sub)</td>
 		<td>Name</td>
-		<td></td>
+		<td>JEANETTE T. SOLIDUM</td>
 		<td colspan="5">(Main)</td>
 		<td>Name</td>
-		<td colspan="3"></td>
+		<td colspan="3">CAPT. HERNAN D. CASTILLO</td>
 	</tr>
 
 	<tr>

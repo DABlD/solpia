@@ -229,6 +229,7 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('H1')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A3')->getFont()->setSize(12);
+                $event->sheet->getDelegate()->getStyle('I6:I28')->getFont()->setSize(6);
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
@@ -407,7 +408,7 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(28);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(12);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(21);
 
                 // ROW RESIZE
                 for($i = 6; $i <= 29; $i++){

@@ -306,7 +306,7 @@ class Klcsm5 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B5:B10', 'I5:I10', 'I16:L19', 'I21:I26', 'D30'
+                    'B5:B10', 'I5:I10', 'I16:L19', 'I21:I26', 'D30', 'C43:C45', 'J43:L45'
                 ];
 
                 foreach($h as $key => $value) {
