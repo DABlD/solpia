@@ -13,7 +13,7 @@ use App\Models\Vessel;
 
 use Illuminate\Support\Str;
 
-class Imsco implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -27,7 +27,6 @@ class Imsco implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $ssTotalM['container'] = 0;
         $ssTotalY['container'] = 0;
-
     	foreach($this->data->sea_service as $ss){
     		if($ss->vessel_name != ""){
                 $tempVessel = Vessel::where('name', $ss->vessel_name)->first();
@@ -50,7 +49,7 @@ class Imsco implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             }
     	}
 
-        return view('exports.' . lcfirst($this->type), [
+        return view('exports.' . 'imsco', [
             'applicant' => $this->data,
             'ssTotalM' => $ssTotalM,
             'ssTotalY' => $ssTotalY
