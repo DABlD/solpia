@@ -694,14 +694,15 @@
 	{{ $getDocument('POLIO VACCINE (IPV)', 'med_cert', '', 'POLIO VACCINE')}}
 
 	<tr>
-		<td colspan="7" rowspan="3">Covid Vaccine Certificate</td>
+		<td colspan="7" rowspan="2">Covid Vaccine Certificate</td>
 		{{ $getDocument('COVID-19 1ST DOSE', 'med_cert', '', '1st Dose')}}
 	</tr>
 	<tr>
 		{{ $getDocument('COVID-19 2ND DOSE', 'med_cert', '', '2nd Dose')}}
 	</tr>
 	<tr>
-		{{ $getDocument('COVID-19 3RD DOSE', 'med_cert', '', '3rd Dose')}}
+		<td colspan="7" style="font-weight: bold;">Covid Vaccine Booster</td>
+		{{ $getDocument('COVID-19 3RD DOSE', 'med_cert', '', '1st Dose')}}
 	</tr>
 	
 	{{-- LINGUISTIC --}}
