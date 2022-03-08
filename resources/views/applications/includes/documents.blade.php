@@ -395,15 +395,25 @@
             	            </span>
             	        </div>
             	        <div class="form-group col-md-2">
-            	            <label for="${clinic}${count}">Clinic</label>
+            	            <label for="${clinic}${count}">Clinic\\Vaccine Brand</label>
             	            <select class="${docu_class} ${clinic}" name="${clinic}${count}">
             	            	<option></option>
-            	            	<option value="MICAH">MICAH</option>
-            	            	<option value="SUPERCARE">SUPERCARE</option>
-            	            	<option value="SM LAZO">SM LAZO</option>
-            	            	<option value="PHYSICIAN">PHYSICIAN</option>
-            	            	<option value="HALCION">HALCION</option>
-            	            	<option value="BUREAU OF QUARANTINE">BUREAU OF QUARANTINE</option>
+            	            	<optgroup label="Suggested"></optgroup>
+	            	            	<option value="MICAH">&nbsp;&nbsp;&nbsp;MICAH</option>
+	            	            	<option value="SUPERCARE">&nbsp;&nbsp;&nbsp;SUPERCARE</option>
+	            	            	<option value="SM LAZO">&nbsp;&nbsp;&nbsp;SM LAZO</option>
+	            	            	<option value="PHYSICIAN">&nbsp;&nbsp;&nbsp;PHYSICIAN</option>
+	            	            	<option value="HALCION">&nbsp;&nbsp;&nbsp;HALCION</option>
+	            	            	<option value="BUREAU OF QUARANTINE">&nbsp;&nbsp;&nbsp;BUREAU OF QUARANTINE</option>
+            	            	<optgroup label="Vaccine Brand">&nbsp;&nbsp;&nbsp;</optgroup>
+	            	            	<option value="SINOVAC">&nbsp;&nbsp;&nbsp;SINOVAC</option>
+	            	            	<option value="ASTRAZENECA">&nbsp;&nbsp;&nbsp;ASTRAZENECA</option>
+	            	            	<option value="MODERNA">&nbsp;&nbsp;&nbsp;MODERNA</option>
+	            	            	<option value="PFIZER">&nbsp;&nbsp;&nbsp;PFIZER</option>
+	            	            	<option value="SPUTNIK">&nbsp;&nbsp;&nbsp;SPUTNIK</option>
+	            	            	<option value="SINOPHARM">&nbsp;&nbsp;&nbsp;SINOPHARM</option>
+	            	            	<option value="BHARAT">&nbsp;&nbsp;&nbsp;BHARAT</option>
+	            	            	<option value="JOHNSON AND JOHNSON">&nbsp;&nbsp;&nbsp;JOHNSON AND JOHNSON</option>
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${clinic}${count}Error"></strong>
