@@ -296,7 +296,7 @@
         	// CREATE MED OPTIONS
         	var med_options = "";
         	var medOptions = [
-        		'', 'HYPERTENSION', 'DIABETES', "POLYPS", 'GALLSTONE', 'MEASLES', 'CHICKEN POX'
+        		'', 'HYPERTENSION', 'DIABETES', "POLYPS", 'GALLSTONE', 'MEASLES', 'CHICKEN POX', 'COVID-19'
         	];
 
         	medOptions.forEach(docu => {
