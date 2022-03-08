@@ -10,7 +10,7 @@ class Klcsm implements WithMultipleSheets
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
         $this->type = $type;
-        $this->applicant->sea_service = $this->applicant->sea_service->sortByDesc('sign_on');
+        $this->applicant->sea_service;
     }
 
     /**

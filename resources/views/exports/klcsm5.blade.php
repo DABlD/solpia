@@ -1,3 +1,12 @@
+@php
+	$temp = [];
+
+	foreach($data->sea_service as $ss){
+		array_push($temp, $ss);
+	}
+	$data->sea_service = $temp;
+@endphp
+
 <table>
 	<tr>
 		<td colspan="12">KLCSM CO., LTD.</td>
@@ -238,7 +247,11 @@
 		<td>Last Company</td>
 		<td colspan="2">{{ $data->sea_service[0]->manning_agent }}</td>
 		<td colspan="5">Serve Period</td>
-		<td colspan="4">{{ $data->sea_service[0]->sign_on->diffInDays($data->sea_service[0]->sign_off) }} D</td>
+		<td colspan="4">
+			{{ $data->sea_service[0]->sign_on->format("d M Y") }}
+			 - 
+			{{ $data->sea_service[0]->sign_off->format("d M Y") }}
+		</td>
 	</tr>
 
 	<tr>
@@ -330,7 +343,7 @@
 	<tr>
 		<td>(Sub)</td>
 		<td>Name</td>
-		<td>JEANETTE T. SOLIDUM</td>
+		<td>JEANNETTE T. SOLIDUM</td>
 		<td colspan="5">(Main)</td>
 		<td>Name</td>
 		<td colspan="3">CAPT. HERNAN D. CASTILLO</td>
