@@ -11,7 +11,7 @@
 		// INIT GET VESSELS
 		getVessels(true);
         function addSS(){
-            imoString == "" ? getVessels(false) : addSS2();
+            addSS2();
         }
 
         function addSS2(){
@@ -292,24 +292,21 @@
         }
 
         function getVessels(flag = true){
-            imoString = "";
-
             $.ajax({
                 url: '{{ route('vessels.getAll') }}',
                 dataType: 'json',
                 success: vessels => {
-                    console.log(vessels);
                     vessels.forEach(vessel => {
                         if(imo[vessel.imo] == undefined){
                             if(vessel.imo != null){
                                 imo[vessel.imo] = vessel;
                                 imoString += `
-                                    <option value="${vessel.imo}">${vessel.imo}</option>
+                                    <option value="${vessel.imo}">${vessel.imo} (${vessel.name})</option>
                                 `;
                             }
                         }
                     });
-					console.log(flag);
+
 					if(!flag){
 						addSS2();
 					}

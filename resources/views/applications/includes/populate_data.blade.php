@@ -194,7 +194,6 @@
 					let sss   = result.sea_service;
 
 					if(lcs.length > 0){
-						console.log(lcs[0].rank);
 						$('#rank').val(lcs[0].rank).trigger('change');
 					}
 
@@ -282,7 +281,6 @@
 						// length ? $('[name="imo1"]').select2('open') : '';
 					
 						index = 0;
-						console.log(length);
 						for(let ctr = 0; ctr < length; ctr++){
 							inputs = $('#sea-services input, #sea-services select');
 							i = (index * 19);
@@ -291,7 +289,6 @@
 							// checkIfExisting($(inputs[i+1]), sss[ctr].vessel_name);
 							$(inputs[i+1]).val(sss[ctr].vessel_name);
 							$(inputs[i+2]).val(sss[ctr].rank).trigger('change');
-							console.log(sss[ctr].rank);
 							
 							inputs[i+3].value       = sss[ctr].vessel_type;
 							inputs[i+4].value       = sss[ctr].gross_tonnage;

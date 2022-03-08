@@ -105,7 +105,9 @@
 	        			`;
 	        		});
 
-	        		populate_data();
+				    @if(isset($edit))
+	        			populate_data();
+				    @endif
 	        	}
 	        });
 	    });
