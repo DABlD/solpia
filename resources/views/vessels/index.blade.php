@@ -926,7 +926,7 @@
                         <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
                         <td>${moment(crew.joining_date).format('DD-MMM-YY')}</td>
-                        <td>${moment(crew.joining_date).diff(moment(), 'months')}</td>
+                        <td>${moment().diff(moment(crew.joining_date), 'months')}</td>
                         <td>${crew.months}</td>
                         <td>${moment(crew.joining_date).add(crew.months, 'months').format('DD-MMM-YY')}</td>
                         <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('DD-MMM-YY') : '-----'}</td>
