@@ -221,7 +221,7 @@
                     parent.find(`[name^="flag"]`).val(imo[selectedVessel].flag);
                     parent.find(`[name^="trade"]`).val(imo[selectedVessel].trade);
                     parent.find(`[name^="manning_agent"]`).val(imo[selectedVessel].manning_agent);
-                    parent.find(`[name^="principal"]`).val(imo[selectedVessel].principal.name);
+                    parent.find(`[name^="principal"]`).val(imo[selectedVessel].pname);
                     parent.find(`[name^="crew_nationality"]`).val(imo[selectedVessel].crew_nationality);
                 }
             });

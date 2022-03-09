@@ -55,7 +55,14 @@ class VesselsController extends Controller
     public function getAll(Request $req){
     	// echo json_encode(Vessel::all());
     	echo json_encode(
-    		Vessel::with('principal')->get()
+    		Vessel::select(
+                'imo', 'principal_id', 'manning_agent', 'vessels.name', 'flag',
+                'type', 'engine', 'gross_tonnage', 'BHP', 'trade',
+                'p.name as pname'
+                )
+                ->where('imo', '!=', null)
+                ->join('principals as p', 'p.id', '=', 'vessels.principal_id')
+                ->get()
     	);
     }
 
