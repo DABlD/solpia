@@ -113,7 +113,7 @@
 		</tr>
 
 		<tr>
-			<td colspan="10"></td>
+			<td colspan="9"></td>
 		</tr>
 
 		<tr>
@@ -240,7 +240,9 @@
 			<td>Address:</td>
 			{{-- <td colspan="8">{{ $realFam ? $realFam->address : "-" }}</td> --}}
 			{{-- GUEVARRA SUGGESTED THAT THIS ONE SHOULD JUST BE THE SAME AS THE APPLICANTS ADDRESS --}}
-			<td colspan="6">{{ $applicant->user->address }}</td>
+			<td colspan="5">{{ $applicant->user->address }}</td>
+			<td>Telephone:</td>
+			<td colspan="2">{{ $applicant->provincial_address }}</td>
 		</tr>
 
 		<tr>
@@ -256,7 +258,7 @@
 		@foreach($applicant->educational_background as $data)
 			{{-- @if($data->course != "") --}}
 				<tr>
-					<td>{{ explode('-', $data->year)[0] . " - " . explode('-', $data->year)[1] }}</td>
+					<td colspan="2">{{ explode('-', $data->year)[0] . " - " . explode('-', $data->year)[1] }}</td>
 					<td colspan="4">{{ $data->school }}</td>
 					<td colspan="3">{{ $data->course }}</td>
 				</tr>
@@ -283,12 +285,9 @@
 
 		<tr>
 			<td colspan="2">
-				National License
-				@if($rank >= 9 && $rank <= 21)
-					(II/4)
-				@endif
+				National
 			</td>
-			<td colspan="2"></td>
+			<td colspan="2">{{ $applicant->rank->name }}</td>
 			<td>{{ $docu ? $docu->no : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -305,8 +304,8 @@
 		@endphp
 	
 		<tr>
-			<td colspan="2">Flag License</td> 
-			<td colspan="2"></td>
+			<td colspan="2">PANAMA</td> 
+			<td colspan="2">{{ $applicant->rank->name }}</td>
 			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -314,34 +313,26 @@
 			<td colspan="2">PANAMA</td>
 		</tr>
 
-		{{-- @php 
+		@php 
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Marshall Islands" && $document->type == "GMDSS/GOC"){
+			    if($document->country == "Panama" && $document->type == "GMDSS/GOC"){
 			        $docu = $document;
 			    }
 			}
-		@endphp --}}
-
-		{{-- <tr>
-			<td colspan="2">Flag GOC</td>
-			<td colspan="2"></td>
-			<td>{{ $docu? $docu->number : "-----" }}</td>
+		@endphp
+	
+		<tr>
+			<td colspan="2">PANAMA GOC</td> 
+			<td colspan="2">{{ $applicant->rank->name }}</td>
+			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $docu ? "Marshall Islands" : "-" }}</td>
-		</tr> --}}
-
-		<tr>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td colspan="2"></td>
+			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
+			<td colspan="2">{{ $docu ? '-----' : 'NOT APPLICABLE' }}</td>
 		</tr>
 
-		{{-- @php 
+		@php 
 			$docu = false;
 			foreach($applicant->document_flag as $document){
 			    if($document->country == "Panama" && $document->type == "SSO"){
@@ -349,23 +340,34 @@
 			    }
 			}
 		@endphp
-
+	
 		<tr>
-			<td colspan="2">Flag SSO</td>
-			<td colspan="2"></td>
+			<td colspan="2">PANAMA SSO</td> 
+			<td colspan="2">{{ $applicant->rank->name }}</td>
 			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">PANAMA</td>
-		</tr> --}}
+			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
+			<td colspan="2">{{ $docu ? '-----' : 'NOT APPLICABLE' }}</td>
+		</tr>
 
+		@php 
+			$docu = false;
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Liberia" && $document->type == "LICENSE"){
+			        $docu = $document;
+			    }
+			}
+		@endphp
+	
 		<tr>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td colspan="2"></td>
+			<td colspan="2">LIBERIAN LIC</td> 
+			<td colspan="2">{{ $applicant->rank->name }}</td>
+			<td>{{ $docu ? $docu->number : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
+			<td colspan="2">{{ $docu ? '-----' : 'NOT APPLICABLE' }}</td>
 		</tr>
 
 		<tr>
@@ -418,7 +420,7 @@
 		@endphp
 
 		<tr>
-			<td colspan="2">National Seaman's Book</td>
+			<td colspan="2">Seaman's Book(National)</td>
 			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
@@ -437,8 +439,8 @@
 		@endphp
 
 		<tr>
-			<td colspan="2">Seaman's Book/Panama</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td colspan="2">Seaman's Book(Panama)</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->name : '-----' }}</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -446,13 +448,32 @@
 		</tr>
 		
 		{{-- 5TH --}}
+		@php
+			$docu = false;
+			foreach($applicant->document_flag as $document){
+			    if($document->country == "Liberia" && $document->type == "BOOKLET"){
+			        $docu = $document;
+			    }
+			}
+		@endphp
+
+		<tr>
+			<td colspan="2">Liberian Book</td>
+			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->name : '-----' }}</td>
+			<td>{{ $docu ? $docu->number : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">PANAMA</td>
+		</tr>
+		
+		{{-- 6TH --}}
 		@php 
 			$name = "MCV";
 			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
 		@endphp
 
 		<tr>
-			<td colspan="2">AUSTRALIA MCV</td>
+			<td colspan="2">AUS MCV Visa</td>
 			<td colspan="2"></td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
@@ -460,7 +481,7 @@
 			<td colspan="2">AU-EMBASSY</td>
 		</tr>
 		
-		{{-- 6TH --}}
+		{{-- 7TH --}}
 		@php 
 			$name = "JAPANESE VISA";
 			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
@@ -500,6 +521,20 @@
 
 		<tr>
 			<td colspan="4">SSO (Ship Security Officer) Course</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
+		</tr>
+
+		{{-- 1ST POINT 5 --}}
+		@php 
+			$name = 'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">SSAT with SDSD</td>
 			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -648,18 +683,13 @@
 
 		{{-- 10TH --}}
 		@php 
-			$name = 'COC';
+			$name = 'COE';
 			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 		@endphp
 
 		<tr>
 			<td colspan="4">
-				Endorsement Certificate /
-				@if($rank >= 1 && $rank <= 8)
-					COE
-				@else
-					COC
-				@endif
+				Endorsement Certificate / COC
 			</td>
 			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
@@ -667,145 +697,105 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
-		@if(($rank >=5 && $rank <= 8) || ($rank >= 15 && $rank <= 21))
-			{{-- 11TH --}}
-			@php 
-				$name = 'ERS WITH ERM';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
+		@php 
+			$name = 'ECDIS';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+		{{-- ECDISCISM --}}
+		<tr>
+			<td rowspan="2">ECDIS</td>
+			<td colspan="3">Generic</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
+		</tr>
 
-			<tr>
-				<td colspan="4">ERS WITH ERM</td>
-				<td>{{ $docu ? $docu->no : "-----"}}</td>
+		<tr>
+			<td colspan="3">Type Specific</td>
+			@if(isset($applicant->ecdis_specific))
+				@php 
+					$name = $applicant->ecdis_specific;
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				@endphp
+				<td>{{ $docu ? $docu->no : "REVERTING"}}</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
-			</tr>
+				<td colspan="2">{{ $docu ? $docu->issuer : "REVERTING" }}</td>
+			@else
+				<td>-----</td>
+				<td>-----</td>
+				<td>-----</td>
+				<td colspan="2">NOT APPLICABLE</td>
+			@endif
+		</tr>
 
-			{{-- 12TH --}}
-			@php 
+		{{-- 11TH --}}
+		@php 
+			$name = 'HAZMAT';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">HAZMAT</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
+		</tr>
+
+		{{-- 12TH --}}
+		@php 
+			$name = 'CONSOLIDATED MARPOL';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="4">MARPOL</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
+		</tr>
+
+		{{-- 13TH --}}
+		@php 
+			$name = 'ERS WITH ERM';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+			if(!isset($docu)){
 				$name = 'ERS';
 				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
+			}
+		@endphp
 
-			<tr>
-				<td colspan="4">ERS</td>
-				<td>{{ $docu ? $docu->no : "-----"}}</td>
-				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
-			</tr>
-
-			{{-- 13TH --}}
-			@php 
-				$name = 'ERM';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<tr>
-				<td colspan="4">ERM</td>
-				<td>{{ $docu ? $docu->no : "-----"}}</td>
-				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
-			</tr>
-
-			{{-- 14TH --}}
-			<tr>
-				<td colspan="4"></td><td></td><td></td><td></td><td colspan="2"></td>
-			</tr>
-
-			{{-- 15TH --}}
-			<tr>
-				<td colspan="4"></td><td></td><td></td><td></td><td colspan="2"></td>
-			</tr>
-		@else
-			{{-- 11TH --}}
-			@php 
-				$name = 'ECDIS JRC 701B';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<tr>
-				<td colspan="4">JRC ECDIS SPECIFIC 1</td>
-				{{-- <td>{{ $docu ? $docu->no : "-----"}}</td> --}}
-				<td>JAN-701B/901B/2000</td>
-				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
-			</tr>
-
-			{{-- 12TH --}}
-			@php 
-				$name = 'ECDIS JRC 9201';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<tr>
-				<td colspan="4">JRC ECDIS SPECIFIC 2</td>
-				{{-- <td>{{ $docu ? $docu->no : "-----"}}</td> --}}
-				<td>JAN-9201/7201</td>
-				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
-			</tr>
-
-			{{-- 13TH --}}
-			@php 
-				$name = 'ECDIS FURUNO 2107';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<tr>
-				<td colspan="4">FURUNO ECDIS FEA</td>
-				{{-- <td>{{ $docu ? $docu->no : "-----"}}</td> --}}
-				<td>FEA-2107/FEA-2807</td>
-				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
-			</tr>
-
-			{{-- 14TH --}}
-			@php 
-				$name = 'ECDIS FURUNO 3300';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<tr>
-				<td colspan="4">FURUNO ECDIS FMD</td>
-				{{-- <td>{{ $docu ? $docu->no : "-----"}}</td> --}}
-				<td>FMD-3300</td>
-				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
-			</tr>
-
-			{{-- 15TH --}}
-			@php 
-				$name = 'ECDIS';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			@endphp
-
-			<tr>
-				<td colspan="4">ECDIS GENERIC</td>
-				<td>{{ $docu ? $docu->no : "-----"}}</td>
-				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
-			</tr>
-		@endif
+		<tr>
+			<td colspan="4">ERS</td>
+			<td>{{ $docu ? $docu->no : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "-----" }}</td>
+		</tr>
 	
 		<tr>
 			<td colspan="4">5. PHYSICAL INSPECTION/YELLOW CARD</td>
 		</tr>
 
 		<tr>
-			<td colspan="4">CERTIFICATE</td>
-			<td>Experience of Measles, Chicken Pox</td>
-			<td>With Vaccine</td>
+			<td rowspan="2" colspan="4">CERTIFICATE</td>
+			<td>Infection History</td>
+			<td>Vaccine</td>
 			<td>Date Issued</td>
 			<td>Expiry Date</td>
 			<td>Issued By</td>
+		</tr>
+
+		<tr>
+			<td>Y/N</td>
+			<td>Y/N</td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 
 		@php 
@@ -814,10 +804,10 @@
 		@endphp
 
 		<tr>	
-			<td colspan="4">PHYSICAL INSPECTION</td>
-			<td>{{ $docu ? "YES" : "NO"}}</td>
-			<td>{{ $docu ? $docu->no : "-----"}}</td>
-			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="4">PEME</td>
+			<td>-----</td>
+			<td>-----</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "REVERTING" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td>{{ $docu ? $docu->clinic : "-----" }}</td>
 		</tr>
@@ -867,7 +857,7 @@
 
 		@php 
 			$name = 'POLIO VACCINE (IPV)';
-			$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
+			$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
 		@endphp
 
 		<tr>	
@@ -877,6 +867,23 @@
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td>{{ $docu ? $docu->clinic : "-----" }}</td>
+		</tr>
+
+		@php 
+			$name = 'COVID-19';
+			$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
+
+			$name2 = 'COVID-19 1ST DOSE';
+			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
+		@endphp
+
+		<tr>	
+			<td colspan="4">COVID-19 (certificate copy must be attached)</td>
+			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>{{ $docu2 ? $docu2->clinic : "-----"}}</td>
+			<td>{{ $docu2 ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu2 ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td>-----</td>
 		</tr>
 
 		{{-- end --}}
@@ -965,23 +972,23 @@
 			<td colspan="9">3) For Deck Officers / Ratings indicate Gross Tonnage of Vessel</td>
 		</tr>
 		<tr>
-			<td colspan="9">4) For Engine Officers / Rating indicate Gross Tonnage and Engine Type (example:SULZER 7RTA62) with Horsepower.</td>
+			<td colspan="9">4) For Engine Officers / Rating indicate Gross Tonnage and Engine Type (example:SULZER 7RTA62) with KW.</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Vessel's Name</td>
 			<td>Type</td>
-			<td>GRT</td>
-			<td>Service Area</td>
+			<td colspan="2">Gross Tonnage, TEU</td>
 			<td>Manning</td>
 			<td>Sign On</td>
 			<td colspan="2">Reason Sign-Off/Notes</td>
 		</tr>
 
 		<tr>
-			<td colspan="2">Flag</td>
+			<td>Flag</td>
+			<td>Mixed Crew</td>
 			<td>Rank</td>
-			<td colspan="2">Engine Type / Power</td>
+			<td colspan="2">Engine KW / Service Area</td>
 			<td>Manager</td>
 			<td>Sign Off</td>
 			<td>Period(Y-M-D)</td>
@@ -992,16 +999,23 @@
 			<tr>
 				<td colspan="2">{{ $data->vessel_name }}</td>
 				<td>{{ $data->vessel_type }}</td>
-				<td>{{ $data->gross_tonnage }}</td>
-				<td>{{ $data->trade }}</td>
+				<td colspan="2">{{ $data->gross_tonnage }}</td>
 				<td>{{ $data->manning_agent }}</td>
 				<td>{{ $data->sign_on != "" ? $data->sign_on->format('M j, Y') : "-----" }}</td>
 				<td colspan="2">{{ $data->remarks }}</td>
 			</tr>
 			<tr>
-				<td colspan="2">{{ $data->flag }}</td>
+				<td>{{ $data->flag }}</td>
+				<td>
+					@if($data->crew_nationality == "FILIPINO" || $data->crew_nationality == "FULL CREW")
+						FULL CREW
+					@elseif($data->crew_nationality != "")
+						MIXED CREW
+					@endif
+				</td>
 				<td>{{ $applicant->ranks[$data->rank] }}</td>
-				<td colspan="2">{{ $data->engine_type }} / {{ $data->bhp_kw }}</td>
+				<td>{{ $data->engine_type }}</td>
+				<td>{{ $data->trade }}</td>
 				<td>{{ $data->principal }}</td>
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "-----" }}</td>
 				<td colspan="2">
