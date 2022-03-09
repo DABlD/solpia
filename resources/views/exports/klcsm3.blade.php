@@ -187,7 +187,7 @@
 	@endphp
 
 	<tr>
-		<td colspan="2">Micah Medical Clinic</td>
+		<td colspan="2">MMC Medical Clinic</td>
 		<td>{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
 		<td>{{ $data->height }}cm</td>
 		<td>{{ $data->weight }}kg</td>
