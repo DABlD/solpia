@@ -404,6 +404,7 @@
 	            	            	<option value="SM LAZO">&nbsp;&nbsp;&nbsp;SM LAZO</option>
 	            	            	<option value="PHYSICIAN">&nbsp;&nbsp;&nbsp;PHYSICIAN</option>
 	            	            	<option value="HALCION">&nbsp;&nbsp;&nbsp;HALCION</option>
+	            	            	<option value="MMC">&nbsp;&nbsp;&nbsp;MMC</option>
 	            	            	<option value="BUREAU OF QUARANTINE">&nbsp;&nbsp;&nbsp;BUREAU OF QUARANTINE</option>
             	            	<optgroup label="Vaccine Brand">&nbsp;&nbsp;&nbsp;</optgroup>
 	            	            	<option value="SINOVAC">&nbsp;&nbsp;&nbsp;SINOVAC</option>
