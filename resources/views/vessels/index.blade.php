@@ -437,137 +437,141 @@
                     }
                 })
             });
-
-            $('[data-original-title="Add Vessel"]').on('click', () => {
-                swal.showLoading();
-
-                $.ajax({
-                    url: '{{ route('principal.get') }}',
-                    data: {
-                        cols: ['id', 'name', 'active'],
-                        where: ['active', 1]
-                    },
-                    success: principals => {
-                        setTimeout(() => {
-                            swal({
-                                title: 'Enter Vessel Details',
-                                html: `
-                                    <select id="principal_id" class="swal2-input">
-                                        <option></option>
-                                    </select>
-                                    <input type="text" id="manning_agent" class="swal2-input" placeholder="Enter Manning Agent">
-                                    <input type="text" id="name" class="swal2-input" placeholder="Enter Vessel Name">
-                                    <input type="number" id="imo" class="swal2-input" placeholder="Enter IMO">
-                                    <input type="text" id="flag" class="swal2-input" placeholder="Enter Flag">
-                                    <input type="text" id="type" class="swal2-input" placeholder="Enter Type of Vessel">
-                                    <input type="text" id="year_build" class="swal2-input" placeholder="Enter Year Built">
-                                    <input type="text" id="builder" class="swal2-input" placeholder="Enter Builder">
-                                    <input type="text" id="engine" class="swal2-input" placeholder="Enter Engine">
-                                    <input type="number" id="gross_tonnage" class="swal2-input" placeholder="Enter GRT">
-                                    <input type="number" id="bhp" class="swal2-input" placeholder="Enter BHP">
-                                    <input type="text" id="trade" class="swal2-input" placeholder="Enter Trade Route">
-                                    <input type="text" id="ecdis" class="swal2-input" placeholder="Enter Trade ECDIS">
-                                `,
-                                preConfirm: () => {
-                                    swal.showLoading();
-                                    return new Promise(resolve => {
-                                        setTimeout(() => {
-                                            let error = "Up to IMO is required";
-
-                                            if(!$('#principal_id').val()){
-                                                swal.showValidationError(error);
-                                            }
-                                            if(!$('#manning_agent').val()){
-                                                swal.showValidationError(error);
-                                            }
-                                            if(!$('#name').val()){
-                                                swal.showValidationError(error);
-                                            }
-                                            if(!$('#imo').val()){
-                                                swal.showValidationError(error);
-                                            }
-                                        resolve()}, 500);
-                                    });
-                                },
-                                onOpen: () => {
-                                    principals = Object.entries(JSON.parse(principals));
-                                    let space = "&nbsp;&nbsp;&nbsp;";
-                                    let options = "";
-
-                                    principals.reverse().forEach((principal, index) => {
-                                        options += `<option value="${principal[1].id}">${space + principal[1].name}</option>`;
-                                    });
-
-                                    $('#principal_id').append(options);
-                                    $('#principal_id').select2({
-                                        placeholder: 'Select Principal',
-                                        tags: true
-                                    });
-
-                                    // CSS
-                                    $(".swal2-input[type='number']").css({
-                                        'max-width': '100%'
-                                    });
-
-                                    $('.select2-selection').css({
-                                        'text-align': 'left'
-                                    });
-
-                                    $('#principal_id').on("select2:open", () => {
-                                        $('.select2-dropdown').css({
-                                            'z-index': 9999
-                                        });
-                                    });
-                                }
-                            }).then(result => {
-                                if(result.value){
-                                    let principal_id = $('#principal_id').val();
-                                    let manning_agent = $('#manning_agent').val();
-                                    let name = $('#name').val();
-                                    let imo = $('#imo').val();
-                                    let flag = $('#flag').val();
-                                    let type = $('#type').val();
-                                    let year_build = $('#year_build').val();
-                                    let builder = $('#builder').val();
-                                    let engine = $('#engine').val();
-                                    let gross_tonnage = $('#gross_tonnage').val();
-                                    let bhp = $('#bhp').val();
-                                    let trade = $('#trade').val();
-                                    let ecdis = $('#ecdis').val();
-
-                                    $.ajax({
-                                        url: '{{ route('vessels.add') }}',
-                                        data: {
-                                            principal_id: principal_id,
-                                            manning_agent: manning_agent,
-                                            name: name,
-                                            imo: imo,
-                                            flag: flag,
-                                            type: type,
-                                            year_build: year_build,
-                                            builder: builder,
-                                            engine: engine,
-                                            gross_tonnage: gross_tonnage,
-                                            bhp: bhp,
-                                            trade: trade,
-                                            ecdis: ecdis
-                                        },
-                                        success: result => {
-                                            console.log(result);
-                                            swal({
-                                                type: 'success',
-                                                title: 'Successfully'
-                                            })
-                                        }
-                                    })
-                                }
-                            });
-                        }, 1000);
-                    }
-                });
-
-            });
         }
+
+
+        $('[title="Add Vessel"]').on('click', () => {
+            swal.showLoading();
+
+            $.ajax({
+                url: '{{ route('principal.get') }}',
+                data: {
+                    cols: ['id', 'name', 'active'],
+                    where: ['active', 1]
+                },
+                success: principals => {
+                    setTimeout(() => {
+                        swal({
+                            title: 'Enter Vessel Details',
+                            html: `
+                                <select id="principal_id" class="swal2-input">
+                                    <option></option>
+                                </select>
+                                <input type="text" id="manning_agent" class="swal2-input" placeholder="Enter Manning Agent">
+                                <input type="text" id="name" class="swal2-input" placeholder="Enter Vessel Name">
+                                <input type="number" id="imo" class="swal2-input" placeholder="Enter IMO">
+                                <input type="text" id="flag" class="swal2-input" placeholder="Enter Flag">
+                                <input type="text" id="type" class="swal2-input" placeholder="Enter Type of Vessel">
+                                <input type="text" id="year_build" class="swal2-input" placeholder="Enter Year Built">
+                                <input type="text" id="builder" class="swal2-input" placeholder="Enter Builder">
+                                <input type="text" id="engine" class="swal2-input" placeholder="Enter Engine">
+                                <input type="number" id="gross_tonnage" class="swal2-input" placeholder="Enter GRT">
+                                <input type="number" id="bhp" class="swal2-input" placeholder="Enter BHP">
+                                <input type="text" id="trade" class="swal2-input" placeholder="Enter Trade Route">
+                                <input type="text" id="ecdis" class="swal2-input" placeholder="Enter Trade ECDIS">
+                            `,
+                            preConfirm: () => {
+                                swal.showLoading();
+                                return new Promise(resolve => {
+                                    setTimeout(() => {
+                                        let error = "Up to IMO is required";
+
+                                        if(!$('#principal_id').val()){
+                                            swal.showValidationError(error);
+                                        }
+                                        if(!$('#manning_agent').val()){
+                                            swal.showValidationError(error);
+                                        }
+                                        if(!$('#name').val()){
+                                            swal.showValidationError(error);
+                                        }
+                                        if(!$('#imo').val()){
+                                            swal.showValidationError(error);
+                                        }
+                                    resolve()}, 500);
+                                });
+                            },
+                            onOpen: () => {
+                                principals = Object.entries(JSON.parse(principals));
+                                let space = "&nbsp;&nbsp;&nbsp;";
+                                let options = "";
+
+                                principals.reverse().forEach((principal, index) => {
+                                    options += `<option value="${principal[1].id}">${space + principal[1].name}</option>`;
+                                });
+
+                                $('#principal_id').append(options);
+                                $('#principal_id').select2({
+                                    placeholder: 'Select Principal',
+                                    tags: true
+                                });
+
+                                // CSS
+                                $(".swal2-input[type='number']").css({
+                                    'max-width': '100%'
+                                });
+
+                                $('.select2-selection').css({
+                                    'text-align': 'left'
+                                });
+
+                                $('#principal_id').on("select2:open", () => {
+                                    $('.select2-dropdown').css({
+                                        'z-index': 9999
+                                    });
+                                });
+                            }
+                        }).then(result => {
+                            if(result.value){
+                                let principal_id = $('#principal_id').val();
+                                let manning_agent = $('#manning_agent').val();
+                                let name = $('#name').val();
+                                let imo = $('#imo').val();
+                                let flag = $('#flag').val();
+                                let type = $('#type').val();
+                                let year_build = $('#year_build').val();
+                                let builder = $('#builder').val();
+                                let engine = $('#engine').val();
+                                let gross_tonnage = $('#gross_tonnage').val();
+                                let bhp = $('#bhp').val();
+                                let trade = $('#trade').val();
+                                let ecdis = $('#ecdis').val();
+
+                                $.ajax({
+                                    url: '{{ route('vessels.add') }}',
+                                    data: {
+                                        principal_id: principal_id,
+                                        manning_agent: manning_agent,
+                                        name: name,
+                                        imo: imo,
+                                        flag: flag,
+                                        type: type,
+                                        year_build: year_build,
+                                        builder: builder,
+                                        engine: engine,
+                                        gross_tonnage: gross_tonnage,
+                                        bhp: bhp,
+                                        trade: trade,
+                                        ecdis: ecdis
+                                    },
+                                    success: result => {
+                                        console.log("vessel add", result);
+
+                                        swal({
+                                            type: 'success',
+                                            title: 'Successfully added vessel',
+                                            timer: 800,
+                                            showConfirmButton: false
+                                        })
+                                    }
+                                })
+                            }
+                        });
+                    }, 1000);
+                }
+            });
+
+        });
 
         function uploadParticular(id){
             swal({
