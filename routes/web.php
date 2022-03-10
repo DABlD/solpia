@@ -134,6 +134,7 @@ Route::group([
 
 		// ON BOARD, ETC.
 		Route::post("$name/updateStatus/{id?}/{status?}/{vessel_id?}", ucfirst($name) . 'Controller@updateStatus')->name("$name.updateStatus");
+		Route::get("$name/updateProApp", ucfirst($name) . 'Controller@updateProApp')->name("$name.updateProApp");
 
 		// SELECTING RELIEVER
 		Route::post("$name/updateLineUpContract", ucfirst($name) . 'Controller@updateLineUpContract')->name("$name.updateLineUpContract");

@@ -1110,6 +1110,10 @@ class ApplicationsController extends Controller
         }
     }
 
+    function updateProApp(Request $req){
+        echo ProcessedApplicant::where($req->col, $req->val)->update($req->update);
+    }
+
     function exportOnOff($id, $type){
         $vesselCrew = $this->getVesselCrew(new Request(), $id);
 

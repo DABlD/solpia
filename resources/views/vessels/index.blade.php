@@ -635,7 +635,7 @@
                             'max-width': '120px'
                         });
 
-                        $('.actions').css('width', '100px');
+                        $('.actions').css('width', '150px');
 
                         $('[id^=table-select-]').on('change', e => {
                             let input = $(e.target);
@@ -800,6 +800,9 @@
                             </a>
                             <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-ship"></span>
+                            </a>
+                            <a class="btn btn-danger" data-toggle="tooltip" title="Remove Lineup" onClick="rlu(${crew.applicant_id}, ${crew.vessel_id})">
+                                <span class="fa fa-times"></span>
                             </a>
                         </td>
                         @endif
@@ -1210,6 +1213,41 @@
                     });
                 }
             })
+        }
+
+        function rlu(aId, vessel_id){
+            swal({
+                type: 'warning',
+                title: 'Confirmation',
+                text: 'Please confirm removal of lineup.',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b'
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('applications.updateProApp') }}',
+                        data: {
+                            col: 'applicant_id',
+                            val: aId,
+                            update: {principal_id: null, vessel_id: null, rank_id: null, status: 'Vacation'}
+                        },
+                        success: result => {
+                            console.log('Remove LineUp', result);
+
+                            getVesselCrew(vessel_id, true);
+                            $('[href=".linedUp"]').click();
+
+                            swal({
+                                type: 'success',
+                                title: 'Successfully removed lineup',
+                                timer: 800,
+                                showConfirmButton: false
+                            }).then(() => {
+                            });
+                        }
+                    })
+                }
+            });
         }
 
         function getContract(id){
