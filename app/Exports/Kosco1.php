@@ -44,7 +44,7 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $temp = 'container';
                 }
 
-                if($temp){
+                if(isset($temp)){
                     $ssTotalM[$temp] += round($ss->sign_on->floatDiffInMonths($ss->sign_off), 1);
                     $ssTotalY[$temp] += round($ss->sign_on->floatDiffInYears($ss->sign_off), 1);
                 }
