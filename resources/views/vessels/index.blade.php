@@ -741,7 +741,7 @@
                             <td><b>Reliever</b></td>
                             <td><b>Remarks</b></td>
                             @if(auth()->user()->role != "Principal")
-                            <td><b>Actions</b></td>
+                                <td><b>Actions</b></td>
                             @endif
                         </tr>
                     </thead>
@@ -940,8 +940,11 @@
                         <td class="remarks">${crew.remarks}</td>
                         @if(auth()->user()->role != "Principal")
                         <td class="actions">
+                            <a class="btn btn-info btn-sm" data-toggle="tooltip" title="Edit On Board Details" onClick='eod(${crew.id}, ${crew.vessel_id}, "${crew.joining_date}", ${crew.months}, "${crew.joining_port ?? ""}")'>
+                                <span class="fa fa-pencil fa-sm"></span>
+                            </a>
                             <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
-                                <span class="fa fa-ship fa-sm"></span>
+                                <span class="fa fa-arrow-down fa-sm"></span>
                             </a>
                             ${onBoardButton}
                         </td>
@@ -1242,12 +1245,100 @@
                                 title: 'Successfully removed lineup',
                                 timer: 800,
                                 showConfirmButton: false
-                            }).then(() => {
                             });
                         }
                     })
                 }
             });
+        }
+
+        function eod(id, vessel_id, joining_date, months, joining_port){
+            swal({
+                title: 'Edit Details',
+                width: '30%',
+                html: `
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Joining Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="joining_date" class="swal2-input" placeholder="Select Date"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Contract Duration</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" min="1" id="months" class="form-control" style="margin-top: 10px;" value="${months}" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel2" style="margin-top: 15px;">Joining Port</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="joining_port" class="swal2-input" value="${joining_port ?? ""}" />
+                        </div>
+                    </div>
+                    <br>
+                `,
+                onOpen: () => {
+                    $('#joining_date').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                        defaultDate: moment(joining_date).format("YYYY-MM-DD")
+                    })
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                confirmButtonText: "Update",
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let a = $('#joining_date').val();
+                            let b = $('#months').val();
+                            let c = $('#joining_port').val();
+
+                            if(a == "" || b == ""){
+                                swal.showValidationError('Joining Date and Contract Duration is required');
+                            }
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('applications.updateContract') }}',
+                        data: {
+                            col: 'id',
+                            val: id,
+                            update: {
+                                joining_date: $('#joining_date').val(),
+                                months: $('#months').val(),
+                                joining_port: $('#joining_port').val(),
+                            }
+                        },
+                        success: result => {
+                            console.log('Update LineUp', result);
+
+                            getVesselCrew(vessel_id, true);
+                            $('[href=".onBoard"]').click();
+
+                            swal({
+                                type: 'success',
+                                title: 'Successfully Updated On-Board Details',
+                                timer: 800,
+                                showConfirmButton: false
+                            });
+                        }
+                    })
+                }
+            })
         }
 
         function getContract(id){

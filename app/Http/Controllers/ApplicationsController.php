@@ -1114,6 +1114,10 @@ class ApplicationsController extends Controller
         echo ProcessedApplicant::where($req->col, $req->val)->update($req->update);
     }
 
+    function updateContract(Request $req){
+        echo LineUpContract::where($req->col, $req->val)->update($req->update);
+    }
+
     function exportOnOff($id, $type){
         $vesselCrew = $this->getVesselCrew(new Request(), $id);
 
