@@ -28,7 +28,9 @@ trait ApplicantAttribute{
 		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Encoder', 'Cadet']) || in_array(auth()->user()->id, $cadets)){
 		// if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) || auth()->user()->id = 33){
 			// LINE UP
-			$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '<span data-status="' . $this->status . '" class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>';
+			if($this->pa_s != "On Board"){
+				$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>';
+			}
 			// DELETE
 			$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-times" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			// SEARCH
