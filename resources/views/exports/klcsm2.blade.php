@@ -279,6 +279,7 @@
 	
 		$a = "BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT";
 		$b = "BTOCT - Basic Training for Oil and Chemical Tanker ";
+		$getDocument($a, 'lc', null, $b);
 
 		$a = "SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD";
 		$b = "SSA SDSD - Ship Security Awareness Training &#38; Seafarers w/ Designated Security Duties";
