@@ -899,7 +899,7 @@
                         curCategory = "GALLEY";
                     }
 
-                    if(crew.abbr == rengiSno.abbr && crew.applicant_id != rengiSno.applicant_id || (curRankID > crewRankID && crewRankCategory == curCategory)){
+                    if((crew.abbr == rengiSno.abbr && crew.applicant_id != rengiSno.applicant_id && rengiSno.status != "On Board") || (curRankID > crewRankID && crewRankCategory == curCategory && rengiSno.status != "Lined-Up")){
                         let name = `${rengiSno.lname + ', ' + rengiSno.fname + ' ' + (rengiSno.suffix || "") + ' ' + rengiSno.mname}`;
 
                         reliever += `
