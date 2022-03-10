@@ -540,7 +540,7 @@ class ApplicationsController extends Controller
         $class = "App\\Exports\\" . ucfirst($type);
 
         $temp = ProcessedApplicant::where('applicant_id', $applicant->id)->first();
-        if($temp->status == "Lined-Up"){
+        if($temp->status == "Lined-Up" || $temp->status == "On Board"){
             $applicant->rank = Rank::find($temp->rank_id);
             $applicant->vessel = Vessel::find($temp->vessel_id);
         }
@@ -590,6 +590,10 @@ class ApplicationsController extends Controller
                     'flag' => null
                 ]);
             }
+        }
+
+        if(isset($req->ecdises)){
+            $applicant->ecdises = json_decode($req->ecdises);
         }
 
         AuditTrail::create([

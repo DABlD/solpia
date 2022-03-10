@@ -713,9 +713,9 @@
 
 		<tr>
 			<td colspan="3">Type Specific</td>
-			@if(isset($applicant->ecdis_specific))
+			@if(isset($applicant->ecdises[0]))
 				@php 
-					$name = $applicant->ecdis_specific;
+					$name = $applicant->ecdises[0];
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				@endphp
 				<td>{{ $docu ? $docu->no : "REVERTING"}}</td>

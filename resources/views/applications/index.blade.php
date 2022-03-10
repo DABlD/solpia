@@ -178,6 +178,10 @@
         .tab-pane h3{
             margin-left: -20px;
         }
+
+        .checkbox input{
+            position: inherit !important;
+        }
 	</style>
 @endpush
 
@@ -2094,8 +2098,74 @@
                                 }
                             })
                         }
+                        else if(type == "toei"){
+                            swal({
+                                title: 'Check all ECDIS Specific',
+                                html: `
+                                    <div class="checkbox col-md-offset-2 col-md-8" style="text-align: left;">
+                                        <label>
+                                            <input type="checkbox" value="ECDIS FURUNO 2107"> ECDIS FURUNO 2107
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS FURUNO 2807"> ECDIS FURUNO 2807
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS FURUNO 3200"> ECDIS FURUNO 3200
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS FURUNO 3300"> ECDIS FURUNO 3300
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS JRC 701B"> ECDIS JRC 701B
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS JRC 7201"> ECDIS JRC 7201
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS JRC 901B"> ECDIS JRC 901B
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS JRC 9201"> ECDIS JRC 9201
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS CHARTWORLD EG2"> ECDIS CHARTWORLD EG2
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS TOKYO"> ECDIS TOKYO
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS TRANSAS"> ECDIS TRANSAS
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS PM3D"> ECDIS PM3D
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS MARTEK"> ECDIS MARTEK
+                                        </label><br>
+                                        <label>
+                                            <input type="checkbox" value="ECDIS MECY"> ECDIS MECY
+                                    </div>
+                                `,
+                                onOpen: () => {
+                                    $('#ecdisSpecific').select2({
+                                        tags: true
+                                    });
+
+                                    $('#ecdisSpecific').on('select2:open', e => {
+                                        $('.select2-container').css('z-index', 1060);
+                                    });
+                                }
+                            }).then(result => {
+                                if(result.value){
+                                    let ecdises = [];
+                                    $('.checkbox input:checked').each((i, ecdis) => {
+                                        ecdises.push($(ecdis).val());
+                                    });
+                                    window.location.href = 'applications/export/' + application.data('id') + '/' + type + `?ecdises=${JSON.stringify(ecdises)}`;
+                                }
+                            })
+                        }
                         else{
-                            console.log('export');
                             window.location.href = 'applications/export/' + application.data('id') + '/' + type;
                         }
                     }
