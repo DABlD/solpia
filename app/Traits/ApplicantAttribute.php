@@ -24,18 +24,22 @@ trait ApplicantAttribute{
 			   
 		//SALUTIN, MARCELLANA, FADRIQUELA, GARCIA, REYES
 		$cadets = [33, 34, 461, 462, 506];
-			   																//	TOEI CADETS
-		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Encoder', 'Cadet']) || in_array(auth()->user()->id, $cadets)){
-		// if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) || auth()->user()->id = 33){
+
+		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Encoder', 'Cadet'])){
 			// LINE UP
 			if($this->pa_s != "On Board"){
 				$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>';
+				$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-times" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
-			// DELETE
-			$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-times" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
-			// SEARCH
-			$string .= '<a class="btn btn-success btn-search" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 		}
+			   																//	TOEI CADETS
+		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Encoder', 'Cadet', 'Crewing Officer']) || in_array(auth()->user()->id, $cadets)){
+		// if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) || auth()->user()->id = 33){
+			// DELETE
+			// SEARCH
+		}
+
+		$string .= '<a class="btn btn-success btn-search" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 
 		// STATUS SHOULD BE EQUAL TO PRINCIPAL ID SO I USED THIS
 		$status = auth()->user()->status;
