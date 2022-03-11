@@ -1512,7 +1512,7 @@
                 cancelButtonColor: '#f76c6b',
                 inputOptions: {
                     ShinkoOnOff: 'Shinko/All',
-                    WesternOnOff: 'Western'
+                    WesternOnOff: 'Nitta/TOEI'
                 },
             }).then(result => {
                 if(result.value){
