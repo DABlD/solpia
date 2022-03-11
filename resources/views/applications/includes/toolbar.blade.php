@@ -1,3 +1,7 @@
+<div class="pull-left">
+	<h4 style="color: red;"><b>NOTE: Disregard any apostrophe in encoding as this will cause problem in saving the information during compression.</b></h4>
+</div>
+
 <div class="pull-right">
 	<a href="{{ route('applications.index') }}" class="btn btn-info" data-toggle="tooltip" title="View All">
 		<span class="fa fa-list"></span>
