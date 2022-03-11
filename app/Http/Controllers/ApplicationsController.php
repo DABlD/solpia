@@ -554,12 +554,23 @@ class ApplicationsController extends Controller
 			}
         }
 
+        // SORT
         if(in_array($type, ['western'])){
             $applicant->sea_service = $applicant->sea_service->sortBy('sign_off');
         }
         else{
             $applicant->sea_service = $applicant->sea_service->sortByDesc('sign_off');
         }
+        // END SORT
+
+        // ARRANGE KEYS AFTER SORT
+        $temp = [];
+
+        foreach($applicant->sea_service as $ss){
+            array_push($temp, $ss);
+        }
+        $applicant->sea_service = collect($temp);
+        // END
 
         // FIX MINIMUM VESSELS
         $minVessels = 0;
