@@ -1191,7 +1191,7 @@
 
                 if(flag.file){
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, flags')">
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
                             <span class="fa fa-search">
                         </span></a>
                         <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
@@ -1689,39 +1689,10 @@
                 url: '{{ route('applications.getFiles') }}',
                 data: {id: id, type: type},
                 success: files => {
-                    files = JSON.parse(JSON.parse(files).file);
+                    files = JSON.parse(files).file;
+                    try{
+                        files = JSON.parse(files);
 
-                    if(type != "med_certs"){
-                        if(imageFormats.includes(files[0].split('.').pop().toUpperCase())){
-                            let img = new Image();
-                            img.src = `files/${aId}/${files[0]}`;
-                            img.onload = () => {
-                                let gallery = new PhotoSwipe(
-                                    $('.pswp')[0], 
-                                    PhotoSwipeUI_Default, 
-                                    [{
-                                        src: img.src,
-                                        w: img.width,
-                                        h: img.height,
-                                    }], 
-                                    {
-                                        allowPanToNext: true,
-                                        escKey: true,
-                                        arrowKeys: true,
-                                        closeOnScroll: false,
-                                        tapToClose: false,
-                                        maxSpreadZoom: 6
-                                    }
-                                );
-
-                                gallery.init();
-                            };
-                        }
-                        else if(files[0].split('.').pop().toUpperCase() == "PDF"){
-                            window.open(`files/${aId}/${files[0]}`);
-                        }
-                    }
-                    else{
                         images = [];
                         files.forEach(file => {
                             console.log(file);
@@ -1752,7 +1723,39 @@
                             );
 
                             gallery.init();
-                        }, files.length * 500);
+                        }, files.length * 250);
+                    } catch (error){
+                        console.log(files.split('.').pop().toUpperCase());
+                        console.log(imageFormats.includes(files.split('.').pop().toUpperCase()));
+                        console.log(imageFormats.includes(files.split('.').pop().toUpperCase()));
+                        if(imageFormats.includes(files.split('.').pop().toUpperCase())){
+                            let img = new Image();
+                            img.src = `files/${aId}/${files}`;
+                            img.onload = () => {
+                                let gallery = new PhotoSwipe(
+                                    $('.pswp')[0], 
+                                    PhotoSwipeUI_Default, 
+                                    [{
+                                        src: img.src,
+                                        w: img.width,
+                                        h: img.height,
+                                    }], 
+                                    {
+                                        allowPanToNext: true,
+                                        escKey: true,
+                                        arrowKeys: true,
+                                        closeOnScroll: false,
+                                        tapToClose: false,
+                                        maxSpreadZoom: 6
+                                    }
+                                );
+
+                                gallery.init();
+                            };
+                        }
+                        else if(files[0].split('.').pop().toUpperCase() == "PDF"){
+                            window.open(`files/${aId}/${files[0]}`);
+                        }
                     }
                 }
             })
