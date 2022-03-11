@@ -182,6 +182,11 @@
         .checkbox input{
             position: inherit !important;
         }
+
+        .rlu{
+            background-color: #f76c6b;
+            border-color: #f76c6b;
+        }
 	</style>
 @endpush
 
@@ -2174,6 +2179,38 @@
                     }
                 });
             }
+        }
+
+        function rlu(aId, vessel_id){
+            swal({
+                type: 'warning',
+                title: 'Confirmation',
+                text: 'Please confirm removal of lineup.',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b'
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('applications.updateProApp') }}',
+                        data: {
+                            col: 'applicant_id',
+                            val: aId,
+                            update: {principal_id: null, vessel_id: null, rank_id: null, status: 'Vacation'}
+                        },
+                        success: result => {
+                            console.log('Remove LineUp', result);
+                            table.search($('#table_filter input').val()).draw();
+                            
+                            swal({
+                                type: 'success',
+                                title: 'Successfully removed lineup',
+                                timer: 800,
+                                showConfirmButton: false
+                            });
+                        }
+                    })
+                }
+            });
         }
 	</script>
 @endpush

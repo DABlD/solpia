@@ -29,7 +29,13 @@ trait ApplicantAttribute{
 			// LINE UP
 			if($this->pa_s != "On Board"){
 				$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>';
-				$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-times" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+				$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-trash" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+			}
+			if($this->pa_s == "Lined-Up"){
+				$string .= '
+                    <a class="btn btn-danger rlu" data-toggle="tooltip" title="Remove Lineup" onClick="rlu(' . $this->id . ', ' . $this->pa_vid . ')">
+                        <span class="fa fa-times"></span>
+                    </a>&nbsp;';
 			}
 		}
 			   																//	TOEI CADETS
