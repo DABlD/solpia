@@ -356,6 +356,7 @@
                         Biodata:        'Biodata',
                         WalangLagay:    'Walang Lagay',
                         HistoryCheck:   'History Check',
+                        SeaServiceCertificate:   'Certificate of Sea Service'
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
@@ -365,7 +366,7 @@
                         if(result.value == 'Biodata'){
                             exportBiodata(application);
                         }
-                        else{
+                        else if(result.value == "WalangLagay"){
                             let data = {};
                             if($(application).data('status') != "Lined-Up"){
                                 let savedVessels = {};
@@ -459,6 +460,43 @@
                             else{
                                 window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}?` + $.param(data);
                             }
+                        }
+                        else if(result.value == "SeaServiceCertificate"){
+                            swal({
+                                html: `
+                                    <select id="por">
+                                        <option value="">Enter purpose of request</option>
+                                        <option value="COC/COP Application">COC/COP Application</option>
+                                        <option value="Loan">Loan</option>
+                                        <option value="Personal">Personal</option>
+                                    </select>
+                                    <br><br>`,
+                                onOpen: () => {
+                                    $('#por').select2({
+                                        width: '100%',
+                                        tags: true
+                                    });
+
+                                    $('#por').on('select2:open', () => {
+                                        $('.swal2-container').css('z-index', 1000);
+                                    })
+                                },
+                                preConfirm: () => {
+                                    swal.showLoading();
+                                    return new Promise(resolve => {
+                                        setTimeout(() => {
+                                            if($('#por').val() == ""){
+                                                swal.showValidationError('Reason is required');
+                                            }
+                                        resolve()}, 500);
+                                    });
+                                },
+                            }).then(result => {
+                                if(result.value){
+                                    let type = "SeaServiceCertificate";
+                                    window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${type}?` + $.param({data: {reason: $('#por').val()}});
+                                }
+                            })
                         }
                     }
                 })
