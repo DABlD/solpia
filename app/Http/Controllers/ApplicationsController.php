@@ -1185,6 +1185,10 @@ class ApplicationsController extends Controller
             $applicant = Applicant::withTrashed()->find($id)->load('user');
         }
 
+        if($req->data){
+            $applicant->data = $req->data;
+        }
+
         $fileName = $req->filename ?? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
 
         $class = "App\\Exports\\" . $type;
