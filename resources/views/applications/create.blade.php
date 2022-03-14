@@ -12,6 +12,10 @@
             <div class="box box-info">
 
                 <div class="box-header">
+                    <div class="pull-left">
+                        <h5 style="color: red;"><b>NOTE: Disregard any apostrophe in encoding as this will cause problem in saving the information during compression.</b></h5>
+                    </div>
+
                     @include('applications.includes.toolbar')
                 </div>
 
