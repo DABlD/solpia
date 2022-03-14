@@ -895,6 +895,6 @@
 
 	<tr>
 		<td colspan="27"></td>
-		<td colspan="7">Revised by 2020.01.29</td>
+		<td colspan="7">Revised by 2022.02.09</td>
 	</tr>
 </table>
