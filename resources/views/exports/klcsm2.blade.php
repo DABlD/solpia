@@ -113,6 +113,8 @@
 			}
 		}
 
+		$issuer = str_replace('&', '&#38;', $issuer);
+
 		$noNum  = $type == 'lc' ? 'no' : 'number';
 
 		$number = $docu ? $docu->$noNum : '-----';
