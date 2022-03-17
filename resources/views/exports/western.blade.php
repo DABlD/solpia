@@ -850,7 +850,7 @@
 	@endphp
 	
 	@foreach($applicant->sea_service as $service)
-		@if(str_contains($ss->manning_agent, 'SOLPIA')))
+		@if(str_contains($service->manning_agent, 'SOLPIA')))
 			<tr>
 				<td colspan="6">{{ $service->vessel_name }}</td>
 				<td colspan="4">{{ $service->vessel_type }}</td>
