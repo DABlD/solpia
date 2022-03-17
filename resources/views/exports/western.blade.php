@@ -233,6 +233,8 @@
 			// }
 		}
 
+		$issuer = str_replace('&', '&#38;', $issuer);
+
 		if(!$riri){
 			if($name == "1st Dose" || $name == "2nd Dose" || $name == "3rd Dose"){
 				echo "
