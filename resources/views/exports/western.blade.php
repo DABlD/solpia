@@ -371,7 +371,7 @@
 
 	<tr>
 		<td colspan="3">Address:</td>
-		<td colspan="22">{{ $applicant->provincial_address }}</td>
+		<td colspan="22">{{ $applicant->user->address ?? $applicant->provincial_address ?? '---' }}</td>
 		<td colspan="4">Telephone:</td>
 		<td colspan="5">{{ $applicant->provincial_contact }}</td>
 	</tr>
