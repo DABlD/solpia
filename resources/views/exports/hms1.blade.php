@@ -276,6 +276,7 @@
 			$off = $checkDate2($ss->sign_off, 'in');
 			$eng = str_replace('&', '&#38;', $ss->engine_type);
 			$dura = $ss->sign_on->diffInDays($ss->sign_off);
+			$man = str_replace('&', '&#38;', $ss->manning_agent);
 
 			$total += $ss->sign_on->diffInDays($ss->sign_off);
 
@@ -292,7 +293,7 @@
 				<td>$dura</td>
 				<td>$ss->remarks</td>
 				<td>$ss->crew_nationality</td>
-				<td>$ss->manning_agent</td>
+				<td>$man</td>
 				<td>$ss->principal</td>
 			";
 		}
