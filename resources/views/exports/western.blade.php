@@ -850,27 +850,25 @@
 	@endphp
 	
 	@foreach($applicant->sea_service as $service)
-		@if(str_contains($service->manning_agent, 'SOLPIA')))
-			<tr>
-				<td colspan="6">{{ $service->vessel_name }}</td>
-				<td colspan="4">{{ $service->vessel_type }}</td>
-				@php 
-					$temp = $service->gross_tonnage;
-					$temp = $temp == "" ? '---' : $temp; 
-				@endphp
-				<td colspan="6">{{ is_numeric($temp) ? number_format($temp) : $temp}}</td>
-				<td rowspan="2" colspan="6">{{ $service->manning_agent }}</td>
-				<td colspan="6">{{ $service->sign_on != "" ? $service->sign_on->format('d.M.y') : "N/A" }}</td>
-				<td rowspan="2" colspan="6">{{ $service->remarks }}</td>
-			</tr>
+		<tr>
+			<td colspan="6">{{ $service->vessel_name }}</td>
+			<td colspan="4">{{ $service->vessel_type }}</td>
+			@php 
+				$temp = $service->gross_tonnage;
+				$temp = $temp == "" ? '---' : $temp; 
+			@endphp
+			<td colspan="6">{{ is_numeric($temp) ? number_format($temp) : $temp}}</td>
+			<td rowspan="2" colspan="6">{{ $service->manning_agent }}</td>
+			<td colspan="6">{{ $service->sign_on != "" ? $service->sign_on->format('d.M.y') : "N/A" }}</td>
+			<td rowspan="2" colspan="6">{{ $service->remarks }}</td>
+		</tr>
 
-			<tr>
-				<td colspan="6">{{ $service->flag }}</td>
-				<td colspan="4">{{ $applicant->ranks[$service->rank] }}</td>
-				<td colspan="6">{{ $service->engine_type }} / {{ $service->bhp_kw }}</td>
-				<td colspan="6">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
-			</tr>
-		@endif
+		<tr>
+			<td colspan="6">{{ $service->flag }}</td>
+			<td colspan="4">{{ $applicant->ranks[$service->rank] }}</td>
+			<td colspan="6">{{ $service->engine_type }} / {{ $service->bhp_kw }}</td>
+			<td colspan="6">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
+		</tr>
 	@endforeach
 
 	{{ addS('11. Remark') }}
