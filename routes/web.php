@@ -200,6 +200,16 @@ Route::group([
 		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 		Route::get($name . '/statusUpdate', ucfirst($name) . 'Controller@statusUpdate')->name($name . '.statusUpdate');
 
+		// WAGE ROUTES
+		$name = "wage";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-dollar')
+			->defaults('name', 'Wages')
+			->defaults('roles', array('Admin', 'Processing'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
 		// AUDIT TRAIL ROUTES
 		$name = "auditTrail";
 		Route::get($name, ucfirst($name) . 'Controller@index')
@@ -222,6 +232,7 @@ Route::group([
 		Route::post('datatables/vessels', 'DatatablesController@vessels')->name('datatables.vessels');
 		Route::post('datatables/openings', 'DatatablesController@openings')->name('datatables.openings');
 		Route::post('datatables/auditTrail', 'DatatablesController@auditTrail')->name('datatables.auditTrail');
+		Route::post('datatables/wages', 'DatatablesController@wages')->name('datatables.wages');
 
 		// PRINCIPAL
 		$name = "principal";

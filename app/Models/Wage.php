@@ -14,6 +14,10 @@ class Wage extends Model
     	'currency','basic','leave_pay',
     	'fot','ot','sub_allow',
     	'retire_allow','sup_allow',
+        'sr_pay', 'tanker_allow',
+        'owner_allow', 'voyage_allow',
+        'other_allow', 'engine_allow',
+        'aca', 'total', 'imo'
     ];
 
     protected $dates = [

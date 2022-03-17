@@ -9,6 +9,7 @@ use App\Models\{Vessel, Rank, Principal};
 use App\Models\{AuditTrail, SeaService, Opening};
 
 use App\Models\{TempApplicant, TempSeaService};
+use App\Models\{Wage};
 
 use App\{User, TempUser};
 
@@ -603,5 +604,15 @@ class DatatablesController extends Controller
 		}
 
 		return Datatables::of($openings)->rawColumns(['actions'])->make(true);
+	}
+
+	public function wages(){
+		$wages = Wage::select('wages.id', 'p.name as pname', 'v.name as vname', 'v.imo', 'r.name as rname', 'basic', 'leave_pay', 'fot', 'ot', 'sub_allow', 'retire_allow', 'sup_allow')
+			->join('principals as p', 'p.id', '=', 'wages.principal_id')
+			->join('ranks as r', 'r.id', '=', 'wages.rank_id')
+			->join('vessels as v', 'v.id', '=', 'wages.vessel_id')
+			->get();
+
+		return Datatables::of($wages)->rawColumns(['actions'])->make(true);
 	}
 }
