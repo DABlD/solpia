@@ -275,7 +275,11 @@
 			$on = $checkDate2($ss->sign_on, 'in');
 			$off = $checkDate2($ss->sign_off, 'in');
 			$eng = str_replace('&', '&#38;', $ss->engine_type);
-			$dura = $ss->sign_on->diffInDays($ss->sign_off);
+
+			$dura = "-";
+			if($ss->sign_on != "" && $ss->sign_off != ""){
+				$dura = $ss->sign_on->diffInDays($ss->sign_off);
+			}
 			$man = str_replace('&', '&#38;', $ss->manning_agent);
 
 			$total += $ss->sign_on->diffInDays($ss->sign_off);
