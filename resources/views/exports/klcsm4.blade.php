@@ -21,7 +21,12 @@
 		if($ss->vessel_name != null && $ss->vessel_type != null){
 			$on = $checkDate2($ss->sign_on, 'a');
 			$off = $checkDate2($ss->sign_off, 'a');
-			$diff = $ss->sign_on->diffInDays($ss->sign_off);
+
+			$diff = "-";
+			if($ss->sign_off != "" && $ss->sign_on != ""){
+				$diff = $ss->sign_on->diffInDays($ss->sign_off);
+			}
+
 			$eng = str_replace('&', '&#38;', $ss->engine_type);
 
 			echo "
