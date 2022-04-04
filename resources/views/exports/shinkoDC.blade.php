@@ -99,8 +99,6 @@
 						$issuer = $docu ? $docu->issuer : 'NOT APPLICABLE';
 					}
 
-					$issuer = str_replace('&', '&#38;', $issuer);
-
 					if($docu){
 						$string .= "
 							<tr>
@@ -199,6 +197,8 @@
 				$issuer = "REVERTING";
 			}
 		}
+
+		$issuer = str_replace('&', '&#38;', $issuer);
 
 		echo "
 			<tr>

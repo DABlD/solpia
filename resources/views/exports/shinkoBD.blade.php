@@ -343,7 +343,10 @@
 			</tr>
 			<tr>
 				<td rowspan="1">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
-				<td rowspan="1" colspan="2">{{ $service->engine_type }}</td>
+				@php
+					$engine_type = str_replace('&', '&#38;', $service->engine_type);
+				@endphp
+				<td rowspan="1" colspan="2">{{ $engine_type }}</td>
 				@php 
 					$temp = $service->bhp_kw;
 					if($temp == ""){

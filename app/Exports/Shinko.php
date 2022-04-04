@@ -23,7 +23,7 @@ class Shinko implements WithMultipleSheets
 
         array_push($sheets, new ShinkoBD($this->applicant, $this->type . 'BD'));
         array_push($sheets, new ShinkoDC($this->applicant, $this->type . 'DC'));
-        array_push($sheets, new ShinkoLC($this->applicant, $this->type . 'LC'));
+        // array_push($sheets, new ShinkoLC($this->applicant, $this->type . 'LC'));
 
         return $sheets;
     }
