@@ -16,7 +16,7 @@ class AlterWagesTable extends Migration
         Schema::table('wages', function (Blueprint $table) {
             $table->dropColumn('currency');
             
-            $table->json('sr_pay')->after('sup_allow');
+            $table->text('sr_pay')->after('sup_allow');
             $table->string('tanker_allow', 10)->nullable()->default(0)->after('sup_allow');
             $table->string('owner_allow', 10)->nullable()->default(0)->after('sup_allow');
             $table->string('voyage_allow', 10)->nullable()->default(0)->after('sup_allow');
