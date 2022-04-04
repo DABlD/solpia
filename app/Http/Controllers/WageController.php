@@ -8,7 +8,7 @@ use App\Models\Wage;
 class WageController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin/Processing');
+        $this->middleware('permissions:' . 'Admin/Processing/Encoder/Cadet');
     }
 
     public function index(){
