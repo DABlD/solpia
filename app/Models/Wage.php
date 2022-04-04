@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\WageAttribute;
 
 class Wage extends Model
 {
-	use SoftDeletes;
+	use WageAttribute,
+        SoftDeletes;
 
     protected $fillable = [
     	'rank_id','vessel_id','principal_id',

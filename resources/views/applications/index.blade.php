@@ -187,6 +187,10 @@
             background-color: #f76c6b;
             border-color: #f76c6b;
         }
+
+        table .btn{
+            width: 39.22px;
+        }
 	</style>
 @endpush
 

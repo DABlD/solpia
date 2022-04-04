@@ -613,6 +613,10 @@ class DatatablesController extends Controller
 			->join('vessels as v', 'v.id', '=', 'wages.vessel_id')
 			->get();
 
+		foreach($wages as $wage){
+			$wage->actions = $wage->actions;
+		}
+
 		return Datatables::of($wages)->rawColumns(['actions'])->make(true);
 	}
 }

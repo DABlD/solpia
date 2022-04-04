@@ -145,7 +145,6 @@ Route::group([
 		Route::post("$name/uploadFiles", ucfirst($name) . 'Controller@uploadFiles')->name("$name.uploadFiles");
 		Route::post("$name/deleteFile", ucfirst($name) . 'Controller@deleteFile')->name("$name.deleteFile");
 		
-
 		// Vessels ROUTES
 		$name = "vessels";
 		Route::get($name, ucfirst($name) . 'Controller@index')
@@ -209,6 +208,11 @@ Route::group([
 			->defaults('roles', array('Admin', 'Processing'))
 			->name($name . '.index')
 			->defaults('href', $name);
+
+		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
+		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
 
 		// AUDIT TRAIL ROUTES
 		$name = "auditTrail";

@@ -15,7 +15,7 @@ trait VesselAttribute{
 		if(auth()->user()->role == "Admin"){
 			$string .= '<a class="btn btn-primary" data-toggle="tooltip" title="Assign to a Fleet" data-id="' . $this->id . '">' . '
 				<span class="fa fa-ship" data-id="' . $this->id . '"></span>' . 
-			'</a>';
+			'</a>&nbsp;';
 		}
 
 		$string .= '<a class="btn btn-success" data-toggle="tooltip" title="Ships Particular" data-id="' . $this->id . '">' . '
@@ -25,14 +25,19 @@ trait VesselAttribute{
 		if($this->status == "ACTIVE"){
 			$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Remove" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '
 				<span data-status="' . $this->status . '" class="fa fa-times" data-id="' . $this->id . '"></span>' . 
-			'</a>';
+			'</a>&nbsp;';
+
+			if(in_array(auth()->user()->role, ['Admin', 'Processing', 'Encoder', 'Cadet'])){
+				$string .= '<a class="btn btn-default" data-toggle="tooltip" title="Wage Scale" data-id="' . $this->id . '">' . '
+					<span class="fa fa-dollar" data-id="' . $this->id . '"></span>' . 
+				'</a>';
+			}
 		}
 		else{
 			$string .= '<a class="btn btn-success" data-toggle="tooltip" title="Activate" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '
 				<span data-status="' . $this->status . '" class="fa fa-check" data-id="' . $this->id . '"></span>' . 
 			'</a>';
 		}
-
 
 		return $string;
 	}

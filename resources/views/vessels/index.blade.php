@@ -83,7 +83,7 @@
             overflow-x: scroll;
         }
 
-        .modal thead tr{
+        .modal thead tr, .wages thead tr{
             background-color: #ffddcc !important;
         }
 
@@ -126,6 +126,7 @@
 
         td .btn{
             margin-top: 3px;
+            width: 39.22px;
         }
 
     </style>
@@ -437,8 +438,382 @@
                     }
                 })
             });
+
+            $('[data-original-title="Wage Scale"]').on('click', vessel => {
+                let id = $(vessel.target).data('id');
+
+                $.ajax({
+                    url: '{{ route('wage.get') }}',
+                    data: {
+                        cols: ['wages.*', 'r.name as rname'],
+                        where: ['vessel_id', id],
+                        order: ['r.id', 'asc']
+                    },
+                    success: wages => {
+                        showWages(wages, id);
+                    }
+                })
+            });
         }
 
+        function showWages(wages, vid){
+            wages = JSON.parse(wages);
+            let wageString = "";
+
+            swal({
+                title: 'Wages',
+                width: '95%',
+                html: `
+                    <table class="table table-bordered table-striped wages">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Rank</td>
+                                <td>BP</td>
+                                <td>LP</td>
+                                <td>FOT</td>
+                                <td>GOT</td>
+                                <td>SUB ALLOW.</td>
+                                <td>RETIRE ALLOW.</td>
+                                <td>SUP ALLOW</td>
+                                <td>ENGINE ALLOW</td>
+                                <td>OTHER ALLOW</td>
+                                <td>VOYAGE ALLOW</td>
+                                <td>OWNER ALLOW</td>
+                                <td>TANKER ALLOW</td>
+                                <td>ACA</td>
+                                <td>TOTAL</td>
+                                <td>Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                `,
+                onBeforeOpen: () => {
+                    wages.forEach(wage => {
+                        wageString += `
+                            <tr>
+                                <td>${wage.id}</td>
+                                <td>${wage.rname}</td>
+                                <td>${wage.basic}</td>
+                                <td>${wage.leave_pay}</td>
+                                <td>${wage.fot}</td>
+                                <td>${wage.ot}</td>
+                                <td>${wage.sub_allow}</td>
+                                <td>${wage.retire_allow}</td>
+                                <td>${wage.sup_allow}</td>
+                                <td>${wage.engine_allow}</td>
+                                <td>${wage.other_allow}</td>
+                                <td>${wage.voyage_allow}</td>
+                                <td>${wage.owner_allow}</td>
+                                <td>${wage.tanker_allow}</td>
+                                <td>${wage.aca}</td>
+                                <td>${wage.total}</td>
+                                <td>${wage.actions}</td>
+                            </tr>
+                        `;
+                    });
+                },
+                onOpen: () => {
+                    $('.wages tbody').html(wageString);
+                    $('.swal2-title').css('width', '100%');
+                    $('.swal2-content td').css('vertical-align', 'middle');
+                    $('.swal2-title').append(`
+                        <div class="pull-right">
+                            <a class="btn btn-success" onClick="addEntry(${vid})">
+                                Add Entry
+                            </a>
+                            <a class="btn btn-info" onClick="duplicate(${vid})">
+                                Duplicate Wage to Other Vessel
+                            </a>
+                        </div>`);
+                }
+            })
+        }
+
+        function addEntry(vid){
+            swal.showLoading();
+
+            $.ajax({
+                url: '{{ route('applications.getRanks') }}',
+                success: ranks => {
+                    ranks = JSON.parse(ranks);
+                    let rankString = "";
+
+                    Object.keys(ranks).forEach(category => {
+                        rankString += `<optgroup label="${category}"></optgroup>`;
+
+                        ranks[category].forEach(rank => {
+                            rankString += `
+                                <option value="${rank.id}">
+                                    &nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})
+                                </option>`;
+                        });
+                    });
+
+                    swal({
+                        title: 'Enter Details',
+                        html: `
+                            <select id="rank_id" class="form-control">
+                                <option value="">Select Rank</option>
+                                ${rankString}
+                            </select><br><br>
+
+                            <input type="number" min="0" id="basic" class="form-control" placeholder="Basic Pay"><br>
+                            <input type="number" min="0" id="leave_pay" class="form-control" placeholder="Leave Pay"><br>
+                            <input type="number" min="0" id="fot" class="form-control" placeholder="F.O.T."><br>
+                            <input type="number" min="0" id="ot" class="form-control" placeholder="G.O.T."><br>
+                            <input type="number" min="0" id="sub_allow" class="form-control" placeholder="Sub. Allow."><br>
+                            <input type="number" min="0" id="retire_allow" class="form-control" placeholder="Retire Allow."><br>
+                            <input type="number" min="0" id="sup_allow" class="form-control" placeholder="Sup. Allow."><br>
+                            <input type="number" min="0" id="engine_allow" class="form-control" placeholder="Engine Allow."><br>
+                            <input type="number" min="0" id="other_allow" class="form-control" placeholder="Other Allow."><br>
+                            <input type="number" min="0" id="voyage_allow" class="form-control" placeholder="Voyage Allow."><br>
+                            <input type="number" min="0" id="owner_allow" class="form-control" placeholder="Owner Allow."><br>
+                            <input type="number" min="0" id="tanker_allow" class="form-control" placeholder="Tanker Allow."><br>
+                            <input type="number" min="0" id="aca" class="form-control" placeholder="ACA"><br>
+                            <input type="number" min="0" id="total" class="form-control" placeholder="Total" readonly><br>
+                        `,
+                        preConfirm: () => {
+                            swal.showLoading();
+                            return new Promise(resolve => {
+                                setTimeout(() => {
+                                    if($('#rank_id').val() == ""){
+                                        swal.showValidationError('At least rank is required');
+                                    }
+                                resolve()}, 500);
+                            });
+                        },
+                        onOpen: () => {
+                            $('#rank_id').select2();
+                            $('#rank_id').on('select2:open', () => {
+                                $('.swal2-container').css('z-index', 1000);
+                            });
+
+                            $('.swal2-container .form-control').on('input', () => {
+                                let total = 0;
+                                $('.swal2-container .form-control')
+                                        .not(":first")
+                                        .not(":last")
+                                        .each((i, input) => {
+                                    if(input.value != ""){
+                                        total = parseFloat(total) + parseFloat(input.value);
+                                    }
+                                });
+                                $('#total').val(total);
+                            });
+                        }
+                    }).then(result => {
+                        swal.close();
+                        if(result.value){
+                            $.ajax({
+                                url: '{{ route('wage.create') }}',
+                                data: {
+                                    rank_id: $('#rank_id').val(),
+                                    basic: $('#basic').val(),
+                                    leave_pay: $('#leave_pay').val(),
+                                    fot: $('#fot').val(),
+                                    ot: $('#ot').val(),
+                                    sub_allow: $('#sub_allow').val(),
+                                    retire_allow: $('#retire_allow').val(),
+                                    sup_allow: $('#sup_allow').val(),
+                                    engine_allow: $('#engine_allow').val(),
+                                    other_allow: $('#other_allow').val(),
+                                    voyage_allow: $('#voyage_allow').val(),
+                                    owner_allow: $('#owner_allow').val(),
+                                    tanker_allow: $('#tanker_allow').val(),
+                                    aca: $('#aca').val(),
+                                    total: $('#total').val(),
+                                    vessel_id: vid
+                                },
+                                success: result => {
+                                    console.log("Added Wage for Vessel #" + vid);
+                                    swal({
+                                        type: 'success',
+                                        title: 'Success',
+                                        showConfirmButton: false,
+                                        timer: 800
+                                    }).then(() => {
+                                        $(`.btn-default [data-id=${vid}]`).click();
+                                    });
+                                }
+                            });
+                        }
+                        else{
+                            $(`.btn-default [data-id=${vid}]`).click();
+                        }
+                    });
+                }
+            });
+        }
+
+        function duplicate(vid){
+            $.ajax({
+                url: '{{ route('') }}'
+            })
+        }
+
+        function deleteWage(id, vid){
+            swal({
+                type: 'warning',
+                title: 'Confirmation',
+                text: 'Are you sure you want to delete entry?',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b'
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('wage.delete') }}',
+                        type: 'POST',
+                        data: {id: id},
+                        success: result => {
+                            console.log(`Deleted Wage id #${id} from vessel #${vid}`);
+                            swal({
+                                type: 'success',
+                                title: 'Success',
+                                timer: 800,
+                                showConfirmButton: false
+                            }).then(() => {
+                                $(`.btn-default [data-id=${vid}]`).click();
+                            })
+                        }
+                    })
+                }
+                else{
+                    $(`.btn-default [data-id=${vid}]`).click();
+                }
+            })
+        }
+
+        function editEntry(id){
+            swal.close();
+            swal.showLoading();
+
+            $.ajax({
+                url: '{{ route('wage.get') }}',
+                data: {
+                    cols: ['wages.*', 'r.name as rname'],
+                    where: ['wages.id', id],
+                },
+                success: wage => {
+                    wage = JSON.parse(wage)[0];
+                    
+                    $.ajax({
+                        url: '{{ route('applications.getRanks') }}',
+                        success: ranks => {
+                            ranks = JSON.parse(ranks);
+                            let rankString = "";
+
+                            Object.keys(ranks).forEach(category => {
+                                rankString += `<optgroup label="${category}"></optgroup>`;
+
+                                ranks[category].forEach(rank => {
+                                    rankString += `
+                                        <option value="${rank.id}">
+                                            &nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})
+                                        </option>`;
+                                });
+                            });
+
+                            swal({
+                                title: 'Enter Details',
+                                html: `
+                                    <select id="rank_id" class="form-control">
+                                        <option value="">Select Rank</option>
+                                        ${rankString}
+                                    </select><br><br>
+
+                                    <input type="number" min="0" value="${wage.basic}" id="basic" class="form-control" placeholder="Basic Pay"><br>
+                                    <input type="number" min="0" value="${wage.leave_pay}" id="leave_pay" class="form-control" placeholder="Leave Pay"><br>
+                                    <input type="number" min="0" value="${wage.fot}" id="fot" class="form-control" placeholder="F.O.T."><br>
+                                    <input type="number" min="0" value="${wage.ot}" id="ot" class="form-control" placeholder="G.O.T."><br>
+                                    <input type="number" min="0" value="${wage.sub_allow}" id="sub_allow" class="form-control" placeholder="Sub. Allow."><br>
+                                    <input type="number" min="0" value="${wage.retire_allow}" id="retire_allow" class="form-control" placeholder="Retire Allow."><br>
+                                    <input type="number" min="0" value="${wage.sup_allow}" id="sup_allow" class="form-control" placeholder="Sup. Allow."><br>
+                                    <input type="number" min="0" value="${wage.engine_allow}" id="engine_allow" class="form-control" placeholder="Engine Allow."><br>
+                                    <input type="number" min="0" value="${wage.other_allow}" id="other_allow" class="form-control" placeholder="Other Allow."><br>
+                                    <input type="number" min="0" value="${wage.voyage_allow}" id="voyage_allow" class="form-control" placeholder="Voyage Allow."><br>
+                                    <input type="number" min="0" value="${wage.owner_allow}" id="owner_allow" class="form-control" placeholder="Owner Allow."><br>
+                                    <input type="number" min="0" value="${wage.tanker_allow}" id="tanker_allow" class="form-control" placeholder="Tanker Allow."><br>
+                                    <input type="number" min="0" value="${wage.aca}" id="aca" class="form-control" placeholder="ACA"><br>
+                                    <input type="number" min="0" value="${wage.total}" id="total" class="form-control" placeholder="Total" readonly><br>
+                                `,
+                                preConfirm: () => {
+                                    swal.showLoading();
+                                    return new Promise(resolve => {
+                                        setTimeout(() => {
+                                            if($('#rank_id').val() == ""){
+                                                swal.showValidationError('At least rank is required');
+                                            }
+                                        resolve()}, 500);
+                                    });
+                                },
+                                onOpen: () => {
+                                    $('#rank_id').select2();
+                                    $('#rank_id').on('select2:open', () => {
+                                        $('.swal2-container').css('z-index', 1000);
+                                    });
+                                    $('#rank_id').val(wage.rank_id).trigger('change');
+
+                                    $('.swal2-container .form-control').on('input', () => {
+                                        let total = 0;
+                                        $('.swal2-container .form-control')
+                                                .not(":first")
+                                                .not(":last")
+                                                .each((i, input) => {
+                                            if(input.value != ""){
+                                                total = parseFloat(total) + parseFloat(input.value);
+                                            }
+                                        });
+                                        $('#total').val(total);
+                                    });
+                                }
+                            }).then(result => {
+                                swal.close();
+                                if(result.value){
+                                    $.ajax({
+                                        url: '{{ route('wage.update') }}',
+                                        type: 'POST',
+                                        data: {
+                                            rank_id: $('#rank_id').val(),
+                                            basic: $('#basic').val(),
+                                            leave_pay: $('#leave_pay').val(),
+                                            fot: $('#fot').val(),
+                                            ot: $('#ot').val(),
+                                            sub_allow: $('#sub_allow').val(),
+                                            retire_allow: $('#retire_allow').val(),
+                                            sup_allow: $('#sup_allow').val(),
+                                            engine_allow: $('#engine_allow').val(),
+                                            other_allow: $('#other_allow').val(),
+                                            voyage_allow: $('#voyage_allow').val(),
+                                            owner_allow: $('#owner_allow').val(),
+                                            tanker_allow: $('#tanker_allow').val(),
+                                            aca: $('#aca').val(),
+                                            total: $('#total').val(),
+                                            id: id
+                                        },
+                                        success: result => {
+                                            console.log("Updated Wage #" + id);
+                                            swal({
+                                                type: 'success',
+                                                title: 'Success',
+                                                showConfirmButton: false,
+                                                timer: 800
+                                            }).then(() => {
+                                                $(`.btn-default [data-id=${wage.vessel_id}]`).click();
+                                            });
+                                        }
+                                    });
+                                }
+                                else{
+                                    $(`.btn-default [data-id=${wage.vessel_id}]`).click();
+                                }
+                            });
+                        }
+                    })
+                }
+            })
+        }
 
         $('[title="Add Vessel"]').on('click', () => {
             swal.showLoading();
