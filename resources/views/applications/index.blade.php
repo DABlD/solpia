@@ -865,6 +865,8 @@
                 })
 
             });
+
+            $('[type="search"]:first').focus();
 	    }
 
         // CREW INFO
