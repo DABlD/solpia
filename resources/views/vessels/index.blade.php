@@ -648,9 +648,9 @@
         }
 
         function duplicate(vid){
-            $.ajax({
-                url: '{{ route('') }}'
-            })
+            // $.ajax({
+            //     url: '{{ route('') }}'
+            // })
         }
 
         function deleteWage(id, vid){
