@@ -886,7 +886,7 @@
                     let srStr = "";
                     let len = 2;
 
-                    if(sr_pay != null){
+                    if(sr_pay != null && sr_pay != ""){
                         sr_pay = JSON.parse(sr_pay);
                         sr_pay.forEach(sr => {
                             srStr += `
