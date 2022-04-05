@@ -28,8 +28,8 @@ trait VesselAttribute{
 			'</a>&nbsp;';
 
 			if(in_array(auth()->user()->role, ['Admin', 'Processing', 'Encoder', 'Cadet'])){
-				$string .= '<a class="btn btn-default" data-toggle="tooltip" title="Wage Scale" data-id="' . $this->id . '">' . '
-					<span class="fa fa-dollar" data-id="' . $this->id . '"></span>' . 
+				$string .= '<a class="btn btn-default" data-toggle="tooltip" title="Wage Scale" data-id="' . $this->id . '" data-name="' . $this->name . '">' . '
+					<span class="fa fa-dollar" data-id="' . $this->id . '" data-name="' . $this->name . '"></span>' . 
 				'</a>';
 			}
 		}

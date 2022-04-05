@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Wage;
+use App\Models\{Wage, Vessel};
 
 class WageController extends Controller
 {
@@ -42,6 +42,25 @@ class WageController extends Controller
         }
 
         echo json_encode($vessels);
+    }
+
+    public function getVessels(Request $req){
+        $vessels = Vessel::where('imo', '!=', null)->select('id', 'name', 'imo')->get();
+        echo json_encode($vessels);
+    }
+
+    public function duplicate(Request $req){
+        Wage::where('vessel_id', $req->vid2)->delete();
+
+        $wages = Wage::where('vessel_id', $req->vid)->get();
+        foreach ($wages as $wage) {
+            $temp = $wage;
+            $temp->vessel_id = $req->vid2;
+            $temp->created_at = now();
+            $temp->save();
+        }
+
+        echo "Success";
     }
 
     public function create(Request $req){

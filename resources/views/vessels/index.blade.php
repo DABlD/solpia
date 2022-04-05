@@ -441,6 +441,7 @@
 
             $('[data-original-title="Wage Scale"]').on('click', vessel => {
                 let id = $(vessel.target).data('id');
+                let vname = $(vessel.target).data('name');
 
                 $.ajax({
                     url: '{{ route('wage.get') }}',
@@ -450,20 +451,21 @@
                         order: ['r.id', 'asc']
                     },
                     success: wages => {
-                        showWages(wages, id);
+                        showWages(wages, id, vname);
                     }
                 })
             });
         }
 
-        function showWages(wages, vid){
+        function showWages(wages, vid, vname){
             wages = JSON.parse(wages);
             let wageString = "";
 
             swal({
-                title: 'Wages',
+                title: vname + ' Wages',
                 width: '95%',
                 html: `
+                    <div class="table-responsive">
                     <table class="table table-bordered table-striped wages">
                         <thead>
                             <tr>
@@ -488,6 +490,7 @@
                         </thead>
                         <tbody></tbody>
                     </table>
+                    </div>
                 `,
                 onBeforeOpen: () => {
                     wages.forEach(wage => {
@@ -648,7 +651,64 @@
         }
 
         function duplicate(vid){
-            // AJAX
+            $.ajax({
+                url: '{{ route('wage.getVessels') }}',
+                success: vessels => {
+                    vessels = JSON.parse(vessels);
+
+                    swal({
+                        title: 'Select Vessel',
+                        html: `
+                            <select id="vessel">
+                                <option value="">Select Vessel</option>
+                            </select>
+                        `,
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                        onOpen: () => {
+                            let choices = "";
+
+                            console.log(vessels);
+                            vessels.forEach(vessel => {
+                                choices += `<option value="${vessel.id}">${vessel.name} (${vessel.imo})</option>`;
+                            });
+
+                            $('#vessel').append(choices);
+                            $('#vessel').select2();
+                            $('#vessel').on('select2:open', () => {
+                                $('.swal2-container').css("z-index", 1000);
+                            });
+                        }
+                    }).then(result => {
+                        if(result.value){
+                            let vid2 = $('#vessel').val();
+
+                            $.ajax({
+                                url: '{{ route('wage.duplicate') }}',
+                                data: {vid: vid, vid2: vid2},
+                                type: 'POST',
+                                success: result => {
+                                    if(result){
+                                        console.log("Duplicated Wage for Vessel #" + vid + " to Vessel #" + vid2);
+
+                                        swal({
+                                            type: 'success',
+                                            title: 'Success',
+                                            showConfirmButton: false,
+                                            timer: 800
+                                        }).then(() => {
+                                            $(`.btn-default [data-id=${vid2}]`).click();
+                                        })
+                                    }
+                                }
+                            })
+                        }
+                        else{
+                            $(`.btn-default [data-id=${vid}]`).click();
+                        }
+                    });
+                }
+            })
         }
 
         function deleteWage(id, vid){
