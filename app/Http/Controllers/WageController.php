@@ -55,9 +55,11 @@ class WageController extends Controller
         $wages = Wage::where('vessel_id', $req->vid)->get();
         foreach ($wages as $wage) {
             $temp = $wage;
-            $temp->vessel_id = $req->vid2;
-            $temp->created_at = now();
-            $temp->save();
+
+            $temp2 = $temp->replicate();
+            $temp2->vessel_id = $req->vid2;
+            $temp2->created_at = now();
+            $temp2->save();
         }
 
         echo "Success";
