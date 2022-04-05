@@ -408,6 +408,7 @@
 	            	            	<option value="PHYSICIAN">&nbsp;&nbsp;&nbsp;PHYSICIAN</option>
 	            	            	<option value="HALCION">&nbsp;&nbsp;&nbsp;HALCION</option>
 	            	            	<option value="MMC">&nbsp;&nbsp;&nbsp;MMC</option>
+	            	            	<option value="MCIS">&nbsp;&nbsp;&nbsp;MCIS</option>
 	            	            	<option value="BUREAU OF QUARANTINE">&nbsp;&nbsp;&nbsp;BUREAU OF QUARANTINE</option>
             	            	<optgroup label="Vaccine Brand">&nbsp;&nbsp;&nbsp;</optgroup>
 	            	            	<option value="SINOVAC">&nbsp;&nbsp;&nbsp;SINOVAC</option>
@@ -417,6 +418,7 @@
 	            	            	<option value="SPUTNIK">&nbsp;&nbsp;&nbsp;SPUTNIK</option>
 	            	            	<option value="SINOPHARM">&nbsp;&nbsp;&nbsp;SINOPHARM</option>
 	            	            	<option value="BHARAT">&nbsp;&nbsp;&nbsp;BHARAT</option>
+	            	            	<option value="FCN">&nbsp;&nbsp;&nbsp;FCN</option>
 	            	            	<option value="JOHNSON AND JOHNSON">&nbsp;&nbsp;&nbsp;JOHNSON AND JOHNSON</option>
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
