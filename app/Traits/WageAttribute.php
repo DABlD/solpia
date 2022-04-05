@@ -13,6 +13,9 @@ trait WageAttribute{
 	    "</a>&nbsp;" . 
 	    "<a class='btn btn-warning' data-toggle='tooltip' title='Edit' onClick='editEntry($id)'>" . 
 	        "<span class='fa fa-pencil'</span>" . 
+	    "</a>&nbsp;" . 
+	    "<a class='btn btn-info' data-toggle='tooltip' title='Seniority Allowance' onClick='showSr($id, $vid)'>" . 
+	        "<span class='fa fa-sort-amount-asc fa-rotate-180 fa-flip-vertical'</span>" . 
 	    "</a>";
 	}
 }

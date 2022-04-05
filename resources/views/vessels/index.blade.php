@@ -630,7 +630,7 @@
                                     vessel_id: vid
                                 },
                                 success: result => {
-                                    console.log("Added Wage for Vessel #" + vid);
+                                    console.log("Added Wage for Vessel #" + vid, result);
                                     swal({
                                         type: 'success',
                                         title: 'Success',
@@ -725,7 +725,7 @@
                         type: 'POST',
                         data: {id: id},
                         success: result => {
-                            console.log(`Deleted Wage id #${id} from vessel #${vid}`);
+                            console.log(`Deleted Wage id #${id} from vessel #${vid}`, result);
                             swal({
                                 type: 'success',
                                 title: 'Success',
@@ -851,7 +851,7 @@
                                             id: id
                                         },
                                         success: result => {
-                                            console.log("Updated Wage #" + id);
+                                            console.log("Updated Wage #" + id, result);
                                             swal({
                                                 type: 'success',
                                                 title: 'Success',
@@ -868,6 +868,117 @@
                                 }
                             });
                         }
+                    })
+                }
+            })
+        }
+
+        function showSr(id, vid){
+            $.ajax({
+                url: '{{ route('wage.get') }}',
+                data: {
+                    cols: ['wages.id', 'wages.sr_pay'],
+                    where: ['wages.id', id],
+                },
+                success: wage => {
+                    wage = JSON.parse(wage)[0];
+                    let sr_pay = JSON.parse(wage.sr_pay);
+                    let srStr = "";
+                    let len = 2;
+
+                    console.log(sr_pay);
+                    if(sr_pay != null){
+                        sr_pay.forEach(sr => {
+                            srStr += `
+                                <tr>
+                                    <td>
+                                        ${len}
+                                    </td>
+                                    <td>
+                                        <input type="text" value="${sr}"><br>
+                                    </td>
+                                </tr>
+                            `;
+                            len++;
+                        })
+                    }
+
+                    swal({
+                        html: `<table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Seniority Level</td>
+                                    <td>Seniority Pay</td>
+                                </tr>
+                            </thead>
+                            <tbody id="srs">
+                                ${srStr}
+                            </tbody>
+                        </table>`,
+                        showCancelButton: true,
+                        cancelButtonText: 'Save',
+                        cancelButtonColor: '#00a65a',
+                        confirmButtonText: 'Add Entry',
+                        showCloseButton: true,
+                        onOpen: () => {
+                            $('.swal2-container input').css({
+                                'border': 'none',
+                                'text-align': 'center'
+                            });
+                        },
+                        preConfirm: () => {
+                            return new Promise(resolve => {
+                                $('#srs').append(`
+                                    <tr>
+                                        <td>
+                                            ${len}
+                                        </td>
+                                        <td>
+                                            <input type="text"><br>
+                                        </td>
+                                    </tr>
+                                `);
+                                len++;
+                                $('.swal2-container input').css({
+                                    'border': 'none',
+                                    'text-align': 'center'
+                                });
+
+                                swal.enableButtons();
+                            });
+                        },
+                    }).then(result => {
+                        if(result.dismiss == "cancel"){
+                            let srs = $('.swal2-container input:visible');
+                            let srsv = [];
+
+                            srs.each((i, sr) => {
+                                const temp = $(sr).val();
+                                if(temp != ""){
+                                    srsv.push(temp);
+                                }
+                            });
+
+                            $.ajax({
+                                url: '{{ route('wage.update') }}',
+                                type: 'POST',
+                                data: {
+                                    id: id,
+                                    sr_pay: JSON.stringify(srsv)
+                                },
+                                success: result => {
+                                    console.log("Updated SR Pay of wage id #" + id, result);
+                                    swal({
+                                        type: 'success',
+                                        timer: 800,
+                                        showConfirmButton: false,
+                                    }).then(() => {
+                                        $(`.btn-default [data-id=${vid}]`).click();
+                                    });
+                                }
+                            })
+                        }
+
                     })
                 }
             })
