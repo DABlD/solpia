@@ -811,30 +811,30 @@
                             width: '90%',
                             animation: false,
                             html: `
-                                <ul class="nav nav-pills" role="tablist">
+                                <ul class="nav nav-pills" role="tablist" id="infoTabs">
                                     <li role="presentation" class="active">
-                                        <a href=".pinfo" role="tab" data-toggle="pill">Personal Info</a>
+                                        <a href=".pinfo" role="tab" data-toggle="pill"><u>P</u>ersonal Info</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".educbg" role="tab" data-toggle="pill">Educational Background</a>
+                                        <a href=".educbg" role="tab" data-toggle="pill"><u>E</u>ducational Background</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".ids" role="tab" data-toggle="pill">Document ID</a>
+                                        <a href=".ids" role="tab" data-toggle="pill">Document <u>I</u>D</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".flags" role="tab" data-toggle="pill">Flag Documents</a>
+                                        <a href=".flags" role="tab" data-toggle="pill"><u>F</u>lag Documents</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".l_cs" role="tab" data-toggle="pill">Documents</a>
+                                        <a href=".l_cs" role="tab" data-toggle="pill"><u>D</u>ocuments</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".med_certs" role="tab" data-toggle="pill">Medical Certificates</a>
+                                        <a href=".med_certs" role="tab" data-toggle="pill"><u>M</u>edical Certificates</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".meds" role="tab" data-toggle="pill">Medical History</a>
+                                        <a href=".meds" role="tab" data-toggle="pill">Medical <u>H</u>istory</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".ss" role="tab" data-toggle="pill">Sea Services</a>
+                                        <a href=".ss" role="tab" data-toggle="pill"><u>S</u>ea Services</a>
                                     </li>
                                 </ul>
                                 <br><br>
@@ -864,8 +864,39 @@
                     }
                 })
 
+                
             });
 
+            window.addEventListener("keydown", function (event) {
+                if($('#infoTabs').is(':visible')){
+                    const key = event.key;
+
+                    if(key == "P" || key == "p"){
+                        $('[href=".pinfo"]').click();
+                    }
+                    else if(key == "E" || key == "e"){
+                        $('[href=".educbg"]').click();
+                    }
+                    else if(key == "I" || key == "i"){
+                        $('[href=".ids"]').click();
+                    }
+                    else if(key == "F" || key == "f"){
+                        $('[href=".flags"]').click();
+                    }
+                    else if(key == "D" || key == "d"){
+                        $('[href=".l_cs"]').click();
+                    }
+                    else if(key == "M" || key == "m"){
+                        $('[href=".med_certs"]').click();
+                    }
+                    else if(key == "H" || key == "h"){
+                        $('[href=".meds"]').click();
+                    }
+                    else if(key == "S" || key == "s"){
+                        $('[href=".ss"]').click();
+                    }
+                }
+            }, true);
             $('[type="search"]:first').focus();
 	    }
 
