@@ -882,12 +882,12 @@
                 },
                 success: wage => {
                     wage = JSON.parse(wage)[0];
-                    let sr_pay = JSON.parse(wage.sr_pay);
+                    let sr_pay = wage.sr_pay;
                     let srStr = "";
                     let len = 2;
 
-                    console.log(sr_pay);
                     if(sr_pay != null){
+                        sr_pay = JSON.parse(sr_pay);
                         sr_pay.forEach(sr => {
                             srStr += `
                                 <tr>
