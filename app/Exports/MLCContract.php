@@ -26,8 +26,8 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
         $this->applicant->vessel = Vessel::find($this->applicant->pro_app->vessel_id);
 
         $this->applicant->position = Rank::find($this->applicant->pro_app->rank_id)->name;
-        $this->applicant->wage = Wage::where('principal_id', $this->applicant->pro_app->principal_id)
-                                    ->where('rank_id', $this->applicant->pro_app->rank_id)
+        $this->applicant->wage = Wage::where('rank_id', $this->applicant->pro_app->rank_id)
+                                    ->where('vessel_id', $this->applicant->pro_app->vessel_id)
                                     ->first();
 
         foreach($this->applicant->document_id as $docu){
