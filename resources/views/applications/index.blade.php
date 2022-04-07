@@ -11,25 +11,27 @@
 					@include('applications.includes.toolbar')
 				</div>
 
-				<div class="box-body">
-					<table class="table table-hover table-bordered" id="table" style="width: 100%;">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Status</th>
-                                <th>Pic</th>
-                                <th>Rank</th>
-								<th>Last Name</th>
-								<th>First Name</th>
-								<th>Age</th>
-								<th>Contact</th>
-                                <th>Last Vessel</th>
-								<th>Remarks</th>
-                                <th>Actions</th>
-							</tr>
-						</thead>
-					</table>
-				</div>
+                <div class="table-responsive">
+    				<div class="box-body">
+    					<table class="table table-hover table-bordered" id="table" style="width: 100%;">
+    						<thead>
+    							<tr>
+    								<th>#</th>
+    								<th>Status</th>
+                                    <th>Pic</th>
+                                    <th>Rank</th>
+    								<th>Last Name</th>
+    								<th>First Name</th>
+    								<th>Age</th>
+    								<th>Contact</th>
+                                    <th>Last Vessel</th>
+    								<th>Remarks</th>
+                                    <th>Actions</th>
+    							</tr>
+    						</thead>
+    					</table>
+    				</div>
+                </div>
 
 				<div class="box-footer clearfix">
 				</div>
@@ -860,11 +862,12 @@
                                 fillTab7(applicant);
                                 fillTab8(applicant);
                             }
+                        }).then(() => {
+                            $('[type="search"]:first').focus();
                         });
                     }
                 })
-
-                
+                 
             });
 
             window.addEventListener("keydown", function (event) {
