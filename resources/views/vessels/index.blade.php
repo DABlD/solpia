@@ -11,21 +11,23 @@
                     @include('vessels.includes.toolbar')
                 </div>
 
-                <div class="box-body">
-                    <table class="table table-hover table-bordered" id="table" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Vessel Name</th>
-                                <th>Fleet</th>
-                                <th>Principal</th>
-                                <th>Flag</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                    </table>
+                <div class="table-responsive">
+                    <div class="box-body">
+                        <table class="table table-hover table-bordered" id="table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Vessel Name</th>
+                                    <th>Fleet</th>
+                                    <th>Principal</th>
+                                    <th>Flag</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="box-footer clearfix">
