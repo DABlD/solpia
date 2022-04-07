@@ -468,10 +468,10 @@
 			foreach($applicant->document_lc as $document){
 				$regulation = json_decode($document->regulation);
 				
-				if($$applicant->rank->id >= 9 && $$applicant->rank->id <= 11){
+				if($applicant->rank->id >= 9 && $$applicant->rank->id <= 11){
 					$temp = 'II/4';
 				}
-				elseif($$applicant->rank->id >= 15 && $$applicant->rank->id <= 17){
+				elseif($applicant->rank->id >= 15 && $$applicant->rank->id <= 17){
 					$temp = 'III/4';
 				}
 
