@@ -555,7 +555,7 @@ class ApplicationsController extends Controller
         }
 
         // SORT
-        if(in_array($type, ['western'])){
+        if(in_array($type, ['western', 'toei'])){
             $applicant->sea_service = $applicant->sea_service->sortBy('sign_off');
         }
         else{

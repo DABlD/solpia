@@ -120,7 +120,7 @@
 			<td>Address:</td>
 			<td colspan="5">{{ $applicant->user->address }}</td>
 			<td>Telephone:</td>
-			<td colspan="2">{{ $applicant->contact }}</td>
+			<td colspan="2">{{ $applicant->user->contact }}</td>
 		</tr>
 
 		<tr>
@@ -242,7 +242,7 @@
 			{{-- GUEVARRA SUGGESTED THAT THIS ONE SHOULD JUST BE THE SAME AS THE APPLICANTS ADDRESS --}}
 			<td colspan="5">{{ $applicant->user->address }}</td>
 			<td>Telephone:</td>
-			<td colspan="2">{{ $applicant->provincial_address }}</td>
+			<td colspan="2">{{ $applicant->provincial_contact }}</td>
 		</tr>
 
 		<tr>
