@@ -331,14 +331,20 @@
 
 	<tr>
 		<td colspan="2">NAME</td>
-		<td colspan="5">{{ $nok->lname }}, {{ $nok->fname }} {{ $nok->mname }} {{ $nok->suffix }}</td>
+		<td colspan="5">
+			@if($nok)
+				{{ $nok->lname }}, {{ $nok->fname }} {{ $nok->mname }} {{ $nok->suffix }}
+			@else
+				-----
+			@endif
+		</td>
 		<td colspan="2">RELATIONSHIP</td>
-		<td>{{ $nok->type }}</td>
+		<td>{{ $nok ? $nok->type : '-----' }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">ADDRESS</td>
-		<td colspan="5">{{ $nok->address }}</td>
+		<td colspan="5">{{ $nok ? $nok->address : '-----' }}</td>
 		<td colspan="2">NO. OF CHILDREN</td>
 		<td style="text-align: left;">{{ $childrens }}</td>
 	</tr>
