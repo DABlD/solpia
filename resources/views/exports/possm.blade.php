@@ -137,6 +137,7 @@
 				";
 			}
 			else if($ctr == 5){
+				$clinic = $docu->clinic;
 				echo "
 					<tr>
 						<td colspan='3'>$issuer</td>
