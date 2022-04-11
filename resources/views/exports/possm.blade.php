@@ -507,7 +507,7 @@
 	<tr>
 		<td colspan="2">WATCHKEEPING</td>
 		<td>{{ $docu ? $docu->number : "" }}</td>
-		<td colspan="2">{{ $docu ? checkDate2($docu->issue_date, 'I') : "" }}</td>
+		<td colspan="2">{{ $docu ? $checkDate2($docu->issue_date, 'I') : "" }}</td>
 
 		<td colspan="2">OTHERS</td>
 		<td colspan="2"></td>
