@@ -324,7 +324,8 @@
 	
 		<tr>
 			<td colspan="2">PANAMA GOC</td> 
-			<td colspan="2">{{ $applicant->rank->name }}</td>
+			{{-- <td colspan="2">{{ $applicant->rank->name }}</td> --}}
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -343,7 +344,8 @@
 	
 		<tr>
 			<td colspan="2">PANAMA SSO</td> 
-			<td colspan="2">{{ $applicant->rank->name }}</td>
+			{{-- <td colspan="2">{{ $applicant->rank->name }}</td> --}}
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -362,7 +364,8 @@
 	
 		<tr>
 			<td colspan="2">LIBERIAN LIC</td> 
-			<td colspan="2">{{ $applicant->rank->name }}</td>
+			{{-- <td colspan="2">{{ $applicant->rank->name }}</td> --}}
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
