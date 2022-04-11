@@ -494,6 +494,12 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(14);
                 $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(14);
 
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(12);
+                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(12);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(12);
+                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(12);
+                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(12);
+
                 $rash3 += 1;
 
                 // SET PRINT AREA
@@ -509,8 +515,8 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
         $drawing->setResizeProportional(false);
-        $drawing->setWidth(152);
-        $drawing->setHeight(134);
+        $drawing->setWidth(130);
+        $drawing->setHeight(135);
         $drawing->setOffsetX(2);
         $drawing->setOffsetY(1);
         $drawing->setCoordinates('A2');
