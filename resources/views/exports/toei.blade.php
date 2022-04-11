@@ -189,21 +189,18 @@
 		</tr>
 
 		@php
-			$realFam = false;
-			$numOfChild = 0;
+			$nok = null;
+			$temps = ['Spouse', 'Son', 'Daughter', 'Father', 'Mother'];
+			$childrens = 0;
 
-			if(sizeof($applicant->family_data)){
-				$realFam = $applicant->family_data->first();
-				$hasWife = false;
-
-				foreach($applicant->family_data as $fam){
-					if($fam->type == "Son" || $fam->type == "Daughter"){
-						$numOfChild++;
+			foreach($temps as $key => $temp){
+				foreach($applicant->family_data as $fd){
+					if(($fd->type == "Son" || $fd->type == "Daughter") && $key == 0){
+						$childrens++;
 					}
 
-					if($fam->type == "Beneficiary"){
-						$hasWife = true;
-						$realFam = $fam;
+					if($fd->type == $temp && $fd->fname != "" && $nok == null){
+						$nok = $fd;
 						break;
 					}
 				}
@@ -215,18 +212,18 @@
 			<td colspan="3"></td>
 			<td>Relation</td>
 			<td></td>
-			<td>{{ $realFam ? $realFam->type : "-----" }}</td>
+			<td>{{ $nok ? $nok->type : '-----' }}</td>
 			<td></td>
 		</tr>
 
 		<tr>
 			<td>Name</td>
 			{{-- <td colspan="8"></td> --}}
-			<td colspan="2">{{ $realFam ? $realFam->lname : "-----" }}</td>
-			<td colspan="2">{{ $realFam ? $realFam->fname . ' ' . $realFam->suffix : "-----" }}</td>
-			<td colspan="2">{{ $realFam ? $realFam->mname : "-----" }}</td>
+			<td colspan="2">{{ $nok ? $nok->lname : "-----" }}</td>
+			<td colspan="2">{{ $nok ? $nok->fname . ' ' . $nok->suffix : "-----" }}</td>
+			<td colspan="2">{{ $nok ? $nok->mname : "-----" }}</td>
 			<td rowspan="2">Number of Children</td>
-			<td rowspan="2">{{ $numOfChild }}</td>
+			<td rowspan="2">{{ $childrens }}</td>
 		</tr>
 
 		<tr>
@@ -394,7 +391,7 @@
 
 		<tr>
 			<td colspan="2">Passport</td>
-			<td colspan="2"></td>
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -409,7 +406,7 @@
 
 		<tr>
 			<td colspan="2">U.S. C1/D Visa</td>
-			<td colspan="2"></td>
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -424,7 +421,7 @@
 
 		<tr>
 			<td colspan="2">Seaman's Book(National)</td>
-			<td colspan="2"></td>
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -477,7 +474,7 @@
 
 		<tr>
 			<td colspan="2">AUS MCV Visa</td>
-			<td colspan="2"></td>
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -492,7 +489,7 @@
 
 		<tr>
 			<td colspan="2">Japanese Visa</td>
-			<td colspan="2"></td>
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -837,7 +834,7 @@
 
 		<tr>	
 			<td colspan="4">MEASLES, MUMPS, RUBELLA (MMR)</td>
-			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>YES</td>
 			<td>{{ $docu ? $docu->with_mv : "-----"}}</td>
 			<td>-----</td>
 			<td>-----</td>
@@ -851,7 +848,7 @@
 
 		<tr>	
 			<td colspan="4">Chicken Pox</td>
-			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>YES</td>
 			<td>{{ $docu ? $docu->with_mv : "-----"}}</td>
 			<td>-----</td>
 			<td>-----</td>
@@ -860,7 +857,7 @@
 
 		@php 
 			$name = 'POLIO VACCINE (IPV)';
-			$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
+			$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
 		@endphp
 
 		<tr>	
@@ -1017,7 +1014,13 @@
 					@endif
 				</td>
 				<td>{{ $applicant->ranks[$data->rank] }}</td>
-				<td>{{ $data->engine_type }}</td>
+				<td>
+					@if(str_starts_with($applicant->rank->category, 'ENGINE'))
+						{{ $data->engine_type }} {{ $data->bhp_kw }}
+					@else
+						-----
+					@endif
+				</td>
 				<td>{{ $data->trade }}</td>
 				<td>{{ $data->principal }}</td>
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "-----" }}</td>
