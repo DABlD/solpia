@@ -465,7 +465,15 @@ class ApplicationsController extends Controller
                     }
                 }
                 elseif(isset($data->number)){
-                    if($data->number == ""){
+                    if($docuType == "document_med_cert"){
+                        if(!str_starts_with($data->type, 'COVID')){
+                            if($data->number == ""){
+                                $applicant->$docuType->forget($key);
+                                continue;
+                            }
+                        }
+                    }
+                    elseif($data->number == ""){
                         $applicant->$docuType->forget($key);
                         continue;
                     }
