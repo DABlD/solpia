@@ -284,7 +284,7 @@
 			<td colspan="2">
 				National
 			</td>
-			<td colspan="2">{{ $applicant->rank->name }}</td>
+			<td colspan="2">{{ $applicant->rank->name ?? "-----" }}</td>
 			<td>{{ $docu ? $docu->no : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -302,7 +302,7 @@
 	
 		<tr>
 			<td colspan="2">PANAMA</td> 
-			<td colspan="2">{{ $applicant->rank->name }}</td>
+			<td colspan="2">{{ $applicant->rank->name ?? "-----" }}</td>
 			<td>{{ $docu ? $docu->number : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -1007,18 +1007,22 @@
 			<tr>
 				<td>{{ $data->flag }}</td>
 				<td>
-					@if($data->crew_nationality == "FILIPINO" || $data->crew_nationality == "FULL CREW")
-						FULL CREW
-					@elseif($data->crew_nationality != "")
-						MIXED CREW
+					@if(isset($data->crew_nationality))
+						@if($data->crew_nationality == "FILIPINO" || $data->crew_nationality == "FULL CREW")
+							FULL CREW
+						@elseif($data->crew_nationality != "")
+							MIXED CREW
+						@endif
 					@endif
 				</td>
 				<td>{{ $applicant->ranks[$data->rank] }}</td>
 				<td>
-					@if(str_starts_with($applicant->rank->category, 'ENGINE'))
-						{{ $data->engine_type }} {{ $data->bhp_kw }}
-					@else
-						-----
+					@if(isset($applicant->rank))
+						@if(str_starts_with($applicant->rank->category, 'ENGINE'))
+							{{ $data->engine_type }} {{ $data->bhp_kw }}
+						@else
+							-----
+						@endif
 					@endif
 				</td>
 				<td>{{ $data->trade }}</td>
@@ -1028,7 +1032,7 @@
 					@if($data->sign_on != "" && $data->sign_off != "")
 						{{ $data->sign_on->diff($data->sign_off->addDay())->format('%yyr, %mmos, %ddays') }}
 					@else
-						Not enough data
+						
 					@endif
 				</td>
 			</tr>
