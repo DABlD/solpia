@@ -276,15 +276,55 @@
 		</tr>
 
 		@php 
-			$name = 'COC';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			$docu = false;
+
+			if(isset($applicant->rank)){
+				$requiredRegulation = "";
+				$tRank = $applicant->rank->id;
+
+				// DECK
+				if($tRank >= 9 && $tRank <= 11){
+					$requiredRegulation = "II/4";
+				}
+				elseif($tRank == 3 && $tRank == 4){
+					$requiredRegulation = "II/1";
+				}
+				elseif($tRank == 1 && $tRank == 2){
+					$requiredRegulation = "II/2";
+				}
+				// ENGINE
+				elseif ($tRank >= 15 && $tRank <= 17) {
+					$requiredRegulation = "III/4";
+				}
+				elseif($tRank == 7 || $tRank == 8){
+					$requiredRegulation = "III/1";
+				}
+				elseif($tRank == 5 || $tRank == 6){
+					$requiredRegulation = "III/2";
+				}
+
+				foreach($applicant->document_lc as $document){
+					$regulation = json_decode($document->regulation);
+
+				    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
+				        $docu = $document;
+				    }
+				}
+			}
 		@endphp
 
 		<tr>
 			<td colspan="2">
-				National
+				NATIONAL
 			</td>
-			<td colspan="2">{{ $applicant->rank->name ?? "-----" }}</td>
+			<td colspan="2">
+				@if(isset($applicant->rank))
+					@if($applicant->rank->type == "RATING")
+						{{ $applicant->rank->name ?? "-----" }}</td>
+					@elseif($applicant->rank->type == "OFFICER")
+						OIC-NAVIGATIONAL WATCH
+					@endif
+				@endif
 			<td>{{ $docu ? $docu->no : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -545,23 +585,44 @@
 		@php
 		// FIX. IF DECK RATING. II/4. ELSE IF ENGINE RATING. III/4
 		// OK NA
-			$docu = false;
-			foreach($applicant->document_lc as $document){
-				$regulation = json_decode($document->regulation);
-				$size = sizeof($regulation);
-				// $haystack = ["II/4", "III/4"];
-				$haystack = [];
+			// $docu = false;
+			// foreach($applicant->document_lc as $document){
+			// 	$regulation = json_decode($document->regulation);
+			// 	$size = sizeof($regulation);
+			// 	// $haystack = ["II/4", "III/4"];
+			// 	$haystack = [];
 				
-				if($rank >= 9 && $rank <= 14){
-					array_push($haystack, "II/4");
-				}
-				elseif($rank >= 15 && $rank <= 21){
-					array_push($haystack, "III/4");
-				}
+			// 	if($rank >= 9 && $rank <= 14){
+			// 		array_push($haystack, "II/4");
+			// 	}
+			// 	elseif($rank >= 15 && $rank <= 21){
+			// 		array_push($haystack, "III/4");
+			// 	}
 
-			    if($document->type == "COC" && $size == 1 && in_array($regulation[0], $haystack)){
-			        $docu = $document;
-			    }
+			//     if($document->type == "COC" && $size == 1 && in_array($regulation[0], $haystack)){
+			//         $docu = $document;
+			//     }
+			// }
+
+			// DECK/ENGINE WATCH DAW TO
+			$name = 'DECK WATCH';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+			if(!isset($docu)){
+				$name = 'ENGINE WATCH';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
+			if(!isset($docu)){
+				$name = 'WATCHKEEPING';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
+			if(!isset($docu)){
+				$name = 'DECK WATCHKEEPING';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			}
+			if(!isset($docu)){
+				$name = 'ENGINE WATCHKEEPING';
+				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 			}
 		@endphp
 
@@ -683,8 +744,41 @@
 
 		{{-- 10TH --}}
 		@php 
-			$name = 'COE';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			$docu = false;
+
+			if(isset($applicant->rank)){
+				$requiredRegulation = "";
+				$tRank = $applicant->rank->id;
+
+				// DECK
+				if($tRank >= 9 && $tRank <= 11){
+					$requiredRegulation = "II/5";
+				}
+				elseif($tRank == 3 && $tRank == 4){
+					$requiredRegulation = "II/1";
+				}
+				elseif($tRank == 1 && $tRank == 2){
+					$requiredRegulation = "II/2";
+				}
+				// ENGINE
+				elseif ($tRank >= 15 && $tRank <= 17) {
+					$requiredRegulation = "III/5";
+				}
+				elseif($tRank == 7 || $tRank == 8){
+					$requiredRegulation = "III/1";
+				}
+				elseif($tRank == 5 || $tRank == 6){
+					$requiredRegulation = "III/2";
+				}
+
+				foreach($applicant->document_lc as $document){
+					$regulation = json_decode($document->regulation);
+
+				    if($document->type == "COE" && in_array($requiredRegulation, $regulation)){
+				        $docu = $document;
+				    }
+				}
+			}
 		@endphp
 
 		<tr>
@@ -760,22 +854,109 @@
 
 		{{-- 13TH --}}
 		@php 
-			$name = 'ERS WITH ERM';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			if(isset($applicant->rank)){
+				if(str_contains($applicant->rank->category, "DECK")){
+					$name = 'SSBT WITH BRM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 
-			if(!isset($docu)){
-				$name = 'ERS';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					if(!isset($docu)){
+						$name = 'SSBT';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+					if(!isset($docu)){
+						$name = 'BRM';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+					if(!isset($docu)){
+						$name = 'BTM';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+				}
+				else{
+					$name = 'ERS WITH ERM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+					if(!isset($docu)){
+						$name = 'ERS';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+
+				}
 			}
 		@endphp
 
 		<tr>
-			<td colspan="4">ERS</td>
+			<td colspan="4">
+				@if(isset($applicant->rank) && str_contains($applicant->rank->category, "DECK"))
+					SSBT W/ BRM
+				@else
+					ERS W/ ERM
+				@endif
+			</td>
 			<td>{{ $docu ? $docu->no : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
+
+		@php 
+			$docu = false;
+			$docu2 = false;
+
+			if(isset($applicant->rank)){
+				if($applicant->rank->type == "OFFICER"){
+					$requiredRegulation = "";
+					$requiredRegulation2 = "";
+					$tRank = $applicant->rank->id;
+
+					// DECK
+					if($tRank >= 9 && $tRank <= 11){
+						$requiredRegulation = "II/4";
+						$requiredRegulation2 = "II/5";
+					}
+					// ENGINE
+					elseif ($tRank >= 15 && $tRank <= 17) {
+						$requiredRegulation = "III/4";
+						$requiredRegulation2 = "III/5";
+					}
+
+					foreach($applicant->document_lc as $document){
+						$regulation = json_decode($document->regulation);
+
+					    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
+					        $docu = $document;
+					    }
+					    if($document->type == "COE" && in_array($requiredRegulation2, $regulation)){
+					        $docu2 = $document;
+					    }
+					}
+				}
+			}
+		@endphp
+
+		@if($applicant->rank)
+			@if($applicant->rank->type == "OFFICER")
+				<tr>
+					<td colspan="4">
+						MARINA COP REGULATION {{ $requiredRegulation }}
+					</td>
+					<td>{{ $docu ? $docu->no : "-----"}}</td>
+					<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+					<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+					<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+				</tr>
+
+				<tr>
+					<td colspan="4">
+						MARINA COP REGULATION {{ $requiredRegulation }}
+					</td>
+					<td>{{ $docu2 ? $docu2->no : "-----"}}</td>
+					<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
+					<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
+					<td colspan="2">{{ $docu2 ? $docu2->issuer : "NOT APPLICABLE" }}</td>
+				</tr>
+			@endif
+		@endif
 	
 		<tr>
 			<td colspan="4">5. PHYSICAL INSPECTION/YELLOW CARD</td>
@@ -819,7 +1000,7 @@
 
 		<tr>	
 			<td colspan="4">YELLOW FEVER</td>
-			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>-----</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -862,7 +1043,7 @@
 
 		<tr>	
 			<td colspan="4">POLIO VACCINE (IPV)</td>
-			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>-----</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -875,14 +1056,15 @@
 
 			$name2 = 'COVID-19 1ST DOSE';
 			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
+
 		@endphp
 
 		<tr>	
 			<td colspan="4">COVID-19 (certificate copy must be attached)</td>
-			<td>{{ $docu ? "YES" : "NO"}}</td>
+			<td>{{ $docu2 ? "YES" : "NO"}}</td>
 			<td>{{ $docu2 ? $docu2->clinic : "-----"}}</td>
-			<td>{{ $docu2 ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu2 ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
 			<td>-----</td>
 		</tr>
 
@@ -906,7 +1088,13 @@
 				<td>Acceptable</td>
 				<td>Poor</td>
 				<td>Unsuitable</td>
-				<td></td>
+				<td>
+					@if(isset($applicant->rank))
+						@if(str_contains($applicant->rank->category, 'OFFICER'))
+							GOOD
+						@endif
+					@endif
+				</td>
 				<td></td>
 			</tr>
 		@endforeach
@@ -925,9 +1113,21 @@
 		@foreach(['Training for SMS', 'Experience for SMS'] as $row)
 			<tr>
 				<td colspan="4">{{ $row }}</td>
-				<td></td>
-				<td colspan="2"></td>
-				<td colspan="2"></td>
+				@if(isset($applicant->rank))
+					@if(str_contains($applicant->rank->category, 'OFFICER'))
+						<td>-</td>
+						<td colspan="2">-</td>
+						<td colspan="2">
+							@if($row == "Training for SMS")
+								REVERTING
+							@endif
+						</td>
+					@else
+						<td></td>
+						<td colspan="2"></td>
+						<td colspan="2"></td>
+					@endif
+				@endif
 			</tr>
 		@endforeach
 
