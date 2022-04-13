@@ -875,7 +875,6 @@
 
 			$name2 = 'COVID-19 1ST DOSE';
 			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
-			dd($applicant->document_med_cert);
 		@endphp
 
 		<tr>	
