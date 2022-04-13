@@ -29,7 +29,10 @@
 		}
 	}
 
-	$rank_category = $data->rank->category;
+	$rank_category = "";
+	if(isset($data->rank)){
+		$rank_category = $data->rank->category;
+	}
 	$total = 0;
 
 	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null, $period = null) use ($data, $checkDate2, $rank) {
@@ -262,8 +265,9 @@
 
 	$eb = function($type) use ($data){
 		foreach($data->educational_background as $eb){
+			$course = str_replace('&', '&#38;', $eb->course);
 			if($eb->type == $type){
-				echo "$eb->school/$eb->course/$eb->year/Graduated";
+				echo "$eb->school/$course/$eb->year/Graduated";
 			}
 		} 
 	};
@@ -779,7 +783,11 @@
 		
 		<td colspan="10">I hereby certify that the above information are true and correct in every detail.</td>
 		<td colspan="2">Serial #</td>
-		<td colspan="3" rowspan="2">N/A</td>
+		<td colspan="3" rowspan="2">
+			@if(auth()->user()->fleet == "FLEET D")
+				MS. JANICE AGUACITO
+			@endif
+		</td>
 	</tr>
 
 	<tr>
@@ -791,7 +799,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="2">College</td>
+		<td colspan="2">Colleges</td>
 		<td colspan="6">{{ $eb('College') }}</td>
 		
 		<td>Date: </td>
@@ -799,6 +807,18 @@
 		<td>Applicant:</td>
 		<td colspan="4">{{ $data->user->fname . ' ' . $data->user->mname . ' ' . $data->user->lname }}</td>
 		<td colspan="2">Approved By:</td>
-		<td colspan="3">MR. ADULF KIT JUMAWAN</td>
+		<td colspan="3">
+			@if(auth()->user()->fleet == "FLEET B")
+				MR. ADULF KIT JUMAWAN
+			@elseif(auth()->user()->fleet == "FLEET D")
+				MS. THEA GUERRA
+			@else
+				@if(auth()->user()->gender == "Male")
+					MR. {{ auth()->user()->fname }} {{ auth()->user()->lname }}
+				@else
+					MS. {{ auth()->user()->fname }} {{ auth()->user()->lname }}
+				@endif
+			@endif
+		</td>
 	</tr>
 </table>
