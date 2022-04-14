@@ -246,5 +246,7 @@ Route::group([
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
+		Route::get('generateApplicantFleet', 'ApplicationsController@generateApplicantFleet')->name('generateApplicantFleet');
+		Route::get('testFunc', 'ApplicationsController@testFunc')->name('testFunc');
 	}
 );

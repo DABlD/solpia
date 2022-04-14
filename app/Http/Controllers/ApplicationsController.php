@@ -1331,6 +1331,61 @@ class ApplicationsController extends Controller
         echo json_encode($applicant);
     }
 
+    public function generateApplicantFleet(){
+        $applicants = User::where("role", 'Applicant')
+                        ->select('users.id as uid', 'users.role',
+                                'a.id as aid', 'a.user_id',
+                                'pa.vessel_id', 'pa.status', 'pa.principal_id'
+                        )
+                        ->join('applicants as a', 'a.user_id', '=', 'users.id')
+                        ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
+                        ->get();
+
+        $principals = Principal::where('fleet', '!=', null)->get();
+        $ctr = 0;
+
+        foreach($applicants as $applicant){
+            $fleet = null;
+            $reason = null;
+
+            if($applicant->status == "Lined-Up" || $applicant->status == "On Board"){
+                $fleet = Vessel::where('id', $applicant->vessel_id)->first()->fleet;
+                $reason = "Based on Lined-Up/On Board vessel's fleet";
+            }
+            else{
+                $ss = SeaService::where('applicant_id', $applicant->aid)->get()->sortByDesc('sign_off')->first();
+                if($ss){
+                    $vessel = Vessel::where([['name', '=', $ss->vessel_name], ['fleet','!=',null]])->get();
+                    if($vessel->count()){
+                        $fleet = $vessel->first()->fleet;
+                        $reason = "Based on previous vessel name's fleet";
+                    }
+                    else{
+                        foreach ($principals as $principal) {
+                            if($ss->principal != null && (strtoupper($ss->principal) == strtoupper($principal->name) || str_contains(strtoupper($ss->principal), strtoupper($principal->name)))){
+                                $fleet = $principal->fleet;
+                                $reason = "Based on previous vessel's principal name or same name";
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if($fleet){
+                User::where('id', $applicant->uid)->update(['fleet' => $fleet]);
+                echo $applicant->uid . ' Successfully added to ' . $fleet . ' - ' . $reason . '<br>';
+                $ctr++;
+            }
+        }
+
+        echo '<br> Total Updated: ' . $ctr;
+    }
+
+    public function testFunc(){
+        echo 'test';
+    }
+
     private function _view($view, $data = array()){
     	return view('applications.' . $view, $data);
     }
