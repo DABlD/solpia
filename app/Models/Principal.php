@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Principal extends Model
 {
     protected $fillable = [
-    	'user_id', 'name', 'slug'
+    	'user_id', 'name', 'slug', 'fleet'
     ];
 
     protected $dates = [
