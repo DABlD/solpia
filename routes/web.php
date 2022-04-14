@@ -55,7 +55,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-user')
 			->defaults('name', 'Dashboard')
-			->defaults('roles', array('Admin', 'Principal', 'Crewing Officer', "Crewing Manager"))
+			->defaults('roles', array('Admin', 'Principal', 'Crewing Officer', "Crewing Manager", 'Encoder', 'Cadet'))
 			->name('dashboard')
 			->defaults('href', 'dashboard');
 
