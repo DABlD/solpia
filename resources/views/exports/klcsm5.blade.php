@@ -48,6 +48,7 @@
 				$temp = null;
 				foreach ($data->educational_background as $eb) {
 					$temp = $eb;
+
 					if($temp->type == "College" || $temp->type == "Vocational"){
 						echo $temp->school;
 						break;
@@ -61,14 +62,14 @@
 		<td>Given Name</td>
 		<td colspan="2">{{ $data->user->fname }}</td>
 		<td colspan="5">Course</td>
-		<td colspan="4">{{ $temp->course ?? '-' }}</td>
+		<td colspan="4">{{ $temp ? $temp->course : '-' }}</td>
 	</tr>
 
 	<tr>
 		<td>Middle Name</td>
 		<td colspan="2">{{ $data->user->mname }}</td>
 		<td colspan="5">Duration</td>
-		<td colspan="4">{{ $temp->type == "College" ? "4yrs" : "2yrs" }}</td>
+		<td colspan="4">{{ $temp ? $temp->type == "College" ? "4yrs" : "2yrs" : '' }}</td>
 	</tr>
 
 	<tr>
