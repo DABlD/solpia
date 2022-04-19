@@ -412,11 +412,11 @@ class DatatablesController extends Controller
 		if(auth()->user()->fleet != "" && !str_contains($req->search['value'], '-A')){
 			$vessels = Vessel::where([
 					['status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE'],
-					['fleet', '=', auth()->user()->fleet]
+					['vessels.fleet', '=', auth()->user()->fleet]
 				])
 				->join('principals as p', 'p.id', '=', 'vessels.principal_id')
 				->select('vessels.*', 'p.name as pname')
-				->get();			
+				->get();
 		}
 		else{
 			$vessels = Vessel::where('status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE')
