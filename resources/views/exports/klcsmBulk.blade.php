@@ -39,32 +39,35 @@
 	$totalYears = 0;
 
 	foreach($data->sea_service as $ss){
-		$type = strtoupper($ss->vessel_type);
+		// SKIP FILLER SS
+		if($ss->vessel_name && $ss->rank){
+			$type = strtoupper($ss->vessel_type);
 
-		if(str_contains($type, 'BULK') || str_contains($type, 'VLOC')){
-			$type = 'BULK';
-		}
-		elseif(str_contains($type, 'TANK') || str_contains($type, 'CHEM' || str_contains($type, 'VLCC'))){
-			$type = 'TANKER';
-		}
-		elseif(str_contains($type, 'CONT')){
-			$type = "CONTAINER";
-		}
-		elseif(str_contains($type, 'GEN') || str_contains($type, 'CARGO')){
-			$type = "GENERAL CARGO";
-		}
-		elseif(str_contains($type, 'REEF')){
-			$type = "REEFER";
-		}
-		else{
-			$type = "OTHERS";
-		}
+			if(str_contains($type, 'BULK') || str_contains($type, 'VLOC')){
+				$type = 'BULK';
+			}
+			elseif(str_contains($type, 'TANK') || str_contains($type, 'CHEM' || str_contains($type, 'VLCC'))){
+				$type = 'TANKER';
+			}
+			elseif(str_contains($type, 'CONT')){
+				$type = "CONTAINER";
+			}
+			elseif(str_contains($type, 'GEN') || str_contains($type, 'CARGO')){
+				$type = "GENERAL CARGO";
+			}
+			elseif(str_contains($type, 'REEF')){
+				$type = "REEFER";
+			}
+			else{
+				$type = "OTHERS";
+			}
 
-		$ssTotal[$type][0] += $ss->total_months + 0.00;
-		$ssTotal[$type][1] += round(($ss->total_months / 12), 2);
+			$ssTotal[$type][0] += $ss->total_months + 0.00;
+			$ssTotal[$type][1] += round(($ss->total_months / 12), 2);
 
-		$totalMonths += $ss->total_months + 0.00;
-		$totalYears += round(($ss->total_months / 12), 2);
+			$totalMonths += $ss->total_months + 0.00;
+			$totalYears += round(($ss->total_months / 12), 2);
+		}
 	}
 
 	$rank_category = $data->rank->category;
@@ -159,7 +162,11 @@
 		$rank = $data->ranks[$ss->rank];
 		$on = $checkDate2($ss->sign_on, 'I');
 		$off = $checkDate2($ss->sign_off, 'I');
-		$diff = $ss->sign_on->diffInDays($ss->sign_off);
+		// SKIP FILLER SS
+		$diff = 0;
+		if($ss->vessel_name && $ss->rank){
+			$diff = $ss->sign_on->diffInDays($ss->sign_off);
+		}
 
 		echo "
 			<td>$rank</td>
