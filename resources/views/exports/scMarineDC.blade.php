@@ -199,6 +199,8 @@
 			}
 		}
 
+		$issuer = str_replace('&', '&#38;', $issuer);
+
 		echo "
 			<tr>
 				<td colspan='5'>
