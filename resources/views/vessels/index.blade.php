@@ -2036,6 +2036,7 @@
                             </div>
 
                             <div class="modal-footer" style="background-color: transparent;">
+                                <button type="button" class="btn btn-primary" onClick="omc(${id})">On Board Multiple Crew</button>
                                 <button type="button" class="btn btn-info" onClick="exportOnOff(${id})">Export On/Off Signers</button>
                                 <button type="button" class="btn btn-success" onClick="exportOnBoard(${id}, '${name}')">Export Onboard</button>
                                 @if(auth()->user()->role != "Principal")
@@ -2048,6 +2049,168 @@
 
                 </div>`
             );
+        }
+
+        function omc(vid){
+            let crews = [];
+
+            let temp = $('.LUN');
+            let crewString = "";
+
+            temp.each((index, value) => {
+                let temp2 = $(value);
+
+                crewString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${temp2[0].innerText}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let config = {
+                confirmButtonText: 'Next',
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+            }
+
+            swal.queue([
+                {
+                    ...config,
+                    title: 'Select Crew',
+                    html: '<br><br>' + crewString,
+                    width: '450px',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+                        $('#swal2-content .col-md-10').css('text-align', 'left');
+                        $('#swal2-content .col-md-10 label').css({
+                            "font-size": '20px',
+                            "text-align": 'left'
+                        });
+                        $('#swal2-content input[type=checkbox]').css({
+                            'zoom': '1.7',
+                            'margin': '1px 0 0'
+                        });
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let temp3 = $(".crew-checklist:checked");
+                                
+                                temp3.each((index, value) => {
+                                    crews.push($(value).data('id'));
+                                });
+                            resolve()}, 500);
+                        });
+                    },
+                },
+                {
+                    ...config,
+                    title: 'Fill Details',
+                    html: `
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Joining Port</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="port" class="swal2-input" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Joining Date</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="date" class="swal2-input" placeholder="Select Date"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel2">Months of Contract</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="number" min="1" id="months" class="form-control" />
+                            </div>
+                        </div>
+                        <br>
+                    `,
+                    width: '450px',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+
+                        $('#date').flatpickr({
+                            altInput: true,
+                            altFormat: 'F j, Y',
+                            dateFormat: 'Y-m-d',
+                        })
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let b = $('#date').val();
+                                let c = $('#months').val();
+
+                                if(b == "" || c == ""){
+                                    swal.showValidationError('Date and Months is required');
+                                }
+                            resolve()}, 500);
+                        });
+                    },
+                },
+            ]).then(result => {
+                if(result.value){
+                    let port = $('#port').val();
+                    let date = $('#date').val();
+                    let months = $('#months').val();
+
+                    crews.forEach(id => {
+                        let ctr = 0;
+                        $.ajax({
+                            type: 'POST',
+                            url: `{{ route('applications.updateStatus') }}/${id}/On Board/${vid}`,
+                            data: {
+                                id: id,
+                                port: port,
+                                date: date,
+                                months: months
+                            },
+                            success: vessel => {
+                                ctr++;
+
+                                if(ctr == crews.length){
+                                    swal({
+                                        type: 'success',
+                                        title: 'Successfully Boarded ' + crews.length + ' Crew',
+                                        showConfirmButton: false,
+                                        timer: 800
+                                    }).then(() => {
+                                        console.log(vessel);
+                                        getVesselCrew(vessel, true);
+                                        $('[href=".onBoard"]').click();
+                                    });
+                                }
+                            }
+                        });
+                    });
+                }
+            })
         }
 
         function exportOnOff(id){
