@@ -110,7 +110,7 @@
 		}
 
         .w100{
-            width: 110px !important;
+            padding: 3px 3px 3px 3px !important;
         }
 
         .dt-status b{
@@ -192,6 +192,10 @@
 
         table .btn{
             width: 39.22px;
+        }
+
+        .box-body{
+            margin: 0px 0px 0px 0px !important;
         }
 	</style>
 @endpush
