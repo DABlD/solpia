@@ -699,8 +699,10 @@
                                 <select id="vessel">
                                     <option value=""></option>
                                 </select>
-                                <br><br>
-                                <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
+                                @if(auth()->user()->fleet == "Fleet B")
+                                    <br><br>
+                                    <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
+                                @endif
                             `,
                             allowOutsideClick: false,
                             showCancelButton: true,
@@ -734,7 +736,9 @@
                                         rank_id: aRank,
                                         principal_id: aPrincipal,
                                         vessel_id: $('#vessel').val(),
-                                        mob: $('#mob').val()
+                                        @if(auth()->user()->fleet == "Fleet B")
+                                            mob: $('#mob').val()
+                                        @endif
                                     },
                                     success: result => {
                                         setTimeout(() => {
