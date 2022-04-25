@@ -283,8 +283,11 @@
 				$tRank = $applicant->rank->id;
 
 				// DECK
-				if($tRank >= 9 && $tRank <= 11){
+				if($tRank == 11){
 					$requiredRegulation = "II/4";
+				}
+				if($tRank >= 9 && $tRank <= 10){
+					$requiredRegulation = "II/5";
 				}
 				elseif($tRank == 3 && $tRank == 4){
 					$requiredRegulation = "II/1";
@@ -293,8 +296,11 @@
 					$requiredRegulation = "II/2";
 				}
 				// ENGINE
-				elseif ($tRank >= 15 && $tRank <= 17) {
+				elseif ($tRank == 17) {
 					$requiredRegulation = "III/4";
+				}
+				elseif ($tRank >= 15 && $tRank <= 16) {
+					$requiredRegulation = "III/5";
 				}
 				elseif($tRank == 7 || $tRank == 8){
 					$requiredRegulation = "III/1";
@@ -747,36 +753,22 @@
 			$docu = false;
 
 			if(isset($applicant->rank)){
-				$requiredRegulation = "";
-				$tRank = $applicant->rank->id;
-
-				// DECK
-				if($tRank >= 9 && $tRank <= 11){
-					$requiredRegulation = "II/5";
-				}
-				elseif($tRank == 3 && $tRank == 4){
-					$requiredRegulation = "II/1";
-				}
-				elseif($tRank == 1 && $tRank == 2){
-					$requiredRegulation = "II/2";
-				}
-				// ENGINE
-				elseif ($tRank >= 15 && $tRank <= 17) {
-					$requiredRegulation = "III/5";
-				}
-				elseif($tRank == 7 || $tRank == 8){
-					$requiredRegulation = "III/1";
-				}
-				elseif($tRank == 5 || $tRank == 6){
-					$requiredRegulation = "III/2";
-				}
+				$tempDocu = null;
 
 				foreach($applicant->document_lc as $document){
 					$regulation = json_decode($document->regulation);
 
-				    if($document->type == "COE" && in_array($requiredRegulation, $regulation)){
+				    if($document->type == "COE" && in_array("II/5", $regulation)){
 				        $docu = $document;
 				    }
+
+				    if($document->type == "COC" && in_array("II/4", $regulation)){
+				        $tempDocu = $document;
+				    }
+				}
+
+				if(!$docu && $tempDocu){
+					$temp = $tempDocu;
 				}
 			}
 		@endphp
@@ -902,34 +894,39 @@
 		@php 
 			$docu = false;
 			$docu2 = false;
+			$requiredRegulation = "";
+			$requiredRegulation2 = "";
 
 			if(isset($applicant->rank)){
-				if($applicant->rank->type == "OFFICER"){
-					$requiredRegulation = "";
-					$requiredRegulation2 = "";
-					$tRank = $applicant->rank->id;
+				$requiredRegulation = "";
+				$tRank = $applicant->rank->id;
 
-					// DECK
-					if($tRank >= 9 && $tRank <= 11){
-						$requiredRegulation = "II/4";
-						$requiredRegulation2 = "II/5";
-					}
-					// ENGINE
-					elseif ($tRank >= 15 && $tRank <= 17) {
-						$requiredRegulation = "III/4";
-						$requiredRegulation2 = "III/5";
-					}
+				// DECK
+				if($tRank >= 9 && $tRank <= 10){
+					$requiredRegulation = "II/4";
+				}
+				elseif($tRank == 3 && $tRank == 4){
+					$requiredRegulation = "II/4";
+					$requiredRegulation2 = "II/5";
+				}
+				// ENGINE
+				elseif ($tRank >= 15 && $tRank <= 16) {
+					$requiredRegulation = "III/4";
+				}
+				elseif($tRank == 7 || $tRank == 8){
+					$requiredRegulation = "III/4";
+					$requiredRegulation2 = "III/5";
+				}
 
-					foreach($applicant->document_lc as $document){
-						$regulation = json_decode($document->regulation);
+				foreach($applicant->document_lc as $document){
+					$regulation = json_decode($document->regulation);
 
-					    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
-					        $docu = $document;
-					    }
-					    if($document->type == "COE" && in_array($requiredRegulation2, $regulation)){
-					        $docu2 = $document;
-					    }
-					}
+				    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
+				        $docu = $document;
+				    }
+				    if($document->type == "COE" && in_array($requiredRegulation2, $regulation)){
+				        $docu2 = $document;
+				    }
 				}
 			}
 		@endphp
@@ -1061,7 +1058,8 @@
 
 		<tr>	
 			<td colspan="4">COVID-19 (certificate copy must be attached)</td>
-			<td>{{ $docu2 ? "YES" : "NO"}}</td>
+			<td>NO</td>
+			{{-- <td>{{ $docu2 ? "YES" : "NO"}}</td> --}}
 			<td>{{ $docu2 ? $docu2->clinic : "-----"}}</td>
 			<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
