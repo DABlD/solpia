@@ -204,58 +204,165 @@
             }, 800);
         });
 
+        function showVesselDetails(vessel, editable){
+            let fields = "";
+
+            let names = [
+                "IMO",
+                "Owner",
+                "Size",
+                "Vessel Name", 
+                "Principal", 
+                "Flag", 
+                "Type", 
+                "Manning Agent", 
+                "Year Built", 
+                "Builder", 
+                "Engine", 
+                "Gross Tonnage", 
+                "BHP", 
+                "Trade", 
+                "ECDIS", 
+            ];
+
+            let columns = [
+                'imo',
+                'owner',
+                'size',
+                'name', 
+                'principal.name', 
+                'flag', 
+                "type", 
+                "manning_agent", 
+                "year_build", 
+                "builder", 
+                "engine", 
+                "gross_tonnage", 
+                "BHP", 
+                "trade", 
+                "ecdis", 
+            ];
+
+            $.each(Object.keys(vessel), (index, key) => {
+                let temp = columns.indexOf(key);
+                if(temp >= 0){
+                    fields += `
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5><strong>` + names[temp] + `</strong></h5>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" id="vd-${key}" class="form-control" value="` + (vessel[key] ? vessel[key] : '') + `"${editable ? '' : ' readonly'}/>
+                            </div>
+                        </div>
+                        <br id="` + key + `">
+                    `;
+                }
+            });
+
+            swal({
+                title: 'Vessel Details',
+                width: '50%',
+                html: `
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            ` + fields + `
+                        </div>
+                    </div>
+                `,
+                onBeforeOpen: () => {
+                    // CUSTOM FIELDS
+
+                    // OPTIONAL
+
+                    // MODIFIERS
+                },
+                onOpen: () => {
+                    if(editable){
+                        let col = $('#vd-size').parent();
+                        $('#vd-size').remove();
+
+                        let string = `
+                            <select id="vd-size" class="form-control">
+                                <option value=""></option>
+                                <optgroup label="Bulk"></optgroup>
+                                    <option value="Handymax">&nbsp;&nbsp;&nbsp;&nbsp;Handymax</option>
+                                    <option value="Handysize">&nbsp;&nbsp;&nbsp;&nbsp;Handysize</option>
+                                    <option value="Supramax">&nbsp;&nbsp;&nbsp;&nbsp;Supramax</option>
+                                    <option value="Panamax">&nbsp;&nbsp;&nbsp;&nbsp;Panamax</option>
+                                    <option value="Post Panamax">&nbsp;&nbsp;&nbsp;&nbsp;Post Panamax</option>
+                                    <option value="Capesize">&nbsp;&nbsp;&nbsp;&nbsp;Capesize</option>
+                                    <option value="VLOC">&nbsp;&nbsp;&nbsp;&nbsp;VLOC</option>
+                                <optgroup label="Tanker"></optgroup>
+                                    <option value="Aframax">&nbsp;&nbsp;&nbsp;&nbsp;Aframax</option>
+                                    <option value="Suezmax">&nbsp;&nbsp;&nbsp;&nbsp;Suezmax</option>
+                                    <option value="VLCC">&nbsp;&nbsp;&nbsp;&nbsp;VLCC</option>
+                            </select>
+                        `;
+
+                        col.append(string);
+                        $('#vd-size').select2({placeholder: 'Select Size'});
+                        $('#vd-size').on("select2:open", () => {
+                            $('.select2-dropdown').css({
+                                'z-index': 9999
+                            });
+                        });
+                        $('#select2-vd-size-container').css('text-align', 'left');
+                    }
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                cancelButtonText: 'Close',
+                confirmButtonText: editable ? 'Save' : 'Edit'
+            }).then(result => {
+                if(result.value){
+                    if(editable){
+                        $.ajax({
+                            url: '{{ route('vessels.updateAll') }}',
+                            data: {
+                                id: vessel.id,
+                                imo: $('#vd-imo').val(),
+                                owner: $('#vd-owner').val(),
+                                size: $('#vd-size').val(),
+                                name: $('#vd-name').val(),
+                                flag: $('#vd-flag').val(),
+                                type: $('#vd-type').val(),
+                                manning_agent: $('#vd-manning_agent').val(),
+                                year_build: $('#vd-year_build').val(),
+                                builder: $('#vd-builder').val(),
+                                engine: $('#vd-engine').val(),
+                                gross_tonnage: $('#vd-gross_tonnage').val(),
+                                BHP: $('#vd-BHP').val(),
+                                trade: $('#vd-trade').val(),
+                                ecdis: $('#vd-ecdis').val()
+                            },
+                            success: () => {
+                                swal({
+                                    type: 'success',
+                                    title: 'Vessel Details Successfully Updated',
+                                    timer: 800,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    $(`[data-original-title="View Vessel Details"] [data-id="${vessel.id}"]`).click();
+                                });
+                            }
+                        })
+                    }
+                    else{
+                        showVesselDetails(vessel, true);
+                    }
+                }
+            });
+        }
+
         function initializeActions(){
             $('[data-original-title="View Vessel Details"]').on('click', vessel => {
                 $.ajax({
                     url: 'vessels/get/' + $(vessel.target).data('id'),
                     success: vessel => {
                         vessel = JSON.parse(vessel);
-                        let fields = "";
-
-                        let names = [
-                            "Vessel Name", "Principal", "Flag", "Type", "Manning Agent", "Year Built", "Builder", "Engine", "Gross Tonnage", "BHP", "Trade", "ECDIS", "Status"
-                        ];
-
-                        let columns = [
-                            'name', 'principal.name', 'flag', "type", "manning_agent", "year_build", "builder", "engine", "gross_tonnage", "BHP", "trade", "ecdis", "status"
-                        ];
-
-                        $.each(Object.keys(vessel), (index, key) => {
-                            let temp = columns.indexOf(key);
-                            if(temp >= 0){
-                                fields += `
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <h5><strong>` + names[temp] + `</strong></h5>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control" value="` + vessel[key]+ `" readonly/>
-                                        </div>
-                                    </div>
-                                    <br id="` + key + `">
-                                `;
-                            }
-                        });
-
-                        swal({
-                            title: 'Vessel Details',
-                            width: '50%',
-                            html: `
-                                <br><br>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        ` + fields + `
-                                    </div>
-                                </div>
-                            `,
-                            onBeforeOpen: () => {
-                                // CUSTOM FIELDS
-
-                                // OPTIONAL
-
-                                // MODIFIERS
-                            }
-                        });
+                        showVesselDetails(vessel, false);
                     }
                 });
             });

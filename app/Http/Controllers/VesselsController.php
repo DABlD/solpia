@@ -70,6 +70,10 @@ class VesselsController extends Controller
         echo Vessel::where('id', $req->id)->update([$req->column => $req->value]);
     }
 
+    public function updateAll(Request $req){
+        echo Vessel::where('id', $req->id)->update($req->all());
+    }
+
     public function getParticular(Request $req){
         echo Vessel::where('id', $req->id)->select('particulars')->first()->particulars;
     }
