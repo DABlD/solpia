@@ -695,27 +695,36 @@
                     function showSelectVessel(){
                         swal({
                             title: 'Select Vessel',
-                            input: 'select',
-                            inputOptions: {
-                                '' : '',
-                                ...vessels //merged 2 objects
-                            },
+                            html: `
+                                <select id="vessel">
+                                    <option value=""></option>
+                                </select>
+                                <br><br>
+                                <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
+                            `,
                             allowOutsideClick: false,
                             showCancelButton: true,
                             cancelButtonColor: '#f76c6b',
                             onOpen: () => {
-                                $('.swal2-select').select2({
+                                let string = "";
+
+                                vessels.forEach((name, id) => {
+                                    string += `<option value="${id}">${name}</option>`;
+                                });
+
+                                $('#vessel').append(string);
+
+                                $('#vessel').select2({
                                     placeholder: 'Select Vessel',
                                     width: '100%',
                                 });
 
-                                $('.swal2-select').on('select2:open', function (e) {
+                                $('#vessel').on('select2:open', function (e) {
                                     $('.select2-dropdown--below').css('z-index', 1060);
                                 });
                             },
-                        }).then(vessel => {
-                            if(vessel.value){
-                                aVessel = vessel.value;
+                        }).then(result => {
+                            if(result.value){
                                 swal.showLoading();
 
                                 $.ajax({
@@ -724,7 +733,8 @@
                                         applicant_id: id,
                                         rank_id: aRank,
                                         principal_id: aPrincipal,
-                                        vessel_id: aVessel,
+                                        vessel_id: $('#vessel').val(),
+                                        mob: $('#mob').val()
                                     },
                                     success: result => {
                                         setTimeout(() => {

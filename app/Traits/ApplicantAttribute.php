@@ -24,7 +24,7 @@ trait ApplicantAttribute{
 
 		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Encoder', 'Cadet'])){
 			// LINE UP
-			if($this->pa_s != "Lined-Up"){
+			if($this->pa_s != "Lined-Up" && $this->pa_s != "On Board"){
 				$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
 			if($this->pa_s != "On Board"){
