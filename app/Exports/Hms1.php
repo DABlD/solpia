@@ -434,17 +434,31 @@ class Hms1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setOffsetY(2);
         $drawing2->setCoordinates('C3');
 
-        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing3->setName('sir_kit_sig');
-        $drawing3->setDescription('sir_kit_sig');
-        $drawing3->setPath(public_path('images/sir_kit_sig.png'));
-        $drawing3->setResizeProportional(false);
-        // $drawing3->setHeight(230);
-        // $drawing3->setWidth(230);
-        $drawing3->setOffsetX(2);
-        $drawing3->setOffsetY(-45);
-        $drawing3->setRotation(8);
-        $drawing3->setCoordinates('W42');
+        if(auth()->user()->fleet == "FLEET B"){
+            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing3->setName('sir_kit_sig');
+            $drawing3->setDescription('sir_kit_sig');
+            $drawing3->setPath(public_path('images/sir_kit_sig.png'));
+            $drawing3->setResizeProportional(false);
+            // $drawing3->setHeight(230);
+            // $drawing3->setWidth(230);
+            $drawing3->setOffsetX(2);
+            $drawing3->setOffsetY(-45);
+            $drawing3->setRotation(8);
+            $drawing3->setCoordinates('W42');
+        }
+        else{
+            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing3->setName('maam_thea_sig');
+            $drawing3->setDescription('maam_thea_sig');
+            $drawing3->setPath(public_path('images/maam_thea_sig.png'));
+            $drawing3->setResizeProportional(false);
+            $drawing3->setHeight(132);
+            $drawing3->setWidth(236);
+            $drawing3->setOffsetX(30);
+            $drawing3->setOffsetY(-67);
+            $drawing3->setCoordinates('W42');
+        }
 
         return [$drawing, $drawing2, $drawing3];
     }
