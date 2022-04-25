@@ -15,6 +15,7 @@ class AlterPaAddTempMob extends Migration
     {
         Schema::table('processed_applicants', function (Blueprint $table){
             $table->integer('mob')->after('status')->nullable();
+            $table->string('eld')->after('mob')->nullable(); //EXPECTED LINEUP DATE
         });
     }
 
@@ -27,6 +28,7 @@ class AlterPaAddTempMob extends Migration
     {
         Schema::table('processed_applicants', function (Blueprint $table){
             $table->dropColumn('mob');
+            $table->dropColumn('eld');
         });
     }
 }

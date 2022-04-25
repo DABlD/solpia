@@ -94,6 +94,7 @@
 @push('after-styles')
 	<link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
 
     {{-- PHOTO VIWER --}}
     <link rel="stylesheet" href="{{ asset('css/photoswipe.css') }}">
@@ -110,11 +111,16 @@
 		}
 
         .w100{
+            width: 150px;
             padding: 3px 3px 3px 3px !important;
         }
 
-        .dt-status b{
-            color: red;
+        [data-status="Lined-Up"]{
+            color: orange;
+        }
+
+        [data-status="On Board"]{
+            color: green;
         }
 
         .select2-selection__choice{
@@ -209,6 +215,7 @@
     {{-- PHOTOVIEWER --}}
     <script src="{{ asset('js/photoswipe.js') }}"></script>
     <script src="{{ asset('js/photoswipe-ui-default.js') }}"></script>
+    <script src="{{ asset('js/flatpickr.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -244,10 +251,9 @@
             columnDefs: [
                 {
                     targets: 1,
-                    className: "dt-status",
                     render: function(status, display, row){
                         if(status == "Lined-Up" || status == "On Board"){
-                            status += `<br><b>${row.vessel}</b>`;
+                            status += `<br><b data-status="${status}">${row.vessel}</b>`;
                         }
 
                         return status;
@@ -699,8 +705,10 @@
                                 <select id="vessel">
                                     <option value=""></option>
                                 </select>
-                                @if(auth()->user()->fleet == "Fleet B")
+                                @if(auth()->user()->fleet == "Fleet B" || auth()->user()->role == "Admin")
                                     <br><br>
+                                    <input type="string" id="eld" placeholder="Expected Date of Lineup (optional)" class="form-control">
+                                    <br>
                                     <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
                                 @endif
                             `,
@@ -713,6 +721,12 @@
                                 vessels.forEach((name, id) => {
                                     string += `<option value="${id}">${name}</option>`;
                                 });
+
+                                $('#eld').flatpickr({
+                                    altInput: true,
+                                    altFormat: 'F j, Y',
+                                    dateFormat: 'Y-m-d',
+                                })
 
                                 $('#vessel').append(string);
 
@@ -736,8 +750,9 @@
                                         rank_id: aRank,
                                         principal_id: aPrincipal,
                                         vessel_id: $('#vessel').val(),
-                                        @if(auth()->user()->fleet == "Fleet B")
-                                            mob: $('#mob').val()
+                                        @if(auth()->user()->fleet == "Fleet B" || auth()->user()->role == "Admin")
+                                            mob: $('#mob').val(),
+                                            eld: $('#eld').val()
                                         @endif
                                     },
                                     success: result => {

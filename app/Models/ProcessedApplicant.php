@@ -15,6 +15,7 @@ class ProcessedApplicant extends Model
 
     protected $dates = [
     	'created_at', 'updated_at'
+        , 'eld' //EXPECTED LINEUP DATE
     ];
 
     public function applicant(){
