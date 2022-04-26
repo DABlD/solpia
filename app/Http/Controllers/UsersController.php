@@ -10,7 +10,8 @@ use Hash;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin');
+        // REMOVE CADET AND ENCODER AFTER ADDING FLEET TO CREW
+        $this->middleware('permissions:' . 'Admin/Cadet/Encoder');
     }
 
     public function index(){
