@@ -115,7 +115,41 @@ class DatatablesController extends Controller
 		// 	];
 		// }
 
-		if($search){
+		if(str_contains($req->search['value'], '-NF')){
+			$applicants = Applicant::select(
+					'fname', 'lname', 'applicants.id', 'u.fleet'
+				)
+				->join('users as u', 'u.id', '=', 'applicants.user_id')
+				->where('u.fleet', null)
+				->get();
+
+			$string = "";
+			foreach ($applicants as $applicant) {
+				$string .= "
+					<tr>
+						<td>$applicant->id</td>
+						<td>$applicant->fname</td>
+						<td>$applicant->lname</td>
+					</tr>
+				";
+			}
+
+			echo "
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+						</tr>
+					</thead>
+					$string
+				</table>
+			";
+
+			die;
+		}
+		elseif($search){
 			$applicants = Applicant::select(
 					'applicants.id', 'applicants.remarks', 'u.fleet',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
