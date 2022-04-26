@@ -117,7 +117,7 @@ class DatatablesController extends Controller
 
 		if($search){
 			$applicants = Applicant::select(
-					'applicants.id', 'applicants.remarks',
+					'applicants.id', 'applicants.remarks', 'u.fleet',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
 					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
 					,'r.abbr'
@@ -164,7 +164,7 @@ class DatatablesController extends Controller
 			$diff = collect($sss2)->diff($applicants->pluck('id'));
 			foreach($diff as $id){
 				$temp = Applicant::select(
-					'applicants.id', 'applicants.remarks',
+					'applicants.id', 'applicants.remarks', 'u.fleet',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
 					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
 					,'r.abbr'
@@ -203,7 +203,7 @@ class DatatablesController extends Controller
 				$diff = collect($sss2)->diff($applicants->pluck('id'));
 				foreach($diff as $id){
 					$temp = Applicant::select(
-						'applicants.id', 'applicants.remarks',
+						'applicants.id', 'applicants.remarks', 'u.fleet',
 						'avatar', 'fname', 'lname', 'contact', 'birthday',
 						'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
 						,'r.abbr'
@@ -230,7 +230,7 @@ class DatatablesController extends Controller
 			$arr = explode(' ', $search);
 			if(sizeof($arr) > 1){
 				$temp1 = Applicant::select(
-					'applicants.id', 'applicants.remarks',
+					'applicants.id', 'applicants.remarks', 'u.fleet',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
 					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
 					,'r.abbr'
@@ -247,7 +247,7 @@ class DatatablesController extends Controller
 				->get();
 
 				$temp2 = Applicant::select(
-					'applicants.id', 'applicants.remarks',
+					'applicants.id', 'applicants.remarks', 'u.fleet',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
 					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
 					,'r.abbr'
@@ -276,7 +276,7 @@ class DatatablesController extends Controller
 			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')->where([$condition])->count();
 
 			$applicants = Applicant::select(
-					'applicants.id', 'applicants.remarks',
+					'applicants.id', 'applicants.remarks', 'u.fleet',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
 					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
 				)

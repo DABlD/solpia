@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ssap;
+use App\Models\{Ssap, Applicant};
 use App\User;
 use Hash;
 
@@ -81,6 +81,13 @@ class UsersController extends Controller
 
     public function ajaxUpdate(Request $req){
         echo User::where('id', $req->id)->update([$req->column => $req->value]);
+    }
+
+    // using Applicant ID
+    public function ajaxUpdate2(Request $req){
+        $user = User::find(Applicant::find((int)$req->id)->user_id);
+        $user->{$req->column} = $req->value;
+        echo $user->save();
     }
 
     public function delete(User $user){

@@ -81,6 +81,7 @@ Route::group([
 		Route::post('users/update', 'UsersController@update')->name('users.update');
 
 		Route::get('users/ajaxUpdate', 'UsersController@ajaxUpdate')->name('users.ajaxUpdate');
+		Route::get('users/ajaxUpdate2', 'UsersController@ajaxUpdate2')->name('users.ajaxUpdate2');
 
 		Route::get('users/delete/{user}', 'UsersController@delete')->name('users.delete');
 

@@ -1333,6 +1333,7 @@ class ApplicationsController extends Controller
 
     public function generateApplicantFleet(){
         $applicants = User::where("role", 'Applicant')
+                        ->where('fleet', null)
                         ->select('users.id as uid', 'users.role',
                                 'a.id as aid', 'a.user_id',
                                 'pa.vessel_id', 'pa.status', 'pa.principal_id'

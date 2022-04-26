@@ -25,7 +25,10 @@
     								<th>Age</th>
     								<th>Contact</th>
                                     <th>Last Vessel</th>
-    								<th>Remarks</th>
+                                    @if(auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder" || auth()->user()->role == "Admin")
+    								    <th>Fleet</th>
+                                    @endif
+                                    <th>Remarks</th>
                                     <th>Actions</th>
     							</tr>
     						</thead>
@@ -244,6 +247,9 @@
                 { data: 'age', name: 'age' },
                 { data: 'contact', name: 'contact' },
                 { data: 'last_vessel', name: 'last_vessel' },
+                @if(auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder" || auth()->user()->role == "Admin")
+                    { data: 'fleet', name: 'fleet' },
+                @endif
                 { data: 'remarks', name: 'remarks' },
                 { data: 'actions', name: 'actions' },
                 { data: 'search', name: 'search', visible: false }
@@ -267,7 +273,7 @@
                     },
                 },
                 {
-                    targets: 10,
+                    targets: 11,
                     className: "w100"
                 },
                 {
@@ -283,7 +289,7 @@
                     },
                 },
                 {
-                    targets: 9,
+                    targets: 10,
                     width: 85,
                     render: function(remarks, display, data){
                         remarks = remarks;
@@ -2318,6 +2324,45 @@
                                 timer: 800,
                                 showConfirmButton: false
                             });
+                        }
+                    })
+                }
+            });
+        }
+
+        // ADD TO FLEET
+        function atf(aId){
+            swal({
+                title: 'Select Fleet',
+                input: 'select',
+                inputOptions: {
+                    'FLEET A' : 'FLEET A',
+                    'FLEET B' : 'FLEET B',
+                    'FLEET C' : 'FLEET C',
+                    'FLEET D' : 'FLEET D',
+                    'FLEET E' : 'FLEET E',
+                    'TOEI' : 'TOEI',
+                    'FISHING' : 'FISHING',
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b'
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('users.ajaxUpdate2') }}',
+                        data: {
+                            column: 'fleet',
+                            value: result.value,
+                            id: aId
+                        },
+                        success: () => {
+                            table.ajax.reload(null, false);
+                            swal({
+                                type: 'success',
+                                title: 'Successfully assigned to fleet',
+                                timer: 800,
+                                showConfirmButton: false
+                            })
                         }
                     })
                 }
