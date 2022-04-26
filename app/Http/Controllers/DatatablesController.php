@@ -149,6 +149,20 @@ class DatatablesController extends Controller
 
 			die;
 		}
+		elseif(str_starts_with($req->search['value'], '-EE') || str_starts_with($req->search['value'], '-ee')){
+			$term = explode(' ', $req->search['value'])[1];
+			$ids = SeaService::where('engine_type', 'LIKE', "%" . $term . "%")->groupBy('applicant_id')->pluck('applicant_id');
+			$applicants = Applicant::select(
+					'applicants.id', 'applicants.remarks', 'u.fleet',
+					'avatar', 'fname', 'lname', 'contact', 'birthday',
+					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
+				)
+				->join('users as u', 'u.id', '=', 'applicants.user_id')
+				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+				->whereIn('applicant_id', $ids)
+				->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
+				->get();
+		}
 		elseif($search){
 			$applicants = Applicant::select(
 					'applicants.id', 'applicants.remarks', 'u.fleet',

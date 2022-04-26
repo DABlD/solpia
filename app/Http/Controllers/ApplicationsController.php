@@ -723,6 +723,10 @@ class ApplicationsController extends Controller
         $user['suffix'] = strtoupper($user['suffix']);
         $user['applicant'] = auth()->user()->status;
 
+        if($user['applicant']){
+            $user['fleet'] = auth()->user()->fleet;
+        }
+
         // UPLOAD AVATAR
         if($req->hasFile('avatar')){
             $image = $req->file('avatar');
