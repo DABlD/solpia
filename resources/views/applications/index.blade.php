@@ -273,10 +273,6 @@
                     },
                 },
                 {
-                    targets: 11,
-                    className: "w100"
-                },
-                {
                     targets: 0,
                     render: function(id, display, data){
                         return id;
@@ -288,26 +284,57 @@
                         return row;
                     },
                 },
-                {
-                    targets: 10,
-                    width: 85,
-                    render: function(remarks, display, data){
-                        remarks = remarks;
-                        let selected = "";
-
-                        remarks.forEach(remark => {
-                            selected += `
-                                <option value="${remark}" selected>${remark}</option>
-                            `;
-                        });
-
-                        return `
-                            <select id="table-select-${data.id}" data-id="${data.id}" multiple>
-                                ${selected}
-                            </select>
-                        `;
+                @if(auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder" || auth()->user()->role == "Admin")
+                    {
+                        targets: 11,
+                        className: "w100"
                     },
-                },
+                    {
+                        targets: 10,
+                        width: 85,
+                        render: function(remarks, display, data){
+                            remarks = remarks;
+                            let selected = "";
+
+                            remarks.forEach(remark => {
+                                selected += `
+                                    <option value="${remark}" selected>${remark}</option>
+                                `;
+                            });
+
+                            return `
+                                <select id="table-select-${data.id}" data-id="${data.id}" multiple>
+                                    ${selected}
+                                </select>
+                            `;
+                        },
+                    },
+                @else
+                    {
+                        targets: 10,
+                        className: "w100"
+                    },
+                    {
+                        targets: 9,
+                        width: 85,
+                        render: function(remarks, display, data){
+                            remarks = remarks;
+                            let selected = "";
+
+                            remarks.forEach(remark => {
+                                selected += `
+                                    <option value="${remark}" selected>${remark}</option>
+                                `;
+                            });
+
+                            return `
+                                <select id="table-select-${data.id}" data-id="${data.id}" multiple>
+                                    ${selected}
+                                </select>
+                            `;
+                        },
+                    },
+                @endif
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
