@@ -204,7 +204,28 @@
         }
 
         .box-body{
-            margin: 0px 0px 0px 0px !important;
+            margin: 0px 0px 0px 10px !important;
+        }
+
+        th{
+            text-align: center;
+        }
+
+        .tss{
+            font-size: 9px;
+        }
+
+        .modal thead tr, .tss thead tr{
+            background-color: #ffddcc !important;
+        }
+
+        .custom-striped tr:nth-child(4n+3), .custom-striped tr:nth-child(4n+4) {
+            background-color: #fdeee6;
+        }
+
+        .custom-striped td{
+            padding-top: 1px !important;
+            padding-bottom: 1px !important;
         }
 	</style>
 @endpush
@@ -1105,6 +1126,7 @@
                                 <br>
                             </div>
                         </div>
+                        <br>
 
                         <div class="row">
                             <div class="col-md-2">
@@ -1649,129 +1671,49 @@
             sss.forEach((ss, i) => {
                 ss = ss[1];
                 temp += `
-                    <h3 style="text-align: left;"><b>${i+1 + ".) " + ss.vessel_name}</b></h3>
-                    <div class="row">
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="rank">Rank</label>
-                                <input type="text" class="form-control" id="rank" value="${ss.rank ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="vessel_type">Vessel Type</label>
-                                <input type="text" class="form-control" id="vessel_type" value="${ss.vessel_type ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="gross_tonnage">Gross Tonnage</label>
-                                <input type="text" class="form-control" id="gross_tonnage" value="${ss.gross_tonnage ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="engine_type">Engine Type</label>
-                                <input type="text" class="form-control" id="engine_type" value="${ss.engine_type ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="bhp_kw">BHP/KW</label>
-                                <input type="text" class="form-control" id="bhp_kw" value="${ss.bhp_kw ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="flag">FLAG</label>
-                                <input type="text" class="form-control" id="flag" value="${ss.flag ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="trade">Trade</label>
-                                <input type="text" class="form-control" id="trade" value="${ss.trade ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="previous_salary">Previous Salary</label>
-                                <input type="text" class="form-control" id="previous_salary" value="${ss.previous_salary ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="manning_agent">Manning Agent</label>
-                                <input type="text" class="form-control" id="manning_agent" value="${ss.manning_agent ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="principal">Principal</label>
-                                <input type="text" class="form-control" id="principal" value="${ss.principal ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="crew_nationality">Crew Nationality</label>
-                                <input type="text" class="form-control" id="crew_nationality" value="${ss.crew_nationality ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="sign_on">Sign On</label>
-                                <input type="text" class="form-control" id="sign_on" value="${ss.sign_on != null ? moment(ss.sign_on).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="sign_off">Sign Off</label>
-                                <input type="text" class="form-control" id="sign_off" value="${ss.sign_off != null ? moment(ss.sign_off).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="total_months">Total Months</label>
-                                <input type="text" class="form-control" id="total_months" value="${ss.total_months ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="remarks">Remarks</label>
-                                <input type="text" class="form-control" id="remarks" value="${ss.remarks ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${ss.vessel_name}</td>
+                        <td>${ss.rank}</td>
+                        <td>${ss.vessel_type}</td>
+                        <td>${ss.gross_tonnage}</td>
+                        <td>${ss.engine_type}</td>
+                        <td>${ss.flag}</td>
+                        <td>${ss.trade}</td>
+                        <td>${ss.manning_agent}</td>
+                        <td>${ss.principal}</td>
+                        <td>${ss.sign_on != null ? moment(ss.sign_on).format("MMM DD, YYYY") : "---"}</td>
+                        <td>${ss.sign_off != null ? moment(ss.sign_off).format("MMM DD, YYYY") : "---"}</td>
+                        <td>${ss.remarks}</td>
+                    </tr>
                 `;
             });
 
             let string = `
                 <div class="box box-success" style="font-size: 15px;">
                     <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Sea Service</b></h2>'}
+                        <table class="table table-bordered table-striped tss">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Rank</th>
+                                    <th>Type</th>
+                                    <th>GRT</th>
+                                    <th>Engine</th>
+                                    <th>Flag</th>
+                                    <th>Trade</th>
+                                    <th>Manning</th>
+                                    <th>Principal</th>
+                                    <th>On</th>
+                                    <th>Off</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${temp != "" ? temp : `<tr><td colspan="16">No Recorded Sea Service</td></tr>`}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             `;
