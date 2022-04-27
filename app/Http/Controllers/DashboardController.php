@@ -32,15 +32,35 @@ class DashboardController extends Controller
         // }
         $applicants = Applicant::select('applicants.id', 'u.fname', 'u.lname', 'u.contact')
                             ->join('users as u', 'u.id', '=', 'applicants.user_id')
+                            ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
                             ->get()->keyBy('id');
 
-        $vacation = ProcessedApplicant::where('status', 'Vacation')->select('id', 'applicant_id')->get()->keyBy('applicant_id');
-        $onBoard = ProcessedApplicant::where('status', 'On Board')->select('id', 'applicant_id')->get()->keyBy('applicant_id');
-        $linedUp = ProcessedApplicant::where('status', 'Lined-Up')->select('id', 'applicant_id')->get()->keyBy('applicant_id');
-        $vessels = Vessel::where('status', 'ACTIVE')->select('id', 'name')->count();
+        $vacation = ProcessedApplicant::where('processed_applicants.status', 'Vacation')
+                            ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
+                            ->join('users as u', 'u.id', '=', 'a.user_id')
+                            ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
+                            ->select('processed_applicants.id', 'applicant_id')->get()->keyBy('applicant_id');
+
+        $onBoard = ProcessedApplicant::where('processed_applicants.status', 'On Board')
+                            ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
+                            ->join('users as u', 'u.id', '=', 'a.user_id')
+                            ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
+                            ->select('processed_applicants.id', 'applicant_id')->get()->keyBy('applicant_id');
+
+        $linedUp = ProcessedApplicant::where('processed_applicants.status', 'Lined-Up')
+                            ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
+                            ->join('users as u', 'u.id', '=', 'a.user_id')
+                            ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
+                            ->select('processed_applicants.id', 'applicant_id')->get()->keyBy('applicant_id');
+
+        $vessels = Vessel::where('status', 'ACTIVE')->where('fleet', 'LIKE', auth()->user()->fleet ?? "%%")->select('id', 'name')->count();
 
         $fleets = array_keys(Vessel::where('fleet', '!=', "")->get()->groupBy('fleet')->toArray());
         sort($fleets);
+
+        if(auth()->user()->fleet){
+            $fleets = [auth()->user()->fleet];
+        }
 
     	return $this->_view('dashboard', [
     		'title' 		=> 'Dashboard',
@@ -59,11 +79,17 @@ class DashboardController extends Controller
     }
 
     function getCrewWithExpiredDocs(Request $req){
-        $vacation = ProcessedApplicant::where('status', 'Vacation')->select('id', 'applicant_id')->get()->keyBy('applicant_id');
-        $fleets;
-
+        $vacation = ProcessedApplicant::where('processed_applicants.status', 'Vacation')
+                        ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
+                        ->join('users as u', 'u.id', '=', 'a.user_id')
+                        ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
+                        ->select('processed_applicants.id', 'applicant_id')
+                        ->get()->keyBy('applicant_id');
+        
+        $fleets = [];
+        $fleets['Vacation'] = [];
         $crew =  DocumentId::where('expiry_date', '<=', now()->addMonths(2)->toDateString())
-                        ->select('applicant_id', 'expiry_date', 'type', 'u.fname', 'u.lname', 'u.contact')
+                        ->select('applicant_id', 'expiry_date', 'type', 'u.fname', 'u.lname', 'u.contact', 'u.fleet')
                         ->join('applicants as a', 'a.id', '=', 'document_ids.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
                         ->get()
@@ -88,41 +114,47 @@ class DashboardController extends Controller
             }
 
             if($bool){
-                $fleets['Vacation'][$id] = $temp;
+                if(auth()->user()->role == "Admin" && auth()->user()->fleet == null){
+                    $fleets['Vacation'][$id] = $temp;
+                }
+                else{
+                    if($docs[0]->fleet == auth()->user()->fleet){
+                        $fleets['Vacation'][$id] = $temp;
+                    }
+                }
             }
         }
-
-        // die;
 
         foreach($fleets['Vacation'] as $id => $crew){
             if(!array_key_exists($id, $vacation->toArray())){
                 $fleet = Vessel::where('pa.applicant_id', $id)
-                                    ->select('vessels.fleet', 'vessels.name')
-                                    ->join('processed_applicants as pa', 'pa.vessel_id', '=', 'vessels.id')
-                                    ->first();
+                    ->select('vessels.fleet', 'vessels.name')
+                    ->join('processed_applicants as pa', 'pa.vessel_id', '=', 'vessels.id')
+                    ->first();
 
-                if(!array_key_exists($fleet->fleet, $fleets)){
-                    $fleets[$fleet->fleet] = [];
+                if($fleet){
+                    if(!array_key_exists($fleet->fleet, $fleets)){
+                        $fleets[$fleet->fleet] = [];
+                    }
+
+                    if(!$fleet->fleet == ""){
+                        $fleets[$fleet->fleet][$id] = $fleets['Vacation'][$id];
+                        unset($fleets['Vacation'][$id]);
+                    }
+                    else{
+                        $name = $fleet->name;
+
+                        AuditTrail::create([
+                            'user_id'   => auth()->user()->id,
+                            'action'    => "WARNING: VESSEL $name HAS NO FLEET ASSIGNMENT",
+                            'ip'        => $req->getClientIp(),
+                            'hostname'  => gethostname(),
+                            'device'    => Browser::deviceFamily(),
+                            'browser'   => Browser::browserName(),
+                            'platform'  => Browser::platformName()
+                        ]);
+                    }
                 }
-
-                if(!$fleet->fleet == ""){
-                    $fleets[$fleet->fleet][$id] = $fleets['Vacation'][$id];
-                    unset($fleets['Vacation'][$id]);
-                }
-                else{
-                    $name = $fleet->name;
-
-                    AuditTrail::create([
-                        'user_id'   => auth()->user()->id,
-                        'action'    => "WARNING: VESSEL $name HAS NO FLEET ASSIGNMENT",
-                        'ip'        => $req->getClientIp(),
-                        'hostname'  => gethostname(),
-                        'device'    => Browser::deviceFamily(),
-                        'browser'   => Browser::browserName(),
-                        'platform'  => Browser::platformName()
-                    ]);
-                }
-
             }
         }
 
@@ -163,6 +195,9 @@ class DashboardController extends Controller
                 // ->where('disembarkation_date', '<=', $end)
                 ->whereBetween('disembarkation_date', [$start, $end])
                 ->orWhereBetween('joining_date', [$start, $end])
+                ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
+                ->join('users as u', 'u.id', '=', 'a.user_id')
+                ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
                 ->get();
 
         $data = [];

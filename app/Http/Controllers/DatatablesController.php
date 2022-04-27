@@ -175,7 +175,11 @@ class DatatablesController extends Controller
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
 				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-				->where([$condition, ['applicants.remarks', 'LIKE', "%" . $search . "%"]])
+				->where([
+					$condition, 
+					['applicants.remarks', 'LIKE', "%" . $search . "%"],
+					['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
+				])
 				->orWhere('fname', 'LIKE', "%" . $search . "%")
 				->orWhere('lname', 'LIKE', "%" . $search . "%")
 				->orWhere('pro_app.status', 'LIKE', "%" . $search . "%")
@@ -194,7 +198,11 @@ class DatatablesController extends Controller
 			$sss2 = [];
 			
 			foreach ($sss as $key => $id) {
-				$ss = SeaService::where('applicant_id', $id)->orderByDesc('sign_on')->first();
+				$ss = SeaService::where('applicant_id', $id)
+                        ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
+                        ->join('users as u', 'u.id', '=', 'a.user_id')
+                        ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
+						->orderByDesc('sign_on')->first();
 				if(in_array($ss->vessel_name, $temp)){
 					// $temp2 = $sss->splice($key);
 					// $temp2->shift();
@@ -223,6 +231,7 @@ class DatatablesController extends Controller
 				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
 				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
 				->where('applicants.id', $id)
+				->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
 				->first();
 
 				// IF NOT DELETED
@@ -262,6 +271,7 @@ class DatatablesController extends Controller
 					->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
 					->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
 					->where('applicants.id', $id)
+					->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
 					->first();
 
 					// IF NOT DELETED
@@ -290,7 +300,8 @@ class DatatablesController extends Controller
 				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
 				->where([
 					['u.fname', '=', $arr[0]],
-					['u.lname', '=', $arr[1]]
+					['u.lname', '=', $arr[1]],
+					['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
 				])
 				->get();
 
@@ -307,7 +318,8 @@ class DatatablesController extends Controller
 				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
 				->where([
 					['u.lname', '=', $arr[0]],
-					['u.fname', '=', $arr[1]]
+					['u.fname', '=', $arr[1]],
+					['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
 				])
 				->get();
 
@@ -321,7 +333,11 @@ class DatatablesController extends Controller
 			}
 		}
 		else{
-			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')->where([$condition])->count();
+			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')
+					->where([
+						$condition,
+						['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
+					])->count();
 
 			$applicants = Applicant::select(
 					'applicants.id', 'applicants.remarks', 'u.fleet',
@@ -330,7 +346,10 @@ class DatatablesController extends Controller
 				)
 				->join('users as u', 'u.id', '=', 'applicants.user_id')
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				->where([$condition])
+				->where([
+					$condition,
+					['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
+				])
 				->offset($req->start)
 				->limit($req->length)
 				->get();
