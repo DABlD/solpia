@@ -83,6 +83,13 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
+			elseif($doc == "WELDING"){
+				foreach($data->document_lc as $document){
+				    if(str_contains($document->type, $doc)){
+				    	$docu = $document;
+				    }
+				}
+			}
 			else{
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 			}
@@ -184,14 +191,9 @@
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK W/ OEC", 'id') }}
 	{{ $doc("MCV", "MCV with PPRT NO.", 'id') }}
 
-	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("BOOKLET", "BOOKLET", 'flag') }}
-	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
+	{{ $section("2. FLAG DOCUMENTS N/A", 0) }}
 
-	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-
-	{{ $section("4. CERTIFICATES WITH COP", 0) }}
+	{{ $section("3. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'flag') }}
 
@@ -202,13 +204,14 @@
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
+	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
-	{{ $con("POEA CONTRACT *", 1,1,1) }}
 	{{ $con("MLC/CBA CONTRACT", 1,0,0) }}
 	{{ $con("PERSONAL DATA RECORD", 1,0,1) }}
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,0,1) }}
 	{{ $con("ALLOTMENT SUMMARY *", 1,0,0) }}
+	{{ $con("POEA CONTRACT *", 1,1,1) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
 	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc') }}

@@ -58,29 +58,29 @@
 			}
 		}
 		else{
-			if($type == "RADAR"){
-				$type = "RADAR SIMULATOR COURSE";
-				$docu = $data->{'document_' . $type}->{$doc};
+			if($doc == "RADAR"){
+				$doc = "RADAR SIMULATOR COURSE";
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
 				if(!$docu){
-					$type = "RADAR TRAINING COURSE";
-					$docu = $data->{'document_' . $type}->{$doc};
+					$doc = "RADAR TRAINING COURSE";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($type == "ARPA TRAINING COURSE"){
-				$docu = $data->{'document_' . $type}->{$doc};
+			elseif($doc == "ARPA TRAINING COURSE"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
 				if(!$docu){
-					$type = "RADAR OPERATOR PLOTTING AID";
-					$docu = $data->{'document_' . $type}->{$doc};
+					$doc = "RADAR OPERATOR PLOTTING AID";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($type == "ENGINE WATCH"){
-				$docu = $data->{'document_' . $type}->{$doc};
+			elseif($doc == "ENGINE WATCH"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
 				if(!$docu){
-					$type = "ENGINE WATCHKEEPING";
-					$docu = $data->{'document_' . $type}->{$doc};
+					$doc = "ENGINE WATCHKEEPING";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
 			else{

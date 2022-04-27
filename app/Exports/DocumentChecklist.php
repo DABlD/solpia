@@ -43,7 +43,43 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
 
         }
         elseif($fleet == "FLEET B"){
-            
+            if($type == "hms_con_kor"){
+                $this->data->manager = "ADULF KIT JUMAWAN";
+                $this->data->officer = "";
+
+                if($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 53;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "BSN" || $rank == "AB"){
+                    $this->rows    = 42;
+                    $this->view    = "BSN_AB";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 40;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "OLR1"){
+                    $this->rows    = 43;
+                    $this->view    = "OLR1";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 41;
+                    $this->view    = "OLR1";
+                }
+                elseif($rank == "CCK" || $rank == "2CK"){
+                    $this->rows    = 39;
+                    $this->view    = "CCK_2CK";
+                }
+                elseif($rank == "A/E"){
+                    $this->rows    = 44;
+                    $this->view    = "AE";
+                }
+                elseif($rank == "ECDT"){
+                    $this->rows    = 38;
+                    $this->view    = "ECDT";
+                }
+            }
         }
         elseif($fleet == "FLEET C"){
             
