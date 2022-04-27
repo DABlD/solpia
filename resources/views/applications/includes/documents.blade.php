@@ -256,6 +256,7 @@
 					<option value="GENERAL TRAINING RECORD BOOK">&nbsp;&nbsp;&nbsp;&nbsp;GENERAL TRAINING RECORD BOOK</option>
 					<option value="IN HOUSE TRAINING CERT WITH ISM">&nbsp;&nbsp;&nbsp;&nbsp;IN HOUSE TRAINING CERT WITH ISM</option>
 					<option value="PDOS">&nbsp;&nbsp;&nbsp;&nbsp;PDOS</option>
+					<option value="MCRA">&nbsp;&nbsp;&nbsp;&nbsp;MARITIME CYBER RISK AWARENESS/MANAGEMENT - MCRA</option>
 
 				<optgroup label="CONTRACTS"></optgroup>
 					<option value="POEA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;POEA CONTRACT</option>
