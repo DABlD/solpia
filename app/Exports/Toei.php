@@ -60,7 +60,66 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         ]
                     ],
                 ],
-            ]
+            ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_HAIR,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_HAIR,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_HAIR,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_HAIR,
+                    ],
+                ]
+            ],
         ];
 
         $fillStyle = [
@@ -143,7 +202,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getParent()->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(8.5);
 
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 
@@ -168,7 +227,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // }
 
                 // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setName('Arial');
-                // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setSize(10);
+                // $event->sheet->getDelegate()->getDefaultStyle()->getFont()->setSize(9.5);
 
                 // FONT SIZES
 
@@ -180,6 +239,14 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FOR BORDER BOTOTM
                 $cells[2] = array();
+                // BORDER HAIR TOP
+                $cells[7] = array();
+                // BORDER HAIR BOTTON
+                $cells[8] = array();
+                // BORDER HAIR LEFT
+                $cells[9] = array();
+                // BORDER HAIR RIGHT
+                $cells[10] = array();
 
                 // EDUCATION BACKGROUND ROWS
                 $ebRows = array();
@@ -232,6 +299,38 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($ocRows, "F$row");
                     array_push($ocRows, "G$row");
                     array_push($ocRows, "H$row:I$row");
+                }
+                
+                // FOR MARINA COP
+                if($this->applicant->rank){
+                    // DECK
+                    if(in_array($this->applicant->rank->id, [9,10,15,16])){
+                        $start = $raoc;
+                        $end = $raoc;
+                        $raoc += 1;
+                        array_push($ocRows, "A$start:D$end");
+                        array_push($ocRows, "E$start");
+                        array_push($ocRows, "F$start");
+                        array_push($ocRows, "G$start");
+                        array_push($ocRows, "H$start:I$end");
+                    }
+                    elseif(in_array($this->applicant->rank->id, [3,4,7,8])){
+                        $start = $raoc;
+                        $end = $raoc;
+                        $start2 = $start+1;
+                        $end2 = $end+1;
+                        $raoc += 2;
+                        array_push($ocRows, "A$start:D$end");
+                        array_push($ocRows, "A$start2:D$end2");
+                        array_push($ocRows, "E$start");
+                        array_push($ocRows, "F$start");
+                        array_push($ocRows, "G$start");
+                        array_push($ocRows, "E$start2");
+                        array_push($ocRows, "F$start2");
+                        array_push($ocRows, "G$start2");
+                        array_push($ocRows, "H$start:I$end");
+                        array_push($ocRows, "H$start2:I$end2");
+                    }
                 }
 
                 // PIYC
@@ -291,9 +390,9 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                     if(($i+1) == $temp){
                         $row++;
-                        $event->sheet->getDelegate()->getStyle("D$row")->getFont()->setSize(9);
+                        $event->sheet->getDelegate()->getStyle("D$row")->getFont()->setSize(8.5);
                         $row++;
-                        $event->sheet->getDelegate()->getStyle("H$row")->getFont()->setSize(9);
+                        $event->sheet->getDelegate()->getStyle("H$row")->getFont()->setSize(8.5);
                     }
                 }
 
@@ -313,6 +412,9 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SH3 ROWS
                 $sh3Rows = array();
                 $temp = $this->applicant->sea_service->count();
+                if($temp > 10){
+                    $temp = 10;
+                }
                 $rash3 = $rash2 + ($temp * 2) + 1; //Row # AFTER sh2;
 
                 for($i = 0, $row = $rash2, $row2 = $row+1; $i < $temp; $i++, $row+=2, $row2+=2){
@@ -323,12 +425,15 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($sh3Rows, "G$row:G$row2");
                     array_push($sh3Rows, "H$row:I$row2");
 
-                    $event->sheet->getDelegate()->getStyle("D$row2")->getFont()->setSize(10);
-                    $event->sheet->getDelegate()->getStyle("C$row")->getFont()->setSize(10);
+                    $event->sheet->getDelegate()->getStyle("D$row2")->getFont()->setSize(9.5);
+                    $event->sheet->getDelegate()->getStyle("C$row")->getFont()->setSize(9.5);
 
                     // FOR BOTTOM BORDER
-                    array_push($cells[2], "A$row:I$row");
+                    array_push($cells[8], "A$row:I$row");
+                    array_push($cells[9], "E$row2");
                 }
+
+                // dd($cells, $borderStyle[8], $borderStyle[9]);
 
                 // NUMBER HEADING ROWS
                 $nhr = [
@@ -389,7 +494,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[5] = [
-                    ('A' . ($rapiyc - 6) . ':' . 'I' . ($rapiyc - 6)), 'B25', 'I23', 'A57:D60'
+                    ('A' . ($rapiyc - 8) . ':' . 'I' . ($rapiyc - 8)), 'B25', 'I23', 'A57:D60'
                 ];
 
                 // B
@@ -402,7 +507,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    ('E' . ($rapiyc - 6)), 'H23'
+                    ('E' . ($rapiyc - 7)), 'H23'
                 ];
 
                 // $event->sheet->getDelegate()->getStyle('A1:N60')->getAlignment()->setWrapText(true);
@@ -452,12 +557,46 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BOTTOM ONLY
                 $cells[1] = [
+                    "C$rash3:E$rash3", "G$rash3:I$rash3"
+                ];
+
+                // REMOVE TOP
+                $cells[3] = [
+                    $piyc('E', 2),
+                    $piyc('F', 2),
+                    $piyc('G', 2),
+                    $piyc('H', 2),
+                    $piyc('I', 2),
+                ];
+
+                // REMOVE BOTTON
+                $cells[4] = [
+                    $piyc('E', 1),
+                    $piyc('F', 1),
+                    $piyc('G', 1),
+                    $piyc('H', 1),
+                    $piyc('I', 1),
+                ];
+
+                // REMOVE LEFT
+                $cells[5] = [
+
+                ];
+
+                // REMOVE RIGHT
+                $cells[6] = [
+
+                ];
+
+                // HAIR BOTTOM
+                $cells[8] = array_merge($cells[8], [
                     'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'D19', 'H20', 'F11', 'H11:I11', 'B12:G12',
                     'B15:F15', 'H15:I15', 'H16:I16', 'B17', 'D17', 'F17:G17', 'I17',
                     'G17', 'I17', 'B18:C18', 'E18', 'G18', 'B19:C19', 'E19', 'G19', 'I19',
-                    'F20', 'I20', 'D21:E21', 'G22:I22', 'B23:I23', 'B25:F25', 'H25:I25',
-                    "C$rash3:E$rash3", "G$rash3:I$rash3"
-                ];
+                    'F20', 'I20', 'D21:E21', 'G22:I22', 'B23:I23', 'B25:F25', 'H25:I25'
+                ]);
+
+                // 2,7,8,9,10 on top
 
 
                 foreach($cells as $key => $value) {
@@ -473,8 +612,8 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(12);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(12);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(13);
-                $event->sheet->getDelegate()->getStyle("G$rash3")->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle("G$rash3")->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle("G$rash3")->getFont()->setSize(8.5);
+                $event->sheet->getDelegate()->getStyle("G$rash3")->getFont()->setSize(8.5);
                 // $event->sheet->getDelegate()->getColumnDimension('H')->setAutoSize(false);
                 // $event->sheet->getDelegate()->getColumnDimension('C')->setAutoSize(true);
                 // $event->sheet->getDelegate()->getColumnDimension('E')->setAutoSize(true);
@@ -482,23 +621,23 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
 
                 for($i = 11; $i <= ($rash3 + 1); $i++){
-                    if($i = ($rapiyc - 6)){
+                    if($i = ($rapiyc - 8)){
                         $i = ($rash3+1) + 1;
                     }
-                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(15);
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(14.5);
                 }
 
                 for($i = 1; $i < 130; $i++){
-                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(14.9);
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(13.7);
                 }
-                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(14);
-                $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(14);
+                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(13.5);
+                $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(13.5);
 
-                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(12);
-                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(12);
-                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(12);
-                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(12);
-                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(12);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(11.5);
+                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(11.5);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(11.5);
+                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(11.5);
+                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(11.5);
 
                 $rash3 += 1;
 

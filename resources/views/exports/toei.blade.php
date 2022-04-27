@@ -212,7 +212,7 @@
 			<td colspan="3"></td>
 			<td>Relation</td>
 			<td></td>
-			<td>{{ $nok ? $nok->type : '-----' }}</td>
+			<td>{{ $nok ? strtoupper($nok->type) : '-----' }}</td>
 			<td></td>
 		</tr>
 
@@ -277,33 +277,41 @@
 
 		@php 
 			$docu = false;
+			$altDoc = false;
 
 			if(isset($applicant->rank)){
 				$requiredRegulation = "";
+				$altRegulation = "";
 				$tRank = $applicant->rank->id;
 
 				// DECK
 				if($tRank == 11){
 					$requiredRegulation = "II/4";
+					$altRegulation = "II/5";
 				}
 				if($tRank >= 9 && $tRank <= 10){
 					$requiredRegulation = "II/5";
+					$altRegulation = "II/1";
 				}
-				elseif($tRank == 3 && $tRank == 4){
+				elseif($tRank == 3 || $tRank == 4){
 					$requiredRegulation = "II/1";
+					$altRegulation = "II/2";
 				}
-				elseif($tRank == 1 && $tRank == 2){
+				elseif($tRank == 1 || $tRank == 2){
 					$requiredRegulation = "II/2";
 				}
 				// ENGINE
 				elseif ($tRank == 17) {
 					$requiredRegulation = "III/4";
+					$altRegulation = "III/5";
 				}
 				elseif ($tRank >= 15 && $tRank <= 16) {
 					$requiredRegulation = "III/5";
+					$altRegulation = "III/1";
 				}
 				elseif($tRank == 7 || $tRank == 8){
 					$requiredRegulation = "III/1";
+					$altRegulation = "III/2";
 				}
 				elseif($tRank == 5 || $tRank == 6){
 					$requiredRegulation = "III/2";
@@ -315,6 +323,14 @@
 				    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
 				        $docu = $document;
 				    }
+
+				    if($document->type == "COC" && in_array($altRegulation, $regulation)){
+				        $altDoc = $document;
+				    }
+
+				    if($document->type == "COE" && in_array($altRegulation, $regulation)){
+				        $altDoc = $document;
+				    }
 				}
 			}
 		@endphp
@@ -325,10 +341,21 @@
 			</td>
 			<td colspan="2">
 				@if(isset($applicant->rank))
-					@if($applicant->rank->type == "RATING")
+					@if($applicant->rank->type == "RATING" && $doc)
+						@if(in_array($requiredRegulation, ["II/5", "III/5"]) && $altDoc)
+							OIC-NAVIGATIONAL WATCH
+						@else
+							NAVIGATIONAL WATCHKEEPING
+						@endif
 						{{ $applicant->rank->name ?? "-----" }}</td>
 					@elseif($applicant->rank->type == "OFFICER")
-						OIC-NAVIGATIONAL WATCH
+						@if(in_array($requiredRegulation, ["II/2", "III/2"]))
+							{{ $applicant->rank->name ?? "-----" }}
+						@elseif(in_array($requiredRegulation, ["II/1", "III/1"]) && $altDoc)
+							{{ $applicant->rank->name ?? "-----" }}
+						@else
+							OIC-NAVIGATIONAL WATCH
+						@endif
 					@endif
 				@endif
 			<td>{{ $docu ? $docu->no : "-----" }}</td>
@@ -482,11 +509,24 @@
 			        $docu = $document;
 			    }
 			}
+
+			if(isset($applicant->rank)){
+				$rname = $applicant->rank->name;
+				if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
+					$rname == "WIPER";
+				}
+				elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
+					$rname == "ORDINARY SEAMAN";
+				}
+			}
+			else{
+				$rname == "-----";
+			}
 		@endphp
 
 		<tr>
 			<td colspan="2">Seaman's Book(Panama)</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->name : '-----' }}</td>
+			<td colspan="2">{{ $rname }}</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -505,11 +545,11 @@
 
 		<tr>
 			<td colspan="2">Liberian Book</td>
-			<td colspan="2">{{ isset($applicant->rank) ? $applicant->rank->name : '-----' }}</td>
+			<td colspan="2">-----</td>
 			<td>{{ $docu ? $docu->number : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">PANAMA</td>
+			<td colspan="2">LIBERIA</td>
 		</tr>
 		
 		{{-- 6TH --}}
@@ -905,7 +945,7 @@
 				if($tRank >= 9 && $tRank <= 10){
 					$requiredRegulation = "II/4";
 				}
-				elseif($tRank == 3 && $tRank == 4){
+				elseif($tRank == 3 || $tRank == 4){
 					$requiredRegulation = "II/4";
 					$requiredRegulation2 = "II/5";
 				}
@@ -921,18 +961,23 @@
 				foreach($applicant->document_lc as $document){
 					$regulation = json_decode($document->regulation);
 
-				    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
-				        $docu = $document;
-				    }
-				    if($document->type == "COE" && in_array($requiredRegulation2, $regulation)){
-				        $docu2 = $document;
-				    }
+					if($requiredRegulation != ""){
+					    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
+					        $docu = $document;
+					    }
+					}
+
+					if($requiredRegulation2 != ""){
+					    if($document->type == "COE" && in_array($requiredRegulation2, $regulation)){
+					        $docu2 = $document;
+					    }
+					}
 				}
 			}
 		@endphp
 
 		@if($applicant->rank)
-			@if($applicant->rank->type == "OFFICER")
+			@if(in_array($applicant->rank->id, [9,10,15,16,3,4,7,8]))
 				<tr>
 					<td colspan="4">
 						MARINA COP REGULATION {{ $requiredRegulation }}
@@ -942,10 +987,12 @@
 					<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 					<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 				</tr>
+			@endif
 
+			@if(in_array($applicant->rank->id, [3,4,7,8]))
 				<tr>
 					<td colspan="4">
-						MARINA COP REGULATION {{ $requiredRegulation }}
+						MARINA COP REGULATION {{ $requiredRegulation2 }}
 					</td>
 					<td>{{ $docu2 ? $docu2->no : "-----"}}</td>
 					<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
@@ -1013,10 +1060,10 @@
 		<tr>	
 			<td colspan="4">MEASLES, MUMPS, RUBELLA (MMR)</td>
 			<td>YES</td>
-			<td>{{ $docu ? $docu->with_mv : "-----"}}</td>
+			<td>YES</td>
 			<td>-----</td>
 			<td>-----</td>
-			<td>{{ $docu ? $docu->case_remarks : "-----" }}</td>
+			<td>HEALTH CENTER</td>
 		</tr>
 
 		@php 
@@ -1027,10 +1074,10 @@
 		<tr>	
 			<td colspan="4">Chicken Pox</td>
 			<td>YES</td>
-			<td>{{ $docu ? $docu->with_mv : "-----"}}</td>
+			<td>YES</td>
 			<td>-----</td>
 			<td>-----</td>
-			<td>{{ $docu ? $docu->case_remarks : "-----" }}</td>
+			<td>HEALTH CENTER</td>
 		</tr>
 
 		@php 
@@ -1089,7 +1136,9 @@
 				<td>
 					@if(isset($applicant->rank))
 						@if(str_contains($applicant->rank->category, 'OFFICER'))
-							GOOD
+							Good
+						@else
+							Acceptable
 						@endif
 					@endif
 				</td>
@@ -1193,7 +1242,11 @@
 			<td>SMC</td>
 		</tr>
 
-		@foreach($applicant->sea_service as $data)
+		@foreach($applicant->sea_service as $key => $data)
+			@if($key == 10)
+				@break
+			@endif
+
 			<tr>
 				<td colspan="2">{{ $data->vessel_name }}</td>
 				<td>{{ $data->vessel_type }}</td>
@@ -1218,8 +1271,6 @@
 					@if(isset($applicant->rank))
 						@if(str_starts_with($applicant->rank->category, 'ENGINE'))
 							{{ $data->engine_type }} {{ $data->bhp_kw }}
-						@else
-							-----
 						@endif
 					@endif
 				</td>
@@ -1229,8 +1280,6 @@
 				<td colspan="2">
 					@if($data->sign_on != "" && $data->sign_off != "")
 						{{ $data->sign_on->diff($data->sign_off->addDay())->format('%yyr, %mmos, %ddays') }}
-					@else
-						
 					@endif
 				</td>
 			</tr>
