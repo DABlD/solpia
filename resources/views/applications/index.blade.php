@@ -235,6 +235,7 @@
 	<script src="{{ asset('js/moment.js') }}"></script>
 	<script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script src="{{ asset('js/checklist.js') }}"></script>
 
     {{-- PHOTOVIEWER --}}
     <script src="{{ asset('js/photoswipe.js') }}"></script>
@@ -426,7 +427,8 @@
                         Biodata:        'Biodata',
                         WalangLagay:    'Walang Lagay',
                         HistoryCheck:   'History Check',
-                        SeaServiceCertificate:   'Certificate of Sea Service'
+                        SeaServiceCertificate:   'Certificate of Sea Service',
+                        DocumentChecklist:   'Document Checklist'
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
@@ -568,9 +570,130 @@
                                 }
                             })
                         }
+                        else if(result.value == "DocumentChecklist"){
+                            let type = "DocumentChecklist";
+                            let status = application.data('status2');
+                            let fleet = "{{ auth()->user()->fleet }}";
+
+                            @if(auth()->user()->role == "Admin" && auth()->user()->fleet == null)
+                                swal({
+                                    title: 'Select Fleet',
+                                    input: 'select',
+                                    inputOptions: {
+                                        'FLEET A' : 'FLEET A',
+                                        'FLEET B' : 'FLEET B',
+                                        'FLEET C' : 'FLEET C',
+                                        'FLEET D' : 'FLEET D',
+                                        'FLEET E' : 'FLEET E',
+                                        'TOEI' : 'TOEI',
+                                        'FISHING' : 'FISHING',
+                                    },
+                                    showCancelButton: true,
+                                    cancelButtonColor: '#f76c6b'
+                                }).then(result => {
+                                    if(result.value){
+                                        fleet = result.value;
+                                        edc(type, status, fleet, application);
+                                    }
+                                });
+                            @else
+                                edc(type, status, fleet, application);
+                            @endif
+                        }
                     }
                 })
 	    	});
+
+            function edc(type, status, fleet, application){
+                if(status == "Vacation"){
+                    swal({
+                        title: 'Enter Details',
+                        html: `
+                            <select id="rank">
+                                <option value=""></option>
+                            </select>
+                            <br>
+                            <br>
+                            <select id="type">
+                            </select>
+                            <br>
+                        `,
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                        onOpen: () => {
+                            $('#rank').append(`
+                                @foreach($categories as $category => $ranks)
+                                    <optgroup label="{{ $category }}"></optgroup>
+                                    @foreach($ranks as $rank)
+                                        <option value="{{ $rank->id }}">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            {{ $rank->name }} ({{ $rank->abbr }})
+                                        </option>
+                                    @endforeach
+                                @endforeach
+                            `);
+
+                            $('#type').append(getChecklist(fleet));
+                            $('#rank').select2({
+                                placeholder: 'Select Rank',
+                                width: '100%',
+                            });
+                            $('#type').select2({
+                                width: '100%',
+                            });
+
+                            $('#rank, #type').on('select2:open', function (e) {
+                                $('.select2-dropdown--below').css('z-index', 1060);
+                            });
+                        },
+                    }).then(result => {
+                        let data = {
+                            rank: $('#rank').val(),
+                            status: status,
+                            type: $('#type').val(),
+                            fleet: fleet
+                        }
+
+                        if(result.value){
+                            window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${type}?` + $.param({data});
+                        }
+                    });
+                }
+                else{
+                    swal({
+                        title: 'Select Type',
+                        html: `
+                            <select id="type">
+                            </select>
+                            <br>
+                        `,
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                        onOpen: () => {
+                            $('#type').append(getChecklist(fleet));
+                            $('#type').select2({
+                                width: '100%',
+                            });
+
+                            $('#rank, #type').on('select2:open', function (e) {
+                                $('.select2-dropdown--below').css('z-index', 1060);
+                            });
+                        },
+                    }).then(result => {
+                        let data = {
+                            type: $('#type').val(),
+                            status: status,
+                            fleet: fleet
+                        }
+
+                        if(result.value){
+                            window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${type}?` + $.param({data});
+                        }
+                    });
+                }
+            }
 
             $('[data-original-title="Edit Application"]').on('click', application => {
                 window.location.href = 'applications/edit/' + $(application.target).data('id');

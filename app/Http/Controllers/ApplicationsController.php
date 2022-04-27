@@ -1195,6 +1195,20 @@ class ApplicationsController extends Controller
         }
         else{
             $applicant = Applicant::withTrashed()->find($id)->load('user');
+
+            if ($type == "DocumentChecklist") {           
+                if($req->data['status'] == "Vacation"){
+                    $applicant->rank = Rank::find($req->data['rank'])->abbr;
+                }
+                else{
+                    $pa = ProcessedApplicant::where('applicant_id', $id)->first();
+                    $applicant->rank = Rank::find($pa->rank_id)->abbr;
+                    
+                    $vessel = Vessel::find($pa->vessel_id);
+                    $applicant->vessel = $vessel;
+                    $applicant->departure = $pa->eld;
+                }
+            }
         }
 
         if($req->data){
@@ -1202,7 +1216,6 @@ class ApplicationsController extends Controller
         }
 
         $fileName = $req->filename ?? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
-
         $class = "App\\Exports\\" . $type;
         
         return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");
