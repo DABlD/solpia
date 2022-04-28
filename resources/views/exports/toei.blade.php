@@ -1089,11 +1089,11 @@
 			<td>{{ $docu ? $docu->clinic : "-----" }}</td>
 		</tr>
 
-		@php 
-			$name = 'COVID-19';
-			$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
+		@php
+			$name = 'COVID-19 1ST DOSE';
+			$docu = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
 
-			$name2 = 'COVID-19 1ST DOSE';
+			$name = 'COVID-19 2ND DOSE';
 			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
 
 		@endphp
@@ -1102,9 +1102,13 @@
 			<td colspan="4">COVID-19 (certificate copy must be attached)</td>
 			<td>NO</td>
 			{{-- <td>{{ $docu2 ? "YES" : "NO"}}</td> --}}
-			<td>{{ $docu2 ? $docu2->clinic : "-----"}}</td>
-			<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
+			<td>{{ $docu ? $docu2->clinic : "-----"}}</td>
+			<td>
+				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }} &#38;
+				{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}
+
+			</td>
+			<td>-----</td>
 			<td>-----</td>
 		</tr>
 
@@ -1266,6 +1270,10 @@
 					@if(isset($applicant->rank))
 						@if(str_starts_with($applicant->rank->category, 'ENGINE'))
 							{{ $data->engine_type }} {{ $data->bhp_kw }}
+						@else
+							@if($data->vessel_name != "")
+								-----
+							@endif
 						@endif
 					@endif
 				</td>

@@ -2100,7 +2100,31 @@
                     data.med_date           = $('#med_date').val();
                     data.employment_months  = $('#employment_months').val();
 
-                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                    @if(auth()->user()->role == "Admin" && auth()->user()->fleet == null)
+                        swal({
+                            title: 'Select Fleet',
+                            input: 'select',
+                            inputOptions: {
+                                'FLEET A' : 'FLEET A',
+                                'FLEET B' : 'FLEET B',
+                                'FLEET C' : 'FLEET C',
+                                'FLEET D' : 'FLEET D',
+                                'FLEET E' : 'FLEET E',
+                                'TOEI' : 'TOEI',
+                                'FISHING' : 'FISHING',
+                            },
+                            showCancelButton: true,
+                            cancelButtonColor: '#f76c6b'
+                        }).then(result => {
+                            if(result.value){
+                                data.fleet = result.value;
+                                window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                            }
+                        });
+                    @else
+                        data.fleet = '{{ auth()->user()->fleet }}';
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                    @endif
                 }
             });
         }

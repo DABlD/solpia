@@ -258,6 +258,13 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($ebRows, "B$row");
                     array_push($ebRows, "C$row:F$row");
                     array_push($ebRows, "G$row:I$row");
+
+                    if($temp > 1){
+                        array_push($cells[8], "A$row");
+                        array_push($cells[8], "B$row");
+                        array_push($cells[8], "C$row:F$row");
+                        array_push($cells[8], "G$row:I$row");
+                    }
                 }
 
                 // LICENSES ROWS
@@ -272,6 +279,15 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($lRows, "F$row");
                     array_push($lRows, "G$row");
                     array_push($lRows, "H$row:I$row");
+
+                    if($i >= 1 && $temp > 3){
+                        array_push($cells[8], "A$row:B$row");
+                        array_push($cells[8], "C$row:D$row");
+                        array_push($cells[8], "E$row");
+                        array_push($cells[8], "F$row");
+                        array_push($cells[8], "G$row");
+                        array_push($cells[8], "H$row:I$row");
+                    }
                 }
 
                 // CERTIFICATE ROWS
@@ -286,6 +302,15 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($cRows, "F$row");
                     array_push($cRows, "G$row");
                     array_push($cRows, "H$row:I$row");
+
+                    if($i >= 1 && $temp > 3){
+                        array_push($cells[8], "A$row:B$row");
+                        array_push($cells[8], "C$row:D$row");
+                        array_push($cells[8], "E$row");
+                        array_push($cells[8], "F$row");
+                        array_push($cells[8], "G$row");
+                        array_push($cells[8], "H$row:I$row");
+                    }
                 }
 
                 // OTHER CERTIFICATE ROWS
@@ -299,6 +324,14 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($ocRows, "F$row");
                     array_push($ocRows, "G$row");
                     array_push($ocRows, "H$row:I$row");
+
+                    if($i >= 1 && $temp > 3){
+                        array_push($cells[8], "A$row:D$row");
+                        array_push($cells[8], "E$row");
+                        array_push($cells[8], "F$row");
+                        array_push($cells[8], "G$row");
+                        array_push($cells[8], "H$row:I$row");
+                    }
                 }
                 
                 // FOR MARINA COP
@@ -313,8 +346,14 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         array_push($ocRows, "F$start");
                         array_push($ocRows, "G$start");
                         array_push($ocRows, "H$start:I$end");
+
+                        array_push($cells[8], "A$start:D$end");
+                        array_push($cells[8], "E$start");
+                        array_push($cells[8], "F$start");
+                        array_push($cells[8], "G$start");
+                        array_push($cells[8], "H$start:I$end");
                     }
-                    elseif(in_array($this->applicant->rank->id, [3,4,7,8])){
+                    elseif(in_array($this->applicant->rank->id, [3,4,8,8])){
                         $start = $raoc;
                         $end = $raoc;
                         $start2 = $start+1;
@@ -330,6 +369,17 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         array_push($ocRows, "G$start2");
                         array_push($ocRows, "H$start:I$end");
                         array_push($ocRows, "H$start2:I$end2");
+
+                        array_push($cells[8], "A$start:D$end");
+                        array_push($cells[8], "A$start2:D$end2");
+                        array_push($cells[8], "E$start");
+                        array_push($cells[8], "F$start");
+                        array_push($cells[8], "G$start");
+                        array_push($cells[8], "E$start2");
+                        array_push($cells[8], "F$start2");
+                        array_push($cells[8], "G$start2");
+                        array_push($cells[8], "H$start:I$end");
+                        array_push($cells[8], "H$start2:I$end2");
                     }
                 }
 
@@ -351,6 +401,17 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($eajlRows, "G$row");
                     array_push($eajlRows, "H$row");
                     array_push($eajlRows, "I$row");
+
+                    if($i >= 1 && $temp > 3){
+                        array_push($cells[8], "A$row:B$row");
+                        array_push($cells[8], "C$row");
+                        array_push($cells[8], "D$row");
+                        array_push($cells[8], "E$row");
+                        array_push($cells[8], "F$row");
+                        array_push($cells[8], "G$row");
+                        array_push($cells[8], "H$row");
+                        array_push($cells[8], "I$row");
+                    }
                 }
 
                 // TESMS CERTIFICATE ROWS
@@ -363,6 +424,13 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($eajlRows, "E$row");
                     array_push($eajlRows, "F$row:G$row");
                     array_push($eajlRows, "H$row:I$row");
+
+                    if($i >= 1 && $temp > 3){
+                        array_push($cells[8], "A$row:D$row");
+                        array_push($cells[8], "E$row");
+                        array_push($cells[8], "F$row:G$row");
+                        array_push($cells[8], "H$row:I$row");
+                    }
                 }
 
                 // AOW CERTIFICATE ROWS
@@ -596,14 +664,25 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'F20', 'I20', 'D21:E21', 'G22:I22', 'B23:I23', 'B25:F25', 'H25:I25'
                 ]);
 
-                // 2,7,8,9,10 on top
+                $cells[7] = array_merge($cells[7], [
 
+                ]);
+
+                // 2,7,8,9,10 on top
+                // cells[8] on hair bottom
 
                 foreach($cells as $key => $value) {
                     foreach($value as $cell){
                         $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
                     }
                 }
+
+                foreach($cells[8] as $cell){
+                    echo $cell . '<br>';
+                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[8]);
+                }
+
+                die;
 
                 // COLUMN RESIZE
 
