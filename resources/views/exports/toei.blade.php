@@ -341,7 +341,7 @@
 			</td>
 			<td colspan="2">
 				@if(isset($applicant->rank))
-					@if($applicant->rank->type == "RATING" && $doc)
+					@if($applicant->rank->type == "RATING" && $docu)
 						@if(in_array($requiredRegulation, ["II/5", "III/5"]) && $altDoc)
 							OIC-NAVIGATIONAL WATCH
 						@else
