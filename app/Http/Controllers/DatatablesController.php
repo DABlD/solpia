@@ -203,7 +203,7 @@ class DatatablesController extends Controller
                         ->join('users as u', 'u.id', '=', 'a.user_id')
                         ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
 						->orderByDesc('sign_on')->first();
-				if(in_array($ss->vessel_name, $temp)){
+				if(isset($ss) && in_array($ss->vessel_name, $temp)){
 					// $temp2 = $sss->splice($key);
 					// $temp2->shift();
 					// $sss->merge($temp2);
