@@ -508,14 +508,14 @@
 			if(isset($applicant->rank)){
 				$rname = $applicant->rank->name;
 				if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
-					$rname == "WIPER";
+					$rname = "WIPER";
 				}
 				elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
-					$rname == "ORDINARY SEAMAN";
+					$rname = "ORDINARY SEAMAN";
 				}
 			}
 			else{
-				$rname == "-----";
+				$rname = "-----";
 			}
 		@endphp
 
@@ -1091,9 +1091,9 @@
 
 		@php
 			$name = 'COVID-19 1ST DOSE';
-			$docu = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
+			$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
 
-			$name = 'COVID-19 2ND DOSE';
+			$name2 = 'COVID-19 2ND DOSE';
 			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
 
 		@endphp
@@ -1102,7 +1102,7 @@
 			<td colspan="4">COVID-19 (certificate copy must be attached)</td>
 			<td>NO</td>
 			{{-- <td>{{ $docu2 ? "YES" : "NO"}}</td> --}}
-			<td>{{ $docu ? $docu2->clinic : "-----"}}</td>
+			<td>{{ $docu ? $docu->clinic : "-----"}}</td>
 			<td>
 				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }} &#38;
 				{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}

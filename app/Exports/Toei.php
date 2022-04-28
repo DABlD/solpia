@@ -501,8 +501,6 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($cells[9], "E$row2");
                 }
 
-                // dd($cells, $borderStyle[8], $borderStyle[9]);
-
                 // NUMBER HEADING ROWS
                 $nhr = [
                     'A26', 'A' . ($rae + 1), 'A' . $ral, 'A' . $rac, 'A' . $raoc, 'A' . $rapiyc, 'A' . $raeajl,
@@ -678,11 +676,8 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 foreach($cells[8] as $cell){
-                    echo $cell . '<br>';
                     $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[8]);
                 }
-
-                die;
 
                 // COLUMN RESIZE
 
