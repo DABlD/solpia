@@ -320,15 +320,11 @@
 				foreach($applicant->document_lc as $document){
 					$regulation = json_decode($document->regulation);
 
-				    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
+				    if(in_array($requiredRegulation, $regulation)){
 				        $docu = $document;
 				    }
 
 				    if($document->type == "COC" && in_array($altRegulation, $regulation)){
-				        $altDoc = $document;
-				    }
-
-				    if($document->type == "COE" && in_array($altRegulation, $regulation)){
 				        $altDoc = $document;
 				    }
 				}
@@ -347,7 +343,6 @@
 						@else
 							NAVIGATIONAL WATCHKEEPING
 						@endif
-						{{ $applicant->rank->name ?? "-----" }}</td>
 					@elseif($applicant->rank->type == "OFFICER")
 						@if(in_array($requiredRegulation, ["II/2", "III/2"]))
 							{{ $applicant->rank->name ?? "-----" }}
