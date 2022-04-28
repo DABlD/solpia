@@ -40,7 +40,10 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
         $this->applicant->med_date          = $this->req['med_date'];
         $this->applicant->employment_months = $this->req['employment_months'];
 
-        return view('exports.' . lcfirst($this->type), [
+        $fleet = auth()->user()->fleet ?? $this->applicant->data['fleet'];
+        $exportView = str_replace(' ', '_', $fleet . '.' . $this->applicant->vessel->principal_id);
+
+        return view('exports.mlc.' . $exportView, [
             'data' => $this->applicant,
         ]);
     }
@@ -53,6 +56,20 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
                     ],
                 ]
             ],
@@ -74,15 +91,71 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
             ],
             [
                 'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
                     'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
                     ],
                 ]
             ],
             [
                 'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
                     'bottom' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOTTED,
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
                     ],
                 ]
             ],
@@ -168,7 +241,7 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
+                $event->sheet->getDelegate()->setTitle('MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -177,10 +250,12 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
-                $event->sheet->getDelegate()->getStyle('A1:O60')->getFont()->setName('ARIAL');
-                $event->sheet->getDelegate()->getStyle('A1:O60')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(12);
-                $event->sheet->getDelegate()->getStyle('A9')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:H58')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A1:H58')->getFont()->setSize(10);
+
+                // SET PAGE BREAK PREVIEW
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
                 // FUNCTIONS
                 // $osSize = sizeof($this->linedUps);
@@ -218,51 +293,36 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
                 // HC
                 $h[3] = [
-                    'A3:O4',
-                    'A11', 'F11', 'A13', 'A15', 'A17', 'A19', 'F15', 'F17', 'F19',
-                    'A29', 'A31',
-                    'A35:I35', 'A37:E37', 'E39',
-                    'A49:F49'
                 ];
 
                 // HL
                 $h[4] = [
-                    'J29'
                 ];
 
                 // HC VC
                 $h[5] = [
-                    'A1'
                 ];
 
                 // B
                 $h[6] = [
-                    'A1', 'A9',
-                    'A11', 'F11', 'A13', 'A15', 'A17', 'A19', 'F15', 'F17', 'F19',
-                    'A21', 'A27', 'A33', 'A46'
                 ];
 
                 // VC
                 $h[7] = [
-                    
+                    'A1:H58'
                 ];
 
                 // B I
                 $h[8] = [
-                    'C3', 'H3:H4', 'M3',
-                    'A11', 'F11', 'A13', 'A15', 'A17', 'A19', 'F15', 'F17', 'F19',
-                    'C23', 'C25', 'A29', 'A31', 'J29', 'J31',
-                    'A35:I35', 'A37:M37', 'A39:O39',
-                    'A49:F49'
                 ];
 
                 $h['wrap'] = [
-                    
+                    'A23', 'A32', 'B26', 'E23', 'E26', 'B21', 'B29', 'B30', 'A39', 'A42', 'A45', 'A48', 'A50', 'A56'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A19'
+                    'F8', 'E54', 'C7', 'H8', 'C12'
                 ];
 
                 foreach($h as $key => $value) {
@@ -299,27 +359,35 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 }
 
                 // BORDERS
+
+                // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    
+                    'A7:I16', 'A19:I21', 'A23:I30', 'A32:I35', 'A39:I39', 'A42:I42', 'A45:I45', 'A48:I48', 'A56:I57'
                 ]);
 
+                // ALL BORDER MEDIUM
                 $cells[1] = array_merge([
-                    'A6:O7', 'A10:E11', 'F10:O11', 'A12:O13', 'A14:E15', 'F14:O15', 'A16:E17', 'F16:O17', 'A18:E19', 'F18:O19',
-                    'A22:O23', 'A24:O25', 
-                    'A28:H29', 'I28:O29', 'A30:E31', 'F30:O31',
-                    'A34:D35', 'E34:H35', 'I34:O35',
-                    'A36:D37', 'E36:H37', 'I36:O37',
-                    'A38:D39', 'E38:H39', 'I38:O39',
-                    'A40:O40', 'A41:O42', 'A43:O43', 'A44:O44',
-                    'A47:E49', 'F47:O49'
                 ]);
 
+                // ALL BORDER THICK
                 $cells[2] = array_merge([
-                    
                 ]);
 
+                // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
-                    'C3', 'H3:K3', 'M3:O3', 'H4:K4',
+                ]);
+
+                // OUTSIDE BORDER MEDIUM
+                $cells[4] = array_merge([
+                ]);
+
+                // OUTSIDE BORDER THICK
+                $cells[5] = array_merge([
+                ]);
+
+                // BOTTOM BORDER THIN
+                $cells[7] = array_merge([
+                    'A52:C52', 'E52:H52'
                 ]);
 
                 foreach($cells as $key => $value){
@@ -328,50 +396,53 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     }
                 }
 
-                $fonts = [
-                    'A3', 'D3', 'L3', 'G3', 'A6:A7', 'A10:F10', 'A12', 'A14:F14', 'A16:F16', 'A18:F18',
-                    'A22', 'A24',
-                    'A28', 'I28', 'A30', 'F30',
-                    'A34:I34', 'A36:I36', 'A38:O38',
-                    'A40:O44', 'A47:F47'
-                ];
-
-                foreach($fonts as $font){
-                    $event->sheet->getDelegate()->getStyle($font)->getFont()->setSize(7);
-                }
-
                 // FOR THE CHECK
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(3);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(2.5);
-
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6.5);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6.5);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6.5);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(6.5);
-
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(4.5);
-
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(6.5);
-                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(6.5);
-                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(10.7);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(19.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(5);
 
                 // ROW RESIZE
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(27);
-                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(4);
-                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(4);
-                $event->sheet->getDelegate()->getRowDimension(20)->setRowHeight(4);
-                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(4);
-                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(4);
-                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(4);
-                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(4);
-                $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(4);
-                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(30);
+                for($i = 1; $i <= 59; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(20);
+                }
+
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(80);
+                $event->sheet->getDelegate()->getRowDimension(23)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(29)->setRowHeight(50);
+                $event->sheet->getDelegate()->getRowDimension(30)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(39)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(42)->setRowHeight(95);
+                $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(95);
+                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(95);
+                $event->sheet->getDelegate()->getRowDimension(50)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(51)->setRowHeight(120);
+                $event->sheet->getDelegate()->getRowDimension(52)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(54)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(56)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(57)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(58)->setRowHeight(16);
             },
         ];
     }
@@ -380,12 +451,22 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
-        $drawing->setCoordinates('F49');
+        $drawing->setCoordinates('G51');
         $drawing->setHeight(154);
         $drawing->setWidth(154);
-        $drawing->setOffsetX(-55);
-        $drawing->setOffsetY(-20);
+        $drawing->setOffsetX(35);
+        $drawing->setOffsetY(3);
 
-        return $drawing;
+        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing3->setName('mlc_hmm_sig');
+        $drawing3->setDescription('mlc_hmm_sig');
+        $drawing3->setPath(public_path('images/mlc_hmm_sig.jpg'));
+        $drawing3->setOffsetX(2);
+        $drawing3->setOffsetY(2);
+        $drawing3->setCoordinates('E51');
+        $drawing3->setHeight(140);
+        $drawing3->setWidth(140);
+
+        return [$drawing, $drawing3];
     }
 }
