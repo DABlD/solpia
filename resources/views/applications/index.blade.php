@@ -1406,6 +1406,14 @@
                 file = "";
 
                 if(id.file){
+                    try{
+                        id.file = JSON.parse(id.file);
+                        id.file = id.file[0];
+                    }
+                    catch(error){
+                        id.file = id.file;
+                    }
+
                     file = `
                         <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
                             <span class="fa fa-search">
@@ -1484,6 +1492,14 @@
                 file = "";
 
                 if(flag.file){
+                    try{
+                        flag.file = JSON.parse(flag.file);
+                        flag.file = flag.file[0];
+                    }
+                    catch(error){
+                        flag.file = flag.file;
+                    }
+
                     file = `
                         <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
                             <span class="fa fa-search">
@@ -1562,6 +1578,14 @@
                 file = "";
 
                 if(lc.file){
+                    try{
+                        lc.file = JSON.parse(lc.file);
+                        lc.file = lc.file[0];
+                    }
+                    catch(error){
+                        lc.file = lc.file;
+                    }
+
                     file = `
                         <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
                             <span class="fa fa-search">
@@ -1647,6 +1671,14 @@
                 file = "";
 
                 if(mc.file){
+                    try{
+                        mc.file = JSON.parse(mc.file);
+                        mc.file = mc.file[0];
+                    }
+                    catch(error){
+                        mc.file = mc.file;
+                    }
+
                     file = `
                         <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
                             <span class="fa fa-search">
@@ -1725,6 +1757,14 @@
                 file = "";
 
                 if(mh.file){
+                    try{
+                        mh.file = JSON.parse(mh.file);
+                        mh.file = mh.file[0];
+                    }
+                    catch(error){
+                        mh.file = mh.file;
+                    }
+
                     file = `
                         <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
                             <span class="fa fa-search">
