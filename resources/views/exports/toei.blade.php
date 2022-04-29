@@ -1293,7 +1293,13 @@
 			<td colspan="2">Crew's Name:</td>
 			<td colspan="3">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname }}</td>
 			<td>Presenter:</td>
-			<td colspan="3">NEIL ROMANO / CREWING MANAGER</td>
+			<td colspan="3">
+				@if(auth()->user()->id == 21)
+					LHEA MARQUEZ / CREWING MANAGER
+				@else
+					NEIL ROMANO / CREWING MANAGER
+				@endif
+			</td>
 		</tr>
 
 		<tr>
