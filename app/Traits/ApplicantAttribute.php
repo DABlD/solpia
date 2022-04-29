@@ -9,6 +9,7 @@ trait ApplicantAttribute{
 		// return '<a class="btn btn-success" data-toggle="tooltip" title="View Applicant" data-id="' . $this->id . '">' .
 		// 	        '<span class="fa fa-search" data-id="' . $this->id . '"></span>' .
 		// 	   '</a>&nbsp;' . 
+		$string = "";
 		if(auth()->user()->role != "Training"){
 			$string = '<a class="btn btn-warning" data-toggle="tooltip" title="Export" data-status2="' . $this->pa_s . '" data-id="' . $this->id . '">' .
 				        '<span class="fa fa-file-text" data-id="' . $this->id . '" data-status2="' . $this->pa_s . '"></span>' .
