@@ -120,6 +120,30 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
+            [
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ],
+            ],
+            [
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ],
+            ],
+            [
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_HAIR,
+                    ],
+                ],
+            ]
         ];
 
         $fillStyle = [
@@ -236,7 +260,6 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 ];
 
-
                 // FOR BORDER BOTOTM
                 $cells[2] = array();
                 // BORDER HAIR TOP
@@ -247,6 +270,12 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $cells[9] = array();
                 // BORDER HAIR RIGHT
                 $cells[10] = array();
+                // BORDER THIN BOTTOM
+                $cells[11] = array();
+                // BORDER THIN LR
+                $cells[12] = array();
+                // BORDER HAIR R
+                $cells[13] = array();
 
                 // EDUCATION BACKGROUND ROWS
                 $ebRows = array();
@@ -254,17 +283,24 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rae = 27 + $temp; //Row # AFTER EDUC BACKGROUND
 
                 for($i = 0, $row = 28; $i < $temp; $i++, $row++){
-                    array_push($ebRows, "A$row");
-                    array_push($ebRows, "B$row");
-                    array_push($ebRows, "C$row:F$row");
-                    array_push($ebRows, "G$row:I$row");
-
-                    if($temp > 1){
-                        array_push($cells[8], "A$row");
-                        array_push($cells[8], "B$row");
-                        array_push($cells[8], "C$row:F$row");
-                        array_push($cells[8], "G$row:I$row");
+                    if ($i+1 == $temp) {
+                        array_push($cells[11], "A$row");
+                        array_push($cells[11], "B$row");
+                        array_push($cells[11], "C$row:F$row");
+                        array_push($cells[11], "G$row:I$row");
                     }
+
+                    if($i >= 1){
+                        array_push($cells[7], "A$row");
+                        array_push($cells[7], "B$row");
+                        array_push($cells[7], "C$row:F$row");
+                        array_push($cells[7], "G$row:I$row");
+                    }
+
+                    array_push($cells[12], "A$row");
+                    array_push($cells[12], "B$row");
+                    array_push($cells[12], "C$row:F$row");
+                    array_push($cells[12], "G$row:I$row");
                 }
 
                 // LICENSES ROWS
@@ -273,21 +309,38 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $ral = $rae + 2 + $temp; //Row # AFTER LICENSES
 
                 for($i = 0, $row = $rae + 2; $i < $temp; $i++, $row++){
-                    array_push($lRows, "A$row:B$row");
-                    array_push($lRows, "C$row:D$row");
-                    array_push($lRows, "E$row");
-                    array_push($lRows, "F$row");
-                    array_push($lRows, "G$row");
-                    array_push($lRows, "H$row:I$row");
-
-                    if($i >= 1 && $temp > 3){
-                        array_push($cells[8], "A$row:B$row");
-                        array_push($cells[8], "C$row:D$row");
-                        array_push($cells[8], "E$row");
-                        array_push($cells[8], "F$row");
-                        array_push($cells[8], "G$row");
-                        array_push($cells[8], "H$row:I$row");
+                    if($i == 0){
+                        array_push($lRows, "A$row:B$row");
+                        array_push($lRows, "C$row:D$row");
+                        array_push($lRows, "E$row");
+                        array_push($lRows, "F$row");
+                        array_push($lRows, "G$row");
+                        array_push($lRows, "H$row:I$row");
                     }
+                    elseif($i+1 == $temp){
+                        array_push($cells[11], "A$row:B$row");
+                        array_push($cells[11], "C$row:D$row");
+                        array_push($cells[11], "E$row");
+                        array_push($cells[11], "F$row");
+                        array_push($cells[11], "G$row");
+                        array_push($cells[11], "H$row:I$row");
+                    }
+
+                    if($i >= 2){
+                        array_push($cells[7], "A$row:B$row");
+                        array_push($cells[7], "C$row:D$row");
+                        array_push($cells[7], "E$row");
+                        array_push($cells[7], "F$row");
+                        array_push($cells[7], "G$row");
+                        array_push($cells[7], "H$row:I$row");
+                    }
+
+                    array_push($cells[12], "A$row:B$row");
+                    array_push($cells[12], "C$row:D$row");
+                    array_push($cells[12], "E$row");
+                    array_push($cells[12], "F$row");
+                    array_push($cells[12], "G$row");
+                    array_push($cells[12], "H$row:I$row");
                 }
 
                 // CERTIFICATE ROWS
@@ -296,21 +349,38 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rac = $ral + 1 + $temp; //Row # AFTER CERTIFICATES
 
                 for($i = 0, $row = $ral + 1; $i < $temp; $i++, $row++){
-                    array_push($cRows, "A$row:B$row");
-                    array_push($cRows, "C$row:D$row");
-                    array_push($cRows, "E$row");
-                    array_push($cRows, "F$row");
-                    array_push($cRows, "G$row");
-                    array_push($cRows, "H$row:I$row");
-
-                    if($i >= 1 && $temp > 3){
-                        array_push($cells[8], "A$row:B$row");
-                        array_push($cells[8], "C$row:D$row");
-                        array_push($cells[8], "E$row");
-                        array_push($cells[8], "F$row");
-                        array_push($cells[8], "G$row");
-                        array_push($cells[8], "H$row:I$row");
+                    if($i == 0){
+                        array_push($cRows, "A$row:B$row");
+                        array_push($cRows, "C$row:D$row");
+                        array_push($cRows, "E$row");
+                        array_push($cRows, "F$row");
+                        array_push($cRows, "G$row");
+                        array_push($cRows, "H$row:I$row");
                     }
+                    elseif($i+1 == $temp){
+                        array_push($cells[11], "A$row:B$row");
+                        array_push($cells[11], "C$row:D$row");
+                        array_push($cells[11], "E$row");
+                        array_push($cells[11], "F$row");
+                        array_push($cells[11], "G$row");
+                        array_push($cells[11], "H$row:I$row");
+                    }
+
+                    if($i >= 2){
+                        array_push($cells[7], "A$row:B$row");
+                        array_push($cells[7], "C$row:D$row");
+                        array_push($cells[7], "E$row");
+                        array_push($cells[7], "F$row");
+                        array_push($cells[7], "G$row");
+                        array_push($cells[7], "H$row:I$row");
+                    }
+
+                    array_push($cells[12], "A$row:B$row");
+                    array_push($cells[12], "C$row:D$row");
+                    array_push($cells[12], "E$row");
+                    array_push($cells[12], "F$row");
+                    array_push($cells[12], "G$row");
+                    array_push($cells[12], "H$row:I$row");
                 }
 
                 // OTHER CERTIFICATE ROWS
@@ -318,22 +388,6 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $temp = 17;
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
-                for($i = 0, $row = $rac + 1; $i < $temp; $i++, $row++){
-                    array_push($ocRows, "A$row:D$row");
-                    array_push($ocRows, "E$row");
-                    array_push($ocRows, "F$row");
-                    array_push($ocRows, "G$row");
-                    array_push($ocRows, "H$row:I$row");
-
-                    if($i >= 1 && $temp > 3){
-                        array_push($cells[8], "A$row:D$row");
-                        array_push($cells[8], "E$row");
-                        array_push($cells[8], "F$row");
-                        array_push($cells[8], "G$row");
-                        array_push($cells[8], "H$row:I$row");
-                    }
-                }
-                
                 // FOR MARINA COP
                 if($this->applicant->rank){
                     // DECK
@@ -341,46 +395,49 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         $start = $raoc;
                         $end = $raoc;
                         $raoc += 1;
-                        array_push($ocRows, "A$start:D$end");
-                        array_push($ocRows, "E$start");
-                        array_push($ocRows, "F$start");
-                        array_push($ocRows, "G$start");
-                        array_push($ocRows, "H$start:I$end");
-
-                        array_push($cells[8], "A$start:D$end");
-                        array_push($cells[8], "E$start");
-                        array_push($cells[8], "F$start");
-                        array_push($cells[8], "G$start");
-                        array_push($cells[8], "H$start:I$end");
+                        $temp += 1;
                     }
-                    elseif(in_array($this->applicant->rank->id, [3,4,8,8])){
+                    elseif(in_array($this->applicant->rank->id, [3,4,7,8])){
                         $start = $raoc;
                         $end = $raoc;
                         $start2 = $start+1;
                         $end2 = $end+1;
                         $raoc += 2;
-                        array_push($ocRows, "A$start:D$end");
-                        array_push($ocRows, "A$start2:D$end2");
-                        array_push($ocRows, "E$start");
-                        array_push($ocRows, "F$start");
-                        array_push($ocRows, "G$start");
-                        array_push($ocRows, "E$start2");
-                        array_push($ocRows, "F$start2");
-                        array_push($ocRows, "G$start2");
-                        array_push($ocRows, "H$start:I$end");
-                        array_push($ocRows, "H$start2:I$end2");
-
-                        array_push($cells[8], "A$start:D$end");
-                        array_push($cells[8], "A$start2:D$end2");
-                        array_push($cells[8], "E$start");
-                        array_push($cells[8], "F$start");
-                        array_push($cells[8], "G$start");
-                        array_push($cells[8], "E$start2");
-                        array_push($cells[8], "F$start2");
-                        array_push($cells[8], "G$start2");
-                        array_push($cells[8], "H$start:I$end");
-                        array_push($cells[8], "H$start2:I$end2");
+                        $temp += 2;
                     }
+                }
+
+                for($i = 0, $row = $rac + 1; $i < $temp; $i++, $row++){
+                    if($i == 0){
+                        array_push($ocRows, "A$row:D$row");
+                        array_push($ocRows, "E$row");
+                        array_push($ocRows, "F$row");
+                        array_push($ocRows, "G$row");
+                        array_push($ocRows, "H$row:I$row");
+                    }
+                    elseif($i+1 == $temp){
+                        array_push($cells[11], "A$row:D$row");
+                        array_push($cells[11], "E$row");
+                        array_push($cells[11], "F$row");
+                        array_push($cells[11], "G$row");
+                        array_push($cells[11], "H$row:I$row");
+                    }
+
+                    if($i >= 2){
+                        array_push($cells[7], "A$row:D$row");
+                        array_push($cells[7], "E$row");
+                        array_push($cells[7], "F$row");
+                        array_push($cells[7], "G$row");
+                        array_push($cells[7], "H$row:I$row");
+                    }
+
+                    array_push($cells[12], "A$row:D$row");
+                    array_push($cells[12], "E$row");
+                    array_push($cells[12], "F$row");
+                    array_push($cells[12], "G$row");
+                    array_push($cells[12], "H$row:I$row");
+
+                    array_push($cells[13], "A$row");
                 }
 
                 // PIYC
@@ -393,25 +450,47 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $raeajl = $rapiyc + 1 + $temp; //Row # AFTER OTHER PIYC
 
                 for($i = 0, $row = $rapiyc + 1; $i < $temp; $i++, $row++){
-                    array_push($eajlRows, "A$row:B$row");
-                    array_push($eajlRows, "C$row");
-                    array_push($eajlRows, "D$row");
-                    array_push($eajlRows, "E$row");
-                    array_push($eajlRows, "F$row");
-                    array_push($eajlRows, "G$row");
-                    array_push($eajlRows, "H$row");
-                    array_push($eajlRows, "I$row");
 
-                    if($i >= 1 && $temp > 3){
-                        array_push($cells[8], "A$row:B$row");
-                        array_push($cells[8], "C$row");
-                        array_push($cells[8], "D$row");
-                        array_push($cells[8], "E$row");
-                        array_push($cells[8], "F$row");
-                        array_push($cells[8], "G$row");
-                        array_push($cells[8], "H$row");
-                        array_push($cells[8], "I$row");
+                    if($i == 0){
+                        array_push($eajlRows, "A$row:B$row");
+                        array_push($eajlRows, "C$row");
+                        array_push($eajlRows, "D$row");
+                        array_push($eajlRows, "E$row");
+                        array_push($eajlRows, "F$row");
+                        array_push($eajlRows, "G$row");
+                        array_push($eajlRows, "H$row");
+                        array_push($eajlRows, "I$row");
                     }
+                    elseif($i+1 == $temp){
+                        array_push($cells[11], "A$row:B$row");
+                        array_push($cells[11], "C$row");
+                        array_push($cells[11], "D$row");
+                        array_push($cells[11], "E$row");
+                        array_push($cells[11], "F$row");
+                        array_push($cells[11], "G$row");
+                        array_push($cells[11], "H$row");
+                        array_push($cells[11], "I$row");
+                    }
+
+                    if($i >= 2){
+                        array_push($cells[7], "A$row:B$row");
+                        array_push($cells[7], "C$row");
+                        array_push($cells[7], "D$row");
+                        array_push($cells[7], "E$row");
+                        array_push($cells[7], "F$row");
+                        array_push($cells[7], "G$row");
+                        array_push($cells[7], "H$row");
+                        array_push($cells[7], "I$row");
+                    }
+                    
+                    array_push($cells[12], "A$row:B$row");
+                    array_push($cells[12], "C$row");
+                    array_push($cells[12], "D$row");
+                    array_push($cells[12], "E$row");
+                    array_push($cells[12], "F$row");
+                    array_push($cells[12], "G$row");
+                    array_push($cells[12], "H$row");
+                    array_push($cells[12], "I$row");
                 }
 
                 // TESMS CERTIFICATE ROWS
@@ -420,17 +499,30 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $ratesms = $raeajl + 1 + $temp; //Row # AFTER TESMS
 
                 for($i = 0, $row = $raeajl + 1; $i < $temp; $i++, $row++){
-                    array_push($eajlRows, "A$row:D$row");
-                    array_push($eajlRows, "E$row");
-                    array_push($eajlRows, "F$row:G$row");
-                    array_push($eajlRows, "H$row:I$row");
-
-                    if($i >= 1 && $temp > 3){
-                        array_push($cells[8], "A$row:D$row");
-                        array_push($cells[8], "E$row");
-                        array_push($cells[8], "F$row:G$row");
-                        array_push($cells[8], "H$row:I$row");
+                    if($i == 0){
+                        array_push($eajlRows, "A$row:D$row");
+                        array_push($eajlRows, "E$row");
+                        array_push($eajlRows, "F$row:G$row");
+                        array_push($eajlRows, "H$row:I$row");
                     }
+                    elseif($i+1 == $temp){
+                        array_push($cells[11], "A$row:D$row");
+                        array_push($cells[11], "E$row");
+                        array_push($cells[11], "F$row:G$row");
+                        array_push($cells[11], "H$row:I$row");
+                    }
+
+                    if($i >= 2){
+                        array_push($cells[7], "A$row:D$row");
+                        array_push($cells[7], "E$row");
+                        array_push($cells[7], "F$row:G$row");
+                        array_push($cells[7], "H$row:I$row");
+                    }
+
+                    array_push($cells[12], "A$row:D$row");
+                    array_push($cells[12], "E$row");
+                    array_push($cells[12], "F$row:G$row");
+                    array_push($cells[12], "H$row:I$row");
                 }
 
                 // AOW CERTIFICATE ROWS
@@ -439,13 +531,42 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $raaow = $ratesms + 1 + $temp; //Row # AFTER AOW
 
                 for($i = 0, $row = $ratesms + 1; $i < $temp; $i++, $row++){
-                    array_push($aowRows, "A$row:B$row");
-                    array_push($aowRows, "C$row");
-                    array_push($aowRows, "D$row");
-                    array_push($aowRows, "E$row");
-                    array_push($aowRows, "F$row");
-                    array_push($aowRows, "G$row");
-                    array_push($aowRows, "H$row:I$row");
+                    if($i == 0){
+                        array_push($aowRows, "A$row:B$row");
+                        array_push($aowRows, "C$row");
+                        array_push($aowRows, "D$row");
+                        array_push($aowRows, "E$row");
+                        array_push($aowRows, "F$row");
+                        array_push($aowRows, "G$row");
+                        array_push($aowRows, "H$row:I$row");
+                    }
+                    elseif($i+1 == $temp){
+                        array_push($cells[11], "A$row:B$row");
+                        array_push($cells[11], "C$row");
+                        array_push($cells[11], "D$row");
+                        array_push($cells[11], "E$row");
+                        array_push($cells[11], "F$row");
+                        array_push($cells[11], "G$row");
+                        array_push($cells[11], "H$row:I$row");
+                    }
+
+                    if($i >= 2){
+                        array_push($cells[7], "A$row:B$row");
+                        array_push($cells[7], "C$row");
+                        array_push($cells[7], "D$row");
+                        array_push($cells[7], "E$row");
+                        array_push($cells[7], "F$row");
+                        array_push($cells[7], "G$row");
+                        array_push($cells[7], "H$row:I$row");
+                    }
+
+                    array_push($cells[12], "A$row:B$row");
+                    array_push($cells[12], "C$row");
+                    array_push($cells[12], "D$row");
+                    array_push($cells[12], "E$row");
+                    array_push($cells[12], "F$row");
+                    array_push($cells[12], "G$row");
+                    array_push($cells[12], "H$row:I$row");
                 }
 
                 // SH1 ROWS
@@ -501,6 +622,8 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($cells[9], "E$row2");
                 }
 
+                // dd($cells, $borderStyle[8], $borderStyle[9]);
+
                 // NUMBER HEADING ROWS
                 $nhr = [
                     'A26', 'A' . ($rae + 1), 'A' . $ral, 'A' . $rac, 'A' . $raoc, 'A' . $rapiyc, 'A' . $raeajl,
@@ -512,7 +635,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     return $col . ($raoc + $inc);
                 };
 
-                $piycRows = array(
+                $tempPiycRows = array(
                     // $piyc('A', 1) . ':' . $piyc('D', 1), $piyc('E', 1), $piyc('F', 1), $piyc('G', 1), $piyc('H', 1) . ':' . $piyc('I', 1),
                     // $piyc('A', 2) . ':' . $piyc('D', 3), $piyc('E', 2), $piyc('E', 3), $piyc('F', 2) . ':' . $piyc('F', 3),
                     // $piyc('G', 2) . ':' . $piyc('G', 3), $piyc('H', 2) . ':' . $piyc('H', 3), $piyc('I', 2) . ':' . $piyc('I', 3),
@@ -526,6 +649,27 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $piyc('A', 7) . ':' . $piyc('D', 7), $piyc('E', 7), $piyc('F', 7), $piyc('G', 7), $piyc('H', 7), $piyc('I', 7),
                     $piyc('A', 8) . ':' . $piyc('D', 8), $piyc('E', 8), $piyc('F', 8), $piyc('G', 8), $piyc('H', 8), $piyc('I', 8),
                 );
+
+
+                for ($i=0; $i <= 11; $i++) { 
+                    array_push($piycRows, $tempPiycRows[$i]);
+                }
+
+                array_push($cells[11], $tempPiycRows[42]);
+                array_push($cells[11], $tempPiycRows[43]);
+                array_push($cells[11], $tempPiycRows[44]);
+                array_push($cells[11], $tempPiycRows[45]);
+                array_push($cells[11], $tempPiycRows[46]);
+                array_push($cells[11], $tempPiycRows[47]);
+
+                for ($i=8; $i < 42; $i++) { 
+                    array_push($cells[7], $tempPiycRows[$i]);
+                }
+
+                foreach ($tempPiycRows as $cell) {
+                    array_push($cells[12], $cell);
+                }
+
                 
                 // HEADINGS
 
@@ -618,7 +762,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // ALL AROUND
                 $cells[0] = array_merge($rows, $ebRows, $lRows, $cRows, $ocRows, $piycRows, $eajlRows, $aowRows, $sh2Rows, $sh3Rows, [
                     'A2:B9', 'H1:I1', 'H2', 'I2', 'H3:H5', 'I3:I5',
-                    'A27:B27', 'C27:F27', 'G27:I27', 'A57:D60'
+                    'A27:B27', 'C27:F27', 'G27:I27'
                 ]);
 
                 // BOTTOM ONLY
@@ -662,21 +806,12 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'F20', 'I20', 'D21:E21', 'G22:I22', 'B23:I23', 'B25:F25', 'H25:I25'
                 ]);
 
-                $cells[7] = array_merge($cells[7], [
-
-                ]);
-
                 // 2,7,8,9,10 on top
-                // cells[8] on hair bottom
 
                 foreach($cells as $key => $value) {
                     foreach($value as $cell){
                         $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
                     }
-                }
-
-                foreach($cells[8] as $cell){
-                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[8]);
                 }
 
                 // COLUMN RESIZE
