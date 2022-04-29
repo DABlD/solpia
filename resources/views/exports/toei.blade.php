@@ -1241,11 +1241,10 @@
 			<td>SMC</td>
 		</tr>
 
+		@php
+			$applicant->sea_service = $applicant->sea_service->reverse()->take(10)->reverse();
+		@endphp
 		@foreach($applicant->sea_service as $key => $data)
-			@if($key == 10)
-				@break
-			@endif
-
 			<tr>
 				<td colspan="2">{{ $data->vessel_name }}</td>
 				<td>{{ $data->vessel_type }}</td>
