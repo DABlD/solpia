@@ -278,7 +278,7 @@ class Hms1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'E14:J22', 'L10:Y15', 'K19:Y28', 'D25:J38', 'E40:J42', 'K36'
+                    'E14:J22', 'L10:Y15', 'K19:Y28', 'D25:J38', 'E40:J42', 'K36', 'L6', 'O7'
                 ];
 
                 foreach($h as $key => $value) {
