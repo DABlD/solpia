@@ -62,7 +62,26 @@
 	</tr>
 
 	@php
-		$temp = $applicant->educational_background->last() ?? '---';
+		$temp = $applicant->educational_background->filter(function($eb) {
+			return $eb->type == "College";
+		})->first();
+
+		if(!$temp){
+			$temp = $applicant->educational_background->filter(function($eb) {
+				return $eb->type == "Vocational";
+			})->first();			
+		}
+		if(!$temp){
+			$temp = $applicant->educational_background->filter(function($eb) {
+				return $eb->type == "Undergrad";
+			})->first();			
+		}
+		if(!$temp){
+			$temp = $applicant->educational_background->filter(function($eb) {
+				return $eb->type == "High School";
+			})->first();			
+		}
+		
 		$educ = $temp;
 
 		if($temp != '---'){
