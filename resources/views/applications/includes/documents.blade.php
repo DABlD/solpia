@@ -220,9 +220,10 @@
 					<option value="RADAR OPERATOR PLOTTING AID">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OPERATOR PLOTTING AID</option>
 					<option value="SSBT WITH BRM">&nbsp;&nbsp;&nbsp;&nbsp;SSBT WITH BRM</option>
 					<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
-					<option value="SRC">SRC</option>
-					<option value="ENGINE WATCH">ENGINE WATCH</option>
-					<option value="DECK WATCH">DECK WATCH</option>
+					<option value="SRC">&nbsp;&nbsp;&nbsp;&nbsp;SRC</option>
+					<option value="ENGINE WATCH">&nbsp;&nbsp;&nbsp;&nbsp;ENGINE WATCH</option>
+					<option value="DECK WATCH">&nbsp;&nbsp;&nbsp;&nbsp;DECK WATCH</option>
+					<option value="PADAMS">&nbsp;&nbsp;&nbsp;&nbsp;PADAMS</option>
 
 				<optgroup label="SPECIAL CERTIFICATES"></optgroup>
 					<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
