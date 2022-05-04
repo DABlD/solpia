@@ -82,10 +82,12 @@
 			})->first();			
 		}
 		
-		$educ = $temp;
-
-		if($temp != '---'){
+		// $educ = $temp;
+		if($temp != null){
 			$educ = $temp->school . ' / ' . $temp->course . ' / ' . $temp->year;
+		}
+		else{
+			$educ = null;
 		}
 	@endphp
 	<tr>
