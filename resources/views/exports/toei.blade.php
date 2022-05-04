@@ -282,12 +282,14 @@
 			if(isset($applicant->rank)){
 				$requiredRegulation = "";
 				$altRegulation = "";
+				$altRegulation2 = "";
 				$tRank = $applicant->rank->id;
 
 				// DECK
 				if($tRank == 11){
 					$requiredRegulation = "II/4";
 					$altRegulation = "II/5";
+					$altRegulation = "II/1";
 				}
 				if($tRank >= 9 && $tRank <= 10){
 					$requiredRegulation = "II/5";
@@ -337,20 +339,57 @@
 			</td>
 			<td colspan="2">
 				@if(isset($applicant->rank))
-					@if($applicant->rank->type == "RATING" && $docu)
-						@if(in_array($requiredRegulation, ["II/5", "III/5"]) && $altDoc)
-							OIC-NAVIGATIONAL WATCH
+					{{-- DECK --}}
+					@if($applicant->rank->id == 11)
+						@if($altDoc)
+							ABLE SEAFARER DECK
 						@else
 							NAVIGATIONAL WATCHKEEPING
 						@endif
-					@elseif($applicant->rank->type == "OFFICER")
-						@if(in_array($requiredRegulation, ["II/2", "III/2"]))
-							{{ $applicant->rank->name ?? "-----" }}
-						@elseif(in_array($requiredRegulation, ["II/1", "III/1"]) && $altDoc)
-							{{ $applicant->rank->name ?? "-----" }}
+					@elseif($applicant->rank->id == 10 || $applicant->rank->id == 9)
+						@if($altDoc)
+							OIC-NAVIGATIONAL WATCHKEEPING
+						@else
+							ABLE SEAFARER DECK
+						@endif
+					@elseif($applicant->rank->id == 4 || $applicant->rank->id == 3)
+						@if($altDoc)
+							CHIEF OFFICER
 						@else
 							OIC-NAVIGATIONAL WATCHKEEPING
 						@endif
+					@elseif($applicant->rank->id == 2)
+						CHIEF OFFICER
+					@elseif($applicant->rank->id == 1)
+						MASTER
+					{{-- ENGINE --}}
+					@elseif($applicant->rank->id == 17)
+						@if($altDoc)
+							ABLE SEAFARER ENGINE
+						@else
+							ENGINEERING WATCHKEEPING
+						@endif
+					@elseif($applicant->rank->id == 16 || $applicant->rank->id == 15)
+						@if($altDoc)
+							OIC-ENGINEERING WATCH
+						@else
+							ABLE SEAFARER ENGINE
+						@endif
+					@elseif($applicant->rank->id == 8 || $applicant->rank->id == 7)
+						@if($altDoc)
+							SECOND ENGINEER
+						@else
+							OIC-NAVIGATIONAL WATCHKEEPING
+						@endif
+					@elseif($applicant->rank->id == 6)
+						SECOND ENGINEER
+					@elseif($applicant->rank->id == 5)
+						CHIEF ENGINEER
+				 	{{-- GALLEY --}}
+					@elseif($applicant->rank->id == 24)
+						SHIP'S COOK
+					@elseif($applicant->rank->id == 27 || $applicant->rank->id == 28)
+						STEWARD
 					@endif
 				@endif
 			<td>{{ $docu ? strtoupper($docu->no) : "-----" }}</td>
@@ -512,6 +551,12 @@
 				}
 				elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
 					$rname = "ORDINARY SEAMAN";
+				}
+				elseif($applicant->rank->id == 24){
+					$rname = "SHIP'S COOK";
+				}
+				elseif($applicant->rank->id == 27 || $applicant->rank->id == 28){
+					$rname = "STEWARD";
 				}
 			}
 			else{
