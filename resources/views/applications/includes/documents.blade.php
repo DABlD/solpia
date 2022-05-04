@@ -193,14 +193,13 @@
 					<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;ECDIS SPECIFIC"></optgroup>
 						<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2107</option>
 						<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2807</option>
-						<option value="ECDIS FURUNO 3200">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3200</Option>
-						<option value="ECDIS FURUNO 3300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3300</option>
+						<option value="ECDIS FURUNO 3100/3200/3300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3100/3200/3300</Option>
 						<option value="ECDIS JRC 701B">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 701B</option>
 						<option value="ECDIS JRC 7201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 7201</option>
 						<option value="ECDIS JRC 901B">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 901B</option>
 						<option value="ECDIS JRC 9201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 9201</option>
-						<option value="ECDIS FURUNO 3300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS CHARTWORLD EG2</option>
-						<option value="ECDIS FURUNO 3300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TOKYO</option>
+						<option value="ECDIS CHARTWORLD EG2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS CHARTWORLD EG2</option>
+						<option value="ECDIS TOKYO">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TOKYO</option>
 						<option value="ECDIS PM3D">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS PM3D</option>
 						<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
 						<option value="ECDIS MECYS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MECYS</option>
