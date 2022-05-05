@@ -203,7 +203,12 @@
 
 		$diff = "";
 		if($ss->sign_on && $ss->sign_off){
+			$year = $ss->sign_on->diff($ss->sign_off)->format('%y');
 			$diff = $ss->sign_on->diff($ss->sign_off)->format('%mM %dD');
+
+			if($year > 0){
+				$diff = $year . "Y " . $diff;
+			}
 		}
 		$eng = str_replace('&', '&#38;', $ss->engine_type);
 		$font = "style='font-size: 8px;'";
