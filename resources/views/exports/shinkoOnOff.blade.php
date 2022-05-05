@@ -20,9 +20,12 @@
 		<td>REMARKS</td>
 	</tr>
 
+	@php
+		$ctr = 1;
+	@endphp
 	@foreach($linedUps as $key => $onSigner)
 		<tr>
-			<td rowspan="2">{{ $key + 1 }}</td>
+			<td rowspan="2">{{ $ctr }}</td>
 			<td rowspan="2">{{ $onSigner->abbr }}</td>
 			<td rowspan="2">{{ $onSigner->lname . ', ' . $onSigner->fname . ' ' . $onSigner->suffix . ' ' . $onSigner->mname }}</td>
 			<td rowspan="2">{{ now()->parse($onSigner->birthday)->format('d-M-Y') }}</td>
@@ -37,6 +40,9 @@
 			<td>{{ $onSigner->{"SEAMAN'S BOOK"} ? $onSigner->{"SEAMAN'S BOOK"}->format('d-M-Y') : '-----' }}</td>
 			<td>{{ $onSigner->{'US-VISA'} ? $onSigner->{'US-VISA'}->format('d-M-Y') : '-----'}}</td>
 		</tr>
+		@php
+			$ctr++;
+		@endphp
 	@endforeach
 
 	<tr></tr>
@@ -63,9 +69,12 @@
 		<td>REMARKS</td>
 	</tr>
 
+	@php
+		$ctr = 1;
+	@endphp
 	@foreach($onBoards as $key => $offSigner)
 		<tr>
-			<td rowspan="2">{{ $key + 1 }}</td>
+			<td rowspan="2">{{ $ctr }}</td>
 			<td rowspan="2">{{ $offSigner->abbr }}</td>
 			<td rowspan="2">{{ $offSigner->lname . ', ' . $offSigner->fname . ' ' . $offSigner->suffix . ' ' . $offSigner->mname }}</td>
 			<td rowspan="2">{{ now()->parse($offSigner->birthday)->format('d-M-Y') }}</td>
@@ -80,5 +89,8 @@
 			<td>{{ $offSigner->{"SEAMAN'S BOOK"} ? $offSigner->{"SEAMAN'S BOOK"}->format('d-M-Y') : '-----' }}</td>
 			<td>{{ $offSigner->{'US-VISA'} ? $offSigner->{'US-VISA'}->format('d-M-Y') : '-----'}}</td>
 		</tr>
+		@php
+			$ctr++;
+		@endphp
 	@endforeach
 </table>

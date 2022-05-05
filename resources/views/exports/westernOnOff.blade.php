@@ -15,9 +15,12 @@
 		<td>Last Ship</td>
 	</tr>
 
+	@php
+		$ctr = 1;
+	@endphp
 	@foreach($linedUps as $key => $onSigner)
 		<tr>
-			<td>{{ $key + 1 }}</td>
+			<td>{{ $ctr }}</td>
 			<td>{{ $onSigner->abbr }}</td>
 			<td>{{ $onSigner->lname . ', ' . $onSigner->fname . ' ' . $onSigner->suffix . ' ' . $onSigner->mname }}</td>
 			<td>{{ now()->parse($onSigner->birthday)->format('d-M-Y') }}</td>
@@ -25,6 +28,9 @@
 			<td>{{ $onSigner->{"SEAMAN'S BOOKn"} ?? '-----' }}</td>
 			<td>{{ $onSigner->lastShip }}</td>
 		</tr>
+		@php
+			$ctr++;
+		@endphp
 	@endforeach
 
 	<tr></tr>
@@ -46,9 +52,12 @@
 		<td>Remarks</td>
 	</tr>
 
+	@php
+		$ctr = 1;
+	@endphp
 	@foreach($onBoards as $key => $onBoard)
 		<tr>
-			<td>{{ $key + 1 }}</td>
+			<td>{{ $ctr }}</td>
 			<td>{{ $onBoard->abbr }}</td>
 			<td>{{ $onBoard->lname . ', ' . $onBoard->fname . ' ' . $onBoard->suffix . ' ' . $onBoard->mname }}</td>
 			<td>{{ now()->parse($onBoard->birthday)->format('d-M-Y') }}</td>
@@ -56,5 +65,8 @@
 			<td>{{ $onBoard->{"SEAMAN'S BOOKn"} ?? '-----' }}</td>
 			<td></td>
 		</tr>
+		@php
+			$ctr++;
+		@endphp
 	@endforeach
 </table>
