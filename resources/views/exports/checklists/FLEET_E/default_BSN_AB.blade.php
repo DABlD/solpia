@@ -244,12 +244,12 @@
 
 	<tr>
 		<td style="font-weight: bold; height: 15px;">SCAN</td>
-		<td colspan="3"></td>
+		<td colspan="3" style="font-weight: bold;">{{ $data->officer }}</td>
 	</tr>
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold; vertical-align: top !important;">DOCUMENTATION ASSISTANT</td>
+		<td colspan="3" style="font-weight: bold; vertical-align: top !important;">CREWING OFFICER</td>
 	</tr>
 
 	<tr>
@@ -270,7 +270,7 @@
 
 	<tr>
 		<td style="font-weight: bold; height: 15px;">SIGN OFF</td>
-		<td colspan="3" style="font-weight: bold;">{{ $data->officer }}</td>
+		<td colspan="3" style="font-weight: bold;"></td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
@@ -279,7 +279,7 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;">CREWING MANAGER</td>
+		<td colspan="3" style="font-weight: bold;"></td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>
