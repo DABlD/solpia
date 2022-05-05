@@ -815,20 +815,20 @@
         				},
         				{
         					range: [
+        						[9,41]
+        					],
+        					documents: [
+        						'BOOKLET', 'SDSD'
+        					]
+        				},
+        				{
+        					range: [
         						[1,41]
         					],
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
         					]
         				},
-        				{
-        					range: [
-        						[9,41]
-        					],
-        					documents: [
-        						'BOOKLET', 'SDSD'
-        					]
-        				}
         			]
         		},
         		{
