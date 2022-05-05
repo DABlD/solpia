@@ -778,7 +778,7 @@
 	        			{
 	        				range: [
 	        					[9,23],
-	        					[27,29]
+	        					[27,41]
 	        				],
 	        				documents: [
 	        					'BOOKLET', 'SDSD'
@@ -815,7 +815,15 @@
         				},
         				{
         					range: [
-        						[9,29]
+        						[1,41]
+        					],
+        					documents: [
+        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
+        					]
+        				},
+        				{
+        					range: [
+        						[9,41]
         					],
         					documents: [
         						'BOOKLET', 'SDSD'
@@ -841,12 +849,20 @@
         			details: [
         				{
         					range: [
-        						[1,35]
+        						[1,41]
         					],
         					documents: [
         						'LICENSE', 'BOOKLET'
         					]
-        				}
+        				},
+        				{
+        					range: [
+        						[1,41]
+        					],
+        					documents: [
+        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
+        					]
+        				},
         			]
         		},
         		// {
