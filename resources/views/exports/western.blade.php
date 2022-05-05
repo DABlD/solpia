@@ -468,7 +468,7 @@
 	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'National GMDSS'	,'',true			)}}
 	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flag License'		,'',true			)}}
 	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Flag GMDSS'		,'',true			)}}
-	@if($rank <= 8)
+	@if($rank >= 1 && $rank <= 4)
 		{{ $getDocument('SSO', 			'flag', 	'', 			'Flag SSO / SDSD'	,'',true			)}}
 	@else
 		{{ $getDocument('SDSD', 		'flag', 	'', 		'Flag SSO / SDSD'	,'',true			)}}
