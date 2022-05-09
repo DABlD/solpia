@@ -195,7 +195,7 @@
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
 	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - SEAFARER DECK - III/5", 'lc', 1, 'III/5') }}
+	{{ $doc("COE", "COC - SEAFARER ENGINE - III/5", 'lc', 1, 'III/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
@@ -204,7 +204,7 @@
 		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
 	@endphp
 	{{ $doc($a, $b, 'lc') }}
-	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'flag') }}
+	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
 	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
@@ -268,7 +268,7 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;">CREWING MANAGER</td>
+		<td colspan="3" style="font-weight: bold;">CREWING OFFICER</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>
@@ -284,7 +284,7 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;">CREWING MANAGER</td>
+		<td colspan="3" style="font-weight: bold;">CREWING OFFICER</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>

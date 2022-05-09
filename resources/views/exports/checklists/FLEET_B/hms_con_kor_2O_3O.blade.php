@@ -201,8 +201,8 @@
 	{{ $section("2. FLAG DOCUMENTS N/A", 0) }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - II/2", 'lc', 1, 'II/1') }}
-	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - II/2", 'lc', 1, 'II/1') }}
+	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - II/1", 'lc', 1, 'II/1') }}
+	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - II/1", 'lc', 1, 'II/1') }}
 	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE - IV/2", 'lc', 1, 'IV/2') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
@@ -215,7 +215,7 @@
 	{{ $doc("ADVANCE FIRE FIGHTING - AFF", "ADVANCED FIREFGHTING (AFF)", 'lc') }}
 	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
-	{{ $doc("SHIP SECURITY OFFICER - SSO", "SHIP SECURTIY OFFICER (SSO)", 'lc') }}
+	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
 	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
@@ -284,7 +284,7 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;">CREWING MANAGER</td>
+		<td colspan="3" style="font-weight: bold;">CREWING OFFICER</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>
@@ -300,7 +300,7 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;">CREWING MANAGER</td>
+		<td colspan="3" style="font-weight: bold;">CREWING OFFICER</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>

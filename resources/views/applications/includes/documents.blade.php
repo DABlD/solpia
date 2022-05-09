@@ -200,9 +200,8 @@
 						<option value="ECDIS JRC 9201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 9201</option>
 						<option value="ECDIS CHARTWORLD EG2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS CHARTWORLD EG2</option>
 						<option value="ECDIS TOKYO">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TOKYO</option>
-						<option value="ECDIS PM3D">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS PM3D</option>
+						<option value="ECDIS MECYS PM3D">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS PM3D</option>
 						<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
-						<option value="ECDIS MECYS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MECYS</option>
 						<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
 					<option value="ERS WITH ERM">&nbsp;&nbsp;&nbsp;&nbsp;ERS WITH ERM</option>
 					<option value="PRACTIAL ASSESSMENT IN MANAGEMENT LEVEL">&nbsp;&nbsp;&nbsp;&nbsp;PRACTIAL ASSESSMENT IN MANAGEMENT LEVEL</option>
@@ -223,6 +222,7 @@
 					<option value="ENGINE WATCH">&nbsp;&nbsp;&nbsp;&nbsp;ENGINE WATCH</option>
 					<option value="DECK WATCH">&nbsp;&nbsp;&nbsp;&nbsp;DECK WATCH</option>
 					<option value="PADAMS">&nbsp;&nbsp;&nbsp;&nbsp;PADAMS</option>
+					<option value="KOSCO - IN HOUSE TRAINING RECORD">&nbsp;&nbsp;&nbsp;&nbsp;KOSCO - IN HOUSE TRAINING RECORD</option>
 
 				<optgroup label="SPECIAL CERTIFICATES"></optgroup>
 					<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
@@ -242,6 +242,7 @@
 					<option value="SATELLITE COMMUNICATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SATELLITE COMMUNICATION COURSE</option>
 					<option value="SHIP HANDLING SIMULATION">&nbsp;&nbsp;&nbsp;&nbsp;SHIP HANDLING SIMULATION</option>
 					<option value="STABILITY AND TRIM">&nbsp;&nbsp;&nbsp;&nbsp;STABILITY AND TRIM</option>
+					<option value="MARINE ELECTRIC WITH REEFER">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRIC WITH REEFER</option>
 					<option value="WELDING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;WELDING COURSE</option>
 					<option value="KML">&nbsp;&nbsp;&nbsp;&nbsp;KML</option>
 
@@ -257,6 +258,7 @@
 					<option value="IN HOUSE TRAINING CERT WITH ISM">&nbsp;&nbsp;&nbsp;&nbsp;IN HOUSE TRAINING CERT WITH ISM</option>
 					<option value="PDOS">&nbsp;&nbsp;&nbsp;&nbsp;PDOS</option>
 					<option value="MCRA">&nbsp;&nbsp;&nbsp;&nbsp;MARITIME CYBER RISK AWARENESS/MANAGEMENT - MCRA</option>
+					<option value="BASIC MARITIME COMPUTER COURSE">&nbsp;&nbsp;&nbsp;&nbsp;BASIC MARITIME COMPUTER COURSE</option>
 
 				<optgroup label="CONTRACTS"></optgroup>
 					<option value="POEA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;POEA CONTRACT</option>
@@ -828,7 +830,7 @@
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
         					]
-        				},
+        				}
         			]
         		},
         		{

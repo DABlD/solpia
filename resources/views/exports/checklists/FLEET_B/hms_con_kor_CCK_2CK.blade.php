@@ -213,7 +213,7 @@
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
-	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'flag') }}
+	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES - NONE", 0) }}
 
@@ -275,7 +275,7 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;">CREWING MANAGER</td>
+		<td colspan="3" style="font-weight: bold;">CREWING OFFICER</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>
@@ -291,7 +291,7 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;">CREWING MANAGER</td>
+		<td colspan="3" style="font-weight: bold;">CREWING OFFICER</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>

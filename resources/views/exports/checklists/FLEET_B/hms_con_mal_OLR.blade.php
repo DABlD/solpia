@@ -75,6 +75,21 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
+			elseif($doc == "ENGINE WATCH"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+
+				if(!$docu){
+					$doc = "ENGINE WATCHKEEPING";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+			}
+			elseif($doc == "WELDING"){
+				foreach($data->document_lc as $document){
+				    if(str_contains($document->type, $doc)){
+				    	$docu = $document;
+				    }
+				}
+			}
 			else{
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 			}
@@ -176,16 +191,11 @@
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK W/ OEC", 'id') }}
 	{{ $doc("MCV", "MCV with PPRT NO.", 'id') }}
 
-	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("BOOKLET", "BOOKLET", 'flag') }}
-	{{ $doc("LICENSE", "LICENSE", 'flag') }}
-	{{ $doc("GMDSS/GOC", "GOC", 'flag') }}
-	{{ $doc("SSO", "FLAG SSO ENDORSEMENT", 'flag') }}
+	{{ $section("2. FLAG DOCUMENTS N/A", 0) }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - II/1", 'lc', 1, 'II/1') }}
-	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - II/1", 'lc', 1, 'II/1') }}
-	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE - IV/2", 'lc', 1, 'IV/2') }}
+	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
+	{{ $doc("COE", "COC - SEAFARER ENGINE - III/5", 'lc', 1, 'III/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
@@ -194,36 +204,31 @@
 		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
 	@endphp
 	{{ $doc($a, $b, 'lc') }}
-	{{ $doc("ADVANCE FIRE FIGHTING - AFF", "ADVANCED FIREFGHTING (AFF)", 'lc') }}
-	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
-	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
-	{{ $doc("SHIP SECURITY OFFICER - SSO", "SHIP SECURTIY OFFICER (SSO)", 'lc') }}
+	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
-	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
-	{{ $doc("ECDIS SPECIFIC", "ECDIS - SPECIFIC: __________", 'lc') }}
-	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
-	{{ $doc("OLC TRAINING F1", "OLC TRAINING FOR OIC-NW - F1/M1 (PART A)", 'lc') }}
-	{{ $doc("OLC TRAINING F3", "OLC TRAINING FOR OIC-NW - F3/M1 & M2 (PART A)", 'lc') }}
-	{{ $doc("ARPA TRAINING COURSE", "ARPA/ROPA/RNPUA", 'lc') }}
-	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc') }}
+	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
+	{{ $doc("WELDING", "WELDING TRAINING CERTIFICATE", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 1) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
+	{{ $doc("MALTA MEDICAL", "MALTA MEDICAL", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
+	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
-	{{ $con("POEA CONTRACT *", 1,1,1) }}
 	{{ $con("MLC/CBA CONTRACT", 1,0,0) }}
 	{{ $con("PERSONAL DATA RECORD", 1,0,1) }}
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,0,1) }}
 	{{ $con("ALLOTMENT SUMMARY *", 1,0,0) }}
+	{{ $con("POEA CONTRACT *", 1,1,1) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
+	{{ $doc("HDOS FAMILIARIZATION", "HDOS FAMILIARIZATION", 'lc') }}
 	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc') }}
 	{{ $doc("IN HOUSE TRAINING CERT WITH ISM", "IN HOUSE TRAINING CERTIFICATE WITH ISM", 'lc') }}
-	{{ $doc("GENERAL TRAINING RECORD BOOK", "GENERAL TRAINING RECORD BOOK", 'lc', null, null, 1,0,1) }}
+	{{ $doc("MCRA", "MCRA", 'lc', null, null, 1,1,1) }}
 
 	{{ $section("9. TRAVEL DOCUMENTS", 1) }}
 	{{ $con("PDOS, ETICKET, LOG, OKTB/VISA", 1,0,0) }}
@@ -246,12 +251,12 @@
 
 	<tr>
 		<td style="font-weight: bold; height: 15px;">SCAN</td>
-		<td colspan="3" style="font-weight: bold;">{{ $data->officer }}</td>
+		<td colspan="3"></td>
 	</tr>
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold; vertical-align: top !important;">CREWING OFFICER</td>
+		<td colspan="3" style="font-weight: bold; vertical-align: top !important;">DOCUMENTATION ASSISTANT</td>
 	</tr>
 
 	<tr>
@@ -265,14 +270,14 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;">CREWING MANAGER</td>
+		<td colspan="3" style="font-weight: bold;">CREWING OFFICER</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>
 
 	<tr>
 		<td style="font-weight: bold; height: 15px;">SIGN OFF</td>
-		<td colspan="3" style="font-weight: bold;"></td>
+		<td colspan="3" style="font-weight: bold;">{{ $data->officer }}</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
@@ -281,7 +286,7 @@
 
 	<tr>
 		<td style="height: 15px;">Date:</td>
-		<td colspan="3" style="font-weight: bold;"></td>
+		<td colspan="3" style="font-weight: bold;">CREWING OFFICER</td>
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">SEAFARER</td>
 	</tr>
