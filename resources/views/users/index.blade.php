@@ -327,9 +327,9 @@
                 let id = $(user.target).data('id');
 
                 swal({
-                    title: 'Select Fleet',
                     input: 'select',
                     inputOptions: {
+                        'null' : 'Select Fleet',
                         'FLEET A' : 'FLEET A',
                         'FLEET B' : 'FLEET B',
                         'FLEET C' : 'FLEET C',
@@ -342,12 +342,13 @@
                     cancelButtonColor: '#f76c6b'
                 }).then(result => {
                     if(result.value){
+                    	let fleet = result.value == "null" ? null : result.value;
                         $.ajax({
                             url: '{{ route('users.ajaxUpdate') }}',
                             data: {
                                 id: id,
                                 column: 'fleet',
-                                value: result.value
+                                value: fleet
                             },
                             success: () => {
                                 table.ajax.reload(null, false);
