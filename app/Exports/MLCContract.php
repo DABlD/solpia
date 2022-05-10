@@ -252,6 +252,10 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
                 $event->sheet->getDelegate()->getStyle('A1:H58')->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A1:H58')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('B21')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A42')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A45')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A48')->getFont()->setSize(8);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -322,7 +326,7 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'F8', 'E54', 'C7', 'H8', 'C12'
+                    'F8', 'E54', 'C7', 'H8', 'C12',
                 ];
 
                 foreach($h as $key => $value) {
@@ -433,8 +437,8 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(35);
                 $event->sheet->getDelegate()->getRowDimension(39)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(42)->setRowHeight(95);
-                $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(95);
-                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(95);
+                $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(115);
+                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(80);
                 $event->sheet->getDelegate()->getRowDimension(50)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(51)->setRowHeight(120);
                 $event->sheet->getDelegate()->getRowDimension(52)->setRowHeight(16);

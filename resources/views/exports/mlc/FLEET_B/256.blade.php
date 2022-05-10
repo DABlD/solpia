@@ -131,11 +131,13 @@
 		<td style="{{ $center }}">Early Termination</td>
 		<td colspan="8" style="height: 100px;">
 			"1)	Where the shipowner intends to cancel a Seafarers' employment agreement, he/she shall inform the seafarer of the cancellation of the Seafarer’s employment agreement in writing with a period of advance notice of not less than 30 days.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			2)	The seafarer shall give a notice to shipowner for their early termination in accordance with the flag state regulations as follows.
-			{{ PHP_EOL }}
-			(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
+			(1) Korea : Within 30 days  
+			<br style="mso-data-placement:same-cell;" />
+			(2) Panama : Minimum 15 days in advance  
+			<br style="mso-data-placement:same-cell;" />
 			(3) Marshall Islands/Liberia/Malta : Minimum 7 days in advance"
 		</td>
 	</tr>
@@ -266,14 +268,13 @@
 			or the place at which the seafarer agreed to enter into the engagement as the shipowner's expenses. However, in case where the
 			shipowner pay the expense of repatriation according to the request of the seafarer, shipowner does not have any responsibility 
 			for the repatriation.
-			{{ PHP_EOL }}
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			2) Despite above 1, in case of the following particulars, the shipowner can recover the cost of repatriation from the seafarer.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			a. When the seafarer leaves a ship without just cause.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			b. When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			3) The amount of money to be spent by the shipowner pursuant to paragraph (1) shall include transportation, accommodation, meals expenses incurred in the repatriation.
 		</td>
 	</tr>
@@ -293,24 +294,23 @@
 	<tr>
 		<td colspan="9">
 			1) Hours of work
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			a. Hours of Ordinary Work : 8 hours in a day and 40 hours in a week.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			b. Over Time Work : Fixed Over Time(103 hours) and Owner’s Guaranteed Overtime.
-			{{ PHP_EOL }}
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			2) Hours of rest
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			a. Minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			b. Minimum of 10 hours rest in any 24-hour period may be divided into no more than two periods, one of which shall be at least six hours in length
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			c. The interval between consecutive periods of rest shall not exceed 14 hours.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			d. Musters and drills shall be conducted in a manner that minimizes the disturbance of rest periods and does not induce fatigue.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			e. When a seafarer is on call, such as when a machinery space is unattended, the seafarer shall have an adequate compensatory 
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			Rest periodic the normal period of rest is disturbed by call-outs to work.
 		</td>
 	</tr>
@@ -330,10 +330,10 @@
 	<tr>
 		<td colspan="9">
 			Any facts which are not defined in this agreement, these are complied with the law of flag state or Applicable collective bargaining agreement.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and
 			entitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships.
-			{{ PHP_EOL }}
+			<br style="mso-data-placement:same-cell;" />
 			※	Additional clause for Marshall Islands flag
 			The terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic of the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law and Regulations of the Republic of the Marshall Islands.
 		</td>
