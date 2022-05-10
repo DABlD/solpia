@@ -1455,6 +1455,7 @@
                             <a class="btn btn-info" data-toggle="tooltip" title="Export Documents" onClick="getContract(${crew.applicant_id})">
                                 <span class="fa fa-file-text"></span>
                             </a>
+
                             <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-ship"></span>
                             </a>
@@ -2006,7 +2007,10 @@
                     'WalangLagay':      'Walang Lagay',
                     'MLCContract':      'MLC Contract',
                     'POEAContract':     'POEA Contract',
-                    'RequestToProcess': 'Request To Process'
+                    'RequestToProcess': 'Request To Process',
+                    @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
+                        'Fleet_B_BorrowDocuments': 'Borrow Documents'
+                    @endif
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
@@ -2019,9 +2023,110 @@
                     else if(result.value == "RequestToProcess"){
                         RTP(id);
                     }
+                    else if(result.value == "Fleet_B_BorrowDocuments"){
+                        FBBD(id, result.value);
+                    }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
                     }
+                }
+            })
+        }
+
+        function FBBD(id, type){
+            swal({
+                title: 'Fill all details',
+                html: `
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">REF NO.</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="ref" class="swal2-input" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">PURPOSE</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="purpose" class="swal2-input" />
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let a = $('#ref').val();
+                            let b = $('#purpose').val();
+
+                            if(a == "" || b == ""){
+                                swal.showValidationError('All fields is required');
+                            }
+                        resolve()}, 800);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    let temp = [
+                        'Passport', "Seaman's Book", 'Maritime Crew Visa', 'BT', "PSCRB", "AFF", "MECA", "MEFA", 'SDSD', 'COC', 'COE'
+                    ];
+                    let docString = "";
+                    let docs = [];
+
+                    temp.forEach((value, index) => {
+                        docString += `  
+                            <div class="row">
+                                <div class="col-md-4" style="text-align: right;">
+                                    <input type="checkbox" class="crew-checklist" value="${value}"/>
+                                </div>
+                                <div class="col-md-8" style="text-align: left;">
+                                    <label for="">
+                                        ${value}
+                                    </label>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    let data = {};
+                    data.data2 = {};
+                    data.data2.ref = $('#ref').val();
+                    data.data2.purpose = $('#purpose').val();
+
+                    swal({
+                        title: 'Select Documents to Borrow',
+                        html: '<br><br>' + docString,
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                        onOpen: () => {
+                            $('#swal2-content input[type=checkbox]').css({
+                                'zoom': '1.7',
+                                'margin': '1px 0 0'
+                            });
+                        },
+                        preConfirm: () => {
+                            swal.showLoading();
+                            return new Promise(resolve => {
+                                setTimeout(() => {
+                                    let temp2 = $(".crew-checklist:checked");
+                                    
+                                    temp2.each((index, value) => {
+                                        docs.push($(value).val());
+                                    });
+                                resolve()}, 500);
+                            });
+                        },
+                    }).then(result => {
+                        if(result.value){
+                            data.data2.docs = docs;
+                            window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                        }
+                    })
                 }
             })
         }

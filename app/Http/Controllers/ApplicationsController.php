@@ -1196,7 +1196,7 @@ class ApplicationsController extends Controller
         else{
             $applicant = Applicant::withTrashed()->find($id)->load('user');
 
-            if ($type == "DocumentChecklist") {           
+            if ($type == "DocumentChecklist" || str_starts_with($type, 'Fleet')) {           
                 if($req->data['status'] == "Vacation"){
                     $applicant->rank = Rank::find($req->data['rank'])->abbr;
                 }
@@ -1213,6 +1213,9 @@ class ApplicationsController extends Controller
 
         if($req->data){
             $applicant->data = $req->data;
+        }
+        if($req->data2){
+            $applicant->data2 = $req->data2;
         }
 
         $fileName = $req->filename ?? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
