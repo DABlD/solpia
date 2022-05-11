@@ -90,6 +90,30 @@ class ApplicationsController extends Controller
         echo json_encode(collect($regulations)->unique());
     }
 
+    public function get2(Request $req){
+        $applicant = Applicant::select($req->cols);
+        $applicant->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id');
+
+        // IF HAS SORT PARAMETER $ORDER
+        if($req->order){
+            $applicant = $applicant->orderBy($req->order[0], $req->order[1]);
+        }
+
+        // IF HAS WHERE
+        if($req->where){
+            $applicant = $applicant->where($req->where[0], $req->where[1]);
+        }
+
+        $applicant = $applicant->get();
+
+        // IF HAS GROUP
+        if($req->group){
+            $applicant = $applicant->groupBy($req->group);
+        }
+
+        echo json_encode($applicant);
+    }
+
     public function edit(Applicant $applicant){
         $applicant->load('user');
         $applicant->load('educational_background');

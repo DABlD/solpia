@@ -192,7 +192,7 @@
 					<option value="ECDIS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS GENERIC</option>
 					<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;ECDIS SPECIFIC"></optgroup>
 						<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2107</option>
-						<option value="ECDIS FURUNO 2107">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2807</option>
+						<option value="ECDIS FURUNO 2807">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 2807</option>
 						<option value="ECDIS FURUNO 3100/3200/3300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS FURUNO 3100/3200/3300</Option>
 						<option value="ECDIS JRC 701B">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 701B</option>
 						<option value="ECDIS JRC 7201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS JRC 7201</option>

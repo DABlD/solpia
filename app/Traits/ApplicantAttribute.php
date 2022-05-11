@@ -27,7 +27,7 @@ trait ApplicantAttribute{
 			if($this->pa_s != "Lined-Up" && $this->pa_s != "On Board"){
 				$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
-			if($this->pa_s != "On Board"){
+			if(auth()->user()->role == "Admin"){
 				$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-trash" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
 			if($this->pa_s == "Lined-Up"){
@@ -45,9 +45,15 @@ trait ApplicantAttribute{
 
 		$string .= '<a class="btn btn-success btn-search" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 
-		if(auth()->user()->role == "Encoder" || auth()->user()->role == "Cadet" || auth()->user()->role == "Admin"){
+		if(in_array(auth()->user()->role, ['Admin', 'Encoder', 'Cadet'])){
 			$string .= '<a class="btn btn-secondary" data-toggle="tooltip" title="Assign to Fleet" onClick="atf(' . $this->id . ')">
                     <span class="fa fa-tasks"></span>
+                </a>&nbsp;';
+		}
+
+		if(in_array(auth()->user()->role, ['Admin', 'Encoder', 'Cadet']) || auth()->user()->fleet == "FLEET B"){
+			$string .= '<a class="btn btn-secondary" data-toggle="tooltip" title="Seniority Level" onClick="as(' . $this->id . ')">
+                    <span class="fa fa-address-card"></span>
                 </a>&nbsp;';
 		}
 

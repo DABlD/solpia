@@ -262,7 +262,7 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'pa_s', name: 'pa_s' },
-                { data: 'avatar', name: 'avatar' },
+                { data: 'avatar', name: 'avatar', visible: false},
                 { data: 'rank', name: 'rank' },
                 { data: 'lname', name: 'lname' },
                 { data: 'fname', name: 'fname' },
@@ -2499,6 +2499,54 @@
                     })
                 }
             });
+        }
+
+        function as(aId){
+            $.ajax({
+                url: '{{ route('applications.get2') }}',
+                data:{
+                    where: ['applicants.id', aId],
+                    cols: ['pa.seniority']
+                },
+                success: result => {
+                    result = JSON.parse(result)[0];
+                    swal({
+                        title: 'Seniority Level',
+                        input: 'range',
+                        inputAttributes: {
+                            min: 1,
+                            max: 10,
+                            step: 1
+                        },
+                        inputValue: result.seniority,
+                        confirmButtonText: 'Update',
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                        cancelButtonText: 'Exit'
+                    }).then(result => {
+                        if(result.value){
+                            $.ajax({
+                                url: '{{ route('applications.updateProApp') }}',
+                                data: {
+                                    col: 'applicant_id',
+                                    val: aId,
+                                    update: {seniority: result.value},
+                                },
+                                success: result => {
+                                    console.log(result, 'update seniority');
+                                    swalNotification(
+                                        'success', 
+                                        'Success', 
+                                        "Successfully updated crew seniority", 
+                                        timer = null).then(() => {
+                                            table.ajax.reload(null, false);
+                                        });
+                                }
+                            });
+                        }
+                    })
+                }
+            })
         }
 	</script>
 @endpush
