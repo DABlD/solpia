@@ -14,7 +14,7 @@ class AlterApplicantAddChecked extends Migration
     public function up()
     {
         Schema::table('applicants', function (Blueprint $table){
-            $table->boolean('checked')->after('')->nullable();
+            $table->boolean('checked')->after('eye_color')->nullable();
         });
     }
 
@@ -24,7 +24,9 @@ class AlterApplicantAddChecked extends Migration
      * @return void
      */
     public function down()
-    {
-        
+    {   
+        Schema::table('applicants', function (Blueprint $table){
+            $table->dropColumn('checked');
+        });
     }
 }
