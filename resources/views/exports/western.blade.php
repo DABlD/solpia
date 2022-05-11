@@ -160,6 +160,15 @@
 
 				$name = 'BRM/ERM';
 			}
+			elseif ($docu == 'ERS') {
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+
+				if(!$docu){
+					$name = 'ERS WITH ERM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
+			}
 			else{
 				$temp = $docu;
 
@@ -324,7 +333,7 @@
 	<tr>
 		<td colspan="15"></td>
 		<td colspan="3">Date:</td>
-		<td colspan="8">{{ $applicant->created_at->format('M j, Y') }}</td>
+		<td colspan="8">{{ now()->format('M j, Y') }}</td>
 	</tr>
 
 	<tr></tr>
@@ -337,11 +346,15 @@
 
 		{{-- GET FIRST SOLPIA SEA SERVICE --}}
 		@php
-			$date_employed = $applicant->created_at->format('M j, Y');
+			$date_employed = null;
 			foreach($applicant->sea_service as $service){
-				if(strpos(strtoupper($service->manning_agent), 'SOLPIA') !== false){
+				if(strpos(strtoupper($service->manning_agent), 'SOLPIA') !== false && !$date_employed){
 					$date_employed = $service->sign_on->format('M j, Y');
 				}
+			}
+
+			if(!$date_employed){
+				$date_employed = $applicant->created_at->format('M j, Y');
 			}
 		@endphp
 
@@ -542,7 +555,13 @@
 	{{ $getDocument('ADVANCE FIRE FIGHTING - AFF', 'lc', 'MARINA', 'Fire-Fighting Course')}}
 	{{ $getDocument('MEDICAL FIRST AID - MEFA', 'lc', 'MARINA', 'Medical First Aid Course')}}
 	{{ $getDocument('RADAR', 'lc', '', 'Radar Observer')}}
-	{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA')}}
+	@if(isset($applicant->rank))
+		@if(str_starts_with($applicant->rank->type, 'ENGINE'))
+			{{ $getDocument('ERS', 'lc', '')}}
+		@else
+			{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA')}}	
+		@endif
+	@endif
 	{{ $getDocument('BTM', 'lc', '', 'BTM/ETM')}}
 	{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
 	{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'Ship Simulator')}}
@@ -597,10 +616,10 @@
 		$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
 		
 		if(!$docu){
-			$name = "ECDIS FURUNO 3200";
+			$name = "ECDIS FURUNO 2807";
 			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
 			if(!$docu){
-				$name = "ECDIS FURUNO 3300";
+				$name = "FURUNO 3100/3200/3300";
 				$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
 			}
 		}
