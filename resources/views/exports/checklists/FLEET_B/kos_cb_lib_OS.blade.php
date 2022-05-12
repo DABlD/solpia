@@ -2,7 +2,7 @@
 	$checkDate = function($issue, $expiry, $type2){
 		if($type2){
 			if($issue != "" && $issue != null){
-				return $issue->format('d-M-Y');
+				return "UNLIMITED";
 			}
 
 			return null;
@@ -48,15 +48,13 @@
 		$display = $cleanText($display);
 		$docu = null;
 
-		if($regulation){
-			foreach($data->document_lc as $document){
+			foreach(get_object_vars($data->document_lc) as $document){
 				$regulations = json_decode($document->regulation);
 
-			    if($document->type == $type && in_array($regulation, $regulations)){
+			    if(str_contains($document->type, $doc) && in_array($regulation, $regulations)){
 			        $docu = $document;
 			    }
 			}
-		}
 		else{
 			if($doc == "RADAR"){
 				$doc = "RADAR SIMULATOR COURSE";
@@ -102,8 +100,8 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
-					foreach ($data->document_flag as $flag) {
-						if($flag->country == "Panama" && $flag->type == $doc){
+					foreach (get_object_vars($data->document_flag) as $flag) {
+						if($flag->country == "Marshall Islands" && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}

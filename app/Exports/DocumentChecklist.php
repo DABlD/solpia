@@ -22,7 +22,13 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
         foreach(['document_id', 'document_flag', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
             foreach($applicant->$docuType as $key => $doc){
                 $name = $doc->type;
-                $applicant->$docuType->$name = $doc;
+                if(!isset($applicant->$docuType->$name)){
+                    $applicant->$docuType->$name = $doc;
+                }
+                else{
+                    $name .= sizeof($applicant->$docuType->$name);
+                    $applicant->$docuType->$name = $doc;
+                }
                 $applicant->$docuType->forget($key);
             }
         }
