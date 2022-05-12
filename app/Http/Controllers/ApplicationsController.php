@@ -1226,11 +1226,17 @@ class ApplicationsController extends Controller
                 }
                 else{
                     $pa = ProcessedApplicant::where('applicant_id', $id)->first();
-                    $applicant->rank = Rank::find($pa->rank_id)->abbr;
-                    
-                    $vessel = Vessel::find($pa->vessel_id);
-                    $applicant->vessel = $vessel;
-                    $applicant->departure = $pa->eld;
+                    if($pa){
+                        $rank = Rank::find($pa->rank_id);
+                        if($rank){
+                            $applicant->rank = $rank->abbr;
+                            
+                            $vessel = Vessel::find($pa->vessel_id);
+                            $applicant->vessel = $vessel;
+                            $applicant->departure = $pa->eld;
+                        }
+                        
+                    }
                 }
             }
         }

@@ -2009,7 +2009,6 @@
                     'POEAContract':     'POEA Contract',
                     'RequestToProcess': 'Request To Process',
                     'X01_BorrowDocuments': 'Borrow Documents',
-                    'X02_RequestForSAC': 'Shoe and Coverall Request'
                     @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
                     @endif
                 },
@@ -2274,11 +2273,7 @@
 
                             <div class="modal-footer" style="background-color: transparent;">
                                 <button type="button" class="btn btn-primary" onClick="omc(${id})">On Board Multiple Crew</button>
-                                <button type="button" class="btn btn-info" onClick="exportOnOff(${id})">Export On/Off Signers</button>
-                                <button type="button" class="btn btn-success" onClick="exportOnBoard(${id}, '${name}')">Export Onboard</button>
-                                @if(auth()->user()->role != "Principal")
-                                <button type="button" class="btn btn-warning" onClick="RTP(${id})">Request to Process</button>
-                                @endif
+                                <button type="button" class="btn btn-success" onClick="batchExport(${id}, '${name}')">Batch Export</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -2286,6 +2281,104 @@
 
                 </div>`
             );
+        }
+
+        function batchExport(id, data){
+            swal({
+                title: 'Select Type',
+                input: 'select',
+                inputOptions: {
+                    exportOnOff : 'Export On/Off Signers',
+                    exportOnBoard : 'Export Onboard',
+                    RTP : 'Request to Process',
+                    RFSC: 'Shoe and Coverall Request'
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '300px',
+                onOpen: () => {
+                    $('.swal2-select').select2();
+                    $('.swal2-select').on("select2:open", () => {
+                        $('.select2-dropdown').css({
+                            'z-index': 9999
+                        });
+                    });
+                    $('.swal2-select').parent().css('text-align', 'center');
+                    $('.select2-container').css('width', '100%');
+                }
+            }).then(result => {
+                if(result.value){
+                    window[result.value](id, data);
+                }
+            })
+        }
+
+        function RFSC(id){
+            let crews = [];
+
+            let temp = $('.LUN');
+            let crewString = "";
+
+            temp.each((index, value) => {
+                let temp2 = $(value);
+
+                crewString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${temp2[0].innerText}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            swal({
+                confirmButtonText: 'Submit',
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+                title: 'Select Crew',
+                html: '<br><br>' + crewString,
+                width: '450px',
+                onOpen: () => {
+                    $('#swal2-title').css({
+                        'font-size': '28px',
+                        'color': '#00c0ef'
+                    });
+                    $('#swal2-content .col-md-10').css('text-align', 'left');
+                    $('#swal2-content .col-md-10 label').css({
+                        "font-size": '20px',
+                        "text-align": 'left'
+                    });
+                    $('#swal2-content input[type=checkbox]').css({
+                        'zoom': '1.7',
+                        'margin': '1px 0 0'
+                    });
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let temp3 = $(".crew-checklist:checked");
+                            
+                            temp3.each((index, value) => {
+                                crews.push($(value).data('id'));
+                            });
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    if(crews.length){
+                        let type = 'X02_RFSC';
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data2: crews});
+                    }
+                }
+            })
         }
 
         function omc(vid){
