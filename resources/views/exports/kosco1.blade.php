@@ -44,7 +44,7 @@
 		<td colspan="3">Name</td>
 		<td colspan="9">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . ($sfx != "" ? $sfx . ' ' : '') . $applicant->user->mname }}</td>
 		<td colspan="2">Birth Date</td>
-		<td colspan="7">{{ $applicant->user->birthday->format('M j, Y') }}</td>
+		<td colspan="7">{{ $applicant->user->birthday ? $applicant->user->birthday->format('M j, Y') : '---' }}</td>
 	</tr>
 
 	<tr>

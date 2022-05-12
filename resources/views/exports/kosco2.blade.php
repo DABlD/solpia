@@ -66,7 +66,7 @@
 
 	<tr>
 		<td colspan="3">생년월일 Date of Birth</td>
-		<td colspan="5">{{ $applicant->user->birthday->format('d-M-Y') }}</td>
+		<td colspan="5">{{ $applicant->user->birthday ? $applicant->user->birthday->format('M j, Y') : '---' }}</td>
 		<td colspan="3">면허 License</td>
 		<td colspan="4">{{ $docu ? $docu->no : 'N/A' }}</td>
 	</tr>
