@@ -610,16 +610,16 @@
                                 <td>${wage.basic}</td>
                                 <td>${wage.leave_pay}</td>
                                 <td>${wage.fot}</td>
-                                <td>${wage.ot}</td>
-                                <td>${wage.sub_allow}</td>
-                                <td>${wage.retire_allow}</td>
-                                <td>${wage.sup_allow}</td>
-                                <td>${wage.engine_allow}</td>
-                                <td>${wage.other_allow}</td>
-                                <td>${wage.voyage_allow}</td>
-                                <td>${wage.owner_allow}</td>
-                                <td>${wage.tanker_allow}</td>
-                                <td>${wage.aca}</td>
+                                <td>${wage.ot ?? '---'}</td>
+                                <td>${wage.sub_allow ?? '---'}</td>
+                                <td>${wage.retire_allow ?? '---'}</td>
+                                <td>${wage.sup_allow ?? '---'}</td>
+                                <td>${wage.engine_allow ?? '---'}</td>
+                                <td>${wage.other_allow ?? '---'}</td>
+                                <td>${wage.voyage_allow ?? '---'}</td>
+                                <td>${wage.owner_allow ?? '---'}</td>
+                                <td>${wage.tanker_allow ?? '---'}</td>
+                                <td>${wage.aca ?? '---'}</td>
                                 <td>${wage.total}</td>
                                 <td>${wage.actions}</td>
                             </tr>
