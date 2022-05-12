@@ -1087,7 +1087,9 @@
                                 }
                             })
                         }
-
+                        else{
+                            $(`.btn-default [data-id=${vid}]`).click();
+                        }
                     })
                 }
             })
