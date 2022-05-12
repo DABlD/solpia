@@ -609,7 +609,7 @@
                                 <td>${wage.rname}</td>
                                 <td>${wage.basic}</td>
                                 <td>${wage.leave_pay}</td>
-                                <td>${wage.fot}</td>
+                                <td>${wage.fot ?? '---'}</td>
                                 <td>${wage.ot ?? '---'}</td>
                                 <td>${wage.sub_allow ?? '---'}</td>
                                 <td>${wage.retire_allow ?? '---'}</td>
