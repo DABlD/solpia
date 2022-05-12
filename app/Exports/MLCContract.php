@@ -40,7 +40,7 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
         $this->applicant->med_date          = $this->req['med_date'];
         $this->applicant->employment_months = $this->req['employment_months'];
 
-        $fleet = auth()->user()->fleet ?? $this->applicant->data['fleet'];
+        $fleet = $this->applicant->vessel->fleet;
         $exportView = str_replace(' ', '_', $fleet . '.' . $this->applicant->vessel->principal_id);
 
         return view('exports.mlc.' . $exportView, [

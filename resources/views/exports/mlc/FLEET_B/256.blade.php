@@ -2,7 +2,6 @@
 	$bold = "font-weight: bold;";
 	$center = "text-align: center;";
 	$color = "color: #0000FF;";
-	dd($data);
 @endphp
 
 <table>
@@ -156,7 +155,17 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $center }} {{ $color }}">${{ $data->wage->basic ?? 0 }}</td>
+		<td style="{{ $center }} {{ $color }}">
+			@php
+				$seniority = $data->pro_app->seniority;
+				$srpay = json_decode($data->wage->sr_pay);
+				$spay = 0;
+
+				if($seniority > 1){
+					$spay = $srpay[$seniority - 2];
+				}
+			@endphp
+			${{ $data->wage->basic ? ($data->wage->basic + $spay) : 0 }}</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->fot ?? 0 }}</td>
 		<td colspan="3" style="{{ $center }} {{ $color }}">${{ $data->wage->sup_allow ?? 0 }}</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">{{ $data->wage->sub_allow ?? 0 }}</td>
