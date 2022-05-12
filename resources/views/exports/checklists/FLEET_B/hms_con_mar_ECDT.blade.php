@@ -90,8 +90,8 @@
 				    }
 				}
 			}
-			elseif($doc == "SMS"){
-				foreach($data->document_lc as $document){
+			elseif($doc == "SMS" || $doc == "WELDING"){
+				foreach(get_object_vars($data->document_lc) as $document){
 				    if(str_contains($document->type, $doc)){
 				    	$docu = $document;
 				    }
@@ -99,7 +99,7 @@
 			}
 			elseif($doc == "CF"){
 				$ctr = 0;
-				foreach($data->{'document_' . $type} as $document){
+				foreach(get_object_vars($data->{'document_' . $type}) as $document){
 				    if(str_contains($document->type, 'CONTAINER')){
 				    	$ctr++;
 				    }
