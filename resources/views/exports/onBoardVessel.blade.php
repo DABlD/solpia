@@ -1,3 +1,9 @@
+@php
+	function verifyDate($date){
+		return $date ? $date->format('d-M-y') : '---';
+	}
+@endphp
+
 <table>
 	<tr>
 		<td colspan="15"></td>
@@ -37,12 +43,22 @@
 			<td>{{ $crew->joining_date->diffInMonths(now()) }}</td>
 			<td>{{ $crew->months }}</td>
 			<td>{{ $crew->joining_date->addMonths($crew->months)->format('d-M-y') }}</td>
-			<td>{{ $crew->{"PASSPORT"}->format('d-M-y') }}</td>
-			<td>{{ $crew->{"SEAMAN'S BOOK"}->format('d-M-y') }}</td>
-			<td>{{ $crew->{"US-VISA"}->format('d-M-y') }}</td>
+			<td>{{ verifyDate($crew->{"PASSPORT"}) }}</td>
+			<td>{{ verifyDate($crew->{"SEAMAN'S BOOK"}) }}</td>
+			<td>{{ verifyDate($crew->{"US-VISA"}) }}</td>
 			<td>{{ $crew->joining_port }}</td>
 			<td>{{ $crew->reliever }}</td>
-			<td>{{ $crew->remarks }}</td>
+			<td>
+				@php
+					$remarks = json_decode($crew->remarks);
+					foreach ($remarks as $key => $remark) {
+						if($key > 0){
+							echo ', ';
+						}
+						echo $remark;
+					}
+				@endphp
+			</td>
 		</tr>
 	@endforeach
 </table>

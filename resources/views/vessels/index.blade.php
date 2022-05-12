@@ -2009,7 +2009,7 @@
                     'POEAContract':     'POEA Contract',
                     'RequestToProcess': 'Request To Process',
                     'X01_BorrowDocuments': 'Borrow Documents',
-                    // 'X02_RequestForSAC': 'Shoe and Coverall Request'
+                    'X02_RequestForSAC': 'Shoe and Coverall Request'
                     @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
                     @endif
                 },
