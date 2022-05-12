@@ -26,7 +26,11 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $applicant->$docuType->$name = $doc;
                 }
                 else{
-                    $name .= sizeof($applicant->$docuType->$name);
+                    $size = 0;
+                    if(is_array($applicant->$docuType->$name)){
+                        $size = sizeof($applicant->$docuType->$name);
+                    }
+                    $name .= $size;
                     $applicant->$docuType->$name = $doc;
                 }
                 $applicant->$docuType->forget($key);
