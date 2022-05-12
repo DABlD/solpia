@@ -2008,8 +2008,9 @@
                     'MLCContract':      'MLC Contract',
                     'POEAContract':     'POEA Contract',
                     'RequestToProcess': 'Request To Process',
+                    'X01_BorrowDocuments': 'Borrow Documents',
+                    // 'X02_RequestForSAC': 'Shoe and Coverall Request'
                     @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
-                        'Fleet_B_BorrowDocuments': 'Borrow Documents'
                     @endif
                 },
                 inputPlaceholder: '',
@@ -2023,7 +2024,7 @@
                     else if(result.value == "RequestToProcess"){
                         RTP(id);
                     }
-                    else if(result.value == "Fleet_B_BorrowDocuments"){
+                    else if(result.value == "X01_BorrowDocuments"){
                         FBBD(id, result.value);
                     }
                     else{

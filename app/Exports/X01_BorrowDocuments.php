@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class Fleet_B_BorrowDocuments implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class X01_BorrowDocuments implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -19,7 +19,7 @@ class Fleet_B_BorrowDocuments implements FromView, WithEvents//, WithDrawings//,
 
     public function view(): View
     {
-        return view('exports.forms.fleet_b.borrowDocuments', [
+        return view('exports.forms.' . $this->type, [
             'data' => $this->data,
         ]);
     }

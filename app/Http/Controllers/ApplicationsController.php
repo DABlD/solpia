@@ -1220,7 +1220,7 @@ class ApplicationsController extends Controller
         else{
             $applicant = Applicant::withTrashed()->find($id)->load('user');
 
-            if ($type == "DocumentChecklist" || str_starts_with($type, 'Fleet')) {           
+            if ($type == "DocumentChecklist" || str_starts_with($type, 'X0')) {
                 if($req->data['status'] == "Vacation"){
                     $applicant->rank = Rank::find($req->data['rank'])->abbr;
                 }
