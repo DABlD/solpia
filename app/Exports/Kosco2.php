@@ -18,7 +18,7 @@ class Kosco2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
     public function view(): View
     {
-        return view('exports.' . lcfirst($this->type), [
+        return view('exports.kosco2', [
             'applicant' => $this->data,
         ]);
     }

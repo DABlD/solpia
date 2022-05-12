@@ -51,7 +51,7 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             }
     	}
 
-        return view('exports.' . lcfirst($this->type), [
+        return view('exports.kosco1', [
             'applicant' => $this->data,
             'ssTotalM' => $ssTotalM,
             'ssTotalY' => $ssTotalY
