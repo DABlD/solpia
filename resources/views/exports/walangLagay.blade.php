@@ -12,7 +12,9 @@
 		<td colspan="4">{{ $data->vessel }}</td>
 		<td colspan="2"></td>
 		<td>AGE:</td>
-		<td>{{ $data->user->birthday->diff(now())->format('%y') }}</td>
+		<td>
+			{{ $data->user->birthday ? diff(now())->format('%y') : '---' }}
+		</td>
 		<td>BMI:</td>
 		<td>{{ $data->bmi }}</td>
 	</tr>
