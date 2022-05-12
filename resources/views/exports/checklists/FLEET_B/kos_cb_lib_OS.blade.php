@@ -48,6 +48,7 @@
 		$display = $cleanText($display);
 		$docu = null;
 
+		if($regulation){
 			foreach(get_object_vars($data->document_lc) as $document){
 				$regulations = json_decode($document->regulation);
 
@@ -55,6 +56,7 @@
 			        $docu = $document;
 			    }
 			}
+		}
 		else{
 			if($doc == "RADAR"){
 				$doc = "RADAR SIMULATOR COURSE";

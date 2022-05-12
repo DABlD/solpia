@@ -2,6 +2,7 @@
 	$bold = "font-weight: bold;";
 	$center = "text-align: center;";
 	$color = "color: #0000FF;";
+	dd($data);
 @endphp
 
 <table>
