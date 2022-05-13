@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//, ShouldAutoSize
+class Toei implements FromView, WithEvents, WithDrawings//, WithColumnFormatting//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
@@ -618,19 +618,19 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     array_push($sh3Rows, "G$row:G$row2");
                     array_push($sh3Rows, "H$row:I$row2");
 
-                    $p1 = "ISBLANK(G" . $row2 . ")";
-                    $p2 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"y")&" yrs, "&';
-                    $p3 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"ym")&" mos, "&';
-                    $p4 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"md")&" days';
-                    $blank = '""';
-                    $value = "=IF(" . $p1 . "," . $blank . "," . $p2 . $p3 . $p4 .'")';
-                    $event->sheet->getParent()->getActiveSheet()->setCellValue('H' . $row2, $value);
+                    // $p1 = "ISBLANK(G" . $row2 . ")";
+                    // $p2 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"y")&" yrs, "&';
+                    // $p3 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"ym")&" mos, "&';
+                    // $p4 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"md")&" days';
+                    // $blank = '""';
+                    // $value = "=IF(" . $p1 . "," . $blank . "," . $p2 . $p3 . $p4 .'")';
+                    // $event->sheet->getParent()->getActiveSheet()->setCellValue('H' . $row2, $value);
 
-                    $sign_in = $event->sheet->getParent()->getActiveSheet()->getCell('G' . $row, $value)->getValue();
-                    $sign_off = $event->sheet->getParent()->getActiveSheet()->getCell('G' . $row2, $value)->getValue();
+                    // $sign_in = $event->sheet->getParent()->getActiveSheet()->getCell('G' . $row, $value)->getValue();
+                    // $sign_off = $event->sheet->getParent()->getActiveSheet()->getCell('G' . $row2, $value)->getValue();
 
-                    $event->sheet->getParent()->getActiveSheet()->setCellValue('G' . $row, now()->parse($sign_in)->format('M j, Y'));
-                    $event->sheet->getParent()->getActiveSheet()->setCellValue('G' . $row2, now()->parse($sign_off)->format('M j, Y'));
+                    // $event->sheet->getParent()->getActiveSheet()->setCellValue('G' . $row, now()->parse($sign_in)->format('M j, Y'));
+                    // $event->sheet->getParent()->getActiveSheet()->setCellValue('G' . $row2, now()->parse($sign_off)->format('M j, Y'));
 
                     $event->sheet->getDelegate()->getStyle("D$row2")->getFont()->setSize(9.5);
                     $event->sheet->getDelegate()->getStyle("C$row")->getFont()->setSize(9.5);
