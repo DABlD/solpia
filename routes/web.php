@@ -160,6 +160,7 @@ Route::group([
 			->defaults('href', $name);
 
 		Route::get($name . '/get/{id?}', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::get($name . '/get2', ucfirst($name) . 'Controller@get2')->name($name . '.get2');
 		Route::get("$name/getAll", ucfirst($name) . 'Controller@getAll')->name("$name.getAll");
 		Route::post("$name/import", ucfirst($name) . 'Controller@import')->name("$name.import");
 		Route::get("$name/export/{type?}", ucfirst($name) . 'Controller@export')->name("$name.export");
