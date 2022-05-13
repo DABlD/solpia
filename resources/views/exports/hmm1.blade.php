@@ -285,6 +285,7 @@
 				$dura = $ss->sign_on->diffInDays($ss->sign_off);
 			}
 			$man = str_replace('&', '&#38;', $ss->manning_agent);
+			$bhp = str_replace('&', '&#38;', $ss->bhp_kw);
 
 			$total += $ss->sign_on->diffInDays($ss->sign_off);
 
@@ -292,7 +293,7 @@
 				<td>$ss->flag</td>
 				<td colspan='2'>$ss->vessel_name</td>
 				<td>$ss->gross_tonnage</td>
-				<td>$ss->bhp_kw</td>
+				<td>$bhp</td>
 				<td>$ss->vessel_type</td>
 				<td>$vr</td>
 				<td>$eng</td>
