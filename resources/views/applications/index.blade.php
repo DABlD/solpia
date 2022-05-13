@@ -818,55 +818,63 @@
                     }).then(rank => {
                         if(rank.value){
                             aRank = rank.value;
-                            selectPrincipal();
-                        }
-                    });
-                }
-
-                function selectPrincipal(){
-                    swal({
-                        title: 'Select Principal',
-                        input: 'select',
-                        inputOptions: {
-                            '' : '',
-                            @foreach($principals as $principal)
-                                '{{ $principal->id }}': '{{ $principal->name }}',
-                            @endforeach
-                        },
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        cancelButtonColor: '#f76c6b',
-                        onOpen: () => {
-                            $('.swal2-select').select2({
-                                placeholder: 'Select Principal',
-                                width: '100%',
-                            });
-
-                            $('.swal2-select').on('select2:open', function (e) {
-                                $('.select2-dropdown--below').css('z-index', 1060);
-                            });
-                        },
-                    }).then(principal => {
-                        if(principal.value){
-                            aPrincipal = principal.value;
                             selectVessel();
                         }
                     });
                 }
 
+                // function selectPrincipal(){
+                //     swal({
+                //         title: 'Select Principal',
+                //         input: 'select',
+                //         inputOptions: {
+                //             '' : '',
+                //             @foreach($principals as $principal)
+                //                 @if($principal->fleet == auth()->user()->fleet || auth()->user()->role == "Admin")
+                //                     '{{ $principal->id }}': '{{ $principal->name }}',
+                //                 @endif
+                //             @endforeach
+                //         },
+                //         allowOutsideClick: false,
+                //         showCancelButton: true,
+                //         cancelButtonColor: '#f76c6b',
+                //         onOpen: () => {
+                //             $('.swal2-select').select2({
+                //                 placeholder: 'Select Principal',
+                //                 width: '100%',
+                //             });
+
+                //             $('.swal2-select').on('select2:open', function (e) {
+                //                 $('.select2-dropdown--below').css('z-index', 1060);
+                //             });
+                //         },
+                //     }).then(principal => {
+                //         if(principal.value){
+                //             aPrincipal = principal.value;
+                //             selectVessel();
+                //         }
+                //     });
+                // }
+
                 function selectVessel(){
                     let vessels = [];
+                    aPrincipal = [];
 
                     swal('Loading Vessels');
                     swal.showLoading();
 
                     $.ajax({
-                        url: '{{ route('vessels.get') }}',
-                        data: {id: aPrincipal},
+                        url: '{{ route('vessels.get2') }}',
+                        data:{
+                            where: ['fleet', '{{ auth()->user()->fleet }}'],
+                            cols: ['id', 'name', 'principal_id']
+                        },
                         dataType: 'json',
                         success: result => {
                             result.forEach(a => {
+                                aPrincipal
                                 vessels[a.id] = a.name;
+                                aPrincipal[a.id] = a.principal_id;
                             });
 
                             setTimeout(() => {
@@ -917,14 +925,15 @@
                         }).then(result => {
                             if(result.value){
                                 swal.showLoading();
+                                let vid = $('#vessel').val();
 
                                 $.ajax({
                                     url: '{{ route('applications.lineUp') }}',
                                     data: {
                                         applicant_id: id,
                                         rank_id: aRank,
-                                        principal_id: aPrincipal,
-                                        vessel_id: $('#vessel').val(),
+                                        principal_id: aPrincipal[vid],
+                                        vessel_id: vid,
                                         @if(auth()->user()->fleet == "Fleet B" || auth()->user()->role == "Admin")
                                             mob: $('#mob').val(),
                                             eld: $('#eld').val()
@@ -2322,7 +2331,9 @@
                     inputOptions: {
                         '' : '',
                         @foreach($principals as $principal)
-                            '{{ $principal->slug }}': '{{ $principal->name }}',
+                            @if($principal->fleet == auth()->user()->fleet || auth()->user()->role == "Admin")
+                                '{{ $principal->id }}': '{{ $principal->name }}',
+                            @endif
                         @endforeach
                     },
                     onOpen: () => {

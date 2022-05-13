@@ -52,6 +52,29 @@ class VesselsController extends Controller
     	);
     }
 
+    public function get2(Request $req){
+        $vessels = Vessel::select($req->cols);
+
+        // IF HAS SORT PARAMETER $ORDER
+        if($req->order){
+            $vessels = $vessels->orderBy($req->order[0], $req->order[1]);
+        }
+
+        // IF HAS WHERE
+        if($req->where){
+            $vessels = $vessels->where($req->where[0], $req->where[1]);
+        }
+
+        $vessels = $vessels->get();
+
+        // IF HAS GROUP
+        if($req->group){
+            $vessels = $vessels->groupBy($req->group);
+        }
+
+        echo json_encode($vessels);
+    }
+
     public function getAll(Request $req){
     	// echo json_encode(Vessel::all());
     	echo json_encode(
