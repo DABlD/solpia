@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class Hms1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -19,7 +19,7 @@ class Hms1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
     public function view(): View
     {
-        return view('exports.' . 'hms1', [
+        return view('exports.' . 'hmm1', [
             'data' => $this->data,
         ]);
     }

@@ -56,7 +56,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
             $this->data->manager = "ADULF KIT JUMAWAN";
             $this->data->officer = auth()->user()->fullname;
             
-            if($type == "hms_con_kor"){
+            if($type == "hmm_con_kor"){
                 if($rank == "2/O" || $rank == "3/O"){
                     $this->rows    = 53;
                     $this->view    = "2O_3O";
@@ -90,7 +90,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->view    = "ECDT";
                 }
             }
-            elseif($type == "hms_con_mal"){
+            elseif($type == "hmm_con_mal"){
                 if($rank == "2/O" || $rank == "3/O"){
                     $this->rows    = 52;
                     $this->view    = "2O_3O";
@@ -116,7 +116,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->view    = "CCK_2CK";
                 }
             }
-            elseif($type == "hms_con_mar"){
+            elseif($type == "hmm_con_mar"){
                 if($rank == "2/O" || $rank == "3/O"){
                     $this->rows    = 62;
                     $this->view    = "2O_3O";
@@ -166,7 +166,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->view    = "CCK_2CK";
                 }
             }
-            elseif($type == "hms_con_pan"){
+            elseif($type == "hmm_con_pan"){
                 if($rank == "BSN" || $rank == "AB"){
                     $this->rows    = 45;
                     $this->view    = "BSN_AB";

@@ -4,10 +4,10 @@ function getChecklist(fleet){
 	}
 	else if(fleet == "FLEET B"){
 		return `
-			<option value="hms_con_kor">HMS - CONTAINER - KOREAN FLAG</option>
-			<option value="hms_con_mal">HMS - CONTAINER - MALTA FLAG</option>
-			<option value="hms_con_mar">HMS - CONTAINER - MARSHALL FLAG</option>
-			<option value="hms_con_pan">HMS - CONTAINER - PANAMA FLAG</option>
+			<option value="hmm_con_kor">HMM - CONTAINER - KOREAN FLAG</option>
+			<option value="hmm_con_mal">HMM - CONTAINER - MALTA FLAG</option>
+			<option value="hmm_con_mar">HMM - CONTAINER - MARSHALL FLAG</option>
+			<option value="hmm_con_pan">HMM - CONTAINER - PANAMA FLAG</option>
 			<option value="kos_bul_mar">KOSCO - BULK - MARSHALL</option>
 			<option value="kos_bul_lib">KOSCO - BULK - LIBERIA</option>
 			<option value="kos_cb_lib">KOSCO - CONTAINER & BULK - PANAMA</option>

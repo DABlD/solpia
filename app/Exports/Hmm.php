@@ -5,7 +5,7 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class Hms implements WithMultipleSheets
+class Hmm implements WithMultipleSheets
 {
     use Exportable;
     
@@ -20,7 +20,7 @@ class Hms implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        array_push($sheets, new Hms1($this->applicant, $this->type . '1'));
+        array_push($sheets, new Hmm1($this->applicant, $this->type . '1'));
 
         return $sheets;
     }

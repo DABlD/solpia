@@ -53,7 +53,7 @@ class UsersTableSeeder extends Seeder
         $principals = [
             'SHINKO', 'KOSCO', 'TOEI', 'SMTECH', 'SC MARINE',
             'IMSCO', 'SEYEONG', 'HANJOO', 'WESTERN', 'KLCSM', 
-            'H-LINE', 'DINTEC', 'HMS', 'NAUTICA'
+            'H-LINE', 'DINTEC', 'HMM', 'NAUTICA'
         ];
 
         foreach($principals as $name){
