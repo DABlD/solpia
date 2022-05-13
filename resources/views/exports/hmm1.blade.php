@@ -373,7 +373,7 @@
 
 	<tr>
 		<td colspan="2">Date of Birth</td>
-		<td colspan="3">{{ $data->user->birthday->format('d-F-Y') }}</td>
+		<td colspan="3">{{ $data->user->birthday ? $data->user->birthday->format('d-F-Y') : '---' }}</td>
 		<td>Home Address</td>
 		<td colspan="5">{{ $data->user->address }}</td>
 		<td>Tel No.</td>
