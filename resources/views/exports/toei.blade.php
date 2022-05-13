@@ -1296,6 +1296,7 @@
 				<td colspan="2">{{ $data->gross_tonnage }}</td>
 				<td>{{ $data->manning_agent }}</td>
 				<td>{{ $data->sign_on != "" ? $data->sign_on->format('M j, Y') : "" }}</td>
+				{{-- <td>{{ $data->sign_on != "" ? $data->sign_on->format('Y-m-d') : "" }}</td> --}}
 				<td colspan="2">{{ $data->remarks }}</td>
 			</tr>
 			<tr>
@@ -1324,10 +1325,8 @@
 				<td>{{ $data->trade }}</td>
 				<td>{{ $data->principal }}</td>
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "" }}</td>
+				{{-- <td>{{ $data->sign_off != "" ? $data->sign_off->format('Y-m-d') : "" }}</td> --}}
 				<td colspan="2">
-					@if($data->sign_on != "" && $data->sign_off != "")
-						{{ $data->sign_on->diff($data->sign_off->addDay())->format('%yyr, %mmos, %ddays') }}
-					@endif
 				</td>
 			</tr>
 		@endforeach

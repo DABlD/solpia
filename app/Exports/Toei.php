@@ -614,6 +614,14 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     array_push($sh3Rows, "G$row:G$row2");
                     array_push($sh3Rows, "H$row:I$row2");
 
+                    $p1 = "ISBLANK(G" . $row2 . ")";
+                    $p2 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"y")&" yrs, "&';
+                    $p3 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"ym")&" mos, "&';
+                    $p4 = 'DATEDIF(G' . $row . ',G' . $row2 . ',"md")&" days';
+                    $blank = '""';
+                    $value = "=IF(" . $p1 . "," . $blank . "," . $p2 . $p3 . $p4 .'")';
+                    $event->sheet->getParent()->getActiveSheet()->setCellValue('H' . $row2, $value);
+
                     $event->sheet->getDelegate()->getStyle("D$row2")->getFont()->setSize(9.5);
                     $event->sheet->getDelegate()->getStyle("C$row")->getFont()->setSize(9.5);
 
