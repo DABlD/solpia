@@ -882,12 +882,10 @@
                                 <select id="vessel">
                                     <option value=""></option>
                                 </select>
-                                @if(auth()->user()->fleet == "Fleet B" || auth()->user()->role == "Admin")
-                                    <br><br>
-                                    <input type="string" id="eld" placeholder="Expected Date of Lineup (optional)" class="form-control">
-                                    <br>
-                                    <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
-                                @endif
+                                <br><br>
+                                <input type="string" id="eld" placeholder="Expected Date of Lineup (optional)" class="form-control">
+                                <br>
+                                <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
                             `,
                             allowOutsideClick: false,
                             showCancelButton: true,
