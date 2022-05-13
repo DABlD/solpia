@@ -1295,8 +1295,8 @@
 				<td>{{ $data->vessel_type }}</td>
 				<td colspan="2">{{ $data->gross_tonnage }}</td>
 				<td>{{ $data->manning_agent }}</td>
-				<td>{{ $data->sign_on != "" ? $data->sign_on->format('M j, Y') : "" }}</td>
-				{{-- <td>{{ $data->sign_on != "" ? $data->sign_on->format('Y-m-d') : "" }}</td> --}}
+				{{-- <td>{{ $data->sign_on != "" ? $data->sign_on->format('M j, Y') : "" }}</td> --}}
+				<td>{{ $data->sign_on != "" ? $data->sign_on->format('d-m-Y') : "" }}</td>
 				<td colspan="2">{{ $data->remarks }}</td>
 			</tr>
 			<tr>
@@ -1324,8 +1324,8 @@
 				</td>
 				<td>{{ $data->trade }}</td>
 				<td>{{ $data->principal }}</td>
-				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "" }}</td>
-				{{-- <td>{{ $data->sign_off != "" ? $data->sign_off->format('Y-m-d') : "" }}</td> --}}
+				{{-- <td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "" }}</td> --}}
+				<td>{{ $data->sign_off != "" ? $data->sign_off->format('d-m-Y') : "" }}</td>
 				<td colspan="2">
 				</td>
 			</tr>

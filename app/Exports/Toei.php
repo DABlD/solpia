@@ -11,11 +11,15 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+
+class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
         $this->type = $type;
+        $this->formatCols = [];
     }
 
     public function view(): View
@@ -622,6 +626,12 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $value = "=IF(" . $p1 . "," . $blank . "," . $p2 . $p3 . $p4 .'")';
                     $event->sheet->getParent()->getActiveSheet()->setCellValue('H' . $row2, $value);
 
+                    $sign_in = $event->sheet->getParent()->getActiveSheet()->getCell('G' . $row, $value)->getValue();
+                    $sign_off = $event->sheet->getParent()->getActiveSheet()->getCell('G' . $row2, $value)->getValue();
+
+                    $event->sheet->getParent()->getActiveSheet()->setCellValue('G' . $row, now()->parse($sign_in)->format('M j, Y'));
+                    $event->sheet->getParent()->getActiveSheet()->setCellValue('G' . $row2, now()->parse($sign_off)->format('M j, Y'));
+
                     $event->sheet->getDelegate()->getStyle("D$row2")->getFont()->setSize(9.5);
                     $event->sheet->getDelegate()->getStyle("C$row")->getFont()->setSize(9.5);
 
@@ -861,6 +871,13 @@ class Toei implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SET PRINT AREA
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
             },
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'G85:G105' => "mmm dd, yyyy",
         ];
     }
 
