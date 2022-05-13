@@ -2332,7 +2332,7 @@
                         '' : '',
                         @foreach($principals as $principal)
                             @if($principal->fleet == auth()->user()->fleet || auth()->user()->role == "Admin")
-                                '{{ $principal->id }}': '{{ $principal->name }}',
+                                '{{ $principal->slug }}': '{{ $principal->name }}',
                             @endif
                         @endforeach
                     },
