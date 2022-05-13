@@ -2293,7 +2293,8 @@
                     exportOnOff : 'Export On/Off Signers',
                     exportOnBoard : 'Export Onboard',
                     RTP : 'Request to Process',
-                    RFSC: 'Shoe and Coverall Request'
+                    RFSC: 'Shoe and Coverall Request',
+                    RPPE: 'PPE Request'
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
@@ -2315,7 +2316,11 @@
             })
         }
 
-        function RFSC(id){
+        function RPPE(id){
+            RFSC(id, 'X03_RPPE');
+        }
+
+        function RFSC(id, type = null){
             let crews = [];
 
             let temp = $('.LUN');
@@ -2376,7 +2381,9 @@
             }).then(result => {
                 if(result.value){
                     if(crews.length){
-                        let type = 'X02_RFSC';
+                        if(type == null){
+                            type = 'X02_RFSC';
+                        }
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({
                             data2: crews,
                             // filename
