@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
-use App\Models\{Applicant, Vessel};
+use App\Models\{Applicant, Vessel, Principal, Rank};
 use App\User;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
@@ -16,17 +16,24 @@ class x02_RFSC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $vessel = null;
+        $principal = null;
         $applicants = [];
 
         foreach ($data->data2 as $crew) {
             $applicant = Applicant::find($crew);
             $applicant->load('user');
+            $applicant->rank = Rank::find($applicant->pro_app->rank_id)->abbr;
             array_push($applicants, $applicant);
 
             if(!$vessel){
                 $vessel = Vessel::find($applicant->pro_app->vessel_id);
+                $principal = Principal::find($applicant->pro_app->vessel_id);
             }
         }
+
+        $data->vessel = $vessel;
+        $data->principal = $principal;
+        $data->applicants = $applicants;
 
         $this->vessel   = $vessel;
         $this->data     = $data;
@@ -228,21 +235,28 @@ class x02_RFSC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
+                $event->sheet->getDelegate()->setTitle('REQUESTFORSHOEANDCOVERALL', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(12);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Trebuchet MS');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
+                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(20);
+                $event->sheet->getDelegate()->getStyle('A3')->getFont()->setSize(18);
+                $event->sheet->getDelegate()->getStyle('A22')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('A27')->getFont()->setSize(20);
+                $event->sheet->getDelegate()->getStyle('A28')->getFont()->setSize(18);
+                $event->sheet->getDelegate()->getStyle('A47')->getFont()->setSize(9);
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
@@ -308,6 +322,7 @@ class x02_RFSC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
+                    'A2', 'A3', 'A27', 'A28'
                 ];
 
                 $h['wrap'] = [
@@ -407,10 +422,18 @@ class x02_RFSC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(35.5);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(17);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(35);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
