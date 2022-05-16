@@ -435,7 +435,6 @@
                 }).then(result => {
                     if(result.value){
                         application = $(application.target);
-                        console.log(application);
                         if(result.value == 'Biodata'){
                             exportBiodata(application);
                         }
@@ -593,11 +592,11 @@
                                 }).then(result => {
                                     if(result.value){
                                         fleet = result.value;
-                                        edc(type, status, fleet, application);
+                                        edc(type, fleet, application);
                                     }
                                 });
                             @else
-                                edc(type, status, fleet, application);
+                                edc(type, fleet, application);
                             @endif
                         }
                     }
