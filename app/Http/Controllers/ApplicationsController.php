@@ -1070,6 +1070,14 @@ class ApplicationsController extends Controller
             $temp->joining_date = $req->date;
             $temp->months = $req->months;
 
+            if($temp->months == "" || $temp->months == null){
+                $temp->months = $temp->mob;
+            }
+
+            if($temp->months == null){
+                $temp->months = 0;
+            }
+
             LineUpContract::create($temp->toArray());
         }
 

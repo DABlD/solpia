@@ -890,7 +890,7 @@
                                     <option value=""></option>
                                 </select>
                                 <br><br>
-                                <input type="string" id="eld" placeholder="Expected Date of Lineup (optional)" class="form-control">
+                                <input type="string" id="eld" placeholder="Expected Sign-on Date (optional)" class="form-control">
                                 <br>
                                 <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
                             `,

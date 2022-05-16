@@ -2012,7 +2012,8 @@
                     'POEAContract':         'POEA Contract',
                     'RequestToProcess':     'Request To Process',
                     'DocumentChecklist':    'Document Checklist',
-                    'X01_BorrowDocuments':  'Borrow Documents'
+                    'X01_BorrowDocuments':  'Borrow Documents',
+                    'X04_USVE':  'US Visa Endorsement Form'
                     @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
                     @endif
                 },
@@ -2033,9 +2034,73 @@
                     else if(result.value == "DocumentChecklist"){
                         EDC(id, result.value);
                     }
+                    else if(result.value == "X04_USVE"){
+                        USVE(id, result.value);
+                    }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
                     }
+                }
+            })
+        }
+
+        function USVE(id, type){
+            $.ajax({
+                url: '{{ route('applications.get2') }}',
+                data: {
+                    where: ['applicants.id', id],
+                    cols: ['mob', 'eld']
+                },
+                success: result => {
+                    let pro_app = JSON.parse(result)[0];
+                    let vessel = "";
+
+                    if(pro_app.eld == null){
+                        vessel = `
+                            <br><br>
+                            <input type="string" id="eld" placeholder="Expected Sign-on Date (optional)" class="form-control">
+                            <br>
+                            <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
+                        `;
+                    }
+
+                    swal({
+                        title: 'Charge to: ',
+                        html: `
+                            <div style="text-align: left;">
+                                <label class="radio-inline" style="font-size: 16px;">
+                                    <input type="radio" name="chargeTo" value="1" checked> Seafarer
+                                </label>
+                                <br>
+                                <label class="radio-inline" style="font-size: 16px;">
+                                    <input type="radio" name="chargeTo"} value="0"> SMI
+                                </label>
+                                ${vessel}
+                            </div>
+                        `,
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                        onOpen: () => {
+                            let string = "";
+
+                            $('#eld').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d',
+                            })
+                        }
+                    }).then(result => {
+                        if(result.value){
+                            let data = {
+                                status: 'Lined-Up',
+                                eld: $('#eld').val(),
+                                mob: $('#mob').val(),
+                                chargeTo: $('[name="chargeTo"]:checked').val()
+                            }
+
+                            window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                        }
+                    });
                 }
             })
         }
@@ -2549,21 +2614,21 @@
                                 let b = $('#date').val();
                                 let c = $('#months').val();
 
-                                if(b == "" || c == ""){
-                                    swal.showValidationError('Date and Months is required');
+                                if(b == ""){
+                                    swal.showValidationError('Date is required');
                                 }
                             resolve()}, 500);
                         });
-                    },
+                    }
                 },
             ]).then(result => {
                 if(result.value){
                     let port = $('#port').val();
                     let date = $('#date').val();
                     let months = $('#months').val();
+                    let ctr = 0;
 
                     crews.forEach(id => {
-                        let ctr = 0;
                         $.ajax({
                             type: 'POST',
                             url: `{{ route('applications.updateStatus') }}/${id}/On Board/${vid}`,
