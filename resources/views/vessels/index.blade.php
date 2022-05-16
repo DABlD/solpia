@@ -2589,7 +2589,7 @@
                                 <h4 class="clabel2">Months of Contract</h4>
                             </div>
                             <div class="col-md-7">
-                                <input type="number" min="1" id="months" class="form-control" />
+                                <input type="number" min="1" value="0" id="months" class="form-control" />
                             </div>
                         </div>
                         <br>

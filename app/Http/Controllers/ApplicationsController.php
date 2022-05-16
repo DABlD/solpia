@@ -1068,14 +1068,9 @@ class ApplicationsController extends Controller
         if($status == "On Board"){
             $temp->joining_port = $req->port;
             $temp->joining_date = $req->date;
-            $temp->months = $req->months;
 
-            if($temp->months == "" || $temp->months == null){
-                $temp->months = $temp->mob;
-            }
-
-            if($temp->months == null){
-                $temp->months = 0;
+            if($temp->months != null){
+                $temp->months = $req->months;
             }
 
             LineUpContract::create($temp->toArray());
