@@ -1069,7 +1069,7 @@ class ApplicationsController extends Controller
             $temp->joining_port = $req->port;
             $temp->joining_date = $req->date;
 
-            if($temp->months != null){
+            if($temp->months == null){
                 $temp->months = $req->months;
             }
 
