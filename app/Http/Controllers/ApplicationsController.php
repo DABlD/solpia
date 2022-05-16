@@ -1108,6 +1108,9 @@ class ApplicationsController extends Controller
                 'total_months'      => $lin_con->months,
                 'remarks'           => $status
             ]);
+
+            $temp->eld = null;
+            $temp->mob = null;
         }
 
         // LineUpContract::where('applicant_id', $id)->where('status', 'On Board')->update($lucs);

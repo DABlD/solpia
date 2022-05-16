@@ -933,10 +933,8 @@
                                         rank_id: aRank,
                                         principal_id: aPrincipal[vid],
                                         vessel_id: vid,
-                                        @if(auth()->user()->fleet == "Fleet B" || auth()->user()->role == "Admin")
-                                            mob: $('#mob').val(),
-                                            eld: $('#eld').val()
-                                        @endif
+                                        mob: $('#mob').val(),
+                                        eld: $('#eld').val()
                                     },
                                     success: result => {
                                         setTimeout(() => {
