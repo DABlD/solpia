@@ -140,6 +140,7 @@
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/flatpickr.js') }}"></script>
+    <script src="{{ asset('js/checklist.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -2006,11 +2007,12 @@
                 title: 'Select Document',
                 input: 'select',
                 inputOptions: {
-                    'WalangLagay':      'Walang Lagay',
-                    'MLCContract':      'MLC Contract',
-                    'POEAContract':     'POEA Contract',
-                    'RequestToProcess': 'Request To Process',
-                    'X01_BorrowDocuments': 'Borrow Documents',
+                    'WalangLagay':          'Walang Lagay',
+                    'MLCContract':          'MLC Contract',
+                    'POEAContract':         'POEA Contract',
+                    'RequestToProcess':     'Request To Process',
+                    'DocumentChecklist':    'Document Checklist',
+                    'X01_BorrowDocuments':  'Borrow Documents'
                     @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
                     @endif
                 },
@@ -2028,11 +2030,49 @@
                     else if(result.value == "X01_BorrowDocuments"){
                         FBBD(id, result.value);
                     }
+                    else if(result.value == "DocumentChecklist"){
+                        EDC(id, result.value);
+                    }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
                     }
                 }
             })
+        }
+
+        function EDC(id, type){
+            let fleet = "{{ auth()->user()->fleet }}";
+            swal({
+                title: 'Select Type',
+                html: `
+                    <select id="type">
+                    </select>
+                    <br>
+                `,
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                onOpen: () => {
+                    $('#type').append(getChecklist(fleet));
+                    $('#type').select2({
+                        width: '100%',
+                    });
+
+                    $('#rank, #type').on('select2:open', function (e) {
+                        $('.select2-dropdown--below').css('z-index', 1060);
+                    });
+                },
+            }).then(result => {
+                let data = {
+                    type: $('#type').val(),
+                    status: "Lined-Up",
+                    fleet: fleet
+                }
+
+                if(result.value){
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                }
+            });
         }
 
         function FBBD(id, type){

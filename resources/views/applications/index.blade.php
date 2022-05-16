@@ -435,6 +435,7 @@
                 }).then(result => {
                     if(result.value){
                         application = $(application.target);
+                        console.log(application);
                         if(result.value == 'Biodata'){
                             exportBiodata(application);
                         }
@@ -572,7 +573,6 @@
                         }
                         else if(result.value == "DocumentChecklist"){
                             let type = "DocumentChecklist";
-                            let status = application.data('status2');
                             let fleet = "{{ auth()->user()->fleet }}";
 
                             @if(auth()->user()->role == "Admin" && auth()->user()->fleet == null)
@@ -604,8 +604,8 @@
                 })
 	    	});
 
-            function edc(type, status, fleet, application){
-                if(status == "Vacation"){
+            function edc(type, fleet, application){
+                if(application.data('status2') == "Vacation"){
                     swal({
                         title: 'Enter Details',
                         html: `
