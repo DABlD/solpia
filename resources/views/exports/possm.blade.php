@@ -211,6 +211,7 @@
 			}
 		}
 		$eng = str_replace('&', '&#38;', $ss->engine_type);
+		$manning = str_replace('&', '&#38;', $ss->manning_agent);
 		$font = "style='font-size: 8px;'";
 
 		echo "
@@ -222,7 +223,7 @@
 				<td $font>$rank</td>
 				<td $font>$on - $off</td>
 				<td $font>$diff</td>
-				<td $font>$ss->manning_agent</td>
+				<td $font>$manning</td>
 				<td $font>$ss->remarks</td>
 			</tr>
 		";
