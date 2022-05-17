@@ -517,6 +517,11 @@ class ApplicationsController extends Controller
                     }
                 }
 
+                if(isset($applicant->$docuType->$temp)){
+                    if(isset($applicant->$docuType->$temp->expiry_date)){
+                        continue;
+                    }
+                }
                 $applicant->$docuType->$temp = $data;
             }
         }
