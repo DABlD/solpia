@@ -220,6 +220,8 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
