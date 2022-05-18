@@ -363,7 +363,8 @@
 		{{ $getDocument('GMDSS/GOC', 	'flag', 	'PANAMA', 		'FLAG STATE GMDSS-GOC'					)}}
 		{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 		'FLAG STATE SEAMAN BOOK (I.D. BOOK)'	)}}
 		{{ $getDocument('SSO', 			'flag', 	'PANAMA', 		'FLAG STATE SSO LICENSE'				)}}
-		{{ $getDocument("SHIP'S COOK ENDORSEMENT", 'flag', 'PANAMA', 'FLAG STATE ENDORSEMENT COOK COURSE')}}
+		{{ $getDocument('SDSD', 		'flag', 	'PANAMA', 		'FLAG STATE SDSD'						)}}
+		{{ $getDocument("SHIP'S COOK ENDORSEMENT", 'flag', 'PANAMA', 'FLAG STATE ENDORSEMENT COOK COURSE'	)}}
 
 		{{ addS('TRAINING CERTIFICATES') }}
 		
