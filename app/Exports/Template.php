@@ -28,28 +28,28 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
     {
         $borderStyle = 
         [
-            [
+            [//0
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                 ]
             ],
-            [
+            [//1
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
                     ],
                 ]
             ],
-            [
+            [//2
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
                     ],
                 ]
             ],
-            [
+            [//3
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -65,7 +65,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//4
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
@@ -81,7 +81,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//5
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
@@ -97,7 +97,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//6
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -105,7 +105,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//7
                 'borders' => [
                     'bottom' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -113,7 +113,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//8
                 'borders' => [
                     'left' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -121,7 +121,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//9
                 'borders' => [
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -129,10 +129,38 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//10
                 'borders' => [
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [//11
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//12
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//13
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//14
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
                     ],
                 ]
             ],
@@ -383,6 +411,26 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $cells[10] = array_merge([
                 ]);
 
+                // TBT - TOP BORDER THIN
+                $cells[10] = array_merge([
+                ]);
+
+                // TBT - TOP BORDER THIN
+                $cells[11] = array_merge([
+                ]);
+
+                // BBT
+                $cells[12] = array_merge([\
+                ]);
+
+                // LBT
+                $cells[13] = array_merge([
+                ]);
+
+                // RBT
+                $cells[14] = array_merge([
+                ]);
+                
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
                         $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
