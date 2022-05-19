@@ -420,7 +420,7 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ]);
 
                 // BBT
-                $cells[12] = array_merge([\
+                $cells[12] = array_merge([
                 ]);
 
                 // LBT
