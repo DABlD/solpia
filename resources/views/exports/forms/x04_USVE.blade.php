@@ -347,7 +347,19 @@
 		</td>
 		<td></td>
 		<td colspan="3" style="{{ $center }}">
-			Mr. Adulf Kit Jumawan
+			@if(auth()->user()->fleet == "FLEET A")
+				Ms. Precian Cervantes
+			@elseif(auth()->user()->fleet == "FLEET B")
+				Mr. Adulf Kit Jumawan
+			@elseif(auth()->user()->fleet == "FLEET C")
+				Ms. Jeanette Solidum
+			@elseif(auth()->user()->fleet == "FLEET D")
+				Ms. Thea Guerra
+			@elseif(auth()->user()->fleet == "FLEET E")
+				Mr. Homer Birco
+			@elseif(auth()->user()->fleet == "TOEI")
+				Mr. Neil Romano
+			@endif
 		</td>
 	</tr>
 
