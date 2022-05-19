@@ -24,14 +24,19 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
         }
         $pro_app->save();
 
+        $applicant->load('document_id');
         $applicant->load(['sea_service' => function ($q) {
             $q->orderBy('sign_off', 'desc');
         }]);
         $applicant->pro_app = $pro_app;
 
-        dd($applicant);
+        foreach($applicant->document_id as $key => $doc){
+            $name = $doc->type;
+            $applicant->document_id->$name = $doc;
+            $applicant->document_id->forget($key);
+        }
 
-        $this->data     = $data;
+        $this->data     = $applicant;
         $this->type     = $type;
     }
 
@@ -46,28 +51,28 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
     {
         $borderStyle = 
         [
-            [
+            [//0
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                 ]
             ],
-            [
+            [//1
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
                     ],
                 ]
             ],
-            [
+            [//2
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
                     ],
                 ]
             ],
-            [
+            [//3
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -83,7 +88,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//4
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
@@ -99,7 +104,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//5
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
@@ -115,7 +120,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//6
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -123,7 +128,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//7
                 'borders' => [
                     'bottom' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -131,7 +136,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//8
                 'borders' => [
                     'left' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -139,7 +144,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//9
                 'borders' => [
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -147,10 +152,38 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//10
                 'borders' => [
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [//11
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//12
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//13
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//14
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
                     ],
                 ]
             ],
@@ -230,7 +263,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
+                $event->sheet->getDelegate()->setTitle('USVE', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -238,10 +271,12 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(12);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(11);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
@@ -313,10 +348,12 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
+                    'A37'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'A11:A34', 'D5', 'I40', 'A44'
                 ];
 
                 foreach($h as $key => $value) {
@@ -360,6 +397,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER MEDIUM
                 $cells[1] = array_merge([
+                    'A46', 'E46'
                 ]);
 
                 // ALL BORDER THICK
@@ -368,6 +406,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
+                    'A39:J41'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -388,7 +427,6 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // LRB
                 $cells[8] = array_merge([
-
                 ]);
 
                 // RRB
@@ -397,6 +435,26 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // TRB
                 $cells[10] = array_merge([
+                ]);
+
+                // TBT - TOP BORDER THIN
+                $cells[11] = array_merge([
+                ]);
+
+                // BBT
+                $cells[12] = array_merge([
+                    'A44:F44', 'H44:J44', 'H48:J48',
+                    'D5:G5', 'J5',
+                    'D6:G6', 'J6',
+                    'D7:G7', 'J7',
+                ]);
+
+                // LBT
+                $cells[13] = array_merge([
+                ]);
+
+                // RBT
+                $cells[14] = array_merge([
                 ]);
 
                 foreach($cells as $key => $value){
@@ -409,7 +467,16 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(14.5);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(14);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
