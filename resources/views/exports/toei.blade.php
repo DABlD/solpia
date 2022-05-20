@@ -838,11 +838,11 @@
 				foreach($applicant->document_lc as $document){
 					$regulation = json_decode($document->regulation);
 
-				    if($document->type == "COE" && in_array("II/5", $regulation)){
+				    if($document->type == "COE"){
 				        $docu = $document;
 				    }
 
-				    if($document->type == "COC" && in_array("II/4", $regulation)){
+				    if($document->type == "COC"){
 				        $tempDocu = $document;
 				    }
 				}
@@ -914,6 +914,13 @@
 		@php 
 			$name = 'CONSOLIDATED MARPOL';
 			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			$docu = false;
+
+			foreach($applicant->document_lc as $key => $doc){
+				if(str_contains($key, "MARPOL")){
+					$docu = $doc;
+				}
+			}
 		@endphp
 
 		<tr>
