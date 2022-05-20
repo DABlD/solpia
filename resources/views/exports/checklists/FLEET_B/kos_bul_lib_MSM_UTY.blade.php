@@ -212,7 +212,7 @@
 	{{ $doc("SDSD", "LIBERIA SQC - SDSD", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("NCI", "COC - NC1 LICENSE", 'lc', 1) }}
+	{{ $doc("NCI", "COC - NC1 LICENSE", 'lc', 0) }}
 
 	{{ $section("4. CERTIFICATECATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
