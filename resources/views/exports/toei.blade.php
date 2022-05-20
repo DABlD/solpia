@@ -912,12 +912,9 @@
 
 		{{-- 12TH --}}
 		@php 
-			$name = 'CONSOLIDATED MARPOL';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 			$docu = false;
-
-			foreach($applicant->document_lc as $key => $doc){
-				if(str_contains($key, "MARPOL")){
+			foreach($applicant->document_lc as $doc){
+				if(str_contains($doc->type, "MARPOL")){
 					$docu = $doc;
 				}
 			}
