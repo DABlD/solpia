@@ -102,7 +102,7 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
-					foreach ($data->document_flag as $flag) {
+					foreach (get_object_vars($data->document_flag) as $flag) {
 						if($flag->country == "Liberia" && $flag->type == $doc){
 							$docu = $flag;
 						}
