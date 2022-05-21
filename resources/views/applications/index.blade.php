@@ -428,7 +428,8 @@
                         WalangLagay:    'Walang Lagay',
                         HistoryCheck:   'History Check',
                         SeaServiceCertificate:   'Certificate of Sea Service',
-                        DocumentChecklist:   'Document Checklist'
+                        DocumentChecklist:   'Document Checklist',
+                        X05_Clearance: 'Clearance'
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
@@ -598,6 +599,9 @@
                             @else
                                 edc(type, fleet, application);
                             @endif
+                        }
+                        else{
+                            window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
                         }
                     }
                 })
