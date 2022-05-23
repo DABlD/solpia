@@ -21,7 +21,7 @@
 	<tbody>
 		<tr>
 			<td colspan="15">
-				HANJOO SHIPPING AND AIR INTERNATIONAL CO LTD
+				HANJOO MARITIME CO. LTD
 			</td>
 		</tr>
 
