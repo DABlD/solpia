@@ -2332,7 +2332,7 @@
                     inputOptions: {
                         '' : '',
                         @foreach($principals as $principal)
-                            @if($principal->fleet == auth()->user()->fleet || auth()->user()->role == "Admin" || auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder")
+                            @if($principal->fleet == auth()->user()->fleet || auth()->user()->role == "Admin" || auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder" || auth()->user()->role == "Training")
                                 '{{ $principal->slug }}': '{{ $principal->name }}',
                             @endif
                         @endforeach
