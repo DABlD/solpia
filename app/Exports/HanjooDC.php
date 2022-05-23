@@ -141,6 +141,10 @@ class HanjooDC implements FromView, WithEvents, WithColumnFormatting//, WithDraw
                 $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(12);
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(28);
 
+                // SET PAGE BREAK PREVIEW
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+
                 // CHEAT
 
                 if(isset($this->applicant->document_id->PASSPORT) && $this->applicant->document_id->PASSPORT->issue_date->diffInMonths($this->applicant->document_id->PASSPORT->expiry_date) < 18){

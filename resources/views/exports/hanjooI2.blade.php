@@ -13,7 +13,7 @@
 	<tr></tr>
 
 	<tr>
-		<td colspan="15">
+		<td colspan="15" style="font-weight: bold;">
 			Interview Check List for Foreigner
 		</td>
 	</tr>
@@ -21,9 +21,9 @@
 	<tr></tr>
 
 	<tr>
-		<td colspan="2">Rank</td>
+		<td colspan="2">Vessel / Rank</td>
 		<td colspan="3">
-			{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}
+			{{ isset($applicant->vessel) ? $applicant->vessel->name : '-----' }} / {{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}
 		</td>
 		<td colspan="2">Date of Interview</td>
 		<td colspan="8">{{ $applicant->created_at->format('d-M-y') }}</td>
@@ -34,31 +34,8 @@
 		<td colspan="3">
 			{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname[0] }}
 		</td>
-		<td colspan="2">Seaman book No.</td>
-		@php
-			$docu = "SEAMAN'S BOOK";
-			$docu = isset($applicant->document_id->$docu) ? $applicant->document_id->$docu : false;
-		@endphp
-		<td colspan="8">
-			{{ $docu ? $docu->number : '-----' }}
-		</td>
-	</tr>
-
-	<tr>
 		<td colspan="2">Date of Birth</td>
-		<td colspan="3">
-			{{ $applicant->user->birthday->format('F j, Y') }}
-		</td>
-		<td colspan="2">License Class (Officer Only)</td>
-		<td colspan="8">
-			@if($applicant->rank->id >= 1 && $applicant->rank->id <= 8)
-				@php
-					$docu = "COC";
-					$docu = isset($applicant->document_lc->$docu) ? $applicant->document_lc->$docu : false;
-				@endphp
-				{{ $docu ? $docu->no : '-----' }}
-			@endif
-		</td>
+		<td colspan="8">{{ $applicant->user->birthday->format('d M Y') }}</td>
 	</tr>
 
 	<tr>
@@ -74,8 +51,8 @@
 	
 	{{-- 1st ROW --}}
 	<tr>
-		<td colspan="13">Evaluation Item</td>
-		<td colspan="2">Score</td>
+		<td colspan="13" style="font-weight: bold;">Evaluation Item</td>
+		<td colspan="2" style="font-weight: bold;">Score</td>
 	</tr>
 
 	<tr>
@@ -108,7 +85,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="12">(For ratings) qualification for welding, electricity, machine (Max Score is 5)</td>
+		<td colspan="3">(For ratings) Qualification for ship (exclusion of mandatory)</td>
+		<td colspan="9">Addtional 2 point per year (Max Score is 5)</td>
 		<td></td>
 		<td></td>
 	</tr>
@@ -219,9 +197,11 @@
 	<tr>
 		<td colspan="2">Health (10)</td>
 		<td colspan="3">Qualification to perform task (Appearance or medical test result)</td>
-		<td colspan="2">10</td>
-		<td colspan="3">7</td>
-		<td colspan="2">3</td>
+		<td>10</td>
+		<td colspan="2">8</td>
+		<td>6</td>
+		<td colspan="2">4</td>
+		<td>2</td>
 		<td></td>
 		<td></td>
 	</tr>
@@ -229,34 +209,34 @@
 	<tr>
 		<td colspan="2">Background (10)</td>
 		<td colspan="3">Family relationship, marriage, personal history</td>
-		<td colspan="2">10</td>
-		<td colspan="3">7</td>
-		<td colspan="2">3</td>
+		<td>10</td>
+		<td colspan="2">8</td>
+		<td>6</td>
+		<td colspan="2">4</td>
+		<td>2</td>
 		<td></td>
 		<td></td>
 	</tr>
 
 	{{-- END --}}
 	<tr>
-		<td>Remark</td>
-		<td colspan="5"></td>
+		<td colspan="6"></td>
 		<td colspan="7">Total Score</td>
 		<td></td>
 		<td></td>
 	</tr>
 
 	<tr>
-		<td colspan="3">Recommendation (if have)</td>
-		<td colspan="12"></td>
+		<td colspan="3">Smoking</td>
+		{{-- <td colspan="2">Y / &#9411;</td> --}}
+		<td colspan="2"></td>
+		<td colspan="7">Alcohol</td>
+		<td colspan="3"></td>
+		{{-- <td colspan="3">Y / &#9411;</td> --}}
 	</tr>
 
 	<tr>
-		<td colspan="3">Last Evaluation Check</td>
-		<td colspan="12"></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">Academic ability</td>
+		<td colspan="3">Hobby</td>
 		<td colspan="2"></td>
 		<td colspan="7">Religion</td>
 		<td colspan="3">
@@ -265,16 +245,54 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Alcohol</td>
-		{{-- <td colspan="2">Y / &#9411;</td> --}}
+		<td colspan="3">Document Preparation</td>
 		<td colspan="2"></td>
-		<td colspan="7">Smoking</td>
-		<td colspan="3"></td>
-		{{-- <td colspan="3">Y / &#9411;</td> --}}
+		<td colspan="7">USA Visa</td>
+		<td colspan="3">
+			{{ isset($applicant->document_id->{"US-VISA"}) ? "R C1/D" : '' }}
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">Status of legal education</td>
+		<td colspan="2"></td>
+		<td colspan="7">Available date for boarding</td>
+		<td colspan="3">
+			Anytime
+		</td>
 	</tr>
 
 	<tr>
 		<td colspan="3">Comments</td>
 		<td colspan="12"></td>
+	</tr>
+
+	<tr>
+		<td rowspan="2">
+			1ˢᵗ <br style="mso-data-placement:same-cell;" />(Manning Company)
+		</td>
+		<td>Rank/Name</td>
+		<td colspan="2" style="text-decoration: underline;">Ms. Thea Mae D. Guerra</td>
+		<td rowspan="2">
+			2ⁿᵈ <br style="mso-data-placement:same-cell;" />(Owner)
+		</td>
+		<td colspan="2">Rank / Name</td>
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		<td>Sign</td>
+		<td colspan="2">
+			{{-- SIGN --}}
+		</td>
+		<td colspan="2">Sign</td>
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2">Recruitment Status</td>
+		<td colspan="2">Employable / Unemployable</td>
+		<td colspan="2">Confirm by D.P</td>
+		<td colspan="9"></td>
 	</tr>
 </table>

@@ -138,6 +138,10 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A1:Q36')->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A1:Q36')->getFont()->setSize(10);
 
+                // SET PAGE BREAK PREVIEW
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+
                 // HEADINGS
 
                 // HC B

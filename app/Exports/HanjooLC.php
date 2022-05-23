@@ -120,7 +120,7 @@ class HanjooLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // FONT SIZES
 
                 $event->sheet->getDelegate()->getStyle('A4:N60')->getFont()->setSize(12);
-                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(28);
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(24);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(20);
                 $event->sheet->getDelegate()->getStyle('C20')->getFont()->setSize(11);
                 // $event->sheet->getDelegate()->getStyle('D48:D49')->getFont()->setSize(7);
@@ -129,6 +129,10 @@ class HanjooLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('L48:L49')->getFont()->getColor()->setRGB('2f5596');
                 // $event->sheet->getDelegate()->getStyle('D48:D49')->getFont()->setItalic(true);
                 // $event->sheet->getDelegate()->getStyle('L48:L49')->getFont()->setItalic(true);
+
+                // SET PAGE BREAK PREVIEW
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
                 // FAMILY DATA ROWS
                 $rows = [

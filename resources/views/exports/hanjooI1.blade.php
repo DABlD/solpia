@@ -150,6 +150,13 @@
 						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 					}
 				}
+				elseif($temp == "POLLUTION"){
+					foreach(get_object_vars($applicant->document_lc) as $document){
+					    if(str_contains($document->type, $temp)){
+					        $docu = $document;
+					    }
+					}
+				}
 			}
 
 		}
@@ -201,16 +208,19 @@
 				echo "
 					<tr>
 						<td colspan='2' rowspan='3'>
-							Advanced Safety Course<span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-							- Fire Fighting<span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-							- Survival Craft And Rescue Boat<span></span><span></span>
+							Advanced Safety Course
+							<br style='mso-data-placement:same-cell;' />
+							- Fire Fighting
+							<br style='mso-data-placement:same-cell;' />
+							- Survival Craft And Rescue Boat
+							<br style='mso-data-placement:same-cell;' />
 							- First Aid
 						</td>
 
 						<td colspan='1'>$number</td>
 						<td colspan='2'>$issue</td>
 						<td colspan='3'>$expiry</td>
-						<td colspan='1'></td>
+						<td colspan='1'>$issuer</td>
 					</tr>
 				";
 			}
@@ -220,7 +230,7 @@
 						<td colspan='1'>$number</td>
 						<td colspan='2'>$issue</td>
 						<td colspan='3'>$expiry</td>
-						<td colspan='1'></td>
+						<td colspan='1'>$issuer</td>
 					</tr>
 				";
 			}
@@ -235,7 +245,7 @@
 					<td colspan='1'>$number</td>
 					<td colspan='2'>$issue</td>
 					<td colspan='3'>$expiry</td>
-					<td colspan='1'></td>
+					<td colspan='1'>$issuer</td>
 				</tr>
 			";
 		}
@@ -264,14 +274,14 @@
 	</tr>
 
 	<tr>
-		<td colspan="9">
+		<td colspan="9" style="vertical-align: middle;">
 			*In case of no available document, please specify the status in a remark
 		</td>
 	</tr>
 
 	<tr>
 		<td>Name of Vessel</td>
-		<td colspan="2">
+		<td colspan="2" style="font-weight: bold;">
 			{{ isset($applicant->vessel) ? $applicant->vessel->name : '-----' }}
 		</td>
 
@@ -299,6 +309,8 @@
 	{{ $getDocument('COC', 			'lc', 		'MARINA', 		'C.O.C.'								)}}
 	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'G.O.C.'								)}}
 	{{ $getDocument('COC', 			'lc',		'MARINA', 		'Watch-keeping Certificate', 		true)}}
+	{{ $getDocument('MEDICAL CARE - MECA', 'lc', 'MARINA', 'MEDICAL CARE (MECA)')}}
+	{{ $getDocument('POLLUTION', 'lc', 'MARINA', 'Maritime Pollution Prevention')}}
 	{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 		"Flagged Seaman's Book"					)}}
 	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flagged License'						)}}
 	{{ $getDocument('BASIC TRAINING - BT', 'lc', 'MARINA', 		'Basic Safety Course'					)}}
@@ -315,41 +327,26 @@
 	{{ $getDocument('ECDIS', 'lc', '', 'ECDIS (Generic)')}}
 	{{ $getDocument('ECDIS SPECIFIC', 'lc', '', 'ECDIS (Specific)')}}
 
-	{{ $getDocument("US-VISA", 		'id', 		'US EMBASSY', 	'US Visa'								)}}
 	{{ $getDocument('MEDICAL CERTIFICATE', 'med_cert', '', 'Medical Examination Certificate'			)}}
 	{{ $getDocument('YELLOW FEVER', 'med_cert', '', 'Yellow Fever'										)}}
+	{{ $getDocument("US-VISA", 		'id', 		'US EMBASSY', 	'US Visa'								)}}
 
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td>a</td>
+		<td colspan="5" rowspan="2" style="text-align: center; vertical-align: middle;">Checked by:</td>
+		<td>x</td>
 		<td colspan="3">Qualified</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
 		<td></td>
 		<td colspan="3">Unqualified</td>
 	</tr>
 
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td>a</td>
+		<td colspan="5" rowspan="2" style="text-align: center; vertical-align: middle;">Confirmed by: <span style="text-decoration: underline;">THEA GUERRA</span></td>
+		<td>x</td>
 		<td colspan="3">Qualified</td>
 	</tr>
 	<tr>
-		<td colspan="2">Confirmed by: </td>
-		<td colspan="3"><span></span><span></span><span></span>THEA GUERRA<span>
 		<td></td>
 		<td colspan="3">Unqualified</td>
 	</tr>

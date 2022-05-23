@@ -128,9 +128,13 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
                 // FONT SIZES
-                $event->sheet->getDelegate()->getStyle('A1:Q36')->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A1:Q36')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:Q35')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A1:Q35')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A5')->getFont()->setSize(16);
+
+                // SET PAGE BREAK PREVIEW
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
                 // HEADINGS
 
@@ -161,7 +165,7 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[5] = [
-                    'A1:O33'
+                    'A1:O35'
                 ];
 
                 // B
@@ -175,7 +179,7 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'D26:D27', 'F7:F9', 'C10'
+                    'D25:D27', 'F7:F9', 'C10', 'A30:O35'
                 ];
 
                 // SHRINK TO FIT
@@ -220,7 +224,7 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ]);
 
                 $cells[1] = array_merge([
-                	'A7:O33'
+                	'A7:O35'
                 ]);
 
                 foreach($cells as $key => $value){
@@ -258,6 +262,7 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension('14')->setRowHeight(26.25);
                 $event->sheet->getDelegate()->getRowDimension('15')->setRowHeight(28.5);
 
+                $event->sheet->getDelegate()->getRowDimension('25')->setRowHeight(32);
                 $event->sheet->getDelegate()->getRowDimension('26')->setRowHeight(29.25);
                 $event->sheet->getDelegate()->getRowDimension('27')->setRowHeight(27);
                 $event->sheet->getDelegate()->getRowDimension('28')->setRowHeight(22.5);
@@ -266,6 +271,8 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension('31')->setRowHeight(21);
                 $event->sheet->getDelegate()->getRowDimension('32')->setRowHeight(21);
                 $event->sheet->getDelegate()->getRowDimension('33')->setRowHeight(27.5);
+                $event->sheet->getDelegate()->getRowDimension('34')->setRowHeight(21);
+                $event->sheet->getDelegate()->getRowDimension('35')->setRowHeight(21);
 
                 for($i = 7; $i <= 10; $i++){
                 	$event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(27);
@@ -294,24 +301,58 @@ class HanjooI2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setName('YN1');
         $drawing2->setDescription('YN1');
         $drawing2->setPath(public_path('images/yn1.jpg'));
-        $drawing2->setCoordinates('D32');
-        $drawing2->setOffsetX(7);
-        $drawing2->setOffsetY(3);
+        $drawing2->setCoordinates('D28');
+        $drawing2->setOffsetX(5);
+        $drawing2->setOffsetY(2);
         $drawing2->setResizeProportional(false);
-        $drawing2->setWidth(130);
-        $drawing2->setHeight(23);
+        $drawing2->setWidth(140);
+        $drawing2->setHeight(26);
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setName('YN2');
         $drawing3->setDescription('YN2');
         $drawing3->setPath(public_path('images/yn2.jpg'));
-        $drawing3->setCoordinates('M32');
-        $drawing3->setOffsetX(7);
-        $drawing3->setOffsetY(3);
+        $drawing3->setCoordinates('M28');
+        $drawing3->setOffsetX(5);
+        $drawing3->setOffsetY(2);
         $drawing3->setResizeProportional(false);
-        $drawing3->setWidth(130);
-        $drawing3->setHeight(23);
+        $drawing3->setWidth(135);
+        $drawing3->setHeight(26);
 
-        return [$drawing, $drawing2, $drawing3];
+        $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing4->setName('YN3');
+        $drawing4->setDescription('YN3');
+        $drawing4->setPath(public_path('images/yn3.jpg'));
+        $drawing4->setCoordinates('D30');
+        $drawing4->setOffsetX(7);
+        $drawing4->setOffsetY(3);
+        $drawing4->setResizeProportional(false);
+        $drawing4->setWidth(130);
+        $drawing4->setHeight(23);
+
+        $drawing5 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing5->setName('YN4');
+        $drawing5->setDescription('YN4');
+        $drawing5->setPath(public_path('images/yn3.jpg'));
+        $drawing5->setCoordinates('D31');
+        $drawing5->setOffsetX(7);
+        $drawing5->setOffsetY(3);
+        $drawing5->setResizeProportional(false);
+        $drawing5->setWidth(130);
+        $drawing5->setHeight(23);
+
+        $drawing6 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing6->setName('YN4');
+        $drawing6->setDescription('YN4');
+        $drawing6->setPath(public_path('images/maam_thea_sig.png'));
+        $drawing6->setCoordinates('C34');
+        $drawing6->setOffsetX(7);
+        $drawing6->setOffsetY(3);
+        $drawing6->setResizeProportional(false);
+        $drawing6->setWidth(150);
+        $drawing6->setHeight(25);
+
+        // return [$drawing, $drawing2, $drawing3];
+        return [$drawing, $drawing2, $drawing3, $drawing4, $drawing5, $drawing6];
     }
 }

@@ -165,6 +165,10 @@ class HanjooBD implements FromView, WithEvents, WithDrawings, WithColumnFormatti
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(28);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(20);
 
+                // SET PAGE BREAK PREVIEW
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+
                 // FAMILY DATA ROWS
                 $fdRows = array();
                 $temp = $this->applicant->family_data->count() / 2;
