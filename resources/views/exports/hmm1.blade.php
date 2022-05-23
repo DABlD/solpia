@@ -286,6 +286,7 @@
 			}
 			$man = str_replace('&', '&#38;', $ss->manning_agent);
 			$bhp = str_replace('&', '&#38;', $ss->bhp_kw);
+			$cn = str_replace('&', '&#38;', $ss->crew_nationality);
 
 			$total += $ss->sign_on->diffInDays($ss->sign_off);
 
@@ -301,7 +302,7 @@
 				<td>$off</td>
 				<td>$dura</td>
 				<td>$ss->remarks</td>
-				<td>$ss->crew_nationality</td>
+				<td>$cn</td>
 				<td>$man</td>
 				<td>$ss->principal</td>
 			";
