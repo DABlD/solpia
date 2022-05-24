@@ -342,7 +342,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="5" rowspan="2" style="text-align: center; vertical-align: middle;">Confirmed by: <span style="text-decoration: underline;">THEA GUERRA</span></td>
+		<td colspan="5" rowspan="2" style="text-align: center; vertical-align: middle;">Confirmed by: <span style="text-decoration: underline;">Ms. Thea Mae D. Guerra</span></td>
 		<td>x</td>
 		<td colspan="3">Qualified</td>
 	</tr>
