@@ -238,17 +238,13 @@
 					}
 					
 					setTimeout(() => {
-						index = 0;
 						for(let ctr = 0; ctr < keys.length; ctr++){
+							index = 0;
 							flags[keys[ctr]].forEach((data, ctr2) => {0
 								let country = $(`[name="docu-country${(ctr + 1)}"]`);
 
 								inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
 								i = (index * 7);
-								
-								if(ctr > 0){
-									i -= ctr * 21;
-								}
 
 								checkIfExisting($(inputs[i]), flags[keys[ctr]][ctr2].type);
 
@@ -257,6 +253,7 @@
 
 								$(inputs[i+2]).flatpickr(config).setDate(flags[keys[ctr]][ctr2].issue_date, true);
 								$(inputs[i+4]).flatpickr(config2).setDate(flags[keys[ctr]][ctr2].expiry_date, true);
+
 
 								$loc = $($($(inputs[i+4]).parent().parent()).children()[(ctr2 * 4) + ctr2]);
 
