@@ -9,94 +9,23 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use App\Models\{Rank, LineUpContract, Wage};
+use App\Models\Rank;
 
-class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class X07_SeaServiceRequestForm implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
-        $ranks = Rank::pluck('abbr', 'id');
-        $ranks2 = Rank::pluck('name', 'id');
-        $data->load('pro_app');
-        $data->load('document_id');
-        $data->load('document_lc');
-        $data->load('document_flag');
-        $data->load('document_med_cert');
-        $data->load('sea_service');
-
-        $con = LineUpContract::where([
-            ['applicant_id', '=', $data->id],
-            ['principal_id', '=', $data->pro_app->principal_id],
-            ['vessel_id', '=', $data->pro_app->vessel_id],
-            ['rank_id', '=', $data->pro_app->rank_id],
-            ['status', '=', "On Board"],
-        ])->first();
-
-        foreach(['document_id', 'document_flag', 'document_med_cert', 'document_lc'] as $docuType){
-            foreach($data->$docuType as $key => $doc){
-                $name = $doc->type;
-                if(!isset($data->$docuType->$name)){
-                    $data->$docuType->$name = $doc;
-                }
-                else{
-                    $size = 0;
-                    if(is_array($data->$docuType->$name)){
-                        $size = sizeof($data->$docuType->$name);
-                    }
-                    $name .= $size;
-                    $data->$docuType->$name = $doc;
-                }
-                $data->$docuType->forget($key);
+        $data->load(['sea_service' => function ($query) {
+            $query->orderBy('sign_on', 'desc');
+        }]);
+        if(!isset($data->vessel)){
+            $rank = $data->sea_service->first()->rank;
+            if($rank != ""){
+                $data->rank = Rank::where('name', $rank)->first()->abbr;
             }
         }
-
-        $wage1 = Wage::where('rank_id', $data->pro_app->rank_id)
-                    ->where('vessel_id', 42)
-                    // ->where('vessel_id', $data->pro_app->vessel_id)
-                    ->first();
-        $wage2 = Wage::where('rank_id', $data->data['rank'])
-                    ->where('vessel_id', 42)
-                    // ->where('vessel_id', $data->pro_app->vessel_id)
-                    ->first();
-
-        $fields = [
-            'basic', 'leave_pay', 'fot', 'ot', 
-            'sub_allow', 'retire_allow', 
-            'sup_allow', 'aca', 'engine_allow',
-            'other_allow', 'voyage_allow',
-            'owner_allow', 'tanker_allow'
-        ];
-
-        $wage1 = $this->getSum($wage1, $fields, $data->pro_app->seniority);
-        $wage2 = $this->getSum($wage2, $fields, $data->pro_app->seniority);
-
-        $data->con      = $con;
-        $data->ranks    = $ranks->all();
-        $data->ranks2   = $ranks2->all();
-        $data->wage1    = $wage1;
-        $data->wage2    = $wage2;
 
         $this->data     = $data;
         $this->type     = $type;
-    }
-
-    public function getSum($wage, $fields, $seniority){
-        $total = 0;
-
-        foreach($fields as $field){
-            if($wage->$field){
-                $total += $wage->$field;
-            }
-        }
-
-        $sr = $wage->sr_pay;
-        if($sr && $sr != "[]"){
-            $sr = json_decode($sr);
-            if($seniority > 1){
-                $total += $sr[$seniority - 2] ?? 0;
-            }
-        }
-
-        return sprintf('%g', $total);
     }
 
     public function view(): View
@@ -246,13 +175,6 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
                     ],
                 ]
             ],
-            [//15
-                'borders' => [
-                    'bottom' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOUBLE
-                    ],
-                ]
-            ],
         ];
 
         $fillStyle = [
@@ -329,7 +251,7 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('Extension Promotion Form', false);
+                $event->sheet->getDelegate()->setTitle('Sea Service Request Form', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -337,7 +259,7 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
-                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
@@ -411,19 +333,16 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // VC
                 $h[7] = [
-                    'B14:B22', 'C18:J19', 'C15:J16', 'C22:J24',
-                    'B25', 'G25',
-                    'B28', 'G28',
-                    'B31', 'G31',
+                    'A1:G17'
                 ];
 
                 $h['wrap'] = [
-                    'F18:J18', 'C23:E24', 'C16:J16'
+                    'E8'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'F15:G15'
+                    'A12:F13', 'E9'
                 ];
 
                 foreach($h as $key => $value) {
@@ -463,12 +382,10 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'C15:J16', 'C18:J19'
                 ]);
 
                 // ALL BORDER MEDIUM
                 $cells[1] = array_merge([
-                    'C23:J24'
                 ]);
 
                 // ALL BORDER THICK
@@ -481,7 +398,6 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'C15:J16', 'C18:J19'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -519,13 +435,10 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // BBT
                 $cells[12] = array_merge([
-                    'D5:F5', 'D6:F6', 'D7:F7', 'D8:F8', 
-                    'D9:F9', 'D10:F10', 'D11:F11', 'D12:F12', 
-                    'D13:F13',
-
-
-                    'B26:D26', 'G26:H26', 'B29:D29', 'G29:H29',
-                    'B32:D32', 'G32:H32',
+                    'B3:E3', 'B4:E4', 'B5:E5', 'B6:E6',
+                    'C9', 'E9', 'G9', 'C10', 'E10', 'G10',
+                    'A12:B12', 'D12:F12',
+                    'C15:E15'
                 ]);
 
                 // LBT
@@ -535,11 +448,6 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
                 // RBT
                 $cells[14] = array_merge([
                 ]);
-
-                // BBD
-                $cells[15] = array_merge([
-                    'C15:J15', 'C18:J18'
-                ]);
                 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
@@ -548,19 +456,16 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
                 }
 
                 // FOR THE CHECK
-                // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('A1:G17')->getFont()->setName('Calibri');
+                $event->sheet->getDelegate()->getStyle('A1:G17')->getFont()->setSize(11);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(3);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(1);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(1);
+
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(16);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(14);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(17);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
@@ -578,23 +483,23 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
         $drawing->setDescription('Letter Head');
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(70);
-        $drawing->setWidth(890);
+        $drawing->setHeight(115);
+        $drawing->setWidth(2200);
         $drawing->setOffsetX(4);
         $drawing->setOffsetY(4);
-        $drawing->setCoordinates('B1');
+        $drawing->setCoordinates('C1');
 
-        // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        // $drawing2->setName('Avatar');
-        // $drawing2->setDescription('Avatar');
-        // $drawing2->setPath(public_path($this->data->user->avatar));
-        // $drawing2->setResizeProportional(false);
-        // $drawing2->setHeight(230);
-        // $drawing2->setWidth(230);
-        // $drawing2->setOffsetX(5);
-        // $drawing2->setOffsetY(2);
-        // $drawing2->setCoordinates('C3');
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setName('Avatar');
+        $drawing2->setDescription('Avatar');
+        $drawing2->setPath(public_path($this->data->user->avatar));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(230);
+        $drawing2->setWidth(230);
+        $drawing2->setOffsetX(5);
+        $drawing2->setOffsetY(2);
+        $drawing2->setCoordinates('C3');
 
-        return [$drawing];
+        return [$drawing, $drawing2];
     }
 }

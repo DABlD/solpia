@@ -424,12 +424,13 @@
                     title: 'Select Export Type',
                     input: 'select',
                     inputOptions: {
-                        Biodata:        'Biodata',
-                        WalangLagay:    'Walang Lagay',
-                        HistoryCheck:   'History Check',
-                        SeaServiceCertificate:   'Certificate of Sea Service',
-                        DocumentChecklist:   'Document Checklist',
-                        X05_Clearance: 'Clearance'
+                        Biodata:                    'Biodata',
+                        WalangLagay:                'Walang Lagay',
+                        HistoryCheck:               'History Check',
+                        SeaServiceCertificate:      'Certificate of Sea Service',
+                        X07_SeaServiceRequestForm:  'Request for Sea Service Certificate',
+                        X05_Clearance:              'Clearance',
+                        DocumentChecklist:          'Document Checklist'
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
@@ -599,6 +600,48 @@
                             @else
                                 edc(type, fleet, application);
                             @endif
+                        }
+                        else if(result.value == "X07_SeaServiceRequestForm"){
+                            swal({
+                                html: `
+                                    <select id="por">
+                                        <option value="">Enter purpose of request</option>
+                                        <option value="COC/COP Application">COC/COP Application</option>
+                                        <option value="Loan">Loan</option>
+                                        <option value="Personal">Personal</option>
+                                    </select>
+                                    <br><br>`,
+                                onOpen: () => {
+                                    $('#por').select2({
+                                        width: '100%',
+                                        tags: true
+                                    });
+
+                                    $('#por').on('select2:open', () => {
+                                        $('.swal2-container').css('z-index', 1000);
+                                    })
+                                },
+                                preConfirm: () => {
+                                    swal.showLoading();
+                                    return new Promise(resolve => {
+                                        setTimeout(() => {
+                                            if($('#por').val() == ""){
+                                                swal.showValidationError('Reason is required');
+                                            }
+                                        resolve()}, 500);
+                                    });
+                                },
+                            }).then(result2 => {
+                                if(result2.value){
+                                    let type = result.value;
+                                    let data = {
+                                        status: application.data('status2'),
+                                        reason: $('#por').val(),
+                                        rank: 1
+                                    };
+                                    window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${type}?` + $.param({data});
+                                }
+                            })
                         }
                         else{
                             window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
