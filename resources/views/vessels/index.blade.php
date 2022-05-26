@@ -2016,8 +2016,9 @@
                     'RequestToProcess':     'Request To Process',
                     'DocumentChecklist':    'Document Checklist',
                     'X01_BorrowDocuments':  'Borrow Documents',
-                    'X04_USVE':  'US Visa Endorsement Form'
+                    'X04_USVE':  'US Visa Endorsement Form',
                     @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
+                        'X08_KoscoWaiver':  'Kosco Waiver'
                     @endif
                 },
                 inputPlaceholder: '',
