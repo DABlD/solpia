@@ -1601,7 +1601,10 @@
                         <td class="remarks">${crew.remarks}</td>
                         @if(auth()->user()->role != "Principal")
                         <td class="actions">
-                            <a class="btn btn-info btn-sm" data-toggle="tooltip" title="Edit On Board Details" onClick='eod(${crew.id}, ${crew.vessel_id}, "${crew.joining_date}", ${crew.months}, "${crew.joining_port ?? ""}")'>
+                            <a class="btn btn-info btn-sm" data-toggle="tooltip" title="Export Documents" onClick="getContract2(${crew.applicant_id})">
+                                <span class="fa fa-file-text"></span>
+                            </a>
+                            <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit On Board Details" onClick='eod(${crew.id}, ${crew.vessel_id}, "${crew.joining_date}", ${crew.months}, "${crew.joining_port ?? ""}")'>
                                 <span class="fa fa-pencil fa-sm"></span>
                             </a>
                             <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
@@ -2042,6 +2045,102 @@
                     }
                 }
             })
+        }
+
+        function getContract2(id){
+            swal({
+                title: 'Select Document',
+                input: 'select',
+                inputOptions: {
+                    'X06_Ext_Prom_Form':  'Extension Promotion Form'
+                },
+                inputPlaceholder: '',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+            }).then(result => {
+                if(result.value){
+                    if(result.value == "X06_Ext_Prom_Form"){
+                        X06(id, result.value);
+                    }
+                    else{
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
+                    }
+                }
+            })
+        }
+
+        function X06(id, type){
+            swal.showLoading();
+
+            $.ajax({
+                url: '{{ route('applications.getRanks') }}',
+                success: ranks => {
+                    ranks = JSON.parse(ranks);
+                    let rankString = "";
+
+                    Object.keys(ranks).forEach(category => {
+                        rankString += `<optgroup label="${category}"></optgroup>`;
+
+                        ranks[category].forEach(rank => {
+                            rankString += `
+                                <option value="${rank.id}">
+                                    &nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})
+                                </option>`;
+                        });
+                    });
+
+                    swal({
+                        title: 'Enter Details',
+                        html: `
+                            <select id="rank_id" class="form-control">
+                                <option value="">Promote To:</option>
+                                ${rankString}
+                            </select><br><br>
+
+                            <input type="text" id="doe" class="form-control" placeholder="Date of Effectivity"><br>
+                            <input type="text" id="recommended_by" class="form-control" placeholder="Recommended By (optional)"><br>
+                            <input type="text" id="remarks" class="form-control" placeholder="Remarks (optional)"><br>
+                            <input type="number" min="1" id="cd" class="form-control" placeholder="Contract Duration (optional)"><br>
+                        `,
+                        preConfirm: () => {
+                            swal.showLoading();
+                            return new Promise(resolve => {
+                                setTimeout(() => {
+                                    if($('#rank_id').val() == ""){
+                                        swal.showValidationError('Rank is required');
+                                    }
+                                resolve()}, 500);
+                            });
+                        },
+                        onOpen: () => {
+                            $('#rank_id').select2();
+                            $('#rank_id').on('select2:open', () => {
+                                $('.select2-dropdown').css('z-index', 1060);
+                            });
+
+                            $('#doe').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d',
+                                minDate: moment().format("YYYY-MM-DD")
+                            })
+                        }
+                    }).then(result => {
+                        if(result.value){
+                            let data = {
+                                rank: $('#rank_id').val(),
+                                doe: $('#doe').val(),
+                                recommended_by: $('#recommended_by').val(),
+                                remarks: $('#remarks').val(),
+                                status: "On Board",
+                                cd: $('#cd').val()
+                            }
+
+                            window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                        }
+                    });
+                }
+            });
         }
 
         function USVE(id, type){
