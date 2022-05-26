@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use App\Models\Rank;
 
 class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
@@ -37,11 +38,14 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
             }
         }
 
+        if(!isset($applicant->rank)){
+            $applicant->rank = Rank::find($applicant->data['rank'])->abbr;
+        }
+
         $this->data     = $applicant;
         $this->type     = $applicant->data['type'];
         $this->rows     = null;
         $this->view     = null;
-
         $this->initNulls($applicant->data['type'], $applicant->data['fleet']);
     }
 
