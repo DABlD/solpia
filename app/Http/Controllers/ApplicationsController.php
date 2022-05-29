@@ -22,6 +22,10 @@ use App\Exports\AllApplicant;
 // use App\Exports\Application;
 use Maatwebsite\Excel\Facades\Excel;
 
+// PDF CLASSES
+use App\Exports\PDFExport;
+use PDF;
+
 class ApplicationsController extends Controller
 {
     public function __construct(){
@@ -1250,6 +1254,9 @@ class ApplicationsController extends Controller
                     }
                 }
             }
+            elseif(str_starts_with($type, 'Y0')){
+                $applicant->data = $req->all();
+            }
         }
 
         if($req->data){
@@ -1259,10 +1266,20 @@ class ApplicationsController extends Controller
             $applicant->data2 = $req->data2;
         }
 
+        // SET IF PDF OR EXCEL
+        $exportType = $req->exportType ?? "xlsx";
+
         $fileName = $req->filename ?? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
         $class = "App\\Exports\\" . $type;
         
-        return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");
+        if($exportType == "xlsx"){
+            return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");
+        }
+        else{
+            $pdf = new PDFExport($applicant, $type, $fileName);
+            $pdf->getData();
+            return $pdf->download();
+        }
     }
 
     function getFiles_old(Request $req){

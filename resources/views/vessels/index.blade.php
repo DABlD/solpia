@@ -2496,10 +2496,11 @@
                 input: 'select',
                 inputOptions: {
                     exportOnOff : 'Export On/Off Signers',
+                    exportOnDocs : 'Export Onsigners SIRB and PPRT',
+                    exportOffDocs : 'Export Offsigners SIRB and PPRT',
                     exportOnBoard : 'Export Onboard',
                     RTP : 'Request to Process',
                     RFSC: 'Shoe and Coverall Request',
-                    RPPE: 'PPE Request'
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
@@ -2783,6 +2784,28 @@
             data.filename = name.substring(4) + " - Onboard";
 
             window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel?` + $.param(data);
+        }
+
+        function exportOnDocs(id, name){
+            let data = {};
+            data.id = id;
+            data.filename = name.replace(/[^\w\s]/gi, '') + " - Onsigners";
+            data.exportType = "pdf";
+
+            const type = "Y01_OnsignerDocs";
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+        }
+
+        function exportOffDocs(id, name){
+            let data = {};
+            data.id = id;
+            data.filename = name.replace(/[^\w\s]/gi, '') + " - Offsigners";
+            data.exportType = "pdf";
+
+            const type = "Y02_OffsignerDocs";
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
         }
 
         function RTP(id){
