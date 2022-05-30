@@ -243,7 +243,8 @@ class ShinkoOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
 
                 // VC
                 $h[7] = [
-                    'A1', 'H4:' . $ar('H', 3), $ar('A', 5), $ar('H', 8, 'H', 7, true)
+                    'A1', 'H4:' . $ar('H', 3), $ar('A', 5), $ar('H', 8, 'H', 7, true),
+                    'A1:H30'
                 ];
 
                 $h['wrap'] = [
