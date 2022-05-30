@@ -103,7 +103,7 @@
 				}
 				else{
 					foreach (get_object_vars($data->document_flag) as $flag) {
-						if($flag->country == "Marshall Islands" && $flag->type == $doc){
+						if($flag->country == "Panama" && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
