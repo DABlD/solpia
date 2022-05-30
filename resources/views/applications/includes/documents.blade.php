@@ -829,7 +829,7 @@
         						[1,41]
         					],
         					documents: [
-        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
+        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA'
         					]
         				}
         			]

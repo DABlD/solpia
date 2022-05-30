@@ -1462,7 +1462,12 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
-        echo 'test';
+        $applicants = DocumentFlag::where('type', 'SDSD')->get()->groupBy('applicant_id');
+        foreach($applicants as $key => $applicant){
+            if(sizeof(sizeof($applicant)) > 1){
+                echo $key . '<br>';
+            }
+        }
     }
 
     private function _view($view, $data = array()){
