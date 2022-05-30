@@ -1464,7 +1464,7 @@ class ApplicationsController extends Controller
     public function testFunc(){
         $applicants = DocumentFlag::where('type', 'SDSD')->get()->groupBy('applicant_id');
         foreach($applicants as $key => $applicant){
-            if(sizeof(sizeof($applicant)) > 1){
+            if(sizeof($applicant) > 1){
                 echo $key . '<br>';
             }
         }
