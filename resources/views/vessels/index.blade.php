@@ -2769,11 +2769,32 @@
                 cancelButtonColor: '#f76c6b',
                 inputOptions: {
                     ShinkoOnOff: 'Shinko/All',
+                    ToeiOnOff: 'Toei',
                     WesternOnOff: 'Nitta/TOEI'
                 },
             }).then(result => {
+                let data = {};
                 if(result.value){
-                    window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}`;
+                    if(result.value == "ToeiOnOff"){
+                        swal({
+                            title: 'Enter Details',
+                            showCancelButton: true,
+                            cancelButtonColor: '#f76c6b',
+                            html: `
+                                <input type="text" id="to" class="form-control" placeholder="To"><br>
+                                <input type="text" id="port" class="form-control" placeholder="Port"><br>
+                            `
+                        }).then(result2 => {
+                            if(result2.value){
+                                data.to = $('#to').val();
+                                data.port = $('#port').val();
+                            }
+                            window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}?` + $.param({data: data});
+                        });
+                    }
+                    else{
+                        window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}`;
+                    }
                 }
             })
         }

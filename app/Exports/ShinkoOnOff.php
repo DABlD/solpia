@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 
 class ShinkoOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($linedUps, $onBoards, $type){
+    public function __construct($linedUps, $onBoards, $type, $data){
         $this->linedUps 	= $linedUps;
         $this->onBoards 	= $onBoards;
         $this->type 		= $type;

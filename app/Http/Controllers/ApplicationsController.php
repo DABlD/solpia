@@ -973,7 +973,7 @@ class ApplicationsController extends Controller
                         ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
                         // ->join('document_ids as d', 'd.applicant_id', '=', 'processed_applicants.applicant_id')
                         // ->join('sea_services as s', 's.applicant_id', '=', 'processed_applicants.applicant_id')
-                        ->select('processed_applicants.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
+                        ->select('processed_applicants.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place')
                         ->get();
 
         $temp = collect();
@@ -992,7 +992,7 @@ class ApplicationsController extends Controller
         $linedUps = $temp;
 
         foreach($linedUps as $linedUp){
-            $temp = DocumentId::where('applicant_id', $linedUp->applicant_id)->select('type', 'expiry_date', 'number')->get();
+            $temp = DocumentId::where('applicant_id', $linedUp->applicant_id)->select('type', 'issue_date', 'expiry_date', 'number')->get();
 
             $linedUp->age = now()->parse($linedUp->birthday)->diff(now())->format('%y');
             $linedUp->status2 = "NEW-HIRE";
@@ -1000,6 +1000,7 @@ class ApplicationsController extends Controller
             foreach($temp as $docu){
                 if($docu->type != ""){
                     $linedUp->{$docu->type} = $docu->expiry_date;
+                    $linedUp->{$docu->type . 'i'} = $docu->issue_date;
                     $linedUp->{$docu->type . 'n'} = $docu->number;
                 }
             }
@@ -1017,7 +1018,7 @@ class ApplicationsController extends Controller
                                 ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
                                 ->join('users as u', 'u.id', '=', 'a.user_id')
                                 ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
-                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr')
+                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place')
                                 ->get();
 
         $temp = collect();
@@ -1038,12 +1039,13 @@ class ApplicationsController extends Controller
         $onSigners = array();
 
         foreach($crews as $crew){
-            $temp = DocumentId::where('applicant_id', $crew->applicant_id)->select('type', 'expiry_date', 'number')->get();
+            $temp = DocumentId::where('applicant_id', $crew->applicant_id)->select('type', 'issue_date', 'expiry_date', 'number')->get();
             $crew->age = now()->parse($crew->birthday)->diff(now())->format('%y');
 
             foreach($temp as $docu){
                 if($docu->type != ""){
                     $crew->{$docu->type} = $docu->expiry_date;
+                    $crew->{$docu->type . 'i'} = $docu->issue_date;
                     $crew->{$docu->type . 'n'} = $docu->number;
                 }
             }
@@ -1180,7 +1182,7 @@ class ApplicationsController extends Controller
         echo LineUpContract::where($req->col, $req->val)->update($req->update);
     }
 
-    function exportOnOff($id, $type){
+    function exportOnOff($id, $type, Request $req){
         $vesselCrew = $this->getVesselCrew(new Request(), $id);
 
         $onBoards = array_filter($vesselCrew[0], function($vesselCrew){
@@ -1197,8 +1199,12 @@ class ApplicationsController extends Controller
         $class = "App\\Exports\\" . $type;
 
         $name = substr($vesselCrew[2], 4);
+        $data = null;
+        if($req->data){
+            $data = $req->data;
+        }
 
-        return Excel::download(new $class($linedUps, $onBoards, $type), "$name Onsigners and Offsigners.xlsx");
+        return Excel::download(new $class($linedUps, $onBoards, $type, $data), "$name Onsigners and Offsigners.xlsx");
     }
 
     function exportDocument($id, $type, Request $req){
