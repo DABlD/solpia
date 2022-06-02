@@ -424,13 +424,14 @@
                     title: 'Select Export Type',
                     input: 'select',
                     inputOptions: {
-                        Biodata:                    'Biodata',
-                        WalangLagay:                'Walang Lagay',
-                        HistoryCheck:               'History Check',
-                        SeaServiceCertificate:      'Certificate of Sea Service',
-                        X07_SeaServiceRequestForm:  'Request for Sea Service Certificate',
-                        X05_Clearance:              'Clearance',
-                        DocumentChecklist:          'Document Checklist'
+                        Biodata:                        'Biodata',
+                        WalangLagay:                    'Walang Lagay',
+                        HistoryCheck:                   'History Check',
+                        SeaServiceCertificate:          'Certificate of Sea Service',
+                        X07_SeaServiceRequestForm:      'Request for Sea Service Certificate',
+                        X05_Clearance:                  'Clearance',
+                        X09_InitialDocumentChecklist:   'Document Checklist (Initial)',
+                        DocumentChecklist:              'Document Checklist (Final)'
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
