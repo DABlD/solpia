@@ -119,12 +119,12 @@
 	<tr>
 		<td rowspan="2" style="{{ $center }}">Period</td>
 		<td>Date of commencement</td>
-		<td colspan="7" style="{{ $color }}"></td>
+		<td colspan="7" style="{{ $color }}">{{ now()->parse($data->date_processed)->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
 		<td>Date of termination</td>
-		<td colspan="7" style="{{ $color }}"></td>
+		<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
