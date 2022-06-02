@@ -240,8 +240,10 @@ class OnBoardVessel implements FromView, WithEvents//, WithDrawings//, ShouldAut
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-
+                    'D4:D' . $this->size,
+                    'M4:M' . $this->size
                 ];
+
 
                 foreach($h as $key => $value) {
                     foreach($value as $col){
@@ -313,7 +315,7 @@ class OnBoardVessel implements FromView, WithEvents//, WithDrawings//, ShouldAut
                 $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(13);
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(10.5);
                 $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(11.5);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(11.5);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(30);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(35);
                 $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(35);
 
