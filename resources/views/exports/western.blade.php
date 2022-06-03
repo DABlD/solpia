@@ -169,6 +169,18 @@
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				}
 			}
+			elseif($type == "lc" && $issuer == "MARINA"){
+				$change = true;
+				foreach(get_object_vars($applicant->document_lc) as $docs2){
+					if(str_starts_with($docs2->type, $docu) && $docs2->issuer == "MARINA"){
+						$docu = $docs2;
+						$change = false;
+					}
+				}
+				if($change){
+					$docu = false;
+				}
+			}
 			else{
 				$temp = $docu;
 
