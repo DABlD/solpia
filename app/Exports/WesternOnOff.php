@@ -209,7 +209,7 @@ class WesternOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAuto
 
                 // VC
                 $h[7] = [
-                    'A1:30'
+                    'A1:K30'
                 ];
 
                 $h['wrap'] = [
