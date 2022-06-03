@@ -48,21 +48,28 @@
 
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
 			if($type == "lc" && $docu == "COC" && $name == "Watchkeeping"){
-				if($applicant->rank->type == "OFFICER" && $regulation){
+				if($applicant->rank->type == "RATING" && $regulation){
 					$tempDocu = $docu;
 					$docu = false;
 					$temp = "";
 
-					if($rank >= 9 && $rank <= 23){
+					if($rank >= 9 && $rank <= 23){	
+						
+						if($rank == 11){
+							$temp = 'II/4';
+						}
+						if($rank == 10){
+							$temp = 'II/5';
+						}
+						if($rank == 17){
+							$temp = 'III/4';
+						}
+						if($rank == 16){
+							$temp = 'III/5';
+						}
+
 						foreach($applicant->document_lc as $document){
 							$regulation = json_decode($document->regulation);
-							
-							if($rank >= 9 && $rank <= 14){
-								$temp = 'II/4';
-							}
-							elseif($rank >= 15 && $rank <= 23){
-								$temp = 'III/4';
-							}
 
 						    if(in_array($temp, $regulation)){
 						        $docu = $document;
@@ -489,7 +496,11 @@
 		<td colspan="6">Issued By</td>
 	</tr>
 
-	{{ $getDocument('COC', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
+	@if($applicant->rank->type == "OFFICER")
+		{{ $getDocument('COC', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
+	@else
+		{{ $getDocument('COC-EMPTY', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
+	@endif
 	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'National GMDSS'	,'',true			)}}
 	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flag License'		,'',true			)}}
 	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Flag GMDSS'		,'',true			)}}
