@@ -526,7 +526,20 @@ class ApplicationsController extends Controller
                         continue;
                     }
                 }
-                $applicant->$docuType->$temp = $data;
+
+                if(!isset($applicant->$docuType->$temp)){
+                    $applicant->$docuType->$temp = $data;
+                }
+                else{
+                    $size = 0;
+                    if(is_array($applicant->$docuType->$temp)){
+                        $size = sizeof($applicant->$docuType->$temp);
+                    }
+                    $temp .= $size;
+                    $applicant->$docuType->$temp = $data;
+                }
+                
+                // $applicant->$docuType->$temp = $data;
             }
         }
 
