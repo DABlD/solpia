@@ -48,7 +48,7 @@
 
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
 			if($type == "lc" && $docu == "COC" && $name == "Watchkeeping"){
-				if($rank > 0 && $regulation){
+				if($applicant->rank->type == "OFFICER" && $regulation){
 					$tempDocu = $docu;
 					$docu = false;
 					$temp = "";
