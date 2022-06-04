@@ -404,6 +404,45 @@
                 })
             });
 
+            $('[data-original-title="Export Principal\'s Onboard Crew"]').on('click', () => {
+                $.ajax({
+                    url: '{{ route('principal.get') }}',
+                    data: {
+                        cols: ['id', 'name', 'active', 'fleet'],
+                        where: ['active', 1]
+                    },
+                    success: principals => {
+                        principals = JSON.parse(principals);
+                        select = [];
+                        console.log(principals);
+
+                        principals.forEach(principal => {
+                            $bool = true;
+
+                            @if(auth()->user()->fleet)
+                                if(principal.fleet != "{{ auth()->user()->fleet }}"){
+                                    $bool = false;
+                                }
+                            @endif
+
+                            if($bool){
+                                select[principal.id] = principal.name;
+                            }
+                        });
+
+                        swal({
+                            title: 'Select Principal',
+                            input: 'select',
+                            inputOptions: select,
+                            showCancelButton: true,
+                            cancelButtonColor: '#f76c6b'
+                        }).then(result => {
+                            window.location.href = `{{ route('principal.getOnboardCrew') }}/${result.value}`;
+                        });
+                    }
+                });
+            });
+
             $('[data-original-title="Remove"]').on('click', vessel => {
                 let id = $(vessel.target).data('id');
 

@@ -538,7 +538,7 @@ class ApplicationsController extends Controller
                     $temp .= $size;
                     $applicant->$docuType->$temp = $data;
                 }
-                
+
                 // $applicant->$docuType->$temp = $data;
             }
         }
@@ -1481,12 +1481,18 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
-        $applicants = DocumentFlag::where('type', 'SDSD')->get()->groupBy('applicant_id');
-        foreach($applicants as $key => $applicant){
-            if(sizeof($applicant) > 1){
-                echo $key . '<br>';
-            }
-        }
+        // $applicants = DocumentFlag::where('type', 'SDSD')->get()->groupBy('applicant_id');
+        // foreach($applicants as $key => $applicant){
+        //     if(sizeof($applicant) > 1){
+        //         echo $key . '<br>';
+        //     }
+        // }
+
+        $luc = Applicant::where('lup.status', 'On Board')
+                    ->join('line_up_contracts as lup', 'lup.applicant_id', '=', 'applicants.id')
+                    ->get();
+        // $luc = LineUpContract::where('status', 'On Board')->get();
+        dd($luc);
     }
 
     private function _view($view, $data = array()){

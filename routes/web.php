@@ -247,6 +247,7 @@ Route::group([
 		// PRINCIPAL
 		$name = "principal";
 		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::get($name . '/getOnboardCrew/{principal?}', ucfirst($name) . 'Controller@getOnboardCrew')->name($name . '.getOnboardCrew');
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
