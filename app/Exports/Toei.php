@@ -392,22 +392,37 @@ class Toei implements FromView, WithEvents, WithDrawings//, WithColumnFormatting
                 $temp = 17;
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
+                $hl = false;
+                if($this->applicant->rank){
+                    foreach($this->applicant->document_lc as $lc){
+                        if($lc->type == "COC"){
+                            $regulations = json_decode($lc->regulation);
+
+                            if(in_array("II/1", $regulations) || in_array("III/1", $regulations)){
+                                $hl = true;
+                            }
+                        }
+                    }
+                }
+
                 // FOR MARINA COP
                 if($this->applicant->rank){
                     // DECK
-                    if(in_array($this->applicant->rank->id, [9,10,15,16])){
-                        $start = $raoc;
-                        $end = $raoc;
-                        $raoc += 1;
-                        $temp += 1;
-                    }
-                    elseif(in_array($this->applicant->rank->id, [3,4,7,8])){
+                    $rid = $this->applicant->rank->id;
+
+                    if(($rid == 10 && $hl) || ($rid == 16 && $hl) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
                         $start = $raoc;
                         $end = $raoc;
                         $start2 = $start+1;
                         $end2 = $end+1;
                         $raoc += 2;
                         $temp += 2;
+                    }
+                    elseif(in_array($rid, [10,16]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
+                        $start = $raoc;
+                        $end = $raoc;
+                        $raoc += 1;
+                        $temp += 1;
                     }
                 }
 

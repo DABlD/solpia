@@ -973,53 +973,39 @@
 		@php 
 			$docu = false;
 			$docu2 = false;
-			$requiredRegulation = "";
-			$requiredRegulation2 = "";
+			$rr1 = null;
+			$rr2 = null;
 
 			if(isset($applicant->rank)){
-				$requiredRegulation = "";
 				$tRank = $applicant->rank->id;
 
-				// DECK
-				if($tRank >= 9 && $tRank <= 10){
-					$requiredRegulation = "II/4";
+				if($tRank == 10 || $tRank == 11){
+					$rr1 = "II/4";
+					$rr2 = "II/5";
 				}
-				elseif($tRank == 3 || $tRank == 4){
-					$requiredRegulation = "II/4";
-					$requiredRegulation2 = "II/5";
-				}
-				// ENGINE
-				elseif ($tRank >= 15 && $tRank <= 16) {
-					$requiredRegulation = "III/4";
-				}
-				elseif($tRank == 7 || $tRank == 8){
-					$requiredRegulation = "III/4";
-					$requiredRegulation2 = "III/5";
+				else if($tRank == 16 || $tRank == 17){
+					$rr1 = "III/4";
+					$rr2 = "III/5";
 				}
 
-				foreach($applicant->document_lc as $document){
-					$regulation = json_decode($document->regulation);
+				foreach($applicant->document_lc as $lc){
+					$regulations = json_decode($lc->regulation);
 
-					if($requiredRegulation != ""){
-					    if($document->type == "COC" && in_array($requiredRegulation, $regulation)){
-					        $docu = $document;
-					    }
+					if(in_array($rr1, $regulations)){
+						$docu = $lc;
 					}
-
-					if($requiredRegulation2 != ""){
-					    if($document->type == "COE" && in_array($requiredRegulation2, $regulation)){
-					        $docu2 = $document;
-					    }
+					if(in_array($rr2, $regulations)){
+						$docu2 = $lc;
 					}
 				}
 			}
 		@endphp
 
 		@if($applicant->rank)
-			@if(in_array($applicant->rank->id, [9,10,15,16,3,4,7,8]))
+			@if($tRank == 10 || $tRank == 16 || ($tRank == 11 && $hl == 2) || ($tRank == 17 && $hl == 2))
 				<tr>
 					<td colspan="4">
-						MARINA COP REGULATION {{ $requiredRegulation }}
+						MARINA COP REGULATION {{ $rr1 }}
 					</td>
 					<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 					<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
@@ -1028,10 +1014,10 @@
 				</tr>
 			@endif
 
-			@if(in_array($applicant->rank->id, [3,4,7,8]))
+			@if(($tRank == 10 && $hl == 2) || ($tRank == 16 && $hl == 2) || ($tRank == 11 && $hl == 2) || ($tRank == 17 && $hl == 2))
 				<tr>
 					<td colspan="4">
-						MARINA COP REGULATION {{ $requiredRegulation2 }}
+						MARINA COP REGULATION {{ $rr2 }}
 					</td>
 					<td>{{ $docu2 ? $docu2->no : "-----"}}</td>
 					<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
