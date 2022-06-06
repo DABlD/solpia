@@ -395,6 +395,8 @@
 					@else
 						-----
 					@endif
+				@else
+					-----
 				@endif
 			</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
