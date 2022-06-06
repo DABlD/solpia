@@ -361,6 +361,7 @@
 
 	@php
 		$eb = null;
+		$year = "-";
 		$temps = ['College', 'Vocational', 'Undergrad'];
 
 		foreach($temps as $temp){
@@ -372,15 +373,17 @@
 			}
 		}
 
-		$temp = explode('-', $eb->year);
-		$year = $temp[1] != "" ? $temp[1] : "";
+		if($eb){
+			$temp = explode('-', $eb->year);
+			$year = $temp[1] != "" ? $temp[1] : "";
+		}
 	@endphp
 
 	<tr>
 		<td>COURSE</td>
-		<td colspan="2">{{ $eb->course }}</td>
+		<td colspan="2">{{ $eb ? $eb->course : '-' }}</td>
 		<td>SCHOOL</td>
-		<td colspan="4">{{ $eb->school }}</td>
+		<td colspan="4">{{ $eb ? $eb->school : '-' }}</td>
 		<td>YEAR</td>
 		<td style="text-align: left;">{{ $year }}</td>
 	</tr>
