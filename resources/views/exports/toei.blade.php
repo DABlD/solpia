@@ -276,59 +276,34 @@
 		</tr>
 
 		@php 
-			$docu = false;
-			$altDoc = false;
+			$regs = array();
+			$regs['dr'] = ["II/4", "II/5", "II/1", "II/2"];
+			$regs['er'] = ["III/4", "III/5", "III/1", "III/2"];
 
-			if(isset($applicant->rank)){
-				$requiredRegulation = "";
-				$altRegulation = "";
-				$altRegulation2 = "";
-				$tRank = $applicant->rank->id;
+			$hl = null;
+			$docu = null;
+			$rt = str_starts_with($applicant->rank->category, "ENGINE") ? "er" : "dr";
 
-				// DECK
-				if($tRank == 11){
-					$requiredRegulation = "II/4";
-					$altRegulation = "II/5";
-					$altRegulation = "II/1";
-				}
-				if($tRank >= 9 && $tRank <= 10){
-					$requiredRegulation = "II/5";
-					$altRegulation = "II/1";
-				}
-				elseif($tRank == 3 || $tRank == 4){
-					$requiredRegulation = "II/1";
-					$altRegulation = "II/2";
-				}
-				elseif($tRank == 1 || $tRank == 2){
-					$requiredRegulation = "II/2";
-				}
-				// ENGINE
-				elseif ($tRank == 17) {
-					$requiredRegulation = "III/4";
-					$altRegulation = "III/5";
-				}
-				elseif ($tRank >= 15 && $tRank <= 16) {
-					$requiredRegulation = "III/5";
-					$altRegulation = "III/1";
-				}
-				elseif($tRank == 7 || $tRank == 8){
-					$requiredRegulation = "III/1";
-					$altRegulation = "III/2";
-				}
-				elseif($tRank == 5 || $tRank == 6){
-					$requiredRegulation = "III/2";
-				}
+			if($applicant->rank){
+				foreach($applicant->document_lc as $lc){
+					if($lc->type == "COC"){
+						$regulations = json_decode($lc->regulation);
 
-				foreach($applicant->document_lc as $document){
-					$regulation = json_decode($document->regulation);
-
-				    if(in_array($requiredRegulation, $regulation)){
-				        $docu = $document;
-				    }
-
-				    if($document->type == "COC" && in_array($altRegulation, $regulation)){
-				        $altDoc = $document;
-				    }
+						foreach($regs[$rt] as $key => $ref){
+							if(in_array($ref, $regulations)){
+								if($hl){
+									if($key > $hl){
+										$hl = $key;
+										$docu = $lc;
+									}
+								}
+								else{
+									$hl = $key;
+									$docu = $lc;
+								}
+							}
+						}
+					}
 				}
 			}
 		@endphp
@@ -339,52 +314,38 @@
 			</td>
 			<td colspan="2">
 				@if(isset($applicant->rank))
-					{{-- DECK --}}
-					@if($applicant->rank->id == 11)
-						@if($altDoc)
-							ABLE SEAFARER DECK
+					@if($hl == 0)
+						@if($rt == "er")
+							ENGINEERING WATCHKEEPING
 						@else
 							NAVIGATIONAL WATCHKEEPING
 						@endif
-					@elseif($applicant->rank->id == 10 || $applicant->rank->id == 9)
-						@if($altDoc)
-							OIC-NAVIGATIONAL WATCHKEEPING
+					@elseif($hl == 1)
+						@if($rt == "er")
+							ABLE SEAFARER ENGINE
 						@else
 							ABLE SEAFARER DECK
 						@endif
-					@elseif($applicant->rank->id == 4 || $applicant->rank->id == 3)
-						@if($altDoc)
-							CHIEF OFFICER
-						@else
-							OIC-NAVIGATIONAL WATCHKEEPING
-						@endif
-					@elseif($applicant->rank->id == 2)
-						CHIEF OFFICER
-					@elseif($applicant->rank->id == 1)
-						MASTER
-					{{-- ENGINE --}}
-					@elseif($applicant->rank->id == 17)
-						@if($altDoc)
-							ABLE SEAFARER ENGINE
-						@else
-							ENGINEERING WATCHKEEPING
-						@endif
-					@elseif($applicant->rank->id == 16 || $applicant->rank->id == 15)
-						@if($altDoc)
+					@elseif($hl == 2)
+						@if($rt == "er")
 							OIC-ENGINEERING WATCH
 						@else
-							ABLE SEAFARER ENGINE
+							OIC-NAVIGATIONAL WATCH
 						@endif
-					@elseif($applicant->rank->id == 8 || $applicant->rank->id == 7)
-						@if($altDoc)
-							SECOND ENGINEER
+					@elseif($hl == 3)
+						@if($rt == "er")
+							@if(str_starts_with($docu->no, "CCE"))
+								CHIEF ENGINEER
+							@else
+								SECOND ENGINEER
+							@endif
 						@else
-							OIC-NAVIGATIONAL WATCHKEEPING
+							@if(str_starts_with($docu->no, "CMM"))
+								MASTER MARINER
+							@else
+								CHIEF MATE
+							@endif
 						@endif
-					@elseif($applicant->rank->id == 6)
-						SECOND ENGINEER
-					@elseif($applicant->rank->id == 5)
-						CHIEF ENGINEER
 				 	{{-- GALLEY --}}
 					@elseif($applicant->rank->id == 24)
 						SHIP'S COOK
@@ -409,7 +370,33 @@
 	
 		<tr>
 			<td colspan="2">PANAMA</td> 
-			<td colspan="2">{{ $applicant->rank->name ?? "-----" }}</td>
+			<td colspan="2">
+				@if(isset($applicant->rank) && $docu)
+					@if($hl == 2)
+						@if($rt == "er")
+							OIC-ENGINEERING WATCH
+						@else
+							OIC-NAVIGATIONAL WATCH
+						@endif
+					@elseif($hl == 3)
+						@if($rt == "er")
+							@if(str_starts_with($docu->no, "CCE"))
+								CHIEF ENGINEER
+							@else
+								SECOND ENGINEER
+							@endif
+						@else
+							@if(str_starts_with($docu->no, "CMM"))
+								MASTER MARINER
+							@else
+								CHIEF MATE
+							@endif
+						@endif
+					@else
+						-----
+					@endif
+				@endif
+			</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -557,6 +544,12 @@
 				}
 				elseif($applicant->rank->id == 27 || $applicant->rank->id == 28){
 					$rname = "STEWARD";
+				}
+				elseif($applicant->rank->id == 3 || $applicant->rank->id == 4){
+					$rname = "OIC-NAVIGATIONAL WATCH";
+				}
+				elseif($applicant->rank->id == 7 || $applicant->rank->id == 8){
+					$rname = "OIC-ENGINEERING WATCH";
 				}
 			}
 			else{
