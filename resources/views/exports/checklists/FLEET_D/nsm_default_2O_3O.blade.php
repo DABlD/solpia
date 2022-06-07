@@ -209,8 +209,8 @@
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
 	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
 	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
-	{{ $doc("MLC TRAINING F1", "MLC TRAINING DECK - F1", 'lc') }}
-	{{ $doc("MLC TRAINING F3", "MLC TRAINING DECK - F3", 'lc') }}
+	{{ $doc("OLC TRAINING F1", "OLC TRAINING DECK - F1", 'lc') }}
+	{{ $doc("OLC TRAINING F3", "OLC TRAINING DECK - F3", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 1) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
