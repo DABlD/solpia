@@ -211,8 +211,8 @@
 	{{ $doc("SDSD", "PANAMA SDSD", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "OIC-EW LICENSE (CERTIFICATE) - III/2", 'lc', 1, 'II/2') }}
-	{{ $doc("COE", "OIC-EW LICENSE (ENDORSEMENT) - III/2", 'lc', 1, 'II/2') }}
+	{{ $doc("COC", "OIC-EW LICENSE (CERTIFICATE) - III/2", 'lc', 1, 'III/2') }}
+	{{ $doc("COE", "OIC-EW LICENSE (ENDORSEMENT) - III/2", 'lc', 1, 'III/2') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
