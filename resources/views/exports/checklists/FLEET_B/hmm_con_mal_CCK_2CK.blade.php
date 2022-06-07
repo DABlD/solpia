@@ -228,7 +228,7 @@
 
 	{{ $section("6. MEDICAL / VACCINATION", 1) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("MALTA MEDICAL", "MALTA MEDICAL", 'med_cert') }}
+	{{ $doc("FLAG MEDICAL", "MALTA MEDICAL", 'med_cert') }}
 	{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 

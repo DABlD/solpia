@@ -221,8 +221,7 @@
 
 	{{ $section("6. MEDICAL / VACCINATION", 1) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("MALTA MEDICAL", "MALTA MEDICAL", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
+	{{ $doc("FLAG MEDICAL", "MALTA MEDICAL", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
