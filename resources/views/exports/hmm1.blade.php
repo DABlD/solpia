@@ -231,14 +231,25 @@
 			}
 		}
 		else{
-			echo "
-				<td colspan='3'>$name</td>
-				<td colspan='2'style='color: #ff0000; font-weight: bold;'>REVERTING</td>
-				<td colspan='2'>$period</td>
-				<td colspan='3'>$issuer</td>
-				<td style='color: #ff0000; font-weight: bold;'>REVERTING</td>
-				<td colspan='3' style='color: #ff0000; font-weight: bold;'>REVERTING</td>
-			";
+			if($name == "COC-DECK RATING"){
+				echo "
+					<td>$name</td>
+					<td>$issuer</td>
+					<td>$number</td>
+					<td colspan='2'>$issue</td>
+					<td>$expiry</td>
+				";
+			}
+			else{
+				echo "
+					<td colspan='3'>$name</td>
+					<td colspan='2'style='color: #ff0000; font-weight: bold;'>REVERTING</td>
+					<td colspan='2'>$period</td>
+					<td colspan='3'>$issuer</td>
+					<td style='color: #ff0000; font-weight: bold;'>REVERTING</td>
+					<td colspan='3' style='color: #ff0000; font-weight: bold;'>REVERTING</td>
+				";
+			}
 		}
 	};
 
