@@ -331,7 +331,78 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
             
         }
         elseif($fleet == "FLEET D"){
-            
+            $this->data->manager = "THEA GUERRA";
+            $this->data->officer = "JANICE AGUACITO";
+            $rank = "MBY";
+
+            if($type == "nsm_default"){
+                if($rank == "MSTR"){
+                    $this->rows    = 57;
+                    $this->view    = "MSTR";
+                }
+                elseif($rank == "C/O"){
+                    $this->rows    = 58;
+                    $this->view    = "CO";
+                }
+                elseif($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 55;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "AB"){
+                    $this->rows    = 46;
+                    $this->view    = "AB";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 45;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "C/E"){
+                    $this->rows    = 52;
+                    $this->view    = "CE";
+                }
+                elseif($rank == "2AE"){
+                    $this->rows    = 53;
+                    $this->view    = "2AE";
+                }
+                elseif($rank == "ETO"){
+                    $this->rows    = 48;
+                    $this->view    = "ETO";
+                }
+                elseif($rank == "ETR"){
+                    $this->rows    = 46;
+                    $this->view    = "ETR";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 47;
+                    $this->view    = "OLR";
+                }
+                elseif($rank == "WPR"){
+                    $this->rows    = 38;
+                    $this->view    = "WPR";
+                }
+                elseif($rank == "CCK"){
+                    $this->rows    = 46;
+                    $this->view    = "CCK";
+                }
+                elseif($rank == "MBY"){
+                    $this->rows    = 45;
+                    $this->view    = "MBY";
+                }
+            }
+            elseif($type == "dlsm_sola_gratia"){
+            }
+            elseif($type == "dlsm_kc_hadong"){
+            }
+            elseif($type == "hanj_dk_initio"){
+            }
+            elseif($type == "hanj_dk_ione"){
+            }
+            elseif($type == "scm_gns_harmony"){
+            }
+            elseif($type == "scm_gns_harvest"){
+            }
+            elseif($type == "scm_gns_hope"){
+            }
         }
         elseif($fleet == "FLEET E"){
             if($type == "default"){
