@@ -140,8 +140,8 @@ class RankSeeder extends Seeder
                 'RATING'
             ],
             [
-                'ELECTRICIAN',
-                'ELECT',
+                'ETO',
+                'ETO',
                 'ENGINE RATING',
                 'RATING'
             ],
