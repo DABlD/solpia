@@ -868,19 +868,19 @@
         				},
         			]
         		},
-        		// {
-        		// 	country: 'Malaysia',
-        		// 	details: [
-        		// 		{
-        		// 			range: [
-        		// 				[1,8]
-        		// 			],
-        		// 			documents: [
-        		// 				'LICENSE'
-        		// 			]
-        		// 		}
-        		// 	]
-        		// },
+        		{
+        			country: 'Malaysia',
+        			details: [
+        				{
+        					range: [
+        						[1,41]
+        					],
+        					documents: [
+        						'LICENSE', 'BOOKLET'
+        					]
+        				}
+        			]
+        		},
         		{
         			country: 'General',
         			details: [
