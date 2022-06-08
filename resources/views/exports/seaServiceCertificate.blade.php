@@ -4,7 +4,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="10" style="text-align: center; font-weight: bold; background-color: #f4f7fc">C&nbsp;&nbsp;E&nbsp;&nbsp;R&nbsp;&nbsp;T&nbsp;&nbsp;I&nbsp;&nbsp;F&nbsp;&nbsp;I&nbsp;&nbsp;C&nbsp;&nbsp;A&nbsp;&nbsp;T&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;F&nbsp;&nbsp;&nbsp;&nbsp;S&nbsp;&nbsp;E&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;S&nbsp;&nbsp;E&nbsp;&nbsp;R&nbsp;&nbsp;V&nbsp;&nbsp;I&nbsp;&nbsp;C&nbsp;&nbsp;E</td>
+		<td colspan="10" style="text-align: center; font-weight: bold; background-color: #f4f7fc">C E R T I F I C A T E  ‎‏‏‎ ‎‏‏‎O F  ‎‏‏‎ ‎‏‏‎S E A S E R V I C E</td>
 	</tr>
 
 	<tr>
