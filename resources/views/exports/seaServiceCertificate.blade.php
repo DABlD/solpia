@@ -71,7 +71,9 @@
 
 	@foreach($data->sea_service as $ss)
 		@php
-			$diff = $ss->sign_on->diff($ss->sign_off);
+			if($ss->sign_on && $ss->sign_off){
+				$diff = $ss->sign_on->diff($ss->sign_off);
+			}
 		@endphp
 		@if(str_contains($ss->manning_agent, "SOLPIA"))
 			<tr>
