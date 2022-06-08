@@ -1207,7 +1207,9 @@ class ApplicationsController extends Controller
         foreach($linedUps as $linedUp){
             $lastShip = SeaService::where('applicant_id', $linedUp->applicant_id)->where('manning_agent', 'LIKE', '%SOLPIA%')->get()->sortByDesc('sign_off')->first();
             if($lastShip){
-                $vessel = implode(' ', array_shift(explode(' ', $lastShip->vessel_name)));
+                $temp = explode(' ', $lastShip->vessel_name);
+                array_shift($temp);
+                $vessel = implode(' ', $temp);
                 $vesselMatch = Vessel::where('name', 'LIKE', "%$vessel%")
                                 ->where('fleet', auth()->user()->fleet)
                                 ->first();

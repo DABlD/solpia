@@ -83,7 +83,7 @@ class PrincipalController extends Controller
             }
         }
 
-        $fileName = $principal->name . ' Onboard Crew - ' . now()->format('d-M-y');
+        $fileName = str_replace('/', '_', $principal->name) . ' Onboard Crew - ' . now()->format('d-M-y');
         $class = "App\\Exports\\X10_PrincipalOnboardCrew";
         return Excel::download(new $class($obcs), "$fileName.xlsx");
     }
