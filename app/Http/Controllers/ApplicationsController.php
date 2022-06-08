@@ -1205,8 +1205,24 @@ class ApplicationsController extends Controller
         $linedUps = $vesselCrew[1];
 
         foreach($linedUps as $linedUp){
-            $count = SeaService::where('applicant_id', $linedUp->applicant_id)->where('manning_agent', 'LIKE', '%SOLPIA%')->count();
-            $linedUp->lastShip = $count ? 'EX-SOLPIA' : 'NEW HIRE';
+            $lastShip = SeaService::where('applicant_id', $linedUp->applicant_id)->where('manning_agent', 'LIKE', '%SOLPIA%')->get()->sortByDesc('sign_off')->first();
+            if($lastShip){
+                $vessel = implode(' ', array_shift(explode(' ', $lastShip->vessel_name)));
+                $vesselMatch = Vessel::where('name', 'LIKE', "%$vessel%")
+                                ->where('fleet', auth()->user()->fleet)
+                                ->first();
+
+                if($vesselMatch){
+                    $lastShip = $vesselMatch->name;
+                }
+                else{
+                    $lastShip = "EX-SOLPIA";
+                }
+            }
+            else{
+                $lastShip = "NEW HIRE"
+            }
+            $linedUp->lastShip = $lastShip;
         }
 
         $class = "App\\Exports\\" . $type;
