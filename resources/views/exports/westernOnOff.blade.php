@@ -63,7 +63,17 @@
 			<td>{{ now()->parse($onBoard->birthday)->format('d-M-Y') }}</td>
 			<td>{{ $onBoard->{'PASSPORTn'} ? strtoupper($onBoard->{'PASSPORTn'}) : '-----' }}</td>
 			<td>{{ $onBoard->{"SEAMAN'S BOOKn"} ? strtoupper($onBoard->{"SEAMAN'S BOOKn"}) : '-----' }}</td>
-			<td></td>
+			<td>
+				@php
+					$remarks = json_decode($onBoard->remarks);
+					$remark = "FINISHED CONTRACT";
+					if(sizeof($remarks)){
+						$remark = implode(', ', $remarks);
+					}
+
+					echo $remark;
+				@endphp
+			</td>
 		</tr>
 		@php
 			$ctr++;

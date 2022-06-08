@@ -285,7 +285,7 @@ class WesternOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAuto
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(18);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(18);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);
             },
         ];
     }
