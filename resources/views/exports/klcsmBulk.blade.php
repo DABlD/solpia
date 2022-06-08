@@ -586,7 +586,7 @@
 			}
 
 			if(!$docu){
-				$name = 'ENGINE WATCH';
+				$name = 'DECK WATCH';
 				$docu = isset($data->document_lc->{$name}) ? $data->document_lc->{$name} : false;
 			}
 		@endphp
