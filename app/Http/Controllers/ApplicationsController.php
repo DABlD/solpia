@@ -1220,7 +1220,7 @@ class ApplicationsController extends Controller
                 }
             }
             else{
-                $lastShip = "NEW HIRE"
+                $lastShip = "NEW HIRE";
             }
             $linedUp->lastShip = $lastShip;
         }
