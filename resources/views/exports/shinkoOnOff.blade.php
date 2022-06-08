@@ -29,8 +29,8 @@
 			<td rowspan="2">{{ $onSigner->abbr }}</td>
 			<td rowspan="2">{{ $onSigner->lname . ', ' . $onSigner->fname . ' ' . $onSigner->suffix . ' ' . $onSigner->mname }}</td>
 			<td rowspan="2">{{ now()->parse($onSigner->birthday)->format('d-M-Y') }}</td>
-			<td>{{ $onSigner->{'PASSPORTn'} ?? '-----' }}</td>
-			<td>{{ $onSigner->{"SEAMAN'S BOOKn"} ?? '-----' }}</td>
+			<td>{{ $onSigner->{'PASSPORTn'} ? strtoupper($onSigner->{'PASSPORTn'}) : '-----' }}</td>
+			<td>{{ $onSigner->{"SEAMAN'S BOOKn"} ? strtoupper($onSigner->{"SEAMAN'S BOOKn"}) : '-----' }}</td>
 			<td>{{ $onSigner->{'US-VISAn'} ?? '-----' }}</td>
 			<td rowspan="2"></td>
 		</tr>
@@ -78,8 +78,8 @@
 			<td rowspan="2">{{ $offSigner->abbr }}</td>
 			<td rowspan="2">{{ $offSigner->lname . ', ' . $offSigner->fname . ' ' . $offSigner->suffix . ' ' . $offSigner->mname }}</td>
 			<td rowspan="2">{{ now()->parse($offSigner->birthday)->format('d-M-Y') }}</td>
-			<td>{{ $offSigner->{'PASSPORTn'} ?? '-----' }}</td>
-			<td>{{ $offSigner->{"SEAMAN'S BOOKn"} ?? '-----' }}</td>
+			<td>{{ $offSigner->{'PASSPORTn'} ? strtoupper($offSigner->{'PASSPORTn'}) : '-----' }}</td>
+			<td>{{ $offSigner->{"SEAMAN'S BOOKn"} ? strtoupper($offSigner->{"SEAMAN'S BOOKn"}) : '-----' }}</td>
 			<td>{{ $offSigner->{'US-VISAn'} ?? '-----' }}</td>
 			<td rowspan="2"></td>
 		</tr>
