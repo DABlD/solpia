@@ -192,9 +192,10 @@ class WesternOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAuto
                     'A2:' . $ar('G', 2), $ar('A', 5, 'G', 5, true)
                 ];
 
+
                 // HL
                 $h[4] = [
-                    'A2:' . $ar('C', 4, true), $ar('C', 5, 'C', 5, true)
+                    'C3:' . $ar('C', 2), $ar('C', 6, 'C', 5, true)
                 ];
 
                 // HC VC
