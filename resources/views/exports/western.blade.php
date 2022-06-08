@@ -243,7 +243,7 @@
 
 		$noNum  = $type == 'lc' ? 'no' : 'number';
 
-		$number = $docu ? $docu->$noNum : '-----';
+		$number = $docu ? strtoupper($docu->$noNum) : '-----';
 		$issue  = $docu ? $checkDate2($docu->issue_date, 'I') : '-----';
 		$expiry = $docu ? $checkDate2($docu->expiry_date, 'E') : '-----';
 
@@ -504,7 +504,7 @@
 	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'National GMDSS'	,'',true			)}}
 	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flag License'		,'',true			)}}
 	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Flag GMDSS'		,'',true			)}}
-	@if($rank >= 1 && $rank <= 4)
+	@if($rank >= 1 && $rank <= 2)
 		{{ $getDocument('SSO', 			'flag', 	'', 			'Flag SSO / SDSD'	,'',true			)}}
 	@else
 		{{ $getDocument('SDSD', 		'flag', 	'', 		'Flag SSO / SDSD'	,'',true			)}}
