@@ -21,19 +21,83 @@ class Hmm implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        // array_push($sheets, new Hmm1($this->applicant, $this->type . '1'));
+        array_push($sheets, new Hmm1($this->applicant, $this->type . '1'));
 
         if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin" || auth()->user()->role == "Principal"){
             $rank = $this->applicant->rank->abbr;
-            $rank = "2/O";
+            $rank = "ETO";
 
-            if($rank == "2/O"){
+            if($rank == "C/O"){
+                $rows = 34;
+                $rank = "CO";
+            }
+            elseif($rank == "2/O"){
                 $rows = 33;
                 $rank = "2O";
             }
             elseif($rank == "3/O"){
-                $rows = 36;
+                $rows = 32;
                 $rank = "3O";
+            }
+            elseif($rank == "A/O"){
+                $rows = 30;
+                $rank = "AO";
+            }
+            elseif($rank == "3AE"){
+                $rows = 33;
+                $rank = "3AE";
+            }
+            elseif($rank == "A/E"){
+                $rows = 30;
+                $rank = "AE";
+            }
+            elseif($rank == "OLR"){
+                $rows = 30;
+                $rank = "OLR";
+            }
+            elseif($rank == "OLR1"){
+                $rows = 30;
+                $rank = "OLR1";
+            }
+            elseif($rank == "1AE"){
+                $rows = 33;
+                $rank = "1AE";
+            }
+            elseif($rank == "CCK"){
+                $rows = 30;
+                $rank = "CCK";
+            }
+            elseif($rank == "BSN"){
+                $rows = 30;
+                $rank = "BSN";
+            }
+            elseif($rank == "AB"){
+                $rows = 30;
+                $rank = "AB";
+            }
+            elseif($rank == "2CK"){
+                $rows = 30;
+                $rank = "2CK";
+            }
+            elseif($rank == "OS"){
+                $rows = 30;
+                $rank = "OS";
+            }
+            elseif($rank == "ETO"){
+                $rows = 34;
+                $rank = "ELECT";
+            }
+            elseif($rank == "ETR"){
+                $rows = 34;
+                $rank = "ELECT";
+            }
+            elseif($rank == "2AE"){
+                $rows = 33;
+                $rank = "2AE";
+            }
+            elseif($rank == "DCDT"){
+                $rows = 30;
+                $rank = "DCDT";
             }
 
             array_push($sheets, new InterviewSheet($this->applicant, $rows, "hmm", $rank));
