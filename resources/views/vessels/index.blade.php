@@ -2807,7 +2807,7 @@
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
                 inputOptions: {
-                    ShinkoOnOff: 'Shinko/All',
+                    ShinkoOnOff: 'Default',
                     ToeiOnOff: 'Toei',
                     WesternOnOff: 'Nitta/TOEI'
                 },
