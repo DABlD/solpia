@@ -842,7 +842,7 @@
         						[1,8]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET'
+        						'LICENSE', 'BOOKLET', 'PSCRB'
         					]
         				}
         			]
