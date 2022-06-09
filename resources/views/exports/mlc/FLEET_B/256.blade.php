@@ -187,7 +187,7 @@
 
 	<tr>
 		<td style="{{ $center }} {{ $color }}">${{ $data->wage->ot ?? 0 ?? 0 }}</td>
-		<td colspan="2" style="{{ $center }} {{ $color }}">$0</td>
+		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $spay }}</td>
 		<td colspan="3" style="{{ $center }} {{ $color }}">${{ $data->wage->retire_allow ?? 0 }}</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">{{ $data->wage->other_allow ?? 0 }}</td>
 	</tr>
