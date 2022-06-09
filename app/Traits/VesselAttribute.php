@@ -27,7 +27,7 @@ trait VesselAttribute{
 				<span data-status="' . $this->status . '" class="fa fa-times" data-id="' . $this->id . '"></span>' . 
 			'</a>&nbsp;';
 
-			if(in_array(auth()->user()->role, ['Admin', 'Processing', 'Encoder', 'Cadet'])){
+			if(in_array(auth()->user()->role, ['Admin', 'Processing', 'Encoder', 'Cadet', 'Crewing Officer', 'Crewing Manager'])){
 				$string .= '<a class="btn btn-default" data-toggle="tooltip" title="Wage Scale" data-id="' . $this->id . '" data-name="' . $this->name . '">' . '
 					<span class="fa fa-dollar" data-id="' . $this->id . '" data-name="' . $this->name . '"></span>' . 
 				'</a>';
