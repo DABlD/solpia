@@ -31,7 +31,9 @@ class MLCContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                                     ->first();
 
         foreach($this->applicant->document_id as $docu){
-            $this->applicant->{$docu->type} = $docu->number;
+            if($docu->type){
+                $this->applicant->{$docu->type} = $docu->number;
+            }
         }
 
         $this->applicant->date_processed    = $this->req['date_processed'];
