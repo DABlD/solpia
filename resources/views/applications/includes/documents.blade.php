@@ -402,7 +402,7 @@
             	            </span>
             	        </div>
             	        <div class="form-group col-md-2">
-            	            <label for="${clinic}${count}">Clinic\\Vaccine Brand</label>
+            	            <label for="${clinic}${count}">Clinic\\Covid Vaccine Brand</label>
             	            <select class="${docu_class} ${clinic}" name="${clinic}${count}">
             	            	<option></option>
             	            	<optgroup label="Suggested"></optgroup>
@@ -414,7 +414,7 @@
 	            	            	<option value="MMC">&nbsp;&nbsp;&nbsp;MMC</option>
 	            	            	<option value="MCIS">&nbsp;&nbsp;&nbsp;MCIS</option>
 	            	            	<option value="BUREAU OF QUARANTINE">&nbsp;&nbsp;&nbsp;BUREAU OF QUARANTINE</option>
-            	            	<optgroup label="Vaccine Brand">&nbsp;&nbsp;&nbsp;</optgroup>
+            	            	<optgroup label="Covid Vaccine Brand">&nbsp;&nbsp;&nbsp;</optgroup>
 	            	            	<option value="SINOVAC">&nbsp;&nbsp;&nbsp;SINOVAC</option>
 	            	            	<option value="ASTRAZENECA">&nbsp;&nbsp;&nbsp;ASTRAZENECA</option>
 	            	            	<option value="MODERNA">&nbsp;&nbsp;&nbsp;MODERNA</option>
