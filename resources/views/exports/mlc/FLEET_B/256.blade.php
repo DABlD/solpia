@@ -119,12 +119,12 @@
 	<tr>
 		<td rowspan="2" style="{{ $center }}">Period</td>
 		<td>Date of commencement</td>
-		<td colspan="7" style="{{ $color }}">{{ now()->parse($data->date_processed)->format('d-M-Y') }}</td>
+		<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
 		<td>Date of termination</td>
-		<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
+		<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
@@ -402,7 +402,7 @@
 			agreement is entered into.
 		</td>
 		<td colspan="2" style="{{ $center }}">Place</td>
-		<td colspan="3" style="{{ $center }} {{ $color }}">{{ $data->status }}</td>
+		<td colspan="3" style="{{ $center }} {{ $color }}">MANILA, PHILIPPINES</td>
 	</tr>
 
 	<tr>
