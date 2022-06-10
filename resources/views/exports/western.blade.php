@@ -635,8 +635,14 @@
 
 	{{-- CATERING --}}
 	@php
-		$name = "CATERING TRAINING";
-		$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		$docu = false;
+		$name = "CATERING";
+
+		foreach($applicant->document_lc as $document){
+		    if(str_contains($document->type, $name)){
+		    	$docu = $document;
+		    }
+		}
 	@endphp
 
 	<tr>
