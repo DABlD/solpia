@@ -860,6 +860,14 @@
         				},
         				{
         					range: [
+        						[24,26]
+        					],
+        					documents: [
+        						"SHIP'S COOK ENDORSEMENT"
+        					]
+        				},
+        				{
+        					range: [
         						[1,41]
         					],
         					documents: [
