@@ -18,14 +18,15 @@ function getChecklist(fleet){
 	}
 	else if(fleet == "FLEET D"){
 		return `
-			<option value="nsm_default"> 		NSM - DEFAULT 		 		</option>
-			<option value="dlsm_sola_gratia">	DLSM - SOLA GRATIA 			</option>
-			<option value="dlsm_kc_hadong">		DLSM - KC HADONG 			</option>
-			<option value="hanj_dk_initio"> 	HANJOO - DK INITIO 			</option>
-			<option value="hanj_dk_ione"> 		HANJOO - DK IONE 	 		</option>
-			<option value="scm_gns_harmony"> 	SC MARINE - GNS HARMONY 	</option>
-			<option value="scm_gns_harvest"> 	SC MARINE - GNS HARVEST 	</option>
-			<option value="scm_gns_hope"> 		SC MARINE - GNS HOPE  		</option>
+			<option value="nsm_default"> 		NSM - DEFAULT 		 			</option>
+			<option value="dlsm_sola_gratia">	DLSM - SOLA GRATIA 				</option>
+			<option value="dlsm_kc_hadong_lib">	DLSM - KC HADONG - LIBERIA 		</option>
+			<option value="dlsm_kc_hadong_mar">	DLSM - KC HADONG - MARSHALL		</option>
+			<option value="hanj_dk_initio"> 	HANJOO - DK INITIO 				</option>
+			<option value="hanj_dk_ione"> 		HANJOO - DK IONE 	 			</option>
+			<option value="scm_gns_harmony"> 	SC MARINE - GNS HARMONY 		</option>
+			<option value="scm_gns_harvest"> 	SC MARINE - GNS HARVEST 		</option>
+			<option value="scm_gns_hope"> 		SC MARINE - GNS HOPE  			</option>
 		`;
 	}
 	else if(fleet == "FLEET E"){
