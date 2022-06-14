@@ -913,15 +913,19 @@
                     $.ajax({
                         url: '{{ route('vessels.get2') }}',
                         data:{
-                            where: ['fleet', '{{ auth()->user()->fleet }}'],
-                            cols: ['id', 'name', 'principal_id']
+                            @if(auth()->user()->role != "Admin")
+                                where: ['fleet', '{{ auth()->user()->fleet }}'],
+                            @endif
+                            cols: ['id', 'name', 'principal_id', 'status']
                         },
                         dataType: 'json',
                         success: result => {
                             result.forEach(a => {
-                                aPrincipal
-                                vessels[a.id] = a.name;
-                                aPrincipal[a.id] = a.principal_id;
+                                // aPrincipal
+                                if(a.status == "ACTIVE"){
+                                    vessels[a.id] = a.name;
+                                    aPrincipal[a.id] = a.principal_id;
+                                }
                             });
 
                             setTimeout(() => {
