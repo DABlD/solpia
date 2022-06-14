@@ -913,7 +913,7 @@
                     $.ajax({
                         url: '{{ route('vessels.get2') }}',
                         data:{
-                            @if(auth()->user()->role != "Admin")
+                            @if(auth()->user()->fleet != "")
                                 where: ['fleet', '{{ auth()->user()->fleet }}'],
                             @endif
                             cols: ['id', 'name', 'principal_id', 'status']
