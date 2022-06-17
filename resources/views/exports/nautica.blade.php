@@ -252,7 +252,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="2"></td>
+		<td colspan="2">Anytime</td>
 		<td colspan="3">{{ now()->format('F j, Y') }}</td>
 	</tr>
 
@@ -262,7 +262,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="2">Solpia Marine</td>
+		<td colspan="2">Solpia Marine &#38; Ship Mgt. Inc</td>
 		<td colspan="3">{{ $data->vessel ? $data->vessel->name : "N/A" }}</td>
 	</tr>
 
