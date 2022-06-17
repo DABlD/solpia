@@ -224,8 +224,6 @@
 					<option value="PADAMS">&nbsp;&nbsp;&nbsp;&nbsp;PADAMS</option>
 					<option value="MARITIME POLLUTION PREVENTION">&nbsp;&nbsp;&nbsp;&nbsp;MARITIME POLLUTION PREVENTION</option>
 					<option value="KOSCO - IN HOUSE TRAINING RECORD">&nbsp;&nbsp;&nbsp;&nbsp;KOSCO - IN HOUSE TRAINING RECORD</option>
-
-				<optgroup label="SPECIAL CERTIFICATES"></optgroup>
 					<option value="ADVANCE NAVIGATION">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE NAVIGATION</option>
 					<option value="ADVANCE SHIPBOARD OPERATION AND MGT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE SHIPBOARD OPERATION AND MGT</option>
 					<option value="AUXILIARY MACHINERY SYSTEM">&nbsp;&nbsp;&nbsp;&nbsp;AUXILIARY MACHINERY SYSTEM</option>
@@ -246,6 +244,12 @@
 					<option value="MARINE ELECTRIC WITH REEFER">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRIC WITH REEFER</option>
 					<option value="WELDING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;WELDING COURSE</option>
 					<option value="KML">&nbsp;&nbsp;&nbsp;&nbsp;KML</option>
+					<option value="CATERING TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;CATERING TRAINING</option>
+					<option value="HIGH VOLTAGE TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;HIGH VOLTAGE TRAINING</option>
+					<option value="NEW ENGINE ROOM MACHINERY - WESTERN">&nbsp;&nbsp;&nbsp;&nbsp;NEW ENGINE ROOM MACHINERY - WESTERN</option>
+					<option value="ELECTRONIC NAVIGATION SYSTEMS - ENS">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRONIC NAVIGATION SYSTEMS - ENS</option>
+					<option value="GENERAL TANKER FAMILIARIZATION">&nbsp;&nbsp;&nbsp;&nbsp;GENERAL TANKER FAMILIARIZATION</option>
+					<option value="CONTAINER FAMILIARIZATION">&nbsp;&nbsp;&nbsp;&nbsp;CONTAINER FAMILIARIZATION</option>
 
 				<optgroup label="TANKER CERTIFICATES"></optgroup>
 					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
@@ -264,11 +268,6 @@
 				<optgroup label="CONTRACTS"></optgroup>
 					<option value="POEA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;POEA CONTRACT</option>
 					<option value="MLC/CBA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;MLC/CBA CONTRACT</option>
-
-				<optgroup label="TRAININGS"></optgroup>
-					<option value="CATERING TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;CATERING TRAINING</option>
-					<option value="HIGH VOLTAGE TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;HIGH VOLTAGE TRAINING</option>
-					<option value="NEW ENGINE ROOM MACHINERY - WESTERN">&nbsp;&nbsp;&nbsp;&nbsp;NEW ENGINE ROOM MACHINERY - WESTERN</option>
 			`;
 
 			// 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE S.Q. FOR TANKERS', 'FLAG STATE LICENSE', 'FLAG STATE SSO LICENSE', 'FLAG STATE ENDORSEMENT COOK COURSE', 'FLAG STATE GMDSS-GOC', 
