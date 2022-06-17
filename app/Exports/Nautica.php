@@ -255,7 +255,7 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(1);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(1.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(1);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
@@ -332,21 +332,21 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:L62', 'A63:H83', 'A84:L85', 'A87:L108'
+                    'A1:L66', 'A67:H87', 'A88:L89', 'A91:L112'
                 ];
 
                 // VT2
                 $h[8] = [
-                    'I63', 'A99'
+                    'I67', 'A103'
                 ];
 
                 $h['wrap'] = [
-                    'I63', 'A27', 'H28'
+                    'I67', 'A27', 'H28'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A39', 'H41', 'F47:F57', 'B47:B57', 'K47:K57', 'E63:E85', 'H63:H85'
+                    'A39', 'H41', 'F47:F61', 'B47:B61', 'K47:K61', 'E67:E89', 'H67:H89'
                 ];
 
                 foreach($h as $key => $value) {
@@ -386,7 +386,7 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A44:L57', 'A62:H85'
+                    'A44:L61', 'A66:H89'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -405,7 +405,7 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'A31:D32', 'E31:G32', 'H31:J32', 'K31:L32', 'A33:D34', 'E33:G34', 'H33:J34', 'K33:L34',
                     'A35:D36', 'E35:G36', 'H35:J36', 'K35:L36', 'A37:D38', 'E37:G38', 'H37:J38', 'K37:L38',
                     'A39:D40', 'E39:G40', 'H39:J40', 'K39:L40', 'A41:D42', 'E41:G42', 'H41:J42', 'K41:L42',
-                    'I62:L85', 'A87:L88', 'A89:L90'
+                    'I66:L89', 'A91:L92', 'A93:L94'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -425,7 +425,7 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'L1', 'A4:J4', 'A5:D5', 'J5', 'A11:D11', 'J11', 'A12:J12', 'E6:I6', 'E8:F8', 'G8:I8', 'E10:F10', 'G10:I10',
                     'A14:L14', 'A16:L16', 'A18:L18', 'A20:G20', 'A22:G22', 'A24:G24', 'A26:G26', 'H20:L20', 'H24:L24', 'H27:L27', 'A29:G29',
                     'A31:L31', 'A33:L33', 'A35:L35', 'A37:L37', 'A39:L39', 'A41:L41',
-                    'I62:L62', 'I83:L83', 'I84:L84', 'L58'
+                    'I66:L66', 'I87:L87', 'I88:L88', 'L62'
                 ]);
 
                 // LRB
@@ -434,12 +434,12 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // RRB
                 $cells[9] = array_merge([
-                    'K1:K2', 'J84:J85', 'K58:K59'
+                    'K1:K2', 'J88:J89', 'K62:K63'
                 ]);
 
                 // BBM
                 $cells[10] = array_merge([
-                    'A2:L2', 'A59:L59'
+                    'A2:L2', 'A63:L63'
                 ]);
 
                 // TBT - TOP BORDER THIN
@@ -448,8 +448,8 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'A3:L3', 'A60:L60', 'C98:G98', 'I98:J98', 'L98',
-                    'C99:L99', 'C100:L100', 'C101:L101', 'C102:L102', 'C103:L103', 'C104:L104', 'C105:L105', 'C106:L106', 'C107:L107', 'C108:L108'
+                    'A3:L3', 'A64:L64', 'C102:G102', 'I102:J102', 'L102',
+                    'C103:L103', 'C104:L104', 'C105:L105', 'C106:L106', 'C107:L107', 'C108:L108', 'C109:L109', 'C110:L110', 'C111:L111', 'C112:L112'
                 ]);
 
                 // LBT
@@ -482,7 +482,7 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(7);
                 $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(24);
 
-                $skip = [1,2,3,4,13,43,58,59,60,61, 86, 91];
+                $skip = [1,2,3,4,13,43,62,63,64,65,90,95];
                 // ROW RESIZE
                 for($i = 0; $i <= 108; $i++){
                     if(!in_array($i, $skip)){
@@ -518,7 +518,7 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setWidth(130);
         $drawing2->setOffsetX(3);
         $drawing2->setOffsetY(3);
-        $drawing2->setCoordinates('A58');
+        $drawing2->setCoordinates('A62');
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setName('Avatar');

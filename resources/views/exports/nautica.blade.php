@@ -92,6 +92,8 @@
 		$issuer = $docu ? $clean($docu->issuer) : "---";
 		$issue = $docu ? $checkDate($docu->issue_date) : "---";
 		$expiry = $docu ? $checkDate($docu->expiry_date) : "---";
+
+		$blue = 'color: #0000FF;';
 		
 		if($type2 == 1){
 			echo "
@@ -137,7 +139,7 @@
 		elseif($type2 == 6){
 			echo "
 				<td colspan='4'>$title</td>
-				<td style='$center'>$number</td>
+				<td style='$center $blue'>$number</td>
 				<td style='$center'>$issue</td>
 				<td style='$center'>$expiry</td>
 				<td style='$center'>$issuer</td>
@@ -146,7 +148,7 @@
 		elseif($type2 == 7){
 			echo "
 				<td colspan='4'>$title</td>
-				<td style='$center'>NOT APPLICABLE</td>
+				<td style='$center $blue'>NOT APPLICABLE</td>
 				<td style='$center'>---</td>
 				<td style='$center'>---</td>
 				<td style='$center'>---</td>
@@ -174,6 +176,21 @@
 					<td style='$center'>$on</td>
 					<td style='$center'>$off</td>
 					<td style='$center' colspan='2'>$manning</td>
+				</tr>
+			";
+		}
+		else{
+			echo "
+				<tr>
+					<td style='$center'></td>
+					<td style='$center' colspan='3'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center' colspan='2'></td>
 				</tr>
 			";
 		}
@@ -207,8 +224,26 @@
 		<td rowspan="6"></td>
 	</tr>
 
+	@php
+		$rank = $data->rank->name;
+		if($rank == "2ND OFFICER"){
+			$rank = "SECOND OFFICER";
+		}
+		elseif($rank == "3RD OFFICER"){
+			$rank = "THIRD OFFICER";
+		}
+		elseif($rank == "1ST ASST. ENGR"){
+			$rank = "FIRST ASSISTANT ENGINEER";
+		}
+		elseif($rank == "2ND ASST. ENGR"){
+			$rank = "SECOND ASSISTANT ENGINEER";
+		}
+		elseif($rank == "3RD ASST. ENGR"){
+			$rank = "THIRD ASSISTANT ENGINEER";
+		}
+	@endphp
 	<tr>
-		<td colspan="5">{{ $data->rank->name }}</td>
+		<td colspan="5">{{ $rank }}</td>
 	</tr>
 
 	<tr>
@@ -345,7 +380,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="5" rowspan="3">{{ $nok->address }}</td>
+		<td colspan="5" rowspan="3">{{ $data->user->address }}</td>
 	</tr>
 
 	<tr>
@@ -408,7 +443,6 @@
 	{{ isset($data->sea_service[12]) ? $ss($data->sea_service[12]) : $ss(null) }}
 	{{ isset($data->sea_service[13]) ? $ss($data->sea_service[13]) : $ss(null) }}
 	{{ isset($data->sea_service[14]) ? $ss($data->sea_service[14]) : $ss(null) }}
-	{{ isset($data->sea_service[15]) ? $ss($data->sea_service[15]) : $ss(null) }}
 
 	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
 	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
