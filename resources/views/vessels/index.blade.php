@@ -1323,7 +1323,7 @@
                         $('select').select2({
                             tags: true,
                             class: 'table-select',
-                            disabled: {{ !in_array(auth()->user()->role, ['Admin', 'Crewing Manager']) ? 'true' : 'false' }}
+                            disabled: {{ !in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer']) ? 'true' : 'false' }}
                         });
 
                         $('[id^=table-select] + .select2-container').css('width', '100%');
