@@ -3,7 +3,7 @@
 	<tbody>
 		<tr>
 			<td colspan="14">
-				S.C.MARINE AND SHIPPING CO.,LTD.
+				SC MARINE CO. LTD
 			</td>
 		</tr>
 
