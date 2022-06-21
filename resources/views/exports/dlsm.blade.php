@@ -196,7 +196,7 @@
 		};
 		
 		$ss = function($ss) use($applicant, $empty){
-			if($applicant->vessel_name != null){	
+			if($ss->vessel_name != null){
 				$rank = $ss ? $applicant->ranks[$ss->rank] : "";
 				$vessel = $ss ? $ss->vessel_name : "";
 				$type = $ss ? $ss->vessel_type : "";
