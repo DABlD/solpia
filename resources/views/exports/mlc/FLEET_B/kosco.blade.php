@@ -128,10 +128,12 @@
 	</tr>
 
 	@php
-		$monthly = $data->wage->basic + $data->wage->ot + $data->wage->sup_allow + $data->wage->sub_allow;
+		$ot = $data->wage->fot ?? $data->wage->ot ?? 0;
+		$otl = $data->wage->fot ? "Fixed Overtime Allowance" : "Guaranteed Overtime Allowance";
+		$monthly = $data->wage->basic + $ot + $data->wage->sup_allow + $data->wage->sub_allow;
 	@endphp
 	{{ $wage("A.) Basic Wage :", $data->wage->basic ?? 0) }}
-	{{ $wage("B.) Guaranteed Overtime Allowance :", $data->wage->ot ?? 0) }}
+	{{ $wage("B.) $otl :", $ot) }}
 	{{ $wage("C.) SVP (Supervisor Allowance) :", $data->wage->sup_allow ?? 0) }}
 	{{ $wage("D.) SUB.A (Subsistence Allowance) :", $data->wage->sub_allow ?? 0) }}
 	{{ $wage("E.) M.W. : Monthly Wage(E= A + B + C + D)", $monthly) }}
@@ -229,7 +231,7 @@
 		<td>6.1 Period : From</td>
 		<td colspan="2" style="{{ $center }}">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
 		<td>To</td>
-		<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-y') }}</td>
+		<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->sub(1, 'day')->format('d-M-y') }}</td>
 		<td colspan="3"></td>
 	</tr>
 
