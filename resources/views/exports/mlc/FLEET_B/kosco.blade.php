@@ -1,12 +1,18 @@
 @php
 	$bold = "font-weight: bold;";
 	$center = "text-align: center;";
+	$blue = "color: #0000FF;";
 	// dd($data);
 
 	$wage = function($label, $wage){
+		$blue = "";
+		if(str_starts_with($label, 'B') || str_starts_with($label, 'C') || str_starts_with($label, 'D') || str_starts_with($label, 'F') || str_starts_with($label, 'G')){
+			$blue = "color: #0000FF;";
+		}
+
 		echo "
 			<tr>
-				<td colspan='5'> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎$label</td>
+				<td colspan='5' style='$blue'> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎$label</td>
 				<td colspan='2' style='text-align: center;'>$wage</td>
 				<td></td>
 				<td>USD / MONTH</td>
@@ -72,11 +78,11 @@
 	<tr>
 		<td rowspan="2" style="{{ $bold }} {{ $center }}">Seafarer</td>
 		<td style="{{ $bold }} {{ $center }}">Name</td>
-		<td colspan="6" style="{{ $bold }} {{ $center }}">
+		<td colspan="6" style="{{ $bold }} {{ $center }} {{ $blue }}">
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
 		</td>
 		<td style="{{ $bold }} {{ $center }}">Birthdate</td>
-		<td style="{{ $bold }} {{ $center }}">{{ $data->user->birthday->format('d-M-Y') }}</td>
+		<td style="{{ $bold }} {{ $center }} {{ $blue }}">{{ $data->user->birthday->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
@@ -85,7 +91,7 @@
 		<td style="{{ $bold }} {{ $center }}">Nationality</td>
 		<td colspan="2" style="{{ $bold }} {{ $center }}">FILIPINO</td>
 		<td style="{{ $bold }} {{ $center }}">Birthplace</td>
-		<td style="{{ $bold }} {{ $center }}">{{ $data->birth_place }}</td>
+		<td style="{{ $bold }} {{ $center }} {{ $blue }}">{{ $data->birth_place }}</td>
 	</tr>
 
 	<tr>
@@ -102,7 +108,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="9">
+		<td colspan="9" style="{{ $blue }}">
 			1.2 The places where Seafarers shall be entitled to be repatriated to : 
 		</td>
 		<td style="{{ $center }}">MANILA, PHILIPPINES</td>
@@ -145,7 +151,7 @@
 
 	<tr><td colspan="10"></td></tr>
 	<tr>
-		<td colspan="10">3.2  The details of Other Allowances are applied according to the Collective Bargaining Agreement (IBF FKSU-AMOSUP-KSA CBA) or Rules of Employment.</td>
+		<td colspan="10" style="{{ $blue }}">3.2  The details of Other Allowances are applied according to the Collective Bargaining Agreement (IBF FKSU-AMOSUP-KSA CBA) or Rules of Employment.</td>
 	</tr>
 
 	<tr>

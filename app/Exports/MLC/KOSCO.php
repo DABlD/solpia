@@ -172,7 +172,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'bdb9b9'
+                        'rgb' => 'FFFF00'
                     ]
                 ],
             ],
@@ -355,10 +355,21 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
+                    'J12', 'J13', 'J15',
+                    'F19:G19', 'I19',
+                    'F20:G20', 'I20',
+                    'F21:G21', 'I21',
+                    'F22:G22', 'I22',
+                    'F23:G23', 'I23',
+                    'F25:G25', 'I25',
+                    'F26:G26', 'I26',
+                    'F28:G28', 'I28',
+                    'F46:H46', 'C48',
+                    'B51:C51', 'E51:G51',
+                    'D107:F107', 'I108:J108'
                 ];
 
                 $fills[1] = [
-                    
                 ];
 
                 foreach($fills as $key => $value){
