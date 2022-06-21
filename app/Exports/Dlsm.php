@@ -27,14 +27,14 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $ssTotalM['container'] = 0;
         $ssTotalY['container'] = 0;
-    	foreach($this->data->sea_service as $ss){
-    		if($ss->vessel_name != ""){
-                $tempVessel = Vessel::where('name', $ss->vessel_name)->first();
-                $ss->year_built = $tempVessel->year_built ?? null;
-    		}
-    		else{
-    			$ss->year_built = null;
-    		}
+
+        foreach($this->data->sea_service as $ss){
+            if($ss->vessel_name != ""){
+                $ss->year_built = Vessel::where('name', $ss->vessel_name)->first()->year_build ?? null;
+            }
+            else{
+                $ss->year_built = null;
+            }
 
             if($ss->sign_on != "" && $ss->sign_off != ""){
                 if(Str::contains(strtoupper($ss->vessel_type), 'BULK')){
@@ -44,12 +44,14 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $temp = 'container';
                 }
 
-                $ssTotalM[$temp] += round($ss->sign_on->floatDiffInMonths($ss->sign_off), 1);
-                $ssTotalY[$temp] += round($ss->sign_on->floatDiffInYears($ss->sign_off), 1);
+                if(isset($temp)){
+                    $ssTotalM[$temp] += round($ss->sign_on->floatDiffInMonths($ss->sign_off), 1);
+                    $ssTotalY[$temp] += round($ss->sign_on->floatDiffInYears($ss->sign_off), 1);
+                }
             }
-    	}
+        }
 
-        return view('exports.' . 'imsco', [
+        return view('exports.dlsm', [
             'applicant' => $this->data,
             'ssTotalM' => $ssTotalM,
             'ssTotalY' => $ssTotalY
@@ -193,7 +195,7 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToPage(false);
-                $event->sheet->getDelegate()->getPageSetup()->setScale(75);
+                $event->sheet->getDelegate()->getPageSetup()->setScale(60);
 
                 $event->sheet->getDelegate()->setTitle('BIO_DATA', false);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
@@ -205,18 +207,18 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(8);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('E3:E4')->getFont()->setSize(11);
-                $event->sheet->getDelegate()->getStyle('P3')->getFont()->setSize(11);
-                $event->sheet->getDelegate()->getStyle('B11')->getFont()->setSize(5);
-                $event->sheet->getDelegate()->getStyle('L14:L25')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('M13')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('R13')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('A26:V26')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('A28:A34')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setSize(16);
+                $event->sheet->getDelegate()->getStyle('E3:E4')->getFont()->setSize(13);
+                $event->sheet->getDelegate()->getStyle('P3')->getFont()->setSize(13);
+                $event->sheet->getDelegate()->getStyle('B11')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('L14:L25')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('M13')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('R13')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('A26:V26')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('A28:A34')->getFont()->setSize(10);
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // CELL COLOR
@@ -240,7 +242,7 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A35:A36')->getFont()->getColor()->setRGB('FF0000');
 
                 // TEXT ROTATION
-                $event->sheet->getDelegate()->getStyle('A3')->getAlignment()->setTextRotation(-90);
+                $event->sheet->getDelegate()->getStyle('A3')->getAlignment()->setTextRotation(90);
                 $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(-90);
 
                 // SET PAGE BREAK PREVIEW
@@ -312,7 +314,7 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $h['wrap'] = [
                     'E7', 'B11', 'M13', 'N8', 'U14:U25', 'L14:L25', 'I14:I25', 'F14:F25',
-                    'A26:V26', 'A29:A36', 'A41:E52', 'O42:O52', 'J42:J52'
+                    'A26:V26', 'A29:A36', 'A41:E52', 'O42:O52', 'J42:J52', 'S14:T25', 'A3'
                 ];
 
                 // SHRINK TO FIT
@@ -359,7 +361,7 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ]);
 
                 $cells[1] = array_merge([
-                	'A1:P2'
+                    'A1:P2'
                 ]);
 
                 $cells[2] = array_merge([
@@ -384,15 +386,15 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3.7);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(5.8);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11.2);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(9);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(3.5);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(6.4);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(8.5);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(5.2);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(5.5);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6);
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(6.1);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(6.5);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(1.8);
                 $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(10.5);
@@ -404,42 +406,42 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('V')->setWidth(9);
 
                 // ROW RESIZE
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(23.25);
-                $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(33);
-                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(15.75);
-                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(15.75);
-                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(14.25);
-                $event->sheet->getDelegate()->getRowDimension(7)->setRowHeight(26.25);
-                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(15.75);
-                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(15.75);
-                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(13.50);
-                $event->sheet->getDelegate()->getRowDimension(11)->setRowHeight(13);
-                $event->sheet->getDelegate()->getRowDimension(12)->setRowHeight(13);
-                $event->sheet->getDelegate()->getRowDimension(13)->setRowHeight(18);
-                $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(15)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(16)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(18)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(20)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(23)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(29.75);
-                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(29.25);
-                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(31.50);
-                $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(13.50);
-                $event->sheet->getDelegate()->getRowDimension(29)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(30)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(15);
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(24.25);
+                $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(16.75);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(16.75);
+                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(15.25);
+                $event->sheet->getDelegate()->getRowDimension(7)->setRowHeight(27.25);
+                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(16.75);
+                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(16.75);
+                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(14.50);
+                $event->sheet->getDelegate()->getRowDimension(11)->setRowHeight(14);
+                $event->sheet->getDelegate()->getRowDimension(12)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(13)->setRowHeight(22);
+                $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(15)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(16)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(18)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(20)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(23)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(35.75);
+                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(30.25);
+                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(32.50);
+                $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(14.50);
+                $event->sheet->getDelegate()->getRowDimension(29)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(30)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(16);
 
                 for($i = 38; $i <= 52; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(24.75);                    
@@ -454,48 +456,48 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-		$drawing->setName('Avatar');
-		$drawing->setDescription('Avatar');
+        $drawing->setName('Avatar');
+        $drawing->setDescription('Avatar');
         $drawing->setPath(public_path($this->data->user->avatar));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(129);
         $drawing->setWidth(119);
         $drawing->setOffsetX(1);
         $drawing->setOffsetY(1);
-		$drawing->setCoordinates('B14');
+        $drawing->setCoordinates('B14');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-		$drawing2->setName('Logo');
-		$drawing2->setDescription('Logo');
+        $drawing2->setName('Logo');
+        $drawing2->setDescription('Logo');
         $drawing2->setPath(public_path('images/logo.png'));
         $drawing2->setResizeProportional(false);
         $drawing2->setHeight(65);
         $drawing2->setWidth(159);
         $drawing2->setOffsetX(3);
         $drawing2->setOffsetY(3);
-		$drawing2->setCoordinates('A1');
+        $drawing2->setCoordinates('A1');
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-		$drawing3->setName('Sir Kit Sig');
-		$drawing3->setDescription('Sir Kit Sig');
-        $drawing3->setPath(public_path('images/sir_kit_sig.png'));
+        $drawing3->setName('Maam Thea Sig');
+        $drawing3->setDescription('Maam Thea Sig');
+        $drawing3->setPath(public_path('images/maam_thea_sig.png'));
         $drawing3->setResizeProportional(false);
         $drawing3->setHeight(50);
         $drawing3->setWidth(170);
         $drawing3->setOffsetX(-7);
         $drawing3->setOffsetY(-3);
-		$drawing3->setCoordinates('S29');
+        $drawing3->setCoordinates('S29');
 
         $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-		$drawing4->setName('Sir Pres Sig');
-		$drawing4->setDescription('Sir Pres Sig');
+        $drawing4->setName('Sir Pres Sig');
+        $drawing4->setDescription('Sir Pres Sig');
         $drawing4->setPath(public_path('images/pres_sig.png'));
         $drawing4->setResizeProportional(false);
         $drawing4->setHeight(100);
         $drawing4->setWidth(104);
         $drawing4->setOffsetX(35);
         $drawing4->setOffsetY(-35);
-		$drawing4->setCoordinates('S31');
+        $drawing4->setCoordinates('S31');
 
         return [$drawing, $drawing2, $drawing3, $drawing4];
     }
