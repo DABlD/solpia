@@ -201,11 +201,11 @@
 				$vessel = $ss ? $ss->vessel_name : "";
 				$type = $ss ? $ss->vessel_type : "";
 				$grt = $ss ? $ss->gross_tonnage : "";
-				$engineBHP = $ss ? str_replace('&', '&#38', $ss->engine_type) . ' / ' . $ss->bhp_kw : "";
+				$engineBHP = $ss ? str_replace('&', '&#38;', $ss->engine_type) . ' / ' . $ss->bhp_kw : "";
 				$on = $ss ? $ss->sign_on->format('d.M.y') : "";
 				$off = $ss ? $ss->sign_off->format('d.M.y') : "";
 				$diff = ($on && $off) ? round($ss->sign_on->floatDiffInMonths($ss->sign_off), 1) : "";
-				$manning = str_replace('&', '&#38', $ss->manning_agent);
+				$manning = str_replace('&', '&#38;', $ss->manning_agent);
 
 				echo "
 					<tr>
