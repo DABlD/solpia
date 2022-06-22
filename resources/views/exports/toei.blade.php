@@ -532,6 +532,8 @@
 				elseif($applicant->rank->id == 7 || $applicant->rank->id == 8){
 					$rname = "OIC-ENGINEERING WATCH";
 				}
+
+				$rname = $rname == "MASTER" ? "MASTER MARINER" : $rname;
 			}
 			else{
 				$rname = "-----";
