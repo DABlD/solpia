@@ -182,7 +182,8 @@
 		else{
 			$fwd2 = "font-family: Wingdings 2; font-size: 14px;";
 		}
-		echo $box;
+		// echo $box;
+		echo "<td style='$fwd2 text-align: right;'>$box</td>";
 	};
 @endphp
 
@@ -227,110 +228,110 @@
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("PASSPORT", "id") }}</td>
+		{{ $cd("PASSPORT", "id") }}
 		<td colspan="4">PASSPORT:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BASIC TRAINING - BT", 'lc', 'COP') }}</td>
+		{{ $cd("BASIC TRAINING - BT", 'lc', 'COP') }}
 		<td colspan="4">BT</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("US-VISA", "id") }}</td>
+		{{ $cd("US-VISA", "id") }}
 		<td colspan="4">US VISA:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", 'lc', 'COP') }}</td>
+		{{ $cd("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", 'lc', 'COP') }}
 		<td colspan="4">PSCRB</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SEAMAN'S BOOK", "id") }}</td>
+		{{ $cd("SEAMAN'S BOOK", "id") }}
 		<td colspan="4">SIRB:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ADVANCE FIRE FIGHTING - AFF", 'lc', 'COP') }}</td>
+		{{ $cd("ADVANCE FIRE FIGHTING - AFF", 'lc', 'COP') }}
 		<td colspan="4">ATFF</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SRN", "lc") }}</td>
+		{{ $cd("SRN", "lc") }}
 		<td colspan="4">SRN (RANK):</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("MEDICAL FIRST AID - MEFA", 'lc', 'COP') }}</td>
+		{{ $cd("MEDICAL FIRST AID - MEFA", 'lc', 'COP') }}
 		<td colspan="4">MEFA</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("COC", "lc") }}</td>
+		{{ $cd("COC", "lc") }}
 		<td colspan="4">PRC/COP (LICENSE):</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("MEDICAL CARE - MECA", 'lc', 'COP') }}</td>
+		{{ $cd("MEDICAL CARE - MECA", 'lc', 'COP') }}
 		<td colspan="4">MECA</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("GMDSS/GOC", "lc") }}</td>
+		{{ $cd("GMDSS/GOC", "lc") }}
 		<td colspan="4">GOC:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("FAST RESCUE BOAT - FRB", 'lc', 'COP') }}</td>
+		{{ $cd("FAST RESCUE BOAT - FRB", 'lc', 'COP') }}
 		<td colspan="4">PFRB</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("COC", "lc", "II-4/5") }}</td>
+		{{ $cd("COC", "lc", "II-4/5") }}
 		<td colspan="4">COP (DECK/ENGINE):2/4-5</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SHIP SECURITY OFFICER - SSO", 'lc', 'COP') }}</td>
+		{{ $cd("SHIP SECURITY OFFICER - SSO", 'lc', 'COP') }}
 		<td colspan="4">SSO</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("NC", "lc") }}</td>
+		{{ $cd("NC", "lc") }}
 		<td colspan="4">NC 1 / NC 3:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'COP') }}</td>
+		{{ $cd("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'COP') }}
 		<td colspan="4">SDSD SAT</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("YELLOW FEVER", "med_cert") }}</td>
+		{{ $cd("YELLOW FEVER", "med_cert") }}
 		<td colspan="4">YELLOW FEVER:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", 'lc', 'COP') }}</td>
+		{{ $cd("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", 'lc', 'COP') }}
 		<td colspan="4">BTOCT</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("MCV", "id") }}</td>
+		{{ $cd("MCV", "id") }}
 		<td colspan="4">MCV:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ATOCT", 'lc', 'COP') }}</td>
+		{{ $cd("ATOCT", 'lc', 'COP') }}
 		<td colspan="4">ATOCT</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
@@ -346,27 +347,27 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("LICENSE", "flag", 'Panama') }}</td>
+		{{ $cd("LICENSE", "flag", 'Panama') }}
 		<td colspan="3">PANAMA:</td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BOOKLET", "flag", 'Panama') }}</td>
+		{{ $cd("BOOKLET", "flag", 'Panama') }}
 		<td>BOOKLET</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BASIC TRAINING - BT", 'lc') }}</td>
+		{{ $cd("BASIC TRAINING - BT", 'lc') }}
 		<td colspan="3">BT</td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", 'lc') }}</td>
+		{{ $cd("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", 'lc') }}
 		<td colspan="4">BTOCT</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("GMDSS/GOC", "flag", 'Panama') }}</td>
+		{{ $cd("GMDSS/GOC", "flag", 'Panama') }}
 		<td>GMDSS</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", 'lc') }}</td>
+		{{ $cd("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", 'lc') }}
 		<td colspan="3">PSCRB</td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ATOCT", 'lc') }}</td>
+		{{ $cd("ATOCT", 'lc') }}
 		<td colspan="4">ATOCT</td>
 	</tr>
 
@@ -375,60 +376,61 @@
 		<td colspan="4">ENDORSEMENT</td>
 		<td colspan="3"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ADVANCE FIRE FIGHTING - AFF", 'lc') }}</td>
+		{{ $cd("ADVANCE FIRE FIGHTING - AFF", 'lc') }}
 		<td colspan="3">ATFF</td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("WELDING", 'lc') }}</td>
+		{{ $cd("WELDING", 'lc') }}
 		<td colspan="4">WELDING COURSE</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SSO", "flag", 'Panama') }}</td>
+		{{ $cd("SSO", "flag", 'Panama') }}
 		<td>SSO</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("MEDICAL FIRST AID - MEFA", 'lc') }}</td>
+		{{ $cd("MEDICAL FIRST AID - MEFA", 'lc') }}
 		<td colspan="8">MEFA</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SDSD", "flag", 'Panama') }}</td>
+		{{ $cd("SDSD", "flag", 'Panama') }}
 		<td>SDSD SAT</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("MEDICAL CARE - MECA", 'lc') }}</td>
+		{{ $cd("MEDICAL CARE - MECA", 'lc') }}
 		<td colspan="8">MECA</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ECDIS", "flag", 'Panama') }}</td>
+		{{ $cd("ECDIS", "flag", 'Panama') }}
 		<td>ECDIS</td>
 		<td colspan="3" style="{{ $center }}"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("FAST RESCUE BOAT - FRB", 'lc') }}</td>
+		{{ $cd("FAST RESCUE BOAT - FRB", 'lc') }}
 		<td colspan="8">PFRB</td>
 	</tr>
 
 	<tr>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("LICENSE", "flag", 'Marshall Island') }}</td>
+		{{ $cd("LICENSE", "flag", 'Marshall Island') }}
 		<td colspan="3">MARSHALL:</td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BOOKLET", "flag", 'Marshall Island') }}</td>
+		{{ $cd("BOOKLET", "flag", 'Marshall Island') }}
 		<td>BOOKLET</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("WATCH", 'lc') }}</td>
+		{{ $cd("WATCH", 'lc') }}
 		<td colspan="8">WATCHKEEPING (DECK / ENGINE)</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right; color: #FFFFFF;">{{ $cd("LICENSE", "flag", 'Marshall Island') }}</td>
+		{{-- <td style="{{ $fwd2 }} text-align: right; color: #FFFFFF;"></td> --}}
+		{{ $cd("LICENSE", "flag", 'Marshall Island') }}
 		<td>COC</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SHIP SECURITY OFFICER - SSO", 'lc') }}</td>
+		{{ $cd("SHIP SECURITY OFFICER - SSO", 'lc') }}
 		<td colspan="8">SSO</td>
 	</tr>
 
@@ -439,54 +441,54 @@
 		<td></td>
 		<td colspan="3"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SDSD", 'lc') }}</td>
+		{{ $cd("SDSD", 'lc') }}
 		<td colspan="8">SDSD SAT</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BT", "flag", 'Marshall Island') }}</td>
+		{{ $cd("BT", "flag", 'Marshall Island') }}
 		<td>BT / BST</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("MEFA", 'flag', 'Marshall Island') }}</td>
+		{{ $cd("MEFA", 'flag', 'Marshall Island') }}
 		<td>MEFA</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("HAZMAT", 'lc') }}</td>
+		{{ $cd("HAZMAT", 'lc') }}
 		<td>HAZMAT</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("PSCRB", "flag", 'Marshall Island') }}</td>
+		{{ $cd("PSCRB", "flag", 'Marshall Island') }}
 		<td>PSCRB</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("MECA", 'flag', 'Marshall Island') }}</td>
+		{{ $cd("MECA", 'flag', 'Marshall Island') }}
 		<td>MECA</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("CONSOLIDATED MARPOL", 'lc') }}</td>
+		{{ $cd("CONSOLIDATED MARPOL", 'lc') }}
 		<td>CONSOLIDATED MARPOL</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("AFF", "flag", 'Marshall Island') }}</td>
+		{{ $cd("AFF", "flag", 'Marshall Island') }}
 		<td>ATFF</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("TANKERMAN", 'flag', 'Marshall Island') }}</td>
+		{{ $cd("TANKERMAN", 'flag', 'Marshall Island') }}
 		<td>TANKERMAN</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("MARPOL", 'lc') }}</td>
+		{{ $cd("MARPOL", 'lc') }}
 		<td>MARPOL</td>
 		@foreach($marpols as $marpol)
-			<td style="{{ $fwd2 }}">{{ $marpol }}</td>	
+			<td style="{{ $fwd2 }}">{{ $marpol }}</td>
 		@endforeach
 		<td></td>
 	</tr>
 
 	<tr>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("LICENSE", "flag", 'Liberia') }}</td>
+		{{ $cd("LICENSE", "flag", 'Liberia') }}
 		<td colspan="3">LIBERIA:</td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BOOKLET", "flag", 'Liberia') }}</td>
+		{{ $cd("BOOKLET", "flag", 'Liberia') }}
 		<td>BOOKLET</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
@@ -502,32 +504,32 @@
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("GMDSS/GOC", "flag", 'Liberia') }}</td>
+		{{ $cd("GMDSS/GOC", "flag", 'Liberia') }}
 		<td>GOC</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("PADAMS", 'lc') }}</td>
+		{{ $cd("PADAMS", 'lc') }}
 		<td colspan="8">PADAMS</td>
 	</tr>
 
 	<tr>
 		<td colspan="4"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ENDORSEMENT", "flag", 'Liberia') }}</td>
+		{{ $cd("ENDORSEMENT", "flag", 'Liberia') }}
 		<td>ENDORSEMENT</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ML", 'lc') }}</td>
+		{{ $cd("ML", 'lc') }}
 		<td colspan="8">MARITIME ENGLISH (OFFICERS/RATINGS)</td>
 	</tr>
 
 	<tr>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("LICENSE", "flag", 'OTHER') }}</td>
+		{{ $cd("LICENSE", "flag", 'OTHER') }}
 		<td colspan="3">OTHERS:</td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("BOOKLET", "flag", 'OTHER') }}</td>
+		{{ $cd("BOOKLET", "flag", 'OTHER') }}
 		<td>BOOKLET</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ISM", 'lc') }}</td>
+		{{ $cd("ISM", 'lc') }}
 		<td colspan="8">ISM FAMILIARIZATION</td>
 	</tr>
 
@@ -542,59 +544,59 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ECDIS", 'lc') }}</td>
+		{{ $cd("ECDIS", 'lc') }}
 		<td></td>
 		<td colspan="4">ECDIS</td>
 		<td colspan="3"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ERM", 'lc') }}</td>
+		{{ $cd("ERM", 'lc') }}
 		<td colspan="8">ERM</td>
 	</tr>
 
 	<tr>
 		<td colspan="2"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ECDISG", 'lc') }}</td>
+		{{ $cd("ECDISG", 'lc') }}
 		<td colspan="3">GENERIC (2)</td>
 		<td colspan="3"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ERS", 'lc') }}</td>
+		{{ $cd("ERS", 'lc') }}
 		<td colspan="8">ERS</td>
 	</tr>
 
 	<tr>
 		<td colspan="2"></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("ECDISS", 'lc') }}</td>
+		{{ $cd("ECDISS", 'lc') }}
 		<td colspan="3">SPECIFIC (2)   ‎‏‏‎TYPE:</td>
 		<td colspan="3"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("EWE", 'lc') }}</td>
+		{{ $cd("EWE", 'lc') }}
 		<td colspan="8">ERS W/ ERM - ERRS W/ ERRM</td>
 	</tr>
 
 	<tr>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("GMDSS/GOC", 'lc') }}</td>
+		{{ $cd("GMDSS/GOC", 'lc') }}
 		<td colspan="5">GMDSS / GOC</td>
 		<td colspan="3"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("AUXILIARY", 'lc') }}</td>
+		{{ $cd("AUXILIARY", 'lc') }}
 		<td colspan="8">AUXILIARY MACHINERY SYSTEM</td>
 	</tr>
 
 	<tr>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SAT", 'lc') }}</td>
+		{{ $cd("SAT", 'lc') }}
 		<td colspan="5">INMARSAT / SATCOM</td>
 		<td colspan="3"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("CONTROL ENGINEERING", 'lc') }}</td>
+		{{ $cd("CONTROL ENGINEERING", 'lc') }}
 		<td colspan="8">CONTROL ENGINEERING</td>
 	</tr>
 
 	<tr>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("SAT", 'lc') }}</td>
+		{{ $cd("SAT", 'lc') }}
 		<td colspan="5">RSC</td>
 		<td colspan="3"></td>
 		<td></td>
-		<td style="{{ $fwd2 }} text-align: right;">{{ $cd("CONTROL ENGINEERING", 'lc') }}</td>
+		{{ $cd("CONTROL ENGINEERING", 'lc') }}
 		<td colspan="8">HYDRAULICS / PNEUMATICS</td>
 	</tr>
 </table>
