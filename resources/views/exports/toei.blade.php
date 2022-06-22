@@ -371,33 +371,12 @@
 		<tr>
 			<td colspan="2">PANAMA</td> 
 			<td colspan="2">
-				@if(isset($applicant->rank) && $docu)
-					@if($hl == 2)
-						@if($rt == "er")
-							OIC-ENGINEERING WATCH
-						@else
-							OIC-NAVIGATIONAL WATCH
-						@endif
-					@elseif($hl == 3)
-						@if($rt == "er")
-							@if(str_starts_with(strtoupper($docu->no), "CCE"))
-								CHIEF ENGINEER
-							@else
-								SECOND ENGINEER
-							@endif
-						@else
-							@if(str_starts_with(strtoupper($docu->no), "CMM"))
-								MASTER MARINER
-							@else
-								CHIEF MATE
-							@endif
-						@endif
-					@else
-						-----
-					@endif
-				@else
-					-----
-				@endif
+				@php
+					$rank = $applicant->rank->name;
+					$rank = $rank == "MASTER" ? "MASTER MARINER" : $rank;
+					
+					echo $rank;
+				@endphp
 			</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
