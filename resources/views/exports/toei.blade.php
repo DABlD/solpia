@@ -334,13 +334,13 @@
 						@endif
 					@elseif($hl == 3)
 						@if($rt == "er")
-							@if(str_starts_with($docu->no, "CCE"))
+							@if(str_starts_with(strtoupper($docu->no), "CCE"))
 								CHIEF ENGINEER
 							@else
 								SECOND ENGINEER
 							@endif
 						@else
-							@if(str_starts_with($docu->no, "CMM"))
+							@if(str_starts_with(strtoupper($docu->no), "CMM"))
 								MASTER MARINER
 							@else
 								CHIEF MATE
@@ -380,13 +380,13 @@
 						@endif
 					@elseif($hl == 3)
 						@if($rt == "er")
-							@if(str_starts_with($docu->no, "CCE"))
+							@if(str_starts_with(strtoupper($docu->no), "CCE"))
 								CHIEF ENGINEER
 							@else
 								SECOND ENGINEER
 							@endif
 						@else
-							@if(str_starts_with($docu->no, "CMM"))
+							@if(str_starts_with(strtoupper($docu->no), "CMM"))
 								MASTER MARINER
 							@else
 								CHIEF MATE
