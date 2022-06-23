@@ -48,6 +48,7 @@
 
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
 			if($docu == "WATCHKEEPING"){
+				$docu = false;
 				foreach($applicant->document_lc as $document){
 					$watchCerts = ['DECK WATCH', 'ENGINE WATCH', 'ENGINE WATCHKEEPING', 'DECK WATCHKEEPING', 'WATCHKEEPING', 'NAV WATCH'];
 				    if(in_array($document->type, $watchCerts)){
