@@ -216,6 +216,7 @@
 					<option value="RADAR SIMULATOR COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR SIMULATOR COURSE</option>
 					<option value="RADAR TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR TRAINING COURSE</option>
 					<option value="RADAR OPERATOR PLOTTING AID">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OPERATOR PLOTTING AID</option>
+					<option value="RADAR OBSERVER COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OBSERVER COURSE</option>
 					<option value="SSBT WITH BRM">&nbsp;&nbsp;&nbsp;&nbsp;SSBT WITH BRM</option>
 					<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
 					<option value="SRC">&nbsp;&nbsp;&nbsp;&nbsp;SRC</option>
@@ -243,13 +244,16 @@
 					<option value="STABILITY AND TRIM">&nbsp;&nbsp;&nbsp;&nbsp;STABILITY AND TRIM</option>
 					<option value="MARINE ELECTRIC WITH REEFER">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRIC WITH REEFER</option>
 					<option value="WELDING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;WELDING COURSE</option>
-					<option value="KML">&nbsp;&nbsp;&nbsp;&nbsp;KML</option>
+					<option value="KML">&nbsp;&nbsp;&nbsp;&nbsp;KOREAN MARITIME LAW - KML</option>
 					<option value="CATERING TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;CATERING TRAINING</option>
 					<option value="HIGH VOLTAGE TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;HIGH VOLTAGE TRAINING</option>
 					<option value="NEW ENGINE ROOM MACHINERY - WESTERN">&nbsp;&nbsp;&nbsp;&nbsp;NEW ENGINE ROOM MACHINERY - WESTERN</option>
 					<option value="ELECTRONIC NAVIGATION SYSTEMS - ENS">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRONIC NAVIGATION SYSTEMS - ENS</option>
 					<option value="GENERAL TANKER FAMILIARIZATION">&nbsp;&nbsp;&nbsp;&nbsp;GENERAL TANKER FAMILIARIZATION</option>
 					<option value="CONTAINER FAMILIARIZATION">&nbsp;&nbsp;&nbsp;&nbsp;CONTAINER FAMILIARIZATION</option>
+					<option value="PSSR">&nbsp;&nbsp;&nbsp;&nbsp;PERSONAL SAFETY AND SOCIAL RESPONSIBILITIES - PSSR</option>
+					<option value="SHIPS RESTRICTED RADIO TELEPHONE OPERATORS COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SHIPS RESTRICTED RADIO TELEPHONE OPERATORS COURSE</option>
+					<option value="SHORE-BASED FIREFIGHTING FOR TANKERS">&nbsp;&nbsp;&nbsp;&nbsp;SHORE-BASED FIREFIGHTING FOR TANKERS</option>
 
 				<optgroup label="TANKER CERTIFICATES"></optgroup>
 					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
@@ -267,7 +271,9 @@
 
 				<optgroup label="CONTRACTS"></optgroup>
 					<option value="POEA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;POEA CONTRACT</option>
+					<option value="AMOSUP CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;AMOSUP CONTRACT</option>
 					<option value="MLC/CBA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;MLC/CBA CONTRACT</option>
+					<option value="SEAFARERS EMPLOYMENT AGREEMENT">&nbsp;&nbsp;&nbsp;&nbsp;SEAFARERS EMPLOYMENT AGREEMENT</option>
 			`;
 
 			// 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE S.Q. FOR TANKERS', 'FLAG STATE LICENSE', 'FLAG STATE SSO LICENSE', 'FLAG STATE ENDORSEMENT COOK COURSE', 'FLAG STATE GMDSS-GOC', 
@@ -830,7 +836,15 @@
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA'
         					]
-        				}
+        				},
+	        			{
+	        				range: [
+	        					[24,26]
+	        				],
+	        				documents: [
+	        					"SHIP'S COOK ENDORSEMENT"
+	        				]
+	        			}
         			]
         		},
         		{

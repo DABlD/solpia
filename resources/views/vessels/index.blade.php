@@ -2057,7 +2057,8 @@
                     'X01_BorrowDocuments':  'Borrow Documents',
                     'X04_USVE':  'US Visa Endorsement Form',
                     @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
-                        'X08_KoscoWaiver':  'Kosco Waiver'
+                        'X08_KoscoWaiver':  'Kosco Waiver',
+                        'X11_CrewCompetencyChecklist':  'Crew Competency Checklist',
                     @endif
                 },
                 inputPlaceholder: '',
@@ -2079,6 +2080,9 @@
                     }
                     else if(result.value == "X04_USVE"){
                         USVE(id, result.value);
+                    }
+                    else if(result.value == "X11_CrewCompetencyChecklist"){
+                        CCC(id, result.value);
                     }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
@@ -2242,6 +2246,55 @@
                     });
                 }
             })
+        }
+
+        function CCC(id, type){
+            $.ajax({
+                url: '{{ route('applications.get2') }}',
+                data: {
+                    where: ['applicants.id', id],
+                    cols: ['mob', 'eld']
+                },
+                success: result => {
+                    let pro_app = JSON.parse(result)[0];
+                    let vessel = "";
+
+                    if(pro_app.eld == null){
+                        swal({
+                            title: 'Joining Details: ',
+                            html: `
+                                <input type="text" id="joining_date" placeholder="Joining Date (optional)" class="form-control">
+                                <br>
+                                <input type="text" id="joining_port" placeholder="Joining Port (optional)" class="form-control">
+                            `,
+                            showCancelButton: true,
+                            cancelButtonColor: '#f76c6b',
+                            onOpen: () => {
+                                let string = "";
+
+                                $('#joining_date').flatpickr({
+                                    altInput: true,
+                                    altFormat: 'F j, Y',
+                                    dateFormat: 'Y-m-d',
+                                })
+                            }
+                        }).then(result => {
+                            if(result.value){
+                                let data = {
+                                    status: 'Lined-Up',
+                                    joining_date: $('#joining_date').val(),
+                                    joining_port: $('#joining_port').val()
+                                }
+
+                                window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                            }
+                        });
+                    }
+                    else{
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}`;
+                    }
+                }
+            });
         }
 
         function EDC(id, type){
