@@ -313,7 +313,7 @@
 				NATIONAL
 			</td>
 			<td colspan="2">
-				@if(isset($applicant->rank))
+				@if(isset($applicant->rank) && $docu)
 					@if($hl == 0)
 						@if($rt == "er")
 							ENGINEERING WATCHKEEPING
@@ -352,6 +352,8 @@
 					@elseif($applicant->rank->id == 27 || $applicant->rank->id == 28)
 						STEWARD
 					@endif
+				@else
+					-----
 				@endif
 			<td>{{ $docu ? strtoupper($docu->no) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
@@ -372,10 +374,15 @@
 			<td colspan="2">PANAMA</td> 
 			<td colspan="2">
 				@php
-					$rank = $applicant->rank->name;
-					$rank = $rank == "MASTER" ? "MASTER MARINER" : $rank;
-					
-					echo $rank;
+					if(isset($applicant->rank) && $docu){
+						$rank = $applicant->rank->name;
+						$rank = $rank == "MASTER" ? "MASTER MARINER" : $rank;
+						
+						echo $rank;
+					}
+					else{
+						echo '-----';
+					}
 				@endphp
 			</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
@@ -1107,6 +1114,8 @@
 			$name2 = 'COVID-19 2ND DOSE';
 			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
 
+			$name2 = 'COVID-19 3RD DOSE';
+			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
 		@endphp
 
 		<tr>	
@@ -1308,7 +1317,7 @@
 			<td>Presenter:</td>
 			<td colspan="3">
 				@if(auth()->user()->id == 4567)
-					LHEA MARQUEZ / CREWING MANAGER
+					LHEA MARQUEZ / ASST. CREWING MANAGER
 				@else
 					NEIL ROMANO / CREWING MANAGER
 				@endif
