@@ -163,7 +163,10 @@
 			$on = $checkDate($ss->sign_on);
 			$off = $checkDate($ss->sign_off);
 			$manning = $clean($ss->manning_agent);
-			$rank = $ranks[$ss->rank];
+			$rank = null;
+			if(isset($ss->rank)){
+				$rank = $ranks[$ss->rank];
+			}
 
 			echo "
 				<tr>
