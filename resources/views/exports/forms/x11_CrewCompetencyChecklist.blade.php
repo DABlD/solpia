@@ -212,7 +212,7 @@
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Philippine)", 'lc', 'All D. officer') }}</tr>
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Panama)", 'flag', 'All D. officer', 'Panama') }}</tr>
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Marshall)", 'flag', 'All D. officer', 'Marshall Islands') }}</tr>
-	<tr>{{ $doc("SDSD", "Designated Security Duty(Panama)", 'lc', 'All Rank') }}</tr>
+	<tr>{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "Designated Security Duty(Panama)", 'lc', 'All Rank') }}</tr>
 	<tr>{{ $doc("SHIP'S COOK ENDORSEMENT", "Ship's Cook(Panama)", 'flag', 'Catering Rating', 'Panama') }}</tr>
 	<tr>{{ $doc("SHIP'S COOK ENDORSEMENT", "Ship's Cook(Marshall)", 'flag', 'Catering Rating', 'Marshall Islands') }}</tr>
 	<tr>{{ $doc("GENERAL TANKER FAMILIARIZATION", "Panama Oil Tanker Cert.", 'lc', 'All rank/Oil Tanker') }}</tr>
@@ -234,7 +234,7 @@
 		{{ $row("TRAINING ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(STCW ‎‏‏‎11 ‎‏‏‎REQUIREMENT)", 19) }}
 		{{ $doc("BASIC TRAINING - BT", "Basic Safety Course", 'lc', 'All Rank') }}
 	</tr>
-	<tr>{{ $doc("PSSR", "Personal Safety & Social Responsibility", 'lc', 'All Rank') }}</tr>
+	<tr>{{ $doc("BASIC TRAINING - BT", "Personal Safety & Social Responsibility", 'lc', 'All Rank') }}</tr>
 	<tr>{{ $doc("ADVANCE FIRE FIGHTING - AFF", "Advanced Training in Fire Fighting", 'lc', 'All D/E Officer') }}</tr>
 	<tr>{{ $doc("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", "Proficiency in Survival Craft & Rescue Boat", 'lc', 'All D/E Officer') }}</tr>
 	<tr>{{ $doc("MEDICAL FIRST AID - MEFA", "Medical Emergency-First Aid", 'lc', 'All D/E Officer') }}</tr>
@@ -250,8 +250,8 @@
 	<tr>{{ $doc("BASIC TRAINING FOR OIL AND CHEMICAL TANKER", "Basic Training for Tanker", 'lc', 'All rank/Oil tanker') }}</tr>
 	<tr>{{ $doc("ADVANCE TRAINING FOR OIL TANKER - ATOT", "Advanced Training for Tanker (Oil / Chemical / Liquified Gas)", 'lc', 'All D/E officer, BSN, Pumpman / Tanker') }}</tr>
 	<tr>{{ $doc("SHORE-BASED FIREFIGHTING FOR TANKERS", "Shore-Based Fire Fighting", 'lc', 'All rank') }}</tr>
-	<tr>{{ $doc("N/A", "ISPS-Ship Security Officer", 'lc', 'All D/E Officer') }}</tr>
-	<tr>{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "ISPS-Designated Security Duty", 'lc', 'All D/E Officer') }}</tr>
+	<tr>{{ $doc("SHIP SECURITY OFFICER - SSO", "ISPS-Ship Security Officer", 'lc', 'All D/E Officer') }}</tr>
+	<tr>{{ $doc("N/A", "ISPS-Designated Security Duty", 'lc', 'All D/E Officer') }}</tr>
 
 	<tr>
 		{{ $row("CONTRACT  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Original-Crew ‎‏‏‎/ ‎‏‏‎Copy-Master)", 3) }}
