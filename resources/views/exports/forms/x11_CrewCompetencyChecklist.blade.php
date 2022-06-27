@@ -12,6 +12,7 @@
 	};
 
 	$cleanText = function($text){
+		// return str_replace('&', '&#38;', $text);
 		return str_replace('&', '&#38;', $text);
 	};
 
@@ -121,8 +122,6 @@
 
 		$number = $number == "" ? "N/A" : $number;
 
-		$display = $cleanText($display);
-		
 		echo "
 			<td colspan='2'> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎$display</td>
 			<td colspan='2' style='$center'>$number</td>
@@ -194,7 +193,7 @@
 	</tr>
 	<tr>{{ $doc("LICENSE", "Seaman's book (Panama)", 'flag', 'All Rank', 'Panama') }}</tr>
 	<tr>{{ $doc("LICENSE", "Seaman's book (Marshall/Others)", 'flag', 'All Rank', 'Marshall Islands') }}</tr>
-	<tr>{{ $doc("REGISTRATION CERTIFICATE", "Seaman's Registration Certificate", 'lc', 'All Rank') }}</tr>
+	<tr>{{ $doc("SEAMANS REGISTRATION CERTIFICATE", "Seaman's Registration Certificate", 'lc', 'All Rank') }}</tr>
 	<tr>{{ $doc("PASSPORT", "Passport (Philippine)", 'id', 'All Rank') }}</tr>
 
 	<tr>
@@ -213,7 +212,7 @@
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Philippine)", 'lc', 'All D. officer') }}</tr>
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Panama)", 'flag', 'All D. officer', 'Panama') }}</tr>
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Marshall)", 'flag', 'All D. officer', 'Marshall Islands') }}</tr>
-	<tr>{{ $doc("SDSD", "Designated Security Duty(Panama)", 'flag', 'All Rank', 'Panama') }}</tr>
+	<tr>{{ $doc("SDSD", "Designated Security Duty(Panama)", 'lc', 'All Rank') }}</tr>
 	<tr>{{ $doc("SHIP'S COOK ENDORSEMENT", "Ship's Cook(Panama)", 'flag', 'Catering Rating', 'Panama') }}</tr>
 	<tr>{{ $doc("SHIP'S COOK ENDORSEMENT", "Ship's Cook(Marshall)", 'flag', 'Catering Rating', 'Marshall Islands') }}</tr>
 	<tr>{{ $doc("GENERAL TANKER FAMILIARIZATION", "Panama Oil Tanker Cert.", 'lc', 'All rank/Oil Tanker') }}</tr>
@@ -251,7 +250,7 @@
 	<tr>{{ $doc("BASIC TRAINING FOR OIL AND CHEMICAL TANKER", "Basic Training for Tanker", 'lc', 'All rank/Oil tanker') }}</tr>
 	<tr>{{ $doc("ADVANCE TRAINING FOR OIL TANKER - ATOT", "Advanced Training for Tanker (Oil / Chemical / Liquified Gas)", 'lc', 'All D/E officer, BSN, Pumpman / Tanker') }}</tr>
 	<tr>{{ $doc("SHORE-BASED FIREFIGHTING FOR TANKERS", "Shore-Based Fire Fighting", 'lc', 'All rank') }}</tr>
-	<tr>{{ $doc("SHIP SECURITY OFFICER - SSO", "ISPS-Ship Security Officer", 'lc', 'All D/E Officer') }}</tr>
+	<tr>{{ $doc("N/A", "ISPS-Ship Security Officer", 'lc', 'All D/E Officer') }}</tr>
 	<tr>{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "ISPS-Designated Security Duty", 'lc', 'All D/E Officer') }}</tr>
 
 	<tr>

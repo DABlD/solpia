@@ -151,7 +151,7 @@
         	// CREATE ID OPTIONS
         	var id_options = "";
         	var idOptions = [
-        		'', 'PASSPORT', 'US-VISA', "SEAMAN BOOK", 'MCV', 'JAPANESE VISA'
+        		'', 'PASSPORT', 'US-VISA', "SEAMAN BOOK", 'MCV', 'JAPANESE VISA', "SEAMANS REGISTRATION CERTIFICATE"
         	];
 
         	idOptions.forEach(docu => {
