@@ -437,7 +437,9 @@
                             showCancelButton: true,
                             cancelButtonColor: '#f76c6b'
                         }).then(result => {
-                            window.location.href = `{{ route('principal.getOnboardCrew') }}/${result.value}`;
+                            if(result.value){
+                                window.location.href = `{{ route('principal.getOnboardCrew') }}/${result.value}`;
+                            }
                         });
                     }
                 });
