@@ -24,7 +24,7 @@ class Hmm implements WithMultipleSheets
         array_push($sheets, new Hmm1($this->applicant, $this->type . '1'));
 
         $ranks = ['C/O', '2/O', '3/O', 'BSN', 'AB', 'OS', 'AO', 'DCDT', '1AE', '2AE', '3AE', 'OLR1', 'OLR', 'ELECT', 'A/E', 'CCK', '2CK'];
-        if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin" && in_array($this->applicant->rank->abbr, $ranks)){
+        if((auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin") && in_array($this->applicant->rank->abbr, $ranks)){
             $rank = $this->applicant->rank->abbr;
 
             if($rank == "C/O"){
