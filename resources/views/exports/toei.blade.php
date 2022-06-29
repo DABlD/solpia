@@ -385,7 +385,7 @@
 		<tr>
 			<td colspan="2">PANAMA</td> 
 			<td colspan="2">
-				@if(isset($applicant->rank) && $docu)
+				@if(isset($applicant->rank) && $docu2)
 					@if($hl == 0)
 						@if($rt == "er")
 							ENGINEERING WATCHKEEPING
@@ -438,9 +438,9 @@
 					-----
 				@endif
 			</td>
-			<td>{{ $docu ? strtoupper($docu2->number) : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
+			<td>{{ $docu2 ? strtoupper($docu2->number) : "-----" }}</td>
+			<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
 			<td colspan="2">PANAMA</td>
 		</tr>
