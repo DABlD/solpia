@@ -43,10 +43,10 @@ class PrincipalController extends Controller
     public function getOnboardCrew(Principal $principal){
         $pa = ['pa.applicant_id as id', 'pa.vessel_id as vid', 'pa.principal_id as pid', 'pa.rank_id as rid', 'seniority'];
         $p = ['p.name as pname'];
-        $v = ['v.name as vname', 'v.flag'];
+        $v = ['v.name as vname', 'v.flag', 'v.type'];
         $r = ['r.abbr as rname', 'r.type as rtype'];
-        $lup = ['lup.joining_date'];
-        $u = ['fname', 'mname', 'lname', 'suffix'];
+        $lup = ['lup.joining_date', 'lup.months'];
+        $u = ['fname', 'mname', 'lname', 'suffix', 'birthday'];
 
         $obcs = Applicant::where('pa.status', 'On Board')
                     ->where('pa.principal_id', $principal->id)
@@ -84,7 +84,12 @@ class PrincipalController extends Controller
         }
 
         $fileName = str_replace('/', '_', $principal->name) . ' Onboard Crew - ' . now()->format('d-M-y');
-        $class = "App\\Exports\\X10_PrincipalOnboardCrew";
+        if(in_array($principal->name, ["KOSCO", 'HMM', 'CK MARITIME'])){
+            $class = "App\\Exports\\X10_PrincipalOnboardCrew";
+        }
+        elseif(in_array($principal->name, ["SHINKO"])){
+            $class = "App\\Exports\\X12_PrincipalOnboardCrew";
+        }
         return Excel::download(new $class($obcs), "$fileName.xlsx");
     }
 }
