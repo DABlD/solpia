@@ -166,7 +166,7 @@
 				}
 			@endphp
 			${{ $data->wage->basic ? ($data->wage->basic + $spay) : 0 }}</td>
-		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->fot ?? 0 }}</td>
+		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->fot ?? $data->wage->ot ?? 0 }}</td>
 		<td colspan="3" style="{{ $center }} {{ $color }}">${{ $data->wage->sup_allow ?? 0 }}</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">{{ $data->wage->sub_allow ?? 0 }}</td>
 	</tr>
