@@ -279,6 +279,8 @@
 			$regs = array();
 			$regs['dr'] = ["II/4", "II/5", "II/1", "II/2"];
 			$regs['er'] = ["III/4", "III/5", "III/1", "III/2"];
+			// $regs['dr'] = ["II/2", "II/1", "II/5", "II/4"];
+			// $regs['er'] = ["III/2", "III/1", "III/5", "III/4"];
 
 			$hl = null;
 			$docu = null;
@@ -286,7 +288,7 @@
 
 			if($applicant->rank){
 				foreach($applicant->document_lc as $lc){
-					if($lc->type == "COC"){
+					if($lc->type == "COC" || $lc->type == "COE"){
 						$regulations = json_decode($lc->regulation);
 
 						foreach($regs[$rt] as $key => $ref){
@@ -351,6 +353,16 @@
 						SHIP'S COOK
 					@elseif($applicant->rank->id == 27 || $applicant->rank->id == 28)
 						STEWARD
+					@else
+						@php
+							$rname = $applicant->rank->name;
+							if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
+								$rname = "WIPER";
+							}
+							elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
+								$rname = "ORDINARY SEAMAN";
+							}
+						@endphp
 					@endif
 				@else
 					-----
@@ -362,10 +374,10 @@
 		</tr>
 
 		@php 
-			$docu = false;
+			$docu2 = false;
 			foreach($applicant->document_flag as $document){
 			    if($document->country == "Panama" && $document->type == "LICENSE"){
-			        $docu = $document;
+			        $docu2 = $document;
 			    }
 			}
 		@endphp
@@ -373,21 +385,62 @@
 		<tr>
 			<td colspan="2">PANAMA</td> 
 			<td colspan="2">
-				@php
-					if(isset($applicant->rank) && $docu){
-						$rank = $applicant->rank->name;
-						$rank = $rank == "MASTER" ? "MASTER MARINER" : $rank;
-						
-						echo $rank;
-					}
-					else{
-						echo '-----';
-					}
-				@endphp
+				@if(isset($applicant->rank) && $docu)
+					@if($hl == 0)
+						@if($rt == "er")
+							ENGINEERING WATCHKEEPING
+						@else
+							NAVIGATIONAL WATCHKEEPING
+						@endif
+					@elseif($hl == 1)
+						@if($rt == "er")
+							ABLE SEAFARER ENGINE
+						@else
+							ABLE SEAFARER DECK
+						@endif
+					@elseif($hl == 2)
+						@if($rt == "er")
+							OIC-ENGINEERING WATCH
+						@else
+							OIC-NAVIGATIONAL WATCH
+						@endif
+					@elseif($hl == 3)
+						@if($rt == "er")
+							@if(str_starts_with(strtoupper($docu->no), "CCE"))
+								CHIEF ENGINEER
+							@else
+								SECOND ENGINEER
+							@endif
+						@else
+							@if(str_starts_with(strtoupper($docu->no), "CMM"))
+								MASTER MARINER
+							@else
+								CHIEF MATE
+							@endif
+						@endif
+				 	{{-- GALLEY --}}
+					@elseif($applicant->rank->id == 24)
+						SHIP'S COOK
+					@elseif($applicant->rank->id == 27 || $applicant->rank->id == 28)
+						STEWARD
+					@else
+						@php
+							$rname = $applicant->rank->name;
+							if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
+								$rname = "WIPER";
+							}
+							elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
+								$rname = "ORDINARY SEAMAN";
+							}
+						@endphp
+					@endif
+				@else
+					-----
+				@endif
 			</td>
-			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td>{{ $docu ? strtoupper($docu2->number) : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
 			<td colspan="2">PANAMA</td>
 		</tr>
@@ -1114,8 +1167,8 @@
 			$name2 = 'COVID-19 2ND DOSE';
 			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
 
-			$name2 = 'COVID-19 3RD DOSE';
-			$docu2 = isset($applicant->document_med_cert->{$name2}) ? $applicant->document_med_cert->{$name2} : false;
+			$name3 = 'COVID-19 3RD DOSE';
+			$docu3 = isset($applicant->document_med_cert->{$name3}) ? $applicant->document_med_cert->{$name3} : false;
 		@endphp
 
 		<tr>	
@@ -1127,6 +1180,18 @@
 				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }} &#38;
 				{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}
 
+			</td>
+			<td>-----</td>
+			<td>-----</td>
+		</tr>
+
+		<tr>	
+			<td colspan="4">COVID-19 BOOSTER(certificate copy must be attached)</td>
+			<td>NO</td>
+			{{-- <td>{{ $docu2 ? "YES" : "NO"}}</td> --}}
+			<td>{{ $docu3 ? $docu3->clinic : "-----"}}</td>
+			<td>
+				{{ $docu3 ? checkDate2($docu3->issue_date, "I") : "-----" }}
 			</td>
 			<td>-----</td>
 			<td>-----</td>

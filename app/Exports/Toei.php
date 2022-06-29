@@ -461,7 +461,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, WithColumnFormatting
 
                 // PIYC
                 $piycRows = array(); //WILL BE FILLED AFTER FUNCTIONS
-                $rapiyc = $raoc + 1 + 8; //Row # AFTER PIYC (5 = rows)
+                $rapiyc = $raoc + 1 + 9; //Row # AFTER PIYC (5 = rows)
 
                 // EAJL CERTIFICATE ROWS
                 $eajlRows = array();
@@ -681,6 +681,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, WithColumnFormatting
                     $piyc('A', 6) . ':' . $piyc('D', 6), $piyc('E', 6), $piyc('F', 6), $piyc('G', 6), $piyc('H', 6), $piyc('I', 6),
                     $piyc('A', 7) . ':' . $piyc('D', 7), $piyc('E', 7), $piyc('F', 7), $piyc('G', 7), $piyc('H', 7), $piyc('I', 7),
                     $piyc('A', 8) . ':' . $piyc('D', 8), $piyc('E', 8), $piyc('F', 8), $piyc('G', 8), $piyc('H', 8), $piyc('I', 8),
+                    $piyc('A', 9) . ':' . $piyc('D', 9), $piyc('E', 9), $piyc('F', 9), $piyc('G', 9), $piyc('H', 9), $piyc('I', 9),
                 );
 
 
@@ -688,20 +689,24 @@ class Toei implements FromView, WithEvents, WithDrawings//, WithColumnFormatting
                     array_push($piycRows, $tempPiycRows[$i]);
                 }
 
-                array_push($cells[11], $tempPiycRows[42]);
-                array_push($cells[11], $tempPiycRows[43]);
-                array_push($cells[11], $tempPiycRows[44]);
-                array_push($cells[11], $tempPiycRows[45]);
-                array_push($cells[11], $tempPiycRows[46]);
-                array_push($cells[11], $tempPiycRows[47]);
+                array_push($cells[11], $tempPiycRows[48]);
+                array_push($cells[11], $tempPiycRows[49]);
+                array_push($cells[11], $tempPiycRows[50]);
+                array_push($cells[11], $tempPiycRows[51]);
+                array_push($cells[11], $tempPiycRows[52]);
+                array_push($cells[11], $tempPiycRows[53]);
 
-                for ($i=8; $i < 42; $i++) { 
+                for ($i=8; $i < 54; $i++) { 
                     array_push($cells[7], $tempPiycRows[$i]);
                 }
+
+                // dd($cells[7]);
 
                 foreach ($tempPiycRows as $cell) {
                     array_push($cells[12], $cell);
                 }
+
+                // dd($cells[7], $cells[12]);
 
                 
                 // HEADINGS
@@ -737,7 +742,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, WithColumnFormatting
 
                 // HC VC
                 $h[5] = [
-                    ('A' . ($rapiyc - 8) . ':' . 'I' . ($rapiyc - 8)), 'B25', 'I23', 'A57:D60'
+                    ('A' . ($rapiyc - 9) . ':' . 'I' . ($rapiyc - 9)), 'B25', 'I23', 'A57:D60'
                 ];
 
                 // B
