@@ -786,7 +786,7 @@
 	        			{
 	        				range: [
 	        					[9,23],
-	        					[27,41]
+	        					[27,43]
 	        				],
 	        				documents: [
 	        					'BOOKLET', 'SDSD'
@@ -823,7 +823,7 @@
         				},
         				{
         					range: [
-        						[9,41]
+        						[9,43]
         					],
         					documents: [
         						'BOOKLET', 'SDSD'
@@ -831,7 +831,7 @@
         				},
         				{
         					range: [
-        						[1,41]
+        						[1,43]
         					],
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA'
@@ -865,7 +865,7 @@
         			details: [
         				{
         					range: [
-        						[1,41]
+        						[1,43]
         					],
         					documents: [
         						'LICENSE', 'BOOKLET'
@@ -881,7 +881,7 @@
         				},
         				{
         					range: [
-        						[1,41]
+        						[1,43]
         					],
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
@@ -894,7 +894,7 @@
         			details: [
         				{
         					range: [
-        						[1,41]
+        						[1,43]
         					],
         					documents: [
         						'LICENSE', 'BOOKLET'
@@ -907,7 +907,7 @@
         			details: [
         				{
         					range: [
-        						[1,29]
+        						[1,43]
         					],
         					documents: [
         						'LICENSE'
