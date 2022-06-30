@@ -86,6 +86,18 @@ class PDFExport
         return $applicant;
     }
 
+    public function Y04_LetterOfOath(){
+        $applicant = Applicant::find($this->data->data['id']);
+        $applicant->load('user');
+        $applicant->load('document_id');
+        $applicant->load('pro_app');
+
+        $applicant->vessel = Vessel::find($applicant->pro_app->vessel_id)->name;
+        $applicant->rank = Rank::find($applicant->pro_app->rank_id)->name;
+
+        return $applicant;
+    }
+
     public function download(){
         $pdf = PDF::loadView('exports.forms.' . lcfirst($this->type), ['data' => $this->data]);
         $pdf->setPaper('a4', 'Portrait');
