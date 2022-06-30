@@ -2062,6 +2062,9 @@
                         'X08_KoscoWaiver':  'Kosco Waiver',
                         'X11_CrewCompetencyChecklist':  'Crew Competency Checklist',
                     @endif
+                    @if(auth()->user()->fleet == "FLEET A" || auth()->user()->role == "Admin")
+                        'Y03_LetterOfOath':  'Letter Of Oath',
+                    @endif
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
@@ -2085,6 +2088,13 @@
                     }
                     else if(result.value == "X11_CrewCompetencyChecklist"){
                         CCC(id, result.value);
+                    }
+                    else if(result.value == "Y03_LetterOfOath"){
+                        let data = {};
+                            data.id = id;
+                            data.exportType = "pdf";
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}?` + $.param(data);
                     }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
