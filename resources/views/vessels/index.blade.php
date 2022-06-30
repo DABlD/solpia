@@ -2063,7 +2063,7 @@
                         'X11_CrewCompetencyChecklist':  'Crew Competency Checklist',
                     @endif
                     @if(auth()->user()->fleet == "FLEET A" || auth()->user()->role == "Admin")
-                        'Y03_LetterOfOath':  'Letter Of Oath',
+                        'Y03_LetterOfOathMarpol':  'Letter Of Oath (MARPOL)',
                     @endif
                 },
                 inputPlaceholder: '',
@@ -2089,7 +2089,7 @@
                     else if(result.value == "X11_CrewCompetencyChecklist"){
                         CCC(id, result.value);
                     }
-                    else if(result.value == "Y03_LetterOfOath"){
+                    else if(result.value == "Y03_LetterOfOathMarpol"){
                         let data = {};
                             data.id = id;
                             data.exportType = "pdf";

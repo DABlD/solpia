@@ -74,7 +74,7 @@ class PDFExport
         return $applicants;
     }
 
-    public function Y03_LetterOfOath(){
+    public function Y03_LetterOfOathMarpol(){
         $applicant = Applicant::find($this->data->data['id']);
         $applicant->load('user');
         $applicant->load('document_id');
