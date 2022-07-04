@@ -1431,7 +1431,7 @@
                             <td><b>Rank</b></td>
                             <td><b>Name</b></td>
                             <td><b>Age</b></td>
-                            <td><b>Date Joined</b></td>
+                            <td><b>Joining Date</b></td>
                             <td><b>MOB</b></td>
                             <td><b>Contract<br>Duration</b></td>
                             <td><b>End of<br>Contract</b></td>
@@ -1648,7 +1648,7 @@
                             <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit On Board Details" onClick='eod(${crew.id}, ${crew.vessel_id}, "${crew.joining_date}", ${crew.months}, "${crew.joining_port ?? ""}")'>
                                 <span class="fa fa-pencil fa-sm"></span>
                             </a>
-                            <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id})">
+                            <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id}, '${crew.joining_date}', ${crew.months})">
                                 <span class="fa fa-arrow-down fa-sm"></span>
                             </a>
                             ${onBoardButton}
@@ -1773,7 +1773,7 @@
             });
         };
 
-        function offBoard(id, vessel_id){
+        function offBoard(id, vessel_id, joining_date, months){
             swal({
                 title: 'Disembarkation Details',
                 html: `
@@ -1821,6 +1821,7 @@
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
+                        defaultDate: moment(joining_date).add("months", months).subtract("day", 1).format("Y-m-d")
                     });
 
                     $('#remark').on('select2:open', () => {
