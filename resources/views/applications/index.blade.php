@@ -428,6 +428,8 @@
                         WalangLagay:                    'Walang Lagay',
                         HistoryCheck:                   'History Check',
                         SeaServiceCertificate:          'Certificate of Sea Service',
+                        X01_BorrowDocuments:            'Borrow Documents',
+                        X04_USVE:                       'US Visa Endorsement Form',
                         X07_SeaServiceRequestForm:      'Request for Sea Service Certificate',
                         X05_Clearance:                  'Clearance',
                         X09_InitialDocumentChecklist:   'Document Checklist (Initial)',
@@ -644,12 +646,179 @@
                                 }
                             })
                         }
+                        else if(result.value == "X01_BorrowDocuments"){
+                            FBBD(application.data('id'), result.value);
+                        }
+                        else if(result.value == "X04_USVE"){
+                            USVE(application.data('id'), result.value);
+                        }
                         else{
                             window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
                         }
                     }
                 })
 	    	});
+
+            
+
+            function USVE(id, type){
+                $.ajax({
+                    url: '{{ route('applications.get2') }}',
+                    data: {
+                        where: ['applicants.id', id],
+                        cols: ['mob', 'eld']
+                    },
+                    success: result => {
+                        let pro_app = JSON.parse(result)[0];
+                        let vessel = "";
+
+                        if(pro_app.eld == null){
+                            vessel = `
+                                <br><br>
+                                <input type="string" id="eld" placeholder="Expected Sign-on Date (optional)" class="form-control">
+                                <br>
+                                <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
+                            `;
+                        }
+
+                        swal({
+                            title: 'Charge to: ',
+                            html: `
+                                <div style="text-align: left;">
+                                    <label class="radio-inline" style="font-size: 16px;">
+                                        <input type="radio" name="chargeTo" value="1" checked> Seafarer
+                                    </label>
+                                    <br>
+                                    <label class="radio-inline" style="font-size: 16px;">
+                                        <input type="radio" name="chargeTo"} value="0"> SMI
+                                    </label>
+                                    ${vessel}
+                                </div>
+                            `,
+                            showCancelButton: true,
+                            cancelButtonColor: '#f76c6b',
+                            onOpen: () => {
+                                let string = "";
+
+                                $('#eld').flatpickr({
+                                    altInput: true,
+                                    altFormat: 'F j, Y',
+                                    dateFormat: 'Y-m-d',
+                                })
+                            }
+                        }).then(result => {
+                            if(result.value){
+                                let data = {
+                                    status: 'Lined-Up',
+                                    eld: $('#eld').val(),
+                                    mob: $('#mob').val(),
+                                    chargeTo: $('[name="chargeTo"]:checked').val()
+                                }
+
+                                window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                            }
+                        });
+                    }
+                })
+            }
+
+            function FBBD(id, type){
+                swal({
+                    title: 'Fill all details',
+                    html: `
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">REF NO.</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="ref" class="swal2-input" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">PURPOSE</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="purpose" class="swal2-input" />
+                            </div>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b',
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let a = $('#ref').val();
+                                let b = $('#purpose').val();
+
+                                if(a == "" || b == ""){
+                                    swal.showValidationError('All fields is required');
+                                }
+                            resolve()}, 800);
+                        });
+                    },
+                }).then(result => {
+                    if(result.value){
+                        let temp = [
+                            'Passport', "Seaman's Book", 'Maritime Crew Visa', 'BT', "PSCRB", "AFF", "MECA", "MEFA", 'SDSD', 'COC', 'COE'
+                        ];
+                        let docString = "";
+                        let docs = [];
+
+                        temp.forEach((value, index) => {
+                            docString += `  
+                                <div class="row">
+                                    <div class="col-md-4" style="text-align: right;">
+                                        <input type="checkbox" class="crew-checklist" value="${value}"/>
+                                    </div>
+                                    <div class="col-md-8" style="text-align: left;">
+                                        <label for="">
+                                            ${value}
+                                        </label>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        let data = {};
+                        data.data2 = {};
+                        data.data2.ref = $('#ref').val();
+                        data.data2.purpose = $('#purpose').val();
+
+                        swal({
+                            title: 'Select Documents to Borrow',
+                            html: '<br><br>' + docString,
+                            showCancelButton: true,
+                            cancelButtonColor: '#f76c6b',
+                            onOpen: () => {
+                                $('#swal2-content input[type=checkbox]').css({
+                                    'zoom': '1.7',
+                                    'margin': '1px 0 0'
+                                });
+                            },
+                            preConfirm: () => {
+                                swal.showLoading();
+                                return new Promise(resolve => {
+                                    setTimeout(() => {
+                                        let temp2 = $(".crew-checklist:checked");
+                                        
+                                        temp2.each((index, value) => {
+                                            docs.push($(value).val());
+                                        });
+                                    resolve()}, 500);
+                                });
+                            },
+                        }).then(result => {
+                            if(result.value){
+                                data.data2.docs = docs;
+                                window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                            }
+                        })
+                    }
+                })
+            }
 
             function edc(type, fleet, application){
                 if(application.data('status2') == "Vacation"){
