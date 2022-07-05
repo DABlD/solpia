@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\{Rank, LineUpContract, Wage};
 
-class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class X15_Ext_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $ranks = Rank::pluck('abbr', 'id');
@@ -49,11 +49,7 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
             }
         }
 
-        $wage1 = Wage::where('rank_id', $data->pro_app->rank_id)
-                    ->where('vessel_id', 42)
-                    // ->where('vessel_id', $data->pro_app->vessel_id)
-                    ->first();
-        $wage2 = Wage::where('rank_id', $data->data['rank'])
+        $wage = Wage::where('rank_id', $data->pro_app->rank_id)
                     ->where('vessel_id', 42)
                     // ->where('vessel_id', $data->pro_app->vessel_id)
                     ->first();
@@ -66,14 +62,12 @@ class X06_Ext_Prom_Form implements FromView, WithEvents, WithDrawings//, ShouldA
             'owner_allow', 'tanker_allow'
         ];
 
-        $wage1 = $this->getSum($wage1, $fields, $data->pro_app->seniority);
-        $wage2 = $this->getSum($wage2, $fields, $data->pro_app->seniority);
+        $wage = $this->getSum($wage, $fields, $data->pro_app->seniority);
 
         $data->con      = $con;
         $data->ranks    = $ranks->all();
         $data->ranks2   = $ranks2->all();
-        $data->wage1    = $wage1;
-        $data->wage2    = $wage2;
+        $data->wage    = $wage;
 
         $this->data     = $data;
         $this->type     = $type;

@@ -2110,6 +2110,7 @@
                 title: 'Select Document',
                 input: 'select',
                 inputOptions: {
+                    'X15_Ext_Form':  'Extension Form',
                     'X06_Ext_Prom_Form':  'Extension Promotion Form',
                     'MLCContract':          'MLC Contract'
                 },
@@ -2120,6 +2121,9 @@
                 if(result.value){
                     if(result.value == "X06_Ext_Prom_Form"){
                         X06(id, result.value);
+                    }
+                    else if(result.value == "X15_Ext_Form"){
+                        X15(id, result.value);
                     }
                     else if(result.value == "MLCContract"){
                         getMLCData(id, result.value);
@@ -2201,6 +2205,50 @@
                             window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
                         }
                     });
+                }
+            });
+        }
+
+        function X15(id, type){
+            swal.showLoading();
+
+            swal({
+                title: 'Enter Details',
+                html: `
+                    <input type="text" id="doe" class="form-control" placeholder="Date of Effectivity"><br>
+                    <input type="text" id="recommended_by" class="form-control" placeholder="Recommended By (optional)"><br>
+                    <input type="text" id="remarks" class="form-control" placeholder="Remarks (optional)"><br>
+                    <input type="number" min="1" id="cd" class="form-control" placeholder="Contract Duration (optional)"><br>
+                `,
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            if($('#doe').val() == ""){
+                                swal.showValidationError('Rank is required');
+                            }
+                        resolve()}, 500);
+                    });
+                },
+                onOpen: () => {
+                    $('#doe').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                        minDate: moment().format("YYYY-MM-DD")
+                    })
+                }
+            }).then(result => {
+                if(result.value){
+                    let data = {
+                        doe: $('#doe').val(),
+                        recommended_by: $('#recommended_by').val(),
+                        remarks: $('#remarks').val(),
+                        status: "On Board",
+                        cd: $('#cd').val()
+                    }
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
                 }
             });
         }

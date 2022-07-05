@@ -21,7 +21,7 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $center }} {{ $red }} {{ $und }}" colspan="9">PROMOTION</td>
+		<td style="{{ $center }} {{ $red }} {{ $und }}" colspan="9">EXTENSION</td>
 	</tr>
 
 	<tr>
@@ -49,7 +49,7 @@
 
 	<tr>
 		<td colspan="2">RANK (FROM/TO)</td>
-		<td colspan="3" style="{{ $center }}">{{ $data->ranks[$data->pro_app->rank_id] }} - {{ $data->ranks[$data->data['rank']] }}</td>
+		<td colspan="3" style="{{ $center }}">{{ $data->ranks[$data->pro_app->rank_id] }}</td>
 	</tr>
 
 	<tr>
@@ -69,12 +69,12 @@
 
 	<tr>
 		<td colspan="2">PREVIOUS MO. WAGE</td>
-		<td colspan="3" style="{{ $center }}">${{ $data->wage1 }}</td>
+		<td colspan="3" style="{{ $center }}">${{ $data->wage }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">PRESENT MO. WAGE</td>
-		<td colspan="3" style="{{ $center }}">${{ $data->wage2 }}</td>
+		<td colspan="3" style="{{ $center }}">${{ $data->wage }}</td>
 	</tr>
 
 	<tr>
