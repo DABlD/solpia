@@ -334,7 +334,7 @@
 
 	<tr>
 		<td colspan="4">{{ $data->civil_status }}</td>
-		<td colspan="6">{{ $spouse->lname }}, {{ $spouse->fname }} {{ $spouse->suffix }} {{ $spouse->mname }}</td>
+		<td colspan="6">{{ $spouse->lname ?? "" }}, {{ $spouse->fname ?? "" }} {{ $spouse->suffix ?? "" }} {{ $spouse->mname ?? "" }}</td>
 		<td colspan="2" style="text-align: left;">{{ $noc }}</td>
 	</tr>
 
