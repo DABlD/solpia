@@ -56,7 +56,7 @@
 
 <table>
 	<tr>
-		<td rowspan="55"></td>
+		<td rowspan="59"></td>
 		<td colspan="8" style="height: 50px;"></td>
 	</tr>
 
@@ -106,17 +106,18 @@
 
 	<tr>
 		<td colspan="3"></td>
-		<td rowspan="44"></td>
+		<td rowspan="48"></td>
 		<td colspan="4" style="font-size: 8px; font-style: italic;">
 		    Include options offered &#38; measures take to convince crew to stay.
 		 </td>
 	</tr>
 
-	{{ $dept("FLEET A", "Mr. HOMER BIRCO", "Crewing Manager") }}
+	{{ $dept("FLEET A", "Ms. Precian Cervantes", "Asst Crewing Manager") }}
 	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager") }}
 	{{ $dept("FLEET C", "Ms. Jeanette Solidum", "Crewing Manager") }}
 	{{ $dept("FLEET D", "Ms. Thea Guerra", "Crewing Manager") }}
-	{{ $dept("TOEI DIVISION", "Mr. Neil Romano", "Crewing Manager") }}
+	{{ $dept("FLEET E", "Mr. Homer Birco", "Crewing Manager") }}
+	{{ $dept("TOEI DIVISION", "Mr. Neil Romano - Crewing Mgr", "Ms. Lhea Marquez - A. Crew Mgr") }}
 	{{ $dept("Operation Assistant", "YH Kim", "", 1) }}
 	{{ $dept("Contract / Visa", "Liaison Officer", "", 1) }}
 	{{ $dept("Medical", "Crewing Officer", "", 1) }}

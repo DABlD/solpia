@@ -246,9 +246,9 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
                 $event->sheet->getDelegate()->setTitle('Clearance', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.6);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.8);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.6);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.8);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.1);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
@@ -260,7 +260,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('A1:I60')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:I64')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -325,7 +325,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // VC
                 $h[7] = [
-                    "F7:F41"
+                    "F7:F45"
                 ];
 
                 $h['wrap'] = [
@@ -333,6 +333,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'D28:D29'
                 ];
 
                 foreach($h as $key => $value) {
@@ -372,7 +373,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'F7:I44', 'B51:I51'
+                    'F7:I48', 'B55:I55'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -406,13 +407,13 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
                 // LRB
                 $cells[8] = array_merge([
                     'F10', 'F14', 'F18', 'F22', 'F26',
-                    'F29', 'F32', 'F35', 'F38', 'F41'
+                    'F33', 'F36', 'F39', 'F42', 'F45'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
                     'F10', 'F14', 'F18', 'F22', 'F26',
-                    'F29', 'F32', 'F35', 'F38', 'F41'
+                    'F33', 'F36', 'F39', 'F42', 'F45'
                 ]);
 
                 // TRB
@@ -425,7 +426,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // BBT
                 $cells[12] = array_merge([
-                    'G47:I47', 'C4:E4', 'I3', 'I4', 'F52:I52'
+                    'G51:I51', 'C4:E4', 'I3', 'I4', 'F56:I56'
                 ]);
 
                 // LBT
@@ -488,7 +489,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
         $drawing2->setWidth(155);
         $drawing2->setOffsetX(27);
         $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('I51');
+        $drawing2->setCoordinates('I55');
 
         return [$drawing, $drawing2];
     }
