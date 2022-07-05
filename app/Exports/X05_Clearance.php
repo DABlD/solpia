@@ -245,12 +245,12 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('Clearance', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.6);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.6);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
@@ -260,7 +260,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('A1:I45')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:I60')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -325,7 +325,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // VC
                 $h[7] = [
-                    "F7:F27"
+                    "F7:F41"
                 ];
 
                 $h['wrap'] = [
@@ -372,7 +372,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'F7:I29', 'B36:I36'
+                    'F7:I44', 'B51:I51'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -405,14 +405,14 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // LRB
                 $cells[8] = array_merge([
-                    'F10', 'F13', 'F16', 'F20', 'F23',
-                    'F26'
+                    'F10', 'F14', 'F18', 'F22', 'F26',
+                    'F29', 'F32', 'F35', 'F38', 'F41'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
-                    'F10', 'F13', 'F16', 'F20', 'F23',
-                    'F26'
+                    'F10', 'F14', 'F18', 'F22', 'F26',
+                    'F29', 'F32', 'F35', 'F38', 'F41'
                 ]);
 
                 // TRB
@@ -425,7 +425,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // BBT
                 $cells[12] = array_merge([
-                    'G32:I32', 'C4:E4', 'I3', 'I4', 'F37:I37'
+                    'G47:I47', 'C4:E4', 'I3', 'I4', 'F52:I52'
                 ]);
 
                 // LBT
@@ -435,6 +435,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
                 // RBT
                 $cells[14] = array_merge([
                 ]);
+                // dd($cells);
                 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
@@ -487,7 +488,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
         $drawing2->setWidth(155);
         $drawing2->setOffsetX(27);
         $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('I36');
+        $drawing2->setCoordinates('I51');
 
         return [$drawing, $drawing2];
     }

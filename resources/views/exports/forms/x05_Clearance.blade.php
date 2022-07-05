@@ -56,7 +56,7 @@
 
 <table>
 	<tr>
-		<td rowspan="40"></td>
+		<td rowspan="55"></td>
 		<td colspan="8" style="height: 50px;"></td>
 	</tr>
 
@@ -106,32 +106,20 @@
 
 	<tr>
 		<td colspan="3"></td>
-		<td rowspan="29"></td>
+		<td rowspan="44"></td>
 		<td colspan="4" style="font-size: 8px; font-style: italic;">
 		    Include options offered &#38; measures take to convince crew to stay.
 		 </td>
 	</tr>
 
-	@if($data->user->fleet == "FLEET A")
-		{{ $dept("FLEET A", "Ms. Precian Cervantes", "Crewing Manager") }}
-	@elseif($data->user->fleet == "FLEET B")
-		{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager") }}
-	@elseif($data->user->fleet == "FLEET C")
-		{{ $dept("FLEET C", "Ms. Jeanette Solidum", "Crewing Manager") }}
-	@elseif($data->user->fleet == "FLEET D")
-		{{ $dept("FLEET D", "Ms. Thea Guerra", "Crewing Manager") }}
-	@elseif($data->user->fleet == "FLEET E")
-		{{ $dept("FLEET E", "Mr. Homer Birco", "Crewing Manager") }}
-	@elseif($data->user->fleet == "TOEI")
-		{{ $dept("TOEI DIVISION", "Mr. Neil Romano", "Crewing Manager") }}
-	@endif
-	{{ $dept("Operation Assistant", "YD Sim / YH Kim", "", 1) }}
+	{{ $dept("FLEET A", "Mr. HOMER BIRCO", "Crewing Manager") }}
+	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager") }}
+	{{ $dept("FLEET C", "Ms. Jeanette Solidum", "Crewing Manager") }}
+	{{ $dept("FLEET D", "Ms. Thea Guerra", "Crewing Manager") }}
+	{{ $dept("TOEI DIVISION", "Mr. Neil Romano", "Crewing Manager") }}
+	{{ $dept("Operation Assistant", "YH Kim", "", 1) }}
 	{{ $dept("Contract / Visa", "Liaison Officer", "", 1) }}
-	@php
-		$co = (auth()->user()->gender == "Male" ? "Mr. " : "Ms. ");
-		$co .= lcfirst(strtolower(auth()->user()->fname)) . ' ' . lcfirst(strtolower(auth()->user()->lname));
-	@endphp
-	{{ $dept("Medical", $co, "Crewing Officer") }}
+	{{ $dept("Medical", "Crewing Officer", "", 1) }}
 	{{ $dept("Claims / Legal", "Admin Manager", "", 1) }}
 	{{ $dept("Flag Documents", "Documentation Officer", "", 1) }}
 	{{ $dept("Accounting", "Ms. Lhen Ecleo", "Accounting Manager") }}
