@@ -111,10 +111,10 @@
 			}
 		}
 
-		$fl = $data->document_flag->{"LICENSE"} ?? null;
-		$uv = $data->document_id->{"US-VISA"} ?? null;
-		$yf = $data->document_med_cert->{"YELLOW FEVER"} ?? null;
-		$mcv = $data->document_id->{"MCV"} ?? null;
+		$fl = isset($data->document_flag->{"LICENSE"}) ? $data->document_flag->{"LICENSE"} : null;
+		$uv = isset($data->document_id->{"US-VISA"}) ? $data->document_id->{"US-VISA"} : null;
+		$yf = isset($data->document_med_cert->{"YELLOW FEVER"}) ? $data->document_med_cert->{"YELLOW FEVER"} : null;
+		$mcv = isset($data->document_id->{"MCV"}) ? $data->document_id->{"MCV"} : null;
 	@endphp
 	<tr>
 		<td style="{{ $center }} height: 40px;">
@@ -140,12 +140,12 @@
 		<td style="{{ $center }} height: 40px;">
 			{{ $uv->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $uv->expiry_date ? $uv->expiry_date->format('d-M-Y') : '-' }}
+			{{ $uv ? $uv->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $uv->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $uv->expiry_date ? $uv->expiry_date->format('d-M-Y') : '-' }}
+			{{ $uv ? $uv->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $mcv->number ?? '-' }}
