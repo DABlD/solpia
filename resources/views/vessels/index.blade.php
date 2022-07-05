@@ -2110,7 +2110,8 @@
                 title: 'Select Document',
                 input: 'select',
                 inputOptions: {
-                    'X06_Ext_Prom_Form':  'Extension Promotion Form'
+                    'X06_Ext_Prom_Form':  'Extension Promotion Form',
+                    'MLCContract':          'MLC Contract'
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
@@ -2119,6 +2120,9 @@
                 if(result.value){
                     if(result.value == "X06_Ext_Prom_Form"){
                         X06(id, result.value);
+                    }
+                    else if(result.value == "MLCContract"){
+                        getMLCData(id, result.value);
                     }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
