@@ -165,7 +165,8 @@
 			$manning = $clean($ss->manning_agent);
 			$rank = null;
 			if(isset($ss->rank)){
-				$rank = $ranks[$ss->rank];
+				$temp = $ss->rank == "ELECTRICIAN" ? "ELECT" : $ss->rank;
+				$rank = $ranks[$temp];
 			}
 
 			echo "
