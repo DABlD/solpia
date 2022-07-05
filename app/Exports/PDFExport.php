@@ -98,6 +98,35 @@ class PDFExport
         return $applicant;
     }
 
+    public function Y05_ClearanceAffidavit(){
+        $applicant = Applicant::find($this->data->data['id']);
+        $applicant->load('user');
+        $applicant->load('document_id');
+
+        foreach(['document_id'] as $docuType){
+            foreach($applicant->$docuType as $key => $doc){
+                $name = $doc->type;
+                if(!isset($applicant->$docuType->$name)){
+                    $applicant->$docuType->$name = $doc;
+                }
+                else{
+                    $size = 0;
+                    if(is_array($applicant->$docuType->$name)){
+                        $size = sizeof($applicant->$docuType->$name);
+                    }
+                    $name .= $size;
+                    $applicant->$docuType->$name = $doc;
+                }
+                $applicant->$docuType->forget($key);
+            }
+        }
+
+        $applicant->vessel = Vessel::find($applicant->pro_app->vessel_id)->name;
+        $applicant->rank = Rank::find($applicant->pro_app->rank_id)->name;
+
+        return $applicant;
+    }
+
     public function download(){
         $pdf = PDF::loadView('exports.forms.' . lcfirst($this->type), ['data' => $this->data]);
         $pdf->setPaper('a4', 'Portrait');
