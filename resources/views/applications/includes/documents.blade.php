@@ -274,6 +274,10 @@
 					<option value="AMOSUP CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;AMOSUP CONTRACT</option>
 					<option value="MLC/CBA CONTRACT">&nbsp;&nbsp;&nbsp;&nbsp;MLC/CBA CONTRACT</option>
 					<option value="SEAFARERS EMPLOYMENT AGREEMENT">&nbsp;&nbsp;&nbsp;&nbsp;SEAFARERS EMPLOYMENT AGREEMENT</option>
+
+				<optgroup label="OTHERS"></optgroup>
+					<option value="NBI">&nbsp;&nbsp;&nbsp;&nbsp;NBI</option>
+					<option value="DRIVERS LICENSE">&nbsp;&nbsp;&nbsp;&nbsp;DRIVER'S LICENSE</option>
 			`;
 
 			// 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE S.Q. FOR TANKERS', 'FLAG STATE LICENSE', 'FLAG STATE SSO LICENSE', 'FLAG STATE ENDORSEMENT COOK COURSE', 'FLAG STATE GMDSS-GOC', 
