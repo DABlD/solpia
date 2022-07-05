@@ -164,9 +164,8 @@
 			$off = $checkDate($ss->sign_off);
 			$manning = $clean($ss->manning_agent);
 			$rank = null;
-			if(isset($ss->rank)){
-				$temp = $ss->rank == "ELECTRICIAN" ? "ELECT" : $ss->rank;
-				$rank = $ranks[$temp];
+			if(isset($ss->rank) && $ss->rank != ""){
+				$rank = $ranks[$ss->rank];
 			}
 
 			echo "
