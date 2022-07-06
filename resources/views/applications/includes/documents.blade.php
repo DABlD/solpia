@@ -776,7 +776,7 @@
 	        					[1,4]
 	        				],
 	        				documents: [
-	        					'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'GMDSS/GOC BOOKLET', 'SSO', 'SDSD'
+	        					'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'GMDSS/GOC BOOKLET', 'SSO', 'SDSD', 'ENDORSEMENT'
 	        				]
 	        			},
 	        			{
