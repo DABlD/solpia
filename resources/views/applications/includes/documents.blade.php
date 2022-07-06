@@ -776,7 +776,7 @@
 	        					[1,4]
 	        				],
 	        				documents: [
-	        					'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'GMDSS/GOC BOOKLET', 'SSO', 'SDSD', 'ENDORSEMENT'
+	        					'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'GMDSS/GOC BOOKLET', 'SSO', 'SDSD'
 	        				]
 	        			},
 	        			{
@@ -793,7 +793,7 @@
 	        					[27,43]
 	        				],
 	        				documents: [
-	        					'BOOKLET', 'SDSD'
+	        					'BOOKLET', 'SDSD', 'ENDORSEMENT'
 	        				]
 	        			},
 	        			{
