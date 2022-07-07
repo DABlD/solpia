@@ -121,9 +121,6 @@ class PDFExport
             }
         }
 
-        $applicant->vessel = Vessel::find($applicant->pro_app->vessel_id)->name;
-        $applicant->rank = Rank::find($applicant->pro_app->rank_id)->name;
-
         return $applicant;
     }
 
