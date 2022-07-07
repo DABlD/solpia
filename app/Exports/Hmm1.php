@@ -12,7 +12,8 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $type){
+    public function __construct($data, $type, $is = false){
+        $this->is      = $is;
         $this->data     = $data;
         $this->type     = $type;
     }
@@ -182,7 +183,8 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
+                $event->sheet->getDelegate()->getPageSetup()->setOrientation("landscape");
+                $event->sheet->getDelegate()->setTitle('BIODATA', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -368,21 +370,27 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(23);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(31);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(16);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('R')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('T')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('V')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('W')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('X')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('Y')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(23);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('Q')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('R')->setWidth(29);
+                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('T')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('V')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('W')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('X')->setWidth(23);
+                $event->sheet->getDelegate()->getColumnDimension('Y')->setWidth(15);
 
                 // ROW RESIZE
                 for($i = 0; $i < 50; $i++){
@@ -418,7 +426,7 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(115);
-        $drawing->setWidth(2200);
+        $drawing->setWidth(2200 + ($this->is ? 80 : 1200));
         $drawing->setOffsetX(4);
         $drawing->setOffsetY(4);
         $drawing->setCoordinates('C1');
@@ -429,9 +437,9 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setPath(public_path($this->data->user->avatar));
         $drawing2->setResizeProportional(false);
         $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
+        $drawing2->setWidth(240);
+        $drawing2->setOffsetX(4);
+        $drawing2->setOffsetY(4);
         $drawing2->setCoordinates('C3');
 
         if(auth()->user()->fleet == "FLEET B"){
@@ -455,8 +463,8 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $drawing3->setResizeProportional(false);
             $drawing3->setHeight(132);
             $drawing3->setWidth(236);
-            $drawing3->setOffsetX(30);
-            $drawing3->setOffsetY(-67);
+            $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
+            $drawing3->setOffsetY(-80);
             $drawing3->setCoordinates('W42');
         }
 

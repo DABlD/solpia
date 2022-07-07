@@ -21,8 +21,8 @@ class Hmm implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        array_push($sheets, new Hmm1($this->applicant, $this->type . '1'));
 
+        array_push($sheets, new Hmm1($this->applicant, $this->type . '1'));
         $ranks = ['C/O', '2/O', '3/O', 'BSN', 'AB', 'OS', 'AO', 'DCDT', '1AE', '2AE', '3AE', 'OLR1', 'OLR', 'ELECT', 'A/E', 'CCK', '2CK'];
         if((auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin") && in_array($this->applicant->rank->abbr, $ranks)){
             $rank = $this->applicant->rank->abbr;
@@ -96,6 +96,8 @@ class Hmm implements WithMultipleSheets
                 $rank = "DCDT";
             }
 
+            $sheets = [];
+            array_push($sheets, new Hmm1($this->applicant, $this->type . '1', true));
             array_push($sheets, new InterviewSheet($this->applicant, $rows, "hmm", $rank));
         }
 

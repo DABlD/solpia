@@ -244,6 +244,7 @@ class InterviewSheet implements FromView, WithEvents//, WithDrawings//, ShouldAu
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
+                $event->sheet->getDelegate()->getPageSetup()->setOrientation("portrait");
                 $event->sheet->getDelegate()->setTitle($this->rank . ' - INTERVIEW SHEET', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0);
