@@ -215,7 +215,7 @@
 	<tr><td colspan="10"></td></tr>
 
 	<tr>
-		<td colspan="5">4.3 Paid Leave : Basic Wage/30 X (6) DAYS</td>
+		<td colspan="5">4.3 Paid Leave : Basic Wage/30 X (9) DAYS</td>
 		<td colspan="3" style="{{ $center }}">{{ $data->wage->leave_pay ?? 0 }}</td>
 		<td colspan="2">USD / MONTH</td>
 	</tr>
