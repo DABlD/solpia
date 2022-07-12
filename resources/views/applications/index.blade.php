@@ -2563,6 +2563,9 @@
                                 '{{ $principal->slug }}': '{{ $principal->name }}',
                             @endif
                         @endforeach
+                        @if(auth()->user()->fleet == "FLEET D")
+                            'toei': "TOEI"
+                        @endif
                     },
                     onOpen: () => {
                         $('.swal2-select').select2({
