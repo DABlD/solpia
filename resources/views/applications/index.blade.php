@@ -2064,7 +2064,62 @@
 
         function fillTab8(applicant){
             let sss = Object.entries(applicant.sea_service);
+
+            if(applicant.status == "On Board"){
+                $.ajax({
+                    url: "{{ route('vessels.get2') }}",
+                    data: {
+                        cols: "*",
+                        where: ["id", applicant.pro_app.vessel_id]
+                    },
+                    success: vessel => {
+                        vessel = JSON.parse(vessel)[0];
+
+                        $.ajax({
+                            url: "{{ route('applications.getRanks') }}",
+                            success: categories => {
+                                categories = JSON.parse(categories);
+                                let cRrank = null;
+
+                                Object.entries(categories).forEach(category => {
+                                    let ranks = category[0];
+                                    
+                                    categories[ranks].forEach(rank => {
+                                        if(rank.id == applicant.pro_app.rank_id){
+                                            cRrank = rank.name;
+                                        }
+                                    });
+                                });
+
+                                let temp = {
+                                    vessel_name: vessel.name,
+                                    rank: cRrank,
+                                    vessel_type: vessel.type,
+                                    gross_tonnage: vessel.gross_tonnage,
+                                    engine_type: vessel.engine,
+                                    flag: vessel.flag,
+                                    trade: vessel.trade,
+                                    manning_agent: vessel.manning_agent,
+                                    principal: "",
+                                    sign_on: applicant.lup.joining_date,
+                                    remarks: "On Board"
+                                };
+
+                                sss = [["0", temp]].concat(sss);
+                                forFillTab8(sss);
+                            }
+                        })
+                    }
+                })
+            }
+            else{
+                forFillTab8(sss);
+            }
+        }
+
+        function forFillTab8(sss){
             let temp = ``;
+            console.log(sss);
 
             sss.forEach((ss, i) => {
                 ss = ss[1];

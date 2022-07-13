@@ -110,6 +110,13 @@ class ApplicationsController extends Controller
 
         $applicant = $applicant->get();
 
+        // IF HAS LOAD
+        if($applicant->count() && $req->load){
+            foreach($req->load as $table){
+                $applicant->load($table);
+            }
+        }
+
         // IF HAS GROUP
         if($req->group){
             $applicant = $applicant->groupBy($req->group);
@@ -1442,6 +1449,15 @@ class ApplicationsController extends Controller
         $applicant->load('document_med_cert');
         $applicant->load('document_med');
         $applicant->load('document_med_exp');
+        $applicant->load('pro_app');
+
+        if($applicant->pro_app->status == "On Board"){
+            $applicant->lup = LineUpContract::where([
+                ["applicant_id", '=', $req->id],
+                ["status", '=', "On Board"],
+                ["disembarkation_date", '=', null],
+            ])->first();
+        }
 
         echo json_encode($applicant);
     }
