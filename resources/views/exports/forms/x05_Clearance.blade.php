@@ -114,7 +114,7 @@
 
 	{{ $dept("FLEET A", "Ms. Precian Cervantes", "Asst Crewing Manager") }}
 	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager") }}
-	{{ $dept("FLEET C", "Ms. Jeanette Solidum", "Crewing Manager") }}
+	{{ $dept("FLEET C", "Ms. Jeannette Solidum", "Crewing Manager") }}
 	{{ $dept("FLEET D", "Ms. Thea Guerra", "Crewing Manager") }}
 	{{ $dept("FLEET E", "Mr. Homer Birco", "Crewing Manager") }}
 	{{ $dept("TOEI DIVISION", "Mr. Neil Romano - Crewing Mgr", "Ms. Lhea Marquez - A. Crew Mgr") }}

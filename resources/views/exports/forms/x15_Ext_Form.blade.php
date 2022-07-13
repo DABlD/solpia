@@ -279,7 +279,7 @@
 				@elseif($data->vessel->fleet == "FLEET B")
 					Mr. Adulf Kit Jumawan
 				@elseif($data->vessel->fleet == "FLEET C")
-					Ms. Jeanette Solidum
+					Ms. Jeannette Solidum
 				@elseif($data->vessel->fleet == "FLEET D")
 					Ms. Thea Guerra
 				@elseif($data->vessel->fleet == "FLEET E")

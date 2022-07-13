@@ -802,7 +802,7 @@
 		</td>
 		<td></td>
 		<td colspan="4">Presenter:</td>
-		<td colspan="10">JEN SOLIDUM / CREWING MANAGER</td>
+		<td colspan="10">JEANNETTE SOLIDUM / CREWING MANAGER</td>
 	</tr>
 
 	<tr>
