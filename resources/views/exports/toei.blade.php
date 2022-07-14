@@ -1381,7 +1381,7 @@
 			<td colspan="3">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname }}</td>
 			<td>Presenter:</td>
 			<td colspan="3">
-				@if(auth()->user()->id == 4567)
+				@if(in_array(auth()->user()->id, [4567, 4566]))
 					LHEA MARQUEZ / ASST. CREWING MANAGER
 				@else
 					NEIL ROMANO / CREWING MANAGER
