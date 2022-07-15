@@ -453,11 +453,13 @@
 			    }
 			}
 		@endphp
+
+		{{-- {{ dd($applicant->document_flag, $docu->number) }} --}}
 	
 		<tr>
 			<td colspan="2">PANAMA GOC</td> 
 			{{-- <td colspan="2">{{ $applicant->rank->name }}</td> --}}
-			<td colspan="2">-----</td>
+			<td colspan="2">{{ $docu ? "GMDSS GENERAL OPERATOR" : "-----" }}</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
