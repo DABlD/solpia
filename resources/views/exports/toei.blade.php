@@ -727,25 +727,16 @@
 			// }
 
 			// DECK/ENGINE WATCH DAW TO
-			$name = 'DECK WATCH';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			$names = ["DECK WATCH", "ENGINE WATCH", "WATCHKEEPING", "DECK WATCHKEEPING", "ENGINE WATCHKEEPING"];
+			$docu = false;
 
-			if(!isset($docu)){
-				$name = 'ENGINE WATCH';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			foreach($applicant->document_lc as $docu){
+				if(in_array($docu->type, $names)){
+					$docu = $docu;
+					break;
+				}
 			}
-			if(!isset($docu)){
-				$name = 'WATCHKEEPING';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			}
-			if(!isset($docu)){
-				$name = 'DECK WATCHKEEPING';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			}
-			if(!isset($docu)){
-				$name = 'ENGINE WATCHKEEPING';
-				$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-			}
+
 		@endphp
 
 		<tr>
