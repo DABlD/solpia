@@ -2232,14 +2232,17 @@
                 type: 'POST',
                 url: '{{ route('applications.getFiles') }}',
                 data: {id: id, type: type},
+                allowEscapeKey: false,
                 success: files => {
-                    files = JSON.parse(files).file;
-                    try{
-                        files = JSON.parse(files);
+                    let isPDF = (files.includes(".pdf") || files.includes(".PDF")) ? 1 : 0;
+                    files = JSON.parse(JSON.parse(files).file);
 
+                    if(isPDF){
+                        window.open(`files/${aId}/${files[0]}`);
+                    }
+                    else{
                         images = [];
                         files.forEach(file => {
-                            console.log(file);
                             let img = new Image();
                             img.src = `files/${aId}/${file}`;
                             img.onload = () => {
@@ -2268,38 +2271,6 @@
 
                             gallery.init();
                         }, files.length * 250);
-                    } catch (error){
-                        console.log(files.split('.').pop().toUpperCase());
-                        console.log(imageFormats.includes(files.split('.').pop().toUpperCase()));
-                        console.log(imageFormats.includes(files.split('.').pop().toUpperCase()));
-                        if(imageFormats.includes(files.split('.').pop().toUpperCase())){
-                            let img = new Image();
-                            img.src = `files/${aId}/${files}`;
-                            img.onload = () => {
-                                let gallery = new PhotoSwipe(
-                                    $('.pswp')[0], 
-                                    PhotoSwipeUI_Default, 
-                                    [{
-                                        src: img.src,
-                                        w: img.width,
-                                        h: img.height,
-                                    }], 
-                                    {
-                                        allowPanToNext: true,
-                                        escKey: true,
-                                        arrowKeys: true,
-                                        closeOnScroll: false,
-                                        tapToClose: false,
-                                        maxSpreadZoom: 6
-                                    }
-                                );
-
-                                gallery.init();
-                            };
-                        }
-                        else if(files[0].split('.').pop().toUpperCase() == "PDF"){
-                            window.open(`files/${aId}/${files[0]}`);
-                        }
                     }
                 }
             })
