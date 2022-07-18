@@ -2659,6 +2659,7 @@
                     exportOnBoard : 'Export Onboard',
                     RTP : 'Request to Process',
                     RFSC: 'Shoe and Coverall Request',
+                    X16_MLCOnboard: 'Onboard Crew MLC'
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
@@ -3183,6 +3184,15 @@
                     window.location.href = `{{ route('applications.exportDocument') }}/1/RequestToProcess?` + $.param(data);
                 }
             })
+        }
+
+        function X16_MLCOnboard(vid, name){
+            let data = {
+                vid: vid,
+                filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + "Onboard Crew MLC"
+            };
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/X16_MLCOnboard?` + $.param(data);
         }
     </script>
 @endpush

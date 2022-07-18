@@ -11,8 +11,9 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($applicant){
+    public function __construct($applicant, $title = "HMM MLC"){
         $this->applicant    = $applicant;
+        $this->title        = $title;
     }
 
     public function view(): View
@@ -211,12 +212,14 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             ],
         ];
 
+        $title = $this->title;
+
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $title) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('HMM MLC', false);
+                $event->sheet->getDelegate()->setTitle($title, false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
