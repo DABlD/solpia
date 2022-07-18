@@ -90,6 +90,9 @@ class PrincipalController extends Controller
         elseif(in_array($principal->name, ["SHINKO"])){
             $class = "App\\Exports\\X12_PrincipalOnboardCrew";
         }
+        elseif(in_array($principal->name, ["NITTA/TOEI"])){
+            $class = "App\\Exports\\X13_PrincipalOnboardCrew";
+        }
         return Excel::download(new $class($obcs), "$fileName.xlsx");
     }
 }
