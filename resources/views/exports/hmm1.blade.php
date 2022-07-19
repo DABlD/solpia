@@ -298,11 +298,12 @@
 			$man = str_replace('&', '&#38;', $ss->manning_agent);
 			$bhp = str_replace('&', '&#38;', $ss->bhp_kw);
 			$cn = str_replace('&', '&#38;', $ss->crew_nationality);
+			$flag = str_replace('&', '&#38;', $ss->flag);
 
 			$total += $ss->sign_on->diffInDays($ss->sign_off);
 
 			echo "
-				<td>$ss->flag</td>
+				<td>$flag</td>
 				<td colspan='2'>$ss->vessel_name</td>
 				<td>$ss->gross_tonnage</td>
 				<td>$bhp</td>
