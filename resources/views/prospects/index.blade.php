@@ -67,7 +67,7 @@
         swal.showLoading();
 		var table = $('#table').DataTable({
             serverSide: true,
-            pageLength: 50,
+            pageLength: 20,
             ajax: {
                 url: "{{ route('datatables.prospects') }}",
                 type: "POST",
@@ -96,12 +96,17 @@
                 {
                     targets: 6,
                     render: exp =>{
-                        let temp = "";
-                        exp.forEach(xp => {
-                            temp += "/" + xp;
-                        });
+                        try{
+                            let temp = "";
+                            exp.forEach(xp => {
+                                temp += "/" + xp;
+                            });
 
-                        return temp ? temp.substring(1) : "";
+                            return temp ? temp.substring(1) : "";
+                        }
+                        catch(e){
+                            return exp;
+                        };
                     }
                 }
             ],
@@ -126,6 +131,7 @@
 
         table.on('draw', () => {
         	setTimeout(() => {
+                $('th.sorting:nth-child(12)').css("width", "60px")
         		$('.preloader').fadeOut();
                 if(swal.isVisible()){
                     swal.close();
@@ -295,7 +301,20 @@
         }
 
         function showDetails(data){
-            let exp = JSON.parse(data.exp);
+            let exp = data.exp;
+            console.log(exp);
+            try{
+                if(data.exp){
+                    exp = JSON.parse(data.exp);
+                }
+                else{
+                    exp = "x";
+                }
+            }
+            catch(e){
+                exp = "x";
+            }
+            console.log(exp);
 
             swal({
                 html: `
@@ -402,8 +421,8 @@
                     swal.showLoading();
                     return new Promise(resolve => {
                         let bool = true;
-                        if($('.swal2-container input:placeholder-shown').length){
-                            Swal.showValidationMessage('Fill all fields');
+                        if($('[name="name"]').val() == "" || $('[name="rank"]').val() == "" || $('[name="contact"]').val() == "" || $('[name="exp"]:checked').val() == undefined){
+                            swal.showValidationError('Name, Rank, Contact, and Exp is required');
                         }
                         else{
                             let bool = false;
@@ -466,6 +485,22 @@
                     }, () => {
                         reload();
                     })
+                }
+            });
+        }
+
+        function imp(){
+            swal({
+                title: 'Select File',
+                html: `
+                    <form id="form" method="POST" action="{{ route('prospect.import') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" class="swal2-file">
+                    </form>
+                `
+            }).then(file => {
+                if(file.value){
+                    $('#form').submit();
                 }
             });
         }

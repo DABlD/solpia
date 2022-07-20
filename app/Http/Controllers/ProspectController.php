@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Prospect;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ProspectsImport;
+
 use DB;
 
 class ProspectController extends Controller
@@ -81,6 +84,19 @@ class ProspectController extends Controller
 
     public function delete(Request $req){
         Prospect::find($req->id)->delete();
+    }
+
+    public function import(Request $req){
+        Excel::import(new ProspectsImport, $req->file('file'));
+
+        if(true){
+            $req->session()->flash('success', 'Vessels Successfully Imported');
+            return back();
+        }
+        else{
+            $req->session()->flash('error', 'Please Try Again.');
+            return back();
+        }
     }
 
     private function _view($view, $data = array()){
