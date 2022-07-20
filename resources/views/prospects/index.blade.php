@@ -24,9 +24,9 @@
     								<th>NOC</th>
     								<th>Exp</th>
     								<th>USV</th>
-                                    <th>Last Disembark</th>
+                                    {{-- <th>Last Disembark</th>
                                     <th>Location</th>
-                                    <th>Availability</th>
+                                    <th>Availability</th> --}}
                                     <th>Actions</th>
     							</tr>
     						</thead>
@@ -87,9 +87,9 @@
                 { data: 'contracts' },
                 { data: 'exp' },
                 { data: 'usv' },
-                { data: 'last_disembark' },
-                { data: 'location' },
-                { data: 'availability' },
+                // { data: 'last_disembark' },
+                // { data: 'location' },
+                // { data: 'availability' },
                 { data: 'actions'}
             ],
             columnDefs: [
@@ -131,7 +131,7 @@
 
         table.on('draw', () => {
         	setTimeout(() => {
-                $('th.sorting:nth-child(12)').css("width", "60px")
+                $('th.sorting:nth-child(9)').css("width", "60px");
         		$('.preloader').fadeOut();
                 if(swal.isVisible()){
                     swal.close();
