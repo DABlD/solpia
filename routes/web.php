@@ -85,16 +85,6 @@ Route::group([
 
 		Route::get('users/delete/{user}', 'UsersController@delete')->name('users.delete');
 
-		// RECRUITMENT
-		$name = "recruitment";
-		Route::get($name, ucfirst($name) . 'Controller@index')
-			->defaults('sidebar', 1)
-			->defaults('icon', 'fa-user-plus')
-			->defaults('name', 'Recruitment')
-			->defaults('roles', array('Admin', 'Recruitment Officer'))
-			->name($name . '.index')
-			->defaults('href', $name);
-
 		// APPLICANT ROUTES
 		$name = "applications";
 		Route::get($name, ucfirst($name) . 'Controller@index')
@@ -188,14 +178,28 @@ Route::group([
 
 		Route::get($name . '/delete/{user}', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 
+		// RECRUITMENT
+		$name = "prospect";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-user-plus')
+			->defaults('name', 'Applicants')
+			->defaults('roles', array('Admin', 'Recruitment Officer'))
+			->name($name . '.index')
+			->defaults('href', $name);
+			
+		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
+		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
+		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+
 		// OPENINGS ROUTES
-		$name = "opening";
+		$name = "requirement";
 		Route::get($name, ucfirst($name) . 'Controller@index')
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-briefcase')
-			->defaults('name', 'Job Openings')
-			// ->defaults('roles', array('Admin', 'Crewing Manager', 'Crewing Officer'))
-			->defaults('roles', array('Admin'))
+			->defaults('name', 'Requirements')
+			->defaults('roles', array('Admin', 'Crewing Manager', 'Crewing Officer', 'Training'))
 			->name($name . '.index')
 			->defaults('href', $name);
 			
@@ -205,13 +209,13 @@ Route::group([
 
 		// WAGE ROUTES
 		$name = "wage";
-		Route::get($name, ucfirst($name) . 'Controller@index')
-			->defaults('sidebar', 1)
-			->defaults('icon', 'fa-dollar')
-			->defaults('name', 'Wages')
-			->defaults('roles', array('Admin', 'Processing'))
-			->name($name . '.index')
-			->defaults('href', $name);
+		// Route::get($name, ucfirst($name) . 'Controller@index')
+		// 	->defaults('sidebar', 1)
+		// 	->defaults('icon', 'fa-dollar')
+		// 	->defaults('name', 'Wages')
+		// 	->defaults('roles', array('Admin', 'Processing'))
+		// 	->name($name . '.index')
+		// 	->defaults('href', $name);
 
 		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
 		Route::get($name . '/create', ucfirst($name) . 'Controller@create')->name($name . '.create');
@@ -243,6 +247,9 @@ Route::group([
 		Route::post('datatables/openings', 'DatatablesController@openings')->name('datatables.openings');
 		Route::post('datatables/auditTrail', 'DatatablesController@auditTrail')->name('datatables.auditTrail');
 		Route::post('datatables/wages', 'DatatablesController@wages')->name('datatables.wages');
+
+
+		Route::post('datatables/prospects', 'DatatablesController@prospects')->name('datatables.prospects');
 
 		// PRINCIPAL
 		$name = "principal";

@@ -22,6 +22,7 @@ class CreateProspectsTable extends Migration
             $table->string("contact")->nullable();
             $table->string("email")->nullable();
             $table->string("usv")->nullable();
+            $table->string("rank")->nullable();
             $table->unsignedTinyInteger("contracts")->nullable();
             $table->string("exp")->nullable();
             $table->string("availability")->nullable();

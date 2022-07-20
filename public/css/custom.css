@@ -21,3 +21,18 @@
     font-size: 80%;
     color: #e3342f;
 }
+
+.swal2-container .iLabel{
+	margin-top: 10px;
+	text-align: left;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.select2-dropdown--below{
+	z-index: 2000 !important;
+}
+
+.select2-selection__rendered{
+	text-align: left;
+}

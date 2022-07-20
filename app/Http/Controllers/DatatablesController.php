@@ -10,6 +10,7 @@ use App\Models\{AuditTrail, SeaService, Opening};
 
 use App\Models\{TempApplicant, TempSeaService};
 use App\Models\{Wage};
+use App\Models\{Prospect, Requirement};
 
 use App\{User, TempUser};
 
@@ -685,5 +686,35 @@ class DatatablesController extends Controller
 		}
 
 		return Datatables::of($wages)->rawColumns(['actions'])->make(true);
+	}
+
+	public function prospects(Request $req){
+        $array = Prospect::select($req->select);
+
+        // IF HAS WHERE
+        if($req->where){
+            $array = $array->where($req->where[0], $req->where[1]);
+        }
+
+        $array = $array->get();
+
+        // IF HAS GROUP
+        if($req->group){
+            $array = $array->groupBy($req->group);
+        }
+
+        // IF HAS LOAD
+        if($array->count() && $req->load){
+            foreach($req->load as $table){
+                $array->load($table);
+            }
+        }
+
+        foreach($array as $item){
+        	$item->exp = json_decode($item->exp);
+            $item->actions = $item->actions;
+        }
+
+		return Datatables::of($array)->rawColumns(['actions'])->make(true);
 	}
 }
