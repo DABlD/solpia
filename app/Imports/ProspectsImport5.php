@@ -24,12 +24,19 @@ class ProspectsImport5 implements ToCollection, WithCalculatedFormulas
                 $temp->rank = $prospect[1];
                 $temp->exp = $prospect[3];
                 $temp->contracts = $prospect[4];
-                $temp->usv = $prospect[5];
                 $temp->last_disembark = $prospect[6];
                 $temp->age = $prospect[7];
                 $temp->contact = $prospect[8];
                 $temp->location = $prospect[9];
                 $temp->remarks = "KALAW";
+
+                if(trim($prospect[5]) && (is_numeric($prospect[5]) && $prospect[5] > 40000)){
+                    try {
+                        $temp->usv = gmdate("Y-m-d", ($prospect[5] - 25569) * 86400);
+                    } catch (\Exception $e) {
+                        $temp->usv = $temp->usv;
+                    }
+                }
 
                 $temp->save();
             }
