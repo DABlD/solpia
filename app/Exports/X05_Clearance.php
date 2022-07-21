@@ -260,7 +260,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('A1:I64')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:I66')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -325,7 +325,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // VC
                 $h[7] = [
-                    "F7:F45"
+                    "F7:F47"
                 ];
 
                 $h['wrap'] = [
@@ -333,7 +333,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'D28:D29'
+                    'D28:D50', 'I4'
                 ];
 
                 foreach($h as $key => $value) {
@@ -373,7 +373,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'F7:I48', 'B55:I55'
+                    'F7:I50', 'B57:I57'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -407,13 +407,15 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
                 // LRB
                 $cells[8] = array_merge([
                     'F10', 'F14', 'F18', 'F22', 'F26',
-                    'F33', 'F36', 'F39', 'F42', 'F45'
+                    'F30', 'F34', 'F38', 'F41', 'F44',
+                    'F47'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
                     'F10', 'F14', 'F18', 'F22', 'F26',
-                    'F33', 'F36', 'F39', 'F42', 'F45'
+                    'F30', 'F34', 'F38', 'F41', 'F44',
+                    'F47'
                 ]);
 
                 // TRB
@@ -426,7 +428,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // BBT
                 $cells[12] = array_merge([
-                    'G51:I51', 'C4:E4', 'I3', 'I4', 'F56:I56'
+                    'G53:I53', 'C4:E4', 'I3', 'I4', 'F58:I58'
                 ]);
 
                 // LBT
@@ -480,17 +482,17 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
         $drawing->setOffsetY(4);
         $drawing->setCoordinates('B1');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Clearance');
-        $drawing2->setDescription('Clearance');
-        $drawing2->setPath(public_path("images/clearance_table.png"));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(85);
-        $drawing2->setWidth(155);
-        $drawing2->setOffsetX(27);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('I55');
+        // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        // $drawing2->setName('Clearance');
+        // $drawing2->setDescription('Clearance');
+        // $drawing2->setPath(public_path("images/clearance_table.png"));
+        // $drawing2->setResizeProportional(false);
+        // $drawing2->setHeight(85);
+        // $drawing2->setWidth(155);
+        // $drawing2->setOffsetX(27);
+        // $drawing2->setOffsetY(2);
+        // $drawing2->setCoordinates('I55');
 
-        return [$drawing, $drawing2];
+        return [$drawing];
     }
 }

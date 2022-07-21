@@ -7,7 +7,7 @@
 	$blue = "color: #0000FF;";
 	$bb = "border-bottom: 1px solid #000000;";
 
-	$dept = function($dept, $staff, $position, $type = null) use($bold, $middle, $center, $blue, $bb){
+	$dept = function($dept, $staff, $position, $medical, $type = null) use($bold, $middle, $center, $blue, $bb){
 		if($type){
 			echo "
 				<tr>
@@ -17,7 +17,7 @@
 				</tr>
 
 				<tr>
-					<td colspan='2'></td>
+					<td colspan='2' style='$bold'>$medical</td>
 					<td>$staff</td>
 				</tr>
 
@@ -36,7 +36,7 @@
 				</tr>
 
 				<tr>
-					<td colspan='2'></td>
+					<td colspan='2' style='$bold'>$medical</td>
 					<td>$staff</td>
 				</tr>
 
@@ -56,7 +56,7 @@
 
 <table>
 	<tr>
-		<td rowspan="59"></td>
+		<td rowspan="61"></td>
 		<td colspan="8" style="height: 50px;"></td>
 	</tr>
 
@@ -106,30 +106,29 @@
 
 	<tr>
 		<td colspan="3"></td>
-		<td rowspan="48"></td>
+		<td rowspan="50"></td>
 		<td colspan="4" style="font-size: 8px; font-style: italic;">
 		    Include options offered &#38; measures take to convince crew to stay.
 		 </td>
 	</tr>
 
-	{{ $dept("FLEET A", "Ms. Precian Cervantes", "Asst Crewing Manager") }}
-	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager") }}
-	{{ $dept("FLEET C", "Ms. Jeannette Solidum", "Crewing Manager") }}
-	{{ $dept("FLEET D", "Ms. Thea Guerra", "Crewing Manager") }}
-	{{ $dept("FLEET E", "Mr. Homer Birco", "Crewing Manager") }}
-	{{ $dept("TOEI DIVISION", "Mr. Neil Romano - Crewing Mgr", "Ms. Lhea Marquez - A. Crew Mgr") }}
-	{{ $dept("Operation Assistant", "YH Kim", "", 1) }}
-	{{ $dept("Contract / Visa", "Liaison Officer", "", 1) }}
-	{{ $dept("Medical", "Crewing Officer", "", 1) }}
-	{{ $dept("Claims / Legal", "Admin Manager", "", 1) }}
-	{{ $dept("Flag Documents", "Documentation Officer", "", 1) }}
-	{{ $dept("Accounting", "Ms. Lhen Ecleo", "Accounting Manager") }}
+	{{ $dept("FLEET A", "Ms. Precian Cervantes", "Asst Crewing Manager", "(+ Medical)") }}
+	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager", "(+ Medical)") }}
+	{{ $dept("FLEET C", "Ms. Jeannette Solidum", "Crewing Manager", "(+ Medical)") }}
+	{{ $dept("FLEET D", "Ms. Thea Guerra", "Crewing Manager", "(+ Medical)") }}
+	{{ $dept("FLEET E", "Mr. Dennis Quiño", "Asst Crewing Manager", "(+ Medical)") }}
+	{{ $dept("TOEI DIVISION", "Mr. Neil Romano", "Crewing Manager", "(+ Medical)") }}
+	{{ $dept("TOEI DIVISION", "Ms. Lhea Marquez", "Asst Crewing Manager", "(+ Medical)") }}
+	{{ $dept("FISHING FLEET", "Mr. Ricardo Amparo", "Asst Crewing Manager", "(+ Medical)") }}
+	{{ $dept("PRINCIPAL / REP", "YH Kim or Mr. Ko", "", "", 1) }}
+	{{ $dept("Contract / Visa", "Liaison/Documentation Officer", "", "Flag Documents", 1) }}
+	{{ $dept("Claims / Legal", "Admin Manager", "", "", 1) }}
+	{{ $dept("Accounting", "Ms. Lhen Ecleo", "Accounting Manager", "") }}
 
 	<tr>
 		<td style="{{ $bold }}">Noted by:</td>
 		<td colspan="2"></td>
-		<td colspan="2" style="{{ $bold }}">Noted by:</td>
-		<td colspan="2"></td>
+		<td colspan="4" style="{{ $bold }}">Acknowledged by:</td>
 	</tr>
 
 	<tr>
@@ -148,7 +147,7 @@
 
 	<tr>
 		<td colspan="2"></td>
-		<td>Training Manager/President</td>
+		<td>President / Gen Mgr</td>
 		<td></td>
 		<td colspan="3"></td>
 	</tr>
@@ -165,7 +164,7 @@
 
 	<tr>
 		<td colspan="4"></td>
-		<td colspan="4" style="{{ $center }} {{ $bottom }} height: 30px;">
+		<td colspan="4" style="{{ $center }} {{ $bottom }} height: 20px;">
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }} / {{ now()->toFormattedDateString() }}
 		</td>
 	</tr>
