@@ -790,7 +790,7 @@
 	        			{
 	        				range: [
 	        					[9,23],
-	        					[27,43]
+	        					[27,44]
 	        				],
 	        				documents: [
 	        					'BOOKLET', 'SDSD', 'ENDORSEMENT'
@@ -798,7 +798,8 @@
 	        			},
 	        			{
 	        				range: [
-	        					[24,26]
+	        					[24,26],
+	        					[44]
 	        				],
 	        				documents: [
 	        					'BOOKLET', 'SDSD', "SHIP'S COOK ENDORSEMENT"
@@ -827,7 +828,7 @@
         				},
         				{
         					range: [
-        						[9,43]
+        						[9,44]
         					],
         					documents: [
         						'BOOKLET', 'SDSD'
@@ -835,7 +836,7 @@
         				},
         				{
         					range: [
-        						[1,43]
+        						[1,44]
         					],
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA'
@@ -843,7 +844,8 @@
         				},
 	        			{
 	        				range: [
-	        					[24,26]
+	        					[24,26],
+	        					[44]
 	        				],
 	        				documents: [
 	        					"SHIP'S COOK ENDORSEMENT"
@@ -869,7 +871,7 @@
         			details: [
         				{
         					range: [
-        						[1,43]
+        						[1,44]
         					],
         					documents: [
         						'LICENSE', 'BOOKLET'
@@ -877,7 +879,8 @@
         				},
         				{
         					range: [
-        						[24,26]
+        						[24,26],
+        						[44]
         					],
         					documents: [
         						"SHIP'S COOK ENDORSEMENT"
@@ -885,7 +888,7 @@
         				},
         				{
         					range: [
-        						[1,43]
+        						[1,44]
         					],
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
@@ -898,7 +901,7 @@
         			details: [
         				{
         					range: [
-        						[1,43]
+        						[1,44]
         					],
         					documents: [
         						'LICENSE', 'BOOKLET'
@@ -911,7 +914,7 @@
         			details: [
         				{
         					range: [
-        						[1,43]
+        						[1,44]
         					],
         					documents: [
         						'LICENSE'
