@@ -501,7 +501,13 @@ class ApplicationsController extends Controller
                 }
                 elseif(isset($data->number)){
                     if($docuType == "document_med_cert"){
-                        if(!str_starts_with($data->type, 'COVID')){
+                        if(str_starts_with($data->type, 'MEDICAL CERTIFICATE')){
+                            if($data->expiry_date == ""){
+                                $applicant->$docuType->forget($key);
+                                continue;
+                            }
+                        }
+                        elseif(!str_starts_with($data->type, 'COVID')){
                             if($data->number == ""){
                                 $applicant->$docuType->forget($key);
                                 continue;
