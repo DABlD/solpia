@@ -54,7 +54,10 @@ class PrincipalController extends Controller
                     ->join('principals as p', 'p.id', '=', 'pa.principal_id')
                     ->join('vessels as v', 'v.id', '=', 'pa.vessel_id')
                     ->join('ranks as r', 'r.id', '=', 'pa.rank_id')
-                    ->join('line_up_contracts as lup', 'lup.applicant_id', '=', 'pa.applicant_id')
+                    ->join('line_up_contracts as lup', function($join){
+                            $join->on('lup.applicant_id', '=', 'pa.applicant_id');
+                            $join->on('lup.status', '=', "pa.status");
+                        })
                     ->join('users as u', 'u.id', '=', 'applicants.user_id')
                     ->select(array_merge($pa, $p, $v, $r, $lup, $u))
                     ->with('document_id')
@@ -82,7 +85,7 @@ class PrincipalController extends Controller
                 }
             }
         }
-
+        
         $fileName = str_replace('/', '_', $principal->name) . ' Onboard Crew - ' . now()->format('d-M-y');
         if(in_array($principal->name, ["KOSCO", 'HMM', 'CK MARITIME'])){
             $class = "App\\Exports\\X10_PrincipalOnboardCrew";
