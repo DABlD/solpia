@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 
-class ProspectsImport3 implements ToCollection, WithCalculatedFormulas
+class ProspectsImport4 implements ToCollection, WithCalculatedFormulas
 {
     /**
     * @param array $row
@@ -24,7 +24,6 @@ class ProspectsImport3 implements ToCollection, WithCalculatedFormulas
                 $temp->rank = $prospect[1];
                 $temp->exp = $prospect[3];
                 $temp->contact = $prospect[4];
-                $temp->age = $prospect[5];
                 $temp->remarks = $prospect[8];
 
                 if(str_contains($prospect[8], "WITH US VISA")){
@@ -32,6 +31,11 @@ class ProspectsImport3 implements ToCollection, WithCalculatedFormulas
                 }
                 elseif(str_contains($prospect[8], "EXPIRED US")){
                     $temp->usv = "EXPIRED";
+                }
+
+                $loc = strpos($prospect[8], "YRS OLD");
+                if($loc){
+                    $temp->age = substr($prospect[8], $loc-3,2);
                 }
 
                 $temp->save();

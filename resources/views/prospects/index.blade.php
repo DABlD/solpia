@@ -508,38 +508,14 @@
                     <form id="form" method="POST" action="{{ route('prospect.import') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" class="swal2-file">
-                    </form>
-                `
-            }).then(file => {
-                if(file.value){
-                    $('#form').submit();
-                }
-            });
-        }
-
-        function imp2(){
-            swal({
-                title: 'Select File',
-                html: `
-                    <form id="form" method="POST" action="{{ route('prospect.import2') }}" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" class="swal2-file">
-                    </form>
-                `
-            }).then(file => {
-                if(file.value){
-                    $('#form').submit();
-                }
-            });
-        }
-
-        function imp3(){
-            swal({
-                title: 'Select File',
-                html: `
-                    <form id="form" method="POST" action="{{ route('prospect.import3') }}" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" class="swal2-file">
+                        <select name="import" class="form-control">
+                            <option value="ProspectsImport">Recruiting</option>
+                            <option value="ProspectsImport2">Responses</option>
+                            <option value="ProspectsImport3">Prospect</option>
+                            <option value="ProspectsImport4">On Process</option>
+                            <option value="ProspectsImport5">Kalaw</option>
+                            <option value="ProspectsImport6">Endorsed</option>
+                        </select>
                     </form>
                 `
             }).then(file => {

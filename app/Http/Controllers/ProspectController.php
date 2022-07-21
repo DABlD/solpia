@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Prospect;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\{ProspectsImport, ProspectsImport2, ProspectsImport3};
 
 use DB;
 
@@ -87,33 +86,8 @@ class ProspectController extends Controller
     }
 
     public function import(Request $req){
-        Excel::import(new ProspectsImport, $req->file('file'));
-
-        if(true){
-            $req->session()->flash('success', 'Successfully Imported');
-            return back();
-        }
-        else{
-            $req->session()->flash('error', 'Please Try Again.');
-            return back();
-        }
-    }
-
-    public function import2(Request $req){
-        Excel::import(new ProspectsImport2, $req->file('file'));
-
-        if(true){
-            $req->session()->flash('success', 'Successfully Imported');
-            return back();
-        }
-        else{
-            $req->session()->flash('error', 'Please Try Again.');
-            return back();
-        }
-    }
-
-    public function import3(Request $req){
-        Excel::import(new ProspectsImport3, $req->file('file'));
+    	$class = "App\Imports\\" . $req->import;
+        Excel::import(new $class, $req->file('file'));
 
         if(true){
             $req->session()->flash('success', 'Successfully Imported');
