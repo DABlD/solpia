@@ -6,5 +6,8 @@
 		<a class="btn btn-primary" data-toggle="tooltip" title="Import" onclick="imp()">
 			<span class="fa fa-download"></span>
 		</a>
+		<a class="btn btn-info" data-toggle="tooltip" title="Import 2" onclick="imp2()">
+			<span class="fa fa-download"></span>
+		</a>
 	@endif
 </div>

@@ -81,7 +81,7 @@ class DatatablesController extends Controller
 
 	public function applications(Request $req){
 	// public function applications(Request $req){
-		DB::connection()->enableQueryLog();
+		// DB::connection()->enableQueryLog();
 
 		$ranks = [];
 		$ranks2 = [];
@@ -689,15 +689,16 @@ class DatatablesController extends Controller
 	}
 
 	public function prospects(Request $req){
-        $array = Prospect::select($req->select);
+		// dd($req->all());
+        $array = Prospect::select($req->select)->orderBy('id', 'desc');
 
         // IF HAS WHERE
         if($req->where){
             $array = $array->where($req->where[0], $req->where[1]);
         }
 
-        $array = $array->get();
-
+        $tc = $array->get()->count();
+        $array = $array->offset($req->start)->limit($req->length)->get();
         // IF HAS GROUP
         if($req->group){
             $array = $array->groupBy($req->group);
@@ -715,6 +716,17 @@ class DatatablesController extends Controller
             $item->actions = $item->actions;
         }
 
-		return Datatables::of($array)->rawColumns(['actions'])->make(true);
+        // dd($array->toArray());
+		$array = $array->toArray();
+
+		for ($i=0; $i < $req->start; $i++) { 
+			array_unshift($array, "");
+		}
+
+	    return Datatables::of($array)
+    		->setTotalRecords($tc)
+            ->setFilteredRecords($tc)
+    		->rawColumns(['actions'])
+    		->make(true);
 	}
 }

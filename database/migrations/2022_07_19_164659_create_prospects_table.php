@@ -28,7 +28,7 @@ class CreateProspectsTable extends Migration
             $table->string("availability")->nullable();
             $table->date("last_disembark")->nullable();
             $table->string("location")->nullable();
-            $table->float("previous_salary", 8, 2)->nullable();
+            $table->string("previous_salary")->nullable();
             $table->string("previous_agency")->nullable();
             $table->string("remarks")->nullable();
             $table->enum("status", ["AVAILABLE", "ENDORSED"])->default("AVAILABLE");

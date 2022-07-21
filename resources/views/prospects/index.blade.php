@@ -27,6 +27,7 @@
                                     {{-- <th>Last Disembark</th>
                                     <th>Location</th>
                                     <th>Availability</th> --}}
+                                    <th>Remarks</th>
                                     <th>Actions</th>
     							</tr>
     						</thead>
@@ -90,6 +91,7 @@
                 // { data: 'last_disembark' },
                 // { data: 'location' },
                 // { data: 'availability' },
+                { data: 'remarks'},
                 { data: 'actions'}
             ],
             columnDefs: [
@@ -116,7 +118,8 @@
                 tooltip();
             	// initializeActions();
             },
-            order: [ [0, 'desc'] ],
+            order: [],
+            // order: [ [0, 'desc'] ],
         });
         
         $('#table_filter input').unbind();
@@ -131,7 +134,7 @@
 
         table.on('draw', () => {
         	setTimeout(() => {
-                $('th.sorting:nth-child(9)').css("width", "60px");
+                $('th.sorting:nth-child(10)').css("width", "60px");
         		$('.preloader').fadeOut();
                 if(swal.isVisible()){
                     swal.close();
@@ -197,8 +200,9 @@
                     ${input("availability", "Availability", null, 2,10)}
                     ${input("last_disembark", "Last Disembark", null, 2,10)}
                     ${input("location", "Location", null, 2,10)}
-                    ${input("previous_salary", "Previous Salary", null, 2,10, 'number')}
+                    ${input("previous_salary", "Previous Salary", null, 2,10)}
                     ${input("usv", "US Visa", null, 2,10)}
+                    ${input("remarks", "Remarks", null, 2,10)}
                 `,
                 width: '650px',
                 confirmButtonText: 'Add',
@@ -275,6 +279,7 @@
                             location: $("[name='location']").val(),
                             previous_salary: $("[name='previous_salary']").val(),
                             usv: $("[name='usv']").val(),
+                            remarks: $("[name='remarks']").val(),
                             exp: exp,
                         },
                         success: () => {
@@ -374,8 +379,9 @@
                     ${input("availability", "Availability", data.availability, 2,10)}
                     ${input("last_disembark", "Last Disembark", data.last_disembark, 2,10)}
                     ${input("location", "Location", data.location, 2,10)}
-                    ${input("previous_salary", "Previous Salary", data.previous_salary, 2,10, 'number')}
+                    ${input("previous_salary", "Previous Salary", data.previous_salary, 2,10)}
                     ${input("usv", "US Visa", data.usv, 2,10)}
+                    ${input("remarks", "Remarks", data.remarks, 2,10)}
                 `,
                 width: '800px',
                 confirmButtonText: 'Update',
@@ -457,6 +463,7 @@
                             location: $("[name='location']").val(),
                             previous_salary: $("[name='previous_salary']").val(),
                             usv: $("[name='usv']").val(),
+                            remarks: $("[name='remarks']").val(),
                             exp: JSON.stringify(exp),
                         },
                         message: "Success"
@@ -494,6 +501,22 @@
                 title: 'Select File',
                 html: `
                     <form id="form" method="POST" action="{{ route('prospect.import') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" class="swal2-file">
+                    </form>
+                `
+            }).then(file => {
+                if(file.value){
+                    $('#form').submit();
+                }
+            });
+        }
+
+        function imp2(){
+            swal({
+                title: 'Select File',
+                html: `
+                    <form id="form" method="POST" action="{{ route('prospect.import2') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" class="swal2-file">
                     </form>
