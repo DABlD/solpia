@@ -28,6 +28,7 @@
                                     <th>Location</th>
                                     <th>Availability</th> --}}
                                     <th>Remarks</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
     							</tr>
     						</thead>
@@ -92,6 +93,7 @@
                 // { data: 'location' },
                 // { data: 'availability' },
                 { data: 'remarks'},
+                { data: 'status'},
                 { data: 'actions'}
             ],
             columnDefs: [
@@ -111,6 +113,10 @@
                             return exp;
                         };
                     }
+                },
+                {
+                    targets: 8,
+                    width: "40%"
                 }
             ],
             drawCallback: function(){

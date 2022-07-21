@@ -692,24 +692,16 @@ class DatatablesController extends Controller
 		// dd($req->all());
         $array = Prospect::select($req->select)->orderBy('id', 'desc');
 
-        // IF HAS WHERE
-        if($req->where){
-            $array = $array->where($req->where[0], $req->where[1]);
-        }
+		$search = $req->search["value"];
+		if($search){
+			$array = $array->where('name', 'LIKE', "%" . $search . "%");
+		}
+		else{
+	        $array = $array->offset($req->start)->limit($req->length);
+		}
 
-        $tc = $array->get()->count();
-        $array = $array->offset($req->start)->limit($req->length)->get();
-        // IF HAS GROUP
-        if($req->group){
-            $array = $array->groupBy($req->group);
-        }
-
-        // IF HAS LOAD
-        if($array->count() && $req->load){
-            foreach($req->load as $table){
-                $array->load($table);
-            }
-        }
+	    $tc = $array->get()->count();
+		$array = $array->get();
 
         foreach($array as $item){
         	// $item->exp = json_decode($item->exp);

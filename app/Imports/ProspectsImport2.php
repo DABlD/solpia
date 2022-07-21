@@ -26,11 +26,11 @@ class ProspectsImport2 implements ToCollection, WithCalculatedFormulas
                 $temp->contracts = $prospect[7];
                 $temp->rank = $prospect[5];
                 $temp->exp = $prospect[8];
-                $temp->location = $prospect[11];
-                $temp->previous_salary = $prospect[12];
-                $temp->previous_agency = $prospect[13];
-                $temp->email = $prospect[14];
-                $temp->remarks = $prospect[15];
+                $temp->location = $prospect[12];
+                $temp->previous_salary = $prospect[13];
+                $temp->previous_agency = $prospect[14];
+                $temp->email = $prospect[15];
+                $temp->remarks = $prospect[16];
 
                 // dd($prospect[9], $prospect[10]);
                 if(trim($prospect[6]) && (is_numeric($prospect[6]) && $prospect[6] > 40000)){
