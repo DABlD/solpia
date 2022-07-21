@@ -100,6 +100,7 @@
                     render: exp =>{
                         try{
                             let temp = "";
+                            exp = JSON.parse(exp.replace(/&quot;/g,'"'));
                             exp.forEach(xp => {
                                 temp += "/" + xp;
                             });
@@ -191,6 +192,8 @@
                                 ${checkbox("exp", "Squid Jigger")}
                             </div>
                             <div class="col-md-3 iInput">
+                                ${checkbox("exp", "Passenger")}
+                                ${checkbox("exp", "Cruise")}
                                 ${checkbox("exp", "Offshore")}
                                 ${checkbox("exp", "Livestock")}
                                 ${checkbox("exp", "Roro")}
@@ -370,6 +373,8 @@
                                 ${checkbox("exp", "Squid Jigger", exp.includes("Squid Jigger") ? "checked" : "")}
                             </div>
                             <div class="col-md-3 iInput">
+                                ${checkbox("exp", "Passenger", exp.includes("Offshore") ? "checked" : "")}
+                                ${checkbox("exp", "Cruise", exp.includes("Livestock") ? "checked" : "")}
                                 ${checkbox("exp", "Offshore", exp.includes("Offshore") ? "checked" : "")}
                                 ${checkbox("exp", "Livestock", exp.includes("Livestock") ? "checked" : "")}
                                 ${checkbox("exp", "Roro", exp.includes("Roro") ? "checked" : "")}
@@ -517,6 +522,22 @@
                 title: 'Select File',
                 html: `
                     <form id="form" method="POST" action="{{ route('prospect.import2') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" class="swal2-file">
+                    </form>
+                `
+            }).then(file => {
+                if(file.value){
+                    $('#form').submit();
+                }
+            });
+        }
+
+        function imp3(){
+            swal({
+                title: 'Select File',
+                html: `
+                    <form id="form" method="POST" action="{{ route('prospect.import3') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" class="swal2-file">
                     </form>

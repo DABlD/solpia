@@ -712,7 +712,7 @@ class DatatablesController extends Controller
         }
 
         foreach($array as $item){
-        	$item->exp = json_decode($item->exp);
+        	// $item->exp = json_decode($item->exp);
             $item->actions = $item->actions;
         }
 

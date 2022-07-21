@@ -195,6 +195,7 @@ Route::group([
 
 		Route::post($name . '/import', ucfirst($name) . 'Controller@import')->name($name . '.import');
 		Route::post($name . '/import2', ucfirst($name) . 'Controller@import2')->name($name . '.import2');
+		Route::post($name . '/import3', ucfirst($name) . 'Controller@import3')->name($name . '.import3');
 
 		// OPENINGS ROUTES
 		$name = "requirement";
