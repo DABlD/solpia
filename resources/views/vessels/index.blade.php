@@ -1628,7 +1628,7 @@
                     <tr>
                         <td>${index + 1}</td>
                         <td>${crew.abbr}</td>
-                        <td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+                        <td class="OBC" data-id="${crew.applicant_id}">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
                         <td>${moment(crew.joining_date).format('DD-MMM-YY')}</td>
                         <td>${moment().diff(moment(crew.joining_date), 'months')}</td>
@@ -2055,7 +2055,6 @@
                     'WalangLagay':          'Walang Lagay',
                     'MLCContract':          'MLC Contract',
                     'POEAContract':         'POEA Contract',
-                    'RequestToProcess':     'Request To Process',
                     'DocumentChecklist':    'Document Checklist',
                     'X01_BorrowDocuments':  'Borrow Documents',
                     'X04_USVE':  'US Visa Endorsement Form',
@@ -2075,9 +2074,6 @@
                 if(result.value){
                     if(result.value == "MLCContract"){
                         getMLCData(id, result.value);
-                    }
-                    else if(result.value == "RequestToProcess"){
-                        RTP(id);
                     }
                     else if(result.value == "X01_BorrowDocuments"){
                         FBBD(id, result.value);
@@ -2112,7 +2108,7 @@
                 inputOptions: {
                     'X15_Ext_Form':  'Extension Form',
                     'X06_Ext_Prom_Form':  'Extension Promotion Form',
-                    'MLCContract':          'MLC Contract'
+                    'MLCContract':          'MLC Contract',
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
@@ -2657,7 +2653,8 @@
                     exportOnDocs : 'Export Onsigners SIRB and PPRT',
                     exportOffDocs : 'Export Offsigners SIRB and PPRT',
                     exportOnBoard : 'Export Onboard',
-                    RTP : 'Request to Process',
+                    RTP : 'Request to Process (Lined-Up Crew)',
+                    RTP2 : 'Request to Process (Onboard Crew)',
                     RFSC: 'Shoe and Coverall Request',
                     X16_MLCOnboard: 'Onboard Crew MLC'
                 },
@@ -2993,6 +2990,204 @@
             let docus = [];
 
             let temp = $('.LUN');
+            let crewString = "";
+            let docuString = "";
+
+            let docuArray = [
+                {name: 'USA VISA REFUND',},
+                {name: 'FLAG'},
+                {name: 'VESSEL / PRINCIPAL ENROLLMENT / AMENDMENT'},
+                {name: 'IHT CERT'},
+                {name: 'CONTRACT'}
+            ];
+
+            temp.each((index, value) => {
+                let temp2 = $(value);
+
+                crewString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${temp2[0].innerText}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            docuArray.forEach((value, index) => {
+                docuString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="docu-checklist" data-id="${index}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${value.name}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let config = {
+                confirmButtonText: 'Next',
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+            }
+
+            swal.queue([
+                {
+                    ...config,
+                    title: 'Select Crew',
+                    html: '<br><br>' + crewString,
+                    width: '450px',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+                        $('#swal2-content .col-md-10').css('text-align', 'left');
+                        $('#swal2-content .col-md-10 label').css({
+                            "font-size": '20px',
+                            "text-align": 'left'
+                        });
+                        $('#swal2-content input[type=checkbox]').css({
+                            'zoom': '1.7',
+                            'margin': '1px 0 0'
+                        });
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let temp3 = $(".crew-checklist:checked");
+                                
+                                temp3.each((index, value) => {
+                                    crews.push($(value).data('id'));
+                                });
+                            resolve()}, 500);
+                        });
+                    },
+                },
+                {
+                    ...config,
+                    title: 'Select Documents',
+                    html: '<br><br>' + docuString,
+                    width: '450px',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+                        $('#swal2-content .col-md-10').css('text-align', 'left');
+                        $('#swal2-content .col-md-10 label').css({
+                            "font-size": '20px',
+                            "text-align": 'left'
+                        });
+                        $('#swal2-content input[type=checkbox]').css({
+                            'zoom': '1.7',
+                            'margin': '1px 0 0'
+                        });
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let temp3 = $(".docu-checklist:checked");
+                                
+                                temp3.each((index, value) => {
+                                    docus.push($(value).data('id'));
+                                });
+                            resolve()}, 500);
+                        });
+                    },
+                },
+                {
+                    ...config,
+                    title: 'Fill Details',
+                    html: '<br><br>' + `
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Deparment</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="department" class="swal2-input" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Port / Country</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="port" class="swal2-input" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Departure</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="departure" class="swal2-input" />
+                            </div>
+                        </div>
+                    `,
+                    width: '450px',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+
+                        $('#departure').flatpickr({
+                            altInput: true,
+                            altFormat: 'F j, Y',
+                            dateFormat: 'Y-m-d',
+                        })
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let a = $('#department').val();
+                                let b = $('#port').val();
+                                let c = $('#departure').val();
+
+                                if(a == "" || b == "" || c == ""){
+                                    swal.showValidationError('All fields is required');
+                                }
+                            resolve()}, 500);
+                        });
+                    },
+                },
+            ]).then(result => {
+                if(result.value){
+                    let data = {
+                        crews: crews,
+                        docus: docus,
+                        department: $('#department').val(),
+                        port: $('#port').val(),
+                        departure: $('#departure').val(),
+                        filename: $('.modal-title span')[0].innerText.substring(4) + ' - Request To Process',
+                        isApplicant: false
+                    };
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/RequestToProcess?` + $.param(data);
+                }
+            })
+        }
+
+        function RTP2(id){
+            let crews = [];
+            let docus = [];
+
+            let temp = $('.OBC');
             let crewString = "";
             let docuString = "";
 
