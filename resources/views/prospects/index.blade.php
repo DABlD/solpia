@@ -75,6 +75,7 @@
         var fUsv = "";
         var fExp = [];
         var fBool = false;
+        var fRemarks = "";
 
         swal({
             title: 'Loading',
@@ -149,7 +150,7 @@
             if(e.which == 13){
                 swal('Searching...');
                 swal.showLoading();
-
+                fBool = false;
                 table.search($(e.target).val()).draw();
             }
         });
@@ -553,10 +554,10 @@
                     ${input("name", "Name", $('[type="search"]').val(), 2,10)}
                     <div class="row iRow">
                         <div class="col-md-6">
-                            ${input("min_age", "Min Age", 20, 4,8, 'number', 'min="20" max="60"')}
+                            ${input("min_age", "Min Age", fMin_age, 4,8, 'number', 'min="20" max="60"')}
                         </div>
                         <div class="col-md-6">
-                            ${input("max_age", "Max Age", 65, 5,7, 'number', 'min="20" max="60"')}
+                            ${input("max_age", "Max Age", fMax_age, 5,7, 'number', 'min="20" max="60"')}
                         </div>
                     </div>
 
@@ -617,6 +618,8 @@
                             </select>
                         </div>
                     </div></br>
+
+                    ${input("remarks", "Remarks", $('[name="remarks"]').val(), 2,10)}
 
                     <div class="row iRow">
                         <div class="col-md-2 iLabel">
@@ -697,7 +700,7 @@
                                         $('.select2-container--open .select2-search__field').click();
                                     });
 
-                                    $('[name="ranks"]').val(null).trigger("change");
+                                    $('[name="ranks"]').val(fRanks).trigger("change");
                                 }
                             });
                         }
@@ -710,6 +713,7 @@
                     fMax_age = $("[name='max_age']").val();
                     fRanks = $("[name='ranks']").val();
                     fUsv = $("[name='usv']:checked").val();
+                    fRemarks = $("[name='remarks']").val();
 
                     let temp = [];
                     $('[name="exp"]:checked').each((i, e) => {
@@ -733,6 +737,7 @@
                 ranks: fRanks,
                 usv: fUsv,
                 exp: fExp,
+                remarks: fRemarks,
                 bool: fBool
             }
         }

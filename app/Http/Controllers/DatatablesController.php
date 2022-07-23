@@ -694,7 +694,7 @@ class DatatablesController extends Controller
 
         $filters = $req->filters;
 		$search = $req->search["value"];
-		if($filters["bool"] && $filters["bool"] != "false"){
+		if(($filters["bool"] && $filters["bool"] != "false") || $search){
 			$array = $array->where(function($q) use($filters){
 				$q->whereBetween('age', [$filters["min_age"], $filters["max_age"]]);
 			});
@@ -705,8 +705,13 @@ class DatatablesController extends Controller
 					$q->where("name", 'like', "%$name%");
 				});
 			}
-			if(isset($filters["rank"])){
-				$array = $array->whereIn('rank', $filters["rank"]);
+			if(isset($filters["remarks"]) && $filters["remarks"] != ""){
+				$array = $array->where(function($q) use($filters){
+					$q->where("remarks", 'like', "%" . $filters["remarks"] . "%");
+				});
+			}
+			if(isset($filters["ranks"])){
+				$array = $array->whereIn('rank', $filters["ranks"]);
 			}
 			if(isset($filters["exp"])){
 				$exps = $filters["exp"];
@@ -733,10 +738,10 @@ class DatatablesController extends Controller
 	    	$tc = $array->count();
 	    	$array = $array->offset($req->start)->limit($req->length);
 		}
-		elseif($search){
-			$array = $array->where('name', 'LIKE', "%" . $search . "%");
-	    	$tc = $array->count();
-		}
+		// elseif($search){
+		// 	$array = $array->where('name', 'LIKE', "%" . $search . "%");
+		// 	$tc = $array->count();
+		// }
 		else{
 	    	$tc = $array->count();
 	        $array = $array->offset($req->start)->limit($req->length);
