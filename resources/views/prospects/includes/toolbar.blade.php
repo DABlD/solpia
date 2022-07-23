@@ -7,4 +7,7 @@
 			<span class="fa fa-download"></span>
 		</a>
 	@endif
+	<a class="btn btn-info" data-toggle="tooltip" title="Filter" onclick="filter()">
+		<span class="fa fa-filter"></span>
+	</a>
 </div>

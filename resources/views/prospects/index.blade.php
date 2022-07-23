@@ -49,6 +49,12 @@
 	<link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
+
+    <style>
+        .select2-selection__choice{
+            color: black !important;
+        }
+    </style>
 @endpush
 
 @push('before-scripts')
@@ -62,6 +68,14 @@
 
 @push('after-scripts')
 	<script>
+        var fName = "";
+        var fMin_age = 20;
+        var fMax_age = 65;
+        var fRanks = [];
+        var fUsv = "";
+        var fExp = [];
+        var fBool = false;
+
         swal({
             title: 'Loading',
             timer: 1500
@@ -75,9 +89,10 @@
                 type: "POST",
                 dataType: "json",
                 // dataSrc: "",
-                data: {
-                    table: 'prospect',
-                    select: "*",
+                data: f => {
+                    f.table = 'prospect';
+                    f.select = "*";
+                    f.filters = getFilters();
                 }
             },
             columns: [
@@ -116,7 +131,7 @@
                 },
                 {
                     targets: 8,
-                    width: "40%"
+                    width: "35%"
                 }
             ],
             drawCallback: function(){
@@ -529,6 +544,197 @@
                     $('#form').submit();
                 }
             });
+        }
+
+        function filter(){
+            swal({
+                width: "650px",
+                html:`
+                    ${input("name", "Name", $('[type="search"]').val(), 2,10)}
+                    <div class="row iRow">
+                        <div class="col-md-6">
+                            ${input("min_age", "Min Age", 20, 4,8, 'number', 'min="20" max="60"')}
+                        </div>
+                        <div class="col-md-6">
+                            ${input("max_age", "Max Age", 65, 5,7, 'number', 'min="20" max="60"')}
+                        </div>
+                    </div>
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Ranks
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="ranks" class="form-control" data-placeholder="Select Ranks">
+                            </select>
+                        </div>
+                    </div></br>
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Vessel Exp
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <div class="col-md-3 iInput">
+                                ${checkbox("exp", "Bulk")}
+                                ${checkbox("exp", "Log Bulk")}
+                                ${checkbox("exp", "Container")}
+                                ${checkbox("exp", "Gen Cargo")}
+                                ${checkbox("exp", "PCC")}
+                                ${checkbox("exp", "Woodchip")}
+                                ${checkbox("exp", "VLOC")}
+                                ${checkbox("exp", "MPV")}
+                                ${checkbox("exp", "Cement Carrier")}
+                            </div>
+                            <div class="col-md-3 iInput">
+                                ${checkbox("exp", "Oil Chem")}
+                                ${checkbox("exp", "Product")}
+                                ${checkbox("exp", "VLCC")}
+                                ${checkbox("exp", "LNG")}
+                                ${checkbox("exp", "LPG")}
+                            </div>
+                            <div class="col-md-3 iInput">
+                                ${checkbox("exp", "Purse Seiner")}
+                                ${checkbox("exp", "Long Line")}
+                                ${checkbox("exp", "Trawl")}
+                                ${checkbox("exp", "Squid Jigger")}
+                            </div>
+                            <div class="col-md-3 iInput">
+                                ${checkbox("exp", "Passenger")}
+                                ${checkbox("exp", "Cruise")}
+                                ${checkbox("exp", "Offshore")}
+                                ${checkbox("exp", "Livestock")}
+                                ${checkbox("exp", "Roro")}
+                            </div>
+                        </div>
+                    </div></br>
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="other_exp" class="form-control" data-placeholder="Other Vessel Types">
+                            </select>
+                        </div>
+                    </div></br>
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            US VISA
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <div class="col-md-12 iInput">
+                                ${checkbox("usv", "REQUIRED")}
+                            </div>
+                        </div>
+                    </div></br>
+
+                `,
+                onOpen: () => {
+                    $('.iInput .iInput').css('text-align', 'left');
+                    $('[name="other_exp"]').select2({
+                        tags: true,
+                        multiple: true,
+                        closeOnSelect: false,
+                        scrollAfterSelect: false,
+                    })
+                    .on('select2:selecting', e => {
+                        $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop());
+                    })
+                    .on('select2:select', e => {
+                        $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop'));
+                        $('.select2-search__field').val("");
+                        $('.select2-container--open .select2-search__field').click();
+                    });
+
+                    $.ajax({
+                        url: "{{ route('rank.get') }}",
+                        data: {
+                            select: "abbr",
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            ranks = [];
+                            rankString = "";
+
+                            result.forEach(rank => {
+                                ranks.push(rank.abbr);
+                                rankString += `
+                                    <option value="${rank.abbr}">${rank.abbr}</option>
+                                `;
+                            });
+
+                            $.ajax({
+                                url: "{{ route('prospect.get') }}",
+                                data: {
+                                    select: "rank",
+                                },
+                                success: result => {
+                                    result = JSON.parse(result);
+
+                                    result.forEach(rank => {
+                                        if(!ranks.includes(rank.rank) && rank.rank != null){
+                                            ranks.push(rank.rank);
+                                            rankString += `
+                                                <option value="${rank.rank}">${rank.rank}</option>
+                                            `;
+                                        }
+                                    });
+
+                                    $('[name="ranks"]').append(rankString);
+                                    $('[name="ranks"]').select2({
+                                        tags: true,
+                                        multiple: true,
+                                        closeOnSelect: false,
+                                        scrollAfterSelect: false,
+                                    })
+                                    .on('select2:selecting', e => {
+                                        $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop());
+                                    })
+                                    .on('select2:select', e => {
+                                        $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop'));
+                                        $('.select2-search__field').val("");
+                                        $('.select2-container--open .select2-search__field').click();
+                                    });
+
+                                    $('[name="ranks"]').val(null).trigger("change");
+                                }
+                            });
+                        }
+                    });
+                }
+            }).then(result => {
+                if(result.value){
+                    fName = $("[name='name']").val();
+                    fMin_age = $("[name='min_age']").val();
+                    fMax_age = $("[name='max_age']").val();
+                    fRanks = $("[name='ranks']").val();
+                    fUsv = $("[name='usv']:checked").val();
+
+                    let temp = [];
+                    $('[name="exp"]:checked').each((i, e) => {
+                        temp.push(e.value);
+                    });
+
+                    fExp = temp.concat($('[name="other_exp"]').val());
+                    fBool = true;
+
+                    reload();
+
+                }
+            });
+        }
+
+        function getFilters(){
+            return {
+                name: fName,
+                min_age: fMin_age,
+                max_age: fMax_age,
+                ranks: fRanks,
+                usv: fUsv,
+                exp: fExp,
+                bool: fBool
+            }
         }
 	</script>
 @endpush

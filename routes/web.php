@@ -136,6 +136,21 @@ Route::group([
 		Route::post("$name/getFiles", ucfirst($name) . 'Controller@getFiles')->name("$name.getFiles");
 		Route::post("$name/uploadFiles", ucfirst($name) . 'Controller@uploadFiles')->name("$name.uploadFiles");
 		Route::post("$name/deleteFile", ucfirst($name) . 'Controller@deleteFile')->name("$name.deleteFile");
+
+		// RANK ROUTES
+		$name = "rank";
+		// Route::get($name, ucfirst($name) . 'Controller@index')
+		// 	->defaults('sidebar', 1)
+		// 	->defaults('icon', 'fa-user-plus')
+		// 	->defaults('name', 'Applicants')
+		// 	->defaults('roles', array('Admin', 'Recruitment Officer'))
+		// 	->name($name . '.index')
+		// 	->defaults('href', $name);
+
+		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
+		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
+		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 		
 		// Vessels ROUTES
 		$name = "vessels";

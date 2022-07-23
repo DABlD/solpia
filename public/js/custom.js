@@ -43,7 +43,7 @@ function se(title = "", text = ""){
 
 function sc(title = "", text = "", callback = null){
 	swal({
-		icon: "question",
+		type: "question",
 		title: title,
 		text: text,
 		showCancelButton: true,
