@@ -550,7 +550,13 @@
         function filter(){
             swal({
                 width: "650px",
+                confirmButtonText: 'Apply Filter',
+                showCancelButton: true,
+                cancelButtonColor: errorColor,
+                cancelButtonText: 'Reset Filter',
+                showCloseButton: true,
                 html:`
+                    <br>
                     ${input("name", "Name", $('[type="search"]').val(), 2,10)}
                     <div class="row iRow">
                         <div class="col-md-6">
@@ -748,6 +754,18 @@
 
                     reload();
                     $('[type="search"]').val(fName);
+                }
+                else if(result.dismiss == "cancel"){                    
+                    fName = "";
+                    fMin_age = 20;
+                    fMax_age = 65;
+                    fRanks = [];
+                    fUsv = "";
+                    fExp = [];
+                    fBool = false;
+                    fRemarks = "";
+                    
+                    filter();
                 }
             });
         }
