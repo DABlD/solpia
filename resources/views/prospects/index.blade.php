@@ -577,35 +577,35 @@
                         </div>
                         <div class="col-md-10 iInput">
                             <div class="col-md-3 iInput">
-                                ${checkbox("exp", "Bulk")}
-                                ${checkbox("exp", "Log Bulk")}
-                                ${checkbox("exp", "Container")}
-                                ${checkbox("exp", "Gen Cargo")}
-                                ${checkbox("exp", "PCC")}
-                                ${checkbox("exp", "Woodchip")}
-                                ${checkbox("exp", "VLOC")}
-                                ${checkbox("exp", "MPV")}
-                                ${checkbox("exp", "Cement Carrier")}
+                                ${checkbox("exp", "Bulk", fExp.includes("Bulk") ? "checked" : "")}
+                                ${checkbox("exp", "Log Bulk", fExp.includes("Log Bulk") ? "checked" : "")}
+                                ${checkbox("exp", "Container", fExp.includes("Container") ? "checked" : "")}
+                                ${checkbox("exp", "Gen Cargo", fExp.includes("Gen Cargo") ? "checked" : "")}
+                                ${checkbox("exp", "PCC", fExp.includes("PCC") ? "checked" : "")}
+                                ${checkbox("exp", "Woodchip", fExp.includes("Woodchip") ? "checked" : "")}
+                                ${checkbox("exp", "VLOC", fExp.includes("VLOC") ? "checked" : "")}
+                                ${checkbox("exp", "MPV", fExp.includes("MPV") ? "checked" : "")}
+                                ${checkbox("exp", "Cement Carrier", fExp.includes("Cement Carrier") ? "checked" : "")}
                             </div>
                             <div class="col-md-3 iInput">
-                                ${checkbox("exp", "Oil Chem")}
-                                ${checkbox("exp", "Product")}
-                                ${checkbox("exp", "VLCC")}
-                                ${checkbox("exp", "LNG")}
-                                ${checkbox("exp", "LPG")}
+                                ${checkbox("exp", "Oil Chem", fExp.includes("Oil Chem") ? "checked" : "")}
+                                ${checkbox("exp", "Product", fExp.includes("Product") ? "checked" : "")}
+                                ${checkbox("exp", "VLCC", fExp.includes("VLCC") ? "checked" : "")}
+                                ${checkbox("exp", "LNG", fExp.includes("LNG") ? "checked" : "")}
+                                ${checkbox("exp", "LPG", fExp.includes("LPG") ? "checked" : "")}
                             </div>
                             <div class="col-md-3 iInput">
-                                ${checkbox("exp", "Purse Seiner")}
-                                ${checkbox("exp", "Long Line")}
-                                ${checkbox("exp", "Trawl")}
-                                ${checkbox("exp", "Squid Jigger")}
+                                ${checkbox("exp", "Purse Seiner", fExp.includes("Purse Seiner") ? "checked" : "")}
+                                ${checkbox("exp", "Long Line", fExp.includes("Long Line") ? "checked" : "")}
+                                ${checkbox("exp", "Trawl", fExp.includes("Trawl") ? "checked" : "")}
+                                ${checkbox("exp", "Squid Jigger", fExp.includes("Squid Jigger") ? "checked" : "")}
                             </div>
                             <div class="col-md-3 iInput">
-                                ${checkbox("exp", "Passenger")}
-                                ${checkbox("exp", "Cruise")}
-                                ${checkbox("exp", "Offshore")}
-                                ${checkbox("exp", "Livestock")}
-                                ${checkbox("exp", "Roro")}
+                                ${checkbox("exp", "Passenger", fExp.includes("Passenger") ? "checked" : "")}
+                                ${checkbox("exp", "Cruise", fExp.includes("Cruise") ? "checked" : "")}
+                                ${checkbox("exp", "Offshore", fExp.includes("Offshore") ? "checked" : "")}
+                                ${checkbox("exp", "Livestock", fExp.includes("Livestock") ? "checked" : "")}
+                                ${checkbox("exp", "Roro", fExp.includes("Roro") ? "checked" : "")}
                             </div>
                         </div>
                     </div></br>
@@ -619,7 +619,7 @@
                         </div>
                     </div></br>
 
-                    ${input("remarks", "Remarks", $('[name="remarks"]').val(), 2,10)}
+                    ${input("remarks", "Remarks", fRemarks, 2,10)}
 
                     <div class="row iRow">
                         <div class="col-md-2 iLabel">
@@ -635,6 +635,18 @@
                 `,
                 onOpen: () => {
                     $('.iInput .iInput').css('text-align', 'left');
+
+                    let temp = [];
+                    fExp.forEach(exp => {
+                        let temp2 = $(`[name="exp"][value="${exp}"]`);
+                        if(!temp2.length){
+                            temp.push(exp);
+                            $(`[name="other_exp"]`).append(`
+                                <option value="${exp}">${exp}</option>
+                            `);
+                        }
+                    });
+
                     $('[name="other_exp"]').select2({
                         tags: true,
                         multiple: true,
@@ -649,6 +661,11 @@
                         $('.select2-search__field').val("");
                         $('.select2-container--open .select2-search__field').click();
                     });
+                    $('[name="other_exp"]').val(temp).trigger("change");
+
+                    if(fUsv){
+                        $(`[name="usv"]`).click();
+                    }
 
                     $.ajax({
                         url: "{{ route('rank.get') }}",
@@ -682,6 +699,12 @@
                                                 <option value="${rank.rank}">${rank.rank}</option>
                                             `;
                                         }
+                                    });
+
+                                    fRanks.forEach(rank => {
+                                        rankString += `
+                                            <option value="${rank}">${rank}</option>
+                                        `;
                                     });
 
                                     $('[name="ranks"]').append(rankString);
@@ -724,7 +747,7 @@
                     fBool = true;
 
                     reload();
-
+                    $('[type="search"]').val(fName);
                 }
             });
         }

@@ -689,63 +689,53 @@ class DatatablesController extends Controller
 	}
 
 	public function prospects(Request $req){
-		DB::enableQueryLog();
         $array = Prospect::select($req->select)->orderBy('id', 'desc');
 
         $filters = $req->filters;
 		$search = $req->search["value"];
-		if(($filters["bool"] && $filters["bool"] != "false") || $search){
+		
+		$array = $array->where(function($q) use($filters){
+			$q->whereBetween('age', [$filters["min_age"], $filters["max_age"]]);
+		});
+
+		if(isset($filters["name"]) && $filters["name"] != ""){
 			$array = $array->where(function($q) use($filters){
-				$q->whereBetween('age', [$filters["min_age"], $filters["max_age"]]);
+				$name = $filters["name"];
+				$q->where("name", 'like', "%$name%");
 			});
-
-			if(isset($filters["name"]) && $filters["name"] != ""){
-				$array = $array->where(function($q) use($filters){
-					$name = $filters["name"];
-					$q->where("name", 'like', "%$name%");
-				});
-			}
-			if(isset($filters["remarks"]) && $filters["remarks"] != ""){
-				$array = $array->where(function($q) use($filters){
-					$q->where("remarks", 'like', "%" . $filters["remarks"] . "%");
-				});
-			}
-			if(isset($filters["ranks"])){
-				$array = $array->whereIn('rank', $filters["ranks"]);
-			}
-			if(isset($filters["exp"])){
-				$exps = $filters["exp"];
-				$array = $array->where(function($q) use($exps){
-					foreach($exps as $key => $exp){
-						if($key > 0){
-							$q->orWhere('exp', 'like', '%' . $exp . '%');
-						}
-						else{
-							$q->where('exp', 'like', '%' . $exp . '%');
-						}
+		}
+		if(isset($filters["remarks"]) && $filters["remarks"] != ""){
+			$array = $array->where(function($q) use($filters){
+				$q->where("remarks", 'like', "%" . $filters["remarks"] . "%");
+			});
+		}
+		if(isset($filters["ranks"])){
+			$array = $array->whereIn('rank', $filters["ranks"]);
+		}
+		if(isset($filters["exp"])){
+			$exps = $filters["exp"];
+			$array = $array->where(function($q) use($exps){
+				foreach($exps as $key => $exp){
+					if($key > 0){
+						$q->orWhere('exp', 'like', '%' . $exp . '%');
 					}
-				});
-			}
-			if(isset($filters["usv"]) && $filters["usv"] != ""){
-				$array = $array->where(function($q) use($filters){
-					$q->where('usv', '>', now()->toDateString());
-					$q->orWhere("usv", ">", now()->format("Y"));
-					$q->orWhere("usv", "YES");
-					$q->orWhere("usv", "W/ VISA");
-				});
-			}
+					else{
+						$q->where('exp', 'like', '%' . $exp . '%');
+					}
+				}
+			});
+		}
+		if(isset($filters["usv"]) && $filters["usv"] != ""){
+			$array = $array->where(function($q) use($filters){
+				$q->where('usv', '>', now()->toDateString());
+				$q->orWhere("usv", ">", now()->format("Y"));
+				$q->orWhere("usv", "YES");
+				$q->orWhere("usv", "W/ VISA");
+			});
+		}
 
-	    	$tc = $array->count();
-	    	$array = $array->offset($req->start)->limit($req->length);
-		}
-		// elseif($search){
-		// 	$array = $array->where('name', 'LIKE', "%" . $search . "%");
-		// 	$tc = $array->count();
-		// }
-		else{
-	    	$tc = $array->count();
-	        $array = $array->offset($req->start)->limit($req->length);
-		}
+    	$tc = $array->count();
+    	$array = $array->offset($req->start)->limit($req->length);
 
 		$array = $array->get();
 
