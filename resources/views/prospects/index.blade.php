@@ -332,7 +332,6 @@
 
         function showDetails(data){
             let exp = data.exp;
-            console.log(exp);
             try{
                 if(data.exp){
                     exp = JSON.parse(data.exp);
@@ -344,7 +343,6 @@
             catch(e){
                 exp = "x";
             }
-            console.log(exp);
 
             swal({
                 html: `
@@ -707,11 +705,15 @@
                                         }
                                     });
 
-                                    fRanks.forEach(rank => {
-                                        rankString += `
-                                            <option value="${rank}">${rank}</option>
-                                        `;
-                                    });
+                                    if(fRanks){
+                                        fRanks.forEach(rank => {
+                                            if(!ranks.includes(rank)){
+                                                rankString += `
+                                                    <option value="${rank}">${rank}</option>
+                                                `;
+                                            }
+                                        });
+                                    }
 
                                     $('[name="ranks"]').append(rankString);
                                     $('[name="ranks"]').select2({
