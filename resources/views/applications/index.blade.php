@@ -2235,14 +2235,19 @@
                 allowEscapeKey: false,
                 success: files => {
                     let isPDF = (files.includes(".pdf") || files.includes(".PDF")) ? 1 : 0;
-                    files = JSON.parse(JSON.parse(files).file);
+
+                    try{
+                        files = JSON.parse(JSON.parse(files).file);
+                    }catch(e){
+                        files = [JSON.parse(files).file];
+                    }
 
                     if(isPDF){
                         window.open(`files/${aId}/${files[0]}`);
                     }
                     else{
                         images = [];
-                        files.forEach(file => {
+                        files.forEach((file, i) => {
                             let img = new Image();
                             img.src = `files/${aId}/${file}`;
                             img.onload = () => {
@@ -2251,26 +2256,26 @@
                                     w: img.width,
                                     h: img.height,
                                 });
+
+                                if(i+1 == files.length){
+                                    let gallery = new PhotoSwipe(
+                                        $('.pswp')[0], 
+                                        PhotoSwipeUI_Default, 
+                                        images, 
+                                        {
+                                            allowPanToNext: true,
+                                            escKey: true,
+                                            arrowKeys: true,
+                                            closeOnScroll: false,
+                                            tapToClose: false,
+                                            maxSpreadZoom: 6
+                                        }
+                                    );
+
+                                    gallery.init();
+                                }
                             };
                         });
-
-                        setTimeout(() => {
-                            let gallery = new PhotoSwipe(
-                                $('.pswp')[0], 
-                                PhotoSwipeUI_Default, 
-                                images, 
-                                {
-                                    allowPanToNext: true,
-                                    escKey: true,
-                                    arrowKeys: true,
-                                    closeOnScroll: false,
-                                    tapToClose: false,
-                                    maxSpreadZoom: 6
-                                }
-                            );
-
-                            gallery.init();
-                        }, files.length * 250);
                     }
                 }
             })
