@@ -253,7 +253,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Tahoma');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Calibri');
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(8);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
@@ -322,16 +322,16 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:J10', 'A34:J71', 'J33', 'A72:J111', 'I112:J114'
+                    'A1:H27', 'A31:H32'
                 ];
 
                 $h['wrap'] = [
-                    'C4'
+                    'A1:H32'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'I113'
+                    
                 ];
 
                 foreach($h as $key => $value) {
@@ -355,18 +355,6 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'J12', 'J13', 'J15',
-                    'F19:G19', 'I19',
-                    'F20:G20', 'I20',
-                    'F21:G21', 'I21',
-                    'F22:G22', 'I22',
-                    'F23:G23', 'I23',
-                    'F25:G25', 'I25',
-                    'F26:G26', 'I26',
-                    'F28:G28', 'I28',
-                    'F46:H46', 'C48',
-                    'B51:C51', 'E51:G51',
-                    'D107:F107', 'I108:J108'
                 ];
 
                 $fills[1] = [
@@ -382,7 +370,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A1:J1', 'A3:J10', 'A34:J34', 'A72:J72'
+                    'A3:H27', 'A31:H32'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -420,15 +408,6 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // RRB
                 $cells[9] = array_merge([
-                    'I12', 'I13', 'I15',
-                    'E19', 'G19', 'H19', 'I19',
-                    'E20', 'G20', 'H20', 'I20',
-                    'E21', 'G21', 'H21', 'I21',
-                    'E22', 'G22', 'H22', 'I22',
-                    'E23', 'G23', 'H23', 'I23',
-                    'E25', 'G25', 'H25', 'I25',
-                    'E26', 'G26', 'H26', 'I26',
-                    'E28', 'G28', 'H28', 'I28',
                 ]);
 
                 // TRB
@@ -445,10 +424,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'J12', 'J13', 'J15',
-                    'F19:G19', 'F20:G20', 'F21:G21', 'F22:G22', 'F23:G23', 'F25:G25', 'F26:G26', 'F28:G28',
-                    'F46:H46', 'B51:C51', 'E51:G51',
-                    'D107:F107', 'I108:J108', 'I110:J110', 'I112:J112'
+                    'A29:D29', 'F29:H29'
                 ]);
 
                 // LBT
@@ -466,31 +442,24 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // FOR THE CHECK
-                // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('A3:H32')->getFont()->setName('Calibri');
+                $event->sheet->getDelegate()->getStyle('A3:H32')->getFont()->setSize(8);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(13);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(26);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(13);
 
                 // ROW RESIZE
-                $arr = [1, 2, 11, 30, 33, 34, 38, 43, 45, 49, 52, 55, 58, 60, 64, 71, 72, 77, 80, 86, 89, 92, 97, 99, 102, 105, 109, 112];
-                for($i = 1; $i < 71; $i++){
+                $arr = [1, 15, 21, 22, 24, 25, 26, 27, 28, 29];
+                for($i = 1; $i < 33; $i++){
                     if(!in_array($i, $arr)){
-                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(23);
-                    }
-                }
-
-                for($i = 72; $i < 115; $i++){
-                    if(!in_array($i, $arr)){
-                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(19);
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
                     }
                 }
                 
@@ -507,22 +476,22 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setDescription('SIR KIT SIG');
         $drawing->setPath(public_path("images/sir_kit_sig.png"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(90);
-        $drawing->setWidth(300);
+        $drawing->setHeight(80);
+        $drawing->setWidth(280);
         $drawing->setOffsetX(3);
-        $drawing->setOffsetY(-5);
-        $drawing->setCoordinates('E111');
+        $drawing->setOffsetY(45);
+        $drawing->setCoordinates('A29');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('KOSCO SIG');
-        $drawing2->setDescription('KOSCO SIG');
-        $drawing2->setPath(public_path("images/kosco_sign.png"));
+        $drawing2->setName('MLC SEAL');
+        $drawing2->setDescription('MLC SEAL');
+        $drawing2->setPath(public_path("images/MLC_SEAL_BLUE.png"));
         $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(45);
-        $drawing2->setWidth(210);
-        $drawing2->setOffsetX(3);
-        $drawing2->setOffsetY(20);
-        $drawing2->setCoordinates('I112');
+        $drawing2->setHeight(120);
+        $drawing2->setWidth(135);
+        $drawing2->setOffsetX(40);
+        $drawing2->setOffsetY(-10);
+        $drawing2->setCoordinates('C29');
 
         return [$drawing, $drawing2];
     }
