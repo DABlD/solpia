@@ -130,7 +130,7 @@
 		<td style="{{ $center }} height: 40px;">
 			{{ $fl->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $fl->expiry_date ? $fl->expiry_date->format('d-M-Y') : '-' }}
+			{{ isset($fl->expiry_date) ? $fl->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $uv->number ?? '-' }}
