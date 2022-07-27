@@ -3179,7 +3179,7 @@
                         port: $('#port').val(),
                         departure: $('#departure').val(),
                         filename: $('.modal-title span')[0].innerText.substring(4) + ' - Request To Process',
-                        flag: $('[name="flag"]').val(),
+                        flag: flag,
                         isApplicant: false
                     };
 
@@ -3307,6 +3307,8 @@
                                 temp3.each((index, value) => {
                                     docus.push($(value).data('id'));
                                 });
+
+                                flag = $('[name="flag"]').val();
                             resolve()}, 500);
                         });
                     },
@@ -3352,7 +3354,7 @@
                         department: $('#department').val(),
                         departure: "Onboard",
                         filename: $('.modal-title span')[0].innerText.substring(4) + ' - Request To Process',
-                        flag: $('[name="flag"]').val(),
+                        flag: flag,
                         isApplicant: false
                     };
 

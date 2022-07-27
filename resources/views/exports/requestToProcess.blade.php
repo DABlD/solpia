@@ -110,16 +110,48 @@
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
-				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" && $data->departure != null ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">
+					@if(isset($crew->port))
+						{{ $crew->port }}
+					@else
+						@if($crew->rank)
+							{{ $data->port }}
+						@endif
+					@endif
+				</td>
+				<td style="{{ $center }} height: 13px;">
+					@if($crew->rank != "")
+						@if($data->departure == "Onboard")
+							{{ $data->departure }}
+						@else
+							{{ now()->parse($data->departure)->toFormattedDateString() }}
+						@endif
+					@endif
+				</td>
 			</tr>
 		@else
 			<tr>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
-				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" && $data->departure != null ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">
+					@if(isset($crew->port))
+						{{ $crew->port }}
+					@else
+						@if($crew->rank)
+							{{ $data->port }}
+						@endif
+					@endif
+				</td>
+				<td style="{{ $center }} height: 13px;">
+					@if($crew->rank != "")
+						@if($data->departure == "Onboard")
+							{{ $data->departure }}
+						@else
+							{{ now()->parse($data->departure)->toFormattedDateString() }}
+						@endif
+					@endif
+				</td>
 			</tr>
 		@endif
 	@endforeach
@@ -246,17 +278,48 @@
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
-				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">
+					@if(isset($crew->port))
+						{{ $crew->port }}
+					@else
+						@if($crew->rank)
+							{{ $data->port }}
+						@endif
+					@endif
+				</td>
 				<td style="{{ $center }} height: 13px;">
-					{{ $crew->rank == "" ? "" : $data->departure == "Onboard" && $data->departure != null ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
+					@if($crew->rank != "")
+						@if($data->departure == "Onboard")
+							{{ $data->departure }}
+						@else
+							{{ now()->parse($data->departure)->toFormattedDateString() }}
+						@endif
+					@endif
+				</td>
 			</tr>
 		@else
 			<tr>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
-				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" && $data->departure != null ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">
+					@if(isset($crew->port))
+						{{ $crew->port }}
+					@else
+						@if($crew->rank)
+							{{ $data->port }}
+						@endif
+					@endif
+				</td>
+				<td style="{{ $center }} height: 13px;">
+					@if($crew->rank != "")
+						@if($data->departure == "Onboard")
+							{{ $data->departure }}
+						@else
+							{{ now()->parse($data->departure)->toFormattedDateString() }}
+						@endif
+					@endif
+				</td>
 			</tr>
 		@endif
 	@endforeach
