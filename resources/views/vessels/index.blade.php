@@ -2988,6 +2988,7 @@
         function RTP(id){
             let crews = [];
             let docus = [];
+            let flag = null;
 
             let temp = $('.LUN');
             let crewString = "";
@@ -3027,6 +3028,7 @@
                         <div class="col-md-10">
                             <label for="">
                                 ${value.name}
+                                ${value.name == "FLAG" ? input("flag", "", null, 0,12) : ""}
                             </label>
                         </div>
                     </div>
@@ -3103,6 +3105,8 @@
                                 temp3.each((index, value) => {
                                     docus.push($(value).data('id'));
                                 });
+
+                                flag = $('[name="flag"]').val();
                             resolve()}, 500);
                         });
                     },
@@ -3175,6 +3179,7 @@
                         port: $('#port').val(),
                         departure: $('#departure').val(),
                         filename: $('.modal-title span')[0].innerText.substring(4) + ' - Request To Process',
+                        flag: $('[name="flag"]').val(),
                         isApplicant: false
                     };
 
@@ -3225,6 +3230,7 @@
                         <div class="col-md-10">
                             <label for="">
                                 ${value.name}
+                                ${value.name == "FLAG" ? input("flag", "", null, 0,12) : ""}
                             </label>
                         </div>
                     </div>
@@ -3317,24 +3323,6 @@
                                 <input type="text" id="department" class="swal2-input" />
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-5">
-                                <h4 class="clabel">Port / Country</h4>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" id="port" class="swal2-input" />
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-5">
-                                <h4 class="clabel">Departure</h4>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" id="departure" class="swal2-input" />
-                            </div>
-                        </div>
                     `,
                     width: '450px',
                     onOpen: () => {
@@ -3342,22 +3330,14 @@
                             'font-size': '28px',
                             'color': '#00c0ef'
                         });
-
-                        $('#departure').flatpickr({
-                            altInput: true,
-                            altFormat: 'F j, Y',
-                            dateFormat: 'Y-m-d',
-                        })
                     },
                     preConfirm: () => {
                         swal.showLoading();
                         return new Promise(resolve => {
                             setTimeout(() => {
                                 let a = $('#department').val();
-                                let b = $('#port').val();
-                                let c = $('#departure').val();
 
-                                if(a == "" || b == "" || c == ""){
+                                if(a == ""){
                                     swal.showValidationError('All fields is required');
                                 }
                             resolve()}, 500);
@@ -3370,9 +3350,9 @@
                         crews: crews,
                         docus: docus,
                         department: $('#department').val(),
-                        port: $('#port').val(),
-                        departure: $('#departure').val(),
+                        departure: "Onboard",
                         filename: $('.modal-title span')[0].innerText.substring(4) + ' - Request To Process',
+                        flag: $('[name="flag"]').val(),
                         isApplicant: false
                     };
 

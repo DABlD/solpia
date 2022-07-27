@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 
-use App\Models\{Applicant, Rank, Vessel};
+use App\Models\{Applicant, Rank, Vessel, LineUpContract};
 
 class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
@@ -22,14 +22,22 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
     public function view(): View
     {
         $crews = array();
-
-        $this->data->department = $this->req['department'];
-        $this->data->port       = $this->req['port'];
-        $this->data->departure  = $this->req['departure'];
-        $this->data->docus      = $this->req['docus'];
-
         $tempCrews = $this->req['crews'];
         $vessel = "";
+        $port = null;
+        $ports = null;
+
+        if($this->req['port']){
+            $port = $this->req['port'];
+        }
+        else{
+            $ports = LineUpContract::whereIn('applicant_id', $tempCrews)->whereNull('disembarkation_date')->pluck('joining_port', 'applicant_id');
+        }
+
+        $this->data->port       = $port;
+        $this->data->department = $this->req['department'];
+        $this->data->departure  = $this->req['departure'];
+        $this->data->docus      = $this->req['docus'];
 
         foreach($tempCrews as $id){
             $crew = Applicant::find($id);
@@ -38,6 +46,7 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
             $crew->load('pro_app');
             $crew->rank = Rank::find($crew->pro_app->rank_id)->abbr;
             $crew->vessel = $vessel == "" ? Vessel::find($crew->pro_app->vessel_id)->name : $vessel;
+            $crew->port = $ports[$id];
 
             array_push($crews, $crew);
         }
@@ -166,14 +175,15 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
-                $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->setTitle('Request To Process', false);
+                $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(1);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
 
                 $event->sheet->setShowGridlines(false);
 
@@ -191,35 +201,9 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
 
                 //     return $temp;
                 // };
-                $crewzxc = [];
-                $stfzxc = [];
-                for($i = 17; $i < 37; $i++){
-                    array_push($crewzxc, "A$i:P$i");
-                    array_push($crewzxc, "Q$i:Y$i");
-                    array_push($crewzxc, "Z$i:AL$i");
-                    array_push($crewzxc, "AM$i:AN$i");
-                    array_push($crewzxc, "AO$i");
-
-                    array_push($stfzxc, "A$i:P$i");
-                    array_push($stfzxc, "Z$i:AL$i");
-                }
-
-                // FONT SIZES
-                $event->sheet->getDelegate()->getStyle('A1:AO50')->getFont()->setName('ARIAL');
-                $event->sheet->getDelegate()->getStyle('A6')->getFont()->setSize(14);
-
-                $event->sheet->getDelegate()->getStyle('E8')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('E10')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('T8')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('T10')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('AE8')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('AE10')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('AN11')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('AN13')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('A13')->getFont()->setSize(10);
-
-                $event->sheet->getDelegate()->getStyle('A16:AO16')->getFont()->setSize(9);
                 // HEADINGS
+                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
+                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
                 // HC B
                 $h[0] = [
@@ -228,7 +212,8 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
 
                 // VT
                 $h[1] = [
-                    
+                    'A33:O33',
+                    'A68:O68'
                 ];
 
                 // HL B
@@ -237,9 +222,9 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
                 ];
 
                 // HC
-                $h[3] = array_merge($crewzxc, [
-                    'A6', 'A16:AO16', 'AO11', 'L13', 'AO13'
-                ]);
+                $h[3] = [
+                    
+                ];
 
                 // HL
                 $h[4] = [
@@ -253,23 +238,22 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
 
                 // B
                 $h[6] = [
-                    'A6', 'A16:AO16', 'E8', 'E10', 'T8', 'T10', 'AE8', 'AE10', 'AN11', 'AN13', 'A13',
-                    'A38:AO38'
+                    
                 ];
 
                 // VC
                 $h[7] = [
-                    'A6', 'A16:AO16'
-                ];
-
-                $h['wrap'] = [
                     
                 ];
 
-                // SHRINK TO FIT
-                $h['stf'] = array_merge($stfzxc, [
+                $h['wrap'] = [
+                ];
 
-                ]);
+                // SHRINK TO FIT
+                $h['stf'] = [
+                    'A12:O31',
+                    'A47:O64',
+                ];
 
                 foreach($h as $key => $value) {
                     foreach($value as $col){
@@ -291,7 +275,8 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
 
                 // FILLS
                 $fills[0] = [
-                    'A6:AO6'
+                    'A2:O2',
+                    'A37:O37'
                 ];
 
                 $fills[1] = [
@@ -306,20 +291,19 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
 
                 // BORDERS
                 $cells[0] = array_merge([
-                    
+                    'A10:O11', 'A33:A34', 'A32:O34',
+                    'A45:O46', 'A68:A69', 'A67:O69'
                 ]);
 
 
                 $cells[1] = array_merge([
-                    'C8:D8', 'S8', 'AC8:AD8', 'C10:D10', 'S10', 'AC10:AD10', 'A15:AO15', 
-                    'A16:P16', 'Q16:Y16', 'Z16:AL16', 'AM16:AN16', 'AO16', 'A17:AO36',
-                    'A37:AO37', 'A38:K41', 'L38:V41', 'W38:AH41', 'AI38:AO41', 'A42:AO42',
-                    'A6:AO13'
+                    'A2:O8', 'A11:O31',
+                    'A37:O43', 'A46:O66'
                 ]);
 
 
                 $cells[2] = array_merge([
-                    'L10:R10', 'AO11', 'L13:AM13', 'AO13'
+                    
                 ]);
 
                 foreach($cells as $key => $value){
@@ -329,39 +313,47 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
                 }
 
                 // FOR THE CHECK
-                $event->sheet->getDelegate()->getStyle('C8')->getFont()->setName('Marlett');
-                $event->sheet->getDelegate()->getStyle('C10')->getFont()->setName('Marlett');
-                $event->sheet->getDelegate()->getStyle('S8')->getFont()->setName('Marlett');
-                $event->sheet->getDelegate()->getStyle('S10')->getFont()->setName('Marlett');
-                $event->sheet->getDelegate()->getStyle('AC8')->getFont()->setName('Marlett');
-                $event->sheet->getDelegate()->getStyle('AC10')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('B4')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('F4')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('J4')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('B6')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('F6')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('J6')->getFont()->setName('Marlett');
+
+                $event->sheet->getDelegate()->getStyle('B39')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('F39')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('J39')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('B41')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('F41')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('J41')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $colRes = [
-                    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-                    'O', 'P', 'Q', 'R', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB',
-                    'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL'
-                ];
-
-                foreach($colRes as $col){
-                    $event->sheet->getDelegate()->getColumnDimension($col)->setWidth(1.7);
-                }
-
-                $event->sheet->getDelegate()->getColumnDimension('Q')->setWidth(2.6);
-                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(3.2);
-                $event->sheet->getDelegate()->getColumnDimension('AM')->setWidth(10.9);
-                $event->sheet->getDelegate()->getColumnDimension('AN')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('AO')->setWidth(16.1);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(11.5);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(14);
 
                 // ROW RESIZE
-                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(7.5);
-                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(7.5);
-                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(18);
-                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(3);
-                $event->sheet->getDelegate()->getRowDimension(12)->setRowHeight(7);
-                $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(7);
-                $event->sheet->getDelegate()->getRowDimension(15)->setRowHeight(3);
-                $event->sheet->getDelegate()->getRowDimension(37)->setRowHeight(3);
+                $skip = [1,2,3,5,9,10,32,33,36,37,38,40,44,45,67,68];
+                for($i = 0; $i < 34; $i++){
+                    if(!in_array($i, $skip) && $i < 12 && $i > 31){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(17);
+                    }
+                }
+                
+                // SET PRINT AREA
+                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:O69");
             },
         ];
     }
@@ -370,10 +362,18 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/letter_head.jpg'));
+        $drawing->setResizeProportional(false);
         $drawing->setCoordinates('A1');
-        $drawing->setHeight(90);
-        $drawing->setWidth(692);
+        $drawing->setHeight(59);
+        $drawing->setWidth(685);
 
-        return $drawing;
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setPath(public_path('images/letter_head.jpg'));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setCoordinates('A36');
+        $drawing2->setHeight(59);
+        $drawing2->setWidth(685);
+
+        return [$drawing, $drawing2];
     }
 }
