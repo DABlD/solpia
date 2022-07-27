@@ -38,6 +38,7 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
         $this->data->department = $this->req['department'];
         $this->data->departure  = $this->req['departure'];
         $this->data->docus      = $this->req['docus'];
+        $this->data->flag       = $this->req['flag'];
 
         foreach($tempCrews as $id){
             $crew = Applicant::find($id);
@@ -330,7 +331,7 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(4);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(11.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(15);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(8);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(4);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(4);

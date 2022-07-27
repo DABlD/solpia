@@ -79,26 +79,49 @@
 		<td colspan="15" style="height: 3px;"></td>
 	</tr>
 
-	<tr>
-		<td colspan="4" style="{{ $bc }}">SEAFARER NAME</td>
-		<td colspan="4" style="{{ $bc }}">RANK / POSITION</td>
-		<td colspan="4" style="{{ $bc }}">VESSEL</td>
-		<td colspan="2" style="{{ $bc }}">PORT / COUNTRY</td>
-		<td style="{{ $bc }}">DEPARTURE</td>
-	</tr>
+	@if($data->flag)
+		<tr>
+			<td colspan="3" style="{{ $bc }}">SEAFARER NAME</td>
+			<td colspan="3" style="{{ $bc }}">RANK</td>
+			<td colspan="2" style="{{ $bc }}">FLAG</td>
+			<td colspan="4" style="{{ $bc }}">VESSEL</td>
+			<td colspan="2" style="{{ $bc }}">PORT / COUNTRY</td>
+			<td style="{{ $bc }}">DEPARTURE</td>
+		</tr>
+	@else
+		<tr>
+			<td colspan="4" style="{{ $bc }}">SEAFARER NAME</td>
+			<td colspan="4" style="{{ $bc }}">RANK / POSITION</td>
+			<td colspan="4" style="{{ $bc }}">VESSEL</td>
+			<td colspan="2" style="{{ $bc }}">PORT / COUNTRY</td>
+			<td style="{{ $bc }}">DEPARTURE</td>
+		</tr>
+	@endif
 
 	@foreach($crews as $crew)
 		@php
 			$name = $crew->user->lname . ', ' . $crew->user->fname . ' ' . ($crew->user->suffix == "" ? '' : $crew->user->suffix . ' ') . $crew->user->mname;
 			$name = $crew->user->lname == '' ? '' : $name;
 		@endphp
-		<tr>
-			<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
-			<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
-			<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
-			<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-			<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : now()->parse($data->departure)->toFormattedDateString() }}</td>
-		</tr>
+
+		@if($data->flag)
+			<tr>
+				<td colspan="3" style="{{ $center }} height: 13px;">{{ $name }}</td>
+				<td colspan="3" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
+				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : now()->parse($data->departure)->toFormattedDateString() }}</td>
+			</tr>
+		@else
+			<tr>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
+				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : now()->parse($data->departure)->toFormattedDateString() }}</td>
+			</tr>
+		@endif
 	@endforeach
 
 	<tr>
@@ -192,26 +215,49 @@
 		<td colspan="15" style="height: 3px;"></td>
 	</tr>
 
-	<tr>
-		<td colspan="4" style="{{ $bc }}">SEAFARER NAME</td>
-		<td colspan="4" style="{{ $bc }}">RANK / POSITION</td>
-		<td colspan="4" style="{{ $bc }}">VESSEL</td>
-		<td colspan="2" style="{{ $bc }}">PORT / COUNTRY</td>
-		<td style="{{ $bc }}">DEPARTURE</td>
-	</tr>
+	@if($data->flag)
+		<tr>
+			<td colspan="3" style="{{ $bc }}">SEAFARER NAME</td>
+			<td colspan="3" style="{{ $bc }}">RANK</td>
+			<td colspan="2" style="{{ $bc }}">FLAG</td>
+			<td colspan="4" style="{{ $bc }}">VESSEL</td>
+			<td colspan="2" style="{{ $bc }}">PORT / COUNTRY</td>
+			<td style="{{ $bc }}">DEPARTURE</td>
+		</tr>
+	@else
+		<tr>
+			<td colspan="4" style="{{ $bc }}">SEAFARER NAME</td>
+			<td colspan="4" style="{{ $bc }}">RANK / POSITION</td>
+			<td colspan="4" style="{{ $bc }}">VESSEL</td>
+			<td colspan="2" style="{{ $bc }}">PORT / COUNTRY</td>
+			<td style="{{ $bc }}">DEPARTURE</td>
+		</tr>
+	@endif
 
 	@foreach($crews as $crew)
 		@php
 			$name = $crew->user->lname . ', ' . $crew->user->fname . ' ' . ($crew->user->suffix == "" ? '' : $crew->user->suffix . ' ') . $crew->user->mname;
 			$name = $crew->user->lname == '' ? '' : $name;
 		@endphp
-		<tr>
-			<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
-			<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
-			<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
-			<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-			<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : now()->parse($data->departure)->toFormattedDateString() }}</td>
-		</tr>
+
+		@if($data->flag)
+			<tr>
+				<td colspan="3" style="{{ $center }} height: 13px;">{{ $name }}</td>
+				<td colspan="3" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
+				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : now()->parse($data->departure)->toFormattedDateString() }}</td>
+			</tr>
+		@else
+			<tr>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
+				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
+				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : now()->parse($data->departure)->toFormattedDateString() }}</td>
+			</tr>
+		@endif
 	@endforeach
 
 	<tr>
