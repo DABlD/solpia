@@ -27,7 +27,7 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
         $port = null;
         $ports = null;
 
-        if($this->req['port']){
+        if(isset($this->req['port'])){
             $port = $this->req['port'];
         }
         else{
