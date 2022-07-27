@@ -111,7 +111,7 @@
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
+				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" && $data->departure != null ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
 			</tr>
 		@else
 			<tr>
@@ -119,7 +119,7 @@
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
+				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" && $data->departure != null ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
 			</tr>
 		@endif
 	@endforeach
@@ -247,7 +247,8 @@
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
+				<td style="{{ $center }} height: 13px;">
+					{{ $crew->rank == "" ? "" : $data->departure == "Onboard" && $data->departure != null ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
 			</tr>
 		@else
 			<tr>
@@ -255,7 +256,7 @@
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->port ?? ($crew->rank ? $data->port : "") }}</td>
-				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
+				<td style="{{ $center }} height: 13px;">{{ $crew->rank == "" ? "" : $data->departure == "Onboard" && $data->departure != null ? $data->departure : now()->parse($data->departure)->toFormattedDateString() }}</td>
 			</tr>
 		@endif
 	@endforeach
