@@ -115,17 +115,17 @@
 		<td style="{{ $center }} height: 40px;">
 			{{ $sb->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $sb->expiry_date ? $sb->expiry_date->format('d-M-Y') : '-' }}
+			{{ isset($sb->expiry_date) ? $sb->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $pp->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $pp->expiry_date ? $pp->expiry_date->format('d-M-Y') : '-' }}
+			{{ isset($pp->expiry_date) ? $pp->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $coc->no ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $coc->expiry_date ? $coc->expiry_date->format('d-M-Y') : '-' }}
+			{{ isset($coc->expiry_date) ? $coc->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $fl->number ?? '-' }}
@@ -135,17 +135,17 @@
 		<td style="{{ $center }} height: 40px;">
 			{{ $uv->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $uv ? $uv->expiry_date->format('d-M-Y') : '-' }}
+			{{ isset($uv->expiry_date) ? $uv->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $uv->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $uv ? $uv->expiry_date->format('d-M-Y') : '-' }}
+			{{ isset($uv->expiry_date) ? $uv->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $mcv->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $mcv->expiry_date ? $mcv->expiry_date->format('d-M-Y') : '-' }}
+			{{ isset($mcv->expiry_date) ? $mcv->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 		</td>
