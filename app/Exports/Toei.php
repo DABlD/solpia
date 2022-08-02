@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class Toei implements FromView, WithEvents, WithDrawings//, WithColumnFormatting//, ShouldAutoSize
+class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
@@ -897,7 +897,7 @@ class Toei implements FromView, WithEvents, WithDrawings//, WithColumnFormatting
     public function columnFormats(): array
     {
         return [
-            'G85:G105' => "mmm dd, yyyy",
+            'E30:E35' => "0",
         ];
     }
 

@@ -287,21 +287,34 @@
 			$rt = str_starts_with($applicant->rank->category, "ENGINE") ? "er" : "dr";
 
 			if($applicant->rank){
-				foreach($applicant->document_lc as $lc){
-					if($lc->type == "COC" || $lc->type == "COE"){
-						$regulations = json_decode($lc->regulation);
+				if($applicant->rank->category == "GALLEY"){
+					foreach($applicant->document_lc as $lc){
+						if($lc->type == "NCIII"){
+							$docu = $lc;
+							break;
+						}
+						elseif($lc->type == "NCI"){
+							$docu = $lc;
+						}
+					}
+				}
+				else{
+					foreach($applicant->document_lc as $lc){
+						if($lc->type == "COC" || $lc->type == "COE"){
+							$regulations = json_decode($lc->regulation);
 
-						foreach($regs[$rt] as $key => $ref){
-							if(in_array($ref, $regulations)){
-								if($hl){
-									if($key > $hl){
+							foreach($regs[$rt] as $key => $ref){
+								if(in_array($ref, $regulations)){
+									if($hl){
+										if($key > $hl){
+											$hl = $key;
+											$docu = $lc;
+										}
+									}
+									else{
 										$hl = $key;
 										$docu = $lc;
 									}
-								}
-								else{
-									$hl = $key;
-									$docu = $lc;
 								}
 							}
 						}
@@ -1170,8 +1183,10 @@
 			{{-- <td>{{ $docu2 ? "YES" : "NO"}}</td> --}}
 			<td>{{ $docu ? $docu->clinic : "-----"}}</td>
 			<td>
-				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }} &#38;
-				{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}
+				{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}
+				@if($docu2)
+					 &#38; {{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}
+				@endif
 
 			</td>
 			<td>-----</td>
