@@ -732,8 +732,8 @@
 			$names = ["DECK WATCH", "ENGINE WATCH", "WATCHKEEPING", "DECK WATCHKEEPING", "ENGINE WATCHKEEPING"];
 			$docu = false;
 
-			foreach($applicant->document_lc as $docu){
-				if(in_array($docu->type, $names)){
+			foreach($applicant->document_lc as $doc){
+				if(in_array($doc->type, $names)){
 					$docu = $docu;
 					break;
 				}
@@ -1180,7 +1180,7 @@
 
 		<tr>	
 			<td colspan="4">COVID-19 BOOSTER(certificate copy must be attached)</td>
-			<td>NO</td>
+			<td>-----</td>
 			{{-- <td>{{ $docu2 ? "YES" : "NO"}}</td> --}}
 			<td>{{ $docu3 ? $docu3->clinic : "-----"}}</td>
 			<td>
