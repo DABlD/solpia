@@ -329,7 +329,7 @@
 			</td>
 			<td colspan="2">
 				@if(isset($applicant->rank) && $docu)
-					@if($hl == 0)
+					@if($hl == 0 && $hl != null)
 						@if($rt == "er")
 							ENGINEERING WATCHKEEPING
 						@else
@@ -365,7 +365,7 @@
 					@elseif($applicant->rank->id == 24)
 						SHIP'S COOK
 					@elseif($applicant->rank->id == 27 || $applicant->rank->id == 28)
-						STEWARD
+						MESSMAN
 					@else
 						@php
 							$rname = $applicant->rank->name;
