@@ -149,7 +149,7 @@
 	<tr>
 		<td rowspan="6" style="{{ $center }}">Basic pay &#38; allowance</td>
 		<td style="{{ $center }}">Basic wage</td>
-		<td colspan="2" style="{{ $center }}">Fixed Overtime Allowance</td>
+		<td colspan="2" style="{{ $center }}">Fixed / Guaranteed Overtime Allowance</td>
 		<td colspan="3" style="{{ $center }}">Fixed Supervisor Allowance</td>
 		<td colspan="2" style="{{ $center }}">Substinence Allowance</td>
 	</tr>
