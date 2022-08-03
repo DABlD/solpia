@@ -159,7 +159,7 @@
 	<tr>
 		<td colspan="2">G) Owner's Allowance</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->owner_allow ?? 0 }}</td>
-		<td colspan="2">H) Completion Bonus</td>
+		<td colspan="2">H) Other Allowance</td>
 		<td style="{{ $center }}">${{ $data->wage->retire_allow ?? 0 }}</td>
 	</tr>
 
