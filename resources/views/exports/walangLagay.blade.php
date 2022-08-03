@@ -14,7 +14,6 @@
 		<td>AGE:</td>
 		<td>
 			{{ $data->user->birthday ? $data->user->birthday->diff(now())->format('%y') : '---' }}
-			}
 		</td>
 		<td>BMI:</td>
 		<td>{{ $data->bmi }}</td>
