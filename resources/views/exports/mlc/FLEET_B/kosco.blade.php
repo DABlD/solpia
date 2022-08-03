@@ -160,12 +160,12 @@
 		<td colspan="2">G) Owner's Allowance</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->owner_allow ?? 0 }}</td>
 		<td colspan="2">H) Other Allowance</td>
-		<td style="{{ $center }}">${{ $data->wage->retire_allow ?? 0 }}</td>
+		<td style="{{ $center }}">${{ $data->wage->other_allow ?? 0 }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="4" style="{{ $center }}">Monthly Total (D+E+F+G+H)</td>
-		<td colspan="3" style="{{ $center }}">${{ ($monthly) + ($data->wage->leave_pay ?? 0) + ($data->wage->sub_allow ?? 0) + ($data->wage->owner_allow ?? 0) + ($data->wage->retire_allow ?? 0) }}</td>
+		<td colspan="3" style="{{ $center }}">${{ ($monthly) + ($data->wage->leave_pay ?? 0) + ($data->wage->sub_allow ?? 0) + ($data->wage->owner_allow ?? 0) + ($data->wage->other_allow ?? 0) }}</td>
 	</tr>
 
 	<tr>
