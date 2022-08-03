@@ -299,7 +299,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'A23', 'A32', 'B26', 'E23', 'E26', 'B21', 'B29', 'B30', 'A39', 'A42', 'A45', 'A48', 'A50', 'A56'
+                    'A23', 'A32', 'B26', 'C23', 'E23', 
+                    'E26', 'B21', 'B29', 'B30', 'A39',
+                    'A42', 'A45', 'A48', 'A50', 'A56'
                 ];
 
                 // SHRINK TO FIT
