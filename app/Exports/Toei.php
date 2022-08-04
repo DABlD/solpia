@@ -887,6 +887,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(11.5);
 
                 $rash3 += 1;
+                $event->sheet->getDelegate()->getStyle("E1:E100")->getFont()->setSize(8.5);
 
                 // SET PRINT AREA
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
