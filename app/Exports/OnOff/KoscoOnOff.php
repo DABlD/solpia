@@ -355,7 +355,8 @@ class KoscoOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B10:B50'
+                    'A10:O' . (sizeof($this->linedUps) + 10),
+                    'A' . (sizeof($this->linedUps) + 15) . ':O' . (sizeof($this->linedUps) + 15)
                 ];
 
                 foreach($h as $key => $value) {
