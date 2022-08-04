@@ -19,7 +19,7 @@ class WesternOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAuto
 
     public function view(): View
     {
-        return view('exports.onOff' . lcfirst($this->type), [
+        return view('exports.onOff.' . lcfirst($this->type), [
             'linedUps' => $this->linedUps,
             'onBoards'=> $this->onBoards
         ]);
