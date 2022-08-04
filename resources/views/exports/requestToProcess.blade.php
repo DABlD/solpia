@@ -42,15 +42,15 @@
 	<tr>
 		<td></td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(3, $data->docus) ? 'a' : '' }}
+			
 		</td>
 		<td colspan="3" style="{{ $bold }}">OTHER VISA ___________</td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(4, $data->docus) ? 'a' : '' }}
+			{{ in_array(3, $data->docus) ? 'a' : '' }}
 		</td>
 		<td colspan="3" style="{{ $bold }}">IHT CERT</td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(5, $data->docus) ? 'a' : '' }}
+			{{ in_array(4, $data->docus) ? 'a' : '' }}
 		</td>
 		<td colspan="5" style="{{ $bold }}">
 			CONTRACT
