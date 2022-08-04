@@ -2925,8 +2925,9 @@
                 cancelButtonColor: '#f76c6b',
                 inputOptions: {
                     ShinkoOnOff: 'Default',
-                    ToeiOnOff: 'Toei',
-                    WesternOnOff: 'Nitta/TOEI'
+                    ToeiOnOff: 'TOEI',
+                    WesternOnOff: 'Nitta/TOEI',
+                    KoscoOnOff: 'KOSCO'
                 },
             }).then(result => {
                 let data = {};
@@ -2943,6 +2944,23 @@
                         }).then(result2 => {
                             if(result2.value){
                                 data.to = $('#to').val();
+                                data.port = $('#port').val();
+                            }
+                            window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}?` + $.param({data: data});
+                        });
+                    }
+                    else if(result.value == "KoscoOnOff"){
+                        swal({
+                            title: 'Enter Details',
+                            showCancelButton: true,
+                            cancelButtonColor: '#f76c6b',
+                            html: `
+                                <input type="date" id="date" class="form-control" placeholder="Date of Replacement"><br>
+                                <input type="text" id="port" class="form-control" placeholder="Port"><br>
+                            `
+                        }).then(result2 => {
+                            if(result2.value){
+                                data.date = $('#date').val();
                                 data.port = $('#port').val();
                             }
                             window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}?` + $.param({data: data});

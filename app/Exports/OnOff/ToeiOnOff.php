@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\OnOff;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -32,7 +32,7 @@ class ToeiOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
     public function view(): View
     {
-        return view('exports.' . lcfirst($this->type), [
+        return view('exports.onOff.' . lcfirst($this->type), [
             'linedUps' => $this->linedUps,
             'onBoards'=> $this->onBoards,
             'data'=> $this->data,

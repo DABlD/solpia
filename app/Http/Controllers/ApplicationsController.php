@@ -1020,6 +1020,11 @@ class ApplicationsController extends Controller
         foreach($linedUps as $linedUp){
             $temp = DocumentId::where('applicant_id', $linedUp->applicant_id)->select('type', 'issue_date', 'expiry_date', 'number')->get();
 
+
+            $linedUp->covidVaccines = DocumentMedCert::where('applicant_id', $linedUp->applicant_id)
+                                                ->where('type', 'like', '%COVID%')
+                                                ->get();
+
             $linedUp->age = now()->parse($linedUp->birthday)->diff(now())->format('%y');
             $linedUp->status2 = "NEW-HIRE";
 
@@ -1052,6 +1057,10 @@ class ApplicationsController extends Controller
         // SORT BY RANK
         foreach($ranks as $abbr){
             foreach($crews as $key => $crew){
+
+                $crew->covidVaccines = DocumentMedCert::where('applicant_id', $crew->applicant_id)
+                                                    ->where('type', 'like', '%COVID%')
+                                                    ->get();
                 if($crew->abbr == $abbr->abbr){
                     $temp->push($crew);
                     $crews->pull($key);
@@ -1240,7 +1249,7 @@ class ApplicationsController extends Controller
             $linedUp->lastShip = $lastShip;
         }
 
-        $class = "App\\Exports\\" . $type;
+        $class = "App\\Exports\\OnOff\\" . $type;
 
         $name = substr($vesselCrew[2], 4);
         $data = null;
