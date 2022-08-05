@@ -50,8 +50,8 @@ class X15_Ext_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
         }
 
         $wage = Wage::where('rank_id', $data->pro_app->rank_id)
-                    ->where('vessel_id', 42)
-                    // ->where('vessel_id', $data->pro_app->vessel_id)
+                    // ->where('vessel_id', 42)
+                    ->where('vessel_id', $data->pro_app->vessel_id)
                     ->first();
 
         $fields = [
@@ -81,6 +81,8 @@ class X15_Ext_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
                 $total += $wage->$field;
             }
         }
+
+        dd($total);
 
         $sr = $wage->sr_pay;
         if($sr && $sr != "[]"){
