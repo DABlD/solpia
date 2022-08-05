@@ -82,8 +82,6 @@ class X15_Ext_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
             }
         }
 
-        dd($total);
-
         $sr = $wage->sr_pay;
         if($sr && $sr != "[]"){
             $sr = json_decode($sr);
