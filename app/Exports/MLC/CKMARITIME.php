@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -253,8 +253,6 @@ class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(12);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
@@ -263,6 +261,7 @@ class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+                $event->sheet->getParent()->getActiveSheet()->setShowGridlines(false);
 
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
@@ -323,9 +322,11 @@ class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // VC
                 $h[7] = [
+                    'A1:N12'
                 ];
 
                 $h['wrap'] = [
+                    'A6:N12'
                 ];
 
                 // SHRINK TO FIT
@@ -369,6 +370,7 @@ class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'A6:N12', 'B35:M42'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -385,6 +387,7 @@ class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
+                    'B35:M42'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -422,6 +425,7 @@ class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // BBT
                 $cells[12] = array_merge([
+                    'A151:E151', 'J151:N151',
                 ]);
 
                 // LBT
@@ -439,13 +443,33 @@ class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 }
 
                 // FOR THE CHECK
-                // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(12);
+
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(14);
+                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(18);
+                $event->sheet->getDelegate()->getStyle('B136')->getFont()->setSize(10);
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(6.6);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                for($i = 6; $i <= 12; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(28);
+                }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
@@ -456,27 +480,15 @@ class CKMARITIME implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Letter Head');
-        $drawing->setDescription('Letter Head');
-        $drawing->setPath(public_path("images/letter_head.jpg"));
+        $drawing->setName('CKM STAMP');
+        $drawing->setPath(public_path("images/ck_maritime_stamp.jpg"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $drawing->setHeight(55);
+        $drawing->setWidth(200);
+        $drawing->setOffsetX(40);
+        $drawing->setOffsetY(3);
+        $drawing->setCoordinates('J151');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
-
-        return [$drawing, $drawing2];
+        return [$drawing];
     }
 }

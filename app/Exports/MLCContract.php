@@ -23,7 +23,9 @@ class MLCContract implements WithMultipleSheets
         $this->applicant->load('document_id');
         $this->applicant->vessel = Vessel::find($this->applicant->pro_app->vessel_id);
 
-        $this->applicant->position = Rank::find($this->applicant->pro_app->rank_id)->name;
+        $rank = Rank::find($this->applicant->pro_app->rank_id);
+        $this->applicant->position = $rank->name;
+        $this->applicant->rankType = $rank->type;
         $this->applicant->wage = Wage::where('rank_id', $this->applicant->pro_app->rank_id)
                                     ->where('vessel_id', $this->applicant->pro_app->vessel_id)
                                     ->first();
