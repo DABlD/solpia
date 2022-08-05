@@ -747,11 +747,10 @@
 
 			foreach($applicant->document_lc as $doc){
 				if(in_array($doc->type, $names)){
-					$docu = $docu;
+					$docu = $doc;
 					break;
 				}
 			}
-
 		@endphp
 
 		<tr>
