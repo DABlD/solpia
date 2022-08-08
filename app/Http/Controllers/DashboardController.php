@@ -15,6 +15,9 @@ class DashboardController extends Controller
     public function index(){
         DB::connection()->enableQueryLog();
 
+        if(auth()->user()->role == "Recruitment Officer"){
+            return redirect()->route('prospect.index');
+        }
         if($this->checkIfNotAllowed()){
             return redirect()->route('applications.index');
         }
