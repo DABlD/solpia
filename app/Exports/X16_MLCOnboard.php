@@ -47,7 +47,7 @@ class X16_MLCOnboard implements WithMultipleSheets
             $applicant->date_processed    = now()->toDateString();
             $applicant->effective_date    = $lucs[$applicant->id][0]["joining_date"];
             $applicant->employment_months = $lucs[$applicant->id][0]["months"];
-            $applicant->valid_till        = $applicant->effective_date->add($lucs[$applicant->id][0]["months"], "months");  
+            $applicant->valid_till        = $applicant->effective_date->add($lucs[$applicant->id][0]["months"], "months");
         }
 
         $this->principal = Principal::find($vessel->principal_id)->name;
