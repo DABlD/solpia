@@ -165,7 +165,9 @@
 		// SKIP FILLER SS
 		$diff = 0;
 		if($ss->vessel_name && $ss->rank){
-			$diff = $ss->sign_on->diffInDays($ss->sign_off);
+			if($ss->sign_on && $ss->sign_off){
+				$diff = $ss->sign_on->diffInDays($ss->sign_off);
+			}
 		}
 
 		echo "
