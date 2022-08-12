@@ -587,7 +587,16 @@
 			    }
 			}
 
-			if(isset($applicant->rank)){
+
+			if($applicant->document_flag->count()){
+				if($applicant->document_flag->first()->rank == 42){
+					$rname = "ABLE SEAFARER DECK";
+				}
+				elseif($applicant->document_flag->first()->rank == 43){
+					$rname = "ABLE SEAFARER ENGINE";
+				}
+			}
+			elseif(isset($applicant->rank)){
 				$rname = $applicant->rank->name;
 				if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
 					$rname = "WIPER";
