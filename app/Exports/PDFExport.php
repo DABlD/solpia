@@ -126,7 +126,6 @@ class PDFExport
 
     public function download(){
         $pdf = PDF::loadView('exports.forms.' . lcfirst($this->type), ['data' => $this->data]);
-        $pdf->setOptions(['enable_font_subsetting' => true]);
         $pdf->setPaper('a4', 'Portrait');
         return $pdf->download($this->fileName . '.pdf');
     }
