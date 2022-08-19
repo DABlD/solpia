@@ -488,7 +488,7 @@
                             let type = "DocumentChecklist";
                             let fleet = "{{ auth()->user()->fleet }}";
 
-                            @if(auth()->user()->role == "Admin" && auth()->user()->fleet == null)
+                            @if(auth()->user()->role == "Admin" || auth()->user()->fleet == null)
                                 swal({
                                     title: 'Select Fleet',
                                     input: 'select',
