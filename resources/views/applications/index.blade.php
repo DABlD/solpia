@@ -2580,7 +2580,7 @@
         function exportBiodata(application){
             let type;
 
-            if(application.data('status') == "Lined-Up"){
+            if(["Lined-Up", "On Board"].includes(application.data('status2'))){
                 window.location.href = 'applications/export/' + application.data('id');
             }
             else{
