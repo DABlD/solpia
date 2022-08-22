@@ -59,7 +59,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
         elseif($fleet == "FLEET B"){
             $this->data->manager = "ADULF KIT JUMAWAN";
             $this->data->officer = auth()->user()->fullname;
-            
+
             if($type == "hmm_con_kor"){
                 if($rank == "2/O" || $rank == "3/O"){
                     $this->rows    = 53;
@@ -209,7 +209,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 45;
                     $this->view    = "OS";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3AE"){
                     $this->rows    = 56;
                     $this->view    = "2AE_3AE";
                 }
