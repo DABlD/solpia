@@ -596,6 +596,29 @@
 				elseif($applicant->document_flag->first()->rank == 43){
 					$rname = "ABLE SEAFARER ENGINE";
 				}
+				else{
+					$rname = $applicant->rank->name;
+					if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
+						$rname = "WIPER";
+					}
+					elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
+						$rname = "ORDINARY SEAMAN";
+					}
+					elseif($applicant->rank->id == 24){
+						$rname = "SHIP'S COOK";
+					}
+					elseif($applicant->rank->id == 27 || $applicant->rank->id == 28){
+						$rname = "STEWARD";
+					}
+					elseif($applicant->rank->id == 3 || $applicant->rank->id == 4){
+						$rname = "OIC-NAVIGATIONAL WATCH";
+					}
+					elseif($applicant->rank->id == 7 || $applicant->rank->id == 8){
+						$rname = "OIC-ENGINEERING WATCH";
+					}
+
+					$rname = $rname == "MASTER" ? "MASTER MARINER" : $rname;
+				}
 			}
 			elseif(isset($applicant->rank)){
 				$rname = $applicant->rank->name;
