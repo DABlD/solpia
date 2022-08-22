@@ -385,6 +385,7 @@
             });
 
             $('[data-original-title="View Crew List"]').on('click', vessel => {
+                swal.showLoading();
                 getVesselCrew(vessel);
             });
 
@@ -1317,6 +1318,10 @@
                         createModal(result[2],!bul ? $(vessel.target).data('id') : vessel);
                     }
                     showTables(result[0], result[1], result[3]);
+
+                    // CLOSE LOADING
+                    swal.close();
+                    
                     $('#linedUp').on('show.bs.modal', e => {
 
                         // REMOVE ALL EVENTS

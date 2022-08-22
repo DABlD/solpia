@@ -991,39 +991,26 @@ class ApplicationsController extends Controller
     }
 
     public function getVesselCrew(Request $req, $id = null){
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+
         $linedUps = ProcessedApplicant::where('processed_applicants.vessel_id', $id ?? $req->id)
                         ->where('processed_applicants.status', 'Lined-Up')
-
                         ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
                         ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
-                        // ->join('document_ids as d', 'd.applicant_id', '=', 'processed_applicants.applicant_id')
-                        // ->join('sea_services as s', 's.applicant_id', '=', 'processed_applicants.applicant_id')
                         ->select('processed_applicants.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place')
                         ->get();
 
-        $temp = collect();
-        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
-
-        // SORT BY RANK
-        foreach($ranks as $abbr){
-            foreach($linedUps as $key => $linedUp){
-                if($linedUp->abbr == $abbr->abbr){
-                    $temp->push($linedUp);
-                    $linedUps->pull($key);
-                }
-            }
-        }
-
-        $linedUps = $temp;
+        // SORT
+        $linedUps = $linedUps->sortBy('rank_id');
+        $linedUps->load('applicant.document_med_cert');
+        $linedUps->load('applicant.document_id');
+        $linedUps->load('applicant.sea_service');
+        // dd($linedUps->toArray());
 
         foreach($linedUps as $linedUp){
-            $temp = DocumentId::where('applicant_id', $linedUp->applicant_id)->select('type', 'issue_date', 'expiry_date', 'number')->get();
-
-
-            $linedUp->covidVaccines = DocumentMedCert::where('applicant_id', $linedUp->applicant_id)
-                                                ->where('type', 'like', '%COVID%')
-                                                ->get();
+            $temp = $linedUp->applicant->document_id;
+            $linedUp->covidVaccines = $linedUp->applicant->document_med_cert->where('type', 'LIKE' ,'%COVID%');
 
             $linedUp->age = now()->parse($linedUp->birthday)->diff(now())->format('%y');
             $linedUp->status2 = "NEW-HIRE";
@@ -1036,13 +1023,16 @@ class ApplicationsController extends Controller
                 }
             }
             
-            $sea_services = SeaService::where('applicant_id', $linedUp->applicant_id)->get();
+            $sea_services = $linedUp->applicant->sea_service;
             foreach($sea_services as $service){
                 if(strpos(strtoupper($service->manning_agent), 'SOLPIA') !== false){
                     $linedUp->status2 = 'EX-CREW';
                 }
             }
         }
+
+        // END OF LINEDUPS
+        // START OF ONBOARDS
 
         $crews = LineUpContract::where('vessel_id', $id ?? $req->id)
                                 ->where('line_up_contracts.status','On Board')
@@ -1052,29 +1042,14 @@ class ApplicationsController extends Controller
                                 ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place')
                                 ->get();
 
-        $temp = collect();
-
-        // SORT BY RANK
-        foreach($ranks as $abbr){
-            foreach($crews as $key => $crew){
-
-                $crew->covidVaccines = DocumentMedCert::where('applicant_id', $crew->applicant_id)
-                                                    ->where('type', 'like', '%COVID%')
-                                                    ->get();
-                if($crew->abbr == $abbr->abbr){
-                    $temp->push($crew);
-                    $crews->pull($key);
-                }
-            }
-        }
-
-        $crews = $temp;
+        $crews = $crews->sortBy('rank_id');
+        $crews->load('applicant.document_med_cert');
+        $crews->load('applicant.document_id');
 
         $onBoards = array();
-        $onSigners = array();
-
         foreach($crews as $crew){
-            $temp = DocumentId::where('applicant_id', $crew->applicant_id)->select('type', 'issue_date', 'expiry_date', 'number')->get();
+            $temp = $crew->applicant->document_id;
+            $crew->covidVaccines = $crew->applicant->document_med_cert->where('type', 'LIKE' ,'%COVID%');
             $crew->age = now()->parse($crew->birthday)->diff(now())->format('%y');
 
             foreach($temp as $docu){
@@ -1089,6 +1064,14 @@ class ApplicationsController extends Controller
         }
 
         $vname = Vessel::find($id ?? $req->id)->name;
+
+        $temp = collect();
+        foreach($linedUps as $key => $linedUp){
+            $temp->add($linedUp);
+            $linedUps->pull($key);
+        }
+
+        $linedUps = $temp;
 
         if($id){
             return [$onBoards, $linedUps, $vname];

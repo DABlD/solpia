@@ -19,4 +19,8 @@ class LineUpContract extends Model
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at', 'joining_date', 'disembarkation_date'
     ];
+
+    public function applicant(){
+        return $this->belongsTo('App\Models\Applicant');
+    }
 }
