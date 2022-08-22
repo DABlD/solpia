@@ -221,7 +221,7 @@ Route::group([
 			->defaults('href', $name);
 			
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
-		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
 		Route::get($name . '/statusUpdate', ucfirst($name) . 'Controller@statusUpdate')->name($name . '.statusUpdate');
 
 		// WAGE ROUTES
@@ -267,6 +267,7 @@ Route::group([
 
 
 		Route::post('datatables/prospects', 'DatatablesController@prospects')->name('datatables.prospects');
+		Route::post('datatables/requirements', 'DatatablesController@requirements')->name('datatables.requirements');
 
 		// PRINCIPAL
 		$name = "principal";

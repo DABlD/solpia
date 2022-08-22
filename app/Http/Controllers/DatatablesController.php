@@ -755,4 +755,29 @@ class DatatablesController extends Controller
     		->rawColumns(['actions'])
     		->make(true);
 	}
+
+	public function requirements(Request $req){
+		$array = Requirement::where('fleet', 'like', $req->fleet)
+					->where('vessel_id', 'like', $req->vessel)
+					->where('rank', 'like', $req->rank)
+					->where('joining_date', 'like', $req->date)
+					->get();
+
+        foreach($array as $item){
+            $item->actions = $item->actions;
+        }
+
+        // IF HAS LOAD
+        if($array->count() && $req->load){
+            foreach($req->load as $table){
+                $array->load($table);
+            }
+        }
+
+		$array = $array->toArray();
+
+	    return Datatables::of($array)
+    		->rawColumns(['actions'])
+    		->make(true);
+	}
 }

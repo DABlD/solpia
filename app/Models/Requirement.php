@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\RequirementAttribute;
+
+use App\Models\{Vessel, Rank};
 
 class Requirement extends Model
 {
-	use SoftDeletes;
+	use SoftDeletes, RequirementAttribute;
 
 	protected $fillable = [
 		'vessel_id', 'rank','joining_date','joining_port',
@@ -17,4 +20,12 @@ class Requirement extends Model
     protected $dates = [
         'created_at', 'updated_at', 'joining_date', 'deleted_at'
     ];
+
+    public function vessel(){
+        return $this->hasOne(Vessel::class, 'id', 'vessel_id');
+    }
+
+    public function rank(){
+        return $this->hasOne(Rank::class, 'id', 'rank');
+    }
 }

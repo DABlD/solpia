@@ -2,7 +2,7 @@ let errorColor = "#f76c6b";
 let successColor = "#28a745";
 
 function toDate(timetamp){
-	return moment(timetamp).format('MMM. DD, YYYY');
+	return moment(timetamp).format('MMM DD, YYYY');
 }
 
 function toDateTime(timestamp){

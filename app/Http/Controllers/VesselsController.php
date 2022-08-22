@@ -65,6 +65,11 @@ class VesselsController extends Controller
             $vessels = $vessels->where($req->where[0], $req->where[1]);
         }
 
+        // IF HAS WHERE
+        if($req->where2){
+            $vessels = $vessels->where($req->where2[0], 'like', $req->where2[1]);
+        }
+
         $vessels = $vessels->get();
 
         // IF HAS GROUP

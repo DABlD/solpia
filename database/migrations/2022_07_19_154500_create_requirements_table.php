@@ -21,11 +21,11 @@ class CreateRequirementsTable extends Migration
             $table->string("joining_date")->nullable();
             $table->string("joining_port")->nullable();
             $table->boolean("usv");
-            $table->float("salary", 8, 2);
+            $table->float("salary", 8, 2)->nullable();
             $table->string("remarks")->nullable();
             $table->unsignedTinyInteger("max_age");
             $table->enum("status", ["AVAILABLE", "CANCELLED", "ON HOLD"])->default("AVAILABLE");
-            $table->string("fleet");
+            $table->string("fleet")->nullable();
 
             $table->timestamps();
             $table->softDeletes();

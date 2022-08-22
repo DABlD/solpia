@@ -30,6 +30,11 @@ class WageController extends Controller
             $vessels = $vessels->where($req->where[0], $req->where[1]);
         }
 
+        // IF HAS WHERE
+        if($req->where2){
+            $vessels = $vessels->where($req->where2[0], $req->where2[1]);
+        }
+
         $vessels->join('ranks as r', 'r.id', '=', 'wages.rank_id');
         $vessels = $vessels->get();
         foreach($vessels as $wage){
