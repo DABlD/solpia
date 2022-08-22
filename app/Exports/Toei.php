@@ -221,12 +221,13 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('BIODATA', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
 
                 $event->sheet->getParent()->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
@@ -737,7 +738,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     ('A' . ($raeajl - 2) . ':' . 'A' . ($raeajl - 1)), //A#:A# PIYC ROWS
                     ('A' . ($ratesms - 2) . ':' . 'A' . ($ratesms - 1)), //A#:A# PIYC ROWS
                     ('A' . ($raaow - 1)), //A#:A# PIYC ROWS
-                    'B15', 'B25'
+                    'B25'
                 ]);
 
                 // HC VC
@@ -877,14 +878,15 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 for($i = 1; $i < 130; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(13.7);
                 }
-                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(13.5);
+                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(13);
                 $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(13.5);
 
-                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(11.5);
-                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(11.5);
-                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(11.5);
-                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(11.5);
-                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(11.5);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(10);
+                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(10);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(10);
+                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(10);
+                $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(10);
+                $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(11);
 
                 $rash3 += 1;
                 $event->sheet->getDelegate()->getStyle("E1:E100")->getFont()->setSize(8.5);
@@ -910,8 +912,8 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
         $drawing->setDescription('Logo');
         $drawing->setPath(public_path($this->applicant->user->avatar));
         $drawing->setResizeProportional(false);
-        $drawing->setWidth(130);
-        $drawing->setHeight(135);
+        $drawing->setWidth(123);
+        $drawing->setHeight(118);
         $drawing->setOffsetX(2);
         $drawing->setOffsetY(1);
         $drawing->setCoordinates('A2');

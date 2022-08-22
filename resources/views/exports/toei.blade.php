@@ -143,7 +143,7 @@
 
 		<tr>
 			<td>Civil Status:</td>
-			<td colspan="2">{{ $applicant->civil_status }}</td>
+			<td colspan="2">{{ strtoupper($applicant->civil_status) }}</td>
 			<td>Weight(kg):</td>
 			<td>{{ $applicant->weight }}</td>
 			<td>Height(cm):</td>
@@ -255,7 +255,7 @@
 		@foreach($applicant->educational_background as $data)
 			{{-- @if($data->course != "") --}}
 				<tr>
-					<td colspan="2">{{ explode('-', $data->year)[0] . " - " . explode('-', $data->year)[1] }}</td>
+					<td colspan="2">{{ explode('-', $data->year)[1] }}</td>
 					<td colspan="4">{{ $data->school }}</td>
 					<td colspan="3">{{ $data->course }}</td>
 				</tr>
@@ -477,7 +477,7 @@
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
-			<td colspan="2">{{ $docu ? '-----' : 'NOT APPLICABLE' }}</td>
+			<td colspan="2">{{ $docu ? 'PANAMA' : 'NOT APPLICABLE' }}</td>
 		</tr>
 
 		@php 
@@ -492,12 +492,12 @@
 		<tr>
 			<td colspan="2">PANAMA SSO</td> 
 			{{-- <td colspan="2">{{ $applicant->rank->name }}</td> --}}
-			<td colspan="2">-----</td>
+			<td colspan="2">{{ $docu ? "SHIP SECURITY OFFICER" : "-----" }}</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
-			<td colspan="2">{{ $docu ? '-----' : 'NOT APPLICABLE' }}</td>
+			<td colspan="2">{{ $docu ? 'PANAMA' : 'NOT APPLICABLE' }}</td>
 		</tr>
 
 		@php 
@@ -559,7 +559,7 @@
 			<td colspan="2">-----</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td>{{ ($docu && strtoupper($docu->number) != "REVERTING") ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">U.S EMBASSY</td>
 		</tr>
 		
@@ -588,6 +588,7 @@
 			}
 
 
+			$rname = "";
 			if($applicant->document_flag->count()){
 				if($applicant->document_flag->first()->rank == 42){
 					$rname = "ABLE SEAFARER DECK";
@@ -1152,7 +1153,7 @@
 		@endphp
 
 		<tr>	
-			<td colspan="4">Chicken Pox</td>
+			<td colspan="4">CHICKEN POX</td>
 			<td>YES</td>
 			<td>YES</td>
 			<td>-----</td>
@@ -1236,9 +1237,9 @@
 				<td>
 					@if(isset($applicant->rank))
 						@if(str_contains($applicant->rank->category, 'OFFICER'))
-							Good
+							GOOD
 						@else
-							Acceptable
+							ACCEPTABLE
 						@endif
 					@endif
 				</td>
