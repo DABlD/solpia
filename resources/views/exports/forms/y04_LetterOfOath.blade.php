@@ -82,7 +82,7 @@
 	<tr>
 		<td colspan="2" style="color: #FFF; height: 40px;">---------------------------------------------------------------</td>
 		<td colspan="15">
-			In the event of a violation of these or any other company policies, Western Shipping Corporation/Nitta Kisen Kaisha Ltd reserve the right to take appropriate actions against the violator including but not limited to termination, legal actions to recover costs incurred by the vessel's interests, etc.
+			In the event of a violation of these or any other company policies, Toei Japan Ltd/Nitta Kisen Kaisha Ltd reserve the right to take appropriate actions against the violator including but not limited to termination, legal actions to recover costs incurred by the vessel's interests, etc.
 		</td>
 		<td colspan="2" style="color: #FFF;">---------------------------------------------------------------</td>
 	</tr>
@@ -128,7 +128,7 @@
 	<tr>
 		<td colspan="2" style="color: #FFF; height: 40px;">---------------------------------------------------------------</td>
 		<td colspan="15">
-			In the event of a violation of these or any other company policies, Western Shipping Corporation/Nitta Kisen Kaisha Ltd reserve the right to take appropriate actions against the violator including but not limited to termination, legal actions to recover costs incurred bu the vessels' interests, etc.
+			In the event of a violation of these or any other company policies, Toei Japan Ltd/Nitta Kisen Kaisha Ltd reserve the right to take appropriate actions against the violator including but not limited to termination, legal actions to recover costs incurred bu the vessels' interests, etc.
 		</td>
 		<td colspan="2" style="color: #FFF;">---------------------------------------------------------------</td>
 	</tr>
@@ -162,7 +162,7 @@
 	<tr>
 		<td colspan="2" style="color: #FFF; height: 40px;">---------------------------------------------------------------</td>
 		<td colspan="15">
-			To western Shipping Corporation / Nitta Kisen Kaisha Ltd.
+			To Toei Japan Ltd / Nitta Kisen Kaisha Ltd.
 		</td>
 		<td colspan="2" style="color: #FFF;">---------------------------------------------------------------</td>
 	</tr>

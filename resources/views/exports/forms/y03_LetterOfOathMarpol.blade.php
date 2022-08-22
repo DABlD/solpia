@@ -134,7 +134,7 @@
 
 	<tr>
 		<td colspan="19" style="text-decoration: underline;">
-			To Western Shipping Corporation / Nitta Kisen Kaisha LTD
+			To Toei Japan Ltd / Nitta Kisen Kaisha LTD
 		</td>
 	</tr>
 </table>
