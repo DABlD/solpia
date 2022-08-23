@@ -2070,7 +2070,8 @@
                     @if(auth()->user()->fleet == "FLEET A" || auth()->user()->role == "Admin")
                         'Y03_LetterOfOathMarpol':  'Letter Of Oath (MARPOL)',
                         'Y04_LetterOfOath':  'Letter Of Oath',
-                        'Y06_EMSDeclaration':  'EMS Declaration'
+                        'Y06_EMSDeclaration':  'EMS Declaration',
+                        'Y07_TOEIMLCQuestionnaire': "TOEI - MLC Questionnaire"
                     @endif
                 },
                 inputPlaceholder: '',

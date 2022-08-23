@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use PDF;
-use App\Models\{LineUpContract, ProcessedApplicant, DocumentId, Applicant, Vessel, Rank};
+use App\Models\{LineUpContract, ProcessedApplicant, DocumentId, Applicant, Vessel, Rank, Wage};
 
 class PDFExport
 {
@@ -131,6 +131,25 @@ class PDFExport
         $applicant->vessel = Vessel::find($applicant->pro_app->vessel_id)->name;
         $applicant->rank = Rank::find($applicant->pro_app->rank_id)->name;
 
+        return $applicant;
+    }
+
+    public function Y07_TOEIMLCQuestionnaire(){
+        $applicant = Applicant::find($this->data->data['id']);
+        $applicant->load('document_id');
+        $applicant->load('pro_app');
+
+        foreach(['document_id'] as $docuType){
+            foreach($applicant->$docuType as $key => $doc){
+                $name = $doc->type;
+                $applicant->$docuType->$name = $doc;
+                $applicant->$docuType->forget($key);
+            }
+        }
+
+        $applicant->wage = Wage::where('rank_id', $applicant->pro_app->rank_id)->where('vessel_id', $applicant->pro_app->vessel_id)->first();
+        $applicant->vessel = Vessel::find($applicant->pro_app->vessel_id)->name;
+        
         return $applicant;
     }
 
