@@ -54,7 +54,20 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
         $rank = $this->data->rank;
 
         if($fleet == "FLEET A"){
+            $this->data->manager = "PRECIAN MARIE CERVANTES";
+            $this->data->documentation = auth()->user()->fullname;
+            $this->data->officer = "CARL PALMEJAR";
 
+            if($type == "default"){
+                if($rank == "MSTR" || $rank == "C/O"){
+                    $this->rows    = 54;
+                    $this->view    = "MSTR_CO";
+                }
+                elseif($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 54;
+                    $this->view    = "2O_3O";
+                }
+            }
         }
         elseif($fleet == "FLEET B"){
             $this->data->manager = "ADULF KIT JUMAWAN";
@@ -737,6 +750,8 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: SMOP-CDFC-11 &C&IEFFECTIVE DATE: 01 SEPT 17 &R&IREVISION NO: 0.0');
+
                 $event->sheet->getDelegate()->setTitle($this->view, false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageSetup()->setScale(80);

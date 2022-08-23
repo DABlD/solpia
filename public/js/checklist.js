@@ -1,6 +1,8 @@
 function getChecklist(fleet){
 	if(fleet == "FLEET A"){
-
+		return `
+			<option value="default">Default</option>
+		`;
 	}
 	else if(fleet == "FLEET B"){
 		return `
