@@ -27,7 +27,7 @@ class x02_RFSC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
             if(!$vessel){
                 $vessel = Vessel::find($applicant->pro_app->vessel_id);
-                $principal = Principal::find($applicant->pro_app->vessel_id);
+                $principal = Principal::find($applicant->pro_app->principal_id);
             }
         }
 

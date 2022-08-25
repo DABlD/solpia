@@ -1,7 +1,6 @@
 @php
 	$bold = "font-weight: bold;";
 	$center = "text-align: center;";
-	// dd($data);
 @endphp
 
 <table>

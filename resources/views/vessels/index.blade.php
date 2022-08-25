@@ -2751,12 +2751,13 @@
                 if(result.value){
                     if(crews.length){
                         // if(type == null){
+                            name = type.replace('/', '') + " - Request for Shoe and Coverall";
                             type = 'X02_RFSC';
                         // }
-                        
-                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param({
                             data2: crews,
-                            // filename
+                            filename: name
                         });
                     }
                 }
