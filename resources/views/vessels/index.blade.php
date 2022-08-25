@@ -2750,9 +2750,10 @@
             }).then(result => {
                 if(result.value){
                     if(crews.length){
-                        if(type == null){
+                        // if(type == null){
                             type = 'X02_RFSC';
-                        }
+                        // }
+                        
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({
                             data2: crews,
                             // filename

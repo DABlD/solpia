@@ -58,7 +58,7 @@
 		<td style="color: #0000FF; text-decoration: underline;">
 			{{ $data->vessel->name }}
 		</td>
-		<td>ETD: {{ isset($data->applicants[0]) ? (isset($data->applicants[0]->pro_app->eld) ? $data->applicants[0]->pro_app->format('M j, Y') : '') : '' }}</td>
+		<td>ETD: {{ isset($data->applicants[0]) ? (isset($data->applicants[0]->pro_app->eld) ? now()->parse($data->applicants[0]->pro_app->eld)->format('M j, Y') : '') : '' }}</td>
 	</tr>
 
 	<tr>
@@ -119,7 +119,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="6" style="height: 80px;"></td>
+		<td colspan="6" style="height: 60px;"></td>
 	</tr>
 
 	{{-- 2nd copy~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`` --}}
@@ -177,7 +177,7 @@
 		<td style="color: #0000FF; text-decoration: underline;">
 			{{ $data->vessel->name }}
 		</td>
-		<td>ETD: {{ isset($data->applicants[0]) ? (isset($data->applicants[0]->pro_app->eld) ? $data->applicants[0]->pro_app->format('M j, Y') : '') : '' }}</td>
+		<td>ETD: {{ isset($data->applicants[0]) ? (isset($data->applicants[0]->pro_app->eld) ? now()->parse($data->applicants[0]->pro_app->eld)->format('M j, Y') : '') : '' }}</td>
 	</tr>
 
 	<tr>
