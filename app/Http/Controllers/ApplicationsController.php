@@ -642,7 +642,7 @@ class ApplicationsController extends Controller
         // FIX MINIMUM VESSELS
         $minVessels = 0;
 
-        if(in_array($type, ['kosco', 'imsco'])){
+        if(in_array($type, ['kosco', 'imsco', 'ckMaritime'])){
             $minVessels = 12;
         }
         else{
