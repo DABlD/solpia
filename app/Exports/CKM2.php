@@ -480,13 +480,13 @@ class CKM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing6->setCoordinates('D70');
 
         $drawing7 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing7->setName('unchecked');
-        $drawing7->setDescription('unchecked');
-        $drawing7->setPath(public_path('images/sir_kit_sig.png'));
+        $drawing7->setName('SIR DENNIS SIG');
+        $drawing7->setDescription('SIR DENNIS SIG');
+        $drawing7->setPath(public_path('images/sir_dennis_sig.jpg'));
         $drawing7->setResizeProportional(false);
         $drawing7->setHeight(70);
-        $drawing7->setWidth(165);
-        // $drawing7->setOffsetX(37);
+        $drawing7->setWidth(80);
+        $drawing7->setOffsetX(30);
         $drawing7->setOffsetY(-35);
         $drawing7->setRotation(10);
         $drawing7->setCoordinates('K52');
