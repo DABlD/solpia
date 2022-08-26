@@ -2527,7 +2527,7 @@
                             <h4 class="clabel">Med Cert Issue Date</h4>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" id="med_date" class="swal2-input" />
+                            <input type="text" id="med_date" class="swal2-input" placeholder="(Optional)"/>
                         </div>
                     </div>
 
@@ -2565,10 +2565,9 @@
                         setTimeout(() => {
                             let a = $('#date_processed').val();
                             let b = $('#effective_date').val();
-                            let c = $('#med_date').val();
                             let d = $('#employment_months').val();
 
-                            if(a == "" || b == "" || c == "" || d == ""){
+                            if(a == "" || b == "" || d == ""){
                                 swal.showValidationError('All fields is required');
                             }
                         resolve()}, 800);
