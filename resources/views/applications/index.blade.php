@@ -426,7 +426,7 @@
                     inputOptions: {
                         Biodata:                        'Biodata',
                         WalangLagay:                    'Walang Lagay',
-                        HistoryCheck:                   'History Check',
+                        X17_HistoryCheck:               'History Check',
                         SeaServiceCertificate:          'Certificate of Sea Service',
                         X01_BorrowDocuments:            'Borrow Documents',
                         X04_USVE:                       'US Visa Endorsement Form',
