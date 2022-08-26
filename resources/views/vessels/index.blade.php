@@ -2544,11 +2544,20 @@
                 cancelButtonColor: '#f76c6b',
                 width: '40%',
                 onOpen: () => {
-                    $('#date_processed, #effective_date, #med_date').flatpickr({
+                    $('#effective_date, #med_date').flatpickr({
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
-                    })
+                    });
+
+                    $('#date_processed').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                        defaultDate: moment().format('YYYY-MM-DD')
+                    });
+
+
                 },
                 preConfirm: () => {
                     swal.showLoading();
