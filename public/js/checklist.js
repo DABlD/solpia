@@ -6,13 +6,17 @@ function getChecklist(fleet){
 	}
 	else if(fleet == "FLEET B"){
 		return `
-			<option value="hmm_con_kor">HMM - CONTAINER - KOREAN FLAG</option>
-			<option value="hmm_con_mal">HMM - CONTAINER - MALTA FLAG</option>
-			<option value="hmm_con_mar">HMM - CONTAINER - MARSHALL FLAG</option>
-			<option value="hmm_con_pan">HMM - CONTAINER - PANAMA FLAG</option>
-			<option value="kos_bul_mar">KOSCO - BULK - MARSHALL</option>
-			<option value="kos_bul_lib">KOSCO - BULK - LIBERIA</option>
-			<option value="kos_cb_lib">KOSCO - CONTAINER & BULK - PANAMA</option>
+			<optgroup label="HMM"></optgroup>
+				<option value="hmm_con_kor">&nbsp;&nbsp;&nbsp;HMM - CONTAINER - KOREAN FLAG</option>
+				<option value="hmm_con_mal">&nbsp;&nbsp;&nbsp;HMM - CONTAINER - MALTA FLAG</option>
+				<option value="hmm_con_mar">&nbsp;&nbsp;&nbsp;HMM - CONTAINER - MARSHALL FLAG</option>
+				<option value="hmm_con_pan">&nbsp;&nbsp;&nbsp;HMM - CONTAINER - PANAMA FLAG</option>
+			<optgroup label="KOSCO"></optgroup>
+				<option value="kos_bul_mar">&nbsp;&nbsp;&nbsp;KOSCO - BULK - MARSHALL</option>
+				<option value="kos_bul_lib">&nbsp;&nbsp;&nbsp;KOSCO - BULK - LIBERIA</option>
+				<option value="kos_cb_lib">&nbsp;&nbsp;&nbsp;KOSCO - CONTAINER & BULK - PANAMA</option>
+			<optgroup label="POSSM"></optgroup>
+				<option value="possm">&nbsp;&nbsp;&nbsp;Default</option>
 		`;
 	}
 	else if(fleet == "FLEET C"){
