@@ -5,9 +5,22 @@
 	$fwd2 = "font-family: Wingdings 2; font-size: 12px;";
 	// dd($data);
 
+	$checkExpiry = function($doc){
+		$expiry = null;
+		
+		if($doc->expiry_date != ""){
+			$expiry = now()->parse($doc->expiry_date)->format('d-M-y');
+		}
+		elseif($doc->issue_date != "" && $doc->expiry_date == ""){
+			$expiry = "UNLIMITED";
+		}
+
+		return $expiry;
+	};
+
 	$gNum = null;
 	$marpols = [];
-	$cd = function($name, $type, $ref = null) use($data, &$gNum, &$marpols, &$fwd2){
+	$cd = function($name, $type, $ref = null) use($data, &$gNum, &$marpols, &$fwd2, $checkExpiry){
 		$box = "0";
 		$gNum = null;
 		$marpols = [];
@@ -15,36 +28,43 @@
 		if($type == "id" || $type == "lc" || $type == "med_cert"){
 			if($name == "NC"){
 				if(isset($data->document_lc->NCI)){
-					$gNum = $data->document_lc->NCI->no;
+					$gNum = $checkExpiry($data->document_lc->NCI);
 					$box = "R";
 				}
 				elseif(isset($data->document_lc->NCIII)){
-					$gNum = $data->document_lc->NCIII->no;
+					$gNum = $checkExpiry($data->document_lc->NCIII);
 					$box = "R";
 				}
 			}
 			elseif($name == "ATOCT"){
 				if(isset($data->document_lc->{"ADVANCE TRAINING FOR OIL TANKER - ATOT"})){
-					$gNum = $data->document_lc->{"ADVANCE TRAINING FOR OIL TANKER - ATOT"}->no;
+					$gNum = $checkExpiry($data->document_lc->{"ADVANCE TRAINING FOR OIL TANKER - ATOT"});
 					$box = "R";
 				}
 				elseif(isset($data->document_lc->{"ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT"})){
-					$gNum = $data->document_lc->{"ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT"}->no;
+					$gNum = $checkExpiry($data->document_lc->{"ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT"});
 					$box = "R";
 				}
 			}
 			elseif($name == "MARPOL"){
 				foreach(get_object_vars($data->document_lc) as $docu){
+					$marpols[0] = "";
+					$marpols[1] = "";
+					$marpols[2] = "";
+					$marpols[3] = "";
+					$marpols[4] = "";
+					$marpols[5] = "";
+
 					if(str_starts_with($docu->type, $name)){
 						$box = "R";
 						$marpol = explode('ANNEX', $docu->type)[1]; //TO GET ONLY THE PART AFTER ANNEX 1-6/I-VI
 
-						$marpols[0] = str_contains($marpol, '1') ? 'R' : '0';
-						$marpols[1] = str_contains($marpol, '2') ? 'R' : '0';
-						$marpols[2] = str_contains($marpol, '3') || str_contains($marpol, 'III') ? 'R' : '0';
-						$marpols[3] = str_contains($marpol, '4') || str_contains($marpol, 'IV') ? 'R' : '0';
-						$marpols[4] = str_contains($marpol, '5') || str_contains($marpol, 'V') ? 'R' : '0';
-						$marpols[5] = str_contains($marpol, '6') || str_contains($marpol, 'VI') ? 'R' : '0';
+						$marpols[0] = str_contains($marpol, '1') ? 'a' : '';
+						$marpols[1] = str_contains($marpol, '2') ? 'a' : '';
+						$marpols[2] = str_contains($marpol, '3') || str_contains($marpol, 'III') ? 'a' : '';
+						$marpols[3] = str_contains($marpol, '4') || str_contains($marpol, 'IV') ? 'a' : '';
+						$marpols[4] = str_contains($marpol, '5') || str_contains($marpol, 'V') ? 'a' : '';
+						$marpols[5] = str_contains($marpol, '6') || str_contains($marpol, 'VI') ? 'a' : '';
 					}
 				}
 			}
@@ -52,7 +72,7 @@
 				foreach(get_object_vars($data->document_lc) as $docu){
 					if(str_starts_with($docu->type, $name)){
 						$box = "R";
-						$gNum = $docu->no;
+						$gNum = $checkExpiry($docu);
 					}
 				}
 			}
@@ -60,7 +80,7 @@
 				foreach(get_object_vars($data->document_lc) as $docu){
 					if($docu->type == "ECDIS" || $docu->type == "ECDIS GENERIC"){
 						$box = "R";
-						$gNum = $docu->no;
+						$gNum = $checkExpiry($docu);
 					}
 				}
 			}
@@ -81,7 +101,7 @@
 				foreach(get_object_vars($data->document_lc) as $docu){
 					if(str_contains($docu->type, $name) || str_contains($docu->type, "HAZARDOUS")){
 						$box = "R";
-						$gNum = $docu->no;
+						$gNum = $checkExpiry($docu);
 					}
 				}
 			}
@@ -89,7 +109,7 @@
 				foreach(get_object_vars($data->document_lc) as $docu){
 					if($docu->type == $name || str_contains($docu->type, "SATELLITE")){
 						$box = "R";
-						$gNum = $docu->no;
+						$gNum = $checkExpiry($docu);
 					}
 				}
 			}
@@ -97,7 +117,15 @@
 				foreach(get_object_vars($data->document_lc) as $docu){
 					if($docu->type == "ERS WITH ERM" || $docu->type == "ERM WITH ERS"){
 						$box = "R";
-						$gNum = $docu->no;
+						$gNum = $checkExpiry($docu);
+					}
+				}
+			}
+			elseif($name == "BRM"){
+				foreach(get_object_vars($data->document_lc) as $docu){
+					if($docu->type == "BRM" || $docu->type == "BTM" || $docu->type == "BRTM"){
+						$box = "R";
+						$gNum = $checkExpiry($docu);
 					}
 				}
 			}
@@ -105,15 +133,57 @@
 				foreach(get_object_vars($data->document_lc) as $docu){
 					if(str_contains($docu->type, $name) || str_contains($docu->type, "DRUG ABUSE")){
 						$box = "R";
-						$gNum = $docu->no;
+						$gNum = $checkExpiry($docu);
 					}
 				}
 			}
-			elseif($name == "WELDING" || $name == "WATCH" || $name == "AUXILIARY"){
+			elseif($name == "SSO2"){
+				foreach(get_object_vars($data->document_lc) as $docu){
+					if(str_contains($docu->type, "SHIP SAFETY OFFICER")){
+						$box = "R";
+						$gNum = $checkExpiry($docu);
+					}
+				}
+			}
+			elseif($name == "SHIPS CATERING"){
+				foreach(get_object_vars($data->document_lc) as $docu){
+					if(str_contains($docu->type, "NCI")){
+						$box = "R";
+						$gNum = $checkExpiry($docu);
+					}
+				}
+			}
+			elseif($name == "MLC"){
+				$ctr = 0;
+				foreach(get_object_vars($data->document_lc) as $docu){
+					if(($docu->type == "MLC TRAINING F1" || $docu->type == "MLC TRAINING F3") && $docu->no != ""){
+						$ctr++;
+					}
+				}
+
+				// IF HAS TWO MATCH PRESUMABLY MLC F1 AND F3
+				if($ctr == 2){
+					$box = "R";
+				}
+			}
+			elseif($name == "OLC"){
+				$ctr = 0;
+				foreach(get_object_vars($data->document_lc) as $docu){
+					if(($docu->type == "OLC TRAINING F1" || $docu->type == "OLC TRAINING F2" || $docu->type == "OLC TRAINING F3") && $docu->no != ""){
+						$ctr++;
+					}
+				}
+
+				// IF HAS THREE MATCH PRESUMABLY MLC F1 AND F3
+				if($ctr == 3){
+					$box = "R";
+				}
+			}
+			elseif($name == "WELDING" || $name == "WATCH" || $name == "AUXILIARY" || $name == "ROPA" || $name == "ARPA" || $name == "SSBT" || $name == "SHIELDED METAL ARC WELDING"){
 				foreach(get_object_vars($data->document_lc) as $docu){
 					if(str_contains($docu->type, $name)){
 						$box = "R";
-						$gNum = $docu->no;
+						$gNum = $checkExpiry($docu);
 					}
 				}
 			}
@@ -154,7 +224,7 @@
 					}
 				}
 
-				$gNum = $data->{"document_$type"}->{$name}->{$type == "id" ? "number" : "no"};
+				$gNum = $checkExpiry($data->{"document_$type"}->{$name});
 			}
 		}
 		else{
@@ -163,14 +233,14 @@
 				{
 					if($flag->country == $ref && $flag->type == $name){
 						$box = "R";
-						$gNum = $flag->number;
+						$gNum = $checkExpiry($flag);
 					}
 				}
 				else{
 					$c = $flag->country;
 					if(($c != "Panama" || $c != "Marshall Island" && $c != "Liberia") && $flag->type == $name){
 						$box = "R";
-						$gNum = $flag->number;
+						$gNum = $checkExpiry($flag);
 					}
 				}
 			}
@@ -193,7 +263,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="19" style="{{ $center }} {{ $und }} height: 25px; font-size: 20px;">
+		<td colspan="19" style="{{ $center }} {{ $und }} height: 30px; font-size: 20px;">
 			CREW DOCUMENTS CHECKLIST
 		</td>
 	</tr>
@@ -480,7 +550,7 @@
 		{{ $cd("MARPOL", 'lc') }}
 		<td>MARPOL</td>
 		@foreach($marpols as $marpol)
-			<td style="{{ $fwd2 }}">{{ $marpol }}</td>
+			<td style='font-family: Marlett;'>{{ $marpol }}</td>
 		@endforeach
 		<td></td>
 	</tr>
@@ -598,5 +668,180 @@
 		<td></td>
 		{{ $cd("CONTROL ENGINEERING", 'lc') }}
 		<td colspan="8">HYDRAULICS / PNEUMATICS</td>
+	</tr>
+
+	<tr>
+		{{ $cd("ROP", 'lc') }}
+		<td colspan="5">ROP</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("MARINE ELECTRO TECH", 'lc') }}
+		<td colspan="8">MARINE ELECTRO TECH</td>
+	</tr>
+
+	<tr>
+		{{ $cd("ROPA", 'lc') }}
+		<td colspan="5">ROPA</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("ELECTRONIC EQUIPMENT", 'lc') }}
+		<td colspan="8">ELECTRONIC EQUIPMENT</td>
+	</tr>
+
+	<tr>
+		{{ $cd("ARPA", 'lc') }}
+		<td colspan="5">ARPA</td>
+		<td colspan="3"></td>
+		<td></td>
+		<td></td>
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		{{ $cd("SRROC", 'lc') }}
+		<td colspan="5">SRROC</td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}">OTHER CERTIFICATES:</td>
+	</tr>
+
+	<tr>
+		{{ $cd("BRM", 'lc') }}
+		<td colspan="5">BRTM / BTM / BRM</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("SHIELDED METAL ARC WELDING", 'lc') }}
+		<td colspan="8">SHIELDED METAL</td>
+	</tr>
+
+	<tr>
+		{{ $cd("SSBT", 'lc') }}
+		<td colspan="5">SSBT</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("LPG / LNG", 'lc') }}
+		<td colspan="8">LPG / LNG</td>
+	</tr>
+
+	<tr>
+		{{ $cd("ECDIS", 'lc') }}
+		<td colspan="5">ECDIS</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("MLC", 'lc') }}
+		<td colspan="8">MLC - FUNCTION 1 3</td>
+	</tr>
+
+	<tr>
+		{{ $cd("CARGO HANDLING", 'lc') }}
+		<td colspan="5">CARGO HANDLING</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("OLC", 'lc') }}
+		<td colspan="8">OLC - FUNCTION 1 2 3</td>
+	</tr>
+
+	<tr>
+		{{ $cd("COLLISION AVOIDANCE", 'lc') }}
+		<td colspan="5">COLLISION AVOIDANCE</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("SHIPS CATERING", 'lc') }}
+		<td colspan="8">SHIPS CATERING</td>
+	</tr>
+
+	<tr>
+		{{ $cd("SSO2", 'lc') }}
+		<td colspan="5">SHIP SAFETY OFFICERS</td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}">OTHERS:</td>
+	</tr>
+
+	<tr>
+		<td colspan="6" style="{{ $bold }}">GALLEY DEPARTMENT:</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("BLANK", 'lc') }}
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		{{ $cd("NCI", 'lc') }}
+		<td colspan="5">SHIP CATERING - NC 1</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("BLANK", 'lc') }}
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		{{ $cd("NCIII", 'lc') }}
+		<td colspan="5">SHIP CATERING - NC 3</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("BLANK", 'lc') }}
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		{{ $cd("KC", 'lc') }}
+		<td colspan="5">KOREAN COOKING</td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}">REMARKS </td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td colspan="5"></td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="6" style="{{ $bold }} font-style: italic;">RECEIVED AND CHECKED BY:</td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}"></td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td colspan="5"></td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="8" style="{{ $bold }} {{ $center }}">{{ auth()->user()->fullname }}</td>
+		<td></td>
+		<td colspan="10" style="{{ $bold }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="8" style="{{ $bold }} {{ $center }}">{{ auth()->user()->role }}</td>
+		<td></td>
+		<td colspan="10" style="{{ $bold }}"></td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td colspan="5"></td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $bold }} font-style: italic;">DATE:</td>
+		<td colspan="6" style="{{ $bold }} {{ $center }}">{{ now()->format("d-M-y") }}</td>
+		<td></td>
+		<td></td>
+		<td colspan="8" style="{{ $center }}">
+			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="8" style="{{ $center }}">CREW COPY</td>
+		<td></td>
+		<td></td>
+		<td colspan="8" style="{{ $bold }} {{ $center }}">Crew's Printed Name and Signature</td>
 	</tr>
 </table>

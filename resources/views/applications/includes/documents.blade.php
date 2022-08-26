@@ -172,9 +172,6 @@
 					<option value="COC">&nbsp;&nbsp;&nbsp;&nbsp;COC</option>
 					<option value="COE">&nbsp;&nbsp;&nbsp;&nbsp;COE</option>
 					<option value="GMDSS/GOC">&nbsp;&nbsp;&nbsp;&nbsp;GMDSS/GOC</option>
-					<option value="NCI">&nbsp;&nbsp;&nbsp;&nbsp;NCI</option>
-					<option value="NCII">&nbsp;&nbsp;&nbsp;&nbsp;NCII</option>
-					<option value="NCIII">&nbsp;&nbsp;&nbsp;&nbsp;NCIII</option>
 				<optgroup label="COP"></optgroup>
 
 					<option value="BASIC TRAINING - BT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING - BT</option>
@@ -185,6 +182,12 @@
 					<option value="MEDICAL CARE - MECA">&nbsp;&nbsp;&nbsp;&nbsp;MEDICAL CARE - MECA</option>
 					<option value="SHIP SECURITY OFFICER - SSO">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SECURITY OFFICER - SSO</option>
 					<option value="SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD</option>
+
+				<optgroup label="GALLEY"></optgroup>
+					<option value="NCI">&nbsp;&nbsp;&nbsp;&nbsp;NCI</option>
+					<option value="NCII">&nbsp;&nbsp;&nbsp;&nbsp;NCII</option>
+					<option value="NCIII">&nbsp;&nbsp;&nbsp;&nbsp;NCIII</option>
+					<option value="KOREAN COOKING">&nbsp;&nbsp;&nbsp;&nbsp;KOREAN COOKING/CUISINE</option>
 
 				<optgroup label="OTHER CERTIFICATES"></optgroup>
 					<option value="ARPA TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;ARPA TRAINING COURSE</option>
@@ -244,6 +247,7 @@
 					<option value="STABILITY AND TRIM">&nbsp;&nbsp;&nbsp;&nbsp;STABILITY AND TRIM</option>
 					<option value="MARINE ELECTRIC WITH REEFER">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRIC WITH REEFER</option>
 					<option value="WELDING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;WELDING COURSE</option>
+					<option value="SHIELDED METAL ARC WELDING">&nbsp;&nbsp;&nbsp;&nbsp;SHIELDED METAL ARC WELDING</option>
 					<option value="KML">&nbsp;&nbsp;&nbsp;&nbsp;KOREAN MARITIME LAW - KML</option>
 					<option value="CATERING TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;CATERING TRAINING</option>
 					<option value="HIGH VOLTAGE TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;HIGH VOLTAGE TRAINING</option>

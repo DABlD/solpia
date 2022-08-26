@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $data->load('document_id');
@@ -263,8 +263,12 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawin
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LSMOP-DC-04 &RREV(03) 16.08.17');
+
+                $event->sheet->getDelegate()->getPageSetup()->setFitToPage(false);
+                $event->sheet->getDelegate()->getPageSetup()->setScale(72);
+
                 $event->sheet->getDelegate()->setTitle('Document Checklist', false);
-                $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
@@ -272,7 +276,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawin
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Calibri');
@@ -333,6 +337,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawin
 
                 // HC VC
                 $h[4] = [
+                    'M30:R31'
                 ];
 
                 // HL
@@ -352,6 +357,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawin
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'F33', 'K63'
                 ];
 
                 foreach($h as $key => $value) {
@@ -391,6 +397,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawin
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'M30:R30'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -444,6 +451,41 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawin
 
                 // BBT
                 $cells[12] = array_merge([
+                    'C3:I3', 'M3:S3',
+                    'C4:I4',
+                    'G7:I7', 'P7:S7',
+                    'G8:I8', 'P8:S8',
+                    'G9:I9', 'P9:S9',
+                    'G10:I10', 'P10:S10',
+                    'G11:I11', 'P11:S11',
+                    'G12:I12', 'P12:S12',
+                    'G13:I13', 'P13:S13',
+                    'G14:I14', 'P14:S14',
+                    'G15:I15', 'P15:S15',
+                    'G16:I16', 'P16:S16',
+                    'G19:I19',
+                    'G20:I20',
+                    'G22:I22',
+                    'G23:I23',
+                    'G24:I24',
+                    'G25:I25',
+                    'G26:I26',
+                    'G31:I31',
+                    'G32:I32',
+                    'G33:I33',
+                    'G34:I34',
+                    'A60:H60',
+                    'C63:H63',
+                    'K63:R63',
+                    'L53:S53',
+                    'L54:S54',
+                    'L55:S55',
+                    'J56:S56',
+                    'J57:S57',
+                    'J58:S58',
+                    'J59:S59',
+                    'J60:S60',
+                    'J61:S61',
                 ]);
 
                 // LBT
@@ -464,10 +506,30 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawin
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('Q')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('R')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(15);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                for($i = 3; $i <= 65; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(15);
+                }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
@@ -482,23 +544,23 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents//, WithDrawin
         $drawing->setDescription('Letter Head');
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
+        $drawing->setHeight(60);
+        $drawing->setWidth(770);
         $drawing->setOffsetX(4);
         $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $drawing->setCoordinates('A1');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
+        // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        // $drawing2->setName('Avatar');
+        // $drawing2->setDescription('Avatar');
+        // $drawing2->setPath(public_path($this->data->user->avatar));
+        // $drawing2->setResizeProportional(false);
+        // $drawing2->setHeight(230);
+        // $drawing2->setWidth(230);
+        // $drawing2->setOffsetX(5);
+        // $drawing2->setOffsetY(2);
+        // $drawing2->setCoordinates('C3');
 
-        return [$drawing, $drawing2];
+        return [$drawing];
     }
 }
