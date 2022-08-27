@@ -2533,6 +2533,15 @@
 
                     <div class="row">
                         <div class="col-md-5">
+                            <h4 class="clabel">Port</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="port" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
                             <h4 class="clabel">Months of employment</h4>
                         </div>
                         <div class="col-md-7">
@@ -2580,6 +2589,7 @@
                     data.valid_till         = moment(data.effective_date).add(9, 'months').subtract(1, 'day').format('YYYY-MM-DD');
                     data.med_date           = $('#med_date').val();
                     data.employment_months  = $('#employment_months').val();
+                    data.port               = $('#port').val();
 
                     @if(auth()->user()->role == "Admin" && auth()->user()->fleet == null)
                         swal({
