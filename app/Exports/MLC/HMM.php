@@ -12,6 +12,42 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
+        $array1 = [
+            'M/V HMM MIR', 'M/V HMM ALGECIRAS', 'M/V HYUNDAI BRAVE', 'M/V HMM SOUTHAMPTON', 'M/V HMM HAMBURG', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HYUNDAI COLOMBO', 'M/V HMM RAON', 'M/V HMM COPENHAGEN', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM GDANSK', 'M/V HMM HANBADA', 'M/V HMM OSLO', 'M/V HYUNDAI FORCE'
+        ];
+
+        $array2 = [
+            'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN'
+        ];
+
+        $array3 = [
+            'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE'
+        ];
+
+        if(in_array($applicant->vessel->name, $array1)){
+            $applicant->shipowner = "HMM Company Limited";
+            $applicant->sAddress = "1-7 YEONGJI-DONG, JONGNO-GU, SEOUL, KOREA";
+            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+            $applicant->cAddress = "BUSAN POST OFFICE BUILDING, 5TH FLOOR, JUNGANG-DONG 3GA, JUNG-GU, BUSAN, KOREA";
+        }
+        elseif(in_array($applicant->vessel->name, $array2)){
+            $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
+            $applicant->sAddress = '63, Jungangdaero, Jung-Gu, Busan, 600-711, Korea';
+        }
+        elseif(in_array($applicant->vessel->name, $array3)){
+            $applicant->shipowner = "HMM Company Limited";
+            $applicant->sAddress = '108, Yeoui-daero, Yeongdeungpo-gu, Seoul, Republic of Korea';
+            $applicant->crewManager = 'HMM Ocean Service Co., Ltd.';
+            $applicant->cAddress = '63, Jungangdaero, Jung-Gu, Busan, 600-711, Korea';
+        }
+        else{
+            // DEFAULT
+            $applicant->shipowner = "HMM Company Limited";
+            $applicant->sAddress = "1-7 YEONGJI-DONG, JONGNO-GU, SEOUL, KOREA";
+            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+            $applicant->cAddress = "BUSAN POST OFFICE BUILDING, 5TH FLOOR, JUNGANG-DONG 3GA, JUNG-GU, BUSAN, KOREA";
+        }
+
         $this->applicant    = $applicant;
         $this->title        = $title;
     }

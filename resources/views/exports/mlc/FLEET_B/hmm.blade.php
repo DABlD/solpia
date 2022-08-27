@@ -61,23 +61,23 @@
 	<tr>
 		<td rowspan="2" style="{{ $center }}">Shipowner</td>
 		<td>Company</td>
-		<td colspan="7">HMM Company Limited</td>
+		<td colspan="7">{{ $data->shipowner }}</td>
 	</tr>
 
 	<tr>
 		<td>Address</td>
-		<td>1-7 YEONGJI-DONG, JONGNO-GU, SEOUL, KOREA</td>
+		<td colspan="7">{{ $data->sAddress }}</td>
 	</tr>
 
 	<tr>
 		<td rowspan="2" style="{{ $center }}">Crew Manager</td>
 		<td>Company</td>
-		<td colspan="6">HMM Ocean Service Co., Ltd.</td>
+		<td colspan="7">{{ $data->crewManager ?? "---" }}</td>
 	</tr>
 
 	<tr>
 		<td>Address</td>
-		<td colspan="7">BUSAN POST OFFICE BUILDING, 5TH FLOOR, JUNGANG-DONG 3GA, JUNG-GU, BUSAN, KOREA</td>
+		<td colspan="7">{{ $data->cAddress ?? "---" }}</td>
 	</tr>
 
 	<tr>
