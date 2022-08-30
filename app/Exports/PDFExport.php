@@ -148,7 +148,7 @@ class PDFExport
         }
 
         $applicant->wage = Wage::where('rank_id', $applicant->pro_app->rank_id)->where('vessel_id', $applicant->pro_app->vessel_id)->first();
-        $applicant->vessel = Vessel::find($applicant->pro_app->vessel_id)->name;
+        $applicant->vessel = Vessel::find($applicant->pro_app->vessel_id);
         
         return $applicant;
     }

@@ -66,7 +66,7 @@
 	<tr><td style="height: 25px;"></td></tr>
 
 	<tr>
-		<td colspan="10"><span>----</span>1. Name of assigned vessel & its flag:</td>
+		<td colspan="10"><span>----</span>1. Name of assigned vessel & its flag: M/V "{{ $data->vessel->name }}" / {{ $data->vessel->flag }}</td>
 	</tr>
 
 	<tr>
@@ -300,7 +300,7 @@
 		</td>
 		<td colspan="5">
 			<span>------</span>
-			M/V "{{ $data->vessel }}"
+			M/V "{{ $data->vessel->name }}"
 		</td>
 	</tr>
 
