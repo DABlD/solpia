@@ -162,6 +162,9 @@
 		$rank = $data->ranks[$ss->rank];
 		$on = $checkDate2($ss->sign_on, 'I');
 		$off = $checkDate2($ss->sign_off, 'I');
+		$manning = str_replace('&', '&#38;', $ss->manning_agent);
+		$crew = str_replace('&', '&#38;', $ss->crew_nationality);
+
 		// SKIP FILLER SS
 		$diff = 0;
 		if($ss->vessel_name && $ss->rank){
@@ -179,7 +182,7 @@
 			<td>$on</td>
 			<td>$off</td>
 			<td>$diff D</td>
-			<td colspan='2'>$ss->remarks</td>
+			<td colspan='2' style='font-size: 6px;'>$ss->remarks / AGENCY: $ss->manning / COMBINED CREW: $crew</td>
 		";
 	};
 
