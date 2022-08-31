@@ -37,8 +37,12 @@ class PDFExport
                 ['type', '=', "SEAMAN'S BOOK"],
             ];
 
-            array_push($docs, DocumentId::where($w)->first()->file);
-            array_push($docs, DocumentId::where($w2)->first()->file);
+            $temp = DocumentId::where($w)->first();
+            $temp2 = DocumentId::where($w2)->first();
+            
+            $temp ? array_push($docs, $temp->file) : '';
+            $temp2 ? array_push($docs, $temp2->file) : '';
+
             $applicant->docs = $docs;
         }
 
@@ -66,8 +70,12 @@ class PDFExport
                 ['type', '=', "SEAMAN'S BOOK"],
             ];
 
-            array_push($docs, DocumentId::where($w)->first()->file);
-            array_push($docs, DocumentId::where($w2)->first()->file);
+            $temp = DocumentId::where($w)->first();
+            $temp2 = DocumentId::where($w2)->first();
+
+            $temp ? array_push($docs, $temp->file) : '';
+            $temp2 ? array_push($docs, $temp2->file) : '';
+
             $applicant->docs = $docs;
         }
 
