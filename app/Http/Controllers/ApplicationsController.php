@@ -1083,12 +1083,9 @@ class ApplicationsController extends Controller
     }
 
     public function updateStatus($id, $status, $vessel_id = null, Request $req){
-        $pas = ['status' => $status];
-        $lucs = ['status' => $status];
-        $as = ['status' => $status];
-
         $temp = ProcessedApplicant::where('applicant_id', $id)->first();
         $temp->status = $status;
+
         if($req->rank){
             $temp->rank_id = $req->rank;
         }
@@ -1108,13 +1105,8 @@ class ApplicationsController extends Controller
         $lin_con = LineUpContract::where('applicant_id', $id)->orderBy('id', 'desc')->first();
 
         // IF DISEMBARKATION
-        if(in_array($status, ['VACATION', 'OWN WILL', 'DISMISSAL' ,'MEDICAL REPAT'])){
-            $pas['principal_id'] = null;
-            $pas['vessel_id'] = null;
-            $pas['rank_id'] = null;
-
-            $lucs['status'] = 'Finished';
-
+        // if(in_array($status, ['VACATION', 'OWN WILL', 'DISMISSAL' ,'MEDICAL REPAT', 'VESSEL SOLD'])){
+        if($status != "On Board"){
             $vessel     = Vessel::find($vessel_id);
             $pro_app    = ProcessedApplicant::where('applicant_id', $id)->first();
 
@@ -1131,22 +1123,28 @@ class ApplicationsController extends Controller
                 'trade'             => $vessel->trade,
                 'manning_agent'     => $vessel->manning_agent,
                 'principal'         => Principal::find($vessel->principal_id)->name,
+                'imo'               => $vessel->imo,
                 // 'crew_nationality'  => $
                 'sign_on'           => $lin_con->joining_date,
-                'sign_off'          => now()->parse($lin_con->joining_date)->addMonths($lin_con->months),
-                'total_months'      => $lin_con->months,
+                'sign_off'          => $req->disembarkation_date ? now()->parse($req->disembarkation_date) : now()->parse($lin_con->joining_date)->addMonths($lin_con->months),
+                'total_months'      => $req->disembarkation_date ? now()->parse($lin_con->joining_date)->diffInMonths(now()->parse($req->disembarkation_date)) : $lin_con->months,
                 'remarks'           => $status
             ]);
 
             $temp->eld = null;
             $temp->mob = null;
+            $temp->status = "Vacation";
+            $temp->save();
+            Applicant::where('id', $id)->update(['status' => "Vacation"]);
         }
 
         // LineUpContract::where('applicant_id', $id)->where('status', 'On Board')->update($lucs);
+        $lin_con->disembarkation_port = $req->disembarkation_port ?? null;
+        $lin_con->disembarkation_date = $req->disembarkation_date ?? null;
+        $lin_con->months = $req->disembarkation_date ? now()->parse($lin_con->joining_date)->diffInMonths(now()->parse($req->disembarkation_date)) : $lin_con->months;
         $lin_con->status = $status;
         $lin_con->save();
 
-        Applicant::where('id', $id)->update($as);
 
         echo $vessel_id ?? '';
     }

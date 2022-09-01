@@ -1807,10 +1807,11 @@
                         <div class="col-md-7">
                             <select id="remark" class="swal2-input">
                                 <option></option>
-                                <option value="Vacation">VACATION</option>
+                                <option value="Vacation">FINISHED CONTRACT</option>
                                 <option value="DISMISSAL">DISMISSAL</option>
                                 <option value="OWN WILL">OWN WILL</option>
                                 <option value="MEDICAL REPAT">MEDICAL REPAT</option>
+                                <option value="VESSEL SOLD">VESSEL SOLD</option>
                             </select>
                         </div>
                     </div>
@@ -1826,7 +1827,7 @@
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
-                        defaultDate: moment(joining_date).add("months", months).subtract("day", 1).format("Y-m-d")
+                        defaultDate: moment(joining_date).add("months", months).subtract("day", 1).format("YYYY-MM-DD")
                     });
 
                     $('#remark').on('select2:open', () => {
@@ -1850,24 +1851,16 @@
                 },
             }).then(result => {
                 if(result.value){
-
-                    // SAVE DISEMBARKATION DETAILS
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('applications.updateLineUpContract') }}",
-                        data: {
-                            id: id,
-                            disembarkation_port: $('#port').val(),
-                            disembarkation_date: $('#date').val(),
-                            type: 'Disembark',
-                            remark: $('#remark').val()
-                        }
-                    });
-
                     // UPDATE STATUS
                     $.ajax({
                         type: 'POST',
                         url: `{{ route('applications.updateStatus') }}/${id}/${$('#remark').val()}/${vessel_id}`,
+                        data: {
+                            id: id,
+                            disembarkation_port: $('#port').val(),
+                            disembarkation_date: $('#date').val(),
+                            remark: $('#remark').val()
+                        },
                         success: result => {
                             swal({
                                 type: 'success',
@@ -2658,8 +2651,9 @@
                             </div>
 
                             <div class="modal-footer" style="background-color: transparent;">
-                                <button type="button" class="btn btn-primary" onClick="omc(${id})">On Board Multiple Crew</button>
                                 <button type="button" class="btn btn-success" onClick="batchExport(${id}, '${name}')">Batch Export</button>
+                                <button type="button" class="btn btn-primary" onClick="omc(${id})">On Board Multiple Crew</button>
+                                <button type="button" class="btn btn-warning" onClick="dmc(${id})">Disembark Multiple Crew</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -2940,6 +2934,175 @@
                             }
                         });
                     });
+                }
+            })
+        }
+
+        function dmc(vid){
+            let crews = [];
+
+            let temp = $('.OBC');
+            let crewString = "";
+
+            temp.each((index, value) => {
+                let temp2 = $(value);
+
+                crewString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${temp2[0].innerText}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let config = {
+                confirmButtonText: 'Next',
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+            }
+
+            swal.queue([
+                {
+                    ...config,
+                    title: 'Select Crew',
+                    html: '<br><br>' + crewString,
+                    width: '450px',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+                        $('#swal2-content .col-md-10').css('text-align', 'left');
+                        $('#swal2-content .col-md-10 label').css({
+                            "font-size": '20px',
+                            "text-align": 'left'
+                        });
+                        $('#swal2-content input[type=checkbox]').css({
+                            'zoom': '1.7',
+                            'margin': '1px 0 0'
+                        });
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let temp3 = $(".crew-checklist:checked");
+                                
+                                temp3.each((index, value) => {
+                                    crews.push($(value).data('id'));
+                                });
+                            resolve()}, 500);
+                        });
+                    },
+                },
+                {
+                    ...config,
+                    title: 'Fill Details',
+                    html: `
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Disembarkation Port</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="port" class="swal2-input" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel">Disembarkation Date</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="date" class="swal2-input" placeholder="Select Date"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="clabel2">Remarks</h4>
+                            </div>
+                            <div class="col-md-7">
+                                <select id="remark" class="swal2-input">
+                                    <option></option>
+                                    <option value="Vacation">FINISHED CONTRACT</option>
+                                    <option value="DISMISSAL">DISMISSAL</option>
+                                    <option value="OWN WILL">OWN WILL</option>
+                                    <option value="MEDICAL REPAT">MEDICAL REPAT</option>
+                                    <option value="VESSEL SOLD">VESSEL SOLD</option>
+                                </select>
+                            </div>
+                        </div>
+                    `,
+                    width: '450px',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+
+                        $('#date').flatpickr({
+                            altInput: true,
+                            altFormat: 'F j, Y',
+                            dateFormat: 'Y-m-d',
+                        })
+                    },
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let b = $('#date').val();
+                                let c = $('#remark').val();
+
+                                if(b == "" && c == ""){
+                                    swal.showValidationError('Date and Remarks is required');
+                                }
+                            resolve()}, 500);
+                        });
+                    }
+                },
+            ]).then(result => {
+                if(result.value){
+                    let port = $('#port').val();
+                    let date = $('#date').val();
+                    let remark = $('#remark').val();
+                    let ctr = 0;
+
+                    crews.forEach(id => {
+                        $.ajax({
+                            type: 'POST',
+                            url: `{{ route('applications.updateStatus') }}/${id}/${$('#remark').val()}/${vid}`,
+                            data: {
+                                id: id,
+                                disembarkation_port: port,
+                                disembarkation_date: date,
+                                remark: $('#remark').val()
+                            },
+                            success: vessel => {
+                                ctr++;
+
+                                if(ctr == crews.length){
+                                    swal({
+                                        type: 'success',
+                                        title: 'Successfully Disembarked ' + crews.length + ' Crew',
+                                        showConfirmButton: false,
+                                        timer: 800
+                                    }).then(() => {
+                                        console.log(vessel);
+                                        getVesselCrew(vessel, true);
+                                        $('[href=".onBoard"]').click();
+                                    });
+                                }
+                            }
+                        });
+                    });
+
                 }
             })
         }
