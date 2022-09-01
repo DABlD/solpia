@@ -243,18 +243,21 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('KOSCO MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&R&P/&N');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LF-SPM-0205 / 2018. 03. 01 Established &CKOSCO &RRev. 1 / 2021.02.01');
+
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.3);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Calibri');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(8);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
@@ -296,6 +299,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
+                    'A15'
                 ];
 
                 // HL B
@@ -310,6 +314,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
+                    'C9:C14'
                 ];
 
                 // HL
@@ -322,7 +327,9 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:H27', 'A31:H32'
+                    'A1:H14',
+                    'A16:H27',
+                    'A31:H32'
                 ];
 
                 $h['wrap'] = [
@@ -443,23 +450,23 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FOR THE CHECK
                 $event->sheet->getDelegate()->getStyle('A3:H32')->getFont()->setName('Calibri');
-                $event->sheet->getDelegate()->getStyle('A3:H32')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A3:H32')->getFont()->setSize(10);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(14.5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(15.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(15.5);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15.5);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(15.5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(15.5);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(15.5);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(15.5);
 
                 // ROW RESIZE
                 $arr = [1, 15, 21, 22, 24, 25, 26, 27, 28, 29];
                 for($i = 1; $i < 33; $i++){
                     if(!in_array($i, $arr)){
-                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(32);
                     }
                 }
                 
@@ -479,7 +486,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setHeight(80);
         $drawing->setWidth(280);
         $drawing->setOffsetX(3);
-        $drawing->setOffsetY(45);
+        $drawing->setOffsetY(50);
         $drawing->setCoordinates('A29');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -490,7 +497,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setHeight(120);
         $drawing2->setWidth(135);
         $drawing2->setOffsetX(40);
-        $drawing2->setOffsetY(-10);
+        $drawing2->setOffsetY(30);
         $drawing2->setCoordinates('C29');
 
         return [$drawing, $drawing2];

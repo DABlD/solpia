@@ -3,7 +3,6 @@
 	$center = "text-align: center;";
 	$blue = "color: #0000FF;";
 	$bc = "$bold $center";
-	// dd($data);
 
 	// $wage = function($label, $wage){
 	// 	$blue = "";
@@ -24,7 +23,7 @@
 
 <table>
 	<tr>
-		<td colspan="8" style="height: 50px; {{ $bc }}">
+		<td colspan="8" style="height: 40px; font-size: 16px; {{ $bc }}">
 			SEAFARER'S EMPLOYMENT AGREEMENT
 		</td>
 	</tr>
@@ -120,7 +119,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="8" style="height: 120px;">
+		<td colspan="8" style="height: 140px;">
 			1. The probationary period shall only apply during the first term of employment and shall be 10 weeks. During this period both the seafarer and/or the Company shall be entitled to terminate the employment prior to the expiry of the contract during this period.
 			<br style='mso-data-placement:same-cell;' />
 			2. The periods of employment shall be from the date of departure of his residence to the date of arrival in country of his residence after terminate the Seafarer's employment agreement, unless terminated for just cause or causes enumerated in this agreement.
@@ -203,7 +202,7 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $bc }} height: 140px;">Hours of Work and Hours of Rest</td>
+		<td style="{{ $bc }} height: 160px;">Hours of Work and Hours of Rest</td>
 		<td colspan="7">
 			[Hours of Work]
 			<br style='mso-data-placement:same-cell;' />
@@ -224,7 +223,7 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $bc }} height: 145px;">Seafarer's Entitlement to Repatriation</td>
+		<td style="{{ $bc }} height: 160px;">Seafarer's Entitlement to Repatriation</td>
 		<td colspan="7">
 			1. Where the seafarer leaves at the port which is not a place of his residence nor a place where he concluded the seafarer's employment agreement, a shipowner shall repatriate him to a place of his residence or a place where he concluded the seafarer's employment agreements without delay at the expenses and on the responsibility of the shipowner.
 			<br style='mso-data-placement:same-cell;' />
@@ -238,7 +237,7 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $bc }} height: 110px;">Any facts not defined in this agreement</td>
+		<td style="{{ $bc }} height: 130px;">Any facts not defined in this agreement</td>
 		<td colspan="7">
 			1. Any facts which are not defined in this agreement, these are complied with the law of flag state, crew's national law, and a collective bargaining agreement. The parties to this agreement hereby stipulate that the terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic of the Marshall Islands. Any dispute as to the terms and conditions of this agreement shall be resolved in accordance with the Maritime Law and Regulatios of the Republic of the Marshall Island.
 			<br style='mso-data-placement:same-cell;' />
@@ -254,9 +253,9 @@
 	</tr>
 
 	<tr>
-		<td colspan="4" style="height: 90px;"></td>
-		<td style="height: 90px;"></td>
-		<td colspan="3" style="height: 90px;"></td>
+		<td colspan="4" style="height: 120px;"></td>
+		<td style="height: 120px;"></td>
+		<td colspan="3" style="height: 120px;"></td>
 	</tr>
 
 	<tr>
@@ -266,13 +265,13 @@
 	</tr>
 
 	<tr>
-		<td colspan="3" rowspan="2">The place where and date when the seafarers' employment agreement is entered into</td>
+		<td colspan="2" rowspan="2">The place where and date when the seafarers' employment agreement is entered into</td>
 		<td colspan="2" style="{{ $center }}">Place</td>
-		<td colspan="3" style="{{ $center }}">MANILA, PHILIPPINES</td>
+		<td colspan="4" style="{{ $center }}">MANILA, PHILIPPINES</td>
 	</tr>
 
 	<tr>
 		<td colspan="2" style="{{ $center }}">Date</td>
-		<td colspan="3" style="{{ $center }}">{{ now()->parse($data->date_processed)->format('d-M-y') }}</td>
+		<td colspan="4" style="{{ $center }}">{{ now()->parse($data->date_processed)->format('d-M-y') }}</td>
 	</tr>
 </table>
