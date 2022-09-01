@@ -13,7 +13,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
         $array1 = [
-            'M/V HMM MIR', 'M/V HMM ALGECIRAS', 'M/V HYUNDAI BRAVE', 'M/V HMM SOUTHAMPTON', 'M/V HMM HAMBURG', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HYUNDAI COLOMBO', 'M/V HMM RAON', 'M/V HMM COPENHAGEN', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM GDANSK', 'M/V HMM HANBADA', 'M/V HMM OSLO', 'M/V HYUNDAI FORCE'
+            'M/V HMM MIR', 'M/V HMM ALGECIRAS', 'M/V HYUNDAI BRAVE', 'M/V HMM SOUTHAMPTON', 'M/V HMM HAMBURG', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM COPENHAGEN', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM GDANSK', 'M/V HMM HANBADA', 'M/V HMM OSLO', 'M/V HYUNDAI FORCE'
         ];
 
         $array2 = [
@@ -21,7 +21,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array3 = [
-            'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE'
+            'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO'
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
