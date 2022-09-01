@@ -256,16 +256,18 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&R&P/&N');
+
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.7);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.7);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.7);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.7);
 
                 $event->sheet->getDelegate()->getStyle('A1:H58')->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A1:H58')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A4:H58')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('B21')->getFont()->setSize(8);
                 $event->sheet->getDelegate()->getStyle('A42')->getFont()->setSize(8);
                 $event->sheet->getDelegate()->getStyle('A45')->getFont()->setSize(8);
@@ -301,7 +303,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    
+                    'B21'
                 ];
 
                 // HL B
@@ -327,7 +329,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:H58'
+                    'A1:I20',
+                    'A21',
+                    'A22:I58'
                 ];
 
                 // B I
@@ -420,26 +424,26 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(14);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(19.5);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(17);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(20.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(21);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
 
                 // ROW RESIZE
                 for($i = 1; $i <= 59; $i++){
-                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(20);
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(21);
                 }
 
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(80);
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(17);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(17);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(17);
+                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(17);
+                $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(110);
                 $event->sheet->getDelegate()->getRowDimension(23)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(40);
@@ -451,6 +455,12 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(35);
+
+                // TO PAGE 2
+                $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(37)->setRowHeight(20);
+                // END
+
                 $event->sheet->getDelegate()->getRowDimension(39)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(42)->setRowHeight(95);
                 $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(115);

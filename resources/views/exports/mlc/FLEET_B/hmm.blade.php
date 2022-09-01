@@ -10,7 +10,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="9" style="text-decoration: underline; height: 40px; {{ $bold }} {{ $center }}">
+		<td colspan="9" style="text-decoration: underline; height: 40px; font-size: 16px; {{ $bold }} {{ $center }}">
 			Seafarer's Employment Agreement
 		</td>
 	</tr>
@@ -129,7 +129,7 @@
 
 	<tr>
 		<td style="{{ $center }}">Early Termination</td>
-		<td colspan="8" style="height: 100px;">
+		<td colspan="8" style="height: 90px;">
 			"1)	Where the shipowner intends to cancel a Seafarers' employment agreement, he/she shall inform the seafarer of the cancellation of the Seafarer’s employment agreement in writing with a period of advance notice of not less than 30 days.
 			<br style="mso-data-placement:same-cell;" />
 			2)	The seafarer shall give a notice to shipowner for their early termination in accordance with the flag state regulations as follows.
@@ -147,7 +147,11 @@
 	</tr>
 
 	<tr>
-		<td rowspan="6" style="{{ $center }}">Basic pay &#38; allowance</td>
+		<td rowspan="6" style="{{ $center }}">
+			Basic pay 
+			<br style="mso-data-placement:same-cell;" />
+			&#38; allowance
+		</td>
 		<td style="{{ $center }}">Basic wage</td>
 		<td colspan="2" style="{{ $center }}">Fixed / Guaranteed Overtime Allowance</td>
 		<td colspan="3" style="{{ $center }}">Fixed Supervisor Allowance</td>
@@ -239,7 +243,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="9" style="text-align: right;">1 / 2</td>
+		<td colspan="9"></td>
 	</tr>
 
 	<tr>
@@ -411,6 +415,6 @@
 	</tr>
 
 	<tr>
-		<td colspan="9" style="text-align: right;">2/2</td>
+		<td colspan="9" style="text-align: right;"></td>
 	</tr>
 </table>
