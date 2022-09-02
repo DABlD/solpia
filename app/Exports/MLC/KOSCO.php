@@ -453,14 +453,14 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A3:H32')->getFont()->setSize(10);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(14.5);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(15.5);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(15.5);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15.5);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(15.5);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(15.5);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(15.5);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(15.5);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(16.5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(17.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(17.5);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(17.5);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17.5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(17.5);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(17.5);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(17.5);
 
                 // ROW RESIZE
                 $arr = [1, 15, 21, 22, 24, 25, 26, 27, 28, 29];
