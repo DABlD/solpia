@@ -1,6 +1,5 @@
 <table>
 	@php
-		$data = $data->sortBy('rank_id');
 		foreach ($data as $key => $applicant) {
 		    $docs2 = $applicant->docs;
 

@@ -22,7 +22,7 @@ class PDFExport
             ['status', '=', 'Lined-Up'],
             ['vessel_id', '=', $this->data->data['id']],
         ])
-        ->select('applicant_id')
+        ->select('applicant_id', 'rank_id')
         ->get();
 
         foreach($applicants as $applicant){
@@ -46,6 +46,7 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
+        $applicants = $applicants->sortBy('rank_id');
         return $applicants;
     }
 
@@ -79,6 +80,7 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
+        $applicants = $applicants->sortBy('rank_id');
         return $applicants;
     }
 
