@@ -1,9 +1,3 @@
-<style>
-	img{
-		image-orientation: none;
-	}
-</style>
-
 <table>
 	@php
 		foreach ($data as $key => $applicant) {
@@ -15,7 +9,7 @@
 		        	$img = public_path('files\\' . $applicant->applicant_id . '\\' . $doc[0]);
 		            echo "<tr>
 		            	<td>
-		            		<img src='$img' width='700px' height='1000px'>
+		            		<img src='$img' width='700px' height='1000px' style='image-orientation: none;'>
 		            	</td>
 		            </tr>";
 		        }
