@@ -22,7 +22,8 @@ class PDFExport
             ['status', '=', 'Lined-Up'],
             ['vessel_id', '=', $this->data->data['id']],
         ])
-        ->select('applicant_id', 'rank_id')
+        ->select('applicant_id', 'rank_id', 'order')
+        ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
         ->get();
 
         foreach($applicants as $applicant){
@@ -46,7 +47,7 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
-        $applicants = $applicants->sortBy('rank_id');
+        $applicants = $applicants->sortBy('order');
         return $applicants;
     }
 
@@ -56,7 +57,8 @@ class PDFExport
             ['vessel_id', '=', $this->data->data['id']],
             ['disembarkation_date', '=', null]
         ])
-        ->select('applicant_id', 'reliever')
+        ->select('applicant_id', 'rank_id', 'order')
+        ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
         ->get();
 
         foreach($applicants as $applicant){
@@ -80,7 +82,7 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
-        $applicants = $applicants->sortBy('rank_id');
+        $applicants = $applicants->sortBy('order');
         return $applicants;
     }
 

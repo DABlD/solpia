@@ -998,11 +998,11 @@ class ApplicationsController extends Controller
                         ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
                         ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
-                        ->select('processed_applicants.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place')
+                        ->select('processed_applicants.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place', 'r.order')
                         ->get();
 
         // SORT
-        $linedUps = $linedUps->sortBy('rank_id');
+        $linedUps = $linedUps->sortBy('order');
         $linedUps->load('applicant.document_med_cert');
         $linedUps->load('applicant.document_id');
         $linedUps->load('applicant.sea_service');
@@ -1039,10 +1039,10 @@ class ApplicationsController extends Controller
                                 ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
                                 ->join('users as u', 'u.id', '=', 'a.user_id')
                                 ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
-                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place')
+                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place', 'r.order')
                                 ->get();
 
-        $crews = $crews->sortBy('rank_id');
+        $crews = $crews->sortBy('order');
         $crews->load('applicant.document_med_cert');
         $crews->load('applicant.document_id');
 
