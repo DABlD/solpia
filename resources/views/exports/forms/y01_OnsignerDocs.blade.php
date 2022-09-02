@@ -1,3 +1,9 @@
+<style>
+	img{
+		image-orientation: from-image;
+	}
+</style>
+
 <table>
 	@php
 		foreach ($data as $key => $applicant) {
