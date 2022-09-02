@@ -2546,7 +2546,7 @@
                 cancelButtonColor: '#f76c6b',
                 width: '40%',
                 onOpen: () => {
-                    $('#effective_date, #med_date').flatpickr({
+                    $('#med_date').flatpickr({
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
@@ -2559,7 +2559,31 @@
                         defaultDate: moment().format('YYYY-MM-DD')
                     });
 
+                    $.ajax({
+                        url: '{{ route('applications.getAllInfo') }}',
+                        data: {
+                            id: id
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            let date = moment().format('YYYY-MM-DD');
 
+                            if(result.lup){
+                                date = result.lup.joining_date;
+                                $('#employment_months').val(result.lup.months);
+                            }
+                            else{
+                                date = result.pro_app.eld;
+                            }
+
+                            $('#effective_date').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d',
+                                defaultDate: date
+                            });
+                        }
+                    })
                 },
                 preConfirm: () => {
                     swal.showLoading();
