@@ -9,7 +9,7 @@
 		        	$img = public_path('files\\' . $applicant->applicant_id . '\\' . $doc[0]);
 		            echo "<tr>
 		            	<td>
-		            		<img src='$img' width='550px' height='850px' style='image-orientation: none;'>
+		            		<img src='$img' width='700px' height='1000px'>
 		            	</td>
 		            </tr>";
 		        }
