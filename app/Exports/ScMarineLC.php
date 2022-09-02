@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class ScMarineLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class ScMarineLC implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
@@ -278,5 +278,32 @@ class ScMarineLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
                 }
             },
         ];
+    }
+
+    public function drawings()
+    {
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('THEA SIG');
+        $drawing->setDescription('THEA SIG');
+        $drawing->setPath(public_path("images/maam_thea_sig.png"));
+        $drawing->setResizeProportional(false);
+        $drawing->setHeight(40);
+        $drawing->setWidth(100);
+        $drawing->setOffsetX(30);
+        $drawing->setOffsetY(-5);
+        $drawing->setCoordinates('D50');
+
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('PRES SIG');
+        $drawing->setDescription('PRES SIG');
+        $drawing2->setPath(public_path("images/pres_sig.png"));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(130);
+        $drawing2->setWidth(150);
+        $drawing2->setOffsetX(20);
+        $drawing2->setOffsetY(-50);
+        $drawing2->setCoordinates('L50');
+
+        return [$drawing, $drawing2];
     }
 }
