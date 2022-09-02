@@ -1,6 +1,6 @@
 <style>
 	img{
-		image-orientation: from-image;
+		image-orientation: none;
 	}
 </style>
 
