@@ -13,8 +13,25 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $type){
+        $array1 = [
+            'M/V DONG-A OKNOS', 'M/V GLOVIS COUNTESS', 'M/V DONG-A ASTREA', 'M/V DONG-A GLAUCOS'
+        ];
+
+        $array2 = [
+            'M/V SUNNY LILY', 'M/V SUNNY COSMOS'
+        ];
+
+        if(in_array($applicant->vessel->name, $array1)){
+            $applicant->shipowner = "DONG-A TANKER CO., LTD.";
+            $applicant->sAddress = "#905, 18, Gwangbok-ro 97beon-gil, Jung-gu, Busan, Republic of Korea";
+        }
+        elseif(in_array($applicant->vessel->name, $array2)){
+            $applicant->shipowner = 'EA SHIPPING CO., LTD.';
+            $applicant->sAddress = "#905, 18, Gwangbok-ro 97beon-gil, Jung-gu, Busan, Republic of Korea";
+        }
+
         $this->applicant     = $applicant;
-        $this->type     = $type;
+        $this->type         = $type;
     }
 
     public function view(): View
@@ -453,14 +470,14 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A3:H32')->getFont()->setSize(10);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(16.5);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(17.5);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(17.5);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(17.5);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17.5);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(17.5);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(17.5);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(17.5);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(16);
 
                 // ROW RESIZE
                 $arr = [1, 15, 21, 22, 24, 25, 26, 27, 28, 29];

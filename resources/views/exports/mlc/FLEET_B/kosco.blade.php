@@ -37,12 +37,12 @@
 	<tr>
 		<td rowspan="2" style="{{ $bc }}">Shipowner</td>
 		<td style="{{ $center }}">Company</td>
-		<td colspan="6">EA SHIPPING CO., LTD.</td>
+		<td colspan="6">{{ $data->shipowner }}</td>
 	</tr>
 
 	<tr>
 		<td style="{{ $center }}">Address</td>
-		<td colspan="6">#906, 18, Gwangbok-ro 97beon-gil, Jung-gu, Busan, Republic of Korea</td>
+		<td colspan="6">{{ $data->sAddress }}</td>
 	</tr>
 
 	<tr>
