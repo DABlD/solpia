@@ -57,7 +57,7 @@ class PDFExport
             ['vessel_id', '=', $this->data->data['id']],
             ['disembarkation_date', '=', null]
         ])
-        ->select('applicant_id', 'rank_id', 'order')
+        ->select('applicant_id', 'rank_id', 'order', 'reliever')
         ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
         ->get();
 
