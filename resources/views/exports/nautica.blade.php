@@ -323,6 +323,7 @@
 			elseif($fd->type == "Son" || $fd->type == "Daughter"){
 				$noc++;
 			}
+
 		}
 	@endphp
 
@@ -349,7 +350,11 @@
 			@php
 				$nok = $spouse ?? $father ?? $mother ?? null;
 			@endphp
-			{{ $nok->lname }}, {{ $nok->fname }} {{ $nok->suffix }} {{ $nok->mname }}
+			@if($nok)
+				{{ $nok->lname }}, {{ $nok->fname }} {{ $nok->suffix }} {{ $nok->mname }}
+			@else
+				---
+			@endif
 		</td>
 	</tr>
 
@@ -369,7 +374,7 @@
 
 	<tr>
 		<td colspan="7">{{ $data->user->email }}</td>
-		<td colspan="3" rowspan="2" style="{{ $center }}">{{ $nok->type }}</td>
+		<td colspan="3" rowspan="2" style="{{ $center }}">{{ $nok->type ?? '---' }}</td>
 		<td colspan="2" rowspan="2" style="{{ $center }}">{{ $data->provincial_contact }}</td>
 	</tr>
 
