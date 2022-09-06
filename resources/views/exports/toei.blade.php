@@ -954,7 +954,7 @@
 		<tr>
 			<td colspan="3">Type Specific</td>
 			@if(isset($applicant->ecdises[0]))
-				@php 
+				@php
 					$name = $applicant->ecdises[0];
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				@endphp

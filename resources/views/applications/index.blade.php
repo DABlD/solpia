@@ -2593,10 +2593,7 @@
                                     <input type="checkbox" value="ECDIS FURUNO 2807"> ECDIS FURUNO 2807
                                 </label><br>
                                 <label>
-                                    <input type="checkbox" value="ECDIS FURUNO 3200"> ECDIS FURUNO 3200
-                                </label><br>
-                                <label>
-                                    <input type="checkbox" value="ECDIS FURUNO 3300"> ECDIS FURUNO 3300
+                                    <input type="checkbox" value="ECDIS FURUNO 3100/3200/3300"> ECDIS FURUNO 3100/3200/3300
                                 </label><br>
                                 <label>
                                     <input type="checkbox" value="ECDIS JRC 701B"> ECDIS JRC 701B
@@ -2706,7 +2703,7 @@
                                             <input type="checkbox" value="ECDIS FURUNO 2807"> ECDIS FURUNO 2807
                                         </label><br>
                                         <label>
-                                            <input type="checkbox" value="ECDIS FURUNO 3200"> ECDIS FURUNO 3200
+                                            <input type="checkbox" value="ECDIS FURUNO 3100/3200/3300"> ECDIS FURUNO 3100/3200/3300
                                         </label><br>
                                         <label>
                                             <input type="checkbox" value="ECDIS FURUNO 3300"> ECDIS FURUNO 3300
