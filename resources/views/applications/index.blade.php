@@ -186,6 +186,11 @@
             padding-right: 10px;
         }
 
+        .tab-pane .col-md-8{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
         .tab-pane h3{
             margin-left: -20px;
         }
@@ -1266,6 +1271,9 @@
                                         <a href=".educbg" role="tab" data-toggle="pill"><u>E</u>ducational Background</a>
                                     </li>
                                     <li role="presentation">
+                                        <a href=".family" role="tab" data-toggle="pill">Famil<u>y</u> Data</a>
+                                    </li>
+                                    <li role="presentation">
                                         <a href=".ids" role="tab" data-toggle="pill">Document <u>I</u>D</a>
                                     </li>
                                     <li role="presentation">
@@ -1289,6 +1297,7 @@
                                 <div class="tab-content">
                                   <div role="tabpanel" class="tab-pane fade in pinfo active">a</div>
                                   <div role="tabpanel" class="tab-pane fade educbg">b</div>
+                                  <div role="tabpanel" class="tab-pane fade family">b</div>
                                   <div role="tabpanel" class="tab-pane fade ids">c</div>
                                   <div role="tabpanel" class="tab-pane fade flags">c</div>
                                   <div role="tabpanel" class="tab-pane fade l_cs">c</div>
@@ -1306,6 +1315,7 @@
                                 fillTab6(applicant);
                                 fillTab7(applicant);
                                 fillTab8(applicant);
+                                fillTab9(applicant); //FAMILY SUPPOSED TO BE 3
                             }
                         }).then(() => {
                             $('[type="search"]:first').focus();
@@ -1342,6 +1352,9 @@
                     }
                     else if(key == "S" || key == "s"){
                         $('[href=".ss"]').click();
+                    }
+                    else if(key == "Y" || key == "y"){
+                        $('[href=".family"]').click();
                     }
                 }
             }, true);
@@ -2172,6 +2185,67 @@
             `;
 
             $('.ss').html(string);
+        }
+
+        function fillTab9(applicant){
+            let fds = Object.entries(applicant.family_data);
+            let temp = ``;
+
+            fds.forEach(fd => {
+                fd = fd[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${fd.type}</b></h3>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="course">Course</label>
+                                <input type="text" class="form-control" id="name" value="${fd.fname ?? "-"} ${fd.lname ?? "-"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="birthday">birthday</label>
+                                <input type="text" class="form-control" id="birthday" value="${fd.birthday ? moment(fd.birthday).format('MMM DD, YYYY') : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="year">Age</label>
+                                <input type="text" class="form-control" id="age" value="${fd.birthday ? moment().diff(fd.birthday, 'years') : fd.age ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="occupation">Occupation</label>
+                                <input type="text" class="form-control" id="occupation" value="${fd.occupation ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="school">Address</label>
+                                <input type="text" class="form-control" id="address" value="${fd.address ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            })
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Family Data</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.family').html(string);
         }
 
         // CREW INFO END
