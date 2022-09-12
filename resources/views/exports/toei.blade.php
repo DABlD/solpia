@@ -192,10 +192,10 @@
 			$nok = null;
 			$temps = ['Spouse', 'Son', 'Daughter', 'Father', 'Mother'];
 			$childrens = 0;
-
 			foreach($temps as $key => $temp){
+				$childrens = 0;
 				foreach($applicant->family_data as $fd){
-					if(($fd->type == "Son" || $fd->type == "Daughter") && $key == 0){
+					if($fd->type == "Son" || $fd->type == "Daughter"){
 						$childrens++;
 					}
 
