@@ -1383,11 +1383,7 @@
 				<td>{{ $data->flag }}</td>
 				<td>
 					@if(isset($data->crew_nationality))
-						@if($data->crew_nationality == "FILIPINO" || $data->crew_nationality == "FULL CREW")
-							FULL CREW
-						@elseif($data->crew_nationality != "")
-							MIXED CREW
-						@endif
+						{{ $data->crew_nationality }}
 					@endif
 				</td>
 				<td>{{ $applicant->ranks[$data->rank] }}</td>
