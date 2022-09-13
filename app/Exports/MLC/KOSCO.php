@@ -22,7 +22,15 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array3 = [
-            'M/V KMARIN AZUR', 'M/V KMARIN MELBOURNE', 'M/V KMARIN ATLANTICA', 'M/V KMARIN ULSAN'
+            'M/V KMARIN AZUR', 'M/V KMARIN MELBOURNE', 'M/V KMARIN ATLANTICA', 'M/V KMARIN ULSAN', 'M/V BOKM NINGBO', "M/V BOKM SHANGHAI"
+        ];
+
+        $array4 = [
+            'M/V PACIFIC BLESS', 'M/V PACIFIC CROWN',
+        ];
+
+        $array5 = [
+            'M/V DAEBO GLADSTONE'
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
@@ -36,6 +44,14 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         elseif(in_array($applicant->vessel->name, $array3)){
             $applicant->shipowner = 'KMARIN OCEAN SERVICES CORPORATION';
             $applicant->sAddress = "5F (KUKDONG BLDG), 67, CHANGJANG-DAERO 5BEON-GIL, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
+        }
+        elseif(in_array($applicant->vessel->name, $array4)){
+            $applicant->shipowner = 'KMARIN OCEAN SERVICES CORPORATION';
+            $applicant->sAddress = "14F, CJ Daehantongwoon B/D, 119 Daegyo-ro, Jung-gu, Busan, South Korea , 600-016";
+        }
+        elseif(in_array($applicant->vessel->name, $array5)){
+            $applicant->shipowner = 'DAEBO L&#38;S CO., LTD';
+            $applicant->sAddress = "#4, F11 19, SAEMUNAN-RO 5-GIL, JONGNO-GU, SEOUL, REPUBLIC OF KOREA";
         }
 
         $this->applicant     = $applicant;
