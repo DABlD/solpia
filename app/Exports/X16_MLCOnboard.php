@@ -15,7 +15,7 @@ class X16_MLCOnboard implements WithMultipleSheets
         $ranks = Rank::get()->groupBy('id');
         $wage = Wage::where('vessel_id', $vessel->id)->get()->groupBy("rank_id");
 
-        $lucs = LineUpContract::where("vessel_id", $vessel->id)->where("status", "On Board")->select("applicant_id", "joining_date", "months")->get();
+        $lucs = LineUpContract::where("vessel_id", $vessel->id)->where("status", "On Board")->select("applicant_id", "joining_date", "months", 'vessel_id')->get();
         $applicants = Applicant::find($lucs->pluck("applicant_id")->toArray());
 
         $lucs = $lucs->groupBy("applicant_id");
@@ -45,9 +45,9 @@ class X16_MLCOnboard implements WithMultipleSheets
             }
 
             $applicant->date_processed    = now()->toDateString();
-            $applicant->effective_date    = $lucs[$applicant->id][0]["joining_date"];
+            $applicant->effective_date    = $lucs[$applicant->id][0]["joining_date"]->toDateString();
             $applicant->employment_months = $lucs[$applicant->id][0]["months"];
-            $applicant->valid_till        = $applicant->effective_date->add($lucs[$applicant->id][0]["months"], "months");
+            $applicant->valid_till        = $lucs[$applicant->id][0]["joining_date"]->add($lucs[$applicant->id][0]["months"], "months");
         }
 
         $this->principal = Principal::find($vessel->principal_id)->name;
@@ -62,7 +62,7 @@ class X16_MLCOnboard implements WithMultipleSheets
         $sheets = [];
         foreach($this->applicants as $applicant){
             $class = "App\Exports\MLC\\" . $this->principal;
-            array_push($sheets, new $class($applicant, $applicant->abbr));
+            array_push($sheets, new $class($applicant, $applicant->abbr, $applicant->abbr));
         }
 
         return $sheets;

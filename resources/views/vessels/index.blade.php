@@ -3598,7 +3598,7 @@
         function X16_MLCOnboard(vid, name){
             let data = {
                 vid: vid,
-                filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + "Onboard Crew MLC"
+                filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + " - Onboard Crew MLC"
             };
 
             window.location.href = `{{ route('applications.exportDocument') }}/1/X16_MLCOnboard?` + $.param(data);

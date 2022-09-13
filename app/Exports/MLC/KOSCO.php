@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($applicant, $type){
+    public function __construct($applicant, $type, $rank = null){
         $array1 = [
             'M/V DONG-A OKNOS', 'M/V GLOVIS COUNTESS', 'M/V DONG-A ASTREA', 'M/V DONG-A GLAUCOS'
         ];
@@ -88,6 +88,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $this->applicant     = $applicant;
         $this->type         = $type;
+        $this->rank         = $rank;
     }
 
     public function view(): View
@@ -309,12 +310,13 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             ]
         ];
 
+        $rank = str_replace('/', '', $this->rank);
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $rank) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('KOSCO MLC', false);
+                $event->sheet->getDelegate()->setTitle($rank ?? 'KOSCO MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&R&P/&N');
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LF-SPM-0205 / 2018. 03. 01 Established &CKOSCO &RRev. 1 / 2021.02.01');
