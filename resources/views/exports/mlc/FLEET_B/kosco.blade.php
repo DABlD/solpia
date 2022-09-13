@@ -115,7 +115,7 @@
 		<td style="{{ $center }}">From</td>
 		<td colspan="3">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
 		<td style="{{ $center }}">To</td>
-		<td colspan="2" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->sub(1, 'day')->format('d-M-y') }}</td>
+		<td colspan="2" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-y') }}</td>
 	</tr>
 
 	<tr>
