@@ -21,8 +21,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             'M/V SUNNY LILY', 'M/V SUNNY COSMOS'
         ];
 
-        $array2 = [
-            'M/V KMARIN AZUR', 'M/V KMARIN MELBOURNE'
+        $array3 = [
+            'M/V KMARIN AZUR', 'M/V KMARIN MELBOURNE', 'M/V KMARIN ATLANTICA', 'M/V KMARIN ULSAN'
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
