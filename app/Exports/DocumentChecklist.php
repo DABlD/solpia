@@ -276,7 +276,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 43;
                     $this->view    = "WPR";
                 }
-                elseif($rank == "ECDT"){
+                elseif($rank == "ECDT" || $rank == "EBOY"){
                     $this->rows    = 43;
                     $this->view    = "ECDT";
                 }
