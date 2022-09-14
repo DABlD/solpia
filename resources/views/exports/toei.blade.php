@@ -322,7 +322,6 @@
 				}
 			}
 
-			dd($hl);
 			// HL 0 = DECK; HL 1 = ENGINE
 		@endphp
 
