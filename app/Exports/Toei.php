@@ -839,10 +839,10 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
                 // HAIR BOTTOM
                 $cells[8] = array_merge($cells[8], [
-                    'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'D19', 'H20', 'F11', 'H11:I11', 'B12:G12',
+                    'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'F11', 'H11:I11', 'B12:G12',
                     'B15:F15', 'H15:I15', 'H16:I16', 'B17', 'D17', 'F17:G17', 'I17',
                     'G17', 'I17', 'B18:C18', 'E18', 'G18', 'B19:C19', 'E19', 'G19', 'I19',
-                    'F20', 'I20', 'D21:E21', 'G22:I22', 'B23:I23', 'B25:F25', 'H25:I25'
+                    'C20:D20', 'F20', 'I20', 'H21', 'D21:E21', 'G22:I22', 'B23:I23', 'I24', 'B25:F25', 'H25:I25'
                 ]);
 
                 // 2,7,8,9,10 on top

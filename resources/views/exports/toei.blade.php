@@ -165,7 +165,7 @@
 
 		<tr>
 			<td colspan="2">Crew's physical condition</td>
-			<td colspan="2">FIT FOR DUTY</td>
+			<td colspan="2">NORMAL</td>
 			<td>Diabetes</td>
 
 			@php
@@ -211,9 +211,7 @@
 			<td colspan="2">Spouse/Next of Kin</td>
 			<td colspan="3"></td>
 			<td>Relation</td>
-			<td></td>
-			<td>{{ $nok ? strtoupper($nok->type) : '-----' }}</td>
-			<td></td>
+			<td colspan="3" style="text-align: center;">{{ $nok ? strtoupper($nok->type) : '-----' }}</td>
 		</tr>
 
 		<tr>
@@ -277,6 +275,8 @@
 
 		@php 
 			$regs = array();
+			// $regs['dr'] = ["II/1", "II/2"];
+			// $regs['er'] = ["III/1", "III/2"];
 			$regs['dr'] = ["II/4", "II/5", "II/1", "II/2"];
 			$regs['er'] = ["III/4", "III/5", "III/1", "III/2"];
 			// $regs['dr'] = ["II/2", "II/1", "II/5", "II/4"];
@@ -300,7 +300,7 @@
 				}
 				else{
 					foreach($applicant->document_lc as $lc){
-						if($lc->type == "COC" || $lc->type == "COE"){
+						if(str_starts_with($lc->type, "COC")){
 							$regulations = json_decode($lc->regulation);
 
 							foreach($regs[$rt] as $key => $ref){
@@ -321,6 +321,9 @@
 					}
 				}
 			}
+
+			dd($hl);
+			// HL 0 = DECK; HL 1 = ENGINE
 		@endphp
 
 		<tr>
@@ -363,7 +366,7 @@
 						@endif
 				 	{{-- GALLEY --}}
 					@elseif($applicant->rank->id == 24)
-						SHIP'S COOK
+						COOK
 					@elseif($applicant->rank->id == 27 || $applicant->rank->id == 28)
 						MESSMAN
 					@else
@@ -383,7 +386,7 @@
 			<td>{{ $docu ? strtoupper($docu->no) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">MARINA</td>
+			<td colspan="2">{{ (isset($applicant->rank) && $applicant->rank->category == "GALLEY") ? $docu->issuer : "MARINA" }}</td>
 		</tr>
 
 		@php 
@@ -912,13 +915,9 @@
 				foreach($applicant->document_lc as $document){
 					$regulation = json_decode($document->regulation);
 
-				    if($document->type == "COE"){
-				        $docu = $document;
-				    }
-
-				    if($document->type == "COC"){
-				        $tempDocu = $document;
-				    }
+					if(str_starts_with($document->type, "COE") && (in_array('III/1', $regulations) || in_array('III/2', $regulations) || in_array('II/1', $regulations) || in_array('II/2', $regulations))){
+						$docu = $document;
+					}
 				}
 
 				if(!$docu && $tempDocu){
@@ -1153,7 +1152,7 @@
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			{{-- <td>{{ $docu ? $docu->clinic : "-----" }}</td> --}}
-			<td>QUARANTINE</td>
+			<td>BUREAU OF QUARANTINE</td>
 		</tr>
 
 		@php 
@@ -1195,7 +1194,7 @@
 			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td>{{ $docu ? $docu->clinic : "-----" }}</td>
+			<td>BUREAU OF QUARANTINE</td>
 		</tr>
 
 		@php
@@ -1373,7 +1372,7 @@
 			<tr>
 				<td colspan="2">{{ $data->vessel_name }}</td>
 				<td>{{ $data->vessel_type }}</td>
-				<td colspan="2">{{ $data->gross_tonnage }}</td>
+				<td colspan="2">{{ $data->gross_tonnage ? number_format((int)str_replace(',', '', $data->gross_tonnage)) : "" }}</td>
 				<td>{{ $data->manning_agent }}</td>
 				<td>{{ $data->sign_on != "" ? $data->sign_on->format('M j, Y') : "" }}</td>
 				{{-- <td>{{ $data->sign_on != "" ? $data->sign_on->format('d-m-Y') : "" }}</td> --}}
@@ -1390,7 +1389,7 @@
 				<td>
 					@if(isset($applicant->rank))
 						@if(str_starts_with($applicant->rank->category, 'ENGINE'))
-							{{ $data->engine_type }} {{ $data->bhp_kw }}
+							{{ $data->engine_type }} {{ $data->bhp_kw != 0 ? "/ " . $data->bhp_kw : "" }}
 						@else
 							@if($data->vessel_name != "")
 								-----
@@ -1398,13 +1397,13 @@
 						@endif
 					@endif
 				</td>
-				<td>{{ $data->trade }}</td>
+				<td>{{ $data->trade ? "WORLDWIDE" : "" }}</td>
 				<td>{{ $data->principal }}</td>
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "" }}</td>
 				{{-- <td>{{ $data->sign_off != "" ? $data->sign_off->format('d-m-Y') : "" }}</td> --}}
 				<td colspan="2">
 					@if($data->sign_on != "" && $data->sign_off != "")
-						{{ $data->sign_on->diff($data->sign_off->addDay())->format('%yyr, %mmos, %ddays') }}
+						{{ $data->sign_on->diff($data->sign_off)->format('%yyr, %mmos, %ddays') }}
 					@endif
 				</td>
 			</tr>
