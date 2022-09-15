@@ -2199,7 +2199,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="course">Course</label>
+                                <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" value="${fd.fname ?? "-"} ${fd.lname ?? "-"}" readonly>
                             </div>
                         </div>
