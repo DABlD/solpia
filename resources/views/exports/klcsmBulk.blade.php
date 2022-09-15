@@ -182,7 +182,7 @@
 			<td>$on</td>
 			<td>$off</td>
 			<td>$diff D</td>
-			<td colspan='2' style='font-size: 6px;'>$ss->remarks / AGENCY: $ss->manning / COMBINED CREW: $crew</td>
+			<td colspan='2' style='font-size: 6px;'>$ss->remarks / AGENCY: $ss->manning_agent / COMBINED CREW: $crew</td>
 		";
 	};
 
