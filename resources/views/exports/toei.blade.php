@@ -173,7 +173,7 @@
 				$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
 			@endphp
 
-			<td>{{ $docu ? 'YES' : 'NO' }}</td>
+			<td>{{ $docu ? 'CONTROLLED WITH MEDICATION' : 'NO' }}</td>
 			<td></td>
 			<td>Choleith</td>
 			<td>NO</td>
@@ -182,7 +182,13 @@
 		<tr>
 			<td></td>
 			<td colspan="2">High/Low blood pressure</td>
-			<td colspan="2">NORMAL</td>
+
+			@php
+				$name = 'HYPERTENSION';
+				$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
+			@endphp
+
+			<td colspan="2">{{ $docu ? 'CONTROLLED WITH MEDICATION' : 'NO' }}</td>
 			<td colspan="2">Renal Insufficiency</td>
 			<td>NO</td>
 			<td></td>
