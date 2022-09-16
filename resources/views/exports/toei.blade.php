@@ -402,10 +402,12 @@
 
 		@php 
 			$docu2 = false;
-			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "LICENSE"){
-			        $docu2 = $document;
-			    }
+			if($applicant->rank->type == "OFFICER"){
+				foreach($applicant->document_flag as $document){
+				    if($document->country == "Panama" && $document->type == "LICENSE"){
+				        $docu2 = $document;
+				    }
+				}
 			}
 		@endphp
 	
@@ -469,7 +471,7 @@
 			<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
-			<td colspan="2">PANAMA</td>
+			<td colspan="2">{{ $applicant->rank->type == "OFFICER" ? "PANAMA" : "NOT APPLICABLE" }}</td>
 		</tr>
 
 		@php 
