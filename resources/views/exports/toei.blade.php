@@ -314,16 +314,21 @@
 									if($hl){
 										if($key > $hl){
 											$hl = $key;
-											$docu = $lc;
+											if($hl >= 2){
+												$docu = $lc;
+											}
 										}
 									}
 									else{
 										$hl = $key;
-										$docu = $lc;
+										if($hl >= 2){
+											$docu = $lc;
+										}
 									}
 								}
 							}
 						}
+						echo '<br>';
 					}
 				}
 			}
@@ -337,7 +342,7 @@
 			</td>
 			<td colspan="2">
 				@if(isset($applicant->rank) && $docu)
-					@if($hl == 0 && $hl != null)
+					{{-- @if($hl == 0 && $hl !== null)
 						@if($rt == "er")
 							ENGINEERING WATCHKEEPING
 						@else
@@ -349,7 +354,8 @@
 						@else
 							ABLE SEAFARER DECK
 						@endif
-					@elseif($hl == 2)
+					@elseif($hl == 2) --}}
+					@if($hl == 2)
 						@if($rt == "er")
 							OIC-ENGINEERING WATCH
 						@else
