@@ -296,11 +296,33 @@
 							inputs[i+5].value       = sss[ctr].engine_type;
 							inputs[i+6].value       = sss[ctr].bhp_kw;
 							inputs[i+7].value       = sss[ctr].flag;
-							inputs[i+8].value       = sss[ctr].trade;
+							// inputs[i+8].value       = sss[ctr].trade;
+
+							// Set the value, creating a new option if necessary
+							if(sss[ctr].trade != ""){
+								console.log(sss[ctr].trade);
+								if ($(inputs[i+8]).find("option[value='" + sss[ctr].trade + "']").length) {
+									$(inputs[i+8]).val(sss[ctr].trade).trigger('change');
+								} else { 
+								    var newOption = new Option(sss[ctr].trade, sss[ctr].trade, true, true);
+								    $(inputs[i+8]).append(newOption).trigger('change');
+								} 
+							}
+
 							inputs[i+9].value       = sss[ctr].previous_salary;
 							inputs[i+10].value      = sss[ctr].manning_agent;
 							inputs[i+11].value      = sss[ctr].principal;
-							inputs[i+12].value      = sss[ctr].crew_nationality;
+							// inputs[i+12].value      = sss[ctr].crew_nationality;
+
+							// Set the value, creating a new option if necessary
+							if(sss[ctr].crew_nationality != ""){
+								if ($(inputs[i+12]).find("option[value='" + sss[ctr].crew_nationality + "']").length) {
+									$(inputs[i+12]).val(sss[ctr].crew_nationality).trigger('change');
+								} else { 
+								    var newOption = new Option(sss[ctr].crew_nationality, sss[ctr].crew_nationality, true, true);
+								    $(inputs[i+12]).append(newOption).trigger('change');
+								}
+							}
 
 							$(inputs[i+13]).flatpickr(config).setDate(sss[ctr].sign_on, true);
 							$(inputs[i+15]).flatpickr(config).setDate(sss[ctr].sign_off, true);

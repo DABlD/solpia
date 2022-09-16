@@ -92,11 +92,22 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="trade${count}">Trade</label>
-                        <input type="text" class="form-control" name="trade${count}" placeholder="Enter Trade">
+
+                        <select class="form-control" name="trade${count}">
+                            <option value=""></option>
+                            <option value="WORLDWIDE">WORLDWIDE</option>
+                            <option value="FAR EAST">FAR EAST</option>
+                            <option value="MIDDLE EAST">MIDDLE EAST</option>
+                            <option value="DOMESTIC">DOMESTIC</option>
+                        </select>
+
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="trade${count}Error"></strong>
                         </span>
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="form-group col-md-3">
                         <label for="previous_salary${count}">Previous Salary</label>
                         <input type="text" class="form-control" name="previous_salary${count}" placeholder="Enter Previous Salary">
@@ -120,11 +131,20 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="crew_nationality${count}">Crew Nationality</label>
-                        <input type="text" class="form-control" name="crew_nationality${count}" placeholder="Crew Nationality">
+
+                        <select class="form-control" name="crew_nationality${count}">
+                            <option value=""></option>
+                            <option value="FULL CREW">FULL CREW</option>
+                            <option value="MIXED CREW">MIXED CREW</option>
+                        </select>
+
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="crew_nationality${count}Error"></strong>
                         </span>
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="form-group col-md-3">
                         <label for="sign_on${count}">Sign On</label>
                         <input type="text" class="form-control sign-on" name="sign_on${count}" placeholder="Sign On Date">
@@ -141,17 +161,25 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="remarks${count}">Remarks</label>
-                        <input type="text" class="form-control" name="remarks${count}" placeholder="Remarks">
+                        <input type="text" class="form-control" name="remarks${count}" placeholder="Remarks" id="autoComplete">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="remarks${count}Error"></strong>
                         </span>
                     </div>
-
                 </div>
                 <hr>
             `;
             
             $('#sea-services').append(string);
+            $(`[name="trade${count}"]`).select2({
+                placeholder: 'Select Trade',
+                tags: true
+            });
+            $(`[name="crew_nationality${count}"]`).select2({
+                placeholder: 'Select Crew Nationality',
+                tags: true
+            });
+
             $(`[name="imo${count}"]`).select2({
                 placeholder: 'Select or Input IMO',
                 tags: true
