@@ -9,7 +9,9 @@
         var imoString = "";
 		
 		// INIT GET VESSELS
-		getVessels(true);
+        @if(!isset($edit))
+		  getVessels(true);
+        @endif
         function addSS(){
             addSS2();
         }
@@ -203,9 +205,9 @@
             $('.ssCount')[0].innerText = count;
 
             // CHECK IF NO CONFLICT IN DATES
-            $(`[name="sign_off${count}"], [name="sign_on${count}"]`).change(e => {
-                checkOverlap(e.target, $(e.target).hasClass('sign-on') ? 'sign-on' : 'sign-off');
-            });
+            // $(`[name="sign_off${count}"], [name="sign_on${count}"]`).change(e => {
+            //     checkOverlap(e.target, $(e.target).hasClass('sign-on') ? 'sign-on' : 'sign-off');
+            // });
 
             let count2 = $('.ss').length;
 
@@ -252,7 +254,7 @@
                     parent.find(`[name^="principal"]`).val(imo[selectedVessel].pname);
                     parent.find(`[name^="crew_nationality"]`).val(imo[selectedVessel].crew_nationality);
                 }
-            });
+            });     
         }
 
         function checkOverlap(input, type){ 

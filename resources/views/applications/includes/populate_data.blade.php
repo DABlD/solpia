@@ -13,13 +13,6 @@
 	        dateFormat: 'Y-m-d',
 	    };
 
-	    swal({
-	    	title: 'Loading Data...',
-	    	allowOutsideClick: false,
-	    	allowEscapeKey: false,
-	    });
-	    swal.showLoading();
-
 		$('#createForm').append(`<input type="hidden" name="applicant_id" value='{{ $applicant->id }}'>`);
 
 		$('[name="lname"]').val('{{ $applicant->user->lname }}');
@@ -273,7 +266,6 @@
 					});
 					swal.showLoading();
 					
-					getVessels();
 					setTimeout(() => {
 						for(let ctr = 0; ctr < length; ctr++){
 							addSS2();
@@ -299,8 +291,7 @@
 							// inputs[i+8].value       = sss[ctr].trade;
 
 							// Set the value, creating a new option if necessary
-							if(sss[ctr].trade != ""){
-								console.log(sss[ctr].trade);
+							if(sss[ctr].trade != "" && sss[ctr].trade != null){
 								if ($(inputs[i+8]).find("option[value='" + sss[ctr].trade + "']").length) {
 									$(inputs[i+8]).val(sss[ctr].trade).trigger('change');
 								} else { 
@@ -315,7 +306,7 @@
 							// inputs[i+12].value      = sss[ctr].crew_nationality;
 
 							// Set the value, creating a new option if necessary
-							if(sss[ctr].crew_nationality != ""){
+							if(sss[ctr].crew_nationality != "" && sss[ctr].crew_nationality != null){
 								if ($(inputs[i+12]).find("option[value='" + sss[ctr].crew_nationality + "']").length) {
 									$(inputs[i+12]).val(sss[ctr].crew_nationality).trigger('change');
 								} else { 

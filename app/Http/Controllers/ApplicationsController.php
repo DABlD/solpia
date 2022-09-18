@@ -51,15 +51,12 @@ class ApplicationsController extends Controller
            DocumentId::pluck('issuer')->toArray(),
            DocumentLC::pluck('issuer')->toArray()
         );
-
-        $tempRegulations = DocumentLC::pluck('regulation')->toArray();
-        $regulations = array();
                
     	return $this->_view('create', [
             'title'         => 'Add Crew',
             'categories'    => $ranks->groupBy('category'),
             'issuers'       => collect($issuers)->unique()->toArray(),
-            'regulations'   => collect($regulations)->unique()->toArray(),
+            'regulations'   => DocumentLC::where('regulation', '!=', "[]")->pluck('regulation')->unique()->toArray(),
             'religions'     => Applicant::pluck('religion')->unique(),
             'schools'       => EducationalBackground::pluck('school')->unique()
         ]);

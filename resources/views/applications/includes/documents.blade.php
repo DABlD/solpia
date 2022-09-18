@@ -62,54 +62,36 @@
 
         // LOAD ISSUER OPTIONS
         $(document).ready(() => {
-	        $.ajax({
-	        	url: '{{ route('applications.getIssuers') }}',
-	        	success: issuers => {
-	        		issuers = JSON.parse(issuers);
-	        		Object.values(issuers).forEach(issuer => {
-	        			issuerString += `
-	        				<option value="${issuer}">${issuer}</option>
-	        			`;
-	        		});
-	        	}
-	        });
+        	@foreach($issuers as $issuer)
+        		issuerString += `
+        			<option value="{{ $issuer }}">{{ $issuer }}</option>
+        		`;
+        	@endforeach
 
-	        $.ajax({
-	        	url: '{{ route('applications.getRanks') }}',
-	        	success: categories => {
-	        		categories = JSON.parse(categories);
+        	@foreach($regulations as $regulation)
+        		@php
+        			$tempReg = json_decode($regulation)[0] ?? $regulation;
+        		@endphp
+        		regulationString += `
+        			<option value="{{ $tempReg }}">{{ $tempReg }}</option>
+        		`;
+        	@endforeach
 
-	        		Object.values(categories).forEach((ranks, category) => {
-	        			rankString += `<optgroup label="${ranks[0].category}"></optgroup>`;
-	        			Object.values(ranks).forEach(rank => {
-		        			rankString += `
-		        				<option value="${rank.id}">&nbsp;&nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})</option>
-		        			`;
-		        			rankString2 += `
-		        				<option value="${rank.name}">&nbsp;&nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})</option>
-		        			`;
-		        		});
-	        		});
+        	@foreach($categories as $category)
+        		@foreach($category as $rank)
+        			rankString += `
+        				<option value="{{ $rank->id }}">{{ $rank->name }} ({{ $rank->abbr }})</option>
+        			`;
+        			rankString2 += `
+        				<option value="{{ $rank->name }}">{{ $rank->name }} ({{ $rank->abbr }})</option>
+        			`;
+        		@endforeach
+        	@endforeach
 
-	        		$('#rank').append(rankString);
-	        	}
-	        });
-
-	        $.ajax({
-	        	url: '{{ route('applications.getRegulations') }}',
-	        	success: regulations => {
-	        		regulations = JSON.parse(regulations);
-	        		Object.values(regulations).forEach(regulation => {
-	        			regulationString += `
-	        				<option value="${regulation}">${regulation}</option>
-	        			`;
-	        		});
-
-				    @if(isset($edit))
-	        			populate_data();
-				    @endif
-	        	}
-	        });
+        	$('#rank').append(rankString);
+        	@if(isset($edit))
+    			populate_data();
+        	@endif
 	    });
 
         function addDocu(type){
