@@ -107,9 +107,9 @@
                             <strong id="trade${count}Error"></strong>
                         </span>
                     </div>
-                </div>
 
-                <div class="row">
+                    <div class="col-md-12" style="width: 100%;"></div>
+
                     <div class="form-group col-md-3">
                         <label for="previous_salary${count}">Previous Salary</label>
                         <input type="text" class="form-control" name="previous_salary${count}" placeholder="Enter Previous Salary">
@@ -144,9 +144,9 @@
                             <strong id="crew_nationality${count}Error"></strong>
                         </span>
                     </div>
-                </div>
 
-                <div class="row">
+                    <div class="col-md-12" style="width: 100%;"></div>
+                    
                     <div class="form-group col-md-3">
                         <label for="sign_on${count}">Sign On</label>
                         <input type="text" class="form-control sign-on" name="sign_on${count}" placeholder="Sign On Date">

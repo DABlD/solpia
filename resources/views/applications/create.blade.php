@@ -294,7 +294,7 @@
             inputs = $('#sea-services input, #sea-services select');
             let ss = [];
 
-            for(let i = 0; i < inputs.length; i+= 18){
+            for(let i = 0; i < inputs.length; i+= 19){
                 let tempSS = {};
 
                 if($(inputs[i]).is("[data-type]")){
@@ -326,7 +326,6 @@
                 tempSS.remarks          = inputs[i+18].value.toUpperCase();
                 tempSS.total_months     =  moment(new Date(tempSS.sign_off)).diff(new Date(tempSS.sign_on), 'months', true);;
                 ss.push(tempSS);
-                console.log(tempSS);
             }
 
             $('#createForm').append(`
