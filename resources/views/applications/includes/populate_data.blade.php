@@ -176,162 +176,160 @@
 		
 		getVessels();
 		//getAddDetails
-		setTimeout(() => {
-			$.ajax({
-				url: '{{ route("applications.getAddDetails", ['applicant' => $applicant->id]) }}',
-				success: result => {
-					result = JSON.parse(result);
+		
+		$.ajax({
+			url: '{{ route("applications.getAddDetails", ['applicant' => $applicant->id]) }}',
+			success: result => {
+				result = JSON.parse(result);
 
-					let flags = result.document_flag;
-					let lcs   = result.document_lc;
-					let sss   = result.sea_service;
+				let flags = result.document_flag;
+				let lcs   = result.document_lc;
+				let sss   = result.sea_service;
 
-					if(lcs.length > 0){
-						$('#rank').val(lcs[0].rank).trigger('change');
-					}
+				let size = lcs.length;
+				index = 0;
 
-					let size = lcs.length;
-					index = 0;
+				for(let ctr = 0; ctr < lcs.length; ctr++){
+					addDocu('lc');
 
-					for(let ctr = 0; ctr < lcs.length; ctr++){
-						addDocu('lc');
+					let inputs = $('#docu .lc input, #docu .lc select');
 
-						let inputs = $('#docu .lc input, #docu .lc select');
+					i = (index * 10);
 
-						i = (index * 10);
+					checkIfExisting($(inputs[i]), lcs[ctr].type);
+					checkIfExisting($(inputs[i+1]), lcs[ctr].issuer);
 
-						checkIfExisting($(inputs[i]), lcs[ctr].type);
-						checkIfExisting($(inputs[i+1]), lcs[ctr].issuer);
-
-						regulations = JSON.parse(lcs[ctr].regulation);
-						
-						$(inputs[i+2]).val(regulations);
-						$(inputs[i+2]).trigger('change');
-
-						inputs[i+4].value = lcs[ctr].no;
-
-						$(inputs[i+5]).flatpickr(config).setDate(lcs[ctr].issue_date, true);
-						$(inputs[i+7]).flatpickr(config2).setDate(lcs[ctr].expiry_date, true);
-
-						$($(inputs[i+7]).parent().parent()).prepend(`
-							<input type="hidden" name="id-${lcs[ctr].id}" value="${lcs[ctr].id}" data-type="id">
-						`);
-						index++;
-					}
-
-					let keys = Object.keys(flags);
-					length = keys.length;
-
-					let flagDocu = [];
-					for(let ctr = 0; ctr < length; ctr++){
-						addDocu('Flag');
-
-						let country = $($('.docu-country')[ctr]);
-						$(country).val(keys[ctr]).trigger('change');
-					}
+					regulations = JSON.parse(lcs[ctr].regulation);
 					
-					setTimeout(() => {
-						for(let ctr = 0; ctr < keys.length; ctr++){
-							index = 0;
-							flags[keys[ctr]].forEach((data, ctr2) => {0
-								let country = $(`[name="docu-country${(ctr + 1)}"]`);
+					$(inputs[i+2]).val(regulations);
+					$(inputs[i+2]).trigger('change');
 
-								inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
-								i = (index * 7);
+					inputs[i+4].value = lcs[ctr].no;
 
-								checkIfExisting($(inputs[i]), flags[keys[ctr]][ctr2].type);
+					$(inputs[i+5]).flatpickr(config).setDate(lcs[ctr].issue_date, true);
+					$(inputs[i+7]).flatpickr(config2).setDate(lcs[ctr].expiry_date, true);
 
-								inputs[i+1].value = flags[keys[ctr]][ctr2].number;
+					$($(inputs[i+7]).parent().parent()).prepend(`
+						<input type="hidden" name="id-${lcs[ctr].id}" value="${lcs[ctr].id}" data-type="id">
+					`);
+					index++;
+				}
 
+				let keys = Object.keys(flags);
+				length = keys.length;
 
-								$(inputs[i+2]).flatpickr(config).setDate(flags[keys[ctr]][ctr2].issue_date, true);
-								$(inputs[i+4]).flatpickr(config2).setDate(flags[keys[ctr]][ctr2].expiry_date, true);
+				if(lcs.length > 0){
+					$('#rank').val(lcs[0].rank).trigger('change');
+				}
+				else if(flags.length == undefined){
+					$('#rank').val(flags[keys[0]][0].rank).trigger('change');
+				}
 
+				let flagDocu = [];
+				for(let ctr = 0; ctr < length; ctr++){
+					addDocu('Flag');
 
-								$loc = $($($(inputs[i+4]).parent().parent()).children()[(ctr2 * 4) + ctr2]);
-
-								$loc.before(`
-									<input type="hidden" name="id-${flags[keys[ctr]][ctr2].id}" value="${flags[keys[ctr]][ctr2].id}" data-type="id">
-								`);
-								index++;
-							});
-						}
-					}, 1000);
-					
-					length = sss.length;
-					swal({
-						title: 'Loading Sea Services...',
-						allowOutsideClick: false,
-						allowEscapeKey: false,
-					});
-					swal.showLoading();
-					
-					setTimeout(() => {
-						for(let ctr = 0; ctr < length; ctr++){
-							addSS2();
-						}
-
-						// length ? $('[name="imo1"]').select2('open') : '';
-					
+					let country = $($('.docu-country')[ctr]);
+					$(country).val(keys[ctr]).trigger('change');
+				}
+				setTimeout(() => {
+					for(let ctr = 0; ctr < keys.length; ctr++){
 						index = 0;
-						for(let ctr = 0; ctr < length; ctr++){
-							inputs = $('#sea-services input, #sea-services select');
-							i = (index * 19);
-							
-							$(inputs[i]).val(sss[ctr].imo).trigger('change');
-							// checkIfExisting($(inputs[i+1]), sss[ctr].vessel_name);
-							$(inputs[i+1]).val(sss[ctr].vessel_name);
-							$(inputs[i+2]).val(sss[ctr].rank).trigger('change');
-							
-							inputs[i+3].value       = sss[ctr].vessel_type;
-							inputs[i+4].value       = sss[ctr].gross_tonnage;
-							inputs[i+5].value       = sss[ctr].engine_type;
-							inputs[i+6].value       = sss[ctr].bhp_kw;
-							inputs[i+7].value       = sss[ctr].flag;
-							// inputs[i+8].value       = sss[ctr].trade;
+						flags[keys[ctr]].forEach((data, ctr2) => {
+							let country = $(`[name="docu-country${(ctr + 1)}"]`);
 
-							// Set the value, creating a new option if necessary
-							if(sss[ctr].trade != "" && sss[ctr].trade != null){
-								if ($(inputs[i+8]).find("option[value='" + sss[ctr].trade + "']").length) {
-									$(inputs[i+8]).val(sss[ctr].trade).trigger('change');
-								} else { 
-								    var newOption = new Option(sss[ctr].trade, sss[ctr].trade, true, true);
-								    $(inputs[i+8]).append(newOption).trigger('change');
-								} 
-							}
+							inputs = $(`.flag${$(country).data('fdcount')}-documents input`);
+							i = (index * 7);
 
-							inputs[i+9].value       = sss[ctr].previous_salary;
-							inputs[i+10].value      = sss[ctr].manning_agent;
-							inputs[i+11].value      = sss[ctr].principal;
-							// inputs[i+12].value      = sss[ctr].crew_nationality;
+							checkIfExisting($(inputs[i]), flags[keys[ctr]][ctr2].type);
+							inputs[i+1].value = flags[keys[ctr]][ctr2].number;
 
-							// Set the value, creating a new option if necessary
-							if(sss[ctr].crew_nationality != "" && sss[ctr].crew_nationality != null){
-								if ($(inputs[i+12]).find("option[value='" + sss[ctr].crew_nationality + "']").length) {
-									$(inputs[i+12]).val(sss[ctr].crew_nationality).trigger('change');
-								} else { 
-								    var newOption = new Option(sss[ctr].crew_nationality, sss[ctr].crew_nationality, true, true);
-								    $(inputs[i+12]).append(newOption).trigger('change');
-								}
-							}
 
-							$(inputs[i+13]).flatpickr(config).setDate(sss[ctr].sign_on, true);
-							$(inputs[i+15]).flatpickr(config).setDate(sss[ctr].sign_off, true);
+							$(inputs[i+2]).flatpickr(config).setDate(flags[keys[ctr]][ctr2].issue_date, true);
+							$(inputs[i+4]).flatpickr(config2).setDate(flags[keys[ctr]][ctr2].expiry_date, true);
 
-							inputs[i+17].value      = sss[ctr].remarks;
 
-							// $(inputs[i]).select2('close');
+							$loc = $($($(inputs[i+4]).parent().parent()).children()[(ctr2 * 4) + ctr2]);
 
-							$($(inputs[i+17]).parent().parent()).prepend(`
-								<input type="hidden" name="id-${sss[ctr].id}" value="${sss[ctr].id}" data-type="id">
+							$loc.before(`
+								<input type="hidden" name="id-${flags[keys[ctr]][ctr2].id}" value="${flags[keys[ctr]][ctr2].id}" data-type="id">
 							`);
 							index++;
-						}
-
-						swal.close();
-					}, 2000);
+						});
+					}
+				}, 1000);
+				
+				length = sss.length;
+				swal({
+					title: 'Loading Sea Services...',
+					allowOutsideClick: false,
+					allowEscapeKey: false,
+				});
+				swal.showLoading();
+				
+				for(let ctr = 0; ctr < length; ctr++){
+					addSS2();
 				}
-			})
+
+				// length ? $('[name="imo1"]').select2('open') : '';
+			
+				index = 0;
+				for(let ctr = 0; ctr < length; ctr++){
+					inputs = $('#sea-services input, #sea-services select');
+					i = (index * 19);
+					
+					$(inputs[i]).val(sss[ctr].imo).trigger('change');
+					// checkIfExisting($(inputs[i+1]), sss[ctr].vessel_name);
+					$(inputs[i+1]).val(sss[ctr].vessel_name);
+					$(inputs[i+2]).val(sss[ctr].rank).trigger('change');
+					
+					inputs[i+3].value       = sss[ctr].vessel_type;
+					inputs[i+4].value       = sss[ctr].gross_tonnage;
+					inputs[i+5].value       = sss[ctr].engine_type;
+					inputs[i+6].value       = sss[ctr].bhp_kw;
+					inputs[i+7].value       = sss[ctr].flag;
+					// inputs[i+8].value       = sss[ctr].trade;
+
+					// Set the value, creating a new option if necessary
+					if(sss[ctr].trade != "" && sss[ctr].trade != null){
+						if ($(inputs[i+8]).find("option[value='" + sss[ctr].trade + "']").length) {
+							$(inputs[i+8]).val(sss[ctr].trade).trigger('change');
+						} else { 
+						    var newOption = new Option(sss[ctr].trade, sss[ctr].trade, true, true);
+						    $(inputs[i+8]).append(newOption).trigger('change');
+						} 
+					}
+
+					inputs[i+9].value       = sss[ctr].previous_salary;
+					inputs[i+10].value      = sss[ctr].manning_agent;
+					inputs[i+11].value      = sss[ctr].principal;
+					// inputs[i+12].value      = sss[ctr].crew_nationality;
+
+					// Set the value, creating a new option if necessary
+					if(sss[ctr].crew_nationality != "" && sss[ctr].crew_nationality != null){
+						if ($(inputs[i+12]).find("option[value='" + sss[ctr].crew_nationality + "']").length) {
+							$(inputs[i+12]).val(sss[ctr].crew_nationality).trigger('change');
+						} else { 
+						    var newOption = new Option(sss[ctr].crew_nationality, sss[ctr].crew_nationality, true, true);
+						    $(inputs[i+12]).append(newOption).trigger('change');
+						}
+					}
+
+					$(inputs[i+13]).flatpickr(config).setDate(sss[ctr].sign_on, true);
+					$(inputs[i+15]).flatpickr(config).setDate(sss[ctr].sign_off, true);
+
+					inputs[i+17].value      = sss[ctr].remarks;
+
+					// $(inputs[i]).select2('close');
+
+					$($(inputs[i+17]).parent().parent()).prepend(`
+						<input type="hidden" name="id-${sss[ctr].id}" value="${sss[ctr].id}" data-type="id">
+					`);
+					index++;
+				}
+
+				swal.close();
+			}
 		})
 	}
 
