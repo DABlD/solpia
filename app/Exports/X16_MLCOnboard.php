@@ -15,7 +15,7 @@ class X16_MLCOnboard implements WithMultipleSheets
         $ranks = Rank::get()->groupBy('id');
         $wage = Wage::where('vessel_id', $vessel->id)->get()->groupBy("rank_id");
 
-        $lucs = LineUpContract::where("vessel_id", $vessel->id)->where("status", "On Board")->select("applicant_id", "joining_date", "months", 'vessel_id')->get();
+        $lucs = LineUpContract::where("vessel_id", $vessel->id)->where("status", "On Board")->select("applicant_id", "joining_date", "months", 'vessel_id', 'extensions')->get();
         $applicants = Applicant::find($lucs->pluck("applicant_id")->toArray());
 
         $lucs = $lucs->groupBy("applicant_id");
@@ -44,10 +44,26 @@ class X16_MLCOnboard implements WithMultipleSheets
                 }
             }
 
+            $date = $lucs[$applicant->id][0]["joining_date"];
+            $months = $lucs[$applicant->id][0]["months"];
+            $extensions = $lucs[$applicant->id][0]["extensions"];
+
+            if($extensions){
+                $extensions = json_decode($extensions);
+                $date = now()->parse($date)->add($months, 'months');
+
+                for($i = 0, $j = 1; $i < sizeof($extensions); $i++, $j++){
+                    $months = $extensions[$i];
+                    if($j < sizeof($extensions)){
+                        $date = $date->add($months, 'months');
+                    }
+                }
+            }
+
             $applicant->date_processed    = now()->toDateString();
-            $applicant->effective_date    = $lucs[$applicant->id][0]["joining_date"]->toDateString();
-            $applicant->employment_months = $lucs[$applicant->id][0]["months"];
-            $applicant->valid_till        = $lucs[$applicant->id][0]["joining_date"]->add($lucs[$applicant->id][0]["months"], "months");
+            $applicant->effective_date    = $date->toDateString();
+            $applicant->employment_months = $months;
+            $applicant->valid_till        = $date->add($months, "months");
         }
 
         $this->principal = Principal::find($vessel->principal_id)->name;

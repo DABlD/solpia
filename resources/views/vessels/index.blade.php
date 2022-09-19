@@ -1845,7 +1845,7 @@
                     });
 
                     $('#remark').on('select2:open', () => {
-                        $('.select2-container').css('z-index', 1060);
+                        $('.select2 .select2-container').css('z-index', 1060);
                     });
                 },
                 width: '50%',
@@ -3104,7 +3104,16 @@
                             altInput: true,
                             altFormat: 'F j, Y',
                             dateFormat: 'Y-m-d',
-                        })
+                        });
+
+                        $('#remark').select2({
+                            placeholder: 'Select Remark',
+                            tags: true
+                        });
+
+                        $('#remark').on('select2:open', () => {
+                            $('.select2 .select2-container').css('z-index', 1060);
+                        });
                     },
                     preConfirm: () => {
                         swal.showLoading();

@@ -1264,7 +1264,7 @@ class ApplicationsController extends Controller
         if($type == "OnBoardVessel"){
             $ad = ['a.id', 'a.remarks'];
             $cd = ['fname', 'lname', 'suffix', 'mname', 'birthday'];
-            $lud = ['joining_date', 'joining_port', 'months', 'reliever'];
+            $lud = ['joining_date', 'joining_port', 'months', 'reliever', 'extensions'];
             $rd = ['abbr'];
 
             $applicant = LineUpContract::where([

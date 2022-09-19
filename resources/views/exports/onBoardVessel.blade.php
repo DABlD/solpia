@@ -33,6 +33,20 @@
 	</tr>
 
 	@foreach($data as $crew)
+		@php
+			$cd = $crew->months;
+			$cd2 = $crew->months;
+
+			if($crew->extensions){
+				$tempExt = json_decode($crew->extensions);
+				foreach($tempExt as $ext){
+					$cd = $cd . "+$ext";
+					$cd2 += (int)$ext;
+				}
+			}
+
+			$dd = now()->parse($crew->joining_date)->add($cd2, 'months');
+		@endphp
 		<tr>
 			<td></td>
 			<td>{{ $loop->iteration }}</td>
@@ -41,8 +55,8 @@
 			<td>{{ $crew->age }}</td>
 			<td>{{ $crew->joining_date->format('d-M-y') }}</td>
 			<td>{{ $crew->joining_date->diffInMonths(now()) }}</td>
-			<td>{{ $crew->months }}</td>
-			<td>{{ $crew->joining_date->addMonths($crew->months)->format('d-M-y') }}</td>
+			<td>{{ $cd }}</td>
+			<td>{{ $dd->format('d-M-y') }}</td>
 			<td>{{ verifyDate($crew->{"PASSPORT"}) }}</td>
 			<td>{{ verifyDate($crew->{"SEAMAN'S BOOK"}) }}</td>
 			<td>{{ verifyDate($crew->{"US-VISA"}) }}</td>
