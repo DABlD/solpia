@@ -252,7 +252,11 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 }
             }
             elseif($type == "kos_bul_lib"){
-                if($rank == "BSN" || $rank == "AB"){
+                if($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 63;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "BSN" || $rank == "AB"){
                     $this->rows    = 48;
                     $this->view    = "BSN_AB";
                 }
