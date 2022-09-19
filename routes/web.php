@@ -128,6 +128,7 @@ Route::group([
 		Route::post("$name/updateStatus/{id?}/{status?}/{vessel_id?}", ucfirst($name) . 'Controller@updateStatus')->name("$name.updateStatus");
 		Route::get("$name/updateProApp", ucfirst($name) . 'Controller@updateProApp')->name("$name.updateProApp");
 		Route::get("$name/updateContract", ucfirst($name) . 'Controller@updateContract')->name("$name.updateContract");
+		Route::get("$name/extendContract", ucfirst($name) . 'Controller@extendContract')->name("$name.extendContract");
 
 		// SELECTING RELIEVER
 		Route::post("$name/updateLineUpContract", ucfirst($name) . 'Controller@updateLineUpContract')->name("$name.updateLineUpContract");

@@ -1196,6 +1196,27 @@ class ApplicationsController extends Controller
         echo LineUpContract::where($req->col, $req->val)->update($req->update);
     }
 
+    function extendContract(Request $req){
+        $lup = LineUpContract::where([
+            ["applicant_id", '=', $req->id],
+            ["status", '=', "On Board"],
+            ["disembarkation_date", '=', null],
+        ])->first();
+
+        $temp = $lup->extensions;
+
+        if($temp){
+            $temp = json_decode($temp);
+            array_push($temp, $req->months);
+            $lup->extensions = json_encode($temp);
+        }
+        else{
+            $lup->extensions = json_encode([$req->months]);
+        }
+
+        echo $lup->save();
+    }
+
     function exportOnOff($id, $type, Request $req){
         $vesselCrew = $this->getVesselCrew(new Request(), $id);
 

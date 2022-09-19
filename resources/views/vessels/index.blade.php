@@ -1341,7 +1341,7 @@
                             'max-width': '120px'
                         });
 
-                        $('.actions').css('width', '150px');
+                        $('.actions').css('width', '100px');
 
                         $('[id^=table-select-]').on('change', e => {
                             let input = $(e.target);
@@ -1629,6 +1629,17 @@
                     `;
                 }
 
+                let cd = crew.months;
+                let cd2 = crew.months;
+                if(crew.extensions){
+                    let tempExt = JSON.parse(crew.extensions);
+                    tempExt.forEach(ext => {
+                        cd += `+${ext}`;
+                        cd2 += parseInt(ext);
+                    });
+                }
+
+
                 table2 += `
                     <tr>
                         <td>${index + 1}</td>
@@ -1637,8 +1648,8 @@
                         <td>${crew.age}</td>
                         <td>${moment(crew.joining_date).format('DD-MMM-YY')}</td>
                         <td>${moment().diff(moment(crew.joining_date), 'months')}</td>
-                        <td>${crew.months}</td>
-                        <td>${moment(crew.joining_date).add(crew.months, 'months').format('DD-MMM-YY')}</td>
+                        <td>${cd}</td>
+                        <td>${moment(crew.joining_date).add(cd2, 'months').format('DD-MMM-YY')}</td>
                         <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('DD-MMM-YY') : '-----'}</td>
@@ -1652,6 +1663,9 @@
                             </a>
                             <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit On Board Details" onClick='eod(${crew.id}, ${crew.vessel_id}, "${crew.joining_date}", ${crew.months}, "${crew.joining_port ?? ""}")'>
                                 <span class="fa fa-pencil fa-sm"></span>
+                            </a>
+                            <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Extend Contract" onClick="extendContract(${crew.applicant_id}, ${crew.vessel_id})">
+                                <span class="fa fa-calendar-plus-o"></span>
                             </a>
                             <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id}, '${crew.joining_date}', ${crew.months})">
                                 <span class="fa fa-arrow-down fa-sm"></span>
@@ -2569,8 +2583,23 @@
                             let date = moment().format('YYYY-MM-DD');
 
                             if(result.lup){
-                                date = result.lup.joining_date;
-                                $('#employment_months').val(result.lup.months);
+                                date = moment(result.lup.joining_date);
+                                months = result.lup.months;
+
+                                if(result.lup.extensions){
+                                    let extensions = JSON.parse(result.lup.extensions);
+                                    date = date.add(result.lup.months, 'months');
+
+                                    for(i = 0, j = 1; i < extensions.length; i++, j++){
+                                        months = extensions[i];
+                                        if(j < extensions.length){
+                                            date = date.add(months, 'months');
+                                        }
+                                    }
+                                }
+                                
+                                date = date.format("YYYY-MM-DD");
+                                $('#employment_months').val(months);
                             }
                             else{
                                 date = result.pro_app.eld;
@@ -3602,6 +3631,45 @@
             };
 
             window.location.href = `{{ route('applications.exportDocument') }}/1/X16_MLCOnboard?` + $.param(data);
+        }
+
+        function extendContract(id, vid){
+            swal({
+                title: 'Months to Extend',
+                input: "number",
+                preConfirm: months => {
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+
+                            if(months == ""){
+                                swal.showValidationError('Input is empty');
+                            }
+                        resolve()}, 500);
+                    });
+                }
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('applications.extendContract') }}',
+                        data: {
+                            id: id,
+                            months: result.value
+                        },
+                        success: () => {
+                            swal({
+                                type: 'success',
+                                title: 'Contract Successfully Updated',
+                                showConfirmButton: false,
+                                timer: 800
+                            }).then(() => {
+                                getVesselCrew(vid, true);
+                                $('[href=".onBoard"]').click();
+                            });
+
+                        }
+                    })
+                }
+            });
         }
     </script>
 @endpush
