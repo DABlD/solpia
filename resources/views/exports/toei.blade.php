@@ -613,7 +613,7 @@
 					$rname = "ABLE SEAFARER ENGINE";
 				}
 				else{
-					$rname = $applicant->rank->name;
+					$rname = $applicant->ranks2[$applicant->document_flag->first()->rank];
 					if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
 						$rname = "WIPER";
 					}
@@ -662,6 +662,8 @@
 			else{
 				$rname = "-----";
 			}
+
+			// dd($applicant->rank);
 		@endphp
 
 		<tr>
