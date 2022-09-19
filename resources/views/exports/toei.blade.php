@@ -21,12 +21,21 @@
 		$rank = $applicant->rank_id;
 	}
 	else{
-		if(isset($applicant->rank)){
-			$rank = $applicant->rank->id;
+		if(isset($crewRank)){
+			$rank = $crewRank->id;
 		}
 		else{
 			$rank = 0;
 		}
+	}
+
+	// SET CREW RANK
+	$crewRank = null;
+	if($applicant->document_flag->count()){
+		$crewRank = $applicant->ranks2[$applicant->document_flag->first()->rank][0];
+	}
+	else{
+		$crewRank = $applicant->rank;
 	}
 @endphp
 
@@ -89,7 +98,7 @@
 			<td>Code No.:</td>
 			<td></td>
 			<td>Rank:</td>
-			<td>{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}</td>
+			<td>{{ isset($crewRank) ? $crewRank->abbr : '-----' }}</td>
 			<td>Date Employed:</td>
 			<td></td>
 			<td>Vessel:</td>
@@ -132,9 +141,9 @@
 
 		<tr>
 			<td>Birth Date:</td>
-			<td>{{ $applicant->user->birthday->format('d-M-y') }}</td>
+			<td>{{ $applicant->user->birthday ? $applicant->user->birthday->format('d-M-y') : "" }}</td>
 			<td>Age:</td>
-			<td>{{ $applicant->user->birthday->diffInYears(now()) }}</td>
+			<td>{{ $applicant->user->birthday ? $applicant->user->birthday->diffInYears(now()) : "" }}</td>
 			<td>Birth Place:</td>
 			<td colspan="2">{{ $applicant->birth_place }}</td>
 			<td>Nationality:</td>
@@ -290,10 +299,10 @@
 
 			$hl = null;
 			$docu = null;
-			$rt = str_starts_with($applicant->rank->category, "ENGINE") ? "er" : "dr";
+			$rt = str_starts_with($crewRank->category, "ENGINE") ? "er" : "dr";
 
-			if($applicant->rank){
-				if($applicant->rank->category == "GALLEY"){
+			if($crewRank){
+				if($crewRank->category == "GALLEY"){
 					foreach($applicant->document_lc as $lc){
 						if($lc->type == "NCIII"){
 							$docu = $lc;
@@ -306,7 +315,7 @@
 				}
 				else{
 					foreach($applicant->document_lc as $lc){
-						if(str_starts_with($lc->type, "COC")){
+						if(str_starts_with($lc->type, "COC") || str_starts_with($lc->type, "COE")){
 							$regulations = json_decode($lc->regulation);
 
 							foreach($regs[$rt] as $key => $ref){
@@ -314,21 +323,22 @@
 									if($hl){
 										if($key > $hl){
 											$hl = $key;
-											if($hl >= 2){
-												$docu = $lc;
-											}
+											$docu = $lc;
+											// IF FOR OFFICERS ONLY
+											// if($hl >= 2){
+											// }
 										}
 									}
 									else{
 										$hl = $key;
-										if($hl >= 2){
-											$docu = $lc;
-										}
+										$docu = $lc;
+										// IF FOR OFFICERS ONLY
+										// if($hl >= 2){
+										// }
 									}
 								}
 							}
 						}
-						echo '<br>';
 					}
 				}
 			}
@@ -341,8 +351,8 @@
 				NATIONAL
 			</td>
 			<td colspan="2">
-				@if(isset($applicant->rank) && $docu)
-					{{-- @if($hl == 0 && $hl !== null)
+				@if(isset($crewRank) && $docu)
+					@if($hl == 0 && $hl !== null)
 						@if($rt == "er")
 							ENGINEERING WATCHKEEPING
 						@else
@@ -354,8 +364,7 @@
 						@else
 							ABLE SEAFARER DECK
 						@endif
-					@elseif($hl == 2) --}}
-					@if($hl == 2)
+					@elseif($hl == 2)
 						@if($rt == "er")
 							OIC-ENGINEERING WATCH
 						@else
@@ -376,13 +385,13 @@
 							@endif
 						@endif
 				 	{{-- GALLEY --}}
-					@elseif($applicant->rank->id == 24)
+					@elseif($crewRank->id == 24)
 						COOK
-					@elseif($applicant->rank->id == 27 || $applicant->rank->id == 28)
+					@elseif($crewRank->id == 27 || $crewRank->id == 28)
 						MESSMAN
 					@else
 						@php
-							$rname = $applicant->rank->name;
+							$rname = $crewRank->name;
 							if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
 								$rname = "WIPER";
 							}
@@ -397,12 +406,12 @@
 			<td>{{ $docu ? strtoupper($docu->no) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ (isset($applicant->rank) && $applicant->rank->category == "GALLEY") ? $docu->issuer ?? "MARINA" : "MARINA" }}</td>
+			<td colspan="2">{{ (isset($crewRank) && $crewRank->category == "GALLEY") ? $docu->issuer ?? "MARINA" : "MARINA" }}</td>
 		</tr>
 
 		@php 
 			$docu2 = false;
-			if($applicant->rank->type == "OFFICER"){
+			if($crewRank->type == "OFFICER"){
 				foreach($applicant->document_flag as $document){
 				    if($document->country == "Panama" && $document->type == "LICENSE"){
 				        $docu2 = $document;
@@ -414,7 +423,7 @@
 		<tr>
 			<td colspan="2">PANAMA</td> 
 			<td colspan="2">
-				@if(isset($applicant->rank) && $docu2)
+				@if(isset($crewRank) && $docu2)
 					@if($hl == 0)
 						@if($rt == "er")
 							ENGINEERING WATCHKEEPING
@@ -448,13 +457,13 @@
 							@endif
 						@endif
 				 	{{-- GALLEY --}}
-					@elseif($applicant->rank->id == 24)
+					@elseif($crewRank->id == 24)
 						SHIP'S COOK
-					@elseif($applicant->rank->id == 27 || $applicant->rank->id == 28)
+					@elseif($crewRank->id == 27 || $crewRank->id == 28)
 						STEWARD
 					@else
 						@php
-							$rname = $applicant->rank->name;
+							$rname = $crewRank->name;
 							if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
 								$rname = "WIPER";
 							}
@@ -471,7 +480,7 @@
 			<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
-			<td colspan="2">{{ $applicant->rank->type == "OFFICER" ? "PANAMA" : "NOT APPLICABLE" }}</td>
+			<td colspan="2">{{ $crewRank->type == "OFFICER" ? "PANAMA" : "NOT APPLICABLE" }}</td>
 		</tr>
 
 		@php 
@@ -613,47 +622,47 @@
 					$rname = "ABLE SEAFARER ENGINE";
 				}
 				else{
-					$rname = $applicant->ranks2[$applicant->document_flag->first()->rank];
+					$rname = $applicant->ranks2[$applicant->document_flag->first()->rank][0]->name;
 					if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
 						$rname = "WIPER";
 					}
 					elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
 						$rname = "ORDINARY SEAMAN";
 					}
-					elseif($applicant->rank->id == 24){
+					elseif($crewRank->id == 24){
 						$rname = "SHIP'S COOK";
 					}
-					elseif($applicant->rank->id == 27 || $applicant->rank->id == 28){
+					elseif($crewRank->id == 27 || $crewRank->id == 28){
 						$rname = "STEWARD";
 					}
-					elseif($applicant->rank->id == 3 || $applicant->rank->id == 4){
+					elseif($crewRank->id == 3 || $crewRank->id == 4){
 						$rname = "OIC-NAVIGATIONAL WATCH";
 					}
-					elseif($applicant->rank->id == 7 || $applicant->rank->id == 8){
+					elseif($crewRank->id == 7 || $crewRank->id == 8){
 						$rname = "OIC-ENGINEERING WATCH";
 					}
 
 					$rname = $rname == "MASTER" ? "MASTER MARINER" : $rname;
 				}
 			}
-			elseif(isset($applicant->rank)){
-				$rname = $applicant->rank->name;
+			elseif(isset($crewRank)){
+				$rname = $crewRank->name;
 				if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
 					$rname = "WIPER";
 				}
 				elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
 					$rname = "ORDINARY SEAMAN";
 				}
-				elseif($applicant->rank->id == 24){
+				elseif($crewRank->id == 24){
 					$rname = "SHIP'S COOK";
 				}
-				elseif($applicant->rank->id == 27 || $applicant->rank->id == 28){
+				elseif($crewRank->id == 27 || $crewRank->id == 28){
 					$rname = "STEWARD";
 				}
-				elseif($applicant->rank->id == 3 || $applicant->rank->id == 4){
+				elseif($crewRank->id == 3 || $crewRank->id == 4){
 					$rname = "OIC-NAVIGATIONAL WATCH";
 				}
-				elseif($applicant->rank->id == 7 || $applicant->rank->id == 8){
+				elseif($crewRank->id == 7 || $crewRank->id == 8){
 					$rname = "OIC-ENGINEERING WATCH";
 				}
 
@@ -924,7 +933,7 @@
 		@php 
 			$docu = false;
 
-			if(isset($applicant->rank)){
+			if(isset($crewRank)){
 				$tempDocu = null;
 
 				foreach($applicant->document_lc as $document){
@@ -1018,8 +1027,8 @@
 
 		{{-- 13TH --}}
 		@php 
-			if(isset($applicant->rank)){
-				if(str_contains($applicant->rank->category, "DECK")){
+			if(isset($crewRank)){
+				if(str_contains($crewRank->category, "DECK")){
 					$name = 'SSBT WITH BRM';
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 
@@ -1051,7 +1060,7 @@
 
 		<tr>
 			<td colspan="4">
-				@if(isset($applicant->rank) && str_contains($applicant->rank->category, "DECK"))
+				@if(isset($crewRank) && str_contains($crewRank->category, "DECK"))
 					SSBT W/ BRM
 				@else
 					ERS W/ ERM
@@ -1069,8 +1078,8 @@
 			$rr1 = null;
 			$rr2 = null;
 
-			if(isset($applicant->rank)){
-				$tRank = $applicant->rank->id;
+			if(isset($crewRank)){
+				$tRank = $crewRank->id;
 
 				if($tRank == 10 || $tRank == 11){
 					$rr1 = "II/4";
@@ -1094,7 +1103,7 @@
 			}
 		@endphp
 
-		@if($applicant->rank)
+		@if($crewRank)
 			@if($tRank == 10 || $tRank == 16 || ($tRank == 11 && $hl == 2) || ($tRank == 17 && $hl == 2))
 				<tr>
 					<td colspan="4">
@@ -1272,8 +1281,8 @@
 				<td>Poor</td>
 				<td>Unsuitable</td>
 				<td>
-					@if(isset($applicant->rank))
-						@if(str_contains($applicant->rank->category, 'OFFICER'))
+					@if(isset($crewRank))
+						@if(str_contains($crewRank->category, 'OFFICER'))
 							GOOD
 						@else
 							ACCEPTABLE
@@ -1298,8 +1307,8 @@
 		@foreach(['Training for SMS', 'Experience for SMS'] as $row)
 			<tr>
 				<td colspan="4">{{ $row }}</td>
-				@if(isset($applicant->rank))
-					@if(str_contains($applicant->rank->category, 'OFFICER'))
+				@if(isset($crewRank))
+					@if(str_contains($crewRank->category, 'OFFICER'))
 						<td>-</td>
 						<td colspan="2">-</td>
 						<td colspan="2">
@@ -1402,8 +1411,8 @@
 				</td>
 				<td>{{ $applicant->ranks[$data->rank] }}</td>
 				<td>
-					@if(isset($applicant->rank))
-						@if(str_starts_with($applicant->rank->category, 'ENGINE'))
+					@if(isset($crewRank))
+						@if(str_starts_with($crewRank->category, 'ENGINE'))
 							{{ $data->engine_type }} {{ $data->bhp_kw != 0 ? "/ " . $data->bhp_kw : "" }}
 						@else
 							@if($data->vessel_name != "")

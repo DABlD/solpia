@@ -482,7 +482,7 @@ class ApplicationsController extends Controller
         $applicant->load('document_med');
 
         $applicant->ranks = Rank::pluck('abbr', 'name');
-        $applicant->ranks2 = Rank::pluck('name', 'id');
+        $applicant->ranks2 = Rank::all()->groupBy('id');
         $applicant->ranks[''] = '';
 
         foreach(['document_id', 'document_flag', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
