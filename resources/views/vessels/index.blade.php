@@ -1638,7 +1638,7 @@
                         cd2 += parseInt(ext);
                     });
                 }
-
+                let disembarkation_date = moment(crew.joining_date).add(cd2, 'months');
 
                 table2 += `
                     <tr>
@@ -1649,7 +1649,7 @@
                         <td>${moment(crew.joining_date).format('DD-MMM-YY')}</td>
                         <td>${moment().diff(moment(crew.joining_date), 'months')}</td>
                         <td>${cd}</td>
-                        <td>${moment(crew.joining_date).add(cd2, 'months').format('DD-MMM-YY')}</td>
+                        <td>${disembarkation_date.format('DD-MMM-YY')}</td>
                         <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('DD-MMM-YY') : '-----'}</td>
@@ -1667,7 +1667,7 @@
                             <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Extend Contract" onClick="extendContract(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-calendar-plus-o"></span>
                             </a>
-                            <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id}, '${crew.joining_date}', ${crew.months})">
+                            <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id}, '${disembarkation_date.format('YYYY-MM-DD')}')">
                                 <span class="fa fa-arrow-down fa-sm"></span>
                             </a>
                             ${onBoardButton}
@@ -1792,7 +1792,7 @@
             });
         };
 
-        function offBoard(id, vessel_id, joining_date, months){
+        function offBoard(id, vessel_id, date){
             swal({
                 title: 'Disembarkation Details',
                 html: `
@@ -1841,7 +1841,7 @@
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
-                        defaultDate: moment(joining_date).add("months", months).subtract("day", 1).format("YYYY-MM-DD")
+                        defaultDate: date
                     });
 
                     $('#remark').on('select2:open', () => {
