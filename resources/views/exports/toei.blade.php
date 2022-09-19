@@ -397,7 +397,7 @@
 			<td>{{ $docu ? strtoupper($docu->no) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ (isset($applicant->rank) && $applicant->rank->category == "GALLEY") ? $docu->issuer : "MARINA" }}</td>
+			<td colspan="2">{{ (isset($applicant->rank) && $applicant->rank->category == "GALLEY") ? $docu->issuer ?? "MARINA" : "MARINA" }}</td>
 		</tr>
 
 		@php 
