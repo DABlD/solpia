@@ -1393,7 +1393,7 @@
 
 		@php
 			$applicant->sea_service = $applicant->sea_service->reverse()->take(12)->reverse();
-		@endphp
+;		@endphp
 		@foreach($applicant->sea_service as $key => $data)
 			<tr>
 				<td colspan="2">{{ $data->vessel_name }}</td>
@@ -1423,7 +1423,7 @@
 						@endif
 					@endif
 				</td>
-				<td>{{ $data->trade ? "WORLDWIDE" : "" }}</td>
+				<td>{{ $data->trade ? $data->trade : "" }}</td>
 				<td>{{ $data->principal }}</td>
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "" }}</td>
 				{{-- <td>{{ $data->sign_off != "" ? $data->sign_off->format('d-m-Y') : "" }}</td> --}}
