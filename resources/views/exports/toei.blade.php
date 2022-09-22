@@ -1390,7 +1390,7 @@
 		</tr>
 
 		@php
-			$applicant->sea_service = $applicant->sea_service->reverse()->take(10)->reverse();
+			$applicant->sea_service = $applicant->sea_service->reverse()->take(12)->reverse();
 		@endphp
 		@foreach($applicant->sea_service as $key => $data)
 			<tr>

@@ -410,6 +410,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 if($this->applicant->rank){
                     // DECK
                     $rid = $this->applicant->rank->id;
+
                     if(($rid == 10 && $hl) || ($rid == 16 && $hl) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
                         $start = $raoc;
                         $end = $raoc;
@@ -421,7 +422,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     elseif(in_array($rid, [10,16]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
                         $start = $raoc;
                         $end = $raoc;
-                        // $raoc += 1;
+                        $raoc += 1;
                         $temp += 1;
                     }
                 }
@@ -620,8 +621,8 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 // SH3 ROWS
                 $sh3Rows = array();
                 $temp = $this->applicant->sea_service->count();
-                if($temp > 10){
-                    $temp = 10;
+                if($temp > 12){
+                    $temp = 12;
                 }
                 $rash3 = $rash2 + ($temp * 2) + 1; //Row # AFTER sh2;
 
@@ -891,8 +892,8 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $event->sheet->getDelegate()->getStyle("E1:E100")->getFont()->setSize(8.5);
                 $event->sheet->getDelegate()->getStyle("E1:E130")->getFont()->setName('Times New Roman');
                 
-                // $event->sheet->getDelegate()->getStyle("G22")->getFont()->setName('Times New Roman');
-                // $event->sheet->getDelegate()->getStyle("G22")->getFont()->setSize(8.5);
+                $event->sheet->getDelegate()->getStyle("G22")->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle("G22")->getFont()->setSize(8.5);
 
                 // SET PRINT AREA
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
