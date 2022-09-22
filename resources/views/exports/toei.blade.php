@@ -31,11 +31,13 @@
 
 	// SET CREW RANK
 	$crewRank = null;
-	if($applicant->document_flag->count()){
-		$crewRank = $applicant->ranks2[$applicant->document_flag->first()->rank][0];
+	if(isset($applicant->vessel)){
+		$crewRank = $applicant->rank;
 	}
 	else{
-		$crewRank = $applicant->rank;
+		if($applicant->document_flag->count()){
+			$crewRank = $applicant->ranks2[$applicant->document_flag->first()->rank][0];
+		}
 	}
 @endphp
 
