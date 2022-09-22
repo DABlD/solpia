@@ -14,7 +14,7 @@ class AlterLupAddExtensions extends Migration
     public function up()
     {
         Schema::table('line_up_contracts', function (Blueprint $table) {
-            $table->json('extensions')->nullable()->after('months');
+            $table->text('extensions')->nullable()->after('months');
         });
     }
 
