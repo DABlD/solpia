@@ -156,8 +156,8 @@
                         </span>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="fd-email${count}">Email</label>
-                        <input type="email" class="${fd_class3} ${email}" name="${email}${count}" placeholder="Enter Email">
+                        <label for="fd-email${count}">Contact (Email, Tel, Mobile, etc.)</label>
+                        <input type="email" class="${fd_class3} ${email}" name="${email}${count}" placeholder="Enter Contact">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="fd-email${count}Error"></strong>
                         </span>
