@@ -1477,6 +1477,21 @@ class ApplicationsController extends Controller
         echo json_encode($applicant);
     }
 
+    public function testFunc(){
+        // $applicants = DocumentFlag::where('type', 'SDSD')->get()->groupBy('applicant_id');
+        // foreach($applicants as $key => $applicant){
+        //     if(sizeof($applicant) > 1){
+        //         echo $key . '<br>';
+        //     }
+        // }
+
+        $luc = Applicant::where('lup.status', 'On Board')
+                    ->join('line_up_contracts as lup', 'lup.applicant_id', '=', 'applicants.id')
+                    ->get();
+        // $luc = LineUpContract::where('status', 'On Board')->get();
+        dd($luc);
+    }
+
     public function generateApplicantFleet(){
         $applicants = User::where("role", 'Applicant')
                         ->where('fleet', null)
@@ -1529,19 +1544,43 @@ class ApplicationsController extends Controller
         echo '<br> Total Updated: ' . $ctr;
     }
 
-    public function testFunc(){
-        // $applicants = DocumentFlag::where('type', 'SDSD')->get()->groupBy('applicant_id');
-        // foreach($applicants as $key => $applicant){
-        //     if(sizeof($applicant) > 1){
-        //         echo $key . '<br>';
-        //     }
-        // }
+    public function generateSeaServiceSizeAndOwner(){
+        $this->generateSSDetails('owner');
+        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
+        $this->generateSSDetails('size');
+        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
+        $this->generateSSDetails('engine', "", 'engine_type');
+    }
 
-        $luc = Applicant::where('lup.status', 'On Board')
-                    ->join('line_up_contracts as lup', 'lup.applicant_id', '=', 'applicants.id')
-                    ->get();
-        // $luc = LineUpContract::where('status', 'On Board')->get();
-        dd($luc);
+    private function generateSSDetails($col, $operator = null, $alt = null){
+        $vessels = Vessel::where($col, '!=', null)->select($col, 'name')->get();
+        
+        foreach($vessels as $vessel){
+            $names = [];
+            array_push($names, $vessel['name']);
+
+            if(str_contains($vessel['name'], "M/V")){
+                array_push($names, str_replace('/', '', $vessel['name']));
+            }
+            elseif(str_contains($vessel['name'], "MV")){
+                array_push($names, str_replace('MV', 'M/V', $vessel['name']));
+            }
+            elseif(str_contains($vessel['name'], "M/T")){
+                array_push($names, str_replace('/', '', $vessel['name']));
+            }
+            elseif(str_contains($vessel['name'], "MT")){
+                array_push($names, str_replace('MT', 'M/T', $vessel['name']));
+            }
+
+            $temp = $alt ?? $col;
+            $query = SeaService::whereIn('vessel_name', $names)
+                    ->where($temp, "=", $operator);
+
+            echo "Updated $temp of sea_services of " . $vessel['name'] . ". #" . $query->count();
+            echo " - " . $alt ? $vessel[$col] : " - ";
+            echo "<br>";
+            $query->update([$temp => $vessel[$col]]);
+        }
     }
 
     private function _view($view, $data = array()){
