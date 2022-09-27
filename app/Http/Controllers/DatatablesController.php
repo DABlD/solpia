@@ -116,55 +116,7 @@ class DatatablesController extends Controller
 		// 	];
 		// }
 
-		if(str_contains($req->search['value'], '-NF')){
-			$applicants = Applicant::select(
-					'fname', 'lname', 'applicants.id', 'u.fleet'
-				)
-				->join('users as u', 'u.id', '=', 'applicants.user_id')
-				->where('u.fleet', null)
-				->get();
-
-			$string = "";
-			foreach ($applicants as $applicant) {
-				$string .= "
-					<tr>
-						<td>$applicant->id</td>
-						<td>$applicant->fname</td>
-						<td>$applicant->lname</td>
-					</tr>
-				";
-			}
-
-			echo "
-				<table>
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>First Name</th>
-							<th>Last Name</th>
-						</tr>
-					</thead>
-					$string
-				</table>
-			";
-
-			die;
-		}
-		elseif(str_starts_with($req->search['value'], '-EE') || str_starts_with($req->search['value'], '-ee')){
-			$term = explode(' ', $req->search['value'])[1];
-			$ids = SeaService::where('engine_type', 'LIKE', "%" . $term . "%")->groupBy('applicant_id')->pluck('applicant_id');
-			$applicants = Applicant::select(
-					'applicants.id', 'applicants.remarks', 'u.fleet',
-					'avatar', 'fname', 'lname', 'contact', 'birthday',
-					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
-				)
-				->join('users as u', 'u.id', '=', 'applicants.user_id')
-				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				->whereIn('applicant_id', $ids)
-				->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
-				->get();
-		}
-		elseif($search){
+		if($search){
 			$applicants = Applicant::select(
 					'applicants.id', 'applicants.remarks', 'u.fleet',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
@@ -176,19 +128,19 @@ class DatatablesController extends Controller
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
 				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-				->where([
-					$condition, 
-					['applicants.remarks', 'LIKE', "%" . $search . "%"],
-					['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
-				])
-				->orWhere('fname', 'LIKE', "%" . $search . "%")
-				->orWhere('lname', 'LIKE', "%" . $search . "%")
-				->orWhere('pro_app.status', 'LIKE', "%" . $search . "%")
+				->where([$condition])
+				->where('u.fleet', 'like', auth()->user()->fleet ?? "%%")
+				->where(function($q) use($search){
+					$q->where('applicants.remarks', 'LIKE', "%$search%");
+					$q->orWhere('fname', 'LIKE', "%$search%");
+					$q->orWhere('lname', 'LIKE', "%$search%");
+					$q->orWhere('pro_app.status', 'LIKE', "%$search%");
+					$q->orWhere('r.abbr', '=', $search);
+					$q->orWhere('v.name', 'LIKE', "%$search%");
+				})
+				->get();
 				// ->orWhere('vessel_name', 'LIKE', "%" . $search . "%")
 				// ->orWhere('rank', 'LIKE', "%" . $search . "%")
-				->orWhere('r.abbr', '=', $search)
-				->orWhere('v.name', 'LIKE', "%" . $search . "%")
-				->get();
 
 			$temp = Vessel::where('name', 'LIKE', '%' . $search . "%")->pluck('name')->toArray();
 			// $sss = SeaService::whereIn('vessel_name', $temp)->get();
