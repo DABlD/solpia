@@ -5,7 +5,10 @@
 	<a href="{{ route('applications.create') }}" class="btn btn-primary" data-toggle="tooltip" title="Add New Crew">
 		<span class="fa fa-plus"></span>
 	</a>
-	<a href="{{ route('applications.export.all') }}" class="btn btn-warning" data-toggle="tooltip" title="Export All">
-		<span class="fa fa-download"></span>
+	<a class="btn btn-warning" data-toggle="tooltip" title="Filter" onclick="filter()">
+		<span class="fa fa-filter"></span>
 	</a>
+	{{-- <a href="{{ route('applications.export.all') }}" class="btn btn-warning" data-toggle="tooltip" title="Export All">
+		<span class="fa fa-download"></span>
+	</a> --}}
 </div>
