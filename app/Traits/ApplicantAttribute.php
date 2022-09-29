@@ -22,7 +22,7 @@ trait ApplicantAttribute{
 		//SALUTIN, MARCELLANA, FADRIQUELA, GARCIA, REYES
 		$cadets = [33, 34, 461, 462, 506];
 
-		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer'])){
+		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer', 'Encoder'])){
 			// LINE UP
 			if($this->pa_s != "Lined-Up" && $this->pa_s != "On Board"){
 				$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
