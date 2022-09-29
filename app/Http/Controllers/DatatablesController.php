@@ -135,12 +135,16 @@ class DatatablesController extends Controller
 					$q->orWhere('fname', 'LIKE', "%$search%");
 					$q->orWhere('lname', 'LIKE', "%$search%");
 					$q->orWhere('pro_app.status', 'LIKE', "%$search%");
-					// $q->orWhere('r.abbr', '=', $search);
+					$q->orWhere('r.abbr', '=', $search);
 					$q->orWhere('v.name', 'LIKE', "%$search%");
-				})
-				->get();
+				});
+				// ->get();
 				// ->orWhere('vessel_name', 'LIKE', "%" . $search . "%")
 				// ->orWhere('rank', 'LIKE', "%" . $search . "%")
+			if(auth()->user()->fleet){
+				$applicants->where('u.fleet', 'like', auth()->user()->fleet);
+			}
+			$applicants = $applicants->get();
 
 			$temp = Vessel::where('name', 'LIKE', '%' . $search . "%")->pluck('name')->toArray();
 			// $sss = SeaService::whereIn('vessel_name', $temp)->get();
