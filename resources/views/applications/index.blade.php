@@ -18,14 +18,13 @@
     							<tr>
     								<th>#</th>
     								<th>Status</th>
-                                    <th>Pic</th>
                                     <th>Rank</th>
     								<th>Last Name</th>
     								<th>First Name</th>
     								<th>Age</th>
     								<th>Contact</th>
                                     <th>Last Vessel</th>
-                                    @if(auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder" || auth()->user()->role == "Admin")
+                                    @if(auth()->user()->fleet == null)
     								    <th>Fleet</th>
                                     @endif
                                     <th>Remarks</th>
@@ -250,6 +249,15 @@
 
 @push('after-scripts')
 	<script>
+        var rank = "%%";
+        var remark = "%%";
+        var min_age = 20;
+        var max_age = 60;
+        
+        var size = "%%";
+        var owner = "%%";
+        var engine = "%%";
+
         swal({
             title: 'Loading',
             timer: 1500
@@ -259,22 +267,20 @@
             serverSide: true,
             ajax: {
                 url: '{{ route('datatables.applications') }}',
-                type: 'POST',
-                data: () => {
-                    return $('#formFilter').serialize();
-                }
+                type: 'get',
+                data: f => {
+                    f.filters = getFilters();                }
             },
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'pa_s', name: 'pa_s' },
-                { data: 'avatar', name: 'avatar', visible: false},
                 { data: 'rank', name: 'rank' },
                 { data: 'lname', name: 'lname' },
                 { data: 'fname', name: 'fname' },
                 { data: 'age', name: 'age' },
                 { data: 'contact', name: 'contact' },
                 { data: 'last_vessel', name: 'last_vessel' },
-                @if(auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder" || auth()->user()->role == "Admin")
+                @if(auth()->user()->fleet == null)
                     { data: 'fleet', name: 'fleet' },
                 @endif
                 { data: 'remarks', name: 'remarks' },
@@ -293,31 +299,24 @@
                     },
                 },
                 {
-                    targets: 2,
-                    className: "w50",
-                    render: function(link){
-                        return `<img src="${link}" alt="Applicant Photo"/>`;
-                    },
-                },
-                {
                     targets: 0,
                     render: function(id, display, data){
                         return id;
                     },
                 },
                 {
-                    targets: 4,
+                    targets: 3,
                     render: function(row){
                         return row;
                     },
                 },
-                @if(auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder" || auth()->user()->role == "Admin")
+                @if(auth()->user()->fleet == null)
                     {
-                        targets: 11,
+                        targets: 10,
                         className: "w100"
                     },
                     {
-                        targets: 10,
+                        targets: 9,
                         width: 85,
                         render: function(remarks, display, data){
                             remarks = remarks;
@@ -338,11 +337,11 @@
                     },
                 @else
                     {
-                        targets: 10,
+                        targets: 9,
                         className: "w100"
                     },
                     {
-                        targets: 9,
+                        targets: 8,
                         width: 85,
                         render: function(remarks, display, data){
                             remarks = remarks;
@@ -422,6 +421,18 @@
                 }
         	}, 800);
         });
+
+        function getFilters(){
+            return {
+                rank: rank,
+                min_age: min_age,
+                max_age: max_age,
+                size: size,
+                owner: owner,
+                engine: engine,
+                remark: remark
+            };
+        }
 
         function initializeActions(){
 	    	$('[data-original-title="Export"]').on('click', application => {
@@ -2197,7 +2208,7 @@
                     <h3 style="text-align: left;"><b>${fd.type}</b></h3>
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" value="${fd.fname ?? "-"} ${fd.lname ?? "-"}" readonly>
@@ -2222,6 +2233,13 @@
                             <div class="form-group">
                                 <label for="occupation">Occupation</label>
                                 <input type="text" class="form-control" id="occupation" value="${fd.occupation ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="email">Contact</label>
+                                <input type="text" class="form-control" id="email" value="${fd.email ?? "---"}" readonly>
                             </div>
                         </div>
                     </div>
@@ -2957,6 +2975,11 @@
                     })
                 }
             })
+        }
+
+        // FILTER
+        function filter(){
+            swal('test');
         }
 	</script>
 @endpush
