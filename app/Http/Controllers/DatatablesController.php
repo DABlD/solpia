@@ -129,13 +129,13 @@ class DatatablesController extends Controller
 				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
 				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
 				->where([$condition])
-				->where('u.fleet', 'like', auth()->user()->fleet ?? "%%")
+				// ->where('u.fleet', 'like', auth()->user()->fleet ?? "%%")
 				->where(function($q) use($search){
 					$q->where('applicants.remarks', 'LIKE', "%$search%");
 					$q->orWhere('fname', 'LIKE', "%$search%");
 					$q->orWhere('lname', 'LIKE', "%$search%");
 					$q->orWhere('pro_app.status', 'LIKE', "%$search%");
-					$q->orWhere('r.abbr', '=', $search);
+					// $q->orWhere('r.abbr', '=', $search);
 					$q->orWhere('v.name', 'LIKE', "%$search%");
 				})
 				->get();
