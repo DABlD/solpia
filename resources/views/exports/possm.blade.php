@@ -365,9 +365,9 @@
 		$temps = ['College', 'Vocational', 'Undergrad'];
 
 		foreach($temps as $temp){
-			foreach($data->educational_background as $eb){
-				if($eb->type == $temp && $eb->school != "" && $eb == null){
-					$eb = $fd;
+			foreach($data->educational_background as $eb2){
+				if($eb2->type == $temp && $eb2->school != "" && $eb == null){
+					$eb = $eb2;
 					break;
 				}
 			}
