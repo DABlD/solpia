@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
     public function __construct(){
         // REMOVE CADET AND ENCODER AFTER ADDING FLEET TO CREW
-        $this->middleware('permissions:' . 'Admin/Cadet/Encoder');
+        $this->middleware('permissions:' . 'Admin/Cadet/Encoder/Crewing Manager');
     }
 
     public function index(){
