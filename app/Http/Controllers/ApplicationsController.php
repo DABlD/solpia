@@ -687,7 +687,7 @@ class ApplicationsController extends Controller
             "M/V ULTRA REGINA"
         ];
 
-        if(in_array($applicant->vessel->name, $smtech)){
+        if(isset($applicant->vessel) && in_array($applicant->vessel->name, $smtech)){
             $type = "smtech";
         }
 
