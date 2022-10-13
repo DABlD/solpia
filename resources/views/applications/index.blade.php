@@ -267,7 +267,7 @@
             serverSide: true,
             ajax: {
                 url: '{{ route('datatables.applications') }}',
-                type: 'POST',
+                type: 'get',
                 data: f => {
                     f.filters = getFilters();                }
             },
@@ -2753,6 +2753,9 @@
                         @endforeach
                         @if(auth()->user()->fleet == "FLEET D")
                             'toei': "TOEI"
+                        @endif
+                        @if(auth()->user()->fleet == "TOEI")
+                            'smtech': "SMTECH"
                         @endif
                     },
                     onOpen: () => {
