@@ -160,6 +160,7 @@
 		if($ss){
 			$engine = $clean($ss->engine_type);
 			$bhp = $clean($ss->bhp_kw);
+			$grt = $clean($ss->gross_tonnage);
 			$on = $checkDate($ss->sign_on);
 			$off = $checkDate($ss->sign_off);
 			$manning = $clean($ss->manning_agent);
@@ -174,7 +175,7 @@
 					<td style='$center' colspan='3'>$ss->vessel_name</td>
 					<td style='$center'>$ss->vessel_type</td>
 					<td style='$center'>$engine</td>
-					<td style='$center'>$bhp</td>
+					<td style='$center'>$grt</td>
 					<td style='$center'></td>
 					<td style='$center'>$on</td>
 					<td style='$center'>$off</td>
@@ -425,7 +426,7 @@
 		<td style="{{ $center }}" rowspan="2" colspan="3">Name of Vessel</td>
 		<td style="{{ $center }}" rowspan="2">Type of Vessel</td>
 		<td style="{{ $center }}" rowspan="2">Type of Engine</td>
-		<td style="{{ $center }}" rowspan="2">Horse-Power</td>
+		<td style="{{ $center }}" rowspan="2">Gross Tonnage</td>
 		<td style="{{ $center }}" rowspan="2">DWT</td>
 		<td style="{{ $center }}" colspan="2">Period of Service</td>
 		<td style="{{ $center }}" rowspan="2" colspan="2">Name of Company</td>
