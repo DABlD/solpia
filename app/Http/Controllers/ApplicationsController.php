@@ -602,8 +602,6 @@ class ApplicationsController extends Controller
             $applicant->family_data->push($fd);
         }
 
-        $class = "App\\Exports\\" . ucfirst($type);
-
         $temp = ProcessedApplicant::where('applicant_id', $applicant->id)->first();
         if($temp->status == "Lined-Up" || $temp->status == "On Board"){
             $applicant->rank = Rank::find($temp->rank_id);
@@ -681,6 +679,19 @@ class ApplicationsController extends Controller
             'browser'   => Browser::browserName(),
             'platform'  => Browser::platformName()
         ]);
+
+        $smtech = [
+            "M/V CMB VAN DIJCK", 
+            "M/V MARITIME LONGEVITY", 
+            "M/V MARITIME KING", 
+            "M/V ULTRA REGINA"
+        ];
+
+        if(in_array($applicant->vessel->name, $smtech)){
+            $type = "smtech";
+        }
+
+        $class = "App\\Exports\\" . ucfirst($type);
 
         Statistic::where('name', 'export')->increment('count');
 		$pname = $type == "western" ? "NITTA_TOEI" : $type;
@@ -1261,10 +1272,12 @@ class ApplicationsController extends Controller
     }
 
     function exportDocument($id, $type, Request $req){
-        if($type == "OnBoardVessel"){
+        $folder = null;
+
+        if(str_starts_with($type, 'OnBoardVessel')){
             $ad = ['a.id', 'a.remarks'];
             $cd = ['fname', 'lname', 'suffix', 'mname', 'birthday'];
-            $lud = ['joining_date', 'joining_port', 'months', 'reliever', 'extensions'];
+            $lud = ['joining_date', 'joining_port', 'months', 'reliever', 'extensions', 'vessel_id'];
             $rd = ['abbr'];
 
             $applicant = LineUpContract::where([
@@ -1290,6 +1303,8 @@ class ApplicationsController extends Controller
                     $crew->{$docu->type} = $docu->expiry_date;
                 }
             }
+
+            $folder = "OnBoard\\";
         }
         else{
             $applicant = Applicant::withTrashed()->find($id)->load('user');
@@ -1308,8 +1323,7 @@ class ApplicationsController extends Controller
                             $vessel = Vessel::find($pa->vessel_id);
                             $applicant->vessel = $vessel;
                             $applicant->departure = $pa->eld;
-                        }
-                        
+                        }   
                     }
                 }
             }
@@ -1329,7 +1343,7 @@ class ApplicationsController extends Controller
         $exportType = $req->exportType ?? "xlsx";
 
         $fileName = $req->filename ?? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
-        $class = "App\\Exports\\" . $type;
+        $class = "App\\Exports\\" . $folder . $type;
         
         if($exportType == "xlsx"){
             return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");
