@@ -267,7 +267,7 @@
             serverSide: true,
             ajax: {
                 url: '{{ route('datatables.applications') }}',
-                type: 'get',
+                type: 'POST',
                 data: f => {
                     f.filters = getFilters();                }
             },
