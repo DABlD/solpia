@@ -38,6 +38,9 @@
 		if($applicant->document_flag->count()){
 			$crewRank = $applicant->ranks2[$applicant->document_flag->first()->rank][0];
 		}
+		else{
+			$crewRank = $applicant->rank;
+		}
 	}
 @endphp
 
