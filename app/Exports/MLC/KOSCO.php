@@ -22,35 +22,38 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array3 = [
-            'M/V KMARIN AZUR', 'M/V KMARIN ATLANTICA'
+            'M/V KMARIN AZUR'
         ];
 
         $array4 = [
-            'M/V KMARIN ULSAN'
+            'M/V KMARIN ATLANTICA'
         ];
 
         $array5 = [
-            'M/V KMARIN MELBOURNE'
+            'M/V KMARIN ULSAN'
         ];
 
         $array6 = [
-            'M/V BOKM NINGBO'
+            'M/V KMARIN MELBOURNE'
         ];
 
         $array7 = [
-            "M/V BOKM SHANGHAI"
+            'M/V BOKM NINGBO'
         ];
 
         $array8 = [
-            'M/V PACIFIC BLESS', 'M/V PACIFIC CROWN',
+            "M/V BOKM SHANGHAI"
         ];
 
         $array9 = [
+            'M/V PACIFIC BLESS', 'M/V PACIFIC CROWN',
+        ];
+
+        $array10 = [
             'M/V DAEBO GLADSTONE'
         ];
 
-
-        $array10 = [
+        $array11 = [
             'M/V DONG-A METIS'
         ];
 
@@ -67,30 +70,34 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "BICSA Financial Center, 60th Floor, Balboa Avenue, Panama City, Panama";
         }
         elseif(in_array($applicant->vessel->name, $array4)){
+            $applicant->shipowner = 'KMARIN NO.21A S.A.';
+            $applicant->sAddress = "BICSA Financial Center, 60th Floor, Balboa Avenue, Panama City, Panama";
+        }
+        elseif(in_array($applicant->vessel->name, $array5)){
             $applicant->shipowner = 'HI GOLD OCEAN KMARIN NO.9B S.A.';
             $applicant->sAddress = "19th Floor, Banco General Tower, Aquilino de la Guardia Street, Marbella, Panama city, Panama";
         }
-        elseif(in_array($applicant->vessel->name, $array5)){
+        elseif(in_array($applicant->vessel->name, $array6)){
             $applicant->shipowner = 'KMARIN NO.16B S.A.';
             $applicant->sAddress = "19th Floor, Banco General Tower, Aquilino de la Guardia Street, Marbella, Panama city, Panama";
         }
-        elseif(in_array($applicant->vessel->name, $array6)){
+        elseif(in_array($applicant->vessel->name, $array7)){
             $applicant->shipowner = 'XIANG B32 HK INTERNATIONAL SHIP LEASE CO., LIMITED';
             $applicant->sAddress = "1st Floor, Far East Consortium Building, 121 Des Voeux Road, Central, Hong Kong";
         }
-        elseif(in_array($applicant->vessel->name, $array7)){
+        elseif(in_array($applicant->vessel->name, $array8)){
             $applicant->shipowner = 'XIANG B3 HK INTERNATIONAL SHIP LEASE CO., LIMITED';
             $applicant->sAddress = "18/F, 20 Pedder Street, Central, HONG KONG";
         }
-        elseif(in_array($applicant->vessel->name, $array8)){
+        elseif(in_array($applicant->vessel->name, $array9)){
             $applicant->shipowner = 'KMARIN NO.3A S.A.';
             $applicant->sAddress = "BICSA Financial Center, 60th Floor, Balboa Avenue, Panama City, Panama";
         }
-        elseif(in_array($applicant->vessel->name, $array9)){
+        elseif(in_array($applicant->vessel->name, $array10)){
             $applicant->shipowner = 'DAEBO L&S CO., LTD';
             $applicant->sAddress = "#4, F11 19, SAEMUNAN-RO 5-GIL, JONGNO-GU, SEOUL, REPUBLIC OF KOREA";
         }
-        elseif(in_array($applicant->vessel->name, $array10)){
+        elseif(in_array($applicant->vessel->name, $array11)){
             $applicant->shipowner = 'KMARIN Ocean Services Corporation';
             $applicant->sAddress = "5F, 67, Chungjang-daero 5beon-gil, Jung-gu, Busan, Republic of Korea";
         }
