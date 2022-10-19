@@ -20,6 +20,30 @@ class LineUpContract extends Model
         'created_at', 'updated_at', 'deleted_at', 'joining_date', 'disembarkation_date'
     ];
 
+    public function document_id(){
+        return $this->hasMany('App\Models\DocumentId', 'applicant_id', 'applicant_id');
+    }
+
+    public function document_flag(){
+        return $this->hasMany('App\Models\DocumentFlag', 'applicant_id', 'applicant_id');
+    }
+
+    public function document_lc(){
+        return $this->hasMany('App\Models\DocumentLC', 'applicant_id', 'applicant_id');
+    }
+
+    public function document_med_cert(){
+        return $this->hasMany('App\Models\DocumentMedCert', 'applicant_id', 'applicant_id');
+    }
+
+    public function vessel(){
+        return $this->hasOne('App\Models\Vessel', 'id', 'vessel_id');
+    }
+
+    public function rank(){
+        return $this->hasOne('App\Models\Rank', 'id', 'vessel_id');
+    }
+
     public function applicant(){
         return $this->belongsTo('App\Models\Applicant');
     }
