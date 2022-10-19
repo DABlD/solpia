@@ -2754,9 +2754,6 @@
                         @if(auth()->user()->fleet == "FLEET D")
                             'toei': "TOEI"
                         @endif
-                        @if(auth()->user()->fleet == "TOEI")
-                            'smtech': "SMTECH"
-                        @endif
                     },
                     onOpen: () => {
                         $('.swal2-select').select2({
