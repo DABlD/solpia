@@ -948,8 +948,10 @@
 
 				foreach($applicant->document_lc as $document){
 					$regulation = json_decode($document->regulation);
+					// dd($applicant->document_lc);
+					// dd($document);
 
-					if(str_starts_with($document->type, "COE") && (in_array('III/1', $regulations) || in_array('III/2', $regulations) || in_array('II/1', $regulations) || in_array('II/2', $regulations))){
+					if(str_starts_with($document->type, "COE") && (in_array('III/1', $regulation) || in_array('III/2', $regulation) || in_array('II/1', $regulation) || in_array('II/2', $regulation))){
 						$docu = $document;
 					}
 				}
