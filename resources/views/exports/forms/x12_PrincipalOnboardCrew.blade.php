@@ -189,7 +189,7 @@
 				<td style="{{ $center }}">{{ $key }}</td>
 				<td style="{{ $center }}">{{ $ranks[$applicant->rid]->abbr }}</td>
 				<td style="{{ $center }}">
-					{{ $applicant->lname }}, {{ $applicant->pname }} {{ $applicant->suffix }} {{ $applicant->mname }}
+					{{ $applicant->lname }}, {{ $applicant->fname }} {{ $applicant->suffix }} {{ $applicant->mname }}
 				</td>
 				<td style="{{ $center }}">
 					{{ $applicant->birthday ? now()->parse($applicant->birthday)->format('d-M-y') : "---" }}
