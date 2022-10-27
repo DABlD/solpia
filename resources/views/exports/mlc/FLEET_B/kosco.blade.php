@@ -19,6 +19,18 @@
 	// 		</tr>
 	// 	";
 	// }
+	$allowance = 10.5;
+
+	$v = $data->vessel->name;
+	if(in_array($v, ['M/V DONG-A OKNOS', 'M/V DONG-A EOS', 'M/V GLOVIS COUNTESS', 'M/V DONG-A GLAUCOS'])){
+		$allowance = 10.5;
+	}
+	elseif(in_array($v, ["M/V BOKM SHANGHAI", 'M/V BOKM NINGBO', 'M/V KMARIN AZUR', 'M/V KMARIN ATLANTICA', 'M/V KMARIN ULSAN', 'M/V KMARIN MELBOURNE'])){
+		$allowance = 11;
+	}
+	elseif(in_array($v, ['M/V DAEBO GLADSTONE'])){
+		$allowance = 11.5;
+	}
 @endphp
 
 <table>
@@ -190,7 +202,7 @@
 	<tr>
 		<td style="{{ $bc }}">Provision</td>
 		<td colspan="7">
-			Costs for food shall be (10.5 US Dollars) per person/day excluding shipment cost.
+			Costs for food shall be ({{ $allowance }} US Dollars) per person/day excluding shipment cost.
 		</td>
 	</tr>
 
