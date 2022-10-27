@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\OnBoard;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -39,8 +39,9 @@ class OnBoardVessel implements FromView, WithEvents//, WithDrawings//, ShouldAut
         }
 
         $onBoards = $temp;
+        $view = lcfirst($this->type);
 
-        return view('exports.' . lcfirst($this->type), [
+        return view('exports.OnBoard.' . $view, [
             'data'      => $onBoards,
             'filename'  => $this->req['filename']
         ]);

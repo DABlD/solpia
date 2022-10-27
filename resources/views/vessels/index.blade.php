@@ -3229,8 +3229,25 @@
             let data = {};
             data.id = id;
             data.filename = name.substring(4) + " - Onboard";
+            data.fleet = "{{ auth()->user()->fleet }}";
 
-            window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel?` + $.param(data);
+            @if(auth()->user()->fleet == null)
+                swal({
+                    title: "Select Format",
+                    input: 'select',
+                    inputOptions: {
+                        '': 'Default',
+                        TOEI: 'TOEI'
+                    },
+                }).then(result => {
+                    if(!result.dismiss){
+                        data.fleet = result.value;
+                        window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel${data.fleet}?` + $.param(data);
+                    }
+                })
+            @else
+                window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel${data.fleet}?` + $.param(data);
+            @endif
         }
 
         function exportOnDocs(id, name){
