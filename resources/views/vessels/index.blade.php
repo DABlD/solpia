@@ -405,47 +405,6 @@
                 })
             });
 
-            $('[data-original-title="Export Principal\'s Onboard Crew"]').on('click', () => {
-                $.ajax({
-                    url: '{{ route('principal.get') }}',
-                    data: {
-                        cols: ['id', 'name', 'active', 'fleet'],
-                        where: ['active', 1]
-                    },
-                    success: principals => {
-                        principals = JSON.parse(principals);
-                        select = [];
-                        console.log(principals);
-
-                        principals.forEach(principal => {
-                            $bool = true;
-
-                            @if(auth()->user()->fleet)
-                                if(principal.fleet != "{{ auth()->user()->fleet }}"){
-                                    $bool = false;
-                                }
-                            @endif
-
-                            if($bool){
-                                select[principal.id] = principal.name;
-                            }
-                        });
-
-                        swal({
-                            title: 'Select Principal',
-                            input: 'select',
-                            inputOptions: select,
-                            showCancelButton: true,
-                            cancelButtonColor: '#f76c6b'
-                        }).then(result => {
-                            if(result.value){
-                                window.location.href = `{{ route('principal.getOnboardCrew') }}/${result.value}`;
-                            }
-                        });
-                    }
-                });
-            });
-
             $('[data-original-title="Remove"]').on('click', vessel => {
                 let id = $(vessel.target).data('id');
 
@@ -3696,6 +3655,127 @@
                     })
                 }
             });
+        }
+
+
+        // MAIN EXPORTS
+        function exportData(){
+            swal({
+                title: 'Select Type',
+                input: 'select',
+                inputOptions: {
+                    principalsOnboardCrew : 'Principal\'s Onboard Crew',
+                    x19_LineUpCrewPerVessel: 'Line-up Crew per Vessel'
+
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '300px',
+                onOpen: () => {
+                    $('.swal2-select').select2();
+                    $('.swal2-select').on("select2:open", () => {
+                        $('.select2-dropdown').css({
+                            'z-index': 9999
+                        });
+                    });
+                    $('.swal2-select').parent().css('text-align', 'center');
+                    $('.select2-container').css('width', '100%');
+                }
+            }).then(result => {
+                if(result.value){
+                    window[result.value]();
+                }
+            })
+        }
+
+        function principalsOnboardCrew(){
+            $.ajax({
+                url: '{{ route('principal.get') }}',
+                data: {
+                    cols: ['id', 'name', 'active', 'fleet'],
+                    where: ['active', 1]
+                },
+                success: principals => {
+                    principals = JSON.parse(principals);
+                    select = [];
+
+                    principals.forEach(principal => {
+                        $bool = true;
+
+                        @if(auth()->user()->fleet)
+                            if(principal.fleet != "{{ auth()->user()->fleet }}"){
+                                $bool = false;
+                            }
+                        @endif
+
+                        if($bool){
+                            select[principal.id] = principal.name;
+                        }
+                    });
+
+                    swal({
+                        title: 'Select Principal',
+                        input: 'select',
+                        inputOptions: select,
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b'
+                    }).then(result => {
+                        if(result.value){
+                            window.location.href = `{{ route('principal.getOnboardCrew') }}/${result.value}`;
+                        }
+                    });
+                }
+            });
+        }
+
+        function x19_LineUpCrewPerVessel(){
+            $.ajax({
+                url: '{{ route('vessels.get2') }}',
+                data: {
+                    cols: ['vessels.name', 'vessels.id'],
+                    where: ['status', 'ACTIVE'],
+                    @if(auth()->user()->fleet)
+                        where2: ['fleet', '{{ auth()->user()->fleet }}']
+                    @endif
+                },
+                success: result => {
+                    vessels = JSON.parse(result);
+                    
+                    let vesselString = "";
+                    vessels.forEach(vessel => {
+                        vesselString += `
+                            <input type="checkbox" value="${vessel.id}">
+                            <label for="${vessel.id}">${vessel.name}</label><br>
+                        `;
+                    });
+
+                    swal({
+                        title: 'Select Vessel/s',
+                        html: `
+                            <div style="text-align: left;">
+                                ${vesselString}
+                            </div>
+                        `,
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                    }).then(result => {
+                        if(result.value){
+                            let temp = $('[type="checkbox"]:checked');
+                            let vessels = [];
+
+                            temp.each((id, vessel) => {
+                                vessels.push(vessel.value)
+                            });
+                            
+                            let data = {};
+                                data.id = vessels;
+                                data.filename = "Lined-up Crew";
+
+                            window.location.href = `{{ route('applications.exportDocument') }}/1/x19_LineUpCrewPerVessel?` + $.param(data);
+                        }
+                    });
+                }
+            })
         }
     </script>
 @endpush

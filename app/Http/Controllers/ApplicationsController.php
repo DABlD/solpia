@@ -1499,11 +1499,65 @@ class ApplicationsController extends Controller
         //     }
         // }
 
-        $luc = Applicant::where('lup.status', 'On Board')
-                    ->join('line_up_contracts as lup', 'lup.applicant_id', '=', 'applicants.id')
-                    ->get();
+        // $luc = Applicant::where('lup.status', 'On Board')
+        //             ->join('line_up_contracts as lup', 'lup.applicant_id', '=', 'applicants.id')
+        //             ->get();
         // $luc = LineUpContract::where('status', 'On Board')->get();
-        dd($luc);
+        // dd($luc);
+        $array1 = [];
+        $array2 = [];
+
+        $ids = SeaService::where('manning_agent', 'LIKE', '%SOLPIA%')->get()->pluck('applicant_id')->unique();
+        foreach($ids as $applicant){
+            $sss = SeaService::where('applicant_id', $applicant)->get();
+            $sss = $sss->sortByDesc('sign_on');
+            
+            $total = 0;
+            $end = null;
+            $prev = null;
+
+            foreach($sss as $key => $ss){
+                if(str_contains($ss->manning_agent, 'SOLPIA')){
+                    if($end == null && isset($ss->sign_off)){
+                        $end = $ss->sign_off;
+                    }
+                }
+                else{
+                    if(isset($ss->sign_on) && isset($end)){
+                        $total = $end->diffInMonths($ss->sign_on);
+                    }
+                    elseif(isset($end) && isset($prev)){
+                        $total = $end->diffInMonths($prev);
+                    }
+                    break;
+                }
+                $prev = $ss->sign_on;
+            }
+
+            if($total == 0){
+                if(isset($ss->sign_on) && isset($end)){
+                    $total = $end->diffInMonths($ss->sign_on);
+                }
+            }
+
+            if($total >= 60){
+                array_push($array1, $ss->applicant_id);
+            }
+            if($total >= 120){
+                array_push($array2, $ss->applicant_id);
+            }
+
+            // if($ss->applicant_id == 1841){
+            //     dd($array2);
+            //     dd($total);
+            // }
+        }
+
+        $array1 = array_diff($array1, $array2);
+        $array1 = array_unique($array1);
+        $array2 = array_unique($array2);
+
+        dd($array1, $array2);
     }
 
     public function generateApplicantFleet(){

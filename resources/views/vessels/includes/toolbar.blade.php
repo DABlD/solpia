@@ -10,7 +10,7 @@
 			<span class="fa fa-download"></span>
 		</a>
 	@endif
-	<a class="btn btn-success" data-toggle="tooltip" title="Export Principal's Onboard Crew">
+	<a class="btn btn-success" data-toggle="tooltip" title="Export" onclick="exportData()">
 		<span class="fa fa-download"></span>
 	</a>
 	<a class="btn btn-primary" data-toggle="tooltip" title="Add Vessel">
