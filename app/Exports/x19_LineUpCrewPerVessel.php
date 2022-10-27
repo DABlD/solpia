@@ -17,12 +17,11 @@ class x19_LineUpCrewPerVessel implements FromView, WithEvents//, WithDrawings//,
     public function __construct($data, $type, $req){
         $ids = $req['id'];
 
-        $pa = ProcessedApplicant::whereIn('vessel_id', $ids)->get();
-        $pa = $pa->sortBy('vessel_id');
+        $pa = ProcessedApplicant::whereIn('vessel_id', $ids)->where('status', 'Lined-Up')->get();
+        $pa = $pa->sortBy('vessel_id')->values();
         $pa->load('applicant.user');
         $pa->load('vessel');
         $pa->load('rank');
-
 
         $this->data     = $pa;
         $this->type     = $type;
