@@ -762,7 +762,7 @@
 	        					[1,4]
 	        				],
 	        				documents: [
-	        					'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'GMDSS/GOC BOOKLET', 'SSO', 'SDSD'
+	        					'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'GMDSS/GOC BOOKLET', 'SSO', 'SDSD', 'CT'
 	        				]
 	        			},
 	        			{
@@ -770,7 +770,7 @@
 	        					[5,8]
 	        				],
 	        				documents: [
-	        					'LICENSE', 'BOOKLET', 'SSO', "SDSD"
+	        					'LICENSE', 'BOOKLET', 'SSO', "SDSD", 'CT'
 	        				]
 	        			},
 	        			{
@@ -779,7 +779,7 @@
 	        					[27,44]
 	        				],
 	        				documents: [
-	        					'BOOKLET', 'SDSD', 'ENDORSEMENT'
+	        					'BOOKLET', 'SDSD', 'ENDORSEMENT', 'CT'
 	        				]
 	        			},
 	        			{
@@ -788,7 +788,7 @@
 	        					[44]
 	        				],
 	        				documents: [
-	        					'BOOKLET', 'SDSD', "SHIP'S COOK ENDORSEMENT"
+	        					'BOOKLET', 'SDSD', "SHIP'S COOK ENDORSEMENT", 'CT'
 	        				]
 	        			}
         			]
@@ -860,7 +860,7 @@
         						[1,44]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET'
+        						'LICENSE', 'BOOKLET', 'CRA'
         					]
         				},
         				{
@@ -869,7 +869,7 @@
         						[44]
         					],
         					documents: [
-        						"SHIP'S COOK ENDORSEMENT"
+        						"SHIP'S COOK ENDORSEMENT", 'CRA'
         					]
         				},
         				{
@@ -877,7 +877,7 @@
         						[1,44]
         					],
         					documents: [
-        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
+        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD', 'CRA'
         					]
         				},
         			]
