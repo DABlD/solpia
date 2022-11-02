@@ -95,6 +95,7 @@ Route::group([
 			->name($name . '.index')
 			->defaults('href', $name);
 
+		Route::get($name . '/awardees', ucfirst($name) . 'Controller@awardees')->name($name . '.awardees');
 		Route::get($name . '/get/{user}', ucfirst($name) . 'Controller@get')->name($name . '.get');
 		Route::get($name . '/get2', ucfirst($name) . 'Controller@get2')->name($name . '.get2');
 		Route::get($name . '/getAddDetails/{applicant}', ucfirst($name) . 'Controller@getAddDetails')->name($name . '.getAddDetails');
