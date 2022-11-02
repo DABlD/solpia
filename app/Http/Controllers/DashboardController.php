@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\{Applicant, LineUpContract, ProcessedApplicant, Vessel, DocumentId};
+use App\Models\{Applicant, LineUpContract, ProcessedApplicant, Vessel, DocumentId, DocumentFlag};
 use App\Models\{AuditTrail};
 use Browser;
 use DB;
@@ -82,26 +82,54 @@ class DashboardController extends Controller
     }
 
     function getCrewWithExpiredDocs(Request $req){
+        DB::enableQueryLog();
+
         $vacation = ProcessedApplicant::where('processed_applicants.status', 'Vacation')
                         ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
                         ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
-                        ->select('processed_applicants.id', 'applicant_id')
+                        ->select('processed_applicants.id', 'processed_applicants.applicant_id')
                         ->get()->keyBy('applicant_id');
         
         $fleets = [];
         $fleets['Vacation'] = [];
+        // $crew = User::select('a.applicant_id', 'expiry_date', 'type', 'users.fname', 'user.lname', 'u.contact', 'u.fleet')
+        //             ->join('applicants as a', 'a.user_id', '=', 'users.id')
+        //             ->join()
+
         $crew =  DocumentId::where('expiry_date', '<=', now()->addMonths(2)->toDateString())
                         ->select('applicant_id', 'expiry_date', 'type', 'u.fname', 'u.lname', 'u.contact', 'u.fleet')
+                        ->whereIn('document_ids.type', ['PASSPORT', 'US-VISA', "SEAMAN'S BOOK"])
                         ->join('applicants as a', 'a.id', '=', 'document_ids.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
                         ->get()
                         ->groupBy('applicant_id');
-                        
+
+        $crew2 =  DocumentFlag::where('expiry_date', '<=', now()->addMonths(2)->toDateString())
+                        ->select('applicant_id', 'expiry_date', 'type', 'u.fname', 'u.lname', 'u.contact', 'u.fleet')
+                        ->whereIn('document_flags.type', ['CT', 'CRA'])
+                        ->join('applicants as a', 'a.id', '=', 'document_flags.applicant_id')
+                        ->join('users as u', 'u.id', '=', 'a.user_id')
+                        ->get()
+                        ->groupBy('applicant_id');
+
+        foreach($crew2 as $id => $temp){
+            if(isset($crew[$id])){
+                foreach($temp as $doc){
+                    $crew[$id]->add($doc);
+                }
+            }
+            else{
+                $crew[$id] = $temp;
+            }
+        }
+
+        $temp = null;
         foreach($crew as $id => $docs){
             $temp['fname'] = $docs[0]->fname;
             $temp['lname'] = $docs[0]->lname;
             $temp['contact'] = $docs[0]->contact;
+            $temp['fleet'] = $docs[0]->fleet;
             $temp['docs'] = [];
             $bool = false;
 
@@ -117,7 +145,7 @@ class DashboardController extends Controller
             }
 
             if($bool){
-                if(auth()->user()->role == "Admin" && auth()->user()->fleet == null){
+                if(auth()->user()->role == "Admin" || auth()->user()->fleet == null){
                     $fleets['Vacation'][$id] = $temp;
                 }
                 else{
@@ -128,34 +156,20 @@ class DashboardController extends Controller
             }
         }
 
+        $vacation = $vacation->toArray();
         foreach($fleets['Vacation'] as $id => $crew){
-            if(!array_key_exists($id, $vacation->toArray())){
-                $fleet = Vessel::where('pa.applicant_id', $id)
-                    ->select('vessels.fleet', 'vessels.name')
-                    ->join('processed_applicants as pa', 'pa.vessel_id', '=', 'vessels.id')
-                    ->first();
-
-                if($fleet){
-                    if(!array_key_exists($fleet->fleet, $fleets)){
-                        $fleets[$fleet->fleet] = [];
+            if(!array_key_exists($id, $vacation)){
+                if($crew['fleet']){
+                    if(!array_key_exists($crew['fleet'], $fleets)){
+                        $fleets[$crew['fleet']] = [];
                     }
 
-                    if(!$fleet->fleet == ""){
-                        $fleets[$fleet->fleet][$id] = $fleets['Vacation'][$id];
+                    if(!$crew['fleet'] == ""){
+                        $fleets[$crew['fleet']][$id] = $fleets['Vacation'][$id];
                         unset($fleets['Vacation'][$id]);
                     }
                     else{
-                        $name = $fleet->name;
-
-                        AuditTrail::create([
-                            'user_id'   => auth()->user()->id,
-                            'action'    => "WARNING: VESSEL $name HAS NO FLEET ASSIGNMENT",
-                            'ip'        => $req->getClientIp(),
-                            'hostname'  => gethostname(),
-                            'device'    => Browser::deviceFamily(),
-                            'browser'   => Browser::browserName(),
-                            'platform'  => Browser::platformName()
-                        ]);
+                        //vessel no fleet assignment
                     }
                 }
             }
