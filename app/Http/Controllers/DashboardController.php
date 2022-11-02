@@ -77,7 +77,7 @@ class DashboardController extends Controller
     }
 
     function checkIfNotAllowed(){
-        $toDatabase = ['Cadet', 'Encoder', 'Crewing Officer', 'Processing', 'Training'];
+        $toDatabase = ['Cadet', 'Encoder', 'Processing', 'Training'];
         return in_array(auth()->user()->role, $toDatabase);
     }
 

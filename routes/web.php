@@ -55,7 +55,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-user')
 			->defaults('name', 'Dashboard')
-			->defaults('roles', array('Admin', 'Principal', 'Crewing Officer', "Crewing Manager", 'Encoder', 'Cadet'))
+			->defaults('roles', array('Admin', 'Principal', 'Crewing Officer', "Crewing Manager"))
 			->name('dashboard')
 			->defaults('href', 'dashboard');
 
@@ -278,6 +278,7 @@ Route::group([
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
 		Route::get('generateApplicantFleet', 'ApplicationsController@generateApplicantFleet')->name('generateApplicantFleet');
+		Route::get('generateSeaServiceSizeAndOwner', 'ApplicationsController@generateSeaServiceSizeAndOwner')->name('generateSeaServiceSizeAndOwner');
 		Route::get('testFunc', 'ApplicationsController@testFunc')->name('testFunc');
 	}
 );
