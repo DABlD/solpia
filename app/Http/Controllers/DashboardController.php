@@ -83,7 +83,6 @@ class DashboardController extends Controller
 
     function getCrewWithExpiredDocs(Request $req){
         DB::enableQueryLog();
-
         $vacation = ProcessedApplicant::where('processed_applicants.status', 'Vacation')
                         ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
@@ -134,7 +133,7 @@ class DashboardController extends Controller
             $bool = false;
 
             foreach($docs as $doc){
-                if(in_array($doc->type, ["PASSPORT", "US-VISA", "SEAMAN'S BOOK", "CT", "CRA"]))
+                if(in_array($doc->type, ["PASSPORT", "US-VISA", "SEAMAN'S BOOK", "CT", "CRA"])){
                     $temp['docs'][sizeof($temp['docs'])] = [
                         "type" => $doc->type, 
                         "expiry" => $doc->expiry_date->toDateString()
