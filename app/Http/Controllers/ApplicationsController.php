@@ -1491,47 +1491,39 @@ class ApplicationsController extends Controller
         echo json_encode($applicant);
     }
 
-    public function testFunc(){
-        // $applicants = DocumentFlag::where('type', 'SDSD')->get()->groupBy('applicant_id');
-        // foreach($applicants as $key => $applicant){
-        //     if(sizeof($applicant) > 1){
-        //         echo $key . '<br>';
-        //     }
-        // }
-
-        // $luc = Applicant::where('lup.status', 'On Board')
-        //             ->join('line_up_contracts as lup', 'lup.applicant_id', '=', 'applicants.id')
-        //             ->get();
-        // $luc = LineUpContract::where('status', 'On Board')->get();
-        // dd($luc);
+    public function awardees(){
         $array1 = [];
         $array2 = [];
+        $details = [];
 
-        $ids = SeaService::where('manning_agent', 'LIKE', '%SOLPIA%')->get()->pluck('applicant_id')->unique();
-        foreach($ids as $applicant){
-            $sss = SeaService::where('applicant_id', $applicant)->get();
+        $applicants = SeaService::select('sea_services.*', 'r.abbr as rname', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet')
+                    ->where('manning_agent', 'LIKE', '%SOLPIA%')
+                    ->whereNull('a.deleted_at')
+                    ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
+                    ->join('users as u', 'u.id', '=', 'a.user_id')
+                    ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
+                    ->join('ranks as r', 'r.id', '=', 'pa.rank_id')
+                    ->get()->groupBy('applicant_id');
+        
+        foreach($applicants as $sss){
             $sss = $sss->sortByDesc('sign_on');
+
+            $details[$sss->first()->applicant_id] = [
+                "fname" => $sss->first()->fname,
+                "mname" => $sss->first()->mname,
+                "lname" => $sss->first()->lname,
+                "suffix" => $sss->first()->suffix,
+                "rname" => $sss->first()->rname,
+                "fleet" => $sss->first()->fleet
+            ];
             
             $total = 0;
-            $end = null;
-            $prev = null;
-
             foreach($sss as $key => $ss){
                 if(str_contains($ss->manning_agent, 'SOLPIA')){
-                    if($end == null && isset($ss->sign_off)){
-                        $end = $ss->sign_off;
+                    if(isset($ss->sign_on) && isset($ss->sign_off)){
+                        $total += $ss->sign_off->diffInMonths($ss->sign_on);
                     }
                 }
-                else{
-                    if(isset($ss->sign_on) && isset($end)){
-                        $total = $end->diffInMonths($ss->sign_on);
-                    }
-                    elseif(isset($end) && isset($prev)){
-                        $total = $end->diffInMonths($prev);
-                    }
-                    break;
-                }
-                $prev = $ss->sign_on;
             }
 
             if($total == 0){
@@ -1547,17 +1539,135 @@ class ApplicationsController extends Controller
                 array_push($array2, $ss->applicant_id);
             }
 
-            // if($ss->applicant_id == 1841){
-            //     dd($array2);
-            //     dd($total);
-            // }
+            $details[$sss->first()->applicant_id]['total'] = $total;
         }
 
         $array1 = array_diff($array1, $array2);
         $array1 = array_unique($array1);
         $array2 = array_unique($array2);
 
-        dd($array1, $array2);
+        $FYfleets = [
+            "FLEET A" => [],
+            "FLEET B" => [],
+            "FLEET C" => [],
+            "FLEET D" => [],
+            "TOEI" => [],
+            "FISHING" => [],
+            "" => []
+        ];
+        $TYfleets = [
+            "FLEET A" => [],
+            "FLEET B" => [],
+            "FLEET C" => [],
+            "FLEET D" => [],
+            "TOEI" => [],
+            "FISHING" => [],
+            "" => []
+        ];
+
+        foreach($array1 as $id){
+            array_push($FYfleets[$details[$id]['fleet']], $details[$id]);
+        }
+
+        foreach($array2 as $id){
+            array_push($TYfleets[$details[$id]['fleet']], $details[$id]);
+        }
+
+        ksort($FYfleets);
+        ksort($TYfleets);
+
+        return $this->_view('awardees', [
+            'title' => 'Crew Awardees',
+            'FYfleets' => $FYfleets,
+            'TYfleets' => $TYfleets
+        ]);
+    }
+
+    public function testFunc(){
+        $array1 = [];
+        $array2 = [];
+        $details = [];
+
+        $applicants = SeaService::select('sea_services.*', 'r.abbr as rname', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet')
+                    ->where('manning_agent', 'LIKE', '%SOLPIA%')
+                    ->whereNull('a.deleted_at')
+                    ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
+                    ->join('users as u', 'u.id', '=', 'a.user_id')
+                    ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
+                    ->join('ranks as r', 'r.id', '=', 'pa.rank_id')
+                    ->get()->groupBy('applicant_id');
+        
+        foreach($applicants as $sss){
+            $sss = $sss->sortByDesc('sign_on');
+
+            $details[$sss->first()->applicant_id] = [
+                "fname" => $sss->first()->fname,
+                "mname" => $sss->first()->mname,
+                "lname" => $sss->first()->lname,
+                "suffix" => $sss->first()->suffix,
+                "rname" => $sss->first()->rname,
+                "fleet" => $sss->first()->fleet
+            ];
+            
+            $total = 0;
+            foreach($sss as $key => $ss){
+                if(str_contains($ss->manning_agent, 'SOLPIA')){
+                    if(isset($ss->sign_on) && isset($ss->sign_off)){
+                        $total += $ss->sign_off->diffInMonths($ss->sign_on);
+                    }
+                }
+            }
+
+            if($total == 0){
+                if(isset($ss->sign_on) && isset($end)){
+                    $total = $end->diffInMonths($ss->sign_on);
+                }
+            }
+
+            if($total >= 60){
+                array_push($array1, $ss->applicant_id);
+            }
+            if($total >= 120){
+                array_push($array2, $ss->applicant_id);
+            }
+
+            $details[$sss->first()->applicant_id]['total'] = $total;
+            echo $sss->first()->applicant_id . ' - ' . $total . '<br>';
+        }
+
+        $array1 = array_diff($array1, $array2);
+        $array1 = array_unique($array1);
+        $array2 = array_unique($array2);
+
+        $FYfleets = [
+            "FLEET A" => [],
+            "FLEET B" => [],
+            "FLEET C" => [],
+            "FLEET D" => [],
+            "TOEI" => [],
+            "FISHING" => [],
+            "" => []
+        ];
+        $TYfleets = [
+            "FLEET A" => [],
+            "FLEET B" => [],
+            "FLEET C" => [],
+            "FLEET D" => [],
+            "TOEI" => [],
+            "FISHING" => [],
+            "" => []
+        ];
+
+        foreach($array1 as $id){
+            array_push($FYfleets[$details[$id]['fleet']], $details[$id]);
+        }
+
+        foreach($array2 as $id){
+            array_push($TYfleets[$details[$id]['fleet']], $details[$id]);
+        }
+
+        ksort($FYfleets);
+        ksort($TYfleets);
     }
 
     public function generateApplicantFleet(){

@@ -8,6 +8,9 @@
 	<a class="btn btn-warning" data-toggle="tooltip" title="Filter" onclick="filter()">
 		<span class="fa fa-filter"></span>
 	</a>
+	<a class="btn btn-success" data-toggle="tooltip" title="Awardees" href="{{ route('applications.awardees') }}">
+		<span class="fa fa-trophy"></span>
+	</a>
 	{{-- <a href="{{ route('applications.export.all') }}" class="btn btn-warning" data-toggle="tooltip" title="Export All">
 		<span class="fa fa-download"></span>
 	</a> --}}
