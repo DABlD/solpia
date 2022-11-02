@@ -134,7 +134,7 @@ class DashboardController extends Controller
             $bool = false;
 
             foreach($docs as $doc){
-                if($doc->type == "PASSPORT" || $doc->type == "US-VISA" || $doc->type == "SEAMAN'S BOOK"){
+                if(in_array($doc->type, ["PASSPORT", "US-VISA", "SEAMAN'S BOOK", "CT", "CRA"]))
                     $temp['docs'][sizeof($temp['docs'])] = [
                         "type" => $doc->type, 
                         "expiry" => $doc->expiry_date->toDateString()
