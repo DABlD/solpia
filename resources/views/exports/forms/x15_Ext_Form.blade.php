@@ -97,8 +97,8 @@
 
 	@php
 		// dd($data->document_id);
-		$sb = $data->document_id->{"SEAMAN'S BOOK"} ?? null;
-		$pp = $data->document_id->{"PASSPORT"} ?? null;
+		$sb = isset($data->document_id->{"SEAMAN'S BOOK"}) ? $data->document_id->{"SEAMAN'S BOOK"} : null;
+		$pp = isset($data->document_id->{"PASSPORT"}) ? $data->document_id->{"PASSPORT"} : null;
 		$coc = null;
 		foreach(get_object_vars($data->document_lc) as $lc){
 			if(str_contains($lc, 'COC')){
