@@ -46,16 +46,16 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             [
                 'borders' => [
                     'top' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                     'bottom' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                     'left' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                     'right' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                 ]
             ],
@@ -181,8 +181,8 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // HC VC
                 $h[5] = [
                     'F2', 'A5', 'A7', 'D7', 'G7', 'A8:I8',
-                    'A8', 'C8', 'D8', 'F8', 'I8', 'A7:I30',
-                    'F31:F34'
+                    'A8', 'C8', 'D8', 'F8', 'I8', 'A7:I32',
+                    'A33:G40'
                 ];
 
                 // B
@@ -193,17 +193,17 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A9:A30', 'A32', 'C32', 'I9:I30', 'B7', 'E7', 'H7'
+                    'A9:A32', 'A34', 'C34', 'I9:I32', 'B7', 'E7', 'H7'
                 ];
 
                 //HR
                 $h[8] = [
-                    'A34'
+                    'A36'
                 ];
 
                 //underline
                 $h[9] = [
-                    'C34'
+                    'C36'
                 ];
 
                 $h['wrap'] = [
@@ -212,7 +212,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'C9:H30'
+                    'C9:H32'
                 ];
 
                 foreach($h as $key => $value) {
@@ -243,7 +243,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 $rows = array();
-                for($i = 9; $i <= 28; $i++){
+                for($i = 9; $i <= 30; $i++){
                     array_push($rows, "A$i:B$i");
                     array_push($rows, "C$i");
                     array_push($rows, "D$i:E$i");
@@ -253,7 +253,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BORDERS
                 $cells[0] = array_merge($rows, [
-                    'F2:I3', 'A5:I34'
+                    'F2:I3', 'A5:I36'
                 ]);
 
                 $cells[1] = array_merge([
@@ -295,7 +295,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension('6')->setRowHeight(28.50);
                 $event->sheet->getDelegate()->getRowDimension('7')->setRowHeight(28.50);
 
-                for($i = 8; $i <= 34; $i++){
+                for($i = 8; $i <= 36; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(22.50);
                 }
             },

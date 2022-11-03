@@ -172,7 +172,7 @@
 			}
 
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == $temp){
+			    if($document->type == $temp){
 			        $docu = $document;
 			    }
 			}
@@ -309,8 +309,8 @@
 	{{ $getDocument('COC', 			'lc', 		'MARINA', 		'C.O.C.'								)}}
 	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'G.O.C.'								)}}
 	{{ $getDocument('COC', 			'lc',		'MARINA', 		'Watch-keeping Certificate', 		true)}}
-	{{ $getDocument('MEDICAL CARE - MECA', 'lc', 'MARINA', 'MEDICAL CARE (MECA)')}}
-	{{ $getDocument('POLLUTION', 'lc', 'MARINA', 'Maritime Pollution Prevention')}}
+	{{ $getDocument('MEDICAL CARE - MECA', 'lc', 'MARINA', 		'Medical Care'							)}}
+	{{ $getDocument('POLLUTION', 'lc', 'MARINA', 'Maritime Pollution Prevention'						)}}
 	{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 		"Flagged Seaman's Book"					)}}
 	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flagged License'						)}}
 	{{ $getDocument('BASIC TRAINING - BT', 'lc', 'MARINA', 		'Basic Safety Course'					)}}
@@ -327,12 +327,17 @@
 	{{ $getDocument('ECDIS', 'lc', '', 'ECDIS (Generic)')}}
 	{{ $getDocument('ECDIS SPECIFIC', 'lc', '', 'ECDIS (Specific)')}}
 
+	{{ $getDocument("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'MARINA', 'SECURITY TRAINING(SDSD/SSAT)')}}
+	{{ $getDocument("SHIP'S COOK ENDORSEMENT", 'flag', 'PANAMA', 'SHIP COOK TRAINING')}}
+
 	{{ $getDocument('MEDICAL CERTIFICATE', 'med_cert', '', 'Medical Examination Certificate'			)}}
 	{{ $getDocument('YELLOW FEVER', 'med_cert', '', 'Yellow Fever'										)}}
 	{{ $getDocument("US-VISA", 		'id', 		'US EMBASSY', 	'US Visa'								)}}
 
 	<tr>
-		<td colspan="5" rowspan="2" style="text-align: center; vertical-align: middle;">Checked by:</td>
+		<td colspan="5" rowspan="2" style="text-align: center; vertical-align: middle;">
+			Checked by: ______________________
+		</td>
 		<td>x</td>
 		<td colspan="3">Qualified</td>
 	</tr>
