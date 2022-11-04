@@ -1555,15 +1555,21 @@
                     let curRankID = rengiSno.rank_id;
                     let curCategory = ranks[curRankID].category;
 
-                    if(curCategory.startsWith("DECK")){
-                        curCategory = "DECK";
-                    }
-                    else if(curCategory.startsWith("ENGINE")){
+                    if(curCategory.startsWith("ENGINE")){
                         curCategory = "ENGINE";
                     }
-                    else{
-                        curCategory = "GALLEY";
+                    else if(curCategory.startsWith("DECK")){
+                        curCategory = "DECK";
                     }
+                    else if(crewRankID == 11){ //OS OR WPR GALLEY WILL BE AVAILABLE AS RELIEVER
+                        curCategory = "DECK";
+                    }
+                    else if(crewRankID == 17){ //OS OR WPR GALLEY WILL BE AVAILABLE AS RELIEVER
+                        curCategory = "ENGINE";
+                    }
+                    // else{
+                    //     curCategory = "GALLEY";
+                    // }
 
                     if((crew.abbr == rengiSno.abbr && crew.applicant_id != rengiSno.applicant_id && rengiSno.status != "On Board") || (curRankID > crewRankID && crewRankCategory == curCategory && rengiSno.status != "Lined-Up")){
                         let name = `${rengiSno.lname + ', ' + rengiSno.fname + ' ' + (rengiSno.suffix || "") + ' ' + rengiSno.mname}`;
