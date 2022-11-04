@@ -29,7 +29,7 @@
 		}
 	}
 
-	$rank_category = $data->rank->category;
+	$rank_category = isset($data->rank) ? $data->rank->category : null;
 	$total = 0;
 
 	$getDocument = function($docu, $type, $name = null, $ctr) use ($data, $checkDate2, $rank) {
