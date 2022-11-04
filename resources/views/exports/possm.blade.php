@@ -270,7 +270,7 @@
 	<tr>
 		<td colspan="8" style="font-weight: bold;">I. PERSONAL DATA</td>
 		<td>CODE NO:</td>
-		<td>POS - {{ $data->rank->abbr }}</td>
+		<td>POS - {{ isset($data->rank) ? $data->rank->abbr : "" }}</td>
 	</tr>
 
 	{{ nl() }}
@@ -281,7 +281,7 @@
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->mname }} {{ $data->user->suffix }}
 		</td>
 		<td>RANK</td>
-		<td>{{ $data->rank->abbr }}</td>
+		<td>{{ isset($data->rank) ? $data->rank->abbr : "" }}</td>
 		<td>CIVIL STATUS</td>
 		<td>{{ $data->civil_status }}</td>
 	</tr>
@@ -509,7 +509,11 @@
 	</tr>
 
 	@php
-		$reg = str_starts_with($data->rank->category, 'DECK') ? "II/4" : "III/4";
+		$reg = null;
+		if(isset($data->rank)){
+			$reg = str_starts_with($data->rank->category, 'DECK') ? "II/4" : "III/4";
+		}
+
 		$docu = false;
 
 		foreach($data->document_lc as $document){
