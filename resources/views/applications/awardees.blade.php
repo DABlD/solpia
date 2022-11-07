@@ -325,6 +325,7 @@
         $(document).ready(() => {
             $('.table').DataTable({
                 lengthMenu: [10, 25, 50, 100, 200],
+                pageLength: 200
             });
         });
     </script>
