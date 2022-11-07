@@ -323,7 +323,9 @@
 @push('after-scripts')
     <script>
         $(document).ready(() => {
-            $('.table').DataTable();
+            $('.table').DataTable({
+                lengthMenu: [10, 25, 50, 100, 200],
+            });
         });
     </script>
 @endpush
