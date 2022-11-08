@@ -267,7 +267,7 @@
             serverSide: true,
             ajax: {
                 url: '{{ route('datatables.applications') }}',
-                type: 'POST',
+                type: 'post',
                 data: f => {
                     f.filters = getFilters();                }
             },
@@ -450,7 +450,8 @@
                         X05_Clearance:                  'Clearance',
                         Y05_ClearanceAffidavit:         'Clearance - Affidavit',
                         X09_InitialDocumentChecklist:   'Document Checklist (Initial)',
-                        DocumentChecklist:              'Document Checklist (Final)'
+                        DocumentChecklist:              'Document Checklist (Final)',
+                        X18_EvaluationSheet:            'Evaluation Sheet - POSSM'
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
@@ -584,6 +585,9 @@
 
                             window.location.href = `{{ route('applications.exportDocument') }}/${data.id}/${result.value}?` + $.param(data);
                         }
+                        else if(result.value == "X18_EvaluationSheet"){
+                            x18_ES(application, result.value);
+                        }
                         else{
                             window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
                         }
@@ -685,6 +689,88 @@
                 else{
                     window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}?` + $.param(data);
                 }
+            }
+
+            function x18_ES(application, type){
+                swal({
+                    html: `
+                        <select id="vid" class="form-control">
+                            <option value="">Select Vessel</option>
+                        </select>
+                        <br><br>
+                        <select id="rid" class="form-control">
+                            <option value="">Select Rank</option>
+                        </select>
+                        <br>
+                    `,
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                let a = $('#vid').val();
+                                let b = $('#rid').val();
+
+                                if(a == "" || b == ""){
+                                    swal.showValidationError('All fields is required');
+                                }
+                            resolve()}, 800);
+                        });
+                    },
+                    onOpen: () => {
+                        $.ajax({
+                            url: '{{ route('vessels.get2') }}',
+                            data: {
+                                cols: ['id', 'name'],
+                                where: ['status', 'ACTIVE'],
+                                whereIn: ['fleet', ['FLEET B']]
+                            },
+                            success: result => {
+                                result = JSON.parse(result);
+                                
+                                let vesselString = "";
+                                result.forEach(vessel => {
+                                    vesselString += `
+                                        <option value="${vessel.id}">${vessel.name}</option>
+                                    `;
+                                })
+
+                                $('#vid').append(vesselString);
+
+                                $.ajax({
+                                    url: '{{ route('rank.get') }}',
+                                    data: {
+                                        select: ['id', 'name', 'abbr'],
+                                    },
+                                    success: result => {
+                                        result = JSON.parse(result);
+                                        
+                                        let rankString = "";
+                                        result.forEach(rank => {
+                                            rankString += `
+                                                <option value="${rank.id}">${rank.name} (${rank.abbr})</option>
+                                            `;
+                                        })
+
+                                        $('#rid').append(rankString);
+                                        $('#vid, #rid').select2();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }).then(result => {
+                    if(result.value){
+                        let rid = $('#rid').val();
+                        let vid = $('#vid').val();
+
+                        let data = {};
+                            data.id = application.data('id');
+                            data.rid = rid;
+                            data.vid = vid;
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/${data.id}/${type}?` + $.param(data);
+                    }
+                });
             }
 
             function USVE(id, type){
