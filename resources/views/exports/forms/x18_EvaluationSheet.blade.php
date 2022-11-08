@@ -5,6 +5,16 @@
     $blue = "color: #0000FF;";
     $bc = $bold . " " . $center;
 
+    $vtype = null;
+    $vessel = $data->vessel;
+
+    if(str_contains($vessel->type, 'BUL')){
+        $vtype = "BUL";
+    }
+    elseif(str_contains($vessel->type, 'CON')){
+        $vtype = "CON";
+    }
+
     // MAX AGE
     $age = [
         'MSTR' => 55,
@@ -161,29 +171,29 @@
     });
 
     // TOTAL SAME TYPE - ALL - GREATER THAN 6M
-    $tsta = $data->sea_service->filter(function($value, $key) use($data){
+    $tsta = $data->sea_service->filter(function($value, $key) use($data, $vtype){
         $diff = 0;
         if(isset($value->sign_on) && isset($value->sign_off)){
             $diff = $value->sign_off->diffInMonths($value->sign_on);
         }
 
-        return str_contains($value->vessel_type, "BUL") && $diff >= 6;
+        return str_contains($value->vessel_type, $vtype) && $diff >= 6;
     });
 
     // TOTAL SAME TYPE WITHIN LAST 5 YEARS
-    $tst = $data->sea_service->filter(function($value, $key) use($data){
-        return str_contains($value->vessel_type, "BUL") && now()->diffInYears($value->sign_on) <= 5;
+    $tst = $data->sea_service->filter(function($value, $key) use($data, $vtype){
+        return str_contains($value->vessel_type, $vtype) && now()->diffInYears($value->sign_on) <= 5;
     });
 
 
     // TOTAL SAME TYPE SAME RANK
-    $tstsr = $data->sea_service->filter(function($value, $key) use($data){
+    $tstsr = $data->sea_service->filter(function($value, $key) use($data, $vtype){
         $diff = 0;
         if(isset($value->sign_on) && isset($value->sign_off)){
             $diff = $value->sign_off->diffInMonths($value->sign_on);
         }
 
-        return str_contains($value->vessel_type, "BUL") && $value->rank == $data->rank2->name && $diff >= 6;
+        return str_contains($value->vessel_type, $vtype) && $value->rank == $data->rank2->name && $diff >= 6;
     });
 
     // FAMILY DATA
