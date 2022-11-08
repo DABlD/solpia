@@ -461,14 +461,14 @@
         <td style="{{ $center }}">-</td>
         <td style="{{ $center }} {{ $red }}">Nothing: -5</td>
         <td style="{{ $center }}">
-            @if(sizeof($ww) == 0)
+            @if($ww == 0)
                 0 Times
             @else
                 -
             @endif
         </td>
         <td style="{{ $bc }}">
-            @if(sizeof($ww) == 0)
+            @if($ww == 0)
                 -5
             @else
                 -
