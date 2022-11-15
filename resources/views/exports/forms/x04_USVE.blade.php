@@ -70,7 +70,7 @@
 			PROSPECT VESSEL:
 		</td>
 		<td colspan="4" style="font-size: 10px; {{ $bold }} {{ $blue }}">
-			{{ $data->vessel->name }}
+			{{ $data->vessel ? $data->vessel->name : "---" }}
 		</td>
 		<td></td>
 		<td style="font-size: 10px; {{ $bold }}">
