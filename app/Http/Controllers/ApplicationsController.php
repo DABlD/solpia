@@ -1521,14 +1521,14 @@ class ApplicationsController extends Controller
             foreach($sss as $key => $ss){
                 if(str_contains($ss->manning_agent, 'SOLPIA')){
                     if(isset($ss->sign_on) && isset($ss->sign_off)){
-                        $total += $ss->sign_off->diffInMonths($ss->sign_on);
+                        $total += $ss->sign_off->diffInDays($ss->sign_on) / 30;
                     }
                 }
             }
 
             if($total == 0){
                 if(isset($ss->sign_on) && isset($end)){
-                    $total = $end->diffInMonths($ss->sign_on);
+                    $total = $end->diffInDays($ss->sign_on) / 30;
                 }
             }
 
