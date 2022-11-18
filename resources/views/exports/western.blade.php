@@ -461,6 +461,10 @@
 		<td colspan="6">Issued By</td>
 	</tr>
 
+	@php
+		dd($applicant);
+	@endphp
+
 	@if($applicant->rank->type == "OFFICER")
 		{{ $getDocument('COC', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
 	@else
