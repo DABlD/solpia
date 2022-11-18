@@ -199,7 +199,7 @@
 			}
 
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == $temp){
+			    if($document->country == "Liberia" && $document->type == $temp){
 			        $docu = $document;
 			        $docu->issuer = $docu->country;
 			    }
@@ -466,9 +466,18 @@
 	@else
 		{{ $getDocument('COC-EMPTY', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
 	@endif
+
 	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'National GMDSS'	,'',true			)}}
 	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flag License'		,'',true			)}}
-	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Flag GMDSS'		,'',true			)}}
+
+	{{-- LIBERIA DOCS --}}
+	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Flag GMCM/GOC SQC'		,'',true			)}}
+	{{ $getDocument('BT', 	'flag', 	'', 			'Flag BAS / BT SQC'		,'',true			)}}
+	{{ $getDocument('PSCRB', 	'flag', 	'', 			'Flag SCC / PSCRB SQC'		,'',true			)}}
+	{{ $getDocument('AFF', 	'flag', 	'', 			'Flag AFF / AFM SQC'		,'',true			)}}
+	{{ $getDocument('MECA', 	'flag', 	'', 			'Flag CPM / MECA SQC'		,'',true			)}}
+	{{ $getDocument('MEFA', 	'flag', 	'', 			'Flag FAM / MEFA SQC'		,'',true			)}}
+
 	@if($rank >= 1 && $rank <= 2)
 		{{ $getDocument('SSO', 			'flag', 	'', 			'Flag SSO / SDSD'	,'',true			)}}
 	@else

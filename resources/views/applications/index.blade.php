@@ -2363,7 +2363,7 @@
         function fillTab10(applicant){
             let evalss = Object.entries(applicant.evaluation);
             let temp = ``;
-            
+
             evalss.forEach(evals => {
                 evals = evals[1];
                 temp += `
@@ -2937,6 +2937,21 @@
                                 inputOptions: {
                                     klcsm: 'Tanker',
                                     klcsmBulk: 'Bulk'
+                                }
+                            }).then(result => {
+                                if(result.value){
+                                    type = result.value;
+                                    window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                                }
+                            })
+                        }
+                        else if(type == "western"){
+                            swal({
+                                title: 'Select Flag',
+                                input: 'select',
+                                inputOptions: {
+                                    western: 'PANAMA',
+                                    westernLiberia: 'LIBERIA'
                                 }
                             }).then(result => {
                                 if(result.value){
