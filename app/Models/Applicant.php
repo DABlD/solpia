@@ -67,4 +67,8 @@ class Applicant extends Model
     public function pro_app(){
         return $this->hasOne('App\Models\ProcessedApplicant');
     }
+
+    public function evaluation(){
+        return $this->hasOne('App\Models\Evaluation');
+    }
 }

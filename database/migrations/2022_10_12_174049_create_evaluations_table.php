@@ -14,8 +14,15 @@ class CreateEvaluationsTable extends Migration
     public function up()
     {
         Schema::create('evaluations', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('applicant_id')->unsigned();
+
+            $table->string('type');
+            $table->text('value');
+            $table->string('file');
+            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

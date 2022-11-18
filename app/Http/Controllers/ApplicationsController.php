@@ -1479,6 +1479,7 @@ class ApplicationsController extends Controller
         $applicant->load('document_med');
         $applicant->load('document_med_exp');
         $applicant->load('pro_app');
+        $applicant->load('evaluation');
 
         if($applicant->pro_app->status == "On Board"){
             $applicant->lup = LineUpContract::where([

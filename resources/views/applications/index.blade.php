@@ -1388,6 +1388,9 @@
                                     <li role="presentation">
                                         <a href=".ss" role="tab" data-toggle="pill"><u>S</u>ea Services</a>
                                     </li>
+                                    <li role="presentation">
+                                        <a href=".eval" role="tab" data-toggle="pill">E<u>v</u>aluations</a>
+                                    </li>
                                 </ul>
                                 <br><br>
 
@@ -1401,6 +1404,7 @@
                                   <div role="tabpanel" class="tab-pane fade med_certs">d</div>
                                   <div role="tabpanel" class="tab-pane fade meds">d</div>
                                   <div role="tabpanel" class="tab-pane fade ss">d</div>
+                                  <div role="tabpanel" class="tab-pane fade eval">d</div>
                                 </div>
                             `,
                             onOpen: () => {
@@ -1413,6 +1417,7 @@
                                 fillTab7(applicant);
                                 fillTab8(applicant);
                                 fillTab9(applicant); //FAMILY SUPPOSED TO BE 3
+                                fillTab10(applicant); //FAMILY SUPPOSED TO BE 3
                             }
                         }).then(() => {
                             $('[type="search"]:first').focus();
@@ -1452,6 +1457,9 @@
                     }
                     else if(key == "Y" || key == "y"){
                         $('[href=".family"]').click();
+                    }
+                    else if(key == "V" || key == "v"){
+                        $('[href=".eval"]').click();
                     }
                 }
             }, true);
@@ -2350,6 +2358,74 @@
             `;
 
             $('.family').html(string);
+        }
+
+        function fillTab10(applicant){
+            let evalss = Object.entries(applicant.evaluation);
+            let temp = ``;
+            
+            evalss.forEach(evals => {
+                evals = evals[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${evals.type}</b></h3>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" value="${evals.fname ?? "-"} ${evals.lname ?? "-"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="birthday">birthday</label>
+                                <input type="text" class="form-control" id="birthday" value="${evals.birthday ? moment(evals.birthday).format('MMM DD, YYYY') : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="year">Age</label>
+                                <input type="text" class="form-control" id="age" value="${evals.birthday ? moment().diff(evals.birthday, 'years') : evals.age ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="occupation">Occupation</label>
+                                <input type="text" class="form-control" id="occupation" value="${evals.occupation ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="email">Contact</label>
+                                <input type="text" class="form-control" id="email" value="${evals.email ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="school">Address</label>
+                                <input type="text" class="form-control" id="address" value="${evals.address ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            })
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Evaluation</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.eval').html(string);
         }
 
         // CREW INFO END
