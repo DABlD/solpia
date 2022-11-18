@@ -157,9 +157,16 @@ class DatatablesController extends Controller
 			foreach ($sss as $key => $id) {
 				$ss = SeaService::where('applicant_id', $id)
                         ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
-                        ->join('users as u', 'u.id', '=', 'a.user_id')
-                        ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
-						->orderByDesc('sign_on')->first();
+                        ->join('users as u', 'u.id', '=', 'a.user_id');
+      //                   ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
+						// ->orderByDesc('sign_on')->first();
+
+				if(auth()->user()->fleet){
+					$ss->where('u.fleet', auth()->user()->fleet);
+				}
+
+				$ss = $ss->orderByDesc('sign_on')->first();
+
 				if(isset($ss) && in_array($ss->vessel_name, $temp)){
 					// $temp2 = $sss->splice($key);
 					// $temp2->shift();
@@ -187,9 +194,15 @@ class DatatablesController extends Controller
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
 				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-				->where('applicants.id', $id)
-				->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
-				->first();
+				->where('applicants.id', $id);
+				// ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
+				// ->first();
+
+				if(auth()->user()->fleet){
+					$temp->where('u.fleet', auth()->user()->fleet);
+				}
+
+				$temp = $temp->first();
 
 				// IF NOT DELETED
 				if($temp){
@@ -227,9 +240,15 @@ class DatatablesController extends Controller
 					->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 					->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
 					->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-					->where('applicants.id', $id)
-					->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
-					->first();
+					->where('applicants.id', $id);
+					// ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
+					// ->first();
+
+					if(auth()->user()->fleet){
+						$temp->where('u.fleet', auth()->user()->fleet);
+					}
+
+					$temp = $temp->first();
 
 					// IF NOT DELETED
 					if($temp){
@@ -258,9 +277,15 @@ class DatatablesController extends Controller
 				->where([
 					['u.fname', '=', $arr[0]],
 					['u.lname', '=', $arr[1]],
-					['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
-				])
-				->get();
+					// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
+				]);
+				// ->get();
+
+				if(auth()->user()->fleet){
+					$temp1->where('u.fleet', auth()->user()->fleet);
+				}
+
+				$temp1 = $temp1->get();
 
 				$temp2 = Applicant::select(
 					'applicants.id', 'applicants.remarks', 'u.fleet',
@@ -276,9 +301,15 @@ class DatatablesController extends Controller
 				->where([
 					['u.lname', '=', $arr[0]],
 					['u.fname', '=', $arr[1]],
-					['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
-				])
-				->get();
+					// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
+				]);
+				// ->get();
+
+				if(auth()->user()->fleet){
+					$temp2->where('u.fleet', auth()->user()->fleet);
+				}
+
+				$temp2 = $temp2->get();
 
 				foreach ($temp1 as $a) {
 					$applicants = $applicants->push($a);
@@ -293,8 +324,15 @@ class DatatablesController extends Controller
 			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')
 					->where([
 						$condition,
-						['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
-					])->count();
+						// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
+					]);
+					// ->count();
+
+			if(auth()->user()->fleet){
+				$tc->where('u.fleet', auth()->user()->fleet);
+			}
+
+			$tc = $tc->count();
 
 			$applicants = Applicant::select(
 					'applicants.id', 'applicants.remarks', 'u.fleet',
@@ -305,11 +343,17 @@ class DatatablesController extends Controller
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 				->where([
 					$condition,
-					['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
+					// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
 				])
 				->offset($req->start)
-				->limit($req->length)
-				->get();
+				->limit($req->length);
+				// ->get();
+
+			if(auth()->user()->fleet){
+				$applicants->where('u.fleet', auth()->user()->fleet);
+			}
+
+			$applicants = $applicants->get();
 		}
 
 
