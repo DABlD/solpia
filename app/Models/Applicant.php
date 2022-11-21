@@ -69,6 +69,6 @@ class Applicant extends Model
     }
 
     public function evaluation(){
-        return $this->hasOne('App\Models\Evaluation');
+        return $this->hasMany('App\Models\Evaluation');
     }
 }

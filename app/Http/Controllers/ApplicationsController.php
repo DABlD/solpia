@@ -1369,7 +1369,12 @@ class ApplicationsController extends Controller
     }
 
     function getFiles(Request $req){
-        echo json_encode(DB::table('document_' . $req->type)->where('id', $req->id)->select('file')->first());
+        if(in_array($req->type, ['eval', 'reco', 'comment'])){
+            echo json_encode(DB::table("evaluations")->where('id', $req->id)->select('file')->first());
+        }
+        else{
+            echo json_encode(DB::table('document_' . $req->type)->where('id', $req->id)->select('file')->first());
+        }
     }
 
     function uploadFiles_old(Request $req){
@@ -1378,7 +1383,12 @@ class ApplicationsController extends Controller
         $name = $file->getClientOriginalName();
         $file->move(public_path().'/files/' . $req->aId . '/', $name);
 
-        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => $name]);
+        if(in_array($req->type, ['eval', 'reco', 'comment'])){
+            DB::table("evaluations")->where('id', $req->id)->update(['file' => $name]);
+        }
+        else{
+            DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => $name]);
+        }
 
         echo "<script>window.close();</script>";
     }
@@ -1393,12 +1403,22 @@ class ApplicationsController extends Controller
             array_push($filenames, $name);
         }
         
-        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => json_encode($filenames)]);
+        if(in_array($req->type, ['eval', 'reco', 'comment'])){
+            DB::table("evaluations")->where('id', $req->id)->update(['file' => json_encode($filenames)]);
+        }
+        else{
+            DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => json_encode($filenames)]);
+        }
         echo "<script>window.close();</script>";
     }
 
     public function deleteFile_old(Request $req){
-        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => null]);
+        if(in_array($req->type, ['eval', 'reco', 'comment'])){
+            DB::table("evaluations")->where('id', $req->id)->update(['file' => null]);
+        }
+        else{
+            DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => null]);
+        }
 
         if(!file_exists(public_path("del\\" . $req->aId))){
             mkdir(public_path("del\\files\\" . $req->aId));
@@ -1408,7 +1428,14 @@ class ApplicationsController extends Controller
     }
 
     public function deleteFile(Request $req){
-        $files = DB::table('document_' . $req->type)->where('id', $req->id)->first();
+        $files = null;
+
+        if(in_array($req->type, ['eval', 'reco', 'comment'])){
+            $files = DB::table("evaluations")->where('id', $req->id)->first();
+        }
+        else{
+            $files = DB::table('document_' . $req->type)->where('id', $req->id)->first();
+        }
 
         // if(!file_exists(public_path("del\\" . $req->aId))){
         //     mkdir(public_path("del\\files\\" . $req->aId));
@@ -1421,7 +1448,13 @@ class ApplicationsController extends Controller
         // die;
 
         $files->file = null;
-        DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => null]);
+
+        if(in_array($req->type, ['eval', 'reco', 'comment'])){
+            DB::table("evaluations")->where('id', $req->id)->update(['file' => null]);
+        }
+        else{
+            DB::table('document_' . $req->type)->where('id', $req->id)->update(['file' => null]);
+        }
     }
 
     public function goToPrincipal(Applicant $applicant, Request $req){

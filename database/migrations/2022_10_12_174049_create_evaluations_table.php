@@ -19,7 +19,9 @@ class CreateEvaluationsTable extends Migration
 
             $table->string('type');
             $table->text('value');
-            $table->string('file');
+            $table->string('vessel')->nullable();
+            $table->date('date')->nullable();
+            $table->string('file')->nullable();
             
             $table->timestamps();
             $table->softDeletes();

@@ -10,10 +10,10 @@ class Evaluation extends Model
     use SoftDeletes;
 
     protected $fillable = [
-    	'type', 'value', 'file'
+    	'type', 'value', 'file', 'vessel', 'date'
     ];
 
     protected $dates = [
-        'created_at', 'updated_at', 'deleted_at'
+        'created_at', 'updated_at', 'deleted_at', 'date'
     ];
 }

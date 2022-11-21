@@ -1391,6 +1391,9 @@
                                     <li role="presentation">
                                         <a href=".eval" role="tab" data-toggle="pill">E<u>v</u>aluations</a>
                                     </li>
+                                    <li role="presentation">
+                                        <a href=".reco" role="tab" data-toggle="pill"><u>R</u>ecommendations</a>
+                                    </li>
                                 </ul>
                                 <br><br>
 
@@ -1405,6 +1408,7 @@
                                   <div role="tabpanel" class="tab-pane fade meds">d</div>
                                   <div role="tabpanel" class="tab-pane fade ss">d</div>
                                   <div role="tabpanel" class="tab-pane fade eval">d</div>
+                                  <div role="tabpanel" class="tab-pane fade reco">d</div>
                                 </div>
                             `,
                             onOpen: () => {
@@ -1417,7 +1421,7 @@
                                 fillTab7(applicant);
                                 fillTab8(applicant);
                                 fillTab9(applicant); //FAMILY SUPPOSED TO BE 3
-                                fillTab10(applicant); //FAMILY SUPPOSED TO BE 3
+                                fillTab10(applicant);
                             }
                         }).then(() => {
                             $('[type="search"]:first').focus();
@@ -1460,6 +1464,9 @@
                     }
                     else if(key == "V" || key == "v"){
                         $('[href=".eval"]').click();
+                    }
+                    else if(key == "R" || key == "r"){
+                        $('[href=".reco"]').click();
                     }
                 }
             }, true);
@@ -2360,34 +2367,169 @@
         }
 
         function fillTab10(applicant){
-            let evalss = applicant.evaluation ? Object.entries(applicant.evaluation) : [];
+            let evalss = applicant.evaluation;
             let temp = ``;
+            let temp1 = ``;
+            let temp2 = ``;
+            let temp3 = ``;
 
             evalss.forEach(evals => {
-                evals = evals[1];
-                temp += `
+                file = "";
+
+                if(evals.file){
+                    try{
+                        evals.file = JSON.parse(evals.file);
+                        evals.file = evals.file[0];
+                    }
+                    catch(error){
+                        evals.file = evals.file;
+                    }
+
+                    let type = evals.type == "Evaluation" ? "eval" : evals.type == "Recommendation" ? "reco" : "comment";
+
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${evals.id}', ${applicant.id}, 'eval')">
+                            <span class="fa fa-search">
+                        </span></a>
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${evals.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${evals.id}, ${applicant.id}, 'eval')">
+                            <span class="fa fa-times">
+                        </span></a>`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${evals.id}, ${applicant.id}, 'eval')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
+                temp = `
                     <h3 style="text-align: left;"><b>${evals.type}</b></h3>
 
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" value="test" readonly>
+                                <label for="vessel">Vessel</label>
+                                <input type="text" class="form-control" id="vessel" value="${evals.vessel}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="text" class="form-control" id="date" value="${toDate(evals.date)}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="remark">Remark</label>
+                                <input type="text" class="form-control" id="remark" value="${evals.value}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
                             </div>
                         </div>
                     </div>
                 `;
+
+                if(evals.type == "Evaluation"){
+                    temp1 += temp;
+                }
+                else if(evals.type == "Recommendation"){
+                    temp2 += temp;
+                }
             })
 
-            let string = `
+            let string1 = `
                 <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-header" style="float: right;" data-toggle="tooltip" title="Add">
+                        <a class="btn btn-success" onClick="addEval('Evaluation', ${applicant.id}, 'eval')">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+
                     <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Evaluation</b></h2>'}
+                        ${temp1 != "" ? temp1 : '<h2><b>No Evaluation</b></h2>'}
                     </div>
                 </div>
             `;
 
-            $('.eval').html(string);
+            let string2 = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-header" style="float: right;" data-toggle="tooltip" title="Add">
+                        <a class="btn btn-success" onClick="addEval('Recommendation', ${applicant.id}, 'reco')">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+
+                    <div class="box-body">
+                        ${temp2 != "" ? temp2 : '<h2><b>No Recommendation</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.eval').html(string1);
+            $('.reco').html(string2);
+        }
+
+        function addEval(type, id, tab){
+            swal({
+                html: `
+                    ${input("vessel", "Enter Vessel Name", null, 3, 9)}
+                    ${input("date", "Select Date", null, 3, 9)}
+                    ${input("remark", "Enter Remarks", null, 3, 9)}
+                `,
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let a = $('[name="vessel"]').val();
+                            let b = $('[name="date"]').val();
+                            let c = $('[name="remark"]').val();
+
+                            if(a == "" || b == ""){
+                                swal.showValidationError('All fields is required');
+                            }
+                        resolve()}, 800);
+                    });
+                },
+                width: "50%",
+                onOpen: () => {
+                    $('[name="date"]').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    })
+                }
+            }).then(result => {
+                if(result.value){
+                    let vessel = $('[name="vessel"]').val();
+                    let date = $('[name="date"]').val();
+                    let remark = $('[name="remark"]').val();
+
+                    let data = {};
+                        data.applicant_id = id;
+                        data.type = type;
+                        data.vessel = vessel;
+                        data.date = date;
+                        data.value = remark;
+
+                    update({
+                        url: "{{ route('evaluation.create') }}",
+                        data: data,
+                        message: "Success"
+                    }, () => {
+                        setTimeout(() => {
+                            console.log(id, tab);
+                            reloadTab(null, id, tab);
+                        }, 2000);
+                    })
+                }
+            });
         }
 
         // CREW INFO END
