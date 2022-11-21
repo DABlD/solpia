@@ -2237,7 +2237,6 @@
 
         function forFillTab8(sss){
             let temp = ``;
-            console.log(sss);
 
             sss.forEach((ss, i) => {
                 ss = ss[1];
@@ -2361,7 +2360,7 @@
         }
 
         function fillTab10(applicant){
-            let evalss = Object.entries(applicant.evaluation);
+            let evalss = applicant.evaluation ? Object.entries(applicant.evaluation) : [];
             let temp = ``;
 
             evalss.forEach(evals => {
@@ -2373,44 +2372,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" value="${evals.fname ?? "-"} ${evals.lname ?? "-"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="birthday">birthday</label>
-                                <input type="text" class="form-control" id="birthday" value="${evals.birthday ? moment(evals.birthday).format('MMM DD, YYYY') : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="year">Age</label>
-                                <input type="text" class="form-control" id="age" value="${evals.birthday ? moment().diff(evals.birthday, 'years') : evals.age ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="occupation">Occupation</label>
-                                <input type="text" class="form-control" id="occupation" value="${evals.occupation ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="email">Contact</label>
-                                <input type="text" class="form-control" id="email" value="${evals.email ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="school">Address</label>
-                                <input type="text" class="form-control" id="address" value="${evals.address ?? "---"}" readonly>
+                                <input type="text" class="form-control" id="name" value="test" readonly>
                             </div>
                         </div>
                     </div>
