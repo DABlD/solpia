@@ -1391,9 +1391,6 @@
                                     <li role="presentation">
                                         <a href=".eval" role="tab" data-toggle="pill">E<u>v</u>aluations</a>
                                     </li>
-                                    <li role="presentation">
-                                        <a href=".reco" role="tab" data-toggle="pill"><u>R</u>ecommendations</a>
-                                    </li>
                                 </ul>
                                 <br><br>
 
@@ -1407,8 +1404,7 @@
                                   <div role="tabpanel" class="tab-pane fade med_certs">d</div>
                                   <div role="tabpanel" class="tab-pane fade meds">d</div>
                                   <div role="tabpanel" class="tab-pane fade ss">d</div>
-                                  <div role="tabpanel" class="tab-pane fade eval">d</div>
-                                  <div role="tabpanel" class="tab-pane fade reco">d</div>
+                                  <div role="tabpanel" class="tab-pane fade eval reco">d</div>
                                 </div>
                             `,
                             onOpen: () => {
@@ -1464,9 +1460,6 @@
                     }
                     else if(key == "V" || key == "v"){
                         $('[href=".eval"]').click();
-                    }
-                    else if(key == "R" || key == "r"){
-                        $('[href=".reco"]').click();
                     }
                 }
             }, true);
@@ -2406,8 +2399,6 @@
                 `;
 
                 temp = `
-                    <h3 style="text-align: left;"><b>${evals.type}</b></h3>
-
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
@@ -2447,41 +2438,33 @@
             let string1 = `
                 <div class="box box-success" style="font-size: 15px;">
                     <div class="box-header" style="float: right;" data-toggle="tooltip" title="Add">
-                        <a class="btn btn-success" onClick="addEval('Evaluation', ${applicant.id}, 'eval')">
+                        <a class="btn btn-success" data-toggle="tooltip" title="Add Evaluation" onClick="addEval('Evaluation', ${applicant.id}, 'eval')">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a class="btn btn-info" data-toggle="tooltip" title="Add Recommendation" onClick="addEval('Recommendation', ${applicant.id}, 'eval')">
                             <i class="fa fa-plus"></i>
                         </a>
                     </div>
 
                     <div class="box-body">
+                        <h3 style="text-align: left;"><b>Evaluations</b></h3>
                         ${temp1 != "" ? temp1 : '<h2><b>No Evaluation</b></h2>'}
-                    </div>
-                </div>
-            `;
-
-            let string2 = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-header" style="float: right;" data-toggle="tooltip" title="Add">
-                        <a class="btn btn-success" onClick="addEval('Recommendation', ${applicant.id}, 'reco')">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </div>
-
-                    <div class="box-body">
+                        <h3 style="text-align: left;"><b>Recommendations</b></h3>
                         ${temp2 != "" ? temp2 : '<h2><b>No Recommendation</b></h2>'}
                     </div>
                 </div>
             `;
 
             $('.eval').html(string1);
-            $('.reco').html(string2);
         }
 
         function addEval(type, id, tab){
             swal({
+                title: "Add " + type,
                 html: `
-                    ${input("vessel", "Enter Vessel Name", null, 3, 9)}
-                    ${input("date", "Select Date", null, 3, 9)}
-                    ${input("remark", "Enter Remarks", null, 3, 9)}
+                    ${input("vessel", "Vessel Name", null, 3, 9)}
+                    ${input("date", "Date", null, 3, 9)}
+                    ${input("remark", "Remarks", null, 3, 9)}
                 `,
                 preConfirm: () => {
                     swal.showLoading();
