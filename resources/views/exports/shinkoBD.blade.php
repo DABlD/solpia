@@ -116,9 +116,18 @@
 			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
 
 			$course = "N/A";
-			if($lastSchool){
-				$course = $applicant->educational_background->last()->course;
+
+			$lastSchool = $applicant->educational_background->filter(function($eb) {
+				return $eb->type == "College";
+			})->first();
+
+			if(!$lastSchool){
+				$lastSchool = $applicant->educational_background->filter(function($eb) {
+					return $eb->type == "Vocational";
+				})->first();			
 			}
+
+			$course = $lastSchool->course;
 
 			if(strtoupper($course) == "BSMT"){
 				$course = "Bachelor of Science in Marine Transportation";
@@ -195,7 +204,7 @@
 			<td colspan="2">{{ $docu ? $docu->number : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Last School</td>
-			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->school : "N/A" }}</td>
+			<td colspan="6">{{ $lastSchool ? $lastSchool->school : "N/A" }}</td>
 		</tr>
 
 		@php 
@@ -209,7 +218,7 @@
 			<td colspan="2">{{ $docu ? $docu->no : "-----" }}</td>
 			<td colspan="2">{{ $docu ? checkDate3($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">Period</td>
-			<td colspan="6">{{ $lastSchool ? $applicant->educational_background->last()->year : "N/A" }}</td>
+			<td colspan="6">{{ $lastSchool ? $lastSchool->year : "N/A" }}</td>
 		</tr>
 
 		@php
