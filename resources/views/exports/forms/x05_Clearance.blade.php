@@ -56,7 +56,7 @@
 
 <table>
 	<tr>
-		<td rowspan="61"></td>
+		<td rowspan="87"></td>
 		<td colspan="8" style="height: 50px;"></td>
 	</tr>
 
@@ -106,24 +106,38 @@
 
 	<tr>
 		<td colspan="3"></td>
-		<td rowspan="50"></td>
+		<td rowspan="78"></td>
 		<td colspan="4" style="font-size: 8px; font-style: italic;">
 		    Include options offered &#38; measures take to convince crew to stay.
 		 </td>
 	</tr>
 
-	{{ $dept("FLEET A", "Ms. Precian Cervantes", "Asst Crewing Manager", "(+ Medical)") }}
-	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager", "(+ Medical)") }}
-	{{ $dept("FLEET C", "Ms. Jeannette Solidum", "Crewing Manager", "(+ Medical)") }}
-	{{ $dept("FLEET D", "Ms. Thea Guerra", "Crewing Manager", "(+ Medical)") }}
-	{{ $dept("FLEET E", "Mr. Dennis Quiño", "Asst Crewing Manager", "(+ Medical)") }}
-	{{ $dept("TOEI DIVISION", "Mr. Neil Romano", "Crewing Manager", "(+ Medical)") }}
-	{{ $dept("TOEI DIVISION", "Ms. Lhea Marquez", "Asst Crewing Manager", "(+ Medical)") }}
-	{{ $dept("FISHING FLEET", "Mr. Ricardo Amparo", "Asst Crewing Manager", "(+ Medical)") }}
-	{{ $dept("PRINCIPAL / REP", "YH Kim or Mr. Ko", "", "", 1) }}
-	{{ $dept("Contract / Visa", "Liaison/Documentation Officer", "", "Flag Documents", 1) }}
-	{{ $dept("Claims / Legal", "Admin Manager", "", "", 1) }}
-	{{ $dept("Accounting", "Ms. Lhen Ecleo", "Accounting Manager", "") }}
+	{{ $dept("FLEET A", "Ms. Precian Marie Cervantes", "Asst Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("FLEET C", "Ms. Jeannette Solidum", "Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("FLEET D", "Ms. Thea Mae Guerra", "Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("FLEET E", "Mr. Dennis Quiño", "Asst Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("TOEI DIVISION", "Mr. Neil Romano", "Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("TOEI DIVISION", "Ms. Lhea Marquez(Fleet A)", "Asst Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("TOEI DIVISION", "Ms. Sarah Jane Zamora(Fleet B)", "Asst Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("TOEI DIVISION", "Ms. Jobelle Fernandez(Fleet C)", "Asst Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("FISHING FLEET", "Mr. Ricardo Amparo", "Asst Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("LIAISON OFFICER", "Mr. Randy Andaya", "", "(Contract)") }}
+	{{ $dept("LIAISON OFFICER (TOEI)", "Mr. Philip Manapul", "", "(Contract)") }}
+
+	{{-- PAGE 2 SEPARATOR --}}
+	<tr>
+		<td colspan="3"></td>
+		<td colspan="4"></td>
+	</tr>
+	
+	{{ $dept("DOCUMENTATION OFFICER / SMI", "Ms. Natasha Saguinsin /", "Ms. Merhla De Asis", "(Flag / Visa)") }}
+	{{ $dept("DOCUMENTATION OFFICER / TOEI", "Ms. Yvonne Cruz", "", "") }}
+	{{ $dept("TRAINING COORDINATOR", "Ms. Annie Grace Estrella", "Training Coordinator", "") }}
+	{{ $dept("ADMIN / CLAIMS", "Ms. Vanessa Castro", "Admin / Claims Officer", "(Claims / Legal)") }}
+	{{ $dept("ACCOUNTING", "Ms. Robelyn Ecleo / Ms. Mylene Relano", "Admin / Accounting Manager", "") }}
+
+	{{ $dept("PRINCIPAL'S REPRESENTIVE", "Mr. Younghun Kim / Mr. Kyoung T. Ko", "", "") }}
 
 	<tr>
 		<td style="{{ $bold }}">Noted by:</td>

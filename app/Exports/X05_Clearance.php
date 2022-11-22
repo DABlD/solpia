@@ -242,25 +242,18 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
             AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LDoc, No. SMOP-DCF-08 &CEffective Date 01 Sept 2017 &RREV.5.0 17.11.22');
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('Clearance', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.8);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.8);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.3);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
-
-                // DEFAULT FONT AND STYLE FOR WHOLE PAGE
-                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(11);
-
-                // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('A1:I66')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -325,15 +318,16 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // VC
                 $h[7] = [
-                    "F7:F47"
+                    "F7:F66"
                 ];
 
                 $h['wrap'] = [
+                    'B56', 'B60', 'B76'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'D28:D50', 'I4'
+                    'D28:D83', 'I3:I4'
                 ];
 
                 foreach($h as $key => $value) {
@@ -373,7 +367,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'F7:I50', 'B57:I57'
+                    'F7:I78', 'B85:I85'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -398,24 +392,28 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // TOP REMOVE BORDER
                 $cells[6] = array_merge([
+                    'F55:I55'
                 ]);
 
                 // BRB
                 $cells[7] = array_merge([
+                    'F54:I54', 'F55:I55'
                 ]);
 
                 // LRB
                 $cells[8] = array_merge([
                     'F10', 'F14', 'F18', 'F22', 'F26',
-                    'F30', 'F34', 'F38', 'F41', 'F44',
-                    'F47'
+                    'F30', 'F34', 'F38', 'F42', 'F46',
+                    'F50', 'F54:F55', 'F59', 'F63', 'F67',
+                    'F71', 'F75'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
-                    'F10', 'F14', 'F18', 'F22', 'F26',
-                    'F30', 'F34', 'F38', 'F41', 'F44',
-                    'F47'
+                    'I10', 'I14', 'I18', 'I22', 'I26',
+                    'I30', 'I34', 'I38', 'I42', 'I46',
+                    'I50', 'I54:I55', 'I59', 'I63', 'I67',
+                    'I71', 'I75'
                 ]);
 
                 // TRB
@@ -428,7 +426,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // BBT
                 $cells[12] = array_merge([
-                    'G53:I53', 'C4:E4', 'I3', 'I4', 'F58:I58'
+                    'G81:I81', 'C4:E4', 'I3', 'I4', 'F86:I86'
                 ]);
 
                 // LBT
@@ -452,16 +450,28 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(1);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(7.7);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(13);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(26.5);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(3);
-                // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(2);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(8.7);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(8.2);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(8.2);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(26.5);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(54)->setRowHeight(30);
+                // $event->sheet->getDelegate()->getRowDimension(55)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(56)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(60)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(76)->setRowHeight(30);
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
+                $event->sheet->getDelegate()->getStyle('A1:I90')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:I90')->getFont()->setSize(10);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
