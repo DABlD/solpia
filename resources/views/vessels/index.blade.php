@@ -1586,13 +1586,13 @@
                 });
 
                 let onBoardButton = "";
-                if(onBoardReliever.includes(crew.applicant_id)){
+                // if(onBoardReliever.includes(crew.applicant_id)){
                     onBoardButton = `
                         <a class="btn btn-sm btn-success" data-toggle="tooltip" title="On Board Promotion" onClick="onBoardPromote(${crew.applicant_id}, ${crew.vessel_id}, ${relieverRank[crew.applicant_id]})">
                             <span class="fa fa-level-up fa-sm"></span>
                         </a>
                     `;
-                }
+                // }
 
                 let cd = crew.months;
                 let cd2 = crew.months;
@@ -1857,48 +1857,80 @@
         }
 
         function onBoardPromote(applicant_id, vessel_id, rank_id){
-            swal({
-                title: "Enter Months of New Contract",
-                input: 'number',
-            }).then(result => {
-                if(result.value && result.value != ""){
-                    // DISEMBARK
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('applications.updateLineUpContract') }}",
-                        data: {
-                            id: applicant_id,
-                            disembarkation_date: moment().format("YYYY-MM-DD"),
-                            type: 'On Board Promotion',
-                            remark: "On Board Promotion"
-                        },
-                        success: result2 => {
-                            console.log('on board update lineup: ' + result.value);
-                            // UPDATE STATUS
+            $.ajax({
+                url: '{{ route('applications.getRanks') }}',
+                success: ranks => {
+                    ranks = JSON.parse(ranks);
+                    let rankString = "";
+
+                    Object.keys(ranks).forEach(category => {
+                        rankString += `<optgroup label="${category}"></optgroup>`;
+
+                        ranks[category].forEach(rank => {
+                            rankString += `
+                                <option value="${rank.id}">
+                                    &nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})
+                                </option>`;
+                        });
+                    });
+
+                    swal({
+                        title: "Enter Details",
+                        html: `
+                            <input type="number" min="1" id="cd" class="form-control" placeholder="Contract Duration (optional)"><br>
+
+                            <select id="rank_id" class="form-control">
+                                <option value="">Promote To:</option>
+                                ${rankString}
+                            </select><br><br>
+                        `,
+                        onOpen: () => {
+                            $('#rank_id').select2();
+                        }
+                    }).then(result => {
+                        let cd = $('#cd').val();
+                        let rank = $('#rank_id').val();
+
+                        if(result.value && cd != "" && rank != ""){
+                            // DISEMBARK
                             $.ajax({
                                 type: 'POST',
-                                url: `{{ route('applications.updateStatus') }}/${applicant_id}/${"On Board"}/${vessel_id}`,
+                                url: "{{ route('applications.updateLineUpContract') }}",
                                 data: {
-                                    date: moment().format("YYYY-MM-DD"),
-                                    months: result.value,
-                                    rank: rank_id
+                                    id: applicant_id,
+                                    disembarkation_date: moment().format("YYYY-MM-DD"),
+                                    type: 'On Board Promotion',
+                                    remark: "On Board Promotion"
                                 },
-                                success: result => {
-                                    swal({
-                                        type: 'success',
-                                        title: 'Successfully Promoted On Board',
-                                        showConfirmButton: false,
-                                        timer: 800
-                                    }).then(() => {
-                                        getVesselCrew(vessel_id, true);
-                                        $('[href=".onBoard"]').click();
+                                success: result2 => {
+                                    console.log('on board update lineup: ' + result.value);
+                                    // UPDATE STATUS
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: `{{ route('applications.updateStatus') }}/${applicant_id}/${"On Board"}/${vessel_id}`,
+                                        data: {
+                                            date: moment().format("YYYY-MM-DD"),
+                                            months: cd,
+                                            rank: rank
+                                        },
+                                        success: result => {
+                                            swal({
+                                                type: 'success',
+                                                title: 'Successfully Promoted On Board',
+                                                showConfirmButton: false,
+                                                timer: 800
+                                            }).then(() => {
+                                                getVesselCrew(vessel_id, true);
+                                                $('[href=".onBoard"]').click();
+                                            });
+                                        }
                                     });
                                 }
                             });
                         }
-                    });
+                    })
                 }
-            })
+            });
         }
 
         function rlu(aId, vessel_id){
