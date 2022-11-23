@@ -455,7 +455,7 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $drawing3->setRotation(8);
             $drawing3->setCoordinates('W42');
         }
-        else{
+        if(auth()->user()->fleet == "FLEET D"){
             $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
             $drawing3->setName('maam_thea_sig');
             $drawing3->setDescription('maam_thea_sig');
@@ -465,6 +465,18 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $drawing3->setWidth(236);
             $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
             $drawing3->setOffsetY(-80);
+            $drawing3->setCoordinates('W42');
+        }
+        if(auth()->user()->fleet == "FLEET C"){
+            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing3->setName('maam_jen_sig');
+            $drawing3->setDescription('maam_jen_sig');
+            $drawing3->setPath(public_path('images/maam_jen_sig.jpg'));
+            $drawing3->setResizeProportional(false);
+            $drawing3->setHeight(60);
+            $drawing3->setWidth(236);
+            $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
+            $drawing3->setOffsetY(-60);
             $drawing3->setCoordinates('W42');
         }
 

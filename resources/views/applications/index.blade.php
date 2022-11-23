@@ -3002,6 +3002,8 @@
                         @endforeach
                         @if(auth()->user()->fleet == "FLEET D")
                             'toei': "TOEI"
+                        @elseif(auth()->user()->fleet == "FLEET C")
+                            'hmm': "HMM"
                         @endif
                     },
                     onOpen: () => {
