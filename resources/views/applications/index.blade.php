@@ -2183,7 +2183,7 @@
         function fillTab8(applicant){
             let sss = Object.entries(applicant.sea_service);
 
-            if(applicant.status == "On Board"){
+            if(applicant.lup){
                 $.ajax({
                     url: "{{ route('vessels.get2') }}",
                     data: {
