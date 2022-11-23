@@ -1586,13 +1586,13 @@
                 });
 
                 let onBoardButton = "";
-                // if(onBoardReliever.includes(crew.applicant_id)){
+                if(onBoardReliever.includes(crew.applicant_id)){
                     onBoardButton = `
-                        &nbsp;&nbsp;<a class="btn btn-sm btn-success" data-toggle="tooltip" title="On Board Promotion" onClick="onBoardPromote(${crew.applicant_id}, ${crew.vessel_id}, ${relieverRank[crew.applicant_id]})">
+                        <a class="btn btn-sm btn-success" data-toggle="tooltip" title="On Board Promotion" onClick="onBoardPromote(${crew.applicant_id}, ${crew.vessel_id}, ${relieverRank[crew.applicant_id]})">
                             <span class="fa fa-level-up fa-sm"></span>
                         </a>
                     `;
-                // }
+                }
 
                 let cd = crew.months;
                 let cd2 = crew.months;
