@@ -129,6 +129,10 @@
 					$name = 'ERM';
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				}
+				if(!$docu){
+					$name = 'SSBT WITH BRM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
 
 				$name = 'BRM/ERM';
 			}
