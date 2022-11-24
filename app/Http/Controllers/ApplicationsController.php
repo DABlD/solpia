@@ -1137,7 +1137,7 @@ class ApplicationsController extends Controller
                 'sign_on'           => $lin_con->joining_date,
                 'sign_off'          => $req->disembarkation_date ? now()->parse($req->disembarkation_date) : now()->parse($lin_con->joining_date)->addMonths($lin_con->months),
                 'total_months'      => $req->disembarkation_date ? now()->parse($lin_con->joining_date)->diffInMonths(now()->parse($req->disembarkation_date)) : $lin_con->months,
-                'remarks'           => $status
+                'remarks'           => $status == "Vacation" ? "FINISHED CONTRACT" : $status
             ]);
 
             $temp->eld = null;
