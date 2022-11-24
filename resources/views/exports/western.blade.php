@@ -547,15 +547,15 @@
 	{{ $getDocument('ADVANCE FIRE FIGHTING - AFF', 'lc', 'MARINA', 'Fire-Fighting Course')}}
 	{{ $getDocument('MEDICAL FIRST AID - MEFA', 'lc', 'MARINA', 'Medical First Aid Course')}}
 	{{ $getDocument('RADAR', 'lc', '', 'Radar Observer')}}
+	{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA')}}	
+	{{ $getDocument('BTM', 'lc', '', 'BTM/ETM')}}
 	@if(isset($applicant->rank))
-		@if(str_starts_with($applicant->rank->type, 'ENGINE'))
-			{{ $getDocument('ERS', 'lc', '')}}
+		@if(str_starts_with($applicant->rank->category, 'ENGINE'))
+			{{ $getDocument('ERS', 'lc', '', 'BRM/ERM')}}
 		@else
-			{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA')}}	
+			{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
 		@endif
 	@endif
-	{{ $getDocument('BTM', 'lc', '', 'BTM/ETM')}}
-	{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
 	{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'Ship Simulator')}}
 
 
