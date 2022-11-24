@@ -1786,7 +1786,7 @@
                         <div class="col-md-7">
                             <select id="remark" class="swal2-input">
                                 <option></option>
-                                <option value="FINISHED CONTRACT">FINISHED CONTRACT</option>
+                                <option value="Vacation">FINISHED CONTRACT</option>
                                 <option value="DISMISSAL">DISMISSAL</option>
                                 <option value="OWN WILL">OWN WILL</option>
                                 <option value="MEDICAL REPAT">MEDICAL REPAT</option>
