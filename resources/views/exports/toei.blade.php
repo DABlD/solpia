@@ -175,7 +175,13 @@
 			<td>SSS No.:</td>
 			<td colspan="2">{{ $applicant->sss ? $applicant->sss : '-----' }}</td>
 			<td>BMI:</td>
-			<td>{{ $applicant->bmi ? $applicant->bmi : '-----' }}</td>
+			@php
+				$weight = $applicant->weight;
+				$height = $applicant->height / 100;
+				$bmi = round($weight / ($height * $height), 2);
+			@endphp
+			<td>{{ $bmi }}</td>
+			{{-- <td>{{ $applicant->bmi ? $applicant->bmi : '-----' }}</td> --}}
 			<td>Shoe Size(cm):</td>
 			<td>{{ $applicant->shoe_size ? $applicant->shoe_size : '-----' }}</td>
 			<td>Clothes Size:</td>
