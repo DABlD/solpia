@@ -11,9 +11,10 @@
 		<td>Vessel:</td>
 		<td colspan="4">{{ $data->vessel }}</td>
 		<td colspan="2"></td>
-		<td>AGE:</td>
+		{{-- <td>AGE:</td> --}}
+		<td></td>
 		<td>
-			{{ $data->user->birthday ? $data->user->birthday->diff(now())->format('%y') : '---' }}
+			{{-- {{ $data->user->birthday ? $data->user->birthday->diff(now())->format('%y') : '---' }} --}}
 		</td>
 		<td>BMI:</td>
 		<td>{{ $data->bmi }}</td>
@@ -77,22 +78,26 @@
 	</tr>
 
 	<tr>
-		<td colspan="4">C.E.O / J.S. Sim (if new crew)</td>
-		<td colspan="3"></td>
-		<td colspan="4"></td>
-	</tr>
-
-	<tr>
+		{{-- <td colspan="4">C.E.O / J.S. Sim (if new crew)</td> --}}
 		<td colspan="4"></td>
 		<td colspan="3"></td>
 		<td colspan="4"></td>
 	</tr>
 
 	<tr>
-		<td colspan="11">Remarks:</td>
+		<td colspan="4"></td>
+		<td colspan="3"></td>
+		<td colspan="4"></td>
 	</tr>
 
 	<tr>
+		<td rowspan="3" colspan="11">Remarks:</td>
+	</tr>
+
+	<tr></tr>
+	<tr></tr>
+
+	{{-- <tr>
 		<td colspan="11">
 			Last Medical:
 			@foreach($data->document_med as $data)
@@ -103,7 +108,7 @@
 
 	<tr>
 		<td colspan="11">Last Vessel Evaluation / History Check:</td>
-	</tr>
+	</tr> --}}
 
 	<tr>
 		<td colspan="2">For Promotional Cases</td>
@@ -118,8 +123,8 @@
 		<td colspan="3"></td>
 	</tr>
 
-	<tr>
+	{{-- <tr>
 		<td colspan="2">SMOP-WL-09</td>
 		<td colspan="9"></td>
-	</tr>
+	</tr> --}}
 </table>

@@ -223,6 +223,9 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 $event->sheet->getDelegate()->getStyle('H7')->getFont()->getColor()->setRGB('4badcc');
 
 
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: SMOP-WL-09 &C&IEFFECTIVE DATE: 01 SEPT 17 &R&IREVISION NO: 1.0 /11/29/22');
+
+
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
@@ -344,7 +347,7 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
 
 
                 $cells[1] = array_merge([
-                    'A1:K21'
+                    'A10:K11'
                 ]);
 
                 $cells[2] = array_merge([
@@ -352,7 +355,8 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 ]);
 
                 $cells[3] = array_merge([
-                    'B3:E3', 'I3', 'K3', 'B5', 'D5:F5', 'I5', 'K5', 'B7:E7', 'H7:K7', 'A9:K9'
+                    'B3:E3', 'K3', 'B5', 'D5:F5', 'I5', 'K5', 'B7:E7', 'H7:K7', 'A9:K9'
+                    // , 'I3'
                 ]);
 
                 foreach($cells as $key => $value){
