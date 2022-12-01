@@ -329,11 +329,14 @@
 	<tr>
 		<td colspan="2">Kin/Name/亲属姓名</td>
 		<td style="{{ $c }}">
-			{{ $temp->lname }}, {{ $temp->fname }} {{ $temp->suffix }} {{ $temp->mname }}
+			@if(isset($temp))
+				{{ $temp->lname }}, {{ $temp->fname }} {{ $temp->suffix }} {{ $temp->mname }}
 		</td>
 		<td>Relation/关系</td>
 		<td style="{{ $c }}">
-			{{ $temp->type }}
+			@if(isset($temp))
+				{{ $temp->type }}
+			@endif
 		</td>
 		<td>Z.Code/邮编</td>
 		<td colspan="3" style="{{ $c }}"></td>
