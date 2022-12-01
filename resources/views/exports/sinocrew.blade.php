@@ -331,6 +331,7 @@
 		<td style="{{ $c }}">
 			@if(isset($temp))
 				{{ $temp->lname }}, {{ $temp->fname }} {{ $temp->suffix }} {{ $temp->mname }}
+			@endif
 		</td>
 		<td>Relation/关系</td>
 		<td style="{{ $c }}">
