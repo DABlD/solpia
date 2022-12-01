@@ -1611,10 +1611,10 @@
                         <td>${crew.abbr}</td>
                         <td class="OBC" data-id="${crew.applicant_id}">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
-                        <td>${moment(crew.joining_date).format('DD-MMM-YY')}</td>
+                        <td class="jdate" data-id="${crew.applicant_id}" data-date="${crew.joining_date}">${moment(crew.joining_date).format('DD-MMM-YY')}</td>
                         <td>${moment().diff(moment(crew.joining_date), 'months')}</td>
                         <td>${cd}</td>
-                        <td>${disembarkation_date.format('DD-MMM-YY')}</td>
+                        <td class="ddate" data-id="${crew.applicant_id}" data-date="${moment(disembarkation_date).format("YYYY-MM-DD")}">${disembarkation_date.format('DD-MMM-YY')}</td>
                         <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('DD-MMM-YY') : '-----'}</td>
                         <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('DD-MMM-YY') : '-----'}</td>
@@ -2120,17 +2120,16 @@
                     'X15_Ext_Form':  'Extension Form',
                     'X06_Ext_Prom_Form':  'Extension Promotion Form',
                     'MLCContract':          'MLC Contract',
+                    'X20_DebriefingForm':  'Debriefing Form',
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
             }).then(result => {
                 if(result.value){
-                    if(result.value == "X06_Ext_Prom_Form"){
-                        X06(id, result.value);
-                    }
-                    else if(result.value == "X15_Ext_Form"){
-                        X15(id, result.value);
+                    if(result.value.startsWith("X")){
+                        // will call x01,x02,x06,x15,x20, etc
+                        window[result.value.slice(0,3)](id, result.value);
                     }
                     else if(result.value == "MLCContract"){
                         getMLCData(id, result.value);
@@ -2253,6 +2252,67 @@
                         remarks: $('#remarks').val(),
                         status: "On Board",
                         cd: $('#cd').val()
+                    }
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                }
+            });
+        }
+
+
+        setTimeout(() => {
+            $('.btn-info[data-id=1]').click();
+            setTimeout(() => {
+                $('[href=".onBoard"]').click();
+                setTimeout(() => {
+                    getContract2(2738);
+                }, 500);
+            }, 1000);
+        }, 1000);
+
+        function X20(id, type){
+            swal({
+                title: 'Enter Details',
+                width: '500px',
+                html: `
+                    ${input('joining_date', '', $(`.jdate[data-id="${id}"]`).data('date'), 4, 8, 'hidden')},
+                    ${input('disembarkation_date', 'Date Disembarked', $(`.ddate[data-id="${id}"]`).data('date'), 4, 8)},
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 class="iLabel">Reason for Signed/Off</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="remark" class="swal2-input">
+                                <option value="FINISHED CONTRACT">FINISHED CONTRACT</option>
+                                <option value="DISMISSAL">DISMISSAL</option>
+                                <option value="OWN WILL">OWN WILL</option>
+                                <option value="MEDICAL REPAT">MEDICAL REPAT</option>
+                                <option value="VESSEL SOLD">VESSEL SOLD</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <br>
+                    ${input('arrival_date', 'Arrival Date (optional)', null, 4, 8)},
+                `,
+                onOpen: () => {
+                    $('[name="disembarkation_date"], [name="arrival_date"]').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    })
+
+                    $('#remark').select2({tags: true});
+                }
+            }).then(result => {
+                if(result.value){
+                    let data = {
+                        joining_date: $('[name="joining_date"]').val(),
+                        disembarkation_date: $('[name="disembarkation_date"]').val(),
+                        arrival_date: $('[name="arrival_date"]').val(),
+                        remarks: $('#remark').val(),
+                        status: "On Board"
                     }
 
                     window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
@@ -3632,12 +3692,14 @@
                 },
             ]).then(result => {
                 if(result.value){
+                    let vname = $('.modal-title span')[0].innerText;
+
                     let data = {
                         crews: crews,
                         docus: docus,
                         department: $('#department').val(),
                         departure: "Onboard",
-                        filename: $('.modal-title span')[0].innerText.substring(4) + ' - Request To Process',
+                        filename: vname.substring(vname.match("/") ? 4 : 3) + ' - Request To Process',
                         flag: flag,
                         isApplicant: false
                     };
