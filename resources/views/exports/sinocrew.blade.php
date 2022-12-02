@@ -588,9 +588,10 @@
 
 	@php
 		$ss = array_values($data->sea_service->sortByDesc('sign_off')->toArray());
+		$h = 'height: 20px;';
 
 		for($i = 0; $i < 5; $i++){
-			if(isset($ss[$i])){
+			if(gettype($ss[$i]) == "array"){
 				$name = $cleanText($ss[$i]['vessel_name']);
 				$rank = $data->ranks[$ss[$i]['rank']];
 				$tg = $cleanText($ss[$i]['vessel_type'] . "/" . $ss[$i]['gross_tonnage']);
@@ -600,8 +601,6 @@
 				$trade = $cleanText($ss[$i]['trade']);
 				$reason = $cleanText($ss[$i]['remarks']);
 				$manning = $cleanText($ss[$i]['manning_agent']);
-
-				$h = 'height: 20px;';
 
 				echo "
 					<tr>
