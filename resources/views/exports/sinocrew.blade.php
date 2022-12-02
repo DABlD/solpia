@@ -373,15 +373,21 @@
 	<tr>
 		<td colspan="3" style="{{ $c }}">Graduate From/毕业院校</td>
 		<td style="{{ $c }}">
-			{{ $temp->school }}
+			@if($temp)
+				{{ $temp->school }}
+			@endif
 		</td>
 		<td>Degree/学历</td>
 		<td style="{{ $c }}">
-			{{ $temp->course }}
+			@if($temp)
+				{{ $temp->course }}
+			@endif
 		</td>
 		<td colspan="3">Date Graduated/毕业时间</td>
 		<td colspan="2" style="{{ $c }}">
-			{{ strlen($temp->year) >= 4 ? substr($temp->year, -4) : "---" }}
+			@if($temp)
+				{{ strlen($temp->year) >= 4 ? substr($temp->year, -4) : "---" }}
+			@endif
 		</td>
 	</tr>
 
