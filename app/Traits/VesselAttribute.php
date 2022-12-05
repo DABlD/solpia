@@ -23,9 +23,11 @@ trait VesselAttribute{
 		'</a>&nbsp;';
 
 		if($this->status == "ACTIVE"){
-			$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Remove" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '
-				<span data-status="' . $this->status . '" class="fa fa-times" data-id="' . $this->id . '"></span>' . 
-			'</a>&nbsp;';
+			if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager'])){
+				$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Remove" data-status="' . $this->status . '" data-id="' . $this->id . '">' . '
+					<span data-status="' . $this->status . '" class="fa fa-times" data-id="' . $this->id . '"></span>' . 
+				'</a>&nbsp;';
+			}
 
 			if(in_array(auth()->user()->role, ['Admin', 'Processing', 'Encoder', 'Cadet', 'Crewing Officer', 'Crewing Manager'])){
 				$string .= '<a class="btn btn-default" data-toggle="tooltip" title="Wage Scale" data-id="' . $this->id . '" data-name="' . $this->name . '">' . '
