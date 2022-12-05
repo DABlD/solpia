@@ -1585,6 +1585,7 @@ class ApplicationsController extends Controller
             "FLEET B" => [],
             "FLEET C" => [],
             "FLEET D" => [],
+            "FLEET E" => [],
             "TOEI" => [],
             "FISHING" => [],
             "" => []
@@ -1594,6 +1595,7 @@ class ApplicationsController extends Controller
             "FLEET B" => [],
             "FLEET C" => [],
             "FLEET D" => [],
+            "FLEET E" => [],
             "TOEI" => [],
             "FISHING" => [],
             "" => []
