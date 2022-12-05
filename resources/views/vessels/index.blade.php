@@ -2259,17 +2259,6 @@
             });
         }
 
-
-        setTimeout(() => {
-            $('.btn-info[data-id=1]').click();
-            setTimeout(() => {
-                $('[href=".onBoard"]').click();
-                setTimeout(() => {
-                    getContract2(2738);
-                }, 500);
-            }, 1000);
-        }, 1000);
-
         function X20(id, type){
             swal({
                 title: 'Enter Details',
