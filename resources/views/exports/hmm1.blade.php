@@ -276,9 +276,10 @@
 
 	$eb = function($type) use ($data){
 		foreach($data->educational_background as $eb){
+			$school = str_replace('&', '&#38;', $eb->school);
 			$course = str_replace('&', '&#38;', $eb->course);
 			if($eb->type == $type){
-				echo "$eb->school/$course/$eb->year/Graduated";
+				echo "$school/$course/$eb->year/Graduated";
 			}
 		} 
 	};
