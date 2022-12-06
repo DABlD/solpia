@@ -123,8 +123,9 @@
 		<td colspan="3"></td>
 	</tr>
 
-	{{-- <tr>
-		<td colspan="2">SMOP-WL-09</td>
-		<td colspan="9"></td>
-	</tr> --}}
+	<tr>
+		<td colspan="4">DOC NO: SMOP-WL-09</td>
+		<td colspan="4">EFFECTIVE DATE: 01 SEPT 17</td>
+		<td colspan="3" style="text-align: right;">REVISION NO: 1.0/11/29/22</td>
+	</tr>
 </table>

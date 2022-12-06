@@ -7,10 +7,11 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Concerns\WithDrawings;
 
 use App\Models\{Vessel, Rank, SeaService};
 
-class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class WalangLagay implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $type, $req){
         $this->applicant    = $applicant;
@@ -216,6 +217,8 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 $event->sheet->getDelegate()->getStyle('A19')->getFont()->setSize(9);
                 $event->sheet->getDelegate()->getStyle('E19:E20')->getFont()->setSize(8);
 
+                $event->sheet->getDelegate()->getStyle('A21:K21')->getFont()->setSize(7);
+
                 $event->sheet->getDelegate()->getStyle('B3:B7')->getFont()->getColor()->setRGB('4badcc');
                 $event->sheet->getDelegate()->getStyle('D5')->getFont()->getColor()->setRGB('4badcc');
                 $event->sheet->getDelegate()->getStyle('I3:I5')->getFont()->getColor()->setRGB('4badcc');
@@ -295,7 +298,7 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
 
                 // I
                 $h[9] = [
-                    'A16:E20', 
+                    'A16:E21', 
                 ];
 
                 $h['wrap'] = [
@@ -381,6 +384,7 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(7);
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(11);
 
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(75);
                 $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(8.25);
                 $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(8.25);
 
@@ -391,5 +395,21 @@ class WalangLagay implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea('A1:K21');
             },
         ];
+    }
+
+    public function drawings()
+    {
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('Letter Head');
+        $drawing->setDescription('Letter Head');
+        $drawing->setPath(public_path("images/letter_head.jpg"));
+        $drawing->setResizeProportional(false);
+        $drawing->setHeight(65);
+        $drawing->setWidth(670);
+        $drawing->setOffsetX(4);
+        $drawing->setOffsetY(4);
+        $drawing->setCoordinates('A1');
+
+        return [$drawing];
     }
 }
