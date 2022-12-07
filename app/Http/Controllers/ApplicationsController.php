@@ -1399,7 +1399,12 @@ class ApplicationsController extends Controller
 
         foreach($files as $file){
             $name = $file->getClientOriginalName();
-            $file->move(public_path().'/files/' . $req->aId . '/', $name);
+            // $file->move(public_path().'/files/' . $req->aId . '/', $name);
+
+            $img = Image::make($file);
+            $img->orientate();
+            $img->save(public_path().'/files/' . $req->aId . '/' . $name);
+
             array_push($filenames, $name);
         }
         
