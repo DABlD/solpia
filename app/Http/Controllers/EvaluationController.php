@@ -65,4 +65,8 @@ class EvaluationController extends Controller
     public function update(Request $req){
         echo DB::table('evaluations')->where('id', $req->id)->update($req->except(['id', '_token']));
     }
+
+    public function delete(Request $req){
+        echo Evaluation::find($req->id)->delete();
+    }
 }

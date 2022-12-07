@@ -2387,9 +2387,16 @@
                         <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${evals.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${evals.id}, ${applicant.id}, 'eval')">
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete File"  onClick="deleteFile(${evals.id}, ${applicant.id}, 'eval')">
                             <span class="fa fa-times">
                         </span></a>`;
+                }
+                else{
+                    file += `
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteEval(${evals.id}, ${applicant.id}, 'eval')">
+                            <span class="fa fa-times">
+                        </span></a>
+                    `;
                 }
 
                 file += `
@@ -2625,7 +2632,7 @@
         function deleteFile(id, aId, type){
             swal({
                 type: 'warning',
-                title: 'Are you sure you want to delete?',
+                title: 'Are you sure you want to delete FILE?',
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
                 cancelButtonText: 'Cancel',
@@ -2639,6 +2646,37 @@
                             swal({
                                 type: 'success',
                                 title: 'File Deleted Successfully',
+                                showConfirmButton: false,
+                                timer: 800
+                            }).then(() => {
+                                reloadTab(id, aId, type)
+                            });
+                        }
+                    });
+                }
+                else{
+                    reloadTab(id, aId, type)
+                }
+            });
+        }
+
+        function deleteEval(id, aId, type){
+            swal({
+                type: 'warning',
+                title: 'Are you sure you want to delete Evaluation/Recommendation?',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                cancelButtonText: 'Cancel',
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: '{{ route('evaluation.delete') }}',
+                        type: 'POST',
+                        data: {id: id},
+                        success: result => {
+                            swal({
+                                type: 'success',
+                                title: 'Evaluation/Recommendation Deleted Successfully',
                                 showConfirmButton: false,
                                 timer: 800
                             }).then(() => {
