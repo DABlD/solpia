@@ -1399,18 +1399,25 @@ class ApplicationsController extends Controller
 
         foreach($files as $file){
             $name = $file->getClientOriginalName();
-            // $file->move(public_path().'/files/' . $req->aId . '/', $name);
 
-            $img = Image::make($file);
-            $img->orientate();
+            $type = strtoupper($file->getClientOriginalExtension());
+            if(in_array($type, ["JPG", 'PNG', 'GIF', 'WEBP', 'JPEG'])){
+                // $file->move(public_path().'/files/' . $req->aId . '/', $name);
 
-            $save_path = public_path().'/files/' . $req->aId;
+                $img = Image::make($file);
+                $img->orientate();
 
-            if (!file_exists($save_path)) {
-                mkdir($save_path, 666, true);
+                $save_path = public_path().'/files/' . $req->aId;
+
+                if (!file_exists($save_path)) {
+                    mkdir($save_path, 666, true);
+                }
+
+                $img->save($save_path . '/' . $name);
             }
-
-            $img->save($save_path . '/' . $name);
+            else{
+                $file->move(public_path().'/files/' . $req->aId . '/', $name);
+            }
 
             array_push($filenames, $name);
         }
