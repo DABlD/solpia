@@ -1403,7 +1403,14 @@ class ApplicationsController extends Controller
 
             $img = Image::make($file);
             $img->orientate();
-            $img->save(public_path().'/files/' . $req->aId . '/' . $name);
+
+            $save_path = public_path().'/files/' . $req->aId;
+
+            if (!file_exists($save_path)) {
+                mkdir($save_path, 666, true);
+            }
+
+            $img->save($save_path . '/' . $name);
 
             array_push($filenames, $name);
         }
