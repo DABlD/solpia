@@ -283,7 +283,7 @@
 				@elseif($data->vessel->fleet == "FLEET D")
 					Ms. Thea Guerra
 				@elseif($data->vessel->fleet == "FLEET E")
-					Mr. Homer Birco
+					Mr. Dennis Quiño
 				@elseif($data->vessel->fleet == "TOEI")
 					Mr. Neil Romano
 				@endif
