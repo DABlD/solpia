@@ -124,12 +124,12 @@
 			<td style="{{ $center }}">{{ $crew->abbr }}</td>
 			<td style="{{ $center }}">{{ $checkDate($crew->birthday) }}</td>
 			<td style="{{ $center }}">{{ $crew->birth_place }}</td>
-			<td style="{{ $center }}">{{ $crew->PASSPORTn }}</td>
-			<td style="{{ $center }}">{{ $checkDate($crew->PASSPORTi) }}</td>
-			<td style="{{ $center }}">{{ $crew->PASSPORT->format("d-M-y") }}</td>
-			<td style="{{ $center }}">{{ $crew->{"SEAMAN'S BOOKn"} }}</td>
-			<td style="{{ $center }}">{{ $checkDate($crew->{"SEAMAN'S BOOKi"}) }}</td>
-			<td style="{{ $center }}">{{ $checkDate($crew->{"SEAMAN'S BOOK"}) }}</td>
+			<td style="{{ $center }}">{{ isset($crew->PASSPORT) ? $crew->PASSPORTn : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->PASSPORT) ? $checkDate($crew->PASSPORTi) : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->PASSPORT) ? $crew->PASSPORT->format("d-M-y") : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->{"SEAMAN'S BOOK"})) ? $crew->{"SEAMAN'S BOOKn"} : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->{"SEAMAN'S BOOK"})) ? $checkDate($crew->{"SEAMAN'S BOOKi"}) : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->{"SEAMAN'S BOOK"})) ? $checkDate($crew->{"SEAMAN'S BOOK"}) : "---" }}</td>
 		</tr>
 		@php
 			$ctr++;
@@ -165,12 +165,12 @@
 			<td style="{{ $center }}">{{ $crew->abbr }}</td>
 			<td style="{{ $center }}">{{ $checkDate($crew->birthday) }}</td>
 			<td style="{{ $center }}">{{ $crew->birth_place }}</td>
-			<td style="{{ $center }}">{{ $crew->PASSPORTn }}</td>
-			<td style="{{ $center }}">{{ $checkDate($crew->PASSPORTi) }}</td>
-			<td style="{{ $center }}">{{ $crew->PASSPORT->format("d-M-y") }}</td>
-			<td style="{{ $center }}">{{ $crew->{"SEAMAN'S BOOKn"} }}</td>
-			<td style="{{ $center }}">{{ $checkDate($crew->{"SEAMAN'S BOOKi"}) }}</td>
-			<td style="{{ $center }}">{{ $checkDate($crew->{"SEAMAN'S BOOK"}) }}</td>
+			<td style="{{ $center }}">{{ isset($crew->PASSPORT) ? $crew->PASSPORTn : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->PASSPORT) ? $checkDate($crew->PASSPORTi) : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->PASSPORT) ? $crew->PASSPORT->format("d-M-y") : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->{"SEAMAN'S BOOK"})) ? $crew->{"SEAMAN'S BOOKn"} : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->{"SEAMAN'S BOOK"})) ? $checkDate($crew->{"SEAMAN'S BOOKi"}) : "---" }}</td>
+			<td style="{{ $center }}">{{ isset($crew->{"SEAMAN'S BOOK"})) ? $checkDate($crew->{"SEAMAN'S BOOK"}) : "---" }}</td>
 		</tr>
 		@php
 			$ctr++;
