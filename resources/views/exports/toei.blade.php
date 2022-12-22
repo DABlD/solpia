@@ -315,7 +315,7 @@
 
 			$hl = null;
 			$docu = null;
-			$rt = str_starts_with($crewRank->category, "ENGINE") ? "er" : "dr";
+			$rt = isset($crewRank) && str_starts_with($crewRank->category, "ENGINE") ? "er" : "dr";
 
 			if($crewRank){
 				if($crewRank->category == "GALLEY"){
