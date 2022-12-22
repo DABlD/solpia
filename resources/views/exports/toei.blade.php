@@ -496,7 +496,7 @@
 			<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
-			<td colspan="2">{{ $crewRank->type == "OFFICER" ? "PANAMA" : "NOT APPLICABLE" }}</td>
+			<td colspan="2">{{ isset($crewRank->type) && $crewRank->type == "OFFICER" ? "PANAMA" : "NOT APPLICABLE" }}</td>
 		</tr>
 
 		@php 
