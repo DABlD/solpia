@@ -42,7 +42,7 @@
 			$crewRank = $applicant->rank;
 		}
 
-		if($crewRank == null && $applicant->document_flag){
+		if($crewRank == null && $applicant->document_flag->count()){
 			$applicant->load('document_flag');
 			$crewRank = $applicant->ranks2[$applicant->document_flag->first()->rank]->first();
 		}
