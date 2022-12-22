@@ -427,7 +427,7 @@
 
 		@php 
 			$docu2 = false;
-			if($crewRank->type == "OFFICER"){
+			if(isset($crewRank) && $crewRank->type == "OFFICER"){
 				foreach($applicant->document_flag as $document){
 				    if($document->country == "Panama" && $document->type == "LICENSE"){
 				        $docu2 = $document;
