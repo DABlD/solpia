@@ -353,7 +353,8 @@
 			<tr>
 				<td rowspan="1">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
 				@php
-					$engine_type = str_replace('&', '&#38;', $service->engine_type);
+					// $engine_type = str_replace('&', '&#38;', $service->engine_type);
+					$engine_type = $service->engine_type;
 				@endphp
 				<td rowspan="1" colspan="2">{{ $engine_type }}</td>
 				@php 
