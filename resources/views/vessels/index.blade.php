@@ -1227,7 +1227,6 @@
                     }, 1000);
                 }
             });
-
         });
 
         function uploadParticular(id){

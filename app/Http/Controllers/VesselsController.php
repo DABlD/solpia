@@ -135,7 +135,8 @@ class VesselsController extends Controller
             'bhp' => $req->bhp,
             'trade' => $req->trade,
             'ecdis' => $req->ecdis,
-            'status' => 'INACTIVE'
+            'status' => 'ACTIVE',
+            'fleet' => auth()->user()->fleet
         ]);
     }
 
