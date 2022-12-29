@@ -77,7 +77,7 @@ class X15_Ext_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
         $total = 0;
 
         foreach($fields as $field){
-            if($wage->$field){
+            if(isset($wage->$field)){
                 $total += $wage->$field;
             }
         }
