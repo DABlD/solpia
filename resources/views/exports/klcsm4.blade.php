@@ -29,11 +29,12 @@
 
 			$eng = str_replace('&', '&#38;', $ss->engine_type);
 			$flag = str_replace('&', '&#38;', $ss->flag);
+			$principal = str_replace('&', '&#38;', $ss->principal);
 
 			echo "
 				<tr>
 					<td rowspan='2'>$flag</td>
-					<td>$ss->principal</td>
+					<td>$principal</td>
 					<td>$ss->vessel_type</td>
 					<td>$ss->trade</td>
 					<td>$eng</td>
