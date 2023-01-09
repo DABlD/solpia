@@ -50,10 +50,15 @@
 			if($docu == "WATCHKEEPING"){
 				$docu = false;
 				foreach($applicant->document_lc as $document){
-					$watchCerts = ['DECK WATCH', 'ENGINE WATCH', 'ENGINE WATCHKEEPING', 'DECK WATCHKEEPING', 'WATCHKEEPING', 'NAV WATCH'];
-				    if(in_array($document->type, $watchCerts)){
+					// $watchCerts = ['DECK WATCH', 'ENGINE WATCH', 'ENGINE WATCHKEEPING', 'DECK WATCHKEEPING', 'WATCHKEEPING', 'NAV WATCH'];
+					$regulations = json_decode($document->regulation);
+
+				    if(in_array("II/4", $regulations) || in_array("III/4", $regulations)){
 				        $docu = $document;
-				        break; 
+				    }
+				    elseif(in_array("II/5", $regulations) || in_array("III/5", $regulations)){
+				    	$docu = $document;
+				        break;
 				    }
 				}
 			}
