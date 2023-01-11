@@ -80,7 +80,7 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
-					$country = $type2 ? "Korea" : "Marshall Islands";
+					$country = $type2 ? "Korea" : "Panama";
 					foreach (get_object_vars($data->document_flag) as $flag) {
 						if($flag->country == $country && $flag->type == $doc){
 							$docu = $flag;
@@ -188,8 +188,8 @@
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("MARSHALL APPLICATION", "MARSHALL APPLICATION", 'flag') }}
-	{{ $doc("COC", "MARSHALL LICENSE/CRA-APPLICATION", 'flag') }}
+	{{ $doc("PANAMA APPLICATION", "PANAMA APPLICATION", 'flag') }}
+	{{ $doc("COC", "PANAMA LICENSE/CRA-APPLICATION", 'flag') }}
 	{{ $doc("BT", "BT-SQC-APPLICATION", 'flag') }}
 	{{ $doc("SDSD", "SDSD-SQC-APPLICATION", 'flag') }}
 
@@ -218,7 +218,7 @@
 
 	{{ $section("6. MEDICAL / VACCINATION", 1) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(MARSHALL)", 'med_cert') }}
+	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(PANAMA)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 

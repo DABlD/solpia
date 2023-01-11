@@ -81,7 +81,7 @@
 				}
 				else{
 					foreach (get_object_vars($data->document_flag) as $flag) {
-						if($flag->country == "Marshall Islands" && $flag->type == $doc){
+						if($flag->country == "Panama" && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
@@ -186,22 +186,15 @@
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("BOOKLET", "MARSHALL BOOKLET", 'flag') }}
+	{{ $doc("BOOKLET", "PANAMA APPLICATION", 'flag') }}
 	{{ $doc("BT", "BT-SQC - APPLICATION", 'flag') }}
 	{{ $doc("SDSD", "SDSD-SQC - APPLICATION", 'flag') }}
 	{{ $doc("LICENSE", "RANK-SQC-WPR - APPLICATION", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - RATINGS - III/5", 'lc', 1, 'III/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
-	@php
-		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
-		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
-	@endphp
-	{{ $doc($a, $b, 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
@@ -209,7 +202,7 @@
 
 	{{ $section("6. MEDICAL / VACCINATION", 1) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(MARSHALL)", 'med_cert') }}
+	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(PANAMA)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
@@ -235,16 +228,14 @@
 	</tr>
 
 	<tr>
-		<td colspan="8" rowspan="4" style="height: 25px;">
-			CONSOLIDATED MARPOL
+		<td colspan="8" rowspan="4">
+			CONSOLIDATED MARPOL 1-6*
 			<br style='mso-data-placement:same-cell;' />
 			NBI
 			<br style='mso-data-placement:same-cell;' />
 			POEA CONTRACT*
 			<br style='mso-data-placement:same-cell;' />
 			ALLOTMENT SUMMARY*
-			<br style='mso-data-placement:same-cell;' />
-			POLIO VACCINE*
 		</td>
 	</tr>
 

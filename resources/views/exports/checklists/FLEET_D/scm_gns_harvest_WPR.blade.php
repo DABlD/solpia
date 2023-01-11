@@ -80,9 +80,8 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
-					$country = $type2 ? "Korea" : "Marshall Islands";
 					foreach (get_object_vars($data->document_flag) as $flag) {
-						if($flag->country == $country && $flag->type == $doc){
+						if($flag->country == "Panama" && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
@@ -187,14 +186,14 @@
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("BOOKLET", "MARSHALL - APPLICATION", 'flag') }}
+	{{ $doc("BOOKLET", "PANAMA BOOKLET", 'flag') }}
 	{{ $doc("BT", "BT-SQC - APPLICATION", 'flag') }}
 	{{ $doc("SDSD", "SDSD-SQC - APPLICATION", 'flag') }}
-	{{ $doc("LICENSE", "RANK-SQC-OLR - APPLICATION", 'flag') }}
+	{{ $doc("LICENSE", "RANK-SQC-WPR - APPLICATION", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
 	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - SEAFARER DECK - III/5", 'lc', 1, 'III/5') }}
+	{{ $doc("COE", "COC - RATINGS - III/5", 'lc', 1, 'III/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
@@ -210,22 +209,22 @@
 
 	{{ $section("6. MEDICAL / VACCINATION", 1) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(MARSHALL)", 'med_cert') }}
+	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(PANAMA)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
-	{{ $con("MLC/POEA CONTRACT *", 1,0,1) }}
+	{{ $con("POEA CONTRACT *", 1,1,1) }}
+	{{ $con("MLC/CBA CONTRACT", 1,0,1) }}
 	{{ $con("PERSONAL DATA RECORD", 1,1,1) }}
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,1,1) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
-	{{ $con("DLSM-PRE JOINING", 1,1,1) }}
 	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc') }}
 	{{ $doc("IN HOUSE TRAINING CERT WITH ISM", "IN HOUSE TRAINING CERTIFICATE WITH ISM", 'lc') }}
 	{{ $doc("GENERAL TRAINING RECORD BOOK", "GENERAL TRAINING RECORD BOOK", 'lc', null, null, 1,0,1) }}
 
 	{{ $section("9. TRAVEL DOCUMENTS", 1) }}
-	{{ $con("PDOS, ETICKET, LOG, OKTB, INDONESIA VISA", 1,0,0) }}
+	{{ $con("PDOS, ETICKET, LOG, OKTB", 1,0,0) }}
 
 	<tr>
 		<td style="font-weight: bold;">REMARKS:</td>
@@ -236,10 +235,16 @@
 	</tr>
 
 	<tr>
-		<td colspan="8" rowspan="4">
-			ALLOTMENT SUMMARY*
+		<td colspan="8" rowspan="4" style="height: 25px;">
+			CONSOLIDATED MARPOL
+			<br style='mso-data-placement:same-cell;' />
+			NBI
 			<br style='mso-data-placement:same-cell;' />
 			POEA CONTRACT*
+			<br style='mso-data-placement:same-cell;' />
+			ALLOTMENT SUMMARY*
+			<br style='mso-data-placement:same-cell;' />
+			POLIO VACCINE*
 		</td>
 	</tr>
 
