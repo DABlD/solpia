@@ -597,6 +597,54 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
             elseif($type == "scm_gns_harvest"){
             }
             elseif($type == "scm_gns_hope"){
+                if($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 56;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "AB"){
+                    $this->rows    = 45;
+                    $this->view    = "AB";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 41;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "2AE" || $rank == "3AE"){
+                    $this->rows    = 51;
+                    $this->view    = "2AE_3AE";
+                }
+                elseif($rank == "OLR1"){
+                    $this->rows    = 43;
+                    $this->view    = "OLR1";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 43;
+                    $this->view    = "OLR";
+                }
+                elseif($rank == "WPR"){
+                    $this->rows    = 43;
+                    $this->view    = "WPR";
+                }
+                elseif($rank == "CCK"){
+                    $this->rows    = 42;
+                    $this->view    = "CCK";
+                }
+                elseif($rank == "UTY"){
+                    $this->rows    = 42;
+                    $this->view    = "UTY";
+                }
+                elseif($rank == "BSN"){
+                    $this->rows    = 45;
+                    $this->view    = "BSN";
+                }
+                elseif($rank == "DCDT"){
+                    $this->rows    = 41;
+                    $this->view    = "DCDT";
+                }
+                elseif($rank == "ECDT"){
+                    $this->rows    = 40;
+                    $this->view    = "ECDT";
+                }
             }
         }
         elseif($fleet == "FLEET E"){
