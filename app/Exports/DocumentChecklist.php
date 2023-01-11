@@ -545,9 +545,6 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
             elseif($type == "hanj_dk_ione"){
             }
             elseif($type == "scm_gns_harmony"){
-
-                $rank = "UTY";
-                // dd($rank);
                 if($rank == "2/O" || $rank == "3/O"){
                     $this->rows    = 56;
                     $this->view    = "2O_3O";
