@@ -8,6 +8,10 @@ trait UserAttribute{
 		return ucfirst($this->fname) . ' ' . ucfirst($this->lname);
 	}
 
+	public function getNameFullAttribute(){
+		return ucfirst($this->lname) . ', ' . ucfirst($this->fname) . ' ' . ucfirst($this->suffix) . ' ' . ucfirst($this->mname);
+	}
+
 	public function getActionsAttribute(){
 		$string = '<a class="btn btn-success" data-toggle="tooltip" title="View User" data-id="' . $this->id . '">' .
 			        '<span class="fa fa-search" data-id="' . $this->id . '"></span>' .

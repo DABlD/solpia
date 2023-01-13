@@ -1272,7 +1272,7 @@ class ApplicationsController extends Controller
     }
 
     function exportDocument($id, $type, Request $req){
-        $folder = null;
+        $folder = $req->folder ?? null;
 
         if(str_starts_with($type, 'OnBoardVessel')){
             $ad = ['a.id', 'a.remarks'];

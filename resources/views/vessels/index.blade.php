@@ -3865,5 +3865,38 @@
                 }
             })
         }
+
+        function exportCrewChangePlan(){
+            $.ajax({
+                url: '{{ route('principal.get') }}',
+                data: {
+                    cols: "*",
+                    where: ['active', 1]
+                },
+                success: result => {
+                    result = JSON.parse(result);
+                    let options = [];
+
+                    result.forEach(principal => {
+                        options[principal.id] = principal.name;
+                    });
+
+                    swal({
+                        input: 'select',
+                        inputOptions: options,
+                        inputPlaceholder: "Select Principal"
+                    }).then(result => {
+                        if(result.value){
+                            let data = {};
+                                data.id = result.value;
+                                data.folder = "CrewChange\\";
+                                data.filename = "Crew Change Plan";
+
+                            window.location.href = `{{ route('applications.exportDocument') }}/1/x21_CrewChangePlan?` + $.param(data);
+                        }
+                    })
+                }
+            })
+        }
     </script>
 @endpush

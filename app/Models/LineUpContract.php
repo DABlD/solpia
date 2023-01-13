@@ -41,7 +41,11 @@ class LineUpContract extends Model
     }
 
     public function rank(){
-        return $this->hasOne('App\Models\Rank', 'id', 'vessel_id');
+        return $this->hasOne('App\Models\Rank', 'id', 'rank_id');
+    }
+
+    public function pa_reliever(){
+        return $this->hasOne('App\Models\ProcessedApplicant', 'applicant_id', 'reliever');
     }
 
     public function applicant(){
