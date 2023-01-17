@@ -2070,7 +2070,7 @@
                         'X08_KoscoWaiver':  'Kosco Waiver',
                         'X11_CrewCompetencyChecklist':  'Crew Competency Checklist',
                     @endif
-                    @if(auth()->user()->fleet == "FLEET A" || auth()->user()->role == "Admin")
+                    @if(in_array(auth()->user()->fleet, ["FLEET A", "TOEI"]) || auth()->user()->role == "Admin")
                         'Y03_LetterOfOathMarpol':  'Letter Of Oath (MARPOL)',
                         'Y04_LetterOfOath':  'Letter Of Oath',
                         'Y06_EMSDeclaration':  'EMS Declaration',
@@ -2103,6 +2103,25 @@
                             data.exportType = "pdf";
 
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}?` + $.param(data);
+                    }
+                    else if(result.value == "POEAContract"){
+                        swal({
+                            input: 'select',
+                            inputOptions: {
+                                "x22_POEAFormatContract": "POEA",
+                                "x23_TOEIFormatContract": "TOEI",
+                                "x24_CADETFormatContract": "CADET"
+                            },
+                            inputPlaceholder: "Select Format"
+                        }).then(result => {
+                            if(result.value){
+                                let data = {};
+                                    data.id = result.value;
+                                    data.folder = "POEA\\";
+
+                                window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}?` + $.param(data);
+                            }
+                        })
                     }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;

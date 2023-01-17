@@ -262,6 +262,7 @@
 					<option value="SEAFARERS EMPLOYMENT AGREEMENT">&nbsp;&nbsp;&nbsp;&nbsp;SEAFARERS EMPLOYMENT AGREEMENT</option>
 
 				<optgroup label="OTHERS"></optgroup>
+					<option value="POEA EREGISTRATION">&nbsp;&nbsp;&nbsp;&nbsp;POEA EREGISTRATION</option>
 					<option value="NBI">&nbsp;&nbsp;&nbsp;&nbsp;NBI</option>
 					<option value="DRIVERS LICENSE">&nbsp;&nbsp;&nbsp;&nbsp;DRIVER'S LICENSE</option>
 			`;
