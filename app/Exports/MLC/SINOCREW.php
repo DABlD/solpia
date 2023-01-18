@@ -17,8 +17,15 @@ class SINOCREW implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     public function __construct($data, $type){
         $data->load('document_med_cert');
 
-        $pa = $data->pro_app;
-        $temp = Wage::where('vessel_id', $pa->vessel_id)->where('rank_id', $pa->rank_id)->first();
+        if($data->pro_app->rank->abbr == "1AE"){
+            $data->pro_app->rank->abbr = "2E";
+        }
+        elseif($data->pro_app->rank->abbr == "2AE"){
+            $data->pro_app->rank->abbr = "3E";
+        }
+        elseif($data->pro_app->rank->abbr == "3AE"){
+            $data->pro_app->rank->abbr = "4E";
+        }
 
         $this->data     = $data;
         $this->type     = $type;
@@ -333,7 +340,7 @@ class SINOCREW implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'C22', 'A43'
+                    'C22', 'A43', 'A34'
                 ];
 
                 foreach($h as $key => $value) {
