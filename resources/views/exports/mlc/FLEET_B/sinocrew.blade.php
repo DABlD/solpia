@@ -150,7 +150,7 @@
 		<tr>
 			<td colspan="2">Position of employment: {{ $data->pro_app->rank->abbr }}</td>
 			<td colspan="5">Time of employment: {{ isset($data->pro_app->eld) ? $data->pro_app->eld->format('d/M/Y') : "---" }}</td>
-			<td colspan="3">Port of employment:</td>
+			<td colspan="3">Port of employment: {{ $data->port }}</td>
 		</tr>
 
 		<tr>
