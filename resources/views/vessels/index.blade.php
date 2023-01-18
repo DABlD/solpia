@@ -2241,7 +2241,7 @@
                     'DocumentChecklist':    'Document Checklist',
                     'X01_BorrowDocuments':  'Borrow Documents',
                     'X04_USVE':  'US Visa Endorsement Form',
-                    @if(auth()->user()->fleet == "FLEET B" || auth()->user()->role == "Admin")
+                    @if(in_array(auth()->user()->fleet, ["FLEET B", 'FLEET C']) || auth()->user()->role == "Admin")
                         'X08_KoscoWaiver':  'Kosco Waiver',
                         'X11_CrewCompetencyChecklist':  'Crew Competency Checklist',
                     @endif
