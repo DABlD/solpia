@@ -10,9 +10,23 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class Sinocrew2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
+
+        if($data->rank->abbr == "1AE"){
+            $data->rank->abbr = "2E";
+            $data->rank->name = "2ND ENGINEER";
+        }
+        elseif($data->rank->abbr == "2AE"){
+            $data->rank->abbr = "3E";
+            $data->rank->name = "3RD ENGINEER";
+        }
+        elseif($data->rank->abbr == "3AE"){
+            $data->rank->abbr = "4E";
+            $data->rank->name = "4TH ENGINEER";
+        }
+
         $this->data     = $data;
         $this->type     = $type;
     }
@@ -136,6 +150,13 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
+            [//10
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
             [//11
                 'borders' => [
                     'top' => [
@@ -171,7 +192,7 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'ccffff'
+                        'rgb' => 'bdb9b9'
                     ]
                 ],
             ],
@@ -235,29 +256,30 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             ]
         ];
 
+        $data = $this->data;
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $data) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('BIODATA', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
-                // DEFAULT FONT AND STYLE FOR WHOLE PAGE
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial Narrow');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(7.5);
+                $fdsize = 0;
 
-                // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
-                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
+                foreach($data->document_flag as $docu){
+                    if($docu->number != ""){
+                        $fdsize++;
+                    }
+                }
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -310,10 +332,17 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
+                    'A17:J21',
+                    'A27',
+                    'A29:J42',
+                    'B44:J' . (46 + $fdsize)
                 ];
 
                 // HL
                 $h[5] = [
+                    'H6',
+                    'A30:A42',
+                    'A45'
                 ];
 
                 // B
@@ -322,17 +351,22 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:K53'
+                    'A2',
+                    'A4:J21',
+                    'A23:J25',
+                    'A28',
+                    'A44:J' . (46 + $fdsize)
                 ];
 
                 $h['wrap'] = [
-                    'A38:K42'
+                    'C17:C21',
+                    'A29:J42',
+                    'A46:J' . (46 + $fdsize + 1)
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B4', 'C4:C10', 'E4:E5', 'E8:E10', 'G4:G10', 'K4:K5',
-                    'D12', 'F12', 'J12'
+                    'A17:A21', 'C7:C9', 'C13'
                 ];
 
                 foreach($h as $key => $value) {
@@ -356,8 +390,6 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'A1:A37', 'D4:D8', 'F4:F9', 'I4:I5', 'D10', 'F10', 'A11', 'A12', 'E12', 'G12', 'A13:K14',
-                    'G23:G24', 'F25:I25', 'B37:K37', 'A43:A45', 'H45', 'A48:K50', 'A51:A52', 'A53:K53'
                 ];
 
                 $fills[1] = [
@@ -374,7 +406,11 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A3:K53'
+                    'A21:J15',
+                    'A17:J21',
+                    'A29:J42',
+                    'A44:J' . (46 + $fdsize)
+
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -383,6 +419,8 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THICK
                 $cells[2] = array_merge([
+                    'A27:J28',
+                    'A44:J45'
                 ]);
 
                 // OUTSIDE BORDER THIN
@@ -391,10 +429,22 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
+                    'A15:J15',
+                    'A16:J16',
+                    'A16:A21',
+                    'B16:B21',
+                    'C16:C21',
+                    'D16:E21',
+                    'F16:G21',
+                    'H16:I21',
+                    'J16:J21',
                 ]);
 
                 // OUTSIDE BORDER THICK
                 $cells[5] = array_merge([
+                    'A2:J2',
+                    'A27:J42',
+                    'A44:J' . (46 + $fdsize)
                 ]);
 
                 // TOP REMOVE BORDER
@@ -418,12 +468,13 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $cells[10] = array_merge([
                 ]);
 
-                // TBT - TOP BORDER THIN
+                // TBT - TOP BORDER THICK
                 $cells[10] = array_merge([
                 ]);
 
-                // TBT - TOP BORDER THIN
+                // TBT - TOP BORDER THICK
                 $cells[11] = array_merge([
+                    'A11:J11'
                 ]);
 
                 // BBT
@@ -445,73 +496,70 @@ class Sinocrew implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // FOR THE CHECK
-                $event->sheet->getDelegate()->getStyle('A1:K100')->getFont()->setName('Arial Narrow');
-                $event->sheet->getDelegate()->getStyle('A1:K100')->getFont()->setSize(7.5);
-
-                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(12);
-                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(12);
-                $event->sheet->getDelegate()->getStyle('A3')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A11')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A13')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A23')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A36')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A45')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A48')->getFont()->setSize(9);
+                // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(19);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(21);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(21);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(19);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(13);
 
                 // ROW RESIZE
-                for($i = 1; $i <= 53; $i++){
-                    if(in_array($i, [1,2,37,38,39,40,41,42,43,44,50,53])){
-                        continue;
-                    }
-                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(13);
-                }
+                $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(26);
+                $event->sheet->getDelegate()->getRowDimension(15)->setRowHeight(26);
+                $event->sheet->getDelegate()->getRowDimension(16)->setRowHeight(26);
 
-                $event->sheet->getDelegate()->getRowDimension(43)->setRowHeight(15);
-                $event->sheet->getDelegate()->getRowDimension(44)->setRowHeight(15);
+                for($i = 3; $i <= 14; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
+                for($i = 17; $i <= 21; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(45);
+                }
+                for($i = 23; $i <= 25; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(20);
+                }
                 
                 // SET PRINT AREA
-                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:K53");
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(14);
+                $event->sheet->getDelegate()->getStyle('A15')->getFont()->setSize(14);
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
     }
 
     public function drawings()
     {
-        // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        // $drawing->setName('Letter Head');
-        // $drawing->setDescription('Letter Head');
-        // $drawing->setPath(public_path("images/letter_head.jpg"));
-        // $drawing->setResizeProportional(false);
-        // $drawing->setHeight(115);
-        // $drawing->setWidth(2200);
-        // $drawing->setOffsetX(4);
-        // $drawing->setOffsetY(4);
-        // $drawing->setCoordinates('C1');
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('Letter Head');
+        $drawing->setDescription('Letter Head');
+        $drawing->setPath(public_path("images/sinocrew.png"));
+        $drawing->setResizeProportional(false);
+        $drawing->setHeight(72);
+        $drawing->setWidth(610);
+        $drawing->setOffsetX(4);
+        $drawing->setOffsetY(4);
+        $drawing->setCoordinates('A1');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setName('Avatar');
         $drawing2->setDescription('Avatar');
         $drawing2->setPath(public_path($this->data->user->avatar));
         $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(98);
-        $drawing2->setWidth(125);
-        $drawing2->setOffsetX(3);
-        $drawing2->setOffsetY(3);
-        $drawing2->setCoordinates('J6');
+        $drawing2->setHeight(88);
+        $drawing2->setWidth(85);
+        $drawing2->setOffsetX(5);
+        $drawing2->setOffsetY(2);
+        $drawing2->setCoordinates('J1');
 
-        return [$drawing2];
+        return [$drawing, $drawing2];
     }
 }

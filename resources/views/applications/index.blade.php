@@ -3072,6 +3072,21 @@
                                 }
                             })
                         }
+                        else if(type == "sinocrew"){
+                            swal({
+                                title: 'Select Type',
+                                input: 'select',
+                                inputOptions: {
+                                    sinocrew1: 'Maple Rising Format',
+                                    sinocrew2: 'Xing Long Yung'
+                                }
+                            }).then(result => {
+                                if(result.value){
+                                    type = result.value;
+                                    window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                                }
+                            })
+                        }
                         else if(type == "western"){
                             swal({
                                 title: 'Select Flag',
