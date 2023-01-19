@@ -295,11 +295,11 @@
 	<tr>
 		<td colspan="3">Passport exp:</td>
 		<td colspan="2" style="{{ $center }} {{ $blue }}">
-			{{ $data->document_id->PASSPORT ? $data->document_id->PASSPORT->expiry_date ? $data->document_id->PASSPORT->expiry_date->format('d-M-y') : "N/A" : "N/A" }}
+			{{ isset($data->document_id->PASSPORT) ? $data->document_id->PASSPORT->expiry_date ? $data->document_id->PASSPORT->expiry_date->format('d-M-y') : "N/A" : "N/A" }}
 		</td>
 		<td>SIRB exp:</td>
 		<td style="{{ $center }} {{ $blue }}">
-			{{ $data->document_id->{"SEAMAN'S BOOK"} ? $data->document_id->{"SEAMAN'S BOOK"}->expiry_date ? $data->document_id->{"SEAMAN'S BOOK"}->expiry_date->format('d-M-y') : "N/A" : "N/A" }}
+			{{ isset($data->document_id->{"SEAMAN'S BOOK"}) ? $data->document_id->{"SEAMAN'S BOOK"}->expiry_date ? $data->document_id->{"SEAMAN'S BOOK"}->expiry_date->format('d-M-y') : "N/A" : "N/A" }}
 		</td>
 		<td>Crewing Officer:</td>
 		<td colspan="2" style="{{ $center }}">
