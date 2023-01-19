@@ -87,7 +87,7 @@
 
 		<tr>
 			<td colspan="4">Surname: {{ $data->user->lname }}</td>
-			<td colspan="6">Given Name: {{ $data->user->fname }}</td>
+			<td colspan="6">Given Name: {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}</td>
 		</tr>
 
 		<tr>
@@ -149,7 +149,7 @@
 
 		<tr>
 			<td colspan="2">Position of employment: {{ $data->pro_app->rank->abbr }}</td>
-			<td colspan="5">Time of employment: {{ isset($data->pro_app->eld) ? $data->pro_app->eld->format('d/M/Y') : "---" }}</td>
+			<td colspan="5">Time of employment:</td>
 			<td colspan="3">Port of employment: {{ $data->port }}</td>
 		</tr>
 
@@ -213,7 +213,7 @@
 
 		<tr>
 			<td>Trade Area: {{ $data->pro_app->vessel->trade }}</td>
-			<td colspan="3">Minimum Crew: 13</td>
+			<td colspan="3">Minimum Crew: 14</td>
 			<td colspan="6">Classification Society: NK</td>
 		</tr>
 
