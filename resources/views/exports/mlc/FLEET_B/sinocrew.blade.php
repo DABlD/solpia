@@ -244,7 +244,10 @@
 		</tr>
 
 		<tr>
-			<td colspan="10">Monthly Consolidated Wage (including Basic wage USD{{ $wage->basic ?? 0 }}, annual Leave pay USD{{ $wage->leave_pay }}, Overtime payment USD{{ $fot ?? $got ?? 0 }}):</td>
+			<td colspan="10">
+				Monthly Consolidated Wage (including Basic wage USD{{ $wage->basic ?? 0 }}, 
+				annual Leave pay USD{{ $wage->leave_pay }}, 
+				Overtime payment USD{{ $wage->fot ?? $wage->ot ?? 0 }}):</td>
 		</tr>
 
 		<tr>
