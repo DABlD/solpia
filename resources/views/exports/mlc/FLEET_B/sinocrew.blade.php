@@ -240,7 +240,7 @@
 		<tr>
 			<td colspan="3">（合同期限）： {{ $data->pro_app->mob }}+/-1months</td>
 			<td colspan="4">工资起算日及包Sign on date:</td>
-			<td colspan="3">每周正常工作小时: 44 hours</td>
+			<td colspan="3">每周正常工作小时: 40 hours</td>
 		</tr>
 
 		<tr>
