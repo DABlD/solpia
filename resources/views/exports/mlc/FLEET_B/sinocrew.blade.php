@@ -142,8 +142,8 @@
 		</tr>
 
 		<tr>
-			<td colspan="2">出生日期：</td>
-			<td colspan="5">出生地点：</td>
+			<td colspan="2">海员证号码：</td>
+			<td colspan="5">护照号码：</td>
 			<td colspan="3">国籍：</td>
 		</tr>
 
