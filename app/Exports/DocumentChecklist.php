@@ -701,51 +701,51 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 $this->data->officer = "CZARINA KRIZZLE";
 
                 if($rank == "MSTR" || $rank == "C/O"){
-                    $this->rows    = 55;
+                    $this->rows    = 58;
                     $this->view    = "MSTR_CO";
                 }
                 elseif($rank == "2/O" || $rank == "3/O"){
-                    $this->rows    = 54;
+                    $this->rows    = 57;
                     $this->view    = "2O_3O";
                 }
                 elseif($rank == "C/E" || $rank == "1AE"){
-                    $this->rows    = 52;
+                    $this->rows    = 54;
                     $this->view    = "CE_1AE";
                 }
                 elseif($rank == "2AE" || $rank == "3AE"){
-                    $this->rows    = 48;
+                    $this->rows    = 51;
                     $this->view    = "2AE_3AE";
                 }
                 elseif($rank == "BSN" || $rank == "AB"){
-                    $this->rows    = 43;
+                    $this->rows    = 45;
                     $this->view    = "BSN_AB";
                 }
                 elseif($rank == "OS"){
-                    $this->rows    = 40;
+                    $this->rows    = 43;
                     $this->view    = "OS";
                 }
                 elseif($rank == "DCDT"){
-                    $this->rows    = 39;
+                    $this->rows    = 42;
                     $this->view    = "DCDT";
                 }
                 elseif($rank == "OLR1" || $rank == "OLR"){
-                    $this->rows    = 42;
+                    $this->rows    = 45;
                     $this->view    = "OLR1_OLR";
                 }
                 elseif($rank == "WPR"){
-                    $this->rows    = 40;
+                    $this->rows    = 43;
                     $this->view    = "WPR";
                 }
                 elseif($rank == "ECDT"){
-                    $this->rows    = 39;
+                    $this->rows    = 42;
                     $this->view    = "ECDT";
                 }
                 elseif($rank == "CCK" || $rank == "2CK"){
-                    $this->rows    = 39;
+                    $this->rows    = 42;
                     $this->view    = "CCK_2CK";
                 }
                 elseif($rank == "MSM" || $rank == "MBY"){
-                    $this->rows    = 38;
+                    $this->rows    = 41;
                     $this->view    = "MSM_MBY";
                 }
             }

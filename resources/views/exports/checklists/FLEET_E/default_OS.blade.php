@@ -211,6 +211,21 @@
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
+	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
+	{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}
+
+	@php
+		$temp = null;
+		if(isset($data->document_med_cert->{'COVID-19 1ST DOSE'})){
+			$temp = 'COVID-19 1ST DOSE';
+		}
+		if(isset($data->document_med_cert->{'COVID-19 2ND DOSE'})){
+			$temp = 'COVID-19 2ND DOSE';
+		}
+		if(isset($data->document_med_cert->{'COVID-19 3RD DOSE'})){
+			$temp = 'COVID-19 3RD DOSE';
+		}
+	@endphp
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
 	{{ $con("POEA CONTRACT *", 1,1,1) }}
