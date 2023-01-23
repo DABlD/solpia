@@ -192,9 +192,9 @@
 	{{ $doc("SSO", "FLAG SSO ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - II/1", 'lc', 1, 'II/1') }}
-	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - II/1", 'lc', 1, 'II/1') }}
-	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE - IV/2", 'lc', 1, 'IV/2') }}
+	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - II/1", 'lc', 0, 'II/1') }}
+	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - II/1", 'lc', 0, 'II/1') }}
+	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE - IV/2", 'lc', 0, 'IV/2') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}

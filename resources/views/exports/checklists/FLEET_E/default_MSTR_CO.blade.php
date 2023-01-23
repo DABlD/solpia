@@ -192,8 +192,8 @@
 	{{ $doc("SSO", "FLAG SSO ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "CHIEF MATE LICENSE (CERTIFICATE) - II/2", 'lc', 1, 'II/2') }}
-	{{ $doc("COE", "CHIEF MATE LICENSE (ENDORSEMENT) - II/2", 'lc', 1, 'II/2') }}
+	{{ $doc("COC", "CHIEF MATE LICENSE (CERTIFICATE) - II/2", 'lc', 0, 'II/2') }}
+	{{ $doc("COE", "CHIEF MATE LICENSE (ENDORSEMENT) - II/2", 'lc', 0, 'II/2') }}
 	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE - IV/2", 'lc', 1, 'IV/2') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}

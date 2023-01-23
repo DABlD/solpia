@@ -191,8 +191,8 @@
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - III/1", 'lc', 1, 'III/1') }}
-	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - III/1", 'lc', 1, 'III/1') }}
+	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - III/1", 'lc', 0, 'III/1') }}
+	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - III/1", 'lc', 0, 'III/1') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}

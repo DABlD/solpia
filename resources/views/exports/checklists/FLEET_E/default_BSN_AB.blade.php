@@ -198,8 +198,8 @@
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - II/4", 'lc', 1, 'II/4') }}
-	{{ $doc("COE", "COC - SEAFARER DECK - II/5", 'lc', 1, 'II/5') }}
+	{{ $doc("COC", "COC - RATINGS - II/4", 'lc', 0, 'II/4') }}
+	{{ $doc("COE", "COC - SEAFARER DECK - II/5", 'lc', 0, 'II/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
