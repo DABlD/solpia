@@ -1,7 +1,10 @@
 @php
 	$checkDate = function($issue, $expiry, $type2){
 		if($type2){
-			if($issue != "" && $issue != null){
+			if(isset($issue) && $type2 == 2){
+				return $issue->format('d-M-Y');
+			}
+			elseif($issue != "" && $issue != null){
 				return "UNLIMITED";
 			}
 
@@ -239,7 +242,7 @@
 	{{ $con("ALLOTMENT SUMMARY *", 1,0,0) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
-	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc') }}
+	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc', 2) }}
 	{{ $doc("IN HOUSE TRAINING CERT WITH ISM", "IN HOUSE TRAINING CERTIFICATE WITH ISM", 'lc') }}
 	{{ $doc("MCRA", "MCRA", 'lc', null, null, 1,1,1) }}
 
