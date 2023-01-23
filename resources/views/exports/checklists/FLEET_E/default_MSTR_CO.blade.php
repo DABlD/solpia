@@ -218,7 +218,7 @@
 	{{ $doc("ARPA TRAINING COURSE", "ARPA/ROPA/RNPUA", 'lc') }}
 	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}

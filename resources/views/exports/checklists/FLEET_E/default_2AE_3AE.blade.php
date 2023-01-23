@@ -211,7 +211,7 @@
 	{{ $doc("OLC TRAINING F2", "OLC TRAINING FOR OIC-EW - F2/ M1", 'lc') }}
 	{{ $doc("OLC TRAINING F4", "OLC TRAINING FOR OIC-EW - F4/ M1 & ,M2", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}

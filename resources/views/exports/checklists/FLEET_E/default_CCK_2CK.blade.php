@@ -225,7 +225,7 @@
 		}
 	@endphp
 
-	{{ $section("6. CONTRACT / ADDENDUM / BIO DATA", 1) }}
+	{{ $section("6. CONTRACT / ADDENDUM / BIO DATA", 0) }}
 	{{ $con("POEA CONTRACT *", 1,1,1) }}
 	{{ $con("MLC/CBA CONTRACT", 1,0,0) }}
 	{{ $con("PERSONAL DATA RECORD", 1,0,1) }}

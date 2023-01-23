@@ -213,7 +213,7 @@
 	{{ $doc("MLC TRAINING F3", "MLC TRAINING DECK - F3", 'lc') }}
 	{{ $doc("MLC TRAINING F4", "MLC TRAINING DECK - F4", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}

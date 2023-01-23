@@ -206,7 +206,7 @@
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
 	{{ $doc("DECK WATCH", "DECK WATCHKEEPING CERT.", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
