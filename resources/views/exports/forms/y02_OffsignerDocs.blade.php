@@ -5,7 +5,10 @@
 
 		    if($applicant->reliever){
 			    foreach ($docs2 as $doc) {
-			        $doc = json_decode($doc);
+			    	if(str_starts_with($doc, '[')){
+			        	$doc = json_decode($doc);
+			    	}
+			    	
 			        if($doc){
 			        	$img = public_path('files\\' . $applicant->applicant_id . '\\' . $doc[0]);
 			            echo "<tr>
