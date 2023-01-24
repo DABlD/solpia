@@ -26,7 +26,7 @@ class X16_MLCOnboard implements WithMultipleSheets
 
         foreach ($applicants as $applicant) {
             $applicant->vessel = $vessel;
-            $applicant->wage = isset($wage[$applicant->pro_app->rank_id]) ? $wage[$applicant->pro_app->rank_id][0] : 0;
+            $applicant->wage = isset($wage[$applicant->pro_app->rank_id]) ? $wage[$applicant->pro_app->rank_id][0] : null;
 
             $rank = $ranks[$applicant->pro_app->rank_id][0];
             $applicant->position = $rank->name;
