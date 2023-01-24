@@ -162,12 +162,16 @@
 		<td style="{{ $center }} {{ $color }}">
 			@php
 				$seniority = $data->pro_app->seniority;
-				$srpay = json_decode($data->wage->sr_pay);
-				$spay = 0;
 
-				if($seniority > 1){
-					$spay = $srpay[$seniority - 2];
+				$spay = 0;
+				if($data->wage){
+					$srpay = json_decode($data->wage->sr_pay);
+					
+					if($seniority > 1){
+						$spay = $srpay[$seniority - 2];
+					}
 				}
+
 			@endphp
 			${{ $data->wage->basic ? ($data->wage->basic) : 0 }}</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->fot ?? $data->wage->ot ?? 0 }}</td>
