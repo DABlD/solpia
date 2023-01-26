@@ -12,14 +12,19 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 use App\Models\{Wage, ProcessedApplicant};
 
-class x22_POEAFormatContract implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $type){
+    public function __construct($data, $type, $req){
+        $data->req = $req;
+
+
         $data->load('pro_app');
         $data->load('document_id');
         $data->load('document_lc');
         $data->load('document_flag');
         $data->load('document_med_cert');
+
+        $data->wage = Wage::where('vessel_id', $data->pro_app->vessel_id)->where('rank_id', $data->pro_app->rank->id)->first();
 
         foreach(['document_id', 'document_flag', 'document_lc', 'document_med_cert' ] as $docuType){
             foreach($data->$docuType as $key => $doc){
@@ -280,7 +285,7 @@ class x22_POEAFormatContract implements FromView, WithEvents//, WithDrawings//, 
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -352,6 +357,7 @@ class x22_POEAFormatContract implements FromView, WithEvents//, WithDrawings//, 
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'B13', 'E20', 'F35', 'F36', 'A53'
                 ];
 
                 foreach($h as $key => $value) {
@@ -444,6 +450,27 @@ class x22_POEAFormatContract implements FromView, WithEvents//, WithDrawings//, 
 
                 // BBT
                 $cells[12] = array_merge([
+                    'D11:L11',
+                    'C12:E12', 'H12:L12',
+                    'B13:L13',
+                    'C14:D14', 'F14:G14', 'J14:L14',
+                    'E18:L18',
+                    'E19:L19',
+                    'E20:L20',
+                    'D23:L23',
+                    'C24:D24', 'H24:I24', 'L24',
+                    'C25:D25', 'G25', 'K25:L25',
+                    'F29:L29',
+                    'F30:L30',
+                    'F31:G31', 'J31:L31',
+                    'F32:G32', 'J32:L32',
+                    'F33:G33', 'J33:L33',
+                    'F34:G34', 'J34:L34',
+                    'F35:G35', 'J35:L35',
+                    'F36:G36', 'J36:L36',
+                    'I49', 'K49:L49',
+                    'A53:D53', 'I53:L53',
+                    'A55:D55', 'I55:L55',
                 ]);
 
                 // LBT
@@ -464,45 +491,54 @@ class x22_POEAFormatContract implements FromView, WithEvents//, WithDrawings//, 
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(15);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
+                
+                // SET FIT TO ONE PAGE
+                $event->sheet->getDelegate()->getPageSetup()->setFitToPage(TRUE);
+                $event->sheet->getDelegate()->getPageSetup()->setFitToWidth(TRUE);
+                $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(TRUE);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
     }
 
     public function drawings()
     {
-        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Letter Head');
-        $drawing->setDescription('Letter Head');
-        $drawing->setPath(public_path("images/letter_head.jpg"));
-        $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        if($this->data->req['stamp'] == "true"){
+            $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing->setName('POEA STAMP');
+            $drawing->setPath(public_path("images/poea_stamp.png"));
+            $drawing->setResizeProportional(false);
+            $drawing->setHeight(165);
+            $drawing->setWidth(270);
+            $drawing->setOffsetX(10);
+            $drawing->setOffsetY(10);
+            $drawing->setCoordinates('E50');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
-
-        return [$drawing, $drawing2];
+            return [$drawing];
+        }
+        else{
+            return [];
+        }
     }
 }

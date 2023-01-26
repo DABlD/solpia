@@ -2260,6 +2260,9 @@
                     if(result.value == "MLCContract"){
                         getMLCData(id, result.value);
                     }
+                    else if(result.value == "POEAContract"){
+                        getPOEAData(id, result.value);
+                    }
                     else if(result.value == "X01_BorrowDocuments"){
                         FBBD(id, result.value);
                     }
@@ -2278,25 +2281,6 @@
                             data.exportType = "pdf";
 
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}?` + $.param(data);
-                    }
-                    else if(result.value == "POEAContract"){
-                        swal({
-                            input: 'select',
-                            inputOptions: {
-                                "x22_POEAFormatContract": "POEA",
-                                "x23_TOEIFormatContract": "TOEI",
-                                "x24_CADETFormatContract": "CADET"
-                            },
-                            inputPlaceholder: "Select Format"
-                        }).then(result => {
-                            if(result.value){
-                                let data = {};
-                                    data.id = result.value;
-                                    data.folder = "POEA\\";
-
-                                window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}?` + $.param(data);
-                            }
-                        })
                     }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
@@ -2901,6 +2885,147 @@
                         data.fleet = '{{ auth()->user()->fleet }}';
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
                     @endif
+                }
+            });
+        }
+
+        function getPOEAData(id, type){
+            let data = {};
+            swal({
+                title: 'Fill all details',
+                html: `
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Months of employment</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" id="employment_months" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5" style="margin-top: 10px;">
+                            <h4 style="text-align: right;">Select Format</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <select id="format" class="swal2-input">
+                                <option></option>    
+                                <option value="x22_POEAFormatContract">POEA</option>
+                                <option value="x23_TOEIFormatContract">TOEI</option>
+                                <option value="x24_CADETFormatContract">CADET</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">OT Rate</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" id="otRate" value="5.07" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Required Hours</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" id="hours" value="103" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Point of Hire</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="pointOfHire" value="MANILA, PHILIPPINES" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">CBA if applicable</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="cba" value="IBF JSU / AMOSUP-IMMAJ" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">With Stamp</h4>
+                        </div>
+                        <div class="col-md-7" style="text-align: left; margin-top: 10px;">
+                            <input type="checkbox" id="stamp" checked>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '500px',
+                onOpen: () => {
+                    $.ajax({
+                        url: '{{ route('applications.getAllInfo') }}',
+                        data: {
+                            id: id
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            let date = moment().format('YYYY-MM-DD');
+
+                            if(result.lup){
+                                date = moment(result.lup.joining_date);
+                                months = result.lup.months;
+
+                                if(result.lup.extensions){
+                                    let extensions = JSON.parse(result.lup.extensions);
+                                    date = date.add(result.lup.months, 'months');
+
+                                    for(i = 0, j = 1; i < extensions.length; i++, j++){
+                                        months = extensions[i];
+                                        if(j < extensions.length){
+                                            date = date.add(months, 'months');
+                                        }
+                                    }
+                                }
+                                
+                                date = date.format("YYYY-MM-DD");
+                                $('#employment_months').val(months);
+                            }
+                            else{
+                                date = result.pro_app.eld;
+                            }
+                        }
+                    })
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let a = $('#employment_months').val();
+                            let b = $('#format').val();
+
+                            if(a == "" || b == ""){
+                                swal.showValidationError('Please fill all fields');
+                            }
+                        resolve()}, 800);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    let data = {};
+                        data.id = id;
+                        data.folder = "POEA\\";
+                        data.employment_months  = $('#employment_months').val();
+                        data.otRate  = $('#otRate').val();
+                        data.hours  = $('#hours').val();
+                        data.pointOfHire  = $('#pointOfHire').val();
+                        data.cba  = $('#cba').val();
+                        data.stamp = $('#stamp').is(":checked") ? true : false;
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${$('#format').val()}?` + $.param(data);
                 }
             });
         }
