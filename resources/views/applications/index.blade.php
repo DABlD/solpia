@@ -3024,7 +3024,38 @@
                         }
                     })
                 @else
-                    window.location.href = 'applications/export/' + application.data('id');
+                    let id = application.data('id');
+                    
+                    $.ajax({
+                        url: "{{ route('applications.get2') }}",
+                        data: {
+                            cols: "*",
+                            where: ['applicants.id', id],
+                        },
+                        success: result => {
+                            result = JSON.parse(result)[0];
+                            
+                            // CHECK IF SINOCREW
+                            if(result.principal_id == 999){
+                                swal({
+                                    title: 'Select Type',
+                                    input: 'select',
+                                    inputOptions: {
+                                        sinocrew1: 'Maple Rising Format',
+                                        sinocrew2: 'Xing Long Yung'
+                                    }
+                                }).then(result => {
+                                    if(result.value){
+                                        type = result.value;
+                                        window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                                    }
+                                })
+                            }
+                            else{
+                                window.location.href = 'applications/export/' + application.data('id');
+                            }
+                        }
+                    })
                 @endif
             }
             else{
