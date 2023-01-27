@@ -37,7 +37,12 @@ function getChecklist(fleet){
 	}
 	else if(fleet == "FLEET E"){
 		return `
-			<option value="default">Default</option>
+			<optgroup label="KOSCO"></optgroup>
+				<option value="kos_bul_mar">&nbsp;&nbsp;&nbsp;KOSCO - BULK - MARSHALL</option>
+				<option value="kos_bul_lib">&nbsp;&nbsp;&nbsp;KOSCO - BULK - LIBERIA</option>
+				<option value="kos_cb_lib">&nbsp;&nbsp;&nbsp;KOSCO - CONTAINER & BULK - PANAMA</option>
+			<optgroup label="POSSM"></optgroup>
+				<option value="possm">&nbsp;&nbsp;&nbsp;Default</option>
 		`;
 	}
 	else if(fleet == "TOEI"){
