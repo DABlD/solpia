@@ -749,6 +749,152 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->view    = "MSM_MBY";
                 }
             }
+            elseif($type == "kos_bul_mar"){
+                if($rank == "C/O"){
+                    $this->rows    = 64;
+                    $this->view    = "CO";
+                }
+                elseif($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 63;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "BSN" || $rank == "AB"){
+                    $this->rows    = 48;
+                    $this->view    = "BSN_AB";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 45;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3AE"){
+                    $this->rows    = 56;
+                    $this->view    = "2AE_3AE";
+                }
+                elseif($rank == "OLR1"){
+                    $this->rows    = 48;
+                    $this->view    = "OLR1";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 46;
+                    $this->view    = "OLR";
+                }
+                elseif($rank == "WPR"){
+                    $this->rows    = 44;
+                    $this->view    = "WPR";
+                }
+                elseif($rank == "ECDT"){
+                    $this->rows    = 43;
+                    $this->view    = "ECDT";
+                }
+                elseif($rank == "CCK"){
+                    $this->rows    = 44;
+                    $this->view    = "CCK";
+                }
+                elseif($rank == "MSM" || $rank == "UTY"){
+                    $this->rows    = 43;
+                    $this->view    = "MSM_UTY";
+                }
+            }
+            elseif($type == "kos_bul_lib"){
+                if($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 63;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "BSN" || $rank == "AB"){
+                    $this->rows    = 48;
+                    $this->view    = "BSN_AB";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 45;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "DCDT" || $rank == "DBOY"){
+                    $this->rows    = 44;
+                    $this->view    = "DCDT";
+                }
+                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3AE"){
+                    $this->rows    = 56;
+                    $this->view    = "2AE_3AE";
+                }
+                elseif($rank == "OLR1"){
+                    $this->rows    = 46;
+                    $this->view    = "OLR1";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 46;
+                    $this->view    = "OLR";
+                }
+                elseif($rank == "WPR"){
+                    $this->rows    = 43;
+                    $this->view    = "WPR";
+                }
+                elseif($rank == "ECDT" || $rank == "EBOY"){
+                    $this->rows    = 43;
+                    $this->view    = "ECDT";
+                }
+                elseif($rank == "CCK"){
+                    $this->rows    = 43;
+                    $this->view    = "CCK";
+                }
+                elseif($rank == "MSM" || $rank == "UTY"){
+                    $this->rows    = 43;
+                    $this->view    = "MSM_UTY";
+                }
+            }
+            elseif($type == "kos_cb_lib"){
+                if($rank == "C/O"){
+                    $this->rows    = 57;
+                    $this->view    = "CO";
+                }
+                elseif($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 58;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "BSN" || $rank == "AB"){
+                    $this->rows    = 46;
+                    $this->view    = "BSN_AB";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 44;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "DCDT" || $rank == "DBOY"){
+                    $this->rows    = 42;
+                    $this->view    = "DCDT";
+                }
+                elseif($rank == "1AE"){
+                    $this->rows    = 53;
+                    $this->view    = "1AE";
+                }
+                elseif($rank == "2AE" || $rank == "3AE"){
+                    $this->rows    = 51;
+                    $this->view    = "2AE_3AE";
+                }
+                elseif($rank == "OLR1"){
+                    $this->rows    = 46;
+                    $this->view    = "OLR1_OLR";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 45;
+                    $this->view    = "OLR";
+                }
+                elseif($rank == "WPR"){
+                    $this->rows    = 43;
+                    $this->view    = "WPR";
+                }
+                elseif($rank == "ECDT"){
+                    $this->rows    = 42;
+                    $this->view    = "ECDT";
+                }
+                elseif($rank == "CCK"){
+                    $this->rows    = 43;
+                    $this->view    = "CCK";
+                }
+                elseif($rank == "MSM" || $rank == "UTY"){
+                    $this->rows    = 42;
+                    $this->view    = "MSM_UTY";
+                }
+            }
         }
         elseif($fleet == "TOEI"){
             
