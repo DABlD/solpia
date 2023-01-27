@@ -36,3 +36,7 @@
 .select2-selection__rendered{
 	text-align: left;
 }
+
+.dataTable tbody tr:hover{
+	background-color: #dadada !important;
+}
