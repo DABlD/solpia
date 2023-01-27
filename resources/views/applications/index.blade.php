@@ -435,6 +435,19 @@
         }
 
         function initializeActions(){
+            window.addEventListener("keydown", function (event) {
+                if(!$('#infoTabs').is(':visible')){
+                    const key = event.key;
+
+                    if(key == "V" || key == "v"){
+                        $('.dataTable tbody tr:hover').find('.btn-search').click();
+                    }
+                    else if(key == "E" || key == "e"){
+                        $('.dataTable tbody tr:hover').find('.btn-primary').click();
+                    }
+                }
+            }, true);
+
 	    	$('[data-original-title="Export"]').on('click', application => {
                 swal({
                     title: 'Select Export Type',
