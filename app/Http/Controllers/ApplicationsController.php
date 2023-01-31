@@ -1262,11 +1262,13 @@ class ApplicationsController extends Controller
 
         $class = "App\\Exports\\OnOff\\" . $type;
 
-        $name = substr($vesselCrew[2], 4);
+        $vesselCrew[2]->name = str_replace("/", "", $vesselCrew[2]->name);
+        $name = $vesselCrew[2]->name;
         $data = null;
         if($req->data){
             $data = $req->data;
         }
+
 
         return Excel::download(new $class($linedUps, $onBoards, $type, $data), "$name Onsigners and Offsigners.xlsx");
     }
