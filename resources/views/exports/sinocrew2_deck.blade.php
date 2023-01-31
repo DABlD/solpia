@@ -366,11 +366,11 @@
 	<tr>
 		<td>NEXT OF KIN</td>
 		<td style="text-align: right;">:</td>
-		<td colspan="2">{{ $nok->lname }}, {{ $nok->fname }} {{ $nok->suffix }} {{ $nok->mname }}</td>
+		<td colspan="2">{{ $nok->lname ?? "" }}, {{ $nok->fname ?? "" }} {{ $nok->suffix ?? "" }} {{ $nok->mname ?? "" }}</td>
 
 		<td colspan="2">RELATIONSHIP</td>
 		<td style="text-align: right;">:</td>
-		<td colspan="3">{{ $nok->type }}</td>
+		<td colspan="3">{{ $nok->type ?? "" }}</td>
 	</tr>
 
 	<tr>
@@ -386,13 +386,13 @@
 	<tr>
 		<td>ADDRESS</td>
 		<td style="text-align: right;">:</td>
-		<td colspan="8">{{ $nok->address }}</td>
+		<td colspan="8">{{ $nok->address ?? "" }}</td>
 	</tr>
 
 	<tr>
 		<td>PHONE</td>
 		<td style="text-align: right;">:</td>
-		<td colspan="2">{{ $nok->contact }}</td>
+		<td colspan="2">{{ $nok->contact ?? "" }}</td>
 
 		<td colspan="2">E-MAIL</td>
 		<td style="text-align: right;">:</td>
