@@ -3030,7 +3030,7 @@
             });
         }
 
-        function createModal(name, id){
+        function createModal(vessel, id){
             $('body').append(`
                 <div class="modal fade" id="linedUp">
                     <div class="modal-dialog">
@@ -3042,7 +3042,8 @@
                                 </button>
 
                                 <h4 class="modal-title">
-                                    <b><span style="color: #ca0032;">${name}</span> - Crew Details</b>
+                                    <b><span style="color: #ca0032;">${vessel.name}</span> - Crew Details</b>
+                                    <span class="hidden" id="vessel_flag">${vessel.flag}</span>
                                 </h4>
                             </div>
 
@@ -3068,7 +3069,7 @@
                             </div>
 
                             <div class="modal-footer" style="background-color: transparent;">
-                                <button type="button" class="btn btn-success" onClick="batchExport(${id}, '${name}')">Batch Export</button>
+                                <button type="button" class="btn btn-success" onClick="batchExport(${id}, '${vessel.name}')">Batch Export</button>
                                 <button type="button" class="btn btn-primary" onClick="omc(${id})">On Board Multiple Crew</button>
                                 <button type="button" class="btn btn-warning" onClick="dmc(${id})">Disembark Multiple Crew</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -3343,7 +3344,6 @@
                                         showConfirmButton: false,
                                         timer: 800
                                     }).then(() => {
-                                        console.log(vessel);
                                         getVesselCrew(vessel, true);
                                         $('[href=".onBoard"]').click();
                                     });
@@ -3679,7 +3679,7 @@
                         <div class="col-md-10">
                             <label for="">
                                 ${value.name}
-                                ${value.name == "FLAG" ? input("flag", "", null, 0,12) : ""}
+                                ${value.name == "FLAG" ? input("flag", "", $('#vessel_flag').html(), 0,12) : ""}
                             </label>
                         </div>
                     </div>
@@ -3881,7 +3881,7 @@
                         <div class="col-md-10">
                             <label for="">
                                 ${value.name}
-                                ${value.name == "FLAG" ? input("flag", "", null, 0,12) : ""}
+                                ${value.name == "FLAG" ? input("flag", "", $('#vessel_flag').html(), 0,12) : ""}
                             </label>
                         </div>
                     </div>

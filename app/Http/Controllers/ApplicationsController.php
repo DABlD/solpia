@@ -1072,7 +1072,7 @@ class ApplicationsController extends Controller
             array_push($onBoards, $crew);
         }
 
-        $vname = Vessel::find($id ?? $req->id)->name;
+        $vname = Vessel::find($id ?? $req->id);
 
         $temp = collect();
         foreach($linedUps as $key => $linedUp){
