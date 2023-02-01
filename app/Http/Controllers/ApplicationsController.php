@@ -661,7 +661,8 @@ class ApplicationsController extends Controller
                     'bhp_kw' => null,
                     'principal' => null,
                     'trade' => null,
-                    'flag' => null
+                    'flag' => null,
+                    'owner' => null
                 ]);
             }
         }
