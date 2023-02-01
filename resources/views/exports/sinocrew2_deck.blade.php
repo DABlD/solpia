@@ -210,7 +210,7 @@
 		$rank = isset($ss->rank) ? $data->ranks[$ss->rank] : "---";
 		$eng = $cleanText($ss->engine_type);
 		$bhp = $cleanText($ss->bhp_kw);
-		$owners = $cleanText($ss->owners);
+		$owners = $cleanText($ss->owner);
 		$from = $checkDate2($ss->sign_on);
 		$to = $checkDate2($ss->sign_off);
 
