@@ -127,7 +127,7 @@
 				})->first();			
 			}
 
-			$course = $lastSchool->course;
+			$course = $lastSchool->course ?? "";
 
 			if(strtoupper($course) == "BSMT"){
 				$course = "Bachelor of Science in Marine Transportation";
