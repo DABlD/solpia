@@ -301,7 +301,12 @@
 			$cn = str_replace('&', '&#38;', $ss->crew_nationality);
 			$flag = str_replace('&', '&#38;', $ss->flag);
 
-			$total += $ss->sign_on->diffInDays($ss->sign_off);
+			$son = $ss->sign_on;
+			$soff = $ss->sign_off;
+
+			if($son && $soff){
+				$total += $ss->sign_on->diffInDays($ss->sign_off);
+			}
 
 			echo "
 				<td>$flag</td>
