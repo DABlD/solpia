@@ -16,6 +16,13 @@ class PrincipalController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->table = "principals";
+    }
+
+    public function index(){
+        return $this->_view('index', [
+            'title' => 'Principals'
+        ]);
     }
 
     public function get(Request $req){
@@ -97,5 +104,9 @@ class PrincipalController extends Controller
             $class = "App\\Exports\\X13_PrincipalOnboardCrew";
         }
         return Excel::download(new $class($obcs), "$fileName.xlsx");
+    }
+
+    private function _view($view, $data = array()){
+        return view($this->table . "." . $view, $data);
     }
 }
