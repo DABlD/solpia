@@ -780,4 +780,18 @@ class DatatablesController extends Controller
     		->rawColumns(['actions'])
     		->make(true);
 	}
+
+	public function principals(Request $req){
+		$array = Principal::where('fleet', 'like', $req->fleet)->get();
+
+        foreach($array as $item){
+            $item->actions = $item->actions;
+        }
+
+		$array = $array->toArray();
+
+	    return Datatables::of($array)
+    		->rawColumns(['actions'])
+    		->make(true);
+	}
 }
