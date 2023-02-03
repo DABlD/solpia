@@ -17,7 +17,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array2 = [
-            'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN'
+            'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'MT C. GUARDIAN'
         ];
 
         $array3 = [

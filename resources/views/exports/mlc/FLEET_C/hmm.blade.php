@@ -69,16 +69,18 @@
 		<td colspan="7">{{ $data->sAddress }}</td>
 	</tr>
 
-	<tr>
-		<td rowspan="2" style="{{ $center }}">Crew Manager</td>
-		<td>Company</td>
-		<td colspan="7">{{ $data->crewManager ?? "---" }}</td>
-	</tr>
+	@if(isset($data->crewManager))
+		<tr>
+			<td rowspan="2" style="{{ $center }}">Crew Manager</td>
+			<td>Company</td>
+			<td colspan="7">{{ $data->crewManager }}</td>
+		</tr>
 
-	<tr>
-		<td>Address</td>
-		<td colspan="7">{{ $data->cAddress ?? "---" }}</td>
-	</tr>
+		<tr>
+			<td>Address</td>
+			<td colspan="7">{{ $data->cAddress }}</td>
+		</tr>
+	@endif
 
 	<tr>
 		<td rowspan="2" style="{{ $center }}">Agent</td>
@@ -377,7 +379,7 @@
 		</td>
 		<td></td>
 		<td colspan="4" style="{{ $center }} {{ $color }}">
-			MR. ADULF KIT  JUMAWAN - CREWING MANAGER
+			MS. JEANNETTE T. SOLIDUM - CREWING MANAGER
 		</td>
 		<td></td>
 	</tr>
