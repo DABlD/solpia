@@ -53,7 +53,7 @@ Route::group([
 
 		Route::get('dashboard', 'DashboardController@index')
 			->defaults('sidebar', 1)
-			->defaults('icon', 'fa-user')
+			->defaults('icon', 'fa-columns')
 			->defaults('name', 'Dashboard')
 			->defaults('roles', array('Admin', 'Principal', 'Crewing Officer', "Crewing Manager"))
 			->name('dashboard')
@@ -84,6 +84,23 @@ Route::group([
 		Route::get('users/ajaxUpdate2', 'UsersController@ajaxUpdate2')->name('users.ajaxUpdate2');
 
 		Route::get('users/delete/{user}', 'UsersController@delete')->name('users.delete');
+
+		// PRINCIPAL ROUTES
+		$name = "principal";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-black-tie')
+			->defaults('name', 'Principals')
+			->defaults('roles', array('Admin', 'Processing', 'Encoder', 'Cadet'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
+		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
+		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
+		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+
+		Route::get($name . '/getOnboardCrew', ucfirst($name) . 'Controller@getOnboardCrew')->name($name . '.getOnboardCrew');
 
 		// APPLICANT ROUTES
 		$name = "applications";
@@ -274,15 +291,11 @@ Route::group([
 		Route::post('datatables/openings', 'DatatablesController@openings')->name('datatables.openings');
 		Route::post('datatables/auditTrail', 'DatatablesController@auditTrail')->name('datatables.auditTrail');
 		Route::post('datatables/wages', 'DatatablesController@wages')->name('datatables.wages');
+		Route::post('datatables/principals', 'DatatablesController@principals')->name('datatables.principals');
 
 
 		Route::post('datatables/prospects', 'DatatablesController@prospects')->name('datatables.prospects');
 		Route::post('datatables/requirements', 'DatatablesController@requirements')->name('datatables.requirements');
-
-		// PRINCIPAL
-		$name = "principal";
-		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
-		Route::get($name . '/getOnboardCrew/{principal?}', ucfirst($name) . 'Controller@getOnboardCrew')->name($name . '.getOnboardCrew');
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
