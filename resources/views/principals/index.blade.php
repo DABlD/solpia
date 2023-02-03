@@ -17,8 +17,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Sys Name</th>
-                                    <th>Name</th>
+                                    <th>Short Name</th>
+                                    <th>Full Name</th>
+                                    <th>Address</th>
                                     <th>Fleet</th>
                                     <th>Actions</th>
                                 </tr>
@@ -69,7 +70,8 @@
             columns: [
                 { data: 'id'},
                 { data: 'name'},
-                { data: 'slug'},
+                { data: 'full_name'},
+                { data: 'address'},
                 { data: 'fleet'},
                 { data: 'actions'}
             ],
@@ -271,16 +273,60 @@
                 }
             });
         }
-        
-        function update(id, status, label){
-            sc("Confirmation", `Are you sure you want to ${label}?`, result => {
+
+        function view(id){
+            $.ajax({
+                url: "{{ route('principal.get') }}",
+                data: {
+                    cols: '*',
+                    where: ['id', id],
+                },
+                success: data => {
+                    data = JSON.parse(data)[0];
+                    showDetails(data);
+                }
+            });
+        }
+
+        function showDetails(data){
+            swal({
+                html: `
+                    ${input("id", "", data.id, 2,10, 'hidden')}
+                    ${input("name", "Short Name", data.name, 2,10)}
+                    ${input("full_name", "Full Name", data.full_name, 2,10)}
+                    ${input("address", "Address", data.address, 2,10)}
+                `,
+                width: '800px',
+                confirmButtonText: 'Update',
+                showCancelButton: true,
+                cancelButtonColor: errorColor,
+                cancelButtonText: 'Cancel',
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        let bool = true;
+                        if($('[name="name"]').val() == ""){
+                            swal.showValidationError('Short Name is required');
+                        }
+                        else{
+                            let bool = false;
+                            // Insert ajax validation
+                            setTimeout(() => {resolve()}, 500);
+                        }
+                        bool ? setTimeout(() => {resolve()}, 500) : "";
+                    });
+                },
+            }).then(result => {
                 if(result.value){
                     swal.showLoading();
+
                     update({
                         url: "{{ route('principal.update') }}",
                         data: {
-                            id: id,
-                            status: status
+                            id: $("[name='id']").val(),
+                            name: $("[name='name']").val(),
+                            full_name: $("[name='full_name']").val(),
+                            address: $("[name='address']").val(),
                         },
                         message: "Success"
                     }, () => {
@@ -289,5 +335,23 @@
                 }
             });
         }
+        
+        // function update(id, status, label){
+        //     sc("Confirmation", `Are you sure you want to ${label}?`, result => {
+        //         if(result.value){
+        //             swal.showLoading();
+        //             update({
+        //                 url: "{{ route('principal.update') }}",
+        //                 data: {
+        //                     id: id,
+        //                     status: status
+        //                 },
+        //                 message: "Success"
+        //             }, () => {
+        //                 reload();
+        //             })
+        //         }
+        //     });
+        // }
     </script>
 @endpush
