@@ -493,6 +493,8 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     {
         $mt = $this->mt ? -2 : 0;
 
+        $sig = $this->applicant->vessel->fleet == "FLEET B" ? 'images/mlc_hmm_sig.jpg' : 'images/maam_jen_sig.jpg';
+
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
         $drawing->setCoordinates('G' . (51 + $mt));
@@ -504,7 +506,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setName('mlc_hmm_sig');
         $drawing3->setDescription('mlc_hmm_sig');
-        $drawing3->setPath(public_path('images/mlc_hmm_sig.jpg'));
+        $drawing3->setPath(public_path($sig));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
         $drawing3->setCoordinates('E' . (51 + $mt));
