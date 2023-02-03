@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\PrincipalAttribute;
 
 class Principal extends Model
 {
+	use PrincipalAttribute;
+
     protected $fillable = [
     	'user_id', 'name', 'slug', 'fleet'
     ];

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\{Principal, Applicant};
 use Maatwebsite\Excel\Facades\Excel;
 
+use DB;
+
 class PrincipalController extends Controller
 {
     /**
@@ -104,6 +106,17 @@ class PrincipalController extends Controller
             $class = "App\\Exports\\X13_PrincipalOnboardCrew";
         }
         return Excel::download(new $class($obcs), "$fileName.xlsx");
+    }
+
+    public function update(Request $req){
+        $query = DB::table($this->table);
+
+        if($req->where){
+            $query = $query->where($req->where[0], $req->where[1])->update($req->except(['id', '_token', 'where']));
+        }
+        else{
+            $query = $query->where('id', $req->id)->update($req->except(['id', '_token']));
+        }
     }
 
     private function _view($view, $data = array()){

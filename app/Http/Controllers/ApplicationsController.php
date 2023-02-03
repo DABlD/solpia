@@ -1642,90 +1642,68 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
-        $array1 = [];
-        $array2 = [];
-        $details = [];
-
-        $applicants = SeaService::select('sea_services.*', 'r.abbr as rname', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet')
-                    ->where('manning_agent', 'LIKE', '%SOLPIA%')
-                    ->whereNull('a.deleted_at')
-                    ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
-                    ->join('users as u', 'u.id', '=', 'a.user_id')
-                    ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
-                    ->join('ranks as r', 'r.id', '=', 'pa.rank_id')
-                    ->get()->groupBy('applicant_id');
+        $temp = SeaService::whereIn('rank', ["DECK CADET", "ENGINE CADET"])
+                            ->where('manning_agent', 'LIKE', '%SOLPIA%')
+                            // ->where('principal', 'LIKE', '%TOEI%')
+                            ->where('sign_on', ">=", '2019-09-01')->get();
+        $temp = $temp->groupBy('applicant_id');
         
-        foreach($applicants as $sss){
-            $sss = $sss->sortByDesc('sign_on');
+        $array = [];
 
-            $details[$sss->first()->applicant_id] = [
-                "fname" => $sss->first()->fname,
-                "mname" => $sss->first()->mname,
-                "lname" => $sss->first()->lname,
-                "suffix" => $sss->first()->suffix,
-                "rname" => $sss->first()->rname,
-                "fleet" => $sss->first()->fleet
-            ];
-            
-            $total = 0;
-            foreach($sss as $key => $ss){
-                if(str_contains($ss->manning_agent, 'SOLPIA')){
-                    if(isset($ss->sign_on) && isset($ss->sign_off)){
-                        $total += $ss->sign_off->diffInMonths($ss->sign_on);
+        foreach($temp as $key => $ss){
+
+                if($key == 1691){
+                    dd($ss);
+                }
+            $bool = false;
+            foreach($ss as $ss2){
+                $vessels = $ss2->vessel;
+
+                foreach($vessels as $vessel){
+                    if(in_array($vessel->principal_id, [3, 16, 196])){
+                        $bool = true;
                     }
                 }
             }
 
-            if($total == 0){
-                if(isset($ss->sign_on) && isset($end)){
-                    $total = $end->diffInMonths($ss->sign_on);
-                }
-            }
+            if($bool){
+                $array[$key]["name"] = $ss->first()->applicant->user->namefull;
+                $array[$key]["rank"] = $ss->first()->rank;
+                $array[$key]["times"] = sizeof($ss);
+                $array[$key]["sign_on1"] = $ss->first()->sign_on;
+                $array[$key]["sign_on2"] = $ss->last()->sign_on;
 
-            if($total >= 60){
-                array_push($array1, $ss->applicant_id);
-            }
-            if($total >= 120){
-                array_push($array2, $ss->applicant_id);
-            }
+                $array[$key]["principal"] = $ss->last()->principal;
 
-            $details[$sss->first()->applicant_id]['total'] = $total;
-            echo $sss->first()->applicant_id . ' - ' . $total . '<br>';
+                $array[$key]['hasLicense'] = DocumentLC::where('applicant_id', $key)->where('type', "COC")->where('no', '!=', '')->whereJsonContains('regulation', 'II/1')->count();
+                $array[$key]['hasLicense'] = DocumentLC::where('applicant_id', $key)->where('type', "COC")->where('no', '!=', '')->where(function($q) {
+                    $q->whereJsonContains('regulation', 'II/1');
+                    $q->orWhereJsonContains('regulation', 'III/1');
+                })->count();
+            }
         }
 
-        $array1 = array_diff($array1, $array2);
-        $array1 = array_unique($array1);
-        $array2 = array_unique($array2);
+        echo "<table><tbody>";
+        foreach($array as $crew){
+            $name = $crew['name'];
+            $rank = $crew['rank'];
+            $times = $crew['times'];
+            // $so1 = $crew['sign_on1'] != "" ? $crew['sign_on1']->format('Y-m-d') : "";
+            $so2 = $crew['sign_on2'] != "" ? $crew['sign_on2']->format('Y-m-d') : "";
+            $hasLicense = $crew['hasLicense'] ? "Yes" : "No";
 
-        $FYfleets = [
-            "FLEET A" => [],
-            "FLEET B" => [],
-            "FLEET C" => [],
-            "FLEET D" => [],
-            "TOEI" => [],
-            "FISHING" => [],
-            "" => []
-        ];
-        $TYfleets = [
-            "FLEET A" => [],
-            "FLEET B" => [],
-            "FLEET C" => [],
-            "FLEET D" => [],
-            "TOEI" => [],
-            "FISHING" => [],
-            "" => []
-        ];
-
-        foreach($array1 as $id){
-            array_push($FYfleets[$details[$id]['fleet']], $details[$id]);
+            // $principal = $crew['principal'];
+            echo "
+                <tr>
+                    <td>$name</td>
+                    <td>$rank</td>
+                    <td>$times</td>
+                    <td>$so2</td>
+                    <td>$hasLicense</td>
+                </tr>
+            ";
         }
-
-        foreach($array2 as $id){
-            array_push($TYfleets[$details[$id]['fleet']], $details[$id]);
-        }
-
-        ksort($FYfleets);
-        ksort($TYfleets);
+        echo "</tbody></table>";
     }
 
     public function generateApplicantFleet(){

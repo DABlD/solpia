@@ -16,10 +16,6 @@ class AlterPrincipalsAddShipowners extends Migration
         Schema::table('principals', function (Blueprint $table){
             $table->string('full_name', 50)->after('name')->nullable();
             $table->text('address')->after('full_name')->nullable();
-            $table->string('mlc_shipowner', 50)->after('address')->nullable();
-            $table->text('mlc_shipowner_address')->after('mlc_shipowner')->nullable();
-            $table->string('registered_shipowner', 50)->after('mlc_shipowner_address')->nullable();
-            $table->text('registered_shipowner_address')->after('registered_shipowner')->nullable();
         });
     }
 
@@ -33,10 +29,6 @@ class AlterPrincipalsAddShipowners extends Migration
         Schema::table('principals', function (Blueprint $table){
             $table->dropColumn('full_name');
             $table->dropColumn('address');
-            $table->dropColumn('mlc_shipowner');
-            $table->dropColumn('mlc_shipowner_address');
-            $table->dropColumn('registered_shipowner');
-            $table->dropColumn('registered_shipowner_address');
         });
     }
 }
