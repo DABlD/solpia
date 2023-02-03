@@ -24,6 +24,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             
         ];
 
+        // minus two;
+        $mt = false;
+
         if(in_array($applicant->vessel->name, $array1)){
             $applicant->shipowner = "HMM Company Limited";
             $applicant->sAddress = "108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
@@ -31,6 +34,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
         elseif(in_array($applicant->vessel->name, $array2)){
+            $mt = true;
             $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
             $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
         }
@@ -50,6 +54,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $this->applicant    = $applicant;
         $this->title        = $title;
+        $this->mt           = $mt;
     }
 
     public function view(): View
@@ -249,9 +254,10 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $title = $this->title;
+        $mt = $this->mt ? -2 : 0;
 
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $title) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $title, $mt) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
@@ -266,12 +272,12 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.7);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.7);
 
-                $event->sheet->getDelegate()->getStyle('A1:H58')->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A4:H58')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:H' . (58 + $mt))->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A4:H' . (58 + $mt))->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('B21')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A42')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A45')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A48')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A' . (42 + $mt))->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A' . (45 + $mt))->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A' . (48 + $mt))->getFont()->setSize(8);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -303,7 +309,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    'B21'
+                    'B' . (21 + $mt)
                 ];
 
                 // HL B
@@ -329,9 +335,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:I20',
-                    'A21',
-                    'A22:I58'
+                    'A1:I' . (20 + $mt),
+                    'A' . (21 + $mt),
+                    'A' . (22 + $mt) . ':I' . (58 + $mt)
                 ];
 
                 // B I
@@ -339,14 +345,14 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'A23', 'A32', 'B26', 'C23', 'E23', 
-                    'E26', 'B21', 'B29', 'B30', 'A39',
-                    'A42', 'A45', 'A48', 'A50', 'A56'
+                    'A' . (23 + $mt), 'A' . (32 + $mt), 'B' . (26 + $mt), 'C' . (23 + $mt), 'E' . (23 + $mt), 
+                    'E' . (26 + $mt), 'B' . (21 + $mt), 'B' . (29 + $mt), 'B' . (30 + $mt), 'A' . (39 + $mt),
+                    'A' . (42 + $mt), 'A' . (45 + $mt), 'A' . (48 + $mt), 'A' . (50 + $mt), 'A' . (56 + $mt)
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'F8', 'E54', 'C7', 'H8', 'C12',
+                    'F8', 'E' . (54 + $mt), 'C7', 'H8', 'C' . (12 + $mt),
                 ];
 
                 foreach($h as $key => $value) {
@@ -386,7 +392,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A7:I16', 'A19:I21', 'A23:I30', 'A32:I35', 'A39:I39', 'A42:I42', 'A45:I45', 'A48:I48', 'A56:I57'
+                    'A7:I' . (16 + $mt), 'A' . (19 + $mt) . ':I' . (21 + $mt), 'A' . (23 + $mt) . ':I' . (30 + $mt), 
+                    'A' . (32 + $mt) . ':I' . (35 + $mt), 'A' . (39 + $mt) . ':I' . (39 + $mt), 'A' . (42 + $mt) . ':I' . (42 + $mt),
+                    'A' . (45 + $mt) . ':I' . (45 + $mt), 'A' . (48 + $mt) . ':I' . (48 + $mt), 'A' . (56 + $mt) . ':I' . (57 + $mt)
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -411,7 +419,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BOTTOM BORDER THIN
                 $cells[7] = array_merge([
-                    'A52:C52', 'E52:H52'
+                    'A' . (52 + $mt) . ':C' . (52 + $mt), 'E' . (52 + $mt) . ':H' . (52 + $mt)
                 ]);
 
                 foreach($cells as $key => $value){
@@ -435,53 +443,59 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
 
                 // ROW RESIZE
-                for($i = 1; $i <= 59; $i++){
+                for($i = 1; $i <= (59 + $mt); $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(21);
                 }
 
                 $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(17);
-                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(17);
-                $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(110);
-                $event->sheet->getDelegate()->getRowDimension(23)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(29)->setRowHeight(50);
-                $event->sheet->getDelegate()->getRowDimension(30)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(32)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(17 + $mt)->setRowHeight(17);
+                $event->sheet->getDelegate()->getRowDimension(21 + $mt)->setRowHeight(110);
+                $event->sheet->getDelegate()->getRowDimension(23 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(24 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(26 + $mt)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(27 + $mt)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(28 + $mt)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(29 + $mt)->setRowHeight(50);
+                $event->sheet->getDelegate()->getRowDimension(30 + $mt)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(32 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(33 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(34 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(35 + $mt)->setRowHeight(35);
 
                 // TO PAGE 2
-                $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(37)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(36 + $mt)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(37 + $mt)->setRowHeight(20);
                 // END
 
-                $event->sheet->getDelegate()->getRowDimension(39)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(42)->setRowHeight(95);
-                $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(115);
-                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(80);
-                $event->sheet->getDelegate()->getRowDimension(50)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(51)->setRowHeight(120);
-                $event->sheet->getDelegate()->getRowDimension(52)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(54)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(56)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(57)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(58)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(39 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(42 + $mt)->setRowHeight(95);
+                $event->sheet->getDelegate()->getRowDimension(45 + $mt)->setRowHeight(115);
+                $event->sheet->getDelegate()->getRowDimension(48 + $mt)->setRowHeight(80);
+                $event->sheet->getDelegate()->getRowDimension(50 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(51 + $mt)->setRowHeight(120);
+                $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(53 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(54 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(56 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(57 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(58 + $mt)->setRowHeight(16);
+
+                if($mt){
+                    $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(40);
+                }
             },
         ];
     }
 
     public function drawings()
     {
+        $mt = $this->mt ? -2 : 0;
+
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
-        $drawing->setCoordinates('G51');
+        $drawing->setCoordinates('G' . (51 + $mt));
         $drawing->setHeight(154);
         $drawing->setWidth(154);
         $drawing->setOffsetX(35);
@@ -493,7 +507,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setPath(public_path('images/mlc_hmm_sig.jpg'));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('E51');
+        $drawing3->setCoordinates('E' . (51 + $mt));
         $drawing3->setHeight(140);
         $drawing3->setWidth(140);
 
