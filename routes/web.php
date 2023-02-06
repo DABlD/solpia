@@ -302,5 +302,7 @@ Route::group([
 		Route::get('generateApplicantFleet', 'ApplicationsController@generateApplicantFleet')->name('generateApplicantFleet');
 		Route::get('generateSeaServiceSizeAndOwner', 'ApplicationsController@generateSeaServiceSizeAndOwner')->name('generateSeaServiceSizeAndOwner');
 		Route::get('testFunc', 'ApplicationsController@testFunc')->name('testFunc');
+		Route::get('testFunc2', 'ApplicationsController@testFunc2')->name('testFunc2');
+		
 	}
 );
