@@ -1675,10 +1675,9 @@ class ApplicationsController extends Controller
 
                 $array[$key]["principal"] = $ss->last()->principal;
 
-                $array[$key]['hasLicense'] = DocumentLC::where('applicant_id', $key)->where('type', "COC")->where('no', '!=', '')->whereJsonContains('regulation', 'II/1')->count();
                 $array[$key]['hasLicense'] = DocumentLC::where('applicant_id', $key)->where('type', "COC")->where('no', '!=', '')->where(function($q) {
-                    $q->whereJsonContains('regulation', 'II/1');
-                    $q->orWhereJsonContains('regulation', 'III/1');
+                    $q->whereRaw('json_contains(regulation, \'["II/1"]\')')->get();
+                    $q->whereRaw('json_contains(regulation, \'["III/1"]\')')->get();
                 })->count();
             }
         }
@@ -1723,8 +1722,8 @@ class ApplicationsController extends Controller
 
             if($bool){
                 $hl = DocumentLC::where('applicant_id', $pa->applicant_id)->where('type', "COC")->where('no', '!=', '')->where(function($q) {
-                    $q->whereJsonContains('regulation', 'II/1');
-                    $q->orWhereJsonContains('regulation', 'III/1');
+                    $q->whereRaw('json_contains(regulation, \'["II/1"]\')')->get();
+                    $q->whereRaw('json_contains(regulation, \'["III/1"]\')')->get();
                 })->count();
 
                 if($hl){
