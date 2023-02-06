@@ -1706,6 +1706,52 @@ class ApplicationsController extends Controller
         echo "</tbody></table>";
     }
 
+    public function testFunc2(){
+        $temp = ProcessedApplicant::whereIn('rank_id', [10,16])->get()->load('applicant.user');
+        $array = [];
+
+        $temp = $temp->filter(function($value, $key){
+            return $value->applicant;
+        });
+
+        foreach($temp as $pa){
+            $bool = true;
+
+            if($pa->applicant->user->applicant == 4 || $pa->applicant->user->fleet == "FLEET A"){
+                $bool = true;
+            }
+
+            if($bool){
+                $hl = DocumentLC::where('applicant_id', $pa->applicant_id)->where('type', "COC")->where('no', '!=', '')->where(function($q) {
+                    $q->whereJsonContains('regulation', 'II/1');
+                    $q->orWhereJsonContains('regulation', 'III/1');
+                })->count();
+
+                if($hl){
+                    $array[$pa->applicant_id]["name"] = $pa->applicant->user->namefull;
+                    $array[$pa->applicant_id]["rank"] = $pa->rank->name;
+                    $array[$pa->applicant_id]["fleet"] = $pa->applicant->user->fleet;
+                }
+            }
+        }
+
+        echo "<table><tbody>";
+        foreach($array as $crew){
+            $name = $crew['name'];
+            $rank = $crew['rank'];
+            $fleet = $crew['fleet'];
+
+            echo "
+                <tr>
+                    <td>$name</td>
+                    <td>$rank</td>
+                    <td>$fleet</td>
+                </tr>
+            ";
+        }
+        echo "</tbody></table>";
+    }
+
     public function generateApplicantFleet(){
         $applicants = User::where("role", 'Applicant')
                         ->where('fleet', null)
