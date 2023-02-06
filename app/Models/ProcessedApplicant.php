@@ -19,7 +19,7 @@ class ProcessedApplicant extends Model
     ];
 
     public function applicant(){
-        return $this->belongsTo('App\Models\Applicant');
+        return $this->belongsTo('App\Models\Applicant', 'applicant_id', 'id');
     }
 
     public function principal(){
