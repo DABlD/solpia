@@ -229,7 +229,7 @@
                 'MLC Shipowner',
                 'Address',
                 'Registered Shipowner',
-                'Address'
+                'Address',
             ];
 
             let columns = [
@@ -252,8 +252,8 @@
                 'former_principal',
                 'mlc_shipowner',
                 'mlc_shipowner_address',
-                'registered_shipowner_address',
                 'registered_shipowner',
+                'registered_shipowner_address',
             ];
 
             $.each(Object.keys(vessel), (index, key) => {
@@ -261,7 +261,7 @@
                 if(temp >= 0){
                     fields += `
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3" style="text-align: left;">
                                 <h5><strong>` + names[temp] + `</strong></h5>
                             </div>
                             <div class="col-md-9">
@@ -349,12 +349,12 @@
                                 BHP: $('#vd-BHP').val(),
                                 trade: $('#vd-trade').val(),
                                 ecdis: $('#vd-ecdis').val(),
-                                former_agency: $('#former_agency').val(),
-                                former_principal: $('#former_principal').val(),
-                                mlc_shipowner: $('#mlc_shipowner').val(),
-                                mlc_shipowner_address: $('#mlc_shipowner_address').val(),
-                                registered_shipowner_address: $('#registered_shipowner_address').val(),
-                                registered_shipowner: $('#registered_shipowner').val(),
+                                former_agency: $('#vd-former_agency').val(),
+                                former_principal: $('#vd-former_principal').val(),
+                                mlc_shipowner: $('#vd-mlc_shipowner').val(),
+                                mlc_shipowner_address: $('#vd-mlc_shipowner_address').val(),
+                                registered_shipowner_address: $('#vd-registered_shipowner_address').val(),
+                                registered_shipowner: $('#vd-registered_shipowner').val(),
                             },
                             success: () => {
                                 swal({
