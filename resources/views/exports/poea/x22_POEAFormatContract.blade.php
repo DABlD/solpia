@@ -98,12 +98,12 @@
 
 	<tr>
 		<td colspan="4">Name of Principal/Shipowner:</td>
-		<td colspan="8" style="{{ $bc }} {{ $i }}">TOEI KOREA LTD.</td>
+		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->principal->full_name }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="4">Address of Principal/Shipowner:</td>
-		<td colspan="8" style="{{ $bc }} {{ $i }}">RM. 701, 7FL, BUSAN SUNGUI-SHINHYEOP BLDG., 162, BEOMIL-RO, BUSANJIN-GU, BUSAN, KOREA</td>
+		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->principal->address }}</td>
 	</tr>
 
 	<tr>
