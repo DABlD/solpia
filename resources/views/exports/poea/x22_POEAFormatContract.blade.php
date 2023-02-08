@@ -177,7 +177,7 @@
 		<td></td>
 		<td>1.4</td>
 		<td colspan="3">Hours of Work:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">40 HOURS / WEEK</td>
+		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->work_hours }} HOURS / WEEK</td>
 		<td colspan="2" style="text-align: right;">RETIRE ALLOW:</td>
 		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;">${{ $data->wage->retire_allow ?? 0 }}</td>
 	</tr>
@@ -186,8 +186,8 @@
 		<td></td>
 		<td>1.5</td>
 		<td colspan="2">Overtime:</td>
-		<td style="text-align: right; {{ $b }}">{{ $data->req['otRate'] }} OT</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">/ HR AFTER {{ $data->req['hours'] }} HOURS</td>
+		<td style="text-align: right; {{ $b }}">{{ $data->pro_app->vessel->ot_per_hour }} OT</td>
+		<td colspan="2" style="{{ $b }} {{ $i }}">/ HR AFTER {{ $data->pro_app->vessel->ot_hours }} HOURS</td>
 		<td colspan="2" style="text-align: right;">SUB ALLOW:</td>
 		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;">${{ $data->wage->sub_allow ?? 0 }}</td>
 	</tr>
@@ -214,7 +214,7 @@
 		<td></td>
 		<td>1.8</td>
 		<td colspan="3">CBA if applicable:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->req['cba'] }}</td>
+		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->cba_affiliation }}</td>
 		<td colspan="2" style="text-align: right;"></td>
 		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;"></td>
 	</tr>

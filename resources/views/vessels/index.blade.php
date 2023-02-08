@@ -228,6 +228,10 @@
                 'Address',
                 'Registered Shipowner',
                 'Address',
+                'Work Hours',
+                'OT PER HOUR',
+                'MAX OT HOURS',
+                'CBA AFFILIATION'
             ];
 
             let columns = [
@@ -250,8 +254,13 @@
                 'mlc_shipowner_address',
                 'registered_shipowner',
                 'registered_shipowner_address',
+                'work_hours',
+                'ot_per_hour',
+                'ot_hours',
+                'cba_affiliation'
             ];
 
+            console.log(vessel);
             $.each(Object.keys(vessel), (index, key) => {
                 let temp = columns.indexOf(key);
                 if(temp >= 0){
@@ -350,6 +359,10 @@
                                 mlc_shipowner_address: $('#vd-mlc_shipowner_address').val(),
                                 registered_shipowner_address: $('#vd-registered_shipowner_address').val(),
                                 registered_shipowner: $('#vd-registered_shipowner').val(),
+                                work_hours: $('#vd-work_hours').val(),
+                                ot_per_hour: $('#vd-ot_per_hour').val(),
+                                ot_hours: $('#vd-ot_hours').val(),
+                                cba_affiliation: $('#vd-cba_affiliation').val(),
                             },
                             success: () => {
                                 swal({
@@ -1315,7 +1328,7 @@
                                         Enter Manning Agent
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="manning_agent" class="form-control">
+                                        <input type="text" id="manning_agent" class="form-control" value="SOLPIA">
                                     </div>
                                 </div>
                                 </br>
@@ -1436,6 +1449,10 @@
                                     </div>
                                 </div>
                                 </br>
+                                </br>
+
+                                <h3 style="text-align: left;"><b>For POEA Contract</b></h3>
+                                </br>
                                 <div class="row">
                                     <div class="col-md-3" style="margin-top: 10px; text-align: left;">
                                         MLC Shipowner
@@ -1469,6 +1486,42 @@
                                     </div>
                                     <div class="col-md-9">
                                         <input type="text" id="registered_shipowner_address" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Work Hours
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="work_hours" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        OT Per Hour
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="ot_per_hour" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        MAX OT PER HOUR
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="ot_hours" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        CBA AFFILIATION
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="cba_affiliation" class="form-control">
                                     </div>
                                 </div>
                                 </br>
@@ -1548,7 +1601,11 @@
                                         mlc_shipowner: $('#mlc_shipowner').val(),
                                         mlc_shipowner_address: $('#mlc_shipowner_address').val(),
                                         registered_shipowner: $('#registered_shipowner').val(),
-                                        registered_shipowner_address: $('#registered_shipowner_address').val()
+                                        registered_shipowner_address: $('#registered_shipowner_address').val(),
+                                        work_hours: $('#work_hours').val(),
+                                        ot_per_hour: $('#ot_per_hour').val(),
+                                        ot_hours: $('#ot_hours').val(),
+                                        cba_affiliation: $('#cba_affiliation').val()
                                     },
                                     success: result => {
                                         console.log("vessel add", result);
@@ -3083,37 +3140,10 @@
 
                     <div class="row">
                         <div class="col-md-5">
-                            <h4 style="text-align: right;">OT Rate</h4>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="number" id="otRate" value="5.07" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">
-                            <h4 style="text-align: right;">Required Hours</h4>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="number" id="hours" value="103" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">
                             <h4 style="text-align: right;">Point of Hire</h4>
                         </div>
                         <div class="col-md-7">
                             <input type="text" id="pointOfHire" value="MANILA, PHILIPPINES" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">
-                            <h4 style="text-align: right;">CBA if applicable</h4>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" id="cba" value="IBF JSU / AMOSUP-IMMAJ" class="form-control" />
                         </div>
                     </div>
 
@@ -3183,10 +3213,7 @@
                         data.id = id;
                         data.folder = "POEA\\";
                         data.employment_months  = $('#employment_months').val();
-                        data.otRate  = $('#otRate').val();
-                        data.hours  = $('#hours').val();
                         data.pointOfHire  = $('#pointOfHire').val();
-                        data.cba  = $('#cba').val();
                         data.stamp = $('#stamp').is(":checked") ? true : false;
 
                     window.location.href = `{{ route('applications.exportDocument') }}/${id}/${$('#format').val()}?` + $.param(data);

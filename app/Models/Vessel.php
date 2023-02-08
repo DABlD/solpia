@@ -15,7 +15,9 @@ class Vessel extends Model
     	'ecdis', 'status', 'manning_agent', 'imo', 'fleet', 'particulars',
         'owner', 'size',
         'former_agency', 'former_principal', 'mlc_shipowner', 'mlc_shipowner_address',
-        'registered_shipowner', 'registered_shipowner_address', 
+        'registered_shipowner', 'registered_shipowner_address',
+        'work_hours', 'ot_per_hour', 'ot_hours', 'cba_affiliation',
+        
     ];
 
     protected $dates = [
