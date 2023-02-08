@@ -1304,22 +1304,181 @@
                         swal({
                             title: 'Enter Vessel Details',
                             html: `
-                                <select id="principal_id" class="swal2-input">
-                                    <option></option>
-                                </select>
-                                <input type="text" id="manning_agent" class="swal2-input" placeholder="Enter Manning Agent">
-                                <input type="text" id="name" class="swal2-input" placeholder="Enter Vessel Name">
-                                <input type="number" id="imo" class="swal2-input" placeholder="Enter IMO">
-                                <input type="text" id="flag" class="swal2-input" placeholder="Enter Flag">
-                                <input type="text" id="type" class="swal2-input" placeholder="Enter Type of Vessel">
-                                <input type="text" id="year_build" class="swal2-input" placeholder="Enter Year Built">
-                                <input type="text" id="builder" class="swal2-input" placeholder="Enter Builder">
-                                <input type="text" id="engine" class="swal2-input" placeholder="Enter Engine">
-                                <input type="number" id="gross_tonnage" class="swal2-input" placeholder="Enter GRT">
-                                <input type="number" id="bhp" class="swal2-input" placeholder="Enter BHP">
-                                <input type="text" id="trade" class="swal2-input" placeholder="Enter Trade Route">
-                                <input type="text" id="ecdis" class="swal2-input" placeholder="Enter Trade ECDIS">
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Select Principal
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select id="principal_id" class="form-control">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Manning Agent
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="manning_agent" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Vessel Name
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="name" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter IMO
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" id="imo" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Flag
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="flag" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Type of Vessel
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="type" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Year Built
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="year_build" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Builder
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="builder" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Engine
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="engine" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter GRT
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" id="gross_tonnage" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter BHP
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" id="bhp" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Trade Route
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="trade" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Trade ECDIS
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="ecdis" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Former Agency
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="former_agency" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Former Principal
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="former_principal" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        MLC Shipowner
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="mlc_shipowner" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Address
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="mlc_shipowner_address" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Registered Shipowner
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="registered_shipowner" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Address
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="registered_shipowner_address" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
                             `,
+                            width: "50%",
                             preConfirm: () => {
                                 swal.showLoading();
                                 return new Promise(resolve => {
@@ -1373,36 +1532,28 @@
                             }
                         }).then(result => {
                             if(result.value){
-                                let principal_id = $('#principal_id').val();
-                                let manning_agent = $('#manning_agent').val();
-                                let name = $('#name').val();
-                                let imo = $('#imo').val();
-                                let flag = $('#flag').val();
-                                let type = $('#type').val();
-                                let year_build = $('#year_build').val();
-                                let builder = $('#builder').val();
-                                let engine = $('#engine').val();
-                                let gross_tonnage = $('#gross_tonnage').val();
-                                let bhp = $('#bhp').val();
-                                let trade = $('#trade').val();
-                                let ecdis = $('#ecdis').val();
-
                                 $.ajax({
                                     url: '{{ route('vessels.add') }}',
                                     data: {
-                                        principal_id: principal_id,
-                                        manning_agent: manning_agent,
-                                        name: name,
-                                        imo: imo,
-                                        flag: flag,
-                                        type: type,
-                                        year_build: year_build,
-                                        builder: builder,
-                                        engine: engine,
-                                        gross_tonnage: gross_tonnage,
-                                        bhp: bhp,
-                                        trade: trade,
-                                        ecdis: ecdis
+                                        principal_id: $('#principal_id').val(),
+                                        manning_agent: $('#manning_agent').val(),
+                                        name: $('#name').val(),
+                                        imo: $('#imo').val(),
+                                        flag: $('#flag').val(),
+                                        type: $('#type').val(),
+                                        year_build: $('#year_build').val(),
+                                        builder: $('#builder').val(),
+                                        engine: $('#engine').val(),
+                                        gross_tonnage: $('#gross_tonnage').val(),
+                                        bhp: $('#bhp').val(),
+                                        trade: $('#trade').val(),
+                                        ecdis: $('#ecdis').val(),
+                                        former_agency: $('#former_agency').val(),
+                                        former_principal: $('#former_principal').val(),
+                                        mlc_shipowner: $('#mlc_shipowner').val(),
+                                        mlc_shipowner_address: $('#mlc_shipowner_address').val(),
+                                        registered_shipowner: $('#registered_shipowner').val(),
+                                        registered_shipowner_address: $('#registered_shipowner_address').val()
                                     },
                                     success: result => {
                                         console.log("vessel add", result);

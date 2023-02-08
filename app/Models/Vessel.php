@@ -13,7 +13,9 @@ class Vessel extends Model
     	'principal_id', 'name', 'flag', 'type', 'year_build',
     	'builder', 'engine', 'gross_tonnage', 'BHP', 'trade',
     	'ecdis', 'status', 'manning_agent', 'imo', 'fleet', 'particulars',
-        'owner', 'size'
+        'owner', 'size',
+        'former_agency', 'former_principal', 'mlc_shipowner', 'mlc_shipowner_address',
+        'registered_shipowner', 'registered_shipowner_address', 
     ];
 
     protected $dates = [
