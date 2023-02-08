@@ -211,8 +211,7 @@
             let names = [
                 "IMO",
                 "Size",
-                "Vessel Name", 
-                "Principal", 
+                "Vessel Name",
                 "Flag", 
                 "Type", 
                 "Manning Agent", 
@@ -235,7 +234,6 @@
                 'imo',
                 'size',
                 'name', 
-                'principal.name', 
                 'flag', 
                 "type", 
                 "manning_agent", 
