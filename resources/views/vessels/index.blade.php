@@ -224,6 +224,12 @@
                 "BHP", 
                 "Trade", 
                 "ECDIS", 
+                'Former Agency',
+                'Former Principal',
+                'MLC Shipowner',
+                'Address',
+                'Registered Shipowner',
+                'Address'
             ];
 
             let columns = [
@@ -241,7 +247,13 @@
                 "gross_tonnage", 
                 "BHP", 
                 "trade", 
-                "ecdis", 
+                "ecdis",
+                'former_agency',
+                'former_principal',
+                'mlc_shipowner',
+                'mlc_shipowner_address',
+                'registered_shipowner_address',
+                'registered_shipowner',
             ];
 
             $.each(Object.keys(vessel), (index, key) => {
@@ -336,7 +348,13 @@
                                 gross_tonnage: $('#vd-gross_tonnage').val(),
                                 BHP: $('#vd-BHP').val(),
                                 trade: $('#vd-trade').val(),
-                                ecdis: $('#vd-ecdis').val()
+                                ecdis: $('#vd-ecdis').val(),
+                                former_agency: $('#former_agency').val(),
+                                former_principal: $('#former_principal').val(),
+                                mlc_shipowner: $('#mlc_shipowner').val(),
+                                mlc_shipowner_address: $('#mlc_shipowner_address').val(),
+                                registered_shipowner_address: $('#registered_shipowner_address').val(),
+                                registered_shipowner: $('#registered_shipowner').val(),
                             },
                             success: () => {
                                 swal({
