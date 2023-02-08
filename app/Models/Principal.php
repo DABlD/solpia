@@ -10,7 +10,8 @@ class Principal extends Model
 	use PrincipalAttribute;
 
     protected $fillable = [
-    	'user_id', 'name', 'slug', 'fleet'
+    	'user_id', 'name', 'slug', 'fleet',
+    	'full_name', 'address'
     ];
 
     protected $dates = [

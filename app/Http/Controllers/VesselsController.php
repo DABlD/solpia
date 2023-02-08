@@ -136,7 +136,17 @@ class VesselsController extends Controller
             'trade' => $req->trade,
             'ecdis' => $req->ecdis,
             'status' => 'ACTIVE',
-            'fleet' => auth()->user()->fleet
+            'fleet' => auth()->user()->fleet,
+            'former_agency' => $req->former_agency,
+            'former_principal' => $req->former_principal,
+            'mlc_shipowner' => $req->mlc_shipowner,
+            'mlc_shipowner_address' => $req->mlc_shipowner_address,
+            'registered_shipowner_address' => $req->registered_shipowner_address,
+            'registered_shipowner' => $req->registered_shipowner,
+            'work_hours' => $req->work_hours,
+            'ot_per_hour' => $req->ot_per_hour,
+            'ot_hours' => $req->ot_hours,
+            'cba_affiliation' => $req->cba_affiliation,
         ]);
     }
 

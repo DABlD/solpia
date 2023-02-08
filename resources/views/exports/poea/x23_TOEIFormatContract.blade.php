@@ -97,14 +97,36 @@
 	</tr>
 
 	<tr>
-		<td colspan="4">Name of Principal/Shipowner:</td>
+		<td colspan="4">Name of Principal:</td>
 		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->principal->full_name }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="4">Address of Principal/Shipowner:</td>
+		<td colspan="4">Address:</td>
 		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->principal->address }}</td>
 	</tr>
+
+	<tr>
+		<td colspan="4">Name of MLC Shipowner:</td>
+		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->mlc_shipowner }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="4">Address:</td>
+		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->mlc_shipowner_address }}</td>
+	</tr>
+
+	@if($data->pro_app->vessel->registered_shipowner)
+		<tr>
+			<td colspan="4">Name of Registered Shipowner:</td>
+			<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->registered_shipowner }}</td>
+		</tr>
+
+		<tr>
+			<td colspan="4">Address:</td>
+			<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->registered_shipowner_address }}</td>
+		</tr>
+	@endif
 
 	<tr>
 		<td colspan="4"></td>

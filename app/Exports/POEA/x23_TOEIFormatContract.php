@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 use App\Models\{Wage, ProcessedApplicant};
 
-class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type, $req){
         $data->req = $req;
@@ -271,12 +271,14 @@ class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, Sh
             ]
         ];
 
+        $data = $this->data;
+
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $data) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('POEA FORMAT', false);
+                $event->sheet->getDelegate()->setTitle('TOEI FORMAT', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -315,6 +317,10 @@ class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, Sh
                 // FONT SIZES
 
                 // HEADINGS
+                $plus = 2;
+                if($data->pro_app->vessel->registered_shipowner){
+                    $plus += 2;
+                }
 
                 // HC B
                 $h[0] = [
@@ -357,7 +363,7 @@ class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, Sh
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B13', 'E20', 'F35', 'F36', 'A53'
+                    'B13', 'E20', 'F' . (35 + $plus), 'F' . (36 + $plus), 'A' . (53 + $plus)
                 ];
 
                 foreach($h as $key => $value) {
@@ -457,21 +463,28 @@ class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, Sh
                     'E18:L18',
                     'E19:L19',
                     'E20:L20',
-                    'D23:L23',
-                    'C24:D24', 'H24:I24', 'L24',
-                    'C25:D25', 'G25', 'K25:L25',
-                    'F29:L29',
-                    'F30:L30',
-                    'F31:G31', 'J31:L31',
-                    'F32:G32', 'J32:L32',
-                    'F33:G33', 'J33:L33',
-                    'F34:G34', 'J34:L34',
-                    'F35:G35', 'J35:L35',
-                    'F36:G36', 'J36:L36',
-                    'I49', 'K49:L49',
-                    'A53:D53', 'I53:L53',
-                    'A55:D55', 'I55:L55',
+                    'E21:L21',
+                    'E22:L22',
+                    'D' . (23 + $plus) . ':L' . (23 + $plus),
+                    'C' . (24 + $plus) . ':D' . (24 + $plus), 'H' . (24 + $plus) . ':I' . (24 + $plus), 'L' . (24 + $plus),
+                    'C' . (25 + $plus) . ':D' . (25 + $plus), 'G' . (25 + $plus), 'K' . (25 + $plus) . ':L' . (25 + $plus),
+                    'F' . (29 + $plus) . ':L' . (29 + $plus),
+                    'F' . (30 + $plus) . ':L' . (30 + $plus),
+                    'F' . (31 + $plus) . ':G' . (31 + $plus), 'J' . (31 + $plus) . ':L' . (31 + $plus),
+                    'F' . (32 + $plus) . ':G' . (32 + $plus), 'J' . (32 + $plus) . ':L' . (32 + $plus),
+                    'F' . (33 + $plus) . ':G' . (33 + $plus), 'J' . (33 + $plus) . ':L' . (33 + $plus),
+                    'F' . (34 + $plus) . ':G' . (34 + $plus), 'J' . (34 + $plus) . ':L' . (34 + $plus),
+                    'F' . (35 + $plus) . ':G' . (35 + $plus), 'J' . (35 + $plus) . ':L' . (35 + $plus),
+                    'F' . (36 + $plus) . ':G' . (36 + $plus), 'J' . (36 + $plus) . ':L' . (36 + $plus),
+                    'I' . (49 + $plus), 'K' . (49 + $plus) . ':L' . (49 + $plus),
+                    'A' . (53 + $plus) . ':D' . (53 + $plus), 'I' . (53 + $plus) . ':L' . (53 + $plus),
+                    'A' . (55 + $plus) . ':D' . (55 + $plus), 'I' . (55 + $plus) . ':L' . (55 + $plus),
                 ]);
+
+
+                if($data->pro_app->vessel->registered_shipowner){
+                    $cells[12] = array_merge($cells[12], ['E23:L23', 'E24:L24']);
+                }
 
                 // LBT
                 $cells[13] = array_merge([
@@ -523,7 +536,7 @@ class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, Sh
     }
 
     public function drawings()
-    {
+    {   
         if($this->data->req['stamp'] == "true"){
             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
             $drawing->setName('POEA STAMP');
@@ -533,7 +546,7 @@ class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, Sh
             $drawing->setWidth(270);
             $drawing->setOffsetX(10);
             $drawing->setOffsetY(10);
-            $drawing->setCoordinates('E50');
+            $drawing->setCoordinates('E' . (50 + ($this->data->pro_app->vessel->registered_shipowner ? 4 : 2)));
 
             return [$drawing];
         }
