@@ -210,7 +210,6 @@
 
             let names = [
                 "IMO",
-                "Owner",
                 "Size",
                 "Vessel Name", 
                 "Principal", 
@@ -234,7 +233,6 @@
 
             let columns = [
                 'imo',
-                'owner',
                 'size',
                 'name', 
                 'principal.name', 
@@ -336,7 +334,6 @@
                             data: {
                                 id: vessel.id,
                                 imo: $('#vd-imo').val(),
-                                owner: $('#vd-owner').val(),
                                 size: $('#vd-size').val(),
                                 name: $('#vd-name').val(),
                                 flag: $('#vd-flag').val(),
