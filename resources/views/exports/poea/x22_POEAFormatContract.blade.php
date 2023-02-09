@@ -135,7 +135,7 @@
 		<td colspan="2" style="{{ $c }}">Type of Vessel:</td>
 		<td style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->type }}</td>
 		<td colspan="3" style="{{ $c }}">Classification Society:</td>
-		<td colspan="2" style="{{ $bc }} {{ $i }}">N.K.</td>
+		<td colspan="2" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->classification }}</td>
 	</tr>
 
 	<tr>
@@ -269,7 +269,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎ 2023 at Manila Philippines.</td>
+		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎ {{ now()->format('Y') }} at Manila Philippines.</td>
 	</tr>
 
 	<tr><td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎</td></tr>

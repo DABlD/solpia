@@ -147,6 +147,7 @@ class VesselsController extends Controller
             'ot_per_hour' => $req->ot_per_hour,
             'ot_hours' => $req->ot_hours,
             'cba_affiliation' => $req->cba_affiliation,
+            'classification' => $req->classification,
         ]);
     }
 

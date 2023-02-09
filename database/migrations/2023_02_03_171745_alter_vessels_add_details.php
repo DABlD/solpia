@@ -26,6 +26,7 @@ class AlterVesselsAddDetails extends Migration
             $table->float("ot_per_hour", 5, 2)->after('work_hours')->nullable();
             $table->unsignedInteger('ot_hours')->after('ot_per_hour')->nullable();
             $table->string('cba_affiliation', 100)->after('ot_hours')->nullable();
+            $table->string('classification', 20)->after('cba_affiliation')->nullable();
         });
     }
 
@@ -49,6 +50,7 @@ class AlterVesselsAddDetails extends Migration
             $table->dropColumn('ot_per_hour');
             $table->dropColumn('ot_hours');
             $table->dropColumn('cba_affiliation');
+            $table->dropColumn('classification');
         });
     }
 }

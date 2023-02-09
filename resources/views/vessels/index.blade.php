@@ -231,7 +231,8 @@
                 'Work Hours',
                 'OT PER HOUR',
                 'MAX OT HOURS',
-                'CBA AFFILIATION'
+                'CBA AFFILIATION',
+                'Classification Society'
             ];
 
             let columns = [
@@ -257,7 +258,8 @@
                 'work_hours',
                 'ot_per_hour',
                 'ot_hours',
-                'cba_affiliation'
+                'cba_affiliation',
+                'classification'
             ];
 
             console.log(vessel);
@@ -363,6 +365,7 @@
                                 ot_per_hour: $('#vd-ot_per_hour').val(),
                                 ot_hours: $('#vd-ot_hours').val(),
                                 cba_affiliation: $('#vd-cba_affiliation').val(),
+                                classification: $('#vd-classification').val()
                             },
                             success: () => {
                                 swal({
@@ -1525,6 +1528,15 @@
                                     </div>
                                 </div>
                                 </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Classification Society
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="classifications" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
                             `,
                             width: "50%",
                             preConfirm: () => {
@@ -1605,7 +1617,8 @@
                                         work_hours: $('#work_hours').val(),
                                         ot_per_hour: $('#ot_per_hour').val(),
                                         ot_hours: $('#ot_hours').val(),
-                                        cba_affiliation: $('#cba_affiliation').val()
+                                        cba_affiliation: $('#cba_affiliation').val(),
+                                        classification: $('#classification').val()
                                     },
                                     success: result => {
                                         console.log("vessel add", result);
@@ -3130,10 +3143,15 @@
                         </div>
                         <div class="col-md-7">
                             <select id="format" class="swal2-input">
-                                <option></option>    
-                                <option value="x22_POEAFormatContract">POEA</option>
-                                <option value="x23_TOEIFormatContract">TOEI</option>
-                                <option value="x24_CADETFormatContract">CADET</option>
+                                <option value="">Select Format</option>
+                                <optgroup label="FOR TOEI" style="font-weight: bolder;"></optgroup>
+                                    <option value="x22_POEAFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎POEA</option>
+                                    <option value="x23_TOEIFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎TOEI</option>
+                                    <option value="x24_CADETFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎CADET</option>
+                                <optgroup label="FOR SOLPIA" style="font-weight: bolder;"></optgroup>
+                                    <option value="x22_POEAFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎POEA</option>
+                                    <option value="x23_TOEIFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎TOEI</option>
+                                    <option value="x24_CADETFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎CADET</option>
                             </select>
                         </div>
                     </div>
