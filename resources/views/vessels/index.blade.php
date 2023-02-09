@@ -3302,9 +3302,9 @@
                     RTP : 'Request to Process (Lined-Up Crew)',
                     RTP2 : 'Request to Process (Onboard Crew)',
                     RFSC: 'Shoe and Coverall Request',
+                    X25_MLCLinedUp: 'Lined-Up Crew MLC',
                     X16_MLCOnboard: 'Onboard Crew MLC'
                 },
-                showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
                 width: '300px',
                 onOpen: () => {
@@ -4234,6 +4234,57 @@
             window.location.href = `{{ route('applications.exportDocument') }}/1/X16_MLCOnboard?` + $.param(data);
         }
 
+        function X25_MLCLinedUp(vid, name){
+            swal({
+                title: "Enter Details",
+                html: `
+                    <div class="row">
+                        <div class="col-md-3" style="text-align: left;">
+                            <h5><strong>Joining Date</strong></h5>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="joining_date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3" style="text-align: left;">
+                            <h5><strong>Months</strong></h5>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" min="1" id="months" class="form-control">
+                        </div>
+                    </div>
+                `,
+                onOpen: () => {
+                    $('#joining_date').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    })
+                },
+                preConfirm: () => {
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            if($('#joining_date') == "" || $('#months') == ""){
+                                swal.showValidationError('Please fill all fields');
+                            }
+                        resolve()}, 500);
+                    });
+                }
+            }).then(result => {
+                if(result.value){
+                    let data = {
+                        vid: vid,
+                        joining_date: $('#joining_date').val(),
+                        months: $('#months').val(),
+                        filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + " - Lined-Up Crew MLC"
+                    };
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/X25_MLCLinedUp?` + $.param(data);
+                }
+            })
+        }
+
         function extendContract(id, vid){
             swal({
                 title: 'Months to Extend',
@@ -4282,7 +4333,6 @@
                 inputOptions: {
                     principalsOnboardCrew : 'Principal\'s Onboard Crew',
                     x19_LineUpCrewPerVessel: 'Line-up Crew per Vessel'
-
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',

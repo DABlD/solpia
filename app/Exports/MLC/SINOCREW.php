@@ -252,10 +252,11 @@ class SINOCREW implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         return [
             AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+                $type = str_replace('/', '', $this->type);
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('MLC', false);
+                $event->sheet->getDelegate()->setTitle($type ?? 'SINOCREW MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
