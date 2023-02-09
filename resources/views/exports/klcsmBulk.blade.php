@@ -164,7 +164,10 @@
 		$off = $checkDate2($ss->sign_off, 'I');
 		$manning = str_replace('&', '&#38;', $ss->manning_agent);
 		$crew = str_replace('&', '&#38;', $ss->crew_nationality);
-		$engine = str_replace('&', '&#38;', $ss->engine_type);
+		$vessel_name = str_replace('&', '&#38;', $ss->vessel_name);
+		$bhp = str_replace('&', '&#38;', $ss->bhp);
+		$remarks = str_replace('&', '&#38;', $ss->remarks);
+		$manning_agent = str_replace('&', '&#38;', $ss->manning_agent);
 
 		// SKIP FILLER SS
 		$diff = 0;
@@ -176,16 +179,16 @@
 
 		echo "
 			<td>$rank</td>
-			<td colspan='2'>$ss->vessel_name</td>
+			<td colspan='2'>$vessel_name</td>
 			<td>$ss->vessel_type</td>
 			<td>$ss->gross_tonnage</td>
 			<td>
-				$ss->bhp_kw
+				$bhp
 			</td>
 			<td>$on</td>
 			<td>$off</td>
 			<td>$diff D</td>
-			<td colspan='2' style='font-size: 6px;'>$ss->remarks / AGENCY: $ss->manning_agent / COMBINED CREW: $crew</td>
+			<td colspan='2' style='font-size: 6px;'>$remarks / AGENCY: $manning_agent / COMBINED CREW: $crew</td>
 		";
 	};
 
