@@ -3130,10 +3130,15 @@
                         </div>
                         <div class="col-md-7">
                             <select id="format" class="swal2-input">
-                                <option></option>    
-                                <option value="x22_POEAFormatContract">POEA</option>
-                                <option value="x23_TOEIFormatContract">TOEI</option>
-                                <option value="x24_CADETFormatContract">CADET</option>
+                                <option value="">Select Format</option>
+                                <optgroup label="FOR TOEI" style="font-weight: bolder;"></optgroup>
+                                    <option value="x22_POEAFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎POEA</option>
+                                    <option value="x23_TOEIFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎TOEI</option>
+                                    <option value="x24_CADETFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎CADET</option>
+                                <optgroup label="FOR SOLPIA" style="font-weight: bolder;"></optgroup>
+                                    <option value="x22_POEAFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎POEA</option>
+                                    <option value="x23_TOEIFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎TOEI</option>
+                                    <option value="x24_CADETFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎CADET</option>
                             </select>
                         </div>
                     </div>
