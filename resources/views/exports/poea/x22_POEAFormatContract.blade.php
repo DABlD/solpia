@@ -269,7 +269,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎ 2023 at Manila Philippines.</td>
+		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎ {{ now()->format('Y') }} at Manila Philippines.</td>
 	</tr>
 
 	<tr><td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎</td></tr>
