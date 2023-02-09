@@ -38,7 +38,7 @@
     </div>
     <div class="form-group col-md-2">
         <label for="mname">Middle Name</label>
-        <input type="text" class="form-control aeigh" name="mname" placeholder="Enter Middle Name">
+        <input type="text" class="form-control" name="mname" placeholder="Enter Middle Name">
         <span class="invalid-feedback hidden" role="alert">
             <strong id="mnameError"></strong>
         </span>
