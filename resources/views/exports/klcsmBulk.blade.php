@@ -164,6 +164,7 @@
 		$off = $checkDate2($ss->sign_off, 'I');
 		$manning = str_replace('&', '&#38;', $ss->manning_agent);
 		$crew = str_replace('&', '&#38;', $ss->crew_nationality);
+		$engine = str_replace('&', '&#38;', $ss->engine_type);
 
 		// SKIP FILLER SS
 		$diff = 0;
@@ -178,7 +179,9 @@
 			<td colspan='2'>$ss->vessel_name</td>
 			<td>$ss->vessel_type</td>
 			<td>$ss->gross_tonnage</td>
-			<td>$ss->bhp_kw</td>
+			<td>
+				$ss->bhp_kw
+			</td>
 			<td>$on</td>
 			<td>$off</td>
 			<td>$diff D</td>
@@ -539,6 +542,19 @@
 	@endphp
 	<tr>
 		<td colspan="4">PASSPORT NO.</td>
+		<td colspan="3">{{ $docu ? $docu->number : "-----"}}</td>
+		<td colspan="2">ISSUED ON:</td>
+		<td colspan="2">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+		<td>VALIDITY:</td>
+		<td colspan="3">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+	</tr>
+
+	@php 
+		$name = "US-VISA";
+		$docu = isset($data->document_id->{$name}) ? $data->document_id->{$name} : false;
+	@endphp
+	<tr>
+		<td colspan="4">US-VISA NO.</td>
 		<td colspan="3">{{ $docu ? $docu->number : "-----"}}</td>
 		<td colspan="2">ISSUED ON:</td>
 		<td colspan="2">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
