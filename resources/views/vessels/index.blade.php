@@ -3303,7 +3303,9 @@
                     RTP2 : 'Request to Process (Onboard Crew)',
                     RFSC: 'Shoe and Coverall Request',
                     X25_MLCLinedUp: 'Lined-Up Crew MLC',
-                    X16_MLCOnboard: 'Onboard Crew MLC'
+                    X16_MLCOnboard: 'Onboard Crew MLC',
+                    X26_POEALinedUp: 'Lined-Up Crew POEA Contract',
+                    X27_POEAOnBoard: 'Onboard Crew POEA Contract'
                 },
                 cancelButtonColor: '#f76c6b',
                 width: '300px',
@@ -4283,6 +4285,89 @@
                     window.location.href = `{{ route('applications.exportDocument') }}/1/X25_MLCLinedUp?` + $.param(data);
                 }
             })
+        }
+
+        function X26_POEALinedUp(vid, name){
+            let data = {};
+            swal({
+                title: 'Fill all details',
+                html: `
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Months of employment</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" id="employment_months" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5" style="margin-top: 10px;">
+                            <h4 style="text-align: right;">Select Format</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <select id="format" class="swal2-input">
+                                <option value="">Select Format</option>
+                                <optgroup label="FOR TOEI" style="font-weight: bolder;"></optgroup>
+                                    <option value="x22_POEAFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎POEA</option>
+                                    <option value="x23_TOEIFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎TOEI</option>
+                                    <option value="x24_CADETFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎CADET</option>
+                                <optgroup label="FOR SOLPIA" style="font-weight: bolder;"></optgroup>
+                                    <option value="x22_POEAFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎POEA</option>
+                                    <option value="x23_TOEIFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎TOEI</option>
+                                    <option value="x24_CADETFormatContract"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎CADET</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Point of Hire</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="pointOfHire" value="MANILA, PHILIPPINES" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">With Stamp</h4>
+                        </div>
+                        <div class="col-md-7" style="text-align: left; margin-top: 10px;">
+                            <input type="checkbox" id="stamp" checked>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '500px',
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let a = $('#employment_months').val();
+                            let b = $('#format').val();
+
+                            if(a == "" || b == ""){
+                                swal.showValidationError('Please fill all fields');
+                            }
+                        resolve()}, 800);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    let data = {};
+                        data.vid = vid;
+                        data.folder = "POEA\\";
+                        data.employment_months  = $('#employment_months').val();
+                        data.pointOfHire  = $('#pointOfHire').val();
+                        data.stamp = $('#stamp').is(":checked") ? true : false;
+                        data.format = $('#format').val();
+                        data.filename = name.replace(/[^\w\s]/gi, '') + " Lined-Up Crew POEA Contracts " + moment().format("YYYY-MM-DD");
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/X26_POEALinedUp?` + $.param(data);
+                }
+            });
         }
 
         function extendContract(id, vid){
