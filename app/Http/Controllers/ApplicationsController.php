@@ -662,7 +662,9 @@ class ApplicationsController extends Controller
                     'principal' => null,
                     'trade' => null,
                     'flag' => null,
-                    'owner' => null
+                    'owner' => null,
+                    'crew_nationality' => null,
+                    'bhp' => null
                 ]);
             }
         }

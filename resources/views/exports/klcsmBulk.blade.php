@@ -70,7 +70,7 @@
 		}
 	}
 
-	$rank_category = $data->rank->category;
+	$rank_category = $data->rank ? $data->rank->category : null;
 	$total = 0;
 
 	$getDocument = function($docu, $type, $name1 = null, $name2 = null) use ($data, $checkDate2, $rank) {
@@ -265,7 +265,7 @@
 			D
 		</td>
 		<td colspan="3">Rank</td>
-		<td colspan="4">{{ $data->rank->name }}</td>
+		<td colspan="4">{{ $data->rank ? $data->rank->name : "" }}</td>
 		<td>VESSEL</td>
 		<td colspan="4">{{ $data->vessel->name ?? '-' }}</td>
 		<td colspan="2">PICTURE</td>
