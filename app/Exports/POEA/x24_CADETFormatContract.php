@@ -14,9 +14,8 @@ use App\Models\{Wage, ProcessedApplicant};
 
 class x24_CADETFormatContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $type, $req){
+    public function __construct($data, $type, $req, $title = "CADET FORMAT"){
         $data->req = $req;
-
 
         $data->load('pro_app');
         $data->load('document_id');
@@ -52,6 +51,7 @@ class x24_CADETFormatContract implements FromView, WithEvents, WithDrawings//, S
 
         $this->data     = $data;
         $this->type     = $type;
+        $this->title    = $title;
     }
 
     public function view(): View
@@ -277,7 +277,7 @@ class x24_CADETFormatContract implements FromView, WithEvents, WithDrawings//, S
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('CADET FORMAT', false);
+                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->title), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
