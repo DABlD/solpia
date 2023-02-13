@@ -345,7 +345,7 @@
 
 	<tr>
 		<td colspan="9">
-			Any facts which are not defined in this agreement, Korean seafarers shall be applied [Regulations for employment], Foreign seafarers shall be applied [IBF CA(BBCHP)]
+			Any facts which are not defined in this agreement, Korean seafarers shall be applied [Regulations for employment], Foreign seafarers shall be applied [IBF FKSU CA(BBCHP)]
 			<br style="mso-data-placement:same-cell;" />
 			※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and
 			entitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships.
