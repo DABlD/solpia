@@ -382,14 +382,14 @@
 		$docu = false;
 
 		foreach($applicant->document_flag as $document){
-		    if($document->country == "Panama" && $document->type == $temp){
+		    if($document->country == "Marshall Islands" && $document->type == $temp){
 		        $docu = $document;
 		    }
 		}
 	@endphp
 
 	<tr>
-		<td colspan="4">PANAMA BOOKLET</td>
+		<td colspan="4">MARSHALL BOOKLET</td>
 		<td colspan="4">{{ $docu->number ?? '---' }}</td>
 		<td colspan="3">ISSUED ON:</td>
 		<td colspan="4">{{ $docu ? $checkDate2($docu->issue_date, 'I') : 'N/A' }}</td>
@@ -544,7 +544,7 @@
 				$docu = false;
 
 				foreach($applicant->document_flag as $document){
-					if($document->country == "Panama" && $document->type == $temp){
+					if($document->country == "Marshall Islands" && $document->type == $temp){
 						$docu = $document;
 					}
 				}
@@ -553,7 +553,7 @@
 	@endphp
 
 	<tr>
-		<td colspan="5">License (PANAMA Flag Requirement)</td>
+		<td colspan="5">License (MARSHALL Flag Requirement)</td>
 		<td colspan="2">{{ $docu ? $docu->number : 'N/A' }}</td>
 		<td colspan="3">{{ $docu ? $checkDate2($docu->issue_date, 'I') : 'N/A' }}</td>
 		<td colspan="3">OFFICERS</td>
