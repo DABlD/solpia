@@ -110,28 +110,28 @@
 		<td rowspan="2">
 			Name of seafarer
 		</td>
-		<td rowspan="2" colspan="3" style="{{ $c }} height: 20px;">
+		<td rowspan="2" colspan="3" style="{{ $c }} {{ $blue }} height: 20px;">
 			{{ $data->user->namefull }}
 		</td>
 		<td>Date of birth</td>
-		<td>{{ $data->user->birthday ? $data->user->birthday->format("d-M-y") : "---" }}</td>
+		<td style="{{ $blue }}">{{ $data->user->birthday ? $data->user->birthday->format("d-M-y") : "---" }}</td>
 	</tr>
 
 	<tr>
 		<td style="height: 20px;">Age</td>
-		<td>{{ $data->user->birthday ? $data->user->birthday->age : "---" }}</td>
+		<td style=" {{ $blue }}">{{ $data->user->birthday ? $data->user->birthday->age : "---" }}</td>
 	</tr>
 
 	<tr>
 		<td rowspan="2">Sex</td>
-		<td rowspan="2" colspan="3">Male</td>
+		<td rowspan="2" colspan="3" style=" {{ $blue }}">MALE</td>
 		<td style="height: 20px;">Birth Place</td>
-		<td style="{{ $c }} height: 20px;">{{ $data->birth_place }}</td>
+		<td style="{{ $c }} {{ $blue }} height: 20px;">{{ $data->birth_place }}</td>
 	</tr>
 
 	<tr>
 		<td style="height: 20px;">Nationality</td>
-		<td>Filipino</td>
+		<td style=" {{ $blue }}">FILIPINO</td>
 	</tr>
 
 	<tr>
@@ -140,7 +140,7 @@
 			<br style='mso-data-placement:same-cell;' />
 			(in home country)
 		</td>
-		<td colspan="4" style="{{ $c }}">
+		<td colspan="4" style="{{ $c }} {{ $blue }}">
 			{{ $data->user->address }}
 		</td>
 	</tr>
@@ -151,7 +151,13 @@
 
 	{{ $fill() }}
 
-	{{ $d1("1.1 from (" . $start->format('d-M-y') . ") to " . "(" . $start->add($data->employment_months, 'months')->format('d-M-y') . ")") }}
+	<tr>
+		<td colspan="2">1.1 from</td>
+		<td style="{{ $c }} {{ $blue }}">({{ $start->format('dMY') }})</td>
+		<td style="{{ $c }}">to</td>
+		<td colspan="2" style="{{ $c }} {{ $blue }}">({{ $start->add($data->employment_months, 'months')->format('dMY') }})</td>
+		<td colspan="2"></td>
+	</tr>
 	{{ $d1("1.2 the port of sailing ($data->port) to the port of destination ( NOT FIXED )") }}
 
 	{{ $fill() }}
@@ -171,8 +177,12 @@
 	{{ $fill() }}
 
 	<tr>
-		<td colspan="7">3.1 Vessel of Employment</td>
-		<td style="{{ $blue }}">{{ $data->vessel->name }}</td>
+		@if(str_contains($data->vessel->type, "BUL"))
+			<td colspan="8">3.1 Vessel of Employment</td>
+		@else
+			<td colspan="7">3.1 Vessel of Employment</td>
+			<td style="{{ $blue }}">{{ $data->vessel->name }}</td>
+		@endif
 	</tr>
 
 	{{ $fill() }}
@@ -180,7 +190,7 @@
 	<tr>
 		<td></td>
 		<td colspan="2">Official No.</td>
-		<td colspan="2" style="{{ $c }}">{{ $data->vessel->imo }}</td>
+		<td colspan="2" style="{{ $c }} {{ $blue }}">{{ $data->vessel->imo }}</td>
 		<td colspan="2">Flag</td>
 		<td style="{{ $c }} {{ $blue }}">{{ $data->vessel->flag }}</td>
 	</tr>
@@ -188,14 +198,17 @@
 	<tr>
 		<td></td>
 		<td colspan="2">Gross Tonnage</td>
-		<td colspan="2" style="{{ $c }}">{{ $data->vessel->gross_tonnage }}</td>
+		<td colspan="2" style="{{ $c }} {{ $blue }}">{{ $data->vessel->gross_tonnage }}</td>
 		<td colspan="2">Year built (Keel Laying)</td>
 		<td style="{{ $c }} {{ $blue }}">{{ $data->vessel->year_build }}</td>
 	</tr>
 
 	{{ $fill() }}
 
-	{{ $d1("3.2 Rank: " . $data->pro_app->rank->abbr) }}
+	<tr>
+		<td colspan="2">3.2 Rank:</td>
+		<td colspan="6" style="{{ $blue }}">{{ $data->pro_app->rank->abbr }}</td>
+	</tr>
 
 	{{ $fill() }}
 
@@ -272,14 +285,17 @@
 		$ot = number_format(ceil($basic / 173 * 103 * 1.25), 2);
 		$lp = number_format(ceil($basic * 9 / 30), 2);
 		$sa = number_format(ceil($wage->sup_allow ?? 0), 2);
-		$ccb = number_format(ceil(0), 2);
+		$so = ceil($wage->sub_allow ?? 0 + $wage->owner_allow ?? 0);
+		$ccb = number_format(str_contains($data->vessel->type, "BUL") ? 80 : 0, 2);
 
-		$total = number_format($basic + $ot + $lp + $sa + $ccb, 2);
+		$total = number_format($basic + $ot + $lp + $sa + $ccb + $so, 2);
+		$so = number_format($so, 2);
 	@endphp
 
 	{{ $d2("1) Basic wage : " . $basic . " (USD)") }}
 	{{ $d2("2) Guaranteed Overtime Allowance") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎O/T : " . $ot . "(USD) * Calculation method : Basic wage / 173HRS X 103hrs x 1.25") }}
+	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎&#9312; O/T : " . $ot . "(USD) * Calculation method : Basic wage / 173HRS X 103hrs x 1.25") }}
+	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎&#9313; Other Allowance (Subsistence Allowance + Owners Allowance): " . $so . " (USD)") }}
 	{{ $d2("3) Leave pay : " . $lp . "(USD) * Calculation method : Basic wage x 9days / 30days") }}
 	{{ $d2("4) F/S/A (Fixed Supervision Allowance) if applicable : " . $sa . " (USD)") }}
 	{{ $d2("5) C/B(Contract completion Bonus) : " . $ccb . " (USD)") }}
@@ -394,10 +410,16 @@
 	{{ $d2("If the seafarer found that, the fact should be noticed to the shipowner immediately.") }}
 
 	{{ $fill() }}
-	{{ $d1("13. The place of conclude contract:", true) }}
+	<tr>
+		<td colspan="4" style="{{ $b }}">13. The place of conclude contract:</td>
+		<td colspan="4" style="{{ $blue }}">{{ $data->port }}</td>
+	</tr>
 
 	{{ $fill() }}
-	{{ $d1("14. The time of conclude contract (dd/mm/yy): DD / MMM / YYYY", true) }}
+	<tr>
+		<td colspan="5" style="{{ $b }}">The time of conclude contract (dd/mm/yy): </td>
+		<td colspan="3" style="{{ $blue }}">{{ now()->format('d/M/Y') }}</td>
+	</tr>
 
 	{{ $fill() }}
 	<tr>
@@ -419,16 +441,25 @@
 	{{ $fill() }}
 	<tr>
 		<td colspan="5" style="text-align: right;">or Agent on behalf of shipowner ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ :  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎</td>
-		<td colspan="3" style="text-align: right;">(signature or seal)</td>
+		<td colspan="2" style="{{ $c }} {{ $blue }}">MS. JEANNETTE T. SOLIDUM</td>
+		<td style="text-align: right;">(signature or seal)</td>
+	</tr>
+	<tr>
+		<td colspan="5"></td>
+		<td colspan="2" style="{{ $blue }} {{ $c }}">CREWING MANAGER</td>
+		<td></td>
 	</tr>
 
-	{{ $fill() }}
 	<tr>
 		<td colspan="5" style="text-align: right;">Seafarer  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎:  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎</td>
-		<td colspan="3" style="text-align: right;">(signature or seal)</td>
+		<td colspan="2" rowspan="2" style="{{ $c }} {{ $blue }}">{{ $data->user->namefull }}</td>
+		<td style="text-align: right;">(signature or seal)</td>
+	</tr>
+	<tr>
+		<td colspan="5"></td>
+		<td></td>
 	</tr>
 
-	{{ $fill() }}
 	<tr>
 		<td colspan="4">Distribution of Employment Contract</td>
 		<td colspan="4"></td>
