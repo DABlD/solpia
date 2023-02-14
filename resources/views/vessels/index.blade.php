@@ -3750,7 +3750,8 @@
                     ShinkoOnOff: 'Default',
                     ToeiOnOff: 'TOEI',
                     WesternOnOff: 'Nitta/TOEI',
-                    KoscoOnOff: 'KOSCO'
+                    KoscoOnOff: 'KOSCO',
+                    HmmOnOff: 'HMM',
                 },
             }).then(result => {
                 let data = {};
