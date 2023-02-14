@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class KLCSM implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($applicant, $type){
+    public function __construct($applicant, $title = "HMM MLC"){
         $onum = [
             "M/T SM FALCON" => "48922-17",
             "M/T SM NAVIGATOR" => "50983-19",
@@ -30,8 +30,8 @@ class KLCSM implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
             $applicant->onum = "";
         }
 
-        $this->applicant     = $applicant;
-        $this->type     = $type;
+        $this->applicant    = $applicant;
+        $this->title        = $title;
     }
 
     public function view(): View
@@ -253,12 +253,14 @@ class KLCSM implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
             ]
         ];
 
+        $title = $this->title;
+
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $title) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
+                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -328,6 +330,14 @@ class KLCSM implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
+                    'A1',
+                    'A3', 'D3', 'H3',
+                    'D4',
+                    'D5', 'H5',
+                    'A6', 'D6', 'H6:H7',
+                    'D8', 'H8:H9',
+                    'E10',
+                    'B28:H29'
                 ];
 
                 // HL
@@ -340,13 +350,17 @@ class KLCSM implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
+                    'C3:C10', 'G3',
+                    'G5:G9'
                 ];
 
                 $h['wrap'] = [
+                    'C3:C10'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'D4', 'D6', 'D10'
                 ];
 
                 foreach($h as $key => $value) {
@@ -386,6 +400,8 @@ class KLCSM implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'A3:H10',
+                    'B28:H29'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -459,13 +475,50 @@ class KLCSM implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(23);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                for($i = 11; $i < 38; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(17);
+                }
+
+                for($i = 40; $i < 85; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(18);
+                }
+
+                $except = [92, 94, 97, 100, 103, 109, 115, 119];
+                for($i = 86; $i < 130; $i++){
+                    if(in_array($i, $except)){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(18.5);
+                    }
+                    else{
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(19);
+                    }
+                }
+
+                $except = [149, 151, 153, 155];
+                for($i = 131; $i < 159; $i++){
+                    if(in_array($i, $except)){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight($i == 155 ? 110 : 90);
+                    }
+                    else{
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(17);
+                    }
+                }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                $event->sheet->getDelegate()->getStyle('A2:L150')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
     }
