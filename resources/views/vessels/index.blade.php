@@ -3228,8 +3228,9 @@
                         data.employment_months  = $('#employment_months').val();
                         data.pointOfHire  = $('#pointOfHire').val();
                         data.stamp = $('#stamp').is(":checked") ? true : false;
+                        data.format = $('#format').val();
 
-                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${$('#format').val()}?` + $.param(data);
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/POEA_Contract?` + $.param(data);
                 }
             });
         }
@@ -3749,7 +3750,8 @@
                     ShinkoOnOff: 'Default',
                     ToeiOnOff: 'TOEI',
                     WesternOnOff: 'Nitta/TOEI',
-                    KoscoOnOff: 'KOSCO'
+                    KoscoOnOff: 'KOSCO',
+                    HmmOnOff: 'HMM',
                 },
             }).then(result => {
                 let data = {};
