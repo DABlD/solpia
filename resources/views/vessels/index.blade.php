@@ -3058,6 +3058,9 @@
                                 date = date.format("YYYY-MM-DD");
                                 $('#employment_months').val(months);
                             }
+                            else if(result.pro_app.status == "Lined-Up"){
+                                $('#employment_months').val(result.pro_app.mob);
+                            }
                             else{
                                 date = result.pro_app.eld;
                             }
@@ -3200,6 +3203,9 @@
                                 
                                 date = date.format("YYYY-MM-DD");
                                 $('#employment_months').val(months);
+                            }
+                            else if(result.pro_app.status == "Lined-Up"){
+                                $('#employment_months').val(result.pro_app.mob);
                             }
                             else{
                                 date = result.pro_app.eld;
