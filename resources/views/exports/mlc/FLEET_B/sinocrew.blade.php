@@ -136,8 +136,8 @@
 			}
 		@endphp
 		<tr>
-			<td colspan="2">Seaman’s book No.: {{ $sb ? $pp->number : '---' }}</td>
-			<td colspan="5">Passport No.: {{ $sb ? $pp->number : '---' }}</td>
+			<td colspan="2">Seaman’s book No.: {{ $sb ? $sb->number : '---' }}</td>
+			<td colspan="5">Passport No.: {{ $pp ? $pp->number : '---' }}</td>
 			<td colspan="3">Medical certificate issued on: {{ $mc ? (isset($mc->issue_date) ? $mc->issue_date->format("d/M/Y") : "---") : "---"  }}</td>
 		</tr>
 
