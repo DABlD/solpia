@@ -173,36 +173,31 @@
 	</tr>
 
 	<tr>
-		<td></td>
-		<td>1.1</td>
+		<td colspan="2" style="text-align: right;">1.1</td>
 		<td colspan="3">Duration of Contract:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['employment_months'] }} MONTHS (+/- 1 MONTH WITH MUTUAL CONSENT OF BOTH PARTIES)</td>
 	</tr>
 
 	<tr>
-		<td></td>
-		<td>1.2</td>
+		<td colspan="2" style="text-align: right;">1.2</td>
 		<td colspan="3">Position:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->pro_app->rank->name }}</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.3</td>
+		<td colspan="2" style="text-align: right;">1.3</td>
 		<td colspan="3">Basic Monthly Salary:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">${{ $data->wage->basic }}</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.4</td>
+		<td colspan="2" style="text-align: right;">1.4</td>
 		<td colspan="3">Hours of Work:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->work_hours }} HOURS / WEEK</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.5</td>
+		<td colspan="2" style="text-align: right;">1.5</td>
 		<td colspan="3">Overtime:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">
 			{{ $data->pro_app->rank->type == "OFFICER" ? "F.O.T." : "G.O.T." }}
@@ -214,8 +209,7 @@
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.6</td>
+		<td colspan="2" style="text-align: right;">1.6</td>
 		<td colspan="3">Vacation Leave with Pay:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">
 			${{ $data->wage->leave_pay ?? 0}}
@@ -226,8 +220,7 @@
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.7</td>
+		<td colspan="2" style="text-align: right;">1.7</td>
 		<td colspan="3">Others:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">
 			S.A.
@@ -253,22 +246,19 @@
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.8</td>
+		<td colspan="2" style="text-align: right;">1.8</td>
 		<td colspan="3">Total Salary:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">${{ $data->wage->total }}</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.9</td>
+		<td colspan="2" style="text-align: right;">1.9</td>
 		<td colspan="3">Point of Hire:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['pointOfHire'] }}</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.10</td>
+		<td colspan="2" style="text-align: right;"> ‎‏‏‎1.10</td>
 		<td colspan="4">Collective Bargaining Agreement, if any:</td>
 		<td colspan="6" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->cba_affiliation }}</td>
 	</tr>
