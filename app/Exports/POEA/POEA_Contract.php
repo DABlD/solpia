@@ -25,7 +25,20 @@ class POEA_Contract implements WithMultipleSheets
         $class = "App\Exports\POEA\\" . $format;
         $sheets = [];
 
-        array_push($sheets, new $class($this->data, $format, $this->req, $this->title));
+        if($format == "x27_NITTATOEIFormatContract"){
+            $title = "NITTA/TOEI Format";
+        }
+        elseif($format == "x23_TOEIFormatContract"){
+            $title = "TOEI Format";
+        }
+        elseif($format == "x24_CADETFormatContract"){
+            $title = "CADET Format";
+        }
+        elseif($format == "x22_POEAFormatContract"){
+            $title = "POEA Format";
+        }
+
+        array_push($sheets, new $class($this->data, $format, $this->req, $title));
         array_push($sheets, new InfoSheet($this->data, $format, $this->req));
 
         return $sheets;
