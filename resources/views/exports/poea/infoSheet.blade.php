@@ -20,14 +20,14 @@
 
 	<tr>
 		<td colspan="2">OWWA</td>
-		<td colspan="3">DELFIN</td>
+		<td colspan="3" style="{{ $c }}"></td>
 		<td colspan="12"></td>
 		<td colspan="5"></td>
 	</tr>
 
 	<tr>
 		<td colspan="2">1. Membership</td>
-		<td colspan="2" style="{{ $c }}">VERLO CARL</td>
+		<td colspan="2" style="{{ $c }}"></td>
 		<td></td>
 		<td colspan="12"></td>
 		<td colspan="2">CG No.</td>
@@ -473,7 +473,9 @@
 	</tr>
 
 	<tr>
-		<td colspan="5" style="{{ $c }}">EMBARKED DATE: </td>
+		<td colspan="5">
+			EMBARKED DATE: 
+		</td>
 		<td colspan="16" style="text-align: right;">
 			{{ isset($data->document_id->{"SEAMAN'S BOOK"}) ? $data->document_id->{"SEAMAN'S BOOK"}->number : "-" }}
 		</td>
