@@ -190,55 +190,87 @@
 		<td></td>
 		<td>1.3</td>
 		<td colspan="3">Basic Monthly Salary:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">${{ $data->wage->basic }}</td>
-		<td colspan="2" style="text-align: right;">{{ $data->pro_app->rank->type == "OFFICER" ? "F.O.T." : "G.O.T." }}:</td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;">${{ $data->wage->fot ?? $data->wage->ot ?? "" }}</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">${{ $data->wage->basic }}</td>
 	</tr>
 	
 	<tr>
 		<td></td>
 		<td>1.4</td>
 		<td colspan="3">Hours of Work:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->work_hours }} HOURS / WEEK</td>
-		<td colspan="2" style="text-align: right;">RETIRE ALLOW:</td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;">${{ $data->wage->retire_allow ?? 0 }}</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->work_hours }} HOURS / WEEK</td>
 	</tr>
 	
 	<tr>
 		<td></td>
 		<td>1.5</td>
-		<td colspan="2">Overtime:</td>
-		<td style="text-align: right; {{ $b }}">{{ $data->pro_app->vessel->ot_per_hour }} OT</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">/ HR AFTER {{ $data->pro_app->vessel->ot_hours }} HOURS</td>
-		<td colspan="2" style="text-align: right;">SUB ALLOW:</td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;">${{ $data->wage->sub_allow ?? 0 }}</td>
+		<td colspan="3">Overtime:</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">
+			{{ $data->pro_app->rank->type == "OFFICER" ? "F.O.T." : "G.O.T." }}
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->fot ?? $data->wage->ot ?? "" }}
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->pro_app->vessel->ot_per_hour }} OT / HR AFTER {{ $data->pro_app->vessel->ot_hours }} HOURS
+		</td>
 	</tr>
 	
 	<tr>
 		<td></td>
 		<td>1.6</td>
 		<td colspan="3">Vacation Leave with Pay:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">${{ $data->wage->leave_pay ?? 0}} / MONTH</td>
-		<td colspan="2" style="text-align: right;"></td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;"></td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">
+			${{ $data->wage->leave_pay ?? 0}}
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			9days/month
+		</td>
 	</tr>
 	
 	<tr>
 		<td></td>
 		<td>1.7</td>
-		<td colspan="3">Point of Hire:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->req['pointOfHire'] }}</td>
-		<td colspan="2" style="text-align: right;"></td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;"></td>
+		<td colspan="3">Others:</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">
+			S.A.
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->sub_allow ?? 0}}
+			‎‏‏‎ ‎‏‏‎
+			P.F.
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->retire_allow ?? 0}}
+			‎‏‏‎ ‎‏‏‎
+			S.V.A
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->sup_allow ?? 0}}
+			‎‏‏‎ ‎‏‏‎
+			Owner Allow:
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->owner_allow ?? 0}}
+			‎‏‏‎ ‎‏‏‎
+			Other Allow:
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->other_allow ?? 0}}
+		</td>
 	</tr>
 	
 	<tr>
 		<td></td>
 		<td>1.8</td>
-		<td colspan="3">CBA if applicable:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->cba_affiliation }}</td>
-		<td colspan="2" style="text-align: right;"></td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;"></td>
+		<td colspan="3">Total Salary:</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">${{ $data->wage->total }}</td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td>1.9</td>
+		<td colspan="3">Point of Hire:</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['pointOfHire'] }}</td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td>1.10</td>
+		<td colspan="4">Collective Bargaining Agreement, if any:</td>
+		<td colspan="6" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->cba_affiliation }}</td>
 	</tr>
 
 	<tr>

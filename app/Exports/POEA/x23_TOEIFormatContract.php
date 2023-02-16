@@ -9,10 +9,12 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 use App\Models\{Wage, ProcessedApplicant};
 
-class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings, WithColumnFormatting//, ShouldAutoSize
 {
     public function __construct($data, $type, $req, $title = "TOEI FORMAT"){
         $data->req = $req;
@@ -364,7 +366,7 @@ class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings//, Sh
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B13', 'E20', 'F' . (35 + $plus), 'F' . (36 + $plus), 'A' . (53 + $plus)
+                    'B13', 'E20', 'F' . (35 + $plus), 'F' . (38 + $plus), 'A' . (55 + $plus)
                 ];
 
                 foreach($h as $key => $value) {
@@ -471,15 +473,17 @@ class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings//, Sh
                     'C' . (25 + $plus) . ':D' . (25 + $plus), 'G' . (25 + $plus), 'K' . (25 + $plus) . ':L' . (25 + $plus),
                     'F' . (29 + $plus) . ':L' . (29 + $plus),
                     'F' . (30 + $plus) . ':L' . (30 + $plus),
-                    'F' . (31 + $plus) . ':G' . (31 + $plus), 'J' . (31 + $plus) . ':L' . (31 + $plus),
-                    'F' . (32 + $plus) . ':G' . (32 + $plus), 'J' . (32 + $plus) . ':L' . (32 + $plus),
-                    'F' . (33 + $plus) . ':G' . (33 + $plus), 'J' . (33 + $plus) . ':L' . (33 + $plus),
-                    'F' . (34 + $plus) . ':G' . (34 + $plus), 'J' . (34 + $plus) . ':L' . (34 + $plus),
-                    'F' . (35 + $plus) . ':G' . (35 + $plus), 'J' . (35 + $plus) . ':L' . (35 + $plus),
-                    'F' . (36 + $plus) . ':G' . (36 + $plus), 'J' . (36 + $plus) . ':L' . (36 + $plus),
-                    'I' . (49 + $plus), 'K' . (49 + $plus) . ':L' . (49 + $plus),
-                    'A' . (53 + $plus) . ':D' . (53 + $plus), 'I' . (53 + $plus) . ':L' . (53 + $plus),
+                    'F' . (31 + $plus) . ':L' . (31 + $plus),
+                    'F' . (32 + $plus) . ':L' . (32 + $plus),
+                    'F' . (33 + $plus) . ':L' . (33 + $plus),
+                    'F' . (34 + $plus) . ':L' . (34 + $plus),
+                    'F' . (35 + $plus) . ':L' . (35 + $plus),
+                    'F' . (36 + $plus) . ':L' . (36 + $plus),
+                    'F' . (37 + $plus) . ':L' . (37 + $plus),
+                    'G' . (38 + $plus) . ':L' . (38 + $plus),
+                    'I' . (51 + $plus), 'K' . (51 + $plus) . ':L' . (51 + $plus),
                     'A' . (55 + $plus) . ':D' . (55 + $plus), 'I' . (55 + $plus) . ':L' . (55 + $plus),
+                    'A' . (57 + $plus) . ':D' . (57 + $plus), 'I' . (57 + $plus) . ':L' . (57 + $plus),
                 ]);
 
 
@@ -506,7 +510,7 @@ class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings//, Sh
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(8);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3.5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(4);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11);
@@ -533,6 +537,13 @@ class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings//, Sh
                 $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => NumberFormat::FORMAT_GENERAL,
         ];
     }
 
