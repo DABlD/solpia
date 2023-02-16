@@ -292,7 +292,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="4" style="{{ $c }} {{ $i }}">{{ now()->format('d-M-Y') }}</td>
+		<td colspan="4" style="{{ $c }} {{ $i }}"></td>
 		<td colspan="4"></td>
 		<td colspan="4" style="{{ $c }} {{ $i }}"></td>
 	</tr>
