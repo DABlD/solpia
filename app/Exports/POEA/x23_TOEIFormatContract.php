@@ -482,8 +482,8 @@ class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings, With
                     'F' . (37 + $plus) . ':L' . (37 + $plus),
                     'G' . (38 + $plus) . ':L' . (38 + $plus),
                     'I' . (51 + $plus), 'K' . (51 + $plus) . ':L' . (51 + $plus),
-                    'A' . (55 + $plus) . ':D' . (55 + $plus), 'I' . (55 + $plus) . ':L' . (55 + $plus),
-                    'A' . (57 + $plus) . ':D' . (57 + $plus), 'I' . (57 + $plus) . ':L' . (57 + $plus),
+                    'A' . (56 + $plus) . ':D' . (56 + $plus), 'I' . (56 + $plus) . ':L' . (56 + $plus),
+                    'A' . (58 + $plus) . ':D' . (58 + $plus), 'I' . (58 + $plus) . ':L' . (58 + $plus),
                 ]);
 
 
