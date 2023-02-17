@@ -20,6 +20,8 @@
                                     <th>Short Name</th>
                                     <th>Full Name</th>
                                     <th>Address</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
                                     <th>Fleet</th>
                                     <th>Actions</th>
                                 </tr>
@@ -72,6 +74,8 @@
                 { data: 'name'},
                 { data: 'full_name'},
                 { data: 'address'},
+                { data: 'contact'},
+                { data: 'email'},
                 { data: 'fleet'},
                 { data: 'actions'}
             ],
@@ -295,6 +299,8 @@
                     ${input("name", "Short Name", data.name, 2,10)}
                     ${input("full_name", "Full Name", data.full_name, 2,10)}
                     ${input("address", "Address", data.address, 2,10)}
+                    ${input("contact", "Contact", data.contact, 2,10)}
+                    ${input("email", "Email", data.email, 2,10)}
                 `,
                 width: '800px',
                 confirmButtonText: 'Update',
@@ -327,6 +333,8 @@
                             name: $("[name='name']").val(),
                             full_name: $("[name='full_name']").val(),
                             address: $("[name='address']").val(),
+                            contact: $("[name='contact']").val(),
+                            email: $("[name='email']").val(),
                         },
                         message: "Success"
                     }, () => {
