@@ -11,7 +11,7 @@ class Principal extends Model
 
     protected $fillable = [
     	'user_id', 'name', 'slug', 'fleet',
-    	'full_name', 'address'
+    	'full_name', 'address', 'contact', 'email'
     ];
 
     protected $dates = [
