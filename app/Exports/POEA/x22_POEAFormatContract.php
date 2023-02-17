@@ -493,7 +493,7 @@ class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, Sh
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(8);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3.5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(4);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11);

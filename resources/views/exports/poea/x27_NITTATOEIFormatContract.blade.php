@@ -97,14 +97,36 @@
 	</tr>
 
 	<tr>
-		<td colspan="4">Name of Principal/Shipowner:</td>
+		<td colspan="4">Name of Principal:</td>
 		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->principal->full_name }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="4">Address of Principal/Shipowner:</td>
+		<td colspan="4">Address:</td>
 		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->principal->address }}</td>
 	</tr>
+
+	<tr>
+		<td colspan="4">Name of MLC Shipowner:</td>
+		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->mlc_shipowner }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="4">Address:</td>
+		<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->mlc_shipowner_address }}</td>
+	</tr>
+
+	@if($data->pro_app->vessel->registered_shipowner)
+		<tr>
+			<td colspan="4">Name of Registered Shipowner:</td>
+			<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->registered_shipowner }}</td>
+		</tr>
+
+		<tr>
+			<td colspan="4">Address:</td>
+			<td colspan="8" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->registered_shipowner_address }}</td>
+		</tr>
+	@endif
 
 	<tr>
 		<td colspan="4"></td>
@@ -147,116 +169,130 @@
 	</tr>
 
 	<tr>
-		<td colspan="12">1. That the seafarer shall be employed on board under the following terms and conditions:</td>
+		<td colspan="12">1. That the employee shall be employed on board under the following terms and conditions:</td>
 	</tr>
 
 	<tr>
-		<td></td>
-		<td>1.1</td>
+		<td colspan="2" style="text-align: right;">1.1</td>
 		<td colspan="3">Duration of Contract:</td>
-		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['employment_months'] }} MONTHS (+/- 1 MONTH WITH MUTUAL CONSENT OF BOTH PARTIES)</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['employment_months'] }} MONTHS</td>
 	</tr>
 
 	<tr>
-		<td></td>
-		<td>1.2</td>
+		<td colspan="2" style="text-align: right;">1.2</td>
 		<td colspan="3">Position:</td>
 		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->pro_app->rank->name }}</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.3</td>
+		<td colspan="2" style="text-align: right;">1.3</td>
 		<td colspan="3">Basic Monthly Salary:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">${{ $data->wage->basic }}</td>
-		<td colspan="2" style="text-align: right;">{{ $data->pro_app->rank->type == "OFFICER" ? "F.O.T." : "G.O.T." }}:</td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;">${{ $data->wage->fot ?? $data->wage->ot ?? "" }}</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">${{ $data->wage->basic }}</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.4</td>
+		<td colspan="2" style="text-align: right;">1.4</td>
 		<td colspan="3">Hours of Work:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->work_hours }} HOURS / WEEK</td>
-		<td colspan="2" style="text-align: right;">RETIRE ALLOW:</td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;">${{ $data->wage->retire_allow ?? 0 }}</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->work_hours }} HOURS / WEEK</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.5</td>
-		<td colspan="2">Overtime:</td>
-		<td style="text-align: right; {{ $b }}">{{ $data->pro_app->vessel->ot_per_hour }} OT</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">/ HR AFTER {{ $data->pro_app->vessel->ot_hours }} HOURS</td>
-		<td colspan="2" style="text-align: right;">SUB ALLOW:</td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;">${{ $data->wage->sub_allow ?? 0 }}</td>
+		<td colspan="2" style="text-align: right;">1.5</td>
+		<td colspan="3">Overtime:</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">
+			{{ $data->pro_app->rank->type == "OFFICER" ? "F.O.T." : "G.O.T." }}
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->fot ?? $data->wage->ot ?? "" }}
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->pro_app->vessel->ot_per_hour }} OT / HR AFTER {{ $data->pro_app->vessel->ot_hours }} HOURS
+		</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.6</td>
+		<td colspan="2" style="text-align: right;">1.6</td>
 		<td colspan="3">Vacation Leave with Pay:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">${{ $data->wage->leave_pay ?? 0}} / MONTH</td>
-		<td colspan="2" style="text-align: right;"></td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;"></td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">
+			${{ $data->wage->leave_pay ?? 0}}
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			9days/month
+		</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.7</td>
+		<td colspan="2" style="text-align: right;">1.7</td>
+		<td colspan="3">Others:</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">
+			S.A.
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->sub_allow ?? 0}}
+			‎‏‏‎ ‎‏‏‎
+			P.F.
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->retire_allow ?? 0}}
+			‎‏‏‎ ‎‏‏‎
+			S.V.A
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->sup_allow ?? 0}}
+			‎‏‏‎ ‎‏‏‎
+			Owner Allow:
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->owner_allow ?? 0}}
+			‎‏‏‎ ‎‏‏‎
+			Other Allow:
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			${{ $data->wage->other_allow ?? 0}}
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" style="text-align: right;">1.8</td>
+		<td colspan="3">Total Salary:</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">${{ $data->wage->total }}</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" style="text-align: right;">1.9</td>
 		<td colspan="3">Point of Hire:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->req['pointOfHire'] }}</td>
-		<td colspan="2" style="text-align: right;"></td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;"></td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['pointOfHire'] }}</td>
 	</tr>
 	
 	<tr>
-		<td></td>
-		<td>1.8</td>
-		<td colspan="3">CBA if applicable:</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">{{ $data->pro_app->vessel->cba_affiliation }}</td>
-		<td colspan="2" style="text-align: right;"></td>
-		<td colspan="3" style="{{ $b }} {{ $i }} text-align: right;"></td>
+		<td colspan="2" style="text-align: right;"> ‎‏‏‎1.10</td>
+		<td colspan="4">Collective Bargaining Agreement, if any:</td>
+		<td colspan="6" style="{{ $bc }} {{ $i }}">{{ $data->pro_app->vessel->cba_affiliation }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="12" style="height: 20px;">2.  ‎‏‏‎The terms and conditions in accordancce with Governing Board Resolution No. 09, and Memorandum Circular</td>
+		<td colspan="12" style="height: 20px;">2. The current and applicable ITF Collective Agreement shall be considered to be incorporated into and to form part</td>
 	</tr>
 
 	<tr>
-		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎      No. 10, both Series of 2010, and Memorandum Circular No. 34, Series of 2020 (Compliance with the 2018</td>
-	</tr>
-
-	<tr>
-		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎      Amendments to the Maritime Labour Convention, 2006) shall be strictly and faithfully observed.</td>
+		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎of the contract and shall compliance with the 2018 amendment to the code of Maritime Labor Convention 2006.</td>
 	</tr>
 
 	<tr><td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎</td></tr>
 
 	<tr>
-		<td colspan="12">3.   Any alterations or changes, in any part of this Contract shall be evaluated, verified, processed and</td>
+		<td colspan="12">3. The Ship's Articles shall be deemed for all purpose to include the term of this contract (including the applicable ITF</td>
 	</tr>
 
 	<tr>
-		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎      approved by the Philippine Overseas Employment Administration (POEA). Upon approval, the same shall</td>
+		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎Collective Agreement) and it shall be the duty of the company to ensure that the ship's Articles reflect these terms.</td>
 	</tr>
 
 	<tr>
-		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎      be deemed an integral part of the Standard Terms and Conditions Governing the Employment of Filipino</td>
-	</tr>
-
-	<tr>
-		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎      Seafarers On Board Ocean-Going Vessels.</td>
+		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎These terms shall take precedence over all other terms.</td>
 	</tr>
 
 	<tr><td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎</td></tr>
 
 	<tr>
-		<td colspan="12">4.  Violations of the terms and conditions of this Contract with its approved addendum shall be ground for </td>
+		<td colspan="12">4. The Seafarer has read, understood and agreed to the terms and conditions of employment as identified in the</td>
 	</tr>
 
 	<tr>
-		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎     disciplinary action against the erring party.</td>
+		<td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎Collective Agreement and enters into this contract freely.</td>
 	</tr>
 
 	<tr><td colspan="12"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎</td></tr>
@@ -292,6 +328,18 @@
 	</tr>
 
 	<tr>
+		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4"></td>
+		<td colspan="4" style="{{ $c }}">(for the MLC Shipowner)</td>
+	</tr>
+
+	<tr>
+		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4"></td>
+		<td colspan="4" style="{{ $c }}">Name &#38; Signature/Designation</td>
+	</tr>
+
+	<tr>
 		<td colspan="4" style="{{ $c }} {{ $i }}"></td>
 		<td colspan="4"></td>
 		<td colspan="4" style="{{ $c }} {{ $i }}"></td>
@@ -300,7 +348,7 @@
 	<tr>
 		<td colspan="4" style="{{ $c }}">Date</td>
 		<td colspan="4"></td>
-		<td colspan="4" style="{{ $c }}">Name &#38; Signature of POEA Official</td>
+		<td colspan="4" style="{{ $c }}">Date</td>
 	</tr>
 
 	{{-- {{ dd($data) }} --}}

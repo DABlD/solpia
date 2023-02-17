@@ -3149,6 +3149,7 @@
                                 <option value="">Select Format</option>
                                 <option value="x22_POEAFormatContract">POEA</option>
                                 <option value="x23_TOEIFormatContract">TOEI</option>
+                                <option value="x27_NITTATOEIFormatContract">NITTA/TOEI</option>
                                 <option value="x24_CADETFormatContract">CADET</option>
                             </select>
                         </div>

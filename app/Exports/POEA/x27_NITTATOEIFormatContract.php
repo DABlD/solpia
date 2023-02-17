@@ -14,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 use App\Models\{Wage, ProcessedApplicant};
 
-class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings, WithColumnFormatting//, ShouldAutoSize
+class x27_NITTATOEIFormatContract implements FromView, WithEvents, WithDrawings, WithColumnFormatting//, ShouldAutoSize
 {
     public function __construct($data, $type, $req, $title = "TOEI FORMAT"){
         $data->req = $req;
@@ -366,7 +366,7 @@ class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings, With
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B13', 'E20', 'F' . (35 + $plus), 'F' . (38 + $plus), 'A' . (55 + $plus)
+                    'B13', 'E20', 'F' . (35 + $plus), 'F' . (38 + $plus), 'A' . (53 + $plus)
                 ];
 
                 foreach($h as $key => $value) {
@@ -481,9 +481,9 @@ class x23_TOEIFormatContract implements FromView, WithEvents, WithDrawings, With
                     'F' . (36 + $plus) . ':L' . (36 + $plus),
                     'F' . (37 + $plus) . ':L' . (37 + $plus),
                     'G' . (38 + $plus) . ':L' . (38 + $plus),
-                    'I' . (51 + $plus), 'K' . (51 + $plus) . ':L' . (51 + $plus),
-                    'A' . (56 + $plus) . ':D' . (56 + $plus), 'I' . (56 + $plus) . ':L' . (56 + $plus),
-                    'A' . (58 + $plus) . ':D' . (58 + $plus), 'I' . (58 + $plus) . ':L' . (58 + $plus),
+                    'I' . (49 + $plus), 'K' . (49 + $plus) . ':L' . (49 + $plus),
+                    'A' . (53 + $plus) . ':D' . (53 + $plus), 'I' . (53 + $plus) . ':L' . (53 + $plus),
+                    'A' . (57 + $plus) . ':D' . (57 + $plus), 'I' . (57 + $plus) . ':L' . (57 + $plus),
                 ]);
 
 
