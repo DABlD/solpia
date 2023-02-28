@@ -459,7 +459,7 @@ class InfoSheet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
                     'L45:R45',
                     'L46:R46',
                     'L47:V47',
-                    'N52:V52'
+                    'M52:U52'
                 ]);
 
                 // LBT
