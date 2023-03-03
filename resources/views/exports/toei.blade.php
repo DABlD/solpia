@@ -176,9 +176,13 @@
 			<td colspan="2">{{ $applicant->sss ? $applicant->sss : '-----' }}</td>
 			<td>BMI:</td>
 			@php
-				$weight = $applicant->weight;
-				$height = $applicant->height / 100;
-				$bmi = round($weight / ($height * $height), 2);
+				$weight = $applicant->weight ? $applicant->weight : null;
+				$height = $applicant->height ? $applicant->height / 100 : null;
+				$bmi = null;
+
+				if($weight && $height){
+					$bmi = round($weight / ($height * $height), 2);
+				}
 			@endphp
 			<td>{{ $bmi }}</td>
 			{{-- <td>{{ $applicant->bmi ? $applicant->bmi : '-----' }}</td> --}}
