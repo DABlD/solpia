@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Principal, Applicant};
+use App\Models\{Principal, Applicant, AuditTrail};
 use Maatwebsite\Excel\Facades\Excel;
 
+use Browser;
 use DB;
 
 class PrincipalController extends Controller
@@ -117,6 +118,16 @@ class PrincipalController extends Controller
         else{
             $query = $query->where('id', $req->id)->update($req->except(['id', '_token']));
         }
+
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "Updated Principal $req->name",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
     }
 
     private function _view($view, $data = array()){
