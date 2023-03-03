@@ -314,7 +314,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    $ar('K', 25, 'K', 70), $ar('K', 103, 'K', (103 + ($ssSize * 2))), 'S18', $ar('AC', 25, 'AC', 102), $ar('F', 25, 'F', 32), $ar('A', 102, 'A', (102 + ($ssSize * 2))), $ar('G', 102, 'G', (102 + ($ssSize * 2))), $ar('Q', 102, 'V', (102 + ($ssSize * 2)))
+                    $ar('A', 25, 'K', 70), $ar('K', 103, 'K', (103 + ($ssSize * 2))), 'S18', $ar('AC', 25, 'AC', 102), $ar('F', 25, 'F', 32), $ar('A', 102, 'A', (102 + ($ssSize * 2))), $ar('G', 102, 'G', (102 + ($ssSize * 2))), $ar('Q', 102, 'V', (102 + ($ssSize * 2)))
                 ];
 
                 foreach($h as $key => $value) {
