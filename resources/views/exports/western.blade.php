@@ -450,7 +450,7 @@
 		</td>
 	</tr>
 
-	@foreach($applicant->educational_background as $data){
+	@foreach($applicant->educational_background as $data)
 		<tr>
 			<td colspan="6">{{ $data->year }}</td>
 			<td colspan="14">{{ $data->school }}</td>
@@ -609,7 +609,8 @@
 
 	<tr>
 		<td rowspan="3" colspan="2">ECDIS</td>
-		@if($jr)
+
+		@if($jr && $applicant->rank->category == "DECK OFFICER")
 			<td colspan="8">
 				Specific Training({{ $name }})
 			</td>
@@ -629,7 +630,7 @@
 	</tr>
 
 	<tr>
-		@if($jr)
+		@if($jr || $applicant->rank->category != "DECK OFFICER")
 			<td colspan="8">
 				Specific Training(FURUNO)
 			</td>
