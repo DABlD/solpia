@@ -609,7 +609,8 @@
 
 	<tr>
 		<td rowspan="3" colspan="2">ECDIS</td>
-		@if($jr)
+
+		@if($jr && $applicant->rank->category == "DECK OFFICER")
 			<td colspan="8">
 				Specific Training({{ $name }})
 			</td>
