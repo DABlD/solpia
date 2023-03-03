@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Vessel, Principal};
+use App\Models\{Vessel, Principal, AuditTrail};
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\VesselsImport;
+
+use Browser;
 
 class VesselsController extends Controller
 {
@@ -100,11 +102,35 @@ class VesselsController extends Controller
     }
 
     public function update(Request $req){
-        echo Vessel::where('id', $req->id)->update([$req->column => $req->value]);
+        $res = Vessel::where('id', $req->id)->update([$req->column => $req->value]);
+
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "Updated Vessel $req->name",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
+        echo $res;
     }
 
     public function updateAll(Request $req){
-        echo Vessel::where('id', $req->id)->update($req->all());
+        $res = Vessel::where('id', $req->id)->update($req->all());
+
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "Updated Vessel $req->name",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
+        echo $res;
     }
 
     public function getParticular(Request $req){
@@ -121,7 +147,7 @@ class VesselsController extends Controller
     }
 
     public function add(Request $req){
-        echo Vessel::create([
+        $res = Vessel::create([
             'principal_id' => $req->principal_id,
             'manning_agent' => $req->manning_agent,
             'name' => $req->name,
@@ -149,6 +175,18 @@ class VesselsController extends Controller
             'cba_affiliation' => $req->cba_affiliation,
             'classification' => $req->classification,
         ]);
+
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "Created Vessel $req->name",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
+        echo $res;
     }
 
     public function index(){
