@@ -630,7 +630,7 @@
 	</tr>
 
 	<tr>
-		@if($jr)
+		@if($jr || $applicant->rank->category != "DECK OFFICER")
 			<td colspan="8">
 				Specific Training(FURUNO)
 			</td>
