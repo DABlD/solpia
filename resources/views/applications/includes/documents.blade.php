@@ -426,13 +426,19 @@
             	            </span>
             	        </div>
             	        <div class="form-group col-md-2">
+            	            <label for="${issuer}${count}">Issuer</label>
+            	            <input type="text" class="${docu_class} ${issuer}" name="${issuer}${count}" placeholder="Enter Issuer">
+            	            <span class="invalid-feedback hidden" role="alert">
+            	                <strong id="${issuer}${count}Error"></strong>
+            	            </span>
+            	        </div>
+            	        <div class="form-group col-md-2">
             	            <label for="${number}${count}">Number</label>
             	            <input type="text" class="${docu_class} ${number}" name="${number}${count}" placeholder="Enter Number">
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${number}${count}Error"></strong>
             	            </span>
             	        </div>
-            	        <div class="col-md-6"></div>
             	        <div class="form-group col-md-2">
             	            <label for="${issue_date}${count}">Issue Date</label>
             	            <input type="text" class="${docu_class} ${issue_date}" name="${issue_date}${count}" placeholder="Select Issue Date">

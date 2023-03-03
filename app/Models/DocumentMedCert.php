@@ -10,7 +10,7 @@ class DocumentMedCert extends Model
 	use SoftDeletes;
 	
 	protected $fillable = [
-		'clinic', 'issue_date', 'expiry_date', 'applicant_id', 'type', 'number'
+		'clinic', 'issue_date', 'expiry_date', 'applicant_id', 'type', 'number', 'issuer'
 	];
 
     protected $dates = [

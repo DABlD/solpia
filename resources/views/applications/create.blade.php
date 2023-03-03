@@ -500,7 +500,7 @@
             inputs = $('#docu .MedCert input, #docu .MedCert select');
             let docu_med_cert = [];
 
-            for(let i = 0; i < inputs.length; i+= 8){
+            for(let i = 0; i < inputs.length; i+= 9){
 
                 let tempMedCert = {};
 
@@ -511,15 +511,16 @@
                     i -= 1;
                 }
 
-                if(!checkIfVisible(inputs[i+6])){
+                if(!checkIfVisible(inputs[i+7])){
                     continue;
                 }
 
                 tempMedCert.type        = inputs[i+1].value.toUpperCase();
                 tempMedCert.clinic      = inputs[i+2].value.toUpperCase();
-                tempMedCert.number      = inputs[i+3].value;
-                tempMedCert.issue_date  = inputs[i+4].value;
-                tempMedCert.expiry_date = inputs[i+6].value;
+                tempMedCert.issuer      = inputs[i+3].value.toUpperCase();
+                tempMedCert.number      = inputs[i+4].value;
+                tempMedCert.issue_date  = inputs[i+5].value;
+                tempMedCert.expiry_date = inputs[i+7].value;
                 docu_med_cert.push(tempMedCert);
             }
 
