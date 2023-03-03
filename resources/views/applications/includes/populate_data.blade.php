@@ -134,17 +134,18 @@
 		@endforeach
 		@foreach($applicant->document_med_cert as $data)
 			inputs = $('#docu .MedCert input, #docu .MedCert select');
-			i = (index * 8);
+			i = (index * 9);
 
 			$(inputs[i]).val("{!! $data->type !!}").trigger('change');
 			$(inputs[i+1]).val("{!! $data->clinic !!}").trigger('change');
 
-			inputs[i+2].value = "{{ $data->number }}";
+			inputs[i+2].value = "{{ $data->issuer }}";
+			inputs[i+3].value = "{{ $data->number }}";
 
-		    $(inputs[i+3]).flatpickr(config).setDate("{{ $data->issue_date }}", true);
-			$(inputs[i+5]).flatpickr(config2).setDate("{{ $data->expiry_date }}", true);
+		    $(inputs[i+4]).flatpickr(config).setDate("{{ $data->issue_date }}", true);
+			$(inputs[i+6]).flatpickr(config2).setDate("{{ $data->expiry_date }}", true);
 
-			$($(inputs[i+5]).parent().parent()).prepend(`
+			$($(inputs[i+6]).parent().parent()).prepend(`
 		        <input type="hidden" name="id-{{ $data->id }}" value="{{ $data->id }}" data-type="id">
 			`);
 			index++;
