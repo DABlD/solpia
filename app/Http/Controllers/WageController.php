@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Wage, Vessel};
+use App\Models\{Wage, Vessel, AuditTrail};
+use Browser;
 
 class WageController extends Controller
 {
@@ -71,14 +72,44 @@ class WageController extends Controller
     }
 
     public function create(Request $req){
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "Created Wage for vid: $req->vessel_id rid: $req->rank_id",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
         echo Wage::create($req->all());
     }
 
     public function delete(Request $req){
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "Deleted Wage for vid: $req->vessel_id rid: $req->rank_id",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
         echo Wage::where('id', $req->id)->delete();
     }
 
     public function update(Request $req){
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "Updated Wage for vid: $req->id rid: $req->rank_id",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
         echo Wage::where('id', $req->id)->update($req->all());
     }
 
