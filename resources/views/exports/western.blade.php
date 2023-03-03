@@ -450,7 +450,7 @@
 		</td>
 	</tr>
 
-	@foreach($applicant->educational_background as $data){
+	@foreach($applicant->educational_background as $data)
 		<tr>
 			<td colspan="6">{{ $data->year }}</td>
 			<td colspan="14">{{ $data->school }}</td>
