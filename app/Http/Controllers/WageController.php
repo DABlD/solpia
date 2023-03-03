@@ -68,10 +68,22 @@ class WageController extends Controller
             $temp2->save();
         }
 
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "Duplicated Wage from vid: $req->vid to vid: $req->vid2",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
         echo "Success";
     }
 
     public function create(Request $req){
+        $res = Wage::create($req->all());
+
         AuditTrail::create([
             'user_id'   => auth()->user()->id,
             'action'    => "Created Wage for vid: $req->vessel_id rid: $req->rank_id",
@@ -82,10 +94,12 @@ class WageController extends Controller
             'platform'  => Browser::platformName()
         ]);
 
-        echo Wage::create($req->all());
+        echo $res;
     }
 
     public function delete(Request $req){
+        $res = Wage::where('id', $req->id)->delete();
+
         AuditTrail::create([
             'user_id'   => auth()->user()->id,
             'action'    => "Deleted Wage for vid: $req->vessel_id rid: $req->rank_id",
@@ -96,10 +110,12 @@ class WageController extends Controller
             'platform'  => Browser::platformName()
         ]);
 
-        echo Wage::where('id', $req->id)->delete();
+        echo $res;
     }
 
     public function update(Request $req){
+        $res = Wage::where('id', $req->id)->update($req->all());
+
         AuditTrail::create([
             'user_id'   => auth()->user()->id,
             'action'    => "Updated Wage for vid: $req->id rid: $req->rank_id",
@@ -110,7 +126,7 @@ class WageController extends Controller
             'platform'  => Browser::platformName()
         ]);
 
-        echo Wage::where('id', $req->id)->update($req->all());
+        echo $res;
     }
 
     private function _view($view, $data = array()){
