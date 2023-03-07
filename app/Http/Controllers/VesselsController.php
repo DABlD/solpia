@@ -170,7 +170,6 @@ class VesselsController extends Controller
             'registered_shipowner_address' => $req->registered_shipowner_address,
             'registered_shipowner' => $req->registered_shipowner,
             'work_hours' => $req->work_hours,
-            'ot_per_hour' => $req->ot_per_hour,
             'ot_hours' => $req->ot_hours,
             'cba_affiliation' => $req->cba_affiliation,
             'classification' => $req->classification,
