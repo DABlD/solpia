@@ -87,6 +87,7 @@
 		        foreach($data->sea_service as $ss){
 					if(str_contains($ss->manning_agent, 'SOLPIA')){
 						$ss = $ss;
+						break;
 					}
 		        }
 			@endphp
