@@ -398,7 +398,7 @@
 		<td colspan="7">7.) 월 임금 (M.W) : Monthly Wage</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
 			@php
-				$total = ($data->wage->basic_pay ?? 0) + ($data->wage->fot ?? 0) + ($data->wage->ot ?? 0) + ($data->wage->sup_allow ?? 0) + ($data->wage->sub_allow ?? 0) + ($data->wage->owner_allow ?? 0) + ($data->wage->retire_allow ?? 0);
+				$total = ($data->wage->basic ?? 0) + ($data->wage->fot ?? 0) + ($data->wage->ot ?? 0) + ($data->wage->sup_allow ?? 0) + ($data->wage->sub_allow ?? 0) + ($data->wage->owner_allow ?? 0) + ($data->wage->retire_allow ?? 0);
 			@endphp
 			{{ $total }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
 		</td>
