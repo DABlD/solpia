@@ -83,10 +83,9 @@
 			}
         }
 	@endphp
-	
+
 	<tr>
 		<td style="{{ $bold }}">Crew Name:</td>
-		{{ dd($data) }}
 		<td colspan="3" style="{{ $bottom }}">
 			{{ $data->rank }} {{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
 		</td>
