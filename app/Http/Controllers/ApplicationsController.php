@@ -1328,7 +1328,11 @@ class ApplicationsController extends Controller
                             $vessel = Vessel::find($pa->vessel_id);
                             $applicant->vessel = $vessel;
                             $applicant->departure = $pa->eld;
-                        }   
+                        }
+                        else{
+                            $temp = SeaService::where('applicant_id', $id)->latest('sign_on')->first()->rank;
+                            $applicant->rank = Rank::where('name', $temp)->first()->abbr;
+                        }
                     }
                 }
             }

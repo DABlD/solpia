@@ -74,23 +74,25 @@
 		</td>
 	</tr>
 
+	@php
+        $ss = false;
+        foreach($data->sea_service as $ss){
+			if(str_contains($ss->manning_agent, 'SOLPIA')){
+				$ss = $ss;
+				break;
+			}
+        }
+	@endphp
+	
 	<tr>
 		<td style="{{ $bold }}">Crew Name:</td>
+		{{ dd($data) }}
 		<td colspan="3" style="{{ $bottom }}">
 			{{ $data->rank }} {{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
 		</td>
 		<td></td>
 		<td colspan="2" style="{{ $bold }}">Latest Vessel:</td>
 		<td style="{{ $center }} {{ $bottom }}">
-			@php
-		        $ss = false;
-		        foreach($data->sea_service as $ss){
-					if(str_contains($ss->manning_agent, 'SOLPIA')){
-						$ss = $ss;
-						break;
-					}
-		        }
-			@endphp
 
 			@if($ss)
 				{{ $ss->vessel_name }}
