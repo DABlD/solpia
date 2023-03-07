@@ -19,7 +19,8 @@ class Wage extends Model
         'sr_pay', 'tanker_allow',
         'owner_allow', 'voyage_allow',
         'other_allow', 'engine_allow',
-        'aca', 'total', 'imo'
+        'aca', 'total', 'imo',
+        'ot_per_hour'
     ];
 
     protected $dates = [

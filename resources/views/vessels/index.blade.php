@@ -229,7 +229,6 @@
                 'Registered Shipowner',
                 'Address',
                 'Work Hours',
-                'OT PER HOUR',
                 'MAX OT HOURS',
                 'CBA AFFILIATION',
                 'Classification Society'
@@ -256,7 +255,6 @@
                 'registered_shipowner',
                 'registered_shipowner_address',
                 'work_hours',
-                'ot_per_hour',
                 'ot_hours',
                 'cba_affiliation',
                 'classification'
@@ -586,7 +584,7 @@
                 $.ajax({
                     url: '{{ route('wage.get') }}',
                     data: {
-                        cols: ['wages.*', 'r.name as rname'],
+                        cols: ['wages.*', 'r.abbr as rname'],
                         where: ['vessel_id', id],
                         order: ['r.id', 'asc']
                     },
@@ -625,6 +623,7 @@
                                 <td>TANKER ALLOW</td>
                                 <td>ACA</td>
                                 <td>TOTAL</td>
+                                <td>OT/HR</td>
                                 <td>Actions</td>
                             </tr>
                         </thead>
@@ -652,6 +651,7 @@
                                 <td>${wage.tanker_allow ?? '---'}</td>
                                 <td>${wage.aca ?? '---'}</td>
                                 <td>${wage.total}</td>
+                                <td>${wage.ot_per_hour ?? '---'}</td>
                                 <td>${wage.actions}</td>
                             </tr>
                         `;
@@ -712,96 +712,106 @@
                                 Basic Pay
                             </div>    
                             <div class="col-md-9">
-                                <input type="number" min="0" id="basic" class="form-control"><br>
+                                <input type="number" min="0" id="basic" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Leave Pay
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="leave_pay" class="form-control"><br>
+                                <input type="number" min="0" id="leave_pay" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 F.O.T.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="fot" class="form-control"><br>
+                                <input type="number" min="0" id="fot" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 G.O.T.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="ot" class="form-control"><br>
+                                <input type="number" min="0" id="ot" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Sub. Allow.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="sub_allow" class="form-control"><br>
+                                <input type="number" min="0" id="sub_allow" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Retire Allow.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="retire_allow" class="form-control"><br>
+                                <input type="number" min="0" id="retire_allow" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Sup. Allow.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="sup_allow" class="form-control"><br>
+                                <input type="number" min="0" id="sup_allow" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Engine Allow.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="engine_allow" class="form-control"><br>
+                                <input type="number" min="0" id="engine_allow" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Other Allow.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="other_allow" class="form-control"><br>
+                                <input type="number" min="0" id="other_allow" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Voyage Allow.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="voyage_allow" class="form-control"><br>
+                                <input type="number" min="0" id="voyage_allow" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Owner Allow.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="owner_allow" class="form-control"><br>
+                                <input type="number" min="0" id="owner_allow" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 Tanker Allow.
                             </div>                                
                             <div class="col-md-9">
-                                <input type="number" min="0" id="tanker_allow" class="form-control"><br>
+                                <input type="number" min="0" id="tanker_allow" class="form-control compute"><br>
                             </div>
                             
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 ACA
                             </div>                        
                             <div class="col-md-9">
-                                <input type="number" min="0" id="aca" class="form-control"><br>
+                                <input type="number" min="0" id="aca" class="form-control compute"><br>
                             </div>
 
                             <div class="col-md-3"></div>
                             <div class="col-md-9">
                                 <input type="number" min="0" id="total" class="form-control" placeholder="Total" readonly><br>
+                            </div>
+                            
+                            </br>
+                            </br>
+
+                            <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
+                                OT/HR
+                            </div>                        
+                            <div class="col-md-9">
+                                <input type="number" min="0" id="ot_per_hour" class="form-control" placeholder="(Optional)"><br>
                             </div>
                         `,
                         width: "500px",
@@ -821,12 +831,9 @@
                                 $('.swal2-container').css('z-index', 1000);
                             });
 
-                            $('.swal2-container .form-control').on('input', () => {
+                            $('.form-control.compute').on('input', () => {
                                 let total = 0;
-                                $('.swal2-container .form-control')
-                                        .not(":first")
-                                        .not(":last")
-                                        .each((i, input) => {
+                                $('.form-control.compute').each((i, input) => {
                                     if(input.value != ""){
                                         total = parseFloat(total) + parseFloat(input.value);
                                     }
@@ -855,6 +862,7 @@
                                     tanker_allow: $('#tanker_allow').val(),
                                     aca: $('#aca').val(),
                                     total: $('#total').val(),
+                                    ot_per_hour: $('#ot_per_hour').val(),
                                     vessel_id: vid
                                 },
                                 success: result => {
@@ -1018,96 +1026,106 @@
                                         Basic Pay
                                     </div>    
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.basic}" id="basic" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.basic}" id="basic" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Leave Pay
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.leave_pay}" id="leave_pay" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.leave_pay}" id="leave_pay" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         F.O.T.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.fot}" id="fot" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.fot}" id="fot" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         G.O.T.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.ot}" id="ot" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.ot}" id="ot" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Sub. Allow.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.sub_allow}" id="sub_allow" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.sub_allow}" id="sub_allow" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Retire Allow.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.retire_allow}" id="retire_allow" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.retire_allow}" id="retire_allow" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Sup. Allow.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.sup_allow}" id="sup_allow" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.sup_allow}" id="sup_allow" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Engine Allow.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.engine_allow}" id="engine_allow" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.engine_allow}" id="engine_allow" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Other Allow.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.other_allow}" id="other_allow" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.other_allow}" id="other_allow" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Voyage Allow.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.voyage_allow}" id="voyage_allow" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.voyage_allow}" id="voyage_allow" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Owner Allow.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.owner_allow}" id="owner_allow" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.owner_allow}" id="owner_allow" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         Tanker Allow.
                                     </div>                                
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.tanker_allow}" id="tanker_allow" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.tanker_allow}" id="tanker_allow" class="form-control compute"><br>
                                     </div>
                                     
                                     <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                         ACA
                                     </div>                        
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.aca}" id="aca" class="form-control"><br>
+                                        <input type="number" min="0" value="${wage.aca}" id="aca" class="form-control compute"><br>
                                     </div>
 
                                     <div class="col-md-3"></div>
                                     <div class="col-md-9">
                                         <input type="number" min="0" id="total" class="form-control" placeholder="Total" readonly><br>
+                                    </div>
+                            
+                                    </br>
+                                    </br>
+
+                                    <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
+                                        OT/HR
+                                    </div>                        
+                                    <div class="col-md-9">
+                                        <input type="number" min="0" value="${wage.ot_per_hour}" id="ot_per_hour" class="form-control" placeholder="(Optional)"><br>
                                     </div>
                                 `,
                                 preConfirm: () => {
@@ -1128,12 +1146,17 @@
                                     });
                                     $('#rank_id').val(wage.rank_id).trigger('change');
 
-                                    $('.swal2-container .form-control').on('input', () => {
+                                    let total = 0;
+                                    $('.form-control.compute').each((i, input) => {
+                                        if(input.value != ""){
+                                            total = parseFloat(total) + parseFloat(input.value);
+                                        }
+                                    });
+                                    $('#total').val(total);
+
+                                    $('.form-control.compute').on('input', () => {
                                         let total = 0;
-                                        $('.swal2-container .form-control')
-                                                .not(":first")
-                                                .not(":last")
-                                                .each((i, input) => {
+                                        $('.form-control.compute').each((i, input) => {
                                             if(input.value != ""){
                                                 total = parseFloat(total) + parseFloat(input.value);
                                             }
@@ -1163,6 +1186,7 @@
                                             tanker_allow: $('#tanker_allow').val(),
                                             aca: $('#aca').val(),
                                             total: $('#total').val(),
+                                            ot_per_hour: $('#ot_per_hour').val(),
                                             id: id
                                         },
                                         success: result => {
@@ -1503,15 +1527,6 @@
                                 </br>
                                 <div class="row">
                                     <div class="col-md-3" style="margin-top: 10px; text-align: left;">
-                                        OT Per Hour
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" id="ot_per_hour" class="form-control">
-                                    </div>
-                                </div>
-                                </br>
-                                <div class="row">
-                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
                                         MAX OT PER HOUR
                                     </div>
                                     <div class="col-md-9">
@@ -1615,7 +1630,6 @@
                                         registered_shipowner: $('#registered_shipowner').val(),
                                         registered_shipowner_address: $('#registered_shipowner_address').val(),
                                         work_hours: $('#work_hours').val(),
-                                        ot_per_hour: $('#ot_per_hour').val(),
                                         ot_hours: $('#ot_hours').val(),
                                         cba_affiliation: $('#cba_affiliation').val(),
                                         classification: $('#classification').val()

@@ -16,7 +16,7 @@ class Vessel extends Model
         'owner', 'size',
         'former_agency', 'former_principal', 'mlc_shipowner', 'mlc_shipowner_address',
         'registered_shipowner', 'registered_shipowner_address',
-        'work_hours', 'ot_per_hour', 'ot_hours', 'cba_affiliation', 'classification'
+        'work_hours', 'ot_hours', 'cba_affiliation', 'classification'
 
     ];
 
