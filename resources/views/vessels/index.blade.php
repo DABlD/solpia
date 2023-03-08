@@ -260,7 +260,6 @@
                 'classification'
             ];
 
-            console.log(vessel);
             $.each(Object.keys(vessel), (index, key) => {
                 let temp = columns.indexOf(key);
                 if(temp >= 0){
@@ -320,6 +319,10 @@
                         `;
 
                         col.append(string);
+                        if(vessel.size){
+                            $('#vd-size').val(vessel.size);
+                        }
+
                         $('#vd-size').select2({placeholder: 'Select Size'});
                         $('#vd-size').on("select2:open", () => {
                             $('.select2-dropdown').css({
