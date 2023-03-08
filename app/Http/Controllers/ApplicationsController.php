@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\{ProcessedApplicant, Applicant, LineUpContract};
 use App\Models\{EducationalBackground, FamilyData, SeaService};
-use App\Models\{Vessel, Rank, Principal};
+use App\Models\{Vessel, Rank, Principal, Wage};
 use App\Models\{DocumentFlag, DocumentId, DocumentLC, DocumentMedCert, DocumentMed, DocumentMedExp};
 
 use App\Models\{AuditTrail, Statistic, File as Fileszxc};
@@ -1648,67 +1648,48 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
-        $temp = SeaService::whereIn('rank', ["DECK CADET", "ENGINE CADET"])
-                            ->where('manning_agent', 'LIKE', '%SOLPIA%')
-                            // ->where('principal', 'LIKE', '%TOEI%')
-                            ->where('sign_on', ">=", '2019-09-01')->get();
-        $temp = $temp->groupBy('applicant_id');
-        
-        $array = [];
+        $vessels = Vessel::where('status', "ACTIVE")
+                        ->where('principal_id', 3)
+                        ->get();
 
-        foreach($temp as $key => $ss){
+        foreach($vessels as $vessel){
+           $vessel->work_hours = 40;
+           $vessel->ot_hours = 103;
+           $vessel->cba_affiliation = "IBF JSU / AMOSUP-IMMAJ";
+           $vessel->classification = "N.K.";
+           $vessel->save();
 
-                if($key == 1691){
-                    dd($ss);
-                }
-            $bool = false;
-            foreach($ss as $ss2){
-                $vessels = $ss2->vessel;
-
-                foreach($vessels as $vessel){
-                    if(in_array($vessel->principal_id, [3, 16, 196])){
-                        $bool = true;
-                    }
-                }
-            }
-
-            if($bool){
-                $array[$key]["name"] = $ss->first()->applicant->user->namefull;
-                $array[$key]["rank"] = $ss->first()->rank;
-                $array[$key]["times"] = sizeof($ss);
-                $array[$key]["sign_on1"] = $ss->first()->sign_on;
-                $array[$key]["sign_on2"] = $ss->last()->sign_on;
-
-                $array[$key]["principal"] = $ss->last()->principal;
-
-                $array[$key]['hasLicense'] = DocumentLC::where('applicant_id', $key)->where('type', "COC")->where('no', '!=', '')->where(function($q) {
-                    $q->whereRaw('json_contains(regulation, \'["II/1"]\')')->get();
-                    $q->whereRaw('json_contains(regulation, \'["III/1"]\')')->get();
-                })->count();
-            }
+           echo $vessel->name . ' updated<br>'; 
         }
 
-        echo "<table><tbody>";
-        foreach($array as $crew){
-            $name = $crew['name'];
-            $rank = $crew['rank'];
-            $times = $crew['times'];
-            // $so1 = $crew['sign_on1'] != "" ? $crew['sign_on1']->format('Y-m-d') : "";
-            $so2 = $crew['sign_on2'] != "" ? $crew['sign_on2']->format('Y-m-d') : "";
-            $hasLicense = $crew['hasLicense'] ? "Yes" : "No";
+        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</br></br>";
 
-            // $principal = $crew['principal'];
-            echo "
-                <tr>
-                    <td>$name</td>
-                    <td>$rank</td>
-                    <td>$times</td>
-                    <td>$so2</td>
-                    <td>$hasLicense</td>
-                </tr>
-            ";
+        $ids = $vessels->pluck("id");
+        foreach($ids as $id){
+            $temp = Wage::where('vessel_id', $id)->whereIn('rank_id', [9, 15, 24]);
+            $temp2 = $temp->get();
+            $temp->update(['ot_per_hour' => 5.23]);
+            $count = $temp2->count();
+            echo "Updated $count for vid: $id. amount: 5.23 <br>";
+
+            $temp = Wage::where('vessel_id', $id)->whereIn('rank_id', [10, 16, 42, 43, 26]);
+            $temp2 = $temp->get();
+            $temp->update(['ot_per_hour' => 4.75]);
+            $count = $temp2->count();
+            echo "Updated $count for vid: $id. amount: 4.75 <br>";
+
+            $temp = Wage::where('vessel_id', $id)->whereIn('rank_id', [11, 17, 27, 28]);
+            $temp2 = $temp->get();
+            $temp->update(['ot_per_hour' => 3.57]);
+            $count = $temp2->count();
+            echo "Updated $count for vid: $id. amount: 3.57 <br>";
+
+            $temp = Wage::where('vessel_id', $id)->whereIn('rank_id', [14, 19, 28, 40, 41, 44]);
+            $temp2 = $temp->get();
+            $temp->update(['ot_per_hour' => 1.7]);
+            $count = $temp2->count();
+            echo "Updated $count for vid: $id. amount: 1.7 <br>";
         }
-        echo "</tbody></table>";
     }
 
     public function testFunc2(){
