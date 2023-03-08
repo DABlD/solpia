@@ -1267,7 +1267,12 @@
 
 			</td>
 			<td>-----</td>
-			<td>-----</td>
+			<td>
+				{{ $docu ? $docu->issuer : "-----" }}
+				@if($docu2)
+					 &#38; {{ $docu2 ? $docu2->issuer : "-----" }}
+				@endif
+			</td>
 		</tr>
 
 		<tr>	
@@ -1279,7 +1284,7 @@
 				{{ $docu3 ? checkDate2($docu3->issue_date, "I") : "-----" }}
 			</td>
 			<td>-----</td>
-			<td>-----</td>
+			<td>{{ $docu3 ? $docu3->issuer : "-----"}}</td>
 		</tr>
 
 		{{-- end --}}
