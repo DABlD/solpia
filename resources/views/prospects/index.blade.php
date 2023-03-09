@@ -132,7 +132,7 @@
                 },
                 {
                     targets: 8,
-                    width: "35%"
+                    width: "20%"
                 },
                 {
                     targets: 9,
