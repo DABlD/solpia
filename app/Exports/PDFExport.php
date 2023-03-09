@@ -165,6 +165,63 @@ class PDFExport
         return $applicant;
     }
 
+    public function Y08_OnsignerUSV(){
+        $applicants = ProcessedApplicant::where([
+            ['status', '=', 'Lined-Up'],
+            ['vessel_id', '=', $this->data->data['id']],
+        ])
+        ->select('applicant_id', 'rank_id', 'order')
+        ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
+        ->get();
+
+        foreach($applicants as $applicant){
+            $docs = [];
+
+            $w = [
+                ['applicant_id', '=', $applicant->applicant_id],
+                ['type', '=', "US-VISA"],
+            ];
+
+            $temp = DocumentId::where($w)->first();
+            
+            $temp ? array_push($docs, $temp->file) : '';
+
+            $applicant->docs = $docs;
+        }
+
+        $applicants = $applicants->sortBy('order');
+        return $applicants;
+    }
+
+    public function Y09_OffsignerUSV(){
+        $applicants = LineUpContract::where([
+            ['line_up_contracts.status', '=', 'On Board'],
+            ['vessel_id', '=', $this->data->data['id']],
+            ['disembarkation_date', '=', null]
+        ])
+        ->select('applicant_id', 'rank_id', 'order', 'reliever')
+        ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
+        ->get();
+
+        foreach($applicants as $applicant){
+            $docs = [];
+
+            $w = [
+                ['applicant_id', '=', $applicant->applicant_id],
+                ['type', '=', "US-VISA"],
+            ];
+
+            $temp = DocumentId::where($w)->first();
+            
+            $temp ? array_push($docs, $temp->file) : '';
+
+            $applicant->docs = $docs;
+        }
+
+        $applicants = $applicants->sortBy('order');
+        return $applicants;
+    }
+
     public function download(){
         $pdf = PDF::loadView('exports.forms.' . lcfirst($this->type), ['data' => $this->data]);
         $pdf->setPaper('a4', 'Portrait');
