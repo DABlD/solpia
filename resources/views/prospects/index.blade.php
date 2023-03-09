@@ -133,6 +133,10 @@
                 {
                     targets: 8,
                     width: "35%"
+                },
+                {
+                    targets: 9,
+                    width: "200px"
                 }
             ],
             drawCallback: function(){
@@ -254,7 +258,7 @@
                         $('.select2-dropdown--below').css("z-index", 2000);
                     });
 
-                    $('[name="last_disembark"], [name="birthday"]').flatpickr({
+                    $('[name="last_disembark"], [name="birthday"], [name="availability"], [name="usv"]').flatpickr({
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
@@ -437,7 +441,7 @@
                         $('.select2-dropdown--below').css("z-index", 2000);
                     });
 
-                    $('[name="last_disembark"], [name="birthday"]').flatpickr({
+                    $('[name="last_disembark"], [name="birthday"], [name="availability"], [name="usv"]').flatpickr({
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
