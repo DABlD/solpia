@@ -3317,7 +3317,11 @@
                 inputOptions: {
                     exportOnOff : 'Export On/Off Signers',
                     exportOnDocs : 'Export Onsigners SIRB and PPRT',
+                    exportOnUSV : 'Export Onsigners US Visa',
+                    exportOnCovid : 'Export Onsigners Covid Vaccines',
                     exportOffDocs : 'Export Offsigners SIRB and PPRT',
+                    exportOffUSV : 'Export Offsigners US Visa',
+                    exportOffCovid : 'Export Offsigners Covid Vaccines',
                     exportOnBoard : 'Export Onboard',
                     RTP : 'Request to Process (Lined-Up Crew)',
                     RTP2 : 'Request to Process (Onboard Crew)',
@@ -3849,7 +3853,7 @@
         function exportOnDocs(id, name){
             let data = {};
             data.id = id;
-            data.filename = name.replace(/[^\w\s]/gi, '') + " - Onsigners";
+            data.filename = name.replace(/[^\w\s]/gi, '') + " - Onsigners PPRT AND SIRB";
             data.exportType = "pdf";
 
             const type = "Y01_OnsignerDocs";
@@ -3857,13 +3861,35 @@
             window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
         }
 
+        function exportOnUSV(id, name){
+            let data = {};
+            data.id = id;
+            data.filename = name.replace(/[^\w\s]/gi, '') + " - Onsigners US Visa";
+            data.exportType = "pdf";
+
+            const type = "Y08_OnsignerUSV";
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+        }
+
         function exportOffDocs(id, name){
             let data = {};
             data.id = id;
-            data.filename = name.replace(/[^\w\s]/gi, '') + " - Offsigners";
+            data.filename = name.replace(/[^\w\s]/gi, '') + " - Offsigners PPRT AND SIRB";
             data.exportType = "pdf";
 
             const type = "Y02_OffsignerDocs";
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+        }
+
+        function exportOffUSV(id, name){
+            let data = {};
+            data.id = id;
+            data.filename = name.replace(/[^\w\s]/gi, '') + " - Offsigners US Visa";
+            data.exportType = "pdf";
+
+            const type = "Y09_OffsignerUSV";
 
             window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
         }
