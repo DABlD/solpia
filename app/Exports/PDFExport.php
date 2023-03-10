@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use PDF;
-use App\Models\{LineUpContract, ProcessedApplicant, DocumentId, Applicant, Vessel, Rank, Wage, DocumentLC};
+use App\Models\{LineUpContract, ProcessedApplicant, DocumentId, Applicant, Vessel, Rank, Wage, DocumentMedCert};
 
 class PDFExport
 {
@@ -236,24 +236,12 @@ class PDFExport
 
             $w = [
                 ['applicant_id', '=', $applicant->applicant_id],
-                ['type', '=', "COVID-19 1ST DOSE"],
-            ];
-            $w2 = [
-                ['applicant_id', '=', $applicant->applicant_id],
-                ['type', '=', "COVID-19 2ND DOSE"],
-            ];
-            $w3 = [
-                ['applicant_id', '=', $applicant->applicant_id],
-                ['type', '=', "COVID-19 3RD DOSE"],
+                ['type', 'like', "%COVID-19%"],
             ];
 
-            $temp = DocumentLC::where($w)->first();
-            $temp2 = DocumentLC::where($w2)->first();
-            $temp3 = DocumentLC::where($w3)->first();
+            $temp = DocumentMedCert::where($w)->get();
 
             $temp ? array_push($docs, $temp->file) : '';
-            $temp2 ? array_push($docs, $temp2->file) : '';
-            $temp3 ? array_push($docs, $temp3->file) : '';
 
             $applicant->docs = $docs;
         }
@@ -277,24 +265,12 @@ class PDFExport
 
             $w = [
                 ['applicant_id', '=', $applicant->applicant_id],
-                ['type', '=', "COVID-19 1ST DOSE"],
-            ];
-            $w2 = [
-                ['applicant_id', '=', $applicant->applicant_id],
-                ['type', '=', "COVID-19 2ND DOSE"],
-            ];
-            $w3 = [
-                ['applicant_id', '=', $applicant->applicant_id],
-                ['type', '=', "COVID-19 3RD DOSE"],
+                ['type', 'like', "%COVID-19%"],
             ];
 
-            $temp = DocumentLC::where($w)->first();
-            $temp2 = DocumentLC::where($w2)->first();
-            $temp3 = DocumentLC::where($w3)->first();
+            $temp = DocumentMedCert::where($w)->get();
 
             $temp ? array_push($docs, $temp->file) : '';
-            $temp2 ? array_push($docs, $temp2->file) : '';
-            $temp3 ? array_push($docs, $temp3->file) : '';
 
             $applicant->docs = $docs;
         }
