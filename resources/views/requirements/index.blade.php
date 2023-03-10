@@ -19,13 +19,15 @@
                                     <th>#</th>
                                     <th>Vessel</th>
                                     <th>Rank</th>
-                                    <th>Date</th>
+                                    <th>Join Date</th>
                                     <th>Port</th>
                                     <th>USV</th>
                                     <th>Salary</th>
                                     <th>Max Age</th>
                                     <th>Remarks</th>
+                                    <th>Fleet</th>
                                     <th>Status</th>
+                                    <th>Date Posted</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -92,12 +94,14 @@
                 { data: 'salary' },
                 { data: 'max_age' },
                 { data: 'remarks'},
+                { data: 'fleet'},
                 { data: 'status'},
+                { data: 'created_at'},
                 { data: 'actions'}
             ],
             columnDefs: [
                 {
-                    targets: 3,
+                    targets: [3, 11],
                     render: date =>{
                         return moment(date).format('MMM DD, YYYY');
                     }
@@ -126,6 +130,11 @@
                     swal.close();
                 }
             }, 800);
+        });
+
+        $('#fleet').on('change', e => {
+            fleet = e.target.value;
+            $('#table').DataTable().ajax.reload();
         });
 
         function create(){
@@ -315,15 +324,226 @@
             `;
         }
         
-        function update(id, status, label){
-            sc("Confirmation", `Are you sure you want to ${label}?`, result => {
+        function del(id){
+            sc("Confirmation", "Are you sure you want to delete?", result => {
                 if(result.value){
                     swal.showLoading();
                     update({
+                        url: "{{ route('requirement.delete') }}",
+                        data: {id: id},
+                        message: "Success"
+                    }, () => {
+                        reload();
+                    })
+                }
+            });
+        }
+
+        function view(id){
+            $.ajax({
+                url: "{{ route('requirement.get') }}",
+                data: {
+                    select: '*',
+                    where: ['id', id],
+                },
+                success: data => {
+                    data = JSON.parse(data)[0];
+                    showDetails(data);
+                }
+            });
+        }
+
+        function showDetails(data){
+            let exp = data.exp;
+            try{
+                if(data.exp){
+                    exp = JSON.parse(data.exp);
+                }
+                else{
+                    exp = "x";
+                }
+            }
+            catch(e){
+                exp = "x";
+            }
+
+            swal({
+                html: `
+                    ${input("id", "", data.id, 2,10, 'hidden')}
+                    @if(auth()->user()->fleet == null)
+                        <div class="row iRow">
+                            <div class="col-md-2 iLabel">
+                                Fleet
+                            </div>
+                            <div class="col-md-10 iInput">
+                                <select name="fleet" class="form-control">
+                                    <option value="FLEET A">FLEET A</option>
+                                    <option value="FLEET B">FLEET B</option>
+                                    <option value="FLEET C">FLEET C</option>
+                                    <option value="FLEET D">FLEET D</option>
+                                    <option value="FLEET E">FLEET E</option>
+                                    <option value="TOEI">TOEI</option>
+                                    <option value="FISHING">FISHING</option>
+                                </select>
+                            </div>
+                        </div></br>
+                    @endif
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Vessel
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="vessel_id" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div></br>
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Rank
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="rank" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div></br>
+                    ${input("joining_date", "Joining Date", data.joining_date, 2,10)}
+                    ${input("joining_port", "Joining Port", data.joining_port, 2,10)}
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            US Visa
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <div class="col-md-12 iInput" style="text-align: left;">
+                                ${checkbox("usv", "Require")}
+                            </div>
+                        </div>
+                    </div></br>
+                    ${input("salary", "Salary", data.salary, 2,10, 'number', 'min=0')}
+                    ${input("max_age", "Max Age", data.max_age, 2,10, 'number', 'min=30 max=65')}
+                    ${input("remarks", "Remarks", data.remarks, 2,10)}
+                `,
+                width: '800px',
+                confirmButtonText: 'Update',
+                showCancelButton: true,
+                cancelButtonColor: errorColor,
+                cancelButtonText: 'Cancel',
+                onOpen: () => {
+                    $.ajax({
+                        url: '{{ route('vessels.get2') }}',
+                        data: {
+                            cols: ['id', 'name'],
+                            where: ['status', 'ACTIVE'],
+                            where2: ['fleet', fleet]
+                        },
+                        success: vessels => {
+                            vessels = JSON.parse(vessels);
+                            vesselString = "";
+
+                            vessels.forEach(vessel => {
+                                vesselString += `
+                                    <option value="${vessel.id}">${vessel.name}</option>
+                                `;
+                            });
+
+                            $('[name="vessel_id"]').append(vesselString);
+                            $('[name="vessel_id"]').val(data.vessel_id);
+                            $('[name="vessel_id"]').select2({
+                                placeholder: 'Select Vessel'
+                            });
+                        }
+                    });
+
+                    $.ajax({
+                        url: '{{ route('rank.get') }}',
+                        data: {
+                            select: ['id', 'abbr', 'name'],
+                        },
+                        success: ranks => {
+                            ranks = JSON.parse(ranks);
+                            rankString = "";
+
+                            ranks.forEach(rank => {
+                                rankString += `
+                                    <option value="${rank.id}">${rank.name} (${rank.abbr})</option>
+                                `;
+                            });
+
+                            $('[name="rank"]').append(rankString);
+                            $('[name="rank"]').val(data.rank);
+                            $('[name="rank"]').select2({
+                                placeholder: 'Select Rank'
+                            });
+                        }
+                    });
+
+                    $('[name="joining_date"]').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                        minDate: moment().format("YYYY-MM-DD")
+                    });
+
+                    $('[name="rank"], [name="vessel_id"]').on('change', e => {
+                        if($('[name="rank"]').val() && $('[name="vessel_id"]').val()){
+                            $.ajax({
+                                url: '{{ route('wage.get') }}',
+                                data: {
+                                    cols: 'total',
+                                    where: ['vessel_id', $('[name="vessel_id"]').val()],
+                                    where2: ['rank_id', $('[name="rank"]').val()]
+                                },
+                                success: wage => {
+                                    wage = JSON.parse(wage)[0];
+                                    if(wage){
+                                        $('[name="salary"]').val(wage.total);
+                                    }
+                                    else{
+                                        $('[name="salary"]').val(0);
+                                    }
+                                }
+                            })
+                        }
+                    });
+
+                    @if(auth()->user()->fleet == null)
+                        $('[name="fleet"]').val(data.fleet).change();
+                    @endif
+
+                    if(data.usv){
+                        $('.swal2-content [type="checkbox"]').click();
+                    }
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        if($('[name="vessel_id"]').val() == "" || $('[name="rank"]').val() == ""){
+                            swal.showValidationError('Vessel and Rank is Required');
+                        }
+                            
+                        setTimeout(() => {resolve()}, 500);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    swal.showLoading();
+
+                    update({
                         url: "{{ route('requirement.update') }}",
                         data: {
-                            id: id,
-                            status: status
+                            id: $("[name='id']").val(),
+                            @if(auth()->user()->fleet == null)
+                                fleet: $("[name='fleet']").val(),
+                            @endif
+                            vessel_id: $("[name='vessel_id']").val(),
+                            rank: $("[name='rank']").val(),
+                            joining_date: $("[name='joining_date']").val(),
+                            joining_port: $("[name='joining_port']").val(),
+                            salary: $("[name='salary']").val(),
+                            max_age: $("[name='max_age']").val(),
+                            remarks: $("[name='remarks']").val(),
+                            usv: $("[name='usv']:checked").length
                         },
                         message: "Success"
                     }, () => {
