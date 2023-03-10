@@ -249,9 +249,9 @@ class PDFExport
                 ['type', 'like', "COVID-19 3RD DOSE"],
             ];
 
-            $temp = DocumentMedCert::where($w)->get();
-            $temp2 = DocumentMedCert::where($w2)->get();
-            $temp3 = DocumentMedCert::where($w3)->get();
+            $temp = DocumentMedCert::where($w)->first();
+            $temp2 = DocumentMedCert::where($w2)->first();
+            $temp3 = DocumentMedCert::where($w3)->first();
 
             $temp ? array_push($docs, $temp->file) : '';
             $temp2 ? array_push($docs, $temp2->file) : '';
@@ -292,9 +292,9 @@ class PDFExport
                 ['type', 'like', "COVID-19 3RD DOSE"],
             ];
 
-            $temp = DocumentMedCert::where($w)->get();
-            $temp2 = DocumentMedCert::where($w2)->get();
-            $temp3 = DocumentMedCert::where($w3)->get();
+            $temp = DocumentMedCert::where($w)->first();
+            $temp2 = DocumentMedCert::where($w2)->first();
+            $temp3 = DocumentMedCert::where($w3)->first();
 
             $temp ? array_push($docs, $temp->file) : '';
             $temp2 ? array_push($docs, $temp2->file) : '';
