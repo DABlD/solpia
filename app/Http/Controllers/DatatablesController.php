@@ -757,11 +757,19 @@ class DatatablesController extends Controller
 	}
 
 	public function requirements(Request $req){
-		$array = Requirement::where('fleet', 'like', $req->fleet)
-					->where('vessel_id', 'like', $req->vessel)
-					->where('rank', 'like', $req->rank)
-					->where('joining_date', 'like', $req->date)
-					->get();
+		if(auth()->user()->fleet == null){
+			$array = Requirement::where('vessel_id', 'like', $req->vessel)
+						->where('rank', 'like', $req->rank)
+						->where('joining_date', 'like', $req->date)
+						->get();
+		}
+		else{
+			$array = Requirement::where('fleet', 'like', $req->fleet)
+						->where('vessel_id', 'like', $req->vessel)
+						->where('rank', 'like', $req->rank)
+						->where('joining_date', 'like', $req->date)
+						->get();
+		}
 
         foreach($array as $item){
             $item->actions = $item->actions;
