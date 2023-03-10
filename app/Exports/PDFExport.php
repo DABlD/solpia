@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use PDF;
-use App\Models\{LineUpContract, ProcessedApplicant, DocumentId, Applicant, Vessel, Rank, Wage};
+use App\Models\{LineUpContract, ProcessedApplicant, DocumentId, Applicant, Vessel, Rank, Wage, DocumentLC};
 
 class PDFExport
 {
