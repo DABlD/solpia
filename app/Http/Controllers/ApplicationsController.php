@@ -1336,7 +1336,7 @@ class ApplicationsController extends Controller
                     }
                 }
             }
-            elseif(str_starts_with($type, 'Y0')){
+            elseif(str_starts_with($type, 'Y')){
                 $applicant->data = $req->all();
             }
         }
