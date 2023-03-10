@@ -19,13 +19,15 @@
                                     <th>#</th>
                                     <th>Vessel</th>
                                     <th>Rank</th>
-                                    <th>Date</th>
+                                    <th>Join Date</th>
                                     <th>Port</th>
                                     <th>USV</th>
                                     <th>Salary</th>
                                     <th>Max Age</th>
                                     <th>Remarks</th>
+                                    <th>Fleet</th>
                                     <th>Status</th>
+                                    <th>Date Posted</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -75,6 +77,7 @@
                 dataType: "json",
                 // dataSrc: "",
                 data: f => {
+                    console.log(fleet);
                     f.fleet = fleet;
                     f.vessel = vessel;
                     f.rank = rank;
@@ -92,12 +95,14 @@
                 { data: 'salary' },
                 { data: 'max_age' },
                 { data: 'remarks'},
+                { data: 'fleet'},
                 { data: 'status'},
+                { data: 'created_at'},
                 { data: 'actions'}
             ],
             columnDefs: [
                 {
-                    targets: 3,
+                    targets: [3, 11],
                     render: date =>{
                         return moment(date).format('MMM DD, YYYY');
                     }
@@ -126,6 +131,11 @@
                     swal.close();
                 }
             }, 800);
+        });
+
+        $('#fleet').on('change', e => {
+            fleet = e.target.value;
+            $('#table').DataTable().ajax.reload();
         });
 
         function create(){
