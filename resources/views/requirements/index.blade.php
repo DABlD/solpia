@@ -77,7 +77,6 @@
                 dataType: "json",
                 // dataSrc: "",
                 data: f => {
-                    console.log(fleet);
                     f.fleet = fleet;
                     f.vessel = vessel;
                     f.rank = rank;
