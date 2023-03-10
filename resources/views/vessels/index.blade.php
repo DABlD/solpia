@@ -3872,6 +3872,17 @@
             window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
         }
 
+        function exportOnCovid(id, name){
+            let data = {};
+            data.id = id;
+            data.filename = name.replace(/[^\w\s]/gi, '') + " - Onsigners Covid Vaccinations";
+            data.exportType = "pdf";
+
+            const type = "Y10_OnsignerCovid";
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+        }
+
         function exportOffDocs(id, name){
             let data = {};
             data.id = id;
@@ -3890,6 +3901,17 @@
             data.exportType = "pdf";
 
             const type = "Y09_OffsignerUSV";
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+        }
+
+        function exportOffCovid(id, name){
+            let data = {};
+            data.id = id;
+            data.filename = name.replace(/[^\w\s]/gi, '') + " - Offsigners Covid Vaccinations";
+            data.exportType = "pdf";
+
+            const type = "Y11_OffsignerCovid";
 
             window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
         }
