@@ -236,12 +236,26 @@ class PDFExport
 
             $w = [
                 ['applicant_id', '=', $applicant->applicant_id],
-                ['type', 'like', "%COVID-19%"],
+                ['type', 'like', "COVID-19 1ST DOSE"],
+            ];
+
+            $w2 = [
+                ['applicant_id', '=', $applicant->applicant_id],
+                ['type', 'like', "COVID-19 2ND DOSE"],
+            ];
+
+            $w3 = [
+                ['applicant_id', '=', $applicant->applicant_id],
+                ['type', 'like', "COVID-19 3RD DOSE"],
             ];
 
             $temp = DocumentMedCert::where($w)->get();
+            $temp2 = DocumentMedCert::where($w2)->get();
+            $temp3 = DocumentMedCert::where($w3)->get();
 
             $temp ? array_push($docs, $temp->file) : '';
+            $temp2 ? array_push($docs, $temp2->file) : '';
+            $temp3 ? array_push($docs, $temp3->file) : '';
 
             $applicant->docs = $docs;
         }
@@ -265,12 +279,26 @@ class PDFExport
 
             $w = [
                 ['applicant_id', '=', $applicant->applicant_id],
-                ['type', 'like', "%COVID-19%"],
+                ['type', 'like', "COVID-19 1ST DOSE"],
+            ];
+
+            $w2 = [
+                ['applicant_id', '=', $applicant->applicant_id],
+                ['type', 'like', "COVID-19 2ND DOSE"],
+            ];
+
+            $w3 = [
+                ['applicant_id', '=', $applicant->applicant_id],
+                ['type', 'like', "COVID-19 3RD DOSE"],
             ];
 
             $temp = DocumentMedCert::where($w)->get();
+            $temp2 = DocumentMedCert::where($w2)->get();
+            $temp3 = DocumentMedCert::where($w3)->get();
 
             $temp ? array_push($docs, $temp->file) : '';
+            $temp2 ? array_push($docs, $temp2->file) : '';
+            $temp3 ? array_push($docs, $temp3->file) : '';
 
             $applicant->docs = $docs;
         }
