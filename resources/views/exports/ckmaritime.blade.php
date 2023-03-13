@@ -602,12 +602,22 @@
 		}
 
 		if(isset($b)){
-			if($b->expiry_date < $a->expiry_date){
+			if(isset($a)){
+				if($b->expiry_date < $a->expiry_date){
+					$dok = $b;
+				}
+			}
+			else{
 				$dok = $b;
 			}
 		}
 		elseif(isset($c)){
-			if($c->expiry_date < $dok->expiry_date){
+			if(isset($dok)){
+				if($c->expiry_date < $dok->expiry_date){
+					$dok = $c;
+				}
+			}
+			else{
 				$dok = $c;
 			}
 		}
