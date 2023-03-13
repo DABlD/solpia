@@ -396,8 +396,8 @@
 	</tr>
 
 	@php
-		$coc = $data->document_lc->COC ?? null;
-		$goc = $data->document_lc->{"GMDSS/GOC"} ?? null;
+		$coc = isset($data->document_lc->COC) ? $data->document_lc->COC : null;
+		$goc = isset($data->document_lc->{"GMDSS/GOC"}) ? $data->document_lc->{"GMDSS/GOC"} : null;
 	@endphp
 
 	<tr>
