@@ -552,5 +552,54 @@
                 }
             });
         }
+
+        function candidates(id){
+            console.log(id);
+            $.ajax({
+                url: '{{ route('candidate.get') }}',
+                data: {
+                    where: ['requirement_id', id]
+                },
+                success: candidates => {
+                    candidates = JSON.parse(candidates);
+                    let string = "";
+                    
+                    candidates.forEach(candidate => {
+                        console.log(candidate);
+                    })
+
+                    viewCandidates(string);
+                }
+            });
+        }
+
+        function viewCandidates(string){
+            swal({
+                title: "Candidates",
+                width: '70%',
+                html: `
+                    <table id="candidate_table" class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Initial Interview</th>
+                                <th>Written Assessment</th>
+                                <th>Technical Interview</th>
+                                <th>Principals Approval</th>
+                                <th>For Medical</th>
+                                <th>On Board</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${string}
+                        </tbody>
+                    </table>
+                `,
+                onOpen: () => {
+                    $('#candidate_table th, #candidate_table td').css('text-align', 'center');
+                }
+            })
+        }
     </script>
 @endpush
