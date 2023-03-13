@@ -597,16 +597,16 @@
 		$c = isset($data->document_lc->{"MEDICAL FIRST AID - MEFA"}) ? $data->document_lc->{"MEDICAL FIRST AID - MEFA"} : null;
 
 		$dok = null;
-		if($a){
+		if(isset($a)){
 			$dok = $a;
 		}
 
-		if($b){
+		if(isset($b)){
 			if($b->expiry_date < $a->expiry_date){
 				$dok = $b;
 			}
 		}
-		elseif($c){
+		elseif(isset($c)){
 			if($c->expiry_date < $dok->expiry_date){
 				$dok = $c;
 			}
