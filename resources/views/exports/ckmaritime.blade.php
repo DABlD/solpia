@@ -592,9 +592,9 @@
 	{{ $doc('BASIC TRAINING - BT', 		'lc', 		null,	'기초안전교육 SFTBT(BST)')}}
 
 	@php
-		$a = $data->document_lc->{"ADVANCE FIRE FIGHTING - AFF"};
-		$b = $data->document_lc->{"PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB"};
-		$c = $data->document_lc->{"MEDICAL FIRST AID - MEFA"};
+		$a = isset($data->document_lc->{"ADVANCE FIRE FIGHTING - AFF"}) ? $data->document_lc->{"ADVANCE FIRE FIGHTING - AFF"} : null;
+		$b = isset($data->document_lc->{"PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB"}) ? $data->document_lc->{"PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB"} : null;
+		$c = isset($data->document_lc->{"MEDICAL FIRST AID - MEFA"}) ? $data->document_lc->{"MEDICAL FIRST AID - MEFA"} : null;
 
 		$dok = null;
 		if($a){
