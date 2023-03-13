@@ -601,11 +601,15 @@
 			$dok = $a;
 		}
 
-		if($b && $b->expiry_date < $a->expiry_date){
-			$dok = $b;
+		if($b){
+			if($b->expiry_date < $a->expiry_date){
+				$dok = $b;
+			}
 		}
-		elseif($c && $c->expiry_date < $dok->expiry_date){
-			$dok = $c;
+		elseif($c){
+			if($c->expiry_date < $dok->expiry_date){
+				$dok = $c;
+			}
 		}
 	@endphp
 
