@@ -235,7 +235,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-briefcase')
 			->defaults('name', 'Requirements')
-			->defaults('roles', array('Admin', 'Crewing Manager', 'Crewing Officer', 'Training'))
+			->defaults('roles', array('Admin', 'Crewing Manager', 'Crewing Officer', 'Training', 'Recruitment Officer'))
 			->name($name . '.index')
 			->defaults('href', $name);
 			
