@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
     <style>
-        
+
     </style>
 @endpush
 
@@ -554,30 +554,102 @@
         }
 
         function candidates(id){
-            console.log(id);
             $.ajax({
                 url: '{{ route('candidate.get') }}',
                 data: {
-                    where: ['requirement_id', id]
+                    where: ['requirement_id', id],
+                    load: ["prospect"]
                 },
-                success: candidates => {
-                    candidates = JSON.parse(candidates);
+                success: result => {
+                    result = JSON.parse(result);
+
+                    let candidates = result.candidates;
+                    let req = result.req;
                     let string = "";
                     
-                    candidates.forEach(candidate => {
-                        console.log(candidate);
+                    candidates.forEach(can => {
+                        let action = `
+                            <a class="btn btn-danger" data-toggle="tooltip" title="Reject" 
+                                onclick="reject(${req.id}, ${can.id})">
+                                <span class="fa fa-ban"></span>
+                            </a>
+                        `;
+
+                        string += `
+                            <tr>
+                                <td>${can.id}</td>
+                                <td>${can.prospect.name}</td>
+                                <td>${checkbox("ii", "test", can.initial_interview)}</td>
+                                <td>${checkbox("wa", "test", can.written_assessment)}</td>
+                                <td>${checkbox("ti", "test", can.technical_interview)}</td>
+                                <td>${checkbox("pa", "test", can.principals_approval)}</td>
+                                <td>${checkbox("fm", "test", can.medical)}</td>
+                                <td>${checkbox("ob", "test", can.on_board)}</td>
+                                <td>${can.status}</td>
+                                <td>${action}</td>
+                            </tr>
+                        `;
                     })
 
-                    viewCandidates(string);
+                    if(string == ""){
+                        string = `
+                            <tr>
+                                <td colspan="8">No candidates yet</td>
+                            </tr>
+                        `;
+                    }
+                    viewCandidates(string, req);
                 }
             });
         }
 
-        function viewCandidates(string){
+        function reject(rid, cid){
             swal({
-                title: "Candidates",
+                title: "Confirmation",
+                text: "Are you sure you want to reject this crew?",
+                showCancelButton: true,
+                cancelButtonColor: errorColor
+            }).then(result => {
+                if(result.value){
+                    update({
+                        url: "{{ route('candidate.update') }}",
+                        data: {
+                            id: cid,
+                            status: 'REJECTED'
+                        },
+                        message: "Success"
+                    }, () => {
+                        setTimeout(() => {
+                            candidates(rid);
+                        }, 1000)
+                    })
+                }
+                else{
+                    candidates(rid);
+                }
+            })
+        }
+ 
+        function checkbox(id, value, checked = ""){
+            return `
+                <input type="checkbox" id="${id}" ${checked}>
+            `;
+        }
+
+        function viewCandidates(string, req){
+            swal({
+                title: `${req.rank.abbr} candidates for ${req.vessel.name}`,
                 width: '70%',
                 html: `
+                    @if(in_array(auth()->user()->role, ["Admin", "Recruitment Officer"]))
+                        <div class="pull-right" style="margin-bottom: 5px;">
+                            <a class="btn btn-success" data-toggle="tooltip" title="Add Candidate" 
+                                onclick="addCandidate(${req.id}, '${req.rank.abbr}', ${req.max_age}, ${req.usv}, ${req.vessel.id})">
+                                <span class="fa fa-plus"></span>
+                            </a>
+                        </div>
+                    @endif
+
                     <table id="candidate_table" class="table table-hover table-bordered">
                         <thead>
                             <tr>
@@ -589,6 +661,8 @@
                                 <th>Principals Approval</th>
                                 <th>For Medical</th>
                                 <th>On Board</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -598,6 +672,147 @@
                 `,
                 onOpen: () => {
                     $('#candidate_table th, #candidate_table td').css('text-align', 'center');
+                }
+            })
+        }
+
+        function addCandidate(id, rank, age, usv, vid){
+            swal({
+                title: `Candidate Suggestions`,
+                width: '70%',
+                html: `
+                    <table id="suggestions_table" class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>RANK</th>
+                                <th>AGE</th>
+                                <th>EXP</th>
+                                <th>CONTACT</th>
+                                <th>USV</th>
+                                <th>LOCATION</th>
+                                <th>SALARY</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                `,
+                onOpen: () => {
+                    $('#suggestions_table th, #suggestions_table td').css('text-align', 'center');
+                    var table2 = $('#suggestions_table').DataTable({
+                        serverSide: true,
+                        pageLength: 10,
+                        ajax: {
+                            url: "{{ route('datatables.suggestCandidate') }}",
+                            type: "POST",
+                            dataType: "json",
+                            // dataSrc: "",
+                            data: f => {
+                                f.rank = rank;
+                                f.age = age;
+                                f.usv = usv;
+                            }
+                        },
+                        columns: [
+                            { data: 'id'},
+                            { data: 'name'},
+                            { data: 'rank'},
+                            { data: 'age' },
+                            { data: 'exp' },
+                            { data: 'contact' },
+                            { data: 'usv' },
+                            { data: 'location' },
+                            { data: 'previous_salary'},
+                            { data: 'actions2'}
+                        ],
+                        columnDefs: [
+                            {
+                                targets: 3,
+                                render: (age, d, row) =>{
+                                    return row.birthday ? moment().diff(row.birthday, 'years') : age;
+                                }
+                            },
+                            {
+                                targets: 6,
+                                render: usv =>{
+                                    return usv ? toDate(usv) : "-";
+                                }
+                            },
+                            {
+                                targets: 8,
+                                render: salary =>{
+                                    return salary ?? "-";
+                                }
+                            },
+                            {
+                                targets: 9,
+                                render: action =>{
+                                    return `
+                                        <a class='btn btn-success btn-sm' data-toggle='tooltip' title='Propose' onclick='propose(${id}, ${action}, "${rank}", ${age}, ${usv}, ${vid})'>
+                                            <span class="fa fa-user-plus fa-2xs"></span>
+                                        </a>
+                                    `;
+                                }
+                            },
+                        ],
+                        drawCallback: function(){
+                            $('#suggestions_table tbody').append('<div class="preloader"></div>');
+                            // MUST NOT BE INTERCHANGED t-i
+                            tooltip();
+                            // initializeActions();
+                        },
+                        order: [ [0, 'desc'] ],
+                    });
+
+                    $('#suggestions_table_filter input').unbind();
+                    $('#suggestions_table_filter input').bind('keyup.DT', e => {
+                        if(e.which == 13){
+                            table2.search($(e.target).val()).draw();
+                        }
+                    });
+
+                    table2.on('draw', () => {
+                        setTimeout(() => {
+                            $('.preloader').fadeOut();
+                        }, 800);
+                    });
+                }
+            }).then(result => {
+                if(result.value){
+                    candidates(id);
+                }
+            });
+        }
+
+        function propose(rid, pid, rank, age, usv, vid){
+            swal({
+                title: "Confirmation",
+                text: "Are you sure you want to propose this crew?",
+                showCancelButton: true,
+                cancelButtonColor: errorColor
+            }).then(result => {
+                if(result.value){
+                    $.ajax({
+                        url: "{{ route('candidate.store') }}",
+                        type: "POST",
+                        data: {
+                            requirement_id: rid,
+                            prospect_id: pid,
+                            vessel_id: vid,
+                        },
+                        success: () => {
+                            ss("Success");
+                            setTimeout(() => {
+                                candidates(rid);
+                            }, 1000)
+                        }
+                    })
+                }
+                else{
+                    addCandidate(rid, rank, age, usv);
                 }
             })
         }

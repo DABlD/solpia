@@ -14,4 +14,8 @@ trait ProspectAttribute{
 	    '</a>'
 	    ;
 	}
+
+	public function getActions2Attribute(){
+		return $this->id;
+	}
 }

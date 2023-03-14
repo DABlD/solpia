@@ -227,6 +227,7 @@ Route::group([
 		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
 		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 
+		Route::get($name . '/suggestCandidate', ucfirst($name) . 'Controller@suggestCandidate')->name($name . '.suggestCandidate');
 		Route::post($name . '/import', ucfirst($name) . 'Controller@import')->name($name . '.import');
 
 		// OPENINGS ROUTES
@@ -305,6 +306,7 @@ Route::group([
 
 		Route::post('datatables/prospects', 'DatatablesController@prospects')->name('datatables.prospects');
 		Route::post('datatables/requirements', 'DatatablesController@requirements')->name('datatables.requirements');
+		Route::post('datatables/suggestCandidate', 'DatatablesController@suggestCandidate')->name('datatables.suggestCandidate');
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
