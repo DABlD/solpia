@@ -8,7 +8,7 @@
             <div class="box box-info">
 
                 <div class="box-header">
-                    @include('requirements.includes.toolbar')
+                    {{-- @include('requirements.includes.toolbar') --}}
                 </div>
 
                 <div class="table-responsive">
