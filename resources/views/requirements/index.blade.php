@@ -649,28 +649,48 @@
                                 disableButtons(id, data["status"]);
                             }
 
-                            $.ajax({
-                                url: '{{ route('candidate.update') }}',
-                                type: "POST",
-                                data: data,
-                                success: () => {
-                                    setTimeout(() => {
-                                        swal.hideLoading();
-                                        $('.swal2-content').append(`
-                                            <div id='updateSuccess' style='color: green; text-align: center; font-weight: bold;'>
-                                                Successfully Updated
-                                            </div>
-                                        `);
-                                    }, 800);
-
-                                    setTimeout(() => {
-                                        $('#updateSuccess').remove();
-                                    }, 2000);
-                                }
-                            })
+                            if(data["status"] == "ON BOARD"){
+                                $.ajax({
+                                    url: '{{ route('requirement.update') }}',
+                                    type: "POST",
+                                    data: {
+                                        id: req.id,
+                                        status: "COMPLETED"
+                                    },
+                                    success: () => {
+                                        reload();
+                                        updateCandidate(data);
+                                    }
+                                });
+                            }
+                            else{
+                                updateCandidate(data);
+                            }
                         })
                     });
 
+                }
+            });
+        }
+
+        function updateCandidate(data){
+            $.ajax({
+                url: '{{ route('candidate.update') }}',
+                type: "POST",
+                data: data,
+                success: () => {
+                    setTimeout(() => {
+                        swal.hideLoading();
+                        $('.swal2-content').append(`
+                            <div id='updateSuccess' style='color: green; text-align: center; font-weight: bold;'>
+                                Successfully Updated
+                            </div>
+                        `);
+                    }, 800);
+
+                    setTimeout(() => {
+                        $('#updateSuccess').remove();
+                    }, 2000);
                 }
             });
         }
