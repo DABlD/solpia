@@ -423,6 +423,19 @@
                     ${input("salary", "Salary", data.salary, 2,10, 'number', 'min=0')}
                     ${input("max_age", "Max Age", data.max_age, 2,10, 'number', 'min=30 max=65')}
                     ${input("remarks", "Remarks", data.remarks, 2,10)}
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Status
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="status" class="form-control">
+                                <option value="AVAILABLE">AVAILABLE</option>
+                                <option value="COMPLETED">COMPLETED</option>
+                                <option value="ON HOLD">ON HOLD</option>
+                                <option value="CANCELLED">CANCELLED</option>
+                            </select>
+                        </div>
+                    </div></br>
                 `,
                 width: '800px',
                 confirmButtonText: 'Update',
@@ -514,6 +527,8 @@
                     if(data.usv){
                         $('.swal2-content [type="checkbox"]').click();
                     }
+
+                    $('[name="status"]').val(data.status);
                 },
                 preConfirm: () => {
                     swal.showLoading();
@@ -543,6 +558,7 @@
                             salary: $("[name='salary']").val(),
                             max_age: $("[name='max_age']").val(),
                             remarks: $("[name='remarks']").val(),
+                            status: $("[name='status']").val(),
                             usv: $("[name='usv']:checked").length
                         },
                         message: "Success"
