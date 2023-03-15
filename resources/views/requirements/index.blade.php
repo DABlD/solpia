@@ -119,8 +119,7 @@
                 tooltip();
                 // initializeActions();
             },
-            order: [],
-            // order: [ [0, 'desc'] ],
+            order: [ [0, 'desc'] ],
         });
 
         table.on('draw', () => {
