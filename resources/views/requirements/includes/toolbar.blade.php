@@ -18,6 +18,22 @@
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="row" style="display: flex;">
+            <div class="col-md-4 iLabel" style="margin: auto;">
+                Filter by Status
+            </div>
+            <div class="col-md-8 iInput">
+                <select id="status" class="form-control">
+                    <option value="%%">All</option>
+                    <option value="AVAILABLE">AVAILABLE</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                    <option value="ON HOLD">ON HOLD</option>
+                    <option value="CANCELLED">CANCELLED</option>
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
 
 @if(in_array(auth()->user()->role, ["Admin", "Crewing Officer", "Crewing Manager"]))

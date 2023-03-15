@@ -64,9 +64,10 @@
 @push('after-scripts')
     <script>
         var fleet = "{{ auth()->user()->fleet ?? "%%" }}";
-        var vessel = "%%";
-        var rank = "%%";
-        var date = "%%";
+        var fVessel = "%%";
+        var fRank = "%%";
+        var fDate = "%%";
+        var fStatus = "%%";
 
         var table = $('#table').DataTable({
             serverSide: true,
@@ -78,9 +79,10 @@
                 // dataSrc: "",
                 data: f => {
                     f.fleet = fleet;
-                    f.vessel = vessel;
-                    f.rank = rank;
-                    f.date = date;
+                    f.vessel = fVessel;
+                    f.rank = fRank;
+                    f.date = fDate;
+                    f.status = fStatus;
                     f.load = ['vessel', 'rank']
                 }
             },
@@ -133,6 +135,11 @@
 
         $('#fleet').on('change', e => {
             fleet = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
+        $('#status').on('change', e => {
+            fStatus = e.target.value;
             $('#table').DataTable().ajax.reload();
         });
 
