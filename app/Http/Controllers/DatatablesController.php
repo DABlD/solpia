@@ -781,6 +781,46 @@ class DatatablesController extends Controller
     		->make(true);
 	}
 
+    public function suggestCandidate(Request $req){
+    	if($req->search["value"] == ""){
+	        $suggestions = Prospect::where('rank', $req->rank)
+	                            ->where(function($q) use($req){
+	                                $bday = now()->subYears($req->age)->toDateString();
+
+	                                $q->where('age', '<=', $req->age);
+	                                $q->orWhere('birthday','>=', $bday);
+	                            });
+
+	        if($req->usv){
+	            $suggestions->whereNotNull('usv');
+	        }
+
+	        $suggestions = $suggestions->latest()->take(10)->get();
+
+	        foreach($suggestions as $item){
+	            $item->actions2 = $item->actions2;
+	        }
+
+	        $suggestions = $suggestions->toArray();
+
+		    return Datatables::of($suggestions)
+	    		->make(true);
+    	}
+    	else{
+    		$search = $req->search["value"];
+			$array = Prospect::where('name', 'like', "%$search%")->get();
+
+	        foreach($array as $item){
+	            $item->actions2 = $item->actions2;
+	        }
+
+			$array = $array->toArray();
+
+		    return Datatables::of($array)
+	    		->make(true);
+    	}
+    }
+
 	public function principals(Request $req){
 		$array = Principal::where('fleet', 'like', $req->fleet)->get();
 

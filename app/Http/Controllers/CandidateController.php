@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Candidate;
+use App\Models\{Candidate, Requirement};
 use DB;
 
 class CandidateController extends Controller
@@ -37,6 +37,11 @@ class CandidateController extends Controller
         // IF HAS GROUP
         if($req->group){
             $array = $array->groupBy($req->group);
+        }
+
+        if($req->where[0] == "requirement_id"){
+            $requirement = Requirement::with('rank', 'vessel')->find($req->where[1]);
+            $array = ["req" => $requirement, "candidates" => $array];
         }
 
         echo json_encode($array);

@@ -296,7 +296,7 @@
 				BIRTH DATE
 			</td>
 			<td colspan="3">
-				{{ $applicant->user->birthday->format('F j, Y') }}
+				{{ $applicant->user->birthday ? $applicant->user->birthday->format('F j, Y') : "-" }}
 			</td>
 
 			<td colspan="2">
