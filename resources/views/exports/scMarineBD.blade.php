@@ -59,7 +59,7 @@
 			<td colspan="4">{{ $applicant->user->lname }}</td>
 
 			<td colspan="2">Birth Date</td>
-			<td colspan="3">{{ $applicant->user->birthday->format('F j, Y') }}</td>
+			<td colspan="3">{{ $applicant->user->birthday ? $applicant->user->birthday->format('F j, Y') : "-" }}</td>
 		</tr>
 
 		<tr>

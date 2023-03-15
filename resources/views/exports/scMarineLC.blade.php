@@ -64,7 +64,7 @@
 
 		<tr>
 			<td colspan="2">Birth Date</td>
-			<td colspan="3">{{ $applicant->user->birthday->format('F j, Y') }}</td>
+			<td colspan="3">{{ $applicant->user->birthday ? $applicant->user->birthday->format('F j, Y') : "-" }}</td>
 			<td colspan="5">Height/Weight</td>
 			<td colspan="4">{{ $applicant->height }} cm / {{ $applicant->weight }} kg</td>
 		</tr>
