@@ -64,9 +64,10 @@
 @push('after-scripts')
     <script>
         var fleet = "{{ auth()->user()->fleet ?? "%%" }}";
-        var vessel = "%%";
-        var rank = "%%";
-        var date = "%%";
+        var fVessel = "%%";
+        var fRank = "%%";
+        var fDate = "%%";
+        var fStatus = "%%";
 
         var table = $('#table').DataTable({
             serverSide: true,
@@ -78,9 +79,10 @@
                 // dataSrc: "",
                 data: f => {
                     f.fleet = fleet;
-                    f.vessel = vessel;
-                    f.rank = rank;
-                    f.date = date;
+                    f.vessel = fVessel;
+                    f.rank = fRank;
+                    f.date = fDate;
+                    f.status = fStatus;
                     f.load = ['vessel', 'rank']
                 }
             },
@@ -119,8 +121,7 @@
                 tooltip();
                 // initializeActions();
             },
-            order: [],
-            // order: [ [0, 'desc'] ],
+            order: [ [0, 'desc'] ],
         });
 
         table.on('draw', () => {
@@ -134,6 +135,11 @@
 
         $('#fleet').on('change', e => {
             fleet = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
+        $('#status').on('change', e => {
+            fStatus = e.target.value;
             $('#table').DataTable().ajax.reload();
         });
 
@@ -423,6 +429,19 @@
                     ${input("salary", "Salary", data.salary, 2,10, 'number', 'min=0')}
                     ${input("max_age", "Max Age", data.max_age, 2,10, 'number', 'min=30 max=65')}
                     ${input("remarks", "Remarks", data.remarks, 2,10)}
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Status
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="status" class="form-control">
+                                <option value="AVAILABLE">AVAILABLE</option>
+                                <option value="COMPLETED">COMPLETED</option>
+                                <option value="ON HOLD">ON HOLD</option>
+                                <option value="CANCELLED">CANCELLED</option>
+                            </select>
+                        </div>
+                    </div></br>
                 `,
                 width: '800px',
                 confirmButtonText: 'Update',
@@ -514,6 +533,8 @@
                     if(data.usv){
                         $('.swal2-content [type="checkbox"]').click();
                     }
+
+                    $('[name="status"]').val(data.status);
                 },
                 preConfirm: () => {
                     swal.showLoading();
@@ -543,6 +564,7 @@
                             salary: $("[name='salary']").val(),
                             max_age: $("[name='max_age']").val(),
                             remarks: $("[name='remarks']").val(),
+                            status: $("[name='status']").val(),
                             usv: $("[name='usv']:checked").length
                         },
                         message: "Success"
@@ -566,7 +588,7 @@
                     let candidates = result.candidates;
                     let req = result.req;
                     let string = "";
-                    
+
                     candidates.forEach(can => {
                         let action = `
                             <a class="btn btn-danger" data-toggle="tooltip" title="Reject" 
@@ -579,14 +601,14 @@
                             <tr>
                                 <td>${can.id}</td>
                                 <td>${can.prospect.name}</td>
-                                <td>${checkbox("ii", "test", can.initial_interview)}</td>
-                                <td>${checkbox("wa", "test", can.written_assessment)}</td>
-                                <td>${checkbox("ti", "test", can.technical_interview)}</td>
-                                <td>${checkbox("pa", "test", can.principals_approval)}</td>
-                                <td>${checkbox("fm", "test", can.medical)}</td>
-                                <td>${checkbox("ob", "test", can.on_board)}</td>
-                                <td>${can.status}</td>
-                                <td>${action}</td>
+                                <td>${checkbox2("ii" + can.id, "test", can.initial_interview, can.status)}</td>
+                                <td>${checkbox2("wa" + can.id, "test", can.written_assessment, can.status)}</td>
+                                <td>${checkbox2("ti" + can.id, "test", can.technical_interview, can.status)}</td>
+                                <td>${checkbox2("pa" + can.id, "test", can.principals_approval, can.status)}</td>
+                                <td>${checkbox2("fm" + can.id, "test", can.medical, can.status)}</td>
+                                <td>${checkbox2("ob" + can.id, "test", can.on_board, can.status)}</td>
+                                <td id="can${can.id}">${can.status}</td>
+                                <td>${can.status != "REJECTED" ? action : ""}</td>
                             </tr>
                         `;
                     })
@@ -599,7 +621,136 @@
                         `;
                     }
                     viewCandidates(string, req);
+                    candidates.forEach(can => {
+                        disableButtons(can.id, can.status);
+                    });
+
+                    let cbs = ["ii", "wa", "ti", "pa", "fm", "ob"];
+
+                    /*ONCLICK EVENTS*/
+                    cbs.forEach(cb => {
+                        $(`[class^="${cb}"]`).on('click', e => {
+                            swal.showLoading();
+
+                            let id = e.target.className.replace(cb, "");
+                            let isChecked = e.target.checked;
+                            let temp = {
+                                ii: "initial_interview",
+                                wa: "written_assessment",
+                                ti: "technical_interview",
+                                pa: "principals_approval",
+                                fm: "medical",
+                                ob: "on_board"
+                            };
+
+                            let data = {};
+                            data["id"] = id;
+                            data[temp[cb]] = isChecked ? 1 : 0;
+
+                            if(cb == "ii"){
+                                data["status"] = isChecked ? "PENDING" : "PENDING";
+                            }
+                            else if(cb == "wa"){
+                                data["status"] = isChecked ? "PENDING" : "PENDING";
+                            }
+                            else if(cb == "ti"){
+                                data["status"] = isChecked ? "PENDING" : "PENDING";
+                            }
+                            else if(cb == "pa"){
+                                data["status"] = isChecked ? "FOR APPROVAL" : "PENDING";
+                            }
+                            else if(cb == "fm"){
+                                data["status"] = isChecked ? "FOR MEDICAL" : "FOR APPROVAL";
+                            }
+                            else if(cb == "ob"){
+                                data["status"] = isChecked ? "ON BOARD" : "FOR MEDICAL";
+                            }
+
+                            if(data["status"] != undefined){
+                                $(`#can${id}`).html(data["status"]);
+                                disableButtons(id, data["status"]);
+                            }
+
+                            if(data["status"] == "ON BOARD"){
+                                $.ajax({
+                                    url: '{{ route('requirement.update') }}',
+                                    type: "POST",
+                                    data: {
+                                        id: req.id,
+                                        status: "COMPLETED"
+                                    },
+                                    success: () => {
+                                        reload();
+                                        updateCandidate(data);
+                                    }
+                                });
+                            }
+                            else{
+                                updateCandidate(data);
+                            }
+                        })
+                    });
+
                 }
+            });
+        }
+
+        function updateCandidate(data){
+            $.ajax({
+                url: '{{ route('candidate.update') }}',
+                type: "POST",
+                data: data,
+                success: () => {
+                    setTimeout(() => {
+                        swal.hideLoading();
+                        $('.swal2-content').append(`
+                            <div id='updateSuccess' style='color: green; text-align: center; font-weight: bold;'>
+                                Successfully Updated
+                            </div>
+                        `);
+                    }, 800);
+
+                    setTimeout(() => {
+                        $('#updateSuccess').remove();
+                    }, 2000);
+                }
+            });
+        }
+
+        function disableButtons(id, status){
+            let cbs = ["ii", "wa", "ti", "pa", "fm", "ob"];
+
+            /*ENABLE ALL*/
+            cbs.forEach(cb => {
+                $(`.${cb}${id}`).prop('disabled', false);
+            });
+
+            let temp = [];
+
+            if(status == "PENDING"){
+                temp = ["ii", "wa", "ti"];
+                let ctr = 0;
+                temp.forEach(cb => {
+                    if($(`.${cb}${id}`).is(':checked')){
+                        ctr++;
+                    }
+                });
+
+                temp = ctr < 3 ? ["pa", "fm", "ob"] : ["fm", "ob"];
+            }
+            else if(status == "FOR APPROVAL"){
+                temp = ["ii", "wa", "ti", "ob"];
+            }
+            else if(status == "FOR MEDICAL"){
+                temp = ["ii", "wa", "ti", "pa"];
+            }
+            else if(status == "ON BOARD"){
+                temp = ["ii", "wa", "ti", "pa", "fm"];
+            }
+
+            // disable 
+            temp.forEach(cb => {
+                $(`.${cb}${id}`).prop('disabled', true);
             });
         }
 
@@ -630,16 +781,20 @@
             })
         }
  
-        function checkbox(id, value, checked = ""){
+        function checkbox2(id, value, checked = "", status){
+            if(checked){
+                checked = "checked";
+            }
+
             return `
-                <input type="checkbox" id="${id}" ${checked}>
+                <input type="checkbox" class="${id}" ${checked} ${status == "REJECTED" ? "disabled" : ""}>
             `;
         }
 
         function viewCandidates(string, req){
             swal({
                 title: `${req.rank.abbr} candidates for ${req.vessel.name}`,
-                width: '70%',
+                width: '80%',
                 html: `
                     @if(in_array(auth()->user()->role, ["Admin", "Recruitment Officer"]))
                         <div class="pull-right" style="margin-bottom: 5px;">

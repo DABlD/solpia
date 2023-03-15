@@ -761,6 +761,7 @@ class DatatablesController extends Controller
 					->where('vessel_id', 'like', $req->vessel)
 					->where('rank', 'like', $req->rank)
 					->where('joining_date', 'like', $req->date)
+					->where('status', 'like', $req->status)
 					->get();
 
         foreach($array as $item){
