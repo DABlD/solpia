@@ -695,7 +695,15 @@ class DatatablesController extends Controller
 		$search = $req->search["value"];
 		
 		$array = $array->where(function($q) use($filters){
-			$q->whereBetween('age', [$filters["min_age"], $filters["max_age"]]);
+			if($filters["min_age"] && $filters["max_age"]){
+				$q->whereBetween('age', [$filters["min_age"], $filters["max_age"]]);
+			}
+			elseif($filters["min_age"]){
+				$q->where('age', ">", $filters["min_age"]);
+			}
+			elseif($filters["max_age"]){
+				$q->where('age', ">", $filters["max_age"]);
+			}
 		});
 
 		if(isset($filters["name"]) && $filters["name"] != ""){
