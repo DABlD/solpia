@@ -888,6 +888,7 @@
                 `,
                 onOpen: () => {
                     $('#suggestions_table th, #suggestions_table td').css('text-align', 'center');
+                    $('#suggestions_table th').css('background-color', '#ffddcc');
                     var table2 = $('#suggestions_table').DataTable({
                         serverSide: true,
                         pageLength: 10,
