@@ -32,6 +32,13 @@ class ProspectsImport2 implements ToCollection, WithCalculatedFormulas
                 $temp->email = $prospect[15];
                 $temp->remarks = $prospect[16];
 
+                if($prospect[16] == ""){
+                    $temp->remarks .= "Docs - " . $prospect[11];
+                }
+                else{
+                    $temp->remarks .= " / Docs - " . $prospect[11];
+                }
+
                 // dd($prospect[9], $prospect[10]);
                 if(trim($prospect[6]) && (is_numeric($prospect[6]) && $prospect[6] > 40000)){
                     try {

@@ -526,7 +526,7 @@
         }
 
         function imp(){
-            // <option value="ProspectsImport2">Responses</option>
+            // <option value="ProspectsImport">Recruiting</option>
             // <option value="ProspectsImport3">Prospect</option>
             // <option value="ProspectsImport5">Kalaw</option>
             // <option value="ProspectsImport6">Endorsed</option>
@@ -537,7 +537,7 @@
                         @csrf
                         <input type="file" name="file" class="swal2-file">
                         <select name="import" class="form-control">
-                            <option value="ProspectsImport">Recruiting</option>
+                            <option value="ProspectsImport2">Responses</option>
                             <option value="ProspectsImport4">Applicant Log</option>
                         </select>
                     </form>

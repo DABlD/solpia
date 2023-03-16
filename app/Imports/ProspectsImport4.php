@@ -37,6 +37,8 @@ class ProspectsImport4 implements ToCollection, WithCalculatedFormulas
                 if($loc){
                     $temp->age = substr($prospect[8], $loc-3,2);
                 }
+
+                $temp->save();
             }
         }
     }
