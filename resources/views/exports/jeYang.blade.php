@@ -148,7 +148,7 @@
 				</tr>
 			@elseif($key == 1)
 				@php
-					$salary = $data->wage->total;
+					$salary = $data->wage ? $data->wage->total : 0;
 					$add = 70;
 
 					if(in_array($data->rank ? $data->rank->abbr : "-", ["FMAN", "DHAND", "OLR"])){
