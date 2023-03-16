@@ -793,6 +793,7 @@ class DatatablesController extends Controller
     public function suggestCandidate(Request $req){
     	if($req->search["value"] == ""){
 	        $suggestions = Prospect::where('rank', $req->rank)
+								->where('status', "AVAILABLE")
 	                            ->where(function($q) use($req){
 	                                $bday = now()->subYears($req->age)->toDateString();
 
@@ -817,7 +818,9 @@ class DatatablesController extends Controller
     	}
     	else{
     		$search = $req->search["value"];
-			$array = Prospect::where('name', 'like', "%$search%")->get();
+			$array = Prospect::where('name', 'like', "%$search%")
+								->where('status', "AVAILABLE")
+								->get();
 
 	        foreach($array as $item){
 	            $item->actions2 = $item->actions2;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Candidate, Requirement};
+use App\Models\{Candidate, Requirement, Prospect};
 use DB;
 
 class CandidateController extends Controller
@@ -53,6 +53,8 @@ class CandidateController extends Controller
         $data->prospect_id = $req->prospect_id;
         $data->vessel_id = $req->vessel_id;
         $data->save();
+
+        Prospect::where('id', $data->prospect_id)->update(["status" => "ON PROCESS"]);
     }
 
     public function update(Request $req){
@@ -63,6 +65,21 @@ class CandidateController extends Controller
         }
         else{
             $query = $query->where('id', $req->id)->update($req->except(['id', '_token']));
+        }
+
+        if(isset($req->status)){
+            if($req->status == "FOR APPROVAL"){
+                $can = Candidate::find($req->id);                
+                Prospect::where('id', $can->prospect_id)->update(["status" => "ENDORSED"]);
+            }
+            elseif($req->status == "REJECTED"){
+                $can = Candidate::find($req->id);                
+                Prospect::where('id', $can->prospect_id)->update(["status" => "AVAILABLE"]);
+            }
+            elseif($req->status == "ON BOARD"){
+                $can = Candidate::find($req->id);                
+                Prospect::where('id', $can->prospect_id)->update(["status" => "HIRED"]);
+            }
         }
     }
 }
