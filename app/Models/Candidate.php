@@ -14,8 +14,8 @@ class Candidate extends Model
 
     protected $fillable = [
         'applicant_id','requirement_id','prospect_id','vessel_id','initial_interview',
-        'written_assessment','technical_interview','principals_approval','medical',
-        'on_board','remarks','status'
+        'written_assessment','technical_interview', 'endorsed_to_crewing', 'principals_approval',
+        'medical','on_board','remarks','status'
     ];
 
     protected $dates = [

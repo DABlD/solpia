@@ -604,6 +604,7 @@
                                 <td>${checkbox2("ii" + can.id, "test", can.initial_interview, can.status)}</td>
                                 <td>${checkbox2("wa" + can.id, "test", can.written_assessment, can.status)}</td>
                                 <td>${checkbox2("ti" + can.id, "test", can.technical_interview, can.status)}</td>
+                                <td>${checkbox2("ec" + can.id, "test", can.endorsed_to_crewing, can.status)}</td>
                                 <td>${checkbox2("pa" + can.id, "test", can.principals_approval, can.status)}</td>
                                 <td>${checkbox2("fm" + can.id, "test", can.medical, can.status)}</td>
                                 <td>${checkbox2("ob" + can.id, "test", can.on_board, can.status)}</td>
@@ -616,7 +617,7 @@
                     if(string == ""){
                         string = `
                             <tr>
-                                <td colspan="8">No candidates yet</td>
+                                <td colspan="11">No candidates yet</td>
                             </tr>
                         `;
                     }
@@ -625,7 +626,7 @@
                         disableButtons(can.id, can.status);
                     });
 
-                    let cbs = ["ii", "wa", "ti", "pa", "fm", "ob"];
+                    let cbs = ["ii", "wa", "ti", "ec", "pa", "fm", "ob"];
 
                     /*ONCLICK EVENTS*/
                     cbs.forEach(cb => {
@@ -638,6 +639,7 @@
                                 ii: "initial_interview",
                                 wa: "written_assessment",
                                 ti: "technical_interview",
+                                ec: "endorsed_to_crewing",
                                 pa: "principals_approval",
                                 fm: "medical",
                                 ob: "on_board"
@@ -654,6 +656,9 @@
                                 data["status"] = isChecked ? "PENDING" : "PENDING";
                             }
                             else if(cb == "ti"){
+                                data["status"] = isChecked ? "PENDING" : "PENDING";
+                            }
+                            else if(cb == "ec"){
                                 data["status"] = isChecked ? "PENDING" : "PENDING";
                             }
                             else if(cb == "pa"){
@@ -718,7 +723,7 @@
         }
 
         function disableButtons(id, status){
-            let cbs = ["ii", "wa", "ti", "pa", "fm", "ob"];
+            let cbs = ["ii", "wa", "ti", "ec", "pa", "fm", "ob"];
 
             /*ENABLE ALL*/
             cbs.forEach(cb => {
@@ -728,7 +733,7 @@
             let temp = [];
 
             if(status == "PENDING"){
-                temp = ["ii", "wa", "ti"];
+                temp = ["ii", "wa", "ti", "ec"];
                 let ctr = 0;
                 temp.forEach(cb => {
                     if($(`.${cb}${id}`).is(':checked')){
@@ -736,16 +741,16 @@
                     }
                 });
 
-                temp = ctr < 3 ? ["pa", "fm", "ob"] : ["fm", "ob"];
+                temp = ctr < 4 ? ["pa", "fm", "ob"] : ["fm", "ob"];
             }
             else if(status == "FOR APPROVAL"){
-                temp = ["ii", "wa", "ti", "ob"];
+                temp = ["ii", "wa", "ti", "ec", "ob"];
             }
             else if(status == "FOR MEDICAL"){
-                temp = ["ii", "wa", "ti", "pa"];
+                temp = ["ii", "wa", "ti", "ec", "pa"];
             }
             else if(status == "ON BOARD"){
-                temp = ["ii", "wa", "ti", "pa", "fm"];
+                temp = ["ii", "wa", "ti", "ec", "pa", "fm"];
             }
 
             // disable 
@@ -813,6 +818,7 @@
                                 <th>Initial Interview</th>
                                 <th>Written Assessment</th>
                                 <th>Technical Interview</th>
+                                <th>Endorsed To Crewing</th>
                                 <th>Principals Approval</th>
                                 <th>For Medical</th>
                                 <th>On Board</th>

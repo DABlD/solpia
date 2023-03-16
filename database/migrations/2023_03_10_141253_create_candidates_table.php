@@ -24,6 +24,7 @@ class CreateCandidatesTable extends Migration
             $table->boolean('initial_interview')->default(0);
             $table->boolean('written_assessment')->default(0);
             $table->boolean('technical_interview')->default(0);
+            $table->boolean('endorsed_to_crewing')->default(0);
             $table->boolean('principals_approval')->default(0);
             $table->boolean('medical')->default(0);
             $table->boolean('on_board')->default(0);
