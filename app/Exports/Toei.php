@@ -415,6 +415,8 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     // DECK
                     $rid = $this->applicant->rank->id;
 
+                    // INTERCHANGED COMPARED TO BLADE FILE AROUND LINE 1140
+                    // AB OLR OS WPR WITH SENIOR OFFICER LICENSE
                     if(($rid == 10 && $hl2) || ($rid == 16 && $hl2) || ($rid == 11 && $hl2) || ($rid == 17 && $hl2)){
                         $start = $raoc;
                         $end = $raoc;
@@ -424,6 +426,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                         $raoc += 2;
                         $temp += 2;
                     }
+                    // AB OLR OR OS WPR WITH JUNIOR OFFICER LICENSE
                     elseif(in_array($rid, [10,16]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
                         $start = $raoc;
                         $end = $raoc;
