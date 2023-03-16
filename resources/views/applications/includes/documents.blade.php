@@ -389,6 +389,7 @@
             	            	<option value="CHOLERA">CHOLERA</option>
             	            	<option value="CHEMICAL TEST">CHEMICAL TEST</option>
             	            	<option value="DRUG AND ALCOHOL TEST">DRUG AND ALCOHOL TEST</option>
+            	            	<option value="MMR">MMR VACCINE</option>
             	            	<option value="COVID-19 1ST DOSE">COVID-19 1ST DOSE</option>
             	            	<option value="COVID-19 2ND DOSE">COVID-19 2ND DOSE</option>
             	            	<option value="COVID-19 3RD DOSE">COVID-19 3RD DOSE</option>
