@@ -15,7 +15,7 @@
 
 	<tr>
 		<td colspan="15" style="{{ $bc }} font-size: 16px;">
-			{{ $data->rank->name }} {{ $data->user->namefull }}
+			{{ $data->rank ? $data->rank->name : "-" }} {{ $data->user->namefull }}
 		</td>
 	</tr>
 
@@ -79,13 +79,17 @@
 					<td></td>
 					<td rowspan="4"></td>
 					<td>{{ $data->user->namefull }}</td>
-					<td>{{ $data->rank->abbr }}</td>
+					<td>{{ $data->rank ? $data->rank->abbr : "-" }}</td>
 					<td>
 						{{ $pp ? $pp->number : "" }} ({{ $checkDate($pp ? $pp->expiry_date : null) }})
 						{{ $sb ? $sb->number : "" }} ({{ $checkDate($sb ? $sb->expiry_date : null) }})
 					</td>
 					<td style="{{ $c }}">KR</td>
-					<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@if($ss->vessel_name == null)
+						<td></td>
+					@else
+						<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@endif
 					<td></td>
 					<td></td>
 					<td style="{{ $c }}">
@@ -102,8 +106,14 @@
 					<td style="{{ $c }}">
 						@foreach($data->document_med_cert as $key => $docu)
 							@if(str_contains($docu->type, 'COVID'))
-								{{ $docu->clinic }}
-								@break
+								@if($docu->issue_date)
+									{{ $docu->clinic != "" ? $docu->clinic : "VALID" }}
+									@break
+								@endif
+							@endif
+
+							@if($loop->last)
+								N/A
 							@endif
 						@endforeach
 					</td>
@@ -127,10 +137,15 @@
 					</td>
 					<td style="{{ $c }}">
 						@foreach($data->document_med_cert as $key => $docu)
-							@if(str_contains($docu->type, 'MMR') || str_contains($docu->type, 'MEASLES'))
+							@if(str_contains($docu->type, 'MMR'))
 								@if($docu->issue_date)
 									VALID
+									@break
 								@endif
+							@endif
+
+							@if($loop->last)
+								N/A
 							@endif
 						@endforeach
 					</td>
@@ -148,10 +163,10 @@
 				</tr>
 			@elseif($key == 1)
 				@php
-					$salary = $data->wage->total;
+					$salary = $data->wage ? $data->wage->total : 0;
 					$add = 70;
 
-					if(in_array($data->rank->abbr, ["FMAN", "DHAND", "OLR"])){
+					if(in_array($data->rank ? $data->rank->abbr : "-", ["FMAN", "DHAND", "OLR"])){
 						$add = 50;
 					}
 				@endphp
@@ -161,7 +176,11 @@
 					<td>{{ $data->height }}/{{ $data->weight }}</td>
 					<td></td>
 					<td style="{{ $c }}">US${{ number_format($salary + $add) }}</td>
-					<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@if($ss->vessel_name == null)
+						<td></td>
+					@else
+						<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@endif
 					<td></td>
 					<td></td>
 					<td></td>
@@ -177,7 +196,11 @@
 					<td></td>
 					<td></td>
 					<td style="{{ $c }}">US${{ number_format($salary) }}+{{ $add }}</td>
-					<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@if($ss->vessel_name == null)
+						<td></td>
+					@else
+						<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@endif
 					<td></td>
 					<td></td>
 					<td></td>
@@ -193,7 +216,11 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@if($ss->vessel_name == null)
+						<td></td>
+					@else
+						<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@endif
 					<td></td>
 					<td></td>
 					<td></td>

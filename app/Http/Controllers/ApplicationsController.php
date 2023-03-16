@@ -491,6 +491,7 @@ class ApplicationsController extends Controller
                 // if($docuType == 'document_flag'){
                 //     $temp = $data->country;
                 // }
+                                       //FOR DOCS WITH NO
                 if(isset($data->no)){
                     if($data->no == ""){
                         $applicant->$docuType->forget($key);
@@ -505,7 +506,7 @@ class ApplicationsController extends Controller
                                 continue;
                             }
                         }
-                        elseif(!str_starts_with($data->type, 'COVID')){
+                        elseif(!str_starts_with($data->type, 'COVID') && !str_contains($data->type, 'MMR')){
                             if($data->number == ""){
                                 $applicant->$docuType->forget($key);
                                 continue;
