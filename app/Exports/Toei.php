@@ -394,13 +394,17 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
                 $hl = false;
+                $hl2 = false;
                 if($this->applicant->rank){
                     foreach($this->applicant->document_lc as $lc){
-                        if($lc->type == "COC"){
+                        if($lc->type == "COC" || $lc->type == "COE"){
                             $regulations = json_decode($lc->regulation);
 
-                            if(in_array("II/1", $regulations) || in_array("III/1", $regulations)){
+                            if(in_array("II/5", $regulations) || in_array("III/5", $regulations)){
                                 $hl = true;
+                            }
+                            if(in_array("II/1", $regulations) || in_array("III/1", $regulations)){
+                                $hl2 = true;
                             }
                         }
                     }
@@ -411,17 +415,19 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     // DECK
                     $rid = $this->applicant->rank->id;
 
-                    if(($rid == 10 && $hl) || ($rid == 16 && $hl) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
+                    if(($rid == 10 && $hl2) || ($rid == 16 && $hl2) || ($rid == 11 && $hl2) || ($rid == 17 && $hl2)){
                         $start = $raoc;
                         $end = $raoc;
                         $start2 = $start+1;
                         $end2 = $end+1;
+
                         $raoc += 2;
                         $temp += 2;
                     }
                     elseif(in_array($rid, [10,16]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
                         $start = $raoc;
                         $end = $raoc;
+
                         $raoc += 1;
                         $temp += 1;
                     }
