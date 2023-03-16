@@ -69,8 +69,8 @@
 @push('after-scripts')
 	<script>
         var fName = "";
-        var fMin_age = 20;
-        var fMax_age = 65;
+        var fMin_age = "";
+        var fMax_age = "";
         var fRanks = [];
         var fUsv = "";
         var fExp = [];
@@ -526,6 +526,10 @@
         }
 
         function imp(){
+            // <option value="ProspectsImport2">Responses</option>
+            // <option value="ProspectsImport3">Prospect</option>
+            // <option value="ProspectsImport5">Kalaw</option>
+            // <option value="ProspectsImport6">Endorsed</option>
             swal({
                 title: 'Select File',
                 html: `
@@ -534,11 +538,7 @@
                         <input type="file" name="file" class="swal2-file">
                         <select name="import" class="form-control">
                             <option value="ProspectsImport">Recruiting</option>
-                            <option value="ProspectsImport2">Responses</option>
-                            <option value="ProspectsImport3">Prospect</option>
-                            <option value="ProspectsImport4">On Process</option>
-                            <option value="ProspectsImport5">Kalaw</option>
-                            <option value="ProspectsImport6">Endorsed</option>
+                            <option value="ProspectsImport4">Applicant Log</option>
                         </select>
                     </form>
                 `
