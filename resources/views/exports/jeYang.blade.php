@@ -106,8 +106,14 @@
 					<td style="{{ $c }}">
 						@foreach($data->document_med_cert as $key => $docu)
 							@if(str_contains($docu->type, 'COVID'))
-								{{ $docu->clinic }}
-								@break
+								@if($docu->issue_date)
+									{{ $docu->clinic != "" ? $docu->clinic : "VALID" }}
+									@break
+								@endif
+							@endif
+
+							@if($loop->last)
+								N/A
 							@endif
 						@endforeach
 					</td>
@@ -131,10 +137,15 @@
 					</td>
 					<td style="{{ $c }}">
 						@foreach($data->document_med_cert as $key => $docu)
-							@if(str_contains($docu->type, 'MMR') || str_contains($docu->type, 'MEASLES'))
+							@if(str_contains($docu->type, 'MMR'))
 								@if($docu->issue_date)
 									VALID
+									@break
 								@endif
+							@endif
+
+							@if($loop->last)
+								N/A
 							@endif
 						@endforeach
 					</td>
