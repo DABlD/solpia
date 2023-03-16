@@ -631,6 +631,7 @@
                     /*ONCLICK EVENTS*/
                     cbs.forEach(cb => {
                         $(`[class^="${cb}"]`).on('click', e => {
+                            let ctr = 0;
                             swal.showLoading();
 
                             let id = e.target.className.replace(cb, "");
@@ -649,26 +650,23 @@
                             data["id"] = id;
                             data[temp[cb]] = isChecked ? 1 : 0;
 
-                            if(cb == "ii"){
-                                data["status"] = isChecked ? "PENDING" : "PENDING";
-                            }
-                            else if(cb == "wa"){
-                                data["status"] = isChecked ? "PENDING" : "PENDING";
-                            }
-                            else if(cb == "ti"){
-                                data["status"] = isChecked ? "PENDING" : "PENDING";
-                            }
-                            else if(cb == "ec"){
-                                data["status"] = isChecked ? "PENDING" : "PENDING";
+                            if(["ii", "wa", "ti", "ec"].includes(cb)){
+                                ["ii", "wa", "ti", "ec"].forEach(cb2 => {
+                                    if($(`.${cb2}${id}`).is(":checked")){
+                                        ctr++;
+                                    }
+                                });
+
+                                data["status"] = ctr < 4 ? "PENDING" : "FOR APPROVAL";
                             }
                             else if(cb == "pa"){
-                                data["status"] = isChecked ? "FOR APPROVAL" : "PENDING";
-                            }
-                            else if(cb == "fm"){
                                 data["status"] = isChecked ? "FOR MEDICAL" : "FOR APPROVAL";
                             }
+                            else if(cb == "fm"){
+                                data["status"] = isChecked ? "PASSED" : "FOR MEDICAL";
+                            }
                             else if(cb == "ob"){
-                                data["status"] = isChecked ? "ON BOARD" : "FOR MEDICAL";
+                                data["status"] = isChecked ? "ON BOARD" : "PASSED";
                             }
 
                             if(data["status"] != undefined){
@@ -744,13 +742,16 @@
                 temp = ctr < 4 ? ["pa", "fm", "ob"] : ["fm", "ob"];
             }
             else if(status == "FOR APPROVAL"){
-                temp = ["ii", "wa", "ti", "ec", "ob"];
+                temp = ["ii", "wa", "ti", "ec", "fm", "ob"];
             }
             else if(status == "FOR MEDICAL"){
-                temp = ["ii", "wa", "ti", "ec", "pa"];
+                temp = ["ii", "wa", "ti", "ec", "ob"];
             }
-            else if(status == "ON BOARD"){
+            else if(status == "PASSED"){
                 temp = ["ii", "wa", "ti", "ec", "pa", "fm"];
+            }
+            else if(status == "REJECTED" || status == "ON BOARD"){
+                temp = ["ii", "wa", "ti", "ec", "pa", "fm", "ob"];
             }
 
             // disable 
