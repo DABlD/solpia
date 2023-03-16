@@ -15,7 +15,7 @@
 
 	<tr>
 		<td colspan="15" style="{{ $bc }} font-size: 16px;">
-			{{ $data->rank->name }} {{ $data->user->namefull }}
+			{{ $data->rank ? $data->rank->name : "-" }} {{ $data->user->namefull }}
 		</td>
 	</tr>
 
@@ -79,7 +79,7 @@
 					<td></td>
 					<td rowspan="4"></td>
 					<td>{{ $data->user->namefull }}</td>
-					<td>{{ $data->rank->abbr }}</td>
+					<td>{{ $data->rank ? $data->rank->abbr : "-" }}</td>
 					<td>
 						{{ $pp ? $pp->number : "" }} ({{ $checkDate($pp ? $pp->expiry_date : null) }})
 						{{ $sb ? $sb->number : "" }} ({{ $checkDate($sb ? $sb->expiry_date : null) }})
@@ -151,7 +151,7 @@
 					$salary = $data->wage->total;
 					$add = 70;
 
-					if(in_array($data->rank->abbr, ["FMAN", "DHAND", "OLR"])){
+					if(in_array($data->rank ? $data->rank->abbr : "-", ["FMAN", "DHAND", "OLR"])){
 						$add = 50;
 					}
 				@endphp
