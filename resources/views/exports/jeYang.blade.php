@@ -85,7 +85,11 @@
 						{{ $sb ? $sb->number : "" }} ({{ $checkDate($sb ? $sb->expiry_date : null) }})
 					</td>
 					<td style="{{ $c }}">KR</td>
-					<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@if($ss->vessel_name == null)
+						<td></td>
+					@else
+						<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@endif
 					<td></td>
 					<td></td>
 					<td style="{{ $c }}">
@@ -161,7 +165,11 @@
 					<td>{{ $data->height }}/{{ $data->weight }}</td>
 					<td></td>
 					<td style="{{ $c }}">US${{ number_format($salary + $add) }}</td>
-					<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@if($ss->vessel_name == null)
+						<td></td>
+					@else
+						<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@endif
 					<td></td>
 					<td></td>
 					<td></td>
@@ -177,7 +185,11 @@
 					<td></td>
 					<td></td>
 					<td style="{{ $c }}">US${{ number_format($salary) }}+{{ $add }}</td>
-					<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@if($ss->vessel_name == null)
+						<td></td>
+					@else
+						<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@endif
 					<td></td>
 					<td></td>
 					<td></td>
@@ -193,7 +205,11 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@if($ss->vessel_name == null)
+						<td></td>
+					@else
+						<td>{{ $ss->vessel_name }}({{ $checkDate($ss->sign_on) }}-{{ $checkDate($ss->sign_off) }})</td>
+					@endif
 					<td></td>
 					<td></td>
 					<td></td>
