@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
+
     <style>
 
     </style>
@@ -601,6 +602,7 @@
                             <tr>
                                 <td>${can.id}</td>
                                 <td>${can.prospect.name}</td>
+                                <td>${can.prospect.age}</td>
                                 <td>${checkbox2("ii" + can.id, "test", can.initial_interview, can.status)}</td>
                                 <td>${checkbox2("wa" + can.id, "test", can.written_assessment, can.status)}</td>
                                 <td>${checkbox2("ti" + can.id, "test", can.technical_interview, can.status)}</td>
@@ -609,7 +611,10 @@
                                 <td>${checkbox2("fm" + can.id, "test", can.medical, can.status)}</td>
                                 <td>${checkbox2("ob" + can.id, "test", can.on_board, can.status)}</td>
                                 <td id="can${can.id}">${can.status}</td>
-                                <td>${can.status != "REJECTED" ? action : ""}</td>
+                                <td>
+                                    <textarea id="canRemark${can.id}" style="width: 100%; resize: vertical;" cols="40" rows="2" value="${can.remarks}">${can.remarks ?? ""}</textarea>
+                                </td>
+                                <td>${["REJECTED", "ON BOARD"].includes(can.status) ? "" : action}</td>
                             </tr>
                         `;
                     })
@@ -617,7 +622,7 @@
                     if(string == ""){
                         string = `
                             <tr>
-                                <td colspan="11">No candidates yet</td>
+                                <td colspan="12">No candidates yet</td>
                             </tr>
                         `;
                     }
@@ -694,6 +699,16 @@
                         })
                     });
 
+                    $(`[id^="canRemark"]`).bind('keyup.DT', e => {
+                        if(e.which == 13){
+                            let id = e.target.id.replace("canRemark", "");
+                            console.log(e.target.value);
+                            updateCandidate({
+                                id: id,
+                                remarks: e.target.value
+                            });
+                        }
+                    });
                 }
             });
         }
@@ -800,7 +815,7 @@
         function viewCandidates(string, req){
             swal({
                 title: `${req.rank.abbr} candidates for ${req.vessel.name}`,
-                width: '80%',
+                width: '95%',
                 html: `
                     @if(in_array(auth()->user()->role, ["Admin", "Recruitment Officer"]))
                         <div class="pull-right" style="margin-bottom: 5px;">
@@ -816,14 +831,16 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Initial Interview</th>
-                                <th>Written Assessment</th>
-                                <th>Technical Interview</th>
-                                <th>Endorsed To Crewing</th>
-                                <th>Principals Approval</th>
-                                <th>For Medical</th>
-                                <th>On Board</th>
+                                <th>Age</th>
+                                <th>Initial<br>Interview</th>
+                                <th>Written<br>Assessment</th>
+                                <th>Technical<br>Interview</th>
+                                <th>Endorsed<br>To Crewing</th>
+                                <th>Principals<br>Approval</th>
+                                <th>For<br>Medical</th>
+                                <th>On<br>Board</th>
                                 <th>Status</th>
+                                <th>Remark</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
