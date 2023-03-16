@@ -622,7 +622,7 @@
                     if(string == ""){
                         string = `
                             <tr>
-                                <td colspan="12">No candidates yet</td>
+                                <td colspan="13">No candidates yet</td>
                             </tr>
                         `;
                     }
@@ -827,7 +827,7 @@
                     @endif
 
                     <table id="candidate_table" class="table table-hover table-bordered">
-                        <thead>
+                        <thead style="background-color: #ffddcc;">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -844,13 +844,20 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="border: 1px solid black;">
                             ${string}
                         </tbody>
                     </table>
                 `,
                 onOpen: () => {
                     $('#candidate_table th, #candidate_table td').css('text-align', 'center');
+                    $('#candidate_table td').css({
+                        "border-bottom": "1px solid #c9c9c9",
+                        "border-top": "1px solid #c9c9c9"
+                    });
+                    $('#candidate_table textarea').css({
+                        border: "none"
+                    });
                 }
             })
         }
@@ -881,6 +888,7 @@
                 `,
                 onOpen: () => {
                     $('#suggestions_table th, #suggestions_table td').css('text-align', 'center');
+                    $('#suggestions_table th').css('background-color', '#ffddcc');
                     var table2 = $('#suggestions_table').DataTable({
                         serverSide: true,
                         pageLength: 10,
