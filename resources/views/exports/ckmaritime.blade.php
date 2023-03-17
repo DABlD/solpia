@@ -518,7 +518,7 @@
 		$temp = 'BOOKLET';
 		$docu = false;
 
-		foreach($applicant->document_flag as $document){
+		foreach($data->document_flag as $document){
 		    if($document->country == "Marshall Islands" && $document->type == $temp){
 		        $docu = $document;
 		    }
