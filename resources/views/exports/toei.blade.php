@@ -1103,11 +1103,11 @@
 			if(isset($crewRank)){
 				$tRank = $crewRank->id;
 
-				if($tRank == 10 || $tRank == 11){
+				if($tRank == 9 || $tRank == 10 || $tRank == 11){
 					$rr1 = "II/4";
 					$rr2 = "II/5";
 				}
-				else if($tRank == 16 || $tRank == 17){
+				else if($tRank == 15 || $tRank == 16 || $tRank == 17){
 					$rr1 = "III/4";
 					$rr2 = "III/5";
 				}
@@ -1127,7 +1127,7 @@
 
 		@if($crewRank)
 			{{-- AB, OLR OR OS, WPR WITH JUNIOR OFFICER LICENSE --}}
-			@if($tRank == 10 || $tRank == 16 || ($tRank == 11 && $hl >= 1) || ($tRank == 17 && $hl >= 1))
+			@if($tRank == 10 || $tRank == 16 || $tRank == 9 || $tRank == 15 || ($tRank == 11 && $hl >= 1) || ($tRank == 17 && $hl >= 1))
 				<tr>
 					<td colspan="4">
 						MARINA COP REGULATION {{ $rr1 }}
@@ -1140,7 +1140,7 @@
 			@endif
 
 			{{-- AB,OLR,OS,WPR WITH SENIOR OFFICER LICENSE --}}
-			@if(($tRank == 10 && $hl == 2) || ($tRank == 16 && $hl == 2) || ($tRank == 11 && $hl == 2) || ($tRank == 17 && $hl == 2))
+			@if(($tRank == 10 && $hl == 2) || ($tRank == 16 && $hl == 2) || ($tRank == 9 && $hl == 2) || ($tRank == 15 && $hl == 2) || ($tRank == 11 && $hl == 2) || ($tRank == 17 && $hl == 2))
 				<tr>
 					<td colspan="4">
 						MARINA COP REGULATION {{ $rr2 }}
