@@ -514,13 +514,24 @@
 		<td colspan="2" style="{{ $bc }}"></td>
 	</tr>
 
+	@php
+		$temp = 'BOOKLET';
+		$docu = false;
+
+		foreach($applicant->document_flag as $document){
+		    if($document->country == "Marshall Islands" && $document->type == $temp){
+		        $docu = $document;
+		    }
+		}
+	@endphp
+
 	<tr>
 		<td style="{{ $bc }}">SEAMAN'S BOOK</td>
 		<td style="{{ $bc }}">MARSHALL</td>
-		<td colspan="3" style="{{ $bc }}"></td>
-		<td colspan="3" style="{{ $bc }}"></td>
-		<td colspan="2" style="{{ $bc }}"></td>
-		<td colspan="2" style="{{ $bc }}"></td>
+		<td colspan="3" style="{{ $bc }}">{{ $docu->number ?? '---' }}</td>
+		<td colspan="3" style="{{ $bc }}">{{ $docu ? $checkDate2($docu->issue_date, 'I') : 'N/A' }}</td>
+		<td colspan="2" style="{{ $bc }}">{{ $docu ? $checkDate2($docu->expiry_date, 'E') : 'N/A' }}</td>
+		<td colspan="2" style="{{ $bc }}">{{ $docu ? "CHECKED" : "" }}</td>
 	</tr>
 
 	<tr>
