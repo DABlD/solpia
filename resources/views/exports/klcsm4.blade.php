@@ -136,4 +136,3 @@
 		}
 	@endphp
 </table>
-	{{ dd('test') }}
