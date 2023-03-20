@@ -74,17 +74,21 @@
 			if($ss->sign_on && $ss->sign_off){
 				$diff = $ss->sign_on->diff($ss->sign_off);
 			}
+
+			$ct = function($text){
+   				return str_replace('&', '&#38;', $text);
+   			};
 		@endphp
 		@if(str_contains($ss->manning_agent, "SOLPIA"))
 			<tr>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->vessel_name }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->vessel_type }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->gross_tonnage }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->bhp_kw }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->flag }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->trade }}</td>
-				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_on->format('d-M-Y')  }}</td>
-				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_off->format('d-M-Y')  }}</td>
+				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->vessel_name) }}</td>
+				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->vessel_type) }}</td>
+				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->gross_tonnage) }}</td>
+				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->bhp_kw) }}</td>
+				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->flag) }}</td>
+				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->trade) }}</td>
+				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_on ? $ss->sign_on->format('d-M-Y') : "-" }}</td>
+				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_off ? $ss->sign_off->format('d-M-Y') : "-" }}</td>
 				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->rank }}</td>
 				<td style="border: 1px solid black; font-size: 9px;">
 					{{ $diff->y ? $diff->y . " yr " : "" }}
