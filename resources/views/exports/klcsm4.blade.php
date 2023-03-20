@@ -28,6 +28,7 @@
 			}
 
 			$eng = str_replace('&', '&#38;', $ss->engine_type);
+			$bhp = str_replace('&', '&#38;', $ss->bhp_kw);
 			$flag = str_replace('&', '&#38;', $ss->flag);
 			$principal = str_replace('&', '&#38;', $ss->principal);
 			$manning = str_replace('&', '&#38;', $ss->manning_agent );
@@ -53,7 +54,7 @@
 					<td>$ss->vessel_name</td>
 					<td>$ss->rank</td>
 					<td>$ss->gross_tonnage</td>
-					<td>$ss->bhp_kw</td>
+					<td>$bhp</td>
 					<td>$off</td>
 				</tr>
 			";
