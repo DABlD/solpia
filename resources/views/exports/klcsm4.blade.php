@@ -30,6 +30,7 @@
 			$eng = str_replace('&', '&#38;', $ss->engine_type);
 			$flag = str_replace('&', '&#38;', $ss->flag);
 			$principal = str_replace('&', '&#38;', $ss->principal);
+			$manning = str_replace('&', '&#38;', $ss->manning_agent );
 
 			echo "
 				<tr>
@@ -42,7 +43,7 @@
 					<td rowspan='2'>$diff</td>
 					<td rowspan='2'>$ss->remarks</td>
 					<td rowspan='2'>
-						AGENCY: $ss->manning_agent 
+						AGENCY: $manning
 						" . PHP_EOL . "
 						COMBINED CREW: $ss->crew_nationality
 					</td>
@@ -54,7 +55,7 @@
 					<td>$ss->gross_tonnage</td>
 					<td>$ss->bhp_kw</td>
 					<td>$off</td>
-				</tr>;
+				</tr>
 			";
 		}
 	};
