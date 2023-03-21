@@ -96,16 +96,16 @@
 	<tr>
 		<td rowspan="2" style="{{ $center }}">Ship</td>
 		<td>Ship Name</td>
-		<td colspan="3" style="{{ $center }}">{{ $data->vessel->name }}</td>
+		<td colspan="3" style="{{ $center }} {{ $color }}">{{ $data->vessel->name }}</td>
 		<td colspan="2" style="{{ $center }}">G/T</td>
-		<td colspan="2" style="{{ $center }}">{{ $data->vessel->gross_tonnage }}</td>
+		<td colspan="2" style="{{ $center }} {{ $color }}">{{ $data->vessel->gross_tonnage }}</td>
 	</tr>
 
 	<tr>
 		<td>Year Built</td>
-		<td colspan="3" style="{{ $center }}">{{ $data->vessel->year_build }}</td>
+		<td colspan="3" style="{{ $center }} {{ $color }}">{{ $data->vessel->year_build }}</td>
 		<td colspan="2" style="{{ $center }}">Flag</td>
-		<td colspan="2" style="{{ $center }}">{{ $data->vessel->flag }}</td>
+		<td colspan="2" style="{{ $center }} {{ $color }}">{{ $data->vessel->flag }}</td>
 	</tr>
 
 	<tr>
