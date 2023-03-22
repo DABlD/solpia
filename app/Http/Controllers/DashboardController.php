@@ -56,7 +56,13 @@ class DashboardController extends Controller
                             ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
                             ->select('processed_applicants.id', 'applicant_id')->get()->keyBy('applicant_id');
 
-        $vessels = Vessel::where('status', 'ACTIVE')->where('fleet', 'LIKE', auth()->user()->fleet ?? "%%")->select('id', 'name')->count();
+        if(auth()->user()->fleet){
+            $vessels = Vessel::where('status', 'ACTIVE')->where('fleet', 'LIKE', auth()->user()->fleet)->select('id', 'name')->count();
+        }
+        else{
+            $vessels1 = Vessel::where('status', 'ACTIVE')->where('fleet', '!=', 'FISHING')->select('id', 'name')->count();
+            $vessels2 = Vessel::where('status', 'ACTIVE')->where('fleet', 'FISHING')->select('id', 'name')->count();
+        }
 
         $fleets = array_keys(Vessel::where('fleet', '!=', "")->get()->groupBy('fleet')->toArray());
         sort($fleets);
@@ -71,7 +77,9 @@ class DashboardController extends Controller
             'vacation'       => $vacation->count(),
     		'onBoard' 		=> $onBoard->count(),
             'linedUp'       => $linedUp->count(),
-            'vessels'       => $vessels,
+            'vessels'       => $vessels ?? null,
+            'vessels1'       => $vessels1 ?? null,
+            'vessels2'       => $vessels2 ?? null,
             'fleets'        => array_merge($fleets, ["Vacation"])
     	]);
     }
