@@ -189,6 +189,7 @@
 						<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
 						<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
 					<option value="ERS WITH ERM">&nbsp;&nbsp;&nbsp;&nbsp;ERS WITH ERM</option>
+					<option value="ERS">&nbsp;&nbsp;&nbsp;&nbsp;ERS - ENGINE ROOM SIMULATOR</option>
 					<option value="PRACTICAL ASSESSMENT IN MANAGEMENT LEVEL">&nbsp;&nbsp;&nbsp;&nbsp;PRACTICAL ASSESSMENT IN MANAGEMENT LEVEL</option>
 					<option value="MLC TRAINING F1">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F1</option>
 					<option value="MLC TRAINING F2">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F2</option>
