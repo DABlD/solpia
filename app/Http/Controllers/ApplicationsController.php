@@ -533,8 +533,10 @@ class ApplicationsController extends Controller
                     }
                 }
 
+                // FOR COC ?
                 if(isset($applicant->$docuType->$temp)){
-                    if(isset($applicant->$docuType->$temp->expiry_date)){
+                    if($data->issue_date > $applicant->$docuType->$temp->issue_date){
+                        $applicant->$docuType->$temp = $data;
                         continue;
                     }
                 }
