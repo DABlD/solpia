@@ -604,7 +604,7 @@
 			}
 		}
 
-		$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 	@endphp
 
 	<tr>
