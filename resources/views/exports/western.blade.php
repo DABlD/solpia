@@ -556,7 +556,7 @@
 	{{ $getDocument('BTM', 'lc', '', 'BTM/ETM')}}
 	@if(isset($applicant->rank))
 		@if(str_starts_with($applicant->rank->category, 'ENGINE'))
-			{{ $getDocument('ERS', 'lc', '', 'BRM/ERM')}}
+			{{ $getDocument('ERS', 'lc', '', 'ERS/ERM')}}
 		@else
 			{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
 		@endif
