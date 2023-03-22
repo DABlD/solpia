@@ -127,9 +127,9 @@
             transform: scale(1.3);
         }
 
-        form input:not([type='email']){
+        /*form input:not([type='email']){
             text-transform: uppercase;
-        }
+        }*/
 
         ::placeholder{
             text-transform: none;
