@@ -154,7 +154,7 @@
 		<td></td>
 		<td>1.1</td>
 		<td colspan="3">Duration of Contract:</td>
-		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['employment_months'] }} MONTHS (+/- 1 MONTH WITH MUTUAL CONSENT OF BOTH PARTIES)</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['employment_months'] }} MONTHS {{ $data->pro_app->vessel->months_in_contract }}</td>
 	</tr>
 
 	<tr>

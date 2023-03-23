@@ -169,7 +169,7 @@
 			<td style="text-align: right;">1.1</td>
 			<td colspan="3">Duration of Training:</td>
 			<td colspan="5">
-				{{ $data->req['employment_months'] }} MONTHS (+/- 1 MONTH WITH MUTUAL CONSENT OF BOTH PARTIES)
+				{{ $data->req['employment_months'] }} MONTHS {{ $data->pro_app->vessel->months_in_contract }}
 			</td>
 		</tr>
 
