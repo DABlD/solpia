@@ -173,6 +173,7 @@ class VesselsController extends Controller
             'ot_hours' => $req->ot_hours,
             'cba_affiliation' => $req->cba_affiliation,
             'classification' => $req->classification,
+            'months_in_contract' => $req->months_in_contract
         ]);
 
         AuditTrail::create([

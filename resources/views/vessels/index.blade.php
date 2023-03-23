@@ -231,7 +231,8 @@
                 'Work Hours',
                 'MAX OT HOURS',
                 'CBA AFFILIATION',
-                'Classification Society'
+                'Classification Society',
+                'Months in Contract'
             ];
 
             let columns = [
@@ -257,7 +258,8 @@
                 'work_hours',
                 'ot_hours',
                 'cba_affiliation',
-                'classification'
+                'classification',
+                'months_in_contract'
             ];
 
             $.each(Object.keys(vessel), (index, key) => {
@@ -366,7 +368,8 @@
                                 ot_per_hour: $('#vd-ot_per_hour').val(),
                                 ot_hours: $('#vd-ot_hours').val(),
                                 cba_affiliation: $('#vd-cba_affiliation').val(),
-                                classification: $('#vd-classification').val()
+                                classification: $('#vd-classification').val(),
+                                months_in_contract: $('#vd-months_in_contract').val()
                             },
                             success: () => {
                                 swal({
@@ -1555,6 +1558,15 @@
                                     </div>
                                 </div>
                                 </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Months in Contract
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="months_in_contract" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
                             `,
                             width: "50%",
                             preConfirm: () => {
@@ -1635,7 +1647,8 @@
                                         work_hours: $('#work_hours').val(),
                                         ot_hours: $('#ot_hours').val(),
                                         cba_affiliation: $('#cba_affiliation').val(),
-                                        classification: $('#classification').val()
+                                        classification: $('#classification').val(),
+                                        months_in_contract: $('#months_in_contract').val()
                                     },
                                     success: result => {
                                         console.log("vessel add", result);
