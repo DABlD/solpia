@@ -71,6 +71,7 @@ class CandidateController extends Controller
             if($req->status == "FOR APPROVAL"){
                 $can = Candidate::find($req->id);                
                 Prospect::where('id', $can->prospect_id)->update(["status" => "ENDORSED"]);
+                Requirement::where('id', $can->requirement_id)->update(["date_provided" => now()->toDateString()]);
             }
             elseif($req->status == "REJECTED"){
                 $can = Candidate::find($req->id);                
