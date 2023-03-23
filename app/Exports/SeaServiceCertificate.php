@@ -17,6 +17,8 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
         $this->type     = $type;
         $data->load('sea_service');
         $data->load('document_id');
+
+        $data->sea_service = $data->sea_service->sortByDesc('sign_on');
     }
 
     public function view(): View

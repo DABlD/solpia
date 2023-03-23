@@ -59,7 +59,7 @@
 		<td rowspan="2" style="font-weight: bold; background-color: #C0DCC0;">BHP / KW</td>
 		<td rowspan="2" style="font-weight: bold; background-color: #C0DCC0;">FLAG OF REGISTRY</td>
 		<td rowspan="2" style="font-weight: bold; background-color: #C0DCC0;">TRADE ROUTE</td>
-		<td colspan="2" style="font-weight: bold; background-color: #C0DCC0;">PERIOD COVERTED</td>
+		<td colspan="2" style="font-weight: bold; background-color: #C0DCC0;">PERIOD COVERED</td>
 		<td rowspan="2" style="font-weight: bold; background-color: #C0DCC0;">POSITION / RANK</td>
 		<td rowspan="2" style="font-weight: bold; background-color: #C0DCC0;">NO. OF MONTHS DAYS</td>
 	</tr>
@@ -87,8 +87,8 @@
 				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->bhp_kw) }}</td>
 				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->flag) }}</td>
 				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->trade) }}</td>
-				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_on ? $ss->sign_on->format('d-M-Y') : "-" }}</td>
-				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_off ? $ss->sign_off->format('d-M-Y') : "-" }}</td>
+				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_on ? $ss->sign_on->format('d-M-y') : "-" }}</td>
+				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_off ? $ss->sign_off->format('d-M-y') : "-" }}</td>
 				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->rank }}</td>
 				<td style="border: 1px solid black; font-size: 9px;">
 					{{ $diff->y ? $diff->y . " yr " : "" }}
@@ -124,7 +124,13 @@
 	</tr>
 
 	<tr>
-		<td colspan="10" style="font-weight: bold;">C/E ROMANO A. MARIANO</td>
+		<td colspan="10" style="font-weight: bold;">
+			@if(auth()->user()->fleet == "TOEI")
+				MR. LEONIL LUIS F. ROMANO
+			@else
+				C/E ROMANO A. MARIANO
+			@endif
+		</td>
 	</tr>
 
 	<tr>
