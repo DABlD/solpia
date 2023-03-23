@@ -14,11 +14,13 @@ class Requirement extends Model
 
 	protected $fillable = [
 		'vessel_id', 'rank','joining_date','joining_port',
-		'usv','salary','remarks','max_age','status','fleet'
+		'usv','salary','remarks','max_age','status','fleet',
+        'date_provided'
 	];
 
     protected $dates = [
-        'created_at', 'updated_at', 'joining_date', 'deleted_at'
+        'created_at', 'updated_at', 'joining_date', 'deleted_at',
+        'date_provided'
     ];
 
     public function vessel(){

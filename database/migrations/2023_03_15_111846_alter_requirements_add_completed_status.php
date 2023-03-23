@@ -14,6 +14,8 @@ class AlterRequirementsAddCompletedStatus extends Migration
     public function up()
     {
         Schema::table('requirements', function (Blueprint $table){
+            $table->date('date_provided')->after('status')->nullable();
+
             DB::statement("ALTER TABLE requirements CHANGE COLUMN status status ENUM(
                 'AVAILABLE',
                 'CANCELLED',
