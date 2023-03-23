@@ -134,7 +134,13 @@
 	</tr>
 
 	<tr>
-		<td colspan="10">President</td>
+		<td colspan="10">
+			@if(auth()->user()->fleet == "TOEI")
+				Crewing Manager - TOEI Fleet
+			@else
+				President
+			@endif
+		</td>
 	</tr>
 
 	<tr>
