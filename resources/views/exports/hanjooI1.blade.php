@@ -29,7 +29,11 @@
 		}
 	}
 
-	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null) use ($applicant, $checkDate2, $rank) {
+	$cleanText = function($text){
+		return str_replace('&', '&#38;', $text);
+	};
+
+	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null) use ($applicant, $checkDate2, $rank, $cleanText) {
 		$name   = !$name ? $docu : $name;
 
 		if(in_array($type, ['id', 'lc', 'med_cert'])){
@@ -196,6 +200,8 @@
 				$issuer = "REVERTING";
 			}
 		}
+
+		$issuer = $cleanText($issuer);
 
 		if($name == "69"){
 			$noNum  = $type == 'lc' ? 'no' : 'number';
