@@ -15,10 +15,6 @@
 			echo $date->format('F j, Y');
 		}
 	}
-
-	$cleanText = function($text){
-		return str_replace('&', '&#38;', $text);
-	};
 @endphp
 
 <table>
@@ -342,12 +338,12 @@
 					$temp = $temp == "" ? '---' : $temp; 
 				@endphp
 				<td rowspan="1">{{ is_numeric($temp) ? number_format($temp) : $temp}}</td>
-				<td rowspan="1" colspan="2">{{ $cleanText($service->manning_agent) }}</td>
+				<td rowspan="1" colspan="2">{{ $service->manning_agent }}</td>
 				<td rowspan="2" colspan="2">{{ $service->remarks }}</td>
 			</tr>
 			<tr>
 				<td rowspan="1">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "N/A" }}</td>
-				<td rowspan="1" colspan="2">{{ $cleanText($service->engine_type) }}</td>
+				<td rowspan="1" colspan="2">{{ $service->engine_type }}</td>
 				@php 
 					$temp = $service->bhp_kw;
 					if($temp == ""){
