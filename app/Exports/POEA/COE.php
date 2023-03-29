@@ -164,6 +164,13 @@ class COE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
+            [//14
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOTTED
+                    ],
+                ]
+            ],
         ];
 
         $fillStyle = [
@@ -249,7 +256,10 @@ class COE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial`');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -314,6 +324,7 @@ class COE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
+                    'A10', 'A15'
                 ];
 
                 $h['wrap'] = [
@@ -372,6 +383,24 @@ class COE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
+                    'A9:E10',
+                    'A12:C13', 'D12:E13',
+                    'A14:E15',
+                    'A16:C17', 'D16:E17',
+                    'A18:C19', 'D18:E19',
+                    'A20:C21', 'D20:E21',
+                    'A22:C23', 'D22:E23',
+                    'A25:E26',
+                    'A27:E28',
+                    'A30:D31', 'E30:E31',
+                    'A32:C33', 'D32:E33',
+                    'A35:B36', 'C35:D36', 'E35:E36',
+                    'A37:B38', 'C37:D38', 'E37:E38',
+                    'A39:B40', 'C39:D40', 'E39:E40',
+                    'A41:E41',
+                    'A42:E42',
+                    'A43:E43',
+                    'A45:C46', 'D45:E46',
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -422,6 +451,11 @@ class COE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // RBT
                 $cells[14] = array_merge([
                 ]);
+
+                // RBT
+                $cells[15] = array_merge([
+                    'B7', 'D7:E7', 'E9'
+                ]);
                 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
@@ -433,17 +467,28 @@ class COE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(38);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(26);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(24);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(43);
 
+                $except = [5, 6, 15, 42, 43, 49];
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                for($i = 0; $i < 50; $i++){
+                    if(!in_array($i, $except)){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(18);
+                    }
+                }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A6')->getFont()->setSize(16);
+                $event->sheet->getDelegate()->getStyle('A9:A10')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
     }

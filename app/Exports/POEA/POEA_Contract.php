@@ -39,8 +39,8 @@ class POEA_Contract implements WithMultipleSheets
         }
 
         array_push($sheets, new $class($this->data, $format, $this->req, $title));
-        // array_push($sheets, new InfoSheet($this->data, $format, $this->req));
-        // array_push($sheets, new RPS($this->data, $format, $this->req));
+        array_push($sheets, new InfoSheet($this->data, $format, $this->req));
+        array_push($sheets, new RPS($this->data, $format, $this->req));
         array_push($sheets, new COE($this->data, $format, $this->req));
 
         return $sheets;
