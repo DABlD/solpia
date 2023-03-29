@@ -630,6 +630,7 @@
                                 <td>ACA</td>
                                 <td>TOTAL</td>
                                 <td>OT/HR</td>
+                                <td>LPM</td>
                                 <td>Actions</td>
                             </tr>
                         </thead>
@@ -658,6 +659,7 @@
                                 <td>${wage.aca ?? '---'}</td>
                                 <td>${wage.total}</td>
                                 <td>${wage.ot_per_hour ?? '---'}</td>
+                                <td>${wage.leave_per_month ?? '---'}</td>
                                 <td>${wage.actions}</td>
                             </tr>
                         `;
@@ -815,9 +817,15 @@
 
                             <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
                                 OT/HR
-                            </div>                        
+                            </div>
                             <div class="col-md-9">
-                                <input type="number" min="0" id="ot_per_hour" class="form-control" placeholder="(Optional)"><br>
+                                <input type="number" min="0" id="ot_per_hour" class="form-control"><br>
+                            </div>
+                            <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
+                                Leave Per Month
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" min="0" id="leave_per_month" class="form-control"><br>
                             </div>
                         `,
                         width: "500px",
@@ -869,6 +877,7 @@
                                     aca: $('#aca').val(),
                                     total: $('#total').val(),
                                     ot_per_hour: $('#ot_per_hour').val(),
+                                    leave_per_month: $('#leave_per_month').val(),
                                     vessel_id: vid
                                 },
                                 success: result => {
@@ -1131,7 +1140,14 @@
                                         OT/HR
                                     </div>                        
                                     <div class="col-md-9">
-                                        <input type="number" min="0" value="${wage.ot_per_hour}" id="ot_per_hour" class="form-control" placeholder="(Optional)"><br>
+                                        <input type="number" min="0" value="${wage.ot_per_hour}" id="ot_per_hour" class="form-control"><br>
+                                    </div>
+
+                                    <div class="col-md-3" style="text-align:left; margin-top: 10px; font-weight: bold; font-size: 12px;">
+                                        Leave Per Month
+                                    </div>                        
+                                    <div class="col-md-9">
+                                        <input type="number" min="0" value="${wage.leave_per_month}" id="leave_per_month" class="form-control"><br>
                                     </div>
                                 `,
                                 preConfirm: () => {
@@ -1193,6 +1209,7 @@
                                             aca: $('#aca').val(),
                                             total: $('#total').val(),
                                             ot_per_hour: $('#ot_per_hour').val(),
+                                            leave_per_month: $('#leave_per_month').val(),
                                             id: id
                                         },
                                         success: result => {

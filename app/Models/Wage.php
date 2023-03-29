@@ -20,7 +20,7 @@ class Wage extends Model
         'owner_allow', 'voyage_allow',
         'other_allow', 'engine_allow',
         'aca', 'total', 'imo',
-        'ot_per_hour'
+        'ot_per_hour', 'leave_per_month'
     ];
 
     protected $dates = [
