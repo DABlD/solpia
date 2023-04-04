@@ -3055,7 +3055,8 @@
                                     input: 'select',
                                     inputOptions: {
                                         sinocrew1: 'Maple Rising Format',
-                                        sinocrew2: 'Xing Long Yung'
+                                        sinocrew2: 'Xing Long Yung',
+                                        sinocrew3: 'TENGDA'
                                     }
                                 }).then(result => {
                                     if(result.value){
@@ -3122,7 +3123,8 @@
                                 input: 'select',
                                 inputOptions: {
                                     sinocrew1: 'Maple Rising Format',
-                                    sinocrew2: 'Xing Long Yung'
+                                    sinocrew2: 'Xing Long Yung',
+                                    sinocrew3: 'TENGDA'
                                 }
                             }).then(result => {
                                 if(result.value){
