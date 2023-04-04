@@ -59,47 +59,49 @@
 	@php
 		$kin = null;
 
-		foreach($data->family_data as $fd){
-			if($fd->type == "Spouse"){
-				$kin = $fd;
-				break;
+		if(sizeof($data->family_data)){
+			foreach($data->family_data as $fd){
+				if($fd->type == "Spouse"){
+					$kin = $fd;
+					break;
+				}
 			}
-		}
 
-		if($kin == null){
-			foreach($data->family_data as $fd){
-				if($fd->type == "Father"){
-					$kin = $fd;
-					break;
-				}
-			}			
-		}
+			if($kin == null){
+				foreach($data->family_data as $fd){
+					if($fd->type == "Father"){
+						$kin = $fd;
+						break;
+					}
+				}			
+			}
 
-		if($kin == null){
-			foreach($data->family_data as $fd){
-				if($fd->type == "Mother"){
-					$kin = $fd;
-					break;
-				}
-			}			
-		}
+			if($kin == null){
+				foreach($data->family_data as $fd){
+					if($fd->type == "Mother"){
+						$kin = $fd;
+						break;
+					}
+				}			
+			}
 
-		if($kin == null){
-			foreach($data->family_data as $fd){
-				if($fd->type == "Son"){
-					$kin = $fd;
-					break;
-				}
-			}			
-		}
+			if($kin == null){
+				foreach($data->family_data as $fd){
+					if($fd->type == "Son"){
+						$kin = $fd;
+						break;
+					}
+				}			
+			}
 
-		if($kin == null){
-			foreach($data->family_data as $fd){
-				if($fd->type == "Daughter"){
-					$kin = $fd;
-					break;
-				}
-			}			
+			if($kin == null){
+				foreach($data->family_data as $fd){
+					if($fd->type == "Daughter"){
+						$kin = $fd;
+						break;
+					}
+				}			
+			}
 		}
 	@endphp
 
@@ -123,27 +125,29 @@
 	@php
 		$educ = null;
 
-		foreach($data->educational_background as $eb){
-			if($eb->type == "College"){
-				$educ = $eb;
-				break;
-			}
-		}
-
-		if(!$educ){
+		if(sizeof($data->educational_background)){
 			foreach($data->educational_background as $eb){
-				if($eb->type == "Vocational"){
+				if($eb->type == "College"){
 					$educ = $eb;
 					break;
 				}
 			}
-		}
 
-		if(!$educ){
-			foreach($data->educational_background as $eb){
-				if($eb->type == "Undergraduate"){
-					$educ = $eb;
-					break;
+			if(!$educ){
+				foreach($data->educational_background as $eb){
+					if($eb->type == "Vocational"){
+						$educ = $eb;
+						break;
+					}
+				}
+			}
+
+			if(!$educ){
+				foreach($data->educational_background as $eb){
+					if($eb->type == "Undergraduate"){
+						$educ = $eb;
+						break;
+					}
 				}
 			}
 		}

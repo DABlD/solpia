@@ -322,7 +322,8 @@ class Sinocrew3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $h['wrap'] = [
                     'A12',
-                    'A38:A' . (37 + $sss)
+                    'A38:A' . (37 + $sss),
+                    'C12', 'G12'
                 ];
 
                 // SHRINK TO FIT
