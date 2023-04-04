@@ -329,7 +329,8 @@ class Sinocrew3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $h['stf'] = [
                     'F7',
                     'E11',
-                    'E38:F' . (37 + $sss)
+                    'E38:F' . (37 + $sss),
+                    'C12', 'G12'
                 ];
 
                 foreach($h as $key => $value) {
