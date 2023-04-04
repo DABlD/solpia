@@ -408,6 +408,11 @@
                         <form id="vesselForm" method="POST" action="{{ route('vessels.import') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="file" class="swal2-file">
+
+                            <select name="type" class="form-control">
+                                <option value="default">Default</option>
+                                <option value="addVesselDetails">Additional Vessel Details</option>
+                            </select>
                         </form>
                     `
                 }).then(file => {
