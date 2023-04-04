@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Vessel, Principal, AuditTrail};
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\VesselsImport;
+use App\Imports\{VesselsImport, AddVesselDetails};
 
 use Browser;
 
@@ -16,7 +16,12 @@ class VesselsController extends Controller
     }
 
     public function import(Request $req){
-        Excel::import(new VesselsImport, $req->file('file'));
+        if($req->type == "default"){
+            Excel::import(new VesselsImport, $req->file('file'));
+        }
+        elseif($req->type == "addVesselDetails"){
+            Excel::import(new AddVesselDetails, $req->file('file'));
+        }
 
         if(true){
             $req->session()->flash('success', 'Vessels successfully imported');
