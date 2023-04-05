@@ -10,14 +10,6 @@ class AddVesselWageScale implements ToCollection, WithHeadingRow
 {
     public function collection(Collection $rows)
     {
-        $ranks = Rank::all();
-        foreach($ranks as $rank){
-            $rank->importName = $rank->name;
-            $rank->save();
-        }
-
-        
-
         // $temp = Vessel::where('status', 'active')->get();
         // $vessels = [];
 
