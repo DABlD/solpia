@@ -2,135 +2,59 @@
 
 namespace App\Imports;
 
-use App\User;
-use App\Models\{Vessel, Principal};
+use App\Models\{Vessel};
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\{ToCollection, WithHeadingRow};
 
-use DB;
-
-class AddVesselDetails implements ToCollection
+class AddVesselDetails implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function collection(Collection $data)
+    public function collection(Collection $rows)
     {
-        $ctr = 0;
-        $ctr2 = 0;
-
-        DB::enableQueryLog();
-
-        $vessels = [];
         $temp = Vessel::where('status', 'active')->get();
+        $vessels = [];
+
         foreach($temp as $vessel){
-            $vessel->name = str_replace("/", "", $vessel->name);
-            $vessels[$vessel->name] = $vessel;
+            $name = str_replace("/", "", $vessel->name);
+            $vessels[$name] = $vessel;
         }
 
-        $names = $temp->pluck('name')->toArray();
-        $size = sizeof($data);
+        foreach($rows as $row){
+            if(in_array($row['vessel_name'], array_keys($vessels))){
+                $temp = $vessels[$row['vessel_name']];
 
-        for($i = 1; $i < $size; $i++){
-            $vname = $data[$i][1];
-
-            if(in_array($vname, $names)){
-                if($vessels[$vname]->imo == "" && $data[$i][15] != ""){
-                    $vessels[$vname]->imo = $data[$i][15];
+                if($temp->imo == null && $row['imo_number'] != ""){
+                    $temp->imo = $row['imo_number'];
                 }
-                if($vessels[$vname]->flag == "" && $data[$i][13] != ""){
-                    $vessels[$vname]->flag = $data[$i][13];
+                if($temp->flag == null && $row['flag_port_of_registry'] != ""){
+                    $temp->flag = $row['flag_port_of_registry'];
                 }
-                if($vessels[$vname]->year_build == "" && $data[$i][9] != ""){
-                    $vessels[$vname]->year_build = $data[$i][9];
+                if($temp->year_build == null && $row['yr_built'] != ""){
+                    $temp->year_build = $row['yr_built'];
                 }
-                if($vessels[$vname]->engine == "" && $data[$i][8] != ""){
-                    $vessels[$vname]->engine = $data[$i][8];
+                if($temp->engine == null && $row['engine_make'] != ""){
+                    $temp->engine = $row['engine_make'];
                 }
-                if($vessels[$vname]->gross_tonnage == "" && $data[$i][3] != ""){
-                    $vessels[$vname]->gross_tonnage = $data[$i][3];
+                if($temp->gross_tonnage == null && $row['grt'] != ""){
+                    $temp->gross_tonnage = $row['grt'];
                 }
-                if($vessels[$vname]->trade == "" && $data[$i][21] != ""){
-                    $vessels[$vname]->trade = $data[$i][21];
+                if($temp->trade == null && $row['trading'] != ""){
+                    $temp->trade = $row['trading'];
                 }
-                if($vessels[$vname]->mlc_shipowner == "" && $data[$i][64] != ""){
-                    $vessels[$vname]->mlc_shipowner = $data[$i][64];
+                if($temp->mlc_shipowner == null && $row['mlc_ships_owner_name'] != ""){
+                    $temp->mlc_shipowner = $row['mlc_ships_owner_name'];
                 }
-                if($vessels[$vname]->mlc_shipowner_address == "" && $data[$i][65] != ""){
-                    $vessels[$vname]->mlc_shipowner_address = $data[$i][65];
+                if($temp->mlc_shipowner_address == null && $row['ships_owner_address'] != ""){
+                    $temp->mlc_shipowner_address = $row['ships_owner_address'];
                 }
-                if($vessels[$vname]->former_agency == "" && $data[$i][26] != "" && $data[$i][26] != "NONE" && $data[$i][26] != "SAME"){
-                    $vessels[$vname]->former_agency = $data[$i][26];
+                if($temp->former_agency == null && $row['former_agency'] != "" && $row['former_agency'] != "NONE" && $row['former_agency'] != "SAME"){
+                    $temp->former_agency = $row['former_agency'];
                 }
-                if($vessels[$vname]->former_principal == "" && $data[$i][27] != "" && $data[$i][27] != "NONE" && $data[$i][27] != "SAME"){
-                    $vessels[$vname]->former_principal = $data[$i][27];
+                if($temp->former_principal == null && $row['former_principal'] != "" && $row['former_principal'] != "NONE" && $row['former_principal'] != "SAME"){
+                    $temp->former_principal = $row['former_principal'];
                 }
 
-                $vessels[$vname]->save();
+                $temp->save();
             }
         }
-
-        // foreach($data as $vessel){
-        //     $vname = $vessel[1];
-        //     $array = [];
-
-        //     if(in_array($vname, $names)){
-        //         $ctr2++;
-        //         if($vessels[$vname]->imo == "" && $vessel[15] != ""){
-        //             // $array["imo"] = $vessel[15];
-        //             $vessels[$vname]->imo = $vessel[15];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->flag == "" && $vessel[13] != ""){
-        //             // $array["flag"] = $vessel[13];
-        //             $vessels[$vname]->flag = $vessel[13];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->year_build == "" && $vessel[9] != ""){
-        //             // $array["year_build"] = $vessel[9];
-        //             $vessels[$vname]->year_build = $vessel[9];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->engine == "" && $vessel[8] != ""){
-        //             // $array["engine"] = $vessel[8];
-        //             $vessels[$vname]->engine = $vessel[8];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->gross_tonnage == "" && $vessel[3] != ""){
-        //             // $array["gross_tonnage"] = $vessel[3];
-        //             $vessels[$vname]->gross_tonnage = $vessel[3];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->trade == "" && $vessel[21] != ""){
-        //             // $array["trade"] = $vessel[21];
-        //             $vessels[$vname]->trade = $vessel[21];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->mlc_shipowner == "" && $vessel[64] != ""){
-        //             // $array["mlc_shipowner"] = $vessel[64];
-        //             $vessels[$vname]->mlc_shipowner = $vessel[64];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->mlc_shipowner_address == "" && $vessel[65] != ""){
-        //             // $array["mlc_shipowner_address"] = $vessel[65];
-        //             $vessels[$vname]->mlc_shipowner_address = $vessel[65];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->former_agency == "" && $vessel[26] != "" && $vessel[26] != "NONE" && $vessel[26] != "SAME"){
-        //             // $array["former_agency"] = $vessel[26];
-        //             $vessels[$vname]->former_agency = $vessel[26];
-        //             $ctr++;
-        //         }
-        //         if($vessels[$vname]->former_principal == "" && $vessel[27] != "" && $vessel[27] != "NONE" && $vessel[27] != "SAME"){
-        //             // $array["former_principal"] = $vessel[27];
-        //             $vessels[$vname]->former_principal = $vessel[27];
-        //             $ctr++;
-        //         }
-
-        //         echo $vessels[$vname]->save();
-        //     }
-        // }
     }
 }
