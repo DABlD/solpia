@@ -9,6 +9,8 @@ class Vessel extends Model
 {
     use VesselAttribute;
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
     	'principal_id', 'name', 'flag', 'type', 'year_build',
     	'builder', 'engine', 'gross_tonnage', 'BHP', 'trade',
@@ -18,7 +20,6 @@ class Vessel extends Model
         'registered_shipowner', 'registered_shipowner_address',
         'work_hours', 'ot_hours', 'cba_affiliation', 'classification',
         "months_in_contract"
-
     ];
 
     protected $dates = [

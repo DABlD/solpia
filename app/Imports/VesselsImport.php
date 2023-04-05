@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Imports;
+use Illuminate\Http\Request;
 
 use App\User;
 use App\Models\{Vessel, Principal};
@@ -16,6 +17,12 @@ class VesselsImport implements ToCollection
     */
     public function collection(Collection $data)
     {
+        $temp = new Vessel();
+        $temp->name = "test";
+        $temp->manning_agent = "test";
+        $temp->save();
+        dd($temp);
+        
         $size = sizeof($data);
         $principals = Principal::pluck('name')->toArray();
 
