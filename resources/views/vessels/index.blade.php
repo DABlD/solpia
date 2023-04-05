@@ -412,6 +412,7 @@
                             <select name="type" class="form-control">
                                 <option value="default">Default</option>
                                 <option value="addVesselDetails">Additional Vessel Details</option>
+                                <option value="addVesselWageScale">Import Wage Scale</option>
                             </select>
                         </form>
                     `
