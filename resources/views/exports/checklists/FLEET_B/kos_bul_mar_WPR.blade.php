@@ -204,6 +204,7 @@
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK W/ OEC", 'id') }}
+	{{ $doc("SID", "SID", 'id') }}
 	{{ $doc("MCV", "MARITIME CREW VISA", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS N/A", 0) }}

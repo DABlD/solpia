@@ -183,6 +183,7 @@
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
 	{{ $doc("US-VISA", "US - VISA", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK W/ OEC", 'id') }}
+	{{ $doc("SID", "SID", 'id') }}
 	{{ $doc("MCV", "MCV with PPRT NO.", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
