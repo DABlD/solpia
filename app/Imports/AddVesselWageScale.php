@@ -50,10 +50,12 @@ class AddVesselWageScale implements ToCollection, WithHeadingRow
                                 if($oph){
                                     // $temp = round($oph * 2) / 2;
                                     // echo $oph . ' - ' . $temp . '<br>';
-                                    // $temp->ot_per_hour = $oph;
+                                    $temp->ot_per_hour = round($oph, 2);
+                                    // $temp->ot_per_hour = round($oph * 2) / 2;
+                                    // echo $temp->ot_per_hour . '<br>';
                                 }
                             }
-                            if($wage['leave_pay_calculation_month'] != ""){
+                            if($wage['leave_pay_calculation_month'] != "" && $temp->leave_per_month == ""){
                                 $temp->leave_per_month = preg_replace("/[^0-9\.]/", '', $wage['leave_pay_calculation_month']);
                             }
 
@@ -82,7 +84,8 @@ class AddVesselWageScale implements ToCollection, WithHeadingRow
 
                             $oph = ($wage['got'] != "" && $wage['got'] != 0) ? $wage['got'] / 103 : null;
                             if($oph){
-                                $temp->ot_per_hour = round($oph * 2) / 2;
+                                // $temp->ot_per_hour = round($oph * 2) / 2;
+                                $temp->ot_per_hour = round($oph, 2);
                             }
 
                             if($wage['leave_pay_calculation_month'] != ""){
@@ -91,6 +94,8 @@ class AddVesselWageScale implements ToCollection, WithHeadingRow
 
                             $temp->save();
                         }
+
+                        // 
                     }
                 }
             }
@@ -99,6 +104,7 @@ class AddVesselWageScale implements ToCollection, WithHeadingRow
         // die;
     }
 
+    // SORT RANKS
     private function getPosition($name){
         if($name == "TRAINEE ELECTRICIAN" || $name == "ELECTRICIAN TRAINEE"){
             $name = "TRAINEE ELECTRICIAN";
