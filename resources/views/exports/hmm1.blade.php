@@ -300,6 +300,8 @@
 			$bhp = str_replace('&', '&#38;', $ss->bhp_kw);
 			$cn = str_replace('&', '&#38;', $ss->crew_nationality);
 			$flag = str_replace('&', '&#38;', $ss->flag);
+			$principal = str_replace('&', '&#38;', $ss->principal);
+			$remarks = str_replace('&', '&#38;', $ss->remarks);
 
 			$son = $ss->sign_on;
 			$soff = $ss->sign_off;
@@ -319,10 +321,10 @@
 				<td>$on</td>
 				<td>$off</td>
 				<td>$dura</td>
-				<td>$ss->remarks</td>
+				<td>$remarks</td>
 				<td>$cn</td>
 				<td>$man</td>
-				<td>$ss->principal</td>
+				<td>$principal</td>
 			";
 		}
 	};
