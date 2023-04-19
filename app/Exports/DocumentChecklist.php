@@ -901,7 +901,46 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
             }
         }
         elseif($fleet == "TOEI"){
-            
+            if($rank == "MSTR" || $rank == "C/O"){
+                $this->rows    = 54;
+                $this->view    = "MSTR_CO";
+            }
+            elseif($rank == "2/O" || $rank == "3/O"){
+                $this->rows    = 54;
+                $this->view    = "2O_3O";
+            }
+            elseif($rank == "C/E" || $rank == "1AE"){
+                $this->rows    = 49;
+                $this->view    = "CE_1AE";
+            }
+            elseif($rank == "2AE" || $rank == "3AE"){
+                $this->rows    = 48;
+                $this->view    = "2AE_3AE";
+            }
+            elseif($rank == "BSN" || $rank == "AB"){
+                $this->rows    = 42;
+                $this->view    = "BSN_AB";
+            }
+            elseif($rank == "OS"){
+                $this->rows    = 40;
+                $this->view    = "OS";
+            }
+            elseif($rank == "OLR1" || $rank == "OLR"){
+                $this->rows    = 42;
+                $this->view    = "OLR1_OLR";
+            }
+            elseif($rank == "WPR"){
+                $this->rows    = 40;
+                $this->view    = "WPR";
+            }
+            elseif($rank == "CCK" || $rank == "2CK"){
+                $this->rows    = 39;
+                $this->view    = "CCK_2CK";
+            }
+            elseif($rank == "MSM" || $rank == "MBY"){
+                $this->rows    = 38;
+                $this->view    = "MSM_MBY";
+            }
         }
         elseif($fleet == "FISHING"){
             

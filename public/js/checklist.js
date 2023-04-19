@@ -46,7 +46,11 @@ function getChecklist(fleet){
 		`;
 	}
 	else if(fleet == "TOEI"){
-		
+		return `
+			<option value="Panama"> TOEI - PANAMA 		 	</option>
+			<option value="Marshall Islands"> TOEI - MARSHALL ISLAND 	</option>
+			<option value="Liberia"> TOEI - LIBERIA 			</option>
+		`;
 	}
 	else if(fleet == "FISHING"){
 		
