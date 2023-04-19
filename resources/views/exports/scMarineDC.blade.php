@@ -272,7 +272,7 @@
 				SEAMAN'S NAME
 			</td>
 			<td colspan="3">
-				{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname[0] }}
+				{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . ($applicant->user->mname ? $applicant->user->mname[0] : "") }}
 			</td>
 
 			<td colspan="2">
