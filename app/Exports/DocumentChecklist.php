@@ -162,7 +162,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 56 + $additional;
                     $this->view    = "1AE";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 56 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -226,7 +226,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 45 + $additional;
                     $this->view    = "OS";
                 }
-                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 56 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -272,7 +272,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 44 + $additional;
                     $this->view    = "DCDT";
                 }
-                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 56 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -326,7 +326,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 53 + $additional;
                     $this->view    = "1AE";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 51 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -371,7 +371,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 52 + $additional;
                     $this->view    = "CE_1AE";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 48 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -441,7 +441,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 52 + $additional;
                     $this->view    = "CE";
                 }
-                elseif($rank == "2AE"){
+                elseif($rank == "2AE" || $rank == "3E"){
                     $this->rows    = 53 + $additional;
                     $this->view    = "2AE";
                 }
@@ -489,7 +489,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 42 + $additional;
                     $this->view    = "OS";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 51 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -561,7 +561,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 41 + $additional;
                     $this->view    = "OS";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 51 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -611,7 +611,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 41 + $additional;
                     $this->view    = "OS";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 51 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -661,7 +661,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 41 + $additional;
                     $this->view    = "OS";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 51 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -716,7 +716,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 54 + $additional;
                     $this->view    = "CE_1AE";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 51 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -770,7 +770,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 45 + $additional;
                     $this->view    = "OS";
                 }
-                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 56 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -816,7 +816,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 44 + $additional;
                     $this->view    = "DCDT";
                 }
-                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "1AE" || $rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 56 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -870,7 +870,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 53 + $additional;
                     $this->view    = "1AE";
                 }
-                elseif($rank == "2AE" || $rank == "3AE"){
+                elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                     $this->rows    = 51 + $additional;
                     $this->view    = "2AE_3AE";
                 }
@@ -913,7 +913,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 $this->rows    = 49;
                 $this->view    = "CE_1AE";
             }
-            elseif($rank == "2AE" || $rank == "3AE"){
+            elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
                 $this->rows    = 48;
                 $this->view    = "2AE_3AE";
             }
