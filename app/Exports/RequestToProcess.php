@@ -39,6 +39,7 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
         $this->data->departure  = $this->req['departure'];
         $this->data->docus      = $this->req['docus'];
         $this->data->flag       = $this->req['flag'];
+        $this->data->visa       = $this->req['visa'];
 
         foreach($tempCrews as $id){
             $crew = Applicant::find($id);
@@ -171,8 +172,10 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
             ]
         ];
 
+        $data = $this->data;
+
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $data) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
@@ -302,10 +305,14 @@ class RequestToProcess implements FromView, WithEvents, WithDrawings//, ShouldAu
                     'A37:O43', 'A46:O66'
                 ]);
 
-
                 $cells[2] = array_merge([
                     
                 ]);
+
+                if($data->visa){
+                    array_push($cells[2], "D6");
+                    array_push($cells[2], "D41");
+                }
 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){

@@ -3956,6 +3956,7 @@
             let crews = [];
             let docus = [];
             let flag = null;
+            let visa = null;
 
             let temp = $('.LUN');
             let crewString = "";
@@ -3963,6 +3964,7 @@
 
             let docuArray = [
                 {name: 'USA VISA REFUND',},
+                {name: 'VISA'},
                 {name: 'FLAG'},
                 {name: 'VESSEL / PRINCIPAL ENROLLMENT / AMENDMENT'},
                 {name: 'IHT CERT'},
@@ -3995,6 +3997,7 @@
                         <div class="col-md-10">
                             <label for="">
                                 ${value.name}
+                                ${value.name == "VISA" ? input("visa", "", $('#visa_flag').html(), 0,12) : ""}
                                 ${value.name == "FLAG" ? input("flag", "", $('#vessel_flag').html(), 0,12) : ""}
                             </label>
                         </div>
@@ -4074,6 +4077,7 @@
                                 });
 
                                 flag = $('[name="flag"]').val();
+                                visa = $('[name="visa"]').val();
                             resolve()}, 500);
                         });
                     },
@@ -4147,6 +4151,7 @@
                         departure: $('#departure').val(),
                         filename: $('.modal-title span')[0].innerText.substring(4) + ' - Request To Process',
                         flag: flag,
+                        visa: visa,
                         isApplicant: false
                     };
 
@@ -4165,6 +4170,7 @@
 
             let docuArray = [
                 {name: 'USA VISA REFUND',},
+                {name: 'VISA'},
                 {name: 'FLAG'},
                 {name: 'VESSEL / PRINCIPAL ENROLLMENT / AMENDMENT'},
                 {name: 'IHT CERT'},
@@ -4197,6 +4203,7 @@
                         <div class="col-md-10">
                             <label for="">
                                 ${value.name}
+                                ${value.name == "VISA" ? input("visa", "", $('#visa_flag').html(), 0,12) : ""}
                                 ${value.name == "FLAG" ? input("flag", "", $('#vessel_flag').html(), 0,12) : ""}
                             </label>
                         </div>
@@ -4275,6 +4282,7 @@
                                     docus.push($(value).data('id'));
                                 });
 
+                                visa = $('[name="visa"]').val();
                                 flag = $('[name="flag"]').val();
                             resolve()}, 500);
                         });
@@ -4324,6 +4332,7 @@
                         departure: "Onboard",
                         filename: vname.substring(vname.match("/") ? 4 : 3) + ' - Request To Process',
                         flag: flag,
+                        visa: visa,
                         isApplicant: false
                     };
 
