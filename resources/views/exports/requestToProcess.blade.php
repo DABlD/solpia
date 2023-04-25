@@ -26,11 +26,11 @@
 		</td>
 		<td colspan="3" style="{{ $bold }}">USA VISA REFUND</td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(1, $data->docus) ? 'a' : '' }}
+			{{ in_array(2, $data->docus) ? 'a' : '' }}
 		</td>
 		<td colspan="3" style="{{ $bold }}">FLAG</td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(2, $data->docus) ? 'a' : '' }}
+			{{ in_array(3, $data->docus) ? 'a' : '' }}
 		</td>
 		<td colspan="5" style="{{ $bold }}">
 			VESSEL / PRINCIPAL ENROLLMENT / AMENDMENT
@@ -42,15 +42,22 @@
 	<tr>
 		<td></td>
 		<td style="{{ $box }} {{ $bc }}">
-			
+			{{ in_array(1, $data->docus) ? 'a' : '' }}
 		</td>
-		<td colspan="3" style="{{ $bold }}">OTHER VISA ___________</td>
+
+		@if($data->visa)
+			<td colspan="1" style="{{ $bold }}">OTHER VISA</td>
+			<td colspan="2" style="{{ $bold }}">{{ $data->visa }}</td>
+		@else
+			<td colspan="3" style="{{ $bold }}">OTHER VISA {{ $data->visa ?? "___________" }}</td>
+		@endif
+
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(3, $data->docus) ? 'a' : '' }}
+			{{ in_array(4, $data->docus) ? 'a' : '' }}
 		</td>
 		<td colspan="3" style="{{ $bold }}">IHT CERT</td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(4, $data->docus) ? 'a' : '' }}
+			{{ in_array(5, $data->docus) ? 'a' : '' }}
 		</td>
 		<td colspan="5" style="{{ $bold }}">
 			CONTRACT
@@ -194,11 +201,11 @@
 		</td>
 		<td colspan="3" style="{{ $bold }}">USA VISA REFUND</td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(1, $data->docus) ? 'a' : '' }}
+			{{ in_array(2, $data->docus) ? 'a' : '' }}
 		</td>
 		<td colspan="3" style="{{ $bold }}">FLAG</td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(2, $data->docus) ? 'a' : '' }}
+			{{ in_array(3, $data->docus) ? 'a' : '' }}
 		</td>
 		<td colspan="5" style="{{ $bold }}">
 			VESSEL / PRINCIPAL ENROLLMENT / AMENDMENT
@@ -210,9 +217,16 @@
 	<tr>
 		<td></td>
 		<td style="{{ $box }} {{ $bc }}">
-			{{ in_array(3, $data->docus) ? 'a' : '' }}
+			{{ in_array(1, $data->docus) ? 'a' : '' }}
 		</td>
-		<td colspan="3" style="{{ $bold }}">OTHER VISA ___________</td>
+
+		@if($data->visa)
+			<td colspan="1" style="{{ $bold }}">OTHER VISA</td>
+			<td colspan="2" style="{{ $bold }}">{{ $data->visa }}</td>
+		@else
+			<td colspan="3" style="{{ $bold }}">OTHER VISA {{ $data->visa ?? "___________" }}</td>
+		@endif
+		
 		<td style="{{ $box }} {{ $bc }}">
 			{{ in_array(4, $data->docus) ? 'a' : '' }}
 		</td>
