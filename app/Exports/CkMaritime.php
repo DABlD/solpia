@@ -9,8 +9,10 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class CkMaritime implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class CkMaritime implements FromView, WithEvents, WithDrawings, WithColumnFormatting//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -22,6 +24,13 @@ class CkMaritime implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         return view('exports.' . lcfirst($this->type), [
             'data' => $this->data,
         ]);
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => NumberFormat::FORMAT_NUMBER,
+        ];
     }
 
     public function registerEvents(): array
@@ -331,6 +340,7 @@ class CkMaritime implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'B6:E6',
                     'B9:B10', 'E7:E10',
                     "A91:L" . (91 + ($sss * 2) - 1)
                 ];
