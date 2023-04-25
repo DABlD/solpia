@@ -396,13 +396,21 @@
 	</tr>
 
 	@php
-		$coc = isset($data->document_lc->COC) ? $data->document_lc->COC : null;
+		$label = null;
+		if($data->pro_app->rank->id == 24){
+			$coc = isset($data->document_lc->NCIII) ? $data->document_lc->NCIII : null;
+			$label = "NCIII";
+		}
+		else{
+			$coc = isset($data->document_lc->COC) ? $data->document_lc->COC : null;
+			$label = "COC";
+		}
 		$goc = isset($data->document_lc->{"GMDSS/GOC"}) ? $data->document_lc->{"GMDSS/GOC"} : null;
 	@endphp
 
 	<tr>
 		<td rowspan="2" style="{{ $bc }}">PHILIPPINES</td>
-		<td style="{{ $bc }}">COC</td>
+		<td style="{{ $bc }}">{{ $label }}</td>
 		<td style="{{ $bc }}">{{ $coc ? $data->rank->abbr : "" }}</td>
 		<td colspan="2" style="{{ $bc }}">
 			{{ $coc ? $coc->no : "" }}
