@@ -497,6 +497,7 @@
 
 	{{ $getDocument('PASSPORT', 	'id', 		'',			"National Passport"						)}}
 	{{ $getDocument("SEAMAN'S BOOK",'id', 		'', 		"National Seaman's book"				)}}
+	{{ $getDocument("SID",			'id', 		'', 		"Seafarer Identity Document(SID)"		)}}
 	{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 	"Flag Seaman's book"					)}}
 
 	{{-- VISAS --}}
@@ -942,6 +943,6 @@
 
 	<tr>
 		<td colspan="27"></td>
-		<td colspan="7">Revised by 2022.02.09</td>
+		<td colspan="7">Revised by 2023.04.26</td>
 	</tr>
 </table>
