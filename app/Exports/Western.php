@@ -208,10 +208,10 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $sSsRows2 = [];
 
                 if($ssSize){
-                    $ssRows = 'A' . (104 + $ebSize) . ':' . 'AH' . (103 + $ebSize + ($ssSize * 2));
+                    $ssRows = 'A' . (105 + $ebSize) . ':' . 'AH' . (104 + $ebSize + ($ssSize * 2));
                 }
 
-                $ctr = 102;
+                $ctr = 103;
                 for($i = 0; $i <= sizeof($this->applicant->sea_service); $i++){
                     array_push($sSsRows, 'A' . ($ctr + $ebSize) . ':' . 'F' . ($ctr + $ebSize));
                     array_push($sSsRows, 'G' . ($ctr + $ebSize) . ':' . 'J' . ($ctr + $ebSize));
@@ -245,11 +245,11 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'A1:AH11', 'A12:' . $ar('AH', (103 + ($ssSize *2) + 8))
+                    'A1:AH11', 'A12:' . $ar('AH', (104 + ($ssSize *2) + 8))
                 ];
 
                 $fills[1] = array_merge($fillables, [
-                    'P9:AA9', 'AA11:AH11', 'E13:H13', 'K13:N13', 'T13:W13', 'AA13:AH13', 'C14:L14', 'N14:W14', 'Y14:AH14', 'D16:Y16', 'AD16:AH16', 'D17:Y17', 'AD17:AH16', 'E18:J18', 'M18:N18', 'S18:Y18', 'AD18:AH18', 'E19:J19', 'N19:P19', 'U19:W19', 'AD19:AH19', 'D20:J20', 'M20:Q20', 'V20:W20', 'AE20:AH20', $ar('K', 74, 'AH', 79), $ar('AC', 82, 'AC', 83), $ar('AC', 85, 'AC', 86), $ar('L', 89, 'AH', 91), $ar('AC', 94), $ar('AC', 96, 'AC', 100), $ssRows, $ar('A', (105 + ($ssSize * 2))), $ar('K', (109 + ($ssSize * 2))), $ar('H', (111 + ($ssSize * 2))), $ar('W', (111 + ($ssSize * 2)))
+                    'P9:AA9', 'AA11:AH11', 'E13:H13', 'K13:N13', 'T13:W13', 'AA13:AH13', 'C14:L14', 'N14:W14', 'Y14:AH14', 'D16:Y16', 'AD16:AH16', 'D17:Y17', 'AD17:AH16', 'E18:J18', 'M18:N18', 'S18:Y18', 'AD18:AH18', 'E19:J19', 'N19:P19', 'U19:W19', 'AD19:AH19', 'D20:J20', 'M20:Q20', 'V20:W20', 'AE20:AH20', $ar('K', 74, 'AH', 80), $ar('AC', 83, 'AC', 84), $ar('AC', 86, 'AC', 87), $ar('L', 90, 'AH', 92), $ar('AC', 95), $ar('AC', 97, 'AC', 101), $ssRows, $ar('A', (106 + ($ssSize * 2))), $ar('K', (110 + ($ssSize * 2))), $ar('H', (112 + ($ssSize * 2))), $ar('W', (112 + ($ssSize * 2)))
                 ]);
 
                 if($ebRows != ""){
@@ -257,7 +257,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 $fills[2] = [
-                    'AA1:AH1', 'A22:AH22', $ar('A', 24, 'AH', 24), $ar('A', 31, 'AH', 31), $ar('A', 40, 'AH', 40), $ar('A', 52, 'AH', 52), $ar('A', 73, 'AH', 73), $ar('A', 81, 'AH', 81), $ar('A', 84, 'AH', 84), $ar('A', 88, 'AH', 88), $ar('A', 93, 'AH', 93), $ar('A', 96, 'N', 100), $ar('A', 102, 'AH', 103)
+                    'AA1:AH1', 'A22:AH22', $ar('A', 24, 'AH', 24), $ar('A', 31, 'AH', 31), $ar('A', 40, 'AH', 40), $ar('A', 52, 'AH', 52), $ar('A', 73, 'AH', 73), $ar('A', 82, 'AH', 82), $ar('A', 85, 'AH', 85), $ar('A', 89, 'AH', 89), $ar('A', 94, 'AH', 94), $ar('A', 97, 'N', 101), $ar('A', 103, 'AH', 104)
                 ];
 
                 foreach($fills as $key => $value){
@@ -285,7 +285,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = array_merge($fills[1], $fillables, [
-                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 36), $ar('A', 56), $ar('A', (103 + ($ssSize * 2) + 6)), $ar('A', (103 + ($ssSize * 2) + 8)), $ar('P', (103 + ($ssSize * 2) + 8)), $ar('A', 31, 'AH', 31), $ar('A', 40, 'AH', 40), $ar('A', 52, 'AH', 52), $ar('A', 73, 'AH', 73), $ar('A', 81, 'AH', 81), $ar('A', 84, 'AH', 84), $ar('A', 89, 'AH', 88), $ar('A', 93, 'AH', 93), $ar('A', 102, 'AH', 103)
+                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 36), $ar('A', 56), $ar('A', (103 + ($ssSize * 2) + 6)), $ar('A', (103 + ($ssSize * 2) + 8)), $ar('P', (103 + ($ssSize * 2) + 8)), $ar('A', 31, 'AH', 31), $ar('A', 40, 'AH', 40), $ar('A', 52, 'AH', 52), $ar('A', 73, 'AH', 73), $ar('A', 82, 'AH', 82), $ar('A', 85, 'AH', 85), $ar('A', 90, 'AH', 89), $ar('A', 94, 'AH', 94), $ar('A', 103, 'AH', 104)
                 ]);
 
                 // HL
@@ -300,7 +300,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // B
                 $h[6] = [
-                    'A21', $ar('A', 23), $ar('A', 30), $ar('A', 39), $ar('A', 51), $ar('A', 72), $ar('A', 77), $ar('A', 87), $ar('A', 92), $ar('A', 95), $ar('A', 101), $ar('A', (103 + ($ssSize * 2) + 1)), $ar('A', (103 + ($ssSize * 2) + 6)), $ar('AB', (103 + ($ssSize * 2) + 9))
+                    'A21', $ar('A', 23), $ar('A', 30), $ar('A', 39), $ar('A', 51), $ar('A', 72), $ar('A', 77), $ar('A', 88), $ar('A', 93), $ar('A', 96), $ar('A', 102), $ar('A', (104 + ($ssSize * 2) + 1)), $ar('A', (104 + ($ssSize * 2) + 6)), $ar('AB', (104 + ($ssSize * 2) + 9))
                 ];
 
                 // VC
@@ -314,7 +314,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    $ar('A', 25, 'K', 71), $ar('K', 104, 'K', (104 + ($ssSize * 2))), 'S18', $ar('AC', 25, 'AC', 102), $ar('F', 25, 'F', 32), $ar('A', 103, 'A', (103 + ($ssSize * 2))), $ar('G', 103, 'G', (103 + ($ssSize * 2))), $ar('Q', 103, 'V', (103 + ($ssSize * 2)))
+                    $ar('A', 25, 'K', 71), $ar('K', 105, 'K', (105 + ($ssSize * 2))), 'S18', $ar('AC', 25, 'AC', 103), $ar('F', 25, 'F', 32), $ar('A', 104, 'A', (104 + ($ssSize * 2))), $ar('G', 104, 'G', (104 + ($ssSize * 2))), $ar('Q', 104, 'V', (104 + ($ssSize * 2)))
                 ];
 
                 foreach($h as $key => $value) {
@@ -342,11 +342,11 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BORDERS
                 $cells[0] = array_merge([
-                    'A1:H11', $ar('A', (103 + ($ssSize *2) + 4), 'AH', (103 + ($ssSize *2) + 8))
+                    'A1:H11', $ar('A', (104 + ($ssSize *2) + 4), 'AH', (104 + ($ssSize *2) + 8))
                 ]);
 
                 $cells[1] = array_merge([
-                    'AA1:AH4', 'A22:' . $ar('AH', 101), $ar('A', (103 + ($ssSize *2) + 1), 'AH', (103 + ($ssSize *2) + 4))
+                    'AA1:AH4', 'A22:' . $ar('AH', 102), $ar('A', (104 + ($ssSize *2) + 1), 'AH', (104 + ($ssSize *2) + 4))
                 ]);
 
                 $cells[2] = array_merge([
@@ -397,7 +397,7 @@ class Western implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle($ar('K', 25, 'AH', 71))->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
 
                 // SETTING PRINT AREA
-                $event->sheet->getDelegate()->getPageSetup()->setPrintArea('A1:' . $ar('AH', (103 + ($ssSize * 2)) + 8));
+                $event->sheet->getDelegate()->getPageSetup()->setPrintArea('A1:' . $ar('AH', (104 + ($ssSize * 2)) + 8));
             },
         ];
     }

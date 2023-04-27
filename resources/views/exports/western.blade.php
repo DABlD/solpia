@@ -749,8 +749,11 @@
 		{{ $getDocument('COVID-19 2ND DOSE', 'med_cert', '', '2nd Dose')}}
 	</tr>
 	<tr>
-		<td colspan="7" style="font-weight: bold;">Covid Vaccine Booster</td>
+		<td colspan="7" rowspan="2" style="font-weight: bold;">Covid Vaccine Booster</td>
 		{{ $getDocument('COVID-19 3RD DOSE', 'med_cert', '', '1st Dose')}}
+	</tr>
+	<tr>
+		{{ $getDocument('COVID-19 4TH DOSE', 'med_cert', '', '2nd Dose')}}
 	</tr>
 	
 	{{-- LINGUISTIC --}}
