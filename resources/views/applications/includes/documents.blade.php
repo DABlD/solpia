@@ -395,6 +395,7 @@
             	            	<option value="COVID-19 1ST DOSE">COVID-19 1ST DOSE</option>
             	            	<option value="COVID-19 2ND DOSE">COVID-19 2ND DOSE</option>
             	            	<option value="COVID-19 3RD DOSE">COVID-19 3RD DOSE</option>
+            	            	<option value="COVID-19 4TH DOSE">COVID-19 4TH DOSE</option>
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${mcType}${count}Error"></strong>
