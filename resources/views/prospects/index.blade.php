@@ -539,6 +539,7 @@
                         <select name="import" class="form-control">
                             <option value="ProspectsImport2">Responses</option>
                             <option value="ProspectsImport4">Applicant Log</option>
+                            <option value="ProspectsImport3">Applicant Log 2</option>
                         </select>
                     </form>
                 `
