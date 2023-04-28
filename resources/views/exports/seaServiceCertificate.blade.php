@@ -69,6 +69,10 @@
 		<td style="font-weight: bold; border: 1px solid black; text-align: center; vertical-align: middle;">TO {{ PHP_EOL }} (d/m/y)</td>
 	</tr>
 
+	@php
+		$start = 13;
+	@endphp
+
 	@foreach($data->sea_service as $ss)
 		@php
 			if($ss->sign_on && $ss->sign_off){
@@ -78,6 +82,7 @@
 			$ct = function($text){
    				return str_replace('&', '&#38;', $text);
    			};
+   			$start = $start+1;
 		@endphp
 		@if(str_contains($ss->manning_agent, "SOLPIA"))
 			<tr>
@@ -91,9 +96,7 @@
 				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_off ? $ss->sign_off->format('d-M-y') : "-" }}</td>
 				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->rank }}</td>
 				<td style="border: 1px solid black; font-size: 9px;">
-					{{ $diff->y ? $diff->y . " yr " : "" }}
-					{{ $diff->m ? $diff->m . " mos " : "" }}
-					{{ $diff->d ? $diff->d . " day " : "" }}
+					{{ '=IF(DATEDIF(G' . $start . ',H' . $start . ',"y")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"y")&" yr ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"ym")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"ym")&" mos ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"md")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"md")&" day")' }}
 				</td>
 			</tr>
 		@endif
