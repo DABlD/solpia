@@ -65,6 +65,11 @@ class X25_MLCLinedUp implements WithMultipleSheets
         $sheets = [];
         foreach($this->applicants as $applicant){
             $class = "App\Exports\MLC\\" . $this->principal;
+
+            if($applicant->vessel->id == 6005){
+                $class .= "2";
+            }
+
             array_push($sheets, new $class($applicant, $applicant->abbr));
         }
 
