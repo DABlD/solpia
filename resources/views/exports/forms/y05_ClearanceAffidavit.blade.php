@@ -49,7 +49,7 @@
 
 	<tr>
 		<td colspan="11" style="{{ $center }}">
-			Done this ____ day of ___________ 2022 in Manila, Philippines.
+			Done this ____ day of ___________ {{ now()->format("Y") }} in Manila, Philippines.
 		</td>
 	</tr>
 
