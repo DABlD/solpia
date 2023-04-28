@@ -46,6 +46,10 @@ class MLCContract implements WithMultipleSheets
         $sheets = [];
         $class = "App\Exports\MLC\\" . Principal::find($this->applicant->vessel->principal_id)->name;
 
+        if($this->applicant->vessel->id == 6005){
+            $class .= "2";
+        }
+
         $class = str_replace(' ', '', $class);
 
         array_push($sheets, new $class($this->applicant, $this->type, $this->req));
