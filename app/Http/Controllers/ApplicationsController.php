@@ -1338,6 +1338,10 @@ class ApplicationsController extends Controller
                         }
                     }
                 }
+
+                if($type == "DocumentChecklist"){
+                    $req->filename = $applicant->user->fullname . ' - ' . "FinalDocumentChecklist";
+                }
             }
             elseif(str_starts_with($type, 'Y')){
                 $applicant->data = $req->all();
