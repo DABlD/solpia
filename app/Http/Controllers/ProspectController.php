@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Prospect;
+
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\Reports\Prospect as ProspectReport;
 
 use DB;
 
@@ -97,6 +99,18 @@ class ProspectController extends Controller
             $req->session()->flash('error', 'Please Try Again.');
             return back();
         }
+    }
+
+    public function report($from, $to){
+        $data = Prospect::whereBetween('created_at', [$from, $to])->get();
+        $data->load('candidates');
+
+        $from = now()->parse($from)->toFormattedDateString();
+        $to = now()->parse($to)->toFormattedDateString();
+
+        $fileName = "$from - $to Applicants";
+
+        return Excel::download(new ProspectReport($data->toArray(), $from, $to), "$fileName.xlsx");
     }
 
     private function _view($view, $data = array()){
