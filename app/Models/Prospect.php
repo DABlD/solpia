@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\ProspectAttribute;
 
+use App\Models\Candidate;
+
 class Prospect extends Model
 {
 	use ProspectAttribute, SoftDeletes;
@@ -20,4 +22,8 @@ class Prospect extends Model
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at', 'birthday', 'last_disembark',
     ];
+
+    public function candidates(){
+        return $this->hasMany(Candidate::class, 'prospect_id', 'id');
+    }
 }
