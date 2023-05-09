@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\MLC;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -19,9 +19,9 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
     public function view(): View
     {
-        $exportView = str_replace(' ', '_', $this->applicant->vessel->fleet) . '.hanjoo';
+        $exportView = str_replace(' ', '_', $this->data->vessel->fleet) . '.hanjoo';
         return view('exports.mlc.' . $exportView, [
-            'data' => $this->applicant,
+            'data' => $this->data,
         ]);
     }
 
@@ -241,7 +241,7 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
+                $event->sheet->getDelegate()->setTitle('MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -250,7 +250,7 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -315,13 +315,16 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
+                    'A1:H90'
                 ];
 
                 $h['wrap'] = [
+                    'A38'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'D3', 'D5', 'D9'
                 ];
 
                 foreach($h as $key => $value) {
@@ -361,6 +364,7 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'A3:H13'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -377,6 +381,7 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
+                    'A3:H13'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -414,6 +419,14 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
+                    'H30',
+                    'H31',
+                    'H32',
+                    'H33',
+                    'H34',
+                    'H35',
+                    'A85:E85', 'G85:H85',
+                    'A89:E89', 'G89:H89'
                 ]);
 
                 // LBT
@@ -434,17 +447,45 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(19);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(30);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                for($i = 3; $i <= 17; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
+                for($i = 19; $i <= 36; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
+                for($i = 39; $i <= 42; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
+                for($i = 44; $i <= 45; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
+                for($i = 47; $i <= 57; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
+                for($i = 59; $i <= 61; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
+                for($i = 63; $i <= 72; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
+                for($i = 74; $i <= 79; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A3:H100')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A3:H100')->getFont()->setName('Times New Roman');
             },
         ];
     }
