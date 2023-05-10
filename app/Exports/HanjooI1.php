@@ -141,8 +141,8 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
-                $event->sheet->getDelegate()->getStyle('A1:K37')->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A1:K37')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:K36')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A1:K36')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A5')->getFont()->setSize(16);
 
                 // SET PAGE BREAK PREVIEW
@@ -181,8 +181,8 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // HC VC
                 $h[5] = [
                     'F2', 'A5', 'A7', 'D7', 'G7', 'A8:I8',
-                    'A8', 'C8', 'D8', 'F8', 'I8', 'A7:I32',
-                    'A33:G40'
+                    'A8', 'C8', 'D8', 'F8', 'I8',
+                    'A32:G39'
                 ];
 
                 // B
@@ -193,17 +193,17 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A9:A32', 'A34', 'C34', 'I9:I32', 'B7', 'E7', 'H7'
+                    'A9:A31', 'A33', 'C33', 'I9:I31', 'B7', 'E7', 'H7'
                 ];
 
                 //HR
                 $h[8] = [
-                    'A36'
+                    'A35'
                 ];
 
                 //underline
                 $h[9] = [
-                    'C36'
+                    'C35'
                 ];
 
                 $h['wrap'] = [
@@ -212,7 +212,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'C9:H32'
+                    'C9:H31'
                 ];
 
                 foreach($h as $key => $value) {
@@ -253,7 +253,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BORDERS
                 $cells[0] = array_merge($rows, [
-                    'F2:I3', 'A5:I36'
+                    'F2:I3', 'A5:I35'
                 ]);
 
                 $cells[1] = array_merge([
@@ -295,7 +295,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension('6')->setRowHeight(28.50);
                 $event->sheet->getDelegate()->getRowDimension('7')->setRowHeight(28.50);
 
-                for($i = 8; $i <= 36; $i++){
+                for($i = 8; $i <= 35; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(22.50);
                 }
             },

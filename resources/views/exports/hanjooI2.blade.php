@@ -5,7 +5,7 @@
 		<td rowspan="2" colspan="5"></td>
 		<td></td>
 		<td rowspan="2" colspan="9">
-			FORM SP08-06(1/1) / 0 15.12.21
+			FORM SP08-05(1/1) / 1 / 20.08.18
 		</td>
 	</tr>
 
@@ -14,7 +14,7 @@
 
 	<tr>
 		<td colspan="15" style="font-weight: bold;">
-			Interview Check List for Foreigner
+			Interview Check List for Seafarer
 		</td>
 	</tr>
 
@@ -105,7 +105,11 @@
 	</tr>
 
 	<tr>
-		<td rowspan="4" colspan="2">Skill (20)</td>
+		<td rowspan="4" colspan="2">
+			Ability
+			<br style='mso-data-placement:same-cell;' />
+			(20)
+		</td>
 		<td colspan="3">Knowledge</td>
 		<td>5</td>
 		<td colspan="2">4</td>
@@ -139,7 +143,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Language Skill</td>
+		<td colspan="3">Expressiveness</td>
 		<td>5</td>
 		<td colspan="2">4</td>
 		<td>3</td>
@@ -150,8 +154,12 @@
 	</tr>
 
 	<tr>
-		<td rowspan="4" colspan="2">Attitude (20)</td>
-		<td colspan="3">Own will disembarkation (-1 point/per)</td>
+		<td rowspan="4" colspan="2">
+			Attitude 
+			<br style='mso-data-placement:same-cell;' />
+			(20)
+		</td>
+		<td colspan="3">Responsibility</td>
 		<td>5</td>
 		<td colspan="2">4</td>
 		<td>3</td>
@@ -162,7 +170,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Change company (2 per: 5 / 4 per: 4)</td>
+		<td colspan="3">Diligence</td>
 		<td>5</td>
 		<td colspan="2">4</td>
 		<td>3</td>
@@ -173,7 +181,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Boarding career gap (less than 6 month :5)</td>
+		<td colspan="3">Cooperation</td>
 		<td>5</td>
 		<td colspan="2">4</td>
 		<td>3</td>
@@ -184,7 +192,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Long term boarding plan</td>
+		<td colspan="3">Initiative</td>
 		<td>5</td>
 		<td colspan="2">4</td>
 		<td>3</td>
@@ -195,7 +203,11 @@
 	</tr>
 
 	<tr>
-		<td colspan="2">Health (10)</td>
+		<td colspan="2">
+			Health
+			<br style='mso-data-placement:same-cell;' />
+			(10)
+		</td>
 		<td colspan="3">Qualification to perform task (Appearance or medical test result)</td>
 		<td>10</td>
 		<td colspan="2">8</td>
@@ -207,7 +219,11 @@
 	</tr>
 
 	<tr>
-		<td colspan="2">Background (10)</td>
+		<td colspan="2">
+			Background
+			<br style='mso-data-placement:same-cell;' />
+			(10)
+		</td>
 		<td colspan="3">Family relationship, marriage, personal history</td>
 		<td>10</td>
 		<td colspan="2">8</td>

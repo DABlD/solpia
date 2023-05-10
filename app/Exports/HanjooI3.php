@@ -135,8 +135,8 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
                 // FONT SIZES
-                $event->sheet->getDelegate()->getStyle('A1:Q36')->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A1:Q36')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:Q30')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A1:Q30')->getFont()->setSize(10);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -166,12 +166,12 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HL
                 $h[4] = [
-                    'A10'
+                    'A4'
                 ];
 
                 // HC VC
                 $h[5] = [
-                    'A1:O9', 'A11:O33'
+                    'A1:O3', 'A5:O27'
                 ];
 
                 // B
@@ -181,11 +181,11 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A10'
+                    'A4'
                 ];
 
                 $h['wrap'] = [
-                    'A4', 'C4', 'A12', 'A18', 'A24', 'L4'
+                    'A4', 'C4', 'A6', 'A12', 'A18', 'L4'
                 ];
 
                 // SHRINK TO FIT
@@ -228,11 +228,11 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ]);
 
                 $cells[1] = array_merge([
-                	'A4:O6', 'A11:O29'
+                	'A5:O23'
                 ]);
 
                 $cells[2] = array_merge([
-                    'A8:O8'
+                    
                 ]);
 
                 foreach($cells as $key => $value){
