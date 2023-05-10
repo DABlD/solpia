@@ -109,8 +109,8 @@
 	</tr>
 
 	@php
-		$start = $data->pro_app->eld;
-		$end = $start->add($data->employment_months, 'months');
+		$start = now()->parse($data->pro_app->eld);
+		$end = now()->parse($data->pro_app->eld)->add($data->employment_months, 'months');
 	@endphp
 	<tr>
 		<td colspan="2" style="{{ $c }}">

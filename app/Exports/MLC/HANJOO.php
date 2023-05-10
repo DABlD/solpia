@@ -324,7 +324,7 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'D3', 'D5', 'D9'
+                    'D3', 'D5', 'D9', 'C15'
                 ];
 
                 foreach($h as $key => $value) {
