@@ -134,6 +134,23 @@
 						$name = 'BTM';
 						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 					}
+
+					if(!$docu){
+						$name = 'ERS WITH ERM';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+
+					if(!$docu){
+						$name = 'ERS ';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+
+					if(!$docu){
+						$name = 'ERM';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+
+					$name = "BRTM / ERM";
 				}
 			}
 			else{
@@ -153,6 +170,8 @@
 						$name = 'RADAR OPERATOR PLOTTING AID';
 						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 					}
+
+					$name = "Radar Simulation";
 				}
 				elseif($temp == "POLLUTION"){
 					foreach(get_object_vars($applicant->document_lc) as $document){
@@ -266,7 +285,7 @@
 	<tr>
 		<td rowspan="2" colspan="5"></td>
 		<td rowspan="2" colspan="4">
-			FORM SP08-06(1/1) / 0 15.12.21
+			FORM SP08-06(1/1) / 1 / 22.09.19
 		</td>
 	</tr>
 
@@ -275,13 +294,13 @@
 
 	<tr>
 		<td colspan="9">
-			Document Check List for Foreigner
+			Document Check List for Seafarer
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="9" style="vertical-align: middle;">
-			*In case of no available document, please specify the status in a remark
+			*In case of no available document, please specify the status in a remark column.
 		</td>
 	</tr>
 
@@ -306,7 +325,7 @@
 		<td colspan="2">Documents</td>
 		<td>No.</td>
 		<td colspan="2">Issue</td>
-		<td colspan="3">Exp</td>
+		<td colspan="3">Expire</td>
 		<td>Remark</td>
 	</tr>
 
@@ -327,9 +346,7 @@
 
 	{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA')}}
 	{{ $getDocument('RADAR', 'lc', '', 'Radar Simulation')}}
-	{{ $getDocument('SSBT WITH BRM', 'lc', '', 'BRTM')}}
-
-	{{ $getDocument('ERS WITH ERM', 'lc', '', 'ERM')}}
+	{{ $getDocument('SSBT WITH BRM', 'lc', '', 'BRTM / ERM')}}
 	{{ $getDocument('ECDIS', 'lc', '', 'ECDIS (Generic)')}}
 	{{ $getDocument('ECDIS SPECIFIC', 'lc', '', 'ECDIS (Specific)')}}
 

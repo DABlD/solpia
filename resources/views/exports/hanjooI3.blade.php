@@ -5,44 +5,10 @@
 		<td rowspan="2" colspan="5"></td>
 		<td></td>
 		<td rowspan="2" colspan="9">
-			FORM SP08-06(1/1) / 0 15.12.21
+			FORM SP08-05(1/1) / 1 / 20.08.18
 		</td>
 	</tr>
 
-	<tr></tr>
-
-	<tr>
-		<td rowspan="2">1st (Manning Company)</td>
-		<td>Rank/Name</td>
-		<td colspan="2">
-			CREWING MANANGER<br>
-			THEA GUERRA
-		</td>
-		<td rowspan="2" colspan="2">2nd (Interges)</td>
-		<td colspan="5">Rank/Name</td>
-		<td colspan="4">
-			{{ isset($applicant->rank) ? '(' . $applicant->rank->abbr . ') / ' : '-----' }} {{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname[0] }}
-		</td>
-	</tr>
-
-	<tr>
-		<td>Sign</td>
-		<td colspan="2"></td>
-		<td colspan="5">Sign</td>
-		<td colspan="4"></td>
-	</tr>
-
-	<tr>
-		<td colspan="2">Recruitment Status</td>
-		<td colspan="3">Employable/Unemployable</td>
-		<td colspan="5">Confirm by D.P.</td>
-		<td colspan="5"></td>
-	</tr>
-
-	<tr></tr>
-	<tr>
-		<td colspan="15"></td>
-	</tr>
 	<tr></tr>
 
 	<tr>
@@ -88,7 +54,7 @@
 
 	<tr>
 		<td colspan="6">Under 1 year</td>
-		<td colspan="5">10</td>
+		<td colspan="5">15</td>
 	</tr>
 
 	{{-- 2nd ROW --}}
