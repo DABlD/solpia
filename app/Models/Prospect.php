@@ -16,7 +16,7 @@ class Prospect extends Model
 		'name','birthday','age','contact','email',
 		'usv','contracts','exp','availability','last_disembark',
 		'location','previous_salary','previous_agency','remarks','status',
-		'rank'
+		'rank', 'height', 'weight'
 	];
 
     protected $dates = [

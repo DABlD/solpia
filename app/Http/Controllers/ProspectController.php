@@ -57,6 +57,8 @@ class ProspectController extends Controller
         $data->name = $req->name;
         $data->birthday = $req->birthday;
         $data->age = $req->birthday ? now()->parse($req->birthday)->age : $req->age;
+        $data->height = $req->height;
+        $data->weight = $req->weight;
         $data->contact = $req->contact;
         $data->email = $req->email;
         $data->rank = $req->rank;
