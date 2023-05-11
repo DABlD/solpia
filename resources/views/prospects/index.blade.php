@@ -175,6 +175,29 @@
                     ${input("name", "Name", null, 2,10)}
                     ${input("birthday", "Birthday", null, 2,10)}
                     ${input("age", "Age", null, 2,10, 'number')}
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Height (cm)
+                        </div>
+                        <div class="col-md-2 iInput">
+                            <input type="number" name="height" class="form-control">
+                        </div>
+                        <div class="col-md-2 iLabel">
+                            Weight (kg)
+                        </div>
+                        <div class="col-md-2 iInput">
+                            <input type="number" name="weight" class="form-control">
+                        </div>
+                        <div class="col-md-2 iLabel">
+                            BMI
+                        </div>
+                        <div class="col-md-2 iInput">
+                            <input type="number" name="bmi" class="form-control" disabled>
+                        </div>
+                    </div>
+                    </br>
+
                     ${input("contact", "Contact", null, 2,10)}
                     ${input("email", "Email", null, 2,10, 'email')}
                     <div class="row iRow">
@@ -223,6 +246,7 @@
                                 ${checkbox("exp", "Offshore")}
                                 ${checkbox("exp", "Livestock")}
                                 ${checkbox("exp", "Roro")}
+                                ${checkbox("exp", "Domestic")}
                             </div>
                         </div>
                     </div></br>
@@ -268,12 +292,20 @@
                         e = $(e.target);
                         $("[name='age']").val(moment().diff(moment(e.val()), "years"));
                     });
+
+                    $('[name="height"], [name="weight"]').on('change', e => {
+                        let height = parseInt($('[name="height"]').val() / 100);
+                        let weight = parseInt($('[name="weight"]').val());
+                        let bmi = Math.round(weight / (height * height));
+                        console.log(bmi, height, weight, (height * height));
+                        $("[name='bmi']").val(bmi);
+                    });
                 },
                 preConfirm: () => {
                     swal.showLoading();
                     return new Promise(resolve => {
                         let bool = true;
-                        if($('[name="name"]').val() == "" || $('[name="rank"]').val() == "" || $('[name="contact"]').val() == "" || $('[name="exp"]:checked').val() == undefined){
+                        if($('[name="name"]').val() == "" || $('[name="rank"]').val() == "" || $('[name="contact"]').val() == ""){
                             swal.showValidationError('Name, Rank, Contact, and Exp is required');
                         }
                         else{
@@ -299,6 +331,8 @@
                             name: $("[name='name']").val(),
                             birthday: $("[name='birthday']").val(),
                             age: $("[name='age']").val(),
+                            height: $("[name='height']").val(),
+                            weight: $("[name='weight']").val(),
                             contact: $("[name='contact']").val(),
                             email: $("[name='email']").val(),
                             rank: $("[name='rank']").val(),
@@ -354,6 +388,23 @@
                     ${input("name", "Name", data.name, 2,10)}
                     ${input("birthday", "Birthday", data.birthday, 2,10)}
                     ${input("age", "Age", data.age, 2,10, 'number')}
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Height
+                        </div>
+                        <div class="col-md-4 iInput">
+                            <input type="number" name="height" placeholder="Enter Height (cm)" class="form-control" value="${data.height}">
+                        </div>
+                        <div class="col-md-2 iLabel">
+                            Weight
+                        </div>
+                        <div class="col-md-4 iInput">
+                            <input type="number" name="weight" placeholder="Enter Weight (kg)" class="form-control" value="${data.weight}">
+                        </div>
+                    </div>
+                    </br>
+
                     ${input("contact", "Contact", data.contact, 2,10)}
                     ${input("email", "Email", data.email, 2,10, 'email')}
                     <div class="row iRow">
@@ -402,6 +453,7 @@
                                 ${checkbox("exp", "Offshore", exp.includes("Offshore") ? "checked" : "")}
                                 ${checkbox("exp", "Livestock", exp.includes("Livestock") ? "checked" : "")}
                                 ${checkbox("exp", "Roro", exp.includes("Roro") ? "checked" : "")}
+                                ${checkbox("exp", "Domestic", exp.includes("Domestic") ? "checked" : "")}
                             </div>
                         </div>
                     </div></br>
@@ -456,7 +508,7 @@
                     swal.showLoading();
                     return new Promise(resolve => {
                         let bool = true;
-                        if($('[name="name"]').val() == "" || $('[name="rank"]').val() == "" || $('[name="contact"]').val() == "" || $('[name="exp"]:checked').val() == undefined){
+                        if($('[name="name"]').val() == "" || $('[name="rank"]').val() == "" || $('[name="contact"]').val() == ""){
                             swal.showValidationError('Name, Rank, Contact, and Exp is required');
                         }
                         else{
@@ -483,6 +535,8 @@
                             name: $("[name='name']").val(),
                             birthday: $("[name='birthday']").val(),
                             age: $("[name='age']").val(),
+                            height: $("[name='height']").val(),
+                            weight: $("[name='weight']").val(),
                             contact: $("[name='contact']").val(),
                             email: $("[name='email']").val(),
                             rank: $("[name='rank']").val(),
