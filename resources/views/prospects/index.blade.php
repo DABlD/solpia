@@ -19,6 +19,7 @@
     								<th>#</th>
     								<th>Name</th>
                                     <th>Age</th>
+                                    <th>BMI</th>
     								<th>Contact</th>
                                     <th>Rank</th>
     								<th>NOC</th>
@@ -100,6 +101,7 @@
                 { data: 'id'},
                 { data: 'name'},
                 { data: 'age'},
+                { data: 'height'},
                 { data: 'contact' },
                 { data: 'rank' },
                 { data: 'contracts' },
@@ -114,7 +116,7 @@
             ],
             columnDefs: [
                 {
-                    targets: 6,
+                    targets: 7,
                     render: exp =>{
                         try{
                             let temp = "";
@@ -131,11 +133,25 @@
                     }
                 },
                 {
-                    targets: 8,
-                    width: "20%"
+                    targets: 3,
+                    render: (h,a,row) =>{
+                        let height = parseFloat(row.height / 100).toFixed(2);
+                        let weight = row.weight;
+                        let bmi = null;
+                        
+                        if(height && weight){
+                            bmi = Math.round(weight / (height * height));
+                        }
+
+                        return bmi;
+                    }
                 },
                 {
                     targets: 9,
+                    width: "20%"
+                },
+                {
+                    targets: 10,
                     width: "200px"
                 }
             ],
@@ -293,11 +309,11 @@
                         $("[name='age']").val(moment().diff(moment(e.val()), "years"));
                     });
 
-                    $('[name="height"], [name="weight"]').on('change', e => {
-                        let height = parseInt($('[name="height"]').val() / 100);
-                        let weight = parseInt($('[name="weight"]').val());
+                    $('[name="height"], [name="weight"]').on('keyup', e => {
+                        let height = parseFloat($('[name="height"]').val() / 100).toFixed(2);
+                        let weight = $('[name="weight"]').val();
                         let bmi = Math.round(weight / (height * height));
-                        console.log(bmi, height, weight, (height * height));
+
                         $("[name='bmi']").val(bmi);
                     });
                 },
@@ -393,14 +409,20 @@
                         <div class="col-md-2 iLabel">
                             Height
                         </div>
-                        <div class="col-md-4 iInput">
+                        <div class="col-md-2 iInput">
                             <input type="number" name="height" placeholder="Enter Height (cm)" class="form-control" value="${data.height}">
                         </div>
                         <div class="col-md-2 iLabel">
                             Weight
                         </div>
-                        <div class="col-md-4 iInput">
+                        <div class="col-md-2 iInput">
                             <input type="number" name="weight" placeholder="Enter Weight (kg)" class="form-control" value="${data.weight}">
+                        </div>
+                        <div class="col-md-2 iLabel">
+                            BMI
+                        </div>
+                        <div class="col-md-2 iInput">
+                            <input type="number" name="bmi" class="form-control" disabled>
                         </div>
                     </div>
                     </br>
@@ -503,6 +525,22 @@
                         e = $(e.target);
                         $("[name='age']").val(moment().diff(moment(e.val()), "years"));
                     });
+
+                    $('[name="height"], [name="weight"]').on('keyup', e => {
+                        let height = parseFloat($('[name="height"]').val() / 100).toFixed(2);
+                        let weight = $('[name="weight"]').val();
+                        let bmi = Math.round(weight / (height * height));
+
+                        $("[name='bmi']").val(bmi);
+                    });
+
+                    if($('[name="height"]').val() != "" && $('[name="weight"]').val() != ""){
+                        let height = parseFloat($('[name="height"]').val() / 100).toFixed(2);
+                        let weight = $('[name="weight"]').val();
+                        let bmi = Math.round(weight / (height * height));
+
+                        $("[name='bmi']").val(bmi);
+                    }
                 },
                 preConfirm: () => {
                     swal.showLoading();
