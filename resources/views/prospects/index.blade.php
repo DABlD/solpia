@@ -413,7 +413,7 @@
                 }
             }
             catch(e){
-                exp = "x";
+                exp = data.exp;
             }
 
             swal({
