@@ -31,6 +31,7 @@ class ProspectsImport2 implements ToCollection, WithCalculatedFormulas
                 $temp->previous_agency = $prospect[14];
                 $temp->email = $prospect[15];
                 $temp->remarks = $prospect[16];
+                $temp->source = "Online";
 
                 if($prospect[16] == ""){
                     $temp->remarks .= "Docs - " . $prospect[11];
