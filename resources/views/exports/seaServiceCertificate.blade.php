@@ -28,7 +28,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="10">984 Parkview Plaza, Taft Ave., cor kalaw St.</td>
+		<td colspan="10">MARINA BUILDING, BONIFACIO DRIVE COR. 20TH STREET, PORT AREA</td>
 	</tr>
 
 	<tr>
