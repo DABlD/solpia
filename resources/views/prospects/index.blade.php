@@ -138,7 +138,7 @@
                         let height = parseFloat(row.height / 100).toFixed(2);
                         let weight = row.weight;
                         let bmi = null;
-                        
+
                         if(height && weight){
                             bmi = Math.round(weight / (height * height));
                         }
@@ -188,6 +188,23 @@
         function create(){
             swal({
                 html: `
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Source
+                        </div>
+                        <div class="col-md-10 iInput" style="margin-top: 5px;">
+                            <div class="col-md-2 iInput">
+                                ${radio("source", "Kalaw")}
+                            </div>
+                            <div class="col-md-2 iInput">
+                                ${radio("source", "Online")}
+                            </div>
+                            <div class="col-md-2 iInput">
+                                ${radio("source", "Walk-in")}
+                            </div>
+                        </div>
+                    </div></br>
+
                     ${input("name", "Name", null, 2,10)}
                     ${input("birthday", "Birthday", null, 2,10)}
                     ${input("age", "Age", null, 2,10, 'number')}
@@ -273,7 +290,7 @@
                     ${input("usv", "US Visa", null, 2,10)}
                     ${input("remarks", "Remarks", null, 2,10)}
                 `,
-                width: '650px',
+                width: '800px',
                 confirmButtonText: 'Add',
                 showCancelButton: true,
                 cancelButtonColor: errorColor,
@@ -360,6 +377,7 @@
                             usv: $("[name='usv']").val(),
                             remarks: $("[name='remarks']").val(),
                             exp: exp,
+                            source: $('[name="source"]:checked').val()
                         },
                         success: () => {
                             ss("Success");
@@ -395,12 +413,28 @@
                 }
             }
             catch(e){
-                exp = "x";
+                exp = data.exp;
             }
 
             swal({
                 html: `
                     ${input("id", "", data.id, 2,10, 'hidden')}
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Source
+                        </div>
+                        <div class="col-md-10 iInput" style="margin-top: 5px;">
+                            <div class="col-md-2 iInput">
+                                ${radio("source", "Kalaw")}
+                            </div>
+                            <div class="col-md-2 iInput">
+                                ${radio("source", "Online")}
+                            </div>
+                            <div class="col-md-2 iInput">
+                                ${radio("source", "Walk-in")}
+                            </div>
+                        </div>
+                    </div></br>
                     ${input("name", "Name", data.name, 2,10)}
                     ${input("birthday", "Birthday", data.birthday, 2,10)}
                     ${input("age", "Age", data.age, 2,10, 'number')}
@@ -541,6 +575,10 @@
 
                         $("[name='bmi']").val(bmi);
                     }
+
+                    if(data.source){
+                        $(`[name="source"][value="${data.source}"]`).click();
+                    }
                 },
                 preConfirm: () => {
                     swal.showLoading();
@@ -586,6 +624,7 @@
                             usv: $("[name='usv']").val(),
                             remarks: $("[name='remarks']").val(),
                             exp: JSON.stringify(exp),
+                            source: $('[name="source"]:checked').val()
                         },
                         message: "Success"
                     }, () => {
@@ -598,6 +637,13 @@
         function checkbox(name, value, checked = ""){
             return `
                 <input type="checkbox" name="${name}" value="${value}" ${checked}>
+                <label for="${name}">${value}</label><br>
+            `;
+        }
+
+        function radio(name, value, checked = ""){
+            return `
+                <input type="radio" name="${name}" value="${value}" ${checked}>
                 <label for="${name}">${value}</label><br>
             `;
         }
