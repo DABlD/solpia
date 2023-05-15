@@ -226,6 +226,7 @@ Route::group([
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
 		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
 		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+		Route::post($name . '/uploadFile', ucfirst($name) . 'Controller@uploadFile')->name($name . '.uploadFile');
 		Route::get($name . '/report/{from?}/{to?}', ucfirst($name) . 'Controller@report')->name($name . '.report');
 
 		Route::get($name . '/suggestCandidate', ucfirst($name) . 'Controller@suggestCandidate')->name($name . '.suggestCandidate');

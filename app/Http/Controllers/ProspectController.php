@@ -115,6 +115,20 @@ class ProspectController extends Controller
         return Excel::download(new ProspectReport($data->toArray(), $from, $to), "$fileName.xlsx");
     }
 
+    function uploadFile(Request $req){
+        $file = $req->file('files');
+        $filename = null;
+
+        $name = $file->getClientOriginalName();
+        $name = str_replace(' ', '_', $name);
+
+        $type = strtoupper($file->getClientOriginalExtension());
+        $file->move(public_path().'/prospectForms/' . $req->id . '/', $name);
+        
+        Prospect::where('id', $req->id)->update(['file' => $name]);
+        echo "<script>window.close();</script>";
+    }
+
     private function _view($view, $data = array()){
         return view($this->table . "." . $view, $data);
     }
