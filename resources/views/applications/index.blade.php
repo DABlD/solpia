@@ -2542,7 +2542,7 @@
                 html: `
                     <form action="{{ route('applications.uploadFiles') }}" enctype="multipart/form-data" method="POST" target="_blank">
                         @csrf
-                        <input type="file" name="file" multiple id="file" class="swal2-file"/>
+                        <input type="file" name="files[]" multiple id="file" class="swal2-file"/>
                         <input type="hidden" name="id" value="${id}" />
                         <input type="hidden" name="aId" value="${aId}" />
                         <input type="hidden" name="type" value="${type}" />
