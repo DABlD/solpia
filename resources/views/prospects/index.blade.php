@@ -688,6 +688,77 @@
             });
         }
 
+        function file(id, e){
+            let file = e.dataset.file;
+            let html = "No uploaded file yet";
+
+            if(file){
+                html = `
+                    <a class="btn btn-success" onclick="viewFile('${file}', ${id})">
+                        <span class="fa fa-search fa-xs">
+                            View
+                        </span>
+                    </a>
+                `;
+            }
+
+            swal({
+                title: 'Crew Application Form',
+                html: html,
+                confirmButtonText: "Upload Form",
+                showCancelButton: true,
+                cancelButtonColor: errorColor,
+                cancelButtonText: "Close"
+            }).then(result => {
+                if(result.value){
+                    swal({
+                        title: "Upload Form",
+                        html: `
+                            <form action="{{ route('prospect.uploadFile') }}" enctype="multipart/form-data" method="POST" target="_blank">
+                                @csrf
+                                <input type="hidden" name="id" value="${id}">
+                                <input type="file" name="files" id="file" class="swal2-file"/>
+                            </form>
+                        `,
+                        showCancelButton: true,
+                        cancelButtonColor: errorColor,
+                        cancelButtonText: "Cancel",
+                        preConfirm: () => {
+                            swal.showLoading();
+                            return new Promise(resolve => {
+                                setTimeout(() => {
+                                    if(!$('#file').val()){
+                                        swal.showValidationError('No file Selected');
+                                    }
+                                resolve()}, 500);
+                            });
+                        },
+                    }).then(result2 => {
+                        if(result2.value){
+                            $('.swal2-content form').submit();
+
+                            swal('Uploading File');
+                            swal.showLoading();
+
+                            // UPDATE TO KNOW IF FORM SUCCESSFULLY SUBMITTED THEN DO THE SUCCESS
+                            setTimeout(() => {
+                                swal({
+                                    type: 'success',
+                                    title: 'File successfully uploaded',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                });
+                            }, 1000);
+                        }
+                    })
+                }
+            });
+        }
+
+        function viewFile(file, id){
+            window.open(`prospectForms/${id}/${file}`);
+        }
+
         function report(){
             swal({
                 title: "Select Range",
