@@ -208,10 +208,10 @@ class WesternLiberia implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 $sSsRows2 = [];
 
                 if($ssSize){
-                    $ssRows = 'A' . (108 + $ebSize) . ':' . 'AH' . (107 + $ebSize + ($ssSize * 2));
+                    $ssRows = 'A' . (110 + $ebSize) . ':' . 'AH' . (109 + $ebSize + ($ssSize * 2));
                 }
 
-                $ctr = 106;
+                $ctr = 108;
                 for($i = 0; $i <= sizeof($this->applicant->sea_service); $i++){
                     array_push($sSsRows, 'A' . ($ctr + $ebSize) . ':' . 'F' . ($ctr + $ebSize));
                     array_push($sSsRows, 'G' . ($ctr + $ebSize) . ':' . 'J' . ($ctr + $ebSize));
@@ -239,17 +239,17 @@ class WesternLiberia implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 };
 
                 $fillables = [
-                    $ar('F', 25, 'AH', 34), $ar('K', 37, 'AH', 42),
-                    $ar('K', 45, 'AH', 75)
+                    $ar('F', 25, 'AH', 34), $ar('K', 37, 'AH', 43),
+                    $ar('K', 46, 'AH', 76)
                 ];
 
                 // FILLS
                 $fills[0] = [
-                    'A1:AH11', 'A12:' . $ar('AH', (107 + ($ssSize *2) + 8))
+                    'A1:AH11', 'A12:' . $ar('AH', (109 + ($ssSize *2) + 8))
                 ];
 
                 $fills[1] = array_merge($fillables, [
-                    'P9:AA9', 'AA11:AH11', 'E13:H13', 'K13:N13', 'T13:W13', 'AA13:AH13', 'C14:L14', 'N14:W14', 'Y14:AH14', 'D16:Y16', 'AD16:AH16', 'D17:Y17', 'AD17:AH16', 'E18:J18', 'M18:N18', 'S18:Y18', 'AD18:AH18', 'E19:J19', 'N19:P19', 'U19:W19', 'AD19:AH19', 'D20:J20', 'M20:Q20', 'V20:W20', 'AE20:AH20', $ar('K', 78, 'AH', 83), $ar('AC', 86, 'AC', 87), $ar('AC', 89, 'AC', 90), $ar('L', 93, 'AH', 95), $ar('AC', 98), $ar('AC', 100, 'AC', 104), $ssRows, $ar('A', (109 + ($ssSize * 2))), $ar('K', (113 + ($ssSize * 2))), $ar('H', (115 + ($ssSize * 2))), $ar('W', (115 + ($ssSize * 2)))
+                    'P9:AA9', 'AA11:AH11', 'E13:H13', 'K13:N13', 'T13:W13', 'AA13:AH13', 'C14:L14', 'N14:W14', 'Y14:AH14', 'D16:Y16', 'AD16:AH16', 'D17:Y17', 'AD17:AH16', 'E18:J18', 'M18:N18', 'S18:Y18', 'AD18:AH18', 'E19:J19', 'N19:P19', 'U19:W19', 'AD19:AH19', 'D20:J20', 'M20:Q20', 'V20:W20', 'AE20:AH20', $ar('K', 79, 'AH', 85), $ar('AC', 88, 'AC', 89), $ar('AC', 91, 'AC', 92), $ar('L', 95, 'AH', 97), $ar('AC', 100), $ar('AC', 102, 'AC', 106), $ssRows, $ar('A', (111 + ($ssSize * 2))), $ar('K', (115 + ($ssSize * 2))), $ar('H', (117 + ($ssSize * 2))), $ar('W', (117 + ($ssSize * 2)))
                 ]);
 
                 if($ebRows != ""){
@@ -257,7 +257,7 @@ class WesternLiberia implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 }
 
                 $fills[2] = [
-                    'AA1:AH1', 'A22:AH22', $ar('A', 24, 'AH', 24), $ar('A', 36, 'AH', 36), $ar('A', 44, 'AH', 44), $ar('A', 56, 'AH', 56), $ar('A', 77, 'AH', 77), $ar('A', 85, 'AH', 85), $ar('A', 88, 'AH', 88), $ar('A', 92, 'AH', 92), $ar('A', 97, 'AH', 97), $ar('A', 100, 'N', 104), $ar('A', 106, 'AH', 107)
+                    'AA1:AH1', 'A22:AH22', $ar('A', 24, 'AH', 24), $ar('A', 36, 'AH', 36), $ar('A', 45, 'AH', 45), $ar('A', 57, 'AH', 57), $ar('A', 78, 'AH', 78), $ar('A', 87, 'AH', 87), $ar('A', 90, 'AH', 90), $ar('A', 94, 'AH', 94), $ar('A', 99, 'AH', 99), $ar('A', 102, 'N', 106), $ar('A', 108, 'AH', 109)
                 ];
 
                 foreach($fills as $key => $value){
@@ -285,7 +285,7 @@ class WesternLiberia implements FromView, WithEvents, WithDrawings//, ShouldAuto
 
                 // HC
                 $h[3] = array_merge($fills[1], $fillables, [
-                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 40), $ar('A', 60), $ar('A', (107 + ($ssSize * 2) + 6)), $ar('A', (107 + ($ssSize * 2) + 8)), $ar('P', (107 + ($ssSize * 2) + 8)), $ar('A', 36, 'AH', 36), $ar('A', 44, 'AH', 44), $ar('A', 56, 'AH', 56), $ar('A', 77, 'AH', 77), $ar('A', 85, 'AH', 85), $ar('A', 88, 'AH', 88), $ar('A', 93, 'AH', 92), $ar('A', 97, 'AH', 97), $ar('A', 106, 'AH', 107)
+                    'A1:AH15', 'A22:' . $ar('AH', 22), $ar('A', 24, 'AH', 24), $ar('A', 41), $ar('A', 61), $ar('A', (108 + ($ssSize * 2) + 6)), $ar('A', (108 + ($ssSize * 2) + 8)), $ar('P', (108 + ($ssSize * 2) + 8)), $ar('A', 36, 'AH', 36), $ar('A', 45, 'AH', 45), $ar('A', 57, 'AH', 57), $ar('A', 78, 'AH', 78), $ar('A', 87, 'AH', 87), $ar('A', 90, 'AH', 90), $ar('A', 95, 'AH', 94), $ar('A', 99, 'AH', 99), $ar('A', 108, 'AH', 109)
                 ]);
 
                 // dd($h[3]);
@@ -302,7 +302,7 @@ class WesternLiberia implements FromView, WithEvents, WithDrawings//, ShouldAuto
 
                 // B
                 $h[6] = [
-                    'A21', $ar('A', 23), $ar('A', 35), $ar('A', 43), $ar('A', 55), $ar('A', 76), $ar('A', 81), $ar('A', 91), $ar('A', 96), $ar('A', 99), $ar('A', 105), $ar('A', (107 + ($ssSize * 2) + 1)), $ar('A', (107 + ($ssSize * 2) + 6)), $ar('AB', (107 + ($ssSize * 2) + 9))
+                    'A21', $ar('A', 23), $ar('A', 35), $ar('A', 44), $ar('A', 56), $ar('A', 77), $ar('A', 82), $ar('A', 93), $ar('A', 98), $ar('A', 101), $ar('A', 107), $ar('A', (109 + ($ssSize * 2) + 1)), $ar('A', (109 + ($ssSize * 2) + 6)), $ar('AB', (109 + ($ssSize * 2) + 9))
                 ];
 
                 // VC
@@ -311,12 +311,12 @@ class WesternLiberia implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 ];
 
                 $h['wrap'] = [
-                    $ar('A', 64), $ar('A', 65), $ar('A', 66)
+                    $ar('A', 65), $ar('A', 66), $ar('A', 67)
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    $ar('K', 25, 'K', 75), $ar('K', 108, 'K', (108 + ($ssSize * 2))), 'S18', $ar('AC', 25, 'AC', 107), $ar('F', 25, 'F', 32), $ar('A', 107, 'A', (107 + ($ssSize * 2))), $ar('G', 107, 'G', (107 + ($ssSize * 2))), $ar('Q', 107, 'V', (107 + ($ssSize * 2)))
+                    $ar('K', 25, 'K', 76), $ar('K', 110, 'K', (110 + ($ssSize * 2))), 'S18', $ar('AC', 25, 'AC', 107), $ar('F', 25, 'F', 32), $ar('A', 109, 'A', (109 + ($ssSize * 2))), $ar('G', 109, 'G', (109 + ($ssSize * 2))), $ar('Q', 109, 'V', (109 + ($ssSize * 2)))
                 ];
 
                 foreach($h as $key => $value) {
@@ -344,11 +344,11 @@ class WesternLiberia implements FromView, WithEvents, WithDrawings//, ShouldAuto
 
                 // BORDERS
                 $cells[0] = array_merge([
-                    'A1:H11', $ar('A', (107 + ($ssSize *2) + 4), 'AH', (107 + ($ssSize *2) + 8))
+                    'A1:H11', $ar('A', (109 + ($ssSize *2) + 4), 'AH', (109 + ($ssSize *2) + 8))
                 ]);
 
                 $cells[1] = array_merge([
-                    'AA1:AH4', 'A22:' . $ar('AH', 105), $ar('A', (107 + ($ssSize *2) + 1), 'AH', (107 + ($ssSize *2) + 4))
+                    'AA1:AH4', 'A22:' . $ar('AH', 107), $ar('A', (109 + ($ssSize *2) + 1), 'AH', (109 + ($ssSize *2) + 4))
                 ]);
 
                 $cells[2] = array_merge([
@@ -390,16 +390,16 @@ class WesternLiberia implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 $event->sheet->getDelegate()->getColumnDimension('AE')->setWidth(4.3);
                 $event->sheet->getDelegate()->getColumnDimension('AG')->setWidth(3.7);
 
-                $event->sheet->getDelegate()->getRowDimension(60 + $ebSize)->setRowHeight(43.50);
-                $event->sheet->getDelegate()->getRowDimension(61 + $ebSize)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(61 + $ebSize)->setRowHeight(43.50);
+                $event->sheet->getDelegate()->getRowDimension(62 + $ebSize)->setRowHeight(30);
 
                 // FORMAT CELLS
                 $event->sheet->getDelegate()->getStyle('D20')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
                 $event->sheet->getDelegate()->getStyle('M20')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
-                $event->sheet->getDelegate()->getStyle($ar('K', 25, 'AH', 75))->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
+                $event->sheet->getDelegate()->getStyle($ar('K', 25, 'AH', 76))->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
 
                 // SETTING PRINT AREA
-                $event->sheet->getDelegate()->getPageSetup()->setPrintArea('A1:' . $ar('AH', (107 + ($ssSize * 2)) + 8));
+                $event->sheet->getDelegate()->getPageSetup()->setPrintArea('A1:' . $ar('AH', (109 + ($ssSize * 2)) + 8));
             },
         ];
     }

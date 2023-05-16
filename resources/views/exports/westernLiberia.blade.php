@@ -497,6 +497,7 @@
 
 	{{ $getDocument('PASSPORT', 	'id', 		'',			"National Passport"						)}}
 	{{ $getDocument("SEAMAN'S BOOK",'id', 		'', 		"National Seaman's book"				)}}
+	{{ $getDocument("SID",			'id', 		'', 		"Seafarer Identity Document(SID)"		)}}
 	{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 	"Flag Seaman's book"					)}}
 
 	{{-- VISAS --}}
@@ -729,8 +730,11 @@
 		{{ $getDocument('COVID-19 2ND DOSE', 'med_cert', '', '2nd Dose')}}
 	</tr>
 	<tr>
-		<td colspan="7" style="font-weight: bold;">Covid Vaccine Booster</td>
+		<td colspan="7" rowspan="2" style="font-weight: bold;">Covid Vaccine Booster</td>
 		{{ $getDocument('COVID-19 3RD DOSE', 'med_cert', '', '1st Dose')}}
+	</tr>
+	<tr>
+		{{ $getDocument('COVID-19 4TH DOSE', 'med_cert', '', '2nd Dose')}}
 	</tr>
 	
 	{{-- LINGUISTIC --}}
@@ -923,6 +927,6 @@
 
 	<tr>
 		<td colspan="27"></td>
-		<td colspan="7">Revised by 2022.02.09</td>
+		<td colspan="7">Revised by 2023.04.26</td>
 	</tr>
 </table>
