@@ -24,7 +24,7 @@
 
 	<tr>
 		<td>Rank:</td>
-		<td>{{ $data->rank }}</td>
+		<td>{{ $data->rank ?? "" }}</td>
 		<td>Name:</td>
 		<td colspan="3">{{ $data->user->lname . ', ' . $data->user->fname . (($data->user->suffix != "") ? (' ' . $data->user->suffix) : '') . ' ' . $data->user->mname }}</td>
 		<td colspan="2">Height(cm):</td>
