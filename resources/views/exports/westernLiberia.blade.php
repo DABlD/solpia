@@ -468,7 +468,7 @@
 	@endif
 
 	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'National GMDSS'	,'',true			)}}
-	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flag License'		,'',true			)}}
+	{{ $getDocument('LICENSE', 		'flag', 	'LIBERIA', 		'Flag License'		,'',true			)}}
 
 	{{-- LIBERIA DOCS --}}
 	{{ $getDocument('GMDSS/GOC', 	'flag', 	'', 			'Flag GMCM/GOC SQC'		,'',true			)}}
@@ -498,7 +498,7 @@
 	{{ $getDocument('PASSPORT', 	'id', 		'',			"National Passport"						)}}
 	{{ $getDocument("SEAMAN'S BOOK",'id', 		'', 		"National Seaman's book"				)}}
 	{{ $getDocument("SID",			'id', 		'', 		"Seafarer Identity Document(SID)"		)}}
-	{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 	"Flag Seaman's book"					)}}
+	{{ $getDocument('BOOKLET', 		'flag', 	'LIBERIA', 	"Flag Seaman's book"					)}}
 
 	{{-- VISAS --}}
 	
