@@ -623,7 +623,7 @@ class ApplicationsController extends Controller
         // SORT
         if(in_array($type, ['western', 'toei'])){
             $applicant->sea_service = $applicant->sea_service->sortBy('sign_off');
-            if($type == "western" && $temp->status != "VACATION" && $temp->vessel->flag == "LIBERIA"){
+            if($type == "western" && $temp->status != "Vacation" && $temp->vessel->flag == "LIBERIA"){
                 $type = "westernLiberia";
             }
         }
