@@ -284,6 +284,6 @@
 
 	<tr>
 		<td colspan="2" style="{{ $center }}">Date</td>
-		<td colspan="4" style="{{ $center }}">{{ now()->parse($data->date_processed)->format('d-M-y') }}</td>
+		<td colspan="4" style="{{ $center }}">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
 	</tr>
 </table>
