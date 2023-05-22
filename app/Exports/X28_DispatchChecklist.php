@@ -249,7 +249,7 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('LINE-UP/DISPATCH CHECKLIST', false);
+                $event->sheet->getDelegate()->setTitle('CHECKLIST', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
