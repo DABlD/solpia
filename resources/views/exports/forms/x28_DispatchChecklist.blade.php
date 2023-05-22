@@ -17,7 +17,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="13" style="{{ $bc }} font-size: 14px; height: 25px;">
+		<td colspan="13" style="{{ $bc }} font-size: 14px; height: 20px;">
 			LINE-UP/DISPATCH CHECKLIST
 		</td>
 	</tr>
