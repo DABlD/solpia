@@ -316,6 +316,7 @@ Route::group([
 		Route::get('generateSeaServiceSizeAndOwner', 'ApplicationsController@generateSeaServiceSizeAndOwner')->name('generateSeaServiceSizeAndOwner');
 		Route::get('testFunc', 'ApplicationsController@testFunc')->name('testFunc');
 		Route::get('testFunc2', 'ApplicationsController@testFunc2')->name('testFunc2');
+		Route::get('tempFunc', 'ApplicationsController@tempFunc')->name('tempFunc');
 		
 	}
 );
