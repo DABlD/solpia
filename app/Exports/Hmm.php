@@ -101,7 +101,7 @@ class Hmm implements WithMultipleSheets
                 array_push($sheets, new Hmm2($this->applicant, $this->type . '2', true));
             }
             else{
-                array_push($sheets, new Hmm($this->applicant, $this->type . '1', true));
+                array_push($sheets, new Hmm1($this->applicant, $this->type . '1', true));
             }
             array_push($sheets, new InterviewSheet($this->applicant, $rows, "hmm", $rank));
         }
