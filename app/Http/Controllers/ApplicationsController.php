@@ -1748,6 +1748,42 @@ class ApplicationsController extends Controller
         echo "</tbody></table>";
     }
 
+    public function tempFunc(){
+        $temp = SeaService::select('sea_services.*', 'v.principal_id')
+                            ->where('v.principal_id', 9)
+                            ->where('sea_services.manning_agent', 'LIKE', "%SOLPIA%")
+                            ->join('vessels as v', 'v.name', '=', 'sea_services.vessel_name')
+                            ->get();
+
+        echo "<table>";
+
+        foreach($temp as $ss){
+            $name = $ss->applicant->user->namefull;
+            $vessel = $ss->vessel_name;
+            $rank = $ss->rank;
+            $contact = $ss->applicant->user->contact;
+            $son = $ss->sign_on ? $ss->sign_on->toDateString() : "-";
+            $soff = $ss->sign_off ? $ss->sign_off->toDateString() : "-";
+
+            $name = str_replace("?", "Ñ", $name);
+
+            echo "
+                <tr>
+                    <td>$name</td>
+                    <td>$vessel</td>
+                    <td>$rank</td>
+                    <td>$contact</td>
+                    <td>$son</td>
+                    <td>$soff</td>
+                </tr>
+            ";
+        }
+
+        echo "</table>";
+
+        die;
+    }
+
     public function generateApplicantFleet(){
         $applicants = User::where("role", 'Applicant')
                         ->where('fleet', null)

@@ -14,8 +14,8 @@ class AddColsForBmiInProspects extends Migration
     public function up()
     {
         Schema::table('prospects', function (Blueprint $table) {
-            $table->double('height', 5, 2)->after('age');
-            $table->double('weight', 5, 2)->after('height');
+            $table->double('height', 5, 2)->after('age')->nullable();
+            $table->double('weight', 5, 2)->after('height')->nullable();
         });
     }
 
