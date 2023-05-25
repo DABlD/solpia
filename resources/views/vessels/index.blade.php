@@ -2527,6 +2527,7 @@
                     'POEAContract':         'POEA Contract',
                     // 'DocumentChecklist':    'Document Checklist',
                     'X28_DispatchChecklist':'Line-up/Dispatch Checklist',
+                    'X29_FinalBriefing':    'Final Briefing',
                     'X01_BorrowDocuments':  'Borrow Documents',
                     'X04_USVE':             'US Visa Endorsement Form',
                     @if(in_array(auth()->user()->fleet, ["FLEET B", 'FLEET C']) || auth()->user()->role == "Admin")
@@ -2565,6 +2566,9 @@
                     }
                     else if(result.value == "X28_DispatchChecklist"){
                         getDispatchChecklistData(id, result.value);
+                    }
+                    else if(result.value == "X29_FinalBriefing"){
+                        getFinalBriefingData(id, result.value);
                     }
                     else if(result.value.includes("Y0")){
                         let data = {};
@@ -3268,6 +3272,70 @@
                 if(result.value){
                     data.eld                = $('#eld').val();
                     data.employment_months  = $('#employment_months').val();
+                    data.port               = $('#port').val();
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                }
+            });
+        }
+
+        function getFinalBriefingData(id, type){
+            let data = {};
+            swal({
+                title: 'Enter details',
+                html: `
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Joining Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="eld" class="swal2-input" placeholder="(Optional)"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Port</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="port" class="form-control" placeholder="(Optional)"/>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '40%',
+                onOpen: () => {
+                    $.ajax({
+                        url: '{{ route('applications.getAllInfo') }}',
+                        data: {
+                            id: id
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            let date = moment().format('YYYY-MM-DD');
+
+                            if(result.lup){
+                                date = moment(result.lup.joining_date);
+                                date = date.format("YYYY-MM-DD");
+                            }
+                            else{
+                                date = result.pro_app.eld;
+                            }
+
+                            $('#eld').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d',
+                                defaultDate: date
+                            });
+                        }
+                    })
+                },
+            }).then(result => {
+                if(result.value){
+                    data.eld                = $('#eld').val();
                     data.port               = $('#port').val();
 
                     window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
