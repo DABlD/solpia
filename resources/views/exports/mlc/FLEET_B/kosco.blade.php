@@ -22,7 +22,7 @@
 	$allowance = 12.0;
 
 	$v = $data->vessel->name;
-	if(in_array($v, ['M/V DONG-A OKNOS', 'M/V DONG-A EOS', 'M/V GLOVIS COUNTESS', 'M/V DONG-A GLAUCOS'])){
+	if(in_array($v, ['M/V DONG-A OKNOS', 'M/V DONG-A EOS', 'M/V GLOVIS COUNTESS', 'M/V DONG-A GLAUCOS', 'M/V DONG-A METIS'])){
 		$allowance = 11.1;
 	}
 	elseif(in_array($v, ["M/V BOKM SHANGHAI", 'M/V BOKM NINGBO', 'M/V KMARIN AZUR', 'M/V KMARIN ATLANTICA', 'M/V KMARIN ULSAN', 'M/V KMARIN MELBOURNE'])){
