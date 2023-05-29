@@ -62,12 +62,16 @@
 			<td style="{{ $c }}">{{ $applicant['rank'] }}</td>
 			<td>{{ $applicant['name'] }}</td>
 			<td style="{{ $c }}">
-				@for($i = 0; $i < sizeof($exps); $i++)
-					{{ $exps[$i] }}
-					@if($i+1 != sizeof($exps))
-						,
-					@endif
-				@endfor
+				@if($exps)
+					@for($i = 0; $i < sizeof($exps); $i++)
+						{{ $exps[$i] }}
+						@if($i+1 != sizeof($exps))
+							,
+						@endif
+					@endfor
+				@else
+					-
+				@endif
 			</td>
 			<td style="{{ $c }}">1</td>
 
