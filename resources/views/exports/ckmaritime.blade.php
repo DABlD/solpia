@@ -324,7 +324,7 @@
 		<td colspan="2" style="{{ $c }}">{{ $data->civil_status ?? "-" }}</td>
 		<td colspan="4" style="{{ $bc }}">EMERGENCY CONTACT(WIFE OR NEAREST RELATIVE):</td>
 		<td colspan="4" style="{{ $bc }}">
-			{{ $nok->namefull ?? "-" }}/{{ $nok->email ?? "-" }} ({{ $nok->type }})
+			{{ $nok->namefull ?? "-" }}/{{ $nok->email ?? "-" }} ({{ $nok ? $nok->type : "-" }})
 		</td>
 	</tr>
 
