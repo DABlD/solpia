@@ -215,6 +215,9 @@
 	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
 	{{ $doc("OLC TRAINING F1", "OLC TRAINING FOR OIC-NW - F1/M1 (PART A)", 'lc') }}
 	{{ $doc("OLC TRAINING F3", "OLC TRAINING FOR OIC-NW - F3/M1 & M2 (PART A)", 'lc') }}
+	{{ $doc("MLC TRAINING F1", "MLC TRAINING DECK - F1", 'lc') }}
+	{{ $doc("MLC TRAINING F2", "MLC TRAINING DECK - F2", 'lc') }}
+	{{ $doc("MLC TRAINING F3", "MLC TRAINING DECK - F3", 'lc') }}
 	{{ $doc("ARPA TRAINING COURSE", "ARPA/ROPA/RNPUA", 'lc') }}
 	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc') }}
 
