@@ -598,54 +598,73 @@
 	{{ $getDocument("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'MARINA', 'Security Awareness (SDSD)')}}
 	{{ $getDocument('CONSOLIDATED MARPOL', 'lc', '', 'Marpol 1 73/78')}}
 
-	{{-- ECDIS --}}
 	@php
-		$name = "ECDIS JRC 701B";
-		$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-		
-		if(!$docu){
-			$name = "ECDIS JRC 7201";
-			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-			if(!$docu){
+		$name = null;
+		$jr = false;
+
+		if($applicant->vessel){
+			if(in_array($applicant->vessel->name, ["M/V UNITED HALO", "M/V VENUS HALO", "M/V ATLANTIC BUENAVISTA", "M/V NORD SINGAPORE"])){
+				$name = "ECDIS JRC 9201";
+				$jr = true;
+			}
+			elseif(in_array($applicant->vessel->name, ["M/V PHENOMENAL DIVA"])){
+				$name = "ECDIS FURUNO 3100/3200/3300";
+			}
+			elseif(in_array($applicant->vessel->name, ["M/V FAIR OCEAN", "M/V AFRICAN ARROW", "M/V RED AZALEA", "M/V ATLANTIC OASIS", "M/V ANCASH QUEEN"])){
 				$name = "ECDIS JRC 901B";
-				$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-				if(!$docu){
-					$name = "ECDIS JRC 9201";
-					$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-				}
+				$jr = true;
+			}
+			elseif(in_array($applicant->vessel->name, ["M/V EARTH HARMONY"])){
+				$name = "ECDIS TOKYO";
+			}
+			elseif(in_array($applicant->vessel->name, ["MV WECO ESTHER"])){
+				$name = "ECDIS CHARTWORLD EG2";
 			}
 		}
+
+		$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 	@endphp
 
 	<tr>
 		<td rowspan="3" colspan="2">ECDIS</td>
-		<td colspan="8">Specific Training(JRC)</td>
-		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
-		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+
+		@if($jr && $applicant->rank->category == "DECK OFFICER")
+			<td colspan="8">
+				Specific Training({{ $name }})
+			</td>
+			<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
+			<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+		@else
+			<td colspan="8">
+				Specific Training(JRC)
+			</td>
+			<td colspan="6">-----</td>
+			<td colspan="6">-----</td>
+			<td colspan="6">-----</td>
+			<td colspan="6">-----</td>
+		@endif
 	</tr>
 
-	@php
-		$name = "ECDIS FURUNO 2107";
-		$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-		
-		if(!$docu){
-			$name = "ECDIS FURUNO 2807";
-			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-			if(!$docu){
-				$name = "FURUNO 3100/3200/3300";
-				$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
-			}
-		}
-	@endphp
-
 	<tr>
-		<td colspan="8">Specific Training(FURUNO)</td>
-		<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
-		<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-		<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+		@if($jr || $applicant->rank->category != "DECK OFFICER")
+			<td colspan="8">
+				Specific Training(FURUNO)
+			</td>
+			<td colspan="6">-----</td>
+			<td colspan="6">-----</td>
+			<td colspan="6">-----</td>
+			<td colspan="6">-----</td>
+		@else
+			<td colspan="8">
+				Specific Training({{ $name }})
+			</td>
+			<td colspan="6">{{ $docu ? $docu->no : "-----"}}</td>
+			<td colspan="6">{{ $docu ? $checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td colspan="6">{{ $docu ? $checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="6">{{ $docu ? $docu->issuer : "-----" }}</td>
+		@endif
 	</tr>
 	
 	@php 

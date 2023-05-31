@@ -594,14 +594,14 @@
 		$jr = false;
 
 		if($applicant->vessel){
-			if(in_array($applicant->vessel->name, ["M/V UNITED HALO", "M/V VENUS HALO", "M/V ATLANTIC BUENAVISTA"])){
+			if(in_array($applicant->vessel->name, ["M/V UNITED HALO", "M/V VENUS HALO", "M/V ATLANTIC BUENAVISTA", "M/V NORD SINGAPORE"])){
 				$name = "ECDIS JRC 9201";
 				$jr = true;
 			}
 			elseif(in_array($applicant->vessel->name, ["M/V PHENOMENAL DIVA"])){
 				$name = "ECDIS FURUNO 3100/3200/3300";
 			}
-			elseif(in_array($applicant->vessel->name, ["M/V FAIR OCEAN", "M/V AFRICAN ARROW", "M/V RED AZALEA", "M/V ATLANTIC OASIS", "M/V ANCASH QUEEN", "M/V NORD SINGAPORE"])){
+			elseif(in_array($applicant->vessel->name, ["M/V FAIR OCEAN", "M/V AFRICAN ARROW", "M/V RED AZALEA", "M/V ATLANTIC OASIS", "M/V ANCASH QUEEN"])){
 				$name = "ECDIS JRC 901B";
 				$jr = true;
 			}
