@@ -190,7 +190,8 @@
 						<option value="ECDIS MARTEK">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS MARTEK</option>
 						<option value="ECDIS TRANSAS">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECDIS TRANSAS</option>
 					<option value="ERS WITH ERM">&nbsp;&nbsp;&nbsp;&nbsp;ERS WITH ERM</option>
-					<option value="ERS">&nbsp;&nbsp;&nbsp;&nbsp;ERS - ENGINE ROOM SIMULATOR</option>
+					<option value="ERS">&nbsp;&nbsp;&nbsp;&nbsp;ERS</option>
+					<option value="ERM">&nbsp;&nbsp;&nbsp;&nbsp;ERM</option>
 					<option value="PRACTICAL ASSESSMENT IN MANAGEMENT LEVEL">&nbsp;&nbsp;&nbsp;&nbsp;PRACTICAL ASSESSMENT IN MANAGEMENT LEVEL</option>
 					<option value="MLC TRAINING F1">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F1</option>
 					<option value="MLC TRAINING F2">&nbsp;&nbsp;&nbsp;&nbsp;MLC TRAINING F2</option>
@@ -205,6 +206,8 @@
 					<option value="RADAR OPERATOR PLOTTING AID">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OPERATOR PLOTTING AID</option>
 					<option value="RADAR OBSERVER COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OBSERVER COURSE</option>
 					<option value="SSBT WITH BRM">&nbsp;&nbsp;&nbsp;&nbsp;SSBT WITH BRM</option>
+					<option value="SSBT">&nbsp;&nbsp;&nbsp;&nbsp;SSBT</option>
+					<option value="BRM">&nbsp;&nbsp;&nbsp;&nbsp;BRM</option>
 					<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
 					<option value="SRC">&nbsp;&nbsp;&nbsp;&nbsp;SRC</option>
 					<option value="ENGINE WATCH">&nbsp;&nbsp;&nbsp;&nbsp;ENGINE WATCH</option>
