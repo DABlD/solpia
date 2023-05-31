@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class SINOCREW3 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $data->load('document_med_cert');
@@ -31,7 +31,7 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
     public function view(): View
     {
-        $exportView = str_replace(' ', '_', $this->data->vessel->fleet) . '.sinocrew2';
+        $exportView = str_replace(' ', '_', $this->data->vessel->fleet) . '.sinocrew3';
         return view('exports.mlc.' . $exportView, [
             'data' => $this->data,
         ]);
@@ -300,7 +300,7 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
                 // VT
                 $h[1] = [
-                    
+                    'A44:A46', 'A28'
                 ];
 
                 // HL B
@@ -315,10 +315,12 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
                 // HC VC
                 $h[4] = [
+                    'A2'
                 ];
 
                 // HL
                 $h[5] = [
+                    'A14'
                 ];
 
                 // B
@@ -330,7 +332,7 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
                 ];
 
                 $h['wrap'] = [
-                    'A21', 'A24', 'A40'
+                    'A5', 'A23', 'A28', 'A45', 'A46'
                 ];
 
                 // SHRINK TO FIT
@@ -374,7 +376,7 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A26:I27',
+                    'A44:F47',
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -387,27 +389,24 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
-                    'A7:I8',
-                    'A10:E11',
-                    'F10:I11',
-                    'A12:I13',
-                    'A14:E14',
-                    'F14:I14',
-                    'A15:E16',
-                    'F15:I16',
-                    'A17:E17',
-                    'F17:I17',
-                    'A18:E18',
-                    'F18:I18',
-                    'A20:I20',
-                    'A21:I21',
-                    'A23:I23',
-                    'A24:I24',
-                    'A29:C31','D29:G31','H29:I31',
-                    'A32:C35','D32:G35','H32:I35',
-                    'A36:C37','D36:G37','H36:I37',
-                    'A38:C39','D38:G39','H38:I39',
-                    'A43:F46','G43:I46'
+                    'A5:F5',
+                    'A7:D8', 'E7:F8',
+                    'A9:F10',
+                    'A11:D12', 'E11:F12',
+                    'A13:D14', 'E13:F14',
+                    'A15:D16', 'E15:F16',
+                    'A17:D18', 'E17:F18',
+                    'A20:F21',
+                    'A22:F23',
+                    'A25:F26',
+                    'A27:F28',
+                    'A30:E31', 'F30:F31',
+                    'A32:D33', 'E32:F33',
+                    'A35:C36', 'D35:E36', 'F35:F36',
+                    'A37:C38', 'D37:E38', 'F37:F38',
+                    'A39:C40', 'D39:E40', 'F39:F40',
+                    'A41:C42', 'D41:E42', 'F41:F42',
+                    'A48:D49', 'E48:F49'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -449,7 +448,7 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
                 // BBT
                 $cells[12] = array_merge([
-                    'B5', 'E5:F5',
+                    'B3', 'D3'
                 ]);
 
                 // LBT
@@ -470,15 +469,12 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(5.5);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(17);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(19);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(24);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(25);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
@@ -487,8 +483,8 @@ class SINOCREW2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A44:A46')->getFont()->setSize(8);
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
     }
