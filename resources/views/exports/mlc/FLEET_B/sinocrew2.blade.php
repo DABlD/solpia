@@ -134,7 +134,7 @@
 		</td>
 		<td colspan="4">
 			‎‎
-			Port where is taken up: Manila
+			Port where is taken up: {{ $data->port }}
 		</td>
 	</tr>
 
