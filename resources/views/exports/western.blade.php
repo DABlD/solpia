@@ -131,7 +131,15 @@
 				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
 
 				if(!$docu){
+					$name = 'BRIDGE RESOURCE MANAGEMENT';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
+				if(!$docu){
 					$name = 'ERM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
+				if(!$docu){
+					$name = 'ENGINE RESOURCE MANAGEMENT';
 					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 				}
 				if(!$docu){
