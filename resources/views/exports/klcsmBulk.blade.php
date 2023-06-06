@@ -165,10 +165,11 @@
 		$manning = str_replace('&', '&#38;', $ss->manning_agent);
 		$crew = str_replace('&', '&#38;', $ss->crew_nationality);
 		$vessel_name = str_replace('&', '&#38;', $ss->vessel_name);
-		$bhp = str_replace('&', '&#38;', $ss->bhp);
+		$bhp_kw = str_replace('&', '&#38;', $ss->bhp_kw);
 		$remarks = str_replace('&', '&#38;', $ss->remarks);
 		$manning_agent = str_replace('&', '&#38;', $ss->manning_agent);
-
+		$engine = str_replace('&', '&#38;', $ss->engine_type);
+		
 		// SKIP FILLER SS
 		$diff = 0;
 		if($ss->vessel_name && $ss->rank){
@@ -183,7 +184,9 @@
 			<td>$ss->vessel_type</td>
 			<td>$ss->gross_tonnage</td>
 			<td>
-				$bhp
+				$bhp_kw /
+				<br style='mso-data-placement:same-cell;' />
+				$engine
 			</td>
 			<td>$on</td>
 			<td>$off</td>
@@ -393,7 +396,11 @@
 		<td colspan="2">Vessel</td>
 		<td>Type</td>
 		<td>GRT</td>
-		<td>HP</td>
+		<td>
+			HP /
+			<br style='mso-data-placement:same-cell;' />
+			ENGINE TYPE
+		</td>
 		<td>Signed On</td>
 		<td>Signed Off</td>
 		<td>Period</td>
