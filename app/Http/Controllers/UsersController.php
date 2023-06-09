@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Ssap, Applicant};
+use App\Models\{Ssap, Applicant, AuditTrail};
 use App\User;
 use Hash;
+use Browser;
 
 class UsersController extends Controller
 {
@@ -87,6 +88,19 @@ class UsersController extends Controller
     // using Applicant ID
     public function ajaxUpdate2(Request $req){
         $user = User::find(Applicant::find((int)$req->id)->user_id);
+
+        if($req->column == "fleet"){
+            AuditTrail::create([
+                'user_id'   => auth()->user()->id,
+                'action'    => "updated $user->fname $user->lname fleet from $user->fleet to $req->value",
+                'ip'        => $req->getClientIp(),
+                'hostname'  => gethostname(),
+                'device'    => Browser::deviceFamily(),
+                'browser'   => Browser::browserName(),
+                'platform'  => Browser::platformName()
+            ]);
+        }
+
         $user->{$req->column} = $req->value;
         echo $user->save();
     }
