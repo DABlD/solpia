@@ -3088,6 +3088,8 @@
                             'toei': "TOEI"
                         @elseif(auth()->user()->fleet == "FLEET C")
                             'hmm': "HMM"
+                        @elseif(auth()->user()->id == "4504")
+                            'western': "NITTA/TOEI"
                         @endif
                     },
                     onOpen: () => {

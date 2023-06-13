@@ -68,7 +68,12 @@ class DashboardController extends Controller
         sort($fleets);
 
         if(auth()->user()->fleet){
-            $fleets = [auth()->user()->fleet];
+            if(auth()->user()->id == 4504){
+                $fleets = ["TOEI", "FLEET A"];
+            }
+            else{
+                $fleets = [auth()->user()->fleet];
+            }
         }
 
     	return $this->_view('dashboard', [
@@ -94,9 +99,25 @@ class DashboardController extends Controller
         $vacation = ProcessedApplicant::where('processed_applicants.status', 'Vacation')
                         ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
-                        ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
-                        ->select('processed_applicants.id', 'processed_applicants.applicant_id')
-                        ->get()->keyBy('applicant_id');
+                        ->select('processed_applicants.id', 'processed_applicants.applicant_id');
+
+        if(auth()->user()->fleet){
+            // MA'AM JOBELLE
+            if(auth()->user()->id == 4504){
+                $vacation->where(function($q){
+                    $q->where('u.fleet', 'like', auth()->user()->fleet);
+                    $q->orWhere('u.fleet', 'like', "FLEET A");
+                });
+            }
+            else{
+                $vacation->where('u.fleet', 'like', auth()->user()->fleet);
+            }
+        }
+        else{
+            $vacation->where('u.fleet', 'LIKE', "%%");
+        }
+
+        $vacation = $vacation->get()->keyBy('applicant_id');
         
         $fleets = [];
         $fleets['Vacation'] = [];
@@ -152,7 +173,8 @@ class DashboardController extends Controller
             }
 
             if($bool){
-                if(auth()->user()->role == "Admin" || auth()->user()->fleet == null){
+                // JOBELLE
+                if(auth()->user()->role == "Admin" || auth()->user()->fleet == null || auth()->user()->id == 4504){
                     $fleets['Vacation'][$id] = $temp;
                 }
                 else{
