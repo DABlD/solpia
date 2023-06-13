@@ -142,7 +142,16 @@ class DatatablesController extends Controller
 				// ->orWhere('vessel_name', 'LIKE', "%" . $search . "%")
 				// ->orWhere('rank', 'LIKE', "%" . $search . "%")
 			if(auth()->user()->fleet){
-				$applicants->where('u.fleet', 'like', auth()->user()->fleet);
+				// MA'AM JOBELLE
+				if(auth()->user()->id == 4504){
+					$applicants->where(function($q) use($search){
+						$q->where('u.fleet', 'like', auth()->user()->fleet);
+						$q->orWhere('u.fleet', 'like', "FLEET A");
+					});
+				}
+				else{
+					$applicants->where('u.fleet', 'like', auth()->user()->fleet);
+				}
 			}
 			$applicants = $applicants->get();
 
@@ -161,8 +170,18 @@ class DatatablesController extends Controller
       //                   ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
 						// ->orderByDesc('sign_on')->first();
 
+				
 				if(auth()->user()->fleet){
-					$ss->where('u.fleet', auth()->user()->fleet);
+					// MA'AM JOBELLE
+					if(auth()->user()->id == 4504){
+						$ss->where(function($q) use($search){
+							$q->where('u.fleet', 'like', auth()->user()->fleet);
+							$q->orWhere('u.fleet', 'like', "FLEET A");
+						});
+					}
+					else{
+						$ss->where('u.fleet', 'like', auth()->user()->fleet);
+					}
 				}
 
 				$ss = $ss->orderByDesc('sign_on')->first();
@@ -199,7 +218,16 @@ class DatatablesController extends Controller
 				// ->first();
 
 				if(auth()->user()->fleet){
-					$temp->where('u.fleet', auth()->user()->fleet);
+					// MA'AM JOBELLE
+					if(auth()->user()->id == 4504){
+						$temp->where(function($q) use($search){
+							$q->where('u.fleet', 'like', auth()->user()->fleet);
+							$q->orWhere('u.fleet', 'like', "FLEET A");
+						});
+					}
+					else{
+						$temp->where('u.fleet', 'like', auth()->user()->fleet);
+					}
 				}
 
 				$temp = $temp->first();
@@ -245,7 +273,16 @@ class DatatablesController extends Controller
 					// ->first();
 
 					if(auth()->user()->fleet){
-						$temp->where('u.fleet', auth()->user()->fleet);
+						// MA'AM JOBELLE
+						if(auth()->user()->id == 4504){
+							$temp->where(function($q) use($search){
+								$q->where('u.fleet', 'like', auth()->user()->fleet);
+								$q->orWhere('u.fleet', 'like', "FLEET A");
+							});
+						}
+						else{
+							$temp->where('u.fleet', 'like', auth()->user()->fleet);
+						}
 					}
 
 					$temp = $temp->first();
@@ -282,7 +319,16 @@ class DatatablesController extends Controller
 				// ->get();
 
 				if(auth()->user()->fleet){
-					$temp1->where('u.fleet', auth()->user()->fleet);
+					// MA'AM JOBELLE
+					if(auth()->user()->id == 4504){
+						$temp1->where(function($q) use($search){
+							$q->where('u.fleet', 'like', auth()->user()->fleet);
+							$q->orWhere('u.fleet', 'like', "FLEET A");
+						});
+					}
+					else{
+						$temp1->where('u.fleet', 'like', auth()->user()->fleet);
+					}
 				}
 
 				$temp1 = $temp1->get();
@@ -306,7 +352,16 @@ class DatatablesController extends Controller
 				// ->get();
 
 				if(auth()->user()->fleet){
-					$temp2->where('u.fleet', auth()->user()->fleet);
+					// MA'AM JOBELLE
+					if(auth()->user()->id == 4504){
+						$temp2->where(function($q) use($search){
+							$q->where('u.fleet', 'like', auth()->user()->fleet);
+							$q->orWhere('u.fleet', 'like', "FLEET A");
+						});
+					}
+					else{
+						$temp2->where('u.fleet', 'like', auth()->user()->fleet);
+					}
 				}
 
 				$temp2 = $temp2->get();
@@ -329,7 +384,16 @@ class DatatablesController extends Controller
 					// ->count();
 
 			if(auth()->user()->fleet){
-				$tc->where('u.fleet', auth()->user()->fleet);
+				// MA'AM JOBELLE
+				if(auth()->user()->id == 4504){
+					$tc->where(function($q) use($search){
+						$q->where('u.fleet', 'like', auth()->user()->fleet);
+						$q->orWhere('u.fleet', 'like', "FLEET A");
+					});
+				}
+				else{
+					$tc->where('u.fleet', 'like', auth()->user()->fleet);
+				}
 			}
 
 			$tc = $tc->count();
@@ -349,8 +413,18 @@ class DatatablesController extends Controller
 				->limit($req->length);
 				// ->get();
 
+			
 			if(auth()->user()->fleet){
-				$applicants->where('u.fleet', auth()->user()->fleet);
+				// MA'AM JOBELLE
+				if(auth()->user()->id == 4504){
+					$applicants->where(function($q) use($search){
+						$q->where('u.fleet', 'like', auth()->user()->fleet);
+						$q->orWhere('u.fleet', 'like', "FLEET A");
+					});
+				}
+				else{
+					$applicants->where('u.fleet', 'like', auth()->user()->fleet);
+				}
 			}
 
 			$applicants = $applicants->get();
@@ -480,11 +554,22 @@ class DatatablesController extends Controller
 		if(auth()->user()->fleet != "" && !str_contains($req->search['value'], '-A')){
 			$vessels = Vessel::where([
 					['status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE'],
-					['vessels.fleet', '=', auth()->user()->fleet]
 				])
 				->join('principals as p', 'p.id', '=', 'vessels.principal_id')
-				->select('vessels.*', 'p.name as pname')
-				->get();
+				->select('vessels.*', 'p.name as pname');
+
+			// MA'AM JOBELLE
+			if(auth()->user()->id == 4504){
+				$vessels->where(function($q){
+					$q->where('vessels.fleet', 'like', auth()->user()->fleet);
+					$q->orWhere('vessels.fleet', 'like', "FLEET A");
+				});
+			}
+			else{
+				$vessels->where('vessels.fleet', 'like', auth()->user()->fleet);
+			}
+
+			$vessels = $vessels->get();
 		}
 		else{
 			$vessels = Vessel::where('status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE')
