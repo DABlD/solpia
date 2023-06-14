@@ -112,7 +112,7 @@
                 // { data: 'availability' },
                 { data: 'remarks'},
                 { data: 'status'},
-                { data: 'actions'}
+                { data: 'actions'},
                 { data: 'updated_at'}
             ],
             columnDefs: [
@@ -163,7 +163,7 @@
             	// initializeActions();
             },
             // order: [],
-            order: [12, 'desc']
+            order: [ [12, 'desc'] ]
         });
         
         $('#table_filter input').unbind();
