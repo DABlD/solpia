@@ -31,6 +31,7 @@
                                     <th>Remarks</th>
                                     <th>Status</th>
                                     <th>Actions</th>
+                                    <th>Updated At</th>
     							</tr>
     						</thead>
     					</table>
@@ -113,7 +114,7 @@
                 { data: 'remarks'},
                 { data: 'status'},
                 { data: 'actions'},
-                { data: 'updated_at'}
+                { data: 'updated_at', visible: false}
             ],
             columnDefs: [
                 {
