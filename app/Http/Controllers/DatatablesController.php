@@ -760,11 +760,11 @@ class DatatablesController extends Controller
 	}
 
 	public function wages(){
-		$wages = Wage::select('wages.id', 'p.name as pname', 'v.name as vname', 'v.imo', 'r.name as rname', 'basic', 'leave_pay', 'fot', 'ot', 'sub_allow', 'retire_allow', 'sup_allow')
+		$wages = Wage::select('wages.id', 'p.name as pname', 'v.name as vname', 'v.imo', 'r.name as rname', 'basic', 'leave_pay', 'fot', 'ot', 'sub_allow', 'retire_allow', 'sup_allow', 'updated_at')
 			->join('principals as p', 'p.id', '=', 'wages.principal_id')
 			->join('ranks as r', 'r.id', '=', 'wages.rank_id')
 			->join('vessels as v', 'v.id', '=', 'wages.vessel_id')
-			->get();
+			->get()->sortByDesc('updated_at');
 
 		foreach($wages as $wage){
 			$wage->actions = $wage->actions;
