@@ -113,6 +113,7 @@
                 { data: 'remarks'},
                 { data: 'status'},
                 { data: 'actions'}
+                { data: 'updated_at'}
             ],
             columnDefs: [
                 {
@@ -161,8 +162,8 @@
                 tooltip();
             	// initializeActions();
             },
-            order: [],
-            // order: [ [0, 'desc'] ],
+            // order: [],
+            order: [ [12, 'desc'] ],
         });
         
         $('#table_filter input').unbind();
