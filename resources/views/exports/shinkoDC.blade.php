@@ -140,6 +140,16 @@
 					}
 				}
 			}
+			elseif ($docu == 'ETO') {
+				$docu = "ELECTRO-TECHNICAL RATINGS";
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+
+				if(!$docu){
+					$name = 'ELECTRO-TECHNICAL OFFICER';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				}
+			}
 			else{
 				$temp = $docu;
 				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
@@ -354,6 +364,7 @@
 		{{ $getDocument('COE', 			'lc', 		'MARINA', 		'NATIONAL LICENSE - RATINGS', 		true)}}
 		{{ $getDocument('NCIII', 		'lc', 		'TESDA', 		'NATIONAL LICENSE - CCK (NCIII)', 	true)}}
 		{{ $getDocument('NCI', 			'lc',	 	'TESDA', 		'NATIONAL LICENSE - MSM (NCI)', 	true)}}
+		{{ $getDocument('ETO', 			'lc',	 	'TESDA', 		'ELECTRO-TECHNICAL RATINGS',	 	true)}}
 
 		{{ addS('FLAG STATE CERTIFICATES') }}
 
