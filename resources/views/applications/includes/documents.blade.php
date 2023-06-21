@@ -241,6 +241,7 @@
 					<option value="NEW ENGINE ROOM MACHINERY - WESTERN">&nbsp;&nbsp;&nbsp;&nbsp;NEW ENGINE ROOM MACHINERY - WESTERN</option>
 					<option value="ELECTRONIC NAVIGATION SYSTEMS - ENS">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRONIC NAVIGATION SYSTEMS - ENS</option>
 					<option value="ELECTRO-TECHNICAL RATINGS">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRO-TECHNICAL RATINGS</option>
+					<option value="ELECTRO-TECHNICAL OFFICER">&nbsp;&nbsp;&nbsp;&nbsp;ELECTRO-TECHNICAL OFFICER</option>
 					<option value="GENERAL TANKER FAMILIARIZATION">&nbsp;&nbsp;&nbsp;&nbsp;GENERAL TANKER FAMILIARIZATION</option>
 					<option value="CONTAINER FAMILIARIZATION">&nbsp;&nbsp;&nbsp;&nbsp;CONTAINER FAMILIARIZATION</option>
 					<option value="PSSR">&nbsp;&nbsp;&nbsp;&nbsp;PERSONAL SAFETY AND SOCIAL RESPONSIBILITIES - PSSR</option>
