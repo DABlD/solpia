@@ -113,8 +113,8 @@
                 // { data: 'availability' },
                 { data: 'remarks'},
                 { data: 'status'},
+                { data: 'updated_at'}
                 { data: 'actions'},
-                { data: 'updated_at', visible: false}
             ],
             columnDefs: [
                 {
@@ -155,6 +155,12 @@
                 {
                     targets: 10,
                     width: "200px"
+                },
+                {
+                    targets: 11,
+                    render: date => {
+                        return toDate(date);
+                    }
                 }
             ],
             drawCallback: function(){
