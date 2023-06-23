@@ -159,7 +159,7 @@
                 {
                     targets: 11,
                     render: date => {
-                        return toDate(date);
+                        return toDateTime(date);
                     }
                 }
             ],
