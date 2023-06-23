@@ -307,6 +307,7 @@
 		$b = "ATLGT - Advance Training for Liquified Gas Tanker Cargo Operations";
 		$getDocument($a, 'lc', null, $b);
 
+
 		$a = "HIGH VOLTAGE TRAINING";
 		$b = "High Voltage Training";
 		$getDocument($a, 'lc', null, $b);
