@@ -251,6 +251,8 @@
 				<optgroup label="TANKER CERTIFICATES"></optgroup>
 					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
 					<option value="ADVANCE TRAINING FOR OIL TANKER - ATOT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE TRAINING FOR OIL TANKER - ATOT</option>
+					<option value="BASIC TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - BTLGT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - BTLGT</option>
+					<option value="ADVANCED TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - ATLGT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCED TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - ATLGT</option>
 					<option value="ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT</option>
 					<option value="HAZMAT">&nbsp;&nbsp;&nbsp;&nbsp;HAZMAT</option>
 
