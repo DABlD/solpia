@@ -30,8 +30,8 @@
                                     <th>Availability</th> --}}
                                     <th>Remarks</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
                                     <th>Updated At</th>
+                                    <th>Actions</th>
     							</tr>
     						</thead>
     					</table>
