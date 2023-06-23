@@ -113,7 +113,7 @@
                 // { data: 'availability' },
                 { data: 'remarks'},
                 { data: 'status'},
-                { data: 'updated_at'}
+                { data: 'updated_at'},
                 { data: 'actions'},
             ],
             columnDefs: [
