@@ -299,6 +299,19 @@
 		$b = "ATCT - Advance Training for Chemical Tanker";
 		$getDocument($a, 'lc', null, $b);
 
+		$a = "BASIC TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - BTLGT";
+		$b = "BTLGT - Basic Training for Liquified Gas Tanker Cargo Operations";
+		$getDocument($a, 'lc', null, $b);
+
+		$a = "ADVANCED TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - ATLGT";
+		$b = "ATLGT - Advance Training for Liquified Gas Tanker Cargo Operations";
+		$getDocument($a, 'lc', null, $b);
+
+
+		$a = "HIGH VOLTAGE TRAINING";
+		$b = "High Voltage Training";
+		$getDocument($a, 'lc', null, $b);
+
 		$a = "ADVANCE FIRE FIGHTING - AFF";
 		$b = "AFF - Advance Fire Fighting";
 		$getDocument($a, 'lc', null, $b);
