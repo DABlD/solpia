@@ -21,7 +21,7 @@
 	<tbody>
 		<tr>
 			<td colspan="15">
-				SC MARINE CO. LTD
+				TMS SHIPPING CO. LTD
 			</td>
 		</tr>
 
