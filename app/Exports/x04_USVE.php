@@ -11,7 +11,10 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\{ProcessedApplicant};
 
-class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+
+class X04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $type){
         $pro_app = ProcessedApplicant::where('applicant_id', $applicant->id)->first();
@@ -264,22 +267,24 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('USVE', false);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: SMOP-USVEF-12 &C&IEFFECTIVE DATE: 18 NOV 2020 &R&IREVISION NO: 2.0 23 May 2023');
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.0);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(11);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                $event->sheet->getDelegate()->getStyle('B10:B31')->getNumberFormat()->setFormatCode('@');
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
@@ -318,7 +323,8 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    
+                    'B11:B18', 'B23:B31',
+                    'C18', 'C31'
                 ];
 
                 // HL B
@@ -345,15 +351,17 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
+                    'I3:K3', 'A8',
+                    'A42:L42',
                 ];
 
                 $h['wrap'] = [
-                    'A37'
+                    'C11', 'C13', 'C15', 'C18', 'C23', 'C31', 'A37'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A11:A34', 'D5', 'I40', 'A44'
+                    'G5:G7', 'I42'
                 ];
 
                 foreach($h as $key => $value) {
@@ -393,11 +401,11 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'B50', 'F50',
                 ]);
 
                 // ALL BORDER MEDIUM
                 $cells[1] = array_merge([
-                    'A46', 'E46'
                 ]);
 
                 // ALL BORDER THICK
@@ -406,7 +414,7 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
-                    'A39:J41'
+                    'A42:L42'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -443,10 +451,11 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'A44:F44', 'H44:J44', 'H48:J48',
-                    'D5:G5', 'J5',
-                    'D6:G6', 'J6',
-                    'D7:G7', 'J7',
+                    'G5:H5', 'G6:H6', 'G7:H7', 'J5:K5',
+                    'K6', 'K7',
+
+                    'A44:G44', 'J44:K44',
+                    'J48:K48'
                 ]);
 
                 // LBT
@@ -464,19 +473,22 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 }
 
                 // FOR THE CHECK
-                // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('A1:L50')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:L50')->getFont()->setSize(10);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(7);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(3);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(14);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(14.5);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(14.5);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(4);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
@@ -487,6 +499,13 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
         ];
     }
 
+    public function columnFormats(): array
+    {
+        return [
+            'B' => NumberFormat::FORMAT_TEXT,
+        ];
+    }
+
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -494,23 +513,23 @@ class X04_USVE implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
         $drawing->setDescription('Letter Head');
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $drawing->setHeight(60);
+        $drawing->setWidth(630);
+        $drawing->setOffsetX(2);
+        $drawing->setOffsetY(2);
+        $drawing->setCoordinates('A1');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
+        // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        // $drawing2->setName('Avatar');
+        // $drawing2->setDescription('Avatar');
+        // $drawing2->setPath(public_path($this->data->user->avatar));
+        // $drawing2->setResizeProportional(false);
+        // $drawing2->setHeight(230);
+        // $drawing2->setWidth(230);
+        // $drawing2->setOffsetX(5);
+        // $drawing2->setOffsetY(2);
+        // $drawing2->setCoordinates('C3');
 
-        return [$drawing, $drawing2];
+        return [$drawing];
     }
 }
