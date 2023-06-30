@@ -143,7 +143,7 @@ class DatatablesController extends Controller
 				// ->orWhere('rank', 'LIKE', "%" . $search . "%")
 			if(auth()->user()->fleet){
 				// MA'AM JOBELLE
-				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 					$applicants->where(function($q) use($search){
 						$q->where('u.fleet', 'like', auth()->user()->fleet);
 						$q->orWhere('u.fleet', 'like', "FLEET A");
@@ -173,7 +173,7 @@ class DatatablesController extends Controller
 				
 				if(auth()->user()->fleet){
 					// MA'AM JOBELLE
-					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 						$ss->where(function($q) use($search){
 							$q->where('u.fleet', 'like', auth()->user()->fleet);
 							$q->orWhere('u.fleet', 'like', "FLEET A");
@@ -219,7 +219,7 @@ class DatatablesController extends Controller
 
 				if(auth()->user()->fleet){
 					// MA'AM JOBELLE
-					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 						$temp->where(function($q) use($search){
 							$q->where('u.fleet', 'like', auth()->user()->fleet);
 							$q->orWhere('u.fleet', 'like', "FLEET A");
@@ -274,7 +274,7 @@ class DatatablesController extends Controller
 
 					if(auth()->user()->fleet){
 						// MA'AM JOBELLE
-						if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+						if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 							$temp->where(function($q) use($search){
 								$q->where('u.fleet', 'like', auth()->user()->fleet);
 								$q->orWhere('u.fleet', 'like', "FLEET A");
@@ -320,7 +320,7 @@ class DatatablesController extends Controller
 
 				if(auth()->user()->fleet){
 					// MA'AM JOBELLE
-					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 						$temp1->where(function($q) use($search){
 							$q->where('u.fleet', 'like', auth()->user()->fleet);
 							$q->orWhere('u.fleet', 'like', "FLEET A");
@@ -353,7 +353,7 @@ class DatatablesController extends Controller
 
 				if(auth()->user()->fleet){
 					// MA'AM JOBELLE
-					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 						$temp2->where(function($q) use($search){
 							$q->where('u.fleet', 'like', auth()->user()->fleet);
 							$q->orWhere('u.fleet', 'like', "FLEET A");
@@ -385,7 +385,7 @@ class DatatablesController extends Controller
 
 			if(auth()->user()->fleet){
 				// MA'AM JOBELLE
-				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 					$tc->where(function($q) use($search){
 						$q->where('u.fleet', 'like', auth()->user()->fleet);
 						$q->orWhere('u.fleet', 'like', "FLEET A");
@@ -416,7 +416,7 @@ class DatatablesController extends Controller
 			
 			if(auth()->user()->fleet){
 				// MA'AM JOBELLE
-				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 					$applicants->where(function($q) use($search){
 						$q->where('u.fleet', 'like', auth()->user()->fleet);
 						$q->orWhere('u.fleet', 'like', "FLEET A");
@@ -559,7 +559,7 @@ class DatatablesController extends Controller
 				->select('vessels.*', 'p.name as pname');
 
 			// MA'AM JOBELLE
-			if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013])){
+			if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
 				$vessels->where(function($q){
 					$q->where('vessels.fleet', 'like', auth()->user()->fleet);
 					$q->orWhere('vessels.fleet', 'like', "FLEET A");
