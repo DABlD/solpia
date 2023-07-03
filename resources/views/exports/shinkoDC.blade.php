@@ -426,9 +426,9 @@
 				ADMINISTRATION
 			</td>
 			<td colspan="5" rowspan="3">
-				CONFIRMED BY: Ms. Precian Marie Cervantes
+				CONFIRMED BY: Ms. THEA MAE GUERRA
 				<br>
-				(ASST. CREWING MANAGER)
+				(CREWING MANAGER)
 			</td>
 		</tr>
 	</tbody>
