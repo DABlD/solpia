@@ -544,11 +544,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 }
             }
             elseif($type == "hanj_dk_initio"){
-                if($rank == "ASD"){
-                    $this->rows    = 41;
-                    $this->view    = "ASD";
-                }
-                elseif($rank == "2/O" || $rank == "3/O"){
+                if($rank == "2/O" || $rank == "3/O"){
                     $this->rows    = 56;
                     $this->view    = "2O_3O";
                 }
@@ -594,6 +590,50 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 }
             }
             elseif($type == "hanj_dk_ione"){
+                if($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 56;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "BSN"){
+                    $this->rows    = 43;
+                    $this->view    = "BSN";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 48;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "DCDT"){
+                    $this->rows    = 40;
+                    $this->view    = "DCDT";
+                }
+                elseif($rank == "1AE"){
+                    $this->rows    = 50;
+                    $this->view    = "1AE";
+                }
+                elseif($rank == "2AE" || $rank == "3AE"){
+                    $this->rows    = 56;
+                    $this->view    = "2AE_3AE";
+                }
+                elseif($rank == "OLR1"){
+                    $this->rows    = 43;
+                    $this->view    = "OLR1";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 41;
+                    $this->view    = "OLR";
+                }
+                elseif($rank == "ECDT"){
+                    $this->rows    = 41;
+                    $this->view    = "ECDT";
+                }
+                elseif($rank == "CCK" || $rank == "2CK"){
+                    $this->rows    = 42;
+                    $this->view    = "CCK_2CK";
+                }
+                elseif($rank == "CBY"){
+                    $this->rows    = 41;
+                    $this->view    = "CBY";
+                }
             }
             elseif($type == "scm_gns_harmony"){
                 if($rank == "2/O" || $rank == "3/O"){

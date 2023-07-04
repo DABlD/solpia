@@ -86,13 +86,6 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($doc == "SMS" || $doc == "WELDING"){
-				foreach(get_object_vars($data->document_lc) as $document){
-				    if(str_contains($document->type, $doc)){
-				    	$docu = $document;
-				    }
-				}
-			}
 			else{
 				if($type != "flag"){
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
@@ -205,12 +198,12 @@
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("LICENSE", "PANAMA TEMPORARY CERT", 'flag') }}
+	{{ $doc("LICENSE", "PANAMA BOOKLET - OLR", 'flag') }}
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - RATINGS - III/5", 'lc', 1, 'III/5') }}
+	{{ $doc("COC", "CE - LICENSE (CERTIFICATE) - III/2", 'lc', 1, 'III/2') }}
+	{{ $doc("COE", "CE - LICENSE (ENDORSEMENT) - III/2", 'lc', 1, 'III/2') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
@@ -219,18 +212,23 @@
 		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
 	@endphp
 	{{ $doc($a, $b, 'lc') }}
+	{{ $doc("ADVANCE FIRE FIGHTING - AFF", "ADVANCED FIREFGHTING (AFF)", 'lc') }}
+	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
-	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
-  	{{ $doc("WELDING", "SMAW ADVANCED WELDING", 'lc') }}
+	{{ $doc("ERS WITH ERM", "ERS WITH ERM", 'lc') }}
+	{{ $doc("MLC TRAINING F1", "MLC TRAINING FOR OIC-EW - F1/ M1 & ,M2", 'lc') }}
+	{{ $doc("MLC TRAINING F2", "MLC TRAINING FOR OIC-EW - F2/ M1", 'lc') }}
+	{{ $doc("MLC TRAINING F4", "MLC TRAINING FOR OIC-EW - F4/ M1 & ,M2", 'lc') }}
+	{{ $doc("KOREAN LICENSE", "KOREAN LICENSE", 'lc') }}
+	{{ $doc("KOREAN PSCRB", "KOREAN PSCRB", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
-	{{ $doc("CHEMICAL TEST", "CHEMICAL TEST", 'med_cert') }}
+	{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
-	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
 	{{ $con("MLC/CBA CONTRACT", 1,0,0) }}

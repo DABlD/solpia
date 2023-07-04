@@ -199,7 +199,7 @@
 
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
-	{{ $doc("US-VISA", "US - VISA", 'id') }}
+	{{ $doc("US-VISA", "US VISA", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
@@ -209,28 +209,20 @@
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - RATINGS - III/5", 'lc', 1, 'III/5') }}
+	{{ $doc("NCI", "COC - NC1 LICENSE", 'lc', 1) }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
-	@php
-		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
-		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
-	@endphp
-	{{ $doc($a, $b, 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
 	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
-  	{{ $doc("WELDING", "SMAW ADVANCED WELDING", 'lc') }}
+	{{ $doc("WELDING COURSE", "SHIPBOARD WELDING COURSE", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
-	{{ $doc("CHEMICAL TEST", "CHEMICAL TEST", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
-	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
 	{{ $con("MLC/CBA CONTRACT", 1,0,0) }}
@@ -256,9 +248,15 @@
 
 	<tr>
 		<td colspan="8" rowspan="4">
+			CONSOLIDATED MARPOL*
+			<br style='mso-data-placement:same-cell;' />
+			NBI*
+			<br style='mso-data-placement:same-cell;' />
 			ALLOTMENT SUMMARY*
 			<br style='mso-data-placement:same-cell;' />
 			POEA CONTRACT*
+			<br style='mso-data-placement:same-cell;' />
+			POLIO VACCINE*
 		</td>
 	</tr>
 

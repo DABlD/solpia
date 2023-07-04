@@ -86,13 +86,6 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($doc == "SMS" || $doc == "WELDING"){
-				foreach(get_object_vars($data->document_lc) as $document){
-				    if(str_contains($document->type, $doc)){
-				    	$docu = $document;
-				    }
-				}
-			}
 			else{
 				if($type != "flag"){
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
@@ -199,7 +192,6 @@
 
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
-	{{ $doc("US-VISA", "US - VISA", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
@@ -223,12 +215,10 @@
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
 	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
-  	{{ $doc("WELDING", "SMAW ADVANCED WELDING", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
-	{{ $doc("CHEMICAL TEST", "CHEMICAL TEST", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
@@ -238,7 +228,6 @@
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,0,1) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
-	{{ $con("INTERGIS-PRE JOINING EDUCATION REPORT", 1,1,1) }}
 	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc', 2) }}
 	{{ $doc("IN HOUSE TRAINING CERT WITH ISM", "IN HOUSE TRAINING CERTIFICATE WITH ISM", 'lc') }}
 	{{ $doc("GENERAL TRAINING RECORD BOOK", "GENERAL TRAINING RECORD BOOK", 'lc', null, null, 1,0,1) }}

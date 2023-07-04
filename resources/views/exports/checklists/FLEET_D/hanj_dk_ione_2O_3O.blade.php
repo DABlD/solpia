@@ -78,19 +78,12 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($doc == "ENGINE WATCH"){
+			elseif($doc == "DECK WATCH"){
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
 				if(!$docu){
-					$doc = "ENGINE WATCHKEEPING";
+					$doc = "DECK WATCHKEEPING";
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
-				}
-			}
-			elseif($doc == "SMS" || $doc == "WELDING"){
-				foreach(get_object_vars($data->document_lc) as $document){
-				    if(str_contains($document->type, $doc)){
-				    	$docu = $document;
-				    }
 				}
 			}
 			else{
@@ -199,18 +192,20 @@
 
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
-	{{ $doc("US-VISA", "US - VISA", 'id') }}
+	{{ $doc("US-VISA", "US VISA", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("LICENSE", "PANAMA TEMPORARY CERT", 'flag') }}
-	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
+	{{ $doc("LICENSE", "PANAMA BK/LICENSE", 'flag') }}
+	{{ $doc("GMDSS/GOC", "PANAMA GOC BK/LICENSE", 'flag') }}
+	{{ $doc("SDSD", "SDSD ENDORSEMENT CERTIFICATE", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - RATINGS - III/5", 'lc', 1, 'III/5') }}
+	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - II/1", 'lc', 1, 'II/1') }}
+	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - II/1", 'lc', 1, 'II/1') }}
+	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE - IV/2", 'lc', 1, 'IV/2') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
@@ -219,16 +214,25 @@
 		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
 	@endphp
 	{{ $doc($a, $b, 'lc') }}
+	{{ $doc("ADVANCE FIRE FIGHTING - AFF", "ADVANCED FIREFGHTING (AFF)", 'lc') }}
+	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
+	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
-	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
-  	{{ $doc("WELDING", "SMAW ADVANCED WELDING", 'lc') }}
+	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
+	{{ $doc("ECDIS FURUNO 2107", "ECDIS SPECIFIC: FEA 2107", 'lc') }}
+	{{ $doc("ECDIS FURUNO 3100/3200/3300", "ECDIS SPECIFIC: FMD 3200", 'lc') }}
+	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
+	{{ $doc("OLC TRAINING F1", "OLC TRAINING FOR OIC-NW - F1/M1 (PART A)", 'lc') }}
+	{{ $doc("OLC TRAINING F3", "OLC TRAINING FOR OIC-NW - F3/M1 & M2 (PART A)", 'lc') }}
+	{{ $doc("ARPA TRAINING COURSE", "ARPA/ROPA/RNPUA", 'lc') }}
+	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc') }}
+	{{ $doc("KOREAN PSCRB", "KOREAN PSCRB", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
-	{{ $doc("CHEMICAL TEST", "CHEMICAL TEST", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 

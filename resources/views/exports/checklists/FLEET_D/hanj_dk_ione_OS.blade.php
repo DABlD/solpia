@@ -78,19 +78,12 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($doc == "ENGINE WATCH"){
+			elseif($doc == "DECK WATCH"){
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
 				if(!$docu){
-					$doc = "ENGINE WATCHKEEPING";
+					$doc = "DECK WATCHKEEPING";
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
-				}
-			}
-			elseif($doc == "SMS" || $doc == "WELDING"){
-				foreach(get_object_vars($data->document_lc) as $document){
-				    if(str_contains($document->type, $doc)){
-				    	$docu = $document;
-				    }
 				}
 			}
 			else{
@@ -199,7 +192,6 @@
 
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
-	{{ $doc("US-VISA", "US - VISA", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
@@ -207,10 +199,10 @@
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
 	{{ $doc("LICENSE", "PANAMA TEMPORARY CERT", 'flag') }}
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
+	{{ $doc("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", "BTOCT ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - RATINGS - III/5", 'lc', 1, 'III/5') }}
+	{{ $doc("COC", "COC - RATINGS - II/4", 'lc', 1, 'II/4') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
@@ -220,25 +212,29 @@
 	@endphp
 	{{ $doc($a, $b, 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
+	{{ $doc("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", "BTOCT", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
-	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
-  	{{ $doc("WELDING", "SMAW ADVANCED WELDING", 'lc') }}
+	{{ $doc("DECK WATCH", "DECK WATCHKEEPING CERT.", 'lc') }}
+	{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+	{{ $doc("ENGLISH TEST", "ENGLISH TEST CERTIFICATE", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
-	{{ $doc("CHEMICAL TEST", "CHEMICAL TEST", 'med_cert') }}
+	{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
-	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
 	{{ $con("MLC/CBA CONTRACT", 1,0,0) }}
 	{{ $con("PERSONAL DATA RECORD", 1,0,1) }}
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,0,1) }}
+	{{ $con("KLCSM OATH, UNDERTAKING &#38; MEDICINE LIST", 1,0,1) }}
+	{{ $con("RESEARCH FOR EFFICIENCY ONBOARD", 1,0,1) }}
+	{{ $con("ALLOTMENT SUMMARY*", 1,0,1) }}
+	{{ $con("POEA CONTRACT*", 1,0,1) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
-	{{ $con("INTERGIS-PRE JOINING EDUCATION REPORT", 1,1,1) }}
 	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc', 2) }}
 	{{ $doc("IN HOUSE TRAINING CERT WITH ISM", "IN HOUSE TRAINING CERTIFICATE WITH ISM", 'lc') }}
 	{{ $doc("GENERAL TRAINING RECORD BOOK", "GENERAL TRAINING RECORD BOOK", 'lc', null, null, 1,0,1) }}
@@ -256,9 +252,9 @@
 
 	<tr>
 		<td colspan="8" rowspan="4">
-			ALLOTMENT SUMMARY*
+			{{-- ALLOTMENT SUMMARY*
 			<br style='mso-data-placement:same-cell;' />
-			POEA CONTRACT*
+			POEA CONTRACT* --}}
 		</td>
 	</tr>
 

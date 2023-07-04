@@ -78,19 +78,12 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($doc == "ENGINE WATCH"){
+			elseif($doc == "DECK WATCH"){
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
 				if(!$docu){
-					$doc = "ENGINE WATCHKEEPING";
+					$doc = "DECK WATCHKEEPING";
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
-				}
-			}
-			elseif($doc == "SMS" || $doc == "WELDING"){
-				foreach(get_object_vars($data->document_lc) as $document){
-				    if(str_contains($document->type, $doc)){
-				    	$docu = $document;
-				    }
 				}
 			}
 			else{
@@ -199,36 +192,30 @@
 
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
-	{{ $doc("US-VISA", "US - VISA", 'id') }}
+	{{ $doc("US-VISA", "US VISA", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("LICENSE", "PANAMA TEMPORARY CERT", 'flag') }}
+	{{ $doc("LICENSE", "PANAMA BOOKLET", 'flag') }}
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - RATINGS - III/5", 'lc', 1, 'III/5') }}
+	{{ $doc("COC", "COC - RATINGS - II/4", 'lc', 1, 'II/4') }}
+	{{ $doc("COE", "COC - RATINGS - II/5", 'lc', 1, 'II/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
-	@php
-		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
-		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
-	@endphp
-	{{ $doc($a, $b, 'lc') }}
+	{{ $doc("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT(PSCRB)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 0) }}
-	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
-  	{{ $doc("WELDING", "SMAW ADVANCED WELDING", 'lc') }}
+	{{ $doc("DECK WATCH", "DECK WATCHKEEPING CERT.", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
-	{{ $doc("CHEMICAL TEST", "CHEMICAL TEST", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
