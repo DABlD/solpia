@@ -56,7 +56,6 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
         // LIST HERE ALL ADDITIONAL
         // SID
         $additional = 1;
-
         if($fleet == "FLEET A"){
             $this->data->manager = "PRECIAN MARIE CERVANTES";
             $this->data->documentation = auth()->user()->fullname;
@@ -545,8 +544,96 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 }
             }
             elseif($type == "hanj_dk_initio"){
+                if($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 56;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "BSN"){
+                    $this->rows    = 43;
+                    $this->view    = "BSN";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 47;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "DCDT"){
+                    $this->rows    = 40;
+                    $this->view    = "DCDT";
+                }
+                elseif($rank == "1AE"){
+                    $this->rows    = 50;
+                    $this->view    = "1AE";
+                }
+                elseif($rank == "2AE" || $rank == "3AE"){
+                    $this->rows    = 56;
+                    $this->view    = "2AE_3AE";
+                }
+                elseif($rank == "OLR1"){
+                    $this->rows    = 43;
+                    $this->view    = "OLR1";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 49;
+                    $this->view    = "OLR";
+                }
+                elseif($rank == "ECDT"){
+                    $this->rows    = 41;
+                    $this->view    = "ECDT";
+                }
+                elseif($rank == "CCK" || $rank == "2CK"){
+                    $this->rows    = 42;
+                    $this->view    = "CCK_2CK";
+                }
+                elseif($rank == "CBY"){
+                    $this->rows    = 41;
+                    $this->view    = "CBY";
+                }
             }
             elseif($type == "hanj_dk_ione"){
+                if($rank == "2/O" || $rank == "3/O"){
+                    $this->rows    = 56;
+                    $this->view    = "2O_3O";
+                }
+                elseif($rank == "BSN"){
+                    $this->rows    = 43;
+                    $this->view    = "BSN";
+                }
+                elseif($rank == "OS"){
+                    $this->rows    = 48;
+                    $this->view    = "OS";
+                }
+                elseif($rank == "DCDT"){
+                    $this->rows    = 40;
+                    $this->view    = "DCDT";
+                }
+                elseif($rank == "1AE"){
+                    $this->rows    = 50;
+                    $this->view    = "1AE";
+                }
+                elseif($rank == "2AE" || $rank == "3AE"){
+                    $this->rows    = 56;
+                    $this->view    = "2AE_3AE";
+                }
+                elseif($rank == "OLR1"){
+                    $this->rows    = 43;
+                    $this->view    = "OLR1";
+                }
+                elseif($rank == "OLR"){
+                    $this->rows    = 41;
+                    $this->view    = "OLR";
+                }
+                elseif($rank == "ECDT"){
+                    $this->rows    = 41;
+                    $this->view    = "ECDT";
+                }
+                elseif($rank == "CCK" || $rank == "2CK"){
+                    $this->rows    = 42;
+                    $this->view    = "CCK_2CK";
+                }
+                elseif($rank == "CBY"){
+                    $this->rows    = 41;
+                    $this->view    = "CBY";
+                }
             }
             elseif($type == "scm_gns_harmony"){
                 if($rank == "2/O" || $rank == "3/O"){
@@ -950,6 +1037,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
     public function view(): View
     {
         $exportView = str_replace(' ', '_', $this->data->data['fleet'] . '.' . $this->type . '_' . $this->view);
+
         return view('exports.checklists.' . $exportView, [
             'data' => $this->data,
         ]);
