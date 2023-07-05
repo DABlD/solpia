@@ -56,6 +56,10 @@
         .select2-selection__choice{
             color: black !important;
         }
+
+        table .btn-sm{
+            margin-bottom: 3px !important;
+        }
     </style>
 @endpush
 
@@ -527,6 +531,16 @@
                     ${input("previous_salary", "Previous Salary", data.previous_salary, 2,10)}
                     ${input("usv", "US Visa", data.usv, 2,10)}
                     ${input("remarks", "Remarks", data.remarks, 2,10)}
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Status
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="status" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div></br>
                 `,
                 width: '800px',
                 confirmButtonText: 'Update',
@@ -553,8 +567,25 @@
                         $('[name="rank"]').val(data.rank).change();
                     }
 
-                    $('[name="rank"]').on("select2:open", () => {
+                    statusString = "";
+
+                    ["AVAILABLE", "ON PROCESS", "PASSED", "FAILED"].forEach(status => {
+                        statusString += `
+                            <option value="${status}">${status}</option>
+                        `;
+                    });
+                    $(`[name="status"]`).append(statusString);
+                    $('[name="status"]').select2({
+                        placeholder: "Select status",
+                    });
+
+                    if(data.status != ""){
+                        $('[name="status"]').val(data.status).change();
+                    }
+
+                    $('[name="rank"], [name="status"]').on("select2:open", () => {
                         $('.select2-dropdown--below').css("z-index", 2000);
+                        $('.select2-dropdown--above').css("z-index", 2000);
                     });
 
                     $('[name="last_disembark"], [name="birthday"], [name="availability"], [name="usv"]').flatpickr({
@@ -631,8 +662,9 @@
                             previous_salary: $("[name='previous_salary']").val(),
                             usv: $("[name='usv']").val(),
                             remarks: $("[name='remarks']").val(),
+                            status: $("[name='status']").val(),
                             exp: JSON.stringify(exp),
-                            source: $('[name="source"]:checked').val()
+                            source: $('[name="source"]:checked').val(),
                         },
                         message: "Success"
                     }, () => {
