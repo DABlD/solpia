@@ -94,7 +94,7 @@
 		</td>
 		<td colspan="4"></td>
 		<td>Rank</td>
-		<td>{{ $data->rank->abbr }}</td>
+		<td>{{ $data->rank ? $data->rank->abbr : "" }}</td>
 	</tr>
 
 	<tr>

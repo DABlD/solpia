@@ -19,7 +19,7 @@
 		<td>Ship's Name</td>
 		<td colspan="2">{{ $data->vessel->name ?? '-' }}</td>
 		<td colspan="5">Rank</td>
-		<td colspan="4">{{ $data->rank->abbr }}</td>
+		<td colspan="4">{{ $data->rank ? $data->rank->abbr : "" }}</td>
 	</tr>
 
 	<tr>
