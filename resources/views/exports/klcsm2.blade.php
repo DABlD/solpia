@@ -29,7 +29,7 @@
 		}
 	}
 
-	$rank_category = $data->rank->category;
+	$rank_category = $data->rank ? $data->rank->category : null;
 	$total = 0;
 
 	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null, $country = 'Philippines') use ($data, $checkDate2, $rank) {
