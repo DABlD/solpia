@@ -29,7 +29,7 @@
 		}
 	}
 
-	$rank_category = $data->rank->category;
+	$rank_category = $data->rank ? $data->rank->category : null;
 	$total = 0;
 
 	$eb = function($label, $type) use ($data){
