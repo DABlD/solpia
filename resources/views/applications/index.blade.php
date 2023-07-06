@@ -611,7 +611,7 @@
 
             function walangLagay(application, result){
                 let data = {};
-                if($(application).data('status') != "Lined-Up"){
+                if($(application).data('status2') == "Vacation"){
                     let savedVessels = {};
                     let savedVesselsString = "";
 
