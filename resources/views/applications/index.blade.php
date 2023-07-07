@@ -3090,7 +3090,7 @@
                             'hmm': "HMM"
                         @elseif(in_array(auth()->user()->id, [4504, 5013, 6011]))
                             'western': "NITTA/TOEI"
-                        @elseif(in_array(auth()->user()->id, [4545, 4861, 4988]))
+                        @elseif(in_array(auth()->user()->id, [4545, 4861, 4988, 6016]))
                             'shinko': "SHINKO"
                         @endif
                     },

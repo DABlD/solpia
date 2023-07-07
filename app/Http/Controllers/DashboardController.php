@@ -68,7 +68,7 @@ class DashboardController extends Controller
         sort($fleets);
 
         if(auth()->user()->fleet){
-            if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
+            if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016])){
                 $fleets = ["TOEI", "FLEET A"];
             }
             else{
@@ -103,7 +103,7 @@ class DashboardController extends Controller
 
         if(auth()->user()->fleet){
             // MA'AM JOBELLE
-            if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
+            if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016])){
                 $vacation->where(function($q){
                     $q->where('u.fleet', 'like', auth()->user()->fleet);
                     $q->orWhere('u.fleet', 'like', "FLEET A");
