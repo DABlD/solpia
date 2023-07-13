@@ -236,7 +236,7 @@
 	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'lc') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
 	{{ $doc("ECDIS MECYS PM3D", "ECDIS SPECIFIC: MECYS-PM3D", 'lc') }}
 	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
@@ -245,7 +245,7 @@
 	{{ $doc("ARPA TRAINING COURSE", "ARPA/ROPA/RNPUA", 'lc') }}
 	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "MARSHALL MEDICAL", 'med_cert') }}
 	{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}

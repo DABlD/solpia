@@ -207,7 +207,7 @@
 	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
 	{{ $doc("SHIP SECURITY OFFICER - SSO", "SHIP SECURTIY OFFICER (SSO)", 'lc') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("SAFETY OFFICER'S TRAINING COURSE", "SHIP SAFETY OFFICER", 'lc') }}
 	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
 	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
@@ -216,7 +216,7 @@
 	{{ $doc("ARPA TRAINING COURSE", "ARPA/ROPA", 'lc') }}
 	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "MALAYSIAN MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("DRUG AND ALCOHOL TEST", "DAAT", 'med_cert') }}

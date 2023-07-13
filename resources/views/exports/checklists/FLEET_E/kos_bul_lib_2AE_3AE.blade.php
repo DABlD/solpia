@@ -231,14 +231,14 @@
 	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("ERS WITH ERM", "ERM WITH ERS", 'lc') }}
 	{{ $doc("OLC TRAINING F1", "OLC TRAINING FOR OIC-EW - F1/ M1 & ,M2", 'lc') }}
 	{{ $doc("OLC TRAINING F2", "OLC TRAINING FOR OIC-EW - F2/ M1", 'lc') }}
 	{{ $doc("OLC TRAINING F4", "OLC TRAINING FOR OIC-EW - F4/ M1 & ,M2", 'lc') }}
 	{{ $doc("BASIC MARITIME COMPUTER COURSE", "BASIC MARITIME COMPUTER COURSE", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "MARSHALL MEDICAL", 'med_cert') }}
 	{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}

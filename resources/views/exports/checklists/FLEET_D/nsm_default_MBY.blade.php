@@ -203,10 +203,10 @@
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("CATERING", "SHIP'S CATERING SERVICES NCI", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "MALAYSIAN MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("DRUG AND ALCOHOL TEST", "DAAT", 'med_cert') }}

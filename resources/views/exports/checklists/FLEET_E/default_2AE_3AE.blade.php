@@ -209,7 +209,7 @@
 	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("SHIP SECURITY OFFICER - SSO", "SDSD", 'lc') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("ERS WITH ERM", "ERM WITH ERS", 'lc') }}
 	{{ $doc("OLC TRAINING F1", "OLC TRAINING FOR OIC-EW - F1/ M1 & ,M2", 'lc') }}
 	{{ $doc("OLC TRAINING F2", "OLC TRAINING FOR OIC-EW - F2/ M1", 'lc') }}

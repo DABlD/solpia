@@ -204,13 +204,13 @@
 	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("SHIP SECURITY OFFICER - SSO", "SHIP SECURTIY OFFICER (SSO)", 'lc') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("ERS WITH ERM", "ERM WITH ERS", 'lc') }}
 	{{ $doc("MLC TRAINING F1", "MLC TRAINING FOR OIC-EW - F1/ M1 & ,M2", 'lc') }}
 	{{ $doc("MLC TRAINING F2", "MLC TRAINING FOR OIC-EW - F2/ M1", 'lc') }}
 	{{ $doc("MLC TRAINING F4", "MLC TRAINING FOR OIC-EW - F4/ M1 & ,M2", 'lc') }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "MALAYSIAN MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("DRUG AND ALCOHOL TEST", "DAAT", 'med_cert') }}
