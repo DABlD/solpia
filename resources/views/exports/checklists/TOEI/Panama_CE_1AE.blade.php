@@ -209,7 +209,7 @@
 	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'flag') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("ERS WITH ERM", "ERM WITH ERS", 'lc') }}
 	{{ $doc("MLC TRAINING F1", "MLC TRAINING DECK - F1", 'lc') }}
 	{{ $doc("MLC TRAINING F2", "MLC TRAINING DECK - F2", 'lc') }}

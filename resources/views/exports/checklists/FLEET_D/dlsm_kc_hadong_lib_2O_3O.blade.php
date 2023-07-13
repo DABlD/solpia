@@ -212,7 +212,7 @@
 	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
 	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
 	{{ $doc("OLC TRAINING F1", "OLC TRAINING DECK - F1", 'lc') }}
@@ -222,7 +222,7 @@
 	{{ $doc("LICENSE", "KOREAN LICENSE", 'flag', 1) }}
 	{{ $doc("PSCRB", "KOREAN PSCRB", 'flag', 1) }}
 
-	{{ $section("6. MEDICAL / VACCINATION", 1) }}
+	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
 	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(LIBERIA)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}

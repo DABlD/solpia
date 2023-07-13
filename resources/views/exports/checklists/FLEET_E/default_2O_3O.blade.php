@@ -212,7 +212,7 @@
 	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
 	{{ $doc("SHIP SECURITY OFFICER - SSO", "SHIP SECURTIY OFFICER (SSO)", 'lc') }}
 
-	{{ $section("5. OTHER CERTIFICATES", 0) }}
+	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
 	{{ $doc("ECDIS SPECIFIC", "ECDIS - SPECIFIC: __________", 'lc') }}
 	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
