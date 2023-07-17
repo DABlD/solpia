@@ -341,7 +341,7 @@
 							foreach($regs[$rt] as $key => $ref){
 								if(in_array($ref, $regulations)){
 									if($hl){
-										if($key > $hl){
+										if($key >= $hl){
 											$hl = $key;
 											$docu = $lc;
 											// IF FOR OFFICERS ONLY
