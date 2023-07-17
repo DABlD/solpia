@@ -774,7 +774,7 @@ class DatatablesController extends Controller
 	}
 
 	public function prospects(Request $req){
-        $array = Prospect::select($req->select)->orderBy('id', 'desc');
+        $array = Prospect::select($req->select ?? "*")->orderBy('id', 'desc');
 
         $filters = $req->filters;
 		$search = $req->search["value"];
@@ -828,7 +828,7 @@ class DatatablesController extends Controller
 		}
 
     	$tc = $array->count();
-    	$array = $array->offset($req->start)->limit($req->length);
+    	// $array = $array->offset($req->start)->limit($req->length);
 
 		$array = $array->get();
 
@@ -838,9 +838,9 @@ class DatatablesController extends Controller
 
 		$array = $array->toArray();
 
-		for ($i=0; $i < $req->start; $i++) { 
-			array_unshift($array, "");
-		}
+		// for ($i=0; $i < $req->start; $i++) { 
+		// 	array_unshift($array, "");
+		// }
 
 	    return Datatables::of($array)
     		->setTotalRecords($tc)
