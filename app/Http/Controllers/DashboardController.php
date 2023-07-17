@@ -103,7 +103,7 @@ class DashboardController extends Controller
 
         if(auth()->user()->fleet){
             // MA'AM JOBELLE
-            if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016])){
+            if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014])){
                 $vacation->where(function($q){
                     $q->where('u.fleet', 'like', auth()->user()->fleet);
                     $q->orWhere('u.fleet', 'like', "FLEET A");
@@ -174,7 +174,7 @@ class DashboardController extends Controller
 
             if($bool){
                 // JOBELLE
-                if(auth()->user()->role == "Admin" || auth()->user()->fleet == null || in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011])){
+                if(auth()->user()->role == "Admin" || auth()->user()->fleet == null || in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 5963, 6014])){
                     $fleets['Vacation'][$id] = $temp;
                 }
                 else{
