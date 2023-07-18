@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class ShinkoLC implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant,$type){
         $this->applicant = $applicant;
@@ -278,5 +278,32 @@ class ShinkoLC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 }
             },
         ];
+    }
+
+    public function drawings()
+    {
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('maam_thea_sig');
+        $drawing->setDescription('maam_thea_sig');
+        $drawing->setPath(public_path('images/maam_thea_sig.png'));
+        $drawing->setResizeProportional(false);
+        $drawing->setHeight(35);
+        $drawing->setWidth(100);
+        $drawing->setOffsetX(15);
+        $drawing->setOffsetY(0);
+        $drawing->setCoordinates('D50');
+
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setName('pres_sig');
+        $drawing2->setDescription('pres_sig');
+        $drawing2->setPath(public_path('images/pres_sig.png'));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(130);
+        $drawing2->setWidth(150);
+        $drawing2->setOffsetX(2);
+        $drawing2->setOffsetY(2);
+        $drawing2->setCoordinates('L47');
+
+        return [$drawing, $drawing2];
     }
 }
