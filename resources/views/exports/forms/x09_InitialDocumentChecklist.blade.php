@@ -57,14 +57,17 @@
 
 					if(str_starts_with($docu->type, $name)){
 						$box = "R";
-						$marpol = explode('ANNEX', $docu->type)[1]; //TO GET ONLY THE PART AFTER ANNEX 1-6/I-VI
 
-						$marpols[0] = str_contains($marpol, '1') ? 'a' : '';
-						$marpols[1] = str_contains($marpol, '2') ? 'a' : '';
-						$marpols[2] = str_contains($marpol, '3') || str_contains($marpol, 'III') ? 'a' : '';
-						$marpols[3] = str_contains($marpol, '4') || str_contains($marpol, 'IV') ? 'a' : '';
-						$marpols[4] = str_contains($marpol, '5') || str_contains($marpol, 'V') ? 'a' : '';
-						$marpols[5] = str_contains($marpol, '6') || str_contains($marpol, 'VI') ? 'a' : '';
+						if($docu->type != "MARPOL"){
+							$marpol = explode('ANNEX', $docu->type)[1]; //TO GET ONLY THE PART AFTER ANNEX 1-6/I-VI
+
+							$marpols[0] = str_contains($marpol, '1') ? 'a' : '';
+							$marpols[1] = str_contains($marpol, '2') ? 'a' : '';
+							$marpols[2] = str_contains($marpol, '3') || str_contains($marpol, 'III') ? 'a' : '';
+							$marpols[3] = str_contains($marpol, '4') || str_contains($marpol, 'IV') ? 'a' : '';
+							$marpols[4] = str_contains($marpol, '5') || str_contains($marpol, 'V') ? 'a' : '';
+							$marpols[5] = str_contains($marpol, '6') || str_contains($marpol, 'VI') ? 'a' : '';
+						}
 					}
 				}
 			}
