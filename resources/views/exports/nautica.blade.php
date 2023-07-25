@@ -262,8 +262,8 @@
 
 <table>
 	<tr>
-		<td colspan="11" rowspan="2" style="{{ $center }} font-size: 24px; height: 30px;">SEAFARER APPLICATION FORM</td>
-		<td style="{{ $bold }} height: 30px;">
+		<td colspan="11" rowspan="2" style="{{ $center }} font-size: 24px; height: 29px;">SEAFARER APPLICATION FORM</td>
+		<td style="{{ $bold }} height: 29px;">
 			NSM-SMM-07-03
 			<br style='mso-data-placement:same-cell;' />
 			ISSUED: 20.09.2015
@@ -271,7 +271,7 @@
 	</tr>
 
 	<tr>
-		<td style="height: 35px;">
+		<td style="height: 34px;">
 			Rev # 001
 			<br style='mso-data-placement:same-cell;' />
 			Revised: 20.07.2023
