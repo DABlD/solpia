@@ -64,6 +64,58 @@
 
 				$docu = $temp;
 			}
+			elseif ($docu == 'BRM') {
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+
+				if(!$docu){
+					$name = 'BTM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+					if(!$docu){
+						$name = 'SSBT';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+				}
+			}
+			elseif ($docu == 'ERM') {
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+
+				if(!$docu){
+					$name = 'ETM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+
+					if(!$docu){
+						$name = 'ERS';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+				}
+			}
+			elseif($docu == "WATCHKEEPING"){
+				$temp = $docu;
+				$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+
+				if(!$docu){
+					$doc = "DECK WATCHKEEPING";
+					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				}
+
+				if(!$docu){
+					$doc = "DECK WATCH";
+					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				}
+
+				if(!$docu){
+					$doc = "ENGINE WATCHKEEPING";
+					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				}
+
+				if(!$docu){
+					$doc = "ENGINE WATCH";
+					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				}
+			}
 			elseif($doc == "GAS TANKER"){
 				$temp = null;
 				foreach (get_object_vars($data->document_lc) as $lc){
@@ -92,6 +144,13 @@
 		$issuer = $docu ? $clean($docu->issuer) : "---";
 		$issue = $docu ? $checkDate($docu->issue_date) : "---";
 		$expiry = $docu ? $checkDate($docu->expiry_date) : "---";
+
+		if($doc == "HK-VISA"){
+			$number = "NOT APPLICABLE";
+			$issuer = "NOT APPLICABLE";
+			$issue = "NOT APPLICABLE";
+			$expiry = "NOT APPLICABLE";
+		}
 
 		$blue = 'color: #0000FF;';
 		
@@ -138,7 +197,7 @@
 		}
 		elseif($type2 == 6){
 			echo "
-				<td colspan='4'>$title</td>
+				<td colspan='3'>$title</td>
 				<td style='$center $blue'>$number</td>
 				<td style='$center'>$issue</td>
 				<td style='$center'>$expiry</td>
@@ -147,7 +206,7 @@
 		}
 		elseif($type2 == 7){
 			echo "
-				<td colspan='4'>$title</td>
+				<td colspan='3'>$title</td>
 				<td style='$center $blue'>NOT APPLICABLE</td>
 				<td style='$center'>---</td>
 				<td style='$center'>---</td>
@@ -175,8 +234,8 @@
 					<td style='$center' colspan='3'>$ss->vessel_name</td>
 					<td style='$center'>$ss->vessel_type</td>
 					<td style='$center'>$engine</td>
+					<td style='$center'>$bhp</td>
 					<td style='$center'>$grt</td>
-					<td style='$center'></td>
 					<td style='$center'>$on</td>
 					<td style='$center'>$off</td>
 					<td style='$center' colspan='2'>$manning</td>
@@ -204,11 +263,19 @@
 <table>
 	<tr>
 		<td colspan="11" rowspan="2" style="{{ $center }} font-size: 24px; height: 30px;">SEAFARER APPLICATION FORM</td>
-		<td style="{{ $bold }} height: 30px;">NSM-SMM-07-03</td>
+		<td style="{{ $bold }} height: 30px;">
+			NSM-SMM-07-03
+			<br style='mso-data-placement:same-cell;' />
+			ISSUED: 20.09.2015
+		</td>
 	</tr>
 
 	<tr>
-		<td style="height: 30px;">ISSUED: 20.09.2015</td>
+		<td style="height: 35px;">
+			Rev # 001
+			<br style='mso-data-placement:same-cell;' />
+			Revised: 20.07.2023
+		</td>
 	</tr>
 
 	<tr><td colspan="12" style="height: 5px;"></td></tr>
@@ -426,8 +493,8 @@
 		<td style="{{ $center }}" rowspan="2" colspan="3">Name of Vessel</td>
 		<td style="{{ $center }}" rowspan="2">Type of Vessel</td>
 		<td style="{{ $center }}" rowspan="2">Type of Engine</td>
-		<td style="{{ $center }}" rowspan="2">Gross Tonnage</td>
-		<td style="{{ $center }}" rowspan="2">DWT</td>
+		<td style="{{ $center }}" rowspan="2">Horse- Power</td>
+		<td style="{{ $center }}" rowspan="2">GT</td>
 		<td style="{{ $center }}" colspan="2">Period of Service</td>
 		<td style="{{ $center }}" rowspan="2" colspan="2">Name of Company</td>
 	</tr>
@@ -470,7 +537,7 @@
 	</tr>
 
 	<tr>
-		<td style="height: 30px;">ISSUED: 02.02.2011</td>
+		<td style="height: 35px;">ISSUED: 02.02.2011</td>
 	</tr>
 
 	<tr><td colspan="12" style="height: 5px;"></td></tr>
@@ -480,7 +547,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="4" style="{{ $center }} {{ $bold }}">Qualification</td>
+		<td style="{{ $center }} {{ $bold }}">No</td>
+		<td colspan="3" style="{{ $center }} {{ $bold }}">Descriptions of Documents and Certificate</td>
 		<td style="{{ $center }} {{ $bold }}">Cert No</td>
 		<td style="{{ $center }} {{ $bold }}">Issued</td>
 		<td style="{{ $center }} {{ $bold }}">Valid</td>
@@ -491,8 +559,10 @@
 	</tr>
 
 	<tr>
-		{{ $doc('GMDSS/GOC', 'GMDSS', 'lc', 6) }}
-		<td colspan="4" rowspan="21" style="{{ $center }}">
+		<td>1</td>
+		{{ $doc('MEDICAL CERTIFICATE', 'Medical/Physical Examination Report Cert', 'med_cert', 6) }}
+
+		<td colspan="4" rowspan="26" style="{{ $center }}">
 			<br style='mso-data-placement:same-cell;' />
 			I hereby certify that the information contained
 			<br style='mso-data-placement:same-cell;' />
@@ -504,33 +574,121 @@
 		</td>
 	</tr>
 
-	<tr>{{ $doc('SHIP HANDLING SIMULATION', 'Ship Handling', 'lc', 6) }}</tr>
-	<tr>{{ $doc('ADVANCE FIRE FIGHTING - AFF', 'Advance Fire Fighting', 'lc', 6) }}</tr>
-	<tr>{{ $doc('MEDICAL CARE - MECA', 'Medical Care (Compulsory for Master)', 'lc', 6) }}</tr>
-	<tr>{{ $doc('MEDICAL FIRST AID - MEFA', 'Medical First Aid', 'lc', 6) }}</tr>
-	<tr>{{ $doc('SURVIVAL AT SEA', 'Survival at Sea', 'lc', 6) }}</tr>
-	<tr>{{ $doc('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'Survival Craft & Rescue boat', 'lc', 6) }}</tr>
-	<tr>{{ $doc('GENERAL TANKER FAMILIARIZATION', 'Tanker Familiarization', 'lc', 6) }}</tr>
-	<tr>{{ $doc('GAS TANKER', 'Advanced / Specialized Gas Tanker Safety', 'lc', 6) }}</tr>
-	<tr>{{ $doc('ADVANCE TRAINING FOR OIL TANKER - ATOT', 'Advanced / Specialized Oil Tanker Safety', 'lc', 6) }}</tr>
-	<tr>{{ $doc('ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT', 'Advanced / Specialized Chemical Tanker Safety', 'lc', 6) }}</tr>
-	<tr>{{ $doc('ELECTRONIC NAVIGATION SYSTEMS - ENS', 'Electronic Navigation Systems - ENS (Compulsory for Deck Officer)', 'lc', 6) }}</tr>
-	<tr>{{ $doc('NCC', 'NCC (For Deck Officers)', 'lc', 7) }}</tr>
-	<tr>{{ $doc('PSSR', 'PSSR', 'lc', 7) }}</tr>
-	<tr>{{ $doc('DCE', 'DCE (OIL)', 'lc', 7) }}</tr>
-	<tr>{{ $doc('DCE', 'DCE (CHEM)', 'lc', 7) }}</tr>
-	<tr>{{ $doc('DCE', 'DCE (LPG)', 'lc', 7) }}</tr>
-	<tr>{{ $doc('BTM', 'Bridge Team Management - BTM', 'lc', 6) }}</tr>
-	<tr>{{ $doc('ETM', 'Engine Team Management - ETM', 'lc', 6) }}</tr>
-	<tr>{{ $doc('IN HOUSE TRAINING CERT WITH ISM', 'ISM Code Familiarization', 'lc', 6) }}</tr>
-	<tr>{{ $doc('RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE', 'Risk Assessment', 'lc', 6) }}</tr>
 	<tr>
+		<td>2</td>
+		{{ $doc('MSID', 'Malaysia Seafarer Card/MSID', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>3</td>
+		{{ $doc('MCOR', 'Malaysia COR(for Officers only)', 'lc', 7) }}
+	</tr>
+	<tr>
+		{{-- COVID --}}
+		<td>4</td>
+		<td colspan="3">Covid Vaccination:</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		{{-- dose 1 --}}
+		<td></td>
+		{{ $doc('COVID-19 1ST DOSE', 'a) Dose 1', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		{{-- dose 2 --}}
+		<td></td>
+		{{ $doc('COVID-19 2ND DOSE', 'b) Dose 2', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		{{-- Booster --}}
+		<td></td>
+		{{ $doc('COVID-19 3RD DOSE', 'c) Booster', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		<td>5</td>
+		{{ $doc('YELLOW FEVER', 'Yellow Fever/Stamaril', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">6</td>
+		{{ $doc('TYPHOID', 'Typhoid Vaccination (for Cook and Messboy only)', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">7</td>
+		{{ $doc('WATCHKEEPING', 'Watchkeeping Rating(Deck/Engine) or ASD/ASE', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>8</td>
+		{{ $doc('BASIC TRAINING - BT', 'Basic Safety Training(BST or BSTR)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">9</td>
+		{{ $doc('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'Proficiency Survival Craft and Rescure Boats (PSCRB or PSCRBR)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>10</td>
+		{{ $doc('MEDICAL FIRST AID - MEFA', 'Medical First Aid (MFA)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>11</td>
+		{{ $doc('ADVANCE FIRE FIGHTING - AFF', 'Advance Fire Fighting (AFF ir AFFR)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">12</td>
+		{{ $doc('MEDICAL CARE - MECA', 'Medical Care on Board Ship (Master and C/O only)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td>13</td>
+		{{ $doc('LMS', 'Leadership and Managerial Skill (LMS)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">14</td>
+		{{ $doc('ECDIS', 'ECDIS/Electronic Chart Display &#38; Inf. System', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td>15</td>
+		{{ $doc('ARPA TRAINING COURSE', 'ARPA Radar Simulator', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>16</td>
+		{{ $doc('BTM', 'Bridge Resource Management - BRM', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>17</td>
+		{{ $doc('ETM', 'Engine Resource Management - ERM', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">18</td>
+		{{ $doc('SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 'Designated Security Duties (DSD) or Security Related Training (SRT VI-6)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">19</td>
+		{{ $doc('SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 'Ship Security Awareness (SSA) or Security Related Training (SRT VI-6)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">20</td>
+		{{ $doc('SHIP SECURITY OFFICER - SSO', 'Ship Security Officer Certificate (Compulsory for Master)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">21</td>
 		{{ $doc("SAFETY OFFICER'S TRAINING COURSE", 'Ship Safety Officer Certificate (Compulsory for Master & Chief Officer)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">22</td>
+		{{ $doc('NCIII', 'Shipboard Catering Management / Ship Cook (MLC 2006)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">23</td>
+		{{ $doc('NC1', 'Food Handling Certificate (Messboy &#38; C/Cook)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">24</td>
+		{{ $doc("WELDING COURSE", 'Welder Performance Qualification (WPQ) or 3G/6G Welding Certificate', 'lc', 6) }}
 		<td colspan="2" style="{{ $center }}">…………………………</td>
 		<td colspan="2" style="{{ $center }}">……………………………………………</td>
 	</tr>
 	<tr>
-		{{ $doc('SHIP SECURITY OFFICER - SSO', 'Ship Security Officer Certificate (Compulsory for Master)', 'lc', 6) }}
+		<td>25</td>
+		{{ $doc('ELECTRO-TECHNICAL RATINGS', 'Electro Technical Rating(ETR)', 'lc', 6) }}
 		<td colspan="2" style="{{ $center }}">Date</td>
 		<td colspan="2" style="{{ $center }}">Signature of Applicant</td>
 	</tr>
@@ -542,38 +700,15 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Safety Shoes:</td>
-		<td colspan="2">Boiler Suit:</td>
-		<td colspan="2">Winter Jacket:</td>
-		<td colspan="3">Long John (Upper):</td>
-		<td colspan="2">Long John (Lower):</td>
-	</tr>
-
-	<tr>
-		<td colspan="3">{{ $data->shoe_size }}</td>
-		<td colspan="2">{{ $data->clothes_size }}</td>
-		<td colspan="2">{{ $data->clothes_size }}</td>
-		<td colspan="3">{{ $data->clothes_size }}</td>
-		<td colspan="2">{{ $data->waistline }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3">For Officers Only:</td>
-		<td colspan="2">White Shirt:</td>
-		<td colspan="7">Blue Pants:</td>
-	</tr>
-
-	<tr>
-		<td colspan="3"></td>
-		<td colspan="2">{{ $data->clothes_size }}</td>
-		<td colspan="7">{{ $data->waistline }}</td>
+		<td colspan="4">Safety Shoes (UK Size): {{ $data->shoe_size }}</td>
+		<td colspan="3">Boiler Suit: {{ $data->clothes_size }}</td>
+		<td colspan="5">T-Shirt Catering: {{ $data->clothes_size }}</td>
 	</tr>
 
 	<tr><td colspan="12" style="text-decoration: underline; height: 40px;">Available Sizes</td></tr>
 	<tr><td colspan="12">Safety Shoes Sizes : 5, 6, 7, 8, 9, 10, 11, 12.</td></tr>
-	<tr><td colspan="12">Boiler Suit / Winter Jacket / Long John Sizes: XS, S, M, L, XL, XXL.</td></tr>
-	<tr><td colspan="12">White Shirt Sizes: S, M, L, XL</td></tr>
-	<tr><td colspan="12">Blue Pants Sizes (Inches): 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40.</td></tr>
+	<tr><td colspan="12">Boiler Suit : S, M, L, XL, XXL, 3XL, 4XL, 5XL</td></tr>
+	<tr><td colspan="12">T-Shirt Catering: S, M, L, XL, XXL, 3XL, 4XL, 5XL</td></tr>
 
 	<tr><td colspan="12" style="height: 80px; {{ $bold }}">For Office:</td></tr>
 	<tr><td colspan="12"></td></tr>
@@ -584,7 +719,7 @@
 		<td>Department:</td>
 		<td colspan="2"></td>
 		<td>Status:</td>
-		<td>Approval / Rejected</td>
+		<td>Approved / Rejected</td>
 	</tr>
 
 	<tr>

@@ -332,21 +332,24 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:L66', 'A67:H87', 'A88:L89', 'A91:L112'
+                    'A1:L66', 'A67:H94', 'A96:L96', 'A98:L113'
                 ];
 
                 // VT2
                 $h[8] = [
-                    'I67', 'A103'
+                    'I67', 'A104'
                 ];
 
                 $h['wrap'] = [
-                    'I67', 'A27', 'H28'
+                    'L1:L2',
+                    'F45:G46',
+                    'I67', 'A27', 'H28',
+                    'B67:B94'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A39', 'H41', 'F47:F61', 'B47:B61', 'K47:K61', 'E67:E89', 'H67:H89'
+                    'A39', 'H41', 'F47:F61', 'B47:B61', 'K47:K61', 'E67:H94'
                 ];
 
                 foreach($h as $key => $value) {
@@ -386,7 +389,7 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A44:L61', 'A66:H89'
+                    'A44:L61', 'A66:H94'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -405,7 +408,7 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'A31:D32', 'E31:G32', 'H31:J32', 'K31:L32', 'A33:D34', 'E33:G34', 'H33:J34', 'K33:L34',
                     'A35:D36', 'E35:G36', 'H35:J36', 'K35:L36', 'A37:D38', 'E37:G38', 'H37:J38', 'K37:L38',
                     'A39:D40', 'E39:G40', 'H39:J40', 'K39:L40', 'A41:D42', 'E41:G42', 'H41:J42', 'K41:L42',
-                    'I66:L89', 'A91:L92', 'A93:L94'
+                    'I66:L94', 'A96:L96'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -448,8 +451,8 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'A3:L3', 'A64:L64', 'C102:G102', 'I102:J102', 'L102',
-                    'C103:L103', 'C104:L104', 'C105:L105', 'C106:L106', 'C107:L107', 'C108:L108', 'C109:L109', 'C110:L110', 'C111:L111', 'C112:L112'
+                    'A3:L3', 'A64:L64', 'C103:G103', 'I103:J103', 'L103',
+                    'C104:L104', 'C105:L105', 'C106:L106', 'C107:L107', 'C108:L108', 'C109:L109', 'C110:L110', 'C111:L111', 'C112:L112', 'C113:L113'
                 ]);
 
                 // LBT
@@ -489,6 +492,22 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(20);
                     }
                 }
+
+                $event->sheet->getDelegate()->getRowDimension(75)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(76)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(78)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(81)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(83)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(87)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(88)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(89)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(90)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(91)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(92)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(93)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(97)->setRowHeight(25);
+
+                $event->sheet->getDelegate()->getStyle('B67:B94')->getFont()->setSize('10');
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
@@ -525,8 +544,8 @@ class Nautica implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setDescription('Crew Avatar');
         $drawing3->setPath(public_path($this->data->user->avatar));
         $drawing3->setResizeProportional(false);
-        $drawing3->setHeight(200);
-        $drawing3->setWidth(210);
+        $drawing3->setHeight(202);
+        $drawing3->setWidth(211);
         $drawing3->setOffsetX(3);
         $drawing3->setOffsetY(3);
         $drawing3->setCoordinates('K5');
