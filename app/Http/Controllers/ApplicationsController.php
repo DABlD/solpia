@@ -1361,8 +1361,10 @@ class ApplicationsController extends Controller
         // SET IF PDF OR EXCEL
         $exportType = $req->exportType ?? "xlsx";
 
-        $fileName = $req->filename ?? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
+        $default = $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
+        $fileName = $req->filename ? $req->filename : isset($req->data['filename']) ? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $req->data['filename'] : $default;
         $class = "App\\Exports\\" . $folder . $type;
+
         
         if($exportType == "xlsx"){
             return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");
