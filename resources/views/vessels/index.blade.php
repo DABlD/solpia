@@ -2621,8 +2621,8 @@
                 input: 'select',
                 inputOptions: {
                     'X15_Ext_Form':  'Extension',
-                    'X06_Ext_Prom_Form':  'Extension Promotion',
-                    'X06_Ext_Prom_Form2':  'Salary Amendment'
+                    'X15_Ext_Form2':  'Salary Amendment',
+                    'X06_Ext_Prom_Form':  'Extension Promotion'
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
