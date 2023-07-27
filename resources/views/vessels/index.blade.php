@@ -2651,7 +2651,7 @@
                             return new Promise(resolve => {
                                 setTimeout(() => {
                                     if($('#rank_id').val() == ""){
-                                        swal.showValidationError('Rank is required');
+                                        swal.showValidationError('Date of Effectivity is required');
                                     }
                                 resolve()}, 500);
                             });
@@ -2665,8 +2665,7 @@
                             $('#doe').flatpickr({
                                 altInput: true,
                                 altFormat: 'F j, Y',
-                                dateFormat: 'Y-m-d',
-                                minDate: moment().format("YYYY-MM-DD")
+                                dateFormat: 'Y-m-d'
                             })
                         }
                     }).then(result => {
@@ -2703,7 +2702,7 @@
                     return new Promise(resolve => {
                         setTimeout(() => {
                             if($('#doe').val() == ""){
-                                swal.showValidationError('Rank is required');
+                                swal.showValidationError('Date of Effectivity is required');
                             }
                         resolve()}, 500);
                     });
@@ -2712,8 +2711,7 @@
                     $('#doe').flatpickr({
                         altInput: true,
                         altFormat: 'F j, Y',
-                        dateFormat: 'Y-m-d',
-                        minDate: moment().format("YYYY-MM-DD")
+                        dateFormat: 'Y-m-d'
                     })
                 }
             }).then(result => {
