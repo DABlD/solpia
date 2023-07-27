@@ -2746,6 +2746,11 @@
                         cd: $('#cd').val()
                     }
 
+                    if(type2 == "SALARY AMENDMENT"){
+                        type = "X15_Ext_Form";
+                        data.filename = "X15_Salary_Amendment";
+                    }
+
                     window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
                 }
             });
