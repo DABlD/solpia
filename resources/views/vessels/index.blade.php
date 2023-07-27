@@ -2589,8 +2589,7 @@
                 title: 'Select Document',
                 input: 'select',
                 inputOptions: {
-                    'X15_Ext_Form':  'Extension Form',
-                    'X06_Ext_Prom_Form':  'Extension Promotion Form',
+                    'contract_amendment': "Contract Amendment",
                     'MLCContract':          'MLC Contract',
                     'X20_DebriefingForm':  'Debriefing Form',
                 },
@@ -2606,6 +2605,9 @@
                     else if(result.value == "MLCContract"){
                         getMLCData(id, result.value);
                     }
+                    else if(result.value == "contract_amendment"){
+                        contractAmendment(id);
+                    }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
                     }
@@ -2613,7 +2615,26 @@
             })
         }
 
-        function X06(id, type){
+        function contractAmendment(id){
+            swal({
+                title: 'Select Category',
+                input: 'select',
+                inputOptions: {
+                    'X15_Ext_Form':  'Extension',
+                    'X06_Ext_Prom_Form':  'Extension Promotion',
+                    'X06_Ext_Prom_Form2':  'Salary Amendment'
+                },
+                inputPlaceholder: '',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+            }).then(result => {
+                if(result.value){
+                    window[result.value.slice(0,3)](id, result.value, result.value.slice(-1) == 2 ? "SALARY AMENDMENT" : "PROMOTION");
+                }
+            })
+        }
+
+        function X06(id, type, type2){
             swal.showLoading();
 
             $.ajax({
@@ -2676,6 +2697,7 @@
                                 recommended_by: $('#recommended_by').val(),
                                 remarks: $('#remarks').val(),
                                 status: "On Board",
+                                type2: type2,
                                 cd: $('#cd').val()
                             }
 
