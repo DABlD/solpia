@@ -1362,7 +1362,7 @@ class ApplicationsController extends Controller
         $exportType = $req->exportType ?? "xlsx";
 
         $default = $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
-        $fileName = $req->filename ? $req->filename : isset($req->data['filename']) ? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $req->data['filename'] : $default;
+        $fileName = $req->filename ? $req->filename : (isset($req->data['filename']) ? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $req->data['filename'] : $default);
         $class = "App\\Exports\\" . $folder . $type;
 
         
