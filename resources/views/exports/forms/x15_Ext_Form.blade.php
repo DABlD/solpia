@@ -21,7 +21,7 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $center }} {{ $red }} {{ $und }}" colspan="9">EXTENSION</td>
+		<td style="{{ $center }} {{ $red }} {{ $und }}" colspan="9">{{ $data->data['type2'] }}</td>
 	</tr>
 
 	<tr>

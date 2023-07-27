@@ -21,7 +21,7 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $center }} {{ $red }} {{ $und }}" colspan="9">{{ $data->data['type2'] }}</td>
+		<td style="{{ $center }} {{ $red }} {{ $und }}" colspan="9">PROMOTION</td>
 	</tr>
 
 	<tr>

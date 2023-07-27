@@ -2629,12 +2629,12 @@
                 cancelButtonColor: '#f76c6b',
             }).then(result => {
                 if(result.value){
-                    window[result.value.slice(0,3)](id, result.value, result.value.slice(-1) == 2 ? "SALARY AMENDMENT" : "PROMOTION");
+                    window[result.value.slice(0,3)](id, result.value, result.value.slice(-1) == 2 ? "SALARY AMENDMENT" : "EXTENSION");
                 }
             })
         }
 
-        function X06(id, type, type2){
+        function X06(id, type){
             swal.showLoading();
 
             $.ajax({
@@ -2697,7 +2697,6 @@
                                 recommended_by: $('#recommended_by').val(),
                                 remarks: $('#remarks').val(),
                                 status: "On Board",
-                                type2: type2,
                                 cd: $('#cd').val()
                             }
 
@@ -2708,7 +2707,7 @@
             });
         }
 
-        function X15(id, type){
+        function X15(id, type, type2){
             swal.showLoading();
 
             swal({
@@ -2743,6 +2742,7 @@
                         recommended_by: $('#recommended_by').val(),
                         remarks: $('#remarks').val(),
                         status: "On Board",
+                        type2: type2,
                         cd: $('#cd').val()
                     }
 
