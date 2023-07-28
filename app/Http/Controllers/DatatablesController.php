@@ -149,6 +149,12 @@ class DatatablesController extends Controller
 						$q->orWhere('u.fleet', 'like', "FLEET A");
 					});
 				}
+				elseif(in_array(auth()->user()->id, [4520])){
+					$applicants->where(function($q) use($search){
+						$q->where('u.fleet', 'like', auth()->user()->fleet);
+						$q->orWhere('u.fleet', 'like', "FLEET C");
+					});
+				}
 				else{
 					$applicants->where('u.fleet', 'like', auth()->user()->fleet);
 				}
@@ -177,6 +183,12 @@ class DatatablesController extends Controller
 						$ss->where(function($q) use($search){
 							$q->where('u.fleet', 'like', auth()->user()->fleet);
 							$q->orWhere('u.fleet', 'like', "FLEET A");
+						});
+					}
+					elseif(in_array(auth()->user()->id, [4520])){
+						$ss->where(function($q) use($search){
+							$q->where('u.fleet', 'like', auth()->user()->fleet);
+							$q->orWhere('u.fleet', 'like', "FLEET C");
 						});
 					}
 					else{
@@ -223,6 +235,12 @@ class DatatablesController extends Controller
 						$temp->where(function($q) use($search){
 							$q->where('u.fleet', 'like', auth()->user()->fleet);
 							$q->orWhere('u.fleet', 'like', "FLEET A");
+						});
+					}
+					elseif(in_array(auth()->user()->id, [4520])){
+						$temp->where(function($q) use($search){
+							$q->where('u.fleet', 'like', auth()->user()->fleet);
+							$q->orWhere('u.fleet', 'like', "FLEET C");
 						});
 					}
 					else{
@@ -280,6 +298,12 @@ class DatatablesController extends Controller
 								$q->orWhere('u.fleet', 'like', "FLEET A");
 							});
 						}
+						elseif(in_array(auth()->user()->id, [4520])){
+							$temp->where(function($q) use($search){
+								$q->where('u.fleet', 'like', auth()->user()->fleet);
+								$q->orWhere('u.fleet', 'like', "FLEET C");
+							});
+						}
 						else{
 							$temp->where('u.fleet', 'like', auth()->user()->fleet);
 						}
@@ -326,6 +350,12 @@ class DatatablesController extends Controller
 							$q->orWhere('u.fleet', 'like', "FLEET A");
 						});
 					}
+					elseif(in_array(auth()->user()->id, [4520])){
+						$temp1->where(function($q) use($search){
+							$q->where('u.fleet', 'like', auth()->user()->fleet);
+							$q->orWhere('u.fleet', 'like', "FLEET C");
+						});
+					}
 					else{
 						$temp1->where('u.fleet', 'like', auth()->user()->fleet);
 					}
@@ -357,6 +387,12 @@ class DatatablesController extends Controller
 						$temp2->where(function($q) use($search){
 							$q->where('u.fleet', 'like', auth()->user()->fleet);
 							$q->orWhere('u.fleet', 'like', "FLEET A");
+						});
+					}
+					elseif(in_array(auth()->user()->id, [4520])){
+						$temp2->where(function($q) use($search){
+							$q->where('u.fleet', 'like', auth()->user()->fleet);
+							$q->orWhere('u.fleet', 'like', "FLEET C");
 						});
 					}
 					else{
@@ -391,6 +427,12 @@ class DatatablesController extends Controller
 						$q->orWhere('u.fleet', 'like', "FLEET A");
 					});
 				}
+				elseif(in_array(auth()->user()->id, [4520])){
+					$tc->where(function($q) use($search){
+						$q->where('u.fleet', 'like', auth()->user()->fleet);
+						$q->orWhere('u.fleet', 'like', "FLEET C");
+					});
+				}
 				else{
 					$tc->where('u.fleet', 'like', auth()->user()->fleet);
 				}
@@ -420,6 +462,12 @@ class DatatablesController extends Controller
 					$applicants->where(function($q) use($search){
 						$q->where('u.fleet', 'like', auth()->user()->fleet);
 						$q->orWhere('u.fleet', 'like', "FLEET A");
+					});
+				}
+				elseif(in_array(auth()->user()->id, [4520])){
+					$applicants->where(function($q) use($search){
+						$q->where('u.fleet', 'like', auth()->user()->fleet);
+						$q->orWhere('u.fleet', 'like', "FLEET C");
 					});
 				}
 				else{
@@ -563,6 +611,12 @@ class DatatablesController extends Controller
 				$vessels->where(function($q){
 					$q->where('vessels.fleet', 'like', auth()->user()->fleet);
 					$q->orWhere('vessels.fleet', 'like', "FLEET A");
+				});
+			}
+			elseif(in_array(auth()->user()->id, [4520])){
+				$vessels->where(function($q) use($search){
+					$q->where('u.fleet', 'like', auth()->user()->fleet);
+					$q->orWhere('u.fleet', 'like', "FLEET C");
 				});
 			}
 			else{
