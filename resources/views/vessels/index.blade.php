@@ -2592,6 +2592,12 @@
                     'contract_amendment': "Contract Amendment",
                     'MLCContract':          'MLC Contract',
                     'X20_DebriefingForm':  'Debriefing Form',
+                    @if(in_array(auth()->user()->fleet, ["FLEET A", "TOEI"]) || auth()->user()->role == "Admin")
+                        'Y03_LetterOfOathMarpol':  'Letter Of Oath (MARPOL)',
+                        'Y04_LetterOfOath':  'Letter Of Oath',
+                        'Y06_EMSDeclaration':  'EMS Declaration',
+                        'Y07_TOEIMLCQuestionnaire': "TOEI - MLC Questionnaire"
+                    @endif
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
@@ -2607,6 +2613,13 @@
                     }
                     else if(result.value == "contract_amendment"){
                         contractAmendment(id);
+                    }
+                    else if(result.value.includes("Y0")){
+                        let data = {};
+                            data.id = id;
+                            data.exportType = "pdf";
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}?` + $.param(data);
                     }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
