@@ -3092,6 +3092,9 @@
                             'western': "NITTA/TOEI"
                         @elseif(in_array(auth()->user()->id, [4545, 4861, 4988, 6016]))
                             'shinko': "SHINKO"
+                        @elseif(in_array(auth()->user()->id, [4520]))
+                            'klcsm': "KLCSM",
+                            'hmm': "HMM"
                         @endif
                     },
                     onOpen: () => {
