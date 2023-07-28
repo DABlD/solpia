@@ -174,7 +174,7 @@
             	// initializeActions();
             },
             // order: [],
-            order: [ [12, 'desc'] ]
+            // order: [ [11, 'desc'] ]
         });
         
         $('#table_filter input').unbind();
