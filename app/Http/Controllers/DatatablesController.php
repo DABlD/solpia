@@ -615,8 +615,8 @@ class DatatablesController extends Controller
 			}
 			elseif(in_array(auth()->user()->id, [4520])){
 				$vessels->where(function($q){
-					$q->where('u.fleet', 'like', auth()->user()->fleet);
-					$q->orWhere('u.fleet', 'like', "FLEET C");
+					$q->where('vessels.fleet', 'like', auth()->user()->fleet);
+					$q->orWhere('vessels.fleet', 'like', "FLEET C");
 				});
 			}
 			else{
