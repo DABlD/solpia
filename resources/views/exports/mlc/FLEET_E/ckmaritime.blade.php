@@ -19,7 +19,7 @@
 		</td>
 	</tr>
 
-	<tr><td colspan="14"></td></tr>
+	<tr><td colspan="14" style="height: 3px;"></td></tr>
 
 	<tr>
 		<td colspan="14">
@@ -46,7 +46,7 @@
 			Company Name
 		</td>
 		<td colspan="10" style="{{ $center }}">
-			CK MARITIME KOREA CO., LTD.
+			CK LINE CO., LTD. / President Seo Seonghun
 		</td>
 	</tr>
 	{{-- END 1ST ROW --}}
@@ -59,12 +59,74 @@
 			Address
 		</td>
 		<td colspan="10" style="{{ $center }}">
-			17thFL., KwanJeong Bldg, 46, 9beon-gil, ChungJang-Daero, Jung-gu, Busan, Korea.
+			80-1, Eulji-ro, Jung-gu, Seoul, Republic of Korea
 		</td>
 	</tr>
 	{{-- END 2ND ROW --}}
 
 	{{-- 3RD ROW --}}
+	<tr>
+		<td colspan="2" rowspan="2" style="{{ $center }}">
+			선박소유자
+			<br style='mso-data-placement:same-cell;' />
+			Ship Management
+		</td>
+		<td colspan="2" style="{{ $center }}">
+			회사명
+			<br style='mso-data-placement:same-cell;' />
+			Company Name
+		</td>
+		<td colspan="10" style="{{ $center }}">
+			CK MARITIME KOREA CO., LTD.
+		</td>
+	</tr>
+	{{-- END 3RD ROW --}}
+
+	{{-- 4TH ROW --}}
+	<tr>
+		<td colspan="2" style="{{ $center }}">
+			주소
+			<br style='mso-data-placement:same-cell;' />
+			Address
+		</td>
+		<td colspan="10" style="{{ $center }}">
+			17thFL., KwanJeong Bldg, 46, 9beon-gil, ChungJang-Daero, Jung-gu, Busan, Korea.
+		</td>
+	</tr>
+	{{-- END 4TH ROW --}}
+
+	{{-- 5th ROW --}}
+	<tr>
+		<td colspan="2" rowspan="2" style="{{ $center }}">
+			선박소유자
+			<br style='mso-data-placement:same-cell;' />
+			Crew Manning
+		</td>
+		<td colspan="2" style="{{ $center }}">
+			회사명
+			<br style='mso-data-placement:same-cell;' />
+			Company Name
+		</td>
+		<td colspan="10" style="{{ $center }}">
+			SOLPIA MARINE &#38; SHIP MANAGEMENT, INC.
+		</td>
+	</tr>
+	{{-- END 5th ROW --}}
+
+	{{-- 6th ROW --}}
+	<tr>
+		<td colspan="2" style="{{ $center }}">
+			주소
+			<br style='mso-data-placement:same-cell;' />
+			Address
+		</td>
+		<td colspan="10" style="{{ $center }}">
+			2019 San Marcelino St, Malate, Manila, Philippines 1004
+		</td>
+	</tr>
+	{{-- END 6th ROW --}}
+
+	{{-- 7TH ROW --}}
 	<tr>
 		<td colspan="2" rowspan="2" style="{{ $center }}">
 			선박
@@ -724,17 +786,6 @@
 		</td>
 	</tr>
 
-	<tr><td colspan="14"></td></tr>
-	<tr><td colspan="14"></td></tr>
-	<tr><td colspan="14"></td></tr>
-
-	<tr>
-		<td colspan="6"></td>
-		<td colspan="2" style="{{ $center }}">페이지 2</td>
-		<td colspan="4"></td>
-		<td colspan="2" style="{{ $center }}">CK LINE Co., Ltd</td>
-	</tr>
-
 	<tr>
 		<td colspan="14">
 			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Shipowner shall promptly repatriate the seafarer who leaves a ship at the place of which is not the seafarer's country
@@ -775,6 +826,17 @@
 		<td colspan="14">
 			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Despite above 9.1, in case of the following particulars, shipowner can recover the cost of repatriation from seafarer)
 		</td>
+	</tr>
+
+	<tr><td colspan="14"></td></tr>
+	<tr><td colspan="14"></td></tr>
+	<tr><td colspan="14" style="height: 40px;"></td></tr>
+
+	<tr>
+		<td colspan="6"></td>
+		<td colspan="2" style="{{ $center }}">페이지 2</td>
+		<td colspan="4"></td>
+		<td colspan="2" style="{{ $center }}">CK LINE Co., Ltd</td>
 	</tr>
 
 	<tr>
