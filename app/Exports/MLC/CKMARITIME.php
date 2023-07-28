@@ -250,7 +250,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
 
@@ -322,11 +322,11 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:N12'
+                    'A1:N16'
                 ];
 
                 $h['wrap'] = [
-                    'A6:N12'
+                    'A6:N16'
                 ];
 
                 // SHRINK TO FIT
@@ -370,7 +370,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A6:N12', 'B35:M42'
+                    'A6:N16', 'B39:M46'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -387,7 +387,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'B35:M42'
+                    'B39:M46'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -425,7 +425,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'A151:E151', 'J151:N151',
+                    'A155:E155', 'J155:N155',
                 ]);
 
                 // LBT
@@ -448,29 +448,29 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(14);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(18);
-                $event->sheet->getDelegate()->getStyle('B136')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('B140')->getFont()->setSize(10);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(6.6);
-                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(6.6);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(7.5);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(7.5);
 
                 // ROW RESIZE
-                for($i = 6; $i <= 12; $i++){
+                for($i = 6; $i <= 16; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(28);
                 }
-                
+
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
             },
@@ -481,14 +481,24 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('CKM STAMP');
-        $drawing->setPath(public_path("images/ck_maritime_stamp.jpg"));
+        $drawing->setPath(public_path("images/sir_kit_sig.png"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(55);
         $drawing->setWidth(200);
-        $drawing->setOffsetX(40);
+        $drawing->setOffsetX(-10);
         $drawing->setOffsetY(3);
-        $drawing->setCoordinates('J151');
+        $drawing->setCoordinates('J155');
 
-        return [$drawing];
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setName('MLC SEAL`');
+        $drawing2->setPath(public_path("images/MLC_SEAL_BLUE.png"));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(75);
+        $drawing2->setWidth(75);
+        $drawing2->setOffsetX(3);
+        $drawing2->setOffsetY(-20);
+        $drawing2->setCoordinates('M155');
+
+        return [$drawing, $drawing2];
     }
 }
