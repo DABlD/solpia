@@ -81,7 +81,7 @@ class DatatablesController extends Controller
 
 	public function applications(Request $req){
 	// public function applications(Request $req){
-		// DB::connection()->enableQueryLog();
+		DB::connection()->enableQueryLog();
 
 		$ranks = [];
 		$ranks2 = [];
@@ -828,7 +828,8 @@ class DatatablesController extends Controller
 	}
 
 	public function prospects(Request $req){
-        $array = Prospect::select($req->select ?? "*")->orderBy('id', 'desc');
+		DB::enableQueryLog();
+        $array = Prospect::select($req->select ?? "*")->orderBy('updated_at', 'desc');
 
         $filters = $req->filters;
 		$search = $req->search["value"];
@@ -881,10 +882,13 @@ class DatatablesController extends Controller
 			});
 		}
 
+		// $start = 20;
     	$tc = $array->count();
-    	// $array = $array->offset($req->start)->limit($req->length);
+    	$array = $array->offset($start ?? $req->start)->limit($req->length);
 
 		$array = $array->get();
+
+		// dd($array->toArray());
 
         foreach($array as $item){
             $item->actions = $item->actions;
@@ -892,9 +896,9 @@ class DatatablesController extends Controller
 
 		$array = $array->toArray();
 
-		// for ($i=0; $i < $req->start; $i++) { 
-		// 	array_unshift($array, "");
-		// }
+		for ($i=0; $i < $req->start; $i++) { 
+			array_unshift($array, "");
+		}
 
 	    return Datatables::of($array)
     		->setTotalRecords($tc)
