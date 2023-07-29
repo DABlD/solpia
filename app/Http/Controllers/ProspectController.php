@@ -104,7 +104,10 @@ class ProspectController extends Controller
     }
 
     public function report($from, $to){
-        $data = Prospect::whereBetween('updated_at', [$from, $to])->get();
+        // DB::enableQueryLog();
+        // $data = Prospect::whereBetween('updated_at', [$from, $to])->get();
+        $data = Prospect::where('updated_at', ">=", $from . " 00:00:00")->where('updated_at', "<=", $to . " 23:59:59")->get();
+        // dd(DB::getQueryLog());
         $data->load('candidates');
 
         $from = now()->parse($from)->toFormattedDateString();
