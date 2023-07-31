@@ -192,7 +192,7 @@
 			(Birthdate)
 		</td>
 		<td colspan="4" style="{{ $blue }} {{ $center }}">
-			{{ $data->user->birthday }}
+			{{ $data->user->birthday ? now()->parse($data->user->birthday)->format("Y/m/d") }}
 		</td>
 	</tr>
 
@@ -263,7 +263,7 @@
 			2.1 체결일자(Date)    :
 		</td>
 		<td colspan="11" style="{{ $blue }}">
-			{{ now()->parse($data->date_processed)->format('d/m/Y') }}
+			{{ now()->parse($data->date_processed)->format('Y/m/d') }}
 		</td>
 	</tr>
 
