@@ -76,12 +76,12 @@ class ProspectController extends Controller
 
     public function update(Request $req){
         $query = DB::table($this->table);
-
+        
         if($req->where){
-            $query = $query->where($req->where[0], $req->where[1])->update($req->except(['id', '_token', 'where']));
+            $query = $query->where($req->where[0], $req->where[1])->update(array_merge($req->except(['id', '_token', 'where']), ['updated_at' => now()]));
         }
         else{
-            $query = $query->where('id', $req->id)->update($req->except(['id', '_token']));
+            $query = $query->where('id', $req->id)->update(array_merge($req->except(['id', '_token']), ['updated_at' => now()]));
         }
     }
 
@@ -104,7 +104,10 @@ class ProspectController extends Controller
     }
 
     public function report($from, $to){
-        $data = Prospect::whereBetween('updated_at', [$from, $to])->get();
+        // DB::enableQueryLog();
+        // $data = Prospect::whereBetween('updated_at', [$from, $to])->get();
+        $data = Prospect::where('updated_at', ">=", $from . " 00:00:00")->where('updated_at', "<=", $to . " 23:59:59")->get();
+        // dd(DB::getQueryLog());
         $data->load('candidates');
 
         $from = now()->parse($from)->toFormattedDateString();
@@ -125,7 +128,7 @@ class ProspectController extends Controller
         $type = strtoupper($file->getClientOriginalExtension());
         $file->move(public_path().'/prospectForms/' . $req->id . '/', $name);
         
-        Prospect::where('id', $req->id)->update(['file' => $name]);
+        Prospect::where('id', $req->id)->update(['file' => $name, 'updated_at' => now()]);
         echo "<script>window.close();</script>";
     }
 

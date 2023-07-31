@@ -173,7 +173,7 @@
                 tooltip();
             	// initializeActions();
             },
-            // order: [],
+            order: [],
             // order: [ [11, 'desc'] ]
         });
         

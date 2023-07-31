@@ -828,7 +828,7 @@ class DatatablesController extends Controller
 	}
 
 	public function prospects(Request $req){
-		DB::enableQueryLog();
+		// DB::enableQueryLog();
         $array = Prospect::select($req->select ?? "*")->orderBy('updated_at', 'desc');
 
         $filters = $req->filters;

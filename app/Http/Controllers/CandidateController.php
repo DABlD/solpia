@@ -67,18 +67,18 @@ class CandidateController extends Controller
             $query = $query->where('id', $req->id)->update($req->except(['id', '_token']));
         }
 
+        $can = Candidate::find($req->id); 
+        Prospect::where('id', $can->prospect_id)->update(['updated_at' => now()]);
+
         if(isset($req->status)){
-            if($req->status == "FOR APPROVAL"){
-                $can = Candidate::find($req->id);                
+            if($req->status == "FOR APPROVAL"){               
                 Prospect::where('id', $can->prospect_id)->update(["status" => "ENDORSED"]);
                 Requirement::where('id', $can->requirement_id)->update(["date_provided" => now()->toDateString()]);
             }
-            elseif($req->status == "REJECTED"){
-                $can = Candidate::find($req->id);                
+            elseif($req->status == "REJECTED"){              
                 Prospect::where('id', $can->prospect_id)->update(["status" => "AVAILABLE"]);
             }
-            elseif($req->status == "ON BOARD"){
-                $can = Candidate::find($req->id);                
+            elseif($req->status == "ON BOARD"){              
                 Prospect::where('id', $can->prospect_id)->update(["status" => "HIRED"]);
             }
         }

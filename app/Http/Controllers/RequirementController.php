@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Requirement;
+use App\Models\{Requirement, Prospect};
 use DB;
 
 class RequirementController extends Controller
