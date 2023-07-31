@@ -67,7 +67,7 @@
 	{{-- 3RD ROW --}}
 	<tr>
 		<td colspan="2" rowspan="2" style="{{ $center }}">
-			선박소유자
+			관리사
 			<br style='mso-data-placement:same-cell;' />
 			Ship Management
 		</td>
@@ -98,7 +98,7 @@
 	{{-- 5th ROW --}}
 	<tr>
 		<td colspan="2" rowspan="2" style="{{ $center }}">
-			선박소유자
+			송입사 
 			<br style='mso-data-placement:same-cell;' />
 			Crew Manning
 		</td>
