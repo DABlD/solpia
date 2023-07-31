@@ -192,7 +192,7 @@
 			(Birthdate)
 		</td>
 		<td colspan="4" style="{{ $blue }} {{ $center }}">
-			{{ $data->user->birthday ? now()->parse($data->user->birthday)->format("Y/m/d") }}
+			{{ $data->user->birthday ? now()->parse($data->user->birthday)->format("Y/m/d") : "-"}}
 		</td>
 	</tr>
 
