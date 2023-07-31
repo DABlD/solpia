@@ -17,7 +17,7 @@ class Prospect extends Model
 		'usv','contracts','exp','availability','last_disembark',
 		'location','previous_salary','previous_agency','remarks','status',
 		'rank', 'height', 'weight',
-		'file'
+		'file', 'updated_at'
 	];
 
     protected $dates = [
