@@ -72,7 +72,25 @@ class VesselsController extends Controller
 
         // IF HAS WHERE
         if($req->where){
-            $vessels = $vessels->where($req->where[0], $req->where[1]);
+            // $vessels = $vessels->where($req->where[0], $req->where[1]);
+
+            if($req->where[0] == "fleet"){
+                if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
+                    $vessels = $vessels->where(function($q){
+                        $q->where('fleet', 'like', auth()->user()->fleet);
+                        $q->orWhere('fleet', 'like', "FLEET A");
+                    });
+                }
+                elseif(in_array(auth()->user()->id, [4520])){
+                    $vessels = $vessels->where(function($q){
+                        $q->where('fleet', 'like', auth()->user()->fleet);
+                        $q->orWhere('fleet', 'like', "FLEET C");
+                    });
+                }
+            }
+            else{
+                $vessels = $vessels->where($req->where[0], $req->where[1]);
+            }
         }
 
         // IF HAS WHERE2
