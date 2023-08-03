@@ -260,7 +260,7 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LDoc. NO. SMOP-LUDC05 &CEffective Date: 15 May 2023 &RRevision No. 01');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LDoc. NO. SMOP-LUDC05 &CEffective Date: 01 SEPT 17 &RRevision No. 01 15-May-2023');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
