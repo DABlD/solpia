@@ -68,7 +68,7 @@
         var fVessel = "%%";
         var fRank = "%%";
         var fDate = "%%";
-        var fStatus = "%%";
+        var fStatus = "AVAILABLE";
 
         var table = $('#table').DataTable({
             serverSide: true,

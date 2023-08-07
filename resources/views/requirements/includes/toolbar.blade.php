@@ -26,7 +26,7 @@
             <div class="col-md-8 iInput">
                 <select id="status" class="form-control">
                     <option value="%%">All</option>
-                    <option value="AVAILABLE">AVAILABLE</option>
+                    <option value="AVAILABLE" selected>AVAILABLE</option>
                     <option value="COMPLETED">COMPLETED</option>
                     <option value="ON HOLD">ON HOLD</option>
                     <option value="CANCELLED">CANCELLED</option>
