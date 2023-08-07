@@ -21,4 +21,7 @@
 		<span class="fa fa-exchange"></span>
 		<span class="fa fa-users"></span>
 	</a>
+	<a class="btn btn-default" data-toggle="tooltip" title="Export" onclick="exportDocs()">
+		<span class="fa fa-file"></span>
+	</a>
 </div>

@@ -598,6 +598,16 @@
                             </a>
                         `;
 
+                        let file = "N/A";
+
+                        if(can.prospect.file){
+                            file = `
+                                <a class="btn btn-success" onclick="viewFile('${can.prospect.file}', ${can.prospect.id})">
+                                    <span class="fa fa-file fa-xs">
+                                    </span>
+                                </a>`;
+                        }
+
                         string += `
                             <tr>
                                 <td>${can.id}</td>
@@ -611,6 +621,7 @@
                                 <td>${checkbox2("fm" + can.id, "test", can.medical, can.status)}</td>
                                 <td>${checkbox2("ob" + can.id, "test", can.on_board, can.status)}</td>
                                 <td id="can${can.id}">${can.status}</td>
+                                <td>${file}</td>
                                 <td>
                                     <textarea id="canRemark${can.id}" style="width: 100%; resize: vertical;" cols="40" rows="2" value="${can.remarks}">${can.remarks ?? ""}</textarea>
                                 </td>
@@ -711,6 +722,10 @@
                     });
                 }
             });
+        }
+
+        function viewFile(file, id){
+            window.open(`prospectForms/${id}/${file}`);
         }
 
         function updateCandidate(data){
@@ -840,6 +855,7 @@
                                 <th>For<br>Medical</th>
                                 <th>On<br>Board</th>
                                 <th>Status</th>
+                                <th>Form</th>
                                 <th>Remark</th>
                                 <th>Action</th>
                             </tr>
