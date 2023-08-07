@@ -206,8 +206,10 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             ]
         ];
 
+        $sss = $this->data->sea_service->count();
+
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $sss) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
@@ -239,6 +241,8 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // TEXT ROTATION
                 $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
                 $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
+
+                $add = $sss > 10 ? ($sss - 11) : -1;
 
                 // FUNCTIONS
                 // $osSize = sizeof($this->linedUps);
@@ -281,7 +285,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'A2:O45'
+                    'A2:O' . (46 + $add)
                 ];
 
                 // HL
@@ -290,7 +294,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // B
                 $h[6] = [
-                    'A1:A3', 'N4', 'A4', 'A25:A32', 'A26:O26', 'A27:A32', 'A33:A34', 'M39'
+                    'A1:A3', 'N4', 'A4', 'A' . (25 + $add) . ':A' . (32 + $add), 'A' . (26 + $add) . ':O' . (26 + $add), 'A' . (27 + $add) . ':A' . (32 + $add), 'A' . (33 + $add) . ':A' . (34 + $add), 'M' . (39 + $add)
                 ];
 
                 // VC
@@ -298,7 +302,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'L7', 'N14:N25', 'H14:H25', 'F14:F25', 'B11', 'A4', 'A26:O26', 'A27:A32', 'A38:O45'
+                    'L7', 'N14:N' . (25 + $add), 'H14:H' . (25 + $add), 'F14:F' . (25 + $add), 'B11', 'A4', 'A' . (26 + $add) . ':O' . (26 + $add), 'A' . (27 + $add) . ':A' . (32 + $add), 'A' . (38 + $add) . ':O' . (46 + $add)
                 ];
 
                 // SHRINK TO FIT
@@ -326,7 +330,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'A2:A3', 'E38:O38'
+                    'A2:A3', 'E' . (38 + $add) . ':O' . (38 + $add)
                 ];
 
                 $fills[1] = [
@@ -343,7 +347,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'B4:O13', 'E14:O25', 'A25:O32', 'A35:O45'
+                    'B4:O13', 'E14:O' . (25 + $add), 'A' . (25 + $add) . ':O' . (32 + $add), 'A' . (35 + $add) . ':O' . (46 + $add)
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -378,7 +382,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // LRB
                 $cells[8] = array_merge([
-                    'B14:B25'
+                    'B14:B' . (25 + $add)
                 ]);
 
                 // RRB
@@ -421,15 +425,15 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(15);
                 }
 
-                for($i = 14; $i <= 25; $i++){
+                for($i = 14; $i <= (25 + $add); $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(30);
                 }
 
-                for($i = 27; $i <= 32; $i++){
+                for($i = (27 + $add); $i <= (32 + $add); $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(30);
                 }
 
-                for($i = 33; $i <= 45; $i++){
+                for($i = (33 + $add); $i <= (46 + $add); $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(20);
                 }
 
@@ -446,6 +450,9 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
     public function drawings()
     {
+        $sss = $this->data->sea_service->count();
+        $add = $sss > 10 ? ($sss - 11) : -1;
+
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('Avatar');
         $drawing->setDescription('Avatar');
@@ -455,7 +462,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setWidth(135);
         $drawing->setOffsetX(30);
         $drawing->setOffsetY(2);
-        $drawing->setCoordinates('M29');
+        $drawing->setCoordinates('M' . (29 + $add));
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setName('Avatar');
@@ -477,7 +484,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setWidth(100);
         $drawing3->setOffsetX(80);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('M27');
+        $drawing3->setCoordinates('M' . (27 + $add));
 
         return [$drawing, $drawing2, $drawing3];
     }
