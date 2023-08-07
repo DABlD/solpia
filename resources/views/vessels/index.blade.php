@@ -4873,5 +4873,33 @@
                 }
             })
         }
+
+        function exportDocs(){
+            swal({
+                title: 'Select Type',
+                input: 'select',
+                inputOptions: {
+                    X31_OnOffReport : 'On/Off Report'
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '300px',
+                onOpen: () => {
+                    $('.swal2-select').select2();
+                    $('.swal2-select').on("select2:open", () => {
+                        $('.select2-dropdown').css({
+                            'z-index': 9999
+                        });
+                    });
+                    $('.swal2-select').parent().css('text-align', 'center');
+                    $('.select2-container').css('width', '100%');
+                }
+            }).then(result => {
+                if(result.value){
+                    console.log(result);
+                    window[result.value]();
+                }
+            })
+        }
     </script>
 @endpush
