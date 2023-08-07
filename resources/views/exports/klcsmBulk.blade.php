@@ -237,7 +237,7 @@
 
 	{{-- 4R --}}
 	<tr>
-		<td rowspan="21">
+		<td rowspan="{{ 21 + (sizeof($data->sea_service) > 10 ? (sizeof($data->sea_service) - 11) : -1) }}">
 			P
 			{{ PHP_EOL }}
 			E
@@ -409,20 +409,17 @@
 
 	{{-- SEA SERVICE --}}
 	<tr>
-		<td rowspan="11" colspan="3"></td>
+		<td rowspan="{{ 11 + (sizeof($data->sea_service) > 10 ? (sizeof($data->sea_service) - 11) : -1) }}" colspan="3"></td>
 		{{ isset($data->sea_service[0]) ? $ss($data->sea_service[0]) : isBlank() }}
 	</tr>
 
-	<tr>{{ isset($data->sea_service[1]) ? $ss($data->sea_service[1]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[2]) ? $ss($data->sea_service[2]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[3]) ? $ss($data->sea_service[3]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[4]) ? $ss($data->sea_service[4]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[5]) ? $ss($data->sea_service[5]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[6]) ? $ss($data->sea_service[6]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[7]) ? $ss($data->sea_service[7]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[8]) ? $ss($data->sea_service[8]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[9]) ? $ss($data->sea_service[9]) : isBlank() }}</tr>
-	<tr>{{ isset($data->sea_service[10]) ? $ss($data->sea_service[10]) : isBlank() }}</tr>
+	@foreach($data->sea_service as $key => $sea_service)
+		@if($loop->first)
+			@continue;
+		@else
+			<tr>{{ isset($data->sea_service[$key]) ? $ss($data->sea_service[$key]) : isBlank() }}</tr>
+		@endif
+	@endforeach
 
 	{{-- RATINGS --}}
 	<tr>
