@@ -14,7 +14,7 @@
 
 	<tr>
 		<td colspan="11" style="{{ $center }} height: 40px;">
-			I, {{ $data->user->fname }} {{ $data->user->mname }} {{ $data->user->lname }}, Filipino, {{ $data->civil_status }}, {{ $data->user->birthday->age }}, with present address at {{ $data->user->address }}, do hereby deposed and say:
+			I, {{ $data->user->fname }} {{ $data->user->mname }} {{ $data->user->lname }} {{ $data->user->suffix }}, Filipino, {{ $data->civil_status }}, {{ $data->user->birthday->age }}, with present address at {{ $data->user->address }}, do hereby deposed and say:
 		</td>
 
 	</tr>
