@@ -59,7 +59,7 @@
 
 	<tr>
 		<td colspan="11" style="{{ $center }} text-decoration: underline;">
-			{{ $data->user->fname }} {{ $data->user->mname }} {{ $data->user->lname }}
+			{{ $data->user->fname }} {{ $data->user->mname }} {{ $data->user->lname }} {{ $data->user->suffix }}
 		</td>
 	</tr>
 
