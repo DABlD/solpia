@@ -416,7 +416,7 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(8);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10);
