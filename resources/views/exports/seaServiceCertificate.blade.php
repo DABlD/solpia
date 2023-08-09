@@ -84,7 +84,7 @@
    			};
    			$start = $start+1;
 		@endphp
-		@if(str_contains($ss->manning_agent, "ORO"))
+		@if(str_contains($ss->manning_agent, "SOLPIA"))
 			<tr>
 				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->vessel_name) }}</td>
 				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->vessel_type) }}</td>
