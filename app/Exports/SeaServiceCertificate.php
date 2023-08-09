@@ -216,7 +216,8 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('TITLE', false);
+                $event->sheet->getDelegate()->setTitle('SS CERT', false);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&R&P/&N');
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -224,6 +225,11 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+
+                $event->sheet->getParent()->getActiveSheet()->getProtection()->setSheet(true);
+
+
+                $event->sheet->getParent()->getActiveSheet()->getProtection()->setPassword("123456789");
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Tahoma');
@@ -264,7 +270,7 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
                 // HEADINGS
                 $ctr = 0;
                 foreach ($this->data->sea_service as $ss) {
-                    if(str_contains($ss->manning_agent, 'SOLPIA')){
+                    if(str_contains($ss->manning_agent, 'ORO')){
                         $ctr++;
                     }
                 }
@@ -309,7 +315,7 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
                 ];
 
                 $h['wrap'] = [
-                    'A1:J35'
+                    'A1:J' . (12 + $ctr + 2)
                 ];
 
                 // SHRINK TO FIT
@@ -408,22 +414,22 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(9);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(15);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
                 
                 // SET PRINT AREA
-                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:J" . (25 + $ctr));
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:J" . (25 + $ctr));
             },
         ];
     }

@@ -1,6 +1,6 @@
 <table>
 	<tr>
-		<td colspan="10" style="height: 60px;"></td>
+		<td colspan="10" style="height: 20px;"></td>
 	</tr>
 
 	<tr>
@@ -84,18 +84,18 @@
    			};
    			$start = $start+1;
 		@endphp
-		@if(str_contains($ss->manning_agent, "SOLPIA"))
+		@if(str_contains($ss->manning_agent, "ORO"))
 			<tr>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->vessel_name) }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->vessel_type) }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->gross_tonnage) }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->bhp_kw) }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->flag) }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ct($ss->trade) }}</td>
-				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_on ? $ss->sign_on->format('d-M-y') : "-" }}</td>
-				<td style="border: 1px solid black; font-size: 8px;">{{ $ss->sign_off ? $ss->sign_off->format('d-M-y') : "-" }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">{{ $ss->rank }}</td>
-				<td style="border: 1px solid black; font-size: 9px;">
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->vessel_name) }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->vessel_type) }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->gross_tonnage) }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->bhp_kw) }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->flag) }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->trade) }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ss->sign_on ? $ss->sign_on->format('d-M-y') : "-" }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ss->sign_off ? $ss->sign_off->format('d-M-y') : "-" }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ss->rank }}</td>
+				<td style="border: 1px solid black; font-size: 9px; height: 17px;">
 					{{ '=IF(DATEDIF(G' . $start . ',H' . $start . ',"y")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"y")&" yr ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"ym")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"ym")&" mos ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"md")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"md")&" day")' }}
 				</td>
 			</tr>
