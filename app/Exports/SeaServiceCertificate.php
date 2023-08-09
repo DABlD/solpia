@@ -270,7 +270,7 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
                 // HEADINGS
                 $ctr = 0;
                 foreach ($this->data->sea_service as $ss) {
-                    if(str_contains($ss->manning_agent, 'ORO')){
+                    if(str_contains($ss->manning_agent, 'SOLPIA')){
                         $ctr++;
                     }
                 }
@@ -302,6 +302,7 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
 
                 // HL
                 $h[5] = [
+                    'J12:J' . (12 + $ctr + 2)
                 ];
 
                 // B
