@@ -89,7 +89,7 @@
             },
             columns: [
                 { data: 'id'},
-                { data: 'vessel.name'},
+                { data: 'vessel'},
                 { data: 'rank.abbr'},
                 { data: 'joining_date' },
                 { data: 'joining_port' },
@@ -113,6 +113,16 @@
                     targets: 5,
                     render: usv =>{
                         return usv ? "Required" : "---";
+                    }
+                },
+                {
+                    targets: 1,
+                    render: vessel =>{
+                        return `
+                            ${vessel.name}
+                            <br>
+                            <div style="color: orange;">${vessel.type}</div>
+                        `;
                     }
                 }
             ],
