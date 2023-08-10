@@ -211,6 +211,12 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
             ]
         ];
 
+        $lock = [
+            'protection' => [
+                'locked' => \PhpOffice\PhpSpreadsheet\Style\Protection::PROTECTION_UNPROTECTED
+            ]
+        ];
+
         return [
             AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
                 // SHEET SETTINGS
@@ -322,6 +328,12 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
                 // SHRINK TO FIT
                 $h['stf'] = [
                 ];
+
+                // UNLOCK CELLS
+                $toUnlock = ['A5'];
+                foreach($toUnlock as $cell){
+                    $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($lock);
+                }
 
                 foreach($h as $key => $value) {
                     foreach($value as $col){
