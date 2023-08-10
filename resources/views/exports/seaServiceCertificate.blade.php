@@ -128,8 +128,10 @@
 
 	<tr>
 		<td colspan="10" style="font-weight: bold;">
-			@if(auth()->user()->fleet == "TOEI")
+			@if($data->user->fleet == "TOEI")
 				MR. LEONIL LUIS F. ROMANO
+			@elseif($data->user->fleet == "FLEET B")
+				MR. ADULF KIT JAIME M. JUMAWAN
 			@else
 				C/E ROMANO A. MARIANO
 			@endif
@@ -138,8 +140,10 @@
 
 	<tr>
 		<td colspan="10">
-			@if(auth()->user()->fleet == "TOEI")
+			@if($data->user->fleet == "TOEI")
 				Crewing Manager - TOEI Fleet
+			@elseif($data->user->fleet == "FLEET B")
+				Crewing Manager
 			@else
 				President
 			@endif
@@ -155,7 +159,15 @@
 	</tr>
 
 	<tr>
-		<td colspan="10" style="font-style: italic; font-size: 8px;">/YAN</td>
+		<td colspan="10" style="font-style: italic; font-size: 8px;">
+			@if($data->user->fleet == "TOEI")
+				MR. LEONIL LUIS F. ROMANO
+			@elseif($data->user->fleet == "FLEET B")
+				MR. ADULF KIT JAIME M. JUMAWAN
+			@else
+				C/E ROMANO A. MARIANO
+			@endif
+		</td>
 	</tr>
 
 	<tr>
