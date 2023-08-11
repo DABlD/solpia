@@ -445,6 +445,9 @@
                             <div class="col-md-2 iInput">
                                 ${radio("source", "Walk-in")}
                             </div>
+                            <div class="col-md-2 iInput">
+                                ${radio("source", "Source")}
+                            </div>
                         </div>
                     </div></br>
                     ${input("name", "Name", data.name, 2,10)}
