@@ -4907,7 +4907,6 @@
                 data: {
                     cols: "*",
                     where: ["fleet", "{{ auth()->user()->fleet ?? "%%" }}"],
-                    where: ["fleet", "FLEET B"]
                 },
                 success: result => {
                     result = JSON.parse(result);
