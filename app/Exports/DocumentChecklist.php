@@ -1238,12 +1238,12 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 $event->sheet->getDelegate()->getPageSetup()->setScale(80);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.3);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Calibri');
