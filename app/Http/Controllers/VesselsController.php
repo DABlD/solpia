@@ -87,9 +87,12 @@ class VesselsController extends Controller
                         $q->orWhere('fleet', 'like', "FLEET C");
                     });
                 }
+                else{
+                    $vessels = $vessels->where($req->where[0], 'like', $req->where[1]);
+                }
             }
             else{
-                $vessels = $vessels->where($req->where[0], $req->where[1]);
+                $vessels = $vessels->where($req->where[0], 'like', $req->where[1]);
             }
         }
 
