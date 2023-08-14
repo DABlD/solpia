@@ -96,3 +96,10 @@ function update(data, callback = null){
 function toFloat(value, decimals = 2){
 	return parseFloat(value).toFixed(decimals);
 }
+
+function checkbox(name, value, checked = ""){
+    return `
+        <input type="checkbox" name="${name}" value="${value}" ${checked}>
+        <label for="${name}">${value}</label><br>
+    `;
+}

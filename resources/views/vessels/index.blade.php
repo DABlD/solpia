@@ -4896,10 +4896,128 @@
                 }
             }).then(result => {
                 if(result.value){
-                    console.log(result);
                     window[result.value]();
                 }
             })
+        }
+
+        function X31_OnOffReport(){
+            $.ajax({
+                url: '{{ route('vessels.get2') }}',
+                data: {
+                    cols: "*",
+                    where: ["fleet", "{{ auth()->user()->fleet ?? "%%" }}"],
+                },
+                success: result => {
+                    result = JSON.parse(result);
+
+                    let vessels = [];
+                    let vesselString = "";
+
+                    result.forEach(vessel => {
+                        vesselString += `
+                            <div class="col-md-4 col-lg-3 col-sm-6 iInput" style="text-align: left;">
+                                ${checkbox("vessels", vessel.name, `checked data-status="${vessel.status}" data-id="${vessel.id}"`)}
+                            </div>
+                        `;
+                    });
+
+                    swal({
+                        title: "Select Vessels",
+                        html: `
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <select id="vFilter" class="form-control">
+                                        <option value="all">Select All</option>
+                                        <option value="active">Select Active Only</option>
+                                        <option value="inactive">Select Inactive Only</option>
+                                        <option value="uall">Unselect All</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                ${vesselString}
+                            </div>
+                        `,
+                        width: '70%',
+                        onOpen: () => {
+                            $('#vFilter').on('change', e => {
+                                $('[name="vessels"]').prop('checked', false);
+
+                                if(e.target.value == "all"){
+                                    $('[name="vessels"]').prop('checked', true);
+                                }
+                                else if(e.target.value == "active"){
+                                    $('[name="vessels"][data-status="ACTIVE"]').prop('checked', true);
+                                }
+                                else if(e.target.value == "inactive"){
+                                    $('[name="vessels"][data-status="INACTIVE"]').prop('checked', true);
+                                }
+                            })
+                        }
+                    }).then(result => {
+                        if(result.value){
+                            let vessels = [];
+
+                            $('[name="vessels"]:checked').each((a, cb) => {
+                                vessels.push(cb.dataset.id);
+                            });
+
+                            if(vessels){
+                                X31_OnOffReport2(vessels);
+                            }
+                            else{
+                                swal('No vessel selected');
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        function X31_OnOffReport2(vessels){
+            swal({
+                title: "Select Duration",
+                html: `
+                    ${input("from", "From", null, 2,10)}
+                    ${input("to", "To", null, 2,10)}
+                `,
+                width: '400px',
+                onOpen: () => {
+                    $('[name="from"], [name="to"]').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    });
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        let bool = true;
+                        if($('[name="from"]').val() == "" || $('[name="to"]').val() == ""){
+                            swal.showValidationError('Select Date Range');
+                        }
+                        else{
+                            let bool = false;
+                            setTimeout(() => {resolve()}, 500);
+                        }
+                        bool ? setTimeout(() => {resolve()}, 500) : "";
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    let data = {};
+                        data.from = $('[name="from"]').val();
+                        data.to = $('[name="to"]').val();
+                        data.vessels = vessels;
+                        data.filename = `List of On Off Crew from ${toDate(moment(data.from))} - ${toDate(moment(data.to))}`;
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/X31_OnOffReport?` + $.param(data);
+                }
+            });
         }
     </script>
 @endpush
