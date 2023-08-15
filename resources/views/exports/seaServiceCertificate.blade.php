@@ -1,6 +1,6 @@
 <table>
 	<tr>
-		<td colspan="10" style="height: 20px;"></td>
+		<td colspan="10" style="height: 50px;"></td>
 	</tr>
 
 	<tr>
