@@ -175,7 +175,29 @@
 	<tr>
 		<td colspan="2" style="text-align: right;">1.1</td>
 		<td colspan="3">Duration of Contract:</td>
-		<td colspan="7" style="{{ $b }} {{ $i }}">{{ $data->req['employment_months'] }} MONTHS</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">
+			@php
+				$suffix = "";
+
+				if($data->req['ext_months']){
+					$sMonths = $data->req['ext_months'] . " MONTHS ";
+
+					if($data->req['plus'] == "true" && $data->req['minus'] == "true"){
+						$suffix .= "+/- $sMonths";
+					}
+					elseif($data->req['plus'] == "true"){
+						$suffix .= "+ $sMonths";
+					}
+					elseif($data->req['minus'] == "true"){
+						$suffix .= "- $sMonths";
+					}
+				}
+
+				$suffix .= $data->req['suffix'];
+				
+			@endphp
+			{{ $data->req['employment_months'] }} MONTHS ({{ $suffix }})
+		</td>
 	</tr>
 
 	<tr>

@@ -358,7 +358,7 @@ class x22_POEAFormatContract implements FromView, WithEvents, WithDrawings//, Sh
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B13', 'E20', 'F35', 'F36', 'A53'
+                    'B13', 'E20', 'F35', 'F36', 'A53', 'F29'
                 ];
 
                 foreach($h as $key => $value) {

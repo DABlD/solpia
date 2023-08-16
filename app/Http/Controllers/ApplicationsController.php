@@ -1554,7 +1554,7 @@ class ApplicationsController extends Controller
         $applicant->load('document_med_cert');
         $applicant->load('document_med');
         $applicant->load('document_med_exp');
-        $applicant->load('pro_app');
+        $applicant->load('pro_app.vessel');
         $applicant->load('evaluation');
 
         if($applicant->pro_app->status == "On Board"){

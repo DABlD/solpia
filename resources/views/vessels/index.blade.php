@@ -3386,6 +3386,7 @@
             swal({
                 title: 'Fill all details',
                 html: `
+                    <br>
                     <div class="row">
                         <div class="col-md-5">
                             <h4 style="text-align: right;">Months of employment</h4>
@@ -3425,6 +3426,38 @@
                         </div>
                         <div class="col-md-7" style="text-align: left; margin-top: 10px;">
                             <input type="checkbox" id="stamp" checked>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h2 class="swal2-title">Extension Details</h2>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Months</h4>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="number" id="ext_months" class="form-control" />
+                        </div>
+                        <div class="col-md-1">
+                            ${checkbox("plus", "+")}
+                        </div>
+                        <div class="col-md-1">
+                            ${checkbox("minus", "-")}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5" style="margin-top: 10px;">
+                            <h4 style="text-align: right;">Select One</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <select id="suffix" class="swal2-select">
+                                <option value="">-</option>
+                                <option value="PROMOTION ON BOARD">PROMOTION ON BOARD</option>
+                                <option value="WITH MUTUAL CONSENT OF BOTH PARTIES">WITH MUTUAL CONSENT OF BOTH PARTIES</option>
+                            </select>
                         </div>
                     </div>
                 `,
@@ -3491,6 +3524,10 @@
                         data.pointOfHire  = $('#pointOfHire').val();
                         data.stamp = $('#stamp').is(":checked") ? true : false;
                         data.format = $('#format').val();
+                        data.plus = $('[name="plus"]').is(':checked');
+                        data.minus = $('[name="minus"]').is(':checked');
+                        data.ext_months = $('#ext_months').val();
+                        data.suffix = $('#suffix').val();
 
                     window.location.href = `{{ route('applications.exportDocument') }}/${id}/POEA_Contract?` + $.param(data);
                 }
