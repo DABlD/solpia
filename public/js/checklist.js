@@ -20,7 +20,10 @@ function getChecklist(fleet){
 		`;
 	}
 	else if(fleet == "FLEET C"){
-
+		return `
+			<option value="bulk">&nbsp;&nbsp;&nbsp;Bulk</option>
+			<option value="tanker">&nbsp;&nbsp;&nbsp;Tanker</option>
+		`;
 	}
 	else if(fleet == "FLEET D"){
 		return `
