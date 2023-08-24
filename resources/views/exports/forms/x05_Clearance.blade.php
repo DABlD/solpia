@@ -114,7 +114,6 @@
 		 </td>
 	</tr>
 
-	{{ $dept("FLEET A", "Mr. Dennis Quino", "Asst Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("FLEET C", "Ms. Jeannette Solidum", "Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("FLEET D", "Ms. Thea Mae Guerra", "Crewing Manager", "(+ Medical Matters)") }}
@@ -126,14 +125,20 @@
 	{{ $dept("LIAISON OFFICER", "Mr. Randy Andaya", "", "(Contract)") }}
 	{{ $dept("LIAISON OFFICER (TOEI)", "Mr. Philip Manapul", "", "(Contract)") }}	
 	{{ $dept("DOCUMENTATION OFFICER / SMI", "Ms. Natasha Saguinsin /", "Ms. Merhla De Asis", "(Flag / Visa)") }}
+	{{ $dept("DOCUMENTATION OFFICER / TOEI", "Ms. Yvonne Cruz", "", "", true) }}
 
 	{{-- PAGE 2 SEPARATOR --}}
 	<tr>
 		<td colspan="3"></td>
 		<td colspan="4"></td>
 	</tr>
+	
+	{{-- PAGE 2 SEPARATOR --}}
+	<tr>
+		<td colspan="3"></td>
+		<td colspan="4"></td>
+	</tr>
 
-	{{ $dept("DOCUMENTATION OFFICER / TOEI", "Ms. Yvonne Cruz", "", "") }}
 	{{ $dept("ADMIN / CLAIMS", "Ms. Joy Pineda", "Admin / Claims Officer", "(Claims / Legal)") }}
 	{{ $dept("ACCOUNTING", "Ms. Robelyn Ecleo / Ms. Mylene Relano", "Admin / Accounting Manager", "") }}
 
