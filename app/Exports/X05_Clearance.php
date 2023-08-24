@@ -318,16 +318,16 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // VC
                 $h[7] = [
-                    "F7:F58"
+                    "F7:F54"
                 ];
 
                 $h['wrap'] = [
-                    'B51', 'B56', 'B68'
+                    'B51', 'B52', 'B66'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'D24:D75', 'I3:I4'
+                    'D24:D71', 'I3:I4'
                 ];
 
                 foreach($h as $key => $value) {
@@ -367,7 +367,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'F7:I70', 'B77:I77'
+                    'F7:I66', 'B73:I73'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -392,28 +392,33 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // TOP REMOVE BORDER
                 $cells[6] = array_merge([
-                    'F51:I51'
+                    'F51:I51',
+                    'F54:I54',
+                    'F55:I55',
                 ]);
 
                 // BRB
                 $cells[7] = array_merge([
-                    'F54:I54'
+                    'F52:I52',
+                    'F53:I53',
+                    'F54:I54', 
+                    'F55:I55',
                 ]);
 
                 // LRB
                 $cells[8] = array_merge([
                     'F10', 'F14', 'F18', 'F22', 'F22',
                     'F26', 'F30', 'F34', 'F38', 'F42',
-                    'F46', 'F50', 'F54:F55', "F59",
-                    'F63', 'F67'
+                    'F46', 'F50', 'F53:F54', "F55",
+                    'F59', 'F63'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
                     'I10', 'I14', 'I18', 'I22', 'I22',
                     'I26', 'I31', 'I34', 'I38', 'I42',
-                    'I46', 'I50', 'I54:I55', "I59",
-                    'I63', 'I67'
+                    'I46', 'I50', 'I53:I54', "I55",
+                    'I59', 'I63'
                 ]);
 
                 // TRB
@@ -426,7 +431,7 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
 
                 // BBT
                 $cells[12] = array_merge([
-                    'G73:I73', 'C4:E4', 'I3', 'I4', 'F78:I78'
+                    'G69:I69', 'C4:E4', 'I3', 'I4', 'F74:I74'
                 ]);
 
                 // LBT
@@ -463,15 +468,15 @@ class X05_Clearance implements FromView, WithEvents, WithDrawings//, ShouldAutoS
                 $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(25);
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(25);
                 $event->sheet->getDelegate()->getRowDimension(51)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(54)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(56)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(68)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(30);
+                // $event->sheet->getDelegate()->getRowDimension(54)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(64)->setRowHeight(30);
                 // $event->sheet->getDelegate()->getRowDimension(76)->setRowHeight(30);
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('A1:I82')->getFont()->setName('Arial');
-                $event->sheet->getDelegate()->getStyle('A1:I82')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:I78')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:I78')->getFont()->setSize(10);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
