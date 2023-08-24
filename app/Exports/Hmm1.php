@@ -442,44 +442,50 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setOffsetY(4);
         $drawing2->setCoordinates('C3');
 
-        if(auth()->user()->fleet == "FLEET B"){
-            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-            $drawing3->setName('sir_kit_sig');
-            $drawing3->setDescription('sir_kit_sig');
-            $drawing3->setPath(public_path('images/sir_kit_sig.png'));
-            $drawing3->setResizeProportional(false);
-            // $drawing3->setHeight(230);
-            // $drawing3->setWidth(230);
-            $drawing3->setOffsetX(2);
-            $drawing3->setOffsetY(-45);
-            $drawing3->setRotation(8);
-            $drawing3->setCoordinates('W41');
+        if(auth()->user()->fleet){
+            if(auth()->user()->fleet == "FLEET B"){
+                $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                $drawing3->setName('sir_kit_sig');
+                $drawing3->setDescription('sir_kit_sig');
+                $drawing3->setPath(public_path('images/sir_kit_sig.png'));
+                $drawing3->setResizeProportional(false);
+                // $drawing3->setHeight(230);
+                // $drawing3->setWidth(230);
+                $drawing3->setOffsetX(2);
+                $drawing3->setOffsetY(-45);
+                $drawing3->setRotation(8);
+                $drawing3->setCoordinates('W41');
+            }
+            if(auth()->user()->fleet == "FLEET D"){
+                $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                $drawing3->setName('maam_thea_sig');
+                $drawing3->setDescription('maam_thea_sig');
+                $drawing3->setPath(public_path('images/maam_thea_sig.png'));
+                $drawing3->setResizeProportional(false);
+                $drawing3->setHeight(132);
+                $drawing3->setWidth(236);
+                $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
+                $drawing3->setOffsetY(-80);
+                $drawing3->setCoordinates('W41');
+            }
+            if(auth()->user()->fleet == "FLEET C"){
+                $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+                $drawing3->setName('maam_jen_sig');
+                $drawing3->setDescription('maam_jen_sig');
+                $drawing3->setPath(public_path('images/maam_jen_sig.jpg'));
+                $drawing3->setResizeProportional(false);
+                $drawing3->setHeight(60);
+                $drawing3->setWidth(236);
+                $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
+                $drawing3->setOffsetY(-60);
+                $drawing3->setCoordinates('W41');
+            }
+
+            return [$drawing, $drawing2, $drawing3];
         }
-        if(auth()->user()->fleet == "FLEET D"){
-            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-            $drawing3->setName('maam_thea_sig');
-            $drawing3->setDescription('maam_thea_sig');
-            $drawing3->setPath(public_path('images/maam_thea_sig.png'));
-            $drawing3->setResizeProportional(false);
-            $drawing3->setHeight(132);
-            $drawing3->setWidth(236);
-            $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
-            $drawing3->setOffsetY(-80);
-            $drawing3->setCoordinates('W41');
-        }
-        if(auth()->user()->fleet == "FLEET C"){
-            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-            $drawing3->setName('maam_jen_sig');
-            $drawing3->setDescription('maam_jen_sig');
-            $drawing3->setPath(public_path('images/maam_jen_sig.jpg'));
-            $drawing3->setResizeProportional(false);
-            $drawing3->setHeight(60);
-            $drawing3->setWidth(236);
-            $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
-            $drawing3->setOffsetY(-60);
-            $drawing3->setCoordinates('W41');
+        else{
+            return;
         }
 
-        return [$drawing, $drawing2, $drawing3];
     }
 }
