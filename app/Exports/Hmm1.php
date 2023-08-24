@@ -484,7 +484,7 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             return [$drawing, $drawing2, $drawing3];
         }
         else{
-            return;
+            return [$drawing, $drawing2];
         }
 
     }
