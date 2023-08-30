@@ -157,7 +157,7 @@
                 continuesReload();
             }, 30000);
         }
-        continuesReload();
+        // continuesReload();
 
         $('#fleet').on('change', e => {
             fleet = e.target.value;
