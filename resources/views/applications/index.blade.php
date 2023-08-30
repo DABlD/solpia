@@ -278,7 +278,13 @@
                 { data: 'lname', name: 'lname' },
                 { data: 'fname', name: 'fname' },
                 { data: 'age', name: 'age' },
-                { data: 'contact', name: 'contact' },
+                { 
+                    data: 'contact',
+                    name: 'contact',
+                    @if(in_array(auth()->user()->id, [5901, 5958]) || auth()->user()->role == "Training")
+                        visible: false
+                    @endif
+                },
                 { data: 'last_vessel', name: 'last_vessel' },
                 @if(auth()->user()->fleet == null)
                     { data: 'fleet', name: 'fleet' },

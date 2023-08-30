@@ -28,6 +28,7 @@
                                     <th>Fleet</th>
                                     <th>Status</th>
                                     <th>Date Posted</th>
+                                    <th>Prospect</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -84,7 +85,7 @@
                     f.rank = fRank;
                     f.date = fDate;
                     f.status = fStatus;
-                    f.load = ['vessel', 'rank']
+                    f.load = ['vessel', 'rank', 'candidates']
                 }
             },
             columns: [
@@ -100,6 +101,7 @@
                 { data: 'fleet'},
                 { data: 'status'},
                 { data: 'created_at'},
+                { data: 'candidates.length'},
                 { data: 'actions'}
             ],
             columnDefs: [
@@ -114,6 +116,10 @@
                     render: usv =>{
                         return usv ? "Required" : "---";
                     }
+                },
+                {
+                    targets: 12,
+                    className: "text-center"
                 },
                 {
                     targets: 1,
@@ -143,6 +149,15 @@
                 }
             }, 800);
         });
+
+        function continuesReload(){
+            setTimeout(() => {
+                console.log("reload");
+                reload();
+                continuesReload();
+            }, 30000);
+        }
+        continuesReload();
 
         $('#fleet').on('change', e => {
             fleet = e.target.value;

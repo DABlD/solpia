@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\RequirementAttribute;
 
-use App\Models\{Vessel, Rank};
+use App\Models\{Vessel, Rank, Candidate};
 
 class Requirement extends Model
 {
@@ -29,5 +29,9 @@ class Requirement extends Model
 
     public function rank(){
         return $this->hasOne(Rank::class, 'id', 'rank');
+    }
+
+    public function candidates(){
+        return $this->hasMany(Candidate::class, 'requirement_id', 'id');
     }
 }
