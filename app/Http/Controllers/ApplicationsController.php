@@ -1364,7 +1364,7 @@ class ApplicationsController extends Controller
         // SET IF PDF OR EXCEL
         $exportType = $req->exportType ?? "xlsx";
 
-        $default = $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type;
+        $default = isset($applicant->user) ? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $type : "-";
         $fileName = $req->filename ? $req->filename : (isset($req->data['filename']) ? $applicant->user->fname . ' ' . $applicant->user->lname . ' - ' . $req->data['filename'] : $default);
         $class = "App\\Exports\\" . $folder . $type;
 
