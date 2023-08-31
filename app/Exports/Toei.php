@@ -417,7 +417,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
                     // INTERCHANGED COMPARED TO BLADE FILE AROUND LINE 1140
                     // AB OLR OS WPR WITH SENIOR OFFICER LICENSE
-                    if(($rid == 10 && $hl2) || ($rid == 16 && $hl2) || ($rid == 9 && $hl2) || ($rid == 15 && $hl2) || ($rid == 11 && $hl2) || ($rid == 17 && $hl2)){
+                    if(($rid == 10 && $hl2) || ($rid == 16 && $hl2) || ($rid == 9 && $hl2) || ($rid == 15 && $hl2) || ($rid == 42 && $hl2) || ($rid == 43 && $hl2) || ($rid == 11 && $hl2) || ($rid == 17 && $hl2)){
                         $start = $raoc;
                         $end = $raoc;
                         $start2 = $start+1;
@@ -427,7 +427,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                         $temp += 2;
                     }
                     // AB OLR OR OS WPR WITH JUNIOR OFFICER LICENSE
-                    elseif(in_array($rid, [10,16,9,15]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
+                    elseif(in_array($rid, [10,16,9,15,42,43]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
                         $start = $raoc;
                         $end = $raoc;
 

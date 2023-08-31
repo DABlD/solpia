@@ -1127,7 +1127,7 @@
 
 		@if($crewRank)
 			{{-- AB, OLR OR OS, WPR WITH JUNIOR OFFICER LICENSE --}}
-			@if($tRank == 10 || $tRank == 16 || $tRank == 9 || $tRank == 15 || ($tRank == 11 && $hl >= 1) || ($tRank == 17 && $hl >= 1))
+			@if($tRank == 10 || $tRank == 16 || $tRank == 9 || $tRank == 15 || $tRank == 42 || $tRank == 43 || ($tRank == 11 && $hl >= 1) || ($tRank == 17 && $hl >= 1))
 				<tr>
 					<td colspan="4">
 						MARINA COP REGULATION {{ $rr1 }}
@@ -1140,7 +1140,7 @@
 			@endif
 
 			{{-- AB,OLR,OS,WPR WITH SENIOR OFFICER LICENSE --}}
-			@if(($tRank == 10 && $hl == 2) || ($tRank == 16 && $hl == 2) || ($tRank == 9 && $hl == 2) || ($tRank == 15 && $hl == 2) || ($tRank == 11 && $hl == 2) || ($tRank == 17 && $hl == 2))
+			@if(($tRank == 10 && $hl == 2) || ($tRank == 16 && $hl == 2) || ($tRank == 9 && $hl == 2) || ($tRank == 15 && $hl == 2) || ($tRank == 42 && $hl == 2) || ($tRank == 43 && $hl == 2) || ($tRank == 11 && $hl == 2) || ($tRank == 17 && $hl == 2))
 				<tr>
 					<td colspan="4">
 						MARINA COP REGULATION {{ $rr2 }}
