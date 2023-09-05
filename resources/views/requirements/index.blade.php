@@ -107,8 +107,9 @@
             columnDefs: [
                 {
                     targets: [3, 11],
+                    className: "text-center",
                     render: date =>{
-                        return moment(date).format('MMM DD, YYYY');
+                        return date ? moment(date).format('MMM DD, YYYY') : "-";
                     }
                 },
                 {
