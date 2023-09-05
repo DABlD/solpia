@@ -59,24 +59,14 @@
 						$box = "R";
 
 						if($docu->type != "MARPOL"){
-							if(str_contains($docu->type, "CONSOL")){
-								$marpols[0] = 'a';
-								$marpols[1] = 'a';
-								$marpols[2] = 'a';
-								$marpols[3] = 'a';
-								$marpols[4] = 'a';
-								$marpols[5] = 'a';
-							}
-							else{
-								$marpol = explode('ANNEX', $docu->type)[1]; //TO GET ONLY THE PART AFTER ANNEX 1-6/I-VI
+							$marpol = explode('ANNEX', $docu->type)[1]; //TO GET ONLY THE PART AFTER ANNEX 1-6/I-VI
 
-								$marpols[0] = str_contains($marpol, '1') ? 'a' : '';
-								$marpols[1] = str_contains($marpol, '2') ? 'a' : '';
-								$marpols[2] = str_contains($marpol, '3') || str_contains($marpol, 'III') ? 'a' : '';
-								$marpols[3] = str_contains($marpol, '4') || str_contains($marpol, 'IV') ? 'a' : '';
-								$marpols[4] = str_contains($marpol, '5') || str_contains($marpol, 'V') ? 'a' : '';
-								$marpols[5] = str_contains($marpol, '6') || str_contains($marpol, 'VI') ? 'a' : '';
-							}
+							$marpols[0] = str_contains($marpol, '1') ? 'a' : '';
+							$marpols[1] = str_contains($marpol, '2') ? 'a' : '';
+							$marpols[2] = str_contains($marpol, '3') || str_contains($marpol, 'III') ? 'a' : '';
+							$marpols[3] = str_contains($marpol, '4') || str_contains($marpol, 'IV') ? 'a' : '';
+							$marpols[4] = str_contains($marpol, '5') || str_contains($marpol, 'V') ? 'a' : '';
+							$marpols[5] = str_contains($marpol, '6') || str_contains($marpol, 'VI') ? 'a' : '';
 						}
 					}
 				}
