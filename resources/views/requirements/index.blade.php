@@ -122,6 +122,10 @@
                     className: "text-center"
                 },
                 {
+                    targets: 13,
+                    width: "60px"
+                },
+                {
                     targets: 1,
                     render: vessel =>{
                         return `
