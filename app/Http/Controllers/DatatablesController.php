@@ -911,7 +911,7 @@ class DatatablesController extends Controller
 		$array = Requirement::where('fleet', 'like', $req->fleet)
 					->where('vessel_id', 'like', $req->vessel)
 					->where('rank', 'like', $req->rank)
-					->where('joining_date', 'like', $req->date)
+					// ->where('joining_date', 'like', $req->date)
 					->where('status', 'like', $req->status)
 					->get();
 
