@@ -13,6 +13,9 @@
                     <option value="FLEET D">FLEET D</option>
                     <option value="FLEET E">FLEET E</option>
                     <option value="TOEI">TOEI</option>
+                    @if(auth()->user()->fleet == "TOEI" || auth()->user()->role == "Admin")
+                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->fleet }} - {{ auth()->user()->fname }}</option>
+                    @endif
                     <option value="FISHING">FISHING</option>
                 </select>
             </div>

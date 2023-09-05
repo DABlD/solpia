@@ -912,8 +912,13 @@ class DatatablesController extends Controller
 					->where('vessel_id', 'like', $req->vessel)
 					->where('rank', 'like', $req->rank)
 					// ->where('joining_date', 'like', $req->date)
-					->where('status', 'like', $req->status)
-					->get();
+					->where('status', 'like', $req->status);
+
+		if($req->user_id){
+			$array = $array->where('user_id', 'like', $req->user_id);
+		}
+
+		$array = $array->get();
 
         foreach($array as $item){
             $item->actions = $item->actions;
