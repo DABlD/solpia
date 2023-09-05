@@ -15,7 +15,7 @@ class Requirement extends Model
 	protected $fillable = [
 		'vessel_id', 'rank','joining_date','joining_port',
 		'usv','salary','remarks','max_age','status','fleet',
-        'date_provided'
+        'date_provided', 'user_id'
 	];
 
     protected $dates = [

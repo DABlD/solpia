@@ -66,6 +66,7 @@
 @push('after-scripts')
     <script>
         var fleet = "{{ auth()->user()->fleet ?? "%%" }}";
+        var user_id = null;
         var fVessel = "%%";
         var fRank = "%%";
         var fDate = "%%";
@@ -81,6 +82,7 @@
                 // dataSrc: "",
                 data: f => {
                     f.fleet = fleet;
+                    f.user_id = user_id;
                     f.vessel = fVessel;
                     f.rank = fRank;
                     f.date = fDate;
@@ -165,7 +167,14 @@
         // continuesReload();
 
         $('#fleet').on('change', e => {
-            fleet = e.target.value;
+            if(isNaN(e.target.value)){
+                fleet = e.target.value;
+                user_id = null;
+            }
+            else{
+                user_id = e.target.value;
+                fleet = "%%";
+            }
             $('#table').DataTable().ajax.reload();
         });
 

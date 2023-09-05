@@ -50,6 +50,7 @@ class RequirementController extends Controller
 
     public function store(Request $req){
         $data = new Requirement();
+        $data->user_id = auth()->user()->id;
         $data->vessel_id = $req->vessel_id;
         $data->rank = $req->rank;
         $data->joining_date = $req->joining_date;
