@@ -59,7 +59,7 @@
 						$box = "R";
 
 						if($docu->type != "MARPOL"){
-							if(str_contains($docu->type, "CONSOLIDATED")){
+							if(str_contains($docu->type, "CONSOL")){
 								$marpols[0] = 'a';
 								$marpols[1] = 'a';
 								$marpols[2] = 'a';
