@@ -82,7 +82,10 @@
 			$ct = function($text){
    				return str_replace('&', '&#38;', $text);
    			};
-   			$start = $start+1;
+
+   			if(str_contains($ss->manning_agent, "SOLPIA")){
+   				$start = $start+1;
+   			}
 		@endphp
 		@if(str_contains($ss->manning_agent, "SOLPIA"))
 			<tr>
