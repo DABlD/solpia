@@ -1274,7 +1274,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 $event->sheet->getDelegate()->setTitle($this->view, false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageSetup()->setScale(80);
+                $event->sheet->getDelegate()->getPageSetup()->setScale(85);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
