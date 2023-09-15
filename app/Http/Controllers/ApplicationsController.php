@@ -1754,39 +1754,41 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $temp = SeaService::select('sea_services.*', 'v.principal_id')
-                            ->where('v.principal_id', 9)
-                            ->where('sea_services.manning_agent', 'LIKE', "%SOLPIA%")
-                            ->join('vessels as v', 'v.name', '=', 'sea_services.vessel_name')
-                            ->get();
+        $applicants = User::where('fleet', "TOEI")->where('role', 'Applicant')->get();
+        $applicants->load('crew.sea_service');
 
-        echo "<table>";
+        $newHires = $applicants->filter(function($applicant){
+            // return $applicant->crew->sea_service
+            if(isset($applicant->crew->sea_service)){
+                $sss = $applicant->crew->sea_service->sortBy('sign_on');
+                $nH = false;
 
-        foreach($temp as $ss){
-            $name = $ss->applicant->user->namefull;
-            $vessel = $ss->vessel_name;
-            $rank = $ss->rank;
-            $contact = $ss->applicant->user->contact;
-            $son = $ss->sign_on ? $ss->sign_on->toDateString() : "-";
-            $soff = $ss->sign_off ? $ss->sign_off->toDateString() : "-";
+                foreach($sss as $ss){
+                    if(str_contains($ss->manning_agent, 'SOLPIA')){
+                        if($ss->sign_on >= "2022-09-01"){
+                            $nH = true;
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                }
 
-            $name = str_replace("?", "Ñ", $name);
+                return $nH;
+            }
+        });
 
-            echo "
-                <tr>
-                    <td>$name</td>
-                    <td>$vessel</td>
-                    <td>$rank</td>
-                    <td>$contact</td>
-                    <td>$son</td>
-                    <td>$soff</td>
-                </tr>
-            ";
+        // DISPLAY
+        $newHires->load('crew.line_up_contracts.vessel');
+        $newHires->load('crew.line_up_contracts.rank');
+        echo $newHires->count() . '<br>';
+        foreach($newHires as $nH){
+            $lup = $nH->crew->line_up_contracts->sortBy('joining_date')->first();
+            // if(isset($lup->vessel) && isset($lup->rank)){
+                echo $lup->rank->abbr . ";" . $nH->namefull . ";" . $lup->vessel->name . ";" . $lup->joining_date . '<br>';
+            // }
         }
-
-        echo "</table>";
-
-        die;
     }
 
     public function generateApplicantFleet(){
