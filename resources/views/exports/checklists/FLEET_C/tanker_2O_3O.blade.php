@@ -76,12 +76,15 @@
 				}
 			}
 			else{
+						
 				if($type != "flag"){
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
+
 					foreach (get_object_vars($data->document_flag) as $flag) {
-						if($flag->country == $data->data['type'] && $flag->type == $doc){
+						$vFlag = ucfirst(strtolower($data->vessel->flag));
+						if($flag->country == $vFlag && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
