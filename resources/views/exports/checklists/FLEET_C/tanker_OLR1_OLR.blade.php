@@ -200,7 +200,7 @@
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
 	{{ $doc("BOOKLET", "BOOKLET", 'flag') }}
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
-	{{ $doc("BTOC", "BTOC ENDORSEMENT", 'lc') }}
+	{{ $doc("BTOC", "BTOC ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
 	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 0, 'III/4') }}

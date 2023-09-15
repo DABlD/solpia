@@ -191,9 +191,9 @@
 	{{ $doc("LICENSE", "LICENSE", 'flag') }}
 	{{ $doc("GMDSS/GOC", "GOC", 'flag') }}
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
-	{{ $doc("BTOC", "BTOC ENDORSEMENT", 'lc') }}
-	{{ $doc("ATOT", "ATOT ENDORSEMENT", 'lc') }}
-	{{ $doc("ATCT", "ATCT ENDORSEMENT", 'lc') }}
+	{{ $doc("BTOC", "BTOC ENDORSEMENT", 'flag') }}
+	{{ $doc("ATOT", "ATOT ENDORSEMENT", 'flag') }}
+	{{ $doc("ATCT", "ATCT ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
 	{{ $doc("COC", "OIC-NEW LICENSE (CERTIFICATE) - II/1", 'lc', 1, 'II/1') }}

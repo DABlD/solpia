@@ -193,9 +193,9 @@
 	{{ $doc("BOOKLET", "BOOKLET", 'flag') }}
 	{{ $doc("LICENSE", "LICENSE", 'flag') }}
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
-	{{ $doc("BTOC", "BTOC ENDORSEMENT", 'lc') }}
-	{{ $doc("ATOT", "ATOT ENDORSEMENT", 'lc') }}
-	{{ $doc("ATCT", "ATCT ENDORSEMENT", 'lc') }}
+	{{ $doc("BTOC", "BTOC ENDORSEMENT", 'flag') }}
+	{{ $doc("ATOT", "ATOT ENDORSEMENT", 'flag') }}
+	{{ $doc("ATCT", "ATCT ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
 	{{ $doc("COC", "SECOND ENGINEER LICENSE (CERTIFICATE) - III/2", 'lc', 1, 'III/2') }}
