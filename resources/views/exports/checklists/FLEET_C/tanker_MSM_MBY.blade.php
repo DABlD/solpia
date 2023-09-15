@@ -192,7 +192,7 @@
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
 	{{ $doc("BOOKLET", "BOOKLET", 'flag') }}
 	{{ $doc("SDSD", "SDSD ENDORSEMENT", 'flag') }}
-	{{ $doc("BTOC", "BTOC ENDORSEMENT", 'lc') }}
+	{{ $doc("BTOC", "BTOC ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
 	{{ $doc("NCI", "COC - NC1 LICENSE", 'lc', 0) }}
