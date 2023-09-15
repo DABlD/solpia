@@ -1270,7 +1270,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: SMOP-CDFC-11 &C&IEFFECTIVE DATE: 01 SEPT 17 &R&IREVISION NO: 1.0');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&L&IDOC NO: SMOP-CDFC-11 &C&IEFFECTIVE DATE: 01 SEPT 17 &R&IREVISION NO: 1.0\n9/23/2021");
 
                 $event->sheet->getDelegate()->setTitle($this->view, false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
