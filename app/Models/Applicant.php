@@ -68,6 +68,10 @@ class Applicant extends Model
         return $this->hasOne('App\Models\ProcessedApplicant');
     }
 
+    public function line_up_contracts(){
+        return $this->hasMany('App\Models\LineUpContract');
+    }
+
     public function evaluation(){
         return $this->hasMany('App\Models\Evaluation');
     }

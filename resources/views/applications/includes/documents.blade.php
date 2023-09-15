@@ -794,7 +794,7 @@
 	        			{
 	        				range: [
 	        					[9,23],
-	        					[27,44]
+	        					[27,57]
 	        				],
 	        				documents: [
 	        					'BOOKLET', 'SDSD', 'ENDORSEMENT', 'CT'
@@ -803,12 +803,20 @@
 	        			{
 	        				range: [
 	        					[24,26],
-	        					[44]
+	        					[57]
 	        				],
 	        				documents: [
 	        					'BOOKLET', 'SDSD', "SHIP'S COOK ENDORSEMENT", 'CT'
 	        				]
-	        			}
+	        			},
+        				{
+        					range: [
+        						[1,57]
+        					],
+        					documents: [
+        						'BTOC', 'ATOT', 'ATCT'
+        					]
+        				}
         			]
         		},
         		{
@@ -832,7 +840,7 @@
         				},
         				{
         					range: [
-        						[9,44]
+        						[9,57]
         					],
         					documents: [
         						'BOOKLET', 'SDSD'
@@ -840,16 +848,16 @@
         				},
         				{
         					range: [
-        						[1,44]
+        						[1,57]
         					],
         					documents: [
-        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA'
+        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'BTOC', 'ATOT', 'ATCT'
         					]
         				},
 	        			{
 	        				range: [
 	        					[24,26],
-	        					[44]
+	        					[57]
 	        				],
 	        				documents: [
 	        					"SHIP'S COOK ENDORSEMENT"
@@ -862,10 +870,10 @@
         			details: [
         				{
         					range: [
-        						[1,8]
+        						[1,57]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET', 'PSCRB'
+        						'LICENSE', 'BOOKLET', 'PSCRB', 'BTOC', 'ATOT', 'ATCT'
         					]
         				}
         			]
@@ -875,16 +883,16 @@
         			details: [
         				{
         					range: [
-        						[1,44]
+        						[1,57]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET', 'CRA'
+        						'LICENSE', 'BOOKLET', 'CRA', 'BTOC', 'ATOT', 'ATCT'
         					]
         				},
         				{
         					range: [
         						[24,26],
-        						[44]
+        						[57]
         					],
         					documents: [
         						"SHIP'S COOK ENDORSEMENT", 'CRA'
@@ -892,7 +900,7 @@
         				},
         				{
         					range: [
-        						[1,44]
+        						[1,57]
         					],
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD', 'CRA'
@@ -905,7 +913,7 @@
         			details: [
         				{
         					range: [
-        						[1,44]
+        						[1,57]
         					],
         					documents: [
         						'LICENSE', 'BOOKLET'
@@ -918,10 +926,10 @@
         			details: [
         				{
         					range: [
-        						[1,44]
+        						[1,57]
         					],
         					documents: [
-        						'LICENSE'
+        						'LICENSE', 'BTOC', 'ATOT', 'ATCT'
         					]
         				}
         			]

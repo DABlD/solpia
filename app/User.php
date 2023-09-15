@@ -41,6 +41,10 @@ class User extends Authenticatable
         'created_at', 'updated_at', 'deleted_at', 'birthday', 'email_verified_at'
     ];
 
+    public function crew(){
+        return $this->hasOne('App\Models\Applicant');
+    }
+
     public function setPasswordAttribute($value) {
         $this->attributes['password'] = Hash::make($value);
     }
