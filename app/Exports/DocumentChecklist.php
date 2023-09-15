@@ -455,8 +455,6 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 }
             }
             else if($type == "tanker"){
-                $rank = "AB";
-
                 if($rank == "MSTR" || $rank == "C/O"){
                     $this->rows    = 55;
                     $this->view    = "MSTR_CO";
