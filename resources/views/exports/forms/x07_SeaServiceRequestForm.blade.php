@@ -8,13 +8,12 @@
 
 <table>
 	<tr>
-		<td colspan="7" style="font-size: 15px; height: 40px; vertical-align: middle; {{ $bold }} {{ $center }}">
-			SOLPIA MARINE AND SHIP MANAGEMENT, INC
+		<td colspan="7" style="font-size: 15px; height: 60px;">
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="7" style="height: 30px; {{ $und }} {{ $bold }} {{ $center }}">
+		<td colspan="7" style="height: 70px; {{ $und }} {{ $bold }} {{ $center }} font-size: 20px;">
 			REQUEST FOR SEA SERVICE CERTIFICATE
 		</td>
 	</tr>
@@ -44,7 +43,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="7"></td>
+		<td colspan="7" style="height: 40px;"></td>
 	</tr>
 
 	<tr>
@@ -58,7 +57,7 @@
 
 	<tr>
 		<td colspan="2" style="{{ $middle }}">CREWING DEPT.</td>
-		<td style="{{ $center }} {{ $blue }} font-size: 9px;">{{ now()->format('d-M-y') }}</td>
+		<td style="{{ $center }} {{ $blue }}">{{ now()->format('d-M-y') }}</td>
 		<td></td>
 		<td style="{{ $blue }} {{ $center }}">
 			{{ auth()->user()->gender == "Male" ? "Mr" : "Ms." }} {{ auth()->user()->fname }} {{ auth()->user()->lname }}
@@ -77,9 +76,9 @@
 	</tr>
 
 	<tr>
-		<td style="height: 60px; {{ $middle }}" colspan="2">ISSUED BY:</td>
+		<td style="height: 80px; {{ $middle }}" colspan="2">ISSUED BY:</td>
 		<td></td>
-		<td colspan="3" style="height: 60px; {{ $middle }}">RECEIVED BY:</td>
+		<td colspan="3" style="height: 80px; {{ $middle }}">RECEIVED BY:</td>
 	</tr>
 
 	<tr>
@@ -99,7 +98,7 @@
 	</tr>
 
 	<tr>
-		<td style="height: 40px;" colspan="7"></td>
+		<td style="height: 50px;" colspan="7"></td>
 	</tr>
 
 	<tr>
@@ -108,11 +107,13 @@
 	</tr>
 
 	<tr>
-		<td style="height: 40px;" colspan="7"></td>
+		<td style="height: 50px;" colspan="7"></td>
 	</tr>
 
 	<tr>
-		<td colspan="7">EA SERVICE CERT #</td>
+		<td colspan="2">SEA SERVICE CERT #:</td>
+		<td colspan="3"></td>
+		<td colspan="2"></td>
 	</tr>
 
 </table>

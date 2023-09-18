@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\Rank;
 
-class X07_SeaServiceRequestForm implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class X07_SeaServiceRequestForm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $data->load(['sea_service' => function ($query) {
@@ -252,6 +252,7 @@ class X07_SeaServiceRequestForm implements FromView, WithEvents//, WithDrawings/
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('Sea Service Request Form', false);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: RSSC-17 &C&IEFFECTIVE DATE: 01 JULY 17 &R&IREVISION NO: 1.0 09/15/23');
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -259,7 +260,7 @@ class X07_SeaServiceRequestForm implements FromView, WithEvents//, WithDrawings/
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
-                // $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
@@ -435,10 +436,11 @@ class X07_SeaServiceRequestForm implements FromView, WithEvents//, WithDrawings/
 
                 // BBT
                 $cells[12] = array_merge([
-                    'B3:E3', 'B4:E4', 'B5:E5', 'B6:E6',
+                    'B3:F3', 'B4:F4', 'B5:F5', 'B6:F6',
                     'C9', 'E9', 'G9', 'C10', 'E10', 'G10',
                     'A12:B12', 'D12:F12',
-                    'C15:E15'
+                    'C15:E15',
+                    'C17:E17',
                 ]);
 
                 // LBT
@@ -456,19 +458,27 @@ class X07_SeaServiceRequestForm implements FromView, WithEvents//, WithDrawings/
                 }
 
                 // FOR THE CHECK
-                $event->sheet->getDelegate()->getStyle('A1:G17')->getFont()->setName('Calibri');
-                $event->sheet->getDelegate()->getStyle('A1:G17')->getFont()->setSize(11);
+                // $event->sheet->getDelegate()->getStyle('A1:G17')->getFont()->setName('Calibri');
+                // $event->sheet->getDelegate()->getStyle('A1:G17')->getFont()->setSize(11);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(1);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(1);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);
 
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(15);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(20);
+
+                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(30);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
@@ -483,23 +493,12 @@ class X07_SeaServiceRequestForm implements FromView, WithEvents//, WithDrawings/
         $drawing->setDescription('Letter Head');
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $drawing->setHeight(70);
+        $drawing->setWidth(620);
+        $drawing->setOffsetX(2);
+        $drawing->setOffsetY(2);
+        $drawing->setCoordinates('A1');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
-
-        return [$drawing, $drawing2];
+        return [$drawing];
     }
 }
