@@ -1094,7 +1094,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 $this->rows    = 48;
                 $this->view    = "2AE_3AE";
             }
-            elseif($rank == "BSN" || $rank == "AB"){
+            elseif($rank == "BSN" || $rank == "AB" || $rank == "ABD"){
                 $this->rows    = 42;
                 $this->view    = "BSN_AB";
             }
@@ -1102,7 +1102,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 $this->rows    = 40;
                 $this->view    = "OS";
             }
-            elseif($rank == "OLR1" || $rank == "OLR"){
+            elseif($rank == "OLR1" || $rank == "OLR" || $rank == "ABE"){
                 $this->rows    = 42;
                 $this->view    = "OLR1_OLR";
             }
