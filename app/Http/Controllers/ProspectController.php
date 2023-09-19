@@ -71,6 +71,7 @@ class ProspectController extends Controller
         $data->previous_salary = $req->previous_salary;
         $data->previous_agency = $req->previous_agency;
         $data->remarks = $req->remarks;
+        $data->source = $req->source;
         $data->save();
     }
 
