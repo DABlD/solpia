@@ -24,4 +24,12 @@ class SeaService extends Model
     public function vessel(){
     	return $this->hasMany('App\Models\Vessel', 'name', 'vessel_name');
     }
+
+    public function vessel2(){
+        return $this->hasOne('App\Models\Vessel', 'name', 'vessel_name');
+    }
+
+    public function rank2(){
+        return $this->hasOne('App\Models\Rank', 'name', 'rank');
+    }
 }
