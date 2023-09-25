@@ -146,7 +146,13 @@
 		<td rowspan="5" style="{{ $bc }}">Wages</td>
 		<td colspan="2">A) Basic Wage</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->basic ?? 0 }}</td>
-		<td colspan="2">B.) Fixed Overtime Allowance (BW/173x1.5x103hrs)</td>
+		<td colspan="2">
+			@if($data->vessel->id == 4643)
+				B.) Fixed Overtime Allowance (BW/173x1.25x103hrs)
+			@else
+				B.) Fixed Overtime Allowance (BW/173x1.5x103hrs)
+			@endif
+		</td>
 		<td style="{{ $center }}">${{ $data->wage->fot ?? $data->wage->ot ?? 0 }}</td>
 	</tr>
 
