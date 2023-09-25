@@ -374,9 +374,9 @@
 				@if(isset($crewRank) && $docu)
 					@if($hl == 0 && $hl !== null)
 						@if($rt == "er")
-							ENGINEERING WATCHKEEPING
+							ENGINEERING WATCH
 						@else
-							NAVIGATIONAL WATCHKEEPING
+							NAVIGATIONAL WATCH
 						@endif
 					@elseif($hl == 1)
 						@if($rt == "er")
@@ -446,9 +446,9 @@
 				@if(isset($crewRank) && $docu2)
 					@if($hl == 0)
 						@if($rt == "er")
-							ENGINEERING WATCHKEEPING
+							ENGINEERING WATCH
 						@else
-							NAVIGATIONAL WATCHKEEPING
+							NAVIGATIONAL WATCH
 						@endif
 					@elseif($hl == 1)
 						@if($rt == "er")
