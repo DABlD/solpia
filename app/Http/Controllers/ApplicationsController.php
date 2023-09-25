@@ -1754,13 +1754,14 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $applicants = User::where('fleet', "TOEI")->where('role', 'Applicant')->get();
+        $applicants = User::whereIn('fleet', ["TOEI", "FLEET A"])->where('role', 'Applicant')->get();
         $applicants->load('crew.sea_service');
 
         $newHires = $applicants->filter(function($applicant){
             // return $applicant->crew->sea_service
             if(isset($applicant->crew->sea_service)){
-                $sss = $applicant->crew->sea_service->sortBy('sign_on');
+                $sss = collect($applicant->crew->sea_service->sortBy('sign_on')->values());
+
                 $luc = $applicant->crew->line_up_contracts->sortByDesc('joining_date');
                 $nH = false;
                 $xCrew = false;
@@ -1776,8 +1777,14 @@ class ApplicationsController extends Controller
                                 $applicant->previous_manning = "FIRST";
                             }
 
-                            $nH = true;
-                            break;
+                            if(str_contains($applicant->previous_manning, "FAIRVIEW")){
+                                $xCrew = true;
+                                break;
+                            }
+                            else{
+                                $nH = true;
+                                break;
+                            }
                         }
                         else{
                             $xCrew = true;
@@ -1788,7 +1795,10 @@ class ApplicationsController extends Controller
 
                 if($nH == false && $xCrew == false && $luc->count()){
                     $applicant->previous_manning = $sss->count() ? $sss->last()->manning_agent : "FIRST";
-                    $nH = true;
+
+                    if(!str_contains($applicant->previous_manning, "FAIRVIEW")){
+                        $nH = true;
+                    }
                 }
 
                 return $nH;
@@ -1810,9 +1820,9 @@ class ApplicationsController extends Controller
             $sign_on = isset($nH->ss) ? $nH->ss->sign_on : $lup->joining_date;
             $manning_agent = $nH->previous_manning;
 
-            // if(str_contains($manning_agent, "LEONIS") || str_contains($manning_agent, "MAINE") || str_contains($manning_agent, "SPLASH") || str_contains($manning_agent, "ALPHA")){
-                echo "$rank;$name;$vessel;$age;$sign_on;$manning_agent;end<br>";
-            // }
+            if(str_contains($manning_agent, "LEONIS") || str_contains($manning_agent, "MAINE") || str_contains($manning_agent, "SPLASH") || str_contains($manning_agent, "ALPHA") || str_contains($manning_agent, "LEONES")){
+                echo "$rank;$name;$vessel;$age;$sign_on;$manning_agent<br>";
+            }
         }
     }
 
