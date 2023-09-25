@@ -1754,24 +1754,50 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $applicants = User::where('fleet', "TOEI")->where('role', 'Applicant')->get();
+        $applicants = User::whereIn('fleet', ["TOEI", "FLEET A"])->where('role', 'Applicant')->get();
         $applicants->load('crew.sea_service');
 
         $newHires = $applicants->filter(function($applicant){
             // return $applicant->crew->sea_service
             if(isset($applicant->crew->sea_service)){
-                $sss = $applicant->crew->sea_service->sortBy('sign_on');
-                $nH = false;
+                $sss = collect($applicant->crew->sea_service->sortBy('sign_on')->values());
 
-                foreach($sss as $ss){
+                $luc = $applicant->crew->line_up_contracts->sortByDesc('joining_date');
+                $nH = false;
+                $xCrew = false;
+
+                foreach($sss as $key => $ss){
                     if(str_contains($ss->manning_agent, 'SOLPIA')){
-                        if($ss->sign_on >= "2022-09-01"){
-                            $nH = true;
-                            break;
+                        if($ss->sign_on >= "2021-09-01"){
+                            $applicant->ss = $ss;
+                            if($key > 0){
+                                $applicant->previous_manning = $sss[$key - 1]->manning_agent;
+                            }
+                            else{
+                                $applicant->previous_manning = "FIRST";
+                            }
+
+                            if(str_contains($applicant->previous_manning, "FAIRVIEW")){
+                                $xCrew = true;
+                                break;
+                            }
+                            else{
+                                $nH = true;
+                                break;
+                            }
                         }
                         else{
+                            $xCrew = true;
                             break;
                         }
+                    }
+                }
+
+                if($nH == false && $xCrew == false && $luc->count()){
+                    $applicant->previous_manning = $sss->count() ? $sss->last()->manning_agent : "FIRST";
+
+                    if(!str_contains($applicant->previous_manning, "FAIRVIEW")){
+                        $nH = true;
                     }
                 }
 
@@ -1783,11 +1809,20 @@ class ApplicationsController extends Controller
         $newHires->load('crew.line_up_contracts.vessel');
         $newHires->load('crew.line_up_contracts.rank');
         echo $newHires->count() . '<br>';
+
         foreach($newHires as $nH){
-            $lup = $nH->crew->line_up_contracts->sortBy('joining_date')->first();
-            // if(isset($lup->vessel) && isset($lup->rank)){
-                echo $lup->rank->abbr . ";" . $nH->namefull . ";" . $lup->vessel->name . ";" . $lup->joining_date . '<br>';
-            // }
+            $lup = $nH->crew->line_up_contracts->count() ? $nH->crew->line_up_contracts->sortBy('joining_date')->first() : $nH->ss ?? "";
+
+            $rank = isset($nH->ss) ? (isset($nH->ss->rank2) ? $nH->ss->rank2->abbr : "-") : (isset($lup->rank) ? $lup->rank->abbr : "-");
+            $name = $nH->namefull;
+            $vessel = isset($nH->ss) ? $nH->ss->vessel_name : (isset($lup->vessel) ? $lup->vessel->name : "-");
+            $age = $nH->birthday ? $nH->birthday->age : "";
+            $sign_on = isset($nH->ss) ? $nH->ss->sign_on : $lup->joining_date;
+            $manning_agent = $nH->previous_manning;
+
+            if(str_contains($manning_agent, "LEONIS") || str_contains($manning_agent, "MAINE") || str_contains($manning_agent, "SPLASH") || str_contains($manning_agent, "ALPHA") || str_contains($manning_agent, "LEONES")){
+                echo "$rank;$name;$vessel;$age;$sign_on;$manning_agent<br>";
+            }
         }
     }
 
