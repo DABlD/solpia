@@ -805,6 +805,23 @@
             window.open(`prospectForms/${id}/${file}`);
         }
 
+        function exportReport(){
+            swal({
+                title: 'Select Type',
+                input: 'select',
+                inputOptions: {
+                    report:       'Report',
+                    deployment:   'Deployment Report'
+                },
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b'
+            }).then(result => {
+                if(result.value){
+                    window[result.value]();
+                }
+            });
+        }
+
         function report(){
             swal({
                 title: "Select Range",
@@ -825,6 +842,25 @@
                     let to = $('[name="to"]').val();
                     window.location.href = `{{ route('prospect.report') }}/${from}/${to}`;
                 }
+            })
+        }
+
+        function deployment(){
+            let start = 2022;
+            let years = [];
+            let now = parseInt(moment().format('YYYY'));
+
+            while(start <= now){
+                start++;
+                years[start] = start;
+            }
+
+            swal({
+                title: "Select Year",
+                input: 'select',
+                inputOptions: years,
+            }).then(result => {
+                window.location.href = `{{ route('prospect.deploymentReport') }}/${result.value}`;
             })
         }
 

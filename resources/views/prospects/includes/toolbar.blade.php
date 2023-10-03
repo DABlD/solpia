@@ -7,7 +7,7 @@
 			<span class="fa fa-download"></span>
 		</a>
 	{{-- @endif --}}
-	<a class="btn btn-warning" data-toggle="tooltip" title="Report" onclick="report()">
+	<a class="btn btn-warning" data-toggle="tooltip" title="Export" onclick="exportReport()">
 		<span class="fa fa-file"></span>
 	</a>
 	<a class="btn btn-info" data-toggle="tooltip" title="Filter" onclick="filter()">
