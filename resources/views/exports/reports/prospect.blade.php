@@ -115,9 +115,9 @@
 			</td>
 			<td style="{{ $c }}">1</td>
 
-			<td style="{{ $c }}">{{ $applicant['source'] == "Walk-in" ? 1 : "" }}</td>
-			<td style="{{ $c }}">{{ $applicant['source'] == "Online" ? 1 : "" }}</td>
-			<td style="{{ $c }}">{{ $applicant['source'] == "Kalaw" || $applicant['source'] == "Source" ? 1 : "" }}</td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Walk-in" ? 1 : 0 }}</td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Online" ? 1 : 0 }}</td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Kalaw" || $applicant['source'] == "Source" ? 1 : 0 }}</td>
 
 			<td style="{{ $c }}">{{ $op }}</td>
 			<td style="{{ $c }}">{{ $fi }}</td>
