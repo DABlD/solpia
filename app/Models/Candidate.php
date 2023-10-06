@@ -27,7 +27,7 @@ class Candidate extends Model
     }
 
     public function requirement(){
-        return $this->hasOne(Rank::class, 'id', 'requirement_id');
+        return $this->hasOne(Requirement::class, 'id', 'requirement_id');
     }
 
     public function prospect(){

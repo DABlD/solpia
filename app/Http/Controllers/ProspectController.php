@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Prospect;
+use App\Models\{Prospect, Candidate};
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Reports\Prospect as ProspectReport;
+use App\Exports\Reports\Deployment as DeploymentReport;
 
 use DB;
 
@@ -117,6 +118,33 @@ class ProspectController extends Controller
         $fileName = "$from - $to Applicants";
 
         return Excel::download(new ProspectReport($data->toArray(), $from, $to), "$fileName.xlsx");
+    }
+
+    public function deploymentReport($year){
+        $temp = Candidate::where('status', 'ON BOARD')->get();
+        $sources = [];
+
+        $candidates = [];
+        foreach($temp as $value){
+            if(isset($value->requirement->joining_date)){
+                if(str_starts_with($value->requirement->joining_date, $year)){
+                    $value->month = now()->parse($value->requirement->joining_date)->format('M');
+                    array_push($candidates, $value);
+                    array_push($sources, $value->prospect->source);
+                }
+            }
+            elseif(str_starts_with($value->updated_at, $year)){
+                array_push($candidates, $value);
+                $value->month = now()->parse($value->updated_at)->format('M');
+                array_push($sources, $value->prospect->source);
+            }
+        }
+
+        $sources = array_unique($sources);
+
+        $fileName = "$year Deployment Report";
+
+        return Excel::download(new DeploymentReport(collect($candidates), $year), "$fileName.xlsx");
     }
 
     function uploadFile(Request $req){
