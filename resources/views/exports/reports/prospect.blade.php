@@ -55,6 +55,46 @@
 
 	@foreach($data as $applicant)
 		@php
+			$op = 0;
+			$fi = 0;
+			$passed = 0;
+			$etc = 0;
+			$failed = 0;
+			$backout = 0;
+			$ffu = 0;
+
+			if(str_starts_with($applicant['remarks'], 'BACKED')){
+				$backout++;
+			}
+
+			if(str_starts_with($applicant['remarks'], 'FOLLOW')){
+				$ffu++;
+			}
+
+			foreach($applicant['candidates'] as $candidate){
+				$op++;
+
+				if($candidate['initial_interview']){
+					$fi++;
+				}
+
+				if($candidate['technical_interview']){
+					$passed++;
+				}
+
+				if($candidate['endorsed_to_crewing']){
+					$etc++;
+				}
+
+				if($candidate['status'] == "REJECTED"){
+					$failed++;
+				}
+
+				if($candidate['status'] == "REJECTED"){
+					$failed++;
+				}
+			}
+
 			$exps = json_decode($applicant['exp']);
 		@endphp
 
@@ -75,17 +115,17 @@
 			</td>
 			<td style="{{ $c }}">1</td>
 
-			<td style="{{ $c }}"></td>
-			<td style="{{ $c }}"></td>
-			<td style="{{ $c }}"></td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Walk-in" ? 1 : "" }}</td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Online" ? 1 : "" }}</td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Kalaw" || $applicant['source'] == "Source" ? 1 : "" }}</td>
 
-			<td style="{{ $c }}">{{ $applicant['status'] == "ON PROCESS" ? 1 : "" }}</td>
-			<td style="{{ $c }}"></td>
-			<td style="{{ $c }}"></td>
-			<td style="{{ $c }}"></td>
-			<td style="{{ $c }}"></td>
-			<td style="{{ $c }}"></td>
-			<td style="{{ $c }}"></td>
+			<td style="{{ $c }}">{{ $op }}</td>
+			<td style="{{ $c }}">{{ $fi }}</td>
+			<td style="{{ $c }}">{{ $passed }}</td>
+			<td style="{{ $c }}">{{ $etc }}</td>
+			<td style="{{ $c }}">{{ $failed }}</td>
+			<td style="{{ $c }}">{{ $backout }}</td>
+			<td style="{{ $c }}">{{ $ffu }}</td>
 			<td>{{ $applicant['remarks'] }}</td>
 		</tr>
 	@endforeach
