@@ -1754,7 +1754,7 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $vIds = [22, 71];
+        $vIds = [22, 71, 72, 4661, 4621];
         $linedUp = LineUpContract::whereIn('vessel_id', $vIds)->whereNull('disembarkation_date')->pluck('applicant_id');
         $pro_app = ProcessedApplicant::whereIn('vessel_id', $vIds)->where('status', 'Lined-Up')->pluck('applicant_id');
 
