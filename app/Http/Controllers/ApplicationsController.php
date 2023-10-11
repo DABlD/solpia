@@ -1591,7 +1591,8 @@ class ApplicationsController extends Controller
                 "lname" => $sss->first()->lname,
                 "suffix" => $sss->first()->suffix,
                 "rname" => $sss->first()->rname,
-                "fleet" => $sss->first()->fleet
+                "fleet" => $sss->first()->fleet,
+                "last_vessel" => $sss->first()
             ];
             
             $total = 0;

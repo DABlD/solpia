@@ -67,6 +67,8 @@
                                                                 <th>Name</th>
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
+                                                                <th>Last Vessel</th>
+                                                                <th>Disembarked On</th>
                                                             </tr>
                                                         </thead>
 
@@ -84,6 +86,8 @@
                                                                     <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -98,6 +102,8 @@
                                                                 <th>Name</th>
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
+                                                                <th>Last Vessel</th>
+                                                                <th>Disembarked On</th>
                                                             </tr>
                                                         </thead>
 
@@ -115,6 +121,8 @@
                                                                     <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -168,6 +176,8 @@
                                                                 <th>Name</th>
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
+                                                                <th>Last Vessel</th>
+                                                                <th>Disembarked On</th>
                                                             </tr>
                                                         </thead>
 
@@ -185,6 +195,8 @@
                                                                     <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -199,6 +211,8 @@
                                                                 <th>Name</th>
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
+                                                                <th>Last Vessel</th>
+                                                                <th>Disembarked On</th>
                                                             </tr>
                                                         </thead>
 
@@ -216,6 +230,8 @@
                                                                     <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -325,7 +341,15 @@
         $(document).ready(() => {
             $('.table').DataTable({
                 lengthMenu: [10, 25, 50, 100, 200],
-                pageLength: 200
+                pageLength: 200,
+                columnDefs: [
+                    {
+                        targets: 5,
+                        render: date => {
+                            return toDate(date);
+                        }
+                    }
+                ]
             });
         });
     </script>
