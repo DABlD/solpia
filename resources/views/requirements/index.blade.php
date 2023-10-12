@@ -183,6 +183,38 @@
             $('#table').DataTable().ajax.reload();
         });
 
+        $('#fVessel').on('change', e => {
+            fVessel = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
+        $(document).ready(() => {
+            $.ajax({
+                url: '{{ route('vessels.get2') }}',
+                data: {
+                    cols: "*",
+                    where: ['fleet', fleet],
+                    where2: ['status', 'ACTIVE']
+                },
+                success: result => {
+                    result = JSON.parse(result);
+                    
+                    let fVesselString = "";
+
+                    result.forEach(vessel => {
+                        fVesselString += `
+                            <option value="${vessel.id}">${vessel.name}</option>
+                        `;
+                    })
+
+                    $('#fVessel').append(fVesselString);
+                     $('#fVessel').select2({
+                        placeholder: 'Select Vessel'
+                    });
+                }
+            })
+        });
+
         function create(){
             swal({
                 title: "Input Details",
