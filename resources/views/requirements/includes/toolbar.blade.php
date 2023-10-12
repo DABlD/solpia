@@ -37,6 +37,18 @@
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="row" style="display: flex;">
+            <div class="col-md-4 iLabel" style="margin: auto;">
+                Filter by Vessel
+            </div>
+            <div class="col-md-8 iInput">
+                <select id="fVessel" class="form-control">
+                    <option value="%%">All</option>
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
 
 @if(in_array(auth()->user()->role, ["Admin", "Crewing Officer", "Crewing Manager"]))
