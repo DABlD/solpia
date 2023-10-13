@@ -1577,6 +1577,8 @@ class ApplicationsController extends Controller
                     ->where('manning_agent', 'LIKE', '%SOLPIA%')
                     ->where('a.remarks', 'NOT LIKE', '%WITHDRAW%')
                     ->where('a.remarks', 'NOT LIKE', '%Withdraw%')
+                    ->where('a.remarks', 'NOT LIKE', '%NFR%')
+                    ->where('a.remarks', 'NOT LIKE', '%nfr%')
                     ->whereNull('u.deleted_at')
                     ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
                     ->join('users as u', 'u.id', '=', 'a.user_id')
