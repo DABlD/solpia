@@ -1589,12 +1589,21 @@ class ApplicationsController extends Controller
         foreach($applicants as $sss){
             $sss = $sss->sortByDesc('sign_on');
 
+            $rname = "-";
+
+            if($sss->first()->rank != ""){
+                $rname = $ranks[$sss->first()->rank] ?? $rank2[$sss->first()->rank];
+            }
+
+            // echo $sss->first()->applicant_id . ' - ' . $sss->first()->rank . '<br>';
+
             $details[$sss->first()->applicant_id] = [
                 "fname" => $sss->first()->fname,
                 "mname" => $sss->first()->mname,
                 "lname" => $sss->first()->lname,
                 "suffix" => $sss->first()->suffix,
-                "rname" => isset($ranks[$sss->first()->rank]) ? $ranks[$sss->first()->rank] : isset($rank2[$sss->first()->rank]) ? $rank2[$sss->first()->rank] : "-",
+                // "rname" => isset($ranks[$sss->first()->rank]) ? $ranks[$sss->first()->rank] : isset($rank2[$sss->first()->rank]) ? $rank2[$sss->first()->rank] : "-",
+                "rname" => $rname,
                 "fleet" => $sss->first()->fleet,
                 "last_vessel" => $sss->first()
             ];
