@@ -1594,7 +1594,7 @@ class ApplicationsController extends Controller
                 "mname" => $sss->first()->mname,
                 "lname" => $sss->first()->lname,
                 "suffix" => $sss->first()->suffix,
-                "rname" => isset($ranks[$sss->first()->rank]) ? $ranks[$sss->first()->rank] : isset($ranks2[$sss->first()->rank]) ? $ranks2[$sss->first()->rank] : "-",
+                "rname" => isset($ranks[$sss->first()->rank]) ? $ranks[$sss->first()->rank] : isset($rank2[$sss->first()->rank]) ? $rank2[$sss->first()->rank] : "-",
                 "fleet" => $sss->first()->fleet,
                 "last_vessel" => $sss->first()
             ];
