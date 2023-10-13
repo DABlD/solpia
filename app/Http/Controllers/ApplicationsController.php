@@ -1573,18 +1573,18 @@ class ApplicationsController extends Controller
         $array2 = [];
         $details = [];
 
-        $applicants = SeaService::select('sea_services.*', 'r.abbr as rname', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet')
+        $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet')
                     ->where('manning_agent', 'LIKE', '%SOLPIA%')
-                    ->where('a.remarks', 'NOT LIKE', '%WITHDRAW%')
-                    ->where('a.remarks', 'NOT LIKE', '%Withdraw%')
-                    ->where('a.remarks', 'NOT LIKE', '%NFR%')
-                    ->where('a.remarks', 'NOT LIKE', '%nfr%')
                     ->whereNull('u.deleted_at')
                     ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
                     ->join('users as u', 'u.id', '=', 'a.user_id')
                     ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
-                    ->join('ranks as r', 'r.id', '=', 'pa.rank_id')
+                    // ->join('ranks as r', 'r.id', '=', 'pa.rank_id')
                     ->get()->groupBy('applicant_id');
+
+        $ranks = Rank::pluck('abbr', 'importName');
+        $rank2 = Rank::pluck('abbr', 'name');
+        $ranks[""] = "-";
         
         foreach($applicants as $sss){
             $sss = $sss->sortByDesc('sign_on');
@@ -1594,7 +1594,7 @@ class ApplicationsController extends Controller
                 "mname" => $sss->first()->mname,
                 "lname" => $sss->first()->lname,
                 "suffix" => $sss->first()->suffix,
-                "rname" => $sss->first()->rname,
+                "rname" => isset($ranks[$sss->first()->rank]) ? $ranks[$sss->first()->rank] : isset($ranks2[$sss->first()->rank]) ? isset($ranks2[$sss->first()->rank]) : "-",
                 "fleet" => $sss->first()->fleet,
                 "last_vessel" => $sss->first()
             ];
