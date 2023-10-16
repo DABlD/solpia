@@ -1573,7 +1573,7 @@ class ApplicationsController extends Controller
         $array2 = [];
         $details = [];
 
-        $id = 9999;
+        $id = 1713;
         $id = 9999;
 
         $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet')
@@ -1618,7 +1618,7 @@ class ApplicationsController extends Controller
                     if(isset($ss->sign_on) && isset($ss->sign_off)){
                         $total += $ss->sign_off->diffInDays($ss->sign_on) / 30;
                         if($ss->applicant_id == $id){
-                            echo $ss->manning_agent . ' - ' . $ss->sign_on . ' - ' . $ss->sign_off . ' = ' . $ss->sign_off->diffInDays($ss->sign_on) / 30 . '<br>';
+                            echo $ss->sign_on . ' - ' . $ss->sign_off . ' = ' . $ss->sign_off->diffInDays($ss->sign_on) / 30 . '<br>';
                         }
                     }
                 }
@@ -1627,7 +1627,15 @@ class ApplicationsController extends Controller
                 }
             }
 
+            if($total > 48 && $total < 72){
+                $luc = LineUpContract::where('applicant_id', $sss->first()->applicant_id)->where('status', 'On Board')->first();
+                if($luc){
+                    $total += now()->diffInDays($luc->joining_date) / 30;
+                }
+            }
+
             if($ss->applicant_id == $id){
+                echo $total;
                 die;
             }
 
