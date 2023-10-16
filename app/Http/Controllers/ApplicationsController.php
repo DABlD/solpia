@@ -1573,10 +1573,10 @@ class ApplicationsController extends Controller
         $array2 = [];
         $details = [];
 
-        $id = 1713;
+        $id = 3689;
         $id = 9999;
 
-        $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet')
+        $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet', 'pa.status as pa_s')
                     // ->where('manning_agent', 'LIKE', '%SOLPIA%')
                     // ->where('sea_services.applicant_id', $id)
                     ->whereNull('u.deleted_at')
@@ -1609,7 +1609,8 @@ class ApplicationsController extends Controller
                 // "rname" => isset($ranks[$sss->first()->rank]) ? $ranks[$sss->first()->rank] : isset($rank2[$sss->first()->rank]) ? $rank2[$sss->first()->rank] : "-",
                 "rname" => $rname,
                 "fleet" => $sss->first()->fleet,
-                "last_vessel" => $sss->first()
+                "last_vessel" => $sss->first(),
+                "pa_s" => $sss->first()->pa_s
             ];
             
             $total = 0;
@@ -1627,11 +1628,10 @@ class ApplicationsController extends Controller
                 }
             }
 
-            if($total > 48 && $total < 72){
-                $luc = LineUpContract::where('applicant_id', $sss->first()->applicant_id)->where('status', 'On Board')->first();
-                if($luc){
-                    $total += now()->diffInDays($luc->joining_date) / 30;
-                }
+            $luc = LineUpContract::where('applicant_id', $sss->first()->applicant_id)->where('status', 'On Board')->first();
+            if($luc){
+                $total += now()->diffInDays($luc->joining_date) / 30;
+                $details[$luc->applicant_id]['last_vessel'] = $luc->vessel;
             }
 
             if($ss->applicant_id == $id){

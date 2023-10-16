@@ -68,7 +68,7 @@
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
                                                                 <th>Last Vessel</th>
-                                                                <th>Disembarked On</th>
+                                                                <th>Status</th>
                                                             </tr>
                                                         </thead>
 
@@ -86,8 +86,8 @@
                                                                     <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
-                                                                    <td>{{ $awardee['last_vessel']->vessel_name }}</td>
-                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['pa_s'] }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -121,8 +121,8 @@
                                                                     <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
-                                                                    <td>{{ $awardee['last_vessel']->vessel_name }}</td>
-                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['pa_s'] }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -177,7 +177,7 @@
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
                                                                 <th>Last Vessel</th>
-                                                                <th>Disembarked On</th>
+                                                                <th>Status</th>
                                                             </tr>
                                                         </thead>
 
@@ -195,8 +195,8 @@
                                                                     <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
-                                                                    <td>{{ $awardee['last_vessel']->vessel_name }}</td>
-                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['pa_s'] }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -230,8 +230,8 @@
                                                                     <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
-                                                                    <td>{{ $awardee['last_vessel']->vessel_name }}</td>
-                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['pa_s'] }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -342,14 +342,14 @@
             $('.table').DataTable({
                 lengthMenu: [10, 25, 50, 100, 200],
                 pageLength: 200,
-                columnDefs: [
-                    {
-                        targets: 5,
-                        render: date => {
-                            return toDate(date);
-                        }
-                    }
-                ]
+                // columnDefs: [
+                //     {
+                //         targets: 5,
+                //         render: date => {
+                //             return toDate(date);
+                //         }
+                //     }
+                // ]
             });
         });
     </script>
