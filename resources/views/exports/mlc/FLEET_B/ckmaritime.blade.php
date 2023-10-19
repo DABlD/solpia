@@ -117,7 +117,7 @@
 			(Seafarer)
 		</td>
 		<td colspan="2" style="{{ $center }}">
-			선 명
+			성 명
 			<br style='mso-data-placement:same-cell;' />
 			(Name)
 		</td>
@@ -130,7 +130,7 @@
 			(Birthdate)
 		</td>
 		<td colspan="4" style="{{ $blue }} {{ $center }}">
-			{{ $data->user->birthday }}
+			{{ $data->user->birthday->format('m/d/Y') }}
 		</td>
 	</tr>
 
