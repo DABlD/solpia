@@ -130,7 +130,7 @@
 			(Birthdate)
 		</td>
 		<td colspan="4" style="{{ $blue }} {{ $center }}">
-			{{ $data->user->birthday }}
+			{{ $data->user->birthday->format('m/d/Y') }}
 		</td>
 	</tr>
 
