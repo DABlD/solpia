@@ -808,6 +808,10 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     $this->rows    = 42 + $additional;
                     $this->view    = "CCK";
                 }
+                elseif($rank == "MBY"){
+                    $this->rows    = 40 + $additional;
+                    $this->view    = "MBY";
+                }
                 elseif($rank == "UTY"){
                     $this->rows    = 42 + $additional;
                     $this->view    = "UTY";
