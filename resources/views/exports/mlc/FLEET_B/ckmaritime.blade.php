@@ -179,7 +179,7 @@
 			(Seafarer)
 		</td>
 		<td colspan="2" style="{{ $center }}">
-			선 명
+			성 명
 			<br style='mso-data-placement:same-cell;' />
 			(Name)
 		</td>
