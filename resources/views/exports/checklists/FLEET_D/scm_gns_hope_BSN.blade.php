@@ -80,8 +80,9 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
+					$country = "Marshall Islands";
 					foreach (get_object_vars($data->document_flag) as $flag) {
-						if($flag->country == "Korea" && $flag->type == $doc){
+						if($flag->country == $country && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
@@ -182,21 +183,27 @@
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
-	{{ $doc("SID", "SID", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
 
-	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("BOOKLET", "KOREA BOOKLET", 'flag') }}
+	{{ $section("2. FLAG DOCUMENTS", 0) }} 
+	{{ $doc("BOOKLET", "MARSHALL - APPLICATION", 'flag') }}
 	{{ $doc("BT", "BT-SQC - APPLICATION", 'flag') }}
+	{{ $doc("PSCRB", "PSCRB-SQC - APPLICATION", 'flag') }}
 	{{ $doc("SDSD", "SDSD-SQC - APPLICATION", 'flag') }}
-	{{ $doc("LICENSE", "RANK-SQC-OS - APPLICATION", 'flag') }}
+	{{ $doc("LICENSE", "RANK-SQC-BSN - APPLICATION", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
 	{{ $doc("COC", "COC - RATINGS - II/4", 'lc', 1, 'II/4') }}
+	{{ $doc("COE", "COC - SEAFARER DECK - II/5", 'lc', 1, 'II/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
+	@php
+		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
+		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
+	@endphp
+	{{ $doc($a, $b, 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 1) }}
@@ -204,7 +211,7 @@
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(KOREA)", 'med_cert') }}
+	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(MARSHALL)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
@@ -212,6 +219,7 @@
 	{{ $con("MLC/CBA CONTRACT", 1,0,1) }}
 	{{ $con("PERSONAL DATA RECORD", 1,1,1) }}
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,1,1) }}
+	{{ $con("ALLOTMENT SUMMARY *", 1,0,0) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
 	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc') }}
@@ -219,7 +227,7 @@
 	{{ $doc("GENERAL TRAINING RECORD BOOK", "GENERAL TRAINING RECORD BOOK", 'lc', null, null, 1,0,1) }}
 
 	{{ $section("9. TRAVEL DOCUMENTS", 1) }}
-	{{ $con("PDOS, ETICKET, LOG, OKTB", 1,0,0) }}
+	{{ $con("PDOS, ETICKET, LOG, OKTB, INDONESIA VISA", 1,0,0) }}
 
 	<tr>
 		<td style="font-weight: bold;">REMARKS:</td>
@@ -230,14 +238,10 @@
 	</tr>
 
 	<tr>
-		<td colspan="8" rowspan="4" style="height: 25px;">
+		<td colspan="8" rowspan="4">
 			CONSOLIDATED MARPOL
 			<br style='mso-data-placement:same-cell;' />
 			NBI
-			<br style='mso-data-placement:same-cell;' />
-			POEA CONTRACT*
-			<br style='mso-data-placement:same-cell;' />
-			ALLOTMENT SUMMARY*
 			<br style='mso-data-placement:same-cell;' />
 			POLIO VACCINE*
 		</td>

@@ -831,51 +831,55 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
             }
             elseif($type == "scm_gns_hope"){
                 if($rank == "2/O" || $rank == "3/O"){
-                    $this->rows    = 56 + $additional;
+                    $this->rows    = 52 + $additional;
                     $this->view    = "2O_3O";
                 }
                 elseif($rank == "AB"){
-                    $this->rows    = 45 + $additional;
+                    $this->rows    = 38 + $additional;
                     $this->view    = "AB";
                 }
                 elseif($rank == "OS"){
-                    $this->rows    = 41 + $additional;
+                    $this->rows    = 35 + $additional;
                     $this->view    = "OS";
                 }
                 elseif($rank == "2AE" || $rank == "3E" || $rank == "3AE"){
-                    $this->rows    = 51 + $additional;
+                    $this->rows    = 43 + $additional;
                     $this->view    = "2AE_3AE";
                 }
                 elseif($rank == "OLR1"){
-                    $this->rows    = 43 + $additional;
+                    $this->rows    = 38 + $additional;
                     $this->view    = "OLR1";
                 }
                 elseif($rank == "OLR"){
-                    $this->rows    = 43 + $additional;
+                    $this->rows    = 37 + $additional;
                     $this->view    = "OLR";
                 }
                 elseif($rank == "WPR"){
-                    $this->rows    = 43 + $additional;
+                    $this->rows    = 38 + $additional;
                     $this->view    = "WPR";
                 }
                 elseif($rank == "CCK"){
-                    $this->rows    = 42 + $additional;
+                    $this->rows    = 36 + $additional;
                     $this->view    = "CCK";
                 }
+                elseif($rank == "MBY"){
+                    $this->rows    = 34 + $additional;
+                    $this->view    = "MBY";
+                }
                 elseif($rank == "UTY"){
-                    $this->rows    = 42 + $additional;
+                    $this->rows    = 36 + $additional;
                     $this->view    = "UTY";
                 }
                 elseif($rank == "BSN"){
-                    $this->rows    = 45 + $additional;
+                    $this->rows    = 44 + $additional;
                     $this->view    = "BSN";
                 }
                 elseif($rank == "DCDT"){
-                    $this->rows    = 41 + $additional;
+                    $this->rows    = 35 + $additional;
                     $this->view    = "DCDT";
                 }
                 elseif($rank == "ECDT"){
-                    $this->rows    = 40 + $additional;
+                    $this->rows    = 36 + $additional;
                     $this->view    = "ECDT";
                 }
             }
