@@ -80,12 +80,13 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
-					$country = $type2 ? "Korea" : "Korea";
+					$country = $type2 ? "Korea" : "Panama";
 					foreach (get_object_vars($data->document_flag) as $flag) {
 						if($flag->country == $country && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
+					$type2 = 0;
 				}
 			}
 		}
@@ -183,19 +184,14 @@
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
-	{{ $doc("SID", "SID", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("BOOKLET", "KOREA - APPLICATION", 'flag') }}
-	{{ $doc("BT", "BT-SQC - APPLICATION", 'flag') }}
-	{{ $doc("SDSD", "SDSD-SQC - APPLICATION", 'flag') }}
-	{{ $doc("LICENSE", "RANK-SQC-OLR - APPLICATION", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - SEAFARER DECK - III/5", 'lc', 1, 'III/5') }}
+	{{ $doc("COC", "COC - RATINGS - II/4 - DECK", 'lc', 1, 'II/4') }}
+	{{ $doc("COE", "COC - RATINGS - II/5 - DECK", 'lc', 1, 'II/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
@@ -207,26 +203,25 @@
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 1) }}
-	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
+	{{ $doc("DECK WATCH", "DECK WATCHKEEPING CERT.", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(KOREA)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
+	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
-	{{ $con("MLC/POEA CONTRACT *", 1,0,1) }}
+	{{ $con("POEA/MLC CONTRACT", 1,0,1) }}
 	{{ $con("PERSONAL DATA RECORD", 1,1,1) }}
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,1,1) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
-	{{ $con("DLSM-PRE JOINING", 1,1,1) }}
 	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc') }}
 	{{ $doc("IN HOUSE TRAINING CERT WITH ISM", "IN HOUSE TRAINING CERTIFICATE WITH ISM", 'lc') }}
 	{{ $doc("GENERAL TRAINING RECORD BOOK", "GENERAL TRAINING RECORD BOOK", 'lc', null, null, 1,0,1) }}
 
 	{{ $section("9. TRAVEL DOCUMENTS", 1) }}
-	{{ $con("PDOS, ETICKET, LOG, OKTB, INDONESIA VISA", 1,0,0) }}
+	{{ $con("PDOS, ETICKET, LOG, OKTB, KOREAN VISA", 1,0,0) }}
 
 	<tr>
 		<td style="font-weight: bold;">REMARKS:</td>

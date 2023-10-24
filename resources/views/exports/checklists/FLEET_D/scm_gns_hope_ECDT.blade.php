@@ -81,7 +81,7 @@
 				}
 				else{
 					foreach (get_object_vars($data->document_flag) as $flag) {
-						if($flag->country == "Korea" && $flag->type == $doc){
+						if($flag->country == "Panama" && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
@@ -182,19 +182,12 @@
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
-	{{ $doc("SID", "SID", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("BOOKLET", "KOREA - ACKNOWLEDGEMENT", 'flag') }}
-	{{ $doc("BT", "BT-SQC - ACKNOWLEDGEMENT", 'flag') }}
-	{{ $doc("SDSD", "SDSD-SQC - ACKNOWLEDGEMENT", 'flag') }}
-	{{ $doc("LICENSE", "RANK-SQC-OLR - ACKNOWLEDGEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - SEAFARER DECK - III/5", 'lc', 1, 'III/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
@@ -207,16 +200,15 @@
 
 	{{ $section("5. OTHER CERTIFICATES", 1) }}
 	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
-	{{ $doc("WELDING COURSE", "SMAW NC-1 SHIPBOARD WELDING", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(KOREA)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
+	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
-	{{ $con("POEA CONTRACT *", 1,1,0) }}
-	{{ $con("MLC/CBA CONTRACT *", 1,1,0) }}
+	{{ $con("POEA CONTRACT *", 1,1,1) }}
+	{{ $con("MLC/CBA CONTRACT", 1,0,1) }}
 	{{ $con("PERSONAL DATA RECORD", 1,1,1) }}
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,1,1) }}
 
@@ -237,16 +229,14 @@
 	</tr>
 
 	<tr>
-		<td colspan="8" rowspan="4" style="height: 25px;">
-			CONSOLIDATED MARPOL*
+		<td colspan="8" rowspan="4">
+			CONSOLIDATED MARPOL 1-6*
 			<br style='mso-data-placement:same-cell;' />
-			NBI*
-			<br style='mso-data-placement:same-cell;' />
-			ALLOTMENT SUMMARY*
+			NBI
 			<br style='mso-data-placement:same-cell;' />
 			POEA CONTRACT*
 			<br style='mso-data-placement:same-cell;' />
-			POLIO VACCINE*
+			ALLOTMENT SUMMARY*
 		</td>
 	</tr>
 

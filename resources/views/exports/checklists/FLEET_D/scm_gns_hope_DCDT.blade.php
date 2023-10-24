@@ -81,7 +81,7 @@
 				}
 				else{
 					foreach (get_object_vars($data->document_flag) as $flag) {
-						if($flag->country == "Korea" && $flag->type == $doc){
+						if($flag->country == "Panama" && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
@@ -182,36 +182,24 @@
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
-	{{ $doc("SID", "SID", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("BOOKLET", "KOREA BOOKLET", 'flag') }}
-	{{ $doc("BT", "BT-SQC - APPLICATION", 'flag') }}
-	{{ $doc("SDSD", "SDSD-SQC - APPLICATION", 'flag') }}
-	{{ $doc("LICENSE", "RANK-SQC-WPR - APPLICATION", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
-	{{ $doc("COC", "COC - RATINGS - III/4", 'lc', 1, 'III/4') }}
-	{{ $doc("COE", "COC - RATINGS - III/5", 'lc', 1, 'III/5') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
-	@php
-		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
-		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
-	@endphp
-	{{ $doc($a, $b, 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'lc') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 1) }}
-	{{ $doc("ENGINE WATCH", "ENGINE WATCHKEEPING CERT.", 'lc') }}
+	{{ $doc("DECK WATCH", "DECK WATCHKEEPING CERT.", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(KOREA)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
+	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
 	{{ $con("POEA CONTRACT *", 1,1,1) }}
@@ -236,7 +224,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="8" rowspan="4" style="height: 25px;">
+		<td colspan="8" rowspan="4">
 			CONSOLIDATED MARPOL
 			<br style='mso-data-placement:same-cell;' />
 			NBI
@@ -244,8 +232,6 @@
 			POEA CONTRACT*
 			<br style='mso-data-placement:same-cell;' />
 			ALLOTMENT SUMMARY*
-			<br style='mso-data-placement:same-cell;' />
-			POLIO VACCINE*
 		</td>
 	</tr>
 

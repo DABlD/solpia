@@ -80,7 +80,7 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
-					$country = $type2 ? "Korea" : "Korea";
+					$country = $type2 ? "Korea" : "Panama";
 					foreach (get_object_vars($data->document_flag) as $flag) {
 						if($flag->country == $country && $flag->type == $doc){
 							$docu = $flag;
@@ -183,18 +183,13 @@
 	{{ $section("1. ID DOCUMENTS", 0) }}
 	{{ $doc("PASSPORT", "PASSPORT", 'id') }}
 	{{ $doc("SEAMAN'S BOOK", "SEAMAN'S BOOK", 'id') }}
-	{{ $doc("SID", "SID", 'id') }}
 	{{ $doc("OEC", "OEC", 'id') }}
 	{{ $doc("MCV", "MCV", 'id') }}
 
 	{{ $section("2. FLAG DOCUMENTS", 0) }}
-	{{ $doc("LICENSE", "KOREA TEMPORARY CERT/LICENSE", 'flag') }}
-	{{ $doc("GMDSS/GOC", "KOREA GMDSS TEMPORARY CERT", 'flag') }}
-	{{ $doc("SSO", "SSO ENDORSEMENT", 'flag') }}
 
 	{{ $section("3. NATIONAL LICENSES", 0) }}
 	{{ $doc("COC", "OIC-NW LICENSE (CERTIFICATE) - II/1", 'lc', 1, 'II/1') }}
-	{{ $doc("COE", "OIC-NW LICENSE (ENDORSEMENT) - II/1", 'lc', 1, 'II/1') }}
 	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE - IV/2", 'lc', 1, 'IV/2') }}
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
@@ -214,20 +209,21 @@
 	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
 	{{ $doc("OLC TRAINING F1", "OLC TRAINING DECK - F1", 'lc') }}
 	{{ $doc("OLC TRAINING F3", "OLC TRAINING DECK - F3", 'lc') }}
+	{{ $doc("ARPA TRAINING COURSE", "ARPA/ROPA/RNPUA", 'lc') }}
+	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc') }}
+	{{ $doc("KML TRAINING CERTIFICATE", "KML TRAINING CERTIFICATE", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(KOREA)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
-	{{ $con("MLC/CBA CONTRACT", 1,0,1) }}
+	{{ $con("POEA/MLC CONTRACT", 1,0,1) }}
 	{{ $con("PERSONAL DATA RECORD", 1,1,1) }}
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE", 1,1,1) }}
 
 	{{ $section("8. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
-	{{ $con("DLSM-PRE JOINING EDUCATION REPORT", 1,1,1) }}
 	{{ $doc("ANTI PIRACY", "ANTI PIRACY", 'lc') }}
 	{{ $doc("IN HOUSE TRAINING CERT WITH ISM", "IN HOUSE TRAINING CERTIFICATE WITH ISM", 'lc') }}
 	{{ $doc("GENERAL TRAINING RECORD BOOK", "GENERAL TRAINING RECORD BOOK", 'lc', null, null, 1,0,1) }}
