@@ -923,7 +923,7 @@
                                 <th>Technical<br>Interview</th>
                                 <th>Endorsed<br>To Crewing</th>
                                 <th>Principals<br>Approval</th>
-                                <th>For<br>Medical</th>
+                                <th>Ongoing Medical</th>
                                 <th>On<br>Board</th>
                                 <th>Status</th>
                                 <th>Form</th>
