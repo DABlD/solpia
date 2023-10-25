@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Requirement, Prospect};
+use App\Models\{Requirement, Prospect, Candidate};
 use DB;
 
 class RequirementController extends Controller
@@ -71,6 +71,20 @@ class RequirementController extends Controller
         }
         else{
             $query = $query->where('id', $req->id)->update($req->except(['id', '_token']));
+
+            if($req->status == "CANCELLED"){
+                $candidates = Candidate::where('requirement_id', $req->id)->where('status', '!=', 'REJECTED')->get();
+
+                foreach($candidates as $candidate){
+                    $candidate->status = "REJECTED";
+                    $candidate->remarks = $candidate->remarks . ' / ' . "CANCELLED REQUIREMENT";
+                    $candidate->save();
+
+                    $prospect = Prospect::find($candidate->prospect_id);
+                    $prospect->status = "AVAILABLE";
+                    $prospect->save();
+                }
+            }
         }
     }
 
