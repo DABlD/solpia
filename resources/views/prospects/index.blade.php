@@ -90,6 +90,7 @@
         swal.showLoading();
 		var table = $('#table').DataTable({
             serverSide: true,
+            searching: false,
             pageLength: 20,
             ajax: {
                 url: "{{ route('datatables.prospects') }}",
