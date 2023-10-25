@@ -3,6 +3,7 @@
 	$c = "text-align: center;";
 	$bc = "$b $c";
 
+	$candidates = $data;
 	$data = $data->groupBy('prospect.source');
 
 	$getCount = function($source, $month) use($data){
@@ -17,7 +18,7 @@
 		}
 
 		return $count;
-	}
+	};
 @endphp
 
 <table>
@@ -49,6 +50,11 @@
 		<td style="{{ $c }}">November</td>
 		<td style="{{ $c }}">December</td>
 		<td style="{{ $c }}">Total</td>
+
+		<td></td>
+		<td style="{{ $c }}">Name</td>
+		<td style="{{ $c }}">Rank</td>
+		<td style="{{ $c }}">Vessel</td>
 	</tr>
 
 	<tr>
@@ -69,6 +75,11 @@
 		<td>{{ $getCount('Kalaw', 'Nov') }}</td>
 		<td>{{ $getCount('Kalaw', 'Dec') }}</td>
 		<td>=SUM(E4:P4)</td>
+
+		<td></td>
+		<td style="{{ $c }}">{{ isset($candidates[0]) ? $candidates[0]->prospect->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[0]) ? $candidates[0]->prospect->rank : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[0]) ? $candidates[0]->vessel->name : "" }}</td>
 	</tr>
 
 	<tr>
@@ -89,6 +100,11 @@
 		<td>{{ $getCount('Online', 'Nov') }}</td>
 		<td>{{ $getCount('Online', 'Dec') }}</td>
 		<td>=SUM(E5:P5)</td>
+
+		<td></td>
+		<td style="{{ $c }}">{{ isset($candidates[1]) ? $candidates[1]->prospect->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[1]) ? $candidates[1]->prospect->rank : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[1]) ? $candidates[1]->vessel->name : "" }}</td>
 	</tr>
 
 	<tr>
@@ -109,6 +125,11 @@
 		<td>{{ $getCount('Walk-in', 'Nov') }}</td>
 		<td>{{ $getCount('Walk-in', 'Dec') }}</td>
 		<td>=SUM(E6:P6)</td>
+
+		<td></td>
+		<td style="{{ $c }}">{{ isset($candidates[2]) ? $candidates[2]->prospect->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[2]) ? $candidates[2]->prospect->rank : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[2]) ? $candidates[2]->vessel->name : "" }}</td>
 	</tr>
 
 	<tr>
@@ -129,6 +150,11 @@
 		<td>{{ $getCount('Source', 'Nov') }}</td>
 		<td>{{ $getCount('Source', 'Dec') }}</td>
 		<td>=SUM(E7:P7)</td>
+
+		<td></td>
+		<td style="{{ $c }}">{{ isset($candidates[3]) ? $candidates[3]->prospect->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[3]) ? $candidates[3]->prospect->rank : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[3]) ? $candidates[3]->vessel->name : "" }}</td>
 	</tr>
 
 	<tr>
@@ -149,6 +175,38 @@
 		<td>{{ $getCount('', 'Nov') }}</td>
 		<td>{{ $getCount('', 'Dec') }}</td>
 		<td>=SUM(E8:P8)</td>
+
+		<td></td>
+		<td style="{{ $c }}">{{ isset($candidates[4]) ? $candidates[4]->prospect->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[4]) ? $candidates[4]->prospect->rank : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[4]) ? $candidates[4]->vessel->name : "" }}</td>
 	</tr>
+
+	@for($i = 5; $i < sizeof($candidates); $i++)
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+
+			<td></td>
+			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->prospect->name : "" }}</td>
+			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->prospect->rank : "" }}</td>
+			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->vessel->name : "" }}</td>
+		</tr>
+	@endfor
 
 </table>
