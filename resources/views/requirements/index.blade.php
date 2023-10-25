@@ -131,11 +131,16 @@
                 {
                     targets: 1,
                     render: vessel =>{
-                        return `
-                            ${vessel.name}
-                            <br>
-                            <div style="color: orange;">${vessel.type}</div>
-                        `;
+                        if(vessel){
+                            return `
+                                ${vessel.name}
+                                <br>
+                                <div style="color: orange;">${vessel.type}</div>
+                            `;
+                        }
+                        else{
+                            return "TBN";
+                        }
                     }
                 }
             ],
@@ -243,7 +248,7 @@
                         </div>
                         <div class="col-md-10 iInput">
                             <select name="vessel_id" class="form-control">
-                                <option value=""></option>
+                                <option value="">TBN</option>
                             </select>
                         </div>
                     </div></br>
@@ -298,7 +303,8 @@
 
                             $('[name="vessel_id"]').append(vesselString);
                             $('[name="vessel_id"]').select2({
-                                placeholder: 'Select Vessel'
+                                // placeholder: 'Select Vessel',
+                                tags: true
                             });
                         }
                     });
@@ -357,8 +363,8 @@
                 preConfirm: () => {
                     swal.showLoading();
                     return new Promise(resolve => {
-                        if($('[name="vessel_id"]').val() == "" || $('[name="rank"]').val() == ""){
-                            swal.showValidationError('Vessel and Rank is Required');
+                        if($('[name="rank"]').val() == ""){
+                            swal.showValidationError('Rank is Required');
                         }
                             
                         setTimeout(() => {resolve()}, 500);
@@ -472,7 +478,7 @@
                         </div>
                         <div class="col-md-10 iInput">
                             <select name="vessel_id" class="form-control">
-                                <option value=""></option>
+                                <option value="">TBN</option>
                             </select>
                         </div>
                     </div></br>
@@ -541,7 +547,8 @@
                             $('[name="vessel_id"]').append(vesselString);
                             $('[name="vessel_id"]').val(data.vessel_id);
                             $('[name="vessel_id"]').select2({
-                                placeholder: 'Select Vessel'
+                                // placeholder: 'Select Vessel'
+                                tags: true
                             });
                         }
                     });
@@ -611,7 +618,7 @@
                 preConfirm: () => {
                     swal.showLoading();
                     return new Promise(resolve => {
-                        if($('[name="vessel_id"]').val() == "" || $('[name="rank"]').val() == ""){
+                        if($('[name="rank"]').val() == ""){
                             swal.showValidationError('Vessel and Rank is Required');
                         }
                             
