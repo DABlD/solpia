@@ -909,7 +909,16 @@ class DatatablesController extends Controller
 
 	public function requirements(Request $req){
 		$array = Requirement::where('fleet', 'like', $req->fleet)
-					->where('vessel_id', 'like', $req->vessel)
+					// ->where('vessel_id', 'like', $req->vessel)
+					->where(function($q) use($req){
+					    if($req->vessel == "%%"){
+						    $q->where('vessel_id', 'like', $req->vessel);
+						    $q->orWhereNull('vessel_id');
+					    }
+					    else{
+						    $q->where('vessel_id', 'like', $req->vessel);
+					    }
+					})
 					->where('rank', 'like', $req->rank)
 					// ->where('joining_date', 'like', $req->date)
 					->where('status', 'like', $req->status);
