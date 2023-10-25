@@ -360,7 +360,7 @@ class Deployment implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $fills[1] = [
-                    'B3:Q3'
+                    'B3:Q3', 'S3:U3'
                 ];
 
                 $fills[2] = [
@@ -460,6 +460,9 @@ class Deployment implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
                 $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(6);
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(6);
+
+                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(26);
+                $event->sheet->getDelegate()->getColumnDimension('U')->setWidth(26);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
