@@ -2274,6 +2274,7 @@
                         <td>${ss.principal}</td>
                         <td>${ss.sign_on != null ? moment(ss.sign_on).format("MMM DD, YYYY") : "---"}</td>
                         <td>${ss.sign_off != null ? moment(ss.sign_off).format("MMM DD, YYYY") : "---"}</td>
+                        <td>${moment(ss.sign_on).diff(moment(ss.sign_off), 'months')}</td>
                         <td>${ss.remarks}</td>
                     </tr>
                 `;
@@ -2297,6 +2298,7 @@
                                     <th>Principal</th>
                                     <th>On</th>
                                     <th>Off</th>
+                                    <th>MOB</th>
                                     <th>Remarks</th>
                                 </tr>
                             </thead>
