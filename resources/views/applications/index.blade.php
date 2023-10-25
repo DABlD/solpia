@@ -2274,7 +2274,7 @@
                         <td>${ss.principal}</td>
                         <td>${ss.sign_on != null ? moment(ss.sign_on).format("MMM DD, YYYY") : "---"}</td>
                         <td>${ss.sign_off != null ? moment(ss.sign_off).format("MMM DD, YYYY") : "---"}</td>
-                        <td>${moment(ss.sign_on).diff(moment(ss.sign_off), 'months')}</td>
+                        <td>${moment(ss.sign_off).diff(moment(ss.sign_on), 'months')}</td>
                         <td>${ss.remarks}</td>
                     </tr>
                 `;
