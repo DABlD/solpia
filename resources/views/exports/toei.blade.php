@@ -342,11 +342,16 @@
 								if(in_array($ref, $regulations)){
 									if($hl){
 										if($key >= $hl){
-											$hl = $key;
-											$docu = $lc;
 											// IF FOR OFFICERS ONLY
-											// if($hl >= 2){
-											// }
+											if($key >= 2){
+												if(str_starts_with($lc->type, "COC")){
+													$docu = $lc;
+												}
+											}
+											else{
+												$hl = $key;
+												$docu = $lc;
+											}
 										}
 									}
 									else{
