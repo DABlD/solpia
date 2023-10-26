@@ -421,11 +421,13 @@
         function showDetails(data){
             let exp = data.exp;
 
-            exp = "";
-            
             try{
                 if(data.exp){
                     exp = JSON.parse(data.exp);
+
+                    if(exp == null){
+                        exp = "";
+                    }
                 }
                 else{
                     exp = "x";
