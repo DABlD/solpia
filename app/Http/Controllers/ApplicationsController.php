@@ -132,7 +132,7 @@ class ApplicationsController extends Controller
         // $applicant->load('sea_service');
         // $applicant->load('document_flag');
         // $applicant->load('document_lc');
-        $order = ['Father', 'Mother', 'Spouse', 'Son', 'Daughter', 'Beneficiary'];
+        $order = ['Father', 'Mother', 'Spouse', 'Partner', 'Son', 'Daughter', 'Beneficiary'];
         
         $applicant->family_data = $applicant->family_data->sortBy(function($model) use ($order){
             return array_search($model->type, $order);

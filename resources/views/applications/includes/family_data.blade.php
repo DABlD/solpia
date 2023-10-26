@@ -29,6 +29,14 @@
                 <span class="fa fa-plus"></span>
                 Spouse
             </a>
+
+            <u><h3><strong>Partner</strong></h3></u>
+            <div class="Partner"></div>
+            <span class="PartnerCount fd-count">0</span>
+            <a class="btn btn-success" onclick="addFD('Partner')">
+                <span class="fa fa-plus"></span>
+                Partner
+            </a>
             
             <u><h3><strong>Son</strong></h3></u>
             <div class="Son"></div>
@@ -60,7 +68,7 @@
 
             let count = parseInt($(`.${type}Count`)[0].innerText);
 
-            if(type == 'Spouse'){
+            if(type == 'Spouse' || type == 'Partner'){
                 if(count != 0){
                     swal({
                         type: 'error',
