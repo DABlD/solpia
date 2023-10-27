@@ -278,7 +278,7 @@
 		</td>
 		<td colspan="2"></td>
 		<td>RANK:</td>
-		<td colspan="7" style="{{ $bold }}">{{ $data->rank }}</td>
+		<td colspan="7" style="{{ $bold }}">{{ $data->rank ?? "-" }}</td>
 	</tr>
 
 	<tr>
