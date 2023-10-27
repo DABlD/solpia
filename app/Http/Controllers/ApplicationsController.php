@@ -1339,13 +1339,11 @@ class ApplicationsController extends Controller
                             $applicant->departure = $pa->eld;
                         }
                         else{
-                            $temp = SeaService::where('applicant_id', $id)->latest('sign_on')->first()->rank;
-                            $tRank = Rank::where('name', $temp)->first();
-                            if($tRank){
-                                $applicant->rank = $tRank->abbr;
-                            }
-                            else{
-                                $applicant->rank = null;
+                            $temp = SeaService::where('applicant_id', $id)->latest('sign_on')->first();
+                            $applicant->rank = null;
+
+                            if($temp){
+                                $applicant->rank = Rank::where('name', $temp->rank)->first()->abbr;
                             }
                         }
                     }
