@@ -1340,7 +1340,13 @@ class ApplicationsController extends Controller
                         }
                         else{
                             $temp = SeaService::where('applicant_id', $id)->latest('sign_on')->first()->rank;
-                            $applicant->rank = Rank::where('name', $temp)->first()->abbr;
+                            $tRank = Rank::where('name', $temp)->first();
+                            if($tRank){
+                                $applicant->rank = $tRank->abbr;
+                            }
+                            else{
+                                $applicant->rank = null;
+                            }
                         }
                     }
                 }
