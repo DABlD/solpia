@@ -7,38 +7,21 @@
 	$red = 'color: #FF0000;';
 
 	$fill = function($height = 15){
-		echo "<tr><td colspan='8' style='height: $height;'></td></tr>";
+		echo "<tr><td colspan='12' style='height: $height;'></td></tr>";
 	};
 
 	$d1 = function($text, $bo = false) use($b){
 		if($bo){
 			echo "
 				<tr>
-					<td colspan='8' style='$b'>$text</td>
+					<td colspan='12' style='$b'>$text</td>
 				</tr>
 			";
 		}
 		else{
 			echo "
 				<tr>
-					<td colspan='8'>$text</td>
-				</tr>
-			";
-		}
-	};
-
-	$d2 = function($text, $bo = false) use($b){
-		if($bo){
-			echo "
-				<tr>
-					<td colspan='8' style='$b'> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎$text</td>
-				</tr>
-			";
-		}
-		else{
-			echo "
-				<tr>
-					<td colspan='8'> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎$text</td>
+					<td colspan='12'>$text</td>
 				</tr>
 			";
 		}
@@ -49,232 +32,191 @@
 
 <table>
 	<tr>
-		<td colspan="8" style="{{ $bc }} font-size: 20px; height: 80px;">
+		<td colspan="12" style="{{ $bc }}  font-size: 20px;">
 			Contract of Employment for Seafarer
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="8">The following parties to the contract agree to fully comply with the terms stated hereinafter:</td>
+		<td colspan="12" style="font-size: 8px;">The following parties to the contract agree to fully comply with the terms stated hereinafter:</td>
+	</tr>
+
+	{{-- SHIPOWNER START --}}
+
+	<tr>
+		<td rowspan="6" style="{{ $c }}">Shipowner</td>
+		<td colspan="3">Name of the</td>
+		<td colspan="6" rowspan="2" style="{{ $bc }}">KOREA LINE CORPORATION</td>
+		<td rowspan="2">Phone number</td>
+		<td style="{{ $bc }}" rowspan="2">02-3701-0114</td>
 	</tr>
 
 	<tr>
-		<td colspan="2" rowspan="3" style="{{ $c }} height: 40px;">
-			Shipowner
-		</td>
-		<td>
-			Name of the company
-		</td>
-		<td colspan="3" style="{{ $c }}">
-			{{-- FILL --}}
-			CHANG MYUNG SHIPPING
-		</td>
-		<td>Phone number</td>
-		<td style="{{ $c }}">
-			{{-- FILL --}}
-			+82-2-2175-7000
-		</td>
+		<td colspan="3">company</td>
 	</tr>
 
 	<tr>
-		<td style="height: 40px;">
-			Location of the company
-		</td>
-		<td colspan="5">
-			{{-- FILL --}}
-			9F, 92, SAEMUNAN-RO, JONGNO-GU, SEOUL, KOREA
-		</td>
+		<td colspan="3">Location of</td>
+		<td colspan="8" rowspan="2" style="{{ $bc }}">SM R&#38;D CENTER, 78, MAGOKJUNGANG8-RO, GANGSEO-GU, SEOUL, KOREA</td>
 	</tr>
 
 	<tr>
-		<td style="height: 40px;">
-			Name of the employee
-		</td>
-		<td colspan="3" style="{{ $c }}">
-			{{-- FILL --}}
-			KUK JONG JIN
-		</td>
-		<td>
-			Identification number
-		</td>
-		<td style="{{ $c }}">
-			{{-- FILL --}}
-			110-81-36497
-		</td>
+		<td colspan="3">the company</td>
 	</tr>
 
 	<tr>
-		<td rowspan="5" colspan="2" style="{{ $c }}">
-			Seafarer
-		</td>
-		<td rowspan="2">
-			Name of seafarer
-		</td>
-		<td rowspan="2" colspan="3" style="{{ $c }} {{ $blue }} height: 20px;">
-			{{ $data->user->namefull }}
-		</td>
+		<td colspan="3">Name of the</td>
+		<td colspan="6" rowspan="2" style="{{ $bc }}">KIM MAN TAE</td>
+		<td rowspan="2">Identification number</td>
+		<td rowspan="2" style="{{ $bc }}">101-81-24624</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">employee</td>
+	</tr>
+
+	{{-- SHIPOWNER END --}}
+
+	{{-- SEAFARER START --}}
+
+	<tr>
+		<td rowspan="6" style="{{ $c }}">Seafarer</td>
+		<td colspan="3">Name of</td>
+		<td colspan="6" rowspan="2" style="{{ $bc }} {{ $blue }}">{{ $data->user->namefull }}</td>
 		<td>Date of birth</td>
-		<td style="{{ $blue }}">{{ $data->user->birthday ? $data->user->birthday->format("d-M-y") : "---" }}</td>
+		<td style="{{ $bc }} {{ $blue }}">{{ now()->format('d/M/Y') }}</td>
 	</tr>
 
 	<tr>
-		<td style="height: 20px;">Age</td>
-		<td style=" {{ $blue }}">{{ $data->user->birthday ? $data->user->birthday->age : "---" }}</td>
+		<td colspan="3">seafarer</td>
+		<td>Age</td>
+		<td style="{{ $bc }} {{ $blue }}">{{ $data->user->birthday ? $data->user->birthday->age : "---" }}</td>
 	</tr>
 
 	<tr>
-		<td rowspan="2">Sex</td>
-		<td rowspan="2" colspan="3" style=" {{ $blue }}">MALE</td>
-		<td style="height: 20px;">Birth Place</td>
-		<td style="{{ $c }} {{ $blue }} height: 20px;">{{ $data->birth_place }}</td>
+		<td colspan="3" rowspan="2">Sex</td>
+		<td colspan="6" rowspan="2" style="{{ $bc }} {{ $blue }}">Male</td>
+		<td rowspan="2">Birth place</td>
+		<td rowspan="2" style="{{ $bc }} {{ $blue }}">{{ $data->birth_place }}</td>
 	</tr>
 
-	<tr>
-		<td style="height: 20px;">Nationality</td>
-		<td style=" {{ $blue }}">FILIPINO</td>
-	</tr>
+	<tr></tr>
 
 	<tr>
-		<td colspan="2" style="height: 40px;">
-			Address of seafarer
-			<br style='mso-data-placement:same-cell;' />
-			(in home country)
-		</td>
-		<td colspan="4" style="{{ $c }} {{ $blue }}">
-			{{ $data->user->address }}
+		<td colspan="8">Address of seafarer</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }} {{ $blue }}">
+			{{ $data->user->address ?? $data->provincial_address }}
 		</td>
 	</tr>
+
+	<tr>
+		<td colspan="8">(in home country)</td>
+	</tr>
+
+	{{-- SEAFARER END --}}
 
 	{{ $fill() }}
+
 
 	{{ $d1("1. Contract Period", true) }}
-
-	{{ $fill() }}
-
 	<tr>
-		<td colspan="2">1.1 from</td>
-		<td style="{{ $c }} {{ $blue }}">({{ $start->format('dMY') }})</td>
-		<td style="{{ $c }}">to</td>
-		<td colspan="2" style="{{ $c }} {{ $blue }}">({{ $start->add($data->employment_months, 'months')->format('dMY') }})</td>
+		<td colspan="3">1.1. from</td>
+		<td style="{{ $bc }} {{ $blue }}">({{ $start->format('d/M/Y') }})</td>
+		<td colspan="2" style="{{ $c }}">to</td>
+		<td colspan="4" style="{{ $bc }} {{ $blue }}">({{ $start->add($data->employment_months, 'months')->format('d/M/Y') }})</td>
 		<td colspan="2"></td>
 	</tr>
-	{{ $d1("1.2 the port of sailing ($data->port) to the port of destination ( NOT FIXED )") }}
+
+	<tr>
+		<td colspan="3">1.2. the port of sailing</td>
+		<td colspan="5" style="{{ $bc }} {{ $blue }}">({{ $data->port }})</td>
+		<td colspan="2" style="{{ $c }}">to the port of destination</td>
+		<td colspan="2">UNFIXED</td>
+	</tr>
 
 	{{ $fill() }}
 
-	{{ $d1("2. Advanced Notice of Rescission of the Seafarer's Employment Contract", true) }}
+	{{ $d1("2. Advance Notice of Rescission of the Seafarer's Employment Contract", true) }}
+	<tr>
+		<td colspan="10">If the shipowner or the seafarer wishes to make a rescission of the seafarer's employment contract, to the extent that</td>
+		<td colspan="2" style="{{ $blue }}">the seafarer must make an advance notice</td>
+	</tr>
 
-	{{ $fill() }}
-	{{ $d2("If the shipowner of the seafarer wishes to make a rescission of the seafarer's employment contract, to the") }}
-	{{ $d2("extent that the seafarer must make an advance notice of rescission to the shipowner before 15 days and to ") }}
-	{{ $d2("the extent that the shipowner must make a written advance notice of rescission to the more than 30 days, prior ") }}
-	{{ $d2("to the rescission of the contract.") }}
+	<tr>
+		<td colspan="12">of rescission to the shipowner before 7 days and to the extent that the shipowner must make a written advance notice of rescission to the more than 30 days, prior to the rescission of the contract.</td>
+	</tr>
 
 	{{ $fill() }}
 
 	{{ $d1("3. Vessel of Employment and Rank", true) }}
-
-	{{ $fill() }}
-
 	<tr>
-		@if(str_contains($data->vessel->type, "BUL"))
-			<td colspan="8">3.1 Vessel of Employment</td>
-		@else
-			<td colspan="7">3.1 Vessel of Employment</td>
-			<td style="{{ $blue }}">{{ $data->vessel->name }}</td>
-		@endif
-	</tr>
-
-	{{ $fill() }}
-
-	<tr>
-		<td></td>
-		<td colspan="2">Official No.</td>
-		<td colspan="2" style="{{ $c }} {{ $blue }}">{{ $data->vessel->imo }}</td>
-		<td colspan="2">Flag</td>
-		<td style="{{ $c }} {{ $blue }}">{{ $data->vessel->flag }}</td>
+		<td colspan="9">3.1. Vessel of Employment</td>
+		<td style="{{ $b }} {{ $blue }}">{{ $data->vessel->name }}</td>
+		<td colspan="2"></td>
 	</tr>
 
 	<tr>
-		<td></td>
-		<td colspan="2">Gross Tonnage</td>
-		<td colspan="2" style="{{ $c }} {{ $blue }}">{{ $data->vessel->gross_tonnage }}</td>
-		<td colspan="2">Year built (Keel Laying)</td>
-		<td style="{{ $c }} {{ $blue }}">{{ $data->vessel->year_build }}</td>
+		<td>Official No.</td>
+		<td colspan="3" style="{{ $blue }} {{ $b }}">{{ $data->vessel->imo }}</td>
+		<td colspan="5">Flag.</td>
+		<td style="{{ $blue }} {{ $b }}">{{ $data->vessel->flag }}</td>
+		<td colspan="2"></td>
 	</tr>
-
-	{{ $fill() }}
 
 	<tr>
-		<td colspan="2">3.2 Rank:</td>
-		<td colspan="6" style="{{ $blue }}">{{ $data->pro_app->rank->abbr }}</td>
+		<td>Gross Tonnage</td>
+		<td colspan="3" style="{{ $blue }} {{ $b }}">{{ $data->vessel->gross_tonnage }}</td>
+		<td colspan="5">Year built</td>
+		<td style="{{ $blue }} {{ $b }}">{{ $data->vessel->year_build }}</td>
+		<td colspan="2"></td>
+	</tr>
+
+	<tr>
+		<td>3.2 Rank:</td>
+		<td colspan="3" style="{{ $blue }} {{ $b }}">{{ $data->pro_app->rank->abbr }}</td>
+		<td colspan="7"></td>
 	</tr>
 
 	{{ $fill() }}
-
 	{{ $d1("4. Hours of Work and Overtime", true) }}
+	{{ $d1("4.1. The hours of work on board shall be eight hours in a day and forty hours in a week.") }}
+	{{ $d1("4.2. Overtime") }}
+	{{ $d1("1) The hours of work may be extended for sixteen hours as a maximum in a week by the agreement of the persons concerned.") }}
 
 	{{ $fill() }}
-
-	{{ $d1("4.1. The hours of work on board shall be eight hours in a day and forty hours in a week. ") }}
-	{{ $d1("4.2. Overtime ") }}
-
-	{{ $fill() }}
-
-	{{ $d2("1) The hours of work may be extended for sixteen hours as a maximum in a week by the agreement of the") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎persons concerned.") }}
-
-	{{ $d2("2) Notwithstanding the provision of paragraph 4.2.1), the shipowner may give an order of overtime work") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎within sixteen hours in a week to the crew who is performing the") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎duty of navigational watch and within 4 hours in a week to other crew.") }}
-
-	{{ $d2("3) When there is an unavoidable circumstance such as securing the safety of ship operation etc., the") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎shipowner may give an order of overtime work to the crew even though it exceeds the hours of work") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎prescribed in paragraphs 1) and 2)") }}
-
-	{{ $fill() }}
-
-	{{ $d1("4.3. Overtime allowance:") }}
-
 	<tr>
-		<td colspan="3"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎The shipowner shall pay a (</td>
-		<td colspan="2" style="{{ $blue }} {{ $c }}">FIXED / GUARANTEED</td>
-		<td colspan="3">) overtime allowance equivalent to the amount to seafarer</td>
+		<td colspan="4">2) Notwithstanding the provision of paragraph</td>
+		<td style="{{ $red }} {{ $c }} {{ $und }}">4.1)</td>
+		<td colspan="7">the shipowner may give an order of overtime work within sixteen hours in a week to the crew who is performing</td>
 	</tr>
 
-	{{ $d2("for the work as provision of paragraph 4.2.") }}
+	<tr>
+		<td colspan="12">the duty of navigational watch and within 4 hours in a week to other crew. </td>
+	</tr>
 
 	{{ $fill() }}
 
+	<tr>
+		<td colspan="12">
+			3) When there is an unavoidable circumstance such as securing the safety of ship operation etc., the shipowner may give an order of overtime work to the crew even though it exceeds the hours of work prescribed in paragraphs 1) and 2)
+		</td>
+	</tr>
+
+	{{ $fill() }}
+	{{ $d1("4.3. Overtime Allowance:") }}
+	{{ $fill() }}
+	{{ $d1("The shipowner shall pay an fixed overtime allowance equivalent to the amount to seafarer for the work as provision of paragraph 4.2.") }}
+	{{ $fill() }}
 	{{ $d1("5. Hours of Rest and Holiday", true) }}
-
 	{{ $fill() }}
-
-	{{ $d1("5.1. The shipowner shall give the crew ten hours of rest or more in any 24 hour period and seventy seven hours") }}
-	{{ $d2("of rest or more in any seven-day period.") }}
-
+	{{ $d1("5.1. The shipowner shall give the crew ten hours of rest or more in any 24 hour period and seventy seven hours of rest or more in any seven-day period.") }}
 	{{ $fill() }}
-
-	{{ $d1("5.2. Hours of rest may be divided into no more than two periods, one of which shall be at least six hours in") }}
-	{{ $d2("length, and the interval between consecutive periods of rest shall not exceed 14 hours.") }}
-
+	{{ $d1("5.2. Hours of rest may be divided into no more than two periods, one of which shall be at least six hours in length, and the interval between consecutive periods of rest shall not exceed 14 hours.") }}
 	{{ $fill() }}
-
 	{{ $d1("5.3. Holiday of seafarers is Saturday and Sunday and Korean legal holiday, worker’s day.") }}
-
 	{{ $fill() }}
-
-	{{ $d1("6. Daily victualling expenses : USD12.00 / DAY", true) }}
-
-	{{ $fill() }}
-
-	{{ $d1("7. Payment", true) }}
-
-	{{ $fill() }}
-
-	{{ $d1('7.1 Consolidated pay and benefits') }}
-
-	{{ $fill() }}
+	{{ $d1("6. Payment", true) }}
+	{{ $d1("6.1. Consolidated pay and benefits") }}
 
 	@php
 		$wage = $data->wage;
@@ -292,191 +234,200 @@
 		$so = number_format($so, 2);
 	@endphp
 
-	{{ $d2("1) Basic wage : " . $basic . " (USD)") }}
-	{{ $d2("2) Guaranteed Overtime Allowance") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎&#9312; O/T : " . $ot . "(USD) * Calculation method : Basic wage / 173HRS X 103hrs x 1.25") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎&#9313; Other Allowance (Subsistence Allowance + Owners Allowance): " . $so . " (USD)") }}
-	{{ $d2("3) Leave pay : " . $lp . "(USD) * Calculation method : Basic wage x 9days / 30days") }}
-	{{ $d2("4) F/S/A (Fixed Supervision Allowance) if applicable : " . $sa . " (USD)") }}
-	{{ $d2("5) C/B(Contract completion Bonus) : " . $ccb . " (USD)") }}
-	{{ $d2("6) Monthly total : " . $total . " (USD) * Calculation Method : 1)+2)+3)+4)+5)") }}
-	{{ $d2("7) GOVT. Tax deduction : AS REGULATIONS") }}
-	{{ $d2("8) Health and social security protection benefits") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎- Shipowner provides medical care, sickness benefit, employment injury benefit, invalidity benefit, family") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎benefit and survivors benefit to the seafarer.") }}
+	<tr>
+		<td colspan="12">1) Consolidated pay</td>
+	</tr>
+
+	<tr>
+		<td colspan="4">&#9312; Monthly total wages:</td>
+		<td style="{{ $bc }}">US$</td>
+		<td colspan="1"></td>
+		<td colspan="3" style="{{ $bc }}">{{ $total }}</td>
+		<td colspan="3" style="{{ $blue }}">After deduction FKSU Membership Fee</td>
+	</tr>
+
+	<tr>
+		<td colspan="4">&#9313; Basic Wage:</td>
+		<td style="{{ $bc }}">US$</td>
+		<td colspan="1"></td>
+		<td colspan="3" style="{{ $bc }}">{{ number_format($basic, 2) }}</td>
+		<td colspan="3" style="{{ $blue }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="12">2) Fixed Overtime Allowances, Other Allowances, deduction and calculation method</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $und }}">&#9312; O/T:</td>
+		<td colspan="2"></td>
+		<td style="{{ $bc }}">US$</td>
+		<td colspan="1"></td>
+		<td colspan="3" style="{{ $bc }}">{{ number_format($ot, 2) }}</td>
+		<td colspan="3">Calculation method: Basic / 173hrs x 1.25 x 103hrs</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $und }}">&#9313; Other allowances</td>
+		<td colspan="2" style="{{ $red }} {{ $und }}">(Owner's Allowance):</td>
+		<td style="{{ $bc }}">US$</td>
+		<td colspan="1"></td>
+		<td colspan="3" style="{{ $bc }}">{{ $so }}</td>
+		<td colspan="3">Calculation method: OWNER'S DISCRETION</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $und }}">&#9314; Leave pay:</td>
+		<td colspan="2"></td>
+		<td style="{{ $bc }}">US$</td>
+		<td colspan="1"></td>
+		<td colspan="3" style="{{ $bc }}">{{ number_format($lp, 2) }}</td>
+		<td colspan="3">Calculation method: Basic wage x 9days / 30days</td>
+	</tr>
+
+	<tr>
+		<td colspan="4">&#9315; FKSU Membership Fee:</td>
+		{{-- <td colspan="1"></td> --}}
+		<td style="{{ $bc }}">US$</td>
+		<td colspan="1"></td>
+		<td colspan="3" style="{{ $bc }}">40.00</td>
+		<td colspan="3">As IBF FKSU CA (BBCHP) Article 33</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">&#9316; GOVT. Tax deduction: </td>
+		<td colspan="9" style="{{ $b }}">AS REGULATIONS</td>
+	</tr>
+
+	{{ $d1("3) Health and social security protection benefits - Shipowner provides medical care, sickness benefit, employment injury benefit, ") }}
+	{{ $d1("invalidity benefit, family benefit and survivors’ benefit to the seafarer.") }}
+
+	{{ $d1("6.2. Payment date:") }}
+	<tr>
+		<td colspan="2" style="{{ $blue }}">Every 15th next month.</td>
+		<td colspan="10">If the payment date falls on a holiday, payment will be made on the day before the holiday.</td>
+	</tr>
+	{{ $d1("6.3. Payment methods: Payment will be paid to seafarer or credited to the bank account of seafarer.") }}
 
 	{{ $fill() }}
+	{{ $d1("7. Paid Leave", true) }}
+	<tr>
+		<td colspan="8">7.1. The shipowner shall provide paid leave to the seafarer who has completed (</td>
+		<td style="{{ $blue }} {{ $c }}">9</td>
+		<td colspan="3">) months of continuous service on board(services on the vessel in repair or laid up shall</td>
+	</tr>
 
-	{{ $d1("7.2. Payment date:") }}
-	{{ $d2("(   ) of every following month. If the payment date falls on a holiday, payment will be made on the day") }}
-	{{ $d2("before the holiday.") }}
+	<tr>
+		<td colspan="2">be included) within (</td>
+		<td>3</td>
+		<td colspan="9">) months from the time of completion of the service. However, the commencement of paid leave may be</td>
+	</tr>
 
-	{{ $fill() }}
-
-	{{ $d1("7.3. Payment methods: ") }}
-	{{ $d2("Payment will be paid to seafarer or credited to the bank account of seafarer.") }}
-
-	{{ $fill() }}
-
-	{{ $d1("8. Paid Leave", 2) }}
-
-	{{ $fill() }}
-
-	{{ $d1("8.1. The shipowner shall provide paid leave to the seafarer who has completed ( 8 ) months of continuous service") }}
-	{{ $d2("on board(services on the vessel in repair or laid up shall be included) within ( 4 ) months from the time of") }}
-	{{ $d2("However, the commencement of paid leave may be extended until the vessel's entry into port when the") }}
-	{{ $d2("vessel is under way.") }}
-
-	{{ $fill() }}
-
-	{{ $d1("8.2. The leave pay should be given to seafarers even though the seafarers could not complete the contract.") }}
-
-	{{ $fill() }}
-
-	{{ $d1("8.3. The number of days of paid leave pursuant to 7.1 and 7.2 shall be ( 9 ) days per one month of continuous") }}
-	{{ $d2("service on board.") }}
-
-	{{ $fill() }}
-
-	{{ $d1("8.4. In the calculation of the number of days of paid leave, the service period on board of less than one month") }}
-	{{ $d2("shall be calculated at a rate of days, but a fraction of less than one day shall be one day.") }}
-
-	{{ $fill() }}
-
-	{{ $d1("8.5. The time and place of port granting paid leave shall be decided on the negotiation between the shipowner") }}
-	{{ $d2("and the seafarer.") }}
-
-	{{ $fill() }}
-
-	{{ $d1("8.6. The shipowner shall pay basic wages to the seafarer during the seafarer's vacation as an allowance for paid") }}
-	{{ $d2("leave.") }}
-
-	{{ $fill() }}
-
-	{{ $d1("9. Repatriation", true) }}
-	{{ $d1("9.1. Shipowner shall ensure that seafarers are entitled to repatriation in the following circumstances.") }}
-
-	{{ $fill() }}
-
-	{{ $d2("1) If the seafarers’ employment agreement expires while they are aboard") }}
-	{{ $d2("2) When the seafarers’ employment agreement in terminated by the shipowner or by the seafarer for") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎justified reasons") }}
-	{{ $d2("3) When the seafarers are no longer able to carry out their duties under their employment agreement or ") }}
-	{{ $d2(" ‎‏‏‎ ‎‏‏‎ ‎‏‏‎cannot be excepted to carry them out in the specific circumstance") }}
-
-	{{ $fill() }}
-	{{ $d1("9.2. If the repatriation is serious default of the seafarer’s employment obligations notwithstanding the provision") }}
-	{{ $d2("of paragraph 8.1,the seafarer shall be liable a subset of the cost of repatriation in accordance with collective") }}
-	{{ $d2("agreement.") }}
-
-	{{ $fill() }}
-	{{ $d1("9.3. Shipowner shall promptly repatriate the seafarer to the country of residence of the seafarer(seafarer’s address") }}
-	{{ $d2("in first page of this contract) or the place at which the seafarer was hired as shipowner’s expenses when") }}
-	{{ $d2("leaves a ship at the place of which is not the seafarer's country of residence or the place at which the.") }}
-	{{ $d2("seafarer agreed to enter into the engagement. However, in case where shipowner paid the expense of") }}
-	{{ $d2("repatriation according shipowner to the request of seafarer, does not have any responsibility for the") }}
-	{{ $d2("repatriation.") }}
+	<tr>
+		<td colspan="12">extended until the vessel's entry into port when the vessel is under way.</td>
+	</tr>
 
 	{{ $fill() }}
 	<tr>
-		<td style="{{ $b }}">10.</td>
-		<td colspan="7">
-			Seafarer’s employment agreement shall continue to have effect while a seafarer is held captive on or off
+		<td colspan="12" style="{{ $blue }}">
+			7.2 The leave pay should be given to seafarers even though the seafarers could not complete the contract.
 		</td>
 	</tr>
-	{{ $d2("the ship as a result of acts of piracy or armed robbery against ships, regardless of whether the date fixed") }}
-	{{ $d2("for its expiry has passed or either party has given notice to suspend or terminate it.") }}
 
 	{{ $fill() }}
 	<tr>
-		<td style="{{ $b }}">11.</td>
-		<td colspan="7">
-			Shipowner shall cover the health and social security protection benefits to be provided to the seafarer by 
+		<td colspan="6">7.3. The number of days of paid leave pursuant to 7.1 and 7.2 shall be (</td>
+		<td style="{{ $blue }}">9</td>
+		<td colspan="5">) days per one month of continuous service on board.</td>
+	</tr>
+
+	{{ $fill() }}
+	<tr>
+		<td colspan="12" style="{{ $blue }}">
+			7.4. In place of the four hours of each week in overtime work, one day of paid leave shall be added to the number of days of paid leave pursuant to 7.3.
 		</td>
 	</tr>
-	{{ $d2("due process of low. And the terms not regulated in this contract will follow the provisions of the Collective") }}
-	{{ $d2("Bargaining Agreement (CBA) on the International ship.") }}
 
 	{{ $fill() }}
 	<tr>
-		<td style="{{ $b }}">12.</td>
-		<td colspan="7">
-			Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or
+		<td colspan="12" style="{{ $blue }}">
+			7.5.  In the calculation of the number of days of paid leave, the service period on board of less than one month shall be calculated at a rate of days, 
 		</td>
 	</tr>
-	{{ $d2("placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to") }}
-	{{ $d2("the agent of seafarer recruitment and placement. (other than the cost of the seafarer obtaining the seafarer’s") }}
-	{{ $d2("book and a passport or other similar personal travel documents.)") }}
-	{{ $d2("If the seafarer found that, the fact should be noticed to the shipowner immediately.") }}
-
-	{{ $fill() }}
 	<tr>
-		<td colspan="4" style="{{ $b }}">13. The place of conclude contract:</td>
-		<td colspan="4" style="{{ $blue }}">{{ $data->port }}</td>
-	</tr>
-
-	{{ $fill() }}
-	<tr>
-		<td colspan="5" style="{{ $b }}">The time of conclude contract (dd/mm/yy): </td>
-		<td colspan="3" style="{{ $blue }}">{{ now()->format('d/M/Y') }}</td>
-	</tr>
-
-	{{ $fill() }}
-	<tr>
-		<td style="{{ $b }}">15.</td>
-		<td colspan="7">
-			Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or
+		<td colspan="12" style="{{ $blue }}">
+			but a fraction of less than one day shall be one day. 
 		</td>
 	</tr>
-	{{ $d2("Seafarers signing a seafarers' employment agreement be given an opportunity to examine and seek advice ") }}
-	{{ $d2("on the agreement before signing, as well as such other facilities as are necessary to ensure that they have ") }}
-	{{ $d2("freely entered into an agreement with a sufficient understanding of their rights and responsibilities.") }}
 
 	{{ $fill() }}
 	<tr>
-		<td colspan="5" style="text-align: right;">Shipowner  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎:  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎</td>
-		<td colspan="3">CHANG MYUNG SHIPPING</td>
+		<td colspan="12" style="{{ $blue }}">
+			7.6. The time and place of port granting paid leave shall be decided on the negotiation between the shipowner and the seafarer.
+		</td>
+	</tr>
+
+	{{ $fill() }}
+	{{ $d1("8. Repatriation", true) }}
+	{{ $d1("8.1. Shipowner shall ensure that seafarers are entitled to repatriation in the following circumstances.") }}
+	{{ $d1("1) If the seafarers’ employment agreement expires while they are aboard") }}
+	{{ $d1("2) When the seafarers’ employment agreement in terminated by the shipowner or by the seafarer for justified reasons") }}
+	{{ $d1("3) When the seafarers are no longer able to carry out their duties under their employment agreement or cannot be excepted to carry them out in the specific circumstance") }}
+
+	{{ $fill() }}
+	{{ $d1("9. Seafarer’s employment agreement shall continue to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to suspend or terminate it.") }}
+
+	{{ $fill() }}
+	{{ $d1("10. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer recruitment and placement. (other than the cost of the seafarer obtaining the seafarer’s book and a passport or other similar personal travel documents.). If the seafarer found that, the fact should be noticed to the shipowner immediately.") }}
+	
+	{{ $fill() }}
+	<tr>
+		<td colspan="4">11. The place of conclude contract:</td>
+		<td colspan="5" style="{{ $blue }} {{ $bc }}">MANILA, PHILIPPINES</td>
+		<td colspan="3"></td>
 	</tr>
 
 	{{ $fill() }}
 	<tr>
-		<td colspan="5" style="text-align: right;">or Agent on behalf of shipowner ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ :  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎</td>
-		<td colspan="2" style="{{ $c }} {{ $blue }}">MS. JEANNETTE T. SOLIDUM</td>
-		<td style="text-align: right;">(signature or seal)</td>
-	</tr>
-	<tr>
-		<td colspan="5"></td>
-		<td colspan="2" style="{{ $blue }} {{ $c }}">CREWING MANAGER</td>
-		<td></td>
+		<td colspan="4">12. The time of conclude contract (dd/mm/yy)</td>
+		<td colspan="5" style="{{ $bc }} {{ $blue }}">{{ now()->format('l, F j, Y') }}</td>
 	</tr>
 
+	{{ $fill() }}
+	{{ $d1("13. Seafarers signing a seafarers' employment agreement be given an opportunity to examine and seek advice on the agreement before signing, as well as such other facilities as are necessary to ensure that they have freely entered into an agreement with a sufficient understanding of their rights and responsibilities.") }}
+	
+	{{ $fill(25) }}
 	<tr>
-		<td colspan="5" style="text-align: right;">Seafarer  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎:  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎</td>
-		<td colspan="2" rowspan="2" style="{{ $c }} {{ $blue }}">{{ $data->user->namefull }}</td>
-		<td style="text-align: right;">(signature or seal)</td>
-	</tr>
-	<tr>
-		<td colspan="5"></td>
-		<td></td>
+		<td colspan="6"></td>
+		<td colspan="3">Shipowner:</td>
+		<td colspan="2">KOREA LINE CORPORATION</td>
 	</tr>
 
+	{{ $fill(70) }}
 	<tr>
-		<td colspan="4">Distribution of Employment Contract</td>
-		<td colspan="4"></td>
+		<td colspan="3"></td>
+		<td colspan="3" style="{{ $c }}">or Agent on behalf of shipowner:</td>
+		<td colspan="3"></td>
+		<td colspan="2" style="{{ $c }}">Jeanette T. Solidum</td>
 	</tr>
 	<tr>
-		<td colspan="3">1. Master (Vessel)</td>
-		<td style="text-align: right;">-</td>
-		<td colspan="4"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎Copy</td>
+		<td colspan="3"></td>
+		<td colspan="3" style="{{ $c }}"></td>
+		<td colspan="3"></td>
+		<td colspan="2" style="{{ $c }}">CREWING MANAGER</td>
 	</tr>
 	<tr>
-		<td colspan="3">Seafarer</td>
-		<td style="text-align: right;">-</td>
-		<td colspan="4"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ Original</td>
+		<td colspan="3"></td>
+		<td colspan="3" style="{{ $c }}"></td>
+		<td colspan="3"></td>
+		<td colspan="2" style="{{ $c }}">Solpia Marine &#38; Ship Management Inc.</td>
 	</tr>
+
+	{{ $fill(70) }}
 	<tr>
-		<td colspan="3">Agency</td>
-		<td style="text-align: right;">-</td>
-		<td colspan="4"> ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ Original</td>
+		<td colspan="6"></td>
+		<td colspan="3">Seafarer:</td>
+		<td colspan="2" style="{{ $b }}">{{ $data->user->namefull }}</td>
+		<td>(signature)</td>
 	</tr>
 </table>
