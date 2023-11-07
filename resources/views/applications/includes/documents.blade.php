@@ -172,7 +172,7 @@
 					<option value="NCIII">&nbsp;&nbsp;&nbsp;&nbsp;NCIII</option>
 					<option value="KOREAN COOKING">&nbsp;&nbsp;&nbsp;&nbsp;KOREAN COOKING/CUISINE</option>
 
-				<optgroup label="OTHER CERTIFICATES"></optgroup>
+				<optgroup label="TRAINING CERTIFICATES"></optgroup>
 					<option value="ARPA TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;ARPA TRAINING COURSE</option>
 					<option value="CONSOLIDATED MARPOL">&nbsp;&nbsp;&nbsp;&nbsp;CONSOLIDATED MARPOL</option>
 					<option value="ECDIS">&nbsp;&nbsp;&nbsp;&nbsp;ECDIS GENERIC</option>
@@ -247,6 +247,7 @@
 					<option value="PSSR">&nbsp;&nbsp;&nbsp;&nbsp;PERSONAL SAFETY AND SOCIAL RESPONSIBILITIES - PSSR</option>
 					<option value="SHIPS RESTRICTED RADIO TELEPHONE OPERATORS COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SHIPS RESTRICTED RADIO TELEPHONE OPERATORS COURSE</option>
 					<option value="SHORE-BASED FIREFIGHTING FOR TANKERS">&nbsp;&nbsp;&nbsp;&nbsp;SHORE-BASED FIREFIGHTING FOR TANKERS</option>
+					<option value="STEERING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;STEERING COURSE</option>
 
 				<optgroup label="TANKER CERTIFICATES"></optgroup>
 					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
