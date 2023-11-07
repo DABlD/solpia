@@ -1798,7 +1798,7 @@ class ApplicationsController extends Controller
 
         $tc = $tc->filter(function($temp){
             if(isset($temp->crew->pro_app->rank)){
-                return $temp->crew->pro_app->rank_id == 7 || $temp->crew->pro_app->rank_id == 8 || $temp->crew->pro_app->rank_id == 54 || $temp->crew->pro_app->rank_id == 55;
+                return $temp->crew->pro_app->rank_id == 7 || $temp->crew->pro_app->rank_id == 8 || $temp->crew->pro_app->rank_id == 53 || $temp->crew->pro_app->rank_id == 54 || $temp->crew->pro_app->rank_id == 55;
             }
 
             return false;
