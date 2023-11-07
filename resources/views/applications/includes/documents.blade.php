@@ -248,6 +248,7 @@
 					<option value="SHIPS RESTRICTED RADIO TELEPHONE OPERATORS COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SHIPS RESTRICTED RADIO TELEPHONE OPERATORS COURSE</option>
 					<option value="SHORE-BASED FIREFIGHTING FOR TANKERS">&nbsp;&nbsp;&nbsp;&nbsp;SHORE-BASED FIREFIGHTING FOR TANKERS</option>
 					<option value="STEERING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;STEERING COURSE</option>
+					<option value="SHIPBOARD CULINARY COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SHIPBOARD CULINARY COURSE</option>
 
 				<optgroup label="TANKER CERTIFICATES"></optgroup>
 					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
