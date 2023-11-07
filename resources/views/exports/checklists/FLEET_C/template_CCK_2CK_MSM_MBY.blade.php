@@ -289,17 +289,49 @@
 	{{ $con("TURN-OVER NOTES") }}
 
 	{{ $section("10. PRINCIPAL / OWNERS REQUIREMENTS", 1) }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
+
+	@if(in_array($data->vessel->principal_id, [10]))
+		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+		{{ $doc("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", "BTOC ENDORSEMENT", 'lc') }}
+		{{ $doc("BTOC", "FLAG BTOC ENDORSEMENT", 'flag') }}
+
+		@php
+			$temp = null;
+			if(isset($data->document_med_cert->{'COVID-19 1ST DOSE'})){
+				$temp = 'COVID-19 1ST DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 2ND DOSE'})){
+				$temp = 'COVID-19 2ND DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 3RD DOSE'})){
+				$temp = 'COVID-19 3RD DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 4TH DOSE'})){
+				$temp = 'COVID-19 4TH DOSE';
+			}
+		@endphp
+
+		{{ $doc($temp, "COVID VACCINE", 'med_cert') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+	@elseif(in_array($data->vessel->principal_id, [256]))
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+	@endif
 
 	<tr>
 		<td colspan="9" style="font-style: italic;">Note: (*) Original Copy was provided to crew as Personal Copy</td>
