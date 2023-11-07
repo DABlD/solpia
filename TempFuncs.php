@@ -96,3 +96,12 @@ foreach($newHires as $nH){
         echo "$rank;$name;$vessel;$age;$sign_on;$manning_agent<br>";
     }
 }
+
+<!-- IDK WHAT THIS DO -->
+$vIds = [22, 71, 72, 4661, 4621];
+$linedUp = LineUpContract::whereIn('vessel_id', $vIds)->whereNull('disembarkation_date')->pluck('applicant_id');
+$pro_app = ProcessedApplicant::whereIn('vessel_id', $vIds)->where('status', 'Lined-Up')->pluck('applicant_id');
+
+$aIds = array_merge($linedUp->toArray(), $pro_app->toArray());
+$uIds = Applicant::whereIn('id', $aIds)->pluck('user_id')->toArray();
+User::whereIn('id', $uIds)->update(["fleet" => "FLEET D"]);
