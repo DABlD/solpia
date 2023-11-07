@@ -1814,13 +1814,14 @@ class ApplicationsController extends Controller
 
             foreach($docus as $docu){
                 if(str_starts_with($docu->no, "CCE") || str_starts_with($docu->no, "C2E")){
+                    $temp->hl = $docu->no;
                     array_push($array, $temp);
                 }
             }
         }
 
         foreach($array as $temp){
-            echo $temp->namefull . ';' . $temp->crew->pro_app->rank->abbr . '<br>';
+            echo $temp->namefull . ';' . $temp->crew->pro_app->rank->abbr . ';' . $temp->hl . '<br>';
         }
     }
 
