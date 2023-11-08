@@ -22,6 +22,7 @@
 	$allowance = 12.0;
 
 	$v = $data->vessel->name;
+	$tFot = null;
 	if(in_array($v, ['M/V DONG-A OKNOS', 'M/V DONG-A EOS', 'M/V GLOVIS COUNTESS', 'M/V DONG-A GLAUCOS', 'M/V DONG-A METIS'])){
 		$allowance = 11.1;
 	}
@@ -29,7 +30,7 @@
 		$allowance = 12;
 	}
 	elseif(in_array($v, ['M/V DAEBO GLADSTONE'])){
-		$allowance = 11.5;
+		$allowance = 10.5;
 	}
 @endphp
 
@@ -147,7 +148,7 @@
 		<td colspan="2">A) Basic Wage</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->basic ?? 0 }}</td>
 		<td colspan="2">
-			@if($data->vessel->id == 4643)
+			@if(in_array($data->vessel->id, [4643,17]))
 				B.) Fixed Overtime Allowance (BW/173x1.25x103hrs)
 			@else
 				B.) Fixed Overtime Allowance (BW/173x1.5x103hrs)
