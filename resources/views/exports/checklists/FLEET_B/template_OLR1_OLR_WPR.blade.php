@@ -288,17 +288,44 @@
 	{{ $con("TURN-OVER NOTES") }}
 
 	{{ $section("10. PRINCIPAL / OWNERS REQUIREMENTS", 1) }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
-	{{ $doc("TEST", "", 'lc') }}
+
+	@if(in_array($data->vessel->principal_id, [256]))
+		{{ $con("HMM BRIEFING") }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+	@elseif(in_array($data->vessel->principal_id, [2]))
+		{{ $con("KOSCO OATH") }}
+		{{ $con("KOSCO INHOUSE TRAINING RECORD") }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+	@else
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+	@endif
 
 	<tr>
 		<td colspan="9" style="font-style: italic;">Note: (*) Original Copy was provided to crew as Personal Copy</td>
