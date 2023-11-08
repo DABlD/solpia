@@ -266,8 +266,6 @@
 	{{ $doc("EMPTY", "", 'lc') }}
 	{{ $doc("EMPTY", "", 'lc') }}
 	{{ $doc("EMPTY", "", 'lc') }}
-	{{ $doc("EMPTY", "", 'lc') }}
-	{{ $doc("EMPTY", "", 'lc') }}
 
 	{{ $section("7. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
 	{{ $con("PRE-DEPARTURE ORIENTATION SEMINAR (PDOS)") }}
