@@ -510,8 +510,14 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
-                $event->sheet->getDelegate()->getStyle('A4:I82')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('A4:I82')->getFont()->setName('Trebuchet MS');
+                $event->sheet->getDelegate()->getStyle('A4:I8')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('A9:D75')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('I9:I75')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('A76:I82')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('A4:I8')->getFont()->setName('Trebuchet MS');
+                $event->sheet->getDelegate()->getStyle('A9:D75')->getFont()->setName('Trebuchet MS');
+                $event->sheet->getDelegate()->getStyle('I9:I75')->getFont()->setName('Trebuchet MS');
+                $event->sheet->getDelegate()->getStyle('A76:I82')->getFont()->setName('Trebuchet MS');
             },
         ];
     }
