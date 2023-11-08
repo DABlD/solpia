@@ -122,7 +122,7 @@
 
 		$date = $docu ? $checkDate($docu->issue_date, $docu->expiry_date, $type2) : '';
 
-		$font = 'font-family: Wingdings 2; font-size: 12px;';
+		$font = 'font-family: Wingdings 2; font-size: 11px;';
 
 		$left = 'text-align: left !important;';
 		
@@ -130,26 +130,26 @@
 			<tr>
 				<td colspan='3' style='$left'>$display</td>
 				<td>$date</td>
-				<td style='$font'></td>
-				<td style='$font'></td>
-				<td style='$font'></td>
-				<td style='$font'></td>
+				<td style='$font'>0</td>
+				<td style='$font'>0</td>
+				<td style='$font'>0</td>
+				<td style='$font'>0</td>
 				<td></td>
 			</tr>
 		";
 	};
 
 	$con = function($display){
-		$font = 'font-family: Wingdings 2; font-size: 12px;';
+		$font = 'font-family: Wingdings 2; font-size: 11px;';
 
 		echo "
 			<tr>
 				<td colspan='3'>$display</td>
 				<td></td>
-				<td style='$font'></td>
-				<td style='$font'></td>
-				<td style='$font'></td>
-				<td style='$font'></td>
+				<td style='$font'>0</td>
+				<td style='$font'>0</td>
+				<td style='$font'>0</td>
+				<td style='$font'>0</td>
 				<td></td>
 			</tr>
 		";
