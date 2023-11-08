@@ -94,8 +94,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "BICSA Financial Center, 60th Floor, Balboa Avenue, Panama City, Panama";
         }
         elseif(in_array($applicant->vessel->name, $array10)){
-            $applicant->shipowner = 'DAEBO L&S CO., LTD';
-            $applicant->sAddress = "#4, F11 19, SAEMUNAN-RO 5-GIL, JONGNO-GU, SEOUL, REPUBLIC OF KOREA";
+            $applicant->shipowner = 'KSF GLOBAL NO.31 S.A.';
+            $applicant->sAddress = "Bisca Financial Center, 60th Floor, Balboa Avenue, Panama City, Republic of Panama";
         }
         elseif(in_array($applicant->vessel->name, $array11)){
             $applicant->shipowner = 'KMARIN Ocean Services Corporation';
