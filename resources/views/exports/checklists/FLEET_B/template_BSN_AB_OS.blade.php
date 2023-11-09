@@ -279,8 +279,25 @@
 
 	@if(in_array($data->vessel->principal_id, [256]))
 		{{ $con("HMM BRIEFING") }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}
+
+		@php
+			$temp = null;
+			if(isset($data->document_med_cert->{'COVID-19 1ST DOSE'})){
+				$temp = 'COVID-19 1ST DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 2ND DOSE'})){
+				$temp = 'COVID-19 2ND DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 3RD DOSE'})){
+				$temp = 'COVID-19 3RD DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 4TH DOSE'})){
+				$temp = 'COVID-19 4TH DOSE';
+			}
+		@endphp
+
+		{{ $doc($temp, "COVID VACCINE", 'med_cert') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -292,8 +309,25 @@
 	@elseif(in_array($data->vessel->principal_id, [2]))
 		{{ $con("KOSCO OATH") }}
 		{{ $con("KOSCO INHOUSE TRAINING RECORD") }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}
+
+		@php
+			$temp = null;
+			if(isset($data->document_med_cert->{'COVID-19 1ST DOSE'})){
+				$temp = 'COVID-19 1ST DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 2ND DOSE'})){
+				$temp = 'COVID-19 2ND DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 3RD DOSE'})){
+				$temp = 'COVID-19 3RD DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 4TH DOSE'})){
+				$temp = 'COVID-19 4TH DOSE';
+			}
+		@endphp
+
+		{{ $doc($temp, "COVID VACCINE", 'med_cert') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
