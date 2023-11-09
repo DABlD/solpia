@@ -16,12 +16,12 @@ function getChecklist(fleet){
 	}
 	else if(fleet == "TOEI"){
 		return `
-			<option value="template"> 		NSM - DEFAULT 		 			</option>
+			<option value="template"> 		DEFAULT		 			</option>
 		`;
 	}
 	else if(fleet == "FISHING"){
 		return `
-			<option value="template"> 		NSM - DEFAULT 		 			</option>
+			<option value="template"> 		DEFAULT 		 			</option>
 		`;
 	}
 }
