@@ -281,6 +281,9 @@
 					<option value="POEA EREGISTRATION">&nbsp;&nbsp;&nbsp;&nbsp;POEA EREGISTRATION</option>
 					<option value="NBI">&nbsp;&nbsp;&nbsp;&nbsp;NBI</option>
 					<option value="DRIVERS LICENSE">&nbsp;&nbsp;&nbsp;&nbsp;DRIVER'S LICENSE</option>
+
+				<optgroup label="TESTS"></optgroup>
+					<option value="CES TEST">&nbsp;&nbsp;&nbsp;&nbsp;CES TEST</option>
 			`;
 
 			// 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE S.Q. FOR TANKERS', 'FLAG STATE LICENSE', 'FLAG STATE SSO LICENSE', 'FLAG STATE ENDORSEMENT COOK COURSE', 'FLAG STATE GMDSS-GOC', 
