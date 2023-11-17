@@ -250,6 +250,9 @@
 					<option value="STEERING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;STEERING COURSE</option>
 					<option value="SHIPBOARD CULINARY COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SHIPBOARD CULINARY COURSE</option>
 					<option value="MESSMAN/STEWARD COURSE">&nbsp;&nbsp;&nbsp;&nbsp;MESSMAN/STEWARD COURSE</option>
+					<option value="BULK CARRIER SHIP INSPECTION TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;BULK CARRIER SHIP INSPECTION TRAINING</option>
+					<option value="BULK CARRIER SHIP INSPECTION TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;BULK CARRIER SHIP INSPECTION TRAINING</option>
+					<option value="ENCLOSED SPACE ENTRY">&nbsp;&nbsp;&nbsp;&nbsp;ENCLOSED SPACE ENTRY</option>
 
 				<optgroup label="TANKER CERTIFICATES"></optgroup>
 					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
