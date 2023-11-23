@@ -469,6 +469,10 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     array_push($cells[13], "A$row");
                 }
 
+                if(in_array($this->applicant->id, [3220])){
+                    $raoc-=1;
+                }
+
                 // PIYC
                 $piycRows = array(); //WILL BE FILLED AFTER FUNCTIONS
                 $rapiyc = $raoc + 1 + 9; //Row # AFTER PIYC (5 = rows)
