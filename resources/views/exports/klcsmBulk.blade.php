@@ -281,7 +281,7 @@
 			{{ $data->user->fname . ' ' . $data->user->mname . ' ' . $data->user->lname }}
 		</td>
 		<td rowspan="2">AGE</td>
-		<td rowspan="2">{{ $data->user->birthday->age }}</td>
+		<td rowspan="2">{{ isset($data->user->birthday) ? $data->user->birthday->age : "-" }}</td>
 		<td>Date of Birth</td>
 		<td colspan="3">{{ $data->user->birthday->toFormattedDateString() }}</td>
 	</tr>
