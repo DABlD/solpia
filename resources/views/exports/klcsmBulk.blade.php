@@ -283,7 +283,7 @@
 		<td rowspan="2">AGE</td>
 		<td rowspan="2">{{ isset($data->user->birthday) ? $data->user->birthday->age : "-" }}</td>
 		<td>Date of Birth</td>
-		<td colspan="3">{{ $data->user->birthday->toFormattedDateString() }}</td>
+		<td colspan="3">{{ isset($data->user->birthday) ? $data->user->birthday->toFormattedDateString() : "-" }}</td>
 	</tr>
 
 	{{-- 6R --}}
