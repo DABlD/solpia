@@ -187,7 +187,7 @@
 
 	<tr>
 		<td>Birth Date</td>
-		<td colspan="2">{{ $data->user->birthday->format('F j, Y') }}</td>
+		<td colspan="2">{{ isset($data->user->birthday) ? $data->user->birthday->format('F j, Y') : "-" }}</td>
 
 		<td>Shoe Size</td>
 		<td>{{ $data->shoe_size ?? '-' }}</td>

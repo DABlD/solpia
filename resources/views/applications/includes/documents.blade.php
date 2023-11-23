@@ -250,6 +250,10 @@
 					<option value="STEERING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;STEERING COURSE</option>
 					<option value="SHIPBOARD CULINARY COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SHIPBOARD CULINARY COURSE</option>
 					<option value="MESSMAN/STEWARD COURSE">&nbsp;&nbsp;&nbsp;&nbsp;MESSMAN/STEWARD COURSE</option>
+					<option value="BULK CARRIER SHIP INSPECTION TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;BULK CARRIER SHIP INSPECTION TRAINING</option>
+					<option value="BULK CARRIER SHIP INSPECTION TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;BULK CARRIER SHIP INSPECTION TRAINING</option>
+					<option value="ENCLOSED SPACE ENTRY">&nbsp;&nbsp;&nbsp;&nbsp;ENCLOSED SPACE ENTRY</option>
+					<option value="SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING</option>
 
 				<optgroup label="TANKER CERTIFICATES"></optgroup>
 					<option value="BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT</option>
@@ -277,6 +281,9 @@
 					<option value="POEA EREGISTRATION">&nbsp;&nbsp;&nbsp;&nbsp;POEA EREGISTRATION</option>
 					<option value="NBI">&nbsp;&nbsp;&nbsp;&nbsp;NBI</option>
 					<option value="DRIVERS LICENSE">&nbsp;&nbsp;&nbsp;&nbsp;DRIVER'S LICENSE</option>
+
+				<optgroup label="TESTS"></optgroup>
+					<option value="CES TEST">&nbsp;&nbsp;&nbsp;&nbsp;CES TEST</option>
 			`;
 
 			// 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE SEAMAN BOOK (I.D BOOK)', 'FLAG STATE S.Q. FOR TANKERS', 'FLAG STATE LICENSE', 'FLAG STATE SSO LICENSE', 'FLAG STATE ENDORSEMENT COOK COURSE', 'FLAG STATE GMDSS-GOC', 
