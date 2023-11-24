@@ -1337,6 +1337,7 @@ class ApplicationsController extends Controller
                             $vessel = Vessel::find($pa->vessel_id);
                             $applicant->vessel = $vessel;
                             $applicant->departure = $pa->eld;
+                            $applicant->rank2 = $rank;
                         }
                         else{
                             $temp = SeaService::where('applicant_id', $id)->latest('sign_on')->first();
@@ -1794,34 +1795,43 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $tc = User::where('role', 'Applicant')->where('fleet', 'TOEI')->get();
+        $provinces = ["ABRA","AGUSAN DEL NORTE","AGUSAN DEL SUR","AKLAN","ALBAY","ANTIQUE","APAYAO","AURORA","BASILAN","BATAAN","BATANES","BATANGAS","BENGUET","BILIRAN","BOHOL","BUKIDNON","BULACAN","CAGAYAN","CAMARINES NORTE","CAMARINES SUR","CAMIGUIN","CAPIZ","CATANDUANES","CAVITE","CEBU","COTABATO","DAVAO","DINAGAT ISLANDS","EASTERN SAMAR","GUIMARAS","IFUGAO","ILOCOS NORTE","ILOCOS SUR","ILOILO","ISABELA","KALINGA","LA UNION","LAGUNA","LANAO DEL NORTE","LANAO DEL SUR","LEYTE","MAGUINDANAO","MARINDUQUE","MASBATE","MISAMIS OCCIDENTAL","MISAMIS ORIENTAL","MOUNTAIN PROVINCE","NEGROS OCCIDENTAL","NEGROS ORIENTAL","NORTHERN SAMAR","NUEVA ECIJA","NUEVA VIZCAYA","OCCIDENTAL MINDORO","ORIENTAL MINDORO","PALAWAN","PAMPANGA","PANGASINAN","QUEZON","QUIRINO","RIZAL","ROMBLON","SAMAR","SARANGANI","SIQUIJOR","SORSOGON","SOUTH COTABATO","SOUTHERN LEYTE","SULTAN KUDARAT","SULU","SURIGAO DEL NORTE","SURIGAO DEL SUR","TARLAC","TAWI-TAWI","WESTERN SAMAR","ZAMBALES","ZAMBOANGA DEL NORTE","ZAMBOANGA DEL SUR","ZAMBOANGA SIBUGAY"];
 
-        $tc = $tc->filter(function($temp){
-            if(isset($temp->crew->pro_app->rank)){
-                return $temp->crew->pro_app->rank_id == 7 || $temp->crew->pro_app->rank_id == 8 || $temp->crew->pro_app->rank_id == 53 || $temp->crew->pro_app->rank_id == 54 || $temp->crew->pro_app->rank_id == 55;
+        $cities = ["CALOOCAN","LAS PIÑAS","MAKATI","MALABON","MANDALUYONG","MANILA","MARIKINA","MUNTINLUPA","NAVOTAS","PARAÑAQUE","PASAY","PASIG","PATEROS","QUEZON CITY","SAN JUAN","TAGUIG","VALENZUELA"];
+
+        $crews = User::where('role', 'Applicant')
+                ->where(function($q){
+
+                    $i1 = "DAVAO";
+                    $i2 = "SOUTH COTOBATO";
+                    $i3 = "GEN. SAN";
+
+                    $q->where('address', 'like', "%$i1%");
+                    // $q->orWhere('address', 'like', "%$i2%");
+                    // $q->orWhere('address', 'like', "%$i3%");
+                    $q->orWhere('a.provincial_address', 'like', "%$i1%");
+                    // $q->orWhere('a.provincial_address', 'like', "%$i2%");
+                    // $q->orWhere('a.provincial_address', 'like', "%$i3%");
+                })
+                ->join('applicants as a', 'a.user_id', '=', 'users.id')
+                ->select('address', 'fname', 'lname', 'contact', 'fleet', 'users.id', 'a.id as aid', 'a.provincial_address')
+                ->get();
+
+        foreach($crews as $crew){
+            // GET RANK
+            $rank = null;
+            if(isset($crew->crew->pro_app->rank)){
+                $rank = $crew->crew->pro_app->rank->abbr;
+            }
+            else{
+                continue;
             }
 
-            return false;
-        });
-
-        $array = [];
-        // $tc = $tc->groupBy('crew.pro_app.rank_id');
-
-        foreach($tc as $temp){
-            $docus = $temp->crew->document_lc->filter(function($docu){
-                return $docu->type == "COC";
-            });
-
-            foreach($docus as $docu){
-                if(str_starts_with($docu->no, "CCE") || str_starts_with($docu->no, "C2E")){
-                    $temp->hl = $docu->no;
-                    array_push($array, $temp);
-                }
+            if($crew->contact == ""){
+                $crew->contact = $crew->crew->provincial_contact;
             }
-        }
 
-        foreach($array as $temp){
-            echo $temp->namefull . ';' . $temp->crew->pro_app->rank->abbr . ';' . $temp->hl . '<br>';
+            echo "$crew->fname $crew->lname ; $crew->fleet ; $rank ; $crew->contact ; $crew->address ; $crew->provincial_address <br>";
         }
     }
 

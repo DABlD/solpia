@@ -294,7 +294,7 @@
 	{{-- // DIAMOND Q, WEST T, ULTRA C, QUEEN F, MARGUERITE, HAPPINESS B, PACIFIC I, AFRICAN L, CAPE S, HAPPINESS F, GOLD O, SILVER O, CORONA R, LADY M, ULTRA V, ALAM K, CENTURION S, NORVIC C, CMB M, IKAN B, CAMELLIA I, DORIC K, WISTERIA, INDIGO J, EGRET R, NORD A, NORD D,--}}
 	@if(in_array($data->vessel->id, [4613, 4615, 938, 4620, 4802, 5587, 61, 5, 6200, 27, 940, 949, 743, 952, 67, 6196, 5563, 6141, 4659, 4626, 4625, 4646, 4648, 4610, 4579, 4647, 4649]))
 		{{-- CE/1AE --}}
-		@if(in_array($data->data->rank, [5, 6, 53]))
+		@if(in_array($data->rank2->id, [5, 6, 53]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $doc("SMS FAMILIARIZATION", "SMS FAMILIARIZATION", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
@@ -323,7 +323,7 @@
 	{{-- // ULTRA P, IYO S --}}
 	@elseif(in_array($data->vessel->id, [727, 247]))
 		// MSTR CO 2O
-		@if(in_array($data->data->rank, [1]))
+		@if(in_array($data->rank2->id, [1]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
@@ -335,7 +335,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
-		@elseif(in_array($data->data->rank, [2,3]))
+		@elseif(in_array($data->rank2->id, [2,3]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
@@ -347,7 +347,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
-		@elseif(in_array($data->data->rank, [24]))
+		@elseif(in_array($data->rank2->id, [24]))
 			{{ $doc("FUJI TRAINING", "FUJI TRAINING (FUJI TRADING)", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
@@ -359,7 +359,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
-		@elseif(in_array($data->data->rank, [4]))
+		@elseif(in_array($data->rank2->id, [4]))
 			{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
@@ -388,7 +388,7 @@
 	{{-- CELEBES CLOVER, GLORIOUS ROSE --}}
 	@elseif(in_array($data->vessel->id, [4751, 5049]))
 		{{-- MSTR, CE, 1AE, 2E --}}
-		@if(in_array($data->data->rank, [1]))
+		@if(in_array($data->rank2->id, [1]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $doc("BULK CARRIER SHIP INSPECTION TRAINING", "BULK CARRIER SHIP INSPECTION TRAINING", 'lc') }}
 			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
@@ -401,7 +401,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 		{{-- CO --}}
-		@elseif(in_array($data->data->rank, [2]))
+		@elseif(in_array($data->rank2->id, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $doc("ENCLOSED SPACE ENTRY", "ENCLOSED SPACE ENTRY", 'lc') }}
 			{{ $doc("BULK CARRIER SHIP INSPECTION TRAINING", "BULK CARRIER SHIP INSPECTION TRAINING", 'lc') }}
@@ -414,7 +414,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 		{{-- ENGINE OFFICERS EXCEPT FROM BIG 4 --}}
-		@elseif(in_array($data->data->rank, [7,8,54,55,57]))
+		@elseif(in_array($data->rank2->id, [7,8,54,55,57]))
 			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
 			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
@@ -427,7 +427,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 		{{-- THE REST OF DECK CREW --}}
-		@elseif(in_array($data->data->rank, [3,4,19,11,12,13,14,37,49,42,47,51]))
+		@elseif(in_array($data->rank2->id, [3,4,19,11,12,13,14,37,49,42,47,51]))
 			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
 			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
@@ -440,7 +440,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 		{{-- BSN --}}
-		@elseif(in_array($data->data->rank, [9]))
+		@elseif(in_array($data->rank2->id, [9]))
 			{{ $doc("BULK CARRIER SHIP INSPECTION TRAINING", "BULK CARRIER SHIP INSPECTION TRAINING", 'lc') }}
 			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
 			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
@@ -469,7 +469,7 @@
 	{{-- ULTRA R, MARITIME L, MARITIME K, CMB VAN DIJCK--}}
 	@elseif(in_array($data->vessel->id, [66,51,231,4608]))
 		{{-- MSTR --}}
-		@if(in_array($data->data->rank, [1]))
+		@if(in_array($data->rank2->id, [1]))
 			{{ $con("HATCH COVER") }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
@@ -483,7 +483,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
 		{{-- CO --}}
-		@if(in_array($data->data->rank, [2]))
+		@if(in_array($data->rank2->id, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $con("HATCH COVER") }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
@@ -512,7 +512,7 @@
 	{{-- FEDERAL IMABARI, FEDERAL ICON, --}}
 	@elseif(in_array($data->vessel->id, [23, 4634]))
 		{{-- BIG 4 EXCEPT CO --}}
-		@if(in_array($data->data->rank, [1,5,6,53]))
+		@if(in_array($data->rank2->id, [1,5,6,53]))
 			{{ $doc("CES TEST", "CES TEST", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
@@ -526,7 +526,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
 		{{-- CO --}}
-		@if(in_array($data->data->rank, [2]))
+		@if(in_array($data->rank2->id, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $doc("CES TEST", "CES TEST", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
@@ -555,7 +555,7 @@
 	{{-- SPRING S, --}}
 	@elseif(in_array($data->vessel->id, [4619]))
 		{{-- CO --}}
-		@if(in_array($data->data->rank, [2]))
+		@if(in_array($data->rank2->id, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
@@ -600,7 +600,7 @@
 		@endphp
 
 		{{-- MSTR --}}
-		@if(in_array($data->data->rank, [1]))
+		@if(in_array($data->rank2->id, [1]))
 			{{ $doc($temp, "COVID VACCINE - 1ST DOSE / 2ND DOSE / BOOSTER", 'med_cert') }}
 			{{ $con("TOEI BRIEFING / JOINING CHECKLIST") }}
 			{{ $con("PREJOINING BRIEFING CHECKLIST FOR CAPT &#38; CE") }}
@@ -614,7 +614,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
 		{{-- CO --}}
-		@if(in_array($data->data->rank, [2]))
+		@if(in_array($data->rank2->id, [2]))
 			{{ $doc($temp, "COVID VACCINE - 1ST DOSE / 2ND DOSE / BOOSTER", 'med_cert') }}
 			{{ $con("TOEI BRIEFING / JOINING CHECKLIST") }}
 			{{ $con("LETTER OF OATH MARPOL") }}
@@ -628,7 +628,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 		{{-- CE --}}
 		@endif
-		@if(in_array($data->data->rank, [5]))
+		@if(in_array($data->rank2->id, [5]))
 			{{ $doc($temp, "COVID VACCINE - 1ST DOSE / 2ND DOSE / BOOSTER", 'med_cert') }}
 			{{ $con("TOEI BRIEFING / JOINING CHECKLIST") }}
 			{{ $con("PREJOINING BRIEFING CHECKLIST FOR CAPT &#38; CE") }}
