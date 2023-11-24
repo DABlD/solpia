@@ -1324,8 +1324,10 @@ class ApplicationsController extends Controller
             $applicant = Applicant::withTrashed()->find($id)->load('user');
 
             if ($type == "DocumentChecklist" || str_starts_with($type, 'X')) {
-                if($req->data['status'] == "Vacation"){
-                    $applicant->rank = Rank::find($req->data['rank'])->abbr;
+                if($req->data['status'] == "Vacation" || $req->data['status'] == null){
+                    $tRank = Rank::find($req->data['rank']);
+                    $applicant->rank = $tRank->abbr;
+                    $applicant->rank2 = $tRank;;
                 }
                 else{
                     $pa = ProcessedApplicant::where('applicant_id', $id)->first();
