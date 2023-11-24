@@ -610,6 +610,7 @@
 			{{ $con("QUESTIONNAIRES TO SEAFARERS ON EMPLOYMENMT CONTRACT (P1-2)") }}
 			{{ $con("PCR RESULT") }}
 			{{ $doc("TEST", "", 'lc') }}
+		@endif
 		{{-- CO --}}
 		@if(in_array($data->data->rank, [2]))
 			{{ $doc($temp, "COVID VACCINE - 1ST DOSE / 2ND DOSE / BOOSTER", 'med_cert') }}
@@ -624,6 +625,7 @@
 			{{ $con("PCR RESULT") }}
 			{{ $doc("TEST", "", 'lc') }}
 		{{-- CE --}}
+		@endif
 		@if(in_array($data->data->rank, [5]))
 			{{ $doc($temp, "COVID VACCINE - 1ST DOSE / 2ND DOSE / BOOSTER", 'med_cert') }}
 			{{ $con("TOEI BRIEFING / JOINING CHECKLIST") }}
