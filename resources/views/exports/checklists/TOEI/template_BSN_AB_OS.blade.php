@@ -467,7 +467,7 @@
 		@endif
 	{{-- SMTECH --}}
 	{{-- ULTRA R, MARITIME L, MARITIME K, CMB VAN DIJCK--}}
-	@if(in_array($data->vessel->id, [66,51,231,4608]))
+	@elseif(in_array($data->vessel->id, [66,51,231,4608]))
 		{{-- MSTR --}}
 		@if(in_array($data->data->rank, [1]))
 			{{ $con("HATCH COVER") }}
@@ -510,7 +510,7 @@
 		@endif
 	{{-- SHOEI KISEN --}}
 	{{-- FEDERAL IMABARI, FEDERAL ICON, --}}
-	@if(in_array($data->vessel->id, [23, 4634]))
+	@elseif(in_array($data->vessel->id, [23, 4634]))
 		{{-- BIG 4 EXCEPT CO --}}
 		@if(in_array($data->data->rank, [1,5,6,53]))
 			{{ $doc("CES TEST", "CES TEST", 'lc') }}
@@ -551,10 +551,9 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
-	@endif
 	{{-- SHUNZAN KAIUN --}}
 	{{-- SPRING S, --}}
-	@if(in_array($data->vessel->id, [4619]))
+	@elseif(in_array($data->vessel->id, [4619]))
 		{{-- CO --}}
 		@if(in_array($data->data->rank, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
@@ -581,10 +580,9 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
-	@endif
 	{{-- NITTA KISEN --}}
 	{{-- ANCASH A, ANLANTIC O, ATLANTIC B, NORD S, WECO E--}}
-	@if(in_array($data->vessel->id, [7,8,9,4662,4765]))
+	@elseif(in_array($data->vessel->id, [7,8,9,4662,4765]))
 		@php
 			$temp = null;
 			if(isset($data->document_med_cert->{'COVID-19 1ST DOSE'})){
