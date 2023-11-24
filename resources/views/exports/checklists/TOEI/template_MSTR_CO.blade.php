@@ -282,9 +282,21 @@
 	{{ $con("TURN-OVER NOTES") }}
 
 	{{ $section("10. PRINCIPAL / OWNERS REQUIREMENTS", 1) }}
+	@if(!isset($data->vessel))
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
 	{{-- //TOEI JAPAN | TOEI KOREA | TAIYO KAIUN --}}
 	{{-- // DIAMOND Q, WEST T, ULTRA C, QUEEN F, MARGUERITE, HAPPINESS B, PACIFIC I, AFRICAN L, CAPE S, HAPPINESS F, GOLD O, SILVER O, CORONA R, LADY M, ULTRA V, ALAM K, CENTURION S, NORVIC C, CMB M, IKAN B, CAMELLIA I, DORIC K, WISTERIA, INDIGO J, EGRET R, NORD A, NORD D,--}}
-	@if(in_array($data->vessel->id, [4613, 4615, 938, 4620, 4802, 5587, 61, 5, 6200, 27, 940, 949, 743, 952, 67, 6196, 5563, 6141, 4659, 4626, 4625, 4646, 4648, 4610, 4579, 4647, 4649]))
+	@elseif(in_array($data->vessel->id, [4613, 4615, 938, 4620, 4802, 5587, 61, 5, 6200, 27, 940, 949, 743, 952, 67, 6196, 5563, 6141, 4659, 4626, 4625, 4646, 4648, 4610, 4579, 4647, 4649]))
 		{{-- CE/1AE --}}
 		@if(in_array($data->rank2->id, [5, 6, 53]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
