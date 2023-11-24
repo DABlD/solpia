@@ -481,6 +481,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
+		@endif
 		{{-- CO --}}
 		@if(in_array($data->data->rank, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
@@ -523,6 +524,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
+		@endif
 		{{-- CO --}}
 		@if(in_array($data->data->rank, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
@@ -549,6 +551,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
+	@endif
 	{{-- SHUNZAN KAIUN --}}
 	{{-- SPRING S, --}}
 	@if(in_array($data->vessel->id, [4619]))
@@ -578,6 +581,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
+	@endif
 	{{-- NITTA KISEN --}}
 	{{-- ANCASH A, ANLANTIC O, ATLANTIC B, NORD S, WECO E--}}
 	@if(in_array($data->vessel->id, [7,8,9,4662,4765]))
