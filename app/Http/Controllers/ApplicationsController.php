@@ -1323,11 +1323,11 @@ class ApplicationsController extends Controller
         else{
             $applicant = Applicant::withTrashed()->find($id)->load('user');
 
-            if ($type == "DocumentChecklist" || str_starts_with($type, 'X')) {
-                if($req->data['status'] == "Vacation" || $req->data['status'] == null){
+            if($type == "DocumentChecklist" || str_starts_with($type, 'X')) {
+                if($req->data['status'] == "Vacation"){
                     $tRank = Rank::find($req->data['rank']);
                     $applicant->rank = $tRank->abbr;
-                    $applicant->rank2 = $tRank;;
+                    $applicant->rank2 = $tRank;
                 }
                 else{
                     $pa = ProcessedApplicant::where('applicant_id', $id)->first();
