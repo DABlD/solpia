@@ -13,7 +13,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
         $array1 = [
-            'M/V HMM MIR', 'M/V HMM ALGECIRAS', 'M/V HYUNDAI BRAVE', 'M/V HMM SOUTHAMPTON', 'M/V HMM HAMBURG', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM COPENHAGEN', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM GDANSK', 'M/V HMM HANBADA', 'M/V HMM OSLO', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO'
+            'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO'
         ];
 
         $array2 = [
@@ -21,7 +21,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array3 = [
-            
+            'M/V HMM ALGECIRAS', 'M/V HMM OSLO', 'M/V HMM COPENHAGEN', 'M/V HMM GDANSK', 'M/V HMM HAMBURG', 'M/V HMM SOUTHAMPTON'
         ];
 
         // minus two;
@@ -40,9 +40,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         }
         elseif(in_array($applicant->vessel->name, $array3)){
             $applicant->shipowner = "HMM Company Limited";
-            $applicant->sAddress = '108, Yeoui-daero, Yeongdeungpo-gu, Seoul, Republic of Korea';
-            $applicant->crewManager = 'HMM Ocean Service Co., Ltd.';
-            $applicant->cAddress = '63, Jungangdaero, Jung-Gu, Busan, 600-711, Korea';
+            $applicant->sAddress = 'TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA';
+            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+            $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
         else{
             // DEFAULT
