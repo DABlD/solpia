@@ -47,13 +47,14 @@
 				}
 			}
 			elseif($name == "MARPOL"){
+				$marpols[0] = "";
+				$marpols[1] = "";
+				$marpols[2] = "";
+				$marpols[3] = "";
+				$marpols[4] = "";
+				$marpols[5] = "";
+				
 				foreach(get_object_vars($data->document_lc) as $docu){
-					$marpols[0] = "";
-					$marpols[1] = "";
-					$marpols[2] = "";
-					$marpols[3] = "";
-					$marpols[4] = "";
-					$marpols[5] = "";
 
 					if(str_starts_with($docu->type, $name)){
 						$box = "R";
