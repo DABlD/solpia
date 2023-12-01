@@ -21,6 +21,8 @@
 	// }
 	$allowance = 12.0;
 
+	$cba = "IBF KFSU CA(BBCHP)";
+
 	$v = $data->vessel->name;
 	$tFot = null;
 	if(in_array($v, ['M/V DONG-A OKNOS', 'M/V DONG-A EOS', 'M/V DONG-A GLAUCOS'])){
@@ -31,6 +33,7 @@
 	}
 	elseif(in_array($v, ['M/V DAEBO GLADSTONE', 'M/V DONG-A METIS', 'M/V GLOVIS COUNTESS'])){
 		$allowance = 11;
+		$cba = "IBF FKSU/AMOSUP KSA CBA";
 	}
 @endphp
 
@@ -105,7 +108,7 @@
 			Filipino
 		</td>
 		<td style="{{ $center }}">Applicable CBA</td>
-		<td colspan="2" style="{{ $center }} font-size: 8px;">IBF KFSU CA(BBCHP)</td>
+		<td colspan="2" style="{{ $center }} font-size: 8px;">{{ $cba }}</td>
 	</tr>
 
 	<tr>
