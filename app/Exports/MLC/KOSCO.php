@@ -14,7 +14,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $type){
         $array1 = [
-            'M/V DONG-A OKNOS', 'M/V GLOVIS COUNTESS', 'M/V DONG-A ASTREA', 'M/V DONG-A GLAUCOS'
+            'M/V DONG-A OKNOS', 'M/V DONG-A ASTREA', 'M/V DONG-A GLAUCOS'
         ];
 
         $array2 = [
@@ -50,11 +50,11 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array10 = [
-            'M/V DAEBO GLADSTONE'
+            'M/V DAEBO GLADSTONE', 'M/V DONG-A METIS', 'M/V GLOVIS COUNTESS'
         ];
 
         $array11 = [
-            'M/V DONG-A METIS'
+            
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
@@ -94,8 +94,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "BICSA Financial Center, 60th Floor, Balboa Avenue, Panama City, Panama";
         }
         elseif(in_array($applicant->vessel->name, $array10)){
-            $applicant->shipowner = 'KSF GLOBAL NO.31 S.A.';
-            $applicant->sAddress = "Bisca Financial Center, 60th Floor, Balboa Avenue, Panama City, Republic of Panama";
+            $applicant->shipowner = 'SOLT HOLDING LIBERIA 25 S.A.';
+            $applicant->sAddress = "80 BROAD STREET, MONROVIA, LIBERIA";
         }
         elseif(in_array($applicant->vessel->name, $array11)){
             $applicant->shipowner = 'KMARIN Ocean Services Corporation';
