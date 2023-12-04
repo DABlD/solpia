@@ -31,9 +31,12 @@
 	elseif(in_array($v, ["M/V BOKM SHANGHAI", 'M/V BOKM NINGBO', 'M/V KMARIN AZUR', 'M/V KMARIN ATLANTICA', 'M/V KMARIN ULSAN', 'M/V KMARIN MELBOURNE'])){
 		$allowance = 12;
 	}
-	elseif(in_array($v, ['M/V DAEBO GLADSTONE', 'M/V DONG-A METIS', 'M/V GLOVIS COUNTESS'])){
+	elseif(in_array($v, ['M/V DONG-A METIS', 'M/V GLOVIS COUNTESS'])){
 		$allowance = 11;
 		$cba = "IBF FKSU/AMOSUP KSA CBA";
+	}
+	elseif(in_array($v, ['M/V DAEBO GLADSTONE'])){
+		$allowance = 10.5;
 	}
 @endphp
 
