@@ -469,7 +469,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     array_push($cells[13], "A$row");
                 }
 
-                if(in_array($this->applicant->id, [3220])){
+                if(in_array($this->applicant->id, [3220, 2862])){
                     $raoc-=1;
                 }
 
