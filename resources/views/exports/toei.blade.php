@@ -345,6 +345,7 @@
 											// IF FOR OFFICERS ONLY
 											if($key >= 2){
 												if(str_starts_with($lc->type, "COC")){
+													$hl = $key;
 													$docu = $lc;
 												}
 											}
@@ -1131,19 +1132,6 @@
 		@endphp
 
 		@if($crewRank)
-			{{-- AB, OLR OR OS, WPR WITH JUNIOR OFFICER LICENSE --}}
-			@if($tRank == 10 || $tRank == 16 || $tRank == 9 || $tRank == 15 || $tRank == 42 || $tRank == 43 || ($tRank == 11 && $hl >= 1) || ($tRank == 17 && $hl >= 1))
-				<tr>
-					<td colspan="4">
-						MARINA COP REGULATION {{ $rr1 }}
-					</td>
-					<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
-					<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-					<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-					<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-				</tr>
-			@endif
-
 			{{-- AB,OLR,OS,WPR WITH SENIOR OFFICER LICENSE --}}
 			@if(($tRank == 10 && $hl == 2) || ($tRank == 16 && $hl == 2) || ($tRank == 9 && $hl == 2) || ($tRank == 15 && $hl == 2) || ($tRank == 42 && $hl == 2) || ($tRank == 43 && $hl == 2) || ($tRank == 11 && $hl == 2) || ($tRank == 17 && $hl == 2))
 				<tr>
@@ -1154,6 +1142,19 @@
 					<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
 					<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
 					<td colspan="2">{{ $docu2 ? $docu2->issuer : "NOT APPLICABLE" }}</td>
+				</tr>
+			@endif
+
+			{{-- AB, OLR OR OS, WPR WITH JUNIOR OFFICER LICENSE --}}
+			@if($tRank == 10 || $tRank == 16 || $tRank == 9 || $tRank == 15 || $tRank == 42 || $tRank == 43 || ($tRank == 11 && $hl >= 1) || ($tRank == 17 && $hl >= 1))
+				<tr>
+					<td colspan="4">
+						MARINA COP REGULATION {{ $rr1 }}
+					</td>
+					<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+					<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+					<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+					<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 				</tr>
 			@endif
 		@endif

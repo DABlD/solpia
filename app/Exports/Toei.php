@@ -394,17 +394,34 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
                 $hl = false;
-                $hl2 = false;
+                $regs['dr'] = ["II/4", "II/5", "II/1", "II/2"];
+                $regs['er'] = ["III/4", "III/5", "III/1", "III/2"];
+                $rt = isset($this->applicant->rank) && str_starts_with($this->applicant->rank->category, "ENGINE") ? "er" : "dr";
+
                 if($this->applicant->rank){
                     foreach($this->applicant->document_lc as $lc){
-                        if($lc->type == "COC" || $lc->type == "COE"){
+                        if(str_starts_with($lc->type, "COC") || str_starts_with($lc->type, "COE")){
                             $regulations = json_decode($lc->regulation);
 
-                            if(in_array("II/5", $regulations) || in_array("III/5", $regulations)){
-                                $hl = true;
-                            }
-                            if(in_array("II/1", $regulations) || in_array("III/1", $regulations)){
-                                $hl2 = true;
+                            foreach($regs[$rt] as $key => $ref){
+                                if(in_array($ref, $regulations)){
+                                    if($hl){
+                                        if($key >= $hl){
+                                            // IF FOR OFFICERS ONLY
+                                            if($key >= 2){
+                                                if(str_starts_with($lc->type, "COC")){
+                                                    $hl = $key;
+                                                }
+                                            }
+                                            else{
+                                                $hl = $key;
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        $hl = $key;
+                                    }
+                                }
                             }
                         }
                     }
@@ -417,7 +434,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
                     // INTERCHANGED COMPARED TO BLADE FILE AROUND LINE 1140
                     // AB OLR OS WPR WITH SENIOR OFFICER LICENSE
-                    if(($rid == 10 && $hl2) || ($rid == 16 && $hl2) || ($rid == 9 && $hl2) || ($rid == 15 && $hl2) || ($rid == 42 && $hl2) || ($rid == 43 && $hl2) || ($rid == 11 && $hl2) || ($rid == 17 && $hl2)){
+                    if(($rid == 10 && $hl == 2) || ($rid == 16 && $hl == 2) || ($rid == 9 && $hl == 2) || ($rid == 15 && $hl == 2) || ($rid == 42 && $hl == 2) || ($rid == 43 && $hl == 2) || ($rid == 11 && $hl == 2) || ($rid == 17 && $hl == 2)){
                         $start = $raoc;
                         $end = $raoc;
                         $start2 = $start+1;
@@ -427,7 +444,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                         $temp += 2;
                     }
                     // AB OLR OR OS WPR WITH JUNIOR OFFICER LICENSE
-                    elseif(in_array($rid, [10,16,9,15,42,43]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
+                    elseif(in_array($rid, [10,16,9,15,42,43]) || ($rid == 11 && $hl == 1) || ($rid == 17 && $hl == 1)){
                         $start = $raoc;
                         $end = $raoc;
 
@@ -467,10 +484,6 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     array_push($cells[12], "H$row:I$row");
 
                     array_push($cells[13], "A$row");
-                }
-
-                if(in_array($this->applicant->id, [3220, 2862])){
-                    $raoc-=1;
                 }
 
                 // PIYC
