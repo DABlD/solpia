@@ -3096,7 +3096,7 @@
                             'toei': "TOEI"
                         @elseif(auth()->user()->fleet == "FLEET C")
                             'hmm': "HMM"
-                        @elseif(in_array(auth()->user()->id, [4504, 5013, 6011, 5963, 6014, 6080, 5907]))
+                        @elseif(in_array(auth()->user()->id, [22, 4504, 5013, 6011, 5963, 6014, 6080, 5907]))
                             'western': "NITTA/TOEI"
                         @elseif(in_array(auth()->user()->id, [4545, 4861, 4988, 6016]))
                             'shinko': "SHINKO"
