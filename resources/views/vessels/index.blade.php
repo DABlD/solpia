@@ -131,6 +131,72 @@
             width: 39.22px;
         }
 
+        .file-buttons{
+            text-align: right;
+        }
+
+        .form-group{
+            text-align: left;
+        }
+
+        .puwy{
+            margin-top: 20px !important;
+        }
+
+        .tab-pane .col-md-1{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
+        .tab-pane .col-md-2{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
+        .tab-pane .col-md-3{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
+        .tab-pane .col-md-6{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
+        .tab-pane .col-md-8{
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+
+        .tab-pane h3{
+            margin-left: -20px;
+        }
+
+        th{
+            text-align: center;
+        }
+
+        .tss{
+            font-size: 9px;
+        }
+
+        .modal thead tr, .tss thead tr{
+            background-color: #ffddcc !important;
+        }
+
+        .custom-striped tr:nth-child(4n+3), .custom-striped tr:nth-child(4n+4) {
+            background-color: #fdeee6;
+        }
+
+        .custom-striped td{
+            padding-top: 1px !important;
+            padding-bottom: 1px !important;
+        }
+
+        table .btn{
+            width: 39.22px;
+        }
+
     </style>
 @endpush
 
@@ -1924,7 +1990,9 @@
                             <a class="btn btn-info" data-toggle="tooltip" title="Export Documents" onClick="getContract(${crew.applicant_id})">
                                 <span class="fa fa-file-text"></span>
                             </a>
-
+                            <a class="btn btn-primary btn-search" data-toggle="tooltip" onClick="viewInfo(${crew.applicant_id})">
+                                <span class="fa fa-search" onClick="viewInfo(${crew.applicant_id})"></span>
+                            </a>
                             <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-ship"></span>
                             </a>
@@ -2093,6 +2161,9 @@
                             <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Extend Contract" onClick="extendContract(${crew.applicant_id}, ${crew.vessel_id})">
                                 <span class="fa fa-calendar-plus-o"></span>
                             </a>
+                            <a class="btn btn-primary btn-search" data-toggle="tooltip" onClick="viewInfo(${crew.applicant_id})">
+                                <span class="fa fa-search" onClick="viewInfo(${crew.applicant_id})"></span>
+                            </a>
                             <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id}, '${disembarkation_date.format('YYYY-MM-DD')}')">
                                 <span class="fa fa-arrow-down fa-sm"></span>
                             </a>
@@ -2133,6 +2204,1083 @@
             $('.tab-pane.linedUp').html(table + "</tbody></table>");
             $('.tab-pane.onBoard').html(table2 + "</table>");
             $('.tab-pane.summary').html(table3 + "</table>");
+        }
+
+        function viewInfo(id){
+            $.ajax({
+                url: '{{ route('applications.getAllInfo') }}',
+                data: {id: id},
+                success: applicant => {
+                    applicant = JSON.parse(applicant);
+                    swal({
+                        width: '90%',
+                        animation: false,
+                        html: `
+                            <ul class="nav nav-pills" role="tablist" id="infoTabs">
+                                <li role="presentation" class="active">
+                                    <a href=".pinfo" role="tab" data-toggle="pill"><u>P</u>ersonal Info</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".educbg" role="tab" data-toggle="pill"><u>E</u>ducational Background</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".family" role="tab" data-toggle="pill">Famil<u>y</u> Data</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".ids" role="tab" data-toggle="pill">Document <u>I</u>D</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".flags" role="tab" data-toggle="pill"><u>F</u>lag Documents</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".l_cs" role="tab" data-toggle="pill"><u>D</u>ocuments</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".med_certs" role="tab" data-toggle="pill"><u>M</u>edical Certificates</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".meds" role="tab" data-toggle="pill">Medical <u>H</u>istory</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".ss" role="tab" data-toggle="pill"><u>S</u>ea Services</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href=".eval" role="tab" data-toggle="pill">E<u>v</u>aluations</a>
+                                </li>
+                            </ul>
+                            <br><br>
+
+                            <div class="tab-content">
+                              <div role="tabpanel" class="tab-pane fade in pinfo active">a</div>
+                              <div role="tabpanel" class="tab-pane fade educbg">b</div>
+                              <div role="tabpanel" class="tab-pane fade family">b</div>
+                              <div role="tabpanel" class="tab-pane fade ids">c</div>
+                              <div role="tabpanel" class="tab-pane fade flags">c</div>
+                              <div role="tabpanel" class="tab-pane fade l_cs">c</div>
+                              <div role="tabpanel" class="tab-pane fade med_certs">d</div>
+                              <div role="tabpanel" class="tab-pane fade meds">d</div>
+                              <div role="tabpanel" class="tab-pane fade ss">d</div>
+                              <div role="tabpanel" class="tab-pane fade eval reco">d</div>
+                            </div>
+                        `,
+                        onOpen: () => {
+                            fillTab1(applicant);
+                            fillTab2(applicant);
+                            fillTab3(applicant);
+                            fillTab4(applicant);
+                            fillTab5(applicant);
+                            fillTab6(applicant);
+                            fillTab7(applicant);
+                            fillTab8(applicant);
+                            fillTab9(applicant); //FAMILY SUPPOSED TO BE 3
+                            fillTab10(applicant);
+                        }
+                    }).then(() => {
+                        $('[type="search"]:first').focus();
+                    });
+                }
+            })
+        };
+
+        // CREW INFO
+        function fillTab1(applicant){
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+
+                        <div class="row">
+                        <br>
+                            <div class="col-md-2">
+                                <img src="${applicant.user.avatar}" width="200px;" height="200px;">
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" id="fname" value="${applicant.user.fname}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="mname">Middle Name</label>
+                                    <input type="text" class="form-control" id="mname" value="${applicant.user.mname}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" value="${applicant.user.lname}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="suffix">Suffix</label>
+                                    <input type="text" class="form-control" id="suffix" value="${applicant.user.suffix ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="birthday">Birth Date</label>
+                                    <input type="text" class="form-control" id="birthday" value="${moment(applicant.user.birthday).format('MMM DD, YYYY')}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <input type="text" class="form-control" id="age" value="${moment().diff(moment(applicant.user.birthday), 'years')}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="birth_place">Birth Place</label>
+                                    <input type="text" class="form-control" id="birth_place" value="${applicant.birth_place ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="religion">Religion</label>
+                                    <input type="text" class="form-control" id="religion" value="${applicant.religion ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" value="${applicant.user.address ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="contact">Contact Number</label>
+                                    <input type="text" class="form-control" id="contact" value="${applicant.user.contact ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="provincial_address">Provincial Address</label>
+                                    <input type="text" class="form-control" id="provincial_address" value="${applicant.provincial_address ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="provincial_contact">Provincial Contact Number</label>
+                                    <input type="text" class="form-control" id="provincial_contact" value="${applicant.provincial_contact ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" value="${applicant.user.email ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2" style="text-align: left;">
+                                <label for="gender">Gender</label>
+                                </br>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" id="male" ${applicant.user.gender == "Male" ? "Checked" : ""}> Male
+                                </label>
+                                &nbsp; &nbsp;
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" id="female" ${applicant.user.gender == "Female" ? "Checked" : ""}> Female
+                                </label>
+                                <br>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="waistline">Waistline (inch)</label>
+                                    <input type="text" class="form-control" id="waistline" value="${applicant.waistline ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="shoe_size">Shoe Size (cm)</label>
+                                    <input type="text" class="form-control" id="shoe_size" value="${applicant.shoe_size ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="clothes_size">Clothes Size (cm)</label>
+                                    <input type="text" class="form-control" id="clothes_size" value="${applicant.clothes_size ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="height">Height (cm)</label>
+                                    <input type="text" class="form-control" id="height" value="${applicant.height ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Weight">Weight (kg)</label>
+                                    <input type="text" class="form-control" id="Weight" value="${applicant.weight ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="bmi">BMI</label>
+                                    <input type="text" class="form-control" id="bmi" value="${Math.round( (applicant.weight / ((applicant.height / 100) * (applicant.height / 100))) * 10 ) / 10}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="blood_type">Blood Type</label>
+                                    <input type="text" class="form-control" id="blood_type" value="${applicant.blood_type ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="civil_status">Civil Status</label>
+                                    <input type="text" class="form-control" id="civil_status" value="${applicant.civil_status ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="eye_color">Eye Color</label>
+                                    <input type="text" class="form-control" id="eye_color" value="${applicant.eye_color ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="tin">TIN</label>
+                                    <input type="text" class="form-control" id="tin" value="${applicant.tin ?? "---"}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="sss">SSS</label>
+                                    <input type="text" class="form-control" id="sss" value="${applicant.sss ?? "---"}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            `;
+
+            $('.pinfo').html(string);
+        }
+
+        function fillTab2(applicant){
+            let ebs = Object.entries(applicant.educational_background);
+            let temp = ``;
+
+            ebs.forEach(eb => {
+                eb = eb[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${eb.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="course">Course</label>
+                                <input type="text" class="form-control" id="course" value="${eb.course ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="year">Year</label>
+                                <input type="text" class="form-control" id="year" value="${eb.year ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="school">School</label>
+                                <input type="text" class="form-control" id="school" value="${eb.school ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" value="${eb.address ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            })
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Educational Background</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.educbg').html(string);
+        }
+
+        function fillTab3(applicant){
+            let ids = Object.entries(applicant.document_id);
+            let temp = ``;
+
+            ids.forEach(id => {
+                id = id[1];
+                file = "";
+
+                if(id.file){
+                    try{
+                        id.file = JSON.parse(id.file);
+                        id.file = id.file[0];
+                    }
+                    catch(error){
+                        id.file = id.file;
+                    }
+
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
+                            <span class="fa fa-search">
+                        </span></a>
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, 'ids')">
+                            <span class="fa fa-times">
+                        </span></a>`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
+                temp += `
+                    <h3 style="text-align: left;"><b>${id.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issuer">Issuer</label>
+                                <input type="text" class="form-control" id="issuer" value="${id.issuer ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="number">Number</label>
+                                <input type="text" class="form-control" id="number" value="${id.number ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issue_date">Issue Date</label>
+                                <input type="text" class="form-control" id="issue_date" value="${id.issue_date != null ? moment(id.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="expiry_date">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" value="${id.expiry_date != null ? moment(id.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Flag Documents</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.ids').html(string);
+        }
+
+        function fillTab4(applicant){
+            let flags = Object.entries(applicant.document_flag);
+            let temp = ``;
+
+            flags.forEach(flag => {
+                flag = flag[1];
+                file = "";
+
+                if(flag.file){
+                    try{
+                        flag.file = JSON.parse(flag.file);
+                        flag.file = flag.file[0];
+                    }
+                    catch(error){
+                        flag.file = flag.file;
+                    }
+
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
+                            <span class="fa fa-search">
+                        </span></a>
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.ifile}', 'flags')">
+                            <span class="fa fa-times">
+                        </span></a>`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
+                temp += `
+                    <h3 style="text-align: left;"><b>${flag.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control" id="country" value="${flag.country ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="number">Number</label>
+                                <input type="text" class="form-control" id="number" value="${flag.number ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issue_date">Issue Date</label>
+                                <input type="text" class="form-control" id="issue_date" value="${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="expiry_date">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" value="${flag.expiry_date != null ? moment(flag.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Flag Documents</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.flags').html(string);
+        }
+
+        function fillTab5(applicant){
+            let lcs = Object.entries(applicant.document_lc);
+            let temp = ``;
+
+            lcs.forEach(lc => {
+                lc = lc[1];
+                file = "";
+
+                if(lc.file){
+                    try{
+                        lc.file = JSON.parse(lc.file);
+                        lc.file = lc.file[0];
+                    }
+                    catch(error){
+                        lc.file = lc.file;
+                    }
+
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
+                            <span class="fa fa-search">
+                        </span></a>
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                            <span class="fa fa-times">
+                        </span></a>`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
+                temp += `
+                    <h3 style="text-align: left;"><b>${lc.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="issuer">Issuer</label>
+                                <input type="text" class="form-control" id="issuer" value="${lc.issuer ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="no">Number</label>
+                                <input type="text" class="form-control" id="no" value="${lc.no ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issue_date">Issue Date</label>
+                                <input type="text" class="form-control" id="issue_date" value="${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="expiry_date">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" value="${lc.expiry_date != null ? moment(lc.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="regulation">Regulation</label>
+                                <input type="text" class="form-control" id="regulation" value="${lc.regulation != "[]" ? JSON.parse(lc.regulation) : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Licenses</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.l_cs').html(string);
+        }
+
+        function fillTab6(applicant){
+            let mcs = Object.entries(applicant.document_med_cert);
+            let temp = ``;
+
+            mcs.forEach(mc => {
+                mc = mc[1];
+                file = "";
+
+                if(mc.file){
+                    try{
+                        mc.file = JSON.parse(mc.file);
+                        mc.file = mc.file[0];
+                    }
+                    catch(error){
+                        mc.file = mc.file;
+                    }
+
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
+                            <span class="fa fa-search">
+                        </span></a>
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                            <span class="fa fa-times">
+                        </span></a>`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
+                temp += `
+                    <h3 style="text-align: left;"><b>${mc.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="number">Number</label>
+                                <input type="text" class="form-control" id="number" value="${mc.number ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="clinic">Clinic/Hospital</label>
+                                <input type="text" class="form-control" id="clinic" value="${mc.clinic ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="issue_date">Issue Date</label>
+                                <input type="text" class="form-control" id="issue_date" value="${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="expiry_date">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiry_date" value="${mc.expiry_date != null ? moment(mc.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Medical Certificate</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.med_certs').html(string);
+        }
+
+        function fillTab7(applicant){
+            let mhs = Object.entries(applicant.document_med);
+            let temp = "";
+
+            mhs.forEach(mh => {
+                mh = mh[1];
+                file = "";
+
+                if(mh.file){
+                    try{
+                        mh.file = JSON.parse(mh.file);
+                        mh.file = mh.file[0];
+                    }
+                    catch(error){
+                        mh.file = mh.file;
+                    }
+
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
+                            <span class="fa fa-search">
+                        </span></a>
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, 'meds')">
+                            <span class="fa fa-times">
+                        </span></a>`;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
+                temp += `
+                    <h3 style="text-align: left;"><b>${mh.type}</b></h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="with_mv">With Medication/Vaccine</label>
+                                <input type="text" class="form-control" id="with_mv" value="${mh.with_mv == "Yes" ? mh.with_mv : '---'}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="year">Year</label>
+                                <input type="text" class="form-control" id="year" value="${mh.year ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="case_remarks">Remarks</label>
+                                <input type="text" class="form-control" id="case_remarks" value="${mh.case_remarks ?? "---"}" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : "<h2><b>NO RECORDED HISTORY</b></h2>"}
+                    </div>
+                </div>
+            `;
+
+            $('.meds').html(string);
+        }
+
+        function fillTab8(applicant){
+            let sss = Object.entries(applicant.sea_service);
+
+            if(applicant.lup){
+                $.ajax({
+                    url: "{{ route('vessels.get2') }}",
+                    data: {
+                        cols: "*",
+                        where: ["id", applicant.pro_app.vessel_id]
+                    },
+                    success: vessel => {
+                        vessel = JSON.parse(vessel)[0];
+
+                        $.ajax({
+                            url: "{{ route('applications.getRanks') }}",
+                            success: categories => {
+                                categories = JSON.parse(categories);
+                                let cRrank = null;
+
+                                Object.entries(categories).forEach(category => {
+                                    let ranks = category[0];
+                                    
+                                    categories[ranks].forEach(rank => {
+                                        if(rank.id == applicant.pro_app.rank_id){
+                                            cRrank = rank.name;
+                                        }
+                                    });
+                                });
+
+                                let temp = {
+                                    vessel_name: vessel.name,
+                                    rank: cRrank,
+                                    vessel_type: vessel.type,
+                                    gross_tonnage: vessel.gross_tonnage,
+                                    engine_type: vessel.engine,
+                                    flag: vessel.flag,
+                                    trade: vessel.trade,
+                                    manning_agent: vessel.manning_agent,
+                                    principal: "",
+                                    sign_on: applicant.lup.joining_date,
+                                    remarks: "On Board"
+                                };
+
+                                sss = [["0", temp]].concat(sss);
+                                forFillTab8(sss);
+                            }
+                        })
+                    }
+                })
+            }
+            else{
+                forFillTab8(sss);
+            }
+        }
+
+        function forFillTab8(sss){
+            let temp = ``;
+
+            sss.forEach((ss, i) => {
+                ss = ss[1];
+                temp += `
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${ss.vessel_name}</td>
+                        <td>${ss.rank}</td>
+                        <td>${ss.vessel_type}</td>
+                        <td>${ss.gross_tonnage}</td>
+                        <td>${ss.engine_type}</td>
+                        <td>${ss.flag}</td>
+                        <td>${ss.trade}</td>
+                        <td>${ss.manning_agent}</td>
+                        <td>${ss.principal}</td>
+                        <td>${ss.sign_on != null ? moment(ss.sign_on).format("MMM DD, YYYY") : "---"}</td>
+                        <td>${ss.sign_off != null ? moment(ss.sign_off).format("MMM DD, YYYY") : "---"}</td>
+                        <td>${moment(ss.sign_off).diff(moment(ss.sign_on), 'months')}</td>
+                        <td>${ss.remarks}</td>
+                    </tr>
+                `;
+            });
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped tss">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Rank</th>
+                                    <th>Type</th>
+                                    <th>GRT</th>
+                                    <th>Engine</th>
+                                    <th>Flag</th>
+                                    <th>Trade</th>
+                                    <th>Manning</th>
+                                    <th>Principal</th>
+                                    <th>On</th>
+                                    <th>Off</th>
+                                    <th>MOB</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${temp != "" ? temp : `<tr><td colspan="16">No Recorded Sea Service</td></tr>`}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+
+            $('.ss').html(string);
+        }
+
+        function fillTab9(applicant){
+            let fds = Object.entries(applicant.family_data);
+            let temp = ``;
+
+            fds.forEach(fd => {
+                fd = fd[1];
+                temp += `
+                    <h3 style="text-align: left;"><b>${fd.type}</b></h3>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" value="${fd.fname ?? "-"} ${fd.lname ?? "-"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="birthday">birthday</label>
+                                <input type="text" class="form-control" id="birthday" value="${fd.birthday ? moment(fd.birthday).format('MMM DD, YYYY') : "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="year">Age</label>
+                                <input type="text" class="form-control" id="age" value="${fd.birthday ? moment().diff(fd.birthday, 'years') : fd.age ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="occupation">Occupation</label>
+                                <input type="text" class="form-control" id="occupation" value="${fd.occupation ?? "---"}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="email">Contact</label>
+                                <input type="text" class="form-control" id="email" value="${fd.email ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="school">Address</label>
+                                <input type="text" class="form-control" id="address" value="${fd.address ?? "---"}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            })
+
+            let string = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-body">
+                        ${temp != "" ? temp : '<h2><b>No Recorded Family Data</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.family').html(string);
+        }
+
+        function fillTab10(applicant){
+            let evalss = applicant.evaluation;
+            let temp = ``;
+            let temp1 = ``;
+            let temp2 = ``;
+            let temp3 = ``;
+
+            evalss.forEach(evals => {
+                file = "";
+
+                if(evals.file){
+                    try{
+                        evals.file = JSON.parse(evals.file);
+                        evals.file = evals.file[0];
+                    }
+                    catch(error){
+                        evals.file = evals.file;
+                    }
+
+                    let type = evals.type == "Evaluation" ? "eval" : evals.type == "Recommendation" ? "reco" : "comment";
+
+                    file = `
+                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${evals.id}', ${applicant.id}, 'eval')">
+                            <span class="fa fa-search">
+                        </span></a>
+                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${evals.file}" download>
+                            <span class="fa fa-download">
+                        </span></a>
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete File"  onClick="deleteFile(${evals.id}, ${applicant.id}, 'eval')">
+                            <span class="fa fa-times">
+                        </span></a>`;
+                }
+                else{
+                    file += `
+                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteEval(${evals.id}, ${applicant.id}, 'eval')">
+                            <span class="fa fa-times">
+                        </span></a>
+                    `;
+                }
+
+                file += `
+                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${evals.id}, ${applicant.id}, 'eval')">
+                        <span class="fa fa-upload">
+                    </span></a>
+                `;
+
+                temp = `
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="vessel">Vessel</label>
+                                <input type="text" class="form-control" id="vessel" value="${evals.vessel}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="text" class="form-control" id="date" value="${toDate(evals.date)}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="remark">Remark</label>
+                                <input type="text" class="form-control" id="remark" value="${evals.value}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                ${file}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if(evals.type == "Evaluation"){
+                    temp1 += temp;
+                }
+                else if(evals.type == "Recommendation"){
+                    temp2 += temp;
+                }
+            })
+
+            let string1 = `
+                <div class="box box-success" style="font-size: 15px;">
+                    <div class="box-header" style="float: right;" data-toggle="tooltip" title="Add">
+                        <a class="btn btn-success" data-toggle="tooltip" title="Add Evaluation" onClick="addEval('Evaluation', ${applicant.id}, 'eval')">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a class="btn btn-info" data-toggle="tooltip" title="Add Recommendation" onClick="addEval('Recommendation', ${applicant.id}, 'eval')">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+
+                    <div class="box-body">
+                        <h3 style="text-align: left;"><b>Evaluations</b></h3>
+                        ${temp1 != "" ? temp1 : '<h2><b>No Evaluation</b></h2>'}
+                        <h3 style="text-align: left;"><b>Recommendations</b></h3>
+                        ${temp2 != "" ? temp2 : '<h2><b>No Recommendation</b></h2>'}
+                    </div>
+                </div>
+            `;
+
+            $('.eval').html(string1);
         }
 
         function onBoard(id, vessel_id){

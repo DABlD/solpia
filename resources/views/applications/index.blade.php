@@ -3053,9 +3053,11 @@
                         data: {
                             cols: "*",
                             where: ['applicants.id', id],
+                            load: ['pro_app']
                         },
                         success: result => {
                             result = JSON.parse(result)[0];
+                            console.log(result);
                             
                             // CHECK IF SINOCREW
                             if(result.principal_id == 999){
@@ -3066,6 +3068,21 @@
                                         sinocrew1: 'Maple Rising Format',
                                         sinocrew2: 'Xing Long Yung',
                                         sinocrew3: 'TENGDA'
+                                    }
+                                }).then(result => {
+                                    if(result.value){
+                                        type = result.value;
+                                        window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                                    }
+                                })
+                            }
+                            else if(result.principal_id == 10){
+                                swal({
+                                    title: 'Select Type',
+                                    input: 'select',
+                                    inputOptions: {
+                                        klcsm: 'Tanker',
+                                        klcsmBulk: 'Bulk'
                                     }
                                 }).then(result => {
                                     if(result.value){
