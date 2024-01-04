@@ -36,7 +36,7 @@
 		$cba = "IBF FKSU/AMOSUP KSA CBA";
 	}
 	elseif(in_array($v, ['M/V DAEBO GLADSTONE'])){
-		$allowance = 10.5;
+		$allowance = 12;
 	}
 @endphp
 
