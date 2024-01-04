@@ -296,21 +296,24 @@
 	</tr>
 
 	@php
-		$rank = $data->rank->name;
-		if($rank == "2ND OFFICER"){
-			$rank = "SECOND OFFICER";
-		}
-		elseif($rank == "3RD OFFICER"){
-			$rank = "THIRD OFFICER";
-		}
-		elseif($rank == "1ST ASST. ENGR"){
-			$rank = "FIRST ASSISTANT ENGINEER";
-		}
-		elseif($rank == "2ND ASST. ENGR"){
-			$rank = "SECOND ASSISTANT ENGINEER";
-		}
-		elseif($rank == "3RD ASST. ENGR"){
-			$rank = "THIRD ASSISTANT ENGINEER";
+		$rank = null;
+		if(isset($data->rank)){
+			$rank = $data->rank->name;
+			if($rank == "2ND OFFICER"){
+				$rank = "SECOND OFFICER";
+			}
+			elseif($rank == "3RD OFFICER"){
+				$rank = "THIRD OFFICER";
+			}
+			elseif($rank == "1ST ASST. ENGR"){
+				$rank = "FIRST ASSISTANT ENGINEER";
+			}
+			elseif($rank == "2ND ASST. ENGR"){
+				$rank = "SECOND ASSISTANT ENGINEER";
+			}
+			elseif($rank == "3RD ASST. ENGR"){
+				$rank = "THIRD ASSISTANT ENGINEER";
+			}
 		}
 	@endphp
 	<tr>
