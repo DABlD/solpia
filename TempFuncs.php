@@ -105,3 +105,34 @@ $pro_app = ProcessedApplicant::whereIn('vessel_id', $vIds)->where('status', 'Lin
 $aIds = array_merge($linedUp->toArray(), $pro_app->toArray());
 $uIds = Applicant::whereIn('id', $aIds)->pluck('user_id')->toArray();
 User::whereIn('id', $uIds)->update(["fleet" => "FLEET D"]);
+
+<!-- GET ALL TOEI CREW CE 1AE THAT HAS HIGHER LICENSE -->
+$tc = User::where('role', 'Applicant')->where('fleet', 'TOEI')->get();
+
+$tc = $tc->filter(function($temp){
+    if(isset($temp->crew->pro_app->rank)){
+        return $temp->crew->pro_app->rank_id == 7 || $temp->crew->pro_app->rank_id == 8 || $temp->crew->pro_app->rank_id == 53 || $temp->crew->pro_app->rank_id == 54 || $temp->crew->pro_app->rank_id == 55;
+    }
+
+    return false;
+});
+
+$array = [];
+// $tc = $tc->groupBy('crew.pro_app.rank_id');
+
+foreach($tc as $temp){
+    $docus = $temp->crew->document_lc->filter(function($docu){
+        return $docu->type == "COC";
+    });
+
+    foreach($docus as $docu){
+        if(str_starts_with($docu->no, "CCE") || str_starts_with($docu->no, "C2E")){
+            $temp->hl = $docu->no;
+            array_push($array, $temp);
+        }
+    }
+}
+
+foreach($array as $temp){
+    echo $temp->namefull . ';' . $temp->crew->pro_app->rank->abbr . ';' . $temp->hl . '<br>';
+}
