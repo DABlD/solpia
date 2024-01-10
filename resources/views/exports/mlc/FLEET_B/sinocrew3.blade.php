@@ -15,7 +15,7 @@
 
 	<tr>
 		<td style="{{ $c }}">Date:</td>
-		<td style="{{ $c }}">{{ now()->format('d/F/Y') }}</td>
+		<td style="{{ $c }}">{{ now()->format('d/M/Y') }}</td>
 		<td>and agreed to be effective from</td>
 		<td></td>
 		<td colspan="2"></td>
@@ -189,20 +189,19 @@
 	<tr>
 		<td colspan="3" style="{{ $b }} text-align: left;">{{ $data->employment_months }} +/-1 MONTHS</td>
 		<td colspan="2" style="{{ $b }}">{{ $data->pro_app->eld ? $data->pro_app->eld->format('d/M/Y') : "---" }}</td>
-		<td colspan="1" style="{{ $b }}">{{ $data->pro_app->vessel->work_hours ?? "-" }}</td>
+		<td colspan="1" style="{{ $b }}">44 hours</td>
 	</tr>
 
 	<tr>
 		<td colspan="3" style="height: 12px;">Basic monthly wage:</td>
-		<td style="height: 12px;">Monthly overtime:</td>
-		<td style="height: 12px; text-align: right;">(103 hours guaranteed)</td>
+		<td colspan="2" style="height: 12px;">Monthly overtime: (103 hours guaranteed)</td>
 		<td colspan="1" style="height: 12px;">Overtime rate for hours worked in excess of 95 hrs:</td>
 	</tr>
 
 	<tr>
-		<td colspan="3" style="{{ $b }}">USD {{ $data->wage && $data->wage->basic ? $data->wage->basic : 0.00 }}</td>
-		<td colspan="2" style="{{ $b }}">USD {{ $data->wage ? $data->wage->ot ?? "N/A" : 0.00 }}</td>
-		<td colspan="1" style="{{ $b }}">USD {{ $data->wage ? $data->wage->ot_per_hour : 0.00 }}</td>
+		<td colspan="3" style="{{ $b }}">{{ $data->wage && $data->wage->basic ? $data->wage->basic : 0.00 }} US$</td>
+		<td colspan="2" style="{{ $b }}">N/A</td>
+		<td colspan="1" style="{{ $b }}">N/A</td>
 	</tr>
 
 	<tr>
@@ -212,9 +211,9 @@
 	</tr>
 
 	<tr>
-		<td colspan="3" style="{{ $b }}">{{ $data->wage && $data->wage->leave_per_month ? $data->wage->leave_per_month : 0 }} DAYS</td>
-		<td colspan="2" style="{{ $b }}">USD {{ $data->wage && $data->wage->leave_pay ? $data->wage->leave_pay : 0.00 }}</td>
-		<td colspan="1" style="{{ $b }}">USD {{ $data->wage && $data->wage->sub_allow ? $data->wage->sub_allow : 0.00 }}</td>
+		<td colspan="3" style="{{ $b }}">8 days</td>
+		<td colspan="2" style="{{ $b }}">{{ $data->wage && $data->wage->leave_pay ? $data->wage->leave_pay : 0.00 }} US$</td>
+		<td colspan="1" style="{{ $b }}">{{ $data->wage && $data->wage->sub_allow ? $data->wage->sub_allow : 0.00 }} US$</td>
 	</tr>
 
 	@php
@@ -235,13 +234,15 @@
 	</tr>
 
 	<tr>
-		<td colspan="3" style="{{ $b }}">USD {{ $data->wage ? $data->wage->fot ?? "N/A" : 0.00 }}</td>
-		<td colspan="2" style="{{ $b }}">USD {{ $data->wage && $data->wage->owner_allow ? $data->wage->owner_allow : 0.00 }}</td>
-		<td colspan="1" style="{{ $b }}">USD {{ $salary }}</td>
+		<td colspan="3" style="{{ $b }}">{{ $data->wage ? $data->wage->fot ?? "N/A" : 0.00 }} US$</td>
+		<td colspan="2" style="{{ $b }}">{{ $data->wage && $data->wage->owner_allow ? $data->wage->owner_allow : 0.00 }} US$</td>
+		<td colspan="1" style="{{ $b }}">{{ $salary }} US$</td>
 	</tr>
 
 	<tr>
-		<td colspan="6" style="height: 24px;">Social Contribution:</td>
+		<td colspan="3" style="height: 25px;">Social Contribution:</td>
+		<td colspan="2" style="height: 25px;"></td>
+		<td colspan="1" style="height: 25px;"></td>
 	</tr>
 
 	<tr>

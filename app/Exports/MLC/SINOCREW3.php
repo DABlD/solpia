@@ -256,9 +256,9 @@ class SINOCREW3 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->setTitle('MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
@@ -300,7 +300,7 @@ class SINOCREW3 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
                 // VT
                 $h[1] = [
-                    'A44:A46', 'A28'
+                    'A43:A46', 'A28'
                 ];
 
                 // HL B
@@ -377,6 +377,7 @@ class SINOCREW3 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
                     'A44:F47',
+                    'A43:F43',
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -470,11 +471,11 @@ class SINOCREW3 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(24);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(27);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(22);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(35);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
@@ -483,7 +484,12 @@ class SINOCREW3 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSiz
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
+                $event->sheet->getDelegate()->getStyle('A3:D3')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A44:A46')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('D37')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('F37')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('F39')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A48')->getFont()->setSize(9);
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
