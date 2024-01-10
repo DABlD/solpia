@@ -105,7 +105,7 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
-					$country = isset($data->vessel) ? ucwords(strtolower($data->vessel->flag)) : count($data->document_flag) ? $data->document_flag->first->country : "";
+					$country = ucwords(strtolower($data->vessel->flag));
 					foreach (get_object_vars($data->document_flag) as $flag) {
 						if($flag->country == $country && $flag->type == $doc){
 							$docu = $flag;
