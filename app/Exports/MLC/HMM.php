@@ -27,36 +27,38 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         // minus two;
         $mt = false;
 
-        if(in_array($applicant->vessel->name, $array1)){
-            $applicant->shipowner = "HMM Company Limited";
-            $applicant->sAddress = "108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
-            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-            $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
-        }
-        elseif(in_array($applicant->vessel->name, $array2)){
-            $mt = true;
-            $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
-            $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
-        }
-        elseif(in_array($applicant->vessel->name, $array3)){
-            $applicant->shipowner = "HMM Company Limited";
-            $applicant->sAddress = 'TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA';
-            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-            $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
-        }
-        else{
-            // DEFAULT
-            $applicant->shipowner = "HMM Company Limited";
-            $applicant->sAddress = "1-7 YEONGJI-DONG, JONGNO-GU, SEOUL, KOREA";
-            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-            $applicant->cAddress = "BUSAN POST OFFICE BUILDING, 5TH FLOOR, JUNGANG-DONG 3GA, JUNG-GU, BUSAN, KOREA";
-        }
-
         // FOR FLEET C
         if($applicant->vessel->fleet == "FLEET C"){
             $mt = true;
             $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
             $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
+        }
+        else //FOR FLEET B
+        {
+            if(in_array($applicant->vessel->name, $array1)){
+                $applicant->shipowner = "HMM Company Limited";
+                $applicant->sAddress = "108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
+                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+                $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
+            }
+            elseif(in_array($applicant->vessel->name, $array2)){
+                $mt = true;
+                $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
+                $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
+            }
+            elseif(in_array($applicant->vessel->name, $array3)){
+                $applicant->shipowner = "HMM Company Limited";
+                $applicant->sAddress = 'TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA';
+                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+                $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
+            }
+            else{
+                // DEFAULT
+                $applicant->shipowner = "HMM Company Limited";
+                $applicant->sAddress = "1-7 YEONGJI-DONG, JONGNO-GU, SEOUL, KOREA";
+                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+                $applicant->cAddress = "BUSAN POST OFFICE BUILDING, 5TH FLOOR, JUNGANG-DONG 3GA, JUNG-GU, BUSAN, KOREA";
+            }
         }
 
         $this->applicant    = $applicant;
