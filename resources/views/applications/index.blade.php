@@ -448,7 +448,13 @@
             if(!$('#infoTabs').is(':visible')){
                 const key = event.key;
 
-                if(key == "ArrowUp"){
+                if((key == "V" || key == "v") && event.altKey){
+                    $(`tbody tr:nth-child(${tabCtr})`).find('.btn-search').click();
+                }   
+                else if((key == "E" || key == "e") && event.altKey){
+                    $(`tbody tr:nth-child(${tabCtr})`).find('.btn-primary').click();
+                }
+                else if(key == "ArrowUp"){
                     tabCtr--;
                     $(`tbody tr`).removeClass('selected');
                     $(`tbody tr:nth-child(${tabCtr})`).addClass('selected');
@@ -457,6 +463,14 @@
                     tabCtr++;
                     $(`tbody tr`).removeClass('selected');
                     $(`tbody tr:nth-child(${tabCtr})`).addClass('selected');
+                }
+                else if(key == "ArrowRight"){
+                    tabCtr = 1;
+                    $('#table_next').click();
+                }
+                else if(key == "ArrowLeft"){
+                    tabCtr = 1;
+                    $('#table_previous').click();
                 }
             }
         }, true);
@@ -467,21 +481,6 @@
             window.addEventListener("keydown", function (event) {
                 if(!$('#infoTabs').is(':visible')){
                     const key = event.key;
-
-                    if((key == "V" || key == "v") && event.altKey){
-                        $(`tbody tr:nth-child(${tabCtr})`).find('.btn-search').click();
-                    }
-                    else if((key == "E" || key == "e") && event.altKey){
-                        $(`tbody tr:nth-child(${tabCtr})`).find('.btn-primary').click();
-                    }
-                    else if(key == "ArrowRight"){
-                        tabCtr = 1;
-                        $('#table_next').click();
-                    }
-                    else if(key == "ArrowRight"){
-                        tabCtr = 1;
-                        $('#table_previous').click();
-                    }
                 }
             }, true);
 
