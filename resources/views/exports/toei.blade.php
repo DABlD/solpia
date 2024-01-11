@@ -414,7 +414,7 @@
 				 	{{-- GALLEY --}}
 				 	{{-- CHIEF COOK --}}
 				 	@elseif($hl == 9)
-				 		CHIEF COOK
+				 		SHIP'S COOK
 					@elseif($crewRank->id == 24)
 						COOK
 					@elseif($crewRank->id == 27 || $crewRank->id == 28)
@@ -1171,7 +1171,7 @@
 				@endphp
 
 				<tr>
-					<td colspan="4">NCI</td>
+					<td colspan="4">MESSMAN</td>
 					<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 					<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 					<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
