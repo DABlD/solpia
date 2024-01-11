@@ -326,6 +326,7 @@
 					foreach($applicant->document_lc as $lc){
 						if($lc->type == "NCIII"){
 							$docu = $lc;
+							$hl = 9; //CHIEF COOK
 							break;
 						}
 						elseif($lc->type == "NCI"){
@@ -411,6 +412,9 @@
 							@endif
 						@endif
 				 	{{-- GALLEY --}}
+				 	{{-- CHIEF COOK --}}
+				 	@elseif($hl == 9)
+				 		CHIEF COOK
 					@elseif($crewRank->id == 24)
 						COOK
 					@elseif($crewRank->id == 27 || $crewRank->id == 28)
@@ -1151,6 +1155,23 @@
 					<td colspan="4">
 						MARINA COP REGULATION {{ $rr1 }}
 					</td>
+					<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+					<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+					<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+					<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+				</tr>
+			@endif
+		@endif
+
+		@if($crewRank)
+			@if($hl == 9)
+				@php 
+					$name = 'NCI';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				@endphp
+
+				<tr>
+					<td colspan="4">NCI</td>
 					<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 					<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 					<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>

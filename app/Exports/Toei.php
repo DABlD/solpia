@@ -399,6 +399,10 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $rt = isset($this->applicant->rank) && str_starts_with($this->applicant->rank->category, "ENGINE") ? "er" : "dr";
 
                 if($this->applicant->rank){
+                    if(isset($this->applicant->document_lc->NCIII)){
+                        $raoc+=1;
+                    }
+
                     foreach($this->applicant->document_lc as $lc){
                         if(str_starts_with($lc->type, "COC") || str_starts_with($lc->type, "COE")){
                             $regulations = json_decode($lc->regulation);
