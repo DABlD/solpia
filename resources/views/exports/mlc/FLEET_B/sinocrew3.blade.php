@@ -187,7 +187,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="3" style="{{ $b }} text-align: left;">{{ $data->employment_months }} +/-1 MONTHS</td>
+		<td colspan="3" style="{{ $b }} text-align: left;">{{ $data->employment_months }}</td>
 		<td colspan="2" style="{{ $b }}">{{ $data->pro_app->eld ? $data->pro_app->eld->format('d/M/Y') : "---" }}</td>
 		<td colspan="1" style="{{ $b }}">44 hours</td>
 	</tr>
