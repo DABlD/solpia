@@ -265,6 +265,7 @@
         swal.showLoading();
 		var table = $('#table').DataTable({
             serverSide: true,
+            tabIndex: -1,
             ajax: {
                 url: '{{ route('datatables.applications') }}',
                 type: 'post',
@@ -440,16 +441,46 @@
             };
         }
 
+
+        // MUST BE HERE BECAUSE IF INSIDE INITIALIZE, INCREMENT/DECREMENT WILL STACK
+        let tabCtr = 1;
+        window.addEventListener("keydown", function (event) {
+            if(!$('#infoTabs').is(':visible')){
+                const key = event.key;
+
+                if(key == "ArrowUp"){
+                    tabCtr--;
+                    $(`tbody tr`).removeClass('selected');
+                    $(`tbody tr:nth-child(${tabCtr})`).addClass('selected');
+                }
+                else if(key == "ArrowDown"){
+                    tabCtr++;
+                    $(`tbody tr`).removeClass('selected');
+                    $(`tbody tr:nth-child(${tabCtr})`).addClass('selected');
+                }
+            }
+        }, true);
+
         function initializeActions(){
+            $(`tbody tr:first-child`).addClass('selected');
+
             window.addEventListener("keydown", function (event) {
                 if(!$('#infoTabs').is(':visible')){
                     const key = event.key;
 
-                    if(key == "V" || key == "v"){
-                        $('.dataTable tbody tr:hover').find('.btn-search').click();
+                    if((key == "V" || key == "v") && event.altKey){
+                        $(`tbody tr:nth-child(${tabCtr})`).find('.btn-search').click();
                     }
-                    else if(key == "E" || key == "e"){
-                        $('.dataTable tbody tr:hover').find('.btn-primary').click();
+                    else if((key == "E" || key == "e") && event.altKey){
+                        $(`tbody tr:nth-child(${tabCtr})`).find('.btn-primary').click();
+                    }
+                    else if(key == "ArrowRight"){
+                        tabCtr = 1;
+                        $('#table_next').click();
+                    }
+                    else if(key == "ArrowRight"){
+                        tabCtr = 1;
+                        $('#table_previous').click();
                     }
                 }
             }, true);
