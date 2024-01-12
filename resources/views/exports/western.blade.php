@@ -619,7 +619,7 @@
 	<tr>
 		<td rowspan="3" colspan="2">ECDIS</td>
 
-		@if($jr && $applicant->rank->category == "DECK OFFICER")
+		@if($jr && isset($applicant->rank) && $applicant->rank->category == "DECK OFFICER")
 			<td colspan="8">
 				Specific Training({{ $name }})
 			</td>
@@ -639,7 +639,7 @@
 	</tr>
 
 	<tr>
-		@if($jr || $applicant->rank->category != "DECK OFFICER")
+		@if(isset($applicant->rank) && ($jr || $applicant->rank->category != "DECK OFFICER"))
 			<td colspan="8">
 				Specific Training(FURUNO)
 			</td>
