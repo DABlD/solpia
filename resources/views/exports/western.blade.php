@@ -478,7 +478,7 @@
 		<td colspan="6">Issued By</td>
 	</tr>
 
-	@if($applicant->rank->type == "OFFICER")
+	@if(isset($applicant->rank) && $applicant->rank->type == "OFFICER")
 		{{ $getDocument('COC', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
 	@else
 		{{ $getDocument('COC-EMPTY', 			'lc', 		'MARINA', 		'National License'	,'',true			)}}
