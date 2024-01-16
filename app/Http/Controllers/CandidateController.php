@@ -12,6 +12,12 @@ class CandidateController extends Controller
         $this->table = "candidates";
     }
 
+    public function index(){
+        return $this->_view('index', [
+            'title' => 'Candidates'
+        ]);
+    }
+
     public function get(Request $req){
         $array = Candidate::select($req->select ?? "*");
 
@@ -82,5 +88,9 @@ class CandidateController extends Controller
                 Prospect::where('id', $can->prospect_id)->update(["status" => "HIRED"]);
             }
         }
+    }
+
+    private function _view($view, $data = array()){
+        return view($this->table . "." . $view, $data);
     }
 }

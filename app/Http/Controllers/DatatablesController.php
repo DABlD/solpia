@@ -10,7 +10,7 @@ use App\Models\{AuditTrail, SeaService, Opening};
 
 use App\Models\{TempApplicant, TempSeaService};
 use App\Models\{Wage};
-use App\Models\{Prospect, Requirement};
+use App\Models\{Prospect, Requirement, Candidate};
 
 use App\{User, TempUser};
 
@@ -926,6 +926,43 @@ class DatatablesController extends Controller
 		if($req->user_id){
 			$array = $array->where('user_id', 'like', $req->user_id);
 		}
+
+		$array = $array->get();
+
+        foreach($array as $item){
+            $item->actions = $item->actions;
+        }
+
+        // IF HAS LOAD
+        if($array->count() && $req->load){
+            foreach($req->load as $table){
+                $array->load($table);
+            }
+        }
+
+		$array = $array->toArray();
+
+	    return Datatables::of($array)
+    		->rawColumns(['actions'])
+    		->make(true);
+	}
+
+	public function candidates(Request $req){
+		$array = Candidate::where('candidates.status', 'like', $req->status)
+					->where(function($q) use($req){
+					    if($req->vessel == "%%"){
+						    $q->where('candidates.vessel_id', 'like', $req->vessel);
+						    $q->orWhereNull('candidates.vessel_id');
+					    }
+					    else{
+						    $q->where('candidates.vessel_id', 'like', $req->vessel);
+					    }
+					})
+					->join('prospects as p', 'p.id', '=', 'candidates.prospect_id')
+					->join('requirements as r', 'r.id', '=', 'candidates.requirement_id')
+					->where('p.rank', 'like', $req->rank)
+					->where('r.fleet', 'like', $req->fleet)
+					->select('candidates.*', 'r.fleet as fleet');
 
 		$array = $array->get();
 

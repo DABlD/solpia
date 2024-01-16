@@ -233,6 +233,16 @@ Route::group([
 		Route::get($name . '/suggestCandidate', ucfirst($name) . 'Controller@suggestCandidate')->name($name . '.suggestCandidate');
 		Route::post($name . '/import', ucfirst($name) . 'Controller@import')->name($name . '.import');
 
+		// CANDIDATES
+		$name = "candidate";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-users')
+			->defaults('name', 'Candidates')
+			->defaults('roles', array('Admin', 'Recruitment Officer'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
 		// OPENINGS ROUTES
 		$name = "requirement";
 		Route::get($name, ucfirst($name) . 'Controller@index')
@@ -294,7 +304,7 @@ Route::group([
 		Route::get($name . '/export', ucfirst($name) . 'Controller@export')->name($name . '.export');
 
 		// DATATABLE ROUTES
-		Route::post('datatables/recruitments', 'DatatablesController@recruitments')->name('datatables.recruitments');
+		Route::post('1/recruitments', 'DatatablesController@recruitments')->name('datatables.recruitments');
 		Route::post('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::get('datatables/applications2', 'DatatablesController@applications2');
 		
@@ -310,6 +320,7 @@ Route::group([
 		Route::post('datatables/prospects', 'DatatablesController@prospects')->name('datatables.prospects');
 		Route::post('datatables/requirements', 'DatatablesController@requirements')->name('datatables.requirements');
 		Route::post('datatables/suggestCandidate', 'DatatablesController@suggestCandidate')->name('datatables.suggestCandidate');
+		Route::post('datatables/candidates', 'DatatablesController@candidates')->name('datatables.candidates');
 
 		// MISC
 		Route::get('forceLogout', 'Auth\LoginController@forceLogout')->name('forceLogout');
