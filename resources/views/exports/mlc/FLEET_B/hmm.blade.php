@@ -178,7 +178,7 @@
 			${{ $data->wage->basic ? ($data->wage->basic) : 0 }}</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->fot ?? $data->wage->ot ?? 0 }}</td>
 		<td colspan="3" style="{{ $center }} {{ $color }}">${{ $data->wage->sup_allow ?? 0 }}</td>
-		<td colspan="2" style="{{ $center }} {{ $color }}">{{ $data->wage->sub_allow ?? 0 }}</td>
+		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->sub_allow ?? 0 }}</td>
 	</tr>
 
 	<tr>
@@ -199,7 +199,7 @@
 		<td style="{{ $center }} {{ $color }}">${{ $data->wage->owner_allow ?? 0}}</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $spay }}</td>
 		<td colspan="3" style="{{ $center }} {{ $color }}">${{ $data->wage->retire_allow ?? 0 }}</td>
-		<td colspan="2" style="{{ $center }} {{ $color }}">{{ $data->wage->other_allow ?? 0 }}</td>
+		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->other_allow ?? 0 }}</td>
 	</tr>
 
 	<tr>
