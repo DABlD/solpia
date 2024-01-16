@@ -156,7 +156,7 @@
 		</td>
 		<td style="{{ $center }}">Basic wage</td>
 		<td colspan="2" style="{{ $center }}">
-			{{ $data->rankType == "RATING" ? "Guaranteed (Ratings)" : "Fixed (Officer)" }} 
+			Fixed (Officer) / Guaranteed (Ratings)
 			<br style='mso-data-placement:same-cell;' />
 			Overtime Allowance
 		</td>
@@ -181,8 +181,8 @@
 			@endphp
 			${{ $data->wage->basic ? ($data->wage->basic) : 0 }}</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->fot ?? $data->wage->ot ?? 0 }}</td>
-		<td colspan="3" style="{{ $center }} {{ $color }}">${{ $data->wage->sup_allow ?? 0 }}</td>
-		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->sub_allow ?? 0 }}</td>
+		<td colspan="3" style="{{ $center }} {{ $color }}">${{ $data->wage->sup_allow ? number_format($data->wage->sup_allow) : 0 }}</td>
+		<td colspan="2" style="{{ $center }} {{ $color }}">${{ $data->wage->sub_allow ? number_format($data->wage->sub_allow) : 0 }}</td>
 	</tr>
 
 	<tr>
