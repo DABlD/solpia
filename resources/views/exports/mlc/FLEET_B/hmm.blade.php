@@ -155,7 +155,11 @@
 			&#38; allowance
 		</td>
 		<td style="{{ $center }}">Basic wage</td>
-		<td colspan="2" style="{{ $center }}">{{ $data->rankType == "RATING" ? "Guaranteed" : "Fixed" }} Overtime Allowance</td>
+		<td colspan="2" style="{{ $center }}">
+			{{ $data->rankType == "RATING" ? "Guaranteed (Ratings)" : "Fixed (Officer)" }} 
+			<br style='mso-data-placement:same-cell;' />
+			Overtime Allowance
+		</td>
 		<td colspan="3" style="{{ $center }}">Fixed Supervisor Allowance</td>
 		<td colspan="2" style="{{ $center }}">Substinence Allowance</td>
 	</tr>
