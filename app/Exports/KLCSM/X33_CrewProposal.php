@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\KLCSM;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -10,19 +10,34 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-// FOR FLEET C BIODATA HMM
-class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+use App\Models\{Applicant, Rank};
+
+class X33_CrewProposal implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $type, $is = false){
-        $this->is      = $is;
-        $this->data     = $data;
+    public function __construct($data, $type, $req){
+        $data = $req['crews'];
+        $ranks = Rank::pluck('abbr', 'id');
+
+        $crews = array();
+        foreach($data as $crew){
+            $temp = Applicant::where('id', $crew[0])->first();
+            $temp->load('user');
+            $temp->load('sea_service');
+            $temp->rank = $ranks[$crew[1]];
+
+            array_push($crews, $temp);
+        }
+
+        $this->data     = $crews;
+        $this->vessel   = $req['vessel'];
         $this->type     = $type;
     }
 
     public function view(): View
     {
-        return view('exports.' . 'hmm2', [
+        return view('exports.klcsm.' . lcfirst($this->type), [
             'data' => $this->data,
+            'vessel' => $this->vessel
         ]);
     }
 
@@ -30,14 +45,28 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     {
         $borderStyle = 
         [
-            [
+            [//0
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                 ]
             ],
-            [
+            [//1
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                ]
+            ],
+            [//2
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [//3
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -53,7 +82,23 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//4
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                ]
+            ],
+            [//5
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
@@ -69,7 +114,7 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//6
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -77,7 +122,7 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//7
                 'borders' => [
                     'bottom' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -85,7 +130,7 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//8
                 'borders' => [
                     'left' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -93,7 +138,7 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//9
                 'borders' => [
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -101,10 +146,38 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//10
                 'borders' => [
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [//11
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//12
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//13
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//14
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
                     ],
                 ]
             ],
@@ -179,15 +252,15 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             ]
         ];
 
-        $ssSize = sizeof($this->data->sea_service);
+        $size = sizeof($this->data) * 3;
 
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $ssSize) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $size) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->getPageSetup()->setOrientation("landscape");
-                $event->sheet->getDelegate()->setTitle('BIODATA', false);
+                $event->sheet->getDelegate()->setTitle('TITLE', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -195,23 +268,8 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
-
-                // DEFAULT FONT AND STYLE FOR WHOLE PAGE
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(12);
-
-                $add = 0;
-                if($ssSize > 12){
-                    $add = $ssSize - 12;
-                }
-
-                // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('E14:E19')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('K3')->getFont()->setSize(18);
-                $event->sheet->getDelegate()->getStyle('K8')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('R19:R' . (30 + $add))->getFont()->setSize(10);
-                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -264,31 +322,30 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'C1:Y' . (42 + $add)
+                    'A2:Q'. (3 + $size)
                 ];
 
                 // HL
                 $h[5] = [
-                    'F5:F9', 'W7', 'K' . (32 + $add) . ':K' . (36 + $add)
                 ];
 
                 // B
                 $h[6] = [
-                    'F3', 'K3', 'X2:Y2', 'K8:K16', 'C10:C' . (39 + $add), 'L' . (37 + $add) . ':W' . (42 + $add), 'K' . (42 + $add)
                 ];
 
                 // VC
                 $h[7] = [
-                    'F5:F9'
+                    'A1'
                 ];
 
                 $h['wrap'] = [
-                    'K8','E10:Y' . (39 + $add), 'C20'
+                    'A2:Q3'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'E14:J22', 'L10:Y15', 'K19:Y28', 'D25:J' . (38 + $add), 'E' . (40 + $add) . ':J' . (42 + $add), 'K' . (36 + $add), 'L6', 'O7'
+                    'C3:C'. (3 + $size),
+                    'L3:Q'. (3 + $size)
                 ];
 
                 foreach($h as $key => $value) {
@@ -297,6 +354,7 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                             $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(true);
                         }
                         elseif($key == 'stf'){
+                            $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(false);
                             $event->sheet->getDelegate()->getStyle($col)->applyFromArray([
                                 'alignment' => [
                                     'shrinkToFit' => true
@@ -311,7 +369,6 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'K3', 'F5:F9', 'K3:K8', 'Q3:Q6', 'R3:R4', 'T5:T6', 'U6', 'W5:W6', 'V7', 'C10:C' . (42 + $add), 'E10:E13', 'E20:E21', 'L8:Y9', 'K16:Y18', 'K' . (32 + $add) . ':K' . (37 + $add)
                 ];
 
                 $fills[1] = [
@@ -328,45 +385,71 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'C3:Y23', 'D24:Y' . (30 + $add), 'D'  . (31 + $add) . ':K' . (39 + $add), 'L' . (32 + $add) . ':Y' . (39 + $add), 'C' . (39 + $add) . ':J' . (42 + $add)
+                    'A1:D1',
+                    'A2:Q'. (3 + $size)
+                ]);
+
+                // ALL BORDER MEDIUM
+                $cells[1] = array_merge([
+                ]);
+
+                // ALL BORDER THICK
+                $cells[2] = array_merge([
                 ]);
 
                 // OUTSIDE BORDER THIN
-                $cells[1] = array_merge([
-                    'C24:C' . (38 + $add), 'K' . (40 + $add) . ':T' . (42 + $add), 'U' . (40 + $add) . ':V' . (42 + $add), 'V40' . (40 + $add) . ':Y' . (42 + $add), 'W' . (40 + $add) . ':Y' . (41 + $add)
+                $cells[3] = array_merge([
                 ]);
 
-                // OUTSIDE THICK BORDER
-                $cells[2] = array_merge([
-                    // 'A2:H3', 'A4:' . $ar('H', 3), $ar('A', 6, 'H', 7), $ar('A', 8,'H', 7, true)
-                    'C1:Y1', 'C3:E9', 
+                // OUTSIDE BORDER MEDIUM
+                $cells[4] = array_merge([
+                ]);
+
+                // OUTSIDE BORDER THICK
+                $cells[5] = array_merge([
                 ]);
 
                 // TOP REMOVE BORDER
-                $cells[3] = array_merge([
-                    'F4', 'G4', 'H4:J4'
+                $cells[6] = array_merge([
                 ]);
 
                 // BRB
-                $cells[4] = array_merge([
-
+                $cells[7] = array_merge([
                 ]);
 
                 // LRB
-                $cells[5] = array_merge([
+                $cells[8] = array_merge([
 
                 ]);
 
                 // RRB
-                $cells[6] = array_merge([
-                    'F4', 'G4', 'X7'
+                $cells[9] = array_merge([
                 ]);
 
                 // TRB
-                $cells[7] = array_merge([
-                    'J3:J' . (42 + $add)
+                $cells[10] = array_merge([
                 ]);
 
+                // TBT - TOP BORDER THIN
+                $cells[10] = array_merge([
+                ]);
+
+                // TBT - TOP BORDER THIN
+                $cells[11] = array_merge([
+                ]);
+
+                // BBT
+                $cells[12] = array_merge([
+                ]);
+
+                // LBT
+                $cells[13] = array_merge([
+                ]);
+
+                // RBT
+                $cells[14] = array_merge([
+                ]);
+                
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
                         $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
@@ -377,63 +460,43 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(23);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(31);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(17);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(23);
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(13);
                 $event->sheet->getDelegate()->getColumnDimension('Q')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('R')->setWidth(29);
-                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(17);
-                $event->sheet->getDelegate()->getColumnDimension('T')->setWidth(17);
-                $event->sheet->getDelegate()->getColumnDimension('V')->setWidth(17);
-                $event->sheet->getDelegate()->getColumnDimension('W')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('X')->setWidth(23);
-                $event->sheet->getDelegate()->getColumnDimension('Y')->setWidth(15);
 
                 // ROW RESIZE
-                for($i = 0; $i < (50 + $add); $i++){
-                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);                    
-                }
-
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
-                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(30);
-
-                for($i = 19; $i <= (30 + $add); $i++){
-                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(30);
-                }
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(30);
                 
                 // SET PRINT AREA
-                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y" . (42 + $add));
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
     }
 
     public function drawings()
     {
-        $ssSize = sizeof($this->data->sea_service);
-
-        $add = 0;
-        if($ssSize > 12){
-            $add = $ssSize - 12;
-        }
-
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('Letter Head');
         $drawing->setDescription('Letter Head');
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(115);
-        $drawing->setWidth(2200 + ($this->is ? 80 : 1200));
+        $drawing->setWidth(2200);
         $drawing->setOffsetX(4);
         $drawing->setOffsetY(4);
         $drawing->setCoordinates('C1');
@@ -444,55 +507,11 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setPath(public_path($this->data->user->avatar));
         $drawing2->setResizeProportional(false);
         $drawing2->setHeight(230);
-        $drawing2->setWidth(240);
-        $drawing2->setOffsetX(4);
-        $drawing2->setOffsetY(4);
+        $drawing2->setWidth(230);
+        $drawing2->setOffsetX(5);
+        $drawing2->setOffsetY(2);
         $drawing2->setCoordinates('C3');
 
-        if(auth()->user()->fleet == "FLEET B"){
-            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-            $drawing3->setName('sir_kit_sig');
-            $drawing3->setDescription('sir_kit_sig');
-            $drawing3->setPath(public_path('images/sir_kit_sig.png'));
-            $drawing3->setResizeProportional(false);
-            // $drawing3->setHeight(230);
-            // $drawing3->setWidth(230);
-            $drawing3->setOffsetX(2);
-            $drawing3->setOffsetY(-45);
-            $drawing3->setRotation(8);
-            $drawing3->setCoordinates('W' . (42 + $add));
-        }
-        if(auth()->user()->fleet == "FLEET D"){
-            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-            $drawing3->setName('maam_thea_sig');
-            $drawing3->setDescription('maam_thea_sig');
-            $drawing3->setPath(public_path('images/maam_thea_sig.png'));
-            $drawing3->setResizeProportional(false);
-            $drawing3->setHeight(132);
-            $drawing3->setWidth(236);
-            $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
-            $drawing3->setOffsetY(-80);
-            $drawing3->setCoordinates('W' . (42 + $add));
-        }
-        if(auth()->user()->fleet == "FLEET C"){
-            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-            $drawing3->setName('maam_jen_sig');
-            $drawing3->setDescription('maam_jen_sig');
-            $drawing3->setPath(public_path('images/maam_jen_sig.jpg'));
-            $drawing3->setResizeProportional(false);
-            $drawing3->setHeight(60);
-            $drawing3->setWidth(236);
-            $drawing3->setOffsetX(30 + ($this->is ? 0 : 30));
-            $drawing3->setOffsetY(-60);
-            $drawing3->setCoordinates('W' . (42 + $add));
-        }
-
-        if(isset($drawing3)){
-            return [$drawing, $drawing2, $drawing3];
-        }
-        else{
-            return [$drawing, $drawing2];
-        }
-
+        return [$drawing, $drawing2];
     }
 }
