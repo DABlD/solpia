@@ -197,6 +197,19 @@
             width: 39.22px;
         }
 
+        .proposedCrew{
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid grey;
+        }
+
+        .pcrd{
+            color: red;
+        }
+
+        .proposedCrew .name{
+            text-align: left;
+        }
     </style>
 @endpush
 
@@ -4700,7 +4713,13 @@
                             </div>
 
                             <div class="modal-body">
-                                <ul class="nav nav-pills" role="tablist">
+                                @if(auth()->user()->role == "Admin" || auth()->user()->fleet == "FLEET C")
+                                    <a class="btn btn-info" onclick="proposeCrew('${vessel.name}', ${id})">
+                                        <span class="fa fa-download"> Propose Crew</span>
+                                    </a>
+                                @endif
+
+                                <ul class="nav nav-pills" role="tablist" style="margin-top: 5px;">
                                     <li role="presentation" class="active">
                                         <a href=".linedUp" role="tab" data-toggle="pill">Lined Up</a>
                                     </li>
@@ -6271,5 +6290,149 @@
                 }
             });
         }
+
+        function proposeCrew(vessel, id){
+            $('#linedUp').modal('toggle');
+            swal.showLoading();
+
+            let config = {
+                confirmButtonText: 'Export',
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+            }
+
+            let rankString = [];
+            $.ajax({
+                url: '{{ route('rank.get') }}',
+                data: {select: ['id', 'abbr']},
+                success: result => {
+                    result = JSON.parse(result);
+                    result.forEach(rank => {
+                        rankString += `
+                            <option value="${rank.id}">${rank.abbr}</option>
+                        `;
+                    });
+                }
+            }).then(() => {
+                $.ajax({
+                    url: '{{ route('applications.get2') }}',
+                    data: {
+                        where: ['u.fleet', 'FLEET C'],
+                        where2: ['applicants.status', 'Vacation'],
+                        where3: ['u.deleted_at', null],
+                        cols: ['applicants.*', 'u.status', 'u.fname', 'u.lname'],
+                        load: ['pro_app.rank']
+                    },
+                    success: applicants => {
+                        applicants = JSON.parse(applicants);
+
+                        let crewString = "";
+                        applicants.forEach(crew => {
+                            let name = `${crew.lname}, ${crew.fname}`;
+                            let rank = crew.pro_app.rank ? crew.pro_app.rank.abbr : "-";
+                            let rId = crew.pro_app.rank ? crew.pro_app.rank.id : "-";
+
+                            crewString += `
+                                <option value="${crew.id}" data-name="${name}" data-rank="${rId}">${rank} ${name}</option>
+                            `;
+                        });
+                        setTimeout(() => {
+                            swal({
+                                ...config,
+                                title: 'Select all crew to be proposed',
+                                width: '500px',
+                                html: `
+                                    <select id="crewList">
+                                        <option value="">Search</option>
+                                        ${crewString}
+                                    </select>
+
+                                    <br><br>
+                                `,
+                                onOpen: () => {
+                                    $('#crewList').select2();
+                                    $('#crewList').on('change', e => {
+                                        let id = e.target.value;
+                                        let name = $(e.target).find('option:selected').data('name');
+                                        let rank = $(e.target).find('option:selected').data('rank');
+
+                                        if(id){
+                                            $('#crewList').select2('val', 0);
+
+                                            $('#swal2-content').append(`
+                                                <div class="row proposedCrew" id="pc${id}">
+                                                    <input type="hidden" class="id" value="${id}">
+                                                    <input type="hidden" class="rank" value="${rank}">
+
+                                                    <div class="col-md-6 name" id="pcn${id}">
+                                                        ${name}
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <select class="swal2-select rank" id="pcr${id}">
+                                                            ${rankString}
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2" id="pcrd${id}">
+                                                        <span class="fa fa-times pcrd" data-id="${id}"></span>
+                                                    </div>
+                                                </div>
+                                            `);
+
+                                            $(`#pcr${id}`).val(rank);
+
+                                            $('.pcrd').off();
+                                            $('.pcrd').on('click', e => {
+                                                let id = e.target.dataset.id;
+
+                                                $(`#pc${id}`).fadeOut();
+                                                setTimeout(() => {
+                                                    $(`#pc${id}`).remove();
+                                                }, 1000);
+                                            });
+                                        }
+
+                                    });
+
+                                }
+                            }).then(result => {
+                                if(result.value){
+                                    let crews = [];
+
+                                    $('.proposedCrew').each((i, crew) => {
+                                        crews.push([$(crew).find('.id').val(), $(crew).find('.rank').val()]);
+                                    })
+
+                                    let data = {};
+                                        data.crews = crews;
+                                        data.folder = "KLCSM\\";
+                                        data.filename = "Crew Proposal Form";
+                                        data.vessel = vessel;
+
+                                    window.location.href = `{{ route('applications.exportDocument') }}/1/X33_CrewProposal?` + $.param(data);
+                                }
+                            })
+                        }, 2000);
+                    }
+                })
+            });
+        }
     </script>
 @endpush
+
+{{-- <div class="row proposedCrew" id="pc0">
+    <div class="col-md-2" id="ctr0">
+        1
+    </div>
+    <div class="col-md-5 name" id="pcn0">
+        Test Name 1
+    </div>
+    <div class="col-md-3">
+        <select class="swal2-select rank" id="pcr0">
+            ${rankString}
+        </select>
+    </div>
+    <div class="col-md-2" id="pcrd0">
+        <span class="fa fa-times pcrd" data-id="0"></span>
+    </div>
+</div> --}}

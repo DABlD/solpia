@@ -94,6 +94,7 @@ class ApplicationsController extends Controller
     public function get2(Request $req){
         $applicant = Applicant::select($req->cols);
         $applicant->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id');
+        $applicant->join('users as u', 'u.id', '=', 'applicants.user_id');
 
         // IF HAS SORT PARAMETER $ORDER
         if($req->order){
@@ -103,6 +104,14 @@ class ApplicationsController extends Controller
         // IF HAS WHERE
         if($req->where){
             $applicant = $applicant->where($req->where[0], $req->where[1]);
+        }
+
+        if($req->where2){
+            $applicant = $applicant->where($req->where2[0], $req->where2[1]);
+        }
+
+        if($req->where3){
+            $applicant = $applicant->where($req->where3[0], $req->where3[1]);
         }
 
         $applicant = $applicant->get();
