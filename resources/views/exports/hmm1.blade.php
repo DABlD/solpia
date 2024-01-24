@@ -288,6 +288,7 @@
 	// &$total is passing value by reference
 	$ss = function($ss, $vr) use($checkDate2, &$total){
 		if($ss->vessel_name != null && $ss->vessel_type != null){
+			$name = str_replace('&', '&#38;', $ss->vessel_name);
 			$on = $checkDate2($ss->sign_on, 'in');
 			$off = $checkDate2($ss->sign_off, 'in');
 			$eng = str_replace('&', '&#38;', $ss->engine_type);
@@ -311,7 +312,7 @@
 
 			echo "
 				<td>$flag</td>
-				<td colspan='2'>$ss->vessel_name</td>
+				<td colspan='2'>$name</td>
 				<td>$ss->gross_tonnage</td>
 				<td>$bhp</td>
 				<td>$ss->vessel_type</td>
