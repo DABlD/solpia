@@ -19,7 +19,7 @@ class Vessel extends Model
         'former_agency', 'former_principal', 'mlc_shipowner', 'mlc_shipowner_address',
         'registered_shipowner', 'registered_shipowner_address',
         'work_hours', 'ot_hours', 'cba_affiliation', 'classification',
-        "months_in_contract"
+        "months_in_contract", 'ship_manager'
     ];
 
     protected $dates = [

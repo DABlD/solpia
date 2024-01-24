@@ -1478,7 +1478,7 @@
 					@endif
 				</td>
 				<td>{{ $data->trade ? $data->trade : "" }}</td>
-				<td>{{ $data->principal }}</td>
+				<td>{{ $data->ship_manager ?? $data->principal }}</td>
 				<td>{{ $data->sign_off != "" ? $data->sign_off->format('M j, Y') : "" }}</td>
 				{{-- <td>{{ $data->sign_off != "" ? $data->sign_off->format('d-m-Y') : "" }}</td> --}}
 				<td colspan="2">
