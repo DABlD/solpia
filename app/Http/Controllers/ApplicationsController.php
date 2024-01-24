@@ -1152,6 +1152,7 @@ class ApplicationsController extends Controller
                 'flag'              => $vessel->flag,
                 'trade'             => $vessel->trade,
                 'manning_agent'     => $vessel->manning_agent,
+                'ship_manager'      => $vessel->ship_manager,
                 'principal'         => Principal::find($vessel->principal_id)->name,
                 'imo'               => $vessel->imo,
                 // 'crew_nationality'  => $

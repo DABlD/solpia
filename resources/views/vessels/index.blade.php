@@ -294,6 +294,7 @@
                 "Flag", 
                 "Type", 
                 "Manning Agent", 
+                "Ship Manager", 
                 "Year Built", 
                 "Builder", 
                 "Engine", 
@@ -321,6 +322,7 @@
                 'flag', 
                 "type", 
                 "manning_agent", 
+                "ship_manager", 
                 "year_build", 
                 "builder", 
                 "engine", 
@@ -430,6 +432,7 @@
                                 flag: $('#vd-flag').val(),
                                 type: $('#vd-type').val(),
                                 manning_agent: $('#vd-manning_agent').val(),
+                                ship_manager: $('#vd-ship_manager').val(),
                                 year_build: $('#vd-year_build').val(),
                                 builder: $('#vd-builder').val(),
                                 engine: $('#vd-engine').val(),
@@ -1469,6 +1472,15 @@
                                 </br>
                                 <div class="row">
                                     <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                                        Enter Ship Manager (Optional)
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" id="ship_manager" class="form-control">
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-3" style="margin-top: 10px; text-align: left;">
                                         Enter Vessel Name
                                     </div>
                                     <div class="col-md-9">
@@ -1729,6 +1741,7 @@
                                     data: {
                                         principal_id: $('#principal_id').val(),
                                         manning_agent: $('#manning_agent').val(),
+                                        ship_manager: $('#ship_manager').val(),
                                         name: $('#name').val(),
                                         imo: $('#imo').val(),
                                         flag: $('#flag').val(),
