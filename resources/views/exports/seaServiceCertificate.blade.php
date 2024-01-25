@@ -110,7 +110,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="10">This certification is issued upon the request of Mr. {{ $data->user->fname }} {{ $data->user->mname[0] }}. {{ $data->user->lname }} {{ $data->user->suffix }} for {{ $data->data['reason'] }} purposes</td>
+		<td colspan="10">This certification is issued upon the request of Mr. {{ $data->user->fname }} {{ isset($data->user->mname) && $data->user->mname != "" ? $data->user->mname[0] . "." : "" }} {{ $data->user->lname }} {{ $data->user->suffix }} for {{ $data->data['reason'] }} purposes</td>
 	</tr>
 
 	<tr style="vertical-align: middle;">
