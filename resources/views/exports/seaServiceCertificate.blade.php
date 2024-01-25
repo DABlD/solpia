@@ -49,7 +49,7 @@
 	@endphp
 
 	<tr>
-		<td colspan="10" style="height: 30px;">This it to attest that Mr. {{ $data->user->fname }} {{ isset($data->user->mname) $data->user->mname[0] . "." ? "" }} {{ $data->user->lname }} {{ $data->user->suffix }} holder of SIRB No. {{ $smb }} has been employed by this Company with the following seagoing service:</td>
+		<td colspan="10" style="height: 30px;">This it to attest that Mr. {{ $data->user->fname }} {{ isset($data->user->mname) ? $data->user->mname[0] . "." : "" }} {{ $data->user->lname }} {{ $data->user->suffix }} holder of SIRB No. {{ $smb }} has been employed by this Company with the following seagoing service:</td>
 	</tr>
 
 	<tr>
