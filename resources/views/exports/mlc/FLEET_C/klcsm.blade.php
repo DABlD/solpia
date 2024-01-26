@@ -226,11 +226,16 @@
 		// }
 		$ot = number_format(ceil($basic / 173 * 103 * 1.25), 2);
 		$lp = number_format(ceil($basic * 9 / 30), 2);
+
+		// allowances
 		$sa = number_format(ceil($wage->sup_allow ?? 0), 2);
-		$so = ceil($wage->sub_allow ?? 0 + $wage->owner_allow ?? 0);
+		$so = ceil($wage->sub_allow ?? 0);
+		$oa = ceil($wage->owner_allow ?? 0);
+		$ra = ceil($wage->retire_allow ?? 0);
+
 		$ccb = number_format(str_contains($data->vessel->type, "BUL") ? 80 : 0, 2);
 
-		$total = number_format($basic + $ot + $lp + $sa + $ccb + $so, 2);
+		$total = number_format($basic + $ot + $lp + $sa + $so + $oa + $ra + $ccb - 40, 2);
 		$so = number_format($so, 2);
 	@endphp
 
