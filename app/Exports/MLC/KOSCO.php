@@ -14,7 +14,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $type){
         $array1 = [
-            'M/V DONG-A OKNOS', 'M/V DONG-A ASTREA'
+            'M/V DONG-A OKNOS', 'M/V DONG-A ASTREA', 'M/V GLOVIS COUNTESS'
         ];
 
         $array2 = [
@@ -50,7 +50,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array10 = [
-            'M/V GLOVIS COUNTESS', 'M/V DONG-A GLAUCOS'
+            'M/V DONG-A GLAUCOS'
         ];
 
         $array11 = [
