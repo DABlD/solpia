@@ -277,7 +277,7 @@
 		<td colspan="2" style="{{ $red }} {{ $und }}">(Owner's Allowance):</td>
 		<td style="{{ $bc }}">US$</td>
 		<td colspan="1"></td>
-		<td colspan="3" style="{{ $bc }}">{{ $so }}</td>
+		<td colspan="3" style="{{ $bc }}">{{ number_format($sa + $so + $oa + $ra, 2) }}</td>
 		<td colspan="3">Calculation method: OWNER'S DISCRETION</td>
 	</tr>
 
