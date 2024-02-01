@@ -583,7 +583,7 @@ class ApplicationsController extends Controller
         // }
 
         // IF NAME IS EMPTY, REMOVE
-        $order = ['Father', 'Mother', 'Spouse', 'Son', 'Daughter', 'Beneficiary'];
+        $order = ['Father', 'Mother', 'Spouse', 'Son', 'Daughter', 'Beneficiary', 'Partner'];
         
         $applicant->family_data = $applicant->family_data->sortBy(function($model) use ($order){
             return array_search($model->type, $order);
