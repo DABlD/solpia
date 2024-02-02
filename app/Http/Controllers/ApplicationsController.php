@@ -656,7 +656,7 @@ class ApplicationsController extends Controller
         if(in_array($type, ['kosco', 'imsco', 'ckMaritime'])){
             $minVessels = 12;
         }
-        elseif(in_array($type, ['klcsmBulk'])){
+        elseif(in_array($type, ['klcsmBulk', 'harbourLink'])){
             $minVessels = 10;
         }
         else{
