@@ -341,4 +341,337 @@
 			<td style="{{ $bc }}"></td>
 		</tr>
 	@endforeach
+
+	{{-- BREAK PAGE --}}
+	<div style="page-break-after:always;"></div>
+
+	{{-- SECTION C --}}
+
+	<tr>
+		<td rowspan="2" style="{{ $bc }}">C</td>
+		<td colspan="13" style="{{ $b }}">ACADEMIC RECORD</td>
+	</tr>
+
+	<tr>
+		<td colspan="13" style="{{ $b }} {{ $i }}">REKOD AKADEMIK</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $bc }}">Education Level</td>
+		<td colspan="2" style="{{ $bc }}">From Year</td>
+		<td style="{{ $bc }}">To Year</td>
+		<td colspan="4" style="{{ $bc }}">School / Institute / University</td>
+		<td colspan="3" style="{{ $bc }}">Certificate &#38; Grade Attained</td>
+		<td style="{{ $bc }}">Majored Subject</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Tahap Pendidikan</td>
+		<td colspan="2" style="{{ $c }} {{ $i }}">Dari Tahun</td>
+		<td style="{{ $c }} {{ $i }}">Ke Tahun</td>
+		<td colspan="4" style="{{ $c }} {{ $i }}">Sekolah / Institut / Universiti</td>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Sijil &#38; Gred Diperolehi</td>
+		<td style="{{ $c }} {{ $i }}">Mata Pelajaran</td>
+	</tr>
+
+	{{-- SCHOOL --}}
+	@php
+
+		$eb = function($type) use($data){
+			$from = "";
+			$to = "";
+			$school = "";
+			$course = "";
+
+			$temp = $data->educational_background->filter(function($value) use($type){
+				return $value->type == $type;
+			});
+
+			if(count($temp)){
+				$temp = $temp->first();
+
+				$range = explode('-', $temp->year);
+
+				$from = is_numeric($range[0]) ? $range[0] : "-";
+				$to = is_numeric($range[1]) ? $range[1] : "-";
+				$school = $temp->school;
+				$course = $temp->course;
+			}
+			else{
+				$from = "";
+				$to = "";
+				$school = "";
+				$course = "";
+			}
+
+			return [
+				"from" 		=> $from, 
+				"to" 		=> $to,
+				"school"	=> $school, 
+				"course"	=> $course
+			];
+		}
+	@endphp
+
+	@php
+		$temp = $eb('Elementary');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">Primary</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Sekolah Rendah</td>
+	</tr>
+
+	@php
+		$temp = $eb('High School');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">Lower Secondary</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Tingkatan 3</td>
+	</tr>
+
+	@php
+		$temp = $eb('Senior High School');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">Higher Secondary</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Tingkatan 5</td>
+	</tr>
+
+	@php
+		$temp = $eb('Senior High School');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">Pre-University</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Tingkatan 6</td>
+	</tr>
+
+	@php
+		$temp = $eb('Certificate');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">Certificate</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Sijil</td>
+	</tr>
+
+	@php
+		$temp = $eb('Vocational');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">Diploma</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Diploma</td>
+	</tr>
+
+	@php
+		$temp = $eb('College');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">Bachelor Degree</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Sarjana Muda</td>
+	</tr>
+
+	@php
+		$temp = $eb('Masteral');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">Master Degree</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Sarjana</td>
+	</tr>
+
+	@php
+		$temp = $eb('Doctoral');
+	@endphp
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">PHd.</td>
+		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
+		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
+		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
+		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $i }}">Doktor Falsafah</td>
+	</tr>
+
+	{{-- SECTION D --}}
+
+	<tr>
+		<td rowspan="2" style="{{ $bc }}">D</td>
+		<td colspan="4" style="{{ $b }}">PROFESSIONAL QUALIFICATION</td>
+		<td colspan="9" style="{{ $i }}">(Eg. CPA License, Certified Trainer, Registered Safety Officer &#38; Etc)</td>
+	</tr>
+
+	<tr>
+		<td colspan="4" style="{{ $b }} {{ $i }}">KELAYAKAN PROFESYENAL</td>
+		<td colspan="9" style="{{ $i }}">(Cth. Lesen CPA, Pelatih Berdaftar, Pengawai HSE Berdaftar &#38; Etc)</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $bc }}">Year Attained</td>
+		<td colspan="4" style="{{ $bc }}">Institute</td>
+		<td colspan="5" style="{{ $bc }}">Certification</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $c }} {{ $i }}">Tahun Diperolehi</td>
+		<td colspan="4" style="{{ $c }} {{ $i }}">Institut</td>
+		<td colspan="5" style="{{ $c }} {{ $i }}">Sijil</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $bc }} {{ $i }}">N/A</td>
+		<td colspan="4" style="{{ $bc }} {{ $i }}"></td>
+		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
+		<td colspan="4" style="{{ $bc }} {{ $i }}"></td>
+		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
+		<td colspan="4" style="{{ $bc }} {{ $i }}"></td>
+		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
+	</tr>
+
+	{{-- SECTION E --}}
+
+	<tr>
+		<td rowspan="2" style="{{ $bc }}">E</td>
+		<td colspan="8" style="{{ $b }}">EMPLOYMENT HISTORY BEFORE JOINING PRESENT EMPLOYER</td>
+		<td colspan="5" style="{{ $i }}">(List Down In Chronological Order)</td>
+	</tr>
+
+	<tr>
+		<td colspan="8" style="{{ $b }} {{ $i }}">REKOD PENGAJIAN SEBELUM MENYERTAI MAJIKAN SEKARANG</td>
+		<td colspan="5" style="{{ $i }}">(Senaraikan Mengikut Turutan Kronologi)</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $bc }}">From Year</td>
+		<td style="{{ $bc }}">To Year</td>
+		<td colspan="3" style="{{ $bc }}">Name of Previous</td>
+		<td colspan="3" style="{{ $bc }}">Position Hold</td>
+		<td colspan="3" style="{{ $b }} text-align: right;">Salary</td>
+		<td style="{{ $i }}">/Gaji</td>
+		<td style="{{ $bc }}">Reason for</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $c }} {{ $i }}">Dari Tahun</td>
+		<td style="{{ $c }} {{ $i }}">Ke Tahun</td>
+		<td colspan="3" style="{{ $bc }}">Employer(s)</td>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Jawatan</td>
+		<td colspan="3" style="{{ $bc }}">Basic</td>
+		<td style="{{ $bc }}">Allow</td>
+		<td style="{{ $bc }}">Leaving</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $c }} {{ $i }}"></td>
+		<td style="{{ $c }} {{ $i }}"></td>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Nama Majikan Dahulu</td>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Dipegang</td>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Pokok</td>
+		<td style="{{ $c }} {{ $i }}">Elaun</td>
+		<td style="{{ $c }} {{ $i }}">Sebab Berhenti</td>
+	</tr>
+
+	@foreach($data->sea_service as $ss)
+		@php
+			$vessel = $cleanText($ss->vessel_name);
+			$manning = $cleanText($ss->manning_agent);
+			$type = $cleanText($ss->vessel_type);
+			$rfl = $cleanText($ss->remarks);
+
+			$temp = $vessel != "" ? $vessel . ' / ' . $manning . ' / ' . $type : "";
+		@endphp
+
+		<tr>
+			<td colspan="2" style="{{ $bc }}">{{ $ss->sign_on != "" ? $ss->sign_on->format('d-M-y') : ""  }}</td>
+			<td style="{{ $bc }}">{{ $ss->sign_on != "" ? $ss->sign_on->format('d-M-y') : ""  }}</td>
+			<td colspan="3" style="{{ $bc }}">
+				{{ $temp }}
+			</td>
+			<td colspan="3" style="{{ $bc }}">{{ $ss->rank }}</td>
+			<td colspan="3" style="{{ $bc }}"></td>
+			<td style="{{ $bc }}"></td>
+			<td style="{{ $bc }}">{{ $ss->remarks }}</td>
+		</tr>
+	@endforeach
 </table>

@@ -273,6 +273,8 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A50', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
 
@@ -310,6 +312,7 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     'B10',
                     'A12',
                     'A20',
+                    'A54:F54', 'N54',
                 ];
 
                 // HL B
@@ -330,7 +333,13 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     'H22', 'M22',
                     'H28',
                     'A34', 'K31',
-                    'A36'
+                    'A36',
+                    'A51',
+                    'D55:N72',
+                    'A73',
+                    'A77:N79',
+                    'A80',
+                    'A85:N94'
                 ];
 
                 // HL
@@ -347,7 +356,11 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 ];
 
                 $h['wrap'] = [
-                    'A12'
+                    'A12',
+                    'G53:M54',
+                    'G55:J72',
+                    'N55:N72',
+                    'D85:F94',
                 ];
 
                 // SHRINK TO FIT
@@ -378,6 +391,9 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     'A8:D10',
                     'H15:N17',
                     'A36:N37',
+                    'A51:N52',
+                    'A73:N74',
+                    'A80:N81',
                 ];
 
                 $fills[1] = [
@@ -394,7 +410,10 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A41:N50'
+                    'A41:N50',
+                    'D55:N72',
+                    'A77:N79',
+                    'A85:N94',
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -417,6 +436,15 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     'A33:G35', 'H33:L35', 'M33:N35',
                     'A36:N37',
                     'A38:D40', 'E38:F40', 'G38:H40', 'I38:I40', 'J38:M40', 'N38:N40',
+                    'A51:A52', 'B51:N52',
+                    'A53:C54', 'D53:E54', 'F53:F54', 'G53:J54', 'K53:M54', 'M53:M54',
+                    'A55:C56','A57:C58','A59:C60','A61:C62',                //educ
+                    'A63:C64','A65:C66','A67:C68','A69:C70','A71:C72',      //educ
+                    'B73:E74', 
+                    'A75:E76', 'F75:I76', 'J75:N76',
+                    'A80:A81',
+                    'B80:N81',
+                    'A82:B84', 'C82:C84', 'D82:F84', 'G82:G84', 'J82:M84', 'J83:K84', 'M83:M84', 'N82:N84',
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -480,7 +508,7 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6.5);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(8);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(9);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(7);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(13);
@@ -497,16 +525,25 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(50);
                 $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(54)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(77)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(78)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(79)->setRowHeight(25);
 
                 for($i = 11; $i <= 50; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(17);
+                }
+
+                for($i = 85; $i <= 94; $i++){
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(40);
                 }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
+                $event->sheet->getDelegate()->getStyle('D85:F94')->getFont()->setSize(10);
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
