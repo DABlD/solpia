@@ -12,7 +12,7 @@ use Browser;
 class VesselsController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin/Encoder/Cadet/Crewing Manager/Crewing Officer/Principal/Training/Processing');
+        $this->middleware('permissions:' . 'Admin/Encoder/Cadet/Crewing Manager/Crewing Officer/Principal/Training/Processing/Recruitment Officer');
     }
 
     public function import(Request $req){
