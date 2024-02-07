@@ -678,7 +678,7 @@
 
                         let file = "N/A";
 
-                        if(can.prospect.file){
+                        if(can.prospect.file != null){
                             file = `
                                 <a class="btn btn-success" onclick="viewFile('${can.prospect.file}', ${can.prospect.id})">
                                     <span class="fa fa-file fa-xs">
