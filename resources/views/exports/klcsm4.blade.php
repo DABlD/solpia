@@ -126,7 +126,7 @@
 	</tr>
 
 	@php
-		for($i = 0; $i < 12; $i++){
+		for($i = 0; $i < $data->id == 5164 ? 26 : 12; $i++){
 			if(isset($data->sea_service[$i])){
 				$ss($data->sea_service[$i]);
 			}
