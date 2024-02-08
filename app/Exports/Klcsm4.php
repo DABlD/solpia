@@ -206,12 +206,16 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ],
             ]
         ];
-
-        // FOR CUSTOM NUMBER OF SS;
-        $data = $this->data;
+        $id = $this->data->id;
 
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $data) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $id) {
+                $ssize = 29;
+
+                if($id == 5164){
+                    $ssize = 57;
+                }
+
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
@@ -232,7 +236,7 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('H1')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A3')->getFont()->setSize(12);
-                $event->sheet->getDelegate()->getStyle('I6:I28')->getFont()->setSize(6);
+                $event->sheet->getDelegate()->getStyle('I6:I' . $ssize)->getFont()->setSize(6);
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
@@ -286,7 +290,7 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'A1:I' . $data->id == 5164 ? (26 * 2) + 5 : 29
+                    'A1:I' . $ssize
                 ];
 
                 // HL
@@ -304,12 +308,12 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'A1:I' . $data->id == 5164 ? (26 * 2) + 5 : 29
+                    'A1:I' . $ssize
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B1', 'B6:B' . $data->id == 5164 ? (26 * 2) + 5 : 29
+                    'B1', 'B6:B' . $ssize
                 ];
 
                 foreach($h as $key => $value) {
@@ -350,7 +354,7 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A6:I' . $data->id == 5164 ? (26 * 2) + 5 : 29
+                    'A6:I' . $ssize
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -368,7 +372,7 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'A1:I' . $data->id == 5164 ? (26 * 2) + 5 : 29
+                    'A1:I' . $ssize
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -414,7 +418,7 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(21);
 
                 // ROW RESIZE
-                for($i = 6; $i <= $data->id == 5164 ? (26 * 2) + 5 : 29; $i++){
+                for($i = 6; $i <= $ssize; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(24);
                 }
 
