@@ -208,7 +208,7 @@ class Klcsm4 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
         ];
 
         // FOR CUSTOM NUMBER OF SS;
-        $data = $this->data
+        $data = $this->data;
 
         return [
             AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $data) {
