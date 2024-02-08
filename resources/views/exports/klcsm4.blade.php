@@ -126,7 +126,13 @@
 	</tr>
 
 	@php
-		for($i = 0; $i < $data->id == 5164 ? 26 : 12; $i++){
+		$size = 12;
+
+		if($data->id == 5164){
+			$size = 26;
+		}
+
+		for($i = 0; $i < $size; $i++){
 			if(isset($data->sea_service[$i])){
 				$ss($data->sea_service[$i]);
 			}
