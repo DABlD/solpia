@@ -28,15 +28,19 @@
 	if(in_array($v, ['M/V DONG-A OKNOS', 'M/V DONG-A EOS', 'M/V DONG-A GLAUCOS'])){
 		$allowance = 11.1;
 	}
-	elseif(in_array($v, ["M/V BOKM SHANGHAI", 'M/V BOKM NINGBO', 'M/V KMARIN AZUR', 'M/V KMARIN ATLANTICA', 'M/V KMARIN ULSAN', 'M/V KMARIN MELBOURNE'])){
+	elseif(in_array($v, ['M/V KMARIN ATLANTICA', 'M/V KMARIN ULSAN', 'M/V KMARIN MELBOURNE'])){
 		$allowance = 12;
 	}
-	elseif(in_array($v, ['N/A'])){
-		$allowance = 11;
-		$cba = "IBF FKSU/AMOSUP KSA CBA";
+	elseif(in_array($v, ['M/V KMARIN AZUR', 'M/V KMARIN ATLANTICA', "M/V BOKM SHANGHAI", 'M/V BOKM NINGBO'])){
+		// $allowance = 11;
+		$cba = "IBF FKSU/AMOSUP-KSA CBA";
 	}
 	elseif(in_array($v, ['M/V DAEBO GLADSTONE'])){
 		$allowance = 12;
+		$cba = "IBF FKSU CA(BBCHP)";
+	}
+	elseif(in_array($v, ['M/V DONG-A GLAUCOS', 'M/V GLOVIS COUNTESS'])){
+		$cba = "IBF FKSU CA(BBCHP)";
 	}
 	elseif(in_array($v, ['M/V DONG-A METIS'])){
 		$allowance = 10.5;
