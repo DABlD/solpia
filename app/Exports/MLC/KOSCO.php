@@ -14,7 +14,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $type){
         $array1 = [
-            'M/V DONG-A OKNOS', 'M/V DONG-A ASTREA', 'M/V GLOVIS COUNTESS', 'M/V DONG-A GLAUCOS'
+            'M/V DONG-A OKNOS', 'M/V DONG-A ASTREA'
         ];
 
         $array2 = [
@@ -50,7 +50,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array10 = [
-            
+            'M/V DONG-A GLAUCOS'
         ];
 
         $array11 = [
@@ -59,6 +59,10 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $array12 = [
             'M/V DONG-A METIS'
+        ];
+
+        $array13 = [
+            'M/V GLOVIS COUNTESS'
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
@@ -98,8 +102,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "BICSA Financial Center, 60th Floor, Balboa Avenue, Panama City, Panama";
         }
         elseif(in_array($applicant->vessel->name, $array10)){
-            $applicant->shipowner = 'SOLT HOLDING LIBERIA 25 S.A.';
-            $applicant->sAddress = "80 BROAD STREET, MONROVIA, LIBERIA";
+            $applicant->shipowner = 'DAT PACIFIC ETERNITY S.A.';
+            $applicant->sAddress = "Trust Company Complex, Ajeltake Road, Ajeltake Island, Majuro, MH96960, Marshall Island";
         }
         elseif(in_array($applicant->vessel->name, $array11)){
             $applicant->shipowner = 'KSF GLOBAL NO.31 S.A.';
@@ -108,6 +112,10 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         elseif(in_array($applicant->vessel->name, $array12)){
             $applicant->shipowner = 'DAT Metis Maritime S.A';
             $applicant->sAddress = "BICSA Financial Center, 60th Floor, Balboa Avenue, Panama City, Panama";
+        }
+        elseif(in_array($applicant->vessel->name, $array13)){
+            $applicant->shipowner = 'DAT COUNTESS MARITIME 2 S.A.';
+            $applicant->sAddress = "Trust Company Complex, Ajeltake Road, Ajeltake Island, Majuro, MH96960, Marshall Island";
         }
 
         $this->applicant     = $applicant;
