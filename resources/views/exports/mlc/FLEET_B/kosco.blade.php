@@ -25,7 +25,7 @@
 
 	$v = $data->vessel->name;
 	$tFot = null;
-	if(in_array($v, ['M/V DONG-A OKNOS', 'M/V DONG-A EOS', 'M/V DONG-A GLAUCOS'])){
+	if(in_array($v, ['M/V DONG-A OKNOS', 'M/V DONG-A EOS'])){
 		$allowance = 11.1;
 	}
 	elseif(in_array($v, ['M/V KMARIN ULSAN', 'M/V KMARIN MELBOURNE'])){
@@ -43,8 +43,12 @@
 		$allowance = 12;
 		$cba = "IBF FKSU CA(BBCHP)";
 	}
-	elseif(in_array($v, ['M/V DONG-A GLAUCOS', 'M/V GLOVIS COUNTESS'])){
+	elseif(in_array($v, ['M/V GLOVIS COUNTESS'])){
 		$cba = "IBF FKSU CA(BBCHP)";
+	}
+	elseif(in_array($v, ['M/V DONG-A GLAUCOS'])){
+		$cba = "IBF FKSU CA(BBCHP)";
+		$allowance = 11.1;
 	}
 	elseif(in_array($v, ['M/V DONG-A METIS'])){
 		$allowance = 10.5;
