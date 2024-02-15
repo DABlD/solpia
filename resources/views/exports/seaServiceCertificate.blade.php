@@ -83,7 +83,9 @@
    				return str_replace('&', '&#38;', $text);
    			};
 
-   			if(str_contains($ss->manning_agent, "SOLPIA")){
+   			$bypass = [5119];
+
+   			if(str_contains($ss->manning_agent, "SOLPIA") || in_array($ss->applicant_id, $bypass)){
    				$start = $start+1;
    			}
 		@endphp
