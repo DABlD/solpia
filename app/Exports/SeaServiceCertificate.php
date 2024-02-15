@@ -274,9 +274,11 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
                 // FONT SIZES
 
                 // HEADINGS
+
+                $bypass = [5119];
                 $ctr = 0;
                 foreach ($this->data->sea_service as $ss) {
-                    if(str_contains($ss->manning_agent, 'SOLPIA')){
+                    if(str_contains($ss->manning_agent, 'SOLPIA') || in_array($ss->applicant_id, $bypass)){
                         $ctr++;
                     }
                 }
