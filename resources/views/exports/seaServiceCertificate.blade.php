@@ -89,7 +89,7 @@
    				$start = $start+1;
    			}
 		@endphp
-		@if(str_contains($ss->manning_agent, "SOLPIA"))
+		@if(str_contains($ss->manning_agent, "SOLPIA") || in_array($ss->applicant_id, $bypass))
 			<tr>
 				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->vessel_name) }}</td>
 				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->vessel_type) }}</td>
