@@ -22,6 +22,7 @@
 	$allowance = 12.0;
 
 	$cba = "IBF KFSU CA(BBCHP)";
+	$leave = 9;
 
 	$v = $data->vessel->name;
 	$tFot = null;
@@ -45,6 +46,8 @@
 	}
 	elseif(in_array($v, ['M/V GLOVIS COUNTESS'])){
 		$cba = "IBF FKSU CA(BBCHP)";
+		$allowance = 12;
+		$leave = 10;
 	}
 	elseif(in_array($v, ['M/V DONG-A GLAUCOS'])){
 		$cba = "IBF FKSU CA(BBCHP)";
@@ -211,11 +214,11 @@
 	<tr>
 		<td style="{{ $bc }} height: 45px;">Paid Leave</td>
 		<td colspan="7">
-			1. The number of days of paid leave shall be 9 days per a month of continuous service onboard.
+			1. The number of days of paid leave shall be {{ $leave }} days per a month of continuous service onboard.
 			<br style='mso-data-placement:same-cell;' />
 			2. The method which is calculationf of leave pay as follows.
 			<br style='mso-data-placement:same-cell;' />
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎Leave Pay = (Basic wage) / 30 days x 9days
+			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎Leave Pay = (Basic wage) / 30 days x {{ $leave }}days
 		</td>
 	</tr>
 
