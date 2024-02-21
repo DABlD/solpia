@@ -278,10 +278,10 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
 
                 $bypass = [5119];
                 $ctr = 0;
-                if($data->line_up_contracts->first()->status == "On Board"){
+                if($this->data->line_up_contracts->first()->status == "On Board"){
                     $ctr++;
                 }
-                
+
                 foreach ($this->data->sea_service as $ss) {
                     if(str_contains($ss->manning_agent, 'SOLPIA') || in_array($ss->applicant_id, $bypass)){
                         $ctr++;
