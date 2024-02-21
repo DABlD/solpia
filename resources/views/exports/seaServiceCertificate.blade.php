@@ -82,8 +82,6 @@
 		@php
    			$start = $start+1;
    			$ss = $ob->vessel;
-   			$start = $ob->joining_date;
-   			$end = now()->toDateString();
 		@endphp
 
 		<tr>
@@ -94,7 +92,7 @@
 			<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->flag) }}</td>
 			<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ct($ss->trade) }}</td>
 			<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ob->joining_date ? $ob->joining_date->format('d-M-y') : "-" }}</td>
-			<td style="border: 1px solid black; font-size: 9px; height: 17px;">-</td>
+			<td style="border: 1px solid black; font-size: 9px; height: 17px;"></td>
 			<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ob->rank->abbr }}</td>
 			<td style="border: 1px solid black; font-size: 9px; height: 17px;">
 				{{ '=IF(DATEDIF(G' . $start . ',H' . $start . ',"y")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"y")&" yr ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"ym")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"ym")&" mos ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"md")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"md")&" day")' }}
