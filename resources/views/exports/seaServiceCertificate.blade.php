@@ -95,7 +95,7 @@
 			<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ now()->format('d-M-y') }}</td>
 			<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ob->rank->abbr }}</td>
 			<td style="border: 1px solid black; font-size: 9px; height: 17px;">
-				{{ '=IF(DATEDIF(G' . $start . ',H' . $start . ',"y")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"y")&" yr ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"ym")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"ym")&" mos ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"md")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"md")&" day")' }}
+				{{ '=IF(DATEDIF(G' . $start . ',H' . $start . ',"y")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"y")&" yr ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"ym")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"ym")&" mos ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"md")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"md")&" days")' }}
 			</td>
 		</tr>
 	@endif
@@ -124,7 +124,7 @@
 				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ss->sign_off ? $ss->sign_off->format('d-M-y') : "-" }}</td>
 				<td style="border: 1px solid black; font-size: 9px; height: 17px;">{{ $ss->rank }}</td>
 				<td style="border: 1px solid black; font-size: 9px; height: 17px;">
-					{{ '=IF(DATEDIF(G' . $start . ',H' . $start . ',"y")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"y")&" yr ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"ym")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"ym")&" mos ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"md")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"md")&" day")' }}
+					{{ '=IF(DATEDIF(G' . $start . ',H' . $start . ',"y")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"y")&" yr ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"ym")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"ym")&" mos ")&IF(DATEDIF(G' . $start . ',H' . $start . ',"md")=0,"",DATEDIF(G' . $start . ',H' . $start . ',"md")&" days")' }}
 				</td>
 			</tr>
 		@endif
