@@ -278,7 +278,7 @@ class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, S
 
                 $bypass = [5119];
                 $ctr = 0;
-                if($this->data->line_up_contracts->first()->status == "On Board"){
+                if(sizeof($this->data->line_up_contracts) && $this->data->line_up_contracts->first()->status == "On Board"){
                     $ctr++;
                 }
 
