@@ -225,7 +225,7 @@
 
 		@php
 			$nok = null;
-			$temps = ['Spouse', 'Son', 'Daughter', 'Father', 'Mother'];
+			$temps = ['Spouse', 'Partner', 'Son', 'Daughter', 'Father', 'Mother'];
 			$childrens = 0;
 			foreach($temps as $key => $temp){
 				$childrens = 0;
