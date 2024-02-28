@@ -15,7 +15,7 @@
 		<td rowspan="2" style="{{ $bc }} height: 40px;">RANK</td>
 		<td rowspan="2" style="{{ $bc }} height: 40px;">NAME</td>
 		<td rowspan="2" style="{{ $bc }} height: 40px;">VESSEL EXPERIENCE</td>
-		<td rowspan="2" style="{{ $bc }} height: 40px;">IDENTIFIED CREW REQUIREMENT</td>
+		<td rowspan="2" style="{{ $bc }} height: 40px;">ACTUAL APPLICANTS REPORTED</td>
 		<td colspan="3" style="{{ $bc }} height: 40px;">TOTAL APPLICANTS</td>
 		<td colspan="7" style="{{ $bc }} height: 40px;">STATUS</td>
 		<td rowspan="2" style="{{ $bc }} height: 40px;">REMARKS</td>
@@ -39,7 +39,7 @@
 		<td style="{{ $bc }}"></td>
 		<td style="{{ $bc }}"></td>
 
-		<td style="{{ $bc }}">=SUM(D5:D{{ sizeof($data) + 5 }})</td>
+		<td style="{{ $bc }}"></td>
 		<td style="{{ $bc }}">=SUM(E5:E{{ sizeof($data) + 5 }})</td>
 		<td style="{{ $bc }}">=SUM(F5:F{{ sizeof($data) + 5 }})</td>
 		<td style="{{ $bc }}">=SUM(G5:G{{ sizeof($data) + 5 }})</td>
