@@ -1266,7 +1266,7 @@ class ApplicationsController extends Controller
                 array_shift($temp);
                 $vessel = implode(' ', $temp);
                 $vesselMatch = Vessel::where('name', 'LIKE', "%$vessel%")
-                                ->where('fleet', auth()->user()->fleet)
+                                // ->where('fleet', auth()->user()->fleet)
                                 ->first();
 
                 if($vesselMatch){
