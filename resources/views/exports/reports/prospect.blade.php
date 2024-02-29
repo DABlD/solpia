@@ -115,17 +115,17 @@
 			</td>
 			<td style="{{ $c }}">1</td>
 
-			<td style="{{ $c }}">{{ $applicant['source'] == "Walk-in" ? 1 : 0 }}</td>
-			<td style="{{ $c }}">{{ $applicant['source'] == "Online" ? 1 : 0 }}</td>
-			<td style="{{ $c }}">{{ $applicant['source'] == "Kalaw" || $applicant['source'] == "Source" ? 1 : 0 }}</td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Walk-in" ? "&#10004;" : "" }}</td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Online" ? "&#10004;" : "" }}</td>
+			<td style="{{ $c }}">{{ $applicant['source'] == "Kalaw" || $applicant['source'] == "Source" ? "&#10004;" : "" }}</td>
 
-			<td style="{{ $c }}">{{ $op }}</td>
-			<td style="{{ $c }}">{{ $fi }}</td>
-			<td style="{{ $c }}">{{ $passed }}</td>
-			<td style="{{ $c }}">{{ $etc }}</td>
-			<td style="{{ $c }}">{{ $failed }}</td>
-			<td style="{{ $c }}">{{ $backout }}</td>
-			<td style="{{ $c }}">{{ $ffu }}</td>
+			<td style="{{ $c }}">{{ $op ? "&#10004;" : "" }}</td>
+			<td style="{{ $c }}">{{ $fi ? "&#10004;" : "" }}</td>
+			<td style="{{ $c }}">{{ $passed ? "&#10004;" : "" }}</td>
+			<td style="{{ $c }}">{{ $etc ? "&#10004;" : "" }}</td>
+			<td style="{{ $c }}">{{ $failed ? "&#10004;" : "" }}</td>
+			<td style="{{ $c }}">{{ $backout ? "&#10004;" : "" }}</td>
+			<td style="{{ $c }}">{{ $ffu ? "&#10004;" : "" }}</td>
 			<td>{{ $applicant['remarks'] }}</td>
 		</tr>
 	@endforeach
