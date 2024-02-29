@@ -56,7 +56,7 @@
                         </span>
                     </div>
 
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label for="vessel_type${count}">Vessel Type</label>
                         <input type="text" class="form-control" name="vessel_type${count}" placeholder="Enter Vessel Type">
                         <span class="invalid-feedback hidden" role="alert">
@@ -64,9 +64,17 @@
                         </span>
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="gross_tonnage${count}">Gross Tonnage</label>
-                        <input type="text" class="form-control" name="gross_tonnage${count}" placeholder="Enter Gross Tonnage">
+                    <div class="form-group col-md-2">
+                        <label for="smc${count}">Year Built</label>
+                        <input type="text" class="form-control" name="smc${count}" placeholder="Enter Year">
+                        <span class="invalid-feedback hidden" role="alert">
+                            <strong id="smc${count}Error"></strong>
+                        </span>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="gross_tonnage${count}">GRT</label>
+                        <input type="text" class="form-control" name="gross_tonnage${count}" placeholder="Enter GRT">
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="gross_tonnage${count}Error"></strong>
                         </span>
@@ -242,7 +250,6 @@
                 let parent = vessel.parent().parent();
                 
                 if(imo[selectedVessel] != undefined){
-
                     parent.find('[name^="vessel_name"]').val(imo[selectedVessel].name);
                     parent.find('[name^="vessel_type"]').val(imo[selectedVessel].type);
                     parent.find(`[name^="gross_tonnage"]`).val(imo[selectedVessel].gross_tonnage);
@@ -253,6 +260,7 @@
                     parent.find(`[name^="manning_agent"]`).val(imo[selectedVessel].manning_agent);
                     parent.find(`[name^="principal"]`).val(imo[selectedVessel].pname);
                     parent.find(`[name^="crew_nationality"]`).val(imo[selectedVessel].crew_nationality);
+                    parent.find(`[name^="smc"]`).val(imo[selectedVessel].year_build);
                 }
             });     
         }
