@@ -277,7 +277,7 @@
 				index = 0;
 				for(let ctr = 0; ctr < length; ctr++){
 					inputs = $('#sea-services input, #sea-services select');
-					i = (index * 19);
+					i = (index * 20);
 					
 					$(inputs[i]).val(sss[ctr].imo).trigger('change');
 					// checkIfExisting($(inputs[i+1]), sss[ctr].vessel_name);
@@ -285,45 +285,46 @@
 					$(inputs[i+2]).val(sss[ctr].rank).trigger('change');
 					
 					inputs[i+3].value       = sss[ctr].vessel_type;
-					inputs[i+4].value       = sss[ctr].gross_tonnage;
-					inputs[i+5].value       = sss[ctr].engine_type;
-					inputs[i+6].value       = sss[ctr].bhp_kw;
-					inputs[i+7].value       = sss[ctr].flag;
+					inputs[i+4].value       = sss[ctr].smc;
+					inputs[i+5].value       = sss[ctr].gross_tonnage;
+					inputs[i+6].value       = sss[ctr].engine_type;
+					inputs[i+7].value       = sss[ctr].bhp_kw;
+					inputs[i+8].value       = sss[ctr].flag;
 					// inputs[i+8].value       = sss[ctr].trade;
 
 					// Set the value, creating a new option if necessary
 					if(sss[ctr].trade != "" && sss[ctr].trade != null){
-						if ($(inputs[i+8]).find("option[value='" + sss[ctr].trade + "']").length) {
-							$(inputs[i+8]).val(sss[ctr].trade).trigger('change');
+						if ($(inputs[i+9]).find("option[value='" + sss[ctr].trade + "']").length) {
+							$(inputs[i+9]).val(sss[ctr].trade).trigger('change');
 						} else { 
 						    var newOption = new Option(sss[ctr].trade, sss[ctr].trade, true, true);
-						    $(inputs[i+8]).append(newOption).trigger('change');
+						    $(inputs[i+9]).append(newOption).trigger('change');
 						} 
 					}
 
-					inputs[i+9].value       = sss[ctr].previous_salary;
-					inputs[i+10].value      = sss[ctr].manning_agent;
-					inputs[i+11].value      = sss[ctr].principal;
+					inputs[i+10].value       = sss[ctr].previous_salary;
+					inputs[i+11].value      = sss[ctr].manning_agent;
+					inputs[i+12].value      = sss[ctr].principal;
 					// inputs[i+12].value      = sss[ctr].crew_nationality;
 
 					// Set the value, creating a new option if necessary
 					if(sss[ctr].crew_nationality != "" && sss[ctr].crew_nationality != null){
-						if ($(inputs[i+12]).find("option[value='" + sss[ctr].crew_nationality + "']").length) {
-							$(inputs[i+12]).val(sss[ctr].crew_nationality).trigger('change');
+						if ($(inputs[i+13]).find("option[value='" + sss[ctr].crew_nationality + "']").length) {
+							$(inputs[i+13]).val(sss[ctr].crew_nationality).trigger('change');
 						} else { 
 						    var newOption = new Option(sss[ctr].crew_nationality, sss[ctr].crew_nationality, true, true);
-						    $(inputs[i+12]).append(newOption).trigger('change');
+						    $(inputs[i+13]).append(newOption).trigger('change');
 						}
 					}
 
-					$(inputs[i+13]).flatpickr(config).setDate(sss[ctr].sign_on, true);
-					$(inputs[i+15]).flatpickr(config).setDate(sss[ctr].sign_off, true);
+					$(inputs[i+14]).flatpickr(config).setDate(sss[ctr].sign_on, true);
+					$(inputs[i+16]).flatpickr(config).setDate(sss[ctr].sign_off, true);
 
-					inputs[i+17].value      = sss[ctr].remarks;
+					inputs[i+18].value      = sss[ctr].remarks;
 
 					// $(inputs[i]).select2('close');
 
-					$($(inputs[i+17]).parent().parent()).prepend(`
+					$($(inputs[i+18]).parent().parent()).prepend(`
 						<input type="hidden" name="id-${sss[ctr].id}" value="${sss[ctr].id}" data-type="id">
 					`);
 					index++;

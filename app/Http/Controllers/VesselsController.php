@@ -121,7 +121,7 @@ class VesselsController extends Controller
     	echo json_encode(
     		Vessel::select(
                 'imo', 'principal_id', 'manning_agent', 'vessels.name', 'flag',
-                'type', 'engine', 'gross_tonnage', 'BHP', 'trade',
+                'type', 'engine', 'gross_tonnage', 'BHP', 'trade', 'year_build',
                 'p.name as pname'
                 )
                 ->where('imo', '!=', null)
