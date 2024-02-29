@@ -40,16 +40,16 @@
 		<td style="{{ $bc }}"></td>
 
 		<td style="{{ $bc }}"></td>
-		<td style="{{ $bc }}">=COUNTIF(E5:E{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(F5:F{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(G5:G{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(H5:H{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(I5:I{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(J5:J{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(K5:K{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(L5:L{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(M5:M{{ sizeof($data) + 5 }}, '<>')</td>
-		<td style="{{ $bc }}">=COUNTIF(N5:N{{ sizeof($data) + 5 }}, '<>')</td>
+		<td style="{{ $bc }}">=COUNTIF(E5:E{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(F5:F{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(G5:G{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(H5:H{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(I5:I{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(J5:J{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(K5:K{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(L5:L{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(M5:M{{ sizeof($data) + 5 }}, <>)</td>
+		<td style="{{ $bc }}">=COUNTIF(N5:N{{ sizeof($data) + 5 }}, <>)</td>
 		<td style="{{ $bc }}"></td>
 	</tr>
 
