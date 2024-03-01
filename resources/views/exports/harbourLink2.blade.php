@@ -697,15 +697,233 @@
 		<td colspan="7" style="{{ $i }}">Perniagaan Utama</td>
 	</tr>
 
+	@php
+		$mob = $data->pro_app->mob;
+		$eld = $data->pro_app->eld;
+
+		$dept = "GALLEY";
+		if(str_contains($data->rank->category, "DECK")){
+			$dept = "DECK";
+		}
+		elseif(str_contains($data->rank->category, "ENGINE")){
+			$dept = "ENGINE";
+		}
+
+		$pp = null;
+
+		if(sizeof($data->sea_service)){
+			$pp = $data->sea_service->first()->rank;
+		}
+	@endphp
+
 	<tr>
-		<td colspan="2" style="{{ $b }}">From (Month/Year) To (Month/Year):</td>
-		<td colspan="5" style="{{ $bc }}"></td>
+		<td colspan="4" style="{{ $b }}">From (Month/Year) To (Month/Year):</td>
+		<td colspan="3" style="{{ $bc }}">
+			{{ isset($eld) && isset($mob) ? $eld->format("M/Y") . ' - ' . $eld->addMonth($mob)->format("M/Y") : now()->year }}
+		</td>
 		<td colspan="3" style="{{ $b }}">Department:</td>
+		<td colspan="4" style="{{ $bc }}">{{ $dept }} DEPARTMENT</td>
+	</tr>
+
+	<tr>
+		<td colspan="7" style="{{ $i }}">Dari (Bulan/Tahun) Ke (Bulan/Tahun)</td>
+		<td colspan="7" style="{{ $i }}">Jabatan</td>
+	</tr>
+
+	<tr>
+		<td colspan="7" style="{{ $b }}">Position Offered: {{ $data->rank->name }}</td>
+		<td colspan="7" style="{{ $b }}">Present Position: {{ $pp }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="7" style="{{ $i }}">Jawatan ditawarkan</td>
+		<td colspan="7" style="{{ $i }}">Jawatan Sekarang</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $b }}">Reporting To:</td>
+		<td colspan="5" style="{{ $bc }}">MS. THEA MAE D. GUERRA</td>
+		<td colspan="3" style="{{ $b }}">No. of Subordinates:</td>
 		<td colspan="4" style="{{ $bc }}"></td>
 	</tr>
 
 	<tr>
-		<td colspan="7" style="{{ $i }}">Syarikat</td>
-		<td colspan="7" style="{{ $i }}">Perniagaan Utama</td>
+		<td colspan="7" style="{{ $i }}">Melapor Kepada</td>
+		<td colspan="7" style="{{ $i }}">Bil. Staf Bawahan</td>
+	</tr>
+
+	<tr>
+		<td colspan="14" style="{{ $b }}">
+			Brief description of duties &#38; responsibilities:Assist the Chief Engineer in analyzing needs and plan preventive maintenance programs and upgrades for systems, and successfully implement and administer the ship's planned maintenance system.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="14" style="{{ $i }}">Senaraikan Tugas &#38; Tanggungjawab sekarang</td>
+	</tr>
+
+	{{-- SECTION G --}}
+	<tr>
+		<td rowspan="2" style="{{ $bc }}">G</td>
+		<td colspan="7" style="{{ $b }}">PROGRAM/TRAINING / COMPETENCY COURSE ATTENDED</td>
+		<td colspan="5" style="{{ $i }}">(Shorthand, Typewriting, Book Keeping, Computer Course, &#38; etc)</td>
+	</tr>
+
+	<tr>
+		<td colspan="7" style="{{ $b }}">PROGROM/LATIHAN / KURSUS KECEKAPAN YANG PERNAH DIIKUTI</td>
+		<td colspan="5" style="{{ $i }}">(Trengkas, Typewriting, Computer course, Simpan Kira-kira &#38; etc)</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $bc }}">Course Attended</td>
+		<td colspan="4" style="{{ $bc }}">Institute</td>
+		<td colspan="3" style="{{ $bc }}">Year Attended</td>
+		<td colspan="2" style="{{ $bc }}">License/Certificate Attained</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $c }} {{ $i }}">Kursus yang Dihadiri</td>
+		<td colspan="4" style="{{ $c }} {{ $i }}">Institut</td>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Tahun Hadir</td>
+		<td colspan="2" style="{{ $c }} {{ $i }}">Lesen / Sijil Diperolehi</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $c }}">N/A</td>
+		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="3" style="{{ $c }}"></td>
+		<td colspan="2" style="{{ $c }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="3" style="{{ $c }}"></td>
+		<td colspan="2" style="{{ $c }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="3" style="{{ $c }}"></td>
+		<td colspan="2" style="{{ $c }}"></td>
+	</tr>
+
+	{{-- SECTION H --}}
+	<tr>
+		<td rowspan="2" style="{{ $bc }}">H</td>
+		<td colspan="12" style="{{ $b }}">INSTITUTIONAL / COMMUNAL / ASSOCIATION / CLUB MEMBERSHIP</td>
+	</tr>
+
+	<tr>
+		<td colspan="12" style="{{ $i }}">KAHLIAN INSTITUSI / KEMASYARAKATAN / PERSATUAN / KELAB</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $bc }}">From</td>
+		<td colspan="2" style="{{ $bc }}">To</td>
+		<td colspan="7" style="{{ $bc }}">Organization's Name</td>
+		<td colspan="3" style="{{ $bc }}">Official Hold</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $b }} {{ $i }}">Dari</td>
+		<td colspan="2" style="{{ $b }} {{ $i }}">Hingga</td>
+		<td colspan="7" style="{{ $b }} {{ $i }}">Nama Organisasi</td>
+		<td colspan="3" style="{{ $b }} {{ $i }}">Jawatan Dipegang</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $c }}">N/A</td>
+		<td colspan="2" style="{{ $c }}"></td>
+		<td colspan="7" style="{{ $c }}"></td>
+		<td colspan="3" style="{{ $c }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $c }}"></td>
+		<td colspan="2" style="{{ $c }}"></td>
+		<td colspan="7" style="{{ $c }}"></td>
+		<td colspan="3" style="{{ $c }}"></td>
+	</tr>
+
+	{{-- SECTION I --}}
+	<tr>
+		<td rowspan="2" style="{{ $bc }}">H</td>
+		<td colspan="12" style="{{ $b }}">HOBBIES / SPORT / INTEREST</td>
+	</tr>
+
+	<tr>
+		<td colspan="12" style="{{ $i }}">KEGEMARAN / SUKAN / MINAT</td>
+	</tr>
+
+	<tr>
+		<td colspan="14" style="{{ $bc }}"></td>
+	</tr>
+
+	{{-- SECTION J --}}
+	<tr>
+		<td rowspan="2" style="{{ $bc }}">J</td>
+		<td colspan="3" style="{{ $b }}">LANGUAGE PROFICIENCY</td>
+		<td colspan="9" style="{{ $i }}">(Please specify: Excellent / Fair / Poor)</td>
+	</tr>
+
+	<tr>
+		<td colspan="3" style="{{ $b }}">PENGUASAAN BAHASA</td>
+		<td colspan="9" style="{{ $i }}">(Sila nyatakan seperti berikut: Mahir / Baik / Lemah)</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $bc }}">Language / Dialects</td>
+		<td colspan="3" style="{{ $bc }}">Written</td>
+		<td colspan="3" style="{{ $bc }}">Reading</td>
+		<td colspan="2" style="{{ $bc }}">Speaking</td>
+		<td style="{{ $bc }}">Understanding</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $c }} {{ $i }}">Bahasa / Dialeks</td>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Penulisan</td>
+		<td colspan="3" style="{{ $c }} {{ $i }}">Bacaan</td>
+		<td colspan="2" style="{{ $c }} {{ $i }}">Lisan</td>
+		<td style="{{ $c }} {{ $i }}">Kefahaman</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $b }}">English (Inggeris)</td>
+		<td colspan="3" style="{{ $bc }}">GOOD</td>
+		<td colspan="3" style="{{ $bc }}">GOOD</td>
+		<td colspan="2" style="{{ $bc }}">GOOD</td>
+		<td style="{{ $bc }}">GOOD</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $b }}">Bahasa Malaysia (Bahasa Melayu)</td>
+		<td colspan="3" style="{{ $bc }}"></td>
+		<td colspan="3" style="{{ $bc }}"></td>
+		<td colspan="2" style="{{ $bc }}"></td>
+		<td style="{{ $bc }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $b }}">Chinese (Cina)</td>
+		<td colspan="3" style="{{ $bc }}"></td>
+		<td colspan="3" style="{{ $bc }}"></td>
+		<td colspan="2" style="{{ $bc }}"></td>
+		<td style="{{ $bc }}"></td>
+	</tr>
+
+	<tr>
+		<td colspan="5" style="{{ $b }}">
+			Other Languages / Dialects. Please specify:-(Lain-lain Bahasa / Dialek. Sila nyatakan: 
+			<br style='mso-data-placement:same-cell;' />
+			1.)
+			<br style='mso-data-placement:same-cell;' />
+			2.)
+		</td>
+		<td colspan="3" style="{{ $bc }}"></td>
+		<td colspan="3" style="{{ $bc }}"></td>
+		<td colspan="2" style="{{ $bc }}"></td>
+		<td style="{{ $bc }}"></td>
 	</tr>
 </table>

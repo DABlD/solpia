@@ -1,929 +1,669 @@
 @php
-	$b = "font-weight: bold;";
-	$c = "text-align: center;";
-	$i = "font-style: italic;";
-	$bc = "$b $c";
-
-	$checkDate2 = function($date, $type){
-		if($date == "UNLIMITED"){
-			return $date;
+	$bold = "font-weight: bold;";
+	$center = "text-align: center;";
+	// dd($data);
+	$clean = function($string){
+		return str_replace('&', '&#38;', $string);
+	};
+	$checkDate = function($date){
+		if($date == null || $date == ""){
+			return "---";
 		}
-		elseif($date == "" || $date == null){
-			if($type == "E"){
-				return 'UNLIMITED';
+		else{
+			return $date->format('d-M-Y');
+		}
+	};
+
+	$doc = function($doc, $title, $type, $type2, $flag = null, $regulation = null) use($checkDate, $data, $clean, $bold, $center){
+		$docu = null;
+		$title = $clean($title);
+
+		if($regulation){
+			foreach(get_object_vars($data->document_lc) as $document){
+				$regulations = json_decode($document->regulation);
+
+			    if(str_contains($document->type, $doc) && in_array($regulation, $regulations)){
+			        $docu = $document;
+			    }
+			}
+		}
+		else{
+			if($doc == "RADAR"){
+				$doc = "RADAR SIMULATOR COURSE";
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				if(!$docu){
+					$doc = "RADAR TRAINING COURSE";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+			}
+			elseif($doc == "ARPA TRAINING COURSE"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+
+				if(!$docu){
+					$doc = "RADAR OPERATOR PLOTTING AID";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+			}
+			elseif($doc == "COC" || $doc == "COE"){
+				$temp = null;
+				foreach (get_object_vars($data->document_lc) as $lc){
+					if(str_starts_with($lc->type, $doc)){
+						if($temp){
+							if($lc->issue_date >= $temp->issue_date){
+								$temp = $lc;
+							}
+						}
+						else{
+							$temp = $lc;
+						}
+					}
+				}
+				$docu = $temp;
+			}
+			elseif ($docu == 'BRM') {
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+				if(!$docu){
+					$name = 'BTM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					if(!$docu){
+						$name = 'SSBT';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+				}
+			}
+			elseif ($docu == 'ERM') {
+				$temp = $docu;
+				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+				if(!$docu){
+					$name = 'ETM';
+					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					if(!$docu){
+						$name = 'ERS';
+						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					}
+				}
+			}
+			elseif($docu == "WATCHKEEPING"){
+				$temp = $docu;
+				$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				if(!$docu){
+					$doc = "DECK WATCHKEEPING";
+					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				}
+				if(!$docu){
+					$doc = "DECK WATCH";
+					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				}
+				if(!$docu){
+					$doc = "ENGINE WATCHKEEPING";
+					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				}
+				if(!$docu){
+					$doc = "ENGINE WATCH";
+					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+				}
+			}
+			elseif($doc == "GAS TANKER"){
+				$temp = null;
+				foreach (get_object_vars($data->document_lc) as $lc){
+					if(str_starts_with($lc->type, $doc)){
+						$temp = $lc;
+					}
+				}
+				$docu = $temp;
 			}
 			else{
-				return '-----';
+				if($type != "flag"){
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				else{
+					foreach (get_object_vars($data->document_flag) as $flag) {
+						if($flag->country == $flag && $flag->type == $doc){
+							$docu = $flag;
+						}
+					}
+				}
 			}
 		}
-		else{
-			return $date->format('d M Y');
+
+		$number = $docu ? $docu->{$type == "id" ? "number" : "no"} : "---";
+		$issuer = $docu ? $clean($docu->issuer) : "---";
+		$issue = $docu ? $checkDate($docu->issue_date) : "---";
+		$expiry = $docu ? $checkDate($docu->expiry_date) : "---";
+
+		if($doc == "HK-VISA"){
+			$number = "NOT APPLICABLE";
+			$issuer = "NOT APPLICABLE";
+			$issue = "NOT APPLICABLE";
+			$expiry = "NOT APPLICABLE";
+		}
+
+		$blue = 'color: #0000FF;';
+		
+		if($type2 == 1){
+			echo "
+				<tr>
+					<td colspan='4'>$title</td>
+					<td colspan='3'>Issue At</td>
+					<td colspan='3'>Issue Date</td>
+					<td colspan='2'>Expiry Date</td>
+				</tr>
+				<tr>
+					<td colspan='4'>$number</td>
+					<td colspan='3'>$issuer</td>
+					<td colspan='3'>$issue</td>
+					<td colspan='2'>$expiry</td>
+				</tr>
+			";
+		}
+		elseif($type2 == 2){
+			echo "
+				<td colspan='4'>$title</td>
+				<td colspan='3'>Issue Date / Expiry Date</td>
+			";
+		}
+		elseif($type2 == 3){
+			echo "
+				<td colspan='3'>$title</td>
+				<td colspan='2'>Issue Date / Expiry Date</td>
+			";
+		}
+		elseif($type2 == 4){
+			echo "
+				<td colspan='4'>$number</td>
+				<td colspan='3'>$issue / $expiry</td>
+			";
+		}
+		elseif($type2 == 5){
+			echo "
+				<td colspan='3'>$number</td>
+				<td colspan='2'>$issue / $expiry</td>
+			";
+		}
+		elseif($type2 == 6){
+			echo "
+				<td colspan='3'>$title</td>
+				<td style='$center $blue'>$number</td>
+				<td style='$center'>$issue</td>
+				<td style='$center'>$expiry</td>
+				<td style='$center'>$issuer</td>
+			";
+		}
+		elseif($type2 == 7){
+			echo "
+				<td colspan='3'>$title</td>
+				<td style='$center $blue'>NOT APPLICABLE</td>
+				<td style='$center'>---</td>
+				<td style='$center'>---</td>
+				<td style='$center'>---</td>
+			";
 		}
 	};
 
-	$cleanText = function($text){
-		return str_replace('&', '&#38;', $text);
-	};
+	$ss = function($ss) use($checkDate, $clean, $center, $ranks){
+		if($ss){
+			$engine = $clean($ss->engine_type);
+			$bhp = $clean($ss->bhp_kw);
+			$grt = $clean($ss->gross_tonnage);
+			$on = $checkDate($ss->sign_on);
+			$off = $checkDate($ss->sign_off);
+			$manning = $clean($ss->manning_agent);
+			$rank = null;
+			if(isset($ss->rank) && $ss->rank != ""){
+				$rank = $ranks[$ss->rank];
+			}
 
-	// CHECK IF WATCHKEEPING AND HAS RANK AND IS DECK OR ENGINE RATING
-	if(isset($applicant->rank_id)){
-		$rank = $applicant->rank_id;
-	}
-	else{
-		if(isset($applicant->rank)){
-			$rank = $applicant->rank->id;
+			echo "
+				<tr>
+					<td style='$center'>$rank</td>
+					<td style='$center' colspan='3'>$ss->vessel_name</td>
+					<td style='$center'>$ss->vessel_type</td>
+					<td style='$center'>$engine</td>
+					<td style='$center'>$bhp</td>
+					<td style='$center'>$grt</td>
+					<td style='$center'>$on</td>
+					<td style='$center'>$off</td>
+					<td style='$center' colspan='2'>$manning</td>
+				</tr>
+			";
 		}
 		else{
-			$rank = 0;
+			echo "
+				<tr>
+					<td style='$center'></td>
+					<td style='$center' colspan='3'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center'></td>
+					<td style='$center' colspan='2'></td>
+				</tr>
+			";
 		}
-	}
+	};
 @endphp
 
 <table>
+	<tr>
+		<td colspan="12" rowspan="2" style="{{ $center }} font-size: 24px; height: 55px;">SEAFARER APPLICATION FORM</td>
+	</tr>
 
-	{{-- HEADER --}}
+	<tr></tr>
+
+	<tr><td colspan="12" style="height: 5px;"></td></tr>
 
 	<tr>
 		<td colspan="12"></td>
-		<td>Form No</td>
-		<td>: HRD/F-04 (R2)</td>
-	</tr>
-	<tr>
-		<td colspan="12"></td>
-		<td>Date</td>
-		<td>: 08/09/2018</td>
 	</tr>
 
 	<tr>
-		<td colspan="3" rowspan="3"></td>
-		<td rowspan="3"></td>
-		<td colspan="9"></td>
-		<td rowspan="3" style="{{ $c }}">
-			Affix Photo Here
-			<br style='mso-data-placement:same-cell;' />
-			Lekat foto di sini
+		<td colspan="10"></td>
+		<td colspan="2" rowspan="8" style="{{ $center }}">Recent Photograph</td>
+	</tr>
+
+	<tr>
+		<td colspan="4" rowspan="6"></td>
+		<td colspan="5">Position Applied</td>
+		<td rowspan="6"></td>
+	</tr>
+
+	@php
+		$rank = null;
+		if(isset($data->rank)){
+			$rank = $data->rank->name;
+			if($rank == "2ND OFFICER"){
+				$rank = "SECOND OFFICER";
+			}
+			elseif($rank == "3RD OFFICER"){
+				$rank = "THIRD OFFICER";
+			}
+			elseif($rank == "1ST ASST. ENGR"){
+				$rank = "FIRST ASSISTANT ENGINEER";
+			}
+			elseif($rank == "2ND ASST. ENGR"){
+				$rank = "SECOND ASSISTANT ENGINEER";
+			}
+			elseif($rank == "3RD ASST. ENGR"){
+				$rank = "THIRD ASSISTANT ENGINEER";
+			}
+		}
+	@endphp
+	<tr>
+		<td colspan="5">{{ $rank }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">Date available</td>
+		<td colspan="3">Application Date</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">Anytime</td>
+		<td colspan="3">{{ now()->format('F j, Y') }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">Manning Agent</td>
+		<td colspan="3">For Vessel</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">Solpia Marine &#38; Ship Mgt. Inc</td>
+		<td colspan="3">{{ $data->vessel ? $data->vessel->name : "N/A" }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="10"></td>
+	</tr>
+
+	<tr>
+		<td colspan="12" style="height: 10px;"></td>
+	</tr>
+
+	<tr>
+		<td colspan="10">Full Name (Underline Surname)</td>
+		<td colspan="2">Nationality</td>
+	</tr>
+
+	<tr>
+		<td colspan="10">
+			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
+		</td>
+		<td colspan="2">
+			FILIPINO
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="9" style="{{ $b }} font-size: 20px;">APPLICATION FOR EMPLOYMENT</td>
+		<td colspan="4">Place of Birth</td>
+		<td colspan="3">Date of Birth</td>
+		<td colspan="3">Weight (Kg)</td>
+		<td colspan="2">Height (cm)</td>
 	</tr>
 
 	<tr>
-		<td colspan="9" style="{{ $b }} {{ $i }} font-size: 16px;">Borang Permohonan Kerja</td>
+		<td colspan="4">{{ $data->birth_place }}</td>
+		<td colspan="3">{{ $data->user->birthday ? $data->user->birthday->format('d-M-Y') : "---" }}</td>
+		<td colspan="3" style="text-align: left;">{{ $data->weight }}</td>
+		<td colspan="2" style="text-align: left;">{{ $data->height }}</td>
+	</tr>
+
+	@php
+		$spouse = null;
+		$mother = null;
+		$father = null;
+		$noc = 0;
+		foreach($data->family_data as $fd){
+			if($fd->type == "Spouse"){
+				$spouse = $fd;
+			}
+			elseif($fd->type == "Mother"){
+				$mother = $fd;
+			}
+			elseif($fd->type == "Father"){
+				$father = $fd;
+			}
+			elseif($fd->type == "Son" || $fd->type == "Daughter"){
+				$noc++;
+			}
+		}
+	@endphp
+
+	<tr>
+		<td colspan="4">Marital Status</td>
+		<td colspan="6">Name of Spouse</td>
+		<td colspan="2">No. of Children</td>
 	</tr>
 
 	<tr>
-		<td colspan="4" style="{{ $b }}">POSITION APPLIED FOR</td>
-		<td colspan="6" rowspan="2" style="{{ $b }}">1. {{ $data->rank->name }}</td>
-		<td colspan="4" rowspan="2" style="{{ $b }}">2.</td>
+		<td colspan="4">{{ $data->civil_status }}</td>
+		<td colspan="6">{{ $spouse->lname ?? "" }}, {{ $spouse->fname ?? "" }} {{ $spouse->suffix ?? "" }} {{ $spouse->mname ?? "" }}</td>
+		<td colspan="2" style="text-align: left;">{{ $noc }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="4" style="{{ $b }} {{ $i }}">JAWATAN DIPOHON</td>
-	</tr>
-
-	{{-- SECTION A --}}
-
-	<tr>
-		<td rowspan="3" style="{{ $bc }}">A</td>
-		<td colspan="3" style="{{ $b }}">PERSONAL</td>
-		<td colspan="6">Full Name/Nama Penuh</td>
-		<td colspan="4">Chinese/Other Name, if any</td>
+		<td colspan="7">Tel: (Home)</td>
+		<td colspan="5">Name of Next of Kin</td>
 	</tr>
 
 	<tr>
-		<td colspan="3" style="{{ $b }}">PARTICULARS</td>
-		<td colspan="6">(As given in IC / Mengikut KP)</td>
-		<td colspan="4" style="{{ $i }}">Nama Cina/Lain, jika ada</td>
+		<td colspan="7">{{ $data->provincial_contact }}</td>
+		<td colspan="5" rowspan="3" style="{{ $center }}">
+			@php
+				$nok = $spouse ?? $father ?? $mother ?? null;
+			@endphp
+			@if($nok)
+				{{ $nok->lname }}, {{ $nok->fname }} {{ $nok->suffix }} {{ $nok->mname }}
+			@else
+				---
+			@endif
+		</td>
 	</tr>
 
 	<tr>
-		<td colspan="3" style="{{ $b }} {{ $i }}">BUTIR-BUTIR PERIBADI</td>
-		<td colspan="6" style="{{ $b }}">{{ $data->user->fullname2 }}</td>
-		<td colspan="4" style="{{ $b }}">N/A</td>
+		<td colspan="7">Tel: (Mobile)</td>
 	</tr>
 
 	<tr>
-		<td colspan="2" style="{{ $b }}">Present Address</td>
-		<td colspan="5" style="{{ $i }}"> / Alamat Kediaman Sekarang (Bintulu)</td>
-		<td colspan="3" style="{{ $b }}">Identity Card No</td>
-		<td colspan="4" style="{{ $i }}"> / No Kad Pengenalan</td>
+		<td colspan="7">{{ $data->user->contact }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="7" rowspan="4" style="{{ $b }}">{{ $data->user->address ?? $data->provincial_address }}</td>
+		<td colspan="7">Email</td>
+		<td colspan="3">Relationship</td>
+		<td colspan="2">Tel</td>
+	</tr>
+
+	<tr>
+		<td colspan="7">{{ $data->user->email }}</td>
+		<td colspan="3" rowspan="2" style="{{ $center }}">{{ $nok->type ?? '---' }}</td>
+		<td colspan="2" rowspan="2" style="{{ $center }}">{{ $data->provincial_contact }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="7">Address</td>
+	</tr>
+
+	<tr>
+		<td colspan="7" rowspan="2">{{ $data->user->address }}</td>
+		<td colspan="5">Address of Next of Kin</td>
+	</tr>
+
+	<tr>
+		<td colspan="5" rowspan="3">{{ $data->user->address }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="7">Most Convenient Airport</td>
+	</tr>
+
+	<tr>
 		<td colspan="7"></td>
 	</tr>
 
+	{{ $doc('PASSPORT', "Passport", 'id', 1) }}
+	{{ $doc("SEAMAN'S BOOK", "Seaman Book No", 'id', 1) }}
+	{{ $doc('US-VISA', "U S A Visa (Type)" ,'id', 1) }}
+	{{ $doc('HK-VISA', "Chinese / Hong Kong Visa (Type)" ,'id', 1) }}
+	{{ $doc('COC', "Certificate of Competency No / Capacity (Limitations)" ,'lc', 1) }}
+
 	<tr>
-		<td style="{{ $b }}">Old</td>
-		<td style="{{ $i }}"> / Lama:</td>
-		<td colspan="5"></td>
+		{{ $doc('COE', "Certificate of Endorsement S'pore (COC) No" ,'lc', 2) }}
+		{{ $doc('GMDSS/GOC', "Certificate of Endorsement Hkg (GOC) No" ,'lc', 3) }}
+	</tr>
+	<tr>
+		{{ $doc('COE', "Certificate of Endorsement S'pore (COC) No" ,'lc', 4) }}
+		{{ $doc('GMDSS/GOC', "Certificate of Endorsement Hkg (GOC) No" ,'lc', 5) }}
+	</tr>
+
+	<tr><td colspan="12"></td></tr>
+
+	<tr>
+		<td colspan="12" style="{{ $bold }}">Details of Previous Sea Service</td>
 	</tr>
 
 	<tr>
-		<td style="{{ $b }}">New</td>
-		<td style="{{ $i }}"> / Baru:</td>
-		<td colspan="5"></td>
+		<td style="{{ $center }}" rowspan="2">Rank</td>
+		<td style="{{ $center }}" rowspan="2" colspan="3">Name of Vessel</td>
+		<td style="{{ $center }}" rowspan="2">Type of Vessel</td>
+		<td style="{{ $center }}" rowspan="2">Type of Engine</td>
+		<td style="{{ $center }}" rowspan="2">Horse- Power</td>
+		<td style="{{ $center }}" rowspan="2">GT</td>
+		<td style="{{ $center }}" colspan="2">Period of Service</td>
+		<td style="{{ $center }}" rowspan="2" colspan="2">Name of Company</td>
 	</tr>
 
 	<tr>
-		<td colspan="7" style="{{ $b }}">Applicable to foreigner(s) only</td>
+		<td style="{{ $center }}">Sign-ON</td>
+		<td style="{{ $center }}">Sign-OFF</td>
+	</tr>
+
+	{{ isset($data->sea_service[0]) ? $ss($data->sea_service[0]) : $ss(null) }}
+	{{ isset($data->sea_service[1]) ? $ss($data->sea_service[1]) : $ss(null) }}
+	{{ isset($data->sea_service[2]) ? $ss($data->sea_service[2]) : $ss(null) }}
+	{{ isset($data->sea_service[3]) ? $ss($data->sea_service[3]) : $ss(null) }}
+	{{ isset($data->sea_service[4]) ? $ss($data->sea_service[4]) : $ss(null) }}
+	{{ isset($data->sea_service[5]) ? $ss($data->sea_service[5]) : $ss(null) }}
+	{{ isset($data->sea_service[6]) ? $ss($data->sea_service[6]) : $ss(null) }}
+	{{ isset($data->sea_service[7]) ? $ss($data->sea_service[7]) : $ss(null) }}
+	{{ isset($data->sea_service[8]) ? $ss($data->sea_service[8]) : $ss(null) }}
+	{{ isset($data->sea_service[9]) ? $ss($data->sea_service[9]) : $ss(null) }}
+	{{ isset($data->sea_service[10]) ? $ss($data->sea_service[10]) : $ss(null) }}
+	{{ isset($data->sea_service[11]) ? $ss($data->sea_service[11]) : $ss(null) }}
+	{{ isset($data->sea_service[12]) ? $ss($data->sea_service[12]) : $ss(null) }}
+	{{ isset($data->sea_service[13]) ? $ss($data->sea_service[13]) : $ss(null) }}
+	{{ isset($data->sea_service[14]) ? $ss($data->sea_service[14]) : $ss(null) }}
+
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
+	<tr>
+		<td colspan="12" rowspan="2" style="{{ $center }} font-size: 20px; height: 65px;">SEAFARER APPLICATION FORM</td>
+	</tr>
+
+	<tr></tr>
+
+	<tr><td colspan="12" style="height: 5px;"></td></tr>
+
+	<tr>
+		<td colspan="12"></td>
 	</tr>
 
 	<tr>
-		<td style="{{ $b }}">Tel No</td>
-		<td colspan="2" style="{{ $i }}"> / No Telefon:</td>
-		<td colspan="4" style="{{ $b }}"> {{ $data->user->contact ?? $data->provincial_contact }}</td>
-		<td colspan="2" style="{{ $b }}">Passport No</td>
-		<td colspan="2" style="{{ $i }}"> / No Passport</td>
-		<td colspan="2" style="text-align: right; {{ $b }}">Expiry Date</td>
-		<td style="{{ $i }}">Tarikh Tamat</td>
-	</tr>
-	
-	@php 
-		$name = "PASSPORT";
-		$docu = isset($data->document_id->{$name}) ? $data->document_id->{$name} : false;
-	@endphp
-
-	<tr>
-		<td style="{{ $b }}">Fax No</td>
-		<td colspan="2" style="{{ $i }}"> / No Fax:</td>
-		<td colspan="4"></td>
-		<td colspan="4" style="{{ $b }}">{{ $docu ? strtoupper($docu->number) : "---"}}</td>
-		<td colspan="3" style="{{ $b }}"> {{ $docu ? $checkDate2($docu->expiry_date, "E") : "---" }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $b }}">Permanent Address, if different from the above</td>
-		<td colspan="5" style="{{ $b }}">Date of Birth</td>
-		<td colspan="2" style="{{ $b }}">Place of Birth</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $i }}">Alamat Tetap, jika berlainan dari di atas</td>
-		<td colspan="5" style="{{ $i }}">/Tarikh Lahir</td>
-		<td colspan="2" style="{{ $i }}">/Tempat Lahir</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" rowspan="3"></td>
-		<td colspan="5" style="{{ $bc }}">{{ $data->user->birthday ? $data->user->birthday->format('F j, Y') : "" }}</td>
-		<td colspan="2" style="{{ $bc }}">{{ $data->birth_place }}</td>
-	</tr>
-
-	<tr>
-		<td style="{{ $b }}">Age</td>
-		<td colspan="4" style="{{ $i }}">/Umur</td>
-		<td style="{{ $b }}">Gender</td>
-		<td style="{{ $i }}">/Jantina</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" rowspan="2" style="{{ $b }}">{{ $data->user->birthday ? $data->user->birthday->diffInYears(now()) : "" }}</td>
-		<td colspan="2" rowspan="2" style="{{ $b }}">MALE</td>
-	</tr>
-
-	<tr>
-		<td style="{{ $b }}">Tel No</td>
-		<td colspan="6" style="{{ $i }}">/No Telefon:</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $b }}">Mailing Address</td>
-		<td colspan="5" style="{{ $i }}">/Alamat Pos</td>
-		<td colspan="5" style="{{ $b }}">Citizenship</td>
-		<td colspan="2" style="{{ $b }}">Ethnic</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" rowspan="3"></td>
-		<td colspan="5" style="{{ $i }}">/Kewarganega raan</td>
-		<td colspan="2" style="{{ $i }}">/Bangsa</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $bc }}">FILIPINO</td>
-		<td colspan="2" style="{{ $bc }}">N/A</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $b }}">Religion</td>
-		<td colspan="5" style="{{ $i }}">/Agama</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $b }}">E-mail Address</td>
-		<td colspan="5" style="{{ $i }}">/Alamat E-mail:</td>
-		<td colspan="7" rowspan="2" style="{{ $bc }}">{{ $data->religion ?? "---" }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $bc }}">{{ $data->user->email ?? "---" }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $b }}">Marital Status</td>
-		<td colspan="8" style="{{ $i }}">/Status Perkahwinan</td>
-		<td colspan="3" style="{{ $b }}">No of Children</td>
-		<td style="{{ $i }}">/Bil. Anak</td>
-	</tr>
-
-	@php
-		$childrens = 0;
-		foreach($data->family_data as $fd){
-			if($fd->type == "Son" || $fd->type == "Daughter"){
-				$childrens++;
-			}
-		}
-	@endphp
-
-	<tr>
-		<td colspan="10">
-			@if($data->civil_status == "Single")
-				⁣&#128505; Single/Bujang &#x2610; Married/Kahwin &#x2610; Divorcee/Bercerai
-			@elseif($data->civil_status == "Married")
-				&#x2610; Single/Bujang ⁣&#128505; Married/Kahwin &#x2610; Divorcee/Bercerai
-			@elseif($data->civil_status == "Divorced")
-				&#x2610; Single/Bujang &#x2610; Married/Kahwin ⁣&#128505; Divorcee/Bercerai
-			@else
-				&#x2610; Single/Bujang &#x2610; Married/Kahwin &#x2610; Divorcee/Bercerai
-			@endif
-		</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $childrens }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="10">
-			@if($data->civil_status == "Widow")
-				&#128505; Widow/Janda &#x2610; Widower/Duda
-			@elseif($data->civil_status == "Widowed")
-				&#x2610; Widow/Janda &#128505;; Widower/Duda
-			@else
-				&#x2610; Widow/Janda &#x2610; Widower/Duda
-			@endif
+		<td style="{{ $center }} {{ $bold }}">No</td>
+		<td colspan="3" style="{{ $center }} {{ $bold }}">Descriptions of Documents and Certificate</td>
+		<td style="{{ $center }} {{ $bold }}">Cert No</td>
+		<td style="{{ $center }} {{ $bold }}">Issued</td>
+		<td style="{{ $center }} {{ $bold }}">Valid</td>
+		<td style="{{ $center }} {{ $bold }}">Issue By</td>
+		<td colspan="4" style="{{ $center }} {{ $bold }} text-decoration: underline;">
+			Declaration To Be Signed By the Applicant
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="3" style="{{ $b }}">Driving License Class</td>
-		<td colspan="4" style="{{ $i }}">/Kelas Lesen Memandu Mengendali</td>
-		<td colspan="5" style="{{ $b }}">Year Obtained</td>
-		<td colspan="2" style="{{ $b }}">License No.</td>
-	</tr>
+		<td>1</td>
+		{{ $doc('MEDICAL CERTIFICATE', 'Medical/Physical Examination Report Cert', 'med_cert', 6) }}
 
-	<tr>
-		<td colspan="7" rowspan="2" style="{{ $bc }}">N/A</td>
-		<td colspan="5" style="{{ $i }}">/Tahun diperolehi</td>
-		<td colspan="2" style="{{ $i }}">/No. Lesen</td>
-	</tr>
-
-	<tr>
-		<td colspan="5"></td>
-		<td colspan="2"></td>
-	</tr>
-
-	{{-- SECTION B --}}
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">B</td>
-		<td colspan="4" style="{{ $b }}">PARTICULARS OF IMMEDIATE FAMILY</td>
-		<td colspan="9" style="{{ $i }}">(Spouse, Children or Parent, Brother &#38; Sister)</td>
-	</tr>
-
-	<tr>
-		<td colspan="4" style="{{ $b }}">BUTIR-BUTIR KELUARYGA TERDEKAT</td>
-		<td colspan="9" style="{{ $i }}">(Suami / Isteri, Anak atau Ibubapa, Abang &#38; Kakak)</td>
-	</tr>
-
-	<tr>
-		<td colspan="4" style="{{ $bc }}">Name</td>
-		<td colspan="2" style="{{ $bc }}">Relationship</td>
-		<td colspan="2" style="{{ $bc }}">Sex</td>
-		<td style="{{ $bc }}">Age</td>
-		<td colspan="4" style="{{ $bc }}">Occupation</td>
-		<td style="{{ $bc }}">Name of</td>
-	</tr>
-
-	<tr>
-		<td colspan="4" style="{{ $c }} {{ $i }}">Nama</td>
-		<td colspan="2" style="{{ $c }} {{ $i }}">Hubungan</td>
-		<td colspan="2" style="{{ $c }} {{ $i }}">Jantina</td>
-		<td style="{{ $c }} {{ $i }}">Umur</td>
-		<td colspan="4" style="{{ $c }} {{ $i }}">Pekerjaan</td>
-		<td style="{{ $bc }}">Employer</td>
-	</tr>
-
-	<tr>
-		<td colspan="4" style="{{ $c }} {{ $i }}"></td>
-		<td colspan="2" style="{{ $c }} {{ $i }}"></td>
-		<td colspan="2" style="{{ $c }} {{ $i }}"></td>
-		<td style="{{ $c }} {{ $i }}"></td>
-		<td colspan="4" style="{{ $c }} {{ $i }}"></td>
-		<td style="{{ $c }} {{ $i }}">Nama Majikan</td>
-	</tr>
-
-	@foreach($data->family_data as $fd)
-		<tr>
-			<td colspan="4" style="{{ $bc }}">{{ $fd->fullname2 }}</td>
-			<td colspan="2" style="{{ $bc }}">{{ $fd->type }}</td>
-			<td colspan="2" style="{{ $bc }}">
-				@if(in_array($fd->type, ["Mother", "Spouse", "Daughter", "Partner"]))
-					Female
-				@elseif(in_array($fd->type, ["Father", "Son"]))
-					Male
-				@else
-
-				@endif
-			</td>
-			<td style="{{ $bc }}">{{ $fd->birthday && $fd->type ? $fd->birthday->diffInYears(now()) : "" }}</td>
-			<td colspan="4" style="{{ $bc }}">{{ $fd->occupation }}</td>
-			<td style="{{ $bc }}"></td>
-		</tr>
-	@endforeach
-
-	{{-- BREAK PAGE --}}
-	<div style="page-break-after:always;"></div>
-
-	{{-- SECTION C --}}
-
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">C</td>
-		<td colspan="13" style="{{ $b }}">ACADEMIC RECORD</td>
-	</tr>
-
-	<tr>
-		<td colspan="13" style="{{ $b }} {{ $i }}">REKOD AKADEMIK</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $bc }}">Education Level</td>
-		<td colspan="2" style="{{ $bc }}">From Year</td>
-		<td style="{{ $bc }}">To Year</td>
-		<td colspan="4" style="{{ $bc }}">School / Institute / University</td>
-		<td colspan="3" style="{{ $bc }}">Certificate &#38; Grade Attained</td>
-		<td style="{{ $bc }}">Majored Subject</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Tahap Pendidikan</td>
-		<td colspan="2" style="{{ $c }} {{ $i }}">Dari Tahun</td>
-		<td style="{{ $c }} {{ $i }}">Ke Tahun</td>
-		<td colspan="4" style="{{ $c }} {{ $i }}">Sekolah / Institut / Universiti</td>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Sijil &#38; Gred Diperolehi</td>
-		<td style="{{ $c }} {{ $i }}">Mata Pelajaran</td>
-	</tr>
-
-	{{-- SCHOOL --}}
-	@php
-
-		$eb = function($type) use($data){
-			$from = "";
-			$to = "";
-			$school = "";
-			$course = "";
-
-			$temp = $data->educational_background->filter(function($value) use($type){
-				return $value->type == $type;
-			});
-
-			if(count($temp)){
-				$temp = $temp->first();
-
-				$range = explode('-', $temp->year);
-
-				$from = is_numeric($range[0]) ? $range[0] : "-";
-				$to = is_numeric($range[1]) ? $range[1] : "-";
-				$school = $temp->school;
-				$course = $temp->course;
-			}
-			else{
-				$from = "";
-				$to = "";
-				$school = "";
-				$course = "";
-			}
-
-			return [
-				"from" 		=> $from, 
-				"to" 		=> $to,
-				"school"	=> $school, 
-				"course"	=> $course
-			];
-		}
-	@endphp
-
-	@php
-		$temp = $eb('Elementary');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">Primary</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Sekolah Rendah</td>
-	</tr>
-
-	@php
-		$temp = $eb('High School');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">Lower Secondary</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Tingkatan 3</td>
-	</tr>
-
-	@php
-		$temp = $eb('Senior High School');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">Higher Secondary</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Tingkatan 5</td>
-	</tr>
-
-	@php
-		$temp = $eb('Senior High School');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">Pre-University</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Tingkatan 6</td>
-	</tr>
-
-	@php
-		$temp = $eb('Certificate');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">Certificate</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Sijil</td>
-	</tr>
-
-	@php
-		$temp = $eb('Vocational');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">Diploma</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Diploma</td>
-	</tr>
-
-	@php
-		$temp = $eb('College');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">Bachelor Degree</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Sarjana Muda</td>
-	</tr>
-
-	@php
-		$temp = $eb('Masteral');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">Master Degree</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Sarjana</td>
-	</tr>
-
-	@php
-		$temp = $eb('Doctoral');
-	@endphp
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">PHd.</td>
-		<td colspan="2" rowspan="2" style="{{ $bc }}">{{ $temp['from'] }}</td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['to'] }}</td>
-		<td colspan="4" rowspan="2" style="{{ $bc }}">{{ $temp['school'] }}</td>
-		<td colspan="3" rowspan="2" style="{{ $bc }}"></td>
-		<td rowspan="2" style="{{ $bc }}">{{ $temp['course'] }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $i }}">Doktor Falsafah</td>
-	</tr>
-
-	{{-- SECTION D --}}
-
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">D</td>
-		<td colspan="4" style="{{ $b }}">PROFESSIONAL QUALIFICATION</td>
-		<td colspan="9" style="{{ $i }}">(Eg. CPA License, Certified Trainer, Registered Safety Officer &#38; Etc)</td>
-	</tr>
-
-	<tr>
-		<td colspan="4" style="{{ $b }} {{ $i }}">KELAYAKAN PROFESYENAL</td>
-		<td colspan="9" style="{{ $i }}">(Cth. Lesen CPA, Pelatih Berdaftar, Pengawai HSE Berdaftar &#38; Etc)</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $bc }}">Year Attained</td>
-		<td colspan="4" style="{{ $bc }}">Institute</td>
-		<td colspan="5" style="{{ $bc }}">Certification</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $c }} {{ $i }}">Tahun Diperolehi</td>
-		<td colspan="4" style="{{ $c }} {{ $i }}">Institut</td>
-		<td colspan="5" style="{{ $c }} {{ $i }}">Sijil</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $bc }} {{ $i }}">N/A</td>
-		<td colspan="4" style="{{ $bc }} {{ $i }}"></td>
-		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
-		<td colspan="4" style="{{ $bc }} {{ $i }}"></td>
-		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
-		<td colspan="4" style="{{ $bc }} {{ $i }}"></td>
-		<td colspan="5" style="{{ $bc }} {{ $i }}"></td>
-	</tr>
-
-	{{-- SECTION E --}}
-
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">E</td>
-		<td colspan="8" style="{{ $b }}">EMPLOYMENT HISTORY BEFORE JOINING PRESENT EMPLOYER</td>
-		<td colspan="5" style="{{ $i }}">(List Down In Chronological Order)</td>
-	</tr>
-
-	<tr>
-		<td colspan="8" style="{{ $b }} {{ $i }}">REKOD PENGAJIAN SEBELUM MENYERTAI MAJIKAN SEKARANG</td>
-		<td colspan="5" style="{{ $i }}">(Senaraikan Mengikut Turutan Kronologi)</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $bc }}">From Year</td>
-		<td style="{{ $bc }}">To Year</td>
-		<td colspan="3" style="{{ $bc }}">Name of Previous</td>
-		<td colspan="3" style="{{ $bc }}">Position Hold</td>
-		<td colspan="3" style="{{ $b }} text-align: right;">Salary</td>
-		<td style="{{ $i }}">/Gaji</td>
-		<td style="{{ $bc }}">Reason for</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $c }} {{ $i }}">Dari Tahun</td>
-		<td style="{{ $c }} {{ $i }}">Ke Tahun</td>
-		<td colspan="3" style="{{ $bc }}">Employer(s)</td>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Jawatan</td>
-		<td colspan="3" style="{{ $bc }}">Basic</td>
-		<td style="{{ $bc }}">Allow</td>
-		<td style="{{ $bc }}">Leaving</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $c }} {{ $i }}"></td>
-		<td style="{{ $c }} {{ $i }}"></td>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Nama Majikan Dahulu</td>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Dipegang</td>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Pokok</td>
-		<td style="{{ $c }} {{ $i }}">Elaun</td>
-		<td style="{{ $c }} {{ $i }}">Sebab Berhenti</td>
-	</tr>
-
-	@foreach($data->sea_service as $ss)
-		@php
-			$vessel = $cleanText($ss->vessel_name);
-			$manning = $cleanText($ss->manning_agent);
-			$type = $cleanText($ss->vessel_type);
-			$rfl = $cleanText($ss->remarks);
-
-			$temp = $vessel != "" ? $vessel . ' / ' . $manning . ' / ' . $type : "";
-		@endphp
-
-		<tr>
-			<td colspan="2" style="{{ $bc }}">{{ $ss->sign_on != "" ? $ss->sign_on->format('d-M-y') : ""  }}</td>
-			<td style="{{ $bc }}">{{ $ss->sign_on != "" ? $ss->sign_on->format('d-M-y') : ""  }}</td>
-			<td colspan="3" style="{{ $bc }}">
-				{{ $temp }}
-			</td>
-			<td colspan="3" style="{{ $bc }}">{{ $ss->rank }}</td>
-			<td colspan="3" style="{{ $bc }}"></td>
-			<td style="{{ $bc }}"></td>
-			<td style="{{ $bc }}">{{ $ss->remarks }}</td>
-		</tr>
-	@endforeach
-
-	{{-- SECTION F --}}
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">F</td>
-		<td colspan="13" style="{{ $b }}">DETAILS OF PRESENT / PREVIOUS EMPLOYER</td>
-	</tr>
-
-	<tr>
-		<td colspan="13" style="{{ $i }}">BUTIR-BUTIR LANJUT TENTANG MAJIKAN SEKARANG / SEBELUM</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $b }}">Company:</td>
-		<td colspan="5" style="{{ $bc }}">SOLPIA MARINE &#38; SHIP MANAGEMENT</td>
-		<td colspan="3" style="{{ $b }}">Core Business:</td>
-		<td colspan="4" style="{{ $bc }}">MANNING AGENCY</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $i }}">Syarikat</td>
-		<td colspan="7" style="{{ $i }}">Perniagaan Utama</td>
-	</tr>
-
-	@php
-		$mob = $data->pro_app->mob;
-		$eld = $data->pro_app->eld;
-
-		$dept = "GALLEY";
-		if(str_contains($data->rank->category, "DECK")){
-			$dept = "DECK";
-		}
-		elseif(str_contains($data->rank->category, "ENGINE")){
-			$dept = "ENGINE";
-		}
-
-		$pp = null;
-
-		if(sizeof($data->sea_service)){
-			$pp = $data->sea_service->first()->rank;
-		}
-	@endphp
-
-	<tr>
-		<td colspan="4" style="{{ $b }}">From (Month/Year) To (Month/Year):</td>
-		<td colspan="3" style="{{ $bc }}">
-			{{ isset($eld) && isset($mob) ? $eld->format("M/Y") . ' - ' . $eld->addMonth($mob)->format("M/Y") : now()->year }}
-		</td>
-		<td colspan="3" style="{{ $b }}">Department:</td>
-		<td colspan="4" style="{{ $bc }}">{{ $dept }} DEPARTMENT</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $i }}">Dari (Bulan/Tahun) Ke (Bulan/Tahun)</td>
-		<td colspan="7" style="{{ $i }}">Jabatan</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $b }}">Position Offered: {{ $data->rank->name }}</td>
-		<td colspan="7" style="{{ $b }}">Present Position: {{ $pp }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $i }}">Jawatan ditawarkan</td>
-		<td colspan="7" style="{{ $i }}">Jawatan Sekarang</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $b }}">Reporting To:</td>
-		<td colspan="5" style="{{ $bc }}">MS. THEA MAE D. GUERRA</td>
-		<td colspan="3" style="{{ $b }}">No. of Subordinates:</td>
-		<td colspan="4" style="{{ $bc }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $i }}">Melapor Kepada</td>
-		<td colspan="7" style="{{ $i }}">Bil. Staf Bawahan</td>
-	</tr>
-
-	<tr>
-		<td colspan="14" style="{{ $b }}">
-			Brief description of duties &#38; responsibilities:Assist the Chief Engineer in analyzing needs and plan preventive maintenance programs and upgrades for systems, and successfully implement and administer the ship's planned maintenance system.
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan="14" style="{{ $i }}">Senaraikan Tugas &#38; Tanggungjawab sekarang</td>
-	</tr>
-
-	{{-- SECTION G --}}
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">G</td>
-		<td colspan="7" style="{{ $b }}">PROGRAM/TRAINING / COMPETENCY COURSE ATTENDED</td>
-		<td colspan="5" style="{{ $i }}">(Shorthand, Typewriting, Book Keeping, Computer Course, &#38; etc)</td>
-	</tr>
-
-	<tr>
-		<td colspan="7" style="{{ $b }}">PROGROM/LATIHAN / KURSUS KECEKAPAN YANG PERNAH DIIKUTI</td>
-		<td colspan="5" style="{{ $i }}">(Trengkas, Typewriting, Computer course, Simpan Kira-kira &#38; etc)</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $bc }}">Course Attended</td>
-		<td colspan="4" style="{{ $bc }}">Institute</td>
-		<td colspan="3" style="{{ $bc }}">Year Attended</td>
-		<td colspan="2" style="{{ $bc }}">License/Certificate Attained</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $c }} {{ $i }}">Kursus yang Dihadiri</td>
-		<td colspan="4" style="{{ $c }} {{ $i }}">Institut</td>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Tahun Hadir</td>
-		<td colspan="2" style="{{ $c }} {{ $i }}">Lesen / Sijil Diperolehi</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $c }}">N/A</td>
-		<td colspan="4" style="{{ $c }}"></td>
-		<td colspan="3" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
-		<td colspan="3" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
-		<td colspan="3" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-	</tr>
-
-	{{-- SECTION H --}}
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">H</td>
-		<td colspan="12" style="{{ $b }}">INSTITUTIONAL / COMMUNAL / ASSOCIATION / CLUB MEMBERSHIP</td>
-	</tr>
-
-	<tr>
-		<td colspan="12" style="{{ $i }}">KAHLIAN INSTITUSI / KEMASYARAKATAN / PERSATUAN / KELAB</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $bc }}">From</td>
-		<td colspan="2" style="{{ $bc }}">To</td>
-		<td colspan="7" style="{{ $bc }}">Organization's Name</td>
-		<td colspan="3" style="{{ $bc }}">Official Hold</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $b }} {{ $i }}">Dari</td>
-		<td colspan="2" style="{{ $b }} {{ $i }}">Hingga</td>
-		<td colspan="7" style="{{ $b }} {{ $i }}">Nama Organisasi</td>
-		<td colspan="3" style="{{ $b }} {{ $i }}">Jawatan Dipegang</td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $c }}">N/A</td>
-		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="7" style="{{ $c }}"></td>
-		<td colspan="3" style="{{ $c }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="7" style="{{ $c }}"></td>
-		<td colspan="3" style="{{ $c }}"></td>
-	</tr>
-
-	{{-- SECTION I --}}
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">H</td>
-		<td colspan="12" style="{{ $b }}">HOBBIES / SPORT / INTEREST</td>
-	</tr>
-
-	<tr>
-		<td colspan="12" style="{{ $i }}">KEGEMARAN / SUKAN / MINAT</td>
-	</tr>
-
-	<tr>
-		<td colspan="14" style="{{ $bc }}"></td>
-	</tr>
-
-	{{-- SECTION J --}}
-	<tr>
-		<td rowspan="2" style="{{ $bc }}">J</td>
-		<td colspan="3" style="{{ $b }}">LANGUAGE PROFICIENCY</td>
-		<td colspan="9" style="{{ $i }}">(Please specify: Excellent / Fair / Poor)</td>
-	</tr>
-
-	<tr>
-		<td colspan="3" style="{{ $b }}">PENGUASAAN BAHASA</td>
-		<td colspan="9" style="{{ $i }}">(Sila nyatakan seperti berikut: Mahir / Baik / Lemah)</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $bc }}">Language / Dialects</td>
-		<td colspan="3" style="{{ $bc }}">Written</td>
-		<td colspan="3" style="{{ $bc }}">Reading</td>
-		<td colspan="2" style="{{ $bc }}">Speaking</td>
-		<td style="{{ $bc }}">Understanding</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $c }} {{ $i }}">Bahasa / Dialeks</td>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Penulisan</td>
-		<td colspan="3" style="{{ $c }} {{ $i }}">Bacaan</td>
-		<td colspan="2" style="{{ $c }} {{ $i }}">Lisan</td>
-		<td style="{{ $c }} {{ $i }}">Kefahaman</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $b }}">English (Inggeris)</td>
-		<td colspan="3" style="{{ $bc }}">GOOD</td>
-		<td colspan="3" style="{{ $bc }}">GOOD</td>
-		<td colspan="2" style="{{ $bc }}">GOOD</td>
-		<td style="{{ $bc }}">GOOD</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $b }}">Bahasa Malaysia (Bahasa Melayu)</td>
-		<td colspan="3" style="{{ $bc }}"></td>
-		<td colspan="3" style="{{ $bc }}"></td>
-		<td colspan="2" style="{{ $bc }}"></td>
-		<td style="{{ $bc }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $b }}">Chinese (Cina)</td>
-		<td colspan="3" style="{{ $bc }}"></td>
-		<td colspan="3" style="{{ $bc }}"></td>
-		<td colspan="2" style="{{ $bc }}"></td>
-		<td style="{{ $bc }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="5" style="{{ $b }}">
-			Other Languages / Dialects. Please specify:-(Lain-lain Bahasa / Dialek. Sila nyatakan: 
+		<td colspan="4" rowspan="26" style="{{ $center }}">
 			<br style='mso-data-placement:same-cell;' />
-			1.)
+			I hereby certify that the information contained
 			<br style='mso-data-placement:same-cell;' />
-			2.)
+			in this form is complete &#38; correct. I understand that
+			<br style='mso-data-placement:same-cell;' />
+			the Company may terminate my service at any time
+			<br style='mso-data-placement:same-cell;' />
+			if any of the above information is fount to be false.
 		</td>
-		<td colspan="3" style="{{ $bc }}"></td>
-		<td colspan="3" style="{{ $bc }}"></td>
-		<td colspan="2" style="{{ $bc }}"></td>
-		<td style="{{ $bc }}"></td>
+	</tr>
+
+	<tr>
+		<td>2</td>
+		{{ $doc('MSID', 'Malaysia Seafarer Card/MSID', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>3</td>
+		{{ $doc('MCOR', 'Malaysia COR(for Officers only)', 'lc', 7) }}
+	</tr>
+	<tr>
+		{{-- COVID --}}
+		<td>4</td>
+		<td colspan="3">Covid Vaccination:</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		{{-- dose 1 --}}
+		<td></td>
+		{{ $doc('COVID-19 1ST DOSE', 'a) Dose 1', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		{{-- dose 2 --}}
+		<td></td>
+		{{ $doc('COVID-19 2ND DOSE', 'b) Dose 2', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		{{-- Booster --}}
+		<td></td>
+		{{ $doc('COVID-19 3RD DOSE', 'c) Booster', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		<td>5</td>
+		{{ $doc('YELLOW FEVER', 'Yellow Fever/Stamaril', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">6</td>
+		{{ $doc('TYPHOID', 'Typhoid Vaccination (for Cook and Messboy only)', 'med_cert', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">7</td>
+		{{ $doc('WATCHKEEPING', 'Watchkeeping Rating(Deck/Engine) or ASD/ASE', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>8</td>
+		{{ $doc('BASIC TRAINING - BT', 'Basic Safety Training(BST or BSTR)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">9</td>
+		{{ $doc('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'Proficiency Survival Craft and Rescure Boats (PSCRB or PSCRBR)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>10</td>
+		{{ $doc('MEDICAL FIRST AID - MEFA', 'Medical First Aid (MFA)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>11</td>
+		{{ $doc('ADVANCE FIRE FIGHTING - AFF', 'Advance Fire Fighting (AFF ir AFFR)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">12</td>
+		{{ $doc('MEDICAL CARE - MECA', 'Medical Care on Board Ship (Master and C/O only)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td>13</td>
+		{{ $doc('LMS', 'Leadership and Managerial Skill (LMS)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">14</td>
+		{{ $doc('ECDIS', 'ECDIS/Electronic Chart Display &#38; Inf. System', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td>15</td>
+		{{ $doc('ARPA TRAINING COURSE', 'ARPA Radar Simulator', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>16</td>
+		{{ $doc('BTM', 'Bridge Resource Management - BRM', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td>17</td>
+		{{ $doc('ETM', 'Engine Resource Management - ERM', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">18</td>
+		{{ $doc('SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 'Designated Security Duties (DSD) or Security Related Training (SRT VI-6)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">19</td>
+		{{ $doc('SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 'Ship Security Awareness (SSA) or Security Related Training (SRT VI-6)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">20</td>
+		{{ $doc('SHIP SECURITY OFFICER - SSO', 'Ship Security Officer Certificate (Compulsory for Master)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">21</td>
+		{{ $doc("SAFETY OFFICER'S TRAINING COURSE", 'Ship Safety Officer Certificate (Compulsory for Master & Chief Officer)', 'lc', 6) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">22</td>
+		{{ $doc('NCIII', 'Shipboard Catering Management / Ship Cook (MLC 2006)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">23</td>
+		{{ $doc('NC1', 'Food Handling Certificate (Messboy &#38; C/Cook)', 'lc', 7) }}
+	</tr>
+	<tr>
+		<td style="height: 35px;">24</td>
+		{{ $doc("WELDING COURSE", 'Welder Performance Qualification (WPQ) or 3G/6G Welding Certificate', 'lc', 6) }}
+		<td colspan="2" style="{{ $center }}">…………………………</td>
+		<td colspan="2" style="{{ $center }}">……………………………………………</td>
+	</tr>
+	<tr>
+		<td>25</td>
+		{{ $doc('ELECTRO-TECHNICAL RATINGS', 'Electro Technical Rating(ETR)', 'lc', 6) }}
+		<td colspan="2" style="{{ $center }}">Date</td>
+		<td colspan="2" style="{{ $center }}">Signature of Applicant</td>
 	</tr>
 </table>
