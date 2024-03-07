@@ -616,9 +616,8 @@
 			{{ $con("QUESTIONNAIRES TO SEAFARERS ON EMPLOYMENMT CONTRACT (P1-2)") }}
 			{{ $con("PCR RESULT") }}
 			{{ $doc("TEST", "", 'lc') }}
-		@endif
 		{{-- CO --}}
-		@if(in_array($data->rank2->id, [2]))
+		@elseif(in_array($data->rank2->id, [2]))
 			{{ $doc($temp, "COVID VACCINE - 1ST DOSE / 2ND DOSE / BOOSTER", 'med_cert') }}
 			{{ $con("TOEI BRIEFING / JOINING CHECKLIST") }}
 			{{ $con("LETTER OF OATH MARPOL") }}
@@ -631,8 +630,7 @@
 			{{ $con("PCR RESULT") }}
 			{{ $doc("TEST", "", 'lc') }}
 		{{-- CE --}}
-		@endif
-		@if(in_array($data->rank2->id, [5]))
+		@elseif(in_array($data->rank2->id, [5]))
 			{{ $doc($temp, "COVID VACCINE - 1ST DOSE / 2ND DOSE / BOOSTER", 'med_cert') }}
 			{{ $con("TOEI BRIEFING / JOINING CHECKLIST") }}
 			{{ $con("PREJOINING BRIEFING CHECKLIST FOR CAPT &#38; CE") }}
