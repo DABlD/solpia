@@ -907,7 +907,7 @@
 
         function viewCandidates(string, req){
             swal({
-                title: `${req.rank.abbr} candidates for ${req.vessel.name}`,
+                title: `${req.rank.abbr} candidates for ${req.vessel.name ?? "TBN"}`,
                 width: '95%',
                 html: `
                     @if(in_array(auth()->user()->role, ["Admin", "Recruitment Officer"]))
