@@ -913,7 +913,7 @@
                     @if(in_array(auth()->user()->role, ["Admin", "Recruitment Officer"]))
                         <div class="pull-right" style="margin-bottom: 5px;">
                             <a class="btn btn-success" data-toggle="tooltip" title="Add Candidate" 
-                                onclick="addCandidate(${req.id}, '${req.rank.abbr}', ${req.max_age}, ${req.usv}, ${req.vessel.id})">
+                                onclick="addCandidate(${req.id}, '${req.rank.abbr}', ${req.max_age}, ${req.usv}, ${req.vessel ? req.vessel.id : 0})">
                                 <span class="fa fa-plus"></span>
                             </a>
                         </div>
