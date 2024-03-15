@@ -413,7 +413,7 @@ class DatatablesController extends Controller
 		}
 		else{
 			$filters = $req->filters;
-			
+
 			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')
 					->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
 					->where(function($q) use($filters){
@@ -522,6 +522,7 @@ class DatatablesController extends Controller
 			// $vessels = SeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
 
 			$applicant->last_vessel = $applicant->last_vessel == "" ? "-----" : $applicant->last_vessel;
+			$applicant->last_disembark = $applicant->sign_off == "" ? "" : $applicant->sign_off->toDateString();
 
 			if($applicant->pa_s == "Lined-Up" || $applicant->pa_s == "On Board"){
 			    $applicant->rank = $ranks[$applicant->pa_ri];
