@@ -257,6 +257,7 @@
         var size = "%%";
         var owner = "%%";
         var engine = "%%";
+        var status = "%%";
 
         swal({
             title: 'Loading',
@@ -270,7 +271,8 @@
                 url: '{{ route('datatables.applications') }}',
                 type: 'post',
                 data: f => {
-                    f.filters = getFilters();                }
+                    f.filters = getFilters();
+                }
             },
             columns: [
                 { data: 'id', name: 'id' },
@@ -437,10 +439,15 @@
                 size: size,
                 owner: owner,
                 engine: engine,
-                remark: remark
+                remark: remark,
+                status: status
             };
         }
 
+        $('#statusF').change(e => {
+            status = e.target.value;
+            reload();
+        });
 
         // MUST BE HERE BECAUSE IF INSIDE INITIALIZE, INCREMENT/DECREMENT WILL STACK
         let tabCtr = 1;

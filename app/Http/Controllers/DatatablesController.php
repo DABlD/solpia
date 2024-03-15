@@ -412,7 +412,15 @@ class DatatablesController extends Controller
 			}
 		}
 		else{
+			$filters = $req->filters;
+			
 			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')
+					->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+					->where(function($q) use($filters){
+						// $q->where('pro_app.rank_id', 'like', $filters['rank']);
+						// $q->where('applicants.remarks', 'like', $filters['remark']);
+						$q->where('pro_app.status', 'like', $filters['status']);
+					})
 					->where([
 						$condition,
 						// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
@@ -440,6 +448,15 @@ class DatatablesController extends Controller
 
 			$tc = $tc->count();
 
+			// "rank" => "%%"
+			// "min_age" => "20"
+			// "max_age" => "60"
+			// "size" => "%%"
+			// "owner" => "%%"
+			// "engine" => "%%"
+			// "remark" => "%%"
+			// "status" => "Lined-Up"
+
 			$applicants = Applicant::select(
 					'applicants.id', 'applicants.remarks', 'u.fleet',
 					'avatar', 'fname', 'lname', 'contact', 'birthday',
@@ -447,10 +464,16 @@ class DatatablesController extends Controller
 				)
 				->join('users as u', 'u.id', '=', 'applicants.user_id')
 				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
+				// ->where()
 				->where([
 					$condition,
 					// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
 				])
+				->where(function($q) use($filters){
+					// $q->where('pro_app.rank_id', 'like', $filters['rank']);
+					// $q->where('applicants.remarks', 'like', $filters['remark']);
+					$q->where('pro_app.status', 'like', $filters['status']);
+				})
 				->offset($req->start)
 				->limit($req->length);
 				// ->get();
