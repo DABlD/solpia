@@ -24,6 +24,7 @@
     								<th>Age</th>
     								<th>Contact</th>
                                     <th>Last Vessel</th>
+                                    <th>Last Sign Off</th>
                                     @if(auth()->user()->fleet == null)
     								    <th>Fleet</th>
                                     @endif
@@ -289,6 +290,7 @@
                     @endif
                 },
                 { data: 'last_vessel', name: 'last_vessel' },
+                { data: 'last_disembark', name: 'last_disembark' },
                 @if(auth()->user()->fleet == null)
                     { data: 'fleet', name: 'fleet' },
                 @endif
@@ -320,22 +322,18 @@
                     },
                 },
                 {
-                    targets: 7,
-                    render: function(last_vessel, b, row){
-                        return `
-                            ${last_vessel}
-                            <br>
-                            Sign Off: ${moment(row.last_disembark).format('MMM DD, YYYY')}
-                        `;
+                    targets: 8,
+                    render: function(last_disembark){
+                        return moment(last_disembark).format('MMM DD, YYYY');
                     },
                 },
                 @if(auth()->user()->fleet == null)
                     {
-                        targets: 10,
+                        targets: 11,
                         className: "w100"
                     },
                     {
-                        targets: 9,
+                        targets: 10,
                         width: 85,
                         render: function(remarks, display, data){
                             remarks = remarks;
@@ -356,11 +354,11 @@
                     },
                 @else
                     {
-                        targets: 9,
+                        targets: 10,
                         className: "w100"
                     },
                     {
-                        targets: 8,
+                        targets: 9,
                         width: 85,
                         render: function(remarks, display, data){
                             remarks = remarks;
