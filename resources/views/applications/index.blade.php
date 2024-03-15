@@ -319,6 +319,16 @@
                         return row;
                     },
                 },
+                {
+                    targets: 7,
+                    render: function(last_vessel, b, row){
+                        return `
+                            ${last_vessel}
+                            <br>
+                            Sign Off: ${moment(row.last_disembark).format('MMM DD, YYYY')}
+                        `;
+                    },
+                },
                 @if(auth()->user()->fleet == null)
                     {
                         targets: 10,
