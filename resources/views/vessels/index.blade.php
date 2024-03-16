@@ -224,11 +224,30 @@
 
 @push('after-scripts')
     <script>
+        let fFleet = "%%";
+        let fPrincipal = "%%";
+        let fFlag = "%%";
+        let fType = "%%";
+        let fStatus = "Active";
+
+        function getFilters(){
+            return {
+                fleet: fFleet,
+                principal: fPrincipal,
+                flag: fFlag,
+                type: fType,
+                status: fStatus
+            };
+        }
+
         let table = $('#table').DataTable({
             serverSide: true,
             ajax: {
                 url: '{{ route('datatables.vessels') }}',
                 type: 'POST',
+                data: f => {
+                    f.filters = getFilters();
+                }
             },
             columns: [
                 { data: 'id', name: 'id' },
@@ -283,6 +302,108 @@
                 }
             }, 800);
         });
+
+        function filter(){
+            swal({
+                title: 'Filters',
+                html: `
+                    <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            Fleet
+                        </div>
+                        <div class="col-md-9 iInput">
+                            <select id="fFleet" class="form-control">
+                                <option value="%%">All</option>
+                                <option value="Fleet A">Fleet A</option>
+                                <option value="Fleet B">Fleet B</option>
+                                <option value="Fleet C">Fleet C</option>
+                                <option value="Fleet D">Fleet D</option>
+                                <option value="Fleet E">Fleet E</option>
+                                <option value="TOEI">TOEI</option>
+                                <option value="Fishing">Fishing</option>
+                            </select>
+                        </div>
+                    </div>
+                    </br>
+
+                    <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            Principal
+                        </div>
+                        <div class="col-md-9 iInput">
+                            <select id="fPrincipal" class="form-control">
+                                <option value="%%">All</option>
+                                @foreach($principals as $principal)
+                                    <option value="{{ $principal->id }}">{{ $principal->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    </br>
+
+                    <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            Flag
+                        </div>
+                        <div class="col-md-9 iInput">
+                            <select id="fFlag" class="form-control">
+                                <option value="%%">All</option>
+                                @foreach($flags as $flag)
+                                    <option value="{{ $flag->flag }}">{{ $flag->flag }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    </br>
+
+                    <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            Type
+                        </div>
+                        <div class="col-md-9 iInput">
+                            <select id="fType" class="form-control">
+                                <option value="%%">All</option>
+                                @foreach($types as $type)
+                                    <option value="{{ $type->type }}">{{ $type->type }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    </br>
+
+                    <div class="row iRow">
+                        <div class="col-md-3 iLabel">
+                            Type
+                        </div>
+                        <div class="col-md-9 iInput">
+                            <select id="fStatus" class="form-control">
+                                <option value="%%">All</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    </br>
+                `,
+                onOpen: () => {
+                    $('#fFleet').val(fFleet);
+                    $('#fPrincipal').val(fPrincipal);
+                    $('#fFlag').val(fFlag);
+                    $('#fType').val(fType);
+                    $('#fStatus').val(fStatus);
+                }
+            }).then(result => {
+                if(result.value){
+                    fFleet = $('#fFleet').val();
+                    fPrincipal = $('#fPrincipal').val();
+                    fFlag = $('#fFlag').val();
+                    fType = $('#fType').val();
+                    fStatus = $('#fStatus').val();
+
+                    reload();
+                }
+            });
+        }
 
         function showVesselDetails(vessel, editable){
             let fields = "";
