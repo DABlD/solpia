@@ -210,6 +210,14 @@
         .proposedCrew .name{
             text-align: left;
         }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0; 
+        }
     </style>
 @endpush
 
@@ -349,7 +357,9 @@
                             <select id="fFlag" class="form-control">
                                 <option value="%%">All</option>
                                 @foreach($flags as $flag)
+                                    @if($flag->flag != "")
                                     <option value="{{ $flag->flag }}">{{ $flag->flag }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -364,7 +374,9 @@
                             <select id="fType" class="form-control">
                                 <option value="%%">All</option>
                                 @foreach($types as $type)
+                                    @if($type->type)
                                     <option value="{{ $type->type }}">{{ $type->type }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -1637,7 +1649,9 @@
                                         <select id="type" class="form-control">
                                             <option value="">Select Vessel Type</option>
                                             @foreach($types as $type)
+                                                @if($type->type != "")
                                                 <option value="{{ $type->type }}">{{ $type->type }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -1693,7 +1707,14 @@
                                         Enter Trade Route
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="trade" class="form-control">
+                                        <select id="trade" class="form-control">
+                                            <option value="">Select Trade</option>
+                                            @foreach($trades as $trade)
+                                                @if($trade->trade != "")
+                                                <option value="{{ $trade->trade }}">{{ $trade->trade }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 </br>
@@ -1702,7 +1723,14 @@
                                         Enter Trade ECDIS
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="ecdis" class="form-control">
+                                        <select id="ecdis" class="form-control">
+                                            <option value="">Select Vessel Type</option>
+                                            @foreach($ecdiss as $ecdis)
+                                                @if($ecdis->ecdis != "")
+                                                <option value="{{ $ecdis->ecdis }}">{{ $ecdis->ecdis }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 </br>
@@ -1787,7 +1815,14 @@
                                         CBA AFFILIATION
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="cba_affiliation" class="form-control">
+                                        <select id="cba_afflication" class="form-control">
+                                            <option value="">Select CBA Affliation</option>
+                                            @foreach($cbas as $cba)
+                                                @if($cba->cba_affiliation != "")
+                                                <option value="{{ $cba->cba_affiliation }}">{{ $cba->cba_affiliation }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 </br>
@@ -1847,7 +1882,7 @@
                                     tags: true
                                 });
 
-                                $('#type').select2();
+                                $('#type, #cba_affliation, #trade, #ecdis').select2();
 
                                 // CSS
                                 $(".swal2-input[type='number']").css({

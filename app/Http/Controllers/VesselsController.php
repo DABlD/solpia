@@ -220,14 +220,22 @@ class VesselsController extends Controller
 
     public function index(){
         $principals = Principal::where('active', 1)->where('fleet', 'LIKE', auth()->user()->fleet ?? "%%")->select('name', 'id')->get();
-        $flags = Vessel::select('flag')->distinct()->get();
-        $types = Vessel::select('type')->distinct()->get();
+
+        $vessels = Vessel::select('flag', 'type', 'cba_affiliation', 'trade', 'ecdis')->get();
+        $flags = $vessels->unique('flag');
+        $types = $vessels->unique('type');
+        $cba = $vessels->unique('cba_affiliation');
+        $trade = $vessels->unique('trade');
+        $ecdis = $vessels->unique('ecdis');
 
         return $this->_view('index', [
             'title' => "Vessels",
             'principals' => $principals,
             'flags' => $flags,
-            'types' => $types
+            'types' => $types,
+            'cbas' => $cba,
+            'trades' => $trade,
+            'ecdiss' => $ecdis
         ]);
     }
 
