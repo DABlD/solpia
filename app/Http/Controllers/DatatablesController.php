@@ -623,38 +623,16 @@ class DatatablesController extends Controller
 		$fleet = array();
 		// $fleet[23] = "TOEI";
 
-		if(auth()->user()->fleet != "" && !str_contains($req->search['value'], '-A')){
-			$vessels = Vessel::where([
-					['status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE'],
-				])
-				->join('principals as p', 'p.id', '=', 'vessels.principal_id')
-				->select('vessels.*', 'p.name as pname');
-
-			// MA'AM JOBELLE
-			if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-				$vessels->where(function($q){
-					$q->where('vessels.fleet', 'like', auth()->user()->fleet);
-					$q->orWhere('vessels.fleet', 'like', "FLEET A");
-				});
-			}
-			elseif(in_array(auth()->user()->id, [4520])){
-				$vessels->where(function($q){
-					$q->where('vessels.fleet', 'like', auth()->user()->fleet);
-					$q->orWhere('vessels.fleet', 'like', "FLEET C");
-				});
-			}
-			else{
-				$vessels->where('vessels.fleet', 'like', auth()->user()->fleet);
-			}
-
-			$vessels = $vessels->get();
-		}
-		else{
-			$vessels = Vessel::where('status', 'LIKE', str_contains($req->search['value'], '-A') ? '%%' : 'ACTIVE')
-				->join('principals as p', 'p.id', '=', 'vessels.principal_id')
-				->select('vessels.*', 'p.name as pname')
-				->get();
-		}
+		$f = $req->filters; //FILTERS
+		$vessels = Vessel::join('principals as p', 'p.id', '=', 'vessels.principal_id')
+			->select('vessels.*', 'p.name as pname')
+			->where(function($q) use($f){
+				$q->where('vessels.fleet', 'like', $f['fleet']);
+				$q->where('principal_id', 'like', $f['principal']);
+				$q->where('flag', 'like', $f['flag']);
+				$q->where('type', 'like', $f['type']);
+				$q->where('status', 'like', $f['status']);
+			})->get();
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		$principals = Principal::where('active', 1)->pluck('id')->toArray();
