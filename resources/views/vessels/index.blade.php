@@ -1632,7 +1632,12 @@
                                         Enter Type of Vessel
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="type" class="form-control">
+                                        <select id="type" class="form-control">
+                                            <option value="">Select Vessel Type</option>
+                                            @foreach($types as $type)
+                                                <option value="{{ $type->type }}">{{ $type->type }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 </br>
@@ -1839,6 +1844,8 @@
                                     placeholder: 'Select Principal',
                                     tags: true
                                 });
+
+                                $('#type').select2();
 
                                 // CSS
                                 $(".swal2-input[type='number']").css({
