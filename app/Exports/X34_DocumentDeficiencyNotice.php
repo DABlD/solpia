@@ -426,7 +426,9 @@ class X34_DocumentDeficiencyNotice implements FromView, WithEvents//, WithDrawin
 
                 // BBT
                 $cells[12] = array_merge([
-                    'B2:D2', 'K2:M2'
+                    'B2:D2', 'K2:M2',
+                    'A24:D24', 'J24:M24',
+                    'A30:D30', 'J30:M30'
                 ]);
 
                 // LBT
