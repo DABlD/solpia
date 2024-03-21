@@ -516,7 +516,8 @@
                         X09_InitialDocumentChecklist:   'Document Checklist (Initial)',
                         DocumentChecklist:              'Document Checklist (Final)',
                         X18_EvaluationSheet:            'Evaluation Sheet - POSSM',
-                        X30_POSSMSeaService:            'Sea Service - POSSM'
+                        X30_POSSMSeaService:            'Sea Service - POSSM',
+                        X34_DocumentDeficiencyNotice:   'Document Deficiency Notice'
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
