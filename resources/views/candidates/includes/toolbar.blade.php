@@ -2,7 +2,7 @@
     <div class="col-md-3">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
-                Filter by fleet
+                Filter by Fleet
             </div>
             <div class="col-md-8 iInput">
                 <select id="fleet" class="form-control">
@@ -39,6 +39,11 @@
             </div>
         </div>
     </div>
+</div>
+
+<br>
+
+<div class="row">
     <div class="col-md-3">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
@@ -46,6 +51,19 @@
             </div>
             <div class="col-md-8 iInput">
                 <select id="fVessel" class="form-control">
+                    <option value="%%">All</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row" style="display: flex;">
+            <div class="col-md-4 iLabel" style="margin: auto;">
+                Filter by Rank
+            </div>
+            <div class="col-md-8 iInput">
+                <select id="fRank" class="form-control">
                     <option value="%%">All</option>
                 </select>
             </div>
