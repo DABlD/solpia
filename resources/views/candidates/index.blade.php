@@ -188,7 +188,13 @@
             $('#table').DataTable().ajax.reload();
         });
 
+        $('#fRank').on('change', e => {
+            fRank = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
         $(document).ready(() => {
+            // GET VESSEL FOR FILTER
             $.ajax({
                 url: '{{ route('vessels.get2') }}',
                 data: {
@@ -203,7 +209,7 @@
 
                     result.forEach(vessel => {
                         fVesselString += `
-                            <option value="${vessel.id}">${vessel.name ? vessel.name : "-"}</option>
+                            <option value="${vessel.id}">${vessel.name}</option>
                         `;
                     })
 
@@ -212,7 +218,31 @@
                         placeholder: 'Select Vessel'
                     });
                 }
-            })
+            });
+
+            // GET RANK FOR FILTERS
+            $.ajax({
+                url: '{{ route('rank.get') }}',
+                data: {
+                    select: "*",
+                },
+                success: result => {
+                    result = JSON.parse(result);
+                    
+                    let fRankString = "";
+
+                    result.forEach(rank => {
+                        fRankString += `
+                            <option value="${rank.id}">${rank.name} (${rank.abbr})</option>
+                        `;
+                    })
+
+                    $('#fRank').append(fRankString);
+                     $('#fRank').select2({
+                        placeholder: 'Select Rank'
+                    });
+                }
+            });
         });
     </script>
 @endpush

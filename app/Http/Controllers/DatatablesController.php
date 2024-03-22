@@ -962,7 +962,7 @@ class DatatablesController extends Controller
 					})
 					->join('prospects as p', 'p.id', '=', 'candidates.prospect_id')
 					->join('requirements as r', 'r.id', '=', 'candidates.requirement_id')
-					->where('p.rank', 'like', $req->rank)
+					->where('r.rank', 'like', $req->rank)
 					->where('r.fleet', 'like', $req->fleet)
 					->select('candidates.*', 'r.fleet as fleet');
 
