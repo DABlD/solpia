@@ -138,6 +138,12 @@
                     }
                 },
                 {
+                    targets: 11,
+                    render: vname =>{
+                        return vname ?? "TBA";
+                    }
+                },
+                {
                     targets: [0,1,2,3,4,5,6,7,8,9,10,11,12],
                     className: 'text-center'
                 }
@@ -197,7 +203,7 @@
 
                     result.forEach(vessel => {
                         fVesselString += `
-                            <option value="${vessel.id}">${vessel ? vessel.name : "-"}</option>
+                            <option value="${vessel.id}">${vessel.name ? vessel.name : "-"}</option>
                         `;
                     })
 
