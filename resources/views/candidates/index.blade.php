@@ -197,7 +197,7 @@
 
                     result.forEach(vessel => {
                         fVesselString += `
-                            <option value="${vessel.id}">${vessel.name}</option>
+                            <option value="${vessel.id}">${vessel ? vessel.name : "-"}</option>
                         `;
                     })
 
