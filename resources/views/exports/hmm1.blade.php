@@ -513,7 +513,7 @@
 		@endphp
 
 		@foreach($data->document_lc as $key => $docu)
-			@if($key == "COC" && ($docu->regulation == "II/1" || $docu->regulation == "II/2"))
+			@if($key == "COC" && ($docu->regulation == "III/1" || $docu->regulation == "III/2"))
 				@php
 					$bool = true;
 				@endphp
