@@ -483,9 +483,24 @@
 	</tr>
 
 	<tr>
-		@if($rank_category == "DECK OFFICER")
-			{{ $getDocument('COC', 			'lc', 		'MARINA', 		'COC-DECK OFFICER')}}
-		@else
+		@php
+			$bool = false;
+		@endphp
+
+		@foreach($data->document_lc as $key => $docu)
+			@if($key == "COC" && ($docu->regulation == "II/1" || $docu->regulation == "II/2"))
+				@php
+					$bool = true;
+				@endphp
+				<td>COC-DECK OFFICER</td>
+				<td>MARINA</td>
+				<td>{{ $docu->number }}</td>
+				<td colspan='2'>{{ $checkDate2($docu->issue_date, 'I') }}</td>
+				<td>{{ $checkDate2($docu->expiry_date, 'E') }}</td>
+			@endif
+		@endforeach
+
+		@if($bool == false)
 			{{ isBlank('COC-DECK OFFICER', 'MARINA') }}
 		@endif
 
@@ -494,9 +509,24 @@
 	</tr>
 
 	<tr>
-		@if($rank_category == "ENGINE OFFICER")
-			{{ $getDocument('COC', 			'lc', 		'MARINA', 		'COC-ENGINE OFFICER')}}
-		@else
+		@php
+			$bool = false;
+		@endphp
+
+		@foreach($data->document_lc as $key => $docu)
+			@if($key == "COC" && ($docu->regulation == "II/1" || $docu->regulation == "II/2"))
+				@php
+					$bool = true;
+				@endphp
+				<td>COC-ENGINE OFFICER</td>
+				<td>MARINA</td>
+				<td>{{ $docu->number }}</td>
+				<td colspan='2'>{{ $checkDate2($docu->issue_date, 'I') }}</td>
+				<td>{{ $checkDate2($docu->expiry_date, 'E') }}</td>
+			@endif
+		@endforeach
+
+		@if($bool == false)
 			{{ isBlank('COC-ENGINE OFFICER', 'MARINA') }}
 		@endif
 
