@@ -488,13 +488,16 @@
 		@endphp
 
 		@foreach($data->document_lc as $key => $docu)
-			@if($key == "COC" && ($docu->regulation == "II/1" || $docu->regulation == "II/2"))
+			@php
+				$reg = json_decode($docu->regulation);
+			@endphp
+			@if(str_starts_with($docu->type, 'COC') && ($reg[0] == "II/1" || $reg[0] == "II/2"))
 				@php
 					$bool = true;
 				@endphp
 				<td>COC-DECK OFFICER</td>
 				<td>MARINA</td>
-				<td>{{ $docu->number }}</td>
+				<td>{{ $docu->no }}</td>
 				<td colspan='2'>{{ $checkDate2($docu->issue_date, 'I') }}</td>
 				<td>{{ $checkDate2($docu->expiry_date, 'E') }}</td>
 			@endif
@@ -514,13 +517,16 @@
 		@endphp
 
 		@foreach($data->document_lc as $key => $docu)
-			@if($key == "COC" && ($docu->regulation == "III/1" || $docu->regulation == "III/2"))
-				@php
+			@php
+				$reg = json_decode($docu->regulation);
+			@endphp
+			@if(str_starts_with($docu->type, 'COC') && ($reg[0] == "III/1" || $reg[0] == "III/2"))
+				@php 
 					$bool = true;
 				@endphp
 				<td>COC-ENGINE OFFICER</td>
 				<td>MARINA</td>
-				<td>{{ $docu->number }}</td>
+				<td>{{ $docu->no }}</td>
 				<td colspan='2'>{{ $checkDate2($docu->issue_date, 'I') }}</td>
 				<td>{{ $checkDate2($docu->expiry_date, 'E') }}</td>
 			@endif
