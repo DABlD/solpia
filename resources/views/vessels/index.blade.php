@@ -385,7 +385,7 @@
 
                     <div class="row iRow">
                         <div class="col-md-3 iLabel">
-                            Type
+                            Status
                         </div>
                         <div class="col-md-9 iInput">
                             <select id="fStatus" class="form-control">
