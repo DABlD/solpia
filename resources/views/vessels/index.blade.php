@@ -342,7 +342,7 @@
                             <select id="fPrincipal" class="form-control">
                                 <option value="%%">All</option>
                                 @foreach($principals as $principal)
-                                    <option value="{{ $principal->id }}">{{ $principal->name }}</option>
+                                    <option class="fPrincipal" data-fleet="{{ $principal->fleet }}" value="{{ $principal->id }}">{{ $principal->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -404,7 +404,16 @@
                     $('#fType').val(fType);
                     $('#fStatus').val(fStatus);
 
-                    $('#fType, #fFlag, #fPrincipal').select2();
+                    // $('#fType, #fFlag, #fPrincipal').select2();
+
+                    $('#fFleet').on('change', e => {
+                        let fleet = e.target.value.toUpperCase();
+
+                        $(`.fPrincipal`).hide();
+                        if(fleet != "%%"){
+                            $(`[data-fleet="${fleet}"]`).show();
+                        }
+                    });
                 }
             }).then(result => {
                 if(result.value){
