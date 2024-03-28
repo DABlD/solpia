@@ -230,9 +230,9 @@ class VesselsController extends Controller
 
         return $this->_view('index', [
             'title' => "Vessels",
-            'principals' => $principals,
-            'flags' => $flags,
-            'types' => $types,
+            'principals' => $principals->sortBy('name'),
+            'flags' => $flags->sortBy('flag'),
+            'types' => $types->sortBy('type'),
             'cbas' => $cba,
             'trades' => $trade,
             'ecdiss' => $ecdis

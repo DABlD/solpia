@@ -404,7 +404,7 @@
                     $('#fType').val(fType);
                     $('#fStatus').val(fStatus);
 
-                    $('#fType, #fFlag').select2();
+                    $('#fType, #fFlag, #fPrincipal').select2();
                 }
             }).then(result => {
                 if(result.value){
