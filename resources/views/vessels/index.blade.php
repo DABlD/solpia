@@ -404,14 +404,28 @@
                     $('#fType').val(fType);
                     $('#fStatus').val(fStatus);
 
-                    // $('#fType, #fFlag, #fPrincipal').select2();
+                    $('#fType, #fFlag, #fPrincipal').select2();
 
-                    $('#fFleet').on('change', e => {
-                        let fleet = e.target.value.toUpperCase();
+                    $('#fPrincipal').on('select2:open', function (e) {
+                        let fleet = $('#fFleet').val().toUpperCase();
 
-                        $(`.fPrincipal`).hide();
                         if(fleet != "%%"){
-                            $(`[data-fleet="${fleet}"]`).show();
+                            setTimeout(() => {
+                                $(`.fPrincipal`).addClass('hidden');
+                                $('.select2-results__option').hide()
+                                if(fleet != "%%"){
+                                    $(`[data-fleet="${fleet}"]`).removeClass('hidden');
+                                    $(`.fPrincipal:not(.hidden)`).each((i,e) => {
+                                        $(`.select2-results__option:contains(${e.innerText})`).show()
+                                    });
+                                }
+                                else{
+                                    $(`.fPrincipal`).removeClass('hidden');
+                                    $('.select2-results__options .select2-results__option').show();
+                                }
+
+                                // $('#fPrincipal').select2("destroy").select2();
+                            }, 10);
                         }
                     });
                 }
