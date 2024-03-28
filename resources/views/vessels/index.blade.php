@@ -501,6 +501,19 @@
                 html: `
                     <br><br>
                     <div class="row">
+                        <div class="col-md-3" style="margin-top: 10px; text-align: left;">
+                            <strong>
+                                Select Principal
+                            </strong>
+                        </div>
+                        <div class="col-md-9">
+                            <select id="principal_id" class="form-control" ${editable ? '' : 'disabled'}>
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="row">
                         <div class="col-md-12">
                             ` + fields + `
                         </div>
@@ -508,7 +521,31 @@
                 `,
                 onBeforeOpen: () => {
                     // CUSTOM FIELDS
+                    $.ajax({
+                        url: '{{ route('principal.get') }}',
+                        data: {
+                            cols: ['id', 'name', 'active'],
+                            where: ['active', 1]
+                        },
+                        success: principals => {
+                            principals = Object.entries(JSON.parse(principals));
+                            let options = "";
 
+                            principals.reverse().forEach((principal, index) => {
+                                options += `<option value="${principal[1].id}">${principal[1].name}</option>`;
+                            });
+
+
+                            $('#principal_id').append(options);
+                            $('#principal_id').select2({
+                                placeholder: 'Select Principal',
+                                tags: true
+                            });
+
+
+                            $('#principal_id').val(vessel['principal_id']).change();
+                        }
+                    });
                     // OPTIONAL
 
                     // MODIFIERS
@@ -561,6 +598,7 @@
                             url: '{{ route('vessels.updateAll') }}',
                             data: {
                                 id: vessel.id,
+                                principal_id: $('#principal_id').val(),
                                 imo: $('#vd-imo').val(),
                                 size: $('#vd-size').val(),
                                 name: $('#vd-name').val(),
