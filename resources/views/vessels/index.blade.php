@@ -342,7 +342,7 @@
                             <select id="fPrincipal" class="form-control">
                                 <option value="%%">All</option>
                                 @foreach($principals as $principal)
-                                    <option value="{{ $principal->id }}">{{ $principal->name }}</option>
+                                    <option class="fPrincipal" data-fleet="{{ $principal->fleet }}" value="{{ $principal->id }}">{{ $principal->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -405,6 +405,29 @@
                     $('#fStatus').val(fStatus);
 
                     $('#fType, #fFlag, #fPrincipal').select2();
+
+                    $('#fPrincipal').on('select2:open', function (e) {
+                        let fleet = $('#fFleet').val().toUpperCase();
+
+                        if(fleet != "%%"){
+                            setTimeout(() => {
+                                $(`.fPrincipal`).addClass('hidden');
+                                $('.select2-results__option').hide()
+                                if(fleet != "%%"){
+                                    $(`[data-fleet="${fleet}"]`).removeClass('hidden');
+                                    $(`.fPrincipal:not(.hidden)`).each((i,e) => {
+                                        $(`.select2-results__option:contains(${e.innerText})`).show()
+                                    });
+                                }
+                                else{
+                                    $(`.fPrincipal`).removeClass('hidden');
+                                    $('.select2-results__options .select2-results__option').show();
+                                }
+
+                                // $('#fPrincipal').select2("destroy").select2();
+                            }, 10);
+                        }
+                    });
                 }
             }).then(result => {
                 if(result.value){

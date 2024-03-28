@@ -219,7 +219,7 @@ class VesselsController extends Controller
     }
 
     public function index(){
-        $principals = Principal::where('active', 1)->where('fleet', 'LIKE', auth()->user()->fleet ?? "%%")->select('name', 'id')->get();
+        $principals = Principal::where('active', 1)->where('fleet', 'LIKE', auth()->user()->fleet ?? "%%")->select('name', 'id', 'fleet')->get();
 
         $vessels = Vessel::select('flag', 'type', 'cba_affiliation', 'trade', 'ecdis')->get();
         $flags = $vessels->unique('flag');
