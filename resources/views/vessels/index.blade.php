@@ -518,11 +518,9 @@
                 }
             });
 
-            swal({
-                title: 'Vessel Details',
-                width: '50%',
-                html: `
-                    <br><br>
+            let principal = "";
+            if(editable){
+                principal = `
                     <div class="row">
                         <div class="col-md-3" style="margin-top: 10px; text-align: left;">
                             <strong>
@@ -536,6 +534,28 @@
                         </div>
                     </div>
                     </br>
+                `;
+            }
+            else{
+                principal = `
+                    <div class="row">
+                        <div class="col-md-3" style="text-align: left;">
+                            <h5><strong>Principal</strong></h5>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" id="principal_id" class="form-control" readonly/>
+                        </div>
+                    </div>
+                    <br>
+                `;
+            }
+
+            swal({
+                title: 'Vessel Details',
+                width: '50%',
+                html: `
+                    <br><br>
+                    ${principal}
                     <div class="row">
                         <div class="col-md-12">
                             ` + fields + `
@@ -553,20 +573,26 @@
                         success: principals => {
                             principals = Object.entries(JSON.parse(principals));
                             let options = "";
+                            let options2 = [];
 
                             principals.reverse().forEach((principal, index) => {
                                 options += `<option value="${principal[1].id}">${principal[1].name}</option>`;
+                                options2[principal[1].id] = principal[1].name;
                             });
 
 
-                            $('#principal_id').append(options);
-                            $('#principal_id').select2({
-                                placeholder: 'Select Principal',
-                                tags: true
-                            });
+                            if(editable){
+                                $('#principal_id').append(options);
+                                $('#principal_id').select2({
+                                    placeholder: 'Select Principal',
+                                    tags: true
+                                });
 
-
-                            $('#principal_id').val(vessel['principal_id']).change();
+                                $('#principal_id').val(vessel['principal_id']).change();
+                            }
+                            else{
+                                $('#principal_id').val(options2[vessel['principal_id']]);
+                            }
                         }
                     });
                     // OPTIONAL
@@ -656,7 +682,11 @@
                                     timer: 800,
                                     showConfirmButton: false
                                 }).then(() => {
-                                    $(`[data-original-title="View Vessel Details"] [data-id="${vessel.id}"]`).click();
+                                    reload();
+
+                                    setTimeout(() => {
+                                        $(`[data-original-title="View Vessel Details"] [data-id="${vessel.id}"]`).click();
+                                    }, 500);
                                 });
                             }
                         })
