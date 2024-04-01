@@ -468,7 +468,7 @@
                 "Builder", 
                 "Engine", 
                 "Gross Tonnage", 
-                "BHP", 
+                "KW", 
                 "Trade", 
                 "ECDIS", 
                 'Former Agency',
@@ -1797,7 +1797,7 @@
                                 </br>
                                 <div class="row">
                                     <div class="col-md-3" style="margin-top: 10px; text-align: left;">
-                                        Enter BHP
+                                        Enter KW
                                     </div>
                                     <div class="col-md-9">
                                         <input type="number" id="bhp" class="form-control">
