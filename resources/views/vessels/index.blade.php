@@ -356,7 +356,7 @@
                         <div class="col-md-9 iInput">
                             <select id="fFlag" class="form-control">
                                 <option value="%%">All</option>
-                                @foreach($flags as $flag)
+                                @foreach($flags2 as $flag)
                                     @if($flag->flag != "")
                                     <option value="{{ $flag->flag }}">{{ $flag->flag }}</option>
                                     @endif
