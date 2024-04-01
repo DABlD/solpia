@@ -418,6 +418,13 @@
                                     $(`.fPrincipal:not(.hidden)`).each((i,e) => {
                                         $(`.select2-results__option:contains(${e.innerText})`).show()
                                     });
+
+                                    if(fleet == "FLEET C"){
+                                        $(`.select2-results__option:contains(HMM)`).show()
+                                    }
+                                    else if(fleet == "FLEET D"){
+                                        $(`.select2-results__option:contains(TOEI)`).show()
+                                    }
                                 }
                                 else{
                                     $(`.fPrincipal`).removeClass('hidden');
