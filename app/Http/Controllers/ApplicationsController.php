@@ -1817,7 +1817,7 @@ class ApplicationsController extends Controller
         $lucs->load('rank');
 
         foreach($lucs as $luc){
-            echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . '<br>';
+            echo $luc->rank->abbr . ' ' . $luc->applicant->user->namefull . ' - ' . $luc->applicant->user->fleet . '<br>';
         }
     }
 
