@@ -221,8 +221,11 @@ class VesselsController extends Controller
     public function index(){
         $principals = Principal::where('active', 1)->where('fleet', 'LIKE', auth()->user()->fleet ?? "%%")->select('name', 'id', 'fleet')->get();
 
-        $vessels = Vessel::select('flag', 'type', 'cba_affiliation', 'trade', 'ecdis')->get();
+        $vessels = Vessel::select('flag', 'type', 'cba_affiliation', 'trade', 'ecdis', 'status')->get();
         $flags = $vessels->unique('flag');
+        $flags2 = $vessels->filter(function($vessel){
+            return $vessel->status == "ACTIVE";
+        })->unique('flag');
         $types = $vessels->unique('type');
         $cba = $vessels->unique('cba_affiliation');
         $trade = $vessels->unique('trade');
@@ -232,6 +235,7 @@ class VesselsController extends Controller
             'title' => "Vessels",
             'principals' => $principals->sortBy('name'),
             'flags' => $flags->sortBy('flag'),
+            'flags2' => $flags2->sortBy('flag'),
             'types' => $types->sortBy('type'),
             'cbas' => $cba,
             'trades' => $trade,
