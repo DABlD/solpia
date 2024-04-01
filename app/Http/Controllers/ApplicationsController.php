@@ -1812,43 +1812,12 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $provinces = ["ABRA","AGUSAN DEL NORTE","AGUSAN DEL SUR","AKLAN","ALBAY","ANTIQUE","APAYAO","AURORA","BASILAN","BATAAN","BATANES","BATANGAS","BENGUET","BILIRAN","BOHOL","BUKIDNON","BULACAN","CAGAYAN","CAMARINES NORTE","CAMARINES SUR","CAMIGUIN","CAPIZ","CATANDUANES","CAVITE","CEBU","COTABATO","DAVAO","DINAGAT ISLANDS","EASTERN SAMAR","GUIMARAS","IFUGAO","ILOCOS NORTE","ILOCOS SUR","ILOILO","ISABELA","KALINGA","LA UNION","LAGUNA","LANAO DEL NORTE","LANAO DEL SUR","LEYTE","MAGUINDANAO","MARINDUQUE","MASBATE","MISAMIS OCCIDENTAL","MISAMIS ORIENTAL","MOUNTAIN PROVINCE","NEGROS OCCIDENTAL","NEGROS ORIENTAL","NORTHERN SAMAR","NUEVA ECIJA","NUEVA VIZCAYA","OCCIDENTAL MINDORO","ORIENTAL MINDORO","PALAWAN","PAMPANGA","PANGASINAN","QUEZON","QUIRINO","RIZAL","ROMBLON","SAMAR","SARANGANI","SIQUIJOR","SORSOGON","SOUTH COTABATO","SOUTHERN LEYTE","SULTAN KUDARAT","SULU","SURIGAO DEL NORTE","SURIGAO DEL SUR","TARLAC","TAWI-TAWI","WESTERN SAMAR","ZAMBALES","ZAMBOANGA DEL NORTE","ZAMBOANGA DEL SUR","ZAMBOANGA SIBUGAY"];
+        $lucs = LineUpContract::whereIn('rank_id', [14,19])->where('joining_date', 'LIKE', '2024-03-%')->get();
+        $lucs->load('applicant.user');
+        $lucs->load('rank');
 
-        $cities = ["CALOOCAN","LAS PIÑAS","MAKATI","MALABON","MANDALUYONG","MANILA","MARIKINA","MUNTINLUPA","NAVOTAS","PARAÑAQUE","PASAY","PASIG","PATEROS","QUEZON CITY","SAN JUAN","TAGUIG","VALENZUELA"];
-
-        $crews = User::where('role', 'Applicant')
-                ->where(function($q){
-
-                    $i1 = "DAVAO";
-                    $i2 = "SOUTH COTOBATO";
-                    $i3 = "GEN. SAN";
-
-                    $q->where('address', 'like', "%$i1%");
-                    // $q->orWhere('address', 'like', "%$i2%");
-                    // $q->orWhere('address', 'like', "%$i3%");
-                    $q->orWhere('a.provincial_address', 'like', "%$i1%");
-                    // $q->orWhere('a.provincial_address', 'like', "%$i2%");
-                    // $q->orWhere('a.provincial_address', 'like', "%$i3%");
-                })
-                ->join('applicants as a', 'a.user_id', '=', 'users.id')
-                ->select('address', 'fname', 'lname', 'contact', 'fleet', 'users.id', 'a.id as aid', 'a.provincial_address')
-                ->get();
-
-        foreach($crews as $crew){
-            // GET RANK
-            $rank = null;
-            if(isset($crew->crew->pro_app->rank)){
-                $rank = $crew->crew->pro_app->rank->abbr;
-            }
-            else{
-                continue;
-            }
-
-            if($crew->contact == ""){
-                $crew->contact = $crew->crew->provincial_contact;
-            }
-
-            echo "$crew->fname $crew->lname ; $crew->fleet ; $rank ; $crew->contact ; $crew->address ; $crew->provincial_address <br>";
+        foreach($lucs as $luc){
+            echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . '<br>';
         }
     }
 

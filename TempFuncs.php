@@ -4,23 +4,39 @@ public function tempFunc(){
 
     $cities = ["CALOOCAN","LAS PIÑAS","MAKATI","MALABON","MANDALUYONG","MANILA","MARIKINA","MUNTINLUPA","NAVOTAS","PARAÑAQUE","PASAY","PASIG","PATEROS","QUEZON CITY","SAN JUAN","TAGUIG","VALENZUELA"];
 
-    $data = [];
-    $data2 = [];
+    $crews = User::where('role', 'Applicant')
+            ->where(function($q){
 
-    // foreach($cities as $key => $city){
-        // $city = "qc";
-    //     if($key == 16){
-    //         $data[$city] = User::where('address', 'LIKE', "%" . $city . "%")->where('role', 'Applicant')->pluck('address')->toArray();
-    //         dd($city, $data[$city]);
-    //     }
-    // }
+                $i1 = "DAVAO";
+                $i2 = "SOUTH COTOBATO";
+                $i3 = "GEN. SAN";
 
-    foreach($provinces as $key => $province){
-        $province = "DAVAO";
-        if($key == 74){
-            $data[$province] = User::where('address', 'LIKE', "%" . $province . "%")->where('role', 'Applicant')->pluck('address')->toArray();
-            dd($province, $data[$province]);
+                $q->where('address', 'like', "%$i1%");
+                // $q->orWhere('address', 'like', "%$i2%");
+                // $q->orWhere('address', 'like', "%$i3%");
+                $q->orWhere('a.provincial_address', 'like', "%$i1%");
+                // $q->orWhere('a.provincial_address', 'like', "%$i2%");
+                // $q->orWhere('a.provincial_address', 'like', "%$i3%");
+            })
+            ->join('applicants as a', 'a.user_id', '=', 'users.id')
+            ->select('address', 'fname', 'lname', 'contact', 'fleet', 'users.id', 'a.id as aid', 'a.provincial_address')
+            ->get();
+
+    foreach($crews as $crew){
+        // GET RANK
+        $rank = null;
+        if(isset($crew->crew->pro_app->rank)){
+            $rank = $crew->crew->pro_app->rank->abbr;
         }
+        else{
+            continue;
+        }
+
+        if($crew->contact == ""){
+            $crew->contact = $crew->crew->provincial_contact;
+        }
+
+        echo "$crew->fname $crew->lname ; $crew->fleet ; $rank ; $crew->contact ; $crew->address ; $crew->provincial_address <br>";
     }
 }
 

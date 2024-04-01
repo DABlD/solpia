@@ -16,7 +16,7 @@
                         <table class="table table-hover table-bordered" id="table" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>IMO</th>
                                     <th>Vessel Name</th>
                                     <th>Fleet</th>
                                     <th>Principal</th>
@@ -218,6 +218,10 @@
             appearance: none;
             margin: 0; 
         }
+
+        #table td{
+            text-align: center;
+        }
     </style>
 @endpush
 
@@ -258,7 +262,7 @@
                 }
             },
             columns: [
-                { data: 'id', name: 'id' },
+                { data: 'imo', name: 'imo' },
                 { data: 'name', name: 'name' },
                 { data: 'fleet', name: 'fleet' },
                 { data: 'pname', name: 'pname' },
@@ -289,7 +293,7 @@
                 tooltip();
                 initializeActions();
             },
-            // order: [ [0, 'desc'] ],
+            order: [ [1, 'asc'] ],
         });
         
         $('#table_filter input').unbind();
