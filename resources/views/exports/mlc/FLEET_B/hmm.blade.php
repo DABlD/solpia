@@ -79,6 +79,11 @@
 			<td>Company</td>
 			<td colspan="7">{{ $data->shipowner }}</td>
 		</tr>
+
+		<tr>
+			<td>Address</td>
+			<td colspan="7">{{ $data->sAddress }}</td>
+		</tr>
 	@else
 		<tr>
 			<td rowspan="2" style="{{ $center }}">Shipowner</td>
