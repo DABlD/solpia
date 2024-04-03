@@ -522,7 +522,7 @@
                                 <h5><strong>` + names[temp] + `</strong></h5>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" id="vd-${key}" class="form-control" value="` + (vessel[key] ? ["BHP", "gross_tonnage"].includes(key) ? parseFloat(vessel[key]).toLocaleString() : vessel[key] : '') + `"${editable ? '' : ' readonly'}/>
+                                <input type="text" id="vd-${key}" class="form-control" value="` + (vessel[key] ? ["BHP", "gross_tonnage"].includes(key) ? parseFloat(vessel[key].split(',').join('')).toLocaleString() : vessel[key] : '') + `"${editable ? '' : ' readonly'}/>
                             </div>
                         </div>
                         <br id="` + key + `">
