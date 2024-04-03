@@ -514,6 +514,7 @@
 
             $.each(Object.keys(vessel), (index, key) => {
                 let temp = columns.indexOf(key);
+
                 if(temp >= 0){
                     fields += `
                         <div class="row">
@@ -521,7 +522,7 @@
                                 <h5><strong>` + names[temp] + `</strong></h5>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" id="vd-${key}" class="form-control" value="` + (vessel[key] ? vessel[key] : '') + `"${editable ? '' : ' readonly'}/>
+                                <input type="text" id="vd-${key}" class="form-control" value="` + (vessel[key] ? ["BHP", "gross_tonnage"].includes(key) ? parseFloat(vessel[key]).toLocaleString() : vessel[key] : '') + `"${editable ? '' : ' readonly'}/>
                             </div>
                         </div>
                         <br id="` + key + `">
@@ -646,6 +647,31 @@
                         });
                         $('#select2-vd-size-container').css('text-align', 'left');
                     }
+
+                    function updateTextView(_obj){
+                        var num = getNumber(_obj.val());
+                        if(num==0){
+                            _obj.val('');
+                        }
+                        else{
+                            _obj.val(num.toLocaleString());
+                        }
+                    }
+
+                    function getNumber(_str){
+                        var arr = _str.split('');
+                        var out = new Array();
+                        for(var cnt=0;cnt<arr.length;cnt++){
+                            if(isNaN(arr[cnt])==false){
+                                out.push(arr[cnt]);
+                            }
+                        }
+                        return Number(out.join(''));
+                    }
+
+                    $('#vd-BHP, #vd-gross_tonnage').on('keyup',function(){
+                        updateTextView($(this));
+                    });
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
