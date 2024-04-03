@@ -58,28 +58,51 @@
 		</td>
 	</tr>
 
-	<tr>
-		<td rowspan="2" style="{{ $center }}">Shipowner</td>
-		<td>Company</td>
-		<td colspan="7">{{ $data->shipowner }}</td>
-	</tr>
+	{{-- INTERCHANGE SHIPOWNER AND CREW MANAGER --}}
+	{{-- HMM AMETHYST / --}}
+	@if($data->vessel->id == 6239)
+		@if(isset($data->crewManager))
+			<tr>
+				<td rowspan="2" style="{{ $center }}">Crew Manager</td>
+				<td>Company</td>
+				<td colspan="7">{{ $data->crewManager }}</td>
+			</tr>
 
-	<tr>
-		<td>Address</td>
-		<td colspan="7">{{ $data->sAddress }}</td>
-	</tr>
+			<tr>
+				<td>Address</td>
+				<td colspan="7">{{ $data->cAddress }}</td>
+			</tr>
+		@endif
 
-	@if(isset($data->crewManager))
 		<tr>
-			<td rowspan="2" style="{{ $center }}">Crew Manager</td>
+			<td rowspan="2" style="{{ $center }}">Shipowner</td>
 			<td>Company</td>
-			<td colspan="7">{{ $data->crewManager }}</td>
+			<td colspan="7">{{ $data->shipowner }}</td>
+		</tr>
+	@else
+		<tr>
+			<td rowspan="2" style="{{ $center }}">Shipowner</td>
+			<td>Company</td>
+			<td colspan="7">{{ $data->shipowner }}</td>
 		</tr>
 
 		<tr>
 			<td>Address</td>
-			<td colspan="7">{{ $data->cAddress }}</td>
+			<td colspan="7">{{ $data->sAddress }}</td>
 		</tr>
+
+		@if(isset($data->crewManager))
+			<tr>
+				<td rowspan="2" style="{{ $center }}">Crew Manager</td>
+				<td>Company</td>
+				<td colspan="7">{{ $data->crewManager }}</td>
+			</tr>
+
+			<tr>
+				<td>Address</td>
+				<td colspan="7">{{ $data->cAddress }}</td>
+			</tr>
+		@endif
 	@endif
 
 	<tr>
