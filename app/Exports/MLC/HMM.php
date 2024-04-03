@@ -25,7 +25,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array4 = [
-            'M/V HMMM AMETHYST'
+            'M/V HMM AMETHYST'
         ];
 
         // minus two;
