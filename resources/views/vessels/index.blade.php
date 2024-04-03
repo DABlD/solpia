@@ -723,7 +723,7 @@
 
                                     setTimeout(() => {
                                         $(`[data-original-title="View Vessel Details"] [data-id="${vessel.id}"]`).click();
-                                    }, 500);
+                                    }, 1500);
                                 });
                             }
                         })
