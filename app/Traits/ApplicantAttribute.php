@@ -45,7 +45,7 @@ trait ApplicantAttribute{
 
 		$string .= '<a class="btn btn-success btn-search" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 
-		if(in_array(auth()->user()->role, ['Admin', 'Encoder', 'Cadet', 'Crewing Manager'])){
+		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager'])){
 			$string .= '<a class="btn btn-secondary" data-toggle="tooltip" title="Assign to Fleet" onClick="atf(' . $this->id . ')">
                     <span class="fa fa-tasks"></span>
                 </a>&nbsp;';
