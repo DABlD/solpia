@@ -536,9 +536,7 @@
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
-		@endif
-		{{-- CO --}}
-		@if(in_array($data->rank2->id, [2]))
+		@elseif(in_array($data->rank2->id, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 			{{ $doc("CES TEST", "CES TEST", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
