@@ -13,11 +13,11 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
         $array1 = [
-            'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO'
+            'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN'
         ];
 
         $array2 = [
-            'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'MT C. GUARDIAN', 'MT UNIVERSAL CHALLENGER', 'MT PACIFIC M', "MT NEPTUNE M"
+            'MT C. GUARDIAN', 'MT UNIVERSAL CHALLENGER', 'MT PACIFIC M', "MT NEPTUNE M"
         ];
 
         $array3 = [
