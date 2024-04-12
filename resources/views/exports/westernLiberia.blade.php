@@ -1,4 +1,7 @@
 @php
+	//reverse sea service
+	$applicant->sea_service = $applicant->sea_service->reverse();
+
 	$checkDate2 = function($date, $type){
 		if($date == "UNLIMITED"){
 			return $date;
