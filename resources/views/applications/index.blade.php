@@ -515,6 +515,7 @@
                         Y05_ClearanceAffidavit:         'Clearance - Affidavit',
                         X09_InitialDocumentChecklist:   'Document Checklist (Initial)',
                         DocumentChecklist:              'Document Checklist (Final)',
+                        DocumentChecklistHmm:           'Document Checklist (HMM)',
                         X18_EvaluationSheet:            'Evaluation Sheet - POSSM',
                         X30_POSSMSeaService:            'Sea Service - POSSM',
                         X34_DocumentDeficiencyNotice:   'Document Deficiency Notice'
