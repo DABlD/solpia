@@ -82,7 +82,7 @@
 
 		<tr>
 			<td>President</td>
-			<td colspan="7">KYUNGBAE KIM</td>
+			<td colspan="7">KIM KYUNG BAE</td>
 		</tr>
 
 		<tr>
@@ -98,7 +98,7 @@
 
 		<tr>
 			<td>President</td>
-			<td colspan="7">KYUNGBAE KIM</td>
+			<td colspan="7">KIM KYUNG BAE</td>
 		</tr>
 
 		<tr>
