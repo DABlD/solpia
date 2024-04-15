@@ -283,8 +283,18 @@
 					// checkIfExisting($(inputs[i+1]), sss[ctr].vessel_name);
 					$(inputs[i+1]).val(sss[ctr].vessel_name);
 					$(inputs[i+2]).val(sss[ctr].rank).trigger('change');
+
+					// Set the value, creating a new option if necessary
+					if(sss[ctr].vessel_type != "" && sss[ctr].vessel_type != null){
+						if ($(inputs[i+3]).find("option[value='" + sss[ctr].vessel_type + "']").length) {
+							$(inputs[i+3]).val(sss[ctr].vessel_type).trigger('change');
+						} else { 
+						    var newOption = new Option(sss[ctr].vessel_type, sss[ctr].vessel_type, true, true);
+						    $(inputs[i+3]).append(newOption).trigger('change');
+						} 
+					}
 					
-					inputs[i+3].value       = sss[ctr].vessel_type;
+					// inputs[i+3].value       = sss[ctr].vessel_type;
 					inputs[i+4].value       = sss[ctr].smc;
 					inputs[i+5].value       = sss[ctr].gross_tonnage;
 					inputs[i+6].value       = sss[ctr].engine_type;

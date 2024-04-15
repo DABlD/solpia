@@ -377,11 +377,21 @@
                         <div class="col-md-9 iInput">
                             <select id="fType" class="form-control">
                                 <option value="%%">All</option>
-                                @foreach($types as $type)
-                                    @if($type->type)
-                                    <option value="{{ $type->type }}">{{ $type->type }}</option>
-                                    @endif
-                                @endforeach
+                                <option value="BULK CARRIER">BULK CARRIER</option>
+                                <option value="BULK CARRIER (LOG)">BULK CARRIER (LOG)</option>
+                                <option value="CONTAINER">CONTAINER</option>
+                                <option value="CAR CARRIER">CAR CARRIER</option>
+                                <option value="GENERAL CARGO">GENERAL CARGO</option>
+                                <option value="OIL/CHEM">OIL/CHEM</option>
+                                <option value="PROD. TANKER">PROD. TANKER</option>
+                                <option value="LNG">LNG</option>
+                                <option value="VLCC">VLCC</option>
+                                <option value="WOODCHIP">WOODCHIP</option>
+                                <option value="PURSE SEINER">PURSE SEINER</option>
+                                <option value="LONGLINER">LONGLINER</option>
+                                <option value="TRAWLER">TRAWLER</option>
+                                <option value="SQUID JIGGER">SQUID JIGGER</option>
+                                <option value="LONGLINER (TUNA)">LONGLINER (TUNA)</option>
                             </select>
                         </div>
                     </div>
@@ -1776,11 +1786,21 @@
                                     <div class="col-md-9">
                                         <select id="type" class="form-control">
                                             <option value="">Select Vessel Type</option>
-                                            @foreach($types as $type)
-                                                @if($type->type != "")
-                                                <option value="{{ $type->type }}">{{ $type->type }}</option>
-                                                @endif
-                                            @endforeach
+                                            <option value="BULK CARRIER">BULK CARRIER</option>
+                                            <option value="BULK CARRIER (LOG)">BULK CARRIER (LOG)</option>
+                                            <option value="CONTAINER">CONTAINER</option>
+                                            <option value="CAR CARRIER">CAR CARRIER</option>
+                                            <option value="GENERAL CARGO">GENERAL CARGO</option>
+                                            <option value="OIL/CHEM">OIL/CHEM</option>
+                                            <option value="PROD. TANKER">PROD. TANKER</option>
+                                            <option value="LNG">LNG</option>
+                                            <option value="VLCC">VLCC</option>
+                                            <option value="WOODCHIP">WOODCHIP</option>
+                                            <option value="PURSE SEINER">PURSE SEINER</option>
+                                            <option value="LONGLINER">LONGLINER</option>
+                                            <option value="TRAWLER">TRAWLER</option>
+                                            <option value="SQUID JIGGER">SQUID JIGGER</option>
+                                            <option value="LONGLINER (TUNA)">LONGLINER (TUNA)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -2010,7 +2030,11 @@
                                     tags: true
                                 });
 
-                                $('#type, #cba_affliation, #trade, #ecdis').select2();
+                                $('#cba_affliation, #trade, #ecdis').select2();
+
+                                $('#type').select2({
+                                    tags: true
+                                });
 
                                 // CSS
                                 $(".swal2-input[type='number']").css({

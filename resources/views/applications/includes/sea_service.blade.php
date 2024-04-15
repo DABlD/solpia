@@ -58,7 +58,26 @@
 
                     <div class="form-group col-md-2">
                         <label for="vessel_type${count}">Vessel Type</label>
-                        <input type="text" class="form-control" name="vessel_type${count}" placeholder="Enter Vessel Type">
+
+                        <select class="form-control" name="vessel_type${count}">
+                            <option value=""></option>
+                            <option value="BULK CARRIER">BULK CARRIER</option>
+                            <option value="BULK CARRIER (LOG)">BULK CARRIER (LOG)</option>
+                            <option value="CONTAINER">CONTAINER</option>
+                            <option value="CAR CARRIER">CAR CARRIER</option>
+                            <option value="GENERAL CARGO">GENERAL CARGO</option>
+                            <option value="OIL/CHEM">OIL/CHEM</option>
+                            <option value="PROD. TANKER">PROD. TANKER</option>
+                            <option value="LNG">LNG</option>
+                            <option value="VLCC">VLCC</option>
+                            <option value="WOODCHIP">WOODCHIP</option>
+                            <option value="PURSE SEINER">PURSE SEINER</option>
+                            <option value="LONGLINER">LONGLINER</option>
+                            <option value="TRAWLER">TRAWLER</option>
+                            <option value="SQUID JIGGER">SQUID JIGGER</option>
+                            <option value="LONGLINER (TUNA)">LONGLINER (TUNA)</option>
+                        </select>
+
                         <span class="invalid-feedback hidden" role="alert">
                             <strong id="vessel_type${count}Error"></strong>
                         </span>
@@ -192,6 +211,11 @@
 
             $(`[name="imo${count}"]`).select2({
                 placeholder: 'Select or Input IMO',
+                tags: true
+            });
+
+            $(`[name="vessel_type${count}"]`).select2({
+                placeholder: 'Select or input Type',
                 tags: true
             });
 
