@@ -144,6 +144,9 @@
 @push('after-scripts')
 
     <script>
+        // HIDE FILTER
+        $('#cFilters').hide();
+
         @if(isset($edit))
             swal({
                 title: 'Loading Data...',
