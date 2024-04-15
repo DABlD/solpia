@@ -854,31 +854,31 @@
 
 	<tr>
 		<td colspan="14">Professional/Technical knowledge</td>
-		<td colspan="14">Good / Acceptible / Poor</td>
+		<td colspan="14">Good / Acceptable / Poor</td>
 		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">English Language Ability</td>
-		<td colspan="14">Good / Acceptible / Poor</td>
+		<td colspan="14">Good / Acceptable / Poor</td>
 		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">Attitude</td>
-		<td colspan="14">Good / Acceptible / Poor</td>
+		<td colspan="14">Good / Acceptable / Poor</td>
 		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">Sense of Responsibility</td>
-		<td colspan="14">Good / Acceptible / Poor</td>
+		<td colspan="14">Good / Acceptable / Poor</td>
 		<td colspan="6">GOOD</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">General Health</td>
-		<td colspan="14">Good / Acceptible / Poor</td>
+		<td colspan="14">Good / Acceptable / Poor</td>
 		<td colspan="6">GOOD</td>
 	</tr>
 
