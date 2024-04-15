@@ -1,4 +1,4 @@
-<div class="pull-left">
+<div class="pull-left" id="cFilters">
 	Filter by Status
 	<select id="statusF" class="form-control">
 		<option value="%%">All</option>
