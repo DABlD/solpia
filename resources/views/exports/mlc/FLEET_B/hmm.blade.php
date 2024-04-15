@@ -93,7 +93,7 @@
 		<tr>
 			<td rowspan="3" style="{{ $center }}">Shipowner</td>
 			<td>Company</td>
-			<td colspan="7">{{ $data->shipowner }} / KYUNGBAE KIM</td>
+			<td colspan="7">{{ $data->shipowner }}</td>
 		</tr>
 
 		<tr>
