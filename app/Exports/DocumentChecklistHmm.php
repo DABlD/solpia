@@ -265,16 +265,21 @@ class DocumentChecklistHmm implements FromView, WithEvents//, WithDrawings//, Sh
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
+                $event->sheet->getDelegate()->getPageSetup()->setFitToPage(TRUE);
                 $event->sheet->getDelegate()->setTitle('TITLE', false);
-                $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
+                // $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+
+                // GLOBAL DEFAULT FONT
+                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
+                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(8);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -312,7 +317,7 @@ class DocumentChecklistHmm implements FromView, WithEvents//, WithDrawings//, Sh
 
                 // VT
                 $h[1] = [
-                    
+                    'A5'
                 ];
 
                 // HL B
@@ -327,10 +332,12 @@ class DocumentChecklistHmm implements FromView, WithEvents//, WithDrawings//, Sh
 
                 // HC VC
                 $h[4] = [
+                    'A1', 'A6:I67'
                 ];
 
                 // HL
                 $h[5] = [
+                    'B7:B65'
                 ];
 
                 // B
@@ -342,10 +349,12 @@ class DocumentChecklistHmm implements FromView, WithEvents//, WithDrawings//, Sh
                 ];
 
                 $h['wrap'] = [
+                    'A5', 'B49', 'A7:B65', 'I7:I65'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'D7:H65', 'B2:B4', 'G2:G4'
                 ];
 
                 foreach($h as $key => $value) {
@@ -385,6 +394,7 @@ class DocumentChecklistHmm implements FromView, WithEvents//, WithDrawings//, Sh
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'A2:I4', 'A6:I65', 'A67:I69'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -434,6 +444,7 @@ class DocumentChecklistHmm implements FromView, WithEvents//, WithDrawings//, Sh
 
                 // TBT - TOP BORDER THIN
                 $cells[11] = array_merge([
+                    'A71:I71'
                 ]);
 
                 // BBT
@@ -458,17 +469,36 @@ class DocumentChecklistHmm implements FromView, WithEvents//, WithDrawings//, Sh
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(23);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(17);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                $except = [49, 56];
+                for($i = 7; $i <= 60; $i++){
+                    if(!in_array($i, $except)){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(13);
+                    }
+                }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:I75')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A1:I75')->getFont()->setName('Times New Roman');
+
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(20);
+                $event->sheet->getDelegate()->getStyle('A2:I4')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A5')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A6:I6')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A6:A65')->getFont()->setSize(10);
             },
         ];
     }
