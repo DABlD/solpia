@@ -228,6 +228,7 @@ Route::group([
 		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 		Route::post($name . '/uploadFile', ucfirst($name) . 'Controller@uploadFile')->name($name . '.uploadFile');
 		Route::get($name . '/report/{from?}/{to?}', ucfirst($name) . 'Controller@report')->name($name . '.report');
+		Route::get($name . '/prospectReport/{from?}/{to?}', ucfirst($name) . 'Controller@prospectReport')->name($name . '.prospectReport');
 		Route::get($name . '/deploymentReport/{year?}', ucfirst($name) . 'Controller@deploymentReport')->name($name . '.deploymentReport');
 
 		Route::get($name . '/suggestCandidate', ucfirst($name) . 'Controller@suggestCandidate')->name($name . '.suggestCandidate');

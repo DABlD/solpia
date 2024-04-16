@@ -817,7 +817,8 @@
                 input: 'select',
                 inputOptions: {
                     report:       'Report',
-                    deployment:   'Deployment Report'
+                    deployment:   'Deployment Report',
+                    prospect:     'Prospect Report'
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b'
@@ -856,7 +857,7 @@
             let years = [];
             let now = parseInt(moment().format('YYYY'));
 
-            while(start <= now){
+            while(start < now){
                 start++;
                 years[start] = start;
             }
@@ -866,7 +867,32 @@
                 input: 'select',
                 inputOptions: years,
             }).then(result => {
-                window.location.href = `{{ route('prospect.deploymentReport') }}/${result.value}`;
+                if(result.value){
+                    window.location.href = `{{ route('prospect.deploymentReport') }}/${result.value}`;
+                }
+            })
+        }
+
+        function prospect(){
+            swal({
+                title: "Select Range",
+                html: `
+                    ${input("from", "From", moment().subtract(30, 'days').format("YYYY-MM-DD"), 3,9)}
+                    ${input("to", "To", moment().format("YYYY-MM-DD"), 3,9)}
+                `,
+                onOpen: () => {
+                    $('[name="from"], [name="to"]').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    });
+                }
+            }).then(result => {
+                if(result.value){
+                    let from = $('[name="from"]').val();
+                    let to = $('[name="to"]').val();
+                    window.location.href = `{{ route('prospect.prospectReport') }}/${from}/${to}`;
+                }
             })
         }
 

@@ -8,6 +8,7 @@ use App\Models\{Prospect, Candidate};
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Reports\Prospect as ProspectReport;
 use App\Exports\Reports\Deployment as DeploymentReport;
+use App\Exports\Reports\Prospect2 as ProspectReport2;
 
 use DB;
 
@@ -145,6 +146,20 @@ class ProspectController extends Controller
         $fileName = "$year Deployment Report";
 
         return Excel::download(new DeploymentReport(collect($candidates), $year), "$fileName.xlsx");
+    }
+
+    public function prospectReport($from, $to){
+        // DB::enableQueryLog();
+        // $data = Prospect::whereBetween('updated_at', [$from, $to])->get();
+        $data = Prospect::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")->get();
+        // dd(DB::getQueryLog());
+
+        $from = now()->parse($from)->toFormattedDateString();
+        $to = now()->parse($to)->toFormattedDateString();
+
+        $fileName = "$from - $to Prospects";
+
+        return Excel::download(new ProspectReport2($data->toArray(), $from, $to), "$fileName.xlsx");
     }
 
     function uploadFile(Request $req){
