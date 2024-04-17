@@ -38,8 +38,12 @@ class VesselsController extends Controller
 
     public function export(Request $req, $type = ""){
         $class = "App\\Exports\\Vessels";
-        $datas = Vessel::where('status', 'LIKE', $type . '%')->get();
-        $datas->load('principal');
+        // $datas = Vessel::where('status', 'LIKE', $type . '%')
+        $datas = Vessel::where('status', 'ACTIVE')
+                        ->where('manning_agent', 'LIKE', '%SOLPIA%')
+                        ->join('principals as p', 'p.id', '=', 'vessels.principal_id')
+                        ->select('vessels.*', 'p.name as pname')
+                        ->get();
 
         $principals = Principal::where('active', 1)->pluck('id')->toArray();
         foreach($datas as $key => $vessel){
@@ -48,7 +52,7 @@ class VesselsController extends Controller
             }
         }
 
-        return Excel::download(new $class($datas), 'Vessels.xlsx');
+        return Excel::download(new $class($datas, 'vessels'), 'Vessels.xlsx');
     }
 
     public function get(Request $req, $id = null){

@@ -1,57 +1,78 @@
+@php
+	$b = "font-weight: bold;";
+	$c = "text-align: center;";
+	$bc = "$b $c";
+@endphp
+
 <table>
 	<tr>
-		<td></td>
-		<td colspan="13">FLEET LIST</td>
+		<td colspan="12" style="{{ $bc }} height: 40px;">FLEET LIST MANNED BY SOLPIA MARINE AS OF {{ now()->format('F Y') }}</td>
 	</tr>
 
 	<tr>
-		<td>NO.</td>
-		<td>PRINCIPAL</td>
-		<td>VESSEL NAME</td>
-		<td>FLAG</td>
-		<td>VESSEL TYPE</td>
-		<td>YEAR BUILT</td>
-		<td>BUILDER</td>
-		<td>ENGINE MAKE/MODEL</td>
-		<td>G/T</td>
-		<td></td>
-		<td>BHP</td>
-		<td>TRADE</td>
-		<td>ECDIS</td>
-		<td>STATUS</td>
+		<td style="{{ $c }} height: 42px;">PRINCIPAL</td>
+		<td style="{{ $c }} height: 42px;">VESSEL NAME</td>
+		<td style="{{ $c }} height: 42px;">FLEET</td>
+		<td style="{{ $c }} height: 42px;">FLAG</td>
+		<td style="{{ $c }} height: 42px;">TYPE</td>
+		<td style="{{ $c }} height: 42px;">YEAR BUILT</td>
+		<td style="{{ $c }} height: 42px;">ENGINE MAKE/MODEL</td>
+		<td style="{{ $c }} height: 42px;">KW</td>
+		<td style="{{ $c }} height: 42px;">TRADE</td>
+		<td style="{{ $c }} height: 42px;">NO. OF CREW</td>
+		<td style="{{ $c }} height: 42px;">TOTAL</td>
+		<td style="{{ $c }} height: 42px;">TOTAL VESSEL</td>
 	</tr>
 
-	@foreach($datas as $data)
-		<tr>
-			<td>{{ ($loop->index + 1) }}</td>
-			<td>{{ $data->principal->name }}</td>
-			<td>{{ $data->name }}</td>
-			<td>{{ $data->flag }}</td>
-			<td>{{ $data->type }}</td>
-			<td>{{ $data->year_build }}</td>
-			<td>{{ $data->builder }}</td>
-			<td>{{ $data->engine }}</td>
-			<td>{{ $data->gross_tonnage }}</td>
-			@php 
-				$temp = $data->bhp_kw;
-				if($temp == ""){
-					$temp = '---';
-				}
-				else{
-					$temp = str_replace(',', '', $data->bhp_kw);
-					$temp = str_replace(' ', '', $temp);
-					try {
-						$temp = number_format(ceil(($temp * 0.745) / 5) * 5);
-					} catch (Exception $e) {
-						$temp = "(Invalid)";
-					}
-				}
+	@foreach($data as $principal => $types)
+		@php
+			$ctr = 0;
+		@endphp
+		@foreach($types as $type)
+			@php
+				$ctr++;
 			@endphp
-			<td>{{ $temp }}</td>
-			<td>{{ $data->BHP }}</td>
-			<td>{{ $data->trade }}</td>
-			<td>{{ $data->ecdis }}</td>
-			<td>{{ $data->status }}</td>
-		</tr>
+			{{-- DISREGARD COUNT VARIABLE --}}
+			@if(is_object($type))
+				@foreach($type as $vessel)
+					<tr>
+						{{-- @if($loop->first && $ctr == 1)
+							<td rowspan="{{ $types['count'] }}">{{ $principal }}</td>
+						@endif --}}
+						<td>{{ $principal }}</td>
+						<td>{{ $vessel['name'] }}</td>
+						<td>{{ $vessel['fleet'] }}</td>
+						<td>{{ $vessel['flag'] }}</td>
+						<td>{{ $vessel['type'] }}</td>
+						<td>{{ $vessel['year_build'] }}</td>
+						<td>{{ $vessel['engine'] }}</td>
+						<td>{{ $vessel['BHP'] }}</td>
+						<td>{{ $vessel['trade'] }}</td>
+						<td>{{ $vessel['noc'] }}</td>
+						@if($loop->first && $ctr == 1)
+							<td rowspan="{{ $types['count'] }}">{{ $types['totalCrew'] }}</td>
+						@endif
+						@if($loop->first && $ctr == 1)
+							<td rowspan="{{ $types['count'] }}">{{ sizeof($type) }}</td>
+						@endif
+					</tr>
+				@endforeach
+			@endif
+		@endforeach
 	@endforeach
+
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td style="{{ $bc }}">TOTAL</td>
+		<td style="color: #FF0000; {{ $bc }}">=SUBTOTAL(9, K3:K{{ $total + 2 }})</td>
+		<td style="color: #FF0000; {{ $bc }}">=SUBTOTAL(9, L3:L{{ $total + 2 }})</td>
+	</tr>
 </table>
