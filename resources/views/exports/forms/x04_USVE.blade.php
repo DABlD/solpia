@@ -59,7 +59,7 @@
 	<tr>
 		<td colspan="4" style="{{ $b }}">Prospect Vessel</td>
 		<td colspan="2">:</td>
-		<td colspan="2" style="{{ $blue }}">{{ $data->pro_app->vessel->vessel_name }}</td>
+		<td colspan="2" style="{{ $blue }}">{{ isset($data->pro_app->vessel) ? $data->pro_app->vessel->vessel_name : "-" }}</td>
 		<td colspan="2" style="{{ $b }}">S/ON DATE:</td>
 		<td colspan="1" style="{{ $c }}">{{ isset($data->data['eld']) ? now()->parse($data->data['eld'])->format('d-M-Y') : "-" }}</td>
 	</tr>
