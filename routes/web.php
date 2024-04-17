@@ -187,7 +187,8 @@ Route::group([
 		Route::get($name . '/get2', ucfirst($name) . 'Controller@get2')->name($name . '.get2');
 		Route::get("$name/getAll", ucfirst($name) . 'Controller@getAll')->name("$name.getAll");
 		Route::post("$name/import", ucfirst($name) . 'Controller@import')->name("$name.import");
-		Route::get("$name/export/{type?}", ucfirst($name) . 'Controller@export')->name("$name.export");
+		Route::get("$name/export", ucfirst($name) . 'Controller@export')->name("$name.export");
+		// Route::get("$name/export/{type?}", ucfirst($name) . 'Controller@export')->name("$name.export");
 		Route::get("$name/update", ucfirst($name) . 'Controller@update')->name("$name.update");
 		Route::get("$name/updateAll", ucfirst($name) . 'Controller@updateAll')->name("$name.updateAll");
 		Route::get("$name/getParticular", ucfirst($name) . 'Controller@getParticular')->name("$name.getParticular");

@@ -783,22 +783,6 @@
                 getVesselCrew(vessel);
             });
 
-            $('[data-original-title="Export Vessels"]').on('click', () => {
-                swal({
-                    title: 'Please select',
-                    input: 'select',
-                    inputOptions: {
-                        '': 'All',
-                        ACTIVE: 'Active',
-                        INACTIVE: 'Inactive'
-                    },
-                }).then(result => {
-                    if(!result.dismiss){
-                        window.location.href = "{{ route('vessels.export') }}/" + result.value;
-                    }
-                })
-            });
-
             $('[data-original-title="Remove"]').on('click', vessel => {
                 let id = $(vessel.target).data('id');
 
@@ -6480,7 +6464,9 @@
                 title: 'Select Type',
                 input: 'select',
                 inputOptions: {
-                    X31_OnOffReport : 'On/Off Report'
+                    exportVessels : 'Vessels',
+                    exportCrewChangePlan: 'Crew Change Plan',
+                    X31_OnOffReport : 'On/Off Report',
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
@@ -6500,6 +6486,23 @@
                     window[result.value]();
                 }
             })
+        }
+
+        function exportVessels(){
+            window.location.href = "{{ route('vessels.export') }}";
+            // window.location.href = "{{ route('vessels.export') }}/" + result.value;
+            // swal({
+            //     title: 'Please select',
+            //     input: 'select',
+            //     inputOptions: {
+            //         '': 'All',
+            //         ACTIVE: 'Active',
+            //         INACTIVE: 'Inactive'
+            //     },
+            // }).then(result => {
+            //     if(!result.dismiss){
+            //     }
+            // })
         }
 
         function X31_OnOffReport(){
