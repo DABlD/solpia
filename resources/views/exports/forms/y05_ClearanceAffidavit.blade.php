@@ -20,7 +20,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="11" style="height: 35px;"></td>
+		<td colspan="11" style="height: 30px;"></td>
 	</tr>
 
 	<tr>
@@ -30,14 +30,14 @@
 	</tr>
 
 	<tr>
-		<td colspan="11" style="height: 35px;"></td>
+		<td colspan="11" style="height: 30px;"></td>
 	</tr>
 
 	<td colspan="11" style="{{ $center }} height: 60px;">
 		That I further declare that all my original documents was handed over to me and do state above-mentioned company, and/or agent does not have liability to me howsoever, and, if there any, I hereby waive such claims against either and/or any person in privity with them arising out of my employment, non-rehire and contract with said Solpia Marine &#38; Ship Management Inc.
 	</td>
 
-	<tr><td colspan="11" style="height: 35px;"></td></tr>
+	<tr><td colspan="11" style="height: 30px;"></td></tr>
 
 	<tr>
 		<td colspan="11" style="{{ $center }}">
@@ -45,7 +45,7 @@
 		</td>
 	</tr>
 
-	<tr><td colspan="11" style="height: 35px;"></td></tr>
+	<tr><td colspan="11" style="height: 30px;"></td></tr>
 
 	<tr>
 		<td colspan="11" style="{{ $center }}">
@@ -54,7 +54,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="11" style="height: 45px;"></td>
+		<td colspan="11" style="height: 40px;"></td>
 	</tr>
 
 	<tr>
@@ -76,7 +76,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="11" style="height: 70px;"></td>
+		<td colspan="11" style="height: 65px;"></td>
 	</tr>
 
 	<tr>
@@ -88,7 +88,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="11" style="height: 40px;"></td>
+		<td colspan="11" style="height: 35px;"></td>
 	</tr>
 
 	<tr>
@@ -121,7 +121,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="11" style="height: 40px;"></td>
+		<td colspan="11" style="height: 35px;"></td>
 	</tr>
 
 	<tr>
