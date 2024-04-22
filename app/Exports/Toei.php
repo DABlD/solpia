@@ -167,6 +167,14 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     ]
                 ],
             ],
+            [
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => [
+                        'rgb' => 'FF0000'
+                    ]
+                ],
+            ],
         ];
 
         $headingStyle = [
@@ -927,6 +935,18 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
                 // SET PRINT AREA
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
+
+                // FORMATTING
+                for ($row = 30; $row <= 80; $row++) {
+                    $cell = $event->sheet->getCell('G' . $row)->getValue();
+
+                    try {
+                        if(now() > now()->parse($cell)){
+                            $event->sheet->getDelegate()->getComment('G' . $row)->getText()->createTextRun($cell . ' - EXPIRED');
+                        }
+                    }
+                    catch(\Carbon\Exceptions\InvalidFormatException $e){}
+                }
             },
         ];
     }

@@ -47,6 +47,8 @@
 			$crewRank = $applicant->ranks2[$applicant->document_flag->first()->rank]->first();
 		}
 	}
+
+	$fr = "background-color: #FF0000;";
 @endphp
 
 <table>
