@@ -937,7 +937,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
 
                 // FORMATTING
-                for ($row = 30; $row <= 80; $row++) {
+                for ($row = 30; $row <= 64; $row++) {
                     $cell = $event->sheet->getCell('G' . $row)->getValue();
 
                     try {
