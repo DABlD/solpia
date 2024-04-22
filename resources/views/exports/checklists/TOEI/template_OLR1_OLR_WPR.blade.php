@@ -301,7 +301,7 @@
 	{{ $con("TURN-OVER NOTES") }}
 
 	{{ $section("10. PRINCIPAL / OWNERS REQUIREMENTS", 1) }}
-	@if($data->status == "Vacation")
+	@if($data->status == "Vacation" || !isset($data->vessel))
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
