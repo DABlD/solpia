@@ -1324,7 +1324,9 @@ class ApplicationsController extends Controller
                 }
 
                 foreach($temp as $docu){
-                    $crew->{$docu->type} = $docu->expiry_date;
+                    if($docu->type){
+                        $crew->{$docu->type} = $docu->expiry_date;
+                    }
                 }
             }
 

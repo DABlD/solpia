@@ -236,7 +236,7 @@
 
 @push('after-scripts')
     <script>
-        let fFleet = "%%";
+        let fFleet = "{{ auth()->user()->fleet ?? "%%" }}";
         let fPrincipal = "%%";
         let fFlag = "%%";
         let fType = "%%";
@@ -5078,7 +5078,7 @@
                     exportOffDocs : 'Export Offsigners SIRB and PPRT',
                     exportOffUSV : 'Export Offsigners US Visa',
                     exportOffCovid : 'Export Offsigners Covid Vaccines',
-                    exportOnBoard : 'Export Onboard',
+                    exportOnBoard : 'Export Onboard Crewlist',
                     RTP : 'Request to Process (Lined-Up Crew)',
                     RTP2 : 'Request to Process (Onboard Crew)',
                     RFSC: 'Shoe and Coverall Request',
