@@ -7,11 +7,12 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 use App\Models\{LineUpContract, Rank, DocumentId, Applicant};
 use DB;
 
-class OnBoardVesselTOEI implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class OnBoardVesselTOEI implements FromView, WithEvents//, ShouldAutoSize//, WithDrawings//
 {
     public function __construct($data, $type, $req){
         $this->data     = $data;
@@ -192,13 +193,16 @@ class OnBoardVesselTOEI implements FromView, WithEvents//, WithDrawings//, Shoul
             ]
         ];
 
+        $size = sizeof($this->data);
+
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $size) {
                 // SHEET SETTINGS
-                $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
-                $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
+                $psize = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
+                $event->sheet->getDelegate()->getPageSetup()->setPaperSize($psize);
                 $event->sheet->getDelegate()->setTitle($this->req['filename'], false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
+                $event->sheet->getDelegate()->getPageSetup()->setOrientation("landscape");
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
@@ -252,6 +256,7 @@ class OnBoardVesselTOEI implements FromView, WithEvents//, WithDrawings//, Shoul
 
                 // HC VC
                 $h[5] = [
+                    'A4:AB' . ($size + 5)
                 ];
 
                 // B
@@ -265,10 +270,13 @@ class OnBoardVesselTOEI implements FromView, WithEvents//, WithDrawings//, Shoul
                 ];
 
                 $h['wrap'] = [
+                    'Q5:AB5'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'B5:E' . ($size + 5),
+                    'T5:U' . ($size + 5)
                 ];
 
 
@@ -305,6 +313,7 @@ class OnBoardVesselTOEI implements FromView, WithEvents//, WithDrawings//, Shoul
 
                 // BORDERS
                 $cells[0] = array_merge([
+                    'A4:AB' . ($size + 5)
                 ]);
 
 
@@ -325,26 +334,43 @@ class OnBoardVesselTOEI implements FromView, WithEvents//, WithDrawings//, Shoul
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('A')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('C')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('D')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('E')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('F')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('G')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('H')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('I')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('J')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('K')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('L')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('M')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('N')->setWidth();
-                // $event->sheet->getDelegate()->getColumnDimension('O')->setWidth();
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(2.8);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('Q')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('R')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('T')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('U')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('V')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('W')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('X')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('Y')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('Z')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('AA')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('AB')->setWidth(8);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(8.25);
 
-                $event->sheet->getDelegate()->getStyle('K6:K' . ($this->size + 5))->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_00);
+                $event->sheet->getDelegate()->getStyle('K6:K' . ($size + 5))->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_00);
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                $event->sheet->getDelegate()->getStyle('A4:AB' . ($size + 5))->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A4:AB' . ($size + 5))->getFont()->setName('Times New Roman');
             },
         ];
     }
