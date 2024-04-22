@@ -409,10 +409,13 @@
             	            	<option value="CHEMICAL TEST">CHEMICAL TEST</option>
             	            	<option value="DRUG AND ALCOHOL TEST">DRUG AND ALCOHOL TEST</option>
             	            	<option value="MMR">MMR VACCINE</option>
+            	            	<option value="TYPHOID">TYPHOID</option>
             	            	<option value="COVID-19 1ST DOSE">COVID-19 1ST DOSE</option>
             	            	<option value="COVID-19 2ND DOSE">COVID-19 2ND DOSE</option>
             	            	<option value="COVID-19 3RD DOSE">COVID-19 3RD DOSE</option>
             	            	<option value="COVID-19 4TH DOSE">COVID-19 4TH DOSE</option>
+            	            	<option value="COVID-19 5TH DOSE">COVID-19 5TH DOSE</option>
+            	            	<option value="COVID-19 6TH DOSE">COVID-19 6TH DOSE</option>
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${mcType}${count}Error"></strong>
