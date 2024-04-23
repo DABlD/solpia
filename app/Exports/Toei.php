@@ -949,9 +949,9 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 }
 
                 // FORMATTING FOR PEME
-                $cell = $event->sheet->getCell('H' . $raoc + 3)->getValue();
+                $cell = $event->sheet->getCell('H' . ($raoc + 3))->getValue();
                 if(now() > now()->parse($cell)){
-                    $event->sheet->getDelegate()->getComment('H' . $raoc + 3)->getText()->createTextRun($cell . ' - EXPIRED');
+                    $event->sheet->getDelegate()->getComment('H' . ($raoc + 3))->getText()->createTextRun($cell . ' - EXPIRED');
                 }
             },
         ];
