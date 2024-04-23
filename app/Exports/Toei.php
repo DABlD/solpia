@@ -937,7 +937,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
 
                 // FORMATTING
-                for ($row = 30; $row <= 64; $row++) {
+                for ($row = 30; $row <= ($raoc - 1); $row++) {
                     $cell = $event->sheet->getCell('G' . $row)->getValue();
 
                     try {
@@ -946,6 +946,12 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                         }
                     }
                     catch(\Carbon\Exceptions\InvalidFormatException $e){}
+                }
+
+                // FORMATTING FOR PEME
+                $cell = $event->sheet->getCell('H' . $raoc + 3)->getValue();
+                if(now() > now()->parse($cell)){
+                    $event->sheet->getDelegate()->getComment('H' . $raoc + 3)->getText()->createTextRun($cell . ' - EXPIRED');
                 }
             },
         ];
