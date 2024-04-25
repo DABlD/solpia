@@ -250,15 +250,18 @@
 
 @push('after-scripts')
 	<script>
-        var rank = "%%";
-        var remark = "%%";
-        var min_age = 20;
-        var max_age = 60;
+        var fFname = "";
+        var fLname = "";
+        var fRanks = [];
+        // var remark = "%%";
+        var fMin_age = null;
+        var fMax_age = null;
         
-        var size = "%%";
-        var owner = "%%";
-        var engine = "%%";
-        var status = "%%";
+        // var size = "%%";
+        // var owner = "%%";
+        // var engine = "%%";
+        var fStatus = "%%";
+        var fUsv = "";
 
         swal({
             title: 'Loading',
@@ -270,40 +273,39 @@
             tabIndex: -1,
             ajax: {
                 url: '{{ route('datatables.applications') }}',
-                type: 'post',
+                type: 'get',
                 data: f => {
                     f.filters = getFilters();
                 }
             },
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'pa_s', name: 'pa_s' },
+                { data: 'pas', name: 'pas' },
                 { data: 'rank', name: 'rank' },
-                { data: 'lname', name: 'lname' },
-                { data: 'fname', name: 'fname' },
+                { data: 'user.lname', name: 'user.lname' },
+                { data: 'user.fname', name: 'user.fname' },
                 { data: 'age', name: 'age' },
                 { 
-                    data: 'contact',
-                    name: 'contact',
+                    data: 'user.contact',
+                    name: 'user.contact',
                     @if(in_array(auth()->user()->id, [5901, 5958]) || auth()->user()->role == "Training")
                         visible: false
                     @endif
                 },
-                { data: 'last_vessel', name: 'last_vessel' },
-                { data: 'last_disembark', name: 'last_disembark' },
+                { data: 'last_vessel.vessel_name', name: 'last_vessel.vessel_name' },
+                { data: 'last_vessel.sign_off', name: 'last_vessel.sign_off' },
                 @if(auth()->user()->fleet == null)
-                    { data: 'fleet', name: 'fleet' },
+                    { data: 'user.fleet', name: 'user.fleet' },
                 @endif
                 { data: 'remarks', name: 'remarks' },
                 { data: 'actions', name: 'actions' },
-                { data: 'search', name: 'search', visible: false }
             ],
             columnDefs: [
                 {
                     targets: 1,
                     render: function(status, display, row){
                         if(status == "Lined-Up" || status == "On Board"){
-                            status += `<br><b data-status="${status}">${row.vessel}</b>`;
+                            status += `<br><b data-status="${status}">${row.pro_app.vessel.name}</b>`;
                         }
 
                         return status;
@@ -324,7 +326,7 @@
                 {
                     targets: 8,
                     render: function(last_disembark){
-                        return moment(last_disembark).format('MMM DD, YYYY');
+                        return last_disembark ? moment(last_disembark).format('MMM DD, YYYY') : "-";
                     },
                 },
                 @if(auth()->user()->fleet == null)
@@ -415,8 +417,8 @@
 
                 tooltip();
             	initializeActions();
-            }
-
+            },
+            order: [],
             // order: [ [0, 'desc'] ],
         });
         
@@ -441,21 +443,18 @@
 
         function getFilters(){
             return {
-                rank: rank,
-                min_age: min_age,
-                max_age: max_age,
-                size: size,
-                owner: owner,
-                engine: engine,
-                remark: remark,
-                status: status
+                fRanks: fRanks,
+                fMin_age: fMin_age,
+                fMax_age: fMax_age,
+                fFname: fFname,
+                fLname: fLname,
+                // size: size,
+                // owner: owner,
+                // engine: engine,
+                // remark: remark,
+                fStatus: fStatus
             };
         }
-
-        $('#statusF').change(e => {
-            status = e.target.value;
-            reload();
-        });
 
         // MUST BE HERE BECAUSE IF INSIDE INITIALIZE, INCREMENT/DECREMENT WILL STACK
         let tabCtr = 1;
@@ -3424,7 +3423,174 @@
 
         // FILTER
         function filter(){
-            swal('test');
+            swal({
+                width: "650px",
+                confirmButtonText: 'Apply Filter',
+                showCancelButton: true,
+                cancelButtonColor: errorColor,
+                cancelButtonText: 'Reset Filter',
+                showCloseButton: true,
+                html:`
+                    <div class="row iRow">
+                        <div class="col-md-6">
+                            ${input("fname", "Fname", fFname, 4,8)}
+                        </div>
+                        <div class="col-md-6">
+                            ${input("lname", "Lname", fLname, 4,8)}
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row iRow">
+                        <div class="col-md-6">
+                            ${input("min_age", "Min Age", fMin_age, 4,8, 'number', 'min="20" max="60"')}
+                        </div>
+                        <div class="col-md-6">
+                            ${input("max_age", "Max Age", fMax_age, 4,8, 'number', 'min="20" max="60"')}
+                        </div>
+                    </div>
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Ranks
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="ranks" class="form-control" data-placeholder="Select Ranks">
+                            </select>
+                        </div>
+                    </div></br>
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Status
+                        </div>
+                        <div class="col-md-4 iInput">
+                            <select name="status" class="form-control">
+                                <option value="%%">All</option>
+                                <option value="Vacation">Vacation</option>
+                                <option value="Lined-Up">Lined-Up</option>
+                                <option value="On Board">On Board</option>
+                            </select>
+                        </div>
+                    </div></br>
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            US VISA
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <div class="col-md-12 iInput">
+                                ${checkbox("usv", "REQUIRED")}
+                            </div>
+                        </div>
+                    </div></br>
+                `,
+                onOpen: () => {
+                    $('.iInput .iInput').css('text-align', 'left');
+
+                    // let temp = [];
+                    // fExp.forEach(exp => {
+                    //     let temp2 = $(`[name="exp"][value="${exp}"]`);
+                    //     if(!temp2.length){
+                    //         temp.push(exp);
+                    //         $(`[name="other_exp"]`).append(`
+                    //             <option value="${exp}">${exp}</option>
+                    //         `);
+                    //     }
+                    // });
+
+                    // $('[name="other_exp"]').select2({
+                    //     tags: true,
+                    //     multiple: true,
+                    //     closeOnSelect: false,
+                    //     scrollAfterSelect: false,
+                    // })
+                    // .on('select2:selecting', e => {
+                    //     $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop());
+                    // })
+                    // .on('select2:select', e => {
+                    //     $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop'));
+                    //     $('.select2-search__field').val("");
+                    //     $('.select2-container--open .select2-search__field').click();
+                    // });
+                    // $('[name="other_exp"]').val(temp).trigger("change");
+
+                    if(fUsv){
+                        $(`[name="usv"]`).click();
+                    }
+
+                    $.ajax({
+                        url: "{{ route('rank.get') }}",
+                        data: {
+                            select: ["id", "abbr"],
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            ranks = [];
+                            rankString = "";
+
+                            result.forEach(rank => {
+                                ranks.push(rank.abbr);
+                                rankString += `
+                                    <option value="${rank.id}">${rank.abbr}</option>
+                                `;
+                            });
+
+                            $('[name="ranks"]').append(rankString);
+                            $('[name="ranks"]').select2({
+                                tags: true,
+                                multiple: true,
+                                closeOnSelect: false,
+                                scrollAfterSelect: false,
+                            })
+                            .on('select2:selecting', e => {
+                                $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop());
+                            })
+                            .on('select2:select', e => {
+                                $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop'));
+                                $('.select2-search__field').val("");
+                                $('.select2-container--open .select2-search__field').click();
+                            });
+
+                            $('[name="ranks"]').val(fRanks).trigger("change");
+                        }
+                    });
+                }
+            }).then(result => {
+                if(result.value){
+                    fFname = $("[name='fname']").val();
+                    fLname = $("[name='lname']").val();
+                    fMin_age = $("[name='min_age']").val();
+                    fMax_age = $("[name='max_age']").val();
+                    fRanks = $("[name='ranks']").val();
+                    fStatus = $("[name='status']").val();
+                    fUsv = $("[name='usv']:checked").val();
+                    // fRemarks = $("[name='remarks']").val();
+
+                    // let temp = [];
+                    // $('[name="exp"]:checked').each((i, e) => {
+                    //     temp.push(e.value);
+                    // });
+
+                    // fExp = temp.concat($('[name="other_exp"]').val());
+                    // fBool = true;
+
+                    reload();
+                    // $('[type="search"]').val(fName);
+                }
+                else if(result.dismiss == "cancel"){
+                    fFname = "";
+                    fLname = "";
+                    fRanks = [];
+                    fMin_age = null;
+                    fMax_age = null;
+                    fStatus = "";
+                    fUsv = "";
+                    fStatus = "%%";
+                    
+                    filter();
+                }
+            });
         }
 	</script>
 @endpush

@@ -307,7 +307,7 @@ Route::group([
 
 		// DATATABLE ROUTES
 		Route::post('1/recruitments', 'DatatablesController@recruitments')->name('datatables.recruitments');
-		Route::post('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
+		Route::get('datatables/applications', 'DatatablesController@applications')->name('datatables.applications');
 		Route::get('datatables/applications2', 'DatatablesController@applications2');
 		
 		Route::post('datatables/users', 'DatatablesController@users')->name('datatables.users');
