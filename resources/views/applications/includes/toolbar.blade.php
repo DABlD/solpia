@@ -1,11 +1,4 @@
 <div class="pull-left" id="cFilters">
-	Filter by Status
-	<select id="statusF" class="form-control">
-		<option value="%%">All</option>
-		<option value="Vacation">Vacation</option>
-		<option value="Lined-Up">Lined-Up</option>
-		<option value="On Board">On Board</option>
-	</select>
 </div>
 
 <div class="pull-right">
