@@ -273,7 +273,7 @@
             tabIndex: -1,
             ajax: {
                 url: '{{ route('datatables.applications') }}',
-                type: 'get',
+                type: 'post',
                 data: f => {
                     f.filters = getFilters();
                 }
