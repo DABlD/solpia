@@ -12,6 +12,8 @@ use App\Models\{TempApplicant, TempSeaService};
 use App\Models\{Wage};
 use App\Models\{Prospect, Requirement, Candidate};
 
+use App\Models\{DocumentFlag};
+
 use App\{User, TempUser};
 
 use DB;
@@ -81,504 +83,108 @@ class DatatablesController extends Controller
 
 	public function applications(Request $req){
 	// public function applications(Request $req){
-		DB::connection()->enableQueryLog();
+		DB::enableQueryLog();
+		$applicants = Applicant::select('applicants.*', 'pa.status as pas')
+								->orderBy('created_at', 'DESC')
+								->join('users as u', 'u.id', '=', 'applicants.user_id')
+								->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
+								->where('u.fleet', 'like', auth()->user()->fleet ?? "%%")
+								->where('pa.status', 'like', $req->filters['fStatus']);
 
-		$ranks = [];
-		$ranks2 = [];
-		$temps = Rank::select('id', 'abbr', 'name')->get()->keyBy('abbr')->toArray();
-
-		foreach($temps as $temp){
-			$ranks[$temp['id']] = $temp['abbr'];
-			$ranks2[$temp['name']] = $temp['abbr'];
+		// IF DID NOT USE FILTER AND ONLY SEARCH VALUE
+		if($req->search['value']){
+			$applicants = $applicants->where('u.fname', 'like', "%" . $req->search['value'] . "%")
+									 ->orWhere('u.lname', 'like', "%" . $req->search['value'] . "%");
 		}
 
-		$vesselszxc = Vessel::pluck('name', 'id');
-		
-		// STATUS = WHAT PRINCIPAL IS STAFF UNDER SO I USED THIS
-		$status = auth()->user()->status;
-		$search = $req->search["value"];
+		// APPLY FILTERS
+		$filters = $req->filters;
+		// dd($filters);
 
-		if($status == 1){
-		    $condition = ['u.applicant', '>', 0];
-		}
-		elseif($status > 1){
-		    $condition = ['u.applicant', '=', $status];
-		}
+		// NAME FILTER
+		$applicants = $applicants->where('u.fname', 'like', "%" . $filters["fFname"] ?? "" . "%")
+								->where('u.lname', 'like', "%" . $filters["fLname"] ?? "" . "%");
+					
+		// AGE FILTER
+		if(isset($filters['fMin_age'])){
+			$max_date = now()->subYears($filters['fMin_age'])->format('Y-m-d');
 
-		// if($search){
-		// 	$condition = [
-		// 		$condition, 
-		// 		['u.deleted_at', '=', null], 
-		// 		['applicants.remarks', 'LIKE', "%" . $search . "%"],
-		// 		['fname', 'LIKE', "%" . $search . "%"],
-		// 		['lname', 'LIKE', "%" . $search . "%"],
-		// 		['pro_app.status', 'LIKE', "%" . $search . "%"]
-		// 	];
-		// }
-
-		if($search){
-			$applicants = Applicant::select(
-					'applicants.id', 'applicants.remarks', 'u.fleet',
-					'avatar', 'fname', 'lname', 'contact', 'birthday',
-					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
-					,'r.abbr'
-					,'v.name'
-				)
-				->join('users as u', 'u.id', '=', 'applicants.user_id')
-				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
-				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-				->where([$condition])
-				// ->where('u.fleet', 'like', auth()->user()->fleet ?? "%%")
-				->where(function($q) use($search){
-					$q->where('applicants.remarks', 'LIKE', "%$search%");
-					$q->orWhere('fname', 'LIKE', "%$search%");
-					$q->orWhere('lname', 'LIKE', "%$search%");
-					$q->orWhere('pro_app.status', 'LIKE', "%$search%");
-					$q->orWhere('r.abbr', '=', $search);
-					$q->orWhere('v.name', 'LIKE', "%$search%");
-				});
-				// ->get();
-				// ->orWhere('vessel_name', 'LIKE', "%" . $search . "%")
-				// ->orWhere('rank', 'LIKE', "%" . $search . "%")
-			if(auth()->user()->fleet){
-				// MA'AM JOBELLE
-				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-					$applicants->where(function($q) use($search){
-						$q->where('u.fleet', 'like', auth()->user()->fleet);
-						$q->orWhere('u.fleet', 'like', "FLEET A");
-					});
-				}
-				elseif(in_array(auth()->user()->id, [4520])){
-					$applicants->where(function($q) use($search){
-						$q->where('u.fleet', 'like', auth()->user()->fleet);
-						$q->orWhere('u.fleet', 'like', "FLEET C");
-					});
-				}
-				else{
-					$applicants->where('u.fleet', 'like', auth()->user()->fleet);
-				}
-			}
-			$applicants = $applicants->get();
-
-			$temp = Vessel::where('name', 'LIKE', '%' . $search . "%")->pluck('name')->toArray();
-			// $sss = SeaService::whereIn('vessel_name', $temp)->get();
-			// $sss = SeaService::orderByDesc('sign_on')->groupBy('applicant_id')->whereIn('vessel_name', $temp)->pluck('applicant_id');
-
-			// GET ALL CREW WHOSE LAST SEA SERVICE = SEARCH
-			$sss = SeaService::whereIn('vessel_name', $temp)->groupBy('applicant_id')->pluck('applicant_id');
-			$sss2 = [];
-			
-			foreach ($sss as $key => $id) {
-				$ss = SeaService::where('applicant_id', $id)
-                        ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
-                        ->join('users as u', 'u.id', '=', 'a.user_id');
-      //                   ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
-						// ->orderByDesc('sign_on')->first();
-
-				
-				if(auth()->user()->fleet){
-					// MA'AM JOBELLE
-					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-						$ss->where(function($q) use($search){
-							$q->where('u.fleet', 'like', auth()->user()->fleet);
-							$q->orWhere('u.fleet', 'like', "FLEET A");
-						});
-					}
-					elseif(in_array(auth()->user()->id, [4520])){
-						$ss->where(function($q) use($search){
-							$q->where('u.fleet', 'like', auth()->user()->fleet);
-							$q->orWhere('u.fleet', 'like', "FLEET C");
-						});
-					}
-					else{
-						$ss->where('u.fleet', 'like', auth()->user()->fleet);
-					}
-				}
-
-				$ss = $ss->orderByDesc('sign_on')->first();
-
-				if(isset($ss) && in_array($ss->vessel_name, $temp)){
-					// $temp2 = $sss->splice($key);
-					// $temp2->shift();
-					// $sss->merge($temp2);
-					// $sss = collect(array_merge($sss->toArray(), $temp2->toArray()));
-					array_push($sss2, $id);
-				}
-				else{
-					// $sss2[$id]["abbr"] = $ss->abbr;
-					// $sss2[$id]["name"] = $ss->name;
-				}
-			}
-
-			// REMOVE DUPLICATES
-			$diff = collect($sss2)->diff($applicants->pluck('id'));
-			foreach($diff as $id){
-				$temp = Applicant::select(
-					'applicants.id', 'applicants.remarks', 'u.fleet',
-					'avatar', 'fname', 'lname', 'contact', 'birthday',
-					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
-					,'r.abbr'
-					,'v.name'
-				)
-				->join('users as u', 'u.id', '=', 'applicants.user_id')
-				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
-				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-				->where('applicants.id', $id);
-				// ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
-				// ->first();
-
-				if(auth()->user()->fleet){
-					// MA'AM JOBELLE
-					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-						$temp->where(function($q) use($search){
-							$q->where('u.fleet', 'like', auth()->user()->fleet);
-							$q->orWhere('u.fleet', 'like', "FLEET A");
-						});
-					}
-					elseif(in_array(auth()->user()->id, [4520])){
-						$temp->where(function($q) use($search){
-							$q->where('u.fleet', 'like', auth()->user()->fleet);
-							$q->orWhere('u.fleet', 'like', "FLEET C");
-						});
-					}
-					else{
-						$temp->where('u.fleet', 'like', auth()->user()->fleet);
-					}
-				}
-
-				$temp = $temp->first();
-
-				// IF NOT DELETED
-				if($temp){
-					// $temp->abbr = $sss2[$id]["abbr"];
-					// $temp->name = $sss2[$id]["name"];
-
-					$applicants = $applicants->push($temp);
-				}
-			};
-
-			// IF SEARCH TERM IS A RANK. GET ALL CREW WHOSE LAST SEA SERVICE IS THE SEARCH TERM
-			if(in_array($search, array_keys($temps))){
-				$sss = SeaService::where('rank', $temps[$search]['name'])->groupBy('applicant_id')->pluck('applicant_id');
-				$sss2 = [];
-
-				foreach ($sss as $id) {
-					$temp = SeaService::where('applicant_id', $id)->orderByDesc('sign_on')->first();
-					if($temp->rank == $temps[$search]['name']){
-						array_push($sss2, $id);
-					}
-				}
-
-				// REMOVE DUPLICATE
-				// dd($sss);
-				$diff = collect($sss2)->diff($applicants->pluck('id'));
-				foreach($diff as $id){
-					$temp = Applicant::select(
-						'applicants.id', 'applicants.remarks', 'u.fleet',
-						'avatar', 'fname', 'lname', 'contact', 'birthday',
-						'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
-						,'r.abbr'
-						,'v.name'
-					)
-					->join('users as u', 'u.id', '=', 'applicants.user_id')
-					->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-					->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
-					->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-					->where('applicants.id', $id);
-					// ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? '%%')
-					// ->first();
-
-					if(auth()->user()->fleet){
-						// MA'AM JOBELLE
-						if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-							$temp->where(function($q) use($search){
-								$q->where('u.fleet', 'like', auth()->user()->fleet);
-								$q->orWhere('u.fleet', 'like', "FLEET A");
-							});
-						}
-						elseif(in_array(auth()->user()->id, [4520])){
-							$temp->where(function($q) use($search){
-								$q->where('u.fleet', 'like', auth()->user()->fleet);
-								$q->orWhere('u.fleet', 'like', "FLEET C");
-							});
-						}
-						else{
-							$temp->where('u.fleet', 'like', auth()->user()->fleet);
-						}
-					}
-
-					$temp = $temp->first();
-
-					// IF NOT DELETED
-					if($temp){
-						// $temp->abbr = $sss2[$id]["abbr"];
-						// $temp->name = $sss2[$id]["name"];
-
-						$applicants = $applicants->push($temp);
-					}
-				};
-			}
-
-			// IF HAS SPACES CHECK IF NAME
-			$arr = explode(' ', $search);
-			if(sizeof($arr) > 1){
-				$temp1 = Applicant::select(
-					'applicants.id', 'applicants.remarks', 'u.fleet',
-					'avatar', 'fname', 'lname', 'contact', 'birthday',
-					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
-					,'r.abbr'
-					,'v.name'
-				)
-				->join('users as u', 'u.id', '=', 'applicants.user_id')
-				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
-				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-				->where([
-					['u.fname', '=', $arr[0]],
-					['u.lname', '=', $arr[1]],
-					// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
-				]);
-				// ->get();
-
-				if(auth()->user()->fleet){
-					// MA'AM JOBELLE
-					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-						$temp1->where(function($q) use($search){
-							$q->where('u.fleet', 'like', auth()->user()->fleet);
-							$q->orWhere('u.fleet', 'like', "FLEET A");
-						});
-					}
-					elseif(in_array(auth()->user()->id, [4520])){
-						$temp1->where(function($q) use($search){
-							$q->where('u.fleet', 'like', auth()->user()->fleet);
-							$q->orWhere('u.fleet', 'like', "FLEET C");
-						});
-					}
-					else{
-						$temp1->where('u.fleet', 'like', auth()->user()->fleet);
-					}
-				}
-
-				$temp1 = $temp1->get();
-
-				$temp2 = Applicant::select(
-					'applicants.id', 'applicants.remarks', 'u.fleet',
-					'avatar', 'fname', 'lname', 'contact', 'birthday',
-					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
-					,'r.abbr'
-					,'v.name'
-				)
-				->join('users as u', 'u.id', '=', 'applicants.user_id')
-				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				->leftJoin('ranks as r', 'r.id', '=', 'pro_app.rank_id')
-				->leftJoin('vessels as v', 'v.id', '=', 'pro_app.vessel_id')
-				->where([
-					['u.lname', '=', $arr[0]],
-					['u.fname', '=', $arr[1]],
-					// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
-				]);
-				// ->get();
-
-				if(auth()->user()->fleet){
-					// MA'AM JOBELLE
-					if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-						$temp2->where(function($q) use($search){
-							$q->where('u.fleet', 'like', auth()->user()->fleet);
-							$q->orWhere('u.fleet', 'like', "FLEET A");
-						});
-					}
-					elseif(in_array(auth()->user()->id, [4520])){
-						$temp2->where(function($q) use($search){
-							$q->where('u.fleet', 'like', auth()->user()->fleet);
-							$q->orWhere('u.fleet', 'like', "FLEET C");
-						});
-					}
-					else{
-						$temp2->where('u.fleet', 'like', auth()->user()->fleet);
-					}
-				}
-
-				$temp2 = $temp2->get();
-
-				foreach ($temp1 as $a) {
-					$applicants = $applicants->push($a);
-				}
-
-				foreach ($temp2 as $a) {
-					$applicants = $applicants->push($a);
-				}
-			}
-		}
-		else{
-			$filters = $req->filters;
-
-			$tc = Applicant::join('users as u', 'u.id', '=', 'applicants.user_id')
-					->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-					->where(function($q) use($filters){
-						// $q->where('pro_app.rank_id', 'like', $filters['rank']);
-						// $q->where('applicants.remarks', 'like', $filters['remark']);
-						$q->where('pro_app.status', 'like', $filters['status']);
-					})
-					->where([
-						$condition,
-						// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
-					]);
-					// ->count();
-
-			if(auth()->user()->fleet){
-				// MA'AM JOBELLE
-				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-					$tc->where(function($q) use($search){
-						$q->where('u.fleet', 'like', auth()->user()->fleet);
-						$q->orWhere('u.fleet', 'like', "FLEET A");
-					});
-				}
-				elseif(in_array(auth()->user()->id, [4520])){
-					$tc->where(function($q) use($search){
-						$q->where('u.fleet', 'like', auth()->user()->fleet);
-						$q->orWhere('u.fleet', 'like', "FLEET C");
-					});
-				}
-				else{
-					$tc->where('u.fleet', 'like', auth()->user()->fleet);
-				}
-			}
-
-			$tc = $tc->count();
-
-			// "rank" => "%%"
-			// "min_age" => "20"
-			// "max_age" => "60"
-			// "size" => "%%"
-			// "owner" => "%%"
-			// "engine" => "%%"
-			// "remark" => "%%"
-			// "status" => "Lined-Up"
-
-			$applicants = Applicant::select(
-					'applicants.id', 'applicants.remarks', 'u.fleet',
-					'avatar', 'fname', 'lname', 'contact', 'birthday',
-					'pro_app.vessel_id as pa_vid', 'pro_app.rank_id as pa_ri', 'pro_app.status as pa_s'
-				)
-				->join('users as u', 'u.id', '=', 'applicants.user_id')
-				->join('processed_applicants as pro_app', 'pro_app.applicant_id', '=', 'applicants.id')
-				// ->where()
-				->where([
-					$condition,
-					// ['u.fleet', 'LIKE', auth()->user()->fleet ?? '%%']
-				])
-				->where(function($q) use($filters){
-					// $q->where('pro_app.rank_id', 'like', $filters['rank']);
-					// $q->where('applicants.remarks', 'like', $filters['remark']);
-					$q->where('pro_app.status', 'like', $filters['status']);
-				})
-				->offset($req->start)
-				->limit($req->length);
-				// ->get();
-
-			
-			if(auth()->user()->fleet){
-				// MA'AM JOBELLE
-				if(in_array(auth()->user()->id, [4504, 4545, 4861, 4988, 5013, 6011, 6016, 5963, 6014, 6080, 5907])){
-					$applicants->where(function($q) use($search){
-						$q->where('u.fleet', 'like', auth()->user()->fleet);
-						$q->orWhere('u.fleet', 'like', "FLEET A");
-					});
-				}
-				elseif(in_array(auth()->user()->id, [4520])){
-					$applicants->where(function($q) use($search){
-						$q->where('u.fleet', 'like', auth()->user()->fleet);
-						$q->orWhere('u.fleet', 'like', "FLEET C");
-					});
-				}
-				else{
-					$applicants->where('u.fleet', 'like', auth()->user()->fleet);
-				}
-			}
-
-			$applicants = $applicants->get();
-		}
-
-
-		$applicants = collect($applicants->sortBy('id'));
-
-		// ADD USER ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
-		// RANK IS FETCHED ON LINED-UP/ON BOARD VESSEL. IF NONE, ON LAST VESSEL
-		foreach($applicants as $key => $applicant){
-			$applicant->search = $search . $applicant->abbr;
-			$applicant->remarks = json_decode($applicant->remarks);
-			$applicant->row = ($key + 1);
-			$applicant->actions = $applicant->actions;
-			$applicant->age = $applicant->birthday ? now()->parse($applicant->birthday)->diffInYears(now()) : '-';
-
-			$temp = SeaService::where('applicant_id', $applicant->id)->orderByDesc('sign_on')->first();
-
-			$applicant->last_vessel = $temp->vessel_name ?? null;
-			$applicant->sign_off = $temp->sign_off ?? null;
-			$applicant->rank = $temp->rank ?? null;
-
-			// $vessels = SeaService::select('vessel_name', 'sign_off', 'rank')->where('applicant_id', $applicant->id)->get()->sortBy('sign_off');
-
-			$applicant->last_vessel = $applicant->last_vessel == "" ? "-----" : $applicant->last_vessel;
-			$applicant->last_disembark = $applicant->sign_off == "" ? "" : $applicant->sign_off->toDateString();
-
-			if($applicant->pa_s == "Lined-Up" || $applicant->pa_s == "On Board"){
-			    $applicant->rank = $ranks[$applicant->pa_ri];
-			    $applicant->vessel = $vesselszxc[$applicant->pa_vid];
-
-			    // SEARCH
-			    $applicant->search .= $applicant->rank . $applicant->vessel;
+			if(isset($filters['fMax_age'])){
+				$min_date = now()->subYears($filters['fMax_age'])->format('Y-m-d');
+				$applicants = $applicants->whereBetween('u.birthday', [$min_date, $max_date]);
 			}
 			else{
-			    if($applicant->last_vessel != ""){
-			        $applicant->rank = $applicant->rank != "" ? ($ranks2[$applicant->rank] ?? 'N/A') : 'N/A';
-			    }
-			    else{
-			    	$applicant->rank = "N/A";
-			    }
+				$applicants = $applicants->where('u.birthday', '<=', $max_date);
 			}
-			// if($vessels->count()){
-			// 	$applicant->last_vessel = $vessels->last()->vessel_name;
-			// }
-			// else{
-			// 	$applicant->last_vessel = "-----";
-			// }
-
-			// if($applicant->pro_app->status == "Lined-Up"){
-			//     $applicant->rank = $ranks[$applicant->pro_app->rank_id];
-			//     $applicant->vessel = $vesselszxc[$applicant->pro_app->vessel_id];
-			// }
-			// else{
-			//     if($vessels->count()){
-			//         $name = $vessels->last()->rank;
-			//         $applicant->rank = $name != "" ? ($ranks2[$name] ?? 'N/A') : 'N/A';
-			//     }
-			//     else{
-			//     	$applicant->rank = "N/A";
-			//     }
-			// }
+		}
+		elseif(isset($filters['fMax_age'])){
+			$min_date = now()->subYears($filters['fMax_age'])->format('Y-m-d');
+			$applicants = $applicants->where('u.birthday', '>=', $min_date);
 		}
 
-		$applicants = $applicants->toArray();
-
-		if($search){
-			return Datatables::of($applicants)
-				->rawColumns(['actions'])
-				->make(true);
+		// INIT RANK FILTER
+		if(isset($filters['fRanks'])){
+			$applicants->whereIn('pa.rank_id', $filters['fRanks']);
 		}
-		else{
-			for ($i=0; $i < $req->start; $i++) { 
-				array_push($applicants, "");
-			}
 
-	    	return Datatables::of($applicants)
-	    		->setTotalRecords($tc)
-	            ->setFilteredRecords($tc)
-	    		->rawColumns(['actions'])
-	    		->make(true);
-		}
+    	$tc = $applicants->count();
+    	$applicants = $applicants->offset($req->start)->limit($req->length);
+    	$applicants = $applicants->get();
+
+    	// GETTING ADDITIONAL DETAILS
+    	$applicants->load('user');
+    	$applicants->load('pro_app.vessel');
+    	foreach($applicants as $applicant){
+    		// RANK FILTER
+
+
+    		$last_vessel = SeaService::where('applicant_id', $applicant->id)->orderBy('created_at', 'DESC')->first();
+    		$latest_flag = DocumentFlag::where('applicant_id', $applicant->id)->orderBy('issue_date', 'DESC')->first();
+
+    		$applicant->last_vessel = $last_vessel ?? ["vessel_name" => "-", "sign_off" => null];
+    		$applicant->age = $applicant->user->birthday ? now()->diffInYears($applicant->user->birthday) : $applicant->user->age;
+
+    		// SETTING RANK
+    		$applicant->rank = "-";
+
+    		if(isset($applicant->pro_app->rank)){
+    			$applicant->rank = $applicant->pro_app->rank->abbr;
+    		}
+    		elseif(isset($last_vessel->rank2)){
+    			$applicant->rank = $last_vessel->rank2->abbr;
+    		}
+    		elseif(isset($latest_flag->rankz)){
+    			$applicant->rank = $latest_flag->rankz->abbr;
+    		}
+
+    		// REMARKS
+    		$applicant->remarks = json_decode($applicant->remarks);
+
+    		// ACTIONS
+    		$applicant->actions = $applicant->actions;
+    	}
+
+    	// SORTING DATA
+    	$array = [];
+
+    	// FILL IN FRONT
+    	for($i = $req->start; $i > 0; $i--){
+    		array_push($array, []);
+    	}
+
+    	// MERGE ACTUAL VISIBLE DATA
+    	$array = array_merge($array, $applicants->toArray());
+
+    	// FILL IN END
+    	// for($i = $req->start; $i <= $tc; $i++){
+    	// 	array_push($array, []);
+    	// }
+
+	    return Datatables::of($array)
+    		->setTotalRecords($tc)
+            ->setFilteredRecords($tc)
+    		->rawColumns(['actions'])
+    		->make(true);
 	}
 
 	public function processedApplicant($id){
