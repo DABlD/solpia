@@ -106,7 +106,7 @@
 	</tr>
 
 	<tr>
-		<td rowspan="3" style="{{ $bc }}">Seafarer</td>
+		<td rowspan="4" style="{{ $bc }}">Seafarer</td>
 		<td style="{{ $center }}">Name</td>
 		<td colspan="3">
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
@@ -131,6 +131,39 @@
 		</td>
 		<td style="{{ $center }}">Applicable CBA</td>
 		<td colspan="2" style="{{ $center }} font-size: 8px;">{{ $cba }}</td>
+	</tr>
+
+	@php
+		// FIND PASSPORT
+		$pp = null;
+		$sb = null;
+		foreach($data->document_id as $id){
+			if($id->type == "PASSPORT"){
+				$id->issue = $id->issue_date ? now()->parse($id->issue_date)->format("Y-m-d") : "";
+				$id->expiry = $id->expiry_date ? now()->parse($id->expiry_date)->format("Y-m-d") : "UNLIMITED";
+				$pp = $id;
+			}
+			if($id->type == "SEAMAN'S BOOK"){
+				$id->issue = $id->issue_date ? now()->parse($id->issue_date)->format("Y-m-d") : "";
+				$id->expiry = $id->expiry_date ? now()->parse($id->expiry_date)->format("Y-m-d") : "UNLIMITED";
+				$sb = $id;
+			}
+		}
+	@endphp
+
+	<tr>
+		<td style="{{ $center }}">Passport</td>
+		<td colspan="3">
+			{{ $pp ? "$pp->number" : "" }}
+			<br style='mso-data-placement:same-cell;' />
+			{{ $pp ? "($pp->issue / $pp->expiry)" : "" }}
+		</td>
+		<td style="{{ $center }}">Seaman's Book</td>
+		<td colspan="2" style="{{ $center }} font-size: 8px;">
+			{{ $sb ? "$sb->number" : "" }}
+			<br style='mso-data-placement:same-cell;' />
+			{{ $sb ? "($sb->issue / $sb->expiry)" : "" }}
+		</td>
 	</tr>
 
 	<tr>
