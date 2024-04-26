@@ -3156,7 +3156,8 @@
                             @endif
                         @endforeach
                         @if(auth()->user()->fleet == "FLEET D")
-                            'toei': "TOEI"
+                            'toei': "TOEI",
+                            'shinko': "SHINKO"
                         @elseif(auth()->user()->fleet == "FLEET C")
                             'hmm': "HMM"
                         @elseif(in_array(auth()->user()->id, [22, 4504, 5013, 6011, 5963, 6014, 6080, 5907]))
