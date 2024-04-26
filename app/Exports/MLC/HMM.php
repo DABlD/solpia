@@ -291,12 +291,12 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.7);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.7);
 
-                $event->sheet->getDelegate()->getStyle('A1:H' . (59 + $mt))->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A4:H' . (59 + $mt))->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:H' . (60 + $mt))->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A4:H' . (60 + $mt))->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('B21')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A' . (43 + $mt))->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A' . (46 + $mt))->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A' . (49 + $mt))->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A' . (44 + $mt))->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A' . (47 + $mt))->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A' . (50 + $mt))->getFont()->setSize(8);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -328,7 +328,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    'B' . (22 + $mt)
+                    'B' . (23 + $mt)
                 ];
 
                 // HL B
@@ -354,9 +354,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:I' . (21 + $mt),
-                    'A' . (22 + $mt),
-                    'A' . (23 + $mt) . ':I' . (59 + $mt)
+                    'A1:I' . (22 + $mt),
+                    'A' . (23 + $mt),
+                    'A' . (24 + $mt) . ':I' . (60 + $mt)
                 ];
 
                 // B I
@@ -364,14 +364,14 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'A' . (22 + $mt), 'A' . (33 + $mt), 'B' . (27 + $mt), 'C' . (24 + $mt), 'E' . (24 + $mt), 
-                    'E' . (27 + $mt), 'B' . (22 + $mt), 'B' . (30 + $mt), 'B' . (31 + $mt), 'A' . (40 + $mt),
-                    'A' . (43 + $mt), 'A' . (46 + $mt), 'A' . (49 + $mt), 'A' . (51 + $mt), 'A' . (57 + $mt)
+                    'A' . (23 + $mt), 'A' . (34 + $mt), 'B' . (28 + $mt), 'C' . (25 + $mt), 'E' . (25 + $mt), 
+                    'E' . (28 + $mt), 'B' . (23 + $mt), 'B' . (31 + $mt), 'B' . (32 + $mt), 'A' . (41 + $mt),
+                    'A' . (44 + $mt), 'A' . (47 + $mt), 'A' . (50 + $mt), 'A' . (52 + $mt), 'A' . (58 + $mt)
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'F8', 'E' . (55 + $mt), 'C7', 'H8', 'C' . (13 + $mt),
+                    'F10', 'E' . (56 + $mt), 'C7', 'H9', 'C' . (14 + $mt),
                 ];
 
                 foreach($h as $key => $value) {
@@ -411,9 +411,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A7:I' . (17 + $mt), 'A' . (20 + $mt) . ':I' . (22 + $mt), 'A' . (24 + $mt) . ':I' . (31 + $mt), 
-                    'A' . (33 + $mt) . ':I' . (36 + $mt), 'A' . (40 + $mt) . ':I' . (40 + $mt), 'A' . (43 + $mt) . ':I' . (43 + $mt),
-                    'A' . (46 + $mt) . ':I' . (46 + $mt), 'A' . (49 + $mt) . ':I' . (49 + $mt), 'A' . (57 + $mt) . ':I' . (58 + $mt)
+                    'A7:I' . (18 + $mt), 'A' . (21 + $mt) . ':I' . (23 + $mt), 'A' . (25 + $mt) . ':I' . (32 + $mt), 
+                    'A' . (34 + $mt) . ':I' . (37 + $mt), 'A' . (41 + $mt) . ':I' . (41 + $mt), 'A' . (42 + $mt) . ':I' . (44 + $mt),
+                    'A' . (47 + $mt) . ':I' . (47 + $mt), 'A' . (50 + $mt) . ':I' . (50 + $mt), 'A' . (58 + $mt) . ':I' . (59 + $mt)
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -438,7 +438,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BOTTOM BORDER THIN
                 $cells[7] = array_merge([
-                    'A' . (53 + $mt) . ':C' . (53 + $mt), 'E' . (53 + $mt) . ':H' . (53 + $mt)
+                    'A' . (54 + $mt) . ':C' . (54 + $mt), 'E' . (54 + $mt) . ':H' . (54 + $mt)
                 ]);
 
                 foreach($cells as $key => $value){
@@ -462,50 +462,54 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
 
                 // ROW RESIZE
-                for($i = 1; $i <= (60 + $mt); $i++){
+                for($i = 1; $i <= (61 + $mt); $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(21);
                 }
 
                 $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(17);
-                $event->sheet->getDelegate()->getRowDimension(18 + $mt)->setRowHeight(17);
-                $event->sheet->getDelegate()->getRowDimension(22 + $mt)->setRowHeight(110);
-                $event->sheet->getDelegate()->getRowDimension(24 + $mt)->setRowHeight(30);
+
+                // temp
+                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(30);
+
+                $event->sheet->getDelegate()->getRowDimension(19 + $mt)->setRowHeight(17);
+                $event->sheet->getDelegate()->getRowDimension(23 + $mt)->setRowHeight(110);
                 $event->sheet->getDelegate()->getRowDimension(25 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(27 + $mt)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(28 + $mt)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(26 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(28 + $mt)->setRowHeight(40);
                 $event->sheet->getDelegate()->getRowDimension(29 + $mt)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(30 + $mt)->setRowHeight(50);
-                $event->sheet->getDelegate()->getRowDimension(31 + $mt)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(33 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(30 + $mt)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(31 + $mt)->setRowHeight(50);
+                $event->sheet->getDelegate()->getRowDimension(32 + $mt)->setRowHeight(40);
                 $event->sheet->getDelegate()->getRowDimension(34 + $mt)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(35 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(36 + $mt)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(36 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(37 + $mt)->setRowHeight(35);
 
                 // TO PAGE 2
-                $event->sheet->getDelegate()->getRowDimension(37 + $mt)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(38 + $mt)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(38 + $mt)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(39 + $mt)->setRowHeight(20);
                 // END
 
-                $event->sheet->getDelegate()->getRowDimension(40 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(43 + $mt)->setRowHeight(95);
-                $event->sheet->getDelegate()->getRowDimension(46 + $mt)->setRowHeight(115);
-                $event->sheet->getDelegate()->getRowDimension(49 + $mt)->setRowHeight(80);
-                $event->sheet->getDelegate()->getRowDimension(51 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(120);
-                $event->sheet->getDelegate()->getRowDimension(53 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(41 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(44 + $mt)->setRowHeight(95);
+                $event->sheet->getDelegate()->getRowDimension(47 + $mt)->setRowHeight(115);
+                $event->sheet->getDelegate()->getRowDimension(50 + $mt)->setRowHeight(80);
+                $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(53 + $mt)->setRowHeight(120);
                 $event->sheet->getDelegate()->getRowDimension(54 + $mt)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(55 + $mt)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(57 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(56 + $mt)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(58 + $mt)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(59 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(60 + $mt)->setRowHeight(16);
 
                 if($mt){
-                    $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(40);
+                    $event->sheet->getDelegate()->getRowDimension(37)->setRowHeight(40);
                 }
 
-                $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('C25')->getFont()->setSize(7);
             },
         ];
     }
@@ -518,7 +522,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
-        $drawing->setCoordinates('G' . (52 + $mt));
+        $drawing->setCoordinates('G' . (53 + $mt));
         $drawing->setHeight(154);
         $drawing->setWidth(154);
         $drawing->setOffsetX(35);
@@ -530,7 +534,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setPath(public_path($sig));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('E' . (52 + $mt));
+        $drawing3->setCoordinates('E' . (53 + $mt));
         $drawing3->setHeight(140);
         $drawing3->setWidth(140);
 
