@@ -2,6 +2,7 @@
 	$bold = "font-weight: bold;";
 	$center = "text-align: center;";
 	$color = "color: #0000FF;";
+
 @endphp
 
 <table>
@@ -36,7 +37,7 @@
 	</tr>
 
 	<tr>
-		<td rowspan="2" style="{{ $center }}">Seafarer</td>
+		<td rowspan="3" style="{{ $center }}">Seafarer</td>
 		<td>Name</td>
 		<td colspan="3" style="{{ $center }} {{ $color }}">
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
@@ -55,6 +56,39 @@
 		<td colspan="2" style="{{ $center }}">Birthplace/Nationality</td>
 		<td colspan="2" style="{{ $center }} {{ $color }}">
 			{{ $data->birth_place }} / FILIPINO
+		</td>
+	</tr>
+
+	@php
+		// FIND PASSPORT
+		$pp = null;
+		$sb = null;
+		foreach($data->document_id as $id){
+			if($id->type == "PASSPORT"){
+				$id->issue = $id->issue_date ? now()->parse($id->issue_date)->format("Y-m-d") : "";
+				$id->expiry = $id->expiry_date ? now()->parse($id->expiry_date)->format("Y-m-d") : "UNLIMITED";
+				$pp = $id;
+			}
+			if($id->type == "SEAMAN'S BOOK"){
+				$id->issue = $id->issue_date ? now()->parse($id->issue_date)->format("Y-m-d") : "";
+				$id->expiry = $id->expiry_date ? now()->parse($id->expiry_date)->format("Y-m-d") : "UNLIMITED";
+				$sb = $id;
+			}
+		}
+	@endphp
+
+	<tr>
+		<td>Passport</td>
+		<td colspan="3" style="{{ $center }} {{ $color }}">
+			{{ $pp ? "$pp->number" : "" }}
+			<br style='mso-data-placement:same-cell;' />
+			{{ $pp ? "($pp->issue / $pp->expiry)" : "" }}
+		</td>
+		<td colspan="2" style="{{ $center }}">Seaman's Book</td>
+		<td colspan="2" style="{{ $center }} {{ $color }}">
+			{{ $sb ? "$sb->number" : "" }}
+			<br style='mso-data-placement:same-cell;' />
+			{{ $sb ? "($sb->issue / $sb->expiry)" : "" }}
 		</td>
 	</tr>
 
