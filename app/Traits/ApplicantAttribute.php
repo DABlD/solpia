@@ -9,8 +9,8 @@ trait ApplicantAttribute{
 		// return '<a class="btn btn-success" data-toggle="tooltip" title="View Applicant" data-id="' . $this->id . '">' .
 		// 	        '<span class="fa fa-search" data-id="' . $this->id . '"></span>' .
 		// 	   '</a>&nbsp;' . 
-		$string = '<a class="btn btn-warning" data-toggle="tooltip" title="Export" data-status2="' . $this->pa_s . '" data-id="' . $this->id . '">' .
-			        '<span class="fa fa-file-text" data-id="' . $this->id . '" data-status2="' . $this->pa_s . '"></span>' .
+		$string = '<a class="btn btn-warning" data-toggle="tooltip" title="Export" data-status2="' . $this->status . '" data-id="' . $this->id . '">' .
+			        '<span class="fa fa-file-text" data-id="' . $this->id . '" data-status2="' . $this->status . '"></span>' .
 			   '</a>&nbsp;' .
 			   '<a class="btn btn-primary" data-toggle="tooltip" title="Edit Application" data-id="' . $this->id . '">' .
 			        '<span class="fa fa-pencil" data-id="' . $this->id . '"></span>' .
@@ -24,13 +24,13 @@ trait ApplicantAttribute{
 
 		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer', 'Encoder'])){
 			// LINE UP
-			if($this->pa_s != "Lined-Up" && $this->pa_s != "On Board"){
+			if($this->status != "Lined-Up" && $this->status != "On Board"){
 				$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
 			if(in_array(auth()->user()->role, ['Admin', 'Encoder'])){
 				$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-trash" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
-			if($this->pa_s == "Lined-Up"){
+			if($this->status == "Lined-Up"){
 				$string .= '<a class="btn btn-danger rlu" data-toggle="tooltip" title="Remove Lineup" onClick="rlu(' . $this->id . ', ' . $this->pa_vid . ')">
                         <span class="fa fa-times"></span>
                     </a>&nbsp;';
