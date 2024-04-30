@@ -253,7 +253,8 @@
 		</td>
 		<td colspan="4">
 			‎‎
-			工资起算日(包括当天)： {{ $data->pro_app->eld ? $data->pro_app->eld->format('d/M/Y') : "---" }}
+			工资起算日(包括当天)： 
+			{{-- 工资起算日(包括当天)： {{ $data->pro_app->eld ? $data->pro_app->eld->format('d/M/Y') : "---" }} --}}
 		</td>
 		<td colspan="2">
 			‎‎
@@ -280,7 +281,7 @@
 		</td>
 		<td colspan="4">
 			‎‎
-			Monthly fixed overtime (officer fixed OT 82% basic, rating 
+			Monthly fixed overtime (officer fixed OT {{ $data->rankType == "OFFICER" ? "86" : "82" }}% basic, rating 
 		</td>
 		<td colspan="2">
 			‎‎
