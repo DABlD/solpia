@@ -1814,13 +1814,19 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $lucs = LineUpContract::whereIn('rank_id', [14,19])->where('joining_date', 'LIKE', '2024-03-%')->get();
-        $lucs->load('applicant.user');
-        $lucs->load('rank');
-
-        foreach($lucs as $luc){
-            echo $luc->rank->abbr . ' ' . $luc->applicant->user->namefull . ' - ' . $luc->applicant->user->fleet . '<br>';
+        // ENYE
+        $users = User::where('fname', 'like', '%?%')->orWhere('lname', 'like', '%?%')->get();
+        foreach($users as $user){
+            $user->fname = str_replace('?', 'Ñ', $user->fname);
+            $user->lname = str_replace('?', 'Ñ', $user->lname);
+            $user->save();
         }
+
+        foreach($users as $user){
+            echo $user->fname . ' - ' . $user->lname . '<br>';
+        }
+
+        die;
     }
 
     public function generateApplicantFleet(){
