@@ -13,6 +13,7 @@
 
 	<tr>
 		<td style="{{ $bc }}">#</td>
+		<td style="{{ $bc }}">Source</td>
 		<td style="{{ $bc }}">Rank</td>
 		<td style="{{ $bc }}">Name</td>
 		<td style="{{ $bc }}">Age</td>
@@ -28,6 +29,7 @@
 	@foreach($data as $prospect)
 		<tr>
 			<td style="{{ $c }}">{{ $loop->index+1 }}</td>
+			<td style="{{ $c }}">{{ $prospect['source'] }}</td>
 			<td style="{{ $c }}">{{ $prospect['rank'] }}</td>
 			<td style="{{ $c }}">{{ $prospect['name'] }}</td>
 			<td style="{{ $c }}">{{ isset($prospect['birthday']) ? now()->parse($prospect['birthday'])->age : $prospect['age'] ?? '-' }}</td>

@@ -256,7 +256,7 @@ class Prospect2 implements FromView, WithEvents, ShouldAutoSize//, WithDrawings/
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
-                $event->sheet->getDelegate()->setAutoFilter('A2:I2');
+                $event->sheet->getDelegate()->setAutoFilter('A2:J2');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -355,7 +355,7 @@ class Prospect2 implements FromView, WithEvents, ShouldAutoSize//, WithDrawings/
                 ];
 
                 $fills[1] = [
-                    'A2:I2'
+                    'A2:J2'
                 ];
 
                 foreach($fills as $key => $value){
@@ -368,7 +368,7 @@ class Prospect2 implements FromView, WithEvents, ShouldAutoSize//, WithDrawings/
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A2:I2'
+                    'A2:J2'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -448,7 +448,7 @@ class Prospect2 implements FromView, WithEvents, ShouldAutoSize//, WithDrawings/
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
                 
                 // SET PRINT AREA
-                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I" . ($sod + 2));
+                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:J" . ($sod + 2));
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 $event->sheet->getDelegate()->getStyle('A1:H300')->getFont()->setSize(10);
