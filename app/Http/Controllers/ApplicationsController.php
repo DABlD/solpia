@@ -1817,7 +1817,9 @@ class ApplicationsController extends Controller
         $lucs = LineUpContract::whereIn('rank_id', [14, 19])->where('disembarkation_date', null)->get()->load('applicant.user');
 
         foreach($lucs as $applicant){
-            echo $applicant->applicant->user->namefull . ';' . $applicant->rank->abbr . ';' . $applicant->vessel->name . ';' . now()->parse($applicant->joining_date)->format("M d, Y") . '<br>';
+            if($applicant->applicant->user->fleet == "TOEI"){
+                echo $applicant->applicant->user->namefull . ';' . $applicant->rank->abbr . ';' . $applicant->vessel->name . ';' . now()->parse($applicant->joining_date)->format("M d, Y") . '<br>';
+            }
         }
     }
 
