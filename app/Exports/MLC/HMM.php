@@ -65,9 +65,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             else{
                 // DEFAULT
                 $applicant->shipowner = "HMM Company Limited";
-                $applicant->sAddress = "1-7 YEONGJI-DONG, JONGNO-GU, SEOUL, KOREA";
+                $applicant->sAddress = "108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
                 $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-                $applicant->cAddress = "BUSAN POST OFFICE BUILDING, 5TH FLOOR, JUNGANG-DONG 3GA, JUNG-GU, BUSAN, KOREA";
+                $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
             }
         }
 
