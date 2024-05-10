@@ -152,3 +152,17 @@ foreach($tc as $temp){
 foreach($array as $temp){
     echo $temp->namefull . ';' . $temp->crew->pro_app->rank->abbr . ';' . $temp->hl . '<br>';
 }
+
+// ENYE ñ
+$users = User::where('fname', 'like', '%?%')->orWhere('lname', 'like', '%?%')->get();
+foreach($users as $user){
+    $user->fname = str_replace('?', 'Ñ', $user->fname);
+    $user->lname = str_replace('?', 'Ñ', $user->lname);
+    $user->save();
+}
+
+foreach($users as $user){
+    echo $user->fname . ' - ' . $user->lname . '<br>';
+}
+
+die;

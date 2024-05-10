@@ -1814,19 +1814,13 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        // ENYE
-        $users = User::where('fname', 'like', '%?%')->orWhere('lname', 'like', '%?%')->get();
-        foreach($users as $user){
-            $user->fname = str_replace('?', 'Ñ', $user->fname);
-            $user->lname = str_replace('?', 'Ñ', $user->lname);
-            $user->save();
-        }
+        $lucs = LineUpContract::whereIn('rank_id', [14, 19])->where('disembarkation_date', null)->get()->load('applicant.user');
 
-        foreach($users as $user){
-            echo $user->fname . ' - ' . $user->lname . '<br>';
+        foreach($lucs as $applicant){
+            if($applicant->applicant->user->fleet == "TOEI"){
+                echo $applicant->applicant->user->namefull . ';' . $applicant->rank->abbr . ';' . $applicant->vessel->name . ';' . now()->parse($applicant->joining_date)->format("M d, Y") . '<br>';
+            }
         }
-
-        die;
     }
 
     public function generateApplicantFleet(){

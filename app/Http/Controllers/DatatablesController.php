@@ -96,35 +96,36 @@ class DatatablesController extends Controller
 			$applicants = $applicants->where('u.fname', 'like', "%" . $req->search['value'] . "%")
 									 ->orWhere('u.lname', 'like', "%" . $req->search['value'] . "%");
 		}
+		else{
+			// APPLY FILTERS
+			$filters = $req->filters;
+			// dd($filters['fLname'], $req->search['value'], 'test');
 
-		// APPLY FILTERS
-		$filters = $req->filters;
-		// dd($filters);
+			// NAME FILTER
+			$applicants = $applicants->where('u.fname', 'LIKE', "%" . $filters["fFname"] ?? "" . "%")
+									->where('u.lname', 'LIKE', "%" . $filters["fLname"] ?? "" . "%");
+			// AGE FILTER
+			if(isset($filters['fMin_age'])){
+				$max_date = now()->subYears($filters['fMin_age'])->format('Y-m-d');
 
-		// NAME FILTER
-		$applicants = $applicants->where('u.fname', 'like', "%" . $filters["fFname"] ?? "" . "%")
-								->where('u.lname', 'like', "%" . $filters["fLname"] ?? "" . "%");
-					
-		// AGE FILTER
-		if(isset($filters['fMin_age'])){
-			$max_date = now()->subYears($filters['fMin_age'])->format('Y-m-d');
-
-			if(isset($filters['fMax_age'])){
+				if(isset($filters['fMax_age'])){
+					$min_date = now()->subYears($filters['fMax_age'])->format('Y-m-d');
+					$applicants = $applicants->whereBetween('u.birthday', [$min_date, $max_date]);
+				}
+				else{
+					$applicants = $applicants->where('u.birthday', '<=', $max_date);
+				}
+			}
+			elseif(isset($filters['fMax_age'])){
 				$min_date = now()->subYears($filters['fMax_age'])->format('Y-m-d');
-				$applicants = $applicants->whereBetween('u.birthday', [$min_date, $max_date]);
+				$applicants = $applicants->where('u.birthday', '>=', $min_date);
 			}
-			else{
-				$applicants = $applicants->where('u.birthday', '<=', $max_date);
-			}
-		}
-		elseif(isset($filters['fMax_age'])){
-			$min_date = now()->subYears($filters['fMax_age'])->format('Y-m-d');
-			$applicants = $applicants->where('u.birthday', '>=', $min_date);
-		}
 
-		// INIT RANK FILTER
-		if(isset($filters['fRanks'])){
-			$applicants->whereIn('pa.rank_id', $filters['fRanks']);
+			// INIT RANK FILTER
+			if(isset($filters['fRanks'])){
+				$applicants->whereIn('pa.rank_id', $filters['fRanks']);
+			}
+
 		}
 
     	$tc = $applicants->count();
@@ -179,6 +180,8 @@ class DatatablesController extends Controller
     	// for($i = $req->start; $i <= $tc; $i++){
     	// 	array_push($array, []);
     	// }
+
+    	// dd($array);
 
 	    return Datatables::of($array)
     		->setTotalRecords($tc)
