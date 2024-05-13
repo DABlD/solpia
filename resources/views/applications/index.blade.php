@@ -305,7 +305,7 @@
                     targets: 1,
                     render: function(status, display, row){
                         if(status == "Lined-Up" || status == "On Board"){
-                            status += `<br><b data-status="${status}">${(row.pro_app.vessel.name) ? row.pro_app.vessel.name : "-"}</b>`;
+                            status += `<br><b data-status="${status}">${(row.pro_app.vessel) ? row.pro_app.vessel.name : "-"}</b>`;
                         }
 
                         return status;
