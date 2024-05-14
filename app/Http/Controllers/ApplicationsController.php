@@ -1824,10 +1824,16 @@ class ApplicationsController extends Controller
             $pa = $temp->applicant->pro_app;
 
             if($temp->applicant->deleted_at == null){
-                // echo $pa ? $pa->rank->abbr : "-" . ' = ' . $temp->applicant->user->namefull . ' = ' . $pa ? $pa->status : "-" . ' = ' . $temp->applicant->user->fleet . '<br>';
-                echo ($pa->rank ? $pa->rank->abbr : $temp->rank) . ';' . ($temp->applicant->user->namefull) . ';' . ($pa ? $pa->status : "-") . ';' . ($temp->applicant->user->fleet) . '<br>';
-            }
+                $lv = $pa->vessel ? $pa->vessel->name : ($temp->vessel2 ? $temp->vessel2->name : "-");
+                $ld = null;
 
+                if($pa->status == "Vacation"){
+                    $ld = $temp->sign_off->format("M d, Y");
+                }
+
+                // echo $pa ? $pa->rank->abbr : "-" . ' = ' . $temp->applicant->user->namefull . ' = ' . $pa ? $pa->status : "-" . ' = ' . $temp->applicant->user->fleet . '<br>';
+                echo ($pa->rank ? $pa->rank->abbr : $temp->rank) . ';' . ($temp->applicant->user->namefull) . ';' . ($pa ? $pa->status : "-") . ';' . ($temp->applicant->user->fleet) . ';' . $lv . ';' . $ld . '<br>';
+            }
         }
     }
 
