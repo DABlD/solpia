@@ -1814,12 +1814,20 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $lucs = LineUpContract::whereIn('rank_id', [14, 19])->where('disembarkation_date', null)->get()->load('applicant.user');
+        $applicants = SeaService::where('vessel_name', 'LIKE', "%HMM%")->orWhere('vessel_name', 'LIKE', "%HYUNDAI%")->get();
+        $applicants->load('applicant.user');
+        $applicants->load('applicant.pro_app.rank');
+        $applicants = $applicants->groupBy('applicant_id');
 
-        foreach($lucs as $applicant){
-            if($applicant->applicant->user->fleet == "TOEI"){
-                echo $applicant->applicant->user->namefull . ';' . $applicant->rank->abbr . ';' . $applicant->vessel->name . ';' . now()->parse($applicant->joining_date)->format("M d, Y") . '<br>';
+        foreach($applicants as $temp){
+            $temp = $temp->last();
+            $pa = $temp->applicant->pro_app;
+
+            if($temp->applicant->deleted_at == null){
+                // echo $pa ? $pa->rank->abbr : "-" . ' = ' . $temp->applicant->user->namefull . ' = ' . $pa ? $pa->status : "-" . ' = ' . $temp->applicant->user->fleet . '<br>';
+                echo ($pa->rank ? $pa->rank->abbr : $temp->rank) . ';' . ($temp->applicant->user->namefull) . ';' . ($pa ? $pa->status : "-") . ';' . ($temp->applicant->user->fleet) . '<br>';
             }
+
         }
     }
 
