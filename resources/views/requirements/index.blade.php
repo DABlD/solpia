@@ -111,7 +111,17 @@
                     targets: [3, 11],
                     className: "text-center",
                     render: date =>{
-                        return date ? moment(date).format('MMM DD, YYYY') : "-";
+                        let temp = date ? moment(date).format('MMM DD, YYYY') : "-";
+
+                        if(moment(date).diff(moment(), 'days') <= 30){
+                            temp = `
+                                <div style="color: red; font-weight: bold;">
+                                    ${temp}
+                                </div>
+                            `;
+                        }
+
+                        return temp;
                     }
                 },
                 {
