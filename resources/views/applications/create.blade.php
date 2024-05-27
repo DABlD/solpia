@@ -22,6 +22,8 @@
                 <div class="box-body">
                     <form method="POST" action="{{ !isset($edit) ? route('applications.store') : route('applications.update', ['id' => $applicant->user->id]) }}" id="createForm" enctype="multipart/form-data">
                         @csrf
+
+                        <input type="hidden" name="fleet" value="{{ auth()->user()->fleet }}">
                         
                         {{-- PERSONAL DATA --}}
                         <h2><strong>Personal Data</strong></h2>
