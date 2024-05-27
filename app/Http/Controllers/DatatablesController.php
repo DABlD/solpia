@@ -93,17 +93,21 @@ class DatatablesController extends Controller
 
 		// IF DID NOT USE FILTER AND ONLY SEARCH VALUE
 		if($req->search['value']){
-			$applicants = $applicants->where('u.fname', 'like', "%" . $req->search['value'] . "%")
-									 ->orWhere('u.lname', 'like', "%" . $req->search['value'] . "%");
+			$applicants = $applicants->where(function($q) use($req){
+									 	$q->where('u.fname', 'like', "%" . $req->search['value'] . "%");
+									 	$q->orWhere('u.lname', 'like', "%" . $req->search['value'] . "%");
+									 });
 		}
 		else{
 			// APPLY FILTERS
 			$filters = $req->filters;
-			// dd($filters['fLname'], $req->search['value'], 'test');
 
 			// NAME FILTER
-			$applicants = $applicants->where('u.fname', 'LIKE', "%" . $filters["fFname"] ?? "" . "%")
-									->where('u.lname', 'LIKE', "%" . $filters["fLname"] ?? "" . "%");
+			$applicants = $applicants->where(function($q) use($filters){
+										$q->where('u.fname', 'LIKE', "%" . $filters["fFname"] ?? "" . "%");
+										$q->where('u.lname', 'LIKE', "%" . $filters["fLname"] ?? "" . "%");
+									});
+
 			// AGE FILTER
 			if(isset($filters['fMin_age'])){
 				$max_date = now()->subYears($filters['fMin_age'])->format('Y-m-d');
@@ -125,7 +129,6 @@ class DatatablesController extends Controller
 			if(isset($filters['fRanks'])){
 				$applicants->whereIn('pa.rank_id', $filters['fRanks']);
 			}
-
 		}
 
     	$tc = $applicants->count();
