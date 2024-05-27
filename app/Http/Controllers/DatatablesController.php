@@ -88,8 +88,12 @@ class DatatablesController extends Controller
 								->orderBy('created_at', 'DESC')
 								->join('users as u', 'u.id', '=', 'applicants.user_id')
 								->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
-								->where('u.fleet', 'like', auth()->user()->fleet ?? "%%")
-								->where('pa.status', 'like', $req->filters['fStatus']);
+								->where('pa.status', 'like', $req->filters['fStatus'])
+								->where(function($q){
+									if(auth()->user()->fleet){
+										$q->where('u.fleet', 'like', auth()->user()->fleet);
+									}
+								});
 
 		// IF DID NOT USE FILTER AND ONLY SEARCH VALUE
 		if($req->search['value']){
@@ -134,6 +138,8 @@ class DatatablesController extends Controller
     	$tc = $applicants->count();
     	$applicants = $applicants->offset($req->start)->limit($req->length);
     	$applicants = $applicants->get();
+
+    	dd(DB::getQueryLog(), $tc);
 
     	// GETTING ADDITIONAL DETAILS
     	$applicants->load('user');
