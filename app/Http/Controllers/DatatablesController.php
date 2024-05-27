@@ -139,7 +139,7 @@ class DatatablesController extends Controller
     	$applicants = $applicants->offset($req->start)->limit($req->length);
     	$applicants = $applicants->get();
 
-    	dd(DB::getQueryLog(), $tc);
+    	// dd(DB::getQueryLog(), $tc);
 
     	// GETTING ADDITIONAL DETAILS
     	$applicants->load('user');
