@@ -1814,28 +1814,27 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $applicants = SeaService::where('vessel_name', 'LIKE', "%HMM%")->orWhere('vessel_name', 'LIKE', "%HYUNDAI%")->get();
-        $applicants->load('applicant.user');
-        $applicants->load('applicant.pro_app.rank');
-        $applicants = $applicants->groupBy('applicant_id');
+        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                                    ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                                    ->join('users as u', 'u.id', '=', 'a.user_id')
+                                    ->where('joining_date', '>=', '2024-01-01')
+                                    ->where('fleet', '=', 'TOEI')
+                                    ->get();
 
-        foreach($applicants as $temp){
-            $temp = $temp->last();
-            $pa = $temp->applicant->pro_app;
+        $lups->load('rank');
+        $lups->load('vessel');
+        $lups->load('applicant.user');
+        $lups->load('applicant.sea_service');
 
-            if($temp->applicant->deleted_at == null){
-                $lv = $pa->vessel ? $pa->vessel->name : ($temp->vessel2 ? $temp->vessel2->name : "-");
-                $ld = null;
 
-                if($pa->status == "Vacation"){
-                    $ld = $temp->sign_off->format("M d, Y");
-                }
+        foreach($lups as $lup){
+            $temp = $lup->applicant->sea_service->sortBy('sign_on')->first();
 
-                // echo $pa ? $pa->rank->abbr : "-" . ' = ' . $temp->applicant->user->namefull . ' = ' . $pa ? $pa->status : "-" . ' = ' . $temp->applicant->user->fleet . '<br>';
-                echo ($pa->rank ? $pa->rank->abbr : $temp->rank) . ';' . ($temp->applicant->user->namefull) . ';' . ($pa ? $pa->status : "-") . ';' . ($temp->applicant->user->fleet) . ';' . $lv . ';' . $ld . '<br>';
-            }
+            echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->joining_date . ';' . (isset($temp->sign_on) ? $temp->sign_on : "-") . ';' . (isset($temp->rank) ? $temp->rank : "-") . '<br>';
         }
     }
+
+    //name, current rank, present vessel, date embarked
 
     public function generateApplicantFleet(){
         $applicants = User::where("role", 'Applicant')

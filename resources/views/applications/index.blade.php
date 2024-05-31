@@ -3103,7 +3103,6 @@
                         },
                         success: result => {
                             result = JSON.parse(result)[0];
-                            console.log(result);
                             
                             // CHECK IF SINOCREW
                             if(result.principal_id == 999){
