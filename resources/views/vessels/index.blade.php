@@ -3997,6 +3997,7 @@
                 title: 'Select Document',
                 input: 'select',
                 inputOptions: {
+                    'Biodata':              'Biodata',
                     'WalangLagay':          'Walang Lagay',
                     'MLCContract':          'MLC Contract',
                     'POEAContract':         'POEA Contract',
@@ -4023,6 +4024,9 @@
                 if(result.value){
                     if(result.value == "MLCContract"){
                         getMLCData(id, result.value);
+                    }
+                    else if(result.value == "Biodata"){
+                        exportBiodata(id);
                     }
                     else if(result.value == "POEAContract"){
                         getPOEAData(id, result.value);
@@ -4054,6 +4058,123 @@
                     }
                     else{
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${result.value}`;
+                    }
+                }
+            })
+        }
+
+        function exportBiodata(id){
+            console.log('biodata');
+            $.ajax({
+                url: "{{ route('applications.get2') }}",
+                data: {
+                    cols: "*",
+                    where: ['applicants.id', id],
+                    load: ['pro_app']
+                },
+                success: result => {
+                    result = JSON.parse(result)[0];
+                    console.log(result);
+                    
+                    // CHECK IF SINOCREW
+                    if(result.principal_id == 999){
+                        swal({
+                            title: 'Select Type',
+                            input: 'select',
+                            inputOptions: {
+                                sinocrew1: 'Maple Rising Format',
+                                sinocrew2: 'Xing Long Yung',
+                                sinocrew3: 'TENGDA'
+                            }
+                        }).then(result => {
+                            if(result.value){
+                                type = result.value;
+                                window.location.href = 'applications/export/' + id + '/' + type;
+                            }
+                        })
+                    }
+                    else if(result.principal_id == 10){
+                        swal({
+                            title: 'Select Type',
+                            input: 'select',
+                            inputOptions: {
+                                klcsm: 'Tanker',
+                                klcsmBulk: 'Bulk'
+                            }
+                        }).then(result => {
+                            if(result.value){
+                                type = result.value;
+                                window.location.href = 'applications/export/' + id + '/' + type;
+                            }
+                        })
+                    }
+                    // IF TOEI
+                    else if(result.principal_id == 3){
+                        swal({
+                            title: 'Check all ECDIS Specific',
+                            html: `
+                                <div class="checkbox col-md-offset-2 col-md-8" style="text-align: left;">
+                                    <label>
+                                        <input type="checkbox" value="ECDIS FURUNO 2107"> ECDIS FURUNO 2107
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS FURUNO 2807"> ECDIS FURUNO 2807
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS FURUNO 3100/3200/3300"> ECDIS FURUNO 3100/3200/3300
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS JRC 701B"> ECDIS JRC 701B
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS JRC 7201"> ECDIS JRC 7201
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS JRC 901B"> ECDIS JRC 901B
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS JRC 9201"> ECDIS JRC 9201
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS CHARTWORLD EG2"> ECDIS CHARTWORLD EG2
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS TOKYO"> ECDIS TOKYO
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS TRANSAS"> ECDIS TRANSAS
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS PM3D"> ECDIS PM3D
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS MARTEK"> ECDIS MARTEK
+                                    </label><br>
+                                    <label>
+                                        <input type="checkbox" value="ECDIS MECY"> ECDIS MECY
+                                </div>
+                            `,
+                            onOpen: () => {
+                                $('#ecdisSpecific').select2({
+                                    tags: true
+                                });
+
+                                $('#ecdisSpecific').on('select2:open', e => {
+                                    $('.select2-container').css('z-index', 1060);
+                                });
+                            }
+                        }).then(result => {
+                            if(result.value){
+                                let ecdises = [];
+                                $('.checkbox input:checked').each((i, ecdis) => {
+                                    ecdises.push($(ecdis).val());
+                                });
+                                window.location.href = 'applications/export/' + id + `/toei/?ecdises=${JSON.stringify(ecdises)}`;
+                            }
+                        })
+                    }
+                    else{
+                        window.location.href = 'applications/export/' + id;
                     }
                 }
             })
