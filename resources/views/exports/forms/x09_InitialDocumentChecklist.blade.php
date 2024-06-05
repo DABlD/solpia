@@ -59,6 +59,31 @@
 					if(str_starts_with($docu->type, $name)){
 						$box = "R";
 
+						if($docu->type == "MARPOL I"){
+							$marpols[0] = 'a';
+							continue;
+						}
+						elseif($docu->type == "MARPOL II"){
+							$marpols[1] = 'a';
+							continue;
+						}
+						elseif($docu->type == "MARPOL III"){
+							$marpols[2] = 'a';
+							continue;
+						}
+						elseif($docu->type == "MARPOL IV"){
+							$marpols[3] = 'a';
+							continue;
+						}
+						elseif($docu->type == "MARPOL V"){
+							$marpols[4] = 'a';
+							continue;
+						}
+						elseif($docu->type == "MARPOL VI"){
+							$marpols[5] = 'a';
+							continue;
+						}
+
 						if($docu->type != "MARPOL"){
 							$marpol = explode('ANNEX', $docu->type)[1]; //TO GET ONLY THE PART AFTER ANNEX 1-6/I-VI
 
