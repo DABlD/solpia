@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class InterviewSheet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class InterviewSheet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $rows, $principal, $rank){
         $this->data     = $data;
@@ -480,28 +480,33 @@ class InterviewSheet implements FromView, WithEvents//, WithDrawings//, ShouldAu
 
     public function drawings()
     {
-        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Letter Head');
-        $drawing->setDescription('Letter Head');
-        $drawing->setPath(public_path("images/letter_head.jpg"));
-        $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $row = 'E' . ($this->rows + 22);
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
+        if(!str_contains($this->data->rank->category, "ENGINE")){
+            $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing->setName('PRES SIG');
+            $drawing->setDescription('PRES SIG');
+            $drawing->setPath(public_path("images/pres_sig.png"));
+            $drawing->setResizeProportional(false);
+            $drawing->setHeight(100);
+            $drawing->setWidth(200);
+            $drawing->setOffsetX(50);
+            $drawing->setOffsetY(-70);
+            $drawing->setCoordinates($row);
+        }
+        else{
+            $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing->setName('CAPT SIG');
+            $drawing->setDescription('CAPT SIG');
+            $drawing->setPath(public_path("images/capt_castillo_sig.png"));
+            $drawing->setResizeProportional(false);
+            $drawing->setHeight(50);
+            $drawing->setWidth(150);
+            $drawing->setOffsetX(50);
+            $drawing->setOffsetY(-25);
+            $drawing->setCoordinates($row);
+        }
 
-        return [$drawing, $drawing2];
+        return [$drawing];
     }
 }
