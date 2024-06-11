@@ -414,6 +414,17 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 
                 // SET PRINT AREA
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
+
+                for($i = 14; $i <= 22; $i++){
+                    $temp = $event->sheet->getDelegate()->getCell('J' . $i)->getValue();
+
+                    if(strtotime($temp)){
+                        if(now()->parse($temp)->diffInMonths(now()) < 12){
+                            $event->sheet->getDelegate()->getStyle('J' . $i)->applyFromArray(['font' =>['color' => ['argb' => 'FF0000']]]);
+                        }
+                    }
+
+                }
             },
         ];
     }
