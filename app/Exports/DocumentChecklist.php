@@ -73,7 +73,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
         elseif($rank == "OLR" || $rank == "OLR1" || $rank == "WPR" || $rank == "ECDT" || $rank == "ABE" || $rank == "FTR" || $rank == "EBOY"){
             $this->view    = "OLR1_OLR_WPR";
         }
-        elseif($rank == "ELECT"){
+        elseif($rank == "ELECT" || $rank == "ETO"){
             $this->view    = "ETO";
         }
         elseif($rank == "ETR"){
