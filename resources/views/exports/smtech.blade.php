@@ -606,6 +606,21 @@
 		</tr>
 		
 		{{-- 4TH --}}
+		@php 
+			$name = "SID";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
+
+		<tr>
+			<td colspan="2">S.I.D. (ILO C185)</td>
+			<td colspan="2">-----</td>
+			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">MARINA</td>
+		</tr>
+		
+		{{-- 5TH --}}
 		@php
 			$docu = false;
 			foreach($applicant->document_flag as $document){
@@ -686,25 +701,6 @@
 			<td colspan="2">PANAMA</td>
 		</tr>
 		
-		{{-- 5TH --}}
-		@php
-			$docu = false;
-			foreach($applicant->document_flag as $document){
-			    if($document->country == "Liberia" && $document->type == "BOOKLET"){
-			        $docu = $document;
-			    }
-			}
-		@endphp
-
-		<tr>
-			<td colspan="2">Liberian Book</td>
-			<td colspan="2">-----</td>
-			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
-			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">LIBERIA</td>
-		</tr>
-		
 		{{-- 6TH --}}
 		@php 
 			$name = "MCV";
@@ -764,6 +760,45 @@
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+		</tr>
+
+		{{-- ADDL --}}
+		{{-- IF RANK IS CO --}}
+		@if($applicant->rank->id == 2)
+			@php 
+				$docu = false;
+				foreach($applicant->document_lc as $temp){
+					if(str_contains($temp->type, "SAFETY OFFICER")){
+						$docu = $temp;
+					}
+				}
+			@endphp
+
+			<tr>
+				<td colspan="4">Ship Safety Officer Training Course ( C/O Only )</td>
+				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+			</tr>
+		@endif
+
+		{{-- ADDLS --}}
+		<tr>
+			<td colspan="4">SIMS-WEBINAR</td>
+			<td>----</td>
+			<td>----</td>
+			<td>----</td>
+			<td colspan="2">SMS INDIA</td>
+		</tr>
+
+		{{-- ADDLS --}}
+		<tr>
+			<td colspan="4">WORKSHOP</td>
+			<td>----</td>
+			<td>----</td>
+			<td>----</td>
+			<td colspan="2">SMTECH</td>
 		</tr>
 
 		{{-- 1ST POINT 5 --}}
