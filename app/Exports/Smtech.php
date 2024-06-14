@@ -155,7 +155,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'ced4da'
+                        'rgb' => 'FFFF00'
                     ]
                 ],
             ],
@@ -163,7 +163,15 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'ffc000'
+                        'rgb' => 'B8CCE4'
+                    ]
+                ],
+            ],
+            [
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => [
+                        'rgb' => 'D8E4BC'
                     ]
                 ],
             ],
@@ -390,7 +398,13 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
-                $temp = 17;
+                $temp = 19;
+
+                // IF RANK IS CO ADD 1 ROW BECAUSE OF SHIP SAFETY OFFICER
+                if($this->applicant->rank->id == 2){
+                    $temp += 1;
+                }
+
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
                 $hl = false;
@@ -838,8 +852,24 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 //     $event->sheet->getDelegate()->getStyle($fill)->applyFromArray($fillStyle[0]);
                 // }
 
-                $event->sheet->getDelegate()->getStyle("D11")->applyFromArray($fillStyle[1]);
-                $event->sheet->getDelegate()->getStyle("H11:I11")->applyFromArray($fillStyle[1]);
+                $event->sheet->getDelegate()->getStyle("D19:E19")->applyFromArray($fillStyle[0]);
+                $event->sheet->getDelegate()->getStyle("A20:I21")->applyFromArray($fillStyle[0]);
+                $event->sheet->getDelegate()->getStyle("C" . ($rae + 3) . ':D' . ($rae + 3))->applyFromArray($fillStyle[0]);
+                $event->sheet->getDelegate()->getStyle("A" . ($ral + 6) . ':B' . ($ral + 6))->applyFromArray($fillStyle[0]);
+                $event->sheet->getDelegate()->getStyle("H" . ($ral + 6) . ':I' . ($ral + 6))->applyFromArray($fillStyle[0]);
+
+                $temp = 0;
+                if($this->applicant->rank->id == 2){
+                    $event->sheet->getDelegate()->getStyle("A" . ($raoc + 4) . ':D' . ($raoc + 4))->applyFromArray($fillStyle[0]);
+                    $temp += 1;
+                }
+                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[1]);
+                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 5) . ':I' . ($rac + $temp + 5))->applyFromArray($fillStyle[2]);
+
+                $event->sheet->getDelegate()->getStyle("A" . ($raoc + $temp) . ':I' . ($raoc + $temp + 8))->applyFromArray($fillStyle[2]);
+                $event->sheet->getDelegate()->getStyle("A" . ($rapiyc + $temp) . ':I' . ($rapiyc + $temp + 3))->applyFromArray($fillStyle[0]);
+
+                $event->sheet->getDelegate()->getStyle("F" . ($rash1 + $temp + 1))->applyFromArray($fillStyle[0]);
 
                 // BORDERS
 
