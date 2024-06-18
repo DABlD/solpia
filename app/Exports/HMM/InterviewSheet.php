@@ -482,7 +482,7 @@ class InterviewSheet implements FromView, WithEvents, WithDrawings//, ShouldAuto
     {
         $row = 'E' . ($this->rows + 22);
 
-        if(!str_contains($this->data->rank->category, "ENGINE")){
+        if(str_contains($this->data->rank->category, "ENGINE")){
             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
             $drawing->setName('PRES SIG');
             $drawing->setDescription('PRES SIG');
