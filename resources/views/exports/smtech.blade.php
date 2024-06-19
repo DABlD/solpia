@@ -1443,7 +1443,8 @@
 
 		@php
 			$applicant->sea_service = $applicant->sea_service->reverse()->take(12)->reverse();
-;		@endphp
+			$applicant->sea_service = $applicant->sea_service->sortBy('sign_on');
+		@endphp
 		@foreach($applicant->sea_service as $key => $data)
 			<tr>
 				<td colspan="2">{{ $data->vessel_name }}</td>
