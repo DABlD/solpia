@@ -398,12 +398,12 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
-                $temp = 19;
+                $temp = 20;
 
                 // IF RANK IS CO ADD 1 ROW BECAUSE OF SHIP SAFETY OFFICER
-                if($this->applicant->rank->id == 2){
-                    $temp += 1;
-                }
+                // if($this->applicant->rank->id == 2){
+                //     $temp += 1;
+                // }
 
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
@@ -858,11 +858,11 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 $event->sheet->getDelegate()->getStyle("A" . ($ral + 6) . ':B' . ($ral + 6))->applyFromArray($fillStyle[0]);
                 $event->sheet->getDelegate()->getStyle("H" . ($ral + 6) . ':I' . ($ral + 6))->applyFromArray($fillStyle[0]);
 
-                $temp = 0;
-                if($this->applicant->rank->id == 2){
+                $temp = 1;
+                // if($this->applicant->rank->id == 2){
                     $event->sheet->getDelegate()->getStyle("A" . ($raoc + 4) . ':D' . ($raoc + 4))->applyFromArray($fillStyle[0]);
-                    $temp += 1;
-                }
+                    // $temp += 1;
+                // }
                 $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[1]);
                 $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 5) . ':I' . ($rac + $temp + 5))->applyFromArray($fillStyle[2]);
 
