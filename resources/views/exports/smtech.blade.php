@@ -764,7 +764,7 @@
 
 		{{-- ADDL --}}
 		{{-- IF RANK IS CO --}}
-		@if($applicant->rank->id == 2)
+		{{-- @if($applicant->rank->id == 2) --}}
 			@php 
 				$docu = false;
 				foreach($applicant->document_lc as $temp){
@@ -781,7 +781,7 @@
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 			</tr>
-		@endif
+		{{-- @endif --}}
 
 		{{-- ADDLS --}}
 		<tr>
