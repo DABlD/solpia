@@ -210,6 +210,8 @@
 			$off = $checkDate($ss->sign_off);
 			$manning = $clean($ss->manning_agent);
 			$rank = null;
+			$vname = $clean($ss->vessel_name);
+			
 			if(isset($ss->rank) && $ss->rank != ""){
 				$rank = $ranks[$ss->rank];
 			}
@@ -217,7 +219,7 @@
 			echo "
 				<tr>
 					<td style='$center'>$rank</td>
-					<td style='$center' colspan='3'>$ss->vessel_name</td>
+					<td style='$center' colspan='3'>$vname</td>
 					<td style='$center'>$ss->vessel_type</td>
 					<td style='$center'>$engine</td>
 					<td style='$center'>$bhp</td>
