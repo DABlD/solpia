@@ -263,6 +263,15 @@
         var fStatus = "%%";
         var fUsv = "";
 
+        // INIT DATA FROM SESSION
+        fRanks = "{{ session('fRanks') }}";
+        fMin_age = "{{ session('fMin_age') }}";
+        fMax_age = "{{ session('fMax_age') }}";
+        fFname = "{{ session('fFname') }}";
+        fLname = "{{ session('fLname') }}";
+        fStatus = "{{ session('fStatus') }}";
+        $('#table_filter input[type="search"]').val("{{ session('search') }}");
+
         swal({
             title: 'Loading',
             timer: 1500
