@@ -1124,5 +1124,9 @@
                 }
             })
         }
+
+        function exporto(){
+            window.location.href = `{{ route('requirement.export') }}`;
+        }
     </script>
 @endpush

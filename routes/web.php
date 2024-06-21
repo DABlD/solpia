@@ -260,6 +260,7 @@ Route::group([
 		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
 		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 		Route::get($name . '/statusUpdate', ucfirst($name) . 'Controller@statusUpdate')->name($name . '.statusUpdate');
+		Route::get($name . '/export', ucfirst($name) . 'Controller@export')->name($name . '.export');
 
 		// CANDIDATE ROUTES
 		$name = "candidate";

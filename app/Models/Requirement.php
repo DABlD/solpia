@@ -31,6 +31,10 @@ class Requirement extends Model
         return $this->hasOne(Rank::class, 'id', 'rank');
     }
 
+    public function rank2(){
+        return $this->hasOne(Rank::class, 'id', 'rank');
+    }
+
     public function candidates(){
         return $this->hasMany(Candidate::class, 'requirement_id', 'id');
     }
