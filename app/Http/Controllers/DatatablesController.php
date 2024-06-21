@@ -83,6 +83,14 @@ class DatatablesController extends Controller
 
 	public function applications(Request $req){
 	// public function applications(Request $req){
+
+		session(['search' => $req->search['value']]);
+		session(['fMin_age' => $req->filters['fMin_age']]);
+		session(['fMax_age' => $req->filters['fMax_age']]);
+		session(['fFname' => $req->filters['fFname']]);
+		session(['fLname' => $req->filters['fLname']]);
+		session(['fStatus' => $req->filters['fStatus']]);
+
 		DB::enableQueryLog();
 		$applicants = Applicant::select('applicants.*', 'pa.status as pas')
 								->orderBy('created_at', 'DESC')
