@@ -51,10 +51,14 @@
     </div>
 </div>
 
+<div class="pull-right">
 @if(in_array(auth()->user()->role, ["Admin", "Crewing Officer", "Crewing Manager"]))
-    <div class="pull-right">
-    	<a class="btn btn-success" data-toggle="tooltip" title="Add Requirement" onclick="create()">
-    		<span class="fa fa-plus"></span>
-    	</a>
-    </div>
+	<a class="btn btn-primary" data-toggle="tooltip" title="Add Requirement" onclick="create()">
+		<span class="fa fa-plus"></span>
+	</a>
+
+    <a class="btn btn-success" data-toggle="tooltip" title="Export Requirements" onclick="exporto()">
+        <span class="fa fa-file-text"></span>
+    </a>
 @endif
+</div>

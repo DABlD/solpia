@@ -167,6 +167,8 @@
 		<td colspan="15" style="height: 3px;"></td>
 	</tr>
 
+	{{-- 2ND PART --}}
+
 	<tr>
 		<td colspan="3" style="{{ $bold }} height: 45px;">Requested by:</td>
 		<td colspan="4" style="{{ $bold }} height: 45px;">Approved by:</td>

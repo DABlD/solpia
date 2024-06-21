@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Requirement, Prospect, Candidate};
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
 class RequirementController extends Controller
@@ -86,6 +87,21 @@ class RequirementController extends Controller
                 }
             }
         }
+    }
+
+    public function export(){
+        $class = "App\\Exports\\Requirement\\ReqList";
+
+        $reqs = Requirement::whereIn('status', ['AVAILABLE', 'ON HOLD'])
+                        ->where('fleet', 'like', auth()->user()->fleet ?? "%%")
+                        ->get();
+
+        $reqs->load('vessel');
+        $reqs->load('rank2');
+
+        $date = now()->format('F j, Y');
+
+        return Excel::download(new $class($reqs), "Requirements as of $date.xlsx");
     }
 
     private function _view($view, $data = array()){
