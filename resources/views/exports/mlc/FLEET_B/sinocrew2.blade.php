@@ -281,7 +281,7 @@
 		</td>
 		<td colspan="4">
 			‎‎
-			Monthly fixed overtime (officer fixed OT {{ $data->rankType == "OFFICER" ? "86" : "82" }}% basic, rating 
+			Monthly fixed overtime (officer fixed OT 86% basic, rating 
 		</td>
 		<td colspan="2">
 			‎‎
@@ -296,7 +296,7 @@
 		</td>
 		<td colspan="4">
 			‎‎
-			85hrs guaranteed) 每月固定加班(高级船员82%，普通
+			85hrs guaranteed) 每月固定加班(高级船员86%，普通
 		</td>
 		<td colspan="2">
 			‎‎
