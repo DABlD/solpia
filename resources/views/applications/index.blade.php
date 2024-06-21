@@ -269,7 +269,7 @@
         fMax_age = "{{ session('fMax_age') }}";
         fFname = "{{ session('fFname') }}";
         fLname = "{{ session('fLname') }}";
-        fStatus = "{{ session('fStatus') }}";
+        fStatus = "{{ session('fStatus') ?? "%%" }}";
         $('#table_filter input[type="search"]').val("{{ session('search') }}");
 
         swal({
