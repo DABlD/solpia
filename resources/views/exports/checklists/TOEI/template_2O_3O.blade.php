@@ -326,235 +326,59 @@
 	{{-- // NSSSM --}}
 	{{-- // ULTRA P, IYO S --}}
 	@elseif(in_array($data->vessel->id, [727, 247]))
-		// MSTR CO 2O
-		@if(in_array($data->rank2->id, [1]))
-			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
-			{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("FUJI TRAINING", "FUJI TRAINING (FUJI TRADING)", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@elseif(in_array($data->rank2->id, [2,3]))
-			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
-			{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@elseif(in_array($data->rank2->id, [24]))
-			{{ $doc("FUJI TRAINING", "FUJI TRAINING (FUJI TRADING)", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@elseif(in_array($data->rank2->id, [4]))
-			{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@else
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@endif
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
+		{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
+		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+		{{ $con("MENTAL HEALTH") }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
 	{{-- KITAURA KAIUN --}}
 	{{-- CELEBES CLOVER, GLORIOUS ROSE --}}
 	@elseif(in_array($data->vessel->id, [4751, 5049]))
-		{{-- MSTR, CE, 1AE, 2E --}}
-		@if(in_array($data->rank2->id, [1]))
-			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
-			{{ $doc("BULK CARRIER SHIP INSPECTION TRAINING", "BULK CARRIER SHIP INSPECTION TRAINING", 'lc') }}
-			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
-			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		{{-- CO --}}
-		@elseif(in_array($data->rank2->id, [2]))
-			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
-			{{ $doc("ENCLOSED SPACE ENTRY", "ENCLOSED SPACE ENTRY", 'lc') }}
-			{{ $doc("BULK CARRIER SHIP INSPECTION TRAINING", "BULK CARRIER SHIP INSPECTION TRAINING", 'lc') }}
-			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
-			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		{{-- ENGINE OFFICERS EXCEPT FROM BIG 4 --}}
-		@elseif(in_array($data->rank2->id, [7,8,54,55,57]))
-			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
-			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		{{-- THE REST OF DECK CREW --}}
-		@elseif(in_array($data->rank2->id, [3,4,19,11,12,13,14,37,49,42,47,51]))
-			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
-			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		{{-- BSN --}}
-		@elseif(in_array($data->rank2->id, [9]))
-			{{ $doc("BULK CARRIER SHIP INSPECTION TRAINING", "BULK CARRIER SHIP INSPECTION TRAINING", 'lc') }}
-			{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
-			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@else
-			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@endif
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
+		{{ $doc("WOODCHIP", "WOOD CHIP CARRIER MAINTENANCE AND HANDLING", 'lc') }}
+		{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
+		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+		{{ $con("MENTAL HEALTH") }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
 	{{-- SMTECH --}}
 	{{-- ULTRA R, MARITIME L, MARITIME K, CMB VAN DIJCK--}}
 	@elseif(in_array($data->vessel->id, [66,51,231,4608]))
-		{{-- MSTR --}}
-		@if(in_array($data->rank2->id, [1]))
-			{{ $con("HATCH COVER") }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@endif
-		{{-- CO --}}
-		@if(in_array($data->rank2->id, [2]))
-			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
-			{{ $con("HATCH COVER") }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@else
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@endif
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
+		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+		{{ $con("MENTAL HEALTH") }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
 	{{-- SHOEI KISEN --}}
 	{{-- FEDERAL IMABARI, FEDERAL ICON, --}}
 	@elseif(in_array($data->vessel->id, [23, 4634]))
-		{{-- BIG 4 EXCEPT CO --}}
-		@if(in_array($data->rank2->id, [1,5,6,53]))
-			{{ $doc("CES TEST", "CES TEST", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@endif
-		{{-- CO --}}
-		@if(in_array($data->rank2->id, [2]))
-			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
-			{{ $doc("CES TEST", "CES TEST", 'lc') }}
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@else
-			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
-		@endif
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
+		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+		{{ $con("MENTAL HEALTH") }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
 	{{-- SHUNZAN KAIUN --}}
 	{{-- SPRING S, --}}
 	@elseif(in_array($data->vessel->id, [4619]))
