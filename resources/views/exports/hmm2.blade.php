@@ -231,7 +231,7 @@
 			}
 		}
 		else{
-			if($name == "COC-DECK RATING" || $name == "COC-ENGINE RATING"){
+			if($name == "COC-DECK OFFICER" || $name == "COC-ENGINE RATING"){
 				echo "
 					<td>$name</td>
 					<td>$issuer</td>
