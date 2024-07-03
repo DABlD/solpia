@@ -25,7 +25,7 @@
     								<th>Contact</th>
                                     <th>Last Vessel</th>
                                     <th>Last Sign Off</th>
-                                    @if(auth()->user()->fleet == null)
+                                    @if(auth()->user()->fleet == null || in_array(auth()->user()->id, [5716, 4580]))
     								    <th>Fleet</th>
                                     @endif
                                     <th>Remarks</th>
@@ -303,7 +303,7 @@
                 },
                 { data: 'last_vessel.vessel_name', name: 'last_vessel.vessel_name' },
                 { data: 'last_vessel.sign_off', name: 'last_vessel.sign_off' },
-                @if(auth()->user()->fleet == null)
+                @if(auth()->user()->fleet == null || in_array(auth()->user()->id, [5716, 4580]))
                     { data: 'user.fleet', name: 'user.fleet' },
                 @endif
                 { data: 'remarks', name: 'remarks' },
@@ -338,7 +338,7 @@
                         return last_disembark ? moment(last_disembark).format('MMM DD, YYYY') : "-";
                     },
                 },
-                @if(auth()->user()->fleet == null)
+                @if(auth()->user()->fleet == null || in_array(auth()->user()->id, [5716, 4580]))
                     {
                         targets: 11,
                         className: "w100"

@@ -101,6 +101,11 @@ class DatatablesController extends Controller
 									if(auth()->user()->fleet){
 										$q->where('u.fleet', 'like', auth()->user()->fleet);
 									}
+
+									//SIR KIT MA'AM ABBY CAN SEE TOEI
+									if(in_array(auth()->user()->id, [5716, 4580])){
+										$q->orWhere('u.fleet', 'like', "TOEI");
+									}
 								});
 
 		// IF DID NOT USE FILTER AND ONLY SEARCH VALUE
