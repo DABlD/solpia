@@ -161,7 +161,7 @@ class DatatablesController extends Controller
     		// RANK FILTER
 
 
-    		$last_vessel = SeaService::where('applicant_id', $applicant->id)->orderBy('created_at', 'DESC')->first();
+    		$last_vessel = SeaService::where('applicant_id', $applicant->id)->orderBy('sign_off', 'DESC')->first();
     		$latest_flag = DocumentFlag::where('applicant_id', $applicant->id)->orderBy('issue_date', 'DESC')->first();
 
     		$applicant->last_vessel = $last_vessel ?? ["vessel_name" => "-", "sign_off" => null];
