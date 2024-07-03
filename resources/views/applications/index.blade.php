@@ -3175,6 +3175,13 @@
                         @elseif(in_array(auth()->user()->id, [4520]))
                             'klcsm': "KLCSM",
                             'hmm': "HMM"
+                        @elseif(in_array(auth()->user()->id, [5901])) //SIR GWAK
+                            'klcsm': "KLCSM",
+                            'hmm': "HMM",
+                            'possm': "POSSM",
+                            'ckMaritime': "CK MARITIME",
+                            'sinocrew': "SINOCREW",
+                            'kosco': "KOSCO"
                         @endif
                     },
                     onOpen: () => {
