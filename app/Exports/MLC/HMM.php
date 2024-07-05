@@ -291,12 +291,12 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.7);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.7);
 
-                $event->sheet->getDelegate()->getStyle('A1:H' . (59 + $mt))->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A4:H' . (59 + $mt))->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:H' . (62 + $mt))->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A4:H' . (62 + $mt))->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('B21')->getFont()->setSize(8);
                 $event->sheet->getDelegate()->getStyle('A' . (43 + $mt))->getFont()->setSize(8);
                 $event->sheet->getDelegate()->getStyle('A' . (46 + $mt))->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A' . (49 + $mt))->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A' . (52 + $mt))->getFont()->setSize(8);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -356,7 +356,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $h[7] = [
                     'A1:I' . (21 + $mt),
                     'A' . (22 + $mt),
-                    'A' . (23 + $mt) . ':I' . (59 + $mt)
+                    'A' . (23 + $mt) . ':I' . (62 + $mt)
                 ];
 
                 // B I
@@ -366,12 +366,12 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $h['wrap'] = [
                     'A' . (22 + $mt), 'A' . (33 + $mt), 'B' . (27 + $mt), 'C' . (24 + $mt), 'E' . (24 + $mt), 
                     'E' . (27 + $mt), 'B' . (22 + $mt), 'B' . (30 + $mt), 'B' . (31 + $mt), 'A' . (40 + $mt),
-                    'A' . (43 + $mt), 'A' . (46 + $mt), 'A' . (49 + $mt), 'A' . (51 + $mt), 'A' . (57 + $mt)
+                    'A' . (43 + $mt), 'A' . (46 + $mt), 'A' . (52 + $mt), 'A' . (54 + $mt), 'A' . (60 + $mt)
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'F8', 'E' . (55 + $mt), 'C7', 'H8', 'C' . (13 + $mt),
+                    'F8', 'E' . (58 + $mt), 'C7', 'H8', 'C' . (13 + $mt),
                 ];
 
                 foreach($h as $key => $value) {
@@ -413,7 +413,8 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $cells[0] = array_merge([
                     'A7:I' . (17 + $mt), 'A' . (20 + $mt) . ':I' . (22 + $mt), 'A' . (24 + $mt) . ':I' . (31 + $mt), 
                     'A' . (33 + $mt) . ':I' . (36 + $mt), 'A' . (40 + $mt) . ':I' . (40 + $mt), 'A' . (43 + $mt) . ':I' . (43 + $mt),
-                    'A' . (46 + $mt) . ':I' . (46 + $mt), 'A' . (49 + $mt) . ':I' . (49 + $mt), 'A' . (57 + $mt) . ':I' . (58 + $mt)
+                    'A' . (49 + $mt) . ':I' . (49 + $mt),
+                    'A' . (46 + $mt) . ':I' . (46 + $mt), 'A' . (52 + $mt) . ':I' . (52 + $mt), 'A' . (60 + $mt) . ':I' . (61 + $mt)
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -438,7 +439,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BOTTOM BORDER THIN
                 $cells[7] = array_merge([
-                    'A' . (53 + $mt) . ':C' . (53 + $mt), 'E' . (53 + $mt) . ':H' . (53 + $mt)
+                    'A' . (56 + $mt) . ':C' . (56 + $mt), 'E' . (56 + $mt) . ':H' . (56 + $mt)
                 ]);
 
                 foreach($cells as $key => $value){
@@ -491,15 +492,16 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(40 + $mt)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(43 + $mt)->setRowHeight(95);
                 $event->sheet->getDelegate()->getRowDimension(46 + $mt)->setRowHeight(115);
-                $event->sheet->getDelegate()->getRowDimension(49 + $mt)->setRowHeight(80);
-                $event->sheet->getDelegate()->getRowDimension(51 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(120);
-                $event->sheet->getDelegate()->getRowDimension(53 + $mt)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(54 + $mt)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(55 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(49 + $mt)->setRowHeight(46);
+                $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(80);
+                $event->sheet->getDelegate()->getRowDimension(54 + $mt)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(55 + $mt)->setRowHeight(120);
+                $event->sheet->getDelegate()->getRowDimension(56 + $mt)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(57 + $mt)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(58 + $mt)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(59 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(60 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(61 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(62 + $mt)->setRowHeight(16);
 
                 if($mt){
                     $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(40);
@@ -518,7 +520,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
-        $drawing->setCoordinates('G' . (52 + $mt));
+        $drawing->setCoordinates('G' . (55 + $mt));
         $drawing->setHeight(154);
         $drawing->setWidth(154);
         $drawing->setOffsetX(35);
@@ -530,7 +532,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setPath(public_path($sig));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('E' . (52 + $mt));
+        $drawing3->setCoordinates('E' . (55 + $mt));
         $drawing3->setHeight(140);
         $drawing3->setWidth(140);
 
