@@ -31,7 +31,7 @@
 
 	<tr>
 		<td colspan="9" style="font-weight: bold;">
-			1. Seafarer/Capacity/Shipowner/Crew Manager/Agent/Ship
+			1. Seafarer/Capacity/Shipowner/Ship Manager/Agent/Ship
 		</td>
 	</tr>
 
@@ -71,7 +71,7 @@
 
 	@if(isset($data->crewManager))
 		<tr>
-			<td rowspan="2" style="{{ $center }}">Crew Manager</td>
+			<td rowspan="2" style="{{ $center }}">Ship Manager</td>
 			<td>Company</td>
 			<td colspan="7">{{ $data->crewManager }}</td>
 		</tr>
@@ -155,7 +155,7 @@
 			&#38; allowance
 		</td>
 		<td style="{{ $center }}">Basic wage</td>
-		<td colspan="2" style="{{ $center }}">Fixed / Guaranteed Overtime Allowance</td>
+		<td colspan="2" style="{{ $center }}">Fixed/Guaranteed Overtime Allowance</td>
 		<td colspan="3" style="{{ $center }}">Fixed Supervisor Allowance</td>
 		<td colspan="2" style="{{ $center }}">Substinence Allowance</td>
 	</tr>
@@ -339,7 +339,29 @@
 
 	<tr>
 		<td colspan="9" style="{{ $bold }}">
-			8. Any facts which are not defined in this agreement
+			8. Provision and compliance with Risk assessments
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="9">
+			1) The shipowner shall provide the risk assessment table through the ship's nemtwork (EDMS) and make it aavailable for viewing
+			<br style="mso-data-placement:same-cell;" />
+			at any time
+			<br style="mso-data-placement:same-cell;" />
+			2) Seafarers shall be aware of the relevant information and check and utilize it frequently
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="9">
+			{{-- SPACE ONLY --}}
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="9" style="{{ $bold }}">
+			9. Any facts which are not defined in this agreement
 		</td>
 	</tr>
 
