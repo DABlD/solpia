@@ -108,7 +108,7 @@
 
 		@if(isset($data->crewManager))
 			<tr>
-				<td rowspan="2" style="{{ $center }}">Crew Manager</td>
+				<td rowspan="2" style="{{ $center }}">Ship Manager</td>
 				<td>Company</td>
 				<td colspan="7">{{ $data->crewManager }}</td>
 			</tr>
