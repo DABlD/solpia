@@ -5720,11 +5720,11 @@
                 }).then(result => {
                     if(!result.dismiss){
                         data.fleet = result.value;
-                        window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel${data.fleet}?` + $.param(data);
+                        window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel?` + $.param(data);
                     }
                 })
             @else
-                window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel${data.fleet}?` + $.param(data);
+                window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel?` + $.param(data);
             @endif
         }
 
