@@ -651,7 +651,7 @@
 	</tr>
 
 	<tr>
-		@if(isset($applicant->rank) && $jr || $applicant->rank->category != "DECK OFFICER")
+		@if(isset($applicant->rank) && ($jr || $applicant->rank->category != "DECK OFFICER"))
 			<td colspan="8">
 				Specific Training(FURUNO)
 			</td>
