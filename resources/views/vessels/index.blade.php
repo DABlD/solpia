@@ -4001,7 +4001,6 @@
                     'WalangLagay':          'Walang Lagay',
                     'MLCContract':          'MLC Contract',
                     'POEAContract':         'POEA Contract',
-                    // 'DocumentChecklist':    'Document Checklist',
                     'X28_DispatchChecklist':'Line-up/Dispatch Checklist',
                     'X29_FinalBriefing':    'Final Briefing',
                     'X01_BorrowDocuments':  'Borrow Documents',
@@ -4014,8 +4013,9 @@
                         'Y03_LetterOfOathMarpol':  'Letter Of Oath (MARPOL)',
                         'Y04_LetterOfOath':  'Letter Of Oath',
                         'Y06_EMSDeclaration':  'EMS Declaration',
-                        'Y07_TOEIMLCQuestionnaire': "TOEI - MLC Questionnaire"
+                        'Y07_TOEIMLCQuestionnaire': "TOEI - MLC Questionnaire",
                     @endif
+                    'DocumentChecklist':             'Final Document Checklist',
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,
@@ -4035,7 +4035,32 @@
                         FBBD(id, result.value);
                     }
                     else if(result.value == "DocumentChecklist"){
-                        EDC(id, result.value);
+                        let fleet = "{{ auth()->user()->fleet }}";
+
+                        @if(auth()->user()->role == "Admin" || auth()->user()->fleet == null)
+                            swal({
+                                title: 'Select Fleet',
+                                input: 'select',
+                                inputOptions: {
+                                    'FLEET A' : 'FLEET A',
+                                    'FLEET B' : 'FLEET B',
+                                    'FLEET C' : 'FLEET C',
+                                    'FLEET D' : 'FLEET D',
+                                    'FLEET E' : 'FLEET E',
+                                    'TOEI' : 'TOEI',
+                                    'FISHING' : 'FISHING',
+                                },
+                                showCancelButton: true,
+                                cancelButtonColor: '#f76c6b'
+                            }).then(result => {
+                                if(result.value){
+                                    fleet = result.value;
+                                    EDC(id, fleet, "DocumentChecklist");
+                                }
+                            });
+                        @else
+                            EDC(id, fleet, "DocumentChecklist");
+                        @endif
                     }
                     else if(result.value == "X04_USVE"){
                         USVE(id, result.value);
@@ -4525,39 +4550,14 @@
             });
         }
 
-        function EDC(id, type){
-            let fleet = "{{ auth()->user()->fleet }}";
-            swal({
-                title: 'Select Type',
-                html: `
-                    <select id="type">
-                    </select>
-                    <br>
-                `,
-                allowOutsideClick: false,
-                showCancelButton: true,
-                cancelButtonColor: '#f76c6b',
-                onOpen: () => {
-                    $('#type').append(getChecklist(fleet));
-                    $('#type').select2({
-                        width: '100%',
-                    });
+        function EDC(id, fleet, type){
+            let data = {
+                type: "template",
+                status: "Lined-Up",
+                fleet: fleet
+            }
 
-                    $('#rank, #type').on('select2:open', function (e) {
-                        $('.select2-dropdown--below').css('z-index', 1060);
-                    });
-                },
-            }).then(result => {
-                let data = {
-                    type: $('#type').val(),
-                    status: "Lined-Up",
-                    fleet: fleet
-                }
-
-                if(result.value){
-                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
-                }
-            });
+            window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
         }
 
         function FBBD(id, type){
