@@ -636,7 +636,7 @@ class ApplicationsController extends Controller
             if($applicant->pro_app->status == "On Board" && $type == "toei"){
                 $applicant->sea_service->take(11);
 
-                $lup = $applicant->line_up_contracts->first();
+                $lup = $applicant->line_up_contracts->last();
 
                 $temp2 = new SeaService();
                 $temp2->vessel_name = $lup->vessel->name;
