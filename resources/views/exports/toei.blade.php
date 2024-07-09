@@ -383,34 +383,34 @@
 				@if(isset($crewRank) && $docu)
 					@if($hl == 0 && $hl !== null)
 						@if($rt == "er")
-							ENGINEERING WATCH
+							ABLE SEAMAN (III/4)
 						@else
-							NAVIGATIONAL WATCH
+							ABLE SEAMAN (II/4)
 						@endif
 					@elseif($hl == 1)
 						@if($rt == "er")
-							ABLE SEAFARER ENGINE
+							ABLE SEAMAN (III/5)
 						@else
-							ABLE SEAFARER DECK
+							ABLE SEAMAN (II/5)
 						@endif
 					@elseif($hl == 2)
 						@if($rt == "er")
-							OIC-ENGINEERING WATCH
+							OIC-EW (III/1)
 						@else
-							OIC-NAVIGATIONAL WATCH
+							OIC-NW (II/1)
 						@endif
 					@elseif($hl == 3)
 						@if($rt == "er")
 							@if(str_starts_with(strtoupper($docu->no), "CCE"))
-								CHIEF ENGINEER
+								CHIEF ENGINEER (III/2)
 							@else
-								SECOND ENGINEER
+								SECOND ENGINEER (III/2)
 							@endif
 						@else
 							@if(str_starts_with(strtoupper($docu->no), "CMM"))
-								MASTER MARINER
+								MASTER MARINER (II/2)
 							@else
-								CHIEF MATE
+								CHIEF MATE (II/2)
 							@endif
 						@endif
 				 	{{-- GALLEY --}}
@@ -458,34 +458,34 @@
 				@if(isset($crewRank) && $docu2)
 					@if($hl == 0)
 						@if($rt == "er")
-							ENGINEERING WATCH
+							ABLE SEAMAN (III/5)
 						@else
-							NAVIGATIONAL WATCH
+							ABLE SEAMAN (III/4)
 						@endif
 					@elseif($hl == 1)
 						@if($rt == "er")
-							ABLE SEAFARER ENGINE
+							ABLE SEAMAN (II/5)
 						@else
-							ABLE SEAFARER DECK
+							ABLE SEAMAN (II/4)
 						@endif
 					@elseif($hl == 2)
 						@if($rt == "er")
-							OIC-ENGINEERING WATCH
+							OIC-EW (III/1)
 						@else
-							OIC-NAVIGATIONAL WATCH
+							OIC-EW (II/1)
 						@endif
 					@elseif($hl == 3)
 						@if($rt == "er")
 							@if(str_starts_with(strtoupper($docu->no), "CCE"))
-								CHIEF ENGINEER
+								CHIEF ENGINEER (III/2)
 							@else
-								SECOND ENGINEER
+								SECOND ENGINEER (III/2)
 							@endif
 						@else
 							@if(str_starts_with(strtoupper($docu->no), "CMM"))
-								MASTER MARINER
+								MASTER MARINER (II/2)
 							@else
-								CHIEF MATE
+								CHIEF MATE (II/2)
 							@endif
 						@endif
 				 	{{-- GALLEY --}}
