@@ -1,4 +1,6 @@
 @php
+	$vFlag = $data->vessel->flag;
+	
 	$checkDate = function($issue, $expiry, $type2){
 		if($type2){
 			if($issue != "" && $issue != null){
@@ -138,7 +140,7 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
-					$country = isset($data->vessel) ? ucwords(strtolower($data->vessel->flag)) : "-";
+					$country = isset($data->vessel) ? ucfirst(strtolower($data->vessel->flag)) : "-";
 					foreach (get_object_vars($data->document_flag) as $flag) {
 						if($flag->country == $country && $flag->type == $doc){
 							$docu = $flag;
@@ -240,7 +242,7 @@
 
 	{{ $section("2. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL(LIBERIA)", 'med_cert') }}
+	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL($vFlag)", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
 	{{ $doc("POLIO VACCINE (IPV)", "POLIO VACCINE", 'med_cert') }}
 
