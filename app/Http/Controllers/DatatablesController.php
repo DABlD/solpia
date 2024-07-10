@@ -110,10 +110,31 @@ class DatatablesController extends Controller
 
 		// IF DID NOT USE FILTER AND ONLY SEARCH VALUE
 		if($req->search['value']){
-			$applicants = $applicants->where(function($q) use($req){
-									 	$q->where('u.fname', 'like', "%" . $req->search['value'] . "%");
-									 	$q->orWhere('u.lname', 'like', "%" . $req->search['value'] . "%");
-									 });
+			if(str_contains($req->search['value'], ",")){
+				$temp = explode(",", $req->search['value']);
+
+				$lname = $temp[0];
+
+				$fname = explode(" ", trim($temp[1]));
+				
+				if(sizeof($fname) > 1){
+					$fname = array_slice($fname, 0, -1);
+				}
+
+				$fname = implode(" ", $fname);
+
+				$applicants = $applicants->where(function($q) use($fname, $lname){
+					$q->where('u.fname', 'like', "%" . $fname . "%");
+					$q->where('u.lname', 'like', "%" . $lname . "%");
+				});
+			}
+			else{
+				$applicants = $applicants->where(function($q) use($req){
+					$q->where('u.fname', 'like', "%" . $req->search['value'] . "%");
+					$q->orWhere('u.lname', 'like', "%" . $req->search['value'] . "%");
+				});
+			}
+
 		}
 		else{
 			// APPLY FILTERS
@@ -185,6 +206,7 @@ class DatatablesController extends Controller
 
     		// ACTIONS
     		$applicant->actions = $applicant->actions;
+    		$applicant->hidden = $req->search['value'];
     	}
 
     	// SORTING DATA
@@ -203,7 +225,8 @@ class DatatablesController extends Controller
     	// 	array_push($array, []);
     	// }
 
-    	// dd($array);
+    	// dd($array, $tc);
+    	// dd(DB::getQueryLog(), $tc);
 
 	    return Datatables::of($array)
     		->setTotalRecords($tc)
