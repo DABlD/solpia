@@ -119,7 +119,9 @@
 			}
 			else{
 				foreach (get_object_vars($data->document_flag) as $flag) {
-					if($flag->country == $flag && $flag->type == $doc){
+					$country = ucwords(strtolower($data->vessel->flag));
+
+					if($flag->country == $country && $flag->type == $doc){
 						$docu = $flag;
 					}
 				}
@@ -228,7 +230,7 @@
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Philippine)", 'lc', 'All D. officer') }}</tr>
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Panama)", 'flag', 'All D. officer', 'Panama') }}</tr>
 	<tr>{{ $doc("GMDSS/GOC", "G.O.C (Marshall)", 'flag', 'All D. officer', 'Marshall Islands') }}</tr>
-	<tr>{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "Designated Security Duty(Panama)", 'lc', 'All Rank') }}</tr>
+	<tr>{{ $doc("SDSD", "Designated Security Duty(Panama)", 'flag', 'All Rank', 'Panama') }}</tr>
 	<tr>{{ $doc("SHIP'S COOK ENDORSEMENT", "Ship's Cook(Panama)", 'flag', 'Catering Rating', 'Panama') }}</tr>
 	<tr>{{ $doc("SHIP'S COOK ENDORSEMENT", "Ship's Cook(Marshall)", 'flag', 'Catering Rating', 'Marshall Islands') }}</tr>
 	<tr>{{ $doc("GENERAL TANKER FAMILIARIZATION", "Panama Oil Tanker Cert.", 'lc', 'All rank/Oil Tanker') }}</tr>
