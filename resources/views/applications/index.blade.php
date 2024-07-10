@@ -30,6 +30,7 @@
                                     @endif
                                     <th>Remarks</th>
                                     <th>Actions</th>
+                                    <th>HIDDEN</th>
     							</tr>
     						</thead>
     					</table>
@@ -308,6 +309,7 @@
                 @endif
                 { data: 'remarks', name: 'remarks' },
                 { data: 'actions', name: 'actions' },
+                { data: 'hidden', name: 'hidden', visible: false },
             ],
             columnDefs: [
                 {
