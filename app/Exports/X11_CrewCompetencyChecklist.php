@@ -10,8 +10,10 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\{Rank, Vessel};
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class X11_CrewCompetencyChecklist implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFormatting//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $data->load('document_flag');
@@ -44,6 +46,13 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents//, WithDrawing
         
         $this->data     = $data;
         $this->type     = $type;
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => NumberFormat::FORMAT_NUMBER,
+        ];
     }
 
     public function view(): View
@@ -361,6 +370,7 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents//, WithDrawing
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'D8:E61'
                 ];
 
                 foreach($h as $key => $value) {
