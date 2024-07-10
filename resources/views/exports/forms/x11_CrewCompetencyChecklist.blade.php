@@ -37,19 +37,31 @@
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 			}
 		}
-		elseif($doc == "SMS" || $doc == "WELDING" || $doc == "COVID"){
+		elseif($doc == "SMS" || $doc == "WELDING"){
 			foreach(get_object_vars($data->document_lc) as $document){
 			    if(str_contains($document->type, $doc)){
 			    	$docu = $document;
 			    }
 			}
 		}
-		elseif($doc == "BRM/ERM"){
-			foreach(get_object_vars($data->document_lc) as $document){
-			    if(str_contains($document->type, "BRM" || str_contains($document->type, "ERM"))){
+		elseif($doc == "COVID"){
+			foreach(get_object_vars($data->document_med_cert) as $document){
+			    if(str_contains($document->type, $doc)){
+			    	if($docu && $document->issue_date < $docu->issue_date){
+			    		continue;
+			    	}
+
 			    	$docu = $document;
 			    }
 			}
+		}
+		elseif($doc == "BRM/ERM"){
+			foreach(get_object_vars($data->document_lc) as $document){
+			    if(str_contains($document->type, "ERM") || str_contains($document->type, "BRM")){
+			    	$docu = $document;
+			    }
+			}
+
 		}
 		elseif($doc == "COC-TESDA"){
 			foreach(get_object_vars($data->document_lc) as $document){
@@ -118,7 +130,11 @@
 		$number = $docu ? $docu->no ?? $docu->number : 'N/A';
 		$issuer = $docu ? $cleanText($docu->issuer) : 'N/A';
 		$issue_date = $docu ? $checkDate($docu->issue_date) : 'N/A';
-		$expiry_date = $docu ? $checkDate($docu->expiry_date) : 'N/A';
+		$expiry_date = $docu ? $checkDate($docu->expiry_date) : "N/A";
+
+		if($issue_date != "N/A" && $expiry_date == "N/A"){
+			$expiry_date = "UNLIMITED";
+		}
 
 		$number = $number == "" ? "N/A" : $number;
 
@@ -193,7 +209,7 @@
 	</tr>
 	<tr>{{ $doc("LICENSE", "Seaman's book (Panama)", 'flag', 'All Rank', 'Panama') }}</tr>
 	<tr>{{ $doc("LICENSE", "Seaman's book (Marshall/Others)", 'flag', 'All Rank', 'Marshall Islands') }}</tr>
-	<tr>{{ $doc("SEAMANS REGISTRATION CERTIFICATE", "Seaman's Registration Certificate", 'lc', 'All Rank') }}</tr>
+	<tr>{{ $doc("POEA EREGISTRATION", "Seaman's Registration Certificate", 'lc', 'All Rank') }}</tr>
 	<tr>{{ $doc("PASSPORT", "Passport (Philippine)", 'id', 'All Rank') }}</tr>
 
 	<tr>
