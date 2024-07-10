@@ -91,7 +91,7 @@
 			<td colspan="3" style="{{ $bc }}">SEAFARER NAME</td>
 			<td colspan="3" style="{{ $bc }}">RANK</td>
 			<td colspan="2" style="{{ $bc }}">FLAG</td>
-			<td colspan="4" style="{{ $bc }}">{{ $crews->first()->vessel }}</td>
+			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->vessel }}</td>
 			<td colspan="2" style="{{ $bc }}">FLAG CERT.</td>
 			<td style="{{ $bc }}">DEPARTURE</td>
 		</tr>
@@ -268,7 +268,7 @@
 			<td colspan="3" style="{{ $bc }}">SEAFARER NAME</td>
 			<td colspan="3" style="{{ $bc }}">RANK</td>
 			<td colspan="2" style="{{ $bc }}">FLAG</td>
-			<td colspan="4" style="{{ $bc }}">{{ $crews->first()->vessel }}</td>
+			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->vessel }}</td>
 			<td colspan="2" style="{{ $bc }}">FLAG CERT.</td>
 			<td style="{{ $bc }}">DEPARTURE</td>
 		</tr>
