@@ -21,7 +21,7 @@
 
 	<tr>
 		<td colspan="9" style="{{ $center }}">
-			The following parties to the SEA agree to fully complly with the terms state hereinafter
+			The following parties to the SEA agree to fully comply with the terms state hereinafter
 		</td>
 	</tr>
 
@@ -199,7 +199,7 @@
 			Overtime Allowance
 		</td>
 		<td colspan="3" style="{{ $center }}">Fixed Supervisor Allowance</td>
-		<td colspan="2" style="{{ $center }}">Substinence Allowance</td>
+		<td colspan="2" style="{{ $center }}">Subsistence Allowance</td>
 	</tr>
 
 	<tr>
@@ -261,7 +261,7 @@
 	<tr>
 		<td style="{{ $center }}">Payment methods</td>
 		<td colspan="8">
-			"Wages should be paid directly to the seafarers`designated bank accounts unless they request otherwise in writing. 
+			"Wages should be paid directly to the seafarers designated bank accounts unless they request otherwise in writing. 
 			Some allotments should be remitted in due time and directly to the person or persons nominated by the seafarers."
 		</td>
 	</tr>
@@ -271,7 +271,7 @@
 	</tr>
 
 	<tr>
-		<td rowspan="3" style="{{ $center }}">The amound of Paid Leave</td>
+		<td rowspan="3" style="{{ $center }}">The amount of Paid Leave</td>
 		<td style="{{ $center }}">Amount of P/L</td>
 		<td colspan="7" style="{{ $center }}">Method of calculation</td>
 	</tr>
@@ -391,7 +391,7 @@
 
 	<tr>
 		<td colspan="9">
-			1) The shipowner shall provide the risk assessment table through the ship's nemtwork (EDMS) and make it aavailable for viewing
+			1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing
 			<br style="mso-data-placement:same-cell;" />
 			at any time
 			<br style="mso-data-placement:same-cell;" />
@@ -431,7 +431,7 @@
 
 	<tr>
 		<td colspan="9">
-			In witness whereof, 2 copies of this agreement have been made and mutually signed by either partiesthence each one of them are retained by the each party and the seafarer has opportunity to review on the terms and condition andvoluntarily accept them.
+			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them are retained by the each party and the seafarer has opportunity to review on the terms and condition and voluntarily accept them.
 		</td>
 	</tr>
 
