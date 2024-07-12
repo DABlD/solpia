@@ -103,7 +103,7 @@ class DatatablesController extends Controller
 									}
 
 									//SIR KIT MA'AM ABBY CAN SEE TOEI
-									if(in_array(auth()->user()->id, [5716, 4580, 6132])){
+									if(in_array(auth()->user()->id, [5716, 4580, 3616])){
 										$q->orWhere('u.fleet', 'like', "%%");
 									}
 								});
