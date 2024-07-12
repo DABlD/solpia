@@ -204,7 +204,7 @@
 		$b = "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
 	@endphp
 	{{ $doc($a, $b, 'lc') }}
-	{{ $doc("ADVANCE FIRE FIGHTING - AFF", "ADVANCED FIREFGHTING (AFF)", 'lc') }}
+	{{ $doc("ADVANCE FIRE FIGHTING - AFF", "ADVANCED FIREFIGHTING (AFF)", 'lc') }}
 	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
 	{{ $doc("SHIP SECURITY OFFICER - SSO", "SHIP SECURTIY OFFICER (SSO)", 'lc') }}
