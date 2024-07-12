@@ -233,7 +233,7 @@
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE") }}
 
 	{{ $section("4. NATIONAL LICENSE / COP", 0) }}
-	{{ $doc("COC", "NATIONAL LICENSE (COC/COE)", 'lc', 1, 'II/1') }}
+	{{ $doc("COC", "NATIONAL LICENSE (COC/COE)", 'lc', 0, 'II/1') }}
 	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE", 'lc', 1, 'IV/2') }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
 	@php

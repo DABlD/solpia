@@ -221,7 +221,7 @@
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE") }}
 
 	{{ $section("4. NATIONAL LICENSE / COP", 0) }}
-	{{ $doc("COC", "NATIONAL LICENSE (COC/COE)", 'lc', 1, 'III/1') }}
+	{{ $doc("COC", "NATIONAL LICENSE (COC/COE)", 'lc', 0, 'III/1') }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
 	@php
 		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
