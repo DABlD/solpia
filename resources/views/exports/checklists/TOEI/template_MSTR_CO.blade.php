@@ -233,7 +233,7 @@
 	{{ $con("MLC 5.1.5 COMPLAINT PROCEDURE") }}
 
 	{{ $section("4. NATIONAL LICENSE / COP", 0) }}
-	{{ $doc("COC", "NATIONAL LICENSE (COC/COE)", 'lc', 1, 'II/2') }}
+	{{ $doc("COC", "NATIONAL LICENSE (COC/COE)", 'lc', 0, 'II/2') }}
 	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE", 'lc', 1, 'IV/2') }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
 	@php
@@ -241,7 +241,7 @@
 		$b = "SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
 	@endphp
 	{{ $doc($a, $b, 'lc') }}
-	{{ $doc("ADVANCE FIRE FIGHTING - AFF", "ADVANCED FIREFGHTING (AFF)", 'lc') }}
+	{{ $doc("ADVANCE FIRE FIGHTING - AFF", "ADVANCED FIREFIGHTING (AFF)", 'lc') }}
 	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
 	{{ $doc("SHIP SECURITY OFFICER - SSO", "SHIP SECURTIY OFFICER (SSO)", 'lc') }}
