@@ -458,21 +458,21 @@
 				@if(isset($crewRank) && $docu2)
 					@if($hl == 0)
 						@if($rt == "er")
-							ABLE SEAMAN (III/5)
-						@else
 							ABLE SEAMAN (III/4)
+						@else
+							ABLE SEAMAN (II/4)
 						@endif
 					@elseif($hl == 1)
 						@if($rt == "er")
-							ABLE SEAMAN (II/5)
+							ABLE SEAMAN (III/5)
 						@else
-							ABLE SEAMAN (II/4)
+							ABLE SEAMAN (II/5)
 						@endif
 					@elseif($hl == 2)
 						@if($rt == "er")
 							OIC-EW (III/1)
 						@else
-							OIC-EW (II/1)
+							OIC-NW (II/1)
 						@endif
 					@elseif($hl == 3)
 						@if($rt == "er")
@@ -648,10 +648,10 @@
 			$rname = "";
 			if($applicant->document_flag->count()){
 				if($applicant->document_flag->first()->rank == 42){
-					$rname = "ABLE SEAFARER DECK";
+					$rname = "ABLE SEAMAN (II/5)";
 				}
 				elseif($applicant->document_flag->first()->rank == 43){
-					$rname = "ABLE SEAFARER ENGINE";
+					$rname = "ABLE SEAMAN (III/5)";
 				}
 				else{
 					$rname = $applicant->ranks2[$applicant->document_flag->first()->rank][0]->name;
@@ -668,13 +668,13 @@
 						$rname = "STEWARD";
 					}
 					elseif($crewRank->id == 3 || $crewRank->id == 4){
-						$rname = "OIC-NAVIGATIONAL WATCH";
+						$rname = "OIC-NW (II/1)";
 					}
 					elseif($crewRank->id == 7 || $crewRank->id == 8){
-						$rname = "OIC-ENGINEERING WATCH";
+						$rname = "OIC-EW (III/1)";
 					}
 
-					$rname = $rname == "MASTER" ? "MASTER MARINER" : $rname;
+					$rname = $rname == "MASTER" ? "MASTER MARINER (II/2)" : $rname;
 				}
 			}
 			elseif(isset($crewRank)){
@@ -692,13 +692,13 @@
 					$rname = "STEWARD";
 				}
 				elseif($crewRank->id == 3 || $crewRank->id == 4){
-					$rname = "OIC-NAVIGATIONAL WATCH";
+					$rname = "OIC-NW (II/1)";
 				}
 				elseif($crewRank->id == 7 || $crewRank->id == 8){
-					$rname = "OIC-ENGINEERING WATCH";
+					$rname = "OIC-EW (III/1)";
 				}
 
-				$rname = $rname == "MASTER" ? "MASTER MARINER" : $rname;
+				$rname = $rname == "MASTER" ? "MASTER MARINER (II/2)" : $rname;
 			}
 			else{
 				$rname = "-----";
