@@ -2210,14 +2210,19 @@
 
                     $('#linedUp').modal({
                         backdrop: 'static',
-                        keyboard: true
+                        keyboard: false
                     });
                     $('#linedUp').modal('show');
 
-                     $('#linedUp').on('hide.bs.modal', e => {
+                    $('#linedUp').on('hide.bs.modal', e => {
                         $('#table_filter [type="search"]').focus();
-                     });
+                    });
 
+                    $('body').keydown(function(e){
+                        if(e.which == 27){
+                            $('#linedUp').modal('hide');
+                        }
+                    });
                 }
             });
         }
@@ -5135,7 +5140,7 @@
 
         function createModal(vessel, id){
             $('body').append(`
-                <div class="modal fade" id="linedUp" tabindex="-1">
+                <div class="modal fade" id="linedUp">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header head1">
@@ -6138,10 +6143,10 @@
                     title: 'Fill Details',
                     html: '<br><br>' + `
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <h4 class="clabel">Deparment</h4>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <input type="text" id="department" class="swal2-input" />
                             </div>
                         </div>

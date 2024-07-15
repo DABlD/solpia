@@ -86,12 +86,12 @@
 		<td colspan="15" style="height: 3px;"></td>
 	</tr>
 
-	@if($data->flag)
+	@if(in_array(2, $data->docus))
 		<tr>
 			<td colspan="3" style="{{ $bc }}">SEAFARER NAME</td>
 			<td colspan="3" style="{{ $bc }}">RANK</td>
 			<td colspan="2" style="{{ $bc }}">FLAG</td>
-			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->vessel }}</td>
+			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->user->fleet != "FLEET B" ? "VESSEL" : $crews[0]->vessel }}</td>
 			<td colspan="2" style="{{ $bc }}">FLAG CERT.</td>
 			<td style="{{ $bc }}">DEPARTURE</td>
 		</tr>
@@ -99,7 +99,7 @@
 		<tr>
 			<td colspan="4" style="{{ $bc }}">SEAFARER NAME</td>
 			<td colspan="4" style="{{ $bc }}">RANK / POSITION</td>
-			<td colspan="4" style="{{ $bc }}">VESSEL</td>
+			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->user->fleet != "FLEET B" ? "VESSEL" : $crews[0]->vessel }}</td>
 			<td colspan="2" style="{{ $bc }}">PORT / COUNTRY</td>
 			<td style="{{ $bc }}">DEPARTURE</td>
 		</tr>
@@ -111,12 +111,12 @@
 			$name = $crew->user->lname == '' ? '' : $name;
 		@endphp
 
-		@if($data->flag)
+		@if(in_array(2, $data->docus))
 			<tr>
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
-				<td colspan="4" style="{{ $center }} height: 13px;"></td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
 					{{-- @if(isset($crew->port))
 						{{ $crew->port }}
@@ -140,7 +140,7 @@
 			<tr>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
-				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
 					@if(isset($crew->port))
 						{{ $crew->port }}
@@ -263,12 +263,12 @@
 		<td colspan="15" style="height: 3px;"></td>
 	</tr>
 
-	@if($data->flag)
+	@if(in_array(2, $data->docus))
 		<tr>
 			<td colspan="3" style="{{ $bc }}">SEAFARER NAME</td>
 			<td colspan="3" style="{{ $bc }}">RANK</td>
 			<td colspan="2" style="{{ $bc }}">FLAG</td>
-			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->vessel }}</td>
+			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->user->fleet != "FLEET B" ? "VESSEL" : $crews[0]->vessel }}</td>
 			<td colspan="2" style="{{ $bc }}">FLAG CERT.</td>
 			<td style="{{ $bc }}">DEPARTURE</td>
 		</tr>
@@ -276,7 +276,7 @@
 		<tr>
 			<td colspan="4" style="{{ $bc }}">SEAFARER NAME</td>
 			<td colspan="4" style="{{ $bc }}">RANK / POSITION</td>
-			<td colspan="4" style="{{ $bc }}">VESSEL</td>
+			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->user->fleet != "FLEET B" ? "VESSEL" : $crews[0]->vessel }}</td>
 			<td colspan="2" style="{{ $bc }}">PORT / COUNTRY</td>
 			<td style="{{ $bc }}">DEPARTURE</td>
 		</tr>
@@ -288,20 +288,20 @@
 			$name = $crew->user->lname == '' ? '' : $name;
 		@endphp
 
-		@if($data->flag)
+		@if(in_array(2, $data->docus))
 			<tr>
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
-				<td colspan="4" style="{{ $center }} height: 13px;"></td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
-					@if(isset($crew->port))
+					{{-- @if(isset($crew->port))
 						{{ $crew->port }}
 					@else
 						@if($crew->rank)
 							{{ $data->port }}
 						@endif
-					@endif
+					@endif --}}
 				</td>
 				<td style="{{ $center }} height: 13px;">
 					@if($crew->rank != "")
@@ -317,7 +317,7 @@
 			<tr>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
-				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->vessel }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
 					@if(isset($crew->port))
 						{{ $crew->port }}
