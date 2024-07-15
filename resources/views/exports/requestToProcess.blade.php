@@ -116,7 +116,7 @@
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
-				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crews->first()->vessel }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
 					{{-- @if(isset($crew->port))
 						{{ $crew->port }}
@@ -140,7 +140,7 @@
 			<tr>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
-				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crews->first()->vessel }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
 					@if(isset($crew->port))
 						{{ $crew->port }}
@@ -293,7 +293,7 @@
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="3" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
-				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crews->first()->vessel }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
 					{{-- @if(isset($crew->port))
 						{{ $crew->port }}
@@ -317,7 +317,7 @@
 			<tr>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $name }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crew->rank }}</td>
-				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crews->first()->vessel }}</td>
+				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
 					@if(isset($crew->port))
 						{{ $crew->port }}
