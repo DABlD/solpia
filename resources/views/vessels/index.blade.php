@@ -2136,7 +2136,6 @@
                     swal.close();
                     
                     $('#linedUp').on('show.bs.modal', e => {
-
                         // REMOVE ALL EVENTS
                         $('[id^=table-select]').unbind();
 
@@ -2211,9 +2210,13 @@
 
                     $('#linedUp').modal({
                         backdrop: 'static',
-                        keyboard: false
+                        keyboard: true
                     });
                     $('#linedUp').modal('show');
+
+                     $('#linedUp').on('hide.bs.modal', e => {
+                        $('#table_filter [type="search"]').focus();
+                     });
 
                 }
             });
@@ -5132,7 +5135,7 @@
 
         function createModal(vessel, id){
             $('body').append(`
-                <div class="modal fade" id="linedUp">
+                <div class="modal fade" id="linedUp" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header head1">
