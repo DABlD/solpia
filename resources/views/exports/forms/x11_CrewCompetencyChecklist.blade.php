@@ -121,8 +121,6 @@
 				foreach (get_object_vars($data->document_flag) as $flag) {
 					$country = ucwords(strtolower($data->vessel->flag));
 
-					dd($country);
-
 					if($flag->country == $country && $flag->type == $doc){
 						$docu = $flag;
 					}
