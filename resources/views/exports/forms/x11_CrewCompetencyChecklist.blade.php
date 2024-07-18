@@ -269,7 +269,7 @@
 	<tr>{{ $doc("ADVANCE TRAINING FOR OIL TANKER - ATOT", "Advanced Training for Tanker (Oil / Chemical / Liquified Gas)", 'lc', 'All D/E officer, BSN, Pumpman / Tanker') }}</tr>
 	<tr>{{ $doc("SHORE-BASED FIREFIGHTING FOR TANKERS", "Shore-Based Fire Fighting", 'lc', 'All rank') }}</tr>
 	<tr>{{ $doc("SHIP SECURITY OFFICER - SSO", "ISPS-Ship Security Officer", 'lc', 'All D/E Officer') }}</tr>
-	<tr>{{ $doc("N/A", "ISPS-Designated Security Duty", 'lc', 'All D/E Officer') }}</tr>
+	<tr>{{ $doc("SDSD", "ISPS-Designated Security Duty", 'lc', 'All D/E Officer') }}</tr>
 
 	<tr>
 		{{ $row("CONTRACT  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Original-Crew ‎‏‏‎/ ‎‏‏‎Copy-Master)", 3) }}
