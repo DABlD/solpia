@@ -293,8 +293,8 @@
 	@if(in_array($data->vessel->principal_id, [1, 3]))
 		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 		{{ $con("JOINING FINAL BRIEFING") }}
-		{{ $doc("SHINKO INVENTORY", "", 'lc') }}
-		{{ $doc("MENTAL HEALTH AWARENESS", "", 'lc') }}
+		{{ $con("SHINKO INVENTORY") }}
+		{{ $con("MENTAL HEALTH AWARENESS") }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -304,8 +304,8 @@
 		{{ $doc("TEST", "", 'lc') }}
 	@elseif(in_array($data->vessel->principal_id, [8]))
 		{{ $con("INTERGIS BRIEFING") }}
-		{{ $doc("SHINKO INVENTORY", "", 'lc') }}
-		{{ $doc("MENTAL HEALTH AWARENESS", "", 'lc') }}
+		{{ $con("SHINKO INVENTORY") }}
+		{{ $con("MENTAL HEALTH AWARENESS") }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -316,8 +316,8 @@
 		{{ $doc("TEST", "", 'lc') }}
 	@elseif(in_array($data->vessel->principal_id, [547]))
 		{{ $con("DLSM BRIEFING") }}
-		{{ $doc("SHINKO INVENTORY", "", 'lc') }}
-		{{ $doc("MENTAL HEALTH AWARENESS", "", 'lc') }}
+		{{ $con("SHINKO INVENTORY") }}
+		{{ $con("MENTAL HEALTH AWARENESS") }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -330,8 +330,8 @@
 		{{ $con("NSM - SMM 07 - 14 PRE-JOINING FAMILARISATION", 1,1,1) }}
 		{{ $con("NSM - SMM 07 - 15 Pre BriefingJoining", 1,1,1) }}
 		{{ $con("NSM - SMM 07 - 16 Briefing pre Joining", 1,1,1) }}
-		{{ $doc("SHINKO INVENTORY", "", 'lc') }}
-		{{ $doc("MENTAL HEALTH AWARENESS", "", 'lc') }}
+		{{ $con("SHINKO INVENTORY") }}
+		{{ $con("MENTAL HEALTH AWARENESS") }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -339,8 +339,8 @@
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 	@else
-		{{ $doc("SHINKO INVENTORY", "", 'lc') }}
-		{{ $doc("MENTAL HEALTH AWARENESS", "", 'lc') }}
+		{{ $con("SHINKO INVENTORY") }}
+		{{ $con("MENTAL HEALTH AWARENESS") }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
