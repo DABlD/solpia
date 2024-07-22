@@ -282,8 +282,8 @@
 	@if(in_array($data->vessel->principal_id, [1, 3]))
 		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 		{{ $con("JOINING FINAL BRIEFING") }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("SHINKO INVENTORY", "", 'lc') }}
+		{{ $doc("MENTAL HEALTH AWARENESS", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
