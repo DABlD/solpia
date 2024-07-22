@@ -116,7 +116,19 @@
 			{{ auth()->user()->fname }} {{ auth()->user()->lname }}
 		</td>
 		<td colspan="2"></td>
-		<td colspan="3" style="{{ $center }}">Mr. Adulf Kit Jumawan</td>
+		<td colspan="3" style="{{ $center }}">
+			@if(auth()->user()->fleet == "Fleet B")
+				Mr. Adulf Kit Jumawan
+			@elseif(auth()->user()->fleet == "FLEET C")
+				Ms. Jeanette Solidum
+			@elseif(auth()->user()->fleet == "FLEET D")
+				Ms. Thea Guerra
+			@elseif(auth()->user()->fleet == "FISHING")
+				Mr. Ricardo Amparo
+			@elseif(auth()->user()->fleet == "TOEI")
+				Mr. Leonil Luis F. Romano
+			@endif
+		</td>
 	</tr>
 
 	<tr>
