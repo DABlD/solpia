@@ -286,6 +286,13 @@ class DatatablesController extends Controller
 				$q->where('flag', 'like', $f['flag']);
 				$q->where('type', 'like', $f['type']);
 				$q->where('status', 'like', $f['status']);
+
+				// TOEI CAN SEE TOEI VESSELS ON OTHER FLEETS
+				if(auth()->user()->fleet == "TOEI"){
+					$q->orWhere('principal_id', 3);
+					$q->orWhere('principal_id', 9);
+				}
+
 			})->get();
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
