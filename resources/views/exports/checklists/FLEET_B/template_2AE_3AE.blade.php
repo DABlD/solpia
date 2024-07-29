@@ -28,7 +28,6 @@
 
 			return $expiry->format('d-M-Y');
 		}
-	};
 
 		if($issue->format('Y-m-d') == "2021-06-14" && $expiry->format('Y-m-d') == "2026-06-14"){
 			dd("test");

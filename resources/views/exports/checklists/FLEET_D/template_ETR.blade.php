@@ -29,7 +29,6 @@
 			return $expiry->format('d-M-Y');
 		}
 	};
-	};
 
 	$cleanText = function($text){
 		return str_replace('&', '&#38;', $text);
