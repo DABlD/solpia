@@ -1,8 +1,15 @@
 @php
 	$checkDate = function($issue, $expiry, $type2){
-		if($type2){
+		if($type2 == 1){
 			if($issue != "" && $issue != null){
 				return "UNLIMITED";
+			}
+
+			return null;
+		}
+		elseif($type2 == 2){
+			if($issue != "" && $issue != null){
+				return $issue->format('d-M-Y');
 			}
 
 			return null;
@@ -19,6 +26,7 @@
 
 			return $expiry->format('d-M-Y');
 		}
+	};
 	};
 
 	$cleanText = function($text){
@@ -208,11 +216,11 @@
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD", 'flag') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 1) }}
-	{{ $doc("ERS WITH ERM", "ERM WITH ERS", 'lc') }}
-	{{ $doc("MLC TRAINING F1", "MLC TRAINING DECK - F1", 'lc') }}
-	{{ $doc("MLC TRAINING F2", "MLC TRAINING DECK - F2", 'lc') }}
-	{{ $doc("MLC TRAINING F3", "MLC TRAINING DECK - F3", 'lc') }}
-	{{ $doc("MLC TRAINING F4", "MLC TRAINING DECK - F4", 'lc') }}
+	{{ $doc("ERS WITH ERM", "ERM WITH ERS", 'lc', 2) }}
+	{{ $doc("MLC TRAINING F1", "MLC TRAINING DECK - F1", 'lc', 2) }}
+	{{ $doc("MLC TRAINING F2", "MLC TRAINING DECK - F2", 'lc', 2) }}
+	{{ $doc("MLC TRAINING F3", "MLC TRAINING DECK - F3", 'lc', 2) }}
+	{{ $doc("MLC TRAINING F4", "MLC TRAINING DECK - F4", 'lc', 2) }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}

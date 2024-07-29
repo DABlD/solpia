@@ -2,9 +2,16 @@
 	$vFlag = $data->vessel->flag;
 	
 	$checkDate = function($issue, $expiry, $type2){
-		if($type2){
+		if($type2 == 1){
 			if($issue != "" && $issue != null){
 				return "UNLIMITED";
+			}
+
+			return null;
+		}
+		elseif($type2 == 2){
+			if($issue != "" && $issue != null){
+				return $issue->format('d-M-Y');
 			}
 
 			return null;
@@ -249,9 +256,9 @@
 	{{ $doc("EMPTY", "", 'lc') }}
 
 	{{ $section("6. TRAINING CERTIFICATES", 1) }}
-	{{ $doc("DECK WATCH", "DECK WATCHKEEPING", 'lc') }}
-	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc') }}
-	{{ $doc("STEERING COURSE", "STEERING COURSE", 'lc') }}
+	{{ $doc("DECK WATCH", "DECK WATCHKEEPING", 'lc', 2) }}
+	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc', 2) }}
+	{{ $doc("STEERING COURSE", "STEERING COURSE", 'lc', 2) }}
 	{{ $doc("EMPTY", "", 'lc') }}
 	{{ $doc("EMPTY", "", 'lc') }}
 	{{ $doc("EMPTY", "", 'lc') }}

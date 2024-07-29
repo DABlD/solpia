@@ -1,8 +1,15 @@
 @php
 	$checkDate = function($issue, $expiry, $type2){
-		if($type2){
+		if($type2 == 1){
 			if($issue != "" && $issue != null){
 				return "UNLIMITED";
+			}
+
+			return null;
+		}
+		elseif($type2 == 2){
+			if($issue != "" && $issue != null){
+				return $issue->format('d-M-Y');
 			}
 
 			return null;
@@ -19,6 +26,7 @@
 
 			return $expiry->format('d-M-Y');
 		}
+	};
 	};
 
 	$cleanText = function($text){
@@ -208,9 +216,9 @@
 	{{ $doc("DECK WATCH", "DECK WATCHKEEPING CERT.", 'lc') }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
-	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
-	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert') }}
-	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert') }}
+	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert', 2) }}
+	{{ $doc("FLAG MEDICAL", "FLAG MEDICAL", 'med_cert', 2) }}
+	{{ $doc("YELLOW FEVER", "YELLOW FEVER", 'med_cert', 2) }}
 
 	{{ $section("7. CONTRACT / ADDENDUM / BIO DATA", 1) }}
 	{{ $con("POEA CONTRACT *", 1,1,1) }}
