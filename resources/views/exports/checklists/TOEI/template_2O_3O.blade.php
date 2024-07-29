@@ -2,9 +2,16 @@
 	$vFlag = $data->vessel->flag;
 	
 	$checkDate = function($issue, $expiry, $type2){
-		if($type2){
+		if($type2 == 1){
 			if($issue != "" && $issue != null){
 				return "UNLIMITED";
+			}
+
+			return null;
+		}
+		elseif($type2 == 2){
+			if($issue != "" && $issue != null){
+				return $issue->format('d-M-Y');
 			}
 
 			return null;
@@ -21,6 +28,7 @@
 
 			return $expiry->format('d-M-Y');
 		}
+	};
 	};
 
 	$cleanText = function($text){
@@ -254,15 +262,15 @@
 	{{ $doc("SDSD", "FLAG SDSD ENDORSEMENT", 'flag') }}
 
 	{{ $section("6. TRAINING CERTIFICATES", 1) }}
-	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc') }}
-	{{ $doc("ECDIS SPECIFIC", "ECDIS - SPECIFIC", 'lc') }}
-	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc') }}
-	{{ $doc("OLC TRAINING F1", "OPERATIONAL LEVEL COURSE - DECK (F1)", 'lc') }}
-	{{ $doc("OLC TRAINING F2", "OPERATIONAL LEVEL COURSE - DECK (F2)", 'lc') }}
-	{{ $doc("OLC TRAINING F3", "OPERATIONAL LEVEL COURSE - DECK (F3)", 'lc') }}
-	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc') }}
-	{{ $doc("ARPA TRAINING COURSE", "ARPA / ROPA / RNPUA", 'lc') }}
-	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc') }}
+	{{ $doc("ECDIS", "ECDIS - GENERIC", 'lc', 2) }}
+	{{ $doc("ECDIS SPECIFIC", "ECDIS - SPECIFIC", 'lc', 2) }}
+	{{ $doc("SSBT WITH BRM", "SSBT WITH BRM", 'lc', 2) }}
+	{{ $doc("OLC TRAINING F1", "OPERATIONAL LEVEL COURSE - DECK (F1)", 'lc', 2) }}
+	{{ $doc("OLC TRAINING F2", "OPERATIONAL LEVEL COURSE - DECK (F2)", 'lc', 2) }}
+	{{ $doc("OLC TRAINING F3", "OPERATIONAL LEVEL COURSE - DECK (F3)", 'lc', 2) }}
+	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc', 2) }}
+	{{ $doc("ARPA TRAINING COURSE", "ARPA / ROPA / RNPUA", 'lc', 2) }}
+	{{ $doc("RADAR", "RADAR SIMULATOR COURSE", 'lc', 2) }}
 
 	{{ $section("7. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
 	{{ $con("PRE-DEPARTURE ORIENTATION SEMINAR (PDOS)") }}

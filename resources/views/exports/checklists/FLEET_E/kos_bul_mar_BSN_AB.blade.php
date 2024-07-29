@@ -1,8 +1,15 @@
 @php
 	$checkDate = function($issue, $expiry, $type2){
-		if($type2){
+		if($type2 == 1){
 			if($issue != "" && $issue != null){
 				return "UNLIMITED";
+			}
+
+			return null;
+		}
+		elseif($type2 == 2){
+			if($issue != "" && $issue != null){
+				return $issue->format('d-M-Y');
 			}
 
 			return null;
@@ -19,6 +26,7 @@
 
 			return $expiry->format('d-M-Y');
 		}
+	};
 	};
 
 	$cleanText = function($text){

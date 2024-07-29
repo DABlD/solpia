@@ -2,9 +2,16 @@
 	$vFlag = $data->vessel->flag;
 	
 	$checkDate = function($issue, $expiry, $type2){
-		if($type2){
+		if($type2 == 1){
 			if($issue != "" && $issue != null){
 				return "UNLIMITED";
+			}
+
+			return null;
+		}
+		elseif($type2 == 2){
+			if($issue != "" && $issue != null){
+				return $issue->format('d-M-Y');
 			}
 
 			return null;
@@ -21,6 +28,7 @@
 
 			return $expiry->format('d-M-Y');
 		}
+	};
 	};
 
 	$cleanText = function($text){
@@ -273,10 +281,10 @@
 	{{ $doc("EMPTY", "", 'lc') }}
 
 	{{ $section("6. TRAINING CERTIFICATES", 1) }}
-	{{ $doc("CULINARY AND CATERING COURSE", "SHIP'S CATERING COURSE", 'lc') }}
-	{{ $doc("SHIPBOARD CULINARY COURSE", "SHIPBOARD CULINARY COURSE", 'lc') }}
-	{{ $doc("MESSMAN/STEWARD COURSE", "MESSMAN/STEWARD COURSE", 'lc') }}
-	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc') }}
+	{{ $doc("CULINARY AND CATERING COURSE", "SHIP'S CATERING COURSE", 'lc', 2) }}
+	{{ $doc("SHIPBOARD CULINARY COURSE", "SHIPBOARD CULINARY COURSE", 'lc', 2) }}
+	{{ $doc("MESSMAN/STEWARD COURSE", "MESSMAN/STEWARD COURSE", 'lc', 2) }}
+	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc', 2) }}
 	{{ $doc("EMPTY", "", 'lc') }}
 	{{ $doc("EMPTY", "", 'lc') }}
 	{{ $doc("EMPTY", "", 'lc') }}

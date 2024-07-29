@@ -1,8 +1,15 @@
 @php
 	$checkDate = function($issue, $expiry, $type2){
-		if($type2){
+		if($type2 == 1){
 			if($issue != "" && $issue != null){
 				return "UNLIMITED";
+			}
+
+			return null;
+		}
+		elseif($type2 == 2){
+			if($issue != "" && $issue != null){
+				return $issue->format('d-M-Y');
 			}
 
 			return null;
@@ -19,6 +26,7 @@
 
 			return $expiry->format('d-M-Y');
 		}
+	};
 	};
 
 	$cleanText = function($text){
@@ -242,15 +250,15 @@
 	{{ $doc("SSO", "FLAG SSO ENDORSEMENT", 'flag') }}
 
 	{{ $section("6. TRAINING CERTIFICATES", 1) }}
-	{{ $doc("ERS WITH ERM", "ERS WITH ERM / ERM / ERRM", 'lc') }}
-	{{ $doc("OLC TRAINING F1", "OPERATIONAL LEVEL COURSE - ENGINE (F1)", 'lc') }}
-	{{ $doc("OLC TRAINING F2", "OPERATIONAL LEVEL COURSE - ENGINE (F2)", 'lc') }}
-	{{ $doc("OLC TRAINING F3", "OPERATIONAL LEVEL COURSE - ENGINE (F3)", 'lc') }}
-	{{ $doc("OLC TRAINING F4", "OPERATIONAL LEVEL COURSE - ENGINE (F4)", 'lc') }}
-	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc') }}
-	{{ $doc("ME ENGINE TRAINING", "ME ENGINE TRAINING", 'lc') }}
-	{{ $doc("MARINE ELECTRICAL", "MARINE ELECTRICAL TRAINING", 'lc') }}
-	{{ $doc("EMPTY", "", 'lc') }}
+	{{ $doc("ERS WITH ERM", "ERS WITH ERM / ERM / ERRM", 'lc', 2) }}
+	{{ $doc("OLC TRAINING F1", "OPERATIONAL LEVEL COURSE - ENGINE (F1)", 'lc', 2) }}
+	{{ $doc("OLC TRAINING F2", "OPERATIONAL LEVEL COURSE - ENGINE (F2)", 'lc', 2) }}
+	{{ $doc("OLC TRAINING F3", "OPERATIONAL LEVEL COURSE - ENGINE (F3)", 'lc', 2) }}
+	{{ $doc("OLC TRAINING F4", "OPERATIONAL LEVEL COURSE - ENGINE (F4)", 'lc', 2) }}
+	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc', 2) }}
+	{{ $doc("ME ENGINE TRAINING", "ME ENGINE TRAINING", 'lc', 2) }}
+	{{ $doc("MARINE ELECTRICAL", "MARINE ELECTRICAL TRAINING", 'lc', 2) }}
+	{{ $doc("EMPTY", "", 'lc', 2) }}
 
 	{{ $section("7. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
 	{{ $con("PRE-DEPARTURE ORIENTATION SEMINAR (PDOS)") }}

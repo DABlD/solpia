@@ -1,8 +1,15 @@
 @php
 	$checkDate = function($issue, $expiry, $type2){
-		if($type2){
+		if($type2 == 1){
 			if($issue != "" && $issue != null){
 				return "UNLIMITED";
+			}
+
+			return null;
+		}
+		elseif($type2 == 2){
+			if($issue != "" && $issue != null){
+				return $issue->format('d-M-Y');
 			}
 
 			return null;
@@ -19,6 +26,7 @@
 
 			return $expiry->format('d-M-Y');
 		}
+	};
 	};
 
 	$cleanText = function($text){
@@ -206,7 +214,7 @@
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'flag') }}
 
 	{{ $section("5. OTHER CERTIFICATES", 1) }}
-	{{ $doc("DECK WATCH", "DECK WATCHKEEPING CERT.", 'lc') }}
+	{{ $doc("DECK WATCH", "DECK WATCHKEEPING CERT.", 'lc', 2) }}
 
 	{{ $section("6. MEDICAL / VACCINATION", 0) }}
 	{{ $doc("MEDICAL CERTIFICATE", "MEDICAL CERTIFICATE", 'med_cert') }}
