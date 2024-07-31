@@ -1839,22 +1839,26 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $lucs = LineUpContract::whereIn('rank_id', [14,19])->where('joining_date', '>=', '2024-06-16')->get();
+        $lucs = LineUpContract::whereIn('rank_id', [14,19])->where('joining_date', '>=', '2024-06-16')->where('joining_date', '<=', '2024-07-31')->get();
         $lucs->load('applicant.user');
         $lucs->load('rank');
 
         foreach($lucs as $luc){
-            echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . '<br>';
+            if($luc->applicant->user->fleet == "TOEI"){
+                echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . '<br>';
+            }
         }
 
         echo "<br>-----------------<br>";
 
-        $lucs = LineUpContract::whereIn('rank_id', [14,19])->where('disembarkation_date', '<=', '2024-07-31')->get();
+        $lucs = LineUpContract::whereIn('rank_id', [14,19])->where('disembarkation_date', '>=', '2024-06-16')->where('disembarkation_date', '<=', '2024-07-31')->get();
         $lucs->load('applicant.user');
         $lucs->load('rank');
 
         foreach($lucs as $luc){
-            echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . '<br>';
+            if($luc->applicant->user->fleet == "TOEI"){
+                echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . '<br>';
+            }
         }
     }
 
