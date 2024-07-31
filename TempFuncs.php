@@ -166,3 +166,6 @@ foreach($users as $user){
 }
 
 die;
+
+
+<!-- GET ALL ACTIVE FLEET B CREW -->
