@@ -398,7 +398,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
-                $temp = 19;
+                $temp = 21;
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
                 $hl = false;
