@@ -319,7 +319,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 // LICENSES ROWS
                 $lRows = array();
                 $temp = 6;
-                $ral = $rae + 2 + $temp; //Row # AFTER LICENSES
+                $ral = $rae + 3 + $temp; //Row # AFTER LICENSES
 
                 for($i = 0, $row = $rae + 2; $i < $temp; $i++, $row++){
                     if($i == 0){
