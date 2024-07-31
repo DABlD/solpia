@@ -1839,10 +1839,23 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $vids = Vessel::where('fleet', 'FLEET B')->where('status', 'ACTIVE')->pluck('id');
-        $lups = LineUpContract::whereIn('vessel_id', $vids)->whereNull('disembarkation_date')->get();
+        $lucs = LineUpContract::whereIn('rank_id', [14,19])->where('joining_date', '>=', '2024-06-16')->get();
+        $lucs->load('applicant.user');
+        $lucs->load('rank');
 
-        dd($lups->groupBy('vessel_id'));
+        foreach($lucs as $luc){
+            echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . '<br>';
+        }
+
+        echo "<br>-----------------<br>";
+
+        $lucs = LineUpContract::whereIn('rank_id', [14,19])->where('disembarkation_date', '<=', '2024-07-31')->get();
+        $lucs->load('applicant.user');
+        $lucs->load('rank');
+
+        foreach($lucs as $luc){
+            echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . '<br>';
+        }
     }
 
     //name, current rank, present vessel, date embarked
