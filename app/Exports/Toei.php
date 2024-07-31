@@ -318,7 +318,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
                 // LICENSES ROWS
                 $lRows = array();
-                $temp = 6;
+                $temp = 7;
                 $ral = $rae + 2 + $temp; //Row # AFTER LICENSES
 
                 for($i = 0, $row = $rae + 2; $i < $temp; $i++, $row++){
@@ -398,7 +398,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
-                $temp = 17;
+                $temp = 21;
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
                 $hl = false;
@@ -781,7 +781,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
                 // HC VC
                 $h[5] = [
-                    ('A' . ($rapiyc - 9) . ':' . 'I' . ($rapiyc - 9)), 'B25', 'I23', 'A57:D60'
+                    ('A' . ($rapiyc - 9) . ':' . 'I' . ($rapiyc - 9)), 'B25', 'I23', 'A57:D63'
                 ];
 
                 // B
