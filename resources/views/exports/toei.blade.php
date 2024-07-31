@@ -48,6 +48,8 @@
 		}
 	}
 
+	$crewRank = $applicant->rank;
+
 	$fr = "background-color: #FF0000;";
 @endphp
 
