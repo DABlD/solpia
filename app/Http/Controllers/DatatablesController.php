@@ -90,6 +90,7 @@ class DatatablesController extends Controller
 		session(['fFname' => $req->filters['fFname']]);
 		session(['fLname' => $req->filters['fLname']]);
 		session(['fStatus' => $req->filters['fStatus']]);
+		session(['fFleet' => $req->filters['fFleet']]);
 
 		DB::enableQueryLog();
 		$applicants = Applicant::select('applicants.*', 'pa.status as pas')
@@ -97,6 +98,7 @@ class DatatablesController extends Controller
 								->join('users as u', 'u.id', '=', 'applicants.user_id')
 								->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
 								->where('pa.status', 'like', $req->filters['fStatus'])
+								->where('u.fleet', 'like', $req->filters['fFleet'])
 								->where(function($q){
 									if(auth()->user()->fleet){
 										$q->where('u.fleet', 'like', auth()->user()->fleet);
