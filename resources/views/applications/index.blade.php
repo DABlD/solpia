@@ -263,6 +263,7 @@
         // var engine = "%%";
         var fStatus = "%%";
         var fUsv = "";
+        var fFleet = "%%";
 
         // INIT DATA FROM SESSION
         fRanks = "{{ session('fRanks') }}";
@@ -271,6 +272,8 @@
         fFname = "{{ session('fFname') }}";
         fLname = "{{ session('fLname') }}";
         fStatus = "{{ session('fStatus') ?? "%%" }}";
+        fFleet = "{{ session('fFleet') ?? "%%" }}";
+
         $('#table_filter input[type="search"]').val("{{ session('search') }}");
 
         swal({
@@ -463,7 +466,8 @@
                 // owner: owner,
                 // engine: engine,
                 // remark: remark,
-                fStatus: fStatus
+                fStatus: fStatus,
+                fFleet: fFleet
             };
         }
 
@@ -3363,6 +3367,22 @@
 
                     <div class="row iRow">
                         <div class="col-md-2 iLabel">
+                            Fleet
+                        </div>
+                        <div class="col-md-4 iInput">
+                            <select name="fFleet" class="form-control">
+                                <option value="%%">All</option>
+                                <option value="FLEET B">FLEET B</option>
+                                <option value="FLEET C">FLEET C</option>
+                                <option value="FLEET D">FLEET D</option>
+                                <option value="FISHING">FISHING</option>
+                                <option value="TOEI">TOEI</option>
+                            </select>
+                        </div>
+                    </div></br>
+
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
                             US VISA
                         </div>
                         <div class="col-md-10 iInput">
@@ -3451,6 +3471,7 @@
                     fMax_age = $("[name='max_age']").val();
                     fRanks = $("[name='ranks']").val();
                     fStatus = $("[name='status']").val();
+                    fFleet = $("[name='fFleet']").val();
                     fUsv = $("[name='usv']:checked").val();
                     // fRemarks = $("[name='remarks']").val();
 
@@ -3474,6 +3495,7 @@
                     fStatus = "";
                     fUsv = "";
                     fStatus = "%%";
+                    fFleet = "%%";
                     
                     filter();
                 }
