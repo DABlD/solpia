@@ -1588,6 +1588,8 @@
 			<td colspan="3">
 				@if(in_array(auth()->user()->id, [4567, 4566]))
 					LHEA MARQUEZ / ASST. CREWING MANAGER
+				@elseif(auth()->user()->fleet == "FLEET C")
+					JEANETTE SOLIDUM / CREWING MANAGER
 				@else
 					NEIL ROMANO / CREWING MANAGER
 				@endif
