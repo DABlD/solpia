@@ -5140,7 +5140,7 @@
 
         function createModal(vessel, id){
             $('body').append(`
-                <div class="modal fade" id="linedUp" tabindex="-1">
+                <div class="modal fade" id="linedUp">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header head1">
@@ -5193,6 +5193,10 @@
 
                 </div>`
             );
+
+            $('#linedUp').on('shown.bs.modal', function() {
+                $(document).off('focusin.modal');
+            });
         }
 
         function batchExport(id, data){
