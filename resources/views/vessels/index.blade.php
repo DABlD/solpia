@@ -5140,7 +5140,7 @@
 
         function createModal(vessel, id){
             $('body').append(`
-                <div class="modal fade" id="linedUp">
+                <div class="modal fade" id="linedUp" data-bs-focus="false">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header head1">
