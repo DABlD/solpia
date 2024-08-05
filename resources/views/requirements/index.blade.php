@@ -639,9 +639,8 @@
                 if(result.value){
                     swal.showLoading();
 
-                    update({
-                        url: "{{ route('requirement.update') }}",
-                        data: {
+                    if($("[name='status']").val() == "CANCELLED" && data.status != "CANCELLED"){
+                        let data = {
                             id: $("[name='id']").val(),
                             @if(auth()->user()->fleet == null)
                                 fleet: $("[name='fleet']").val(),
@@ -655,11 +654,58 @@
                             remarks: $("[name='remarks']").val(),
                             status: $("[name='status']").val(),
                             usv: $("[name='usv']:checked").length
-                        },
-                        message: "Success"
-                    }, () => {
-                        reload();
-                    })
+                        };
+
+                        swal({
+                            title: 'Reason for cancellation',
+                            html: `${input("cReason", "", null, 0,12)}`,
+                            preConfirm: () => {
+                                swal.showLoading();
+                                return new Promise(resolve => {
+                                    if($('[name="cReason"]').val() == ""){
+                                        swal.showValidationError('Required');
+                                    }
+                                        
+                                    setTimeout(() => {resolve()}, 500);
+                                });
+                            },
+                        }).then(result => {
+                            if(result.value){
+                                data.remarks = data.remarks + " / Cancelled due to " + $("[name='cReason']").val();
+
+                                update({
+                                    url: "{{ route('requirement.update') }}",
+                                    data: data,
+                                    message: "Success"
+                                }, () => {
+                                    reload();
+                                })
+                            }
+                        });
+                    }
+                    else{
+                        update({
+                            url: "{{ route('requirement.update') }}",
+                            data: {
+                                id: $("[name='id']").val(),
+                                @if(auth()->user()->fleet == null)
+                                    fleet: $("[name='fleet']").val(),
+                                @endif
+                                vessel_id: $("[name='vessel_id']").val(),
+                                rank: $("[name='rank']").val(),
+                                joining_date: $("[name='joining_date']").val(),
+                                joining_port: $("[name='joining_port']").val(),
+                                salary: $("[name='salary']").val(),
+                                max_age: $("[name='max_age']").val(),
+                                remarks: $("[name='remarks']").val(),
+                                status: $("[name='status']").val(),
+                                usv: $("[name='usv']:checked").length
+                            },
+                            message: "Success"
+                        }, () => {
+                            reload();
+                        })
+                    }
                 }
             });
         }
