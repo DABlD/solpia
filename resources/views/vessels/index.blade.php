@@ -5942,7 +5942,7 @@
                     html: '<br><br>' + `
                         <div class="row">
                             <div class="col-md-5">
-                                <h4 class="clabel">Deparment</h4>
+                                <h4 class="clabel">Department</h4>
                             </div>
                             <div class="col-md-7">
                                 <input type="text" id="department" class="swal2-input" />
@@ -6148,7 +6148,7 @@
                     html: '<br><br>' + `
                         <div class="row">
                             <div class="col-md-4">
-                                <h4 class="clabel">Deparment</h4>
+                                <h4 class="clabel">Department</h4>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" id="department" class="swal2-input" />
