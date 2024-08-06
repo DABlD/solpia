@@ -57,7 +57,7 @@
 
 	<tr>
 		<td colspan="3">Location of</td>
-		<td colspan="8" rowspan="2" style="{{ $bc }}">SM R&#38;78, MAGOKJUNGANG8-RO, GANGSEO-GU, SEOUL, REPUBLIC OF KOREA</td>
+		<td colspan="8" rowspan="2" style="{{ $bc }}">78, MAGOKJUNGANG8-RO, GANGSEO-GU, SEOUL, REPUBLIC OF KOREA</td>
 	</tr>
 
 	<tr>
