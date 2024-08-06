@@ -48,7 +48,7 @@
 		<td colspan="3">Name of the</td>
 		<td colspan="6" rowspan="2" style="{{ $bc }}">KOREA LINE CORPORATION</td>
 		<td rowspan="2">Phone number</td>
-		<td style="{{ $bc }}" rowspan="2">02-3701-0114</td>
+		<td style="{{ $bc }}" rowspan="2">82-2-3701-0114</td>
 	</tr>
 
 	<tr>
@@ -57,7 +57,7 @@
 
 	<tr>
 		<td colspan="3">Location of</td>
-		<td colspan="8" rowspan="2" style="{{ $bc }}">SM R&#38;D CENTER, 78, MAGOKJUNGANG8-RO, GANGSEO-GU, SEOUL, KOREA</td>
+		<td colspan="8" rowspan="2" style="{{ $bc }}">SM R&#38;78, MAGOKJUNGANG8-RO, GANGSEO-GU, SEOUL, REPUBLIC OF KOREA</td>
 	</tr>
 
 	<tr>
@@ -66,7 +66,7 @@
 
 	<tr>
 		<td colspan="3">Name of the</td>
-		<td colspan="6" rowspan="2" style="{{ $bc }}">KIM MAN TAE</td>
+		<td colspan="6" rowspan="2" style="{{ $bc }}">MIN TAE YUN</td>
 		<td rowspan="2">Identification number</td>
 		<td rowspan="2" style="{{ $bc }}">101-81-24624</td>
 	</tr>
