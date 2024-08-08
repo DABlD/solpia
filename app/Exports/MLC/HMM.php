@@ -28,6 +28,10 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             'M/V HMM AMETHYST'
         ];
 
+        $array5 = [
+            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP'
+        ];
+
         // minus two;
         $mt = false;
 
@@ -59,6 +63,14 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             elseif(in_array($applicant->vessel->name, $array4)){
                 $applicant->shipowner = "HMM Company Limited";
                 $applicant->sAddress = "108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
+                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+                $applicant->cAddress = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
+            }
+            elseif(in_array($applicant->vessel->name, $array5)){
+                $applicant->shipowner = "HMM Co., LTD.";
+                $applicant->sAddress = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
+                $applicant->shipowner2 = "HMM Ocean Service Co., Ltd.";
+                $applicant->sAddress2 = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
                 $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
                 $applicant->cAddress = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
             }
@@ -275,6 +287,11 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $title = $this->title;
         $mt = $this->mt ? -2 : 0;
 
+        // IF PACIFIC CHAMP AND AFFINITY CHUCHU
+        if(in_array($this->applicant->vessel->id, [7141, 7517])){
+            $mt += 3;
+        }
+
         return [
             AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $title, $mt) {
                 // SHEET SETTINGS
@@ -374,6 +391,15 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'F8', 'E' . (58 + $mt), 'C7', 'H8', 'C' . (13 + $mt),
                 ];
 
+                // IF PACIFIC CHAMP AND AFFINITY CHUCHU
+                if(in_array($this->applicant->vessel->id, [7141, 7517])){
+                    array_push($h[5], 'B9');
+                    array_push($h[5], 'B12');
+
+                    array_push($h['stf'], 'D7');
+                    array_push($h['stf'], 'D19');
+                }
+
                 foreach($h as $key => $value) {
                     foreach($value as $col){
                         if($key === 'wrap'){
@@ -461,6 +487,12 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(21);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
+
+                // IF PACIFIC CHAMP AND AFFINITY CHUCHU
+                if(in_array($this->applicant->vessel->id, [7141, 7517])){
+                    $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
+                    $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
+                }
 
                 // ROW RESIZE
                 for($i = 1; $i <= (60 + $mt); $i++){

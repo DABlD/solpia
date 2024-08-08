@@ -36,26 +36,49 @@
 	</tr>
 
 	<tr>
-		<td rowspan="2" style="{{ $center }}">Seafarer</td>
-		<td>Name</td>
-		<td colspan="3" style="{{ $center }} {{ $color }}">
-			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
-		</td>
-		<td colspan="2" style="{{ $center }}">Date of Birth</td>
-		<td colspan="2" style="{{ $center }} {{ $color }}">
-			{{ $data->user->birthday != "" ? $data->user->birthday->format('d-M-Y') : '' }}
-		</td>
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td rowspan="2" style="{{ $center }}">Seafarer</td>
+			<td colspan="2">Name</td>
+			<td colspan="2" style="{{ $center }} {{ $color }}">
+				{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
+			</td>
+			<td colspan="2" style="{{ $center }}">Date of Birth</td>
+			<td colspan="2" style="{{ $center }} {{ $color }}">
+				{{ $data->user->birthday != "" ? $data->user->birthday->format('d-M-Y') : '' }}
+			</td>
+		@else
+			<td rowspan="2" style="{{ $center }}">Seafarer</td>
+			<td>Name</td>
+			<td colspan="3" style="{{ $center }} {{ $color }}">
+				{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
+			</td>
+			<td colspan="2" style="{{ $center }}">Date of Birth</td>
+			<td colspan="2" style="{{ $center }} {{ $color }}">
+				{{ $data->user->birthday != "" ? $data->user->birthday->format('d-M-Y') : '' }}
+			</td>
+		@endif
 	</tr>
 
 	<tr>
-		<td>Capacity</td>
-		<td colspan="3" style="{{ $center }} {{ $color }}">
-			{{ $data->position }}
-		</td>
-		<td colspan="2" style="{{ $center }}">Birthplace/Nationality</td>
-		<td colspan="2" style="{{ $center }} {{ $color }}">
-			{{ $data->birth_place }} / FILIPINO
-		</td>
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td colspan="2">Capacity</td>
+			<td colspan="2" style="{{ $center }} {{ $color }}">
+				{{ $data->position }}
+			</td>
+			<td colspan="2" style="{{ $center }}">Birthplace/Nationality</td>
+			<td colspan="2" style="{{ $center }} {{ $color }}">
+				{{ $data->birth_place }} / FILIPINO
+			</td>
+		@else
+			<td>Capacity</td>
+			<td colspan="3" style="{{ $center }} {{ $color }}">
+				{{ $data->position }}
+			</td>
+			<td colspan="2" style="{{ $center }}">Birthplace/Nationality</td>
+			<td colspan="2" style="{{ $center }} {{ $color }}">
+				{{ $data->birth_place }} / FILIPINO
+			</td>
+		@endif
 	</tr>
 
 	{{-- INTERCHANGE SHIPOWNER AND Ship MANAGER --}}
@@ -90,61 +113,139 @@
 			<td colspan="7">{{ $data->sAddress }}</td>
 		</tr>
 	@else
-		<tr>
-			<td rowspan="3" style="{{ $center }}">Shipowner</td>
-			<td>Company</td>
-			<td colspan="7">{{ $data->shipowner }}</td>
-		</tr>
-
-		<tr>
-			<td>President</td>
-			<td colspan="7">KIM KYUNG BAE</td>
-		</tr>
-
-		<tr>
-			<td>Address</td>
-			<td colspan="7">{{ $data->sAddress }}</td>
-		</tr>
-
-		@if(isset($data->crewManager))
+		@if(in_array($data->vessel->id, [7141, 7517]))
 			<tr>
-				<td rowspan="2" style="{{ $center }}">Ship Manager</td>
+				<td rowspan="6" style="{{ $center }}">Shipowner</td>
+				<td rowspan="3">Beneficial</td>
 				<td>Company</td>
-				<td colspan="7">{{ $data->crewManager }}</td>
+				<td colspan="6">{{ $data->shipowner }}</td>
+			</tr>
+
+			<tr>
+				<td>President</td>
+				<td colspan="6">KIM KYUNG BAE</td>
 			</tr>
 
 			<tr>
 				<td>Address</td>
-				<td colspan="7">{{ $data->cAddress }}</td>
+				<td colspan="6">{{ $data->sAddress }}</td>
 			</tr>
+
+			<tr>
+				<td rowspan="3">MLC</td>
+				<td>Company</td>
+				<td colspan="6">{{ $data->shipowner2 }}</td>
+			</tr>
+
+			<tr>
+				<td>President</td>
+				<td colspan="6">KIM GYOU BONG</td>
+			</tr>
+
+			<tr>
+				<td>Address</td>
+				<td colspan="6">{{ $data->sAddress2 }}</td>
+			</tr>
+		@else
+			<tr>
+				<td rowspan="3" style="{{ $center }}">Shipowner</td>
+				<td>Company</td>
+				<td colspan="7">{{ $data->shipowner }}</td>
+			</tr>
+
+			<tr>
+				<td>President</td>
+				<td colspan="7">KIM KYUNG BAE</td>
+			</tr>
+
+			<tr>
+				<td>Address</td>
+				<td colspan="7">{{ $data->sAddress }}</td>
+			</tr>
+		@endif
+
+		@if(isset($data->crewManager))
+			@if(in_array($data->vessel->id, [7141, 7517]))
+				<tr>
+					<td rowspan="2" style="{{ $center }}">Ship Manager</td>
+					<td colspan="2">Company</td>
+					<td colspan="6">{{ $data->crewManager }}</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">Address</td>
+					<td colspan="6">{{ $data->cAddress }}</td>
+				</tr>
+			@else
+				<tr>
+					<td rowspan="2" style="{{ $center }}">Ship Manager</td>
+					<td>Company</td>
+					<td colspan="7">{{ $data->crewManager }}</td>
+				</tr>
+
+				<tr>
+					<td>Address</td>
+					<td colspan="7">{{ $data->cAddress }}</td>
+				</tr>
+			@endif
 		@endif
 	@endif
 
-	<tr>
-		<td rowspan="2" style="{{ $center }}">Agent</td>
-		<td>Company</td>
-		<td colspan="7">Solpia Marine and Ship Management, Inc.</td>
-	</tr>
+	@if(in_array($data->vessel->id, [7141, 7517]))
+		<tr>
+			<td rowspan="2" style="{{ $center }}">Agent</td>
+			<td colspan="2">Company</td>
+			<td colspan="6">Solpia Marine and Ship Management, Inc.</td>
+		</tr>
 
-	<tr>
-		<td>Address</td>
-		<td colspan="7">2019 San Marcelino St., Malate Manila, Philippines 1004</td>
-	</tr>
+		<tr>
+			<td colspan="2">Address</td>
+			<td colspan="6">2019 San Marcelino St., Malate Manila, Philippines 1004</td>
+		</tr>
+	@else
+		<tr>
+			<td rowspan="2" style="{{ $center }}">Agent</td>
+			<td>Company</td>
+			<td colspan="7">Solpia Marine and Ship Management, Inc.</td>
+		</tr>
 
-	<tr>
-		<td rowspan="2" style="{{ $center }}">Ship</td>
-		<td>Ship Name</td>
-		<td colspan="3" style="{{ $center }}">{{ $data->vessel->name }}</td>
-		<td colspan="2" style="{{ $center }}">G/T</td>
-		<td colspan="2" style="{{ $center }}">{{ $data->vessel->gross_tonnage }}</td>
-	</tr>
+		<tr>
+			<td>Address</td>
+			<td colspan="7">2019 San Marcelino St., Malate Manila, Philippines 1004</td>
+		</tr>
+	@endif
 
-	<tr>
-		<td>Year Built</td>
-		<td colspan="3" style="{{ $center }}">{{ $data->vessel->year_build }}</td>
-		<td colspan="2" style="{{ $center }}">Flag</td>
-		<td colspan="2" style="{{ $center }}">{{ $data->vessel->flag }}</td>
-	</tr>
+	@if(in_array($data->vessel->id, [7141, 7517]))
+		<tr>
+			<td rowspan="2" style="{{ $center }}">Ship</td>
+			<td colspan="2">Ship Name</td>
+			<td colspan="2" style="{{ $center }}">{{ $data->vessel->name }}</td>
+			<td colspan="2" style="{{ $center }}">G/T</td>
+			<td colspan="2" style="{{ $center }}">{{ $data->vessel->gross_tonnage }}</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Year Built</td>
+			<td colspan="2" style="{{ $center }}">{{ $data->vessel->year_build }}</td>
+			<td colspan="2" style="{{ $center }}">Flag</td>
+			<td colspan="2" style="{{ $center }}">{{ $data->vessel->flag }}</td>
+		</tr>
+	@else
+		<tr>
+			<td rowspan="2" style="{{ $center }}">Ship</td>
+			<td>Ship Name</td>
+			<td colspan="3" style="{{ $center }}">{{ $data->vessel->name }}</td>
+			<td colspan="2" style="{{ $center }}">G/T</td>
+			<td colspan="2" style="{{ $center }}">{{ $data->vessel->gross_tonnage }}</td>
+		</tr>
+
+		<tr>
+			<td>Year Built</td>
+			<td colspan="3" style="{{ $center }}">{{ $data->vessel->year_build }}</td>
+			<td colspan="2" style="{{ $center }}">Flag</td>
+			<td colspan="2" style="{{ $center }}">{{ $data->vessel->flag }}</td>
+		</tr>
+	@endif
 
 	<tr>
 		<td colspan="9"></td>
@@ -156,16 +257,30 @@
 		</td>
 	</tr>
 
-	<tr>
-		<td rowspan="2" style="{{ $center }}">Period</td>
-		<td>Date of commencement</td>
-		<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
-	</tr>
 
-	<tr>
-		<td>Date of termination</td>
-		<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
-	</tr>
+	@if(in_array($data->vessel->id, [7141, 7517]))
+		<tr>
+			<td rowspan="2" style="{{ $center }}">Period</td>
+			<td colspan="2">Date of commencement</td>
+			<td colspan="6" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">Date of termination</td>
+			<td colspan="6" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
+		</tr>
+	@else
+		<tr>
+			<td rowspan="2" style="{{ $center }}">Period</td>
+			<td>Date of commencement</td>
+			<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
+		</tr>
+
+		<tr>
+			<td>Date of termination</td>
+			<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
+		</tr>
+	@endif
 
 	<tr>
 		<td style="{{ $center }}">Early Termination</td>
