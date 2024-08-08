@@ -139,7 +139,7 @@
 		<td colspan="4"></td>
 	</tr>
 
-	{{ $dept("ADMIN / CLAIMS", "Ms. Joy Pineda", "Admin / Claims Officer", "(Claims / Legal)") }}
+	{{ $dept("ADMIN / CLAIMS", "Ms. Claudette Pasaylo", "Admin / Claims Officer", "(Claims / Legal)") }}
 	{{ $dept("ACCOUNTING", "Ms. Robelyn Ecleo / Ms. Mylene Relano", "Admin / Accounting Manager", "") }}
 
 	{{ $dept("PRINCIPAL'S REPRESENTIVE", "Mr. Gyeonghwan Gwak / Mr. Kyoung T. Ko", "", "") }}
