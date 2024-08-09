@@ -493,12 +493,6 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(21);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
 
-                // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, [7141, 7517])){
-                    $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
-                    $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
-                }
-
                 // ROW RESIZE
                 for($i = 1; $i <= (60 + $mt); $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(21);
@@ -542,6 +536,17 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 if($mt){
                     $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(40);
+                }
+
+                // IF PACIFIC CHAMP AND AFFINITY CHUCHU
+                if(in_array($this->applicant->vessel->id, [7141, 7517])){
+                    $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
+                    $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
+
+                    $event->sheet->getDelegate()->getRowDimension(25 + $mt)->setRowHeight(100);
+                    $event->sheet->getDelegate()->getRowDimension(36 + $mt)->setRowHeight(25);
+                    $event->sheet->getDelegate()->getRowDimension(37 + $mt)->setRowHeight(25);
+                    $event->sheet->getDelegate()->getRowDimension(38 + $mt)->setRowHeight(25);
                 }
 
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
