@@ -1625,7 +1625,7 @@ class ApplicationsController extends Controller
         $id = 3689;
         $id = 9999;
 
-        $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet', 'pa.status as pa_s')
+        $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet', 'u.address', 'pa.status as pa_s')
                     // ->where('manning_agent', 'LIKE', '%SOLPIA%')
                     // ->where('sea_services.applicant_id', $id)
                     ->whereNull('u.deleted_at')
@@ -1654,6 +1654,7 @@ class ApplicationsController extends Controller
                 "fname" => $sss->first()->fname,
                 "mname" => $sss->first()->mname,
                 "lname" => $sss->first()->lname,
+                "address" => $sss->first()->address,
                 "suffix" => $sss->first()->suffix,
                 // "rname" => isset($ranks[$sss->first()->rank]) ? $ranks[$sss->first()->rank] : isset($rank2[$sss->first()->rank]) ? $rank2[$sss->first()->rank] : "-",
                 "rname" => $rname,
@@ -1694,10 +1695,10 @@ class ApplicationsController extends Controller
                 }
             }
 
-            if($total >= 60){
+            if($total >= 48 && $total <= 72){
                 array_push($array1, $ss->applicant_id);
             }
-            if($total >= 120){
+            if($total >= 108 && $total <= 132){
                 array_push($array2, $ss->applicant_id);
             }
 

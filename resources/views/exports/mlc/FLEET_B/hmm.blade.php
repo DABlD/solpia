@@ -348,7 +348,14 @@
 	<tr>
 		<td style="{{ $center }}">Owner’s Guaranteed Overtime Allowance</td>
 		<td colspan="2" style="{{ $center }}">Seniority Allowance</td>
-		<td colspan="3" style="{{ $center }}">Provident Fund (Retirement Payment)</td>
+
+
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td colspan="3" style="{{ $center }}">Provident Fund (Contract Completion Bonus)</td>
+		@else
+			<td colspan="3" style="{{ $center }}">Provident Fund (Retirement Payment)</td>
+		@endif
+
 		<td colspan="2" style="{{ $center }}">Others</td>
 	</tr>
 
@@ -376,8 +383,8 @@
 	<tr>
 		<td style="{{ $center }}">Payment methods</td>
 		<td colspan="8">
-			"Wages should be paid directly to the seafarers designated bank accounts unless they request otherwise in writing. 
-			Some allotments should be remitted in due time and directly to the person or persons nominated by the seafarers."
+			Wages should be paid directly to the seafarers designated bank accounts unless they request otherwise in writing. 
+			Some allotments should be remitted in due time and directly to the person or persons nominated by the seafarers.
 		</td>
 	</tr>
 
