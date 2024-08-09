@@ -6,7 +6,11 @@
 
 <table>
 	<tr>
-		<td colspan="9">PHILIPPINE CREW</td>
+		<td colspan="9">
+			CHAPTER  2    외국해원 표준근로계약서
+			<br style='mso-data-placement:same-cell;' />
+			2.1.2   PHILIPPINE CREW(Non Korea Flag Vessel)
+		</td>
 	</tr>
 
 	<tr>
