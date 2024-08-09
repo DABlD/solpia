@@ -68,6 +68,7 @@
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
                                                                 <th>Last Vessel</th>
+                                                                <th>Address</th>
                                                                 <th>Status</th>
                                                             </tr>
                                                         </thead>
@@ -87,6 +88,7 @@
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
                                                                 </tr>
                                                             @endforeach
@@ -103,6 +105,7 @@
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
                                                                 <th>Last Vessel</th>
+                                                                <th>Address</th>
                                                                 <th>Disembarked On</th>
                                                             </tr>
                                                         </thead>
@@ -122,6 +125,7 @@
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
                                                                 </tr>
                                                             @endforeach
@@ -177,6 +181,7 @@
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
                                                                 <th>Last Vessel</th>
+                                                                <th>Address</th>
                                                                 <th>Status</th>
                                                             </tr>
                                                         </thead>
@@ -196,6 +201,7 @@
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
                                                                 </tr>
                                                             @endforeach
@@ -212,6 +218,7 @@
                                                                 <th>Rank</th>
                                                                 <th>Years</th>
                                                                 <th>Last Vessel</th>
+                                                                <th>Address</th>
                                                                 <th>Disembarked On</th>
                                                             </tr>
                                                         </thead>
@@ -231,6 +238,7 @@
                                                                     <td>{{ $awardee['rname'] }}</td>
                                                                     <td>{{ round($awardee['total'] / 12, 2) }}</td>
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
                                                                 </tr>
                                                             @endforeach
