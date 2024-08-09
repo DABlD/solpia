@@ -289,9 +289,7 @@
 			<br style="mso-data-placement:same-cell;" />
 			2)	The seafarer shall give a notice to shipowner for their early termination in accordance with the flag state regulations as follows.
 			<br style="mso-data-placement:same-cell;" />
-			(1) Korea : Within 30 days  
-			<br style="mso-data-placement:same-cell;" />
-			(2) Panama : Minimum 15 days in advance  
+			(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
 			<br style="mso-data-placement:same-cell;" />
 			(3) Marshall Islands/Liberia/Malta : Minimum 7 days in advance"
 		</td>
