@@ -298,15 +298,20 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&R&P/&N');
+
+
+                if(in_array($this->applicant->vessel->id, [7141, 7517])){
+                    $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page 1");
+                    $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
+                }
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.7);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.7);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.7);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.7);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
 
                 $event->sheet->getDelegate()->getStyle('A1:H' . (62 + $mt))->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A4:H' . (62 + $mt))->getFont()->setSize(10);
@@ -552,7 +557,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
-        $drawing->setCoordinates('G' . (55 + $mt));
+        $drawing->setCoordinates('G' . (58 + $mt));
         $drawing->setHeight(154);
         $drawing->setWidth(154);
         $drawing->setOffsetX(35);
@@ -564,7 +569,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setPath(public_path($sig));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('E' . (55 + $mt));
+        $drawing3->setCoordinates('E' . (58 + $mt));
         $drawing3->setHeight(140);
         $drawing3->setWidth(140);
 

@@ -285,7 +285,7 @@
 	<tr>
 		<td style="{{ $center }}">Early Termination</td>
 		<td colspan="8" style="height: 90px;">
-			"1)	Where the shipowner intends to cancel a Seafarers' employment agreement, he/she shall inform the seafarer of the cancellation of the Seafarer’s employment agreement in writing with a period of advance notice of not less than 30 days.
+			1)	Where the shipowner intends to cancel a Seafarers' employment agreement, he/she shall inform the seafarer of the cancellation of the Seafarer’s employment agreement in writing with a period of advance notice of not less than 30 days.
 			<br style="mso-data-placement:same-cell;" />
 			2)	The seafarer shall give a notice to shipowner for their early termination in accordance with the flag state regulations as follows.
 			<br style="mso-data-placement:same-cell;" />
