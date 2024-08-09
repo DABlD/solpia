@@ -547,6 +547,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(25);
                     $event->sheet->getDelegate()->getRowDimension(37)->setRowHeight(25);
                     $event->sheet->getDelegate()->getRowDimension(38)->setRowHeight(25);
+
+                    $event->sheet->getDelegate()->getRowDimension(40)->setRowHeight(5);
+                    $event->sheet->getDelegate()->getRowDimension(41)->setRowHeight(5);
                 }
 
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
