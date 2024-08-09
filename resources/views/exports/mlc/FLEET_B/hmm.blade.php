@@ -296,7 +296,7 @@
 			<br style="mso-data-placement:same-cell;" />
 			(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
 			<br style="mso-data-placement:same-cell;" />
-			(3) Marshall Islands/Liberia/Malta : Minimum 7 days in advance"
+			(3) Marshall Islands / Liberia / Malta / Isle of Man  : Minimum 7 days in advance
 		</td>
 	</tr>
 
@@ -398,7 +398,7 @@
 	<tr>
 		<td style="{{ $center }}">Payment methods</td>
 		<td colspan="8">
-			Wages should be paid directly to the seafarers designated bank accounts unless they request otherwise in writing. 
+			Wages should be paid directly to the seafarer's designated bank accounts unless they request otherwise in writing. 
 			Some allotments should be remitted in due time and directly to the person or persons nominated by the seafarers.
 		</td>
 	</tr>
