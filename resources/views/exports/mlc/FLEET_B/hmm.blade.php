@@ -351,9 +351,17 @@
 
 
 		@if(in_array($data->vessel->id, [7141, 7517]))
-			<td colspan="3" style="{{ $center }}">Provident Fund (Contract Completion Bonus)</td>
+			<td colspan="3" style="{{ $center }}">
+				Provident Fund
+				<br style='mso-data-placement:same-cell;' />
+				(Contract Completion Bonus)
+			</td>
 		@else
-			<td colspan="3" style="{{ $center }}">Provident Fund (Retirement Payment)</td>
+			<td colspan="3" style="{{ $center }}">
+				Provident Fund 
+				<br style='mso-data-placement:same-cell;' />
+				(Retirement Payment)
+			</td>
 		@endif
 
 		<td colspan="2" style="{{ $center }}">Others</td>
@@ -394,7 +402,12 @@
 
 	<tr>
 		<td rowspan="3" style="{{ $center }}">The amount of Paid Leave</td>
-		<td style="{{ $center }}">Amount of P/L</td>
+
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td style="{{ $center }}">Amount</td>
+		@else
+			<td style="{{ $center }}">Amount of P/L</td>
+		@endif
 		<td colspan="7" style="{{ $center }}">Method of calculation</td>
 	</tr>
 
@@ -487,7 +500,12 @@
 			<br style="mso-data-placement:same-cell;" />
 			a. Minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
 			<br style="mso-data-placement:same-cell;" />
-			b. Minimum of 10 hours rest in any 24-hour period may be divided into no more than two periods, one of which shall be at least six hours in length
+
+			@if(in_array($data->vessel->id, [7141, 7517]))
+				b. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours in length
+			@else
+				b. Minimum of 10 hours rest in any 24-hour period may be divided into no more than two periods, one of which shall be at least six hours in length
+			@endif
 			<br style="mso-data-placement:same-cell;" />
 			c. The interval between consecutive periods of rest shall not exceed 14 hours.
 			<br style="mso-data-placement:same-cell;" />
@@ -513,9 +531,13 @@
 
 	<tr>
 		<td colspan="9">
-			1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing
-			<br style="mso-data-placement:same-cell;" />
-			at any time
+			@if(in_array($data->vessel->id, [7141, 7517]))
+				1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing at any time
+			@else
+				1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing
+				<br style="mso-data-placement:same-cell;" />
+				at any time
+			@endif
 			<br style="mso-data-placement:same-cell;" />
 			2) Seafarers shall be aware of the relevant information and check and utilize it frequently
 		</td>
@@ -541,6 +563,7 @@
 			entitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships.
 			<br style="mso-data-placement:same-cell;" />
 			※	Additional clause for Marshall Islands flag
+			<br style="mso-data-placement:same-cell;" />
 			The terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic of the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law and Regulations of the Republic of the Marshall Islands.
 		</td>
 	</tr>
@@ -584,7 +607,12 @@
 	<tr>
 		<td colspan="3" style="{{ $center }}">(Seafarer)</td>
 		<td></td>
-		<td colspan="4" style="{{ $center }}">(Shipowner or for and on behalf of the shipowner)</td>
+
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td colspan="4" style="{{ $center }}">For and on behalf of the Shipowner(Beneficial)</td>
+		@else
+			<td colspan="4" style="{{ $center }}">(Shipowner or for and on behalf of the shipowner)</td>
+		@endif
 		<td></td>
 	</tr>
 
