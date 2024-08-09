@@ -385,7 +385,11 @@
 	</tr>
 
 	<tr>
-		<td style="text-decoration: underline; {{ $center }}">Payday</td>
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td style="{{ $center }}">Payday</td>
+		@else
+			<td style="text-decoration: underline; {{ $center }}">Payday</td>
+		@endif
 		<td colspan="8">
 			All seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid monthly wages not later than 15 days of the succeeding month from the date of commencement of the agreement until the date of arrival at point of hire upon termination of their employment.
 		</td>
@@ -416,7 +420,11 @@
 
 	<tr>
 		<td style="{{ $center }} {{ $color }}">${{ $data->wage->leave_pay ?? 0 }}</td>
-		<td rowspan="2" colspan="7" style="{{ $center }}">Basic Wage / 30 days X 9 days</td>
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td rowspan="2" colspan="7" style="{{ $center }}">Basic Wage / 30 days X ( 9 ) days</td>
+		@else
+			<td rowspan="2" colspan="7" style="{{ $center }}">Basic Wage / 30 days X 9 days</td>
+		@endif
 	</tr>
 
 	<tr>
@@ -425,7 +433,11 @@
 
 	<tr>
 		<td style="text-decoration: underline; {{ $center }}">The number of days</td>
-		<td colspan="8">The number of days of paid leave shall be 9 days per 1 month of continuous service.</td>
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td colspan="8">The number of days of paid leave shall be ( 9 ) days per 1 month of continuous service.</td>
+		@else
+			<td colspan="8">The number of days of paid leave shall be 9 days per 1 month of continuous service.</td>
+		@endif
 	</tr>
 
 	<tr>
@@ -501,7 +513,12 @@
 			<br style="mso-data-placement:same-cell;" />
 			2) Hours of rest
 			<br style="mso-data-placement:same-cell;" />
-			a. Minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
+
+			@if(in_array($data->vessel->id, [7141, 7517]))
+				a. Minimum of 10 hours rest in any 24-hour period and 77 hours in any seven-day period.
+			@else
+				a. Minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
+			@endif
 			<br style="mso-data-placement:same-cell;" />
 
 			@if(in_array($data->vessel->id, [7141, 7517]))
@@ -516,7 +533,7 @@
 			<br style="mso-data-placement:same-cell;" />
 			e. When a seafarer is on call, such as when a machinery space is unattended, the seafarer shall have an adequate compensatory 
 			<br style="mso-data-placement:same-cell;" />
-			Rest periodic the normal period of rest is disturbed by call-outs to work.
+			rest period if the normal period of rest is disturbed by call-outs to work.
 		</td>
 	</tr>
 
@@ -527,13 +544,23 @@
 	</tr>
 
 	<tr>
-		<td colspan="9" style="{{ $bold }}">
-			8. Provision and compliance with Risk assessments
-		</td>
+		@if(in_array($data->vessel->id, [7141, 7517]))
+			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
+				8. Provision and compliance with Risk assessments
+			</td>
+		@else
+			<td colspan="9" style="{{ $bold }}">
+				8. Provision and compliance with Risk assessments
+			</td>
+		@endif
 	</tr>
 
 	<tr>
+		@if(in_array($data->vessel->id, [7141, 7517]))
+		<td colspan="9" style="text-decoration: underline;">
+		@else
 		<td colspan="9">
+		@endif
 			@if(in_array($data->vessel->id, [7141, 7517]))
 				1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing at any time
 			@else
@@ -560,7 +587,7 @@
 
 	<tr>
 		<td colspan="9">
-			Any facts which are not defined in this agreement, these are complied with the law of flag state or Applicable collective bargaining agreement.
+			Any facts which are not defined in this agreement, these are complied with the law of flag state or applicable collective bargaining agreement.
 			<br style="mso-data-placement:same-cell;" />
 			※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and
 			entitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships.
