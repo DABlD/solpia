@@ -303,6 +303,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 if(in_array($this->applicant->vessel->id, [7141, 7517])){
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
+
+                    $event->sheet->getDelegate()->getHeaderFooter()->setEvenHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
+                    $event->sheet->getDelegate()->getHeaderFooter()->setEvenFooter("&LPC-302/2022.01.26/DCN22001");
                 }
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
