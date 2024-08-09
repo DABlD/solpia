@@ -578,7 +578,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
-        $drawing->setCoordinates('G' . (58 + $mt));
+        $drawing->setCoordinates('G' . (55 + $mt));
         $drawing->setHeight(154);
         $drawing->setWidth(154);
         $drawing->setOffsetX(35);
@@ -590,9 +590,14 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setPath(public_path($sig));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('E' . (58 + $mt));
+        $drawing3->setCoordinates('E' . (55 + $mt));
         $drawing3->setHeight(140);
         $drawing3->setWidth(140);
+
+        if(in_array($this->applicant->vessel->id, [7141, 7517])){
+            $drawing->setCoordinates('G' . (58 + $mt));
+            $drawing3->setCoordinates('E' . (58 + $mt));
+        }
 
         return [$drawing, $drawing3];
     }
