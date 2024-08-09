@@ -527,7 +527,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setCoordinates('G102');
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing3->setPath(public_path("images/klcsm.jpg"));
+        $drawing3->setPath(public_path("images/mlc_klcsm.jpg"));
         $drawing3->setResizeProportional(false);
         $drawing3->setHeight(100);
         $drawing3->setWidth(200);
