@@ -261,7 +261,9 @@
 					<option value="BASIC TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - BTLGT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - BTLGT</option>
 					<option value="ADVANCED TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - ATLGT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCED TRAINING FOR LIQUIFIED GAS TANKER CARGO OPERATIONS - ATLGT</option>
 					<option value="ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT</option>
-					<option value="HAZMAT">&nbsp;&nbsp;&nbsp;&nbsp;HAZMAT</option>
+					<option value="BTOC ENDORSEMENT">&nbsp;&nbsp;&nbsp;&nbsp;BTOC ENDORSEMENT</option>
+					<option value="ATOT ENDORSEMENT">&nbsp;&nbsp;&nbsp;&nbsp;ATOT ENDORSEMENT</option>
+					<option value="ATCT ENDORSEMENT">&nbsp;&nbsp;&nbsp;&nbsp;ATCT ENDORSEMENT</option>
 
 				<optgroup label="IN HOUSE CERTIFICATE/SPECIAL TRAINING"></optgroup>
 					<option value="ANTI PIRACY">&nbsp;&nbsp;&nbsp;&nbsp;ANTI PIRACY</option>
@@ -416,6 +418,7 @@
             	            	<option value="COVID-19 4TH DOSE">COVID-19 4TH DOSE</option>
             	            	<option value="COVID-19 5TH DOSE">COVID-19 5TH DOSE</option>
             	            	<option value="COVID-19 6TH DOSE">COVID-19 6TH DOSE</option>
+            	            	<option value="BENZENE TEST">BENZENE TEST</option>
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${mcType}${count}Error"></strong>
