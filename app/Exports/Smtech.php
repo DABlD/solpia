@@ -326,7 +326,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // LICENSES ROWS
                 $lRows = array();
-                $temp = 6;
+                $temp = 5;
                 $ral = $rae + 2 + $temp; //Row # AFTER LICENSES
 
                 for($i = 0, $row = $rae + 2; $i < $temp; $i++, $row++){
@@ -406,7 +406,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
-                $temp = 23;
+                $temp = 20;
 
                 // IF RANK IS CO ADD 1 ROW BECAUSE OF SHIP SAFETY OFFICER
                 // if($this->applicant->rank->id == 2){
@@ -866,15 +866,22 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 $event->sheet->getDelegate()->getStyle("A20:I21")->applyFromArray($fillStyle[0]);
                 $event->sheet->getDelegate()->getStyle("C" . ($rae + 3) . ':D' . ($rae + 3))->applyFromArray($fillStyle[0]);
                 $event->sheet->getDelegate()->getStyle("A" . ($ral + 6) . ':B' . ($ral + 6))->applyFromArray($fillStyle[0]);
-                $event->sheet->getDelegate()->getStyle("H" . ($ral + 6) . ':I' . ($ral + 6))->applyFromArray($fillStyle[0]);
+                $event->sheet->getDelegate()->getStyle("H" . ($ral + 5) . ':I' . ($ral + 5))->applyFromArray($fillStyle[0]);
+
+                $event->sheet->getDelegate()->getStyle("H" . ($ral + 5) . ':I' . ($ral + 5))->applyFromArray($fillStyle[0]);
+
+                $event->sheet->getDelegate()->getStyle("A" . ($rac + 3) . ':B' . ($rac + 3))->applyFromArray($fillStyle[0]);
 
                 $temp = 1;
                 // if($this->applicant->rank->id == 2){
                     $event->sheet->getDelegate()->getStyle("A" . ($raoc + 5) . ':D' . ($raoc + 5))->applyFromArray($fillStyle[0]);
                     // $temp += 1;
                 // }
-                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[1]);
-                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 5) . ':I' . ($rac + $temp + 5))->applyFromArray($fillStyle[2]);
+
+
+
+                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 3) . ':I' . ($rac + $temp + 3))->applyFromArray($fillStyle[1]);
+                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[2]);
 
                 $event->sheet->getDelegate()->getStyle("A" . ($raoc + $temp - 1) . ':I' . ($raoc + $temp + 6))->applyFromArray($fillStyle[3]);
                 $event->sheet->getDelegate()->getStyle("A" . ($rapiyc + $temp - 1) . ':I' . ($rapiyc + $temp + 2))->applyFromArray($fillStyle[0]);
