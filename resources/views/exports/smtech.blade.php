@@ -998,36 +998,85 @@
 		</tr>
 
 		@php 
-			$name = 'ECDIS';
-			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+			$es1 = null;
+			$es2 = null;
+			$ef = null;
+			$et = null;
+
+			foreach($applicant->document_lc as $doc){
+				if(str_contains($doc->type, '701') || str_contains($doc->type, '901') || str_contains($doc->type, '2000')){
+					$es1 = $doc;
+				}
+				elseif(str_contains($doc->type, '7201') || str_contains($doc->type, '9201')){
+					$es2 = $doc;
+				}
+				elseif(str_contains($doc->type, '3300')){
+					$ef = $doc;
+				}
+				elseif(str_contains($doc->type, 'KEIKI')){
+					$et = $doc;
+				}
+			}
+
+			$docu = $es1;
 		@endphp
+
 		{{-- ECDISCISM --}}
 		<tr>
-			<td rowspan="2">ECDIS</td>
-			<td colspan="3">Generic</td>
+			<td colspan="4">ECDIS SPECIFIC 1</td>
 			<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
+		@php 
+			$docu = $es2;
+		@endphp
+		{{-- ECDISCISM --}}
 		<tr>
-			<td colspan="3">Type Specific</td>
-			@if(isset($applicant->ecdises[0]))
-				@php
-					$name = $applicant->ecdises[0];
-					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-				@endphp
-				<td>{{ $docu ? strtoupper($docu->no) : "REVERTING"}}</td>
-				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
-				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-				<td colspan="2">{{ $docu ? $docu->issuer : "REVERTING" }}</td>
-			@else
-				<td>-----</td>
-				<td>-----</td>
-				<td>-----</td>
-				<td colspan="2">NOT APPLICABLE</td>
-			@endif
+			<td colspan="4">ECDIS SPECIFIC 2</td>
+			<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+		</tr>
+
+		@php 
+			$docu = $ef;
+		@endphp
+		{{-- ECDISCISM --}}
+		<tr>
+			<td colspan="4">FURUNO ECDIS FMD</td>
+			<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+		</tr>
+
+		@php 
+			$docu = $et;
+		@endphp
+		{{-- ECDISCISM --}}
+		<tr>
+			<td colspan="4">TOKYO KEIKI</td>
+			<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+		</tr>
+
+		@php 
+			$name = 'ECDIS';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+		{{-- ECDISCISM --}}
+		<tr>
+			<td colspan="4">ECDIS GENERIC</td>
+			<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
 		{{-- 11TH --}}
