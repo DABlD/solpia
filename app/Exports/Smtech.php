@@ -171,7 +171,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'D8E4BC'
+                        'rgb' => '92D050'
                     ]
                 ],
             ],
@@ -398,7 +398,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
-                $temp = 20;
+                $temp = 23;
 
                 // IF RANK IS CO ADD 1 ROW BECAUSE OF SHIP SAFETY OFFICER
                 // if($this->applicant->rank->id == 2){
@@ -796,6 +796,8 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 $h[4] = array_merge($sh1Rows, [
                     ('A' . ($rapiyc - 5) . ':' . 'A' . ($rapiyc - 1)), //A#:A# PIYC ROWS
                     ('A' . ($raeajl - 2) . ':' . 'A' . ($raeajl - 1)), //A#:A# PIYC ROWS
+                    ('A' . ($raeajl - 2) . ':' . 'A' . ($raeajl - 1)), //A#:A# PIYC ROWS
+                    ('A' . ($raeajl - 4)),
                     ('A' . ($ratesms - 2) . ':' . 'A' . ($ratesms - 1)), //A#:A# PIYC ROWS
                     ('A' . ($raaow - 1)), //A#:A# PIYC ROWS
                     'B25'
@@ -860,14 +862,14 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 $temp = 1;
                 // if($this->applicant->rank->id == 2){
-                    $event->sheet->getDelegate()->getStyle("A" . ($raoc + 4) . ':D' . ($raoc + 4))->applyFromArray($fillStyle[0]);
+                    $event->sheet->getDelegate()->getStyle("A" . ($raoc + 5) . ':D' . ($raoc + 5))->applyFromArray($fillStyle[0]);
                     // $temp += 1;
                 // }
                 $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[1]);
                 $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 5) . ':I' . ($rac + $temp + 5))->applyFromArray($fillStyle[2]);
 
-                $event->sheet->getDelegate()->getStyle("A" . ($raoc + $temp) . ':I' . ($raoc + $temp + 8))->applyFromArray($fillStyle[2]);
-                $event->sheet->getDelegate()->getStyle("A" . ($rapiyc + $temp) . ':I' . ($rapiyc + $temp + 3))->applyFromArray($fillStyle[0]);
+                $event->sheet->getDelegate()->getStyle("A" . ($raoc + $temp - 1) . ':I' . ($raoc + $temp + 6))->applyFromArray($fillStyle[2]);
+                $event->sheet->getDelegate()->getStyle("A" . ($rapiyc + $temp - 1) . ':I' . ($rapiyc + $temp + 2))->applyFromArray($fillStyle[0]);
 
                 $event->sheet->getDelegate()->getStyle("F" . ($rash1 + $temp + 1))->applyFromArray($fillStyle[0]);
 
@@ -975,6 +977,9 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 $event->sheet->getDelegate()->getStyle("G22")->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle("G22")->getFont()->setSize(8.5);
+
+                $event->sheet->getDelegate()->getStyle("A20:A100")->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle("A20:A100")->getFont()->setSize(8.5);
 
                 // SET PRINT AREA
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
