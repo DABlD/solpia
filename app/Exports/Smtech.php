@@ -171,6 +171,14 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
+                        'rgb' => 'D8E4BC'
+                    ]
+                ],
+            ],
+            [
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => [
                         'rgb' => '92D050'
                     ]
                 ],
@@ -868,7 +876,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[1]);
                 $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 5) . ':I' . ($rac + $temp + 5))->applyFromArray($fillStyle[2]);
 
-                $event->sheet->getDelegate()->getStyle("A" . ($raoc + $temp - 1) . ':I' . ($raoc + $temp + 6))->applyFromArray($fillStyle[2]);
+                $event->sheet->getDelegate()->getStyle("A" . ($raoc + $temp - 1) . ':I' . ($raoc + $temp + 6))->applyFromArray($fillStyle[3]);
                 $event->sheet->getDelegate()->getStyle("A" . ($rapiyc + $temp - 1) . ':I' . ($rapiyc + $temp + 2))->applyFromArray($fillStyle[0]);
 
                 $event->sheet->getDelegate()->getStyle("F" . ($rash1 + $temp + 1))->applyFromArray($fillStyle[0]);
