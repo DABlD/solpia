@@ -57,7 +57,7 @@
 
 	<tr>
 		<td colspan="3">Location of</td>
-		<td colspan="8" rowspan="2" style="{{ $bc }}">78, MAGOKJUNGANG8-RO, GANGSEO-GU, SEOUL, REPUBLIC OF KOREA</td>
+		<td colspan="8" rowspan="2" style="{{ $bc }}">SM R&D Center, 78, Magokjungang8-ro, Gangseo-gu, Seoul, Korea</td>
 	</tr>
 
 	<tr>
@@ -84,7 +84,7 @@
 		<td colspan="3">Name of</td>
 		<td colspan="6" rowspan="2" style="{{ $bc }} {{ $blue }}">{{ $data->user->namefull }}</td>
 		<td>Date of birth</td>
-		<td style="{{ $bc }} {{ $blue }}">{{ now()->format('d/M/Y') }}</td>
+		<td style="{{ $bc }} {{ $blue }}">{{ $data->user->birthday ? now()->parse($data->user->birthday)->format('d/M/Y') : "---" }}</td>
 	</tr>
 
 	<tr>
