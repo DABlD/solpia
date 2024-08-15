@@ -57,7 +57,7 @@
 
 	<tr>
 		<td colspan="3">Location of</td>
-		<td colspan="8" rowspan="2" style="{{ $bc }}">SM R&D Center, 78, Magokjungang8-ro, Gangseo-gu, Seoul, Korea</td>
+		<td colspan="8" rowspan="2" style="{{ $bc }}">SM R&#38;D Center, 78, Magokjungang8-ro, Gangseo-gu, Seoul, Korea</td>
 	</tr>
 
 	<tr>
