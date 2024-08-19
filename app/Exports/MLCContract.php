@@ -56,6 +56,10 @@ class MLCContract implements WithMultipleSheets
 
         $class = str_replace(' ', '', $class);
 
+        if(isset($this->req['itf'])){
+            $class .= "_" . $this->req['itf'];
+        }
+
         array_push($sheets, new $class($this->applicant, $this->type, $this->req));
 
         return $sheets;
