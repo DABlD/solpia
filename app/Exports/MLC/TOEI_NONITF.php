@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type, $req){
         $this->data     = $data;
@@ -173,7 +173,7 @@ class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'bdb9b9'
+                        'rgb' => 'A6A6A6'
                     ]
                 ],
             ],
@@ -289,7 +289,15 @@ class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
 
                 // VT
                 $h[1] = [
-                    
+                    "A100:H100",
+                    'A114:A131',
+                    'A139:A160',
+                    'A168:A189',
+                    'A195:A219',
+                    'A227:A244',
+                    'A250:A269',
+                    'A277:A294',
+                    'A302:A317',
                 ];
 
                 // HL B
@@ -317,9 +325,13 @@ class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 // VC
                 $h[7] = [
                     'A11:H29',
+                    'A35:H53', 'A55:H63',
+                    'A69:H99'
                 ];
 
                 $h['wrap'] = [
+                    'C26', 'C29',
+                    'B133'
                 ];
 
                 // SHRINK TO FIT
@@ -347,6 +359,7 @@ class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
 
                 // FILLS
                 $fills[0] = [
+                    'A35:H35', 'A43:H43', 'A49:H49', 'A53'
                 ];
 
                 $fills[1] = [
@@ -363,7 +376,9 @@ class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A12:H13', 'A15:H16', 'A18:H19', 'A21:H29'
+                    'A12:H13', 'A15:H16', 'A18:H19', 'A21:H29',
+                    'A35:H53', 'A55:H60', 'A62:H63',
+                    'A99:H100',
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -376,6 +391,18 @@ class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
+                    'A1:B4', 'C1:G4', 'H1:H4',
+                    'A30:B33', 'C30:G33', 'H30:H33',
+                    'A64:B67', 'C64:G67', 'H64:H67',
+                    'A103:B106', 'C103:G106', 'H103:H106',
+                    'A132:B135', 'C132:G135', 'H132:H135',
+                    'A161:B164', 'C161:G164', 'H161:H164',
+                    'A190:B193', 'C190:G193', 'H190:H193',
+                    'A220:B223', 'C220:G223', 'H220:H223',
+                    'A245:B248', 'C245:G248', 'H245:H248',
+                    'A270:B273', 'C270:G273', 'H270:H273',
+                    'A295:B298', 'C295:G298', 'H295:H298',
+                    'A318:B321', 'C318:G321', 'H318:H321',
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -437,31 +464,49 @@ class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(9);
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(5);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(18);
-                // $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6);
                 // $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(18);
 
                 // ROW RESIZE
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(54)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(68)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(70)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(98)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(99)->setRowHeight(80);
+                $event->sheet->getDelegate()->getRowDimension(100)->setRowHeight(90);
 
                 $rows = [
                     [
                         12, //ROW HEIGHT
                         1,4 //START ROW, END ROW
                     ],
-                    [
-                        20,
-                        6,8
-                    ],
-                    [
-                        34,
-                        11,29
-                    ],
+                    [20,6,8],
+                    [12,30,33],
+                    [34,11,29],
+                    [34,36,42],
+                    [34,49,53],
+                    [20,44,47],
+                    [18,55,60],
+                    [25,62,63],
+                    [12,64,67],
+                    [12,103,106],
+                    [12,132,135],
+                    [12,161,164],
+                    [12,190,193],
+                    [12,220,223],
+                    [12,245,248],
+                    [12,270,273],
+                    [12,295,298],
+                    [12,318,321],
                 ];
 
                 $rows2 = [
@@ -486,37 +531,52 @@ class TOEI_NONITF implements FromView, WithEvents//, WithDrawings//, ShouldAutoS
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
+                // PAGE BREAKS
+                $rows = [29, 63, 102, 131, 160, 189, 219, 244, 269, 294, 317];
+                foreach($rows as $row){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
+
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
                 $event->sheet->getDelegate()->getStyle('A5:H100')->getFont()->setName('Arial');
+
+                $event->sheet->getDelegate()->getStyle('A35:H63')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('A71:H97')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A99:H102')->getFont()->setSize(9);
             },
         ];
     }
 
     public function drawings()
     {
-        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Letter Head');
-        $drawing->setDescription('Letter Head');
-        $drawing->setPath(public_path("images/letter_head.jpg"));
-        $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $array = [];
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
+        $cells = [1,30, 64, 103, 132, 161, 190, 220, 245, 270, 295, 318];
 
-        return [$drawing, $drawing2];
+        foreach($cells as $cell){
+            $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing->setPath(public_path("images/itf_logo.png"));
+            $drawing->setResizeProportional(false);
+            $drawing->setHeight(45);
+            $drawing->setWidth(80);
+            $drawing->setOffsetX(25);
+            $drawing->setOffsetY(8);
+            $drawing->setCoordinates("A" . $cell);
+
+            array_push($array, $drawing);
+        }
+
+        // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        // $drawing2->setName('Avatar');
+        // $drawing2->setDescription('Avatar');
+        // $drawing2->setPath(public_path($this->data->user->avatar));
+        // $drawing2->setResizeProportional(false);
+        // $drawing2->setHeight(230);
+        // $drawing2->setWidth(230);
+        // $drawing2->setOffsetX(5);
+        // $drawing2->setOffsetY(2);
+        // $drawing2->setCoordinates('C3');
+
+        return $array;
     }
 }
