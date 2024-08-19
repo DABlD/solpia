@@ -498,7 +498,7 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->getRowDimension(98)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(99)->setRowHeight(80);
                 $event->sheet->getDelegate()->getRowDimension(100)->setRowHeight(90);
-                $event->sheet->getDelegate()->getRowDimension(403)->setRowHeight(50);
+                $event->sheet->getDelegate()->getRowDimension(403)->setRowHeight(90);
 
                 $rows = [
                     [
@@ -590,24 +590,64 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
         }
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setPath(public_path("images/itf_table1.png"));
+        $drawing2->setPath(public_path("images/maam_jen_sig.jpg"));
         $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(200);
-        $drawing2->setWidth(580);
+        $drawing2->setHeight(65);
+        $drawing2->setWidth(155);
         $drawing2->setOffsetX(3);
-        $drawing2->setOffsetY(200);
-        $drawing2->setCoordinates('B350');
+        $drawing2->setOffsetY(13);
+        $drawing2->setCoordinates('A100');
         array_push($array, $drawing2);
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing3->setPath(public_path("images/itf_table2.png"));
+        $drawing3->setPath(public_path("images/MLC_SEAL.png"));
         $drawing3->setResizeProportional(false);
-        $drawing3->setHeight(200);
-        $drawing3->setWidth(580);
-        $drawing3->setOffsetX(3);
-        $drawing3->setOffsetY(70);
-        $drawing3->setCoordinates('B352');
+        $drawing3->setHeight(120);
+        $drawing3->setWidth(120);
+        $drawing3->setOffsetX(80);
+        $drawing3->setOffsetY(3);
+        $drawing3->setCoordinates('B100');
         array_push($array, $drawing3);
+
+        $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing4->setPath(public_path("images/maam_jen_sig.jpg"));
+        $drawing4->setResizeProportional(false);
+        $drawing4->setHeight(65);
+        $drawing4->setWidth(155);
+        $drawing4->setOffsetX(3);
+        $drawing4->setOffsetY(13);
+        $drawing4->setCoordinates('G403');
+        array_push($array, $drawing4);
+
+        $drawing5 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing5->setPath(public_path("images/MLC_SEAL.png"));
+        $drawing5->setResizeProportional(false);
+        $drawing5->setHeight(120);
+        $drawing5->setWidth(120);
+        $drawing5->setOffsetX(70);
+        // $drawing5->setOffsetY(3);
+        $drawing5->setCoordinates('G403');
+        array_push($array, $drawing5);
+
+        $drawing6 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing6->setPath(public_path("images/itf_table1.png"));
+        $drawing6->setResizeProportional(false);
+        $drawing6->setHeight(200);
+        $drawing6->setWidth(580);
+        $drawing6->setOffsetX(3);
+        $drawing6->setOffsetY(200);
+        $drawing6->setCoordinates('B350');
+        array_push($array, $drawing6);
+
+        $drawing7 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing7->setPath(public_path("images/itf_table2.png"));
+        $drawing7->setResizeProportional(false);
+        $drawing7->setHeight(200);
+        $drawing7->setWidth(580);
+        $drawing7->setOffsetX(3);
+        $drawing7->setOffsetY(70);
+        $drawing7->setCoordinates('B352');
+        array_push($array, $drawing7);
 
         return $array;
     }

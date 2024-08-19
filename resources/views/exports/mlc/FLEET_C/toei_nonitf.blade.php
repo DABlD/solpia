@@ -281,7 +281,13 @@
 
 		{{-- GET NOKS --}}
 		@php
-			
+			$childs = [];
+
+			foreach($data->family_data as $fd){
+				if(in_array($fd->type, ['Daughter', 'Son'])){
+					array_push($childs, $fd);
+				}
+			}
 		@endphp
 
 		<tr>
@@ -350,30 +356,30 @@
 
 		<tr>
 			<td style="{{ $bc }}">1st Child</td>
-			<td style="{{ $c }}" colspan="2"></td>
-			<td style="{{ $c }}" colspan="2"></td>
-			<td style="{{ $c }}" colspan="3"></td>
+			<td style="{{ $c }}" colspan="2">{{ isset($childs[0]) ? $childs[0]->fullName2 : "" }}</td>
+			<td style="{{ $c }}" colspan="2">{{ isset($childs[0]) ? (isset($childs[0]->birthday) ? $childs[0]->birthday->format('d-F-Y') : "-") : "" }}</td>
+			<td style="{{ $c }}" colspan="3">{{ isset($childs[0]) ? ($childs[0]->type == "Son" ? "Male" : "Female") : "" }}</td>
 		</tr>
 
 		<tr>
 			<td style="{{ $bc }}">2nd Child</td>
-			<td style="{{ $c }}" colspan="2"></td>
-			<td style="{{ $c }}" colspan="2"></td>
-			<td style="{{ $c }}" colspan="3"></td>
+			<td style="{{ $c }}" colspan="2">{{ isset($childs[1]) ? $childs[1]->fullName2 : "" }}</td>
+			<td style="{{ $c }}" colspan="2">{{ isset($childs[1]) ? (isset($childs[1]->birthday) ? $childs[1]->birthday->format('d-F-Y') : "-") : "" }}</td>
+			<td style="{{ $c }}" colspan="3">{{ isset($childs[1]) ? ($childs[1]->type == "Son" ? "Male" : "Female") : "" }}</td>
 		</tr>
 
 		<tr>
 			<td style="{{ $bc }}">3rd Child</td>
-			<td style="{{ $c }}" colspan="2"></td>
-			<td style="{{ $c }}" colspan="2"></td>
-			<td style="{{ $c }}" colspan="3"></td>
+			<td style="{{ $c }}" colspan="2">{{ isset($childs[2]) ? $childs[2]->fullName2 : "" }}</td>
+			<td style="{{ $c }}" colspan="2">{{ isset($childs[2]) ? (isset($childs[2]->birthday) ? $childs[2]->birthday->format('d-F-Y') : "-") : "" }}</td>
+			<td style="{{ $c }}" colspan="3">{{ isset($childs[2]) ? ($childs[2]->type == "Son" ? "Male" : "Female") : "" }}</td>
 		</tr>
 
 		<tr>
 			<td style="{{ $bc }}">4th Child</td>
-			<td style="{{ $c }}" colspan="2"></td>
-			<td style="{{ $c }}" colspan="2"></td>
-			<td style="{{ $c }}" colspan="3"></td>
+			<td style="{{ $c }}" colspan="2">{{ isset($childs[2]) ? $childs[2]->fullName2 : "" }}</td>
+			<td style="{{ $c }}" colspan="2">{{ isset($childs[2]) ? (isset($childs[2]->birthday) ? $childs[2]->birthday->format('d-F-Y') : "-") : "" }}</td>
+			<td style="{{ $c }}" colspan="3">{{ isset($childs[2]) ? ($childs[2]->type == "Son" ? "Male" : "Female") : "" }}</td>
 		</tr>
 
 		<tr>
@@ -440,27 +446,31 @@
 			<td colspan="5"></td>
 		</tr>
 
+		@php
+			$wage = $data->wage;
+		@endphp
+
 		<tr>
 			<td colspan="2">&#8205; Basic wage</td>
-			<td style="{{ $c }}"></td>
+			<td style="{{ $c }}">{{ $wage ? number_format($wage->basic, 2) : ""}}</td>
 			<td style="{{ $c }}">USD/Month</td>
 			<td colspan="2">&#8205; Period of employment</td>
-			<td style="{{ $c }}"></td>
+			<td style="{{ $c }}">9 (+/-1)</td>
 			<td>&#8205; Months</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">&#8205; Overtime Pay</td>
-			<td style="{{ $c }}"></td>
+			<td style="{{ $c }}">{{ $wage ? number_format($wage->fot ?? $wage->ot, 2) : ""}}</td>
 			<td style="{{ $c }}">USD/Month</td>
 			<td colspan="2">&#8205; Guaranteed Overtime Hours</td>
-			<td style="{{ $c }}"></td>
+			<td style="{{ $c }}">104</td>
 			<td>&#8205; Hours/Month</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">&#8205; Leave Pay</td>
-			<td style="{{ $c }}"></td>
+			<td style="{{ $c }}">{{ $wage ? number_format($wage->leave_pay, 2) : ""}}</td>
 			<td style="{{ $c }}">USD/Month</td>
 			<td colspan="2">&#8205; Overtime Rate</td>
 			<td style="{{ $c }}"></td>
@@ -469,7 +479,7 @@
 
 		<tr>
 			<td colspan="2">&#8205; Other Allowances</td>
-			<td style="{{ $c }}"></td>
+			<td style="{{ $c }}">{{ $wage ? number_format($wage->owner_allow, 2) : ""}}</td>
 			<td style="{{ $c }}">USD/Month</td>
 			<td colspan="2" rowspan="2">
 				&#8205; PF Seafarer's Contribution
@@ -684,7 +694,7 @@
 
 		<tr>
 			<td colspan="4" style="{{ $b }}">
-				For VR Maritime Services Pvt. Ltd.
+				For Solpia Marine &#38; Ship Management, Inc.
 				<br style='mso-data-placement:same-cell;' />
 				RPSL-MUM-199
 				<br style='mso-data-placement:same-cell;' />
@@ -709,7 +719,7 @@
 				<br style='mso-data-placement:same-cell;' />
 				<br style='mso-data-placement:same-cell;' />
 				<br style='mso-data-placement:same-cell;' />
-				Date &#38; Place:
+				Date &#38; Place: {{ $data->req['date_processed'] }} / MANILA, PHILIPPINES
 			</td>
 
 			<td colspan="4" style="{{ $b }}">
@@ -719,13 +729,13 @@
 				<br style='mso-data-placement:same-cell;' />
 				<br style='mso-data-placement:same-cell;' />
 				<br style='mso-data-placement:same-cell;' />
-				Date &#38; Place:
+				Date &#38; Place: {{ $data->req['date_processed'] }} / MANILA, PHILIPPINES
 			</td>
 		</tr>
 
 		<tr>
 			<td></td>
-			<td colspan="7">Original: Seafarer / VR Maritime Services Pvt. Ltd.</td>
+			<td colspan="7">Original: Seafarer / For Solpia Marine &#38; Ship Management, Inc.</td>
 		</tr>
 
 		<tr>
@@ -2343,37 +2353,37 @@
 
 		<tr>
 			<td colspan="2">ㅤName</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">{{ $data->user->fullName2 }}</td>
 			<td colspan="2">ㅤName</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">JEANNETTE T. SOLIDUM</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">ㅤRank</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">{{ $data->pro_app->rank->name }}</td>
 			<td colspan="2">ㅤPosition</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">CREWING MANAGER</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">ㅤPlace</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">MANILA, PHILIPPINES</td>
 			<td colspan="2">ㅤPlace</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">MANILA, PHILIPPINES</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">ㅤDate</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">{{ $data->req['date_processed'] }}</td>
 			<td colspan="2">ㅤDate</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">{{ $data->req['date_processed'] }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">ㅤShip</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">MT BRAVE</td>
 			<td colspan="2">ㅤShip</td>
-			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2" style="{{ $c }}">MT BRAVE</td>
 		</tr>
 
 		<tr>
