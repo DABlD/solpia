@@ -11,7 +11,7 @@
 		echo "
 			<tr>
 				<td colspan='2' rowspan='4'></td>
-				<td colspan='5' rowspan='2' style='font-size: 12; $bc $verdana'>VR Maritime Services Private Limited</td>
+				<td colspan='5' rowspan='2' style='font-size: 12; $bc $verdana'>SOLPIA MARINE &#38; MANAGEMENT, INC.</td>
 				<td style='font-size:8; $verdana'>Issue: 00</td>
 			</tr>
 
@@ -85,12 +85,12 @@
 
 		<tr>
 			<td style="font-size: 9;" colspan="2">&#8205; Name</td>
-			<td style="font-size: 9; {{ $c }}" colspan="6"></td>
+			<td style="font-size: 9; {{ $c }}" colspan="6">BRAVERY MARITIME LTD.</td>
 		</tr>
 
 		<tr>
 			<td style="font-size: 9;" colspan="2">&#8205; Address</td>
-			<td style="font-size: 9; {{ $c }}" colspan="6"></td>
+			<td style="font-size: 9; {{ $c }}" colspan="6">TRUST COMPANY COMPLEX AJELTAKE ROAD, AJELTAKE ISLAND, MAJURO, MARSHALL ISLANDS MN 96960</td>
 		</tr>
 
 		<tr>
@@ -99,12 +99,12 @@
 
 		<tr>
 			<td style="font-size: 9;" colspan="2">&#8205; Name</td>
-			<td style="font-size: 9; {{ $c }}" colspan="6"></td>
+			<td style="font-size: 9; {{ $c }}" colspan="6">ROYAL MARINE SHIPMANAGEMENT PTE LTD. </td>
 		</tr>
 
 		<tr>
 			<td style="font-size: 9;" colspan="2">&#8205; Address</td>
-			<td style="font-size: 9; {{ $c }}" colspan="6"></td>
+			<td style="font-size: 9; {{ $c }}" colspan="6">1 COLEMAN STREET, #09-02A, THE ADELPHI, SINGAPORE 179803</td>
 		</tr>
 
 		<tr>
@@ -250,7 +250,7 @@
 			<td style="font-size: 9;">
 				&#8205; Home Port
 			</td>
-			<td style="font-size: 9; {{ $c }}" colspan="3"></td>
+			<td style="font-size: 9; {{ $c }}" colspan="3">MANILA, PHILIPPINES</td>
 		</tr>
 
 		<tr>
@@ -281,7 +281,7 @@
 
 		{{-- GET NOKS --}}
 		@php
-
+			
 		@endphp
 
 		<tr>
@@ -432,7 +432,7 @@
 
 		<tr>
 			<td colspan="3" style="{{ $bc }}">Name of Manning Agent</td>
-			<td colspan="5" style="{{ $bc }}">SOLPIA MARINE &#38; SHIP MANAGEMENT INC.,</td>
+			<td colspan="5" style="{{ $bc }}">SOLPIA MARINE &#38; SHIP MANAGEMENT, INC.</td>
 		</tr>
 
 		<tr>
