@@ -298,6 +298,12 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     'A250:A269',
                     'A277:A294',
                     'A302:A317',
+                    'A325:A344',
+                    'A350:B353',
+                    'A350:B352',
+                    'A353:B356',
+                    'A362:B387',
+                    'A395'
                 ];
 
                 // HL B
@@ -326,7 +332,9 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $h[7] = [
                     'A11:H29',
                     'A35:H53', 'A55:H63',
-                    'A69:H99'
+                    'A69:H99',
+                    'A397:A403', 'E397:E403',
+                    'A411:H423'
                 ];
 
                 $h['wrap'] = [
@@ -379,6 +387,8 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     'A12:H13', 'A15:H16', 'A18:H19', 'A21:H29',
                     'A35:H53', 'A55:H60', 'A62:H63',
                     'A99:H100',
+                    'A397:H403',
+                    'A411:H423'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -403,6 +413,11 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     'A270:B273', 'C270:G273', 'H270:H273',
                     'A295:B298', 'C295:G298', 'H295:H298',
                     'A318:B321', 'C318:G321', 'H318:H321',
+                    'A345:B348', 'C345:G348', 'H345:H348',
+                    'A357:B360', 'C357:G360', 'H357:H360',
+                    'A388:B391', 'C388:G391', 'H388:H391',
+                    'A404:B407', 'C404:G407', 'H404:H407',
+                    'A430:B433', 'C430:G433', 'H430:H433',
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -483,6 +498,7 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->getRowDimension(98)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(99)->setRowHeight(80);
                 $event->sheet->getDelegate()->getRowDimension(100)->setRowHeight(90);
+                $event->sheet->getDelegate()->getRowDimension(403)->setRowHeight(50);
 
                 $rows = [
                     [
@@ -507,6 +523,13 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                     [12,270,273],
                     [12,295,298],
                     [12,318,321],
+                    [12,346,349],
+                    [12,357,360],
+                    [12,388,391],
+                    [30,397,402],
+                    [12,404,407],
+                    [30,411,423],
+                    [12,430,433],
                 ];
 
                 $rows2 = [
@@ -532,7 +555,7 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // PAGE BREAKS
-                $rows = [29, 63, 102, 131, 160, 189, 219, 244, 269, 294, 317];
+                $rows = [29, 63, 102, 131, 160, 189, 219, 244, 269, 294, 317, 344, 356, 387, 403, 429];
                 foreach($rows as $row){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
@@ -551,7 +574,7 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
     {
         $array = [];
 
-        $cells = [1,30, 64, 103, 132, 161, 190, 220, 245, 270, 295, 318];
+        $cells = [1,30, 64, 103, 132, 161, 190, 220, 245, 270, 295, 318, 345, 357, 388, 404, 430];
 
         foreach($cells as $cell){
             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -566,16 +589,25 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
             array_push($array, $drawing);
         }
 
-        // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        // $drawing2->setName('Avatar');
-        // $drawing2->setDescription('Avatar');
-        // $drawing2->setPath(public_path($this->data->user->avatar));
-        // $drawing2->setResizeProportional(false);
-        // $drawing2->setHeight(230);
-        // $drawing2->setWidth(230);
-        // $drawing2->setOffsetX(5);
-        // $drawing2->setOffsetY(2);
-        // $drawing2->setCoordinates('C3');
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setPath(public_path("images/itf_table1.png"));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(200);
+        $drawing2->setWidth(580);
+        $drawing2->setOffsetX(3);
+        $drawing2->setOffsetY(200);
+        $drawing2->setCoordinates('B350');
+        array_push($array, $drawing2);
+
+        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing3->setPath(public_path("images/itf_table2.png"));
+        $drawing3->setResizeProportional(false);
+        $drawing3->setHeight(200);
+        $drawing3->setWidth(580);
+        $drawing3->setOffsetX(3);
+        $drawing3->setOffsetY(70);
+        $drawing3->setCoordinates('B352');
+        array_push($array, $drawing3);
 
         return $array;
     }

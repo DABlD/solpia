@@ -2037,5 +2037,697 @@
 				In addition, the company will also pay USD 22,805 only (USD twenty-two thousand eight hundred and five only) to each of your children under the age of eighteen up to a maximum of Four (4) children.
 			</td>
 		</tr>
+
+		<tr>
+			<td style="{{ $c }}">30.3</td>
+			<td colspan="7" style="text-align: justify; height: 75px;">
+				If you suffer an accident whilst in the employment of the company through no fault of your own such that your ability to work is reduced as a result thereof, you shall receive from the company a Disability Compensation at a percentage prescribed by the medical practitioner appointed by the company based on the degree of your disability set out at the tables in ARTICLE 30.6 (for Senior Seafarers and Junior Seafarers) and ARTICLE 30.8 (for Cadets, Petty seafarers and ratings).
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">30.4</td>
+			<td colspan="7" style="text-align: justify; height: 60px;">
+				The total disability compensation, however, is not to exceed: 
+				<br style='mso-data-placement:same-cell;' />
+				a)	USD 190,027 (USD one hundred ninety thousand &#38; twenty-seven only) for Senior Seafarers
+				<br style='mso-data-placement:same-cell;' />
+				b)	USD 152,022 (USD one hundred fifty-two thousand &#38; twenty-two only) for Junior Seafarers and
+				<br style='mso-data-placement:same-cell;' />
+				c)	USD 114,018 (USD one hundred fourteen thousand &#38; eighteen only) for Petty Seafarers/Ratings.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">30.5</td>
+			<td colspan="7" style="text-align: justify; height: 45px;">
+				In case of death of a seafarer during his engagement on board the vessel or ashore, the company shall arrange to pay for the immediate cost of burial or repatriation of last remaining mortals to the domicile country of the seafarer as per wishes of next of kin.
+			</td>
+		</tr>
+	</a>
+
+	{{-- 13TH PAGE --}}
+	{{ $header(13) }}
+	<a>
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">30.6</td>
+			<td colspan="7" style="text-align: justify; height: 310px;">
+				In accordance with ARTICLE 30.4 above, the rate of compensation for Senior Seafarers and Junior Seafarers shall be based on the figures set out in the table herein depending on the degree of disability. 
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				Definitions: 
+				<br style='mso-data-placement:same-cell;' />
+				a)	“Senior Seafarers” for the purpose of this ARTICLE means Master, chief Officer, Chief Engineer and
+				ㅤSecond Engineer. 
+				<br style='mso-data-placement:same-cell;' />
+				b)	“Junior Seafarers” for the purpose of this ARTICLE means Second officer, third officer, Third engineer
+				ㅤ&#38; fourth Engineer
+				<br style='mso-data-placement:same-cell;' />
+				Degree of Disability &#38; Rate of Compensation
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">30.7</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				The rate of compensation for Junior Seafarers and Senior Seafarers for disability shall be based on the figures set out above (ARTICLE 30.6) depending on the degree of disability.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">30.8</td>
+			<td colspan="7" style="text-align: justify; height: 250px;">
+				In accordance with ARTICLE 30.4 above, the rate of compensation for Cadets, Petty seafarers and ratings shall be based on the figures set out in the table herein depending on the degree of disability. The compensation however shall not exceed a maximum of USD 114,018 only.
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				<br style='mso-data-placement:same-cell;' />
+				The company shall provide disability compensation to the seafarer in accordance with the above tables, with any differences, including less than 10% disability, to be pro rata.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">30.9</td>
+			<td colspan="7" style="text-align: justify; height: 75px;">
+				Compensation shall be paid as stipulated in ARTICLE 30.6 and ARTICLE 30.8 above for all injuries caused by accidents and/or injuries arising during the course of his or her employment and excludes accidents and/or injuries sustained outside the working hours of the injured seafarer. Such compensation shall be extended for injuries arising from other occupational hazards such as war risk, strikes, riot, civil commotion, piracy, kidnap, abduction, and terrorism.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">ㅤ30.10ㅤ</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				A seafarer who suffers temporary incapacity shall be entitled to medical benefits including paid medical and hospitalization leave as stipulated in this contract.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">ㅤ30.11ㅤ</td>
+			<td colspan="7" style="text-align: justify; height: 45px;">
+				Subject to ARTICLE 30.13 if a seafarer dies during service onboard vessel due to any cause including death occurring whilst travelling to and from the vessel, or as a result of marine or other similar peril, the company shall pay the maximum compensation to the affected seafarer.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">ㅤ30.12ㅤ</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				Where the death of a seafarer is due to any willful act, he or she will not receive compensation from the company.
+			</td>
+		</tr>
+	</a>
+
+	{{-- 14TH PAGE --}}
+	{{ $header(14) }}
+	<a>
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">30.13</td>
+			<td colspan="7" style="text-align: justify; height: 105px;">
+				You shall be responsible for any cost and benefits arising from any chronic disease(s) contracted before your employment on the present vessel and not disclosed at the time of your engagement. All payments due on account of sickness shall be subjected to the following conditions: 
+				<br style='mso-data-placement:same-cell;' />
+				a)	You shall comply with the instructions of the company’s agent at the port at which you landed at and
+				ㅤbe subject to the recommendations/approval of the attending medical practitioner. 
+				<br style='mso-data-placement:same-cell;' />
+				b)	You shall report your arrival to the company’s agent as soon as you return to your port of engagement
+				ㅤwithin a maximum of 72 hours.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $b }}">
+				ARTICLE 31ㅤㅤSTRANDED SEAFARER
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">31.1</td>
+			<td colspan="7" style="text-align: justify; height: 45px;">
+				The company undertakes to repatriate the seafarer if he is stranded at any place as well as to look after or to reasonably maintain, or in the case of death, to transport the mortal remains of the seafarer, as permitted under the local laws where the seafarer met with death.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $b }}">
+				ARTICLE 32ㅤㅤDESERTION
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">32.1</td>
+			<td colspan="7" style="text-align: justify; height: 90px;">
+				In the case of desertion, the company can claim from you the losses which you had caused to the vessel. Repatriation expenses and fines or cautions imposed by the immigration office to the deserting employee shall be deducted from your earnings. If you do not present yourself in any office of the company or its agent’s office or on board the vessel, prior to the departure of the vessel, you will be considered a deserter. Your contract will be considered as terminated by the company at no costs / expenses to the company.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $b }}">
+				ARTICLE 33ㅤㅤTRAINING
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">33.1</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				The company promotes education, training and upgrading of the seafarers serving on or planning to serve on board its managed vessels.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">33.2</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				You may be provided with a training records book, and it is your responsibility to ensure that the training tasks identified therein are completed as scheduled.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">33.3</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				You may also be required to complete a computer-based training modules as per the training matrix provided on board the vessels.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $b }}">
+				ARTICLE 34ㅤㅤDECLARATION
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">34.1</td>
+			<td colspan="7" style="text-align: justify; height: 60px;">
+				I, the under signed employee declare that I have read and fully understood the contents of this contract. I also confirm that no verbal promises other than the terms and conditions in this contract have been made to me. I will not claim any additional benefits or wages of any kind what so ever except those which have been stipulated in this contract.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">34.2</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				I further hereby confirm that I will not, at any time, while employed under the forgoing terms, enter into any contract or agreement, written or oral, which may be in conflict with or which may contradict the forgoing terms in any way.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">34.3</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				All the terms and conditions under this contract are subject to the national laws/regulations of the jurisdiction wherein the seafarer is a national of.
+			</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">34.4</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				I, undersigned employee hereby declare that I have never been deported from any country and never been prosecuted.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $b }}">
+				ARTICLE 35ㅤㅤSEVERABILITY
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">35.1</td>
+			<td colspan="7" style="text-align: justify; height: 60px;">
+				If any provision of this AGREEMENT or part thereof is rendered void, illegal or unenforceable by any legislation to which it is subject, it shall be rendered void, illegal or unenforceable to that extent and it shall in no way affect or prejudice the enforceability of the remainder of such provision or the other provisions of this AGREEMENT.
+			</td>
+		</tr>
+	</a>
+
+	{{-- 15TH PAGE --}}
+	{{ $header(15) }}
+	<a>
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $b }}">
+				ARTICLE 36ㅤㅤSIGNATURE
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">36.1</td>
+			<td colspan="7" style="text-align: justify; height: 30px;">
+				IN WITNESS WHERE OF the parties hereto have hereunto set their hands the date and year hereinbefore mentioned.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="height: 30px;"></td>
+		</tr>
+
+		<tr>
+			<td colspan="4" style="{{ $bc }}">The Seafarer</td>
+			<td colspan="4" style="{{ $bc }}">As agents for and on behalf of:</td>
+		</tr>
+
+		<tr>
+			<td colspan="2">ㅤName</td>
+			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2">ㅤName</td>
+			<td colspan="2" style="{{ $c }}"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2">ㅤRank</td>
+			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2">ㅤPosition</td>
+			<td colspan="2" style="{{ $c }}"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2">ㅤPlace</td>
+			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2">ㅤPlace</td>
+			<td colspan="2" style="{{ $c }}"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2">ㅤDate</td>
+			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2">ㅤDate</td>
+			<td colspan="2" style="{{ $c }}"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2">ㅤShip</td>
+			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2">ㅤShip</td>
+			<td colspan="2" style="{{ $c }}"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2">ㅤSign</td>
+			<td colspan="2" style="{{ $c }}"></td>
+			<td colspan="2">ㅤSign</td>
+			<td colspan="2" style="{{ $c }}"></td>
+		</tr>
+	</a>
+
+	{{-- 16TH PAGE --}}
+	{{ $header(16) }}
+	<a>
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="{{ $bc }} font-size: 11px;">
+				APPENDIX 1 LISTS OF PUBLIC HOLIDAYS
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td style="{{ $bc }}">No.</td>
+			<td colspan="3" style="{{ $bc }}">Public Holidays</td>
+			<td colspan="2" style="{{ $bc }}">Date</td>
+			<td colspan="2" style="{{ $bc }}">Days</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">1</td>
+			<td colspan="3">&#8205; New Year's Day</td>
+			<td colspan="2" style="{{ $c }}">Jan 1</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">2</td>
+			<td colspan="3">&#8205; Republic Day</td>
+			<td colspan="2" style="{{ $c }}">Jan 26th</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">3</td>
+			<td colspan="3">&#8205; Indian National Maritime Day</td>
+			<td colspan="2" style="{{ $c }}">Apr 5th</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">4</td>
+			<td colspan="3">&#8205; International Labor Day</td>
+			<td colspan="2" style="{{ $c }}">May 1st</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">5</td>
+			<td colspan="3">&#8205; Indian Independence Day</td>
+			<td colspan="2" style="{{ $c }}">Aug 15th</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">6</td>
+			<td colspan="3">&#8205; Mahatma Gandhi’s Birthday</td>
+			<td colspan="2" style="{{ $c }}">Oct 2nd</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">7</td>
+			<td colspan="3">&#8205; Ramzan Eid</td>
+			<td colspan="2" style="{{ $c }}">Variable date</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">8</td>
+			<td colspan="3">&#8205; India Diwali Festival</td>
+			<td colspan="2" style="{{ $c }}">Falls in Oct/Nov</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">9</td>
+			<td colspan="3">&#8205; Seafarers Unity Day (Ratings)</td>
+			<td colspan="2" style="{{ $c }}">Nov-06</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">10</td>
+			<td colspan="3">&#8205; MUI Day (Officers)</td>
+			<td colspan="2" style="{{ $c }}">Dec-03</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td style="{{ $c }}">11</td>
+			<td colspan="3">&#8205; Christmas Day</td>
+			<td colspan="2" style="{{ $c }}">Dec 25th</td>
+			<td colspan="2" style="{{ $c }}">1</td>
+		</tr>
+
+		<tr>
+			<td colspan="7" style="{{ $bc }}">Total Days</td>
+			<td style="{{ $c }}">11</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="{{ $b }}"> Remarks:</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				ㅤㅤ1.	The PRINCIPAL ensures implement of 10 days as public holidays onboard its fleet vessels.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				ㅤㅤ2.	Specified date(s) of Festivals by Lunar will be notified to the relevant parties; 
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="height: 30px;">
+				ㅤㅤ3.	The PRINCIPAL reserves the right of nomination of the dates in view of internationals crew-compliments on board
+				<br style='mso-data-placement:same-cell;' />
+				ㅤㅤㅤships. 
+			</td>
+		</tr>
+	</a>
+
+	{{-- 17TH PAGE --}}
+	{{ $header(17) }}
+	<a>
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="{{ $bc }} font-size: 11px;">
+				APPENDIX 2 CODE OF DISCIPLINE APPLICABLE TO ALL SEAFARERS
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="{{ $b }}">INTRODUCTION</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="height: 30px; text-align: justify;">
+				This Code of Discipline will apply to all seafarers while onboard and on business for the Company. The code is in two sections: Misconduct and inefficiency.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="{{ $b }}">Part 1 MISCONDUCT</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="height: 45px; text-align: justify;">
+				The following offences are those for which the Company is entitled to terminate the Agreement with the seafarer either immediately or at the end of the voyage according to the circumstances of the case. This is apart from any legal action which may be called for under the regulations of the Flag of Registry.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8">Assault:</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				1ㅤㅤWillful damage to ship or any property onboard;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				2ㅤㅤTheft or possession of stolen property;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				3ㅤㅤPossession of offensive weapons;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				4ㅤㅤPersistent or willful failure to perform duty;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				5ㅤㅤUnlawfully possess of drug and non-compliance with the anti-drug campaign of the company;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				6ㅤㅤCollision with other at sea to impede the progress of the voyage or navigation of the ship;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				7ㅤㅤDisobedience of order relating to safety of the ship or any person onboard;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				4ㅤㅤPersistent or willful failure to perform duty;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				8ㅤㅤTo be asleep on duty or fall to remain duty if such conduct would prejudice the safety of the ship or of any person onboard;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				9ㅤㅤIncapacity through the influence of drink or drugs to carry out duty to the prejudice of the safety of the ship or to any person onboard;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				10ㅤTo smoke, use a naked light or an unapproved electric torch in any part of the ship carrying dangerous cargo or stores where smoking or the use of naked lights or unapproved torches is prohibited. 
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				11ㅤIntimidation, coercion and interference with the work of other seafarers;
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				12ㅤBehaviors which seriously detract from the social well-being of another crew onboard.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				Offences of a lesser degree or seriousness may be dealt with by:
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				1ㅤㅤInformal warnings administered by the Master, or
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				2ㅤㅤWarnings by the Master recorded in the Ship's official log book and also on the appropriate Company forms; or 
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8">
+				3ㅤㅤWritten reprimands administered by the Master and recorded in the ship's official log book and on the appropriate Company forms.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="{{ $b }}">Part 2 INEFFICIENCY</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="text-align: justify; height: 60px;">
+				It must be assumed that inefficiency can either be voluntary or involuntary, in other words, the seafarer's Agreement will be terminated if he is unable by reason of inadequate skills, physical or mental incapacity to carry out the tasks for which he was engaged, or if he is unwilling to exercise his skills or energies to a sufficient degree to carry out his tasks to acceptable standards.
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="{{ $b }}">Part 3 EXPENSES</td>
+		</tr>
+
+		<tr>
+			<td colspan="8"></td>
+		</tr>
+
+		<tr>
+			<td colspan="8" style="text-align: justify; height: 30px;">
+				In cases of dismissal of an employee due to any reasonable expenses for own repatriation shall be borne by the employee. The Company may however, at its sole discretion reduce such expenses for pro-rata service onboard.
+			</td>
+		</tr>
 	</a>
 </table>
