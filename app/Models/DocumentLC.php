@@ -19,4 +19,8 @@ class DocumentLC extends Model
     protected $dates = [
         'issue_date', 'expiry_date', 'created_at', 'updated_at', 'deleted_at'
     ];
+
+    public function rank2(){
+        return $this->belongsTo('App\Models\Rank', 'rank', 'id');
+    }
 }
