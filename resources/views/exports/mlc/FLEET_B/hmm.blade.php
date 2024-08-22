@@ -362,8 +362,7 @@
 		<td style="{{ $center }}">Owner’s Guaranteed Overtime Allowance</td>
 		<td colspan="2" style="{{ $center }}">Seniority Allowance</td>
 
-
-		@if(in_array($data->vessel->id, [7141, 7517]))
+		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 			<td colspan="3" style="{{ $center }}">
 				Provident Fund
 				<br style='mso-data-placement:same-cell;' />
@@ -373,11 +372,7 @@
 			<td colspan="3" style="{{ $center }}">
 				Provident Fund 
 				<br style='mso-data-placement:same-cell;' />
-				@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
-					(Contract Completion Bonus)
-				@else
-					(Retirement Payment)
-				@endif
+				(Retirement Payment)
 			</td>
 		@endif
 
