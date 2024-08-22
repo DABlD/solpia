@@ -257,9 +257,15 @@
 	</tr>
 
 	<tr>
-		<td colspan="9" style="{{ $bold }}">
-			2. Period &#38; Termination of the agreement
-		</td>
+		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
+			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
+				2. Period &#38; Termination of the agreement
+			</td>
+		@else
+			<td colspan="9" style="{{ $bold }}">
+				2. Period &#38; Termination of the agreement
+			</td>
+		@endif
 	</tr>
 
 
@@ -316,7 +322,7 @@
 		</td>
 		<td style="{{ $center }}">Basic wage</td>
 		<td colspan="2" style="{{ $center }}">
-			Fixed/Guaranteed
+			Fixed/<h1 style="text-decoration: underline;">Guaranteed</h1>
 			<br style='mso-data-placement:same-cell;' />
 			Overtime Allowance
 		</td>
@@ -367,7 +373,11 @@
 			<td colspan="3" style="{{ $center }}">
 				Provident Fund 
 				<br style='mso-data-placement:same-cell;' />
-				(Retirement Payment)
+				@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
+					(Contract Completion Bonus)
+				@else
+					(Retirement Payment)
+				@endif
 			</td>
 		@endif
 
@@ -389,12 +399,12 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7141, 7517]))
+		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 			<td style="{{ $center }}">Payday</td>
 		@else
 			<td style="text-decoration: underline; {{ $center }}">Payday</td>
 		@endif
-		<td colspan="8">
+		<td colspan="8" style="text-align: justify;">
 			All seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid monthly wages not later than 15 days of the succeeding month from the date of commencement of the agreement until the date of arrival at point of hire upon termination of their employment.
 		</td>
 	</tr>
@@ -402,7 +412,8 @@
 	<tr>
 		<td style="{{ $center }}">Payment methods</td>
 		<td colspan="8">
-			Wages should be paid directly to the seafarer's designated bank accounts unless they request otherwise in writing. 
+			Wages should be paid directly to the seafarer's designated bank accounts unless they request otherwise in writing.
+			<br style='mso-data-placement:same-cell;' />
 			Some allotments should be remitted in due time and directly to the person or persons nominated by the seafarers.
 		</td>
 	</tr>
@@ -556,7 +567,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7141, 7517]))
+		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
 				8. Provision and compliance with Risk assessments
 			</td>
@@ -568,7 +579,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7141, 7517]))
+		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 		<td colspan="9" style="text-decoration: underline;">
 		@else
 		<td colspan="9">
@@ -694,7 +705,7 @@
 
 	<tr>
 		<td colspan="2" style="{{ $center }}">Date</td>
-		<td colspan="3" style="{{ $center }} {{ $color }}">{{ now()->format('d-M-Y') }}</td>
+		<td colspan="3" style="{{ $center }} {{ $color }}">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
