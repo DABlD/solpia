@@ -310,14 +310,14 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.4);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.4);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
 
-                $event->sheet->getDelegate()->getStyle('A1:H' . (62 + $mt))->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A4:H' . (62 + $mt))->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A1:I' . (62 + $mt))->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A4:I' . (62 + $mt))->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('B21')->getFont()->setSize(8);
                 $event->sheet->getDelegate()->getStyle('A' . (43 + $mt))->getFont()->setSize(8);
                 $event->sheet->getDelegate()->getStyle('A' . (46 + $mt))->getFont()->setSize(8);
@@ -494,14 +494,14 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(21);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(9);
 
                 // ROW RESIZE
                 for($i = 1; $i <= (60 + $mt); $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(21);
                 }
 
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(17);
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(50);
                 $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(18 + $mt)->setRowHeight(17);
@@ -519,8 +519,8 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(36 + $mt)->setRowHeight(35);
 
                 // TO PAGE 2
-                $event->sheet->getDelegate()->getRowDimension(37 + $mt)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(38 + $mt)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(37 + $mt)->setRowHeight(5);
+                $event->sheet->getDelegate()->getRowDimension(38 + $mt)->setRowHeight(5);
                 // END
 
                 $event->sheet->getDelegate()->getRowDimension(40 + $mt)->setRowHeight(30);
@@ -564,6 +564,8 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(40)->setRowHeight(10);
                     $event->sheet->getDelegate()->getRowDimension(41)->setRowHeight(10);
                 }
+
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
 
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
             },

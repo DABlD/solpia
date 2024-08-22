@@ -24,6 +24,9 @@
                                     <th>Type</th>
                                     <th>Status</th>
                                     <th>Actions</th>
+                                    @if(auth()->user()->id == 23)
+                                        <th>ID</th>
+                                    @endif
                                 </tr>
                             </thead>
                         </table>
@@ -270,6 +273,9 @@
                 { data: 'type', name: 'type' },
                 { data: 'status', name: 'status' },
                 { data: 'actions', name: 'actions' },
+                @if(auth()->user()->id == 23)
+                    { data: 'id', name: 'id' },
+                @endif
             ],
             columnDefs: [
                 {
