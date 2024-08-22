@@ -310,9 +310,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.4);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.4);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
 
@@ -501,7 +501,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(21);
                 }
 
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(50);
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(1);
                 $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(18 + $mt)->setRowHeight(17);
@@ -530,7 +530,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(80);
                 $event->sheet->getDelegate()->getRowDimension(54 + $mt)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(55 + $mt)->setRowHeight(120);
-                $event->sheet->getDelegate()->getRowDimension(56 + $mt)->setRowHeight(16);
+                $event->sheet->getDelegate()->getRowDimension(56 + $mt)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(57 + $mt)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(58 + $mt)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(60 + $mt)->setRowHeight(16);
@@ -568,6 +568,35 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
 
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
+                
+                // RICH TEXTS
+                if(in_array($this->applicant->vessel->id, [7108, 7517, 7141, 4637, 4623])){
+                    $cell = "A6";
+                    $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+
+                    $rt->createText("1. Seafarer/Shipowner/");
+                    $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(10);
+                    $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(10);
+
+                    $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
+
+                    $cell = "A12";
+                    $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+
+                    $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+
+                    $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
+
+                    $cell = "C24";
+                    $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+
+                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                    $rt->createTextRun("Guaranteed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                    $rt->createText(PHP_EOL);
+                    $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
+
+                    $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
+                }
             },
         ];
     }
