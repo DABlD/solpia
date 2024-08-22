@@ -296,7 +296,11 @@
 			<br style="mso-data-placement:same-cell;" />
 			(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
 			<br style="mso-data-placement:same-cell;" />
-			(3) Marshall Islands / Liberia / Malta / Isle of Man  : Minimum 7 days in advance
+			@if(!in_array($data->vessel->id, [4623, 4637]))
+				(3) Marshall Islands / Liberia / Malta : Minimum 7 days in advance
+			@else
+				(3) Marshall Islands / Liberia / Malta / Isle of Man  : Minimum 7 days in advance
+			@endif
 		</td>
 	</tr>
 
@@ -408,9 +412,13 @@
 	</tr>
 
 	<tr>
-		<td rowspan="3" style="{{ $center }}">The amount of Paid Leave</td>
+		@if(!in_array($data->vessel->id, [4623, 4637]))
+			<td rowspan="3" style="{{ $center }}">The amount of paid leave</td>
+		@else
+			<td rowspan="3" style="{{ $center }}">The amount of Paid Leave</td>
+		@endif
 
-		@if(in_array($data->vessel->id, [7141, 7517]))
+		@if(in_array($data->vessel->id, [7141, 7517]) || !in_array($data->vessel->id, [4623, 4637]))
 			<td style="{{ $center }}">Amount</td>
 		@else
 			<td style="{{ $center }}">Amount of P/L</td>
@@ -432,7 +440,11 @@
 	</tr>
 
 	<tr>
-		<td style="text-decoration: underline; {{ $center }}">The number of days</td>
+		@if(!in_array($data->vessel->id, [4623, 4637]))
+			<td style="{{ $center }}">The number of days</td>
+		@else
+			<td style="text-decoration: underline; {{ $center }}">The number of days</td>
+		@endif
 		@if(in_array($data->vessel->id, [7141, 7517]))
 			<td colspan="8">The number of days of paid leave shall be ( 9 ) days per 1 month of continuous service.</td>
 		@else
@@ -483,9 +495,9 @@
 			<br style="mso-data-placement:same-cell;" />
 			2) Despite above 1, in case of the following particulars, the shipowner can recover the cost of repatriation from the seafarer.
 			<br style="mso-data-placement:same-cell;" />
-			a. When the seafarer leaves a ship without just cause.
+			ㅤㅤa. When the seafarer leaves a ship without just cause.
 			<br style="mso-data-placement:same-cell;" />
-			b. When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws.
+			ㅤㅤb. When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws.
 			<br style="mso-data-placement:same-cell;" />
 			3) The amount of money to be spent by the shipowner pursuant to paragraph (1) shall include transportation, accommodation, meals expenses incurred in the repatriation.
 		</td>
@@ -507,31 +519,31 @@
 		<td colspan="9">
 			1) Hours of work
 			<br style="mso-data-placement:same-cell;" />
-			a. Hours of Ordinary Work : 8 hours in a day and 40 hours in a week.
+			ㅤㅤa. Hours of Ordinary Work : 8 hours in a day and 40 hours in a week.
 			<br style="mso-data-placement:same-cell;" />
-			b. Over Time Work : Fixed Over Time(103 hours) and Owner’s Guaranteed Overtime.
+			ㅤㅤb. Over Time Work : Fixed Over Time(103 hours) and Owner’s Guaranteed Overtime.
 			<br style="mso-data-placement:same-cell;" />
 			2) Hours of rest
 			<br style="mso-data-placement:same-cell;" />
 
 			@if(in_array($data->vessel->id, [7141, 7517]))
-				a. Minimum of 10 hours rest in any 24-hour period and 77 hours in any seven-day period.
+				ㅤㅤa. Minimum of 10 hours rest in any 24-hour period and 77 hours in any seven-day period.
 			@else
-				a. Minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
+				ㅤㅤa. Minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
 			@endif
 			<br style="mso-data-placement:same-cell;" />
 
 			@if(in_array($data->vessel->id, [7141, 7517]))
-				b. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours in length
+				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours in length
 			@else
-				b. Minimum of 10 hours rest in any 24-hour period may be divided into no more than two periods, one of which shall be at least six hours in length
+				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than two periods, one of which shall be at least six hours in length
 			@endif
 			<br style="mso-data-placement:same-cell;" />
-			c. The interval between consecutive periods of rest shall not exceed 14 hours.
+			ㅤㅤc. The interval between consecutive periods of rest shall not exceed 14 hours.
 			<br style="mso-data-placement:same-cell;" />
-			d. Musters and drills shall be conducted in a manner that minimizes the disturbance of rest periods and does not induce fatigue.
+			ㅤㅤd. Musters and drills shall be conducted in a manner that minimizes the disturbance of rest periods and does not induce fatigue.
 			<br style="mso-data-placement:same-cell;" />
-			e. When a seafarer is on call, such as when a machinery space is unattended, the seafarer shall have an adequate compensatory 
+			ㅤㅤe. When a seafarer is on call, such as when a machinery space is unattended, the seafarer shall have an adequate compensatory 
 			<br style="mso-data-placement:same-cell;" />
 			rest period if the normal period of rest is disturbed by call-outs to work.
 		</td>
@@ -616,23 +628,44 @@
 		</td>
 	</tr>
 
-	<tr>
-		<td colspan="3" style="{{ $center }} {{ $color }}">
-			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
-		</td>
-		<td></td>
-		<td colspan="4" style="{{ $center }} {{ $color }}">
-			MR. ADULF KIT  JUMAWAN - CREWING MANAGER
-		</td>
-		<td></td>
-	</tr>
+	@if(!in_array($data->vessel->id, [4623, 4637]))
+		<tr>
+			<td colspan="3" style="{{ $center }} {{ $color }}">
+				{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
+			</td>
+			<td>(signature)</td>
+			<td colspan="4" style="{{ $center }} {{ $color }}">
+				MR. ADULF KIT  JUMAWAN - CREWING MANAGER
+			</td>
+			<td>(signature)</td>
+		</tr>
 
-	<tr>
-		<td colspan="3" style="{{ $center }}">(signature)</td>
-		<td></td>
-		<td colspan="4" style="{{ $center }}">(signature)</td>
-		<td></td>
-	</tr>
+		<tr>
+			<td colspan="3" style="{{ $center }}"></td>
+			<td></td>
+			<td colspan="4" style="{{ $center }}"></td>
+			<td></td>
+		</tr>
+
+	@else
+		<tr>
+			<td colspan="3" style="{{ $center }} {{ $color }}">
+				{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
+			</td>
+			<td></td>
+			<td colspan="4" style="{{ $center }} {{ $color }}">
+				MR. ADULF KIT  JUMAWAN - CREWING MANAGER
+			</td>
+			<td></td>
+		</tr>
+
+		<tr>
+			<td colspan="3" style="{{ $center }}">(signature)</td>
+			<td></td>
+			<td colspan="4" style="{{ $center }}">(signature)</td>
+			<td></td>
+		</tr>
+	@endif
 
 	<tr>
 		<td colspan="3" style="{{ $center }}">(Seafarer)</td>
