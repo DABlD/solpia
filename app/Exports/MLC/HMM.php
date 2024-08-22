@@ -570,7 +570,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
                 
                 // RICH TEXTS
-                if(in_array($this->applicant->vessel->id, [7108, 7517, 7141, 4637, 4623])){
+                if(!in_array($this->applicant->vessel->id, [7108, 7517, 7141, 4637, 4623])){
                     $cell = "A6";
                     $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 

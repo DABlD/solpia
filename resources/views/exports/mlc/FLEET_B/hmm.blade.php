@@ -257,7 +257,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
 				2. Period &#38; Termination of the agreement
 			</td>
@@ -322,7 +322,7 @@
 		</td>
 		<td style="{{ $center }}">Basic wage</td>
 		<td colspan="2" style="{{ $center }}">
-			Fixed/<h1 style="text-decoration: underline;">Guaranteed</h1>
+			Fixed/Guaranteed
 			<br style='mso-data-placement:same-cell;' />
 			Overtime Allowance
 		</td>
@@ -362,7 +362,7 @@
 		<td style="{{ $center }}">Owner’s Guaranteed Overtime Allowance</td>
 		<td colspan="2" style="{{ $center }}">Seniority Allowance</td>
 
-		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 			<td colspan="3" style="{{ $center }}">
 				Provident Fund
 				<br style='mso-data-placement:same-cell;' />
@@ -394,7 +394,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 			<td style="{{ $center }}">Payday</td>
 		@else
 			<td style="text-decoration: underline; {{ $center }}">Payday</td>
@@ -562,7 +562,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
 				8. Provision and compliance with Risk assessments
 			</td>
@@ -574,7 +574,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623]))
 		<td colspan="9" style="text-decoration: underline;">
 		@else
 		<td colspan="9">
