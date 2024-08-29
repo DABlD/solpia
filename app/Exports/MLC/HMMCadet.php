@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
         $array1 = [
@@ -378,12 +378,14 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
+                    'A36', 'E36'
                 ];
 
                 // HC VC
                 $h[4] = [
                     'A1:A2', 'A4:A12', 'B4:B12', 'B12:G12',
-                    'A15:H17', 'A18', 'A20:H22'
+                    'A15:H17', 'A18', 'A20:H22',
+                    'A37:A39', 'E37:F39'
                 ];
 
                 // HL
@@ -419,10 +421,12 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $h['wrap'] = [
                     'D8', 'G12',
                     'D15', 'A18',
+                    'A38'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'A36'
                 ];
 
                 foreach($h as $key => $value) {
@@ -463,7 +467,8 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
                     'A4:H12',
-                    'A15:H18','A20:B22', 'A24:H24'
+                    'A15:H18','A20:B22', 'A24:H24',
+                    'A38:H39'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -519,6 +524,7 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
+                    'A36:C36', 'E36:G36'
                 ]);
 
                 // LBT
@@ -545,8 +551,8 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(19);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(10);
 
                 $event->sheet->getDelegate()->getRowDimension(18)->setRowHeight(50);
                 $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(40);
@@ -556,6 +562,7 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(65);
                 $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(80);
                 $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(50);
+                $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(210);
 
                 $rows = [
                     [
@@ -569,7 +576,7 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $rows2 = [
                     [
                         22,
-                        [2,3,19,22,23,25,28,30,32]
+                        [2,3,19,22,23,25,28,30,32,36,37,38,39,40]
                     ],
                 ];
 
@@ -606,27 +613,23 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Letter Head');
-        $drawing->setDescription('Letter Head');
-        $drawing->setPath(public_path("images/letter_head.jpg"));
-        $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $drawing->setPath(public_path('images/MLC_SEAL.png'));
+        $drawing->setCoordinates('F36');
+        $drawing->setHeight(120);
+        $drawing->setWidth(120);
+        $drawing->setOffsetX(100);
+        $drawing->setOffsetY(-60);
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
+        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing3->setName('mlc_hmm_sig');
+        $drawing3->setDescription('mlc_hmm_sig');
+        $drawing3->setPath(public_path("images/mlc_hmm_sig.jpg"));
+        $drawing3->setCoordinates('E36');
+        $drawing3->setHeight(110);
+        $drawing3->setWidth(110);
+        $drawing3->setOffsetX(2);
+        $drawing3->setOffsetY(-100);
 
-        return [$drawing, $drawing2];
+        return [$drawing3, $drawing];
     }
 }

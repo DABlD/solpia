@@ -196,4 +196,34 @@
 			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them are retained by the each party and the cadet has opportunity to review on the terms and condition and voluntarily accept them.
 		</td>
 	</tr>
+
+	<tr>
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		<td colspan="3">{{ $data->user->namefull }}</td>
+		<td>(signature)</td>
+		<td colspan="3"></td>
+		<td>(signature)</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">Name of cadet</td>
+		<td></td>
+		<td colspan="4">Shipowner or for and on behalf of the shipowner</td>
+	</tr>
+
+	<tr>
+		<td colspan="4" rowspan="2">
+			Place where and date when a cadet agreement is entered into.
+		</td>
+		<td>Place</td>
+		<td colspan="3">MANILA, PHILIPPINES</td>
+	</tr>
+
+	<tr>
+		<td>Date</td>
+		<td colspan="3">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
+	</tr>
 </table>
