@@ -254,6 +254,10 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+                
+                // SET DEFAULT FONT
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
 
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
