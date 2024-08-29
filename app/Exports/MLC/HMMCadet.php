@@ -393,13 +393,15 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // B
                 $h[6] = [
                     'A1', 'A3',
-                    'A13:A14', 'A19', 'A23', 'A25'
+                    'A13:A14', 'A19', 'A23', 'A25',
+                    'A28', 'A30', 'A32'
                 ];
 
                 // VC
                 $h[7] = [
                     "D4:D11",
-                    'A13', 'A24', 'B18', 'A26:H27'
+                    'A13', 'A24', 'B18', 'A26:H27',
+                    'A29', 'A31', 'A33'
                 ];
 
                 // UNDERLINE
@@ -410,7 +412,8 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // JUSTIFY
                 $h[9] = [
                     'A24', 'B18',
-                    'A26', 'A27'
+                    'A26', 'A27',
+                    'A33', 'A34'
                 ];
 
                 $h['wrap'] = [
@@ -473,7 +476,8 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
-                    'C20:H21', 'C22:H22', 'A26:H27'
+                    'C20:H21', 'C22:H22', 'A26:H27',
+                    'A29:H29','A31:H31','A33:H33',
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -548,6 +552,10 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(40);
                 $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(70);
                 $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(29)->setRowHeight(190);
+                $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(65);
+                $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(80);
+                $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(50);
 
                 $rows = [
                     [
@@ -561,7 +569,7 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $rows2 = [
                     [
                         22,
-                        [2,3,19,22,23,25]
+                        [2,3,19,22,23,25,28,30,32]
                     ],
                 ];
 
@@ -586,7 +594,11 @@ class HMMCadet implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(16);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(11);
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+
+                $event->sheet->getDelegate()->getStyle('A29:A33')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A29:A33')->getFont()->setName('Times New Roman');
+
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A27', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
             },
         ];
     }
