@@ -90,7 +90,10 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
     public function view(): View
     {
-        $exportView = str_replace(' ', '_', $this->applicant->vessel->fleet) . '.hmm';
+        $principal = "hmm";
+
+        $exportView = str_replace(' ', '_', $this->applicant->vessel->fleet) . '.' . $principal;
+
         return view('exports.mlc.' . $exportView, [
             'data' => $this->applicant,
         ]);
