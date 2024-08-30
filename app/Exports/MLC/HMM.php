@@ -13,7 +13,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
         $array1 = [
-            'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN'
+            'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO'
         ];
 
         $array2 = [
@@ -29,7 +29,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array5 = [
-            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP'
+            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN'
         ];
 
         // minus two;
@@ -383,8 +383,8 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // VC
                 $h[7] = [
                     'A1:I' . (21 + $mt),
-                    'A' . (22 + $mt),
-                    'A' . (23 + $mt) . ':I' . (62 + $mt)
+                    'A' . (22 + $mt), 'B' . (22 + $mt),
+                    'A' . (23 + $mt) . ':I' . (62 + $mt),
                 ];
 
                 // B I
@@ -549,16 +549,17 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
                     $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
 
-                    $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(55);
+                    $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(50);
                     $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(30);
                     $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(10);
 
                     $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(10);
-                    $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(10);
+                    $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(1);
 
-                    $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(85);
+                    $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(70);
                     $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(23);
                     $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(23);
+                    $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(30);
                     $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(25);
                     $event->sheet->getDelegate()->getRowDimension(37)->setRowHeight(25);
                     $event->sheet->getDelegate()->getRowDimension(38)->setRowHeight(25);
