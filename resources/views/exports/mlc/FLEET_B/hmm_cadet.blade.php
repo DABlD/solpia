@@ -105,7 +105,7 @@
 
 	<tr>
 		<td rowspan="2" colspan="2">Training Allowance</td>
-		<td colspan="6">${{ isset($data->wage->total) ? $data->wage->total : "0" }}.00</td>
+		<td colspan="6">${{ isset($data->wage->total) ? $data->wage->total : "0" }}</td>
 	</tr>
 
 	<tr>
@@ -114,7 +114,7 @@
 
 	<tr>
 		<td colspan="2">Payment date/methods</td>
-		<td colspan="6">Allowance shall be paid every month according to agency agreement.</td>
+		<td colspan="6">Allowance shall be paid every month according to agency.</td>
 	</tr>
 
 	<tr>
