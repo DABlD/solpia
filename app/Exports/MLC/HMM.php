@@ -29,7 +29,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array5 = [
-            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'MT UNIVERSAL CHALLENGER', 'M/T ORIENTAL AQUAMARINE', 'M/T UNIVERSAL FRONTIER'
+            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'M/T UNIVERSAL CHALLENGER', 'M/T ORIENTAL AQUAMARINE', 'M/T UNIVERSAL FRONTIER'
         ];
 
         // minus two;
