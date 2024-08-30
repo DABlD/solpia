@@ -302,11 +302,7 @@
 			<br style="mso-data-placement:same-cell;" />
 			(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
 			<br style="mso-data-placement:same-cell;" />
-			@if(!in_array($data->vessel->id, [4623, 4637]))
-				(3) Marshall Islands / Liberia / Malta : Minimum 7 days in advance
-			@else
-				(3) Marshall Islands / Liberia / Malta / Isle of Man  : Minimum 7 days in advance
-			@endif
+			(3) Marshall Islands / Liberia / Malta : Minimum 7 days in advance
 		</td>
 	</tr>
 
@@ -627,44 +623,23 @@
 		</td>
 	</tr>
 
-	@if(!in_array($data->vessel->id, [4623, 4637]))
-		<tr>
-			<td colspan="3" style="{{ $center }} {{ $color }}">
-				{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
-			</td>
-			<td>(signature)</td>
-			<td colspan="4" style="{{ $center }} {{ $color }}">
-				MR. ADULF KIT  JUMAWAN - CREWING MANAGER
-			</td>
-			<td>(signature)</td>
-		</tr>
+	<tr>
+		<td colspan="3" style="{{ $center }} {{ $color }}">
+			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
+		</td>
+		<td>(signature)</td>
+		<td colspan="4" style="{{ $center }} {{ $color }}">
+			MR. ADULF KIT  JUMAWAN - CREWING MANAGER
+		</td>
+		<td>(signature)</td>
+	</tr>
 
-		<tr>
-			<td colspan="3" style="{{ $center }}"></td>
-			<td></td>
-			<td colspan="4" style="{{ $center }}"></td>
-			<td></td>
-		</tr>
-
-	@else
-		<tr>
-			<td colspan="3" style="{{ $center }} {{ $color }}">
-				{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
-			</td>
-			<td></td>
-			<td colspan="4" style="{{ $center }} {{ $color }}">
-				MR. ADULF KIT  JUMAWAN - CREWING MANAGER
-			</td>
-			<td></td>
-		</tr>
-
-		<tr>
-			<td colspan="3" style="{{ $center }}">(signature)</td>
-			<td></td>
-			<td colspan="4" style="{{ $center }}">(signature)</td>
-			<td></td>
-		</tr>
-	@endif
+	<tr>
+		<td colspan="3" style="{{ $center }}"></td>
+		<td></td>
+		<td colspan="4" style="{{ $center }}"></td>
+		<td></td>
+	</tr>
 
 	<tr>
 		<td colspan="3" style="{{ $center }}">(Seafarer)</td>
