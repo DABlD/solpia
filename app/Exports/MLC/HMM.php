@@ -504,7 +504,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(21);
                 }
 
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(1);
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(17);
                 $event->sheet->getDelegate()->getRowDimension(18 + $mt)->setRowHeight(17);
@@ -549,7 +549,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
                     $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
 
-                    $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(50);
+                    $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(16);
                     $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(30);
                     $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(10);
 
