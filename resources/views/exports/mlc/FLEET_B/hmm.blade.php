@@ -299,7 +299,7 @@
 			<br style="mso-data-placement:same-cell;" />
 			(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
 			<br style="mso-data-placement:same-cell;" />
-			@if(!in_array($data->vessel->id, [4623, 4637]))
+			@if(!in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
 				(3) Marshall Islands / Liberia / Malta : Minimum 7 days in advance
 			@else
 				(3) Marshall Islands / Liberia / Malta / Isle of Man  : Minimum 7 days in advance
