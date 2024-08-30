@@ -301,7 +301,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 // EDUCATION BACKGROUND ROWS
                 $ebRows = array();
                 $temp = $this->applicant->educational_background->count();
-                $rae = 27 + $temp; //Row # AFTER EDUC BACKGROUND
+                $rae = 28 + $temp; //Row # AFTER EDUC BACKGROUND
 
                 for($i = 0, $row = 28; $i < $temp; $i++, $row++){
                     if ($i+1 == $temp) {
@@ -366,7 +366,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // CERTIFICATE ROWS
                 $cRows = array();
-                $temp = 8;
+                $temp = 7;
                 $rac = $ral + 1 + $temp; //Row # AFTER CERTIFICATES
 
                 for($i = 0, $row = $ral + 1; $i < $temp; $i++, $row++){
@@ -406,7 +406,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
-                $temp = 20;
+                $temp = 16;
 
                 // IF RANK IS CO ADD 1 ROW BECAUSE OF SHIP SAFETY OFFICER
                 // if($this->applicant->rank->id == 2){
@@ -484,7 +484,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // PIYC
                 $piycRows = array(); //WILL BE FILLED AFTER FUNCTIONS
-                $rapiyc = $raoc + 1 + 7; //Row # AFTER PIYC (5 = rows)
+                $rapiyc = $raoc + 1 + 4; //Row # AFTER PIYC (5 = rows)
 
                 // COVID
                 $covidRows = array(); //WILL BE FILLED AFTER FUNCTIONS
@@ -728,7 +728,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // NUMBER HEADING ROWS
                 $nhr = [
-                    'A26', 'A' . ($rae + 1), 'A' . $ral, 'A' . $rac, 'A' . $raoc, 'A' . $rapiyc, 'A' . $raeajl,
+                    'A27', 'A' . ($rae + 1), 'A' . $ral, 'A' . $rac, 'A' . $raoc, 'A' . $rapiyc, 'A' . $raeajl,
                     'A' . $ratesms, 'A' . $raaow
                 ];
 
@@ -813,7 +813,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // HC VC
                 $h[5] = [
-                    ('A' . ($rapiyc - 9) . ':' . 'I' . ($rapiyc - 9)), "A" . ($racovid - 3) . ':' . "I" . ($racovid - 1),'B25', 'I23', 'A57:D60'
+                    ('A' . ($rapiyc - 9) . ':' . 'I' . ($rapiyc - 9)), "A" . ($racovid - 3) . ':' . "I" . ($racovid - 1),'B25', 'I23', 'A58:D61',
                 ];
 
                 // B
@@ -862,31 +862,32 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 //     $event->sheet->getDelegate()->getStyle($fill)->applyFromArray($fillStyle[0]);
                 // }
 
-                $event->sheet->getDelegate()->getStyle("D19:E19")->applyFromArray($fillStyle[0]);
-                $event->sheet->getDelegate()->getStyle("A20:I21")->applyFromArray($fillStyle[0]);
-                $event->sheet->getDelegate()->getStyle("C" . ($rae + 3) . ':D' . ($rae + 3))->applyFromArray($fillStyle[0]);
-                $event->sheet->getDelegate()->getStyle("A" . ($ral + 6) . ':B' . ($ral + 6))->applyFromArray($fillStyle[0]);
-                $event->sheet->getDelegate()->getStyle("H" . ($ral + 5) . ':I' . ($ral + 5))->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("D19:E19")->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("A20:I21")->applyFromArray($fillStyle[0]);
+                $event->sheet->getDelegate()->getStyle("F26:I26")->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("C" . ($rae + 3) . ':D' . ($rae + 3))->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("A" . ($ral + 6) . ':B' . ($ral + 6))->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("H" . ($ral + 5) . ':I' . ($ral + 5))->applyFromArray($fillStyle[0]);
 
-                $event->sheet->getDelegate()->getStyle("H" . ($ral + 5) . ':I' . ($ral + 5))->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("H" . ($ral + 5) . ':I' . ($ral + 5))->applyFromArray($fillStyle[0]);
 
-                $event->sheet->getDelegate()->getStyle("A" . ($rac + 3) . ':B' . ($rac + 3))->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("A" . ($rac + 3) . ':B' . ($rac + 3))->applyFromArray($fillStyle[0]);
 
                 $temp = 1;
                 // if($this->applicant->rank->id == 2){
-                    $event->sheet->getDelegate()->getStyle("A" . ($raoc + 5) . ':D' . ($raoc + 5))->applyFromArray($fillStyle[0]);
+                    // $event->sheet->getDelegate()->getStyle("A" . ($raoc + 5) . ':D' . ($raoc + 5))->applyFromArray($fillStyle[0]);
                     // $temp += 1;
                 // }
 
 
 
-                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 3) . ':I' . ($rac + $temp + 3))->applyFromArray($fillStyle[1]);
-                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[2]);
+                // $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 3) . ':I' . ($rac + $temp + 3))->applyFromArray($fillStyle[1]);
+                // $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[2]);
 
-                $event->sheet->getDelegate()->getStyle("A" . ($raoc + $temp - 1) . ':I' . ($raoc + $temp + 6))->applyFromArray($fillStyle[3]);
-                $event->sheet->getDelegate()->getStyle("A" . ($rapiyc + $temp - 1) . ':I' . ($rapiyc + $temp + 2))->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("A" . ($raoc + $temp - 1) . ':I' . ($raoc + $temp + 6))->applyFromArray($fillStyle[3]);
+                // $event->sheet->getDelegate()->getStyle("A" . ($rapiyc + $temp - 1) . ':I' . ($rapiyc + $temp + 2))->applyFromArray($fillStyle[0]);
 
-                $event->sheet->getDelegate()->getStyle("F" . ($rash1 + $temp + 1))->applyFromArray($fillStyle[0]);
+                // $event->sheet->getDelegate()->getStyle("F" . ($rash1 + $temp + 1))->applyFromArray($fillStyle[0]);
 
                 // BORDERS
 
@@ -894,7 +895,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 // ALL AROUND
                 $cells[0] = array_merge($rows, $ebRows, $lRows, $cRows, $ocRows, $piycRows, $covidRows, $eajlRows, $aowRows, $sh2Rows, $sh3Rows, [
                     'A2:B9', 'H1:I1', 'H2', 'I2', 'H3:H5', 'I3:I5',
-                    'A27:B27', 'C27:F27', 'G27:I27'
+                    'A28:B28', 'C28:F28', 'G28:I28'
                 ]);
 
                 // BOTTOM ONLY
@@ -932,10 +933,10 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // HAIR BOTTOM
                 $cells[8] = array_merge($cells[8], [
-                    'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'F11', 'H11:I11', 'B12:G12',
-                    'B15:F15', 'H15:I15', 'H16:I16', 'B17', 'D17', 'F17:G17', 'I17',
-                    'G17', 'I17', 'B18:C18', 'E18', 'G18', 'B19:C19', 'E19', 'G19', 'I19',
-                    'C20:D20', 'F20', 'I20', 'H21', 'D21:E21', 'G22:I22', 'B23:I23', 'I24', 'B25:F25', 'H25:I25'
+                    'E7:F7', 'H7:I7', 'H9:I9', 'B11', 'D11', 'F11', 'H11:I11', 'B12:I12',
+                    'B15:F15', 'H16:I16', 'B17', 'D17', 'F17:G17', 'I17',
+                    'G17', 'I18', 'B18:C18', 'E18', 'G18', 'B19:C19', 'E19', 'G19', 'I19',
+                    'C20:D20', 'F20', 'I20', 'H21', 'D21:E21', 'G22:I22', 'B23:I23', 'B25:F25', 'B26:E26', 'G26:I26'
                 ]);
 
                 // 2,7,8,9,10 on top
@@ -984,8 +985,8 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 $event->sheet->getDelegate()->getRowDimension($racovid - 3)->setRowHeight(24);
 
                 $rash3 += 1;
-                $event->sheet->getDelegate()->getStyle("E1:E100")->getFont()->setSize(8.5);
-                $event->sheet->getDelegate()->getStyle("E1:E130")->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle("E1:E101")->getFont()->setSize(8.5);
+                $event->sheet->getDelegate()->getStyle("E1:E131")->getFont()->setName('Times New Roman');
                 
                 $event->sheet->getDelegate()->getStyle("F" . ($racovid - 3) . ':' . "H" . ($racovid - 3))->getFont()->setSize(8.5);
                 $event->sheet->getDelegate()->getStyle("F" . ($racovid - 3) . ':' . "H" . ($racovid - 3))->getFont()->setName('Times New Roman');
@@ -993,11 +994,23 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 $event->sheet->getDelegate()->getStyle("G22")->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle("G22")->getFont()->setSize(8.5);
 
-                $event->sheet->getDelegate()->getStyle("A20:A100")->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle("A20:A100")->getFont()->setSize(8.5);
+                $event->sheet->getDelegate()->getStyle("G16")->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle("G16")->getFont()->setSize(8.5);
+
+                $event->sheet->getDelegate()->getStyle("H20")->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle("H20")->getFont()->setSize(8.5);
+
+                $event->sheet->getDelegate()->getStyle("F21")->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle("F21")->getFont()->setSize(8.5);
+
+                $event->sheet->getDelegate()->getStyle("A20:A101")->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle("A20:A101")->getFont()->setSize(8.5);
 
                 // SET PRINT AREA
                 $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:I$rash3");
+
+                // PAGE BREAK
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A' . ($raoc - 1), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
             },
         ];
     }
