@@ -291,7 +291,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $mt = $this->mt ? -2 : 0;
 
         // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-        if(in_array($this->applicant->vessel->id, [7141, 7517])){
+        if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
             $mt += 3;
         }
 
@@ -303,7 +303,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
 
 
-                if(in_array($this->applicant->vessel->id, [7141, 7517])){
+                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
 
@@ -403,7 +403,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, [7141, 7517])){
+                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
                     array_push($h[5], 'B9');
                     array_push($h[5], 'B12');
 
@@ -545,7 +545,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, [7141, 7517])){
+                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
                     $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
                     $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
 
@@ -628,7 +628,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setHeight(140);
         $drawing3->setWidth(140);
 
-        if(in_array($this->applicant->vessel->id, [7141, 7517])){
+        if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
             $drawing->setCoordinates('G' . (58 + $mt));
             $drawing3->setCoordinates('E' . (58 + $mt));
         }
