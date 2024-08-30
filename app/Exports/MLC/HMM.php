@@ -17,7 +17,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array2 = [
-            'MT C. GUARDIAN', 'MT UNIVERSAL CHALLENGER', 'MT PACIFIC M', "MT NEPTUNE M"
+            'MT C. GUARDIAN', 'MT PACIFIC M', "MT NEPTUNE M"
         ];
 
         $array3 = [
@@ -29,14 +29,14 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array5 = [
-            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN'
+            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'MT UNIVERSAL CHALLENGER', 'M/T ORIENTAL AQUAMARINE', 'M/T UNIVERSAL FRONTIER'
         ];
 
         // minus two;
         $mt = false;
 
         // FOR FLEET C
-        if($applicant->vessel->fleet == "FLEET C"){
+        if($applicant->vessel->fleet == "FLEET C" && !in_array($applicant->vessel->id, [6072, 5842, 5553])){
             $mt = true;
             $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
             $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
@@ -291,7 +291,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $mt = $this->mt ? -2 : 0;
 
         // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-        if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
+        if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553])){
             $mt += 3;
         }
 
@@ -303,7 +303,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
 
 
-                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
+                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553])){
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
 
@@ -403,7 +403,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
+                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553])){
                     array_push($h[5], 'B9');
                     array_push($h[5], 'B12');
 
@@ -545,7 +545,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
+                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553])){
                     $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
                     $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
 
@@ -574,7 +574,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
                 
                 // RICH TEXTS
-                if(!in_array($this->applicant->vessel->id, [7108, 7517, 7141, 4637, 4623])){
+                if(!in_array($this->applicant->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553])){
                     $cell = "A6";
                     $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 
@@ -629,7 +629,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setHeight(140);
         $drawing3->setWidth(140);
 
-        if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637])){
+        if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553])){
             $drawing->setCoordinates('G' . (58 + $mt));
             $drawing3->setCoordinates('E' . (58 + $mt));
         }
