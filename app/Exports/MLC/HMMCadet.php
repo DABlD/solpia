@@ -319,7 +319,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle($this->title, false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.4);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
@@ -556,8 +556,8 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getRowDimension(18)->setRowHeight(50);
                 $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(70);
-                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(65);
+                $event->sheet->getDelegate()->getRowDimension(27)->setRowHeight(35);
                 $event->sheet->getDelegate()->getRowDimension(29)->setRowHeight(190);
                 $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(65);
                 $event->sheet->getDelegate()->getRowDimension(33)->setRowHeight(80);
