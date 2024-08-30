@@ -14,50 +14,50 @@
 	<tr>
 		<td rowspan="3">Shipowner</td>
 		<td colspan="2">Company</td>
-		<td colspan="5">&#8205; HMM Company Limited</td>
+		<td colspan="5">ㅤHMM Company Limited</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">President</td>
-		<td colspan="5">&#8205; KIM KYUNG BAE</td>
+		<td colspan="5">ㅤKIM KYUNG BAE</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">Address</td>
-		<td colspan="5">&#8205; 108, Yeoui-daero, Yeongdeungpo-gu, Seoul, Republic of Korea</td>
+		<td colspan="5">ㅤ108, Yeoui-daero, Yeongdeungpo-gu, Seoul, Republic of Korea</td>
 	</tr>
 
 	<tr>
 		<td rowspan="2">Ship Manager</td>
 		<td colspan="2">Company</td>
-		<td colspan="5">&#8205; HMM Ocean Service Co., Ltd</td>
+		<td colspan="5">ㅤHMM Ocean Service Co., Ltd</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">Address</td>
-		<td colspan="5">&#8205; 5th floor, Busan post office building, Jungang-Daero 63, Jung-Gu, Busan, Republic of Korea</td>
+		<td colspan="5">ㅤ5th floor, Busan post office building, Jungang-Daero 63, Jung-Gu, Busan, Republic of Korea</td>
 	</tr>
 
 	<tr>
 		<td rowspan="2">Agent</td>
 		<td colspan="2">Company</td>
-		<td colspan="5">&#8205; Solpia Marine and Ship Management, Inc.</td>
+		<td colspan="5">ㅤSolpia Marine and Ship Management, Inc.</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">Address</td>
-		<td colspan="5">&#8205; 2019 San Marcelino St., Malate Manila, Philippines 1004</td>
+		<td colspan="5">ㅤ2019 San Marcelino St., Malate Manila, Philippines 1004</td>
 	</tr>
 
 	<tr>
 		<td rowspan="2">Cadet</td>
 		<td colspan="2">Name</td>
-		<td colspan="5">&#8205; {{ $data->user->namefull }}</td>
+		<td colspan="5">ㅤ{{ $data->user->namefull }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">Date of Birth</td>
-		<td>&#8205; {{ isset($data->user->birthday) ? $data->user->birthday->format('d-M-Y') : "-" }}</td>
+		<td>{{ isset($data->user->birthday) ? $data->user->birthday->format('d-M-Y') : "-" }}</td>
 		<td colspan="2">Place of Birth</td>
 		<td colspan="2">{{ $data->birth_place }}</td>
 	</tr>
