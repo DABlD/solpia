@@ -618,7 +618,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setHeight(120);
         $drawing->setWidth(120);
         $drawing->setOffsetX(100);
-        $drawing->setOffsetY(-60);
+        $drawing->setOffsetY(-100);
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setName('mlc_hmm_sig');
