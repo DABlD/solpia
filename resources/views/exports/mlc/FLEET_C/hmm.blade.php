@@ -38,7 +38,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 			<td rowspan="2" style="{{ $center }}">Seafarer</td>
 			<td colspan="2">Name</td>
 			<td colspan="2" style="{{ $center }} {{ $color }}">
@@ -62,7 +62,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 			<td colspan="2">Capacity</td>
 			<td colspan="2" style="{{ $center }} {{ $color }}">
 				{{ $data->position }}
@@ -115,7 +115,7 @@
 			<td colspan="7">{{ $data->sAddress }}</td>
 		</tr>
 	@else
-		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 			<tr>
 				<td rowspan="6" style="{{ $center }}">Shipowner</td>
 				<td rowspan="3">Beneficial</td>
@@ -167,7 +167,7 @@
 		@endif
 
 		@if(isset($data->crewManager))
-			@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+			@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 				<tr>
 					<td rowspan="2" style="{{ $center }}">Ship Manager</td>
 					<td colspan="2">Company</td>
@@ -193,7 +193,7 @@
 		@endif
 	@endif
 
-	@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+	@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 		<tr>
 			<td rowspan="2" style="{{ $center }}">Agent</td>
 			<td colspan="2">Company</td>
@@ -217,7 +217,7 @@
 		</tr>
 	@endif
 
-	@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+	@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 		<tr>
 			<td rowspan="2" style="{{ $center }}">Ship</td>
 			<td colspan="2">Ship Name</td>
@@ -254,7 +254,7 @@
 	</tr>
 
 	<tr>
-		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553, 5801]))
 			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
 				2. Period &#38; Termination of the agreement
 			</td>
@@ -266,7 +266,7 @@
 	</tr>
 
 
-	@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+	@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 		<tr>
 			<td rowspan="2" style="{{ $center }}">Period</td>
 			<td colspan="2">Date of commencement</td>
@@ -355,7 +355,7 @@
 		<td style="{{ $center }}">Owner’s Guaranteed Overtime Allowance</td>
 		<td colspan="2" style="{{ $center }}">Seniority Allowance</td>
 
-		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553, 5801]))
 			<td colspan="3" style="{{ $center }}">
 				Provident Fund
 				<br style='mso-data-placement:same-cell;' />
@@ -387,7 +387,7 @@
 	</tr>
 
 	<tr>
-		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553, 5801]))
 			<td style="{{ $center }}">Payday</td>
 		@else
 			<td style="text-decoration: underline; {{ $center }}">Payday</td>
@@ -413,7 +413,7 @@
 	<tr>
 		<td rowspan="3" style="{{ $center }}">The amount of paid leave</td>
 
-		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 			<td style="{{ $center }}">Amount</td>
 		@else
 			<td style="{{ $center }}">Amount of P/L</td>
@@ -423,7 +423,7 @@
 
 	<tr>
 		<td style="{{ $center }} {{ $color }}">${{ $data->wage->leave_pay ?? 0 }}</td>
-		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 			<td rowspan="2" colspan="7" style="{{ $center }}">Basic Wage / 30 days X ( 9 ) days</td>
 		@else
 			<td rowspan="2" colspan="7" style="{{ $center }}">Basic Wage / 30 days X 9 days</td>
@@ -437,7 +437,7 @@
 	<tr>
 		<td style="{{ $center }}">The number of days</td>
 		
-		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 			<td colspan="8">The number of days of paid leave shall be ( 9 ) days per 1 month of continuous service.</td>
 		@else
 			<td colspan="8">The number of days of paid leave shall be 9 days per 1 month of continuous service.</td>
@@ -518,14 +518,14 @@
 			2) Hours of rest
 			<br style="mso-data-placement:same-cell;" />
 
-			@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+			@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 				ㅤㅤa. Minimum of 10 hours rest in any 24-hour period and 77 hours in any seven-day period.
 			@else
 				ㅤㅤa. Minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
 			@endif
 			<br style="mso-data-placement:same-cell;" />
 
-			@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+			@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours in length
 			@else
 				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than two periods, one of which shall be at least six hours in length
@@ -548,7 +548,7 @@
 	</tr>
 
 	<tr>
-		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553, 5801]))
 			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
 				8. Provision and compliance with Risk assessments
 			</td>
@@ -560,12 +560,12 @@
 	</tr>
 
 	<tr>
-		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553]))
+		@if(!in_array($data->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553, 5801]))
 		<td colspan="9" style="text-decoration: underline;">
 		@else
 		<td colspan="9">
 		@endif
-			@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+			@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 				1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing at any time
 			@else
 				1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing
@@ -642,7 +642,7 @@
 		<td colspan="3" style="{{ $center }}">(Seafarer)</td>
 		<td></td>
 
-		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553]))
+		@if(in_array($data->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801]))
 			<td colspan="4" style="{{ $center }}">For and on behalf of the Shipowner(Beneficial)</td>
 		@else
 			<td colspan="4" style="{{ $center }}">(Shipowner or for and on behalf of the shipowner)</td>
