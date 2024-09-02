@@ -606,6 +606,9 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A29:A33')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A29:A33')->getFont()->setName('Times New Roman');
 
+                $event->sheet->getDelegate()->getStyle('D17')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('D17')->getFont()->setName('Times New Roman');
+
                 $event->sheet->getDelegate()->getStyle('D15')->getFont()->setSize(9);
 
                 $event->sheet->getParent()->getActiveSheet()->setBreak('A27', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
