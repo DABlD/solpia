@@ -12,6 +12,9 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
+
+        $this->newFormHMM = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517];
+
         $array1 = [
             'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO'
         ];
@@ -36,7 +39,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $mt = false;
 
         // FOR FLEET C
-        if($applicant->vessel->fleet == "FLEET C" && !in_array($applicant->vessel->id, [6072, 5553, 5842, 5801])){
+        if($applicant->vessel->fleet == "FLEET C" && !in_array($applicant->vessel->id, $this->newFormHMM)){
             $mt = true;
             $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
             $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
@@ -96,6 +99,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         return view('exports.mlc.' . $exportView, [
             'data' => $this->applicant,
+            'newFormHMM' => $this->newFormHMM
         ]);
     }
 
@@ -291,7 +295,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $mt = $this->mt ? -2 : 0;
 
         // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-        if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801])){
+        if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
             $mt += 3;
         }
 
@@ -303,7 +307,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
 
 
-                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801])){
+                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
 
@@ -403,7 +407,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801])){
+                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
                     array_push($h[5], 'B9');
                     array_push($h[5], 'B12');
 
@@ -529,6 +533,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(40 + $mt)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(43 + $mt)->setRowHeight(95);
                 $event->sheet->getDelegate()->getRowDimension(46 + $mt)->setRowHeight(115);
+                
                 $event->sheet->getDelegate()->getRowDimension(49 + $mt)->setRowHeight(46);
                 $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(80);
                 $event->sheet->getDelegate()->getRowDimension(54 + $mt)->setRowHeight(30);
@@ -545,7 +550,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801])){
+                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
                     $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
                     $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
 
@@ -574,7 +579,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
                 
                 // RICH TEXTS
-                if(!in_array($this->applicant->vessel->id, [7108, 7517, 7141, 4637, 4623, 6072, 5842, 5553, 5801])){
+                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
                     $cell = "A6";
                     $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 
@@ -584,20 +589,22 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                     $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
 
-                    $cell = "A12";
-                    $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-
-                    $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-
-                    $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
-
-                    $cell = "C24";
+                    $cell = "C27";
                     $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 
                     $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
                     $rt->createTextRun("Guaranteed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
                     $rt->createText(PHP_EOL);
                     $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
+
+                    $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
+
+                    $cell = "E30";
+                    $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+
+                    $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
+                    $rt->createText(PHP_EOL);
+                    $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
 
                     $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
                 }
@@ -629,7 +636,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setHeight(140);
         $drawing3->setWidth(140);
 
-        if(in_array($this->applicant->vessel->id, [7141, 7517, 4623, 4637, 6072, 5842, 5553, 5801])){
+        if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
             $drawing->setCoordinates('G' . (58 + $mt));
             $drawing3->setCoordinates('E' . (58 + $mt));
         }
