@@ -554,6 +554,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(18);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(10);
 
+                $event->sheet->getDelegate()->getRowDimension(17)->setRowHeight(31);
                 $event->sheet->getDelegate()->getRowDimension(18)->setRowHeight(50);
                 $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(40);
                 $event->sheet->getDelegate()->getRowDimension(26)->setRowHeight(65);
@@ -569,7 +570,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         30, //ROW HEIGHT
                         1,12 //START ROW, END ROW
                     ],
-                    [22,13,17],
+                    [22,13,16],
                     [15,20,21],
                 ];
 

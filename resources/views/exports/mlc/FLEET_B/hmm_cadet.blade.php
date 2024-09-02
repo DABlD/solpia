@@ -87,7 +87,11 @@
 
 	<tr>
 		<td colspan="2">Period of cadet ship</td>
-		<td>{{ $data->employment_months }}</td>
+		<td>
+			{{ now()->parse($data['effective_date'])->format('d-M-Y') }}
+			<br style='mso-data-placement:same-cell;' />
+			{{ now()->parse($data['effective_date'])->addMonths($data['employment_months'])->format('d-M-Y') }}
+		</td>
 		<td colspan="2">Duty</td>
 		<td colspan="2">{{ $data->pro_app->rank->abbr }}</td>
 	</tr>
