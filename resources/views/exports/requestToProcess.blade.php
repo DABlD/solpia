@@ -92,7 +92,7 @@
 			<td colspan="3" style="{{ $bc }}">RANK</td>
 			<td colspan="2" style="{{ $bc }}">FLAG</td>
 			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->user->fleet != "FLEET B" ? "VESSEL" : $crews[0]->vessel }}</td>
-			<td colspan="2" style="{{ $bc }}">FLAG CERT.</td>
+			<td colspan="2" style="{{ $bc }}">JOINING PORT</td>
 			<td style="{{ $bc }}">DEPARTURE</td>
 		</tr>
 	@else
@@ -118,13 +118,13 @@
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
-					{{-- @if(isset($crew->port))
+					@if(isset($crew->port))
 						{{ $crew->port }}
 					@else
 						@if($crew->rank)
 							{{ $data->port }}
 						@endif
-					@endif --}}
+					@endif
 				</td>
 				<td style="{{ $center }} height: 13px;">
 					@if($crew->rank != "")
@@ -269,7 +269,7 @@
 			<td colspan="3" style="{{ $bc }}">RANK</td>
 			<td colspan="2" style="{{ $bc }}">FLAG</td>
 			<td colspan="4" style="{{ $bc }}">{{ $crews[0]->user->fleet != "FLEET B" ? "VESSEL" : $crews[0]->vessel }}</td>
-			<td colspan="2" style="{{ $bc }}">FLAG CERT.</td>
+			<td colspan="2" style="{{ $bc }}">JOINING PORT</td>
 			<td style="{{ $bc }}">DEPARTURE</td>
 		</tr>
 	@else
@@ -295,13 +295,13 @@
 				<td colspan="2" style="{{ $center }} height: 13px;">{{ $crew->rank ? $data->flag : "" }}</td>
 				<td colspan="4" style="{{ $center }} height: 13px;">{{ $crews[0]->user->fleet == "FLEET B" ? "" : $crew->vessel }}</td>
 				<td colspan="2" style="{{ $center }} height: 13px;">
-					{{-- @if(isset($crew->port))
+					@if(isset($crew->port))
 						{{ $crew->port }}
 					@else
 						@if($crew->rank)
 							{{ $data->port }}
 						@endif
-					@endif --}}
+					@endif
 				</td>
 				<td style="{{ $center }} height: 13px;">
 					@if($crew->rank != "")
