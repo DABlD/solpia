@@ -427,8 +427,8 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // HC VC
                 $h[4] = [
                     'A1', 'A3:B14', 'E9:E14',
-                    'A16:F19',
-                    'A20:A22'
+                    'A16:F17',
+                    'A18:A22'
                 ];
 
                 // HL
@@ -445,7 +445,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $h[7] = [
                     'A2', 'C3:C14', 'F9:F14',
                     'A15',
-                    'B20:B22'
+                    'B18:B22'
                 ];
 
                 // UND
@@ -454,9 +454,9 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // JUSTIFY
                 $h[9] = [
-                    'A15', 'B19',
-                    'B20:B22',
-                    'A23'
+                    // 'A15', 'B19',
+                    // 'B20:B22',
+                    // 'A23'
                 ];
 
                 $h['wrap'] = [
@@ -507,7 +507,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
                     'A3:F14',
-                    'A16:F22'
+                    'A15:F22'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -583,7 +583,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(9);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(30);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(26);
 
                 $event->sheet->getDelegate()->getRowDimension(15)->setRowHeight(150);
                 $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(80);
@@ -627,7 +627,11 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                     [
                         9, //FONT SIZE
-                        ["A15", 'B20:B22', "A23", 'E25'] //CELL
+                        ['B19:B22', "A23", 'E25'] //CELL
+                    ],
+                    [
+                        8, //FONT SIZE
+                        ["A15"] //CELL
                     ],
                 ];
 
