@@ -1852,21 +1852,27 @@ class ApplicationsController extends Controller
         $lups->load('applicant.user');
         $lups->load('applicant.sea_service');
 
-
         foreach($lups as $lup){
             $temp = $lup->applicant->sea_service->sortBy('sign_on');
             $bool = false;
 
-            foreach($temp as $ss){
-                if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
-                    $bool = true;
+            if(in_array($lup->rank_id, [14, 19])){
+                $bool = true;
+            }
+            elseif(sizeof($temp)){
+                foreach($temp as $ss){
+                    if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+                        $bool = true;
+                    }
                 }
+            }
+            else{
+                $bool = true;
             }
 
             if($bool){
                 echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->joining_date . '<br>';
             }
-
         }
 
         echo '<br><br><br>';
