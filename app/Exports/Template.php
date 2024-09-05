@@ -426,10 +426,6 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ]);
 
                 // TBT - TOP BORDER THIN
-                $cells[10] = array_merge([
-                ]);
-
-                // TBT - TOP BORDER THIN
                 $cells[11] = array_merge([
                 ]);
 
