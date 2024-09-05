@@ -445,7 +445,8 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $h[7] = [
                     'A2', 'C3:C14', 'F9:F14',
                     'A15',
-                    'B18:B22'
+                    'B18:B22',
+                    'E25'
                 ];
 
                 // UND
