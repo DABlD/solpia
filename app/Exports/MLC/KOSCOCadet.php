@@ -631,7 +631,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                     [
                         8, //FONT SIZE
-                        ["A15"] //CELL
+                        ["A15", 'C6'] //CELL
                     ],
                 ];
 
