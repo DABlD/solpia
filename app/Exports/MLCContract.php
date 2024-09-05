@@ -54,9 +54,11 @@ class MLCContract implements WithMultipleSheets
             $class .= "3";
         }
 
-        // FOR HMM VESSEL SPECIFIC CADETS
-        // ALGECIRAS, OSLO, COPENHAGEN, GDANSK, HAMBURG, SOUTHAMPTON, LE HAVRE, ST PETERSBURG
-        if(in_array($this->applicant->vessel->id, [4101, 4629, 4627, 3822, 4628, 2069, 4433, 2044]) && in_array($this->applicant->pro_app->rank->id, [14, 19])){
+        // FOR HMM VESSEL SPECIFIC CADETS AND BOY
+        $p1 = in_array($this->applicant->vessel->id, [4101, 4629, 4627, 3822, 4628, 2069, 4433, 2044]); // ALGECIRAS, OSLO, COPENHAGEN, GDANSK, HAMBURG, SOUTHAMPTON, LE HAVRE, ST PETERSBURG
+        $p2 = $this->applicant->vessel->principal_id == 2; //KOSCO
+
+        if(($p1 || $p2) && in_array($this->applicant->pro_app->rank->id, [14, 19, 40, 41])){
             $class .= "Cadet";
         }
 
