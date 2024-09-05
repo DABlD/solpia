@@ -232,7 +232,17 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
-            ]
+            ],
+            [
+                'font' => [
+                    'underline' => true
+                ],
+            ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
+                ],
+            ],
         ];
 
         return [
@@ -318,6 +328,14 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
+                ];
+
+                // UNDERLINE
+                $h[8] = [
+                ];
+
+                // JUSTIFY
+                $h[9] = [
                 ];
 
                 $h['wrap'] = [
@@ -440,7 +458,37 @@ class Hms1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
 
                 // ROW RESIZE
-                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
+                $rows = [
+                    // [
+                    //     12, //ROW HEIGHT
+                    //     1,4 //START ROW, END ROW
+                    // ],
+                ];
+
+                $rows2 = [
+                    // [
+                    //     40,
+                    //     [11,14,17,20]
+                    // ]
+                ];
+
+                foreach($rows as $row){
+                    for($i = $row[1]; $i <= $row[2]; $i++){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight($row[0]);
+                    }
+                }
+
+                foreach($rows2 as $row){
+                    foreach($row[1] as $cell){
+                        $event->sheet->getDelegate()->getRowDimension($cell)->setRowHeight($row[0]);
+                    }
+                }
+
+                // PAGE BREAKS
+                $rows = [];
+                foreach($rows as $row){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
