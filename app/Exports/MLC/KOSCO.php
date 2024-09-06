@@ -411,7 +411,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    'A15'
+                    'A16'
                 ];
 
                 // HL B
@@ -426,7 +426,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'C9:C14'
+                    'C9:C15'
                 ];
 
                 // HL
@@ -439,18 +439,18 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:I14',
-                    'A16:I27',
-                    'A31:I32'
+                    'A1:I15',
+                    'A16',
+                    'A17:I28',
+                    'A32:I33'
                 ];
 
                 // JUSTIFYT
                 $h[8] = [
-                    'A15'
                 ];
 
                 $h['wrap'] = [
-                    'A1:I32'
+                    'A1:I33'
                 ];
 
                 // SHRINK TO FIT
@@ -494,7 +494,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A3:I27', 'A31:I32'
+                    'A3:I28', 'A32:I33'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -548,7 +548,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'A29:D29', 'F29:I29'
+                    'A30:D30', 'F30:I30'
                 ]);
 
                 // LBT
@@ -566,27 +566,30 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // FOR THE CHECK
-                $event->sheet->getDelegate()->getStyle('A2:I32')->getFont()->setName('Calibri');
-                $event->sheet->getDelegate()->getStyle('A2:I32')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('A2:I33')->getFont()->setName('Calibri');
+                $event->sheet->getDelegate()->getStyle('A2:I33')->getFont()->setSize(9);
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(10.99);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10.99);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(10.99);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(10.99);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10.99);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(12.99);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(11.99);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(9.22);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(9.22);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(11.2);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(11.2);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(10.6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10.6);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(16.5);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(10);
 
                 // ROW RESIZE
+                $addRows = 1;
                 $arr = [1, 15, 21, 22, 24, 25, 26, 27, 28, 29];
                 for($i = 1; $i <= 32; $i++){
                     if(!in_array($i, $arr)){
-                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(25);
+                        $event->sheet->getDelegate()->getRowDimension($i + $addRows)->setRowHeight(25);
                     }
                 }
+
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A23', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
@@ -605,7 +608,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setWidth(260);
         $drawing->setOffsetX(3);
         $drawing->setOffsetY(50);
-        $drawing->setCoordinates('A29');
+        $drawing->setCoordinates('A30');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setName('MLC SEAL');
@@ -616,7 +619,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setWidth(125);
         $drawing2->setOffsetX(40);
         $drawing2->setOffsetY(30);
-        $drawing2->setCoordinates('C29');
+        $drawing2->setCoordinates('C30');
 
         return [$drawing, $drawing2];
     }
