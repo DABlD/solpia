@@ -1192,6 +1192,54 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
+		{{-- FLEET C DOCS --}}
+		@php 
+			$name = 'BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		@if($applicant->user->fleet == "FLEET C")
+			<tr>
+				<td colspan="4">Basic Training For Oil And Chemical Tanker</td>
+				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+			</tr>
+		@endif
+
+		{{-- FLEET C DOCS --}}
+		@php 
+			$name = 'ADVANCE TRAINING FOR OIL TANKER - ATOT';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		@if($applicant->user->fleet == "FLEET C")
+			<tr>
+				<td colspan="4">Advance Training For Oil Tanker</td>
+				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+			</tr>
+		@endif
+
+		{{-- FLEET C DOCS --}}
+		@php 
+			$name = 'ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT';
+			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+		@endphp
+
+		@if($applicant->user->fleet == "FLEET C")
+			<tr>
+				<td colspan="4">Advance Training For Chemical Tanker</td>
+				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+			</tr>
+		@endif
+
 		@php 
 			$docu = false;
 			$docu2 = false;
@@ -1588,8 +1636,8 @@
 			<td colspan="3">
 				@if(in_array(auth()->user()->id, [4567, 4566]))
 					LHEA MARQUEZ / ASST. CREWING MANAGER
-				@elseif(auth()->user()->fleet == "FLEET C")
-					JEANETTE SOLIDUM / CREWING MANAGER
+				@elseif($applicant->user->fleet == "FLEET C")
+					Jeannette T. Solidum / CREWING MANAGER
 				@else
 					NEIL ROMANO / CREWING MANAGER
 				@endif
