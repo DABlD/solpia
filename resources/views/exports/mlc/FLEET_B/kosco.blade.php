@@ -57,6 +57,18 @@
 		$allowance = 10.5;
 		$cba = "IBF FKSU CA(BBCHP)";
 	}
+
+	$pp = null;
+	$sb = null;
+
+	foreach($data->document_id as $docu){
+		if($docu->type == "PASSPORT"){
+			$pp = $docu;
+		}
+		elseif($docu->type == "SEAMAN'S BOOK"){
+			$sb = $docu;
+		}
+	}
 @endphp
 
 <table>
@@ -110,7 +122,7 @@
 	</tr>
 
 	<tr>
-		<td rowspan="3" style="{{ $bc }}">Seafarer</td>
+		<td rowspan="4" style="{{ $bc }}">Seafarer</td>
 		<td style="{{ $center }}">Name</td>
 		<td colspan="3">
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
@@ -126,6 +138,17 @@
 		</td>
 		<td style="{{ $center }}">Birthplace</td>
 		<td colspan="3" style="{{ $center }}">{{ $data->birth_place }}</td>
+	</tr>
+
+	<tr>
+		<td style="{{ $center }}">Passport</td>
+		<td colspan="3">
+			{{ $pp ? $pp->number . ' / ' . $pp->expiry_date->format('d-M-Y') : " - " }}
+		</td>
+		<td style="{{ $center }}">Seaman's Bk</td>
+		<td colspan="3" style="{{ $center }} font-size: 8px;">
+			{{ $sb ? $sb->number . ' / ' . $sb->expiry_date->format('d-M-Y') : " - " }}
+		</td>
 	</tr>
 
 	<tr>
@@ -160,7 +183,7 @@
 		<td style="{{ $center }}">Name</td>
 		<td colspan="3">{{ $data->vessel->name }}</td>
 		<td style="{{ $center }}">Gross Ton</td>
-		<td colspan="3" style="{{ $center }}">{{ $data->vessel->gross_tonnage }}</td>
+		<td colspan="3" style="{{ $center }}">{{ $data->vessel->gross_tonnage }} G/T</td>
 	</tr>
 
 	<tr>
@@ -180,13 +203,23 @@
 
 	<tr>
 		<td colspan="9" style="height: 140px;">
-			1. The probationary period shall only apply during the first term of employment and shall be 10 weeks. During this period both the seafarer and/or the Company shall be entitled to terminate the employment prior to the expiry of the contract during this period.
+			1. The probationary period shall only apply during the first term of employment and shall be 10 weeks. During this period both the seafarer
 			<br style='mso-data-placement:same-cell;' />
-			2. The periods of employment shall be from the date of departure of his residence to the date of arrival in country of his residence after terminate the Seafarer's employment agreement, unless terminated for just cause or causes enumerated in this agreement.
+			and/or the Company shall be entitled to terminate the employment prior to the expiry of the contract during this period.
 			<br style='mso-data-placement:same-cell;' />
-			3. Seafarer or shipowner shall provide minimum notice periods in writings for the early termination of the seafarer's employment agreement. The minimum notice shall not be less than 30 days.
+			2. The periods of employment shall be from the date of departure of his residence to the date of arrival in country of his residence after
 			<br style='mso-data-placement:same-cell;' />
-			4. Seafarer's employment agreements shall continue to have effect while seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to suspend or terminate it.
+			terminate the Seafarer's employment agreement, unless terminated for just cause or causes enumerated in this agreement.
+			<br style='mso-data-placement:same-cell;' />
+			3. Seafarer or shipowner shall provide minimum notice periods in writings for the early termination of the seafarer's employment
+			<br style='mso-data-placement:same-cell;' />
+			agreement. The minimum notice shall not be less than 30 days.
+			<br style='mso-data-placement:same-cell;' />
+			4. Seafarer's employment agreements shall continue to have effect while seafarer is held captive on or off the ship as a result of acts of
+			<br style='mso-data-placement:same-cell;' />
+			piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to
+			<br style='mso-data-placement:same-cell;' />
+			suspend or terminate it.
 		</td>
 	</tr>
 
@@ -195,7 +228,7 @@
 		<td colspan="2">A) Basic Wage</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->basic ?? 0 }}</td>
 		<td colspan="2">
-			B.) Fixed Overtime Allowance (BW/173x1.25x103hrs)
+			B.) Guaranteed Overtime Allowance (BW/173x1.25x103hrs)
 		</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->fot ?? $data->wage->ot ?? 0 }}</td>
 	</tr>
@@ -220,7 +253,7 @@
 	<tr>
 		<td colspan="2">G) Owner's Allowance</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->owner_allow ?? 0 }}</td>
-		<td colspan="2">H) Completion Bonus</td>
+		<td colspan="2">H) Provident Fund</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->other_allow ?? 0 }}</td>
 	</tr>
 
@@ -243,9 +276,13 @@
 	<tr>
 		<td style="{{ $bc }} height: 55px;">Payment</td>
 		<td colspan="8">
-			1. Payment date : The shipowner pay seafarer's wage at the end of each calendar month. If the payment date falls on a holiday, payment will be made on the day before the holiday).
+			1. Payment date : The shipowner pay seafarer's wage at the end of each calendar month. If the payment date falls on a
 			<br style='mso-data-placement:same-cell;' />
- 			2. Payment methods : The shipowner shall pay all or part of wages to seafarer or other person designated by seafarer by means of deposit with a financial company, bank, etc.
+			holiday, payment will be made on the day before the holiday).
+			<br style='mso-data-placement:same-cell;' />
+			2. Payment methods : The shipowner shall pay all or part of wages to seafarer or other person designated by seafarer by
+			<br style='mso-data-placement:same-cell;' />
+			means of deposit with a financial company, bank, etc.
 		</td>
 	</tr>
 
@@ -259,7 +296,11 @@
 	<tr>
 		<td style="{{ $bc }} height: 60px;">Health and social security benefits</td>
 		<td colspan="8">
-			The shipowner shall provide medical care, Employment Injury and Sickness Benefit, Unemployment Benefit, Death/Disability Compensation, Pension Fund for Families of Deceased Seafarer(Survivor's Benefit) to the seafarer in accordance with Crew's National Law or Collective Bargaining Agreement.
+			The shipowner shall provide medical care, Employment Injury and Sickness Benefit, Unemployment Benefit,
+			<br style='mso-data-placement:same-cell;' />
+			Death/Disability Compensation, Pension Fund for Families of Deceased Seafarer(Survivor's Benefit) to the seafarer in
+			<br style='mso-data-placement:same-cell;' />
+			accordance with Crew's National Law or Collective Bargaining Agreement.
 		</td>
 	</tr>
 
@@ -268,51 +309,85 @@
 		<td colspan="8">
 			[Hours of Work]
 			<br style='mso-data-placement:same-cell;' />
-			 1. The working hours shall be 8 hours per day, Monday to Friday, a total working hours of 40 hours per week.
+			1. The working hours shall be 8 hours per day, Monday to Friday, a total working hours of 40 hours per week.
 			<br style='mso-data-placement:same-cell;' />
-			 2. The fixed overtime and the guaranteed overtime shall not be more than 103 hours per month.
+			2. The fixed overtime and the guaranteed overtime shall not be more than 103 hours per month.
 			<br style='mso-data-placement:same-cell;' />
 			[Hours of Rest]
 			<br style='mso-data-placement:same-cell;' />
-			 1. The seafarer shall have a minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
+			1. The seafarer shall have a minimum of 10 hours rest in any 24 hour period and 77 hours in any seven-day period.
 			<br style='mso-data-placement:same-cell;' />
-			 2. This period of 24 hours shall begin at the time a seafarer starts work immediately after having had a period at least 6 consecutive hours off duty.
+			2. This period of 24 hours shall begin at the time a seafarer starts work immediately after having had a period at least 6
 			<br style='mso-data-placement:same-cell;' />
-			 3. The hours of rest may be divided into no more than 2 periods, one of which shall be at least 6 hours in length, and the interval between consecutive periods of rest shall not exceed 14 hours.
+			consecutive hours off duty.
 			<br style='mso-data-placement:same-cell;' />
-			 4. Shipowner shall provide a compensatory rest period, comparable to hours of work performed, for seafarers who have performed necessary work although in a rest period or have been disturbed by call-outs to work during the normal period of rest.
+			3. The hours of rest may be divided into no more than 2 periods, one of which shall be at least 6 hours in length, and the
+			<br style='mso-data-placement:same-cell;' />
+			interval between consecutive periods of rest shall not exceed 14 hours.
+			<br style='mso-data-placement:same-cell;' />
+			4. Shipowner shall provide a compensatory rest period, comparable to hours of work performed, for seafarers who have
+			<br style='mso-data-placement:same-cell;' />
+			performed necessary work although in a rest period or have been disturbed by call-outs to work during the normal period of
+			<br style='mso-data-placement:same-cell;' />
+			rest.
 		</td>
 	</tr>
 
 	<tr>
 		<td style="{{ $bc }} height: 160px;">Seafarer's entitlement to repatriation</td>
 		<td colspan="8">
-			1. Where the seafarer leaves at the port which is not a place of his residence nor a place where he concluded the seafarer's employment agreement, a shipowner shall repatriate him to a place of his residence or a place where he concluded the seafarer's employment agreements without delay at the expenses and on the responsibility of the shipowner. 
+			1. Where the seafarer leaves at the port which is not a place of his residence nor a place where he concluded the seafarer's
 			<br style='mso-data-placement:same-cell;' />
-			2. Despite above 1, where a seafarer falls under any of the following cases, a shipowner may claim expenses incurred in the repatriation against seafarer
+			employment agreement, a shipowner shall repatriate him to a place of his residence or a place where he concluded the
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ1) Where a seafarer leaves a ship at his/her discretion without a justifiable reason;
+			seafarer's employment agreements without delay at the expenses and on the responsibility of the shipowner. 
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ2) Where a seafarer leaves a ship after he/she has been disciplined to leave the ship;
+			2. Despite above 1, where a seafarer falls under any of the following cases, a shipowner may claim expenses incurred in the
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ3) here a seafarer falls under the reasons prescribed by a collective bargaining agreement
+			repatriation against seafarer
 			<br style='mso-data-placement:same-cell;' />
-			3. The maximum period the seafarer can be expected to serve onboard before being entitled to repatriation at shipowner's expense is periods of seafarer's employment agreement and the entitlement to repatriation shall not lapse in the situation that the seafarer is held captive in accordance with a collective bargaining agreement.
+			ㅤㅤ1) Where a seafarer leaves a ship at his/her discretion without a justifiable reason;
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤ2) Where a seafarer leaves a ship after he/she has been disciplined to leave the ship;
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤ3) here a seafarer falls under the reasons prescribed by a collective bargaining agreement
+			<br style='mso-data-placement:same-cell;' />
+			3. The maximum period the seafarer can be expected to serve onboard before being entitled to repatriation at shipowner's
+			<br style='mso-data-placement:same-cell;' />
+			expense is periods of seafarer's employment agreement and the entitlement to repatriation shall not lapse in the situation
+			<br style='mso-data-placement:same-cell;' />
+			that the seafarer is held captive in accordance with a collective bargaining agreement.
 		</td>
 	</tr>
 
 	<tr>
 		<td style="{{ $bc }} height: 110px;">Any facts not defined in this agreement</td>
 		<td colspan="8">
-			1. Any facts which are not defined in this agreement, these are complied with the law of flag state, crew's national law, and a collective bargaining agreement.
+			1. Any facts which are not defined in this agreement, these are complied with the law of flag state, crew's national law, and
 			<br style='mso-data-placement:same-cell;' />
- 			2. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer recruitment and placement. (Other than the cost of the passport or other similar personal travel documents.) If the seafarer found that, the fact should be noticed to the shipowner immediately.
+			a collective bargaining agreement. The parties to this agreement hereby stipulate that the terms and conditions laid down
+			<br style='mso-data-placement:same-cell;' />
+			herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic of the Marshall
+			<br style='mso-data-placement:same-cell;' />
+			Islands. Any dispute as to the terms and conditions of this agreement shall be resolved in accordance with the Maritime Law
+			<br style='mso-data-placement:same-cell;' />
+			and Regulatios of the Republic of the Marshall Island.
+			<br style='mso-data-placement:same-cell;' />
+			2. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement
+			<br style='mso-data-placement:same-cell;' />
+			or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer
+			<br style='mso-data-placement:same-cell;' />
+			recruitment and placement. (Other than the cost of the passport or other similar personal travel documents.) If the seafarer
+			<br style='mso-data-placement:same-cell;' />
+			found that, the fact should be noticed to the shipowner immediately.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="9" style="height: 40px;">
-			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them are retained by the each party.
+			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them are retained
+			<br style='mso-data-placement:same-cell;' />
+			by the each party.
 			<br style='mso-data-placement:same-cell;' />
 			And, seafarer has opportunity to review and seek advice on the terms and condition and freely accept them.
 		</td>
@@ -331,7 +406,11 @@
 	</tr>
 
 	<tr>
-		<td colspan="3" rowspan="2">The place where and date when the seafarers' employment agreement is entered into</td>
+		<td colspan="3" rowspan="2">
+			The place where and date when the seafarers' employment agreement is entered
+			<br style='mso-data-placement:same-cell;' />
+			into
+		</td>
 		<td colspan="2" style="{{ $center }}">Place</td>
 		<td colspan="4" style="{{ $center }}">MANILA, PHILIPPINES</td>
 	</tr>

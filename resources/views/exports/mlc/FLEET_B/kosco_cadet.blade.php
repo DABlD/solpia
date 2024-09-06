@@ -110,7 +110,7 @@
 		<td>Name</td>
 		<td colspan="2">ㅤ{{ $data->vessel->name }}</td>
 		<td>Gross Ton</td>
-		<td>ㅤ{{ $data->vessel->gross_tonnage }}</td>
+		<td>ㅤ{{ $data->vessel->gross_tonnage }} G/T</td>
 	</tr>
 
 	<tr>
