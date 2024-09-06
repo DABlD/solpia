@@ -728,7 +728,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setHeight(70);
         $drawing->setWidth(260);
         $drawing->setOffsetX(3);
-        $drawing->setOffsetY(-40);
+        $drawing->setOffsetY(-70);
         $drawing->setCoordinates('A24');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -739,7 +739,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setHeight(110);
         $drawing2->setWidth(125);
         $drawing2->setOffsetX(40);
-        $drawing2->setOffsetY(-40);
+        $drawing2->setOffsetY(-70);
         $drawing2->setCoordinates('C24');
 
         return [$drawing, $drawing2];
