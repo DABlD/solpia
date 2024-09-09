@@ -20,6 +20,9 @@
                             <li role="presentation">
                                 <a href=".10y" role="tab" data-toggle="pill">10 Years</a>
                             </li>
+                            <li role="presentation">
+                                <a href=".15y" role="tab" data-toggle="pill">15 Years</a>
+                            </li>
 
                             <br><br><br>
                             <div class="tab-content">
@@ -164,6 +167,119 @@
                                     <br>
                                     <div class="tab-content">
                                         @foreach($TYfleets as $fleet => $awardees)
+                                            @php
+                                                if($fleet == ""){
+                                                    $fleet = "No Fleet";
+                                                }
+                                                $fleet_ = str_replace(" ", "_", $fleet);
+                                            @endphp
+
+                                            @if($loop->first)
+                                                <div role="tabpanel" class="tab-pane fade active in {{ $fleet_ }}">
+                                                    <table class="table table-hover table-bordered" id="table" style="width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Name</th>
+                                                                <th>Rank</th>
+                                                                <th>Years</th>
+                                                                <th>Last Vessel</th>
+                                                                <th>Address</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        @php
+                                                            $ctr = 0;
+                                                        @endphp
+                                                        <tbody class="tbody">
+                                                            {{-- <div class="preloader"></div> --}}
+                                                            @foreach($awardees as $awardee)
+                                                                @php
+                                                                    $ctr++;
+                                                                @endphp
+                                                                <tr>
+                                                                    <td>{{ $ctr }}</td>
+                                                                    <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
+                                                                    <td>{{ $awardee['rname'] }}</td>
+                                                                    <td>{{ round($awardee['total'] / 12, 2) }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['address'] }}</td>
+                                                                    <td>{{ $awardee['pa_s'] }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @else
+                                                <div role="tabpanel" class="tab-pane fade {{ $fleet_ }}">
+                                                    <table class="table table-hover table-bordered" id="table" style="width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Name</th>
+                                                                <th>Rank</th>
+                                                                <th>Years</th>
+                                                                <th>Last Vessel</th>
+                                                                <th>Address</th>
+                                                                <th>Disembarked On</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        @php
+                                                            $ctr = 0;
+                                                        @endphp
+                                                        <tbody class="tbody">
+                                                            {{-- <div class="preloader"></div> --}}
+                                                            @foreach($awardees as $awardee)
+                                                                @php
+                                                                    $ctr++;
+                                                                @endphp
+                                                                <tr>
+                                                                    <td>{{ $ctr }}</td>
+                                                                    <td>{{ $awardee['lname'] }}, {{ $awardee['fname'] }} {{ $awardee['suffix'] }} {{ $awardee['mname'] }}</td>
+                                                                    <td>{{ $awardee['rname'] }}</td>
+                                                                    <td>{{ round($awardee['total'] / 12, 2) }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
+                                                                    <td>{{ $awardee['address'] }}</td>
+                                                                    <td>{{ $awardee['pa_s'] }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade 15y">
+                                    <ul class="nav nav-pills" role="tablist">
+                                      @foreach($FTYfleets as $fleet => $awardees)
+                                        @php
+                                            if($fleet == ""){
+                                                $fleet = "No Fleet";
+                                            }
+                                            $fleet_ = str_replace(" ", "_", $fleet);
+                                        @endphp
+                                        @if($loop->first)
+                                            <li role="presentation" class="active">
+                                                <a href=".{{ $fleet_ }}" role="tab" data-toggle="pill">
+                                                    {{ $fleet }} <span class="badge">{{ sizeof($awardees) }}</span>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li role="presentation">
+                                                <a href=".{{ $fleet_ }}" role="tab" data-toggle="pill">
+                                                    {{ $fleet }} <span class="badge">{{ sizeof($awardees) }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                      @endforeach
+                                    </ul>
+
+                                    <br>
+                                    <div class="tab-content">
+                                        @foreach($FTYfleets as $fleet => $awardees)
                                             @php
                                                 if($fleet == ""){
                                                     $fleet = "No Fleet";
