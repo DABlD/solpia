@@ -1620,6 +1620,7 @@ class ApplicationsController extends Controller
     public function awardees(){
         $array1 = [];
         $array2 = [];
+        $array3 = [];
         $details = [];
 
         $id = 3689;
@@ -1701,6 +1702,9 @@ class ApplicationsController extends Controller
             if($total >= 108 && $total <= 132){
                 array_push($array2, $ss->applicant_id);
             }
+            if($total >= 168 && $total <= 180){
+                array_push($array3, $ss->applicant_id);
+            }
 
             $details[$sss->first()->applicant_id]['total'] = $total;
         }
@@ -1708,6 +1712,7 @@ class ApplicationsController extends Controller
         $array1 = array_diff($array1, $array2);
         $array1 = array_unique($array1);
         $array2 = array_unique($array2);
+        $array3 = array_unique($array3);
 
         $FYfleets = [
             "FLEET A" => [],
@@ -1729,6 +1734,16 @@ class ApplicationsController extends Controller
             "FISHING" => [],
             "" => []
         ];
+        $FTYfleets = [
+            "FLEET A" => [],
+            "FLEET B" => [],
+            "FLEET C" => [],
+            "FLEET D" => [],
+            "FLEET E" => [],
+            "TOEI" => [],
+            "FISHING" => [],
+            "" => []
+        ];
 
         foreach($array1 as $id){
             array_push($FYfleets[$details[$id]['fleet']], $details[$id]);
@@ -1738,13 +1753,19 @@ class ApplicationsController extends Controller
             array_push($TYfleets[$details[$id]['fleet']], $details[$id]);
         }
 
+        foreach($array3 as $id){
+            array_push($FTYfleets[$details[$id]['fleet']], $details[$id]);
+        }
+
         ksort($FYfleets);
         ksort($TYfleets);
+        ksort($FTYfleets);
 
         return $this->_view('awardees', [
             'title' => 'Crew Awardees',
             'FYfleets' => $FYfleets,
-            'TYfleets' => $TYfleets
+            'TYfleets' => $TYfleets,
+            'FTYfleets' => $FTYfleets
         ]);
     }
 
