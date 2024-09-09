@@ -1702,7 +1702,7 @@ class ApplicationsController extends Controller
             if($total >= 108 && $total <= 132){
                 array_push($array2, $ss->applicant_id);
             }
-            if($total >= 168 && $total <= 180){
+            if($total >= 168){
                 array_push($array3, $ss->applicant_id);
             }
 
