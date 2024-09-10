@@ -3827,7 +3827,12 @@
                     swal({
                         title: "Enter Details",
                         html: `
-                            <input type="number" min="1" id="cd" class="form-control" placeholder="Contract Duration (optional)"><br>
+                            <div style="text-align: left;">
+                                <label>Effective Date</label>
+                            </div>
+                            <input type="text" id="ed" class="form-control"><br>
+
+                            <input type="number" min="1" id="cd" class="form-control" placeholder="Contract Duration"><br>
 
                             <select id="rank_id" class="form-control">
                                 <option value="">Promote To:</option>
@@ -3836,12 +3841,20 @@
                         `,
                         onOpen: () => {
                             $('#rank_id').select2();
+
+                            $('#ed').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d',
+                                defaultDate: moment().format("YYYY-MM-DD")
+                            })
                         }
                     }).then(result => {
                         let cd = $('#cd').val();
                         let rank = $('#rank_id').val();
+                        let ed = $('#ed').val();
 
-                        if(result.value && cd != "" && rank != ""){
+                        if(result.value && cd != "" && rank != "" && ed != ""){
                             // DISEMBARK
                             $.ajax({
                                 type: 'POST',
@@ -3849,6 +3862,7 @@
                                 data: {
                                     id: applicant_id,
                                     disembarkation_date: moment().format("YYYY-MM-DD"),
+                                    ed: ed,
                                     type: 'On Board Promotion',
                                     remark: "On Board Promotion"
                                 },
@@ -3859,7 +3873,7 @@
                                         type: 'POST',
                                         url: `{{ route('applications.updateStatus') }}/${applicant_id}/${"On Board"}/${vessel_id}`,
                                         data: {
-                                            date: moment().format("YYYY-MM-DD"),
+                                            date: ed,
                                             months: cd,
                                             rank: rank
                                         },
