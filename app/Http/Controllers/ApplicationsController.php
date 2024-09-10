@@ -1214,7 +1214,13 @@ class ApplicationsController extends Controller
             $vessel = Vessel::find($lineup->vessel_id);
             $principal = Principal::find($lineup->principal_id);
 
-            $months = now()->parse($req->disembarkation_date)->diffInDays(now()->parse($lineup->joining_date)) / 30;
+            $disembarkation_date = $req->disembarkation_date;
+
+            if(isset($req->ed)){
+                $disembarkation_date = $req->ed;
+            }
+
+            $months = now()->parse($disembarkation_date)->diffInDays(now()->parse($lineup->joining_date)) / 30;
             $lineup->months = $months;
             $lineup->save();
 
@@ -1232,12 +1238,12 @@ class ApplicationsController extends Controller
                 'manning_agent' => $vessel->manning_agent,
                 'principal' => $principal->name,
                 'sign_on' => $lineup->joining_date,
-                'sign_off' => $req->disembarkation_date,
+                'sign_off' => $disembarkation_date,
                 'total_months' => $months,
                 'remarks' => $req->remark == "Vacation" ? 'FINISHED CONTRACT' : $req->remark
             ]);
 
-            $lineup->disembarkation_date = $req->disembarkation_date;
+            $lineup->disembarkation_date = $disembarkation_date;
             $lineup->disembarkation_port = $req->disembarkation_port;
             if($req->type = "On Board Promotion"){
                 $lineup->status = "On Board Promotion";
