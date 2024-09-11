@@ -224,11 +224,11 @@
 		// if(!in_array($data->id, [1243, 1422, 1657, 1703, 1730, 1773, 2013, 2672, 2767])){
 		// 	dd($data->id, $basic, $wage);
 		// }
-		$ot = number_format(ceil($basic / 173 * 103 * 1.25), 2);
-		$lp = number_format(ceil($basic * 9 / 30), 2);
+		$ot = ceil($basic / 173 * 103 * 1.25);
+		$lp = ceil($basic * 9 / 30);
 
 		// allowances
-		$sa = number_format(ceil($wage->sup_allow ?? 0), 2);
+		$sa = ceil($wage->sup_allow ?? 0);
 		$so = ceil($wage->sub_allow ?? 0);
 		$oa = ceil($wage->owner_allow ?? 0);
 		$ra = ceil($wage->retire_allow ?? 0);
