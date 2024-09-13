@@ -290,9 +290,12 @@ class DatatablesController extends Controller
 			->where(function($q) use($f){
 				$q->where('vessels.fleet', 'like', $f['fleet']);
 				$q->where('principal_id', 'like', $f['principal']);
-				$q->where('flag', 'like', $f['flag']);
 				$q->where('type', 'like', $f['type']);
 				$q->where('status', 'like', $f['status']);
+
+				if($f['flag'] != "%%"){
+					$q->where('flag', 'like', $f['flag']);
+				}
 
 				// TOEI CAN SEE TOEI VESSELS ON OTHER FLEETS
 				if(auth()->user()->fleet == "TOEI"){
