@@ -51,7 +51,7 @@ class WageController extends Controller
     }
 
     public function getVessels(Request $req){
-        $vessels = Vessel::where('imo', '!=', null)->select('id', 'name', 'imo')->get();
+        $vessels = Vessel::where('imo', '!=', null)->where('status', 'ACTIVE')->select('id', 'name', 'imo')->get();
         echo json_encode($vessels);
     }
 
