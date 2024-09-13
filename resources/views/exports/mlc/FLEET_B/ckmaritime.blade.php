@@ -98,7 +98,7 @@
 	{{-- 5th ROW --}}
 	<tr>
 		<td colspan="2" rowspan="2" style="{{ $center }}">
-			송입사 
+			대리점 
 			<br style='mso-data-placement:same-cell;' />
 			Crew Manning
 		</td>
@@ -121,7 +121,7 @@
 			Address
 		</td>
 		<td colspan="10" style="{{ $center }}">
-			2019 San Marcelino St, Malate, Manila, Philippines 1004
+			SOLPIA BUILDING 2019 San Marcelino St, Malate, Manila, Philippines 1004
 		</td>
 	</tr>
 	{{-- END 6th ROW --}}
@@ -520,13 +520,13 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎임금은 매월 05일에 정기적으로 지급한다. 다만 지급일이 휴일일 경우에는 그 전일에 지급하는 것으로한다.
+			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎임금은 익월 15일에 정기적으로 지급한다. 다만 지급일이 휴일일 경우에는 그 전일에 지급하는 것으로한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Payment date is 5th of every month. If the payment date falls on a holiday, payment will be made on the day before
+			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Payment date is 15th of every following month. If the payment date falls on a holiday, payment will be made on the day before
 		</td>
 	</tr>
 
