@@ -1076,7 +1076,9 @@
 	<tr>
 		<td style="height: 40px; {{ $blue }} {{ $center }}" colspan="5">{{ $data->vessel->name }}</td>
 		<td colspan="4" style="height: 45px;"></td>
-		<td colspan="5" style="height: 45px;"></td>
+		<td colspan="5" style="height: 45px;">
+			C/E ROMANO A. MARIANO
+		</td>
 	</tr>
 
 	<tr><td colspan="14"></td></tr>

@@ -480,21 +480,21 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('CKM STAMP');
-        $drawing->setPath(public_path("images/sir_kit_sig.png"));
+        $drawing->setName('Pres sig');
+        $drawing->setPath(public_path("images/pres_sig.png"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(55);
+        $drawing->setHeight(200);
         $drawing->setWidth(200);
         $drawing->setOffsetX(-10);
-        $drawing->setOffsetY(3);
+        $drawing->setOffsetY(-80);
         $drawing->setCoordinates('J155');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setName('MLC SEAL`');
         $drawing2->setPath(public_path("images/MLC_SEAL_BLUE.png"));
         $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(75);
-        $drawing2->setWidth(75);
+        $drawing2->setHeight(90);
+        $drawing2->setWidth(90);
         $drawing2->setOffsetX(3);
         $drawing2->setOffsetY(-20);
         $drawing2->setCoordinates('M155');
