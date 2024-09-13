@@ -332,11 +332,11 @@
                         <div class="col-md-9 iInput">
                             <select id="fFleet" class="form-control">
                                 <option value="%%">All</option>
-                                <option value="Fleet A">Fleet A</option>
-                                <option value="Fleet B">Fleet B</option>
-                                <option value="Fleet C">Fleet C</option>
-                                <option value="Fleet D">Fleet D</option>
-                                <option value="Fleet E">Fleet E</option>
+                                <option value="FLEET A">Fleet A</option>
+                                <option value="FLEET B">Fleet B</option>
+                                <option value="FLEET C">Fleet C</option>
+                                <option value="FLEET D">Fleet D</option>
+                                <option value="FLEET E">Fleet E</option>
                                 <option value="TOEI">TOEI</option>
                                 <option value="Fishing">Fishing</option>
                             </select>
