@@ -410,7 +410,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    'A23',
+                    'A24',
                     'E25'
                 ];
 
@@ -426,9 +426,9 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'A1', 'A3:B14', 'E9:E14',
-                    'A16:F17',
-                    'A18:A22'
+                    'A1', 'A3:B15', 'E9:E15',
+                    'A17:F18',
+                    'A19:A23'
                 ];
 
                 // HL
@@ -437,16 +437,16 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // B
                 $h[6] = [
-                    'A1', 'A3:A14',
-                    'A16:A22'
+                    'A1', 'A3:A15',
+                    'A17:A23'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A2', 'C3:C14', 'F9:F14',
-                    'A15',
-                    'B18:B22',
-                    'E25'
+                    'A2', 'C3:C15', 'F9:F15',
+                    'A16',
+                    'B19:B23',
+                    'E26'
                 ];
 
                 // UND
@@ -461,9 +461,9 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'A2:A7', 'F11',
-                    'A16:A22',
-                    'A25'
+                    'A2:A7', 'F12',
+                    'A17:A23',
+                    'A26'
                 ];
 
                 // SHRINK TO FIT
@@ -507,8 +507,8 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A3:F14',
-                    'A15:F22'
+                    'A3:F15',
+                    'A16:F23'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -554,7 +554,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // TBT - TOP BORDER THIN
                 $cells[11] = array_merge([
-                    'A25:C25', 'E25:F25'
+                    'A26:C26', 'E26:F26'
                 ]);
 
                 // BBT
@@ -586,26 +586,26 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(26);
 
-                $event->sheet->getDelegate()->getRowDimension(15)->setRowHeight(150);
-                $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(80);
-                $event->sheet->getDelegate()->getRowDimension(20)->setRowHeight(180);
+                $event->sheet->getDelegate()->getRowDimension(16)->setRowHeight(150);
+                $event->sheet->getDelegate()->getRowDimension(20)->setRowHeight(80);
                 $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(180);
-                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(140);
+                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(180);
                 $event->sheet->getDelegate()->getRowDimension(23)->setRowHeight(140);
+                $event->sheet->getDelegate()->getRowDimension(24)->setRowHeight(140);
 
                 // ROW RESIZE
                 $rows = [
                     [
                         26.5, //ROW HEIGHT
-                        3,14 //START ROW, END ROW
+                        3,15 //START ROW, END ROW
                     ],
                     [
                         26.5, //ROW HEIGHT
-                        16,18 //START ROW, END ROW
+                        17,19 //START ROW, END ROW
                     ],
                     [
                         26.5, //ROW HEIGHT
-                        24,26 //START ROW, END ROW
+                        25,27 //START ROW, END ROW
                     ],
                 ];
 
@@ -628,11 +628,11 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                     [
                         9, //FONT SIZE
-                        ['B19:B22', "A23", 'E25'] //CELL
+                        ['B20:B23', "A24", 'E26'] //CELL
                     ],
                     [
                         8, //FONT SIZE
-                        ["A15", 'C6'] //CELL
+                        ["A16", 'C6'] //CELL
                     ],
                 ];
 
@@ -655,7 +655,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // PAGE BREAKS
-                $rows = [19];
+                $rows = [20];
                 foreach($rows as $row){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
@@ -699,7 +699,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $cba = "IBF FKSU CA(BBCHP)";
                 }
 
-                $cell = "B18";
+                $cell = "B19";
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 
                 $rt->createText("Costs for food shall be ( ");
@@ -729,7 +729,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setWidth(260);
         $drawing->setOffsetX(3);
         $drawing->setOffsetY(-70);
-        $drawing->setCoordinates('A24');
+        $drawing->setCoordinates('A25');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setName('MLC SEAL');
@@ -740,7 +740,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setWidth(125);
         $drawing2->setOffsetX(40);
         $drawing2->setOffsetY(-70);
-        $drawing2->setCoordinates('C24');
+        $drawing2->setCoordinates('C25');
 
         return [$drawing, $drawing2];
     }

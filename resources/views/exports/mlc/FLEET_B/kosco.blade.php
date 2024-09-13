@@ -202,7 +202,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="9" style="height: 140px;">
+		<td colspan="9" style="height: 110px;">
 			1. The probationary period shall only apply during the first term of employment and shall be 10 weeks. During this period both the seafarer
 			<br style='mso-data-placement:same-cell;' />
 			and/or the Company shall be entitled to terminate the employment prior to the expiry of the contract during this period.
@@ -288,9 +288,9 @@
 
 	<tr>
 		<td style="{{ $bc }}">Provision</td>
-		<td colspan="8">
-			Costs for food shall be ({{ $allowance }} US Dollars) per person/day excluding shipment cost.
-		</td>
+		<td colspan="2">Costs for food shall be</td>
+		<td colspan="2">({{ $allowance }} US Dollars)</td>
+		<td colspan="4">per person/day excluding shipment cost.</td>
 	</tr>
 
 	<tr>
@@ -327,24 +327,26 @@
 			<br style='mso-data-placement:same-cell;' />
 			4. Shipowner shall provide a compensatory rest period, comparable to hours of work performed, for seafarers who have
 			<br style='mso-data-placement:same-cell;' />
-			performed necessary work although in a rest period or have been disturbed by call-outs to work during the normal period of
+			performed necessary work although in a rest period or have been disturbed by call-outs to work during the normal period
 			<br style='mso-data-placement:same-cell;' />
-			rest.
+			of rest.
 		</td>
 	</tr>
 
 	<tr>
 		<td style="{{ $bc }} height: 160px;">Seafarer's entitlement to repatriation</td>
 		<td colspan="8">
-			1. Where the seafarer leaves at the port which is not a place of his residence nor a place where he concluded the seafarer's
+			1. Where the seafarer leaves at the port which is not a place of his residence nor a place where he concluded the
 			<br style='mso-data-placement:same-cell;' />
-			employment agreement, a shipowner shall repatriate him to a place of his residence or a place where he concluded the
+			seafarer's employment agreement, a shipowner shall repatriate him to a place of his residence or a place where he
 			<br style='mso-data-placement:same-cell;' />
-			seafarer's employment agreements without delay at the expenses and on the responsibility of the shipowner. 
+			concluded the seafarer's employment agreements without delay at the expenses and on the responsibility of the
 			<br style='mso-data-placement:same-cell;' />
-			2. Despite above 1, where a seafarer falls under any of the following cases, a shipowner may claim expenses incurred in the
+			shipowner.
 			<br style='mso-data-placement:same-cell;' />
-			repatriation against seafarer
+			2. Despite above 1, where a seafarer falls under any of the following cases, a shipowner may claim expenses incurred in
+			<br style='mso-data-placement:same-cell;' />
+			the repatriation against seafarer
 			<br style='mso-data-placement:same-cell;' />
 			ㅤㅤ1) Where a seafarer leaves a ship at his/her discretion without a justifiable reason;
 			<br style='mso-data-placement:same-cell;' />
@@ -352,34 +354,28 @@
 			<br style='mso-data-placement:same-cell;' />
 			ㅤㅤ3) here a seafarer falls under the reasons prescribed by a collective bargaining agreement
 			<br style='mso-data-placement:same-cell;' />
-			3. The maximum period the seafarer can be expected to serve onboard before being entitled to repatriation at shipowner's
+			3. The maximum period the seafarer can be expected to serve onboard before being entitled to repatriation at
 			<br style='mso-data-placement:same-cell;' />
-			expense is periods of seafarer's employment agreement and the entitlement to repatriation shall not lapse in the situation
+			shipowner's expense is periods of seafarer's employment agreement and the entitlement to repatriation shall not lapse in
 			<br style='mso-data-placement:same-cell;' />
-			that the seafarer is held captive in accordance with a collective bargaining agreement.
+			the situation that the seafarer is held captive in accordance with a collective bargaining agreement.
 		</td>
 	</tr>
 
 	<tr>
 		<td style="{{ $bc }} height: 110px;">Any facts not defined in this agreement</td>
 		<td colspan="8">
-			1. Any facts which are not defined in this agreement, these are complied with the law of flag state, crew's national law, and
+			1. Any facts which are not defined in this agreement, these are complied with the law of flag state, crew's national law,
 			<br style='mso-data-placement:same-cell;' />
-			a collective bargaining agreement. The parties to this agreement hereby stipulate that the terms and conditions laid down
+			and a collective bargaining agreement.
 			<br style='mso-data-placement:same-cell;' />
-			herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic of the Marshall
+			2. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or
 			<br style='mso-data-placement:same-cell;' />
-			Islands. Any dispute as to the terms and conditions of this agreement shall be resolved in accordance with the Maritime Law
+			placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of
 			<br style='mso-data-placement:same-cell;' />
-			and Regulatios of the Republic of the Marshall Island.
+			seafarer recruitment and placement. (Other than the cost of the passport or other similar personal travel documents.) If
 			<br style='mso-data-placement:same-cell;' />
-			2. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement
-			<br style='mso-data-placement:same-cell;' />
-			or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer
-			<br style='mso-data-placement:same-cell;' />
-			recruitment and placement. (Other than the cost of the passport or other similar personal travel documents.) If the seafarer
-			<br style='mso-data-placement:same-cell;' />
-			found that, the fact should be noticed to the shipowner immediately.
+			the seafarer found that, the fact should be noticed to the shipowner immediately.
 		</td>
 	</tr>
 

@@ -426,11 +426,13 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'C9:C15'
+                    'C9:C15',
+                    'B24:I24'
                 ];
 
                 // HL
                 $h[5] = [
+                    'F24'
                 ];
 
                 // B
@@ -440,7 +442,6 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // VC
                 $h[7] = [
                     'A1:I15',
-                    'A16',
                     'A17:I28',
                     'A32:I33'
                 ];
@@ -494,7 +495,9 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A3:I28', 'A32:I33'
+                    'A3:I23',
+                    'A24', 'A25:I28',
+                    'A32:I33'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -507,6 +510,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
+                    'B24:I24'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -589,7 +593,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     }
                 }
 
-                $event->sheet->getParent()->getActiveSheet()->setBreak('A23', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A24', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
