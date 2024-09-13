@@ -38,12 +38,23 @@
 		$cba = "IBF FKSU CA(BBCHP)";
 	}
 
+	$pp = null;
+	$sb = null;
+
+	foreach($data->document_id as $docu){
+		if($docu->type == "PASSPORT"){
+			$pp = $docu;
+		}
+		elseif($docu->type == "SEAMAN'S BOOK"){
+			$sb = $docu;
+		}
+	}
 	// dd($data);
 @endphp
 
 <table>
 	<tr>
-		<td colspan="6">Cadet's Training Agreement</td>
+		<td colspan="6">CADET'S TRAINING AGREEMENT</td>
 	</tr>
 
 	<tr>
@@ -84,7 +95,7 @@
 	</tr>
 
 	<tr>
-		<td rowspan="3">Cadet</td>
+		<td rowspan="4">Cadet</td>
 		<td>Name</td>
 		<td colspan="2">ㅤ{{ $data->user->namefull }}</td>
 		<td>Position</td>
@@ -96,6 +107,13 @@
 		<td colspan="2">ㅤ{{ $data->user->birthday ? $data->user->birthday->format('d-M-Y') : "N/A" }}</td>
 		<td>Birthplace</td>
 		<td>ㅤ{{ $data->birth_place }}</td>
+	</tr>
+
+	<tr>
+		<td>Passport</td>
+		<td colspan="2">ㅤ{{ $pp ? $pp->number . ' / ' . $pp->expiry_date->format('d-M-Y') : " - " }}</td>
+		<td>Seaman's Bk</td>
+		<td>ㅤ{{ $sb ? $sb->number . ' / ' . $sb->expiry_date->format('d-M-Y') : " - " }}</td>
 	</tr>
 
 	<tr>
