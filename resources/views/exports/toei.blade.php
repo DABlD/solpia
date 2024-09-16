@@ -719,18 +719,75 @@
 
 				$rname = $rname == "MASTER" ? "MASTER MARINER (II/2)" : $rname;
 
-					$rname = $rname == "CHIEF ENGINEER" ? "CHIEF ENGINEER (III/2)" : $rname;
+				$rname = $rname == "CHIEF ENGINEER" ? "CHIEF ENGINEER (III/2)" : $rname;
 			}
 			else{
 				$rname = "-----";
 			}
 
-			// dd($applicant->rank);
+			// dd($rname, $applicant->rank);
 		@endphp
 
 		<tr>
 			<td colspan="2">Seaman's Book(Panama)</td>
-			<td colspan="2">{{ $rname }}</td>
+			{{-- <td colspan="2">{{ $rname }}</td> --}}
+			<td colspan="2">
+				@if(isset($crewRank) && $docu)
+					@if($hl == 0 && $hl !== null)
+						@if($rt == "er")
+							ABLE SEAMAN (III/4)
+						@else
+							ABLE SEAMAN (II/4)
+						@endif
+					@elseif($hl == 1)
+						@if($rt == "er")
+							ABLE SEAMAN (III/5)
+						@else
+							ABLE SEAMAN (II/5)
+						@endif
+					@elseif($hl == 2)
+						@if($rt == "er")
+							OIC-EW (III/1)
+						@else
+							OIC-NW (II/1)
+						@endif
+					@elseif($hl == 3)
+						@if($rt == "er")
+							@if(str_starts_with(strtoupper($docu->no), "CCE"))
+								CHIEF ENGINEER (III/2)
+							@else
+								SECOND ENGINEER (III/2)
+							@endif
+						@else
+							@if(str_starts_with(strtoupper($docu->no), "CMM"))
+								MASTER MARINER (II/2)
+							@else
+								CHIEF MATE (II/2)
+							@endif
+						@endif
+				 	{{-- GALLEY --}}
+				 	{{-- CHIEF COOK --}}
+				 	@elseif($hl == 9)
+				 		SHIP'S COOK
+					@elseif($crewRank->id == 24)
+						COOK
+					@elseif($crewRank->id == 27 || $crewRank->id == 28)
+						MESSMAN
+					@else
+						@php
+							$rname = $crewRank->name;
+							if($rname == "ENGINE CADET" || $rname == "ENGINE BOY"){
+								$rname = "WIPER";
+							}
+							elseif($rname == "DECK CADET" || $rname == "DECK BOY"){
+								$rname = "ORDINARY SEAMAN";
+							}
+						@endphp
+					@endif
+				@else
+					-----
+				@endif
+			</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
