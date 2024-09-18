@@ -1159,7 +1159,7 @@
 		</tr>
 
 		@php 
-			$docu = $ec;
+			$docu = $eC;
 		@endphp
 		{{-- ECDISCISM --}}
 		<tr>
