@@ -348,6 +348,8 @@
 		<td colspan="9" style="font-style: italic;">Note: (*) Original Copy was provided to crew as Personal Copy</td>
 	</tr>
 
+	<tr><td colspan="9"></td></tr>
+
 	<tr>
 		<td style="font-weight: bold; height: 15px;">DISPATCHED:</td>
 		<td colspan="3" style="font-weight: bold;">{{ $data->officer }}</td>
