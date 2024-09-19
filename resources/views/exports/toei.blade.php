@@ -1106,7 +1106,7 @@
 					$et = $doc;
 				}
 				elseif(str_contains($doc->type, 'CHARTWORLD')){
-					$eC = $doc;
+					$ec = $doc;
 				}
 			}
 
@@ -1159,7 +1159,7 @@
 		</tr>
 
 		@php 
-			$docu = $eC;
+			$docu = $ec;
 		@endphp
 		{{-- ECDISCISM --}}
 		<tr>
