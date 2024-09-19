@@ -362,6 +362,8 @@
 		<td colspan="3" style="font-weight: bold;">CREW SIGNATURE OVER PRINTED NAME / DATE</td>
 	</tr>
 
+	<tr><td colspan="9"></td></tr>
+
 	<tr>
 		<td style="font-weight: bold; height: 15px;">SCANNED:</td>
 		<td colspan="3" style="font-weight: bold;">{{ $data->documentation }}</td>
@@ -375,6 +377,8 @@
 		<td colspan="2"></td>
 		<td colspan="3" style="font-weight: bold;">CREW MANAGER / DATE</td>
 	</tr>
+
+	<tr><td colspan="9"></td></tr>
 
 	<tr>
 		<td style="font-weight: bold; height: 15px;">SIGN-OFF:</td>

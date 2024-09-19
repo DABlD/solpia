@@ -302,7 +302,7 @@
 		{{ $con("JOINING FINAL BRIEFING") }}
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TYPHOID", "TYPHOID", 'med_cert') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -313,7 +313,7 @@
 		{{ $con("INTERGIS BRIEFING") }}
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TYPHOID", "TYPHOID", 'med_cert') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -325,7 +325,7 @@
 		{{ $con("DLSM BRIEFING") }}
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TYPHOID", "TYPHOID", 'med_cert') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -339,7 +339,7 @@
 		{{ $con("NSM - SMM 07 - 16 Briefing pre Joining", 1,1,1) }}
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TYPHOID", "TYPHOID", 'med_cert') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -348,7 +348,7 @@
 	@else
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TYPHOID", "TYPHOID", 'med_cert') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -377,6 +377,8 @@
 		<td colspan="3" style="font-weight: bold;">CREW SIGNATURE OVER PRINTED NAME / DATE</td>
 	</tr>
 
+	<tr><td colspan="9"></td></tr>
+
 	<tr>
 		<td style="font-weight: bold; height: 15px;">SCANNED:</td>
 		<td colspan="3" style="font-weight: bold;">{{ $data->documentation }}</td>
@@ -390,6 +392,8 @@
 		<td colspan="2"></td>
 		<td colspan="3" style="font-weight: bold;">CREW MANAGER / DATE</td>
 	</tr>
+
+	<tr><td colspan="9"></td></tr>
 
 	<tr>
 		<td style="font-weight: bold; height: 15px;">SIGN-OFF:</td>
