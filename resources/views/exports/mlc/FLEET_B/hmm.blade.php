@@ -180,7 +180,7 @@
 				</tr>
 			@else
 				<tr>
-					<td rowspan="2" style="{{ $center }}">Ship Manager</td>
+					<td rowspan="2" style="{{ $center }} text-decoration: underline;">Ship Manager</td>
 					<td>Company</td>
 					<td colspan="7">{{ $data->crewManager }}</td>
 				</tr>
@@ -254,15 +254,9 @@
 	</tr>
 
 	<tr>
-		@if(!in_array($data->vessel->id, $newFormHMM))
-			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
-				2. Period &#38; Termination of the agreement
-			</td>
-		@else
-			<td colspan="9" style="{{ $bold }}">
-				2. Period &#38; Termination of the agreement
-			</td>
-		@endif
+		<td colspan="9" style="{{ $bold }}">
+			2. Period &#38; Termination of the agreement
+		</td>
 	</tr>
 
 
@@ -293,16 +287,22 @@
 	<tr>
 		<td style="{{ $center }}">Early Termination</td>
 		<td colspan="8" style="height: 90px;">
-			1)	Where the shipowner intends to cancel a Seafarers' employment agreement, he/she shall inform the seafarer of the cancellation of the Seafarer’s employment agreement in writing with a period of advance notice of not less than 30 days.
+			ㅤ1) Where the shipowner intends to cancel a Seafarers' employment agreement, he/she shall inform the seafarer of
 			<br style="mso-data-placement:same-cell;" />
-			2)	The seafarer shall give a notice to shipowner for their early termination in accordance with the flag state regulations as follows.
+			ㅤㅤthe cancellation of the Seafarer’s employment agreement in writing with a period of advance notice of not less
 			<br style="mso-data-placement:same-cell;" />
-			(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
+			ㅤㅤthan 30 days.
+			<br style="mso-data-placement:same-cell;" />
+			ㅤ2) The seafarer shall give a notice to shipowner for their early termination in accordance with the flag state
+			<br style="mso-data-placement:same-cell;" />
+			ㅤㅤregulations as follows.
+			<br style="mso-data-placement:same-cell;" />
+			ㅤㅤ(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
 			<br style="mso-data-placement:same-cell;" />
 			@if(!in_array($data->vessel->id, $newFormHMM))
-				(3) Marshall Islands / Liberia / Malta : Minimum 7 days in advance
+			ㅤㅤ(3) Marshall Islands / Liberia / Malta : Minimum 7 days in advance
 			@else
-				(3) Marshall Islands / Liberia / Malta / Isle of Man  : Minimum 7 days in advance
+			ㅤㅤ(3) Marshall Islands / Liberia / Malta / Isle of Man  : Minimum 7 days in advance
 			@endif
 		</td>
 	</tr>
@@ -358,21 +358,11 @@
 	<tr>
 		<td style="{{ $center }}">Owner’s Guaranteed Overtime Allowance</td>
 		<td colspan="2" style="{{ $center }}">Seniority Allowance</td>
-
-		@if(in_array($data->vessel->id, $newFormHMM))
-			<td colspan="3" style="{{ $center }}">
-				Provident Fund
-				<br style='mso-data-placement:same-cell;' />
-				(Contract Completion Bonus)
-			</td>
-		@else
-			<td colspan="3" style="{{ $center }}">
-				Provident Fund 
-				<br style='mso-data-placement:same-cell;' />
-				(Retirement Payment)
-			</td>
-		@endif
-
+		<td colspan="3" style="{{ $center }}">
+			Provident Fund
+			<br style='mso-data-placement:same-cell;' />
+			(Contract Completion Bonus)
+		</td>
 		<td colspan="2" style="{{ $center }}">Others</td>
 	</tr>
 
@@ -397,7 +387,11 @@
 			<td style="text-decoration: underline; {{ $center }}">Payday</td>
 		@endif
 		<td colspan="8" style="text-align: justify;">
-			All seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid monthly wages not later than 15 days of the succeeding month from the date of commencement of the agreement until the date of arrival at point of hire upon termination of their employment.
+			All seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid
+			<br style='mso-data-placement:same-cell;' />
+			monthly wages not later than 15 days of the succeeding month from the date of commencement of the agreement until
+			<br style='mso-data-placement:same-cell;' />
+			the date of arrival at point of hire upon termination of their employment.
 		</td>
 	</tr>
 
@@ -415,13 +409,13 @@
 	</tr>
 
 	<tr>
-		<td rowspan="3" style="{{ $center }}">The amount of paid leave</td>
+		<td rowspan="3" style="{{ $center }}">
+			The amount of 
+			<br style='mso-data-placement:same-cell;' />
+			paid leave
+		</td>
 
-		@if(in_array($data->vessel->id, $newFormHMM))
-			<td style="{{ $center }}">Amount</td>
-		@else
-			<td style="{{ $center }}">Amount of P/L</td>
-		@endif
+		<td style="{{ $center }}">Amount</td>
 		<td colspan="7" style="{{ $center }}">Method of calculation</td>
 	</tr>
 
@@ -439,11 +433,7 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, $newFormHMM))
-			<td style="{{ $center }} text-decoration: underline;">The number of days</td>
-		@else
-			<td style="{{ $center }}">The number of days</td>
-		@endif
+		<td style="{{ $center }}">The number of days</td>
 		
 		@if(in_array($data->vessel->id, $newFormHMM))
 			<td colspan="8">The number of days of paid leave shall be ( 9 ) days per 1 month of continuous service.</td>
@@ -470,7 +460,9 @@
 
 	<tr>
 		<td colspan="9">
-			The shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity benefit, survivors' benefit, SSS, PhilHealth, and Pag-IBIG to the seafarer.
+			ㅤThe shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity benefit, survivors'
+			<br style='mso-data-placement:same-cell;' />
+			ㅤbenefit, SSS, PhilHealth, and Pag-IBIG to the seafarer.
 		</td>
 	</tr>
 
@@ -488,18 +480,25 @@
 
 	<tr>
 		<td colspan="9">
-			1) The shipowner shall promptly repatriate the seafarer who leaves a ship at the place of which is not the seafarer's country of residence
-			or the place at which the seafarer agreed to enter into the engagement as the shipowner's expenses. However, in case where the
-			shipowner pay the expense of repatriation according to the request of the seafarer, shipowner does not have any responsibility 
-			for the repatriation.
+			ㅤ1) The shipowner shall promptly repatriate the seafarer who leaves a ship at the place of which is not the seafarer's country of residence
 			<br style="mso-data-placement:same-cell;" />
-			2) Despite above 1, in case of the following particulars, the shipowner can recover the cost of repatriation from the seafarer.
+			ㅤㅤor the place at which the seafarer agreed to enter into the engagement as the shipowner's expenses. However, in case where the
+			<br style="mso-data-placement:same-cell;" />
+			ㅤㅤshipowner pay the expense of repatriation according to the request of the seafarer, shipowner does not have any responsibility 
+			<br style="mso-data-placement:same-cell;" />
+			ㅤㅤfor the repatriation.
+			<br style="mso-data-placement:same-cell;" />
+			<br style="mso-data-placement:same-cell;" />
+			ㅤ2) Despite above 1, in case of the following particulars, the shipowner can recover the cost of repatriation from the seafarer.
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤa. When the seafarer leaves a ship without just cause.
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤb. When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws.
 			<br style="mso-data-placement:same-cell;" />
-			3) The amount of money to be spent by the shipowner pursuant to paragraph (1) shall include transportation, accommodation, meals expenses incurred in the repatriation.
+			<br style="mso-data-placement:same-cell;" />
+			ㅤ3) The amount of money to be spent by the shipowner pursuant to paragraph (1) shall include transportation, accommodation, meals
+			<br style="mso-data-placement:same-cell;" />
+			ㅤㅤexpenses incurred in the repatriation.
 		</td>
 	</tr>
 
@@ -517,13 +516,14 @@
 
 	<tr>
 		<td colspan="9">
-			1) Hours of work
+			ㅤ1) Hours of work
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤa. Hours of Ordinary Work : 8 hours in a day and 40 hours in a week.
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤb. Over Time Work : Fixed Over Time(103 hours) and Owner’s Guaranteed Overtime.
 			<br style="mso-data-placement:same-cell;" />
-			2) Hours of rest
+			<br style="mso-data-placement:same-cell;" />
+			ㅤ2) Hours of rest
 			<br style="mso-data-placement:same-cell;" />
 
 			@if(in_array($data->vessel->id, $newFormHMM))
@@ -534,9 +534,13 @@
 			<br style="mso-data-placement:same-cell;" />
 
 			@if(in_array($data->vessel->id, $newFormHMM))
-				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours in length
+				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours
+					<br style="mso-data-placement:same-cell;" />
+					ㅤㅤㅤin length
 			@else
-				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than two periods, one of which shall be at least six hours in length
+				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than two periods, one of which shall be at least six hours
+					<br style="mso-data-placement:same-cell;" />
+				ㅤㅤㅤin length
 			@endif
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤc. The interval between consecutive periods of rest shall not exceed 14 hours.
@@ -545,7 +549,7 @@
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤe. When a seafarer is on call, such as when a machinery space is unattended, the seafarer shall have an adequate compensatory 
 			<br style="mso-data-placement:same-cell;" />
-			rest period if the normal period of rest is disturbed by call-outs to work.
+			ㅤㅤㅤrest period if the normal period of rest is disturbed by call-outs to work.
 		</td>
 	</tr>
 
@@ -556,32 +560,20 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->id, $newFormHMM))
-			<td colspan="9" style="{{ $bold }} text-decoration: underline;">
-				8. Provision and compliance with Risk assessments
-			</td>
-		@else
-			<td colspan="9" style="{{ $bold }}">
-				8. Provision and compliance with Risk assessments
-			</td>
-		@endif
+		<td colspan="9" style="{{ $bold }} text-decoration: underline;">
+			8. Provision and compliance with Risk assessments
+		</td>
 	</tr>
 
 	<tr>
 		@if(in_array($data->vessel->id, $newFormHMM))
 		<td colspan="9" style="text-decoration: underline;">
 		@else
-		<td colspan="9">
+		<td colspan="9" style="text-decoration: underline;">
 		@endif
-			@if(in_array($data->vessel->id, $newFormHMM))
-				1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing at any time
-			@else
-				1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing
-				<br style="mso-data-placement:same-cell;" />
-				at any time
-			@endif
+			ㅤ1) The shipowner shall provide the risk assessment table through the ship's network (EDMS) and make it available for viewing at any time
 			<br style="mso-data-placement:same-cell;" />
-			2) Seafarers shall be aware of the relevant information and check and utilize it frequently
+			ㅤ2) Seafarers shall be aware of the relevant information and check and utilize it frequently
 		</td>
 	</tr>
 
@@ -599,14 +591,23 @@
 
 	<tr>
 		<td colspan="9">
-			Any facts which are not defined in this agreement, these are complied with the law of flag state or applicable collective bargaining agreement.
+			ㅤAny facts which are not defined in this agreement, these are complied with the law of flag state or applicable collective bargaining
 			<br style="mso-data-placement:same-cell;" />
-			※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and
-			entitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships.
+			ㅤagreement.
 			<br style="mso-data-placement:same-cell;" />
-			※	Additional clause for Marshall Islands flag
+			ㅤ※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and
 			<br style="mso-data-placement:same-cell;" />
-			The terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic of the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law and Regulations of the Republic of the Marshall Islands.
+			ㅤentitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed
+			<br style="mso-data-placement:same-cell;" />
+			ㅤrobbery against ships.
+			<br style="mso-data-placement:same-cell;" />
+			ㅤ※	Additional clause for Marshall Islands flag
+			<br style="mso-data-placement:same-cell;" />
+			ㅤThe terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic
+			<br style="mso-data-placement:same-cell;" />
+			ㅤof the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law
+			<br style="mso-data-placement:same-cell;" />
+			ㅤand Regulations of the Republic of the Marshall Islands.
 		</td>
 	</tr>
 
@@ -651,7 +652,7 @@
 		<td></td>
 
 		@if(in_array($data->vessel->id, $newFormHMM))
-			<td colspan="4" style="{{ $center }}">For and on behalf of the Shipowner(Beneficial)</td>
+			<td colspan="4" style="{{ $center }} text-decoration: underline;">For and on behalf of the Shipowner(Beneficial)</td>
 		@else
 			<td colspan="4" style="{{ $center }}">(Shipowner or for and on behalf of the shipowner)</td>
 		@endif
@@ -664,8 +665,9 @@
 
 	<tr>
 		<td rowspan="2" colspan="4">
-			Place where and date when a seafarer’s employment 
-			agreement is entered into.
+			ㅤPlace where and date when a seafarer’s employment
+			<br style='mso-data-placement:same-cell;' />
+			ㅤagreement is entered into.
 		</td>
 		<td colspan="2" style="{{ $center }}">Place</td>
 		<td colspan="3" style="{{ $center }} {{ $color }}">MANILA, PHILIPPINES</td>
