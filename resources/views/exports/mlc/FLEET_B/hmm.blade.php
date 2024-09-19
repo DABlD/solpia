@@ -495,6 +495,7 @@
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤb. When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws.
 			<br style="mso-data-placement:same-cell;" />
+			<br style="mso-data-placement:same-cell;" />
 			ㅤ3) The amount of money to be spent by the shipowner pursuant to paragraph (1) shall include transportation, accommodation, meals
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤexpenses incurred in the repatriation.
@@ -520,6 +521,7 @@
 			ㅤㅤa. Hours of Ordinary Work : 8 hours in a day and 40 hours in a week.
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤb. Over Time Work : Fixed Over Time(103 hours) and Owner’s Guaranteed Overtime.
+			<br style="mso-data-placement:same-cell;" />
 			<br style="mso-data-placement:same-cell;" />
 			ㅤ2) Hours of rest
 			<br style="mso-data-placement:same-cell;" />
