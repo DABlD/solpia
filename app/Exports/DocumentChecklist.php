@@ -370,7 +370,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // HC VC
                 $h[4] = [
-                    'A2', 'B4:B6', 'G4:G6', 'D8:I75', 'A77:I82', 'E4:E6'
+                    'A2', 'B4:B6', 'G4:G6', 'D8:I75', 'A77:I84', 'E4:E6'
                 ];
 
                 // HL
@@ -480,6 +480,19 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                     'B81:D81', 'G81:I81',
                 ]);
 
+                if($this->data->user->fleet == "FLEET D"){
+                    array_push($cells[10], 'B80:D80');
+                    array_push($cells[10], 'G80:I80');
+                    array_push($cells[10], 'B83:D83');
+                    array_push($cells[10], 'G83:I83');
+                }
+                else{
+                    array_push($cells[10], 'B79:D79');
+                    array_push($cells[10], 'G79:I79');
+                    array_push($cells[10], 'B81:D81');
+                    array_push($cells[10], 'G81:I81');
+                }
+
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
                         $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
@@ -492,18 +505,18 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(15);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(10.5);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(26);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(20.5);
 
                 // ROW RESIZE
                 $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(50);
 
-                for($i = 4; $i <= 82; $i++){
+                for($i = 4; $i <= 84; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(11);
                 }
                 
@@ -513,11 +526,11 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 $event->sheet->getDelegate()->getStyle('A4:I8')->getFont()->setSize(7);
                 $event->sheet->getDelegate()->getStyle('A9:D75')->getFont()->setSize(7);
                 $event->sheet->getDelegate()->getStyle('I9:I75')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('A76:I82')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('A76:I84')->getFont()->setSize(7);
                 $event->sheet->getDelegate()->getStyle('A4:I8')->getFont()->setName('Trebuchet MS');
                 $event->sheet->getDelegate()->getStyle('A9:D75')->getFont()->setName('Trebuchet MS');
                 $event->sheet->getDelegate()->getStyle('I9:I75')->getFont()->setName('Trebuchet MS');
-                $event->sheet->getDelegate()->getStyle('A76:I82')->getFont()->setName('Trebuchet MS');
+                $event->sheet->getDelegate()->getStyle('A76:I84')->getFont()->setName('Trebuchet MS');
             },
         ];
     }
