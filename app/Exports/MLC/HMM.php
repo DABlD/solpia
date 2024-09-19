@@ -316,9 +316,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.75);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.75);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
@@ -326,9 +326,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A1:I' . (62 + $mt))->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A4:I' . (62 + $mt))->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('B21')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A' . (43 + $mt))->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A' . (46 + $mt))->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A' . (52 + $mt))->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A' . (43 + $mt))->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A' . (46 + $mt))->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A' . (52 + $mt))->getFont()->setSize(10);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -530,12 +530,12 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(38 + $mt)->setRowHeight(5);
                 // END
 
-                $event->sheet->getDelegate()->getRowDimension(40 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(43 + $mt)->setRowHeight(95);
-                $event->sheet->getDelegate()->getRowDimension(46 + $mt)->setRowHeight(115);
+                $event->sheet->getDelegate()->getRowDimension(40 + $mt)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(43 + $mt)->setRowHeight(135);
+                $event->sheet->getDelegate()->getRowDimension(46 + $mt)->setRowHeight(145);
                 
                 $event->sheet->getDelegate()->getRowDimension(49 + $mt)->setRowHeight(46);
-                $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(80);
+                $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(130);
                 $event->sheet->getDelegate()->getRowDimension(54 + $mt)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(55 + $mt)->setRowHeight(120);
                 $event->sheet->getDelegate()->getRowDimension(56 + $mt)->setRowHeight(17);
@@ -553,6 +553,11 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
                     $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
                     $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
+                    $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
+                    // $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(8);
+                    $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(9);
+                    $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
+                    $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(19);
 
                     $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(16);
                     $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(30);
@@ -561,7 +566,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(10);
                     $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(1);
 
-                    $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(70);
+                    $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(100);
                     $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(23);
                     $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(23);
                     $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(30);
@@ -573,27 +578,41 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(40)->setRowHeight(10);
                     $event->sheet->getDelegate()->getRowDimension(41)->setRowHeight(10);
                 }
+                else{
+                    $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(1);
+                    $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
+                    $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
+                }
 
-                $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (31 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
 
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
                 
                 // RICH TEXTS
+                $cell = "A6";
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+
+                $rt->createText("1. Seafarer/Shipowner/");
+                $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(10);
+                $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(10);
+
+                $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
+
                 if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
-                    $cell = "A6";
-                    $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-
-                    $rt->createText("1. Seafarer/Shipowner/");
-                    $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(10);
-
-                    $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
-
                     $cell = "C27";
                     $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 
-                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("Guaranteed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                    if($this->applicant->rankType == "OFFICER" || str_contains($this->applicant->pro_app->rank->category, 'ENGINE')){
+                        $rt->createTextRun("Fixed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                        $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                    }
+                    else{
+                        $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                        $rt->createTextRun("Guaranteed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                    }
+
+
                     $rt->createText(PHP_EOL);
                     $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
 
