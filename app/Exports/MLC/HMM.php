@@ -613,7 +613,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $cell = "C" . (24 + $mt);
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 
-                if($this->applicant->rankType == "OFFICER" || str_contains($this->applicant->pro_app->rank->category, 'ENGINE')){
+                if($this->applicant->rankType == "OFFICER"){
                     $rt->createTextRun("Fixed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
                     $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
                 }
