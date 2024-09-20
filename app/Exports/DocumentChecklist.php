@@ -479,6 +479,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 if($this->data->user->fleet == "FLEET D"){
                     array_push($cells[10], 'B78:D78');
+                    array_push($cells[10], 'G78:I78');
                     array_push($cells[10], 'B81:D81');
                     array_push($cells[10], 'G81:I81');
                     array_push($cells[10], 'B84:D84');
