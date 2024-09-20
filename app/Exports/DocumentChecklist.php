@@ -544,7 +544,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(50);
-        $drawing->setWidth(850);
+        $drawing->setWidth(790);
         $drawing->setOffsetX(4);
         $drawing->setOffsetY(4);
         $drawing->setCoordinates('A1');
