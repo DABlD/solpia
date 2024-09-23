@@ -236,9 +236,9 @@
 			<br style='mso-data-placement:same-cell;' />
 			shipowner on the request of the cadet. 
 			<br style='mso-data-placement:same-cell;' />
-			2. Despite above 1, where a cadet falls under any of the following cases, a shipowner may claim expenses incurred in
+			2. Despite above 1, where a cadet falls under any of the following cases, a shipowner may claim expenses incurred
 			<br style='mso-data-placement:same-cell;' />
-			the repatriation against cadet
+			in the repatriation against cadet
 			<br style='mso-data-placement:same-cell;' />
 			ㅤ1) Where the cadet has left the vessel at his/her discretion without a justifiable reason;
 			<br style='mso-data-placement:same-cell;' />
