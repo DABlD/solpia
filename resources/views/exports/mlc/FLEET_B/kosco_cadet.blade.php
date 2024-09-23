@@ -148,21 +148,19 @@
 
 	<tr>
 		<td colspan="6">
-			1. Commencement of employment of the individual Seafarer shall be at the time of departure from Manila to the date of expiration of agreement or
+			1. Commencement of training of the individual cadet shall be at the time of departure from the country of residence to the date of expiration of
 			<br style='mso-data-placement:same-cell;' />
-			arrival in Manila, unless terminated for just cause or causes enumerated.
+			agreement or arrival in the country of residence, unless terminated for just cause or causes enumerated.
 			<br style='mso-data-placement:same-cell;' />
-			2. The maximum period of engagement shall be nine months, which may be extended to ten months or reduced to eight months for operational
+			2. The maximum periods of training shall be nine months, which may be extended to ten months or reduced to eight months for operational
 			<br style='mso-data-placement:same-cell;' />
-			convenience. This period of engagement may be reduced following the individual "Cadet's Training Agreement" between themselves and the
+			convenience. This periods of training may be reduced following the individual "Cadet's Training Agreement" between themselves and the company.
 			<br style='mso-data-placement:same-cell;' />
-			company. 
+			3. In the case that the cadet is held captive as a result of acts of piracy and any illegal act of violence, detention, depredation and threat, the shipowner
 			<br style='mso-data-placement:same-cell;' />
-			3. In the case that the cadet is held captive as a result of acts of piracy and any illegal act of violence, detention, depredation and threat, the
+			shall not cancel the cadet's training agreement and shall continue until the cadet are released and returned to the repatriation destination where is
 			<br style='mso-data-placement:same-cell;' />
-			shipowner shall not cancel the cadet's training agreement and shall continue until the cadet are released and returned to the repatriation destination
-			<br style='mso-data-placement:same-cell;' />
-			where is regulated in Clause 1 above no matter what the period of agreement expires.
+			regulated in Clause 1 above no matter what the period of agreement expires.
 		</td>
 	</tr>
 
@@ -190,9 +188,9 @@
 		<td colspan="5">
 			The shipowner shall provide medical care, Employment Injury and Sickness Benefit, Unemployment Benefit,
 			<br style='mso-data-placement:same-cell;' />
-			Death/Disability Compensation, Pension Fund for Families of Deceased Seafarer(Survivor's Benefit) to the seafarer
+			Death/Disability Compensation, Pension Fund for Families of Deceased Seafarer(Survivor's Benefit) to the cadet in
 			<br style='mso-data-placement:same-cell;' />
-			in accordance with Crew's National Law or Collective Bargaining Agreement.
+			accordance with Crew's National Law or Collective Bargaining Agreement.
 		</td>
 	</tr>
 
