@@ -579,7 +579,7 @@ class KOSCOCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(12.5);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(13);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(14);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(9);

@@ -228,29 +228,29 @@
 			Cadet's entitlement to repatriation
 		</td>
 		<td colspan="5">
-			1. Where the seafarer leaves at the port which is not a place of his residence nor a place where he concluded the
+			1. Where the cadet leaves at a port other than the chosen repatriation destination, the shipowner shall repatriate
 			<br style='mso-data-placement:same-cell;' />
-			seafarer's employment agreement, a shipowner shall repatriate him to a place of his residence or a place where he
+			the cadet to the chosen repatriation destination at the shipowner's expense and responsibility without delay.
 			<br style='mso-data-placement:same-cell;' />
-			concluded the seafarer's employment agreements without delay at the expenses and on the responsibility of the
+			However, this shall not apply to the case that the expenses necessary for the repatriation is paid to the cadet by the
 			<br style='mso-data-placement:same-cell;' />
-			shipowner. 
+			shipowner on the request of the cadet. 
 			<br style='mso-data-placement:same-cell;' />
-			2. Despite above 1, where a seafarer falls under any of the following cases, a shipowner may claim expenses
+			2. Despite above 1, where a cadet falls under any of the following cases, a shipowner may claim expenses incurred in
 			<br style='mso-data-placement:same-cell;' />
-			incurred in the repatriation against seafarer
+			the repatriation against cadet
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ1) Where a seafarer leaves a ship at his/her discretion without a justifiable reason;
+			ㅤ1) Where the cadet has left the vessel at his/her discretion without a justifiable reason;
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ2) Where a seafarer leaves a ship after he/she has been disciplined to leave the ship;
+			ㅤ2) Where the cadet has been discharged from the vessel by disciplinary punishment; or
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ3) here a seafarer falls under the reasons prescribed by a collective bargaining agreement
+			ㅤ3) Where a cadet falls under the reasons prescribed by a collective bargaining agreement
 			<br style='mso-data-placement:same-cell;' />
-			3. The maximum period the seafarer can be expected to serve onboard before being entitled to repatriation at
+			3. The maximum period the cadet can be expected to serve onboard before being entitled to repatriation at
 			<br style='mso-data-placement:same-cell;' />
-			shipowner's expense is periods of seafarer's employment agreement and the entitlement to repatriation shall not 
+			shipowner's expense is periods of cadet's training agreement and the entitlement to repatriation shall not lapse in
 			<br style='mso-data-placement:same-cell;' />
-			lapse in the situation that the seafarer is held captive in accordance with a collective bargaining agreement.
+			the situation that the cadet is held captive in accordance with a collective bargaining agreement.
 		</td>
 	</tr>
 
