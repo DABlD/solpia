@@ -57,7 +57,13 @@
 
 	<tr>
 		<td colspan="3">Location of</td>
-		<td colspan="8" rowspan="2" style="{{ $bc }}">SM R&#38;D Center, 78, Magokjungang8-ro, Gangseo-gu, Seoul, Korea</td>
+		<td colspan="8" rowspan="2" style="{{ $bc }}">
+			@if($data->vessel->type == "LNG")
+				30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Republic of Korea
+			@else
+				SM R&#38;D Center, 78, Magokjungang8-ro, Gangseo-gu, Seoul, Korea
+			@endif
+		</td>
 	</tr>
 
 	<tr>
@@ -66,7 +72,13 @@
 
 	<tr>
 		<td colspan="3">Name of the</td>
-		<td colspan="6" rowspan="2" style="{{ $bc }}">MIN TAE YUN</td>
+		<td colspan="6" rowspan="2" style="{{ $bc }}">
+			@if($data->vessel->type == "LNG")
+				HAN SU HAN
+			@else
+				MIN TAE YUN
+			@endif
+		</td>
 		<td rowspan="2">Identification number</td>
 		<td rowspan="2" style="{{ $bc }}">101-81-24624</td>
 	</tr>
