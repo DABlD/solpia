@@ -104,21 +104,21 @@
 
 	<tr>
 		<td>Date of birth</td>
-		<td colspan="2">ㅤ{{ $data->user->birthday ? $data->user->birthday->format('d-M-Y') : "N/A" }}</td>
+		<td colspan="2">ㅤ{{ $data->user->birthday ? $data->user->birthday->format('n/j/Y') : "N/A" }}</td>
 		<td>Birthplace</td>
 		<td>ㅤ{{ $data->birth_place }}</td>
 	</tr>
 
 	<tr>
 		<td>Passport</td>
-		<td colspan="2">ㅤ{{ $pp ? $pp->number . ' / ' . $pp->expiry_date->format('d-M-Y') : " - " }}</td>
+		<td colspan="2">ㅤ{{ $pp ? $pp->number . ' / ' . $pp->expiry_date->format('n/j/Y') : " - " }}</td>
 		<td>Seaman's Bk</td>
-		<td>ㅤ{{ $sb ? $sb->number . ' / ' . $sb->expiry_date->format('d-M-Y') : " - " }}</td>
+		<td>ㅤ{{ $sb ? $sb->number . ' / ' . $sb->expiry_date->format('n/j/Y') : " - " }}</td>
 	</tr>
 
 	<tr>
 		<td>Nationality</td>
-		<td colspan="2">ㅤFILIPINO</td>
+		<td colspan="2">ㅤPHILIPPINE</td>
 		<td>Applicable CBA</td>
 		<td>ㅤ{{ $cba }}</td>
 	</tr>
@@ -141,9 +141,9 @@
 	<tr>
 		<td>Period</td>
 		<td>From</td>
-		<td colspan="2">ㅤ{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
+		<td colspan="2">ㅤ{{ now()->parse($data->effective_date)->format('n/j/Y') }}</td>
 		<td>To</td>
-		<td>ㅤ{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-y') }}</td>
+		<td>ㅤ{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('n/j/Y') }}</td>
 	</tr>
 
 	<tr>
@@ -156,11 +156,11 @@
 			<br style='mso-data-placement:same-cell;' />
 			convenience. This periods of training may be reduced following the individual "Cadet's Training Agreement" between themselves and the company.
 			<br style='mso-data-placement:same-cell;' />
-			3. In the case that the cadet is held captive as a result of acts of piracy and any illegal act of violence, detention, depredation and threat, the shipowner
+			3. In the case that the cadet is held captive as a result of acts of piracy and any illegal act of violence, detention, depredation and threat, the
 			<br style='mso-data-placement:same-cell;' />
-			shall not cancel the cadet's training agreement and shall continue until the cadet are released and returned to the repatriation destination where is
+			shipowner, shall not cancel the cadet's training agreement and shall continue until the cadet are released and returned to the repatriation destination
 			<br style='mso-data-placement:same-cell;' />
-			regulated in Clause 1 above no matter what the period of agreement expires.
+			where is regulated in Clause 1 above no matter what the period of agreement expires.
 		</td>
 	</tr>
 
@@ -196,10 +196,10 @@
 
 	<tr>
 		<td>
-			Hours of Work and Hours of Rest
+			Hours of Training and Hours of Rest
 		</td>
 		<td colspan="5">
-			[Hours of Work]
+			[Hours of Training]
 			<br style='mso-data-placement:same-cell;' />
 			1. The working hours shall be 8 hours per day, Monday to Friday, a total working hours of 40 hours per week.
 			<br style='mso-data-placement:same-cell;' />
@@ -225,7 +225,7 @@
 
 	<tr>
 		<td>
-			Seafarer's entitlement to repatriation
+			Cadet's entitlement to repatriation
 		</td>
 		<td colspan="5">
 			1. Where the seafarer leaves at the port which is not a place of his residence nor a place where he concluded the
@@ -240,11 +240,11 @@
 			<br style='mso-data-placement:same-cell;' />
 			incurred in the repatriation against seafarer
 			<br style='mso-data-placement:same-cell;' />
-			ㅤㅤ1) Where a seafarer leaves a ship at his/her discretion without a justifiable reason;
+			ㅤ1) Where a seafarer leaves a ship at his/her discretion without a justifiable reason;
 			<br style='mso-data-placement:same-cell;' />
-			ㅤㅤ2) Where a seafarer leaves a ship after he/she has been disciplined to leave the ship;
+			ㅤ2) Where a seafarer leaves a ship after he/she has been disciplined to leave the ship;
 			<br style='mso-data-placement:same-cell;' />
-			ㅤㅤ3) here a seafarer falls under the reasons prescribed by a collective bargaining agreement
+			ㅤ3) here a seafarer falls under the reasons prescribed by a collective bargaining agreement
 			<br style='mso-data-placement:same-cell;' />
 			3. The maximum period the seafarer can be expected to serve onboard before being entitled to repatriation at
 			<br style='mso-data-placement:same-cell;' />
