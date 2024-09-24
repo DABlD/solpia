@@ -134,7 +134,7 @@
 	<tr>
 		<td style="{{ $center }} font-size: 8px;">Date of Birth</td>
 		<td colspan="3">
-			{{ $data->user->birthday ? $data->user->birthday->format('d-F-Y') : "N/A" }}
+			{{ $data->user->birthday ? $data->user->birthday->format('d-M-Y') : "N/A" }}
 		</td>
 		<td style="{{ $center }}">Birthplace</td>
 		<td colspan="3" style="{{ $center }}">{{ $data->birth_place }}</td>
@@ -143,11 +143,11 @@
 	<tr>
 		<td style="{{ $center }}">Passport</td>
 		<td colspan="3">
-			{{ $pp ? $pp->number . ' / ' . $pp->expiry_date->format('d-F-Y') : " - " }}
+			{{ $pp ? $pp->number . ' / ' . $pp->expiry_date->format('d-M-Y') : " - " }}
 		</td>
 		<td style="{{ $center }}">Seaman's Bk</td>
 		<td colspan="3" style="{{ $center }} font-size: 8px;">
-			{{ $sb ? $sb->number . ' / ' . $sb->expiry_date->format('d-F-Y') : " - " }}
+			{{ $sb ? $sb->number . ' / ' . $sb->expiry_date->format('d-M-Y') : " - " }}
 		</td>
 	</tr>
 
@@ -196,9 +196,9 @@
 	<tr>
 		<td style="{{ $bc }}">Period</td>
 		<td style="{{ $center }}">From</td>
-		<td colspan="3">{{ now()->parse($data->effective_date)->format('d-F-Y') }}</td>
+		<td colspan="3">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
 		<td style="{{ $center }}">To</td>
-		<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-F-Y') }}</td>
+		<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-y') }}</td>
 	</tr>
 
 	<tr>
