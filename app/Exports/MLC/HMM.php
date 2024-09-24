@@ -13,7 +13,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
 
-        $this->newFormHMM = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517];
+        $this->newFormHMM = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517, 7917];
 
         $array1 = [
             'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO'
