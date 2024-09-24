@@ -192,7 +192,7 @@
 			(Birthdate)
 		</td>
 		<td colspan="4" style="{{ $blue }} {{ $center }}">
-			{{ $data->user->birthday ? now()->parse($data->user->birthday)->format("Y/m/d") : "-"}}
+			{{ $data->user->birthday ? now()->parse($data->user->birthday)->format("d-F-Y") : "-"}}
 		</td>
 	</tr>
 
@@ -263,7 +263,7 @@
 			2.1 체결일자(Date)    :
 		</td>
 		<td colspan="11" style="{{ $blue }}">
-			{{ now()->parse($data->date_processed)->format('Y/m/d') }}
+			{{ now()->parse($data->date_processed)->format('d-F-Y') }}
 		</td>
 	</tr>
 
@@ -316,11 +316,11 @@
 			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎*Duration of Contract
 		</td>
 		<td colspan="2" style="{{ $blue }} {{ $bold }}">
-			{{ now()->parse($data->effective_date)->format('Y/m/d') }}
+			{{ now()->parse($data->effective_date)->format('d-F-Y') }}
 		</td>
 		<td colspan="2" style="{{ $bold }}">TO</td>
 		<td colspan="2" style="{{ $blue }} {{ $bold }}">
-			{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('Y/m/d') }}
+			{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-F-Y') }}
 		</td>
 		<td colspan="5"></td>
 	</tr>
