@@ -46,7 +46,7 @@
 			</td>
 			<td colspan="2" style="{{ $center }}">Date of Birth</td>
 			<td colspan="2" style="{{ $center }} {{ $color }}">
-				{{ $data->user->birthday != "" ? $data->user->birthday->format('d-F-Y') : '' }}
+				{{ $data->user->birthday != "" ? $data->user->birthday->format('d-M-Y') : '' }}
 			</td>
 		@else
 			<td rowspan="2" style="{{ $center }}">Seafarer</td>
@@ -56,7 +56,7 @@
 			</td>
 			<td colspan="2" style="{{ $center }}">Date of Birth</td>
 			<td colspan="2" style="{{ $center }} {{ $color }}">
-				{{ $data->user->birthday != "" ? $data->user->birthday->format('d-F-Y') : '' }}
+				{{ $data->user->birthday != "" ? $data->user->birthday->format('d-M-Y') : '' }}
 			</td>
 		@endif
 	</tr>
@@ -270,23 +270,23 @@
 		<tr>
 			<td rowspan="2" style="{{ $center }}">Period</td>
 			<td colspan="2">Date of commencement</td>
-			<td colspan="6" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-F-Y') }}</td>
+			<td colspan="6" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
 		</tr>
 
 		<tr>
 			<td colspan="2">Date of termination</td>
-			<td colspan="6" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-F-Y') }}</td>
+			<td colspan="6" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
 		</tr>
 	@else
 		<tr>
 			<td rowspan="2" style="{{ $center }}">Period</td>
 			<td>Date of commencement</td>
-			<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-F-Y') }}</td>
+			<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
 		</tr>
 
 		<tr>
 			<td>Date of termination</td>
-			<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-F-Y') }}</td>
+			<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
 		</tr>
 	@endif
 
@@ -665,7 +665,7 @@
 
 	<tr>
 		<td colspan="2" style="{{ $center }}">Date</td>
-		<td colspan="3" style="{{ $center }} {{ $color }}">{{ now()->parse($data->effective_date)->subDays(5)->format('d-F-Y') }}</td>
+		<td colspan="3" style="{{ $center }} {{ $color }}">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>

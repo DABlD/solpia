@@ -57,7 +57,7 @@
 
 	<tr>
 		<td colspan="2">Date of Birth</td>
-		<td>{{ isset($data->user->birthday) ? $data->user->birthday->format('d-F-Y') : "-" }}</td>
+		<td>{{ isset($data->user->birthday) ? $data->user->birthday->format('d-M-Y') : "-" }}</td>
 		<td colspan="2">Place of Birth</td>
 		<td colspan="2">{{ $data->birth_place }}</td>
 	</tr>
@@ -88,9 +88,9 @@
 	<tr>
 		<td colspan="2">Period of cadet ship</td>
 		<td>
-			{{ now()->parse($data['effective_date'])->format('d-F-Y') }}
+			{{ now()->parse($data['effective_date'])->format('d-M-Y') }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ now()->parse($data['effective_date'])->addMonths($data['employment_months'])->format('d-F-Y') }}
+			{{ now()->parse($data['effective_date'])->addMonths($data['employment_months'])->format('d-M-Y') }}
 		</td>
 		<td colspan="2">Duty</td>
 		<td colspan="2">{{ $data->pro_app->rank->abbr }}</td>
@@ -228,6 +228,6 @@
 
 	<tr>
 		<td>Date</td>
-		<td colspan="3">{{ now()->parse($data->effective_date)->subDays(5)->format('d-F-Y') }}</td>
+		<td colspan="3">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
 	</tr>
 </table>
