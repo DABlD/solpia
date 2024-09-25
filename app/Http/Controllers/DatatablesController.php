@@ -83,7 +83,6 @@ class DatatablesController extends Controller
 
 	public function applications(Request $req){
 	// public function applications(Request $req){
-
 		session(['search' => $req->search['value']]);
 		session(['fMin_age' => $req->filters['fMin_age']]);
 		session(['fMax_age' => $req->filters['fMax_age']]);
@@ -105,9 +104,9 @@ class DatatablesController extends Controller
 									}
 
 									//SIR KIT MA'AM ABBY CAN SEE TOEI
-									if(in_array(auth()->user()->id, [5716, 4580, 3616])){
-										$q->orWhere('u.fleet', 'like', "%%");
-									}
+									// if(in_array(auth()->user()->id, [5716, 4580, 3616])){
+									// 	$q->orWhere('u.fleet', 'like', "%%");
+									// }
 
 									// TOEI CAN SEE EVER ORIGIN CREW
 									if(auth()->user()->fleet == "TOEI"){
@@ -216,23 +215,27 @@ class DatatablesController extends Controller
     		$applicant->hidden = $req->search['value'];
     	}
 
+
     	// SORTING DATA
     	$array = [];
 
     	// FILL IN FRONT
     	for($i = $req->start; $i > 0; $i--){
-    		array_push($array, []);
+    		array_push($array, ["hidden" => $req->search['value']]);
     	}
 
     	// MERGE ACTUAL VISIBLE DATA
     	$array = array_merge($array, $applicants->toArray());
+    	// array_push($array, $applicants->last()->toArray());
 
     	// FILL IN END
-    	// for($i = $req->start; $i <= $tc; $i++){
-    	// 	array_push($array, []);
+    	// for($i = $req->start; $i <= $tc - $req->start - 1; $i++){
+    		// array_push($array, []);
+    		// array_push($array, $applicants->last()->toArray());
     	// }
 
-    	// dd($array, $tc);
+    	// dd($req->all());
+    	// dd($array, $tc, $req->start);
     	// dd(DB::getQueryLog(), $tc);
 
 	    return Datatables::of($array)
