@@ -595,11 +595,11 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
                     $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(19);
 
-                    $event->sheet->getDelegate()->getRowDimension(41)->setRowHeight(15);
-                    $event->sheet->getDelegate()->getRowDimension(44)->setRowHeight(15);
-                    $event->sheet->getDelegate()->getRowDimension(47)->setRowHeight(15);
-                    $event->sheet->getDelegate()->getRowDimension(50)->setRowHeight(15);
-                    $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(15);
+                    $event->sheet->getDelegate()->getRowDimension(41)->setRowHeight(5);
+                    $event->sheet->getDelegate()->getRowDimension(44)->setRowHeight(5);
+                    $event->sheet->getDelegate()->getRowDimension(47)->setRowHeight(5);
+                    $event->sheet->getDelegate()->getRowDimension(50)->setRowHeight(5);
+                    $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(5);
                 }
 
                 // CM2
@@ -607,10 +607,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
                 else{
-                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (31 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                    // $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
-
 
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
                 
