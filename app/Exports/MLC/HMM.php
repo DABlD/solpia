@@ -35,6 +35,10 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'M/T UNIVERSAL CHALLENGER', 'M/T ORIENTAL AQUAMARINE', 'M/T UNIVERSAL FRONTIER', 'M/T UNIVERSAL INNOVATOR'
         ];
 
+        $array6 = [
+            'M/V BAMBOO STAR'
+        ];
+
         // minus two;
         $mt = false;
 
@@ -74,6 +78,12 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $applicant->sAddress = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
                 $applicant->shipowner2 = "HMM Ocean Service Co., Ltd.";
                 $applicant->sAddress2 = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
+                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+                $applicant->cAddress = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
+            }
+            elseif(in_array($applicant->vessel->name, $array6)){
+                $applicant->shipowner = "HMM Company Limited";
+                $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
                 $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
                 $applicant->cAddress = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
             }
