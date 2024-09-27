@@ -741,7 +741,11 @@ class ApplicationsController extends Controller
 
         Statistic::where('name', 'export')->increment('count');
 		$pname = $type == "western" ? "NITTA_TOEI" : $type;
-        return Excel::download(new $class($applicant, $type), $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . $pname . '.xlsx');
+
+        // $defaultName = $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . $pname . '.xlsx';
+        $defaultName = $applicant->rank->abbr . ' ' . $applicant->user->lname . ', ' . $applicant->user->fname . ' - BIODATA.xlsx';
+
+        return Excel::download(new $class($applicant, $type), $defaultName);
     }
 
     public function exportLineUpApplication(ProcessedApplicant $applicant, $type){
