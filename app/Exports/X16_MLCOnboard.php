@@ -29,7 +29,7 @@ class X16_MLCOnboard implements WithMultipleSheets
             $applicant->wage = isset($wage[$applicant->pro_app->rank_id]) ? $wage[$applicant->pro_app->rank_id][0] : null;
 
             $rank = $ranks[$applicant->pro_app->rank_id][0];
-            $applicant->position = $rank->name;
+            $applicant->rankType = $rank->type;
             $applicant->abbr = $rank->abbr;
 
             foreach($applicant->document_id as $docu){

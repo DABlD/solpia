@@ -30,6 +30,7 @@ class X25_MLCLinedUp implements WithMultipleSheets
 
             $rank = $ranks[$applicant->pro_app->rank_id][0];
             $applicant->position = $rank->name;
+            $applicant->rankType = $rank->type;
             $applicant->abbr = $rank->abbr;
 
             foreach($applicant->document_id as $docu){
