@@ -1875,7 +1875,7 @@ class ApplicationsController extends Controller
         $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
                             ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
                             ->join('users as u', 'u.id', '=', 'a.user_id')
-                            ->where('joining_date', '>=', '2024-04-01')
+                            ->where('joining_date', '>=', '2024-08-15')
                             ->where('fleet', '=', 'TOEI')
                             ->get();
 
