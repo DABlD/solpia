@@ -274,8 +274,6 @@
         fStatus = "{{ session('fStatus') ?? "%%" }}";
         fFleet = "{{ session('fFleet') ?? "%%" }}";
 
-        $('#table_filter input[type="search"]').val("{{ session('search') }}");
-
         swal({
             title: 'Loading',
             timer: 1500
@@ -433,6 +431,11 @@
             	initializeActions();
             },
             order: [],
+            @if(session('search'))
+                search: {
+                    search: "{{ session('search') }}"
+                }
+            @endif
             // order: [ [0, 'desc'] ],
         });
         
