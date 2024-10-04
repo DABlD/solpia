@@ -1935,7 +1935,13 @@ class ApplicationsController extends Controller
             }
 
             if($bool){
-                echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->disembarkation_date . '<br>';
+                if(str_contains($lup->status, "On Board")){
+                    echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->disembarkation_date . '<br>';
+                }
+                else{
+                    $temp2 = $temp->last();
+                    echo $lup->lname . ', ' . $lup->fname . ';' . $temp2->rank2->abbr . ';' . $temp2->vessel_name . ';' . $temp2->sign_off . '<br>';
+                }
             }
 
         }
