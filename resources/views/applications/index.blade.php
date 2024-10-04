@@ -2304,6 +2304,7 @@
                                     manning_agent: vessel.manning_agent,
                                     principal: "",
                                     sign_on: applicant.lup.joining_date,
+                                    smc: vessel.smc,
                                     remarks: "On Board"
                                 };
 
@@ -2332,6 +2333,7 @@
                         <td>${ss.vessel_type}</td>
                         <td>${ss.gross_tonnage}</td>
                         <td>${ss.engine_type}</td>
+                        <td>${ss.smc}</td>
                         <td>${ss.flag}</td>
                         <td>${ss.trade}</td>
                         <td>${ss.manning_agent}</td>
@@ -2356,6 +2358,7 @@
                                     <th>Type</th>
                                     <th>GRT</th>
                                     <th>Engine</th>
+                                    <th>Year Built</th>
                                     <th>Flag</th>
                                     <th>Trade</th>
                                     <th>Manning</th>
