@@ -349,7 +349,7 @@
 		@php
 			$date_employed = null;
 			foreach($applicant->sea_service as $service){
-				if(strpos(strtoupper($service->manning_agent), 'SOLPIA') !== false && !$date_employed){
+				if(strpos(strtoupper($service->manning_agent), 'SOLPIA') !== false && !$date_employed && $service->sign_on){
 					$date_employed = $service->sign_on->format('M j, Y');
 				}
 			}
