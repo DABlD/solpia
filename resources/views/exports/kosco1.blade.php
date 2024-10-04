@@ -200,7 +200,8 @@
 				$temp2 = $service->engine_type . ' / ' . $service->bhp_kw;
 			@endphp
 			<td>{{ $temp2 != " / " ? $temp2 : '' }}</td>
-			<td>{{ $service->year_built }}</td>
+			{{-- THIS IS YEAR BUILT. UNUSE YUNG SMC KAYA GINAMIT KO NALANG PARA SA YEAR BUILT IFORGOTWHY --}}
+			<td>{{ $service->smc ?? "" }}</td>
 			<td colspan="2">{{ $service->sign_on != "" ? $service->sign_on->format('d.M.y') : "" }}</td>
 			<td colspan="2">{{ $service->sign_off != "" ? $service->sign_off->format('d.M.y') : "" }}</td>
 			<td>
