@@ -266,11 +266,11 @@
 	{{ $doc("EMPTY", "", 'lc') }}
 
 	{{ $section("7. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
-	{{ $con("PRE-DEPARTURE ORIENTATION SEMINAR (PDOS)") }}
-	{{ $con("ANTI-PIRACY") }}
-	{{ $con("MARITIME CYBER RISK AWARENESS (MCRA)") }}
-	{{ $con("ISM CODE") }}
-	{{ $con("GENERAL TRAINING RECORD BOOK") }}
+	{{ $doc("PDOS", "PRE-DEPARTURE ORIENTATION SEMINAR (PDOS)", 'lc', 2) }}
+	{{ $doc("ANTI PIRACY", "ANTI-PIRACY", 'lc', 2) }}
+	{{ $doc("MCRA", "MARITIME CYBER RISK AWARENESS (MCRA)", 'lc', 2) }}
+	{{ $doc("ISM", "ISM CODE", 'lc', 2) }}
+	{{ $doc("GTRB", "GENERAL TRAINING RECORD BOOK", 'lc', 2) }}
 
 	{{ $section("8. TRAVEL DOCUMENTS", 1) }}
 	{{ $con("E-TICKET") }}
