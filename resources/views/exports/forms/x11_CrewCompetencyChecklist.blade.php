@@ -16,7 +16,7 @@
 		return str_replace('&', '&#38;', $text);
 	};
 
-	$doc = function($doc, $display, $type, $requirement, $flag = null) use($checkDate, $data, $cleanText, $bold, $center){
+	$doc = function($doc, $display, $type, $requirement, $qFlag = null) use($checkDate, $data, $cleanText, $bold, $center){
 		$display = $cleanText($display);
 		$docu = null;
 
@@ -119,9 +119,9 @@
 			}
 			else{
 				foreach (get_object_vars($data->document_flag) as $flag) {
-					$country = ucwords(strtolower($data->vessel->flag));
+					// $country = ucwords(strtolower($data->vessel->flag));
 
-					if($flag->country == $country && $flag->type == $doc){
+					if($flag->country == $qFlag && $flag->type == $doc){
 						$docu = $flag;
 					}
 				}
