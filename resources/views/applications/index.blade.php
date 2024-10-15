@@ -536,7 +536,8 @@
                         X18_EvaluationSheet:            'Evaluation Sheet - POSSM',
                         X20_DebriefingForm:             'Debriefing Form',
                         X30_POSSMSeaService:            'Sea Service - POSSM',
-                        X34_DocumentDeficiencyNotice:   'Document Deficiency Notice'
+                        X34_DocumentDeficiencyNotice:   'Document Deficiency Notice',
+                        X35_PostMedicalForm:            'Post Medical Form Request'
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
@@ -676,6 +677,9 @@
                         else if(result.value == "X20_DebriefingForm"){
                             x20(application.data('id'), result.value);
                         }
+                        else if(result.value == "X35_PostMedicalForm"){
+                            x35(application.data('id'), result.value);
+                        }
                         else{
                             window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
                         }
@@ -726,6 +730,33 @@
                             arrival_date: $('[name="arrival_date"]').val(),
                             remarks: $('#remark').val(),
                             status: "On Board"
+                        }
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                    }
+                });
+            }
+
+            function x35(id, type){
+                swal({
+                    title: 'Enter Details',
+                    html: `
+                        <br>
+                        ${input('arrival_date', 'Arrival Date', null, 4, 8)}
+                    `,
+                    onOpen: () => {
+                        $('[name="arrival_date"]').flatpickr({
+                            altInput: true,
+                            altFormat: 'F j, Y',
+                            dateFormat: 'Y-m-d',
+                        })
+                    }
+                }).then(result => {
+                    if(result.value){
+                        let data = {
+                            arrival_date: $('[name="arrival_date"]').val(),
+                            status: "Vacation",
+                            rank: 1
                         }
 
                         window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});

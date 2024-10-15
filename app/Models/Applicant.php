@@ -72,6 +72,10 @@ class Applicant extends Model
         return $this->hasMany('App\Models\LineUpContract');
     }
 
+    public function current_lineup(){
+        return $this->hasOne('App\Models\LineUpContract')->latest();
+    }
+
     public function evaluation(){
         return $this->hasMany('App\Models\Evaluation');
     }
