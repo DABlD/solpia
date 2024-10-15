@@ -2305,7 +2305,8 @@
                                     principal: "",
                                     sign_on: applicant.lup.joining_date,
                                     smc: vessel.smc,
-                                    remarks: "On Board"
+                                    remarks: "On Board",
+                                    file: file
                                 };
 
                                 sss = [["0", temp]].concat(sss);
@@ -2320,11 +2321,63 @@
             }
         }
 
+        function uploadSSfile(id, aid){
+            swal({
+                title: "Upload Sea Service",
+                html: `
+                    <input id="ssFile" class="form-control" type="file">
+                    <br>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: errorColor,
+                cancelButtonText: 'Cancel',
+                preConfirm: () => {
+                    if($('#ssFile').val() == ""){
+                        swal.showValidationError('Please Select File');
+                    }
+                }
+            }).then(result => {
+                if(result.value){
+                    let formData = new FormData();
+
+                    formData.append('id', id);
+                    formData.append('file', $("#ssFile").prop('files')[0]);
+                    formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                    fetch('{{ route('applications.uploadSSfile') }}', {
+                        method: "POST", 
+                        body: formData
+                    });
+
+                    ss("Success");
+                    setTimeout(() => {
+                        reloadTab(null, aid, "ss");
+                    }, 1500);
+                }
+            })
+        }
+
         function forFillTab8(sss){
             let temp = ``;
 
             sss.forEach((ss, i) => {
                 ss = ss[1];
+
+                let actions = "";
+                if(ss.file){
+                    actions += `
+                        <a class="btn btn-success" data-toggle="tooltip" title="View" href="${ss.file}" target="_blank">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    `;
+                }
+
+                actions += `
+                    <a class="btn btn-info" data-toggle="tooltip" title="Upload" onClick="uploadSSfile(${ss.id}, ${ss.applicant_id})">
+                        <span class="fa fa-upload"></span>
+                    </a>
+                `;
+
                 temp += `
                     <tr>
                         <td>${i+1}</td>
@@ -2342,6 +2395,7 @@
                         <td>${ss.sign_off != null ? moment(ss.sign_off).format("MMM DD, YYYY") : "---"}</td>
                         <td>${moment(ss.sign_off).diff(moment(ss.sign_on), 'months')}</td>
                         <td>${ss.remarks}</td>
+                        <td>${actions}</td>
                     </tr>
                 `;
             });
@@ -2367,6 +2421,7 @@
                                     <th>Off</th>
                                     <th>MOB</th>
                                     <th>Remarks</th>
+                                    <th>Files</th>
                                 </tr>
                             </thead>
                             <tbody>
