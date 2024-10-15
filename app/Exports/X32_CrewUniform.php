@@ -247,7 +247,7 @@ class X32_CrewUniform implements FromView, WithEvents, WithDrawings//, ShouldAut
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('Crew Uniform Order Slip', false);
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: SMAC-PUR-01 &C&IEFFECTIVE DATE: 01 SEPT 17 &R&IREV NO: 1.0 Sept 1, 2023');
+                // $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: SMAC-PUR-01 &C&IEFFECTIVE DATE: 01 SEPT 17 &R&IREV NO: 1.0 Sept 1, 2023');
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
@@ -311,7 +311,7 @@ class X32_CrewUniform implements FromView, WithEvents, WithDrawings//, ShouldAut
 
                 // HC VC
                 $h[4] = [
-                    'A2'
+                    'A2', 'A21'
                 ];
 
                 // HL
@@ -324,6 +324,8 @@ class X32_CrewUniform implements FromView, WithEvents, WithDrawings//, ShouldAut
 
                 // VC
                 $h[7] = [
+                    'A' . (19 + $size2) . ':J' . (19 + $size2),
+                    'A' . (38 + ($size2 * 2)) . ':J' . (38 + ($size2 * 2)),
                 ];
 
                 $h['wrap'] = [
@@ -332,7 +334,9 @@ class X32_CrewUniform implements FromView, WithEvents, WithDrawings//, ShouldAut
                 // SHRINK TO FIT
                 $h['stf'] = [
                     'D4', 'D7',
-                    'C' . (10 + $size2) . ':C' . (16 + $size2)
+                    'C' . (10 + $size2) . ':C' . (16 + $size2),
+                    'D23', 'D26',
+                    'C' . (29 + ($size2 * 2)) . ':C' . (35 + ($size2 * 2))
                 ];
 
                 foreach($h as $key => $value) {
@@ -372,7 +376,8 @@ class X32_CrewUniform implements FromView, WithEvents, WithDrawings//, ShouldAut
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A9:J' . (16 + $size2)
+                    'A9:J' . (16 + $size2),
+                    'A28:J' . (35 + ($size2 * 2))
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -428,7 +433,11 @@ class X32_CrewUniform implements FromView, WithEvents, WithDrawings//, ShouldAut
                 $cells[12] = array_merge([
                     'D3:E3', 'D4:E4', 'D5:E5', 'D6:E6', 'D7:E7',
                     'I3', 'I4', 'I7',
-                    'C' . (18 + $size2) . ':D' . (18 + $size2), 'F' . (18 + $size2) . ':H' . (18 + $size2)
+                    'C' . (18 + $size2) . ':D' . (18 + $size2), 'F' . (18 + $size2) . ':H' . (18 + $size2),
+                    'A' . (19 + $size2) . ':J' . (19 + $size2),
+                    'D22:E22', 'D23:E23', 'D24:E24', 'D25:E25', 'D26:E26',
+                    'I22', 'I23', 'I26',
+                    'C' . (37 + ($size2 * 2)) . ':D' . (37 + ($size2 * 2)), 'F' . (37 + ($size2 * 2)) . ':H' . (37 + ($size2 * 2)),
                 ]);
 
                 // LBT
@@ -479,11 +488,22 @@ class X32_CrewUniform implements FromView, WithEvents, WithDrawings//, ShouldAut
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(60);
-        $drawing->setWidth(620);
+        $drawing->setWidth(650);
         $drawing->setOffsetX(3);
         $drawing->setOffsetY(3);
         $drawing->setCoordinates('A1');
 
-        return [$drawing];
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setName('Letter Head');
+        $drawing2->setDescription('Letter Head');
+        $drawing2->setPath(public_path("images/letter_head.jpg"));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(60);
+        $drawing2->setWidth(650);
+        $drawing2->setOffsetX(3);
+        $drawing2->setOffsetY(20);
+        $drawing2->setCoordinates('A20');
+
+        return [$drawing, $drawing2];
     }
 }
