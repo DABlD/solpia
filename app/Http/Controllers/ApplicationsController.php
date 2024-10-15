@@ -1560,6 +1560,23 @@ class ApplicationsController extends Controller
         }
     }
 
+    public function uploadSSfile(Request $req){
+        $ss = SeaService::find($req->id);
+        $aid = $ss->applicant_id;
+
+        $file = $req->file('file');
+        $name = "SSFILE$aid-$ss->id-" . time() . "." . $file->getClientOriginalExtension();
+
+        if (!File::exists("ssFile\\$aid")) {
+            File::makeDirectory("ssFile\\$aid", 0755, true);
+        }
+
+        $file->move(public_path("ssFile\\$aid\\"), $name);
+
+        $ss->file = "ssFile/$aid/" . $name;
+        $ss->save();
+    }
+
     public function goToPrincipal(Applicant $applicant, Request $req){
         $user = User::find($applicant->user_id);
         $user->applicant = $req->principal;
