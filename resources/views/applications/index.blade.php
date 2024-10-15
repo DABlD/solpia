@@ -534,6 +534,7 @@
                         DocumentChecklist:              'Document Checklist (Final)',
                         DocumentChecklistHmm:           'Document Checklist (HMM)',
                         X18_EvaluationSheet:            'Evaluation Sheet - POSSM',
+                        X20_DebriefingForm:             'Debriefing Form',
                         X30_POSSMSeaService:            'Sea Service - POSSM',
                         X34_DocumentDeficiencyNotice:   'Document Deficiency Notice'
                     },
@@ -672,12 +673,65 @@
                         else if(result.value == "X18_EvaluationSheet"){
                             x18_ES(application, result.value);
                         }
+                        else if(result.value == "X20_DebriefingForm"){
+                            x20(application.data('id'), result.value);
+                        }
                         else{
                             window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
                         }
                     }
                 })
 	    	});
+
+            function x20(id, type){
+                swal({
+                    title: 'Enter Details',
+                    width: '500px',
+                    html: `
+                        ${input('joining_date', '', $(`.jdate[data-id="${id}"]`).data('date'), 4, 8, 'hidden')},
+                        ${input('disembarkation_date', 'Date Disembarked', $(`.ddate[data-id="${id}"]`).data('date'), 4, 8)},
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4 class="iLabel">Reason for Signed/Off</h4>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="remark" class="swal2-input">
+                                    <option value="FINISHED CONTRACT">FINISHED CONTRACT</option>
+                                    <option value="DISMISSAL">DISMISSAL</option>
+                                    <option value="OWN WILL">OWN WILL</option>
+                                    <option value="MEDICAL REPAT">MEDICAL REPAT</option>
+                                    <option value="VESSEL SOLD">VESSEL SOLD</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        ${input('arrival_date', 'Arrival Date (optional)', null, 4, 8)},
+                    `,
+                    onOpen: () => {
+                        $('[name="disembarkation_date"], [name="arrival_date"]').flatpickr({
+                            altInput: true,
+                            altFormat: 'F j, Y',
+                            dateFormat: 'Y-m-d',
+                        })
+
+                        $('#remark').select2({tags: true});
+                    }
+                }).then(result => {
+                    if(result.value){
+                        let data = {
+                            joining_date: $('[name="joining_date"]').val(),
+                            disembarkation_date: $('[name="disembarkation_date"]').val(),
+                            arrival_date: $('[name="arrival_date"]').val(),
+                            remarks: $('#remark').val(),
+                            status: "On Board"
+                        }
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                    }
+                });
+            }
 
             function walangLagay(application, result){
                 let data = {};
