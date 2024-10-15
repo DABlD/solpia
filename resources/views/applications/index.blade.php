@@ -221,7 +221,15 @@
             font-size: 9px;
         }
 
+        .tss2{
+            font-size: 14px;
+        }
+
         .modal thead tr, .tss thead tr{
+            background-color: #ffddcc !important;
+        }
+
+        .modal thead tr, .tss2 thead tr{
             background-color: #ffddcc !important;
         }
 
@@ -1528,16 +1536,11 @@
                         swal({
                             width: '90%',
                             animation: false,
+                            position: 'top',
                             html: `
                                 <ul class="nav nav-pills" role="tablist" id="infoTabs">
                                     <li role="presentation" class="active">
                                         <a href=".pinfo" role="tab" data-toggle="pill"><u>P</u>ersonal Info</a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href=".educbg" role="tab" data-toggle="pill"><u>E</u>ducational Background</a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href=".family" role="tab" data-toggle="pill">Famil<u>y</u> Data</a>
                                     </li>
                                     <li role="presentation">
                                         <a href=".ids" role="tab" data-toggle="pill">Document <u>I</u>D</a>
@@ -1565,8 +1568,6 @@
 
                                 <div class="tab-content">
                                   <div role="tabpanel" class="tab-pane fade in pinfo active">a</div>
-                                  <div role="tabpanel" class="tab-pane fade educbg">b</div>
-                                  <div role="tabpanel" class="tab-pane fade family">b</div>
                                   <div role="tabpanel" class="tab-pane fade ids">c</div>
                                   <div role="tabpanel" class="tab-pane fade flags">c</div>
                                   <div role="tabpanel" class="tab-pane fade l_cs">c</div>
@@ -1578,14 +1579,12 @@
                             `,
                             onOpen: () => {
                                 fillTab1(applicant);
-                                fillTab2(applicant);
                                 fillTab3(applicant);
                                 fillTab4(applicant);
                                 fillTab5(applicant);
                                 fillTab6(applicant);
                                 fillTab7(applicant);
                                 fillTab8(applicant);
-                                fillTab9(applicant); //FAMILY SUPPOSED TO BE 3
                                 fillTab10(applicant);
                             }
                         }).then(() => {
@@ -1602,9 +1601,6 @@
 
                     if(key == "P" || key == "p"){
                         $('[href=".pinfo"]').click();
-                    }
-                    else if(key == "E" || key == "e"){
-                        $('[href=".educbg"]').click();
                     }
                     else if(key == "I" || key == "i"){
                         $('[href=".ids"]').click();
@@ -1624,9 +1620,6 @@
                     else if(key == "S" || key == "s"){
                         $('[href=".ss"]').click();
                     }
-                    else if(key == "Y" || key == "y"){
-                        $('[href=".family"]').click();
-                    }
                     else if(key == "V" || key == "v"){
                         $('[href=".eval"]').click();
                     }
@@ -1637,17 +1630,54 @@
 
         // CREW INFO
         function fillTab1(applicant){
+            let ebs = Object.entries(applicant.educational_background);
+            let ebString = ``;
+
+            ebs.forEach(eb => {
+                eb = eb[1];
+                ebString += `
+                    <tr>
+                        <td>${eb.type}</td>
+                        <td>${eb.course}</td>
+                        <td>${eb.year}</td>
+                        <td>${eb.school}</td>
+                        <td>${eb.address}</td>
+                    </tr>
+                `;
+            });
+
+            let fds = Object.entries(applicant.family_data);
+            let fdString = ``;
+
+            fds.forEach(fd => {
+                fd = fd[1];
+                fdString += `
+                    <tr>
+                        <td>${fd.type}</td>
+                        <td>${fd.fname} ${fd.lname}</td>
+                        <td>${fd.birthday ? moment(fd.birthday).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${fd.birthday ? moment().diff(fd.birthday, 'years') : "-"}</td>
+                        <td>${fd.occupation}</td>
+                        <td>${fd.email}</td>
+                        <td>${fd.address}</td>
+                    </tr>
+                `;
+            });
+
             let string = `
                 <div class="box box-success" style="font-size: 15px;">
                     <div class="box-body">
 
                         <div class="row">
-                        <br>
-                            <div class="col-md-2">
-                                <img src="${applicant.user.avatar}" width="200px;" height="200px;">
-                            </div>
                             <br>
+                            <div class="col-md-2" style="text-align: center;">
+                                <img src="${applicant.user.avatar}" width="200px;" height="200px;">
+                                <br>
+                                Date Uploaded: ${moment().subtract(6, 'days').format('MMM DD, YYYY')}
+                            </div>
                         </div>
+
+                        <br>
 
                         <div class="row">
                             <div class="col-md-2">
@@ -1858,65 +1888,62 @@
                             </div>
                         </div>
 
+                        <hr>
+                        <h2 style="text-align: left; font-weight: bold;">
+                            Educational Background
+                        </h2>
 
+                        <div class="row">
+                            <div class='col-md-12'>
+                                <table class="table table-bordered tss2 table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Course</th>
+                                            <th>Year</th>
+                                            <th>School</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        ${ebString != "" ? ebString : "<tr><td colspan='5'>No Recorded Educational Background</td></tr>"}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h2 style="text-align: left; font-weight: bold;">
+                            Family Data
+                        </h2>
+
+                        <div class="row">
+                            <div class='col-md-12'>
+                                <table class="table table-bordered tss2 table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Relation</th>
+                                            <th>Name</th>
+                                            <th>Birthday</th>
+                                            <th>Age</th>
+                                            <th>Occupation</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        ${fdString != "" ? fdString : "<tr><td colspan='7'>No Recorded Family Data</td></tr>"}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
 
             $('.pinfo').html(string);
-        }
-
-        function fillTab2(applicant){
-            let ebs = Object.entries(applicant.educational_background);
-            let temp = ``;
-
-            ebs.forEach(eb => {
-                eb = eb[1];
-                temp += `
-                    <h3 style="text-align: left;"><b>${eb.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="course">Course</label>
-                                <input type="text" class="form-control" id="course" value="${eb.course ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="year">Year</label>
-                                <input type="text" class="form-control" id="year" value="${eb.year ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="school">School</label>
-                                <input type="text" class="form-control" id="school" value="${eb.school ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" id="address" value="${eb.address ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            })
-
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Educational Background</b></h2>'}
-                    </div>
-                </div>
-            `;
-
-            $('.educbg').html(string);
         }
 
         function fillTab3(applicant){
@@ -2518,74 +2545,6 @@
             `;
 
             $('.ss').html(string);
-        }
-
-        function fillTab9(applicant){
-            let fds = Object.entries(applicant.family_data);
-            let temp = ``;
-
-            fds.forEach(fd => {
-                fd = fd[1];
-                temp += `
-                    <h3 style="text-align: left;"><b>${fd.type}</b></h3>
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" value="${fd.fname ?? "-"} ${fd.lname ?? "-"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="birthday">birthday</label>
-                                <input type="text" class="form-control" id="birthday" value="${fd.birthday ? moment(fd.birthday).format('MMM DD, YYYY') : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="year">Age</label>
-                                <input type="text" class="form-control" id="age" value="${fd.birthday ? moment().diff(fd.birthday, 'years') : fd.age ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="occupation">Occupation</label>
-                                <input type="text" class="form-control" id="occupation" value="${fd.occupation ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="email">Contact</label>
-                                <input type="text" class="form-control" id="email" value="${fd.email ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="school">Address</label>
-                                <input type="text" class="form-control" id="address" value="${fd.address ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            })
-
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Family Data</b></h2>'}
-                    </div>
-                </div>
-            `;
-
-            $('.family').html(string);
         }
 
         function fillTab10(applicant){
