@@ -225,6 +225,10 @@
             font-size: 14px;
         }
 
+        .tss2 td{
+            vertical-align: middle !important;
+        }
+
         .modal thead tr, .tss thead tr{
             background-color: #ffddcc !important;
         }
@@ -1543,13 +1547,13 @@
                                         <a href=".pinfo" role="tab" data-toggle="pill"><u>P</u>ersonal Info</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".ids" role="tab" data-toggle="pill">Document <u>I</u>D</a>
+                                        <a href=".ids" role="tab" data-toggle="pill"><u>T</u>ravel Documents</a>
                                     </li>
                                     <li role="presentation">
                                         <a href=".flags" role="tab" data-toggle="pill"><u>F</u>lag Documents</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href=".l_cs" role="tab" data-toggle="pill"><u>D</u>ocuments</a>
+                                        <a href=".l_cs" role="tab" data-toggle="pill"><u>N</u>ational Documents</a>
                                     </li>
                                     <li role="presentation">
                                         <a href=".med_certs" role="tab" data-toggle="pill"><u>M</u>edical Certificates</a>
@@ -1602,13 +1606,13 @@
                     if(key == "P" || key == "p"){
                         $('[href=".pinfo"]').click();
                     }
-                    else if(key == "I" || key == "i"){
+                    else if(key == "T" || key == "t"){
                         $('[href=".ids"]').click();
                     }
                     else if(key == "F" || key == "f"){
                         $('[href=".flags"]').click();
                     }
-                    else if(key == "D" || key == "d"){
+                    else if(key == "N" || key == "n"){
                         $('[href=".l_cs"]').click();
                     }
                     else if(key == "M" || key == "m"){
@@ -1964,72 +1968,57 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
+                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
+                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, 'ids')">
+                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, 'ids')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
+                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${id.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issuer">Issuer</label>
-                                <input type="text" class="form-control" id="issuer" value="${id.issuer ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="number">Number</label>
-                                <input type="text" class="form-control" id="number" value="${id.number ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control" id="issue_date" value="${id.issue_date != null ? moment(id.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${id.expiry_date != null ? moment(id.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${id.type}</td>
+                        <td>${id.issuer ?? "-"}</td>
+                        <td>${id.number ?? "-"}</td>
+                        <td>${id.issue_date != null ? moment(id.issue_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${id.expiry_date != null ? moment(id.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Flag Documents</b></h2>'}
+            $('.ids').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Issuer</th>
+                                    <th>No</th>
+                                    <th>Issue Date</th>
+                                    <th>Expiry Date</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded Travel Documents</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.ids').html(string);
+            `);
         }
 
         function fillTab4(applicant){
@@ -2050,72 +2039,57 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
+                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
+                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.ifile}', 'flags')">
+                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.ifile}', 'flags')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
+                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${flag.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="country">Country</label>
-                                <input type="text" class="form-control" id="country" value="${flag.country ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="number">Number</label>
-                                <input type="text" class="form-control" id="number" value="${flag.number ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control" id="issue_date" value="${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${flag.expiry_date != null ? moment(flag.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${flag.type}</td>
+                        <td>${flag.country ?? "-"}</td>
+                        <td>${flag.number ?? "-"}</td>
+                        <td>${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${flag.expiry_date != null ? moment(flag.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Flag Documents</b></h2>'}
+            $('.flags').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Country</th>
+                                    <th>No</th>
+                                    <th>Issue Date</th>
+                                    <th>Expiry Date</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded Flag Documents</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.flags').html(string);
+            `);
         }
 
         function fillTab5(applicant){
@@ -2136,79 +2110,59 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
+                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
+                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, 'l_cs')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${lc.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="issuer">Issuer</label>
-                                <input type="text" class="form-control" id="issuer" value="${lc.issuer ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="no">Number</label>
-                                <input type="text" class="form-control" id="no" value="${lc.no ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control" id="issue_date" value="${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${lc.expiry_date != null ? moment(lc.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="regulation">Regulation</label>
-                                <input type="text" class="form-control" id="regulation" value="${lc.regulation != "[]" ? JSON.parse(lc.regulation) : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${lc.type}</td>
+                        <td>${lc.issuer ?? "-"}</td>
+                        <td>${lc.no ?? "-"}</td>
+                        <td>${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${lc.expiry_date != null ? moment(lc.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${lc.regulation != "[]" ? JSON.parse(lc.regulation) : "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Licenses</b></h2>'}
+            $('.l_cs').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Issuer</th>
+                                    <th>No</th>
+                                    <th>Issue Date</th>
+                                    <th>Expiry Date</th>
+                                    <th>Regulation</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded National Documents</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.l_cs').html(string);
+            `);
         }
 
         function fillTab6(applicant){
@@ -2229,72 +2183,57 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
+                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
+                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, 'med_certs')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${mc.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="number">Number</label>
-                                <input type="text" class="form-control" id="number" value="${mc.number ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="clinic">Clinic/Hospital</label>
-                                <input type="text" class="form-control" id="clinic" value="${mc.clinic ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control" id="issue_date" value="${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${mc.expiry_date != null ? moment(mc.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${mc.type}</td>
+                        <td>${mc.number ?? "-"}</td>
+                        <td>${mc.clinic ?? "-"}</td>
+                        <td>${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${mc.expiry_date != null ? moment(mc.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Medical Certificate</b></h2>'}
+            $('.med_certs').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Number</th>
+                                    <th>Clinic/Hospital</th>
+                                    <th>Issue Date</th>
+                                    <th>Expiry Date</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded Medical Certificates</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.med_certs').html(string);
+            `);
         }
 
         function fillTab7(applicant){
@@ -2315,65 +2254,55 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
+                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
+                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, 'meds')">
+                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, 'meds')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
+                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${mh.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="with_mv">With Medication/Vaccine</label>
-                                <input type="text" class="form-control" id="with_mv" value="${mh.with_mv == "Yes" ? mh.with_mv : '---'}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="year">Year</label>
-                                <input type="text" class="form-control" id="year" value="${mh.year ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="case_remarks">Remarks</label>
-                                <input type="text" class="form-control" id="case_remarks" value="${mh.case_remarks ?? "---"}" readonly>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${mh.type}</td>
+                        <td>${mh.with_mv == "Yes" ? mh.with_mv : '-'}</td>
+                        <td>${mh.year ?? "-"}</td>
+                        <td>${mh.case_remarks ?? "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : "<h2><b>NO RECORDED HISTORY</b></h2>"}
+            $('.meds').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>With Medication?</th>
+                                    <th>Year</th>
+                                    <th>Remarks</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded Medical History</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.meds').html(string);
+            `);
         }
 
         function fillTab8(applicant){
