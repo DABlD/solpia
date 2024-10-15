@@ -75,7 +75,7 @@ class HmmOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => '26b36c'
+                        'rgb' => 'D9D9D9'
                     ]
                 ],
             ],
@@ -311,7 +311,8 @@ class HmmOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 }
 
                 // FOR THE CHECK
-                // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('A1:H40')->getFont()->setName('Arial Narrow');
+                $event->sheet->getDelegate()->getStyle('A1:H40')->getFont()->setSize(9);
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(7);
@@ -323,8 +324,10 @@ class HmmOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(18);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(27);
 
-                $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(18);
-                $event->sheet->getDelegate()->getRowDimension(5 + ($osSize * 2))->setRowHeight(18);
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(22);
+                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(35);
+                $event->sheet->getDelegate()->getRowDimension(5 + ($osSize * 2))->setRowHeight(22);
+                $event->sheet->getDelegate()->getRowDimension(7 + ($osSize * 2))->setRowHeight(35);
             },
         ];
     }

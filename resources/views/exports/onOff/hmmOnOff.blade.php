@@ -32,7 +32,7 @@
 			<td>{{ $onSigner->{'PASSPORTn'} ? strtoupper($onSigner->{'PASSPORTn'}) : '-----' }}</td>
 			<td>{{ $onSigner->{"SEAMAN'S BOOKn"} ? strtoupper($onSigner->{"SEAMAN'S BOOKn"}) : '-----' }}</td>
 			<td>{{ $onSigner->{'US-VISAn'} ?? '-----' }}</td>
-			<td rowspan="2">{{ $onSigner->lastShip }}</td>
+			<td style="color: blue;" rowspan="2">{{ $onSigner->lastShip }}</td>
 		</tr>
 
 		<tr>
@@ -81,7 +81,7 @@
 			<td>{{ $offSigner->{'PASSPORTn'} ? strtoupper($offSigner->{'PASSPORTn'}) : '-----' }}</td>
 			<td>{{ $offSigner->{"SEAMAN'S BOOKn"} ? strtoupper($offSigner->{"SEAMAN'S BOOKn"}) : '-----' }}</td>
 			<td>{{ $offSigner->{'US-VISAn'} ?? '-----' }}</td>
-			<td rowspan="2"></td>
+			<td style="color: blue;" rowspan="2"></td>
 		</tr>
 
 		<tr>
