@@ -4238,6 +4238,7 @@
                 title: 'Select Document',
                 input: 'select',
                 inputOptions: {
+                    'XBD'               : "Biodata",
                     'contract_amendment': "Contract Amendment",
                     'MLCContract':          'MLC Contract',
                     'X20_DebriefingForm':  'Debriefing Form',
@@ -4275,6 +4276,10 @@
                     }
                 }
             })
+        }
+
+        function XBD(id, ehh){
+            window.location.href = 'applications/export/' + id;
         }
 
         function contractAmendment(id){
