@@ -2374,7 +2374,7 @@
                                     sign_on: applicant.lup.joining_date,
                                     smc: vessel.smc,
                                     remarks: "On Board",
-                                    file: file
+                                    file: null
                                 };
 
                                 sss = [["0", temp]].concat(sss);
@@ -2440,11 +2440,14 @@
                     `;
                 }
 
-                actions += `
-                    <a class="btn btn-info" data-toggle="tooltip" title="Upload" onClick="uploadSSfile(${ss.id}, ${ss.applicant_id})">
-                        <span class="fa fa-upload"></span>
-                    </a>
-                `;
+                if(ss.remarks != "On Board"){
+                    actions += `
+                        <a class="btn btn-info" data-toggle="tooltip" title="Upload" onClick="uploadSSfile(${ss.id}, ${ss.applicant_id})">
+                            <span class="fa fa-upload"></span>
+                        </a>
+                    `;
+                }
+
 
                 temp += `
                     <tr>
