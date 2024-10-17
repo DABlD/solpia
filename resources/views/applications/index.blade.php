@@ -2166,8 +2166,35 @@
         }
 
         function fillTab6(applicant){
-            let mcs = Object.entries(applicant.document_med_cert);
+            let medCerts = applicant.document_med_cert.sort(function(a,b){
+              return new Date(b.created_at) - new Date(a.created_at);
+            });
+
+            let tempMcs = Object.entries(applicant.document_med_cert);
             let temp = ``;
+
+            let mcs = [];
+            let order = ["MEDICAL CERTIFICATE", "FLAG MEDICAL", "DRUG AND ALCOHOL TEST", "YELLOW FEVER", "POLIO VACCINE (IPV)", "POLIO", "COVID"];
+
+            order.forEach(type => {
+                let bool = false;
+                tempMcs.forEach((mc, index) => {
+                    if(mc[1].type == type){
+                        mcs.push(mc);
+                        tempMcs.splice(index, 1);
+                        bool = true;
+                    }
+                    else if(mc[1].type == "COVID"){
+                        if(mc[1].type.contains("COVID")){
+                            mcs.push(mc);
+                            tempMcs.splice(index, 1);
+                            bool = true;
+                        }
+                    }
+                });
+            });
+
+            mcs = mcs.concat(tempMcs);
 
             mcs.forEach(mc => {
                 mc = mc[1];
@@ -2347,7 +2374,7 @@
                                     sign_on: applicant.lup.joining_date,
                                     smc: vessel.smc,
                                     remarks: "On Board",
-                                    file: file
+                                    file: null
                                 };
 
                                 sss = [["0", temp]].concat(sss);
@@ -2413,11 +2440,14 @@
                     `;
                 }
 
-                actions += `
-                    <a class="btn btn-info" data-toggle="tooltip" title="Upload" onClick="uploadSSfile(${ss.id}, ${ss.applicant_id})">
-                        <span class="fa fa-upload"></span>
-                    </a>
-                `;
+                if(ss.remarks != "On Board"){
+                    actions += `
+                        <a class="btn btn-info" data-toggle="tooltip" title="Upload" onClick="uploadSSfile(${ss.id}, ${ss.applicant_id})">
+                            <span class="fa fa-upload"></span>
+                        </a>
+                    `;
+                }
+
 
                 temp += `
                     <tr>
