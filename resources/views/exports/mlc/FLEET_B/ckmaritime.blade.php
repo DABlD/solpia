@@ -473,7 +473,7 @@
 	{{-- SALARY 8 --}}
 	<tr>
 		<td></td>
-		<td colspan="7">8.) 유급 휴가비 : Leave pay (7 day/month)</td>
+		<td colspan="7">8.) 유급 휴가비 : Leave pay (9 day/month)</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
 			{{ $data->wage->leave_pay ? ($data->wage->leave_pay) : 0 }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
 		</td>
