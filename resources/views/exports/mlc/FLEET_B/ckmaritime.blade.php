@@ -576,13 +576,13 @@
 
 	<tr>
 		<td colspan="14">
-			5.1 4.1의 규정에 의한 유급휴가일수는 계속하여 승무한 기간 1월에 대하여 7일로 한다.
+			5.1 4.1의 규정에 의한 유급휴가일수는 계속하여 승무한 기간 1월에 대하여 9일로 한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(The number of days of paid leave pursuant to 4.1 shall be 7 days per 1 month of continuous service on board)
+			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(The number of days of paid leave pursuant to 4.1 shall be 9 days per 1 month of continuous service on board)
 		</td>
 	</tr>
 
@@ -594,13 +594,13 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎- 유급휴가비 = (통상임금 / 30) X 7 days
+			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎- 유급휴가비 = (통상임금 / 30) X 9 days
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎- Paid leave = (Monthly Ordinary Wage / 30) X 7 days
+			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎- Paid leave = (Monthly Ordinary Wage / 30) X 9 days
 		</td>
 	</tr>
 
