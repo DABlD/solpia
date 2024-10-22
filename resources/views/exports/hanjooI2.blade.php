@@ -1,314 +1,160 @@
+@php
+	$row = function ($title, $numRows, $rows){
+		$string = "";
+
+		foreach($rows as $key => $item){
+			$string .= "<tr>";
+
+			if($key == 0){
+				$string .= "<td rowspan='$numRows'>$title</td>";
+			}
+
+			$string .= "
+				<td colspan='4'>$item[0]</td>
+				<td>$item[1]</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			";
+
+			$string .= "</tr>";
+		}
+
+		echo $string;
+	}
+@endphp
+
 <table>
-	<tr></tr>
-
 	<tr>
-		<td rowspan="2" colspan="5"></td>
-		<td></td>
-		<td rowspan="2" colspan="9">
-			FORM SP08-05(1/1) / 1 / 20.08.18
-		</td>
+		<td colspan="9" style="text-align: right; height: 30px;">FORM SP08-05(1/1)/2/24.10.01</td>
 	</tr>
 
-	<tr></tr>
-	<tr></tr>
-
 	<tr>
-		<td colspan="15" style="font-weight: bold;">
-			Interview Check List for Seafarer
-		</td>
+		<td colspan="9" style="font-size: 16px;">Interview Check List for Seafarer</td>
 	</tr>
 
-	<tr></tr>
-
 	<tr>
-		<td colspan="2">Vessel / Rank</td>
-		<td colspan="3">
-			{{ isset($applicant->vessel) ? $applicant->vessel->name : '-----' }} / {{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}
-		</td>
-		<td colspan="2">Date of Interview</td>
-		<td colspan="8">{{ $applicant->created_at->format('d-M-y') }}</td>
+		<td colspan="2">Vessel Name</td>
+		<td colspan="2">{{ isset($data->vessel) ? $data->vessel->name : "-" }}</td>
+		<td colspan="2">Rank</td>
+		<td colspan="2">{{ isset($data->rank) ? $data->rank->abbr : '-' }}</td>
+		<td>Date of Interview</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">Name</td>
-		<td colspan="3">
-			{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname[0] }}
-		</td>
+		<td colspan="2">{{ $data->user->namefull }}</td>
 		<td colspan="2">Date of Birth</td>
-		<td colspan="8">{{ $applicant->user->birthday->format('d M Y') }}</td>
+		<td colspan="2">{{ isset($data->user->birthday) ? $data->user->birthday->format('M j, Y') : "-" }}</td>
+		<td></td>
 	</tr>
 
 	<tr>
-		<td colspan="2">Address</td>
-		<td colspan="5">
-			{{ $applicant->provincial_address ?? $applicant->user->address}}
-		</td>
-		<td colspan="4">M.P.</td>
-		<td colspan="4">
-			{{ $applicant->user->contact }}
-		</td>
-	</tr>
-	
-	{{-- 1st ROW --}}
-	<tr>
-		<td colspan="13" style="font-weight: bold;">Evaluation Item</td>
-		<td colspan="2" style="font-weight: bold;">Score</td>
+		<td colspan="9"></td>
 	</tr>
 
 	<tr>
-		<td rowspan="5">Document(40)</td>
-		<td colspan="3">Evaluation Item</td>
-		<td colspan="9">Score Standard</td>
+		<td colspan="5" rowspan="2">Evaluation Item</td>
+		<td rowspan="2">Score</td>
+		<td colspan="2">Score</td>
+		<td rowspan="2">Remark</td>
+	</tr>
+
+	<tr>
 		<td>1st</td>
 		<td>2nd</td>
 	</tr>
 
+	{{-- TITLE, # OF ROWS, ITEMS --}}
+	{{ $row("Document (40)", 5, [
+			["Onboard Career", 30], 
+			["Own will disembarkation", 5],
+			["Number of change company",5],
+			["Non-board period",5],
+			["Age",5],
+		]) }}
+
+	{{ $row("Interview (60)", 8, [
+			["Knowledge",5],
+			["Judgement",5],
+			["Foreign language expression / Expressiveness",5],
+			["Responsibility / Diligence",5],
+			["Cooperation",5],
+			["Initiative",5],
+			["Qualification to perform task <br style='mso-data-placement:same-cell;' /> (Appearance or medical test result)",10],
+			["Family relationship, personal history",10]
+		]) }}
+
 	<tr>
-		<td colspan="3">Onboard Career</td>
-		<td colspan="9">Refer the Onboard Career Table (Max score is 35)</td>
-		<td></td>
-		<td></td>
+		<td colspan="5">Total Score</td>
+		<td>100</td>	
+		<td>=SUM(G8:G20)</td>	
+		<td>=SUM(H8:H20)</td>	
+		<td></td>	
 	</tr>
 
 	<tr>
-		<td colspan="3">Own will disembarkation</td>
-		<td colspan="9">-3 point per one time (If no Score is 0)</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">(For Officer) ISM CODE applied ship career</td>
-		<td colspan="9">Addtional 2 point per year (Max Score is 5)</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">(For ratings) Qualification for ship (exclusion of mandatory)</td>
-		<td colspan="9">Addtional 2 point per year (Max Score is 5)</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-
-
-
-
-	{{-- 2ND ROW --}}
-	<tr>
-		<td rowspan="11">Interview(60)</td>
-		<td colspan="5">Evaluation Item</td>
-		<td colspan="7">Score</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td rowspan="4" colspan="2">
-			Ability
-			<br style='mso-data-placement:same-cell;' />
-			(20)
-		</td>
-		<td colspan="3">Knowledge</td>
-		<td>5</td>
-		<td colspan="2">4</td>
-		<td>3</td>
-		<td colspan="2">2</td>
-		<td>1</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">Judgement</td>
-		<td>5</td>
-		<td colspan="2">4</td>
-		<td>3</td>
-		<td colspan="2">2</td>
-		<td>1</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">Foreign language expression</td>
-		<td>5</td>
-		<td colspan="2">4</td>
-		<td>3</td>
-		<td colspan="2">2</td>
-		<td>1</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">Expressiveness</td>
-		<td>5</td>
-		<td colspan="2">4</td>
-		<td>3</td>
-		<td colspan="2">2</td>
-		<td>1</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td rowspan="4" colspan="2">
-			Attitude 
-			<br style='mso-data-placement:same-cell;' />
-			(20)
-		</td>
-		<td colspan="3">Responsibility</td>
-		<td>5</td>
-		<td colspan="2">4</td>
-		<td>3</td>
-		<td colspan="2">2</td>
-		<td>1</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">Diligence</td>
-		<td>5</td>
-		<td colspan="2">4</td>
-		<td>3</td>
-		<td colspan="2">2</td>
-		<td>1</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">Cooperation</td>
-		<td>5</td>
-		<td colspan="2">4</td>
-		<td>3</td>
-		<td colspan="2">2</td>
-		<td>1</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="3">Initiative</td>
-		<td>5</td>
-		<td colspan="2">4</td>
-		<td>3</td>
-		<td colspan="2">2</td>
-		<td>1</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="2">
-			Health
-			<br style='mso-data-placement:same-cell;' />
-			(10)
-		</td>
-		<td colspan="3">Qualification to perform task (Appearance or medical test result)</td>
-		<td>10</td>
-		<td colspan="2">8</td>
-		<td>6</td>
-		<td colspan="2">4</td>
-		<td>2</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td colspan="2">
-			Background
-			<br style='mso-data-placement:same-cell;' />
-			(10)
-		</td>
-		<td colspan="3">Family relationship, marriage, personal history</td>
-		<td>10</td>
-		<td colspan="2">8</td>
-		<td>6</td>
-		<td colspan="2">4</td>
-		<td>2</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	{{-- END --}}
-	<tr>
-		<td colspan="6"></td>
-		<td colspan="7">Total Score</td>
-		<td></td>
-		<td></td>
+		<td colspan="9">※ Refer to the evaluation criteria and reflect them in the first and second evaluation scores.</td>
 	</tr>
 
 	<tr>
 		<td colspan="3">Smoking</td>
-		{{-- <td colspan="2">Y / &#9411;</td> --}}
 		<td colspan="2"></td>
-		<td colspan="7">Alcohol</td>
-		<td colspan="3"></td>
-		{{-- <td colspan="3">Y / &#9411;</td> --}}
-	</tr>
-
-	<tr>
-		<td colspan="3">Hobby</td>
-		<td colspan="2"></td>
-		<td colspan="7">Religion</td>
-		<td colspan="3">
-			{{ $applicant->religion }}
-		</td>
+		<td colspan="3">Alcohol</td>
+		<td></td>
 	</tr>
 
 	<tr>
 		<td colspan="3">Document Preparation</td>
 		<td colspan="2"></td>
-		<td colspan="7">USA Visa</td>
-		<td colspan="3">
-			{{ isset($applicant->document_id->{"US-VISA"}) ? "R C1/D" : '' }}
-		</td>
+		<td colspan="3">USA Visa</td>
+		<td></td>
 	</tr>
 
 	<tr>
 		<td colspan="3">Status of legal education</td>
 		<td colspan="2"></td>
-		<td colspan="7">Available date for boarding</td>
-		<td colspan="3">
-			Anytime
-		</td>
+		<td colspan="3">Available date for boarding</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td colspan="9" style="height: 5px;"></td>
 	</tr>
 
 	<tr>
 		<td colspan="3">Comments</td>
-		<td colspan="12"></td>
+		<td colspan="6"></td>
 	</tr>
 
 	<tr>
 		<td rowspan="2">
-			1ˢᵗ <br style="mso-data-placement:same-cell;" />(Manning Company)
+			1st
+			<br style='mso-data-placement:same-cell;' />
+			(Manning)
 		</td>
-		<td>Rank/Name</td>
-		<td colspan="2" style="text-decoration: underline;">Ms. Thea Mae D. Guerra</td>
+		<td colspan="2">Rank/Name</td>
+		<td colspan="2"></td>
 		<td rowspan="2">
-			2ⁿᵈ <br style="mso-data-placement:same-cell;" />(Owner)
+			2nd
+			<br style='mso-data-placement:same-cell;' />
+			(Manning)
 		</td>
-		<td colspan="2">Rank / Name</td>
-		<td colspan="8"></td>
+		<td colspan="2">Rank/Name</td>
+		<td></td>
 	</tr>
 
 	<tr>
-		<td>Sign</td>
-		<td colspan="2">
-			{{-- SIGN --}}
-		</td>
 		<td colspan="2">Sign</td>
-		<td colspan="8"></td>
+		<td colspan="2" style="text-align: right;">(sign)</td>
+		<td colspan="2">Sign</td>
+		<td style="text-align: right;">(sign)</td>
 	</tr>
 
 	<tr>
-		<td colspan="2">Recruitment Status</td>
-		<td colspan="2">Employable / Unemployable</td>
-		<td colspan="2">Confirm by D.P</td>
-		<td colspan="9"></td>
+		<td colspan="3">Recruitment Status</td>
+		<td colspan="2"></td>
+		<td colspan="3">Approved by DP</td>
+		<td style="text-align: right;">(sign)</td>
 	</tr>
 </table>

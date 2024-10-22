@@ -1,5 +1,9 @@
 @php
-	$checkDate2 = function($date, $type){
+	$b = "font-weight: bold;";
+	$c = "text-align: center;";
+	$bc = "$b $c";
+
+	$checkDate = function($date, $type){
 		if($date == "UNLIMITED"){
 			return $date;
 		}
@@ -12,17 +16,17 @@
 			}
 		}
 		else{
-			return $date->format('F j, Y');
+			return $date->format('Y-m-d');
 		}
 	};
 
 	// CHECK IF WATCHKEEPING AND HAS RANK AND IS DECK OR ENGINE RATING
-	if(isset($applicant->rank_id)){
-		$rank = $applicant->rank_id;
+	if(isset($data->rank_id)){
+		$rank = $data->rank_id;
 	}
 	else{
-		if(isset($applicant->rank)){
-			$rank = $applicant->rank->id;
+		if(isset($data->rank)){
+			$rank = $data->rank->id;
 		}
 		else{
 			$rank = 0;
@@ -33,349 +37,239 @@
 		return str_replace('&', '&#38;', $text);
 	};
 
-	$getDocument = function($docu, $type, $issuer = null, $name = null, $regulation = null) use ($applicant, $checkDate2, $rank, $cleanText) {
-		$name   = !$name ? $docu : $name;
+	$doc = function($doc, $display, $type, $type2 = 0, $regulation = null) use($checkDate, $data, $cleanText, $c){
+		$display = $cleanText($display);
+		$docu = null;
 
-		if(in_array($type, ['id', 'lc', 'med_cert'])){
-
-			if($type == "lc" && ($docu == "COC" || $docu == "COE") && $name == "NATIONAL LICENSE - RATINGS"){
-				if($rank > 0 && $regulation){
-					$tempDocu = $docu;
-					$docu = false;
-					$temp = "";
-
-					if($rank >= 9 && $rank <= 23){
-						foreach($applicant->document_lc as $document){
-							$regulation = json_decode($document->regulation);
-							
-							if($rank >= 9 && $rank <= 14){
-								$tempName = "COC";
-								$temp = $tempDocu == $tempName ? 'II/4' : 'II/5';
-							}
-							elseif($rank >= 15 && $rank <= 23){
-								$tempName = "COE";
-								$temp = $tempDocu == $tempName ? 'III/4' : 'III/5';
-							}
-
-						    if($document->type == $tempName && in_array($temp, $regulation)){
-						        $docu = $document;
-						        break; 
-						    }
-						}
-
-						$name .= " ($temp)";
+		if($doc == "COC" || $doc == "COE" || $doc == "GMDSS/GOC"){
+			foreach($data->{'document_' . $type} as $document){
+				if($document->type == "$doc"){
+					if($docu == null){
+						$doc = $document;
 					}
 					else{
-						$docu = false;
+						if($document->issue_date > $docu->issue_date){
+							$docu = $document;
+						}
 					}
 				}
-				else{
-					return;
-				}
+
 			}
-			elseif ($docu == 'ECDIS SPECIFIC') {
-				$array = [
-					'ECDIS FURUNO 2107',
-					'ECDIS FURUNO 3200',
-					'ECDIS FURUNO 3300',
-					'ECDIS JRC 701B',
-					'ECDIS JRC 7201',
-					'ECDIS JRC 901B',
-					'ECDIS JRC 9201',
-					'ECDIS MARTEK',
-					'ECDIS MECYS',
-					'ECDIS TRANSAS',
-				];
-
-				$string = "";
-				foreach($array as $ecdis){
-					$docu = isset($applicant->{"document_$type"}->$ecdis) ? $applicant->{"document_$type"}->$ecdis : false;
-
-					$number = $docu ? $docu->no : '-----';
-					$issue  = $docu ? $checkDate2($docu->issue_date, 'I') : '-----';
-					$expiry = $docu ? $checkDate2($docu->expiry_date, 'E') : '-----';
-
-					if($docu){
-						$string .= "
-							<tr>
-								<td colspan='2'>
-									<span></span><span></span>$ecdis
-								</td>
-
-								<td colspan='1'>$number</td>
-								<td colspan='2'>$issue</td>
-								<td colspan='3'>$expiry</td>
-								<td colspan='1'></td>
-							</tr>
-						";
-					}
-
-				}
-
-				if($string != ""){
-					echo $string;
-					return;
-				}
-			}
-			elseif ($docu == 'SSBT WITH BRM') {
-				$temp = $docu;
-				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
+		}
+		else{
+			if($doc == "RADAR"){
+				$doc = "RADAR SIMULATOR COURSE";
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
 				if(!$docu){
-					$name = 'SSBT';
-					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+					$doc = "RADAR TRAINING COURSE";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+			}
+			elseif($doc == "ARPA TRAINING COURSE"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
-					if(!$docu){
-						$name = 'BRM';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+				if(!$docu){
+					$doc = "RADAR OPERATOR PLOTTING AID";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+			}
+			elseif($doc == "BRM/ERM"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+
+				if(!$docu){
+					$doc = "ERS";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "ERM";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "ENGINE RESOURCE MANAGEMENT";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "ENGINE ROOM RESOURCE MANAGEMENT";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+
+				if(!$docu){
+					$doc = "SSBT WITH BRM";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "BRM";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "BRIDGE RESOURCE MANAGEMENT";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "BRIDGE RESOURCE AND TEAM MANAGEMENT";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "SSBT";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "BRTM";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+			}
+			elseif($doc == "ECDIS SPECIFIC"){
+				if(isset($data->vessel)){
+					$docu = isset($data->document_lc->{$data->vessel->ecdis}) ? $data->document_lc->{$temp} : null;
+				}
+			}
+			elseif($doc == "MARINE ELECTRICAL"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+
+				if(!$docu){
+					$doc = "MARINE ELECTRICAL TRAINING";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+			}
+			elseif($doc == "CONSOLIDATED MARPOL"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+
+				if(!$docu){
+					foreach($data->document_lc as $doc){
+						if(str_contains($doc->type, "MARPOL")){
+							$docu = $doc;
+						}
 					}
+				}
+			}
+			elseif($doc == "WATCHKEEPING"){
+				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
-					if(!$docu){
-						$name = 'BTM';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-					}
-
-					if(!$docu){
-						$name = 'ERS WITH ERM';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-					}
-
-					if(!$docu){
-						$name = 'ERS ';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-					}
-
-					if(!$docu){
-						$name = 'ERM';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-					}
-
-					$name = "BRTM / ERM";
+				if(!$docu){
+					$doc = "DECK WATCH";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "ENGINE WATCH";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "DECK WATCHKEEPING";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
+				}
+				if(!$docu){
+					$doc = "ENGINE WATCHKEEPING";
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
 			else{
-				$temp = $docu;
-				$docu = isset($applicant->{"document_$type"}->$docu) ? $applicant->{"document_$type"}->$docu : false;
-
-				if(!$docu && $temp == "RADAR"){
-					$name = 'RADAR TRAINING COURSE';
-					$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-
-					if(!$docu){
-						$name = 'RADAR SIMULATOR COURSE';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-					}
-
-					if(!$docu){
-						$name = 'RADAR OPERATOR PLOTTING AID';
-						$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
-					}
-
-					$name = "Radar Simulation";
+				if($type != "flag"){
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
-				elseif($temp == "POLLUTION"){
-					foreach(get_object_vars($applicant->document_lc) as $document){
-					    if(str_contains($document->type, $temp)){
-					        $docu = $document;
-					    }
+				else{
+					$country = ucwords(strtolower($data->vessel->flag));
+					foreach (get_object_vars($data->document_flag) as $flag) {
+						if($flag->country == $country && $flag->type == $doc){
+							$docu = $flag;
+						}
 					}
+					$type2 = 0;
 				}
-			}
-
-		}
-		elseif($type == 'flag'){
-
-			$temp = $docu;
-			$docu = false;
-
-			if($rank >= 24 && $rank <= 26){
-				if($temp == 'LICENSE'){
-					$temp = "SHIP'S COOK ENDORSEMENT";
-				}
-			}
-
-			foreach($applicant->document_flag as $document){
-			    if($document->type == $temp){
-			        $docu = $document;
-			    }
 			}
 		}
 
 		$noNum  = $type == 'lc' ? 'no' : 'number';
 
 		$number = $docu ? $docu->$noNum : '-----';
-		$issue  = $docu ? $checkDate2($docu->issue_date, 'I') : '-----';
-		$expiry = $docu ? $checkDate2($docu->expiry_date, 'E') : '-----';
+		$issue  = $docu ? $checkDate($docu->issue_date, 'I') : '-----';
+		$expiry = $docu ? $checkDate($docu->expiry_date, 'E') : '-----';
 
-		// $issuer = $issuer != null ? $issuer : $docu ? $docu->issuer : 'NOT APPLICABLE';
-		if($issuer != ""){
-			$issuer = $issuer;
-		}
-		else{
-			$issuer = $type == "med_cert" ? 'clinic' : 'issuer';
-			$issuer = $docu ? $docu->$issuer : 'NOT APPLICABLE';
-
-			if($issuer == "NOT APPLICABLE" && $type == "med_cert"){
-				$issuer = "REVERTING";
-			}
-		}
-
-		$issuer = $cleanText($issuer);
-
-		if($name == "69"){
-			$noNum  = $type == 'lc' ? 'no' : 'number';
-
-			$number = $docu ? $docu->$noNum : '-----';
-			$issue  = $docu ? $checkDate2($docu->issue_date, 'I') : '-----';
-			$expiry = $docu ? $checkDate2($docu->expiry_date, 'E') : '-----';
-
-			if($temp == "ADVANCE FIRE FIGHTING - AFF"){
-				echo "
-					<tr>
-						<td colspan='2' rowspan='3'>
-							Advanced Safety Course
-							<br style='mso-data-placement:same-cell;' />
-							- Fire Fighting
-							<br style='mso-data-placement:same-cell;' />
-							- Survival Craft And Rescue Boat
-							<br style='mso-data-placement:same-cell;' />
-							- First Aid
-						</td>
-
-						<td colspan='1'>$number</td>
-						<td colspan='2'>$issue</td>
-						<td colspan='3'>$expiry</td>
-						<td colspan='1'>$issuer</td>
-					</tr>
-				";
-			}
-			else{
-				echo "
-					<tr>
-						<td colspan='1'>$number</td>
-						<td colspan='2'>$issue</td>
-						<td colspan='3'>$expiry</td>
-						<td colspan='1'>$issuer</td>
-					</tr>
-				";
-			}
-		}
-		else{
-			echo "
-				<tr>
-					<td colspan='2'>
-						<span></span><span></span>$name
-					</td>
-
-					<td colspan='1'>$number</td>
-					<td colspan='2'>$issue</td>
-					<td colspan='3'>$expiry</td>
-					<td colspan='1'>$issuer</td>
-				</tr>
-			";
-		}
+		echo "
+			<tr>
+				<td colspan='2'>&zwnj; $display</td>
+				<td colspan='2' style='$c'>$number</td>
+				<td style='$c'>$issue</td>
+				<td style='$c'>$expiry</td>
+				<td style='$c'></td>
+			</tr>
+		";
 	};
 @endphp
 
 <table>
 	<tr>
-		<td>CB09548-95</td>
+		<td colspan="7" style="text-align: right; height: 30px;">FORM SP08-06(1/1)/2/24.10.01</td>
 	</tr>
 
 	<tr>
-		<td rowspan="2" colspan="5"></td>
-		<td rowspan="2" colspan="4">
-			FORM SP08-06(1/1) / 1 / 22.09.19
+		<td colspan="7" style="{{ $bc }} font-size: 16px;">Document Check List for Seafarer</td>
+	</tr>
+
+	<tr>
+		<td style="{{ $bc }}">Vessel</td>
+		<td colspan="2" style="{{ $c }}">{{ isset($data->vessel) ? $data->vessel->name : "-" }}</td>
+		<td style="{{ $bc }}">Rank</td>
+		<td style="{{ $c }}">{{ isset($data->rank) ? $data->rank->abbr : '-' }}</td>
+		<td style="{{ $bc }}">Name</td>
+		<td style="{{ $c }}">{{ $data->user->namefull }}</td>
+	</tr>
+
+	<tr>
+		<td colspan="7" style="height: 5px;"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $bc }}">Documents</td>
+		<td colspan="2" style="{{ $bc }}">Doc No.</td>
+		<td style="{{ $bc }}">Issue</td>
+		<td style="{{ $bc }}">Expire</td>
+		<td style="{{ $bc }}">Remark</td>
+	</tr>
+
+	{{ $doc("PASSPORT", "Passport", 'id') }}
+	{{ $doc("SEAMAN'S BOOK", "Seaman'S Book", 'id') }}
+	{{ $doc("COC", "C.O.C", 'lc') }}
+	{{ $doc("GMDSS/GOC", "GOC/ROC", 'lc') }}
+	{{ $doc("WATCHKEEPING", "Watch-keeping Cert.", 'lc') }}
+	{{ $doc("MEDICAL CARE - MECA", "Medical Care", 'lc') }}
+	{{ $doc("CONSOLIDATED MARPOL", "Maritime Pollution Prevention", 'lc') }}
+	{{ $doc("BOOKLET", "Flagged Seaman’s Book", 'flag') }}
+	{{ $doc("LICENSE", "Flagged License", 'flag') }}
+	{{ $doc("BASIC TRAINING - BT", "Basic Safety Course", 'lc') }}
+	{{ $doc("BASIC TRAINING - BT", "Advanced Safety Course", 'lc') }} // ASK WHAT ADVANCED TRAINING
+	{{ $doc("ADVANCE FIRE FIGHTING - AFF", " - Fire Fighting", 'lc') }}
+	{{ $doc("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", "- Survival Craft & Rescue Boat", 'lc') }}
+	{{ $doc("MEDICAL FIRST AID - MEFA", "- First Aid", 'lc') }}
+	{{ $doc("ARPA TRAINING COURSE", "RADAR - ARPA", 'lc') }}
+	{{ $doc("RADAR", "Radar Simulation", 'lc') }}
+	{{ $doc("RADAR", "Radar Simulation", 'lc') }}
+	{{ $doc("BRM/ERM", "BRTM / ERM", 'lc') }}
+	{{ $doc("ECDIS", "ECDIS (Generic)", 'lc') }}
+	{{ $doc("ECDIS SPECIFIC", "ECDIS (Specific)", 'lc') }}
+	{{ $doc("SHIP'S COOK ENDORSEMENT", "Ship Cook Training", 'lc') }}
+	{{ $doc("MEDICAL CERTIFICATE", "Medical Examination Cert.", 'med_cert') }}
+	{{ $doc("YELLOW FEVER", "Yellow Fever", 'med_cert') }}
+	{{ $doc("US-VISA", "US Visa", 'id') }}
+
+	<tr>
+		<td colspan="7" style="height: 5px;"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $bc }}">Checked by</td>
+		<td colspan="3"></td>
+		<td style="text-align: right;">(Sign)</td>
+		<td rowspan="2">
+			&#x2610; Qualified
+			<br style='mso-data-placement:same-cell;' />
+			&#x2610; Unqualified
 		</td>
 	</tr>
 
-	<tr></tr>
-	<tr></tr>
-
 	<tr>
-		<td colspan="9">
-			Document Check List for Seafarer
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan="9" style="vertical-align: middle;">
-			*In case of no available document, please specify the status in a remark column.
-		</td>
-	</tr>
-
-	<tr>
-		<td>Name of Vessel</td>
-		<td colspan="2" style="font-weight: bold;">
-			{{ isset($applicant->vessel) ? $applicant->vessel->name : '-----' }}
-		</td>
-
-		<td>Rank</td>
-		<td colspan="2">
-			{{ isset($applicant->rank) ? $applicant->rank->abbr : '-----' }}
-		</td>
-
-		<td>Name</td>
-		<td colspan="2">
-			{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname[0] }}
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan="2">Documents</td>
-		<td>No.</td>
-		<td colspan="2">Issue</td>
-		<td colspan="3">Expire</td>
-		<td>Remark</td>
-	</tr>
-
-	{{ $getDocument('PASSPORT', 	'id', 		'DFA',			'Passport'								)}}
-	{{ $getDocument("SEAMAN'S BOOK",'id', 		'MARINA', 		"Seaman's Book"							)}}
-	{{ $getDocument('COC', 			'lc', 		'MARINA', 		'C.O.C.'								)}}
-	{{ $getDocument('GMDSS/GOC', 	'lc', 		'MARINA', 		'G.O.C.'								)}}
-	{{ $getDocument('COC', 			'lc',		'MARINA', 		'Watch-keeping Certificate', 		true)}}
-	{{ $getDocument('MEDICAL CARE - MECA', 'lc', 'MARINA', 		'Medical Care'							)}}
-	{{ $getDocument('POLLUTION', 'lc', 'MARINA', 'Maritime Pollution Prevention'						)}}
-	{{ $getDocument('BOOKLET', 		'flag', 	'PANAMA', 		"Flagged Seaman's Book"					)}}
-	{{ $getDocument('LICENSE', 		'flag', 	'PANAMA', 		'Flagged License'						)}}
-	{{ $getDocument('BASIC TRAINING - BT', 'lc', 'MARINA', 		'Basic Safety Course'					)}}
-
-	{{ $getDocument('ADVANCE FIRE FIGHTING - AFF', 'lc', 'MARINA', '69')}}
-	{{ $getDocument('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'lc', 'MARINA', '69')}}
-	{{ $getDocument('MEDICAL FIRST AID - MEFA', 'lc', 'MARINA', '69')}}
-
-	{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA')}}
-	{{ $getDocument('RADAR', 'lc', '', 'Radar Simulation')}}
-	{{ $getDocument('SSBT WITH BRM', 'lc', '', 'BRTM / ERM')}}
-	{{ $getDocument('ECDIS', 'lc', '', 'ECDIS (Generic)')}}
-	{{ $getDocument('ECDIS SPECIFIC', 'lc', '', 'ECDIS (Specific)')}}
-
-	{{ $getDocument("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", 'lc', 'MARINA', 'SECURITY TRAINING(SDSD/SSAT)')}}
-	{{ $getDocument("SHIP'S COOK ENDORSEMENT", 'flag', 'PANAMA', 'SHIP COOK TRAINING')}}
-
-	{{ $getDocument('MEDICAL CERTIFICATE', 'med_cert', '', 'Medical Examination Certificate'			)}}
-	{{ $getDocument('YELLOW FEVER', 'med_cert', '', 'Yellow Fever'										)}}
-	{{ $getDocument("US-VISA", 		'id', 		'US EMBASSY', 	'US Visa'								)}}
-
-	<tr>
-		<td colspan="5" rowspan="2" style="text-align: center; vertical-align: middle;">
-			Checked by: ______________________
-		</td>
-		<td>x</td>
-		<td colspan="3">Qualified</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td colspan="3">Unqualified</td>
-	</tr>
-
-	<tr>
-		<td colspan="5" rowspan="2" style="text-align: center; vertical-align: middle;">Confirmed by: <span style="text-decoration: underline;">Ms. Thea Mae D. Guerra</span></td>
-		<td>x</td>
-		<td colspan="3">Qualified</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td colspan="3">Unqualified</td>
+		<td colspan="2" style="{{ $bc }}">Confirmed by</td>
+		<td colspan="3"></td>
+		<td style="text-align: right;">(Sign)</td>
 	</tr>
 </table>
