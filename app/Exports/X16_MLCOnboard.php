@@ -31,6 +31,7 @@ class X16_MLCOnboard implements WithMultipleSheets
             $rank = $ranks[$applicant->pro_app->rank_id][0];
             $applicant->rankType = $rank->type;
             $applicant->abbr = $rank->abbr;
+            $applicant->position = $rank->name;
 
             foreach($applicant->document_id as $docu){
                 if($docu->type){
