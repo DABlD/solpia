@@ -429,25 +429,25 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
                 }
 
                 // FOR MARINA COP
-                if($this->applicant->rank){
-                    // DECK
-                    $rid = $this->applicant->rank->id;
+                // if($this->applicant->rank){
+                //     // DECK
+                //     $rid = $this->applicant->rank->id;
 
-                    if(($rid == 10 && $hl) || ($rid == 16 && $hl) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
-                        $start = $raoc;
-                        $end = $raoc;
-                        $start2 = $start+1;
-                        $end2 = $end+1;
-                        $raoc += 2;
-                        $temp += 2;
-                    }
-                    elseif(in_array($rid, [10,16]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
-                        $start = $raoc;
-                        $end = $raoc;
-                        $raoc += 1;
-                        $temp += 1;
-                    }
-                }
+                //     if(($rid == 10 && $hl) || ($rid == 16 && $hl) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
+                //         $start = $raoc;
+                //         $end = $raoc;
+                //         $start2 = $start+1;
+                //         $end2 = $end+1;
+                //         $raoc += 2;
+                //         $temp += 2;
+                //     }
+                //     elseif(in_array($rid, [10,16]) || ($rid == 11 && $hl) || ($rid == 17 && $hl)){
+                //         $start = $raoc;
+                //         $end = $raoc;
+                //         $raoc += 1;
+                //         $temp += 1;
+                //     }
+                // }
 
                 for($i = 0, $row = $rac + 1; $i < $temp; $i++, $row++){
                     if($i == 0){
