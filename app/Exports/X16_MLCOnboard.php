@@ -76,13 +76,11 @@ class X16_MLCOnboard implements WithMultipleSheets
      */
     public function sheets(): array
     {
-
-
         $sheets = [];
         foreach($this->applicants as $applicant){
             $principal = str_replace(' ', '', $this->principal);
             $class = "App\Exports\MLC\\" . $principal;
-            array_push($sheets, new $class($applicant, $applicant->abbr));
+            array_push($sheets, new $class($applicant, $applicant->abbr, $applicant->abbr));
         }
 
         return $sheets;
