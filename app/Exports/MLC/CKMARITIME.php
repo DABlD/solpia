@@ -12,9 +12,10 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $type){
+    public function __construct($data, $type, $title = null){
         $this->data     = $data;
         $this->type     = $type;
+        $this->title    = $title;
     }
 
     public function view(): View
@@ -241,7 +242,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('CK MARITIME MLC', false);
+                $event->sheet->getDelegate()->setTitle($this->title ?? 'CK MARITIME MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
