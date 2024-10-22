@@ -187,7 +187,7 @@
 
 		echo "
 			<tr>
-				<td colspan='2'>ㅤ$display</td>
+				<td colspan='2'>&zwnj; $display</td>
 				<td colspan='2' style='$c'>$number</td>
 				<td style='$c'>$issue</td>
 				<td style='$c'>$expiry</td>
@@ -199,7 +199,11 @@
 
 <table>
 	<tr>
-		<td colspan="7" style="{{ $bc }}">Document Check List for Seafarer</td>
+		<td colspan="7" style="text-align: right; height: 30px;">FORM SP08-06(1/1)/2/24.10.01</td>
+	</tr>
+
+	<tr>
+		<td colspan="7" style="{{ $bc }} font-size: 16px;">Document Check List for Seafarer</td>
 	</tr>
 
 	<tr>
@@ -247,4 +251,25 @@
 	{{ $doc("MEDICAL CERTIFICATE", "Medical Examination Cert.", 'med_cert') }}
 	{{ $doc("YELLOW FEVER", "Yellow Fever", 'med_cert') }}
 	{{ $doc("US-VISA", "US Visa", 'id') }}
+
+	<tr>
+		<td colspan="7" style="height: 5px;"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $bc }}">Checked by</td>
+		<td colspan="3"></td>
+		<td style="text-align: right;">(Sign)</td>
+		<td rowspan="2">
+			&#x2610; Qualified
+			<br style='mso-data-placement:same-cell;' />
+			&#x2610; Unqualified
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="{{ $bc }}">Confirmed by</td>
+		<td colspan="3"></td>
+		<td style="text-align: right;">(Sign)</td>
+	</tr>
 </table>

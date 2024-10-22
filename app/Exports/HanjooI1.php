@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -164,6 +164,23 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
+            // OUTSIDE BORDER DOUBLE
+            [
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOUBLE,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOUBLE,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOUBLE,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOUBLE,
+                    ],
+                ]
+            ],
         ];
 
         $fillStyle = [
@@ -301,7 +318,7 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    
+                    'A1'  
                 ];
 
                 // HL B
@@ -328,6 +345,10 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
+                    'A2:G3',
+                    'A5:G29',
+                    'A31:E32',
+                    'G31:G32'
                 ];
 
                 // UNDERLINE
@@ -343,6 +364,8 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'B3', 'G3',
+                    'A6:D29'
                 ];
 
                 foreach($h as $key => $value) {
@@ -366,6 +389,9 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
+                    'A3', 'D3', 'F3',
+                    'A5:G5',
+                    'A33:A32'
                 ];
 
                 $fills[1] = [
@@ -382,6 +408,9 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'A3:G3',
+                    'A5:G29',
+                    'A31:G32'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -419,6 +448,7 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // RRB
                 $cells[9] = array_merge([
+                    'E31:E32'
                 ]);
 
                 // TRB
@@ -440,6 +470,13 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // RBT
                 $cells[14] = array_merge([
                 ]);
+
+                // DOUBLE BORDER
+                $cells[15] = array_merge([
+                    'A3:G3',
+                    'A5:G29',
+                    'A31:G32'
+                ]);
                 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
@@ -451,21 +488,35 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(11);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(11);
+                // $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(2);
+                // $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(11.5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11.5);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(27);
 
                 // ROW RESIZE
                 $rows = [
-                    // [
-                    //     12, //ROW HEIGHT
-                    //     1,4 //START ROW, END ROW
-                    // ],
+                    [
+                        22, //ROW HEIGHT
+                        1,29 //START ROW, END ROW
+                    ],
                 ];
 
                 $rows2 = [
-                    // [
-                    //     40,
-                    //     [11,14,17,20]
-                    // ]
+                    [
+                        40,
+                        [2]
+                    ],
+                    [
+                        10,
+                        [4,30]
+                    ],
+                    [
+                        30,
+                        [31,32]
+                    ]
                 ];
 
                 foreach($rows as $row){
@@ -498,16 +549,16 @@ class HanjooI1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
     public function drawings()
     {
-        // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        // $drawing->setName('INTERGIS');
-        // $drawing->setDescription('INTERGIS');
-        // $drawing->setPath(public_path('images/integris.png'));
-        // $drawing->setHeight(40);
-        // // $drawing->setWidth(165);
-        // $drawing->setOffsetX(1);
-        // $drawing->setOffsetY(3);
-        // $drawing->setCoordinates('A2');
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('INTERGIS');
+        $drawing->setDescription('INTERGIS');
+        $drawing->setPath(public_path('images/integris.png'));
+        $drawing->setHeight(35);
+        // $drawing->setWidth(165);
+        $drawing->setOffsetX(2);
+        $drawing->setOffsetY(2);
+        $drawing->setCoordinates('A1');
 
-        // return $drawing;
+        return $drawing;
     }
 }
