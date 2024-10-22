@@ -242,6 +242,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
+                dd($this->title);
                 $event->sheet->getDelegate()->setTitle($this->title ?? 'CK MARITIME MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
