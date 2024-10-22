@@ -210,7 +210,7 @@
 		<td style="{{ $bc }}">Vessel</td>
 		<td colspan="2" style="{{ $c }}">{{ isset($data->vessel) ? $data->vessel->name : "-" }}</td>
 		<td style="{{ $bc }}">Rank</td>
-		<td style="{{ $c }}">{{ isset($applicant->rank) ? $applicant->rank->abbr : '-' }}</td>
+		<td style="{{ $c }}">{{ isset($data->rank) ? $data->rank->abbr : '-' }}</td>
 		<td style="{{ $bc }}">Name</td>
 		<td style="{{ $c }}">{{ $data->user->namefull }}</td>
 	</tr>
