@@ -2,26 +2,25 @@
 
 namespace App\Exports;
 
-use App\Models\{Applicant};
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithDrawings;
 
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Concerns\WithDrawings;
+// use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class HanjooI3 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($applicant,$type){
-        $this->applicant = $applicant;
-        $this->type = $type;
+    public function __construct($data, $type){
+        $this->data     = $data;
+        $this->type     = $type;
     }
 
     public function view(): View
     {
         return view('exports.' . $this->type, [
-            'applicant' => $this->applicant
+            'data' => $this->data,
         ]);
     }
 
@@ -29,45 +28,161 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     {
         $borderStyle = 
         [
-        	[
-	            'borders' => [
-	                'top' => [
-	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-	                ],
-	                'bottom' => [
-	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-	                ],
-	                'left' => [
-	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-	                ],
-	                'right' => [
-	                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-	                ],
-	            ],
-	        ],
-        	[
-	            'borders' => [
+            [//0
+                'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                 ]
-	        ],
-            [
+            ],
+            [//1
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                ]
+            ],
+            [//2
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [//3
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ]
+            ],
+            [//4
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                    ],
+                ]
+            ],
+            [//5
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [//6
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [//7
                 'borders' => [
                     'bottom' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [//8
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [//9
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
+                    ],
+                ]
+            ],
+            [//10
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [//11
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//12
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//13
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//14
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
                     ],
                 ]
             ],
         ];
 
         $fillStyle = [
-            'fill' => [
-                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                'color' => [
-                    'rgb' => 'EEECE1'
-                ]
+            [
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => [
+                        'rgb' => 'CCECFF'
+                    ]
+                ],
             ],
+            [
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'color' => [
+                        'rgb' => 'ebf8a4'
+                    ]
+                ],
+            ]
         ];
 
         $headingStyle = [
@@ -99,14 +214,14 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             ],
             [
                 'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
-                ]
-            ],
-            [
-                'alignment' => [
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
+            ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                ]
             ],
             [
                 'font' => [
@@ -117,7 +232,17 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
-            ]
+            ],
+            [
+                'font' => [
+                    'underline' => true
+                ],
+            ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
+                ],
+            ],
         ];
 
         return [
@@ -133,14 +258,39 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
-
-                // FONT SIZES
-                $event->sheet->getDelegate()->getStyle('A1:Q30')->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A1:Q30')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+                
+                // SET DEFAULT FONT
+                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
+                // $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                // CELL COLOR
+                // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
+
+                // TEXT ROTATION
+                // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
+
+                // FUNCTIONS
+                // $osSize = sizeof($this->linedUps);
+                // $ofsSize = sizeof($this->onBoards);
+
+                // GET AFTER ONSIGNERS
+                // $ar = function($c1, $r1, $c2 = null, $r2 = null, $ofs = false) use($osSize, $ofsSize){
+                //     $size = $osSize;
+                //     $temp = $c1 . ($r1 + $size);
+                //     if($c2 != null){
+                //         $temp .= ':' . $c2 . ($r2 + ($size + ($ofs ? $ofsSize : 0)));
+                //     }
+
+                //     return $temp;
+                // };
+
+                // FONT SIZES
 
                 // HEADINGS
 
@@ -164,33 +314,42 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     
                 ];
 
-                // HL
+                // HC VC
                 $h[4] = [
-                    'A4'
+                    'A1:D36'
                 ];
 
-                // HC VC
+                // HL
                 $h[5] = [
-                    'A1:O3', 'A5:O27'
                 ];
 
                 // B
                 $h[6] = [
-                    
+                    'A1:D3',
+                    'A19:D19',
+                    'A21:D21',
+                    'A27:D27',
+                    'A34:D34'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A4'
+                ];
+
+                // UNDERLINE
+                $h[8] = [
+                ];
+
+                // JUSTIFY
+                $h[9] = [
                 ];
 
                 $h['wrap'] = [
-                    'A4', 'C4', 'A6', 'A12', 'A18', 'L4'
+                    'A4:A18'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                	
                 ];
 
                 foreach($h as $key => $value) {
@@ -199,6 +358,7 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                             $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(true);
                         }
                         elseif($key == 'stf'){
+                            $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(false);
                             $event->sheet->getDelegate()->getStyle($col)->applyFromArray([
                                 'alignment' => [
                                     'shrinkToFit' => true
@@ -211,30 +371,89 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     }
                 }
 
-                // ROTATE TEXT
-
                 // FILLS
-                $fills = [
+                $fills[0] = [
+                    'A2:D3',
+                    'A19:D19',
+                    'A21:D21',
+                    'A27:D27',
+                    'A34:D34'
+                ];
+
+                $fills[1] = [
                     
                 ];
 
-                foreach($fills as $fill){
-                    $event->sheet->getDelegate()->getStyle($fill)->applyFromArray($fillStyle);  
+                foreach($fills as $key => $value){
+                    foreach($value as $cell){
+                        $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($fillStyle[$key]);
+                    }
                 }
 
                 // BORDERS
+
+                // ALL BORDER THIN
                 $cells[0] = array_merge([
-                	'G2:O3'
+                    'A2:D36'
                 ]);
 
+                // ALL BORDER MEDIUM
                 $cells[1] = array_merge([
-                	'A5:O23'
                 ]);
 
+                // ALL BORDER THICK
                 $cells[2] = array_merge([
-                    
                 ]);
 
+                // OUTSIDE BORDER THIN
+                $cells[3] = array_merge([
+                ]);
+
+                // OUTSIDE BORDER MEDIUM
+                $cells[4] = array_merge([
+                ]);
+
+                // OUTSIDE BORDER THICK
+                $cells[5] = array_merge([
+                ]);
+
+                // TOP REMOVE BORDER
+                $cells[6] = array_merge([
+                ]);
+
+                // BRB
+                $cells[7] = array_merge([
+                ]);
+
+                // LRB
+                $cells[8] = array_merge([
+
+                ]);
+
+                // RRB
+                $cells[9] = array_merge([
+                ]);
+
+                // TRB
+                $cells[10] = array_merge([
+                ]);
+
+                // TBT - TOP BORDER THIN
+                $cells[11] = array_merge([
+                ]);
+
+                // BBT
+                $cells[12] = array_merge([
+                ]);
+
+                // LBT
+                $cells[13] = array_merge([
+                ]);
+
+                // RBT
+                $cells[14] = array_merge([
+                ]);
+                
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
                         $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
@@ -245,27 +464,50 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(13.5);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(7.5);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(8.5);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(3);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(1.5);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(2);
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(3);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(8);
-                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(21);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(24);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(13);
 
-                $event->sheet->getDelegate()->getRowDimension('4')->setRowHeight(29.25);
-                $event->sheet->getDelegate()->getRowDimension('5')->setRowHeight(26.25);
-                $event->sheet->getDelegate()->getRowDimension('6')->setRowHeight(32.25);
+                // ROW RESIZE
+                $rows = [
+                    // [
+                    //     12, //ROW HEIGHT
+                    //     1,4 //START ROW, END ROW
+                    // ],
+                ];
 
-                $event->sheet->getDelegate()->getRowDimension('10')->setRowHeight(24);
+                $rows2 = [
+                    [
+                        40,
+                        [1]
+                    ]
+                ];
+
+                foreach($rows as $row){
+                    for($i = $row[1]; $i <= $row[2]; $i++){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight($row[0]);
+                    }
+                }
+
+                foreach($rows2 as $row){
+                    foreach($row[1] as $cell){
+                        $event->sheet->getDelegate()->getRowDimension($cell)->setRowHeight($row[0]);
+                    }
+                }
+
+                // PAGE BREAKS
+                $rows = [];
+                foreach($rows as $row){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
+                
+                // SET PRINT AREA
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
     }
@@ -276,23 +518,12 @@ class HanjooI3 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setName('INTERGIS');
         $drawing->setDescription('INTERGIS');
         $drawing->setPath(public_path('images/integris.png'));
-        $drawing->setHeight(40);
+        $drawing->setHeight(35);
         // $drawing->setWidth(165);
-        $drawing->setOffsetX(1);
-        $drawing->setOffsetY(3);
-        $drawing->setCoordinates('A2');
+        $drawing->setOffsetX(2);
+        $drawing->setOffsetY(2);
+        $drawing->setCoordinates('A1');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('EU');
-        $drawing2->setDescription('EU');
-        $drawing2->setPath(public_path('images/eu.png'));
-        $drawing2->setCoordinates('C6');
-        $drawing2->setOffsetX(10);
-        $drawing2->setOffsetY(5);
-        $drawing2->setResizeProportional(false);
-        $drawing2->setWidth(210);
-        $drawing2->setHeight(35);
-
-        return [$drawing, $drawing2];
+        return $drawing;
     }
 }
