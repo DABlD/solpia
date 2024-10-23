@@ -13,6 +13,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
 
+        // CM2
         $this->newFormHMM = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517, 7917, 7998];
 
         $array1 = [
@@ -33,11 +34,11 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         // CM2
         $array5 = [
-            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'M/T UNIVERSAL CHALLENGER', 'M/T ORIENTAL AQUAMARINE', 'M/T UNIVERSAL FRONTIER', 'M/T UNIVERSAL INNOVATOR', 'M/V HMM MASTER', 'M/V OCEAN FLORA', 'M/V HYUNDAI PREMIUM'
+            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'M/T UNIVERSAL CHALLENGER', 'M/T ORIENTAL AQUAMARINE', 'M/T UNIVERSAL FRONTIER', 'M/T UNIVERSAL INNOVATOR', 'M/V HMM MASTER', 'M/V HYUNDAI PREMIUM'
         ];
 
         $array6 = [
-            'M/V BAMBOO STAR'
+            'M/V BAMBOO STAR', 'M/V OCEAN FLORA'
         ];
 
         // minus two;
