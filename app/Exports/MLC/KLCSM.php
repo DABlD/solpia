@@ -353,7 +353,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'L11', 'J13', 'A22', 'A38', 'A48', 'A91', 'A93', 'A99'
+                    'L11', 'J13', 'A22', 'A38', 'A48', 'A91', 'A93', 'A95', 'A101'
                 ];
 
                 // SHRINK TO FIT
@@ -494,7 +494,8 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(25);
                 $event->sheet->getDelegate()->getRowDimension(91)->setRowHeight(25);
                 $event->sheet->getDelegate()->getRowDimension(93)->setRowHeight(27);
-                $event->sheet->getDelegate()->getRowDimension(99)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(95)->setRowHeight(27);
+                $event->sheet->getDelegate()->getRowDimension(101)->setRowHeight(25);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
@@ -515,7 +516,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setWidth(150);
         $drawing->setOffsetX(70);
         $drawing->setOffsetY(0);
-        $drawing->setCoordinates('J102');
+        $drawing->setCoordinates('J104');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setPath(public_path("images/MLC_SEAL.png"));
@@ -524,7 +525,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setWidth(150);
         $drawing2->setOffsetX(0);
         $drawing2->setOffsetY(5);
-        $drawing2->setCoordinates('G102');
+        $drawing2->setCoordinates('G104');
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setPath(public_path("images/mlc_klcsm.png"));
@@ -533,7 +534,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setWidth(200);
         $drawing3->setOffsetX(50);
         $drawing3->setOffsetY(150);
-        $drawing3->setCoordinates('K101');
+        $drawing3->setCoordinates('K103');
 
         return [$drawing, $drawing2, $drawing3];
     }
