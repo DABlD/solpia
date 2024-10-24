@@ -73,11 +73,12 @@
 	<tr>
 		<td colspan="3">Name of the</td>
 		<td colspan="6" rowspan="2" style="{{ $bc }}">
-			@if($data->vessel->type == "LNG")
+			HAN SU HAN
+			{{-- @if($data->vessel->type == "LNG")
 				HAN SU HAN
 			@else
 				MIN TAE YUN
-			@endif
+			@endif --}}
 		</td>
 		<td rowspan="2">Identification number</td>
 		<td rowspan="2" style="{{ $bc }}">101-81-24624</td>
@@ -395,7 +396,10 @@
 	{{ $d1("9. Seafarer’s employment agreement shall continue to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to suspend or terminate it.") }}
 
 	{{ $fill() }}
-	{{ $d1("10. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer recruitment and placement. (other than the cost of the seafarer obtaining the seafarer’s book and a passport or other similar personal travel documents.). If the seafarer found that, the fact should be noticed to the shipowner immediately.") }}
+	{{ $d1("10. Shipowner shall cover the health and social security protection benefits to be provided to the seafarer by due process of law. And terms not regulated in this contract will follow the one that is more advantageous to both parties comparing the Laws of Flag State / CBA.") }}
+
+	{{ $fill() }}
+	{{ $d1("11. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer recruitment and placement. (other than the cost of the seafarer obtaining the seafarer’s book and a passport or other similar personal travel documents.). If the seafarer found that, the fact should be noticed to the shipowner immediately.") }}
 	
 	{{ $fill() }}
 	<tr>
@@ -411,7 +415,7 @@
 	</tr>
 
 	{{ $fill() }}
-	{{ $d1("13. Seafarers signing a seafarers' employment agreement be given an opportunity to examine and seek advice on the agreement before signing, as well as such other facilities as are necessary to ensure that they have freely entered into an agreement with a sufficient understanding of their rights and responsibilities.") }}
+	{{ $d1("14. Seafarers signing a seafarers' employment agreement be given an opportunity to examine and seek advice on the agreement before signing, as well as such other facilities as are necessary to ensure that they have freely entered into an agreement with a sufficient understanding of their rights and responsibilities.") }}
 	
 	{{ $fill(25) }}
 	<tr>
@@ -423,8 +427,8 @@
 	{{ $fill(70) }}
 	<tr>
 		<td colspan="3"></td>
-		<td colspan="3" style="{{ $c }}">or Agent on behalf of shipowner:</td>
-		<td colspan="3"></td>
+		<td colspan="3" style="{{ $c }}"></td>
+		<td colspan="3" style="{{ $c }}">Agent</td>
 		<td colspan="2" style="{{ $c }}">Jeanette T. Solidum</td>
 	</tr>
 	<tr>
