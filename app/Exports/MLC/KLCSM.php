@@ -381,7 +381,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'A61:L61', 'A91:L91'
+                    'A61:L61'
                 ];
 
                 $fills[1] = [
@@ -494,7 +494,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(25);
                 $event->sheet->getDelegate()->getRowDimension(91)->setRowHeight(25);
                 $event->sheet->getDelegate()->getRowDimension(93)->setRowHeight(27);
-                $event->sheet->getDelegate()->getRowDimension(95)->setRowHeight(27);
+                $event->sheet->getDelegate()->getRowDimension(95)->setRowHeight(40);
                 $event->sheet->getDelegate()->getRowDimension(101)->setRowHeight(25);
                 
                 // SET PRINT AREA
@@ -512,29 +512,29 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path("images/maam_jen_sig.jpg"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(70);
-        $drawing->setWidth(150);
-        $drawing->setOffsetX(70);
-        $drawing->setOffsetY(0);
-        $drawing->setCoordinates('J104');
+        $drawing->setHeight(60);
+        $drawing->setWidth(130);
+        $drawing->setOffsetX(-60);
+        $drawing->setOffsetY(-20);    
+        $drawing->setCoordinates('L108');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setPath(public_path("images/MLC_SEAL.png"));
         $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(150);
-        $drawing2->setWidth(150);
-        $drawing2->setOffsetX(0);
-        $drawing2->setOffsetY(5);
-        $drawing2->setCoordinates('G104');
+        $drawing2->setHeight(100);
+        $drawing2->setWidth(100);
+        $drawing2->setOffsetX(40);
+        $drawing2->setOffsetY(-40);
+        $drawing2->setCoordinates('L105');
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setPath(public_path("images/mlc_klcsm.png"));
         $drawing3->setResizeProportional(false);
-        $drawing3->setHeight(100);
-        $drawing3->setWidth(200);
-        $drawing3->setOffsetX(50);
-        $drawing3->setOffsetY(150);
-        $drawing3->setCoordinates('K103');
+        $drawing3->setHeight(90);
+        $drawing3->setWidth(260);
+        $drawing3->setOffsetX(2);
+        $drawing3->setOffsetY(2);
+        $drawing3->setCoordinates('G104');
 
         return [$drawing, $drawing2, $drawing3];
     }

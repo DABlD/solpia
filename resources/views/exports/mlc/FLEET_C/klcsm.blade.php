@@ -396,10 +396,10 @@
 	{{ $d1("9. Seafarer’s employment agreement shall continue to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to suspend or terminate it.") }}
 
 	{{ $fill() }}
-	{{ $d1("10. Shipowner shall cover the health and social security protection benefits to be provided to the seafarer by due process of law. And terms not regulated in this contract will follow the one that is more advantageous to both parties comparing the Laws of Flag State / CBA. ) }}
+	{{ $d1("10. Shipowner shall cover the health and social security protection benefits to be provided to the seafarer by due process of law. And terms not regulated in this contract will follow the one that is more advantageous to both parties comparing the Laws of Flag State / CBA.") }}
 
 	{{ $fill() }}
-	{{ $d1("11. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer recruitment and placement. (other than the cost of the seafarer obtaining the seafarer’s book and a passport or other similar personal travel documents.). If the seafarer found that, the fact should be noticed to the shipowner immediately. }}
+	{{ $d1("11. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer recruitment and placement. (other than the cost of the seafarer obtaining the seafarer’s book and a passport or other similar personal travel documents.). If the seafarer found that, the fact should be noticed to the shipowner immediately.") }}
 	
 	{{ $fill() }}
 	<tr>
