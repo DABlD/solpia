@@ -403,14 +403,14 @@
 	
 	{{ $fill() }}
 	<tr>
-		<td colspan="4">11. The place of conclude contract:</td>
+		<td colspan="4">12. The place of conclude contract:</td>
 		<td colspan="5" style="{{ $blue }} {{ $bc }}">MANILA, PHILIPPINES</td>
 		<td colspan="3"></td>
 	</tr>
 
 	{{ $fill() }}
 	<tr>
-		<td colspan="4">12. The time of conclude contract (dd/mm/yy)</td>
+		<td colspan="4">13. The time of conclude contract (dd/mm/yy)</td>
 		<td colspan="5" style="{{ $bc }} {{ $blue }}">{{ now()->format('l, F j, Y') }}</td>
 	</tr>
 
