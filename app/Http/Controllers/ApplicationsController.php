@@ -1913,8 +1913,10 @@ class ApplicationsController extends Controller
                     // $q->orWhere('a.provincial_address', 'like', "%$i2%");
                     // $q->orWhere('a.provincial_address', 'like', "%$i3%");
                 })
+                ->where('pa.status', "Vacation")
                 ->join('applicants as a', 'a.user_id', '=', 'users.id')
-                ->select('address', 'fname', 'lname', 'contact', 'fleet', 'users.id', 'a.id as aid', 'a.provincial_address')
+                ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
+                ->select('address', 'fname', 'lname', 'contact', 'fleet', 'users.id', 'a.id as aid', 'a.provincial_address', 'pa.status')
                 ->get();
 
         foreach($crews as $crew){
