@@ -168,4 +168,78 @@ foreach($users as $user){
 die;
 
 
-<!-- GET ALL ACTIVE FLEET B CREW -->
+<!-- CE JOEY CADETS LIST -->
+
+$lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                    ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                    ->join('users as u', 'u.id', '=', 'a.user_id')
+                    ->where('joining_date', '>=', '2024-08-15')
+                    ->where('fleet', '=', 'TOEI')
+                    ->get();
+
+$lups->load('rank');
+$lups->load('vessel');
+$lups->load('applicant.user');
+$lups->load('applicant.sea_service');
+
+foreach($lups as $lup){
+    $temp = $lup->applicant->sea_service->sortBy('sign_on');
+    $bool = false;
+
+    if(in_array($lup->rank_id, [14, 19])){
+        $bool = true;
+    }
+    elseif(sizeof($temp)){
+        foreach($temp as $ss){
+            if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+                $bool = true;
+            }
+        }
+    }
+    else{
+        $bool = true;
+    }
+
+    if($bool){
+        echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->joining_date . '<br>';
+    }
+}
+
+echo '<br><br><br>';
+echo '~~~~~~~~~~~~~~~~~~~';
+echo '<br>';
+
+$lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                            ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                            ->join('users as u', 'u.id', '=', 'a.user_id')
+                            ->where('disembarkation_date', '>=', '2024-06-16')
+                            ->where('fleet', '=', 'TOEI')
+                            ->get();
+
+$lups->load('rank');
+$lups->load('vessel');
+$lups->load('applicant.user');
+$lups->load('applicant.sea_service');
+
+
+foreach($lups as $lup){
+    $temp = $lup->applicant->sea_service->sortBy('sign_on');
+    $bool = false;
+
+    foreach($temp as $ss){
+        if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+            $bool = true;
+        }
+    }
+
+    if($bool){
+        if(str_contains($lup->status, "On Board")){
+            echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->disembarkation_date . '<br>';
+        }
+        else{
+            $temp2 = $temp->last();
+            echo $lup->lname . ', ' . $lup->fname . ';' . $temp2->rank2->abbr . ';' . $temp2->vessel_name . ';' . $temp2->sign_off . '<br>';
+        }
+    }
+
+}
