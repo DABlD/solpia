@@ -69,6 +69,17 @@
 			$sb = $docu;
 		}
 	}
+
+	$position = $data->pro_app->rank->abbr;
+	if($position == "C/O"){
+		$position = "COFF";
+	}
+	elseif($position == "2/O"){
+		$position = "2OFF";
+	}
+	elseif($position == "3/O"){
+		$position = "3OFF";
+	}
 @endphp
 
 <table>
@@ -128,7 +139,7 @@
 			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
 		</td>
 		<td style="{{ $center }}">Position</td>
-		<td colspan="3" style="{{ $center }}">{{ $data->position }}</td>
+		<td colspan="3" style="{{ $center }}">{{ $position }}</td>
 	</tr>
 
 	<tr>
