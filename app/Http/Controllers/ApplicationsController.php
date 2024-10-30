@@ -1889,78 +1889,49 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
-                            ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
-                            ->join('users as u', 'u.id', '=', 'a.user_id')
-                            ->where('joining_date', '>=', '2024-08-15')
-                            ->where('fleet', '=', 'TOEI')
-                            ->get();
+        $provinces = ["ABRA","AGUSAN DEL NORTE","AGUSAN DEL SUR","AKLAN","ALBAY","ANTIQUE","APAYAO","AURORA","BASILAN","BATAAN","BATANES","BATANGAS","BENGUET","BILIRAN","BOHOL","BUKIDNON","BULACAN","CAGAYAN","CAMARINES NORTE","CAMARINES SUR","CAMIGUIN","CAPIZ","CATANDUANES","CAVITE","CEBU","COTABATO","DAVAO","DINAGAT ISLANDS","EASTERN SAMAR","GUIMARAS","IFUGAO","ILOCOS NORTE","ILOCOS SUR","ILOILO","ISABELA","KALINGA","LA UNION","LAGUNA","LANAO DEL NORTE","LANAO DEL SUR","LEYTE","MAGUINDANAO","MARINDUQUE","MASBATE","MISAMIS OCCIDENTAL","MISAMIS ORIENTAL","MOUNTAIN PROVINCE","NEGROS OCCIDENTAL","NEGROS ORIENTAL","NORTHERN SAMAR","NUEVA ECIJA","NUEVA VIZCAYA","OCCIDENTAL MINDORO","ORIENTAL MINDORO","PALAWAN","PAMPANGA","PANGASINAN","QUEZON","QUIRINO","RIZAL","ROMBLON","SAMAR","SARANGANI","SIQUIJOR","SORSOGON","SOUTH COTABATO","SOUTHERN LEYTE","SULTAN KUDARAT","SULU","SURIGAO DEL NORTE","SURIGAO DEL SUR","TARLAC","TAWI-TAWI","WESTERN SAMAR","ZAMBALES","ZAMBOANGA DEL NORTE","ZAMBOANGA DEL SUR","ZAMBOANGA SIBUGAY"];
 
-        $lups->load('rank');
-        $lups->load('vessel');
-        $lups->load('applicant.user');
-        $lups->load('applicant.sea_service');
+        $cities = ["CALOOCAN","LAS PIÑAS","MAKATI","MALABON","MANDALUYONG","MANILA","MARIKINA","MUNTINLUPA","NAVOTAS","PARAÑAQUE","PASAY","PASIG","PATEROS","QUEZON CITY","SAN JUAN","TAGUIG","VALENZUELA"];
 
-        foreach($lups as $lup){
-            $temp = $lup->applicant->sea_service->sortBy('sign_on');
-            $bool = false;
+        $crews = User::where('role', 'Applicant')
+                ->where('fleet', "TOEI")
+                ->where(function($q){
 
-            if(in_array($lup->rank_id, [14, 19])){
-                $bool = true;
-            }
-            elseif(sizeof($temp)){
-                foreach($temp as $ss){
-                    if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
-                        $bool = true;
+                    $i1 = "CALOOCAN";
+
+                    $q->where('address', 'like', "%$i1%");
+                    $q->orWhere('a.provincial_address', 'like', "%$i1%");
+
+                    $locations = ["Caloocan", "Las Piñas", "Makati", "Malabon", "Mandaluyong", "Manila", "Marikina", "Muntinlupa", "Navotas", "Parañaque", "Pasay", "Pasig", "Pateros", "Quezon City", "San Juan", "Taguig", "Valenzuela", "Cavite", "Rizal", "Metro Manila", "Laguna"];
+
+                    foreach($locations as $location){
+                        $q->orWhere('a.provincial_address', 'like', "%$location%");
                     }
-                }
+
+                    // $q->orWhere('address', 'like', "%$i2%");
+                    // $q->orWhere('address', 'like', "%$i3%");
+                    // $q->orWhere('a.provincial_address', 'like', "%$i2%");
+                    // $q->orWhere('a.provincial_address', 'like', "%$i3%");
+                })
+                ->join('applicants as a', 'a.user_id', '=', 'users.id')
+                ->select('address', 'fname', 'lname', 'contact', 'fleet', 'users.id', 'a.id as aid', 'a.provincial_address')
+                ->get();
+
+        foreach($crews as $crew){
+            // GET RANK
+            $rank = null;
+            if(isset($crew->crew->pro_app->rank)){
+                $rank = $crew->crew->pro_app->rank->abbr;
             }
             else{
-                $bool = true;
+                continue;
             }
 
-            if($bool){
-                echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->joining_date . '<br>';
-            }
-        }
-
-        echo '<br><br><br>';
-        echo '~~~~~~~~~~~~~~~~~~~';
-        echo '<br>';
-
-        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
-                                    ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
-                                    ->join('users as u', 'u.id', '=', 'a.user_id')
-                                    ->where('disembarkation_date', '>=', '2024-06-16')
-                                    ->where('fleet', '=', 'TOEI')
-                                    ->get();
-
-        $lups->load('rank');
-        $lups->load('vessel');
-        $lups->load('applicant.user');
-        $lups->load('applicant.sea_service');
-
-
-        foreach($lups as $lup){
-            $temp = $lup->applicant->sea_service->sortBy('sign_on');
-            $bool = false;
-
-            foreach($temp as $ss){
-                if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
-                    $bool = true;
-                }
+            if($crew->contact == ""){
+                $crew->contact = $crew->crew->provincial_contact;
             }
 
-            if($bool){
-                if(str_contains($lup->status, "On Board")){
-                    echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->disembarkation_date . '<br>';
-                }
-                else{
-                    $temp2 = $temp->last();
-                    echo $lup->lname . ', ' . $lup->fname . ';' . $temp2->rank2->abbr . ';' . $temp2->vessel_name . ';' . $temp2->sign_off . '<br>';
-                }
-            }
-
+            echo "$crew->fname $crew->lname ; $crew->fleet ; $rank ; $crew->contact ; $crew->address ; $crew->provincial_address <br>";
         }
     }
 
