@@ -1902,7 +1902,7 @@ class ApplicationsController extends Controller
                     $q->where('address', 'like', "%$i1%");
                     $q->orWhere('a.provincial_address', 'like', "%$i1%");
 
-                    $locations = ["Caloocan", "Las Piñas", "Makati", "Malabon", "Mandaluyong", "Manila", "Marikina", "Muntinlupa", "Navotas", "Parañaque", "Pasay", "Pasig", "Pateros", "Quezon City", "San Juan", "Taguig", "Valenzuela", "Cavite", "Rizal", "Metro Manila", "Laguna"];
+                    $locations = ["Caloocan", "Las Piñas", "Makati", "Malabon", "Mandaluyong", "Manila", "Marikina", "Muntinlupa", "Navotas", "Parañaque", "Pasay", "Pasig", "Pateros", "Quezon City", "San Juan", "Taguig", "Valenzuela", "Cavite", "Rizal", "Metro Manila", "Laguna", "Bulacan"];
 
                     foreach($locations as $location){
                         $q->orWhere('a.provincial_address', 'like', "%$location%");
