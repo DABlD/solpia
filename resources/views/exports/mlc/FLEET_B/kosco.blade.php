@@ -70,16 +70,9 @@
 		}
 	}
 
-	$position = $data->pro_app->rank->abbr;
-	if($position == "C/O"){
-		$position = "COFF";
-	}
-	elseif($position == "2/O"){
-		$position = "2OFF";
-	}
-	elseif($position == "3/O"){
-		$position = "3OFF";
-	}
+	$position = $data->pro_app->rank->importName;
+	$position = str_replace('ASST.', 'ASSISTANT', $position);
+	$position = str_replace('ENGR', 'ENGINEER', $position);
 @endphp
 
 <table>
