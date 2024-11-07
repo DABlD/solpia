@@ -5,11 +5,11 @@
 
 		<div class="user-panel">
 			<div class="pull-left image">
-				@if(in_array(auth()->user()->id, [23,5963]))
+				{{-- @if(in_array(auth()->user()->id, [23,5963]))
 					<img src="{{ asset('images/g1.png')}}" class="img-circle" alt="User Image">
-				@else
+				@else --}}
 					<img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image">
-				@endif
+				{{-- @endif --}}
 			</div>
 			<div class="pull-left info">
 				<p>{{ auth()->user()->fullname }}</p>
