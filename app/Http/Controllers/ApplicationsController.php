@@ -624,9 +624,12 @@ class ApplicationsController extends Controller
                 $name = $applicant->sea_service->sortByDesc('sign_off')->first()->rank;
                 $applicant->rank = Rank::where('name', $name)->first();
             }
-			else{
-				$applicant->rank = null;
+			elseif($applicant->document_flag->count()){
+				$applicant->rank = Rank::find($applicant->document_flag->latest()->rank);
 			}
+            else{
+                $applicant->rank = null;
+            }
         }
 
         // SORT
@@ -1889,51 +1892,80 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
-        $provinces = ["ABRA","AGUSAN DEL NORTE","AGUSAN DEL SUR","AKLAN","ALBAY","ANTIQUE","APAYAO","AURORA","BASILAN","BATAAN","BATANES","BATANGAS","BENGUET","BILIRAN","BOHOL","BUKIDNON","BULACAN","CAGAYAN","CAMARINES NORTE","CAMARINES SUR","CAMIGUIN","CAPIZ","CATANDUANES","CAVITE","CEBU","COTABATO","DAVAO","DINAGAT ISLANDS","EASTERN SAMAR","GUIMARAS","IFUGAO","ILOCOS NORTE","ILOCOS SUR","ILOILO","ISABELA","KALINGA","LA UNION","LAGUNA","LANAO DEL NORTE","LANAO DEL SUR","LEYTE","MAGUINDANAO","MARINDUQUE","MASBATE","MISAMIS OCCIDENTAL","MISAMIS ORIENTAL","MOUNTAIN PROVINCE","NEGROS OCCIDENTAL","NEGROS ORIENTAL","NORTHERN SAMAR","NUEVA ECIJA","NUEVA VIZCAYA","OCCIDENTAL MINDORO","ORIENTAL MINDORO","PALAWAN","PAMPANGA","PANGASINAN","QUEZON","QUIRINO","RIZAL","ROMBLON","SAMAR","SARANGANI","SIQUIJOR","SORSOGON","SOUTH COTABATO","SOUTHERN LEYTE","SULTAN KUDARAT","SULU","SURIGAO DEL NORTE","SURIGAO DEL SUR","TARLAC","TAWI-TAWI","WESTERN SAMAR","ZAMBALES","ZAMBOANGA DEL NORTE","ZAMBOANGA DEL SUR","ZAMBOANGA SIBUGAY"];
+        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                            ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                            ->join('users as u', 'u.id', '=', 'a.user_id')
+                            ->where('joining_date', '>=', '2024-09-15')
+                            ->where('joining_date', '<=', '2024-10-31')
+                            ->where('fleet', '=', 'TOEI')
+                            ->get();
 
-        $cities = ["CALOOCAN","LAS PIÑAS","MAKATI","MALABON","MANDALUYONG","MANILA","MARIKINA","MUNTINLUPA","NAVOTAS","PARAÑAQUE","PASAY","PASIG","PATEROS","QUEZON CITY","SAN JUAN","TAGUIG","VALENZUELA"];
+        $lups->load('rank');
+        $lups->load('vessel');
+        $lups->load('applicant.user');
+        $lups->load('applicant.sea_service');
 
-        $crews = User::where('role', 'Applicant')
-                ->where('fleet', "TOEI")
-                ->where(function($q){
+        foreach($lups as $lup){
+            $temp = $lup->applicant->sea_service->sortBy('sign_on');
+            $bool = false;
 
-                    $i1 = "CALOOCAN";
-
-                    $q->where('address', 'like', "%$i1%");
-                    $q->orWhere('a.provincial_address', 'like', "%$i1%");
-
-                    $locations = ["Caloocan", "Las Piñas", "Makati", "Malabon", "Mandaluyong", "Manila", "Marikina", "Muntinlupa", "Navotas", "Parañaque", "Pasay", "Pasig", "Pateros", "Quezon City", "San Juan", "Taguig", "Valenzuela", "Cavite", "Rizal", "Metro Manila", "Laguna", "Bulacan"];
-
-                    foreach($locations as $location){
-                        $q->orWhere('a.provincial_address', 'like', "%$location%");
+            if(in_array($lup->rank_id, [14, 19])){
+                $bool = true;
+            }
+            elseif(sizeof($temp)){
+                foreach($temp as $ss){
+                    if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+                        $bool = true;
                     }
-
-                    // $q->orWhere('address', 'like', "%$i2%");
-                    // $q->orWhere('address', 'like', "%$i3%");
-                    // $q->orWhere('a.provincial_address', 'like', "%$i2%");
-                    // $q->orWhere('a.provincial_address', 'like', "%$i3%");
-                })
-                ->where('pa.status', "Vacation")
-                ->join('applicants as a', 'a.user_id', '=', 'users.id')
-                ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
-                ->select('address', 'fname', 'lname', 'contact', 'fleet', 'users.id', 'a.id as aid', 'a.provincial_address', 'pa.status')
-                ->get();
-
-        foreach($crews as $crew){
-            // GET RANK
-            $rank = null;
-            if(isset($crew->crew->pro_app->rank)){
-                $rank = $crew->crew->pro_app->rank->abbr;
+                }
             }
             else{
-                continue;
+                $bool = true;
             }
 
-            if($crew->contact == ""){
-                $crew->contact = $crew->crew->provincial_contact;
+            if($bool){
+                echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->joining_date . '<br>';
+            }
+        }
+
+        echo '<br><br><br>';
+        echo '~~~~~~~~~~~~~~~~~~~';
+        echo '<br>';
+
+        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                                    ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                                    ->join('users as u', 'u.id', '=', 'a.user_id')
+                                    ->where('disembarkation_date', '>=', '2024-09-15')
+                                    ->where('disembarkation_date', '<=', '2024-10-31')
+                                    ->where('fleet', '=', 'TOEI')
+                                    ->get();
+
+        $lups->load('rank');
+        $lups->load('vessel');
+        $lups->load('applicant.user');
+        $lups->load('applicant.sea_service');
+
+
+        foreach($lups as $lup){
+            $temp = $lup->applicant->sea_service->sortBy('sign_on');
+            $bool = false;
+
+            foreach($temp as $ss){
+                if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+                    $bool = true;
+                }
             }
 
-            echo "$crew->fname $crew->lname ; $crew->fleet ; $rank ; $crew->contact ; $crew->address ; $crew->provincial_address <br>";
+            if($bool){
+                if(str_contains($lup->status, "On Board")){
+                    echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->disembarkation_date . '<br>';
+                }
+                else{
+                    $temp2 = $temp->last();
+                    echo $lup->lname . ', ' . $lup->fname . ';' . $temp2->rank2->abbr . ';' . $temp2->vessel_name . ';' . $temp2->sign_off . '<br>';
+                }
+            }
+
         }
     }
 
