@@ -494,6 +494,10 @@ class ApplicationsController extends Controller
         $applicant->ranks2 = Rank::all()->groupBy('id');
         $applicant->ranks[''] = '';
 
+        if($applicant->document_flag->count()){
+            $applicant->flagRank = Rank::find($applicant->document_flag->last()->rank);
+        }
+
         foreach(['document_id', 'document_flag', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
             foreach($applicant->$docuType as $key => $data){
 
@@ -624,8 +628,8 @@ class ApplicationsController extends Controller
                 $name = $applicant->sea_service->sortByDesc('sign_off')->first()->rank;
                 $applicant->rank = Rank::where('name', $name)->first();
             }
-			elseif($applicant->document_flag->count()){
-				$applicant->rank = Rank::find($applicant->document_flag->latest()->rank);
+			elseif($applicant->document_flag->count() || isset($applicant->flagRank)){
+				$applicant->rank = $applicant->flagRank;
 			}
             else{
                 $applicant->rank = null;
