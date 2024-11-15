@@ -53,7 +53,7 @@
 		<td colspan="2">:</td>
 		<td colspan="2" style="{{ $blue }}">{{ $lastVessel ? $lastVessel->vessel_name : "-" }}</td>
 		<td colspan="2" style="{{ $b }}">S/OFF DATE:</td>
-		<td colspan="1" style="{{ $c }}">{{ isset($lastVessel) ? $lastVessel->sign_off->format('d-M-Y') : "-" }}</td>
+		<td colspan="1" style="{{ $c }}">{{ isset($lastVessel->sign_off) ? $lastVessel->sign_off->format('d-M-Y') : "-" }}</td>
 	</tr>
 
 	<tr>
