@@ -270,6 +270,8 @@
 					<option value="GENERAL TRAINING RECORD BOOK">&nbsp;&nbsp;&nbsp;&nbsp;GENERAL TRAINING RECORD BOOK</option>
 					<option value="IN HOUSE TRAINING CERT WITH ISM">&nbsp;&nbsp;&nbsp;&nbsp;IN HOUSE TRAINING CERT WITH ISM</option>
 					<option value="PDOS">&nbsp;&nbsp;&nbsp;&nbsp;PDOS - PRE-DEPARTURE ORIENTATION SEMINAR</option>
+					<option value="HAZMAT">&nbsp;&nbsp;&nbsp;&nbsp;HAZMAT - Dangerous, Hazardous and Harmful Substance (Bulk)</option>
+					<option value="MENTAL HEALTH">&nbsp;&nbsp;&nbsp;&nbsp;Mental Health Awareness</option>
 					<option value="MCRA">&nbsp;&nbsp;&nbsp;&nbsp;MCRA - MARITIME CYBER RISK AWARENESS/MANAGEMENT</option>
 					<option value="GTRB">&nbsp;&nbsp;&nbsp;&nbsp;GTRB - GENERAL TRAINING RECORD BOOK</option>
 					<option value="BASIC MARITIME COMPUTER COURSE">&nbsp;&nbsp;&nbsp;&nbsp;BASIC MARITIME COMPUTER COURSE</option>
