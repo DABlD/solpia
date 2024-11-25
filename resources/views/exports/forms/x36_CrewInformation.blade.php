@@ -51,7 +51,7 @@
 	</tr>
 	<tr>
 		<td>RANK:</td>
-		<td>{{ $data->pro_app->rank->abbr }}</td>
+		<td>{{ $data->rank }}</td>
 	</tr>
 	<tr>
 		<td>DATE OF BIRTH:</td>
