@@ -531,7 +531,7 @@
 	    	$('[data-original-title="Export"]').on('click', application => {
                 swal({
                     title: 'Select Export Type',
-                    input: 'select',
+                    input: 'select'
                     inputOptions: {
                         Biodata:                        'Biodata',
                         WalangLagay:                    'Walang Lagay',
@@ -549,7 +549,10 @@
                         X20_DebriefingForm:             'Debriefing Form',
                         X30_POSSMSeaService:            'Sea Service - POSSM',
                         X34_DocumentDeficiencyNotice:   'Document Deficiency Notice',
-                        X35_PostMedicalForm:            'Post Medical Form Request'
+                        X35_PostMedicalForm:            'Post Medical Form Request',
+                        @if(in_array(auth()->user()->id, [23,4580]))
+                            X36_CrewInformation:            'Crew Information - Sir Kit',
+                        @endif
                     },
                     showCancelButton: true,
                     cancelButtonColor: '#f76c6b'
