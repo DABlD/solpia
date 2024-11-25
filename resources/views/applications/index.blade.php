@@ -531,7 +531,7 @@
 	    	$('[data-original-title="Export"]').on('click', application => {
                 swal({
                     title: 'Select Export Type',
-                    input: 'select'
+                    input: 'select',
                     inputOptions: {
                         Biodata:                        'Biodata',
                         WalangLagay:                    'Walang Lagay',
