@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class X36_CrewInformation implements FromView, WithEvents//, ShouldAutoSize//, WithDrawings//
+class X36_CrewInformation implements FromView, WithEvents, WithDrawings//, ShouldAutoSize////
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -503,27 +503,25 @@ class X36_CrewInformation implements FromView, WithEvents//, ShouldAutoSize//, W
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Letter Head');
-        $drawing->setDescription('Letter Head');
-        $drawing->setPath(public_path("images/letter_head.jpg"));
+        $drawing->setPath(public_path("images/shoe_size_chart.png"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $drawing->setHeight(400);
+        $drawing->setWidth(400);
+        $drawing->setOffsetX(-50);
+        $drawing->setOffsetY(5);
+        $drawing->setCoordinates('C12');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
+        // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        // $drawing2->setName('Avatar');
+        // $drawing2->setDescription('Avatar');
+        // $drawing2->setPath(public_path($this->data->user->avatar));
+        // $drawing2->setResizeProportional(false);
+        // $drawing2->setHeight(230);
+        // $drawing2->setWidth(230);
+        // $drawing2->setOffsetX(5);
+        // $drawing2->setOffsetY(2);
+        // $drawing2->setCoordinates('C3');
 
-        return [$drawing, $drawing2];
+        return [$drawing];
     }
 }
