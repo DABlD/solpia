@@ -34,65 +34,67 @@
 			$college = $eb;
 		}
 	}
+
+	$blue = 'color: #0000FF;';
 @endphp
 
 <table>
 	<tr>
 		<td>FIRST NAME</td>
-		<td>{{ $data->user->fname }}</td>
+		<td style="{{ $blue }}">{{ $data->user->fname }}</td>
 	</tr>
 	<tr>
 		<td>MIDDLE NAME</td>
-		<td>{{ $data->user->mname }}</td>
+		<td style="{{ $blue }}">{{ $data->user->mname }}</td>
 	</tr>
 	<tr>
 		<td>LAST NAME</td>
-		<td>{{ $data->user->lname }}</td>
+		<td style="{{ $blue }}">{{ $data->user->lname }}</td>
 	</tr>
 	<tr>
 		<td>RANK:</td>
-		<td>{{ $data->rank }}</td>
+		<td style="{{ $blue }}">{{ $data->rank }}</td>
 	</tr>
 	<tr>
 		<td>DATE OF BIRTH:</td>
-		<td>{{ isset($data->user->birthday) ? $data->user->birthday->format('F j, Y') : "-" }}</td>
+		<td style="{{ $blue }}">{{ isset($data->user->birthday) ? $data->user->birthday->format('F j, Y') : "-" }}</td>
 	</tr>
 	<tr>
 		<td>BIRTH PLACE:</td>
-		<td>{{ $data->birth_place }}</td>
+		<td style="{{ $blue }}">{{ $data->birth_place }}</td>
 	</tr>
 	<tr>
 		<td>MARTIAL STATUS: </td>
-		<td>{{ $data->civil_status }}</td>
+		<td style="{{ $blue }}">{{ $data->civil_status }}</td>
 	</tr>
 	<tr>
 		<td>RELIGION:</td>
-		<td>{{ $data->religion }}</td>
+		<td style="{{ $blue }}">{{ $data->religion }}</td>
 	</tr>
 	<tr>
 		<td>NAME OF FATHER</td>
-		<td>{{ isset($father) ? $father->fullName2 : "-" }}</td>
+		<td style="{{ $blue }}">{{ isset($father) ? $father->fullName2 : "-" }}</td>
 		<td>DOB:</td>
-		<td>{{ isset($father->birthday) ? $father->birthday->format("F j, Y") : "-" }}</td>
+		<td style="{{ $blue }}">{{ isset($father->birthday) ? $father->birthday->format("F j, Y") : "-" }}</td>
 	</tr>
 	<tr>
 		<td>NAME OF MOTHER:</td>
-		<td>{{ isset($mother) ? $mother->fullName2 : "-" }}</td>
+		<td style="{{ $blue }}">{{ isset($mother) ? $mother->fullName2 : "-" }}</td>
 		<td>DOB:</td>
-		<td>{{ isset($mother->birthday) ? $mother->birthday->format("F j, Y") : "-" }}</td>
+		<td style="{{ $blue }}">{{ isset($mother->birthday) ? $mother->birthday->format("F j, Y") : "-" }}</td>
 	</tr>
 	<tr>
 		<td>NAME OF WIFE:</td>
-		<td>{{ isset($spouse) ? $spouse->fullName2 : "-" }}</td>
+		<td style="{{ $blue }}">{{ isset($spouse) ? $spouse->fullName2 : "-" }}</td>
 	</tr>
 	<tr>
 		<td>NAME OF CHILDREN:</td>
-		<td></td>
+		<td style="{{ $blue }}"></td>
 	</tr>
 	@foreach($children as $child)
 		<tr>
 			<td></td>
-			<td>{{ $child->nameFull2 }}</td>
+			<td style="{{ $blue }}">{{ $child->nameFull2 }}</td>
 		</tr>
 	@endforeach
 	<tr>
@@ -101,15 +103,15 @@
 	</tr>
 	<tr>
 		<td>WAISTLINE SIZE (INCH): </td>
-		<td style="text-align: left;">{{ $data->waistline }}</td>
+		<td style="text-align: left; {{ $blue }}">{{ $data->waistline }}</td>
 	</tr>
 	<tr>
 		<td>SAFETY SHOE SIZE (CM):</td>
-		<td style="text-align: left;">{{ $data->shoe_size }}</td>
+		<td style="text-align: left; {{ $blue }}">{{ $data->shoe_size }}</td>
 	</tr>
 	<tr>
 		<td>COVERALL SIZE:</td>
-		<td>{{ $data->clothes_size }}</td>
+		<td style="{{ $blue }}">{{ $data->clothes_size }}</td>
 	</tr>
 	<tr>
 		<td></td>
@@ -117,23 +119,23 @@
 	</tr>
 	<tr>
 		<td>HOME ADDRESS:</td>
-		<td>{{ $data->user->address ?? $data->provincial_address }}</td>
+		<td style="{{ $blue }}">{{ $data->user->address ?? $data->provincial_address }}</td>
 	</tr>
 	<tr>
 		<td>EMAIL ADD:</td>
-		<td>{{ $data->user->email }}</td>
+		<td style="{{ $blue }}">{{ $data->user->email }}</td>
 	</tr>
 	<tr>
 		<td>FACEBOOK NAME: </td>
-		<td></td>
+		<td style="{{ $blue }}"></td>
 	</tr>
 	<tr>
 		<td>TIN NO. :</td>
-		<td>{{ $data->tin }}</td>
+		<td style="{{ $blue }}">{{ $data->tin }}</td>
 	</tr>
 	<tr>
 		<td>SSS NO.: </td>
-		<td>{{ $data->sss }}</td>
+		<td style="{{ $blue }}">{{ $data->sss }}</td>
 	</tr>
 	<tr>
 		<td></td>
@@ -141,18 +143,18 @@
 	</tr>
 	<tr>
 		<td>Educational Background: </td>
-		<td></td>
+		<td style="{{ $blue }}"></td>
 	</tr>
 	<tr>
 		<td>GRADE SCHOOL</td>
-		<td colspan="3">{{ isset($elem) ? $elem->school : "-" }}</td>
+		<td colspan="3" style="{{ $blue }}">{{ isset($elem) ? $elem->school : "-" }}</td>
 	</tr>
 	<tr>
 		<td>HIGH SCHOOL</td>
-		<td colspan="3">{{ isset($hs) ? $hs->school : "-" }}</td>
+		<td colspan="3" style="{{ $blue }}">{{ isset($hs) ? $hs->school : "-" }}</td>
 	</tr>
 	<tr>
 		<td>COLLEGE</td>
-		<td colspan="3">{{ isset($college) ? $college->school : "-" }}</td>
+		<td colspan="3" style="{{ $blue }}">{{ isset($college) ? $college->school : "-" }}</td>
 	</tr>
 </table>
