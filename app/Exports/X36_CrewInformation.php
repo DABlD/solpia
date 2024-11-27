@@ -507,9 +507,9 @@ class X36_CrewInformation implements FromView, WithEvents, WithDrawings//, Shoul
         $drawing->setResizeProportional(false);
         $drawing->setHeight(400);
         $drawing->setWidth(400);
-        $drawing->setOffsetX(-50);
-        $drawing->setOffsetY(5);
-        $drawing->setCoordinates('C12');
+        $drawing->setOffsetX(2);
+        $drawing->setOffsetY(2);
+        $drawing->setCoordinates('D12');
 
         // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         // $drawing2->setName('Avatar');
