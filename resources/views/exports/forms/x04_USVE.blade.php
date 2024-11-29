@@ -175,7 +175,7 @@
 		<td></td>
 		<td>8.‎</td>
 		<td colspan="10" style="{{ $b }}">
-			Both for REGULAR and SEAVRP applications an LBC delivery fee of PHP 440
+			Both for REGULAR and SEAVRP applications an LBC delivery fee of PHP 430
 		</td>
 	</tr>
 
