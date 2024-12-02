@@ -1936,11 +1936,14 @@ class ApplicationsController extends Controller
         echo '~~~~~~~~~~~~~~~~~~~';
         echo '<br>';
 
+        $start = '2024-10-10';
+        $end = '2024-11-30';
+
         $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
                                     ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
                                     ->join('users as u', 'u.id', '=', 'a.user_id')
-                                    ->where('disembarkation_date', '>=', '2024-10-10')
-                                    ->where('disembarkation_date', '<=', '2024-11-30')
+                                    ->where('disembarkation_date', '>=', $start)
+                                    ->where('disembarkation_date', '<=', $end)
                                     ->where('fleet', '=', 'TOEI')
                                     ->get();
 
@@ -1949,7 +1952,8 @@ class ApplicationsController extends Controller
         $lups->load('applicant.user');
         $lups->load('applicant.sea_service');
 
-
+        echo $start . ' -> ' . $end . '<br><br>';
+        
         foreach($lups as $lup){
             $temp = $lup->applicant->sea_service->sortBy('sign_on');
             $bool = false;
