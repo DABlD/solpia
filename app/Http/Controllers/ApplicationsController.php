@@ -1896,11 +1896,16 @@ class ApplicationsController extends Controller
     }
 
     public function tempFunc(){
+        $start = '2024-10-10';
+        $end = '2024-11-30';
+
+        echo $start . ' -> ' . $end . '<br><br>';
+
         $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
                             ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
                             ->join('users as u', 'u.id', '=', 'a.user_id')
-                            ->where('joining_date', '>=', '2024-09-15')
-                            ->where('joining_date', '<=', '2024-10-31')
+                            ->where('joining_date', '>=', $start)
+                            ->where('joining_date', '<=', $end)
                             ->where('fleet', '=', 'TOEI')
                             ->get();
 
@@ -1936,9 +1941,6 @@ class ApplicationsController extends Controller
         echo '~~~~~~~~~~~~~~~~~~~';
         echo '<br>';
 
-        $start = '2024-10-10';
-        $end = '2024-11-30';
-
         $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
                                     ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
                                     ->join('users as u', 'u.id', '=', 'a.user_id')
@@ -1952,8 +1954,6 @@ class ApplicationsController extends Controller
         $lups->load('applicant.user');
         $lups->load('applicant.sea_service');
 
-        echo $start . ' -> ' . $end . '<br><br>';
-        
         foreach($lups as $lup){
             $temp = $lup->applicant->sea_service->sortBy('sign_on');
             $bool = false;
