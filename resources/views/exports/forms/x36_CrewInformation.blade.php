@@ -157,4 +157,36 @@
 		<td>COLLEGE</td>
 		<td colspan="3" style="{{ $blue }}">{{ isset($college) ? $college->school : "-" }}</td>
 	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>MISMO ACCOUNT</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>ㅤㅤㅤUSERNAME: </td>
+		<td style="{{ $blue }}"></td>
+	</tr>
+	<tr>
+		<td>ㅤㅤㅤPASSWORD: </td>
+		<td style="{{ $blue }}"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>E-REGISTRATION DMW</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>ㅤㅤㅤUSERNAME: </td>
+		<td style="{{ $blue }}"></td>
+	</tr>
+	<tr>
+		<td>ㅤㅤㅤPASSWORD: </td>
+		<td style="{{ $blue }}"></td>
+	</tr>
 </table>
