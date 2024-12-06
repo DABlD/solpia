@@ -363,14 +363,14 @@
 	</tr>
 
 	<tr>
-		<td colspan="4">Place of Birth</td>
+		<td colspan="4">Place of Birth: {{ $data->birth_place }}</td>
 		<td colspan="3">Date of Birth</td>
 		<td colspan="3">Weight (Kg)</td>
 		<td colspan="2">Height (cm)</td>
 	</tr>
 
 	<tr>
-		<td colspan="4">{{ $data->birth_place }}</td>
+		<td colspan="4">Religion: {{ $data->religion }}</td>
 		<td colspan="3">{{ $data->user->birthday ? $data->user->birthday->format('d-M-Y') : "---" }}</td>
 		<td colspan="3" style="text-align: left;">{{ $data->weight }}</td>
 		<td colspan="2" style="text-align: left;">{{ $data->height }}</td>
