@@ -291,7 +291,7 @@
 		{{ $con("JOINING FINAL BRIEFING") }}
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -302,7 +302,7 @@
 		{{ $con("INTERGIS BRIEFING") }}
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -314,7 +314,7 @@
 		{{ $con("DLSM BRIEFING") }}
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -328,7 +328,7 @@
 		{{ $con("NSM - SMM 07 - 16 Briefing pre Joining", 1,1,1) }}
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -337,7 +337,7 @@
 	@else
 		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
