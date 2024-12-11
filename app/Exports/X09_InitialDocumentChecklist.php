@@ -263,16 +263,16 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LSMOP-DC-04 &RREV(03) 16.08.17');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: SMOP-DC-04 &C&IEFFECTIVE DATE: 01 SEPT 17 &RRev No. 1.0 12/11/2024');
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToPage(false);
                 $event->sheet->getDelegate()->getPageSetup()->setScale(72);
 
                 $event->sheet->getDelegate()->setTitle('Document Checklist', false);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
@@ -337,7 +337,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings
 
                 // HC VC
                 $h[4] = [
-                    'M30:R31'
+                    'M31:R32'
                 ];
 
                 // HL
@@ -357,7 +357,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'F33', 'K63'
+                    'F34', 'K64'
                 ];
 
                 foreach($h as $key => $value) {
@@ -397,7 +397,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'M30:R30'
+                    'M31:R31'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -468,24 +468,29 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings
                     'G22:I22',
                     'G23:I23',
                     'G24:I24',
-                    'G25:I25',
-                    'G26:I26',
-                    'G31:I31',
-                    'G32:I32',
-                    'G33:I33',
-                    'G34:I34',
-                    'A60:H60',
-                    'C63:H63',
-                    'K63:R63',
-                    'L53:S53',
-                    'L54:S54',
-                    'L55:S55',
-                    'J56:S56',
-                    'J57:S57',
-                    'J58:S58',
-                    'J59:S59',
-                    'J60:S60',
-                    'J61:S61',
+                    'G24:I25',
+                    'G25:I26',
+                    'G26:I27',
+                    'G31:I32',
+                    'G32:I33',
+                    'G33:I34',
+                    'G34:I35',
+                    'G37:J37',
+                    'L37:R37',
+                    'G40:I40',
+                    'G41:I41',
+                    'A65:H66',
+                    'C68:H69',
+                    'K68:R69',
+                    'L55:S56',
+                    'L56:S57',
+                    'L57:S58',
+                    'L58:S59',
+                    'J59:S60',
+                    'J60:S61',
+                    'J61:S62',
+                    'J62:S63',
+                    'J65:S66',
                 ]);
 
                 // LBT
@@ -527,9 +532,10 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings
                 $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(15);
 
                 // ROW RESIZE
-                for($i = 3; $i <= 65; $i++){
+                for($i = 3; $i <= 70; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(15);
                 }
+                $event->sheet->getDelegate()->getRowDimension(66)->setRowHeight(20);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
