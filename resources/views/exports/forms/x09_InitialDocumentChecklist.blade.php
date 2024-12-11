@@ -874,8 +874,8 @@
 	</tr>
 
 	<tr>
-		<td></td>
-		<td colspan="5"></td>
+		{{ $cd("SHIPBOARD CULINARY COURSE", 'lc') }}
+		<td colspan="5">SHIPBOARD CULINARY COURSE</td>
 		<td colspan="3"></td>
 		<td colspan="10" style="{{ $bold }}">REMARKS </td>
 	</tr>
