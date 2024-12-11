@@ -18,6 +18,7 @@
 		return $expiry;
 	};
 
+	$cocExpiry = null;
 	$gNum = null;
 	$marpols = [];
 	$cd = function($name, $type, $ref = null) use($data, &$gNum, &$marpols, &$fwd2, $checkExpiry){
@@ -182,6 +183,22 @@
 					}
 				}
 			}
+			elseif($name == "MESSMAN COURSE"){
+				foreach(get_object_vars($data->document_lc) as $docu){
+					if((str_contains($docu->type, "MESSMAN") && str_contains($docu->type, "COURSE")) || (str_contains($docu->type, "MESSMAN") && str_contains($docu->type, "STEWARD"))){
+						$box = "R";
+						$gNum = $checkExpiry($docu);
+					}
+				}
+			}
+			elseif($name == "CONTAINER VESSEL"){
+				foreach(get_object_vars($data->document_lc) as $docu){
+					if(str_contains($docu->type, "CONTAINER VESSEL") || str_contains($docu->type, "CONTAINER OPERATION" || str_contains($docu->type, "CONTAINER FAMILIARIZATION"))){
+						$box = "R";
+						$gNum = $checkExpiry($docu);
+					}
+				}
+			}
 			elseif($name == "MLC"){
 				$ctr = 0;
 				foreach(get_object_vars($data->document_lc) as $docu){
@@ -233,6 +250,7 @@
 						foreach(get_object_vars($data->document_lc) as $docu){
 							if(str_starts_with($docu->type, 'COC') && $docu->issuer != "MARINA"){
 								$name = $docu->type;
+								$cocExpiry = isset($docu->expiry_date) ? $docu->expiry_date->format('d-M-y') : "-";
 							}
 						}
 					}
@@ -360,8 +378,8 @@
 
 	<tr>
 		<td></td>
-		{{ $cd("SRN", "lc") }}
-		<td colspan="4">SRN (RANK):</td>
+		{{ $cd("SID", "lc") }}
+		<td colspan="4">SID:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
 		{{ $cd("MEDICAL FIRST AID - MEFA", 'lc', 'COP') }}
@@ -453,9 +471,9 @@
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
 		{{ $cd("BASIC TRAINING - BT", 'lc') }}
-		<td colspan="3">BT</td>
+		<td colspan="4">BT</td>
 		{{ $cd("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", 'lc') }}
-		<td colspan="4">BTOCT</td>
+		<td colspan="3">BTOCT</td>
 	</tr>
 
 	<tr>
@@ -465,9 +483,9 @@
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
 		{{ $cd("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", 'lc') }}
-		<td colspan="3">PSCRB</td>
+		<td colspan="4">PSCRB</td>
 		{{ $cd("ATOCT", 'lc') }}
-		<td colspan="4">ATOCT</td>
+		<td colspan="3">ATOCT</td>
 	</tr>
 
 	<tr>
@@ -476,9 +494,9 @@
 		<td colspan="3"></td>
 		<td></td>
 		{{ $cd("ADVANCE FIRE FIGHTING - AFF", 'lc') }}
-		<td colspan="3">ATFF</td>
+		<td colspan="4">ATFF</td>
 		{{ $cd("WELDING", 'lc') }}
-		<td colspan="4">WELDING COURSE</td>
+		<td colspan="3">WELDING COURSE</td>
 	</tr>
 
 	<tr>
@@ -509,6 +527,16 @@
 		<td></td>
 		{{ $cd("FAST RESCUE BOAT - FRB", 'lc') }}
 		<td colspan="8">PFRB</td>
+	</tr>
+
+	<tr>
+		<td colspan="4"></td>
+		{{ $cd("SHIP'S COOK ENDORSEMENT", "flag", 'Panama') }}
+		<td>SCC</td>
+		<td colspan="3" style="{{ $center }}"></td>
+		<td></td>
+		
+		<td colspan="8"></td>
 	</tr>
 
 	<tr>
@@ -634,6 +662,22 @@
 
 	<tr>
 		<td></td>
+		<td colspan="5" style="{{ $bold }}">Higher COC License</td>
+		<td colspan="5" style="{{ $bold }}">COC Validity (Expiry Date)</td>
+		<td colspan="8" style="{{ $bold }}">Flag License Validity (Expiry Date)</td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td style="{{ $center }}">Yes</td>
+		<td style="font-family: Wingdings 2; font-size: 14px; {{ $center }}">0</td>
+		<td style="{{ $center }}">No</td>
+		<td style="font-family: Wingdings 2; font-size: 14px; {{ $center }}">0</td>
+		<td></td>
+		<td colspan="4">{{ $cocExpiry }}</td>
+		<td></td>
+		<td colspan="7"></td>
+		<td></td>
 	</tr>
 
 	<tr>
@@ -738,8 +782,8 @@
 		<td colspan="5">BRTM / BTM / BRM</td>
 		<td colspan="3"></td>
 		<td></td>
-		{{ $cd("SHIELDED METAL ARC WELDING", 'lc') }}
-		<td colspan="8">SHIELDED METAL</td>
+		{{ $cd("IGS / COW", 'lc') }}
+		<td colspan="8">IGS / COW</td>
 	</tr>
 
 	<tr>
@@ -757,7 +801,7 @@
 		<td colspan="3"></td>
 		<td></td>
 		{{ $cd("MLC", 'lc') }}
-		<td colspan="8">MLC - FUNCTION 1 3</td>
+		<td colspan="8">MLC - FUNCTION 1 2 3 4</td>
 	</tr>
 
 	<tr>
@@ -766,7 +810,7 @@
 		<td colspan="3"></td>
 		<td></td>
 		{{ $cd("OLC", 'lc') }}
-		<td colspan="8">OLC - FUNCTION 1 2 3</td>
+		<td colspan="8">OLC - FUNCTION 1 2 3 4</td>
 	</tr>
 
 	<tr>
@@ -774,23 +818,23 @@
 		<td colspan="5">COLLISION AVOIDANCE</td>
 		<td colspan="3"></td>
 		<td></td>
-		{{ $cd("SHIPS CATERING", 'lc') }}
-		<td colspan="8">SHIPS CATERING</td>
+		{{ $cd("CONTAINER VESSEL", 'lc') }}
+		<td colspan="8">CONTAINER VESSEL CERTIFICATE</td>
 	</tr>
 
 	<tr>
 		{{ $cd("SSO2", 'lc') }}
 		<td colspan="5">SHIP SAFETY OFFICERS</td>
 		<td colspan="3"></td>
-		<td colspan="10" style="{{ $bold }}">OTHERS:</td>
+		<td></td>
+		{{ $cd("SHIPS CATERING", 'lc') }}
+		<td colspan="8">SHIPS CATERING</td>
 	</tr>
 
 	<tr>
 		<td colspan="6" style="{{ $bold }}">GALLEY DEPARTMENT:</td>
 		<td colspan="3"></td>
-		<td></td>
-		{{ $cd("BLANK", 'lc') }}
-		<td colspan="8"></td>
+		<td colspan="10" style="{{ $bold }}">OTHERS:</td>
 	</tr>
 
 	<tr>
@@ -815,7 +859,39 @@
 		{{ $cd("KC", 'lc') }}
 		<td colspan="5">KOREAN COOKING</td>
 		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("BLANK", 'lc') }}
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		{{ $cd("MESSMAN COURSE", 'lc') }}
+		<td colspan="5">MESSMAN / STEWARD COURSE</td>
+		<td colspan="3"></td>
+		<td></td>
+		{{ $cd("BLANK", 'lc') }}
+		<td colspan="8"></td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td colspan="5"></td>
+		<td colspan="3"></td>
 		<td colspan="10" style="{{ $bold }}">REMARKS </td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td colspan="5"></td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}"></td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td colspan="5"></td>
+		<td colspan="3"></td>
+		<td colspan="10" style="{{ $bold }}"></td>
 	</tr>
 
 	<tr>
@@ -835,26 +911,33 @@
 		<td></td>
 		<td colspan="5"></td>
 		<td colspan="3"></td>
-		<td colspan="10" style="{{ $bold }}"></td>
+		<td colspan="10" style="{{ $bold }} font-style: italic;">VERIFIED BY:</td>
 	</tr>
 
 	<tr>
-		<td colspan="8" style="{{ $bold }} {{ $center }}">{{ auth()->user()->fullname }}</td>
+		<td colspan="8" style="{{ $bold }} {{ $center }}">
+			@if(auth()->user()->id == 6433)
+				Ms. Gladys Anne Frondozo
+			@elseif(auth()->user()->id == 6794)
+				Ms. Monique Balanay
+			@elseif(auth()->user()->id == 7603)
+				Ms. Jeneva Bianca Santos
+			@else
+				{{ auth()->user()->fullname }}
+			@endif
+		</td>
 		<td></td>
 		<td colspan="10" style="{{ $bold }}"></td>
 	</tr>
 
 	<tr>
-		<td colspan="8" style="{{ $bold }} {{ $center }}">{{ auth()->user()->role }}</td>
+		<td colspan="8" style="{{ $bold }} {{ $center }}">Crewing Officer</td>
 		<td></td>
-		<td colspan="10" style="{{ $bold }}"></td>
+		<td colspan="10" style="{{ $bold }} {{ $center }}">Crewing Manager / ACM</td>
 	</tr>
 
 	<tr>
-		<td></td>
-		<td colspan="5"></td>
-		<td colspan="3"></td>
-		<td colspan="10" style="{{ $bold }}"></td>
+		<td colspan="19"></td>
 	</tr>
 
 	<tr>
@@ -868,7 +951,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="8" style="{{ $center }}">CREW COPY</td>
+		<td colspan="8" style="{{ $bold }} {{ $center }}"></td>
 		<td></td>
 		<td></td>
 		<td colspan="8" style="{{ $bold }} {{ $center }}">Crew's Printed Name and Signature</td>
