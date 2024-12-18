@@ -78,8 +78,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "80 Broad Street, Monrovia, Liberia";
         }
         elseif(in_array($applicant->vessel->name, $array4)){
-            $applicant->shipowner = 'KMARIN NO.21B S.A.';
-            $applicant->sAddress = "BICSA Financial Center, 60th Floor, Balboa Avenue, Panama City, Panama";
+            $applicant->shipowner = 'KOTAM NO.21A S.A.';
+            $applicant->sAddress = "80 Broad Street, Monrovia, Liberia";
         }
         elseif(in_array($applicant->vessel->name, $array5)){
             $applicant->shipowner = 'HI GOLD OCEAN KMARIN NO.9B S.A.';
@@ -459,6 +459,13 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     
                 ];
 
+                if(in_array($this->applicant->vessel->name, ['M/V KMARIN ATLANTICA', 'M/V KMARIN AZUR'])){
+                    $h[1] = [];
+                    $h[4] = ['C9:C16','B25:I25'];
+                    $h[7] = ['A1:I17','A18:I29'];
+                    $h['wrap'] = ['A1:I32'];
+                }
+
                 foreach($h as $key => $value) {
                     foreach($value as $col){
                         if($key === 'wrap'){
@@ -562,6 +569,12 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // RBT
                 $cells[14] = array_merge([
                 ]);
+
+                if(in_array($this->applicant->vessel->name, ['M/V KMARIN ATLANTICA', 'M/V KMARIN AZUR'])){
+                    $cells[0] = array_merge(['A3:I24','A25', 'A26:I29']);
+                    $cells[3] = array_merge(['B25:I25']);
+                    $cells[12] = array_merge(['A31:D31', 'F31:I31']);
+                }
                 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
@@ -587,14 +600,25 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // ROW RESIZE
                 $addRows = 1;
                 $arr = [1, 15, 21, 22, 24, 25, 26, 27, 28, 29];
+
+                if(in_array($this->applicant->vessel->name, ['M/V KMARIN ATLANTICA', 'M/V KMARIN AZUR'])){
+                    $event->sheet->getDelegate()->getStyle('A2:I32')->getFont()->setName('Calibri');
+                    $event->sheet->getDelegate()->getStyle('A2:I32')->getFont()->setSize(9);
+                    $arr = [1, 16, 22, 23, 25, 26, 27, 28, 29, 30];
+                }
+
                 for($i = 1; $i <= 32; $i++){
                     if(!in_array($i, $arr)){
                         $event->sheet->getDelegate()->getRowDimension($i + $addRows)->setRowHeight(25);
                     }
                 }
 
-                $event->sheet->getParent()->getActiveSheet()->setBreak('A24', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-                
+                if(in_array($this->applicant->vessel->name, ['M/V KMARIN ATLANTICA', 'M/V KMARIN AZUR'])){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A22', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
+                else{
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A24', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
             },
@@ -624,6 +648,13 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setOffsetX(40);
         $drawing2->setOffsetY(30);
         $drawing2->setCoordinates('C30');
+
+        if(in_array($this->applicant->vessel->name, ['M/V KMARIN ATLANTICA', 'M/V KMARIN AZUR'])){
+            $drawing->setOffsetY(30);
+            $drawing->setCoordinates('A31');
+            $drawing2->setOffsetY(10);
+            $drawing2->setCoordinates('C31');
+        }
 
         return [$drawing, $drawing2];
     }
