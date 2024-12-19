@@ -221,6 +221,7 @@ Route::group([
 			->defaults('icon', 'fa-user-plus')
 			->defaults('name', 'Applicants')
 			->defaults('roles', array('Admin', 'Recruitment Officer'))
+			->defaults('sped', array(4501))
 			->name($name . '.index')
 			->defaults('href', $name);
 
@@ -243,6 +244,7 @@ Route::group([
 			->defaults('icon', 'fa-users')
 			->defaults('name', 'Candidates')
 			->defaults('roles', array('Admin', 'Recruitment Officer', 'Crewing Manager', 'Crewing Officer'))
+			->defaults('sped', array(4501))
 			->name($name . '.index')
 			->defaults('href', $name);
 
@@ -253,6 +255,7 @@ Route::group([
 			->defaults('icon', 'fa-briefcase')
 			->defaults('name', 'Requirements')
 			->defaults('roles', array('Admin', 'Crewing Manager', 'Crewing Officer', 'Training', 'Recruitment Officer'))
+			->defaults('sped', array(4501))
 			->name($name . '.index')
 			->defaults('href', $name);
 			

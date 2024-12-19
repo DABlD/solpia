@@ -64,6 +64,9 @@
 @push('after-scripts')
     <script>
         var fleet = "{{ auth()->user()->fleet ?? "%%" }}";
+        @if(auth()->user()->id == 4501)
+            fleet = "%%";
+        @endif
         var user_id = null;
         var fVessel = "%%";
         var fRank = "%%";
