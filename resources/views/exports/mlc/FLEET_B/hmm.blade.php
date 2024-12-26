@@ -611,6 +611,20 @@
 			<br style="mso-data-placement:same-cell;" />
 			ㅤand Regulations of the Republic of the Marshall Islands.
 			@endif
+
+			@if(in_array($data->vessel->id, [6791, 7569, 7169, 6245, 7947, 6517]))
+				ㅤ※ Additional clause for The Republic of Liberia flag
+				<br style="mso-data-placement:same-cell;" />
+				ㅤ1)	Seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ recruitment and placement
+				<br style="mso-data-placement:same-cell;" />
+				ㅤservices’ system of protection, to compensate seafarers for monetary loss that they may incur as a result of the failure of the recruitment
+				<br style="mso-data-placement:same-cell;" />
+				ㅤand placement service or the relevant shipowner under the seafarers’ employment agreement to meet its obligations to them.
+				<br style="mso-data-placement:same-cell;" />
+				ㅤ2)	After consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be
+				<br style="mso-data-placement:same-cell;" />
+				ㅤpaid to an account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.
+			@endif
 		</td>
 	</tr>
 

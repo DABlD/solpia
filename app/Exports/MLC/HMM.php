@@ -617,6 +617,16 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(47)->setRowHeight(5);
                     $event->sheet->getDelegate()->getRowDimension(50)->setRowHeight(5);
                     $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(5);
+
+                    // IF CM1 LIBERIA
+                    if(in_array($this->applicant->vessel->id, [6791, 7569, 7169, 6245, 7947, 6517])){
+                        $event->sheet->getDelegate()->getRowDimension(41 + $mt)->setRowHeight(30);
+                        $event->sheet->getDelegate()->getRowDimension(44 + $mt)->setRowHeight(30);
+                        $event->sheet->getDelegate()->getRowDimension(47 + $mt)->setRowHeight(30);
+                        $event->sheet->getDelegate()->getRowDimension(50 + $mt)->setRowHeight(30);
+
+                        $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(200);
+                    }
                 }
 
                 // CM2
@@ -625,7 +635,11 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
                 else{
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-                    // $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+
+                    // IF CM1 LIBERIA
+                    if(in_array($this->applicant->vessel->id, [6791, 7569, 7169, 6245, 7947, 6517])){
+                        $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                    }
                 }
 
                 $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
