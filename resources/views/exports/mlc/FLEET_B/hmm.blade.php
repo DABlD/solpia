@@ -613,6 +613,7 @@
 			@endif
 
 			@if(in_array($data->vessel->id, [6791, 7569, 7169, 6245, 7947, 6517]))
+				<br style="mso-data-placement:same-cell;" />
 				ㅤ※ Additional clause for The Republic of Liberia flag
 				<br style="mso-data-placement:same-cell;" />
 				ㅤ1)	Seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ recruitment and placement
