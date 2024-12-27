@@ -81,6 +81,14 @@ class X16_MLCOnboard implements WithMultipleSheets
             $principal = str_replace(' ', '', $this->principal);
             $class = "App\Exports\MLC\\" . $principal;
 
+            // FOR HMM VESSEL SPECIFIC CADETS AND BOY
+            $p1 = in_array($applicant->vessel->id, [4101, 4629, 4627, 3822, 4628, 2069, 4433, 2044, 2725, 8630, 8841]); // ALGECIRAS, OSLO, COPENHAGEN, GDANSK, HAMBURG, SOUTHAMPTON, LE HAVRE, ST PETERSBURG
+            $p2 = $applicant->vessel->principal_id == 2; //KOSCO
+
+            if(($p1 && in_array($applicant->pro_app->rank->id, [14, 19, 40, 41])) || ($p2 && in_array($applicant->pro_app->rank->id, [14, 19]))){
+                $class .= "Cadet";
+            }
+
             $title = str_replace('/', '', $applicant->abbr);
             array_push($sheets, new $class($applicant, $applicant->abbr, $title));
         }
