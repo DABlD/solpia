@@ -613,7 +613,7 @@
 			@endif
 
 			{{-- CM1 LIBERIA --}}
-			@if(in_array($data->vessel->id, [6791, 7569, 7169, 6245, 7947, 6517, 4433, 33, 36, 37, 38, 6829, 4101, 4627, 3822, 4628, 4629, 2069, 2044, 39, 42, 2725, 8630, 8841]))
+			@if(in_array($data->vessel->id, [6791, 7569, 7169, 6245, 7947, 6517, 4433, 33, 36, 37, 38, 6829, 4101, 4627, 3822, 4628, 4629, 2069, 2044, 39, 42, 2725, 8630, 8841, 8827, 8828]))
 				<br style="mso-data-placement:same-cell;" />
 				ㅤ※ Additional clause for The Republic of Liberia flag
 				<br style="mso-data-placement:same-cell;" />
