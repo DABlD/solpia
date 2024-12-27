@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
+        // CM1
+        $this->cm1 = [6791, 7569, 7169, 6245, 7947, 6517, 4433, 33, 36, 37, 38, 6829, 4101, 4627, 3822, 4628, 4629, 2069, 2044, 39, 42, 2725, 8630, 8841];
 
         // CM2
         $this->newFormHMM = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517, 7917, 7998, 8169];
@@ -619,7 +621,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(5);
 
                     // IF CM1 LIBERIA
-                    if(in_array($this->applicant->vessel->id, [6791, 7569, 7169, 6245, 7947, 6517])){
+                    if(in_array($this->applicant->vessel->id, $this->cm1)){
                         $event->sheet->getDelegate()->getRowDimension(41 + $mt)->setRowHeight(30);
                         $event->sheet->getDelegate()->getRowDimension(44 + $mt)->setRowHeight(30);
                         $event->sheet->getDelegate()->getRowDimension(47 + $mt)->setRowHeight(30);
@@ -637,7 +639,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
 
                     // IF CM1 LIBERIA
-                    if(in_array($this->applicant->vessel->id, [6791, 7569, 7169, 6245, 7947, 6517])){
+                    if(in_array($this->applicant->vessel->id, $this->cm1)){
                         $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                     }
                 }
