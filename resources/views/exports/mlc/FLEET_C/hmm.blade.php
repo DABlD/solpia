@@ -626,7 +626,7 @@
 		</td>
 		<td>(signature)</td>
 		<td colspan="4" style="{{ $center }} {{ $color }}">
-			MS. JEANNETTE T. SOLIDUM - CREWING MANAGER
+			MS. SHIRLEY ERASQUIN - CREWING MANAGER
 		</td>
 		<td>(signature)</td>
 	</tr>

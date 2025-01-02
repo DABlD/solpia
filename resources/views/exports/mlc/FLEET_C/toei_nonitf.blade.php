@@ -2355,7 +2355,7 @@
 			<td colspan="2">ㅤName</td>
 			<td colspan="2" style="{{ $c }}">{{ $data->user->fullName2 }}</td>
 			<td colspan="2">ㅤName</td>
-			<td colspan="2" style="{{ $c }}">JEANNETTE T. SOLIDUM</td>
+			<td colspan="2" style="{{ $c }}">SHIRLEY ERASQUIN</td>
 		</tr>
 
 		<tr>

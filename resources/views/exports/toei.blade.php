@@ -1694,7 +1694,7 @@
 				@if(in_array(auth()->user()->id, [4567, 4566]))
 					LHEA MARQUEZ / ASST. CREWING MANAGER
 				@elseif($applicant->user->fleet == "FLEET C")
-					Jeannette T. Solidum / CREWING MANAGER
+					Shirley Erasquin / CREWING MANAGER
 				@else
 					NEIL ROMANO / CREWING MANAGER
 				@endif

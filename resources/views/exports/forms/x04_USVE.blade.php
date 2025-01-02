@@ -257,7 +257,7 @@
 			@elseif(auth()->user()->fleet == "FLEET B")
 				Mr. Adulf Kit Jumawan
 			@elseif(auth()->user()->fleet == "FLEET C")
-				Ms. Jeanette Solidum
+				Ms. Shirley Erasquin
 			@elseif(auth()->user()->fleet == "FLEET D")
 				Ms. Thea Guerra
 			@elseif(auth()->user()->fleet == "FLEET E")
