@@ -323,6 +323,9 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
 
 
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+
+
                 if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
                     $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
                     // $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
@@ -684,6 +687,13 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                     $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
                 }
+
+
+                if(in_array($this->applicant->vessel->id, $this->cm1)){
+                    $event->sheet->getDelegate()->getPageSetup()->setFitToPage(false);
+                    $event->sheet->getDelegate()->getPageSetup()->setScale(83);
+                }
+
             },
         ];
     }
