@@ -579,10 +579,14 @@
 		@else
 			{{ $getDocument('ARPA TRAINING COURSE', 'lc', '', 'ARPA')}}	
 		@endif
+		{{ $getDocument('BTM', 'lc', '', 'BTM/ETM')}}
+		{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
+	@else
+		{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'Ship Simulator')}}}}
+		{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
+		{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'Ship Simulator')}}
+		{{ $getDocument('blank', 'lc', '', '') }}
 	@endif
-	{{ $getDocument('BTM', 'lc', '', 'BTM/ETM')}}
-	{{ $getDocument('BRM', 'lc', '', 'BRM/ERM')}}
-	{{ $getDocument('SHIP HANDLING SIMULATION', 'lc', '', 'Ship Simulator')}}
 
 
 	{{-- 2ND fOUR 4 --}}
