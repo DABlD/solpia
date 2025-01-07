@@ -750,7 +750,7 @@ class ApplicationsController extends Controller
 		$pname = $type == "western" ? "NITTA_TOEI" : $type;
 
         // $defaultName = $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . $pname . '.xlsx';
-        $rAbbr = str_replace('/', '', $applicant->rank->abbr);
+        $rAbbr = isset($applicant->rank) ? str_replace('/', '', $applicant->rank->abbr) : null;
         $defaultName = $rAbbr . ' ' . $applicant->user->lname . ', ' . $applicant->user->fname . ' - BIODATA.xlsx';
 
         return Excel::download(new $class($applicant, $type), $defaultName);
