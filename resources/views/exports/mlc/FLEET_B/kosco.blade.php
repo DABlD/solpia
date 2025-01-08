@@ -54,7 +54,7 @@
 		$allowance = 12;
 	}
 	elseif(in_array($v, ['M/V DONG-A METIS'])){
-		$allowance = 10.5;
+		$allowance = 12;
 		$cba = "IBF FKSU CA(BBCHP)";
 	}
 
