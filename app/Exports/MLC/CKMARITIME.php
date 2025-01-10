@@ -323,11 +323,11 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:N16'
+                    'A1:N14'
                 ];
 
                 $h['wrap'] = [
-                    'A6:N16'
+                    'A6:N14'
                 ];
 
                 // SHRINK TO FIT
@@ -371,7 +371,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A6:N16', 'B39:M46'
+                    'A6:N14', 'B37:M44'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -388,7 +388,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'B39:M46'
+                    'B37:M44'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -426,7 +426,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'A155:E155', 'J155:N155',
+                    'A152:E152', 'J152:N152',
                 ]);
 
                 // LBT
@@ -449,7 +449,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(14);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(18);
-                $event->sheet->getDelegate()->getStyle('B140')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('B138')->getFont()->setSize(10);
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(7.5);
@@ -468,7 +468,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(7.5);
 
                 // ROW RESIZE
-                for($i = 6; $i <= 16; $i++){
+                for($i = 6; $i <= 14; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(30);
                 }
                 $event->sheet->getDelegate()->getRowDimension(137)->setRowHeight(45);
@@ -495,7 +495,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setWidth(200);
         $drawing->setOffsetX(-10);
         $drawing->setOffsetY(-80);
-        $drawing->setCoordinates('J155');
+        $drawing->setCoordinates('J152');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setName('MLC SEAL`');
@@ -505,7 +505,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setWidth(90);
         $drawing2->setOffsetX(3);
         $drawing2->setOffsetY(-20);
-        $drawing2->setCoordinates('M155');
+        $drawing2->setCoordinates('M152');
 
         return [$drawing, $drawing2];
     }
