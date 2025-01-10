@@ -469,7 +469,14 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ROW RESIZE
                 for($i = 6; $i <= 16; $i++){
-                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(28);
+                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(30);
+                }
+                $event->sheet->getDelegate()->getRowDimension(137)->setRowHeight(45);
+
+                // PAGE BREAKS
+                $rows = [50, 109];
+                foreach($rows as $row){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
 
                 // SET PRINT AREA
