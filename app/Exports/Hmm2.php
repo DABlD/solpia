@@ -478,7 +478,7 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
             $drawing3->setName('maam_jen_sig');
             $drawing3->setDescription('maam_jen_sig');
-            $drawing3->setPath(public_path('images/maam_jen_sig.jpg'));
+            $drawing3->setPath(public_path('images/shirley_sig.png'));
             $drawing3->setResizeProportional(false);
             $drawing3->setHeight(60);
             $drawing3->setWidth(236);

@@ -702,7 +702,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     {
         $mt = $this->mt ? -2 : 0;
 
-        $sig = $this->applicant->vessel->fleet == "FLEET B" ? 'images/mlc_hmm_sig.jpg' : 'images/maam_jen_sig.jpg';
+        $sig = $this->applicant->vessel->fleet == "FLEET B" ? 'images/mlc_hmm_sig.jpg' : 'images/shirley_sig.png';
 
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
