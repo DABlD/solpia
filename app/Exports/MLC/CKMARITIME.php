@@ -471,6 +471,7 @@ class CKMARITIME implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 for($i = 6; $i <= 14; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(30);
                 }
+                $event->sheet->getDelegate()->getRowDimension(136)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(137)->setRowHeight(45);
 
                 // PAGE BREAKS
