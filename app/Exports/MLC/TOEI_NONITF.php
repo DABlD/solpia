@@ -590,7 +590,7 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
         }
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setPath(public_path("images/maam_jen_sig.jpg"));
+        $drawing2->setPath(public_path("images/shirley_sig.png"));
         $drawing2->setResizeProportional(false);
         $drawing2->setHeight(65);
         $drawing2->setWidth(155);
@@ -610,7 +610,7 @@ class TOEI_NONITF implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
         array_push($array, $drawing3);
 
         $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing4->setPath(public_path("images/maam_jen_sig.jpg"));
+        $drawing4->setPath(public_path("images/shirley_sig.png"));
         $drawing4->setResizeProportional(false);
         $drawing4->setHeight(65);
         $drawing4->setWidth(155);

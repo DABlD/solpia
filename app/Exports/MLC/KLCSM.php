@@ -510,7 +510,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setPath(public_path("images/maam_jen_sig.jpg"));
+        $drawing->setPath(public_path("images/shirley_sig.png"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(60);
         $drawing->setWidth(130);
