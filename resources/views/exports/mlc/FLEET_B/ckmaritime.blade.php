@@ -38,7 +38,11 @@
 		<td colspan="2" rowspan="2" style="{{ $center }}">
 			선박소유자
 			<br style='mso-data-placement:same-cell;' />
-			Ship Owner
+			Shipowner
+			<br style='mso-data-placement:same-cell;' />
+			(As per MLC)
+			<br style='mso-data-placement:same-cell;' />
+			definition)
 		</td>
 		<td colspan="2" style="{{ $center }}">
 			회사명
@@ -46,7 +50,7 @@
 			Company Name
 		</td>
 		<td colspan="10" style="{{ $center }}">
-			CK LINE CO., LTD. / President Seo Seonghun
+			CK MARITIME KOREA CO.,LTD / President LEE JEONG SEOK
 		</td>
 	</tr>
 	{{-- END 1ST ROW --}}
@@ -59,43 +63,12 @@
 			Address
 		</td>
 		<td colspan="10" style="{{ $center }}">
-			80-1, Eulji-ro, Jung-gu, Seoul, Republic of Korea
+			17th FL. Kwangjeong Blds, 46, 9beon-gil, Chungjang-Daero, Jung-gu Busan Korea
 		</td>
 	</tr>
 	{{-- END 2ND ROW --}}
 
 	{{-- 3RD ROW --}}
-	<tr>
-		<td colspan="2" rowspan="2" style="{{ $center }}">
-			관리사
-			<br style='mso-data-placement:same-cell;' />
-			Ship Management
-		</td>
-		<td colspan="2" style="{{ $center }}">
-			회사명
-			<br style='mso-data-placement:same-cell;' />
-			Company Name
-		</td>
-		<td colspan="10" style="{{ $center }}">
-			CK MARITIME KOREA CO., LTD.
-		</td>
-	</tr>
-	{{-- END 3RD ROW --}}
-
-	{{-- 4TH ROW --}}
-	<tr>
-		<td colspan="2" style="{{ $center }}">
-			주소
-			<br style='mso-data-placement:same-cell;' />
-			Address
-		</td>
-		<td colspan="10" style="{{ $center }}">
-			17thFL., KwanJeong Bldg, 46, 9beon-gil, ChungJang-Daero, Jung-gu, Busan, Korea.
-		</td>
-	</tr>
-	{{-- END 4TH ROW --}}
-
-	{{-- 5th ROW --}}
 	<tr>
 		<td colspan="2" rowspan="2" style="{{ $center }}">
 			대리점 
@@ -111,9 +84,9 @@
 			SOLPIA MARINE &#38; SHIP MANAGEMENT, INC.
 		</td>
 	</tr>
-	{{-- END 5th ROW --}}
+	{{-- END 3RD ROW --}}
 
-	{{-- 6th ROW --}}
+	{{-- 4TH ROW --}}
 	<tr>
 		<td colspan="2" style="{{ $center }}">
 			주소
@@ -124,9 +97,9 @@
 			SOLPIA BUILDING 2019 San Marcelino St, Malate, Manila, Philippines 1004
 		</td>
 	</tr>
-	{{-- END 6th ROW --}}
+	{{-- END 4TH ROW --}}
 
-	{{-- 7TH ROW --}}
+	{{-- 5TH ROW --}}
 	<tr>
 		<td colspan="2" rowspan="2" style="{{ $center }}">
 			선박
@@ -828,8 +801,6 @@
 		</td>
 	</tr>
 
-	<tr><td colspan="14"></td></tr>
-	<tr><td colspan="14"></td></tr>
 	<tr><td colspan="14" style="height: 40px;"></td></tr>
 
 	<tr>
@@ -995,7 +966,27 @@
 		</td>
 	</tr>
 
-	<tr><td colspan="14"></td></tr>
+	<tr>
+		<td colspan="14">
+			9.6. 선주는 선원고용계약에 따른 의무를 이행하지 못함으로써 선원이 입을 수 있는 금전적 손실을 보상하며
+			<br style='mso-data-placement:same-cell;' />
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			이를 선원이 계약 전 알 수 있도록 보장해야 한다.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="14">
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			(The shipowner shall compensate the crew for any financial losses they may suffer due to the shipowner's failure
+			<br style='mso-data-placement:same-cell;' />
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			to fulfill obligations under the crew employment contract and ensure that the crew is informed of this before )
+			<br style='mso-data-placement:same-cell;' />
+			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			entering into the contract)
+		</td>
+	</tr>
 
 	<tr>
 		<td colspan="14" style="{{ $bold }}">
@@ -1086,8 +1077,15 @@
 
 	<tr>
 		<td colspan="6"></td>
-		<td colspan="2" style="{{ $center }}">페이지 3</td>
+		<td colspan="2" style="{{ $center }}"></td>
 		<td colspan="4"></td>
 		<td colspan="2" style="{{ $center }}">CK LINE Co., Ltd</td>
 	</tr>
+
+	<tr><td colspan="14"></td></tr>
+	<tr><td colspan="14"></td></tr>
+	<tr><td colspan="14"></td></tr>
+	<tr><td colspan="14"></td></tr>
+	<tr><td colspan="14"></td></tr>
+	<tr><td colspan="14" style="{{ $center }}">페이지 3</td></tr>
 </table>
