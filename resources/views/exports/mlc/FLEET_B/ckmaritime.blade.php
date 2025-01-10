@@ -1081,9 +1081,7 @@
 		<td colspan="4"></td>
 		<td colspan="2" style="{{ $center }}">CK LINE Co., Ltd</td>
 	</tr>
-
-	<tr><td colspan="14"></td></tr>
-	<tr><td colspan="14"></td></tr>
+	
 	<tr><td colspan="14"></td></tr>
 	<tr><td colspan="14"></td></tr>
 	<tr><td colspan="14"></td></tr>
