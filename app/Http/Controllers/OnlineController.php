@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{TempApplicant, TempSeaService, TempUser};
+use App\Models\{TempApplicant, TempSeaService, TempUser, Rank};
 
 class OnlineController extends Controller
 {
     public function index(Request $req){
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+
         return $this->_view('index', [
-            'title'         => 'SOLPIA ONLINE APPLICATION'
+            'title'         => 'SOLPIA ONLINE APPLICATION',
+            'categories'    => $ranks->groupBy('category'),
         ]);
     }
 
