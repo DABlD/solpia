@@ -32,12 +32,16 @@ Route::get('/home', function() {
 	return redirect()->route('dashboard');
 });
 
+Route::get('apply','OnlineController@index')->name('online.apply');
+Route::post('store','OnlineController@store')->name('online.store');
+Route::get('update','OnlineController@update')->name('online.update');
+
 Route::get('not-permitted', function(){
 	return view('errors.not-permitted');
 })->name('not-permitted');
 
 Route::group(['middleware' => 'cors'], function() {
-	Route::get('getOpenings','OpeningController@getOpenings' );
+	Route::get('getOpenings','OpeningController@getOpenings');
 });
 
 Auth::routes();
