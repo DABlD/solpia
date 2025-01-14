@@ -19,4 +19,8 @@ class TempUser extends Model
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at', 'birthday'
     ];
+
+    public function setPasswordAttribute($value) {
+        $this->attributes['password'] = Hash::make($value);
+    }
 }
