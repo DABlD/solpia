@@ -36,6 +36,10 @@
                 margin-left: 0px !important;
             }
 
+            .main-header{
+                background-color: #009cd5;
+            }
+
             #table td, #table th{
                 text-align: center;
             }
@@ -60,7 +64,7 @@
                     <img src="{{ asset("images/logo.png") }}" alt="LOGO" height="45">
                     <li class="nav-item">
                         <a class="nav-link" role="button">
-                            <b><h3>SOLPIA MARINE</h3></b>
+                            <b><h3 style="color: black; font-family: roboto;">SOLPIA MARINE</h3></b>
                         </a>
                     </li>
                 </ul>
