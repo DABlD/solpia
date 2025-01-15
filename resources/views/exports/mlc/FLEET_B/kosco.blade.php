@@ -197,80 +197,48 @@
 		<td colspan="3" style="{{ $center }}">{{ $data->vessel->year_build }}</td>
 	</tr>
 
-	@if(in_array($data->vessel->name, ['M/V KMARIN ATLANTICA', 'M/V KMARIN AZUR'])){
-		<tr>
-			<td rowspan="2" style="{{ $bc }}">Period</td>
-			<td style="{{ $center }}">From</td>
-			<td colspan="3">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
-			<td style="{{ $center }}">To</td>
-			<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-y') }}</td>
-		</tr>
+	<tr>
+		<td rowspan="2" style="{{ $bc }}">Period</td>
+		<td style="{{ $center }}">From</td>
+		<td colspan="3">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
+		<td style="{{ $center }}">To</td>
+		<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-y') }}</td>
+	</tr>
 
-		<tr>
-			<td style="{{ $center }}">Place</td>
-			<td colspan="3">MANILA, PHILIPPINES</td>
-			<td style="{{ $center }}">Date</td>
-			<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
-		</tr>
+	<tr>
+		<td style="{{ $center }}">Place</td>
+		<td colspan="3">MANILA, PHILIPPINES</td>
+		<td style="{{ $center }}">Date</td>
+		<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
+	</tr>
 
-		<tr>
-			<td colspan="9" style="height: 150px;">
-				1. The probationary period shall only apply during the first term of employment and shall be 10 weeks. During this period both the
-				<br style='mso-data-placement:same-cell;' />
-				seafarer and/or the Company shall be entitled to terminate the employment prior to the expiry of the contract during this period.
-				<br style='mso-data-placement:same-cell;' />
-				2. The periods of employment shall be from the date of departure of his residence (or a place where he concluded an employment
-				<br style='mso-data-placement:same-cell;' />
-				agreement) to the date of arrival in country of his residence (or a place where he concluded an employment agreement) after terminate
-				<br style='mso-data-placement:same-cell;' />
-				the Seafarer's employment agreement, unless terminated for just cause or causes enumerated in this agreement.
-				<br style='mso-data-placement:same-cell;' />
-				3. Seafarer or shipowner shall provide minimum notice periods in writings for the early termination of the seafarer's employment
-				<br style='mso-data-placement:same-cell;' />
-				agreement. The minimum notice shall not be less than 30 days.
-				<br style='mso-data-placement:same-cell;' />
-				4. Where a seafarer's employment agreement is terminated while a vessel is out at sea, agreement shall be deemed to continue until the
-				<br style='mso-data-placement:same-cell;' />
-				ship enters the next port and unloads all cargoes to be unloaded or lands all passengers who are to leave the ship at the port.
-				<br style='mso-data-placement:same-cell;' />
-				5. Seafarer's employment agreements shall continue to have effect while seafarer is held captive on or off the ship as a result of acts of
-				<br style='mso-data-placement:same-cell;' />
-				piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to
-				<br style='mso-data-placement:same-cell;' />
-				suspend or terminate it.
-			</td>
-		</tr>
-	@else
-		<tr>
-			<td style="{{ $bc }}">Period</td>
-			<td style="{{ $center }}">From</td>
-			<td colspan="3">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
-			<td style="{{ $center }}">To</td>
-			<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-y') }}</td>
-		</tr>
-
-		<tr>
-			<td colspan="9" style="height: 110px;">
-				1. The probationary period shall only apply during the first term of employment and shall be 10 weeks. During this period both the seafarer
-				<br style='mso-data-placement:same-cell;' />
-				and/or the Company shall be entitled to terminate the employment prior to the expiry of the contract during this period.
-				<br style='mso-data-placement:same-cell;' />
-				2. The periods of employment shall be from the date of departure of his residence to the date of arrival in country of his residence after
-				<br style='mso-data-placement:same-cell;' />
-				terminate the Seafarer's employment agreement, unless terminated for just cause or causes enumerated in this agreement.
-				<br style='mso-data-placement:same-cell;' />
-				3. Seafarer or shipowner shall provide minimum notice periods in writings for the early termination of the seafarer's employment
-				<br style='mso-data-placement:same-cell;' />
-				agreement. The minimum notice shall not be less than 30 days.
-				<br style='mso-data-placement:same-cell;' />
-				4. Seafarer's employment agreements shall continue to have effect while seafarer is held captive on or off the ship as a result of acts of
-				<br style='mso-data-placement:same-cell;' />
-				piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to
-				<br style='mso-data-placement:same-cell;' />
-				suspend or terminate it.
-			</td>
-		</tr>
-	@endif
+	<tr>
+		<td colspan="9" style="height: 150px;">
+			1. The probationary period shall only apply during the first term of employment and shall be 10 weeks. During this period both the
+			<br style='mso-data-placement:same-cell;' />
+			seafarer and/or the Company shall be entitled to terminate the employment prior to the expiry of the contract during this period.
+			<br style='mso-data-placement:same-cell;' />
+			2. The periods of employment shall be from the date of departure of his residence (or a place where he concluded an employment
+			<br style='mso-data-placement:same-cell;' />
+			agreement) to the date of arrival in country of his residence (or a place where he concluded an employment agreement) after terminate
+			<br style='mso-data-placement:same-cell;' />
+			the Seafarer's employment agreement, unless terminated for just cause or causes enumerated in this agreement.
+			<br style='mso-data-placement:same-cell;' />
+			3. Seafarer or shipowner shall provide minimum notice periods in writings for the early termination of the seafarer's employment
+			<br style='mso-data-placement:same-cell;' />
+			agreement. The minimum notice shall not be less than 30 days.
+			<br style='mso-data-placement:same-cell;' />
+			4. Where a seafarer's employment agreement is terminated while a vessel is out at sea, agreement shall be deemed to continue until the
+			<br style='mso-data-placement:same-cell;' />
+			ship enters the next port and unloads all cargoes to be unloaded or lands all passengers who are to leave the ship at the port.
+			<br style='mso-data-placement:same-cell;' />
+			5. Seafarer's employment agreements shall continue to have effect while seafarer is held captive on or off the ship as a result of acts of
+			<br style='mso-data-placement:same-cell;' />
+			piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to
+			<br style='mso-data-placement:same-cell;' />
+			suspend or terminate it.
+		</td>
+	</tr>
 
 	<tr>
 		<td rowspan="5" style="{{ $bc }}">Wages</td>
@@ -311,56 +279,29 @@
 		<td colspan="4" style="{{ $center }}">${{ ($monthly) + ($data->wage->leave_pay ?? 0) + ($data->wage->sub_allow ?? 0) + ($data->wage->owner_allow ?? 0) + ($data->wage->other_allow ?? 0) }}</td>
 	</tr>
 
+	<tr>
+		<td style="{{ $bc }} height: 55px;">Payment</td>
+		<td colspan="8">
+			1. Payment date : The shipowner pay seafarer's wage at the end of each calendar month. If the payment date falls on a
+			<br style='mso-data-placement:same-cell;' />
+			holiday, payment will be made on the day before the holiday).
+			<br style='mso-data-placement:same-cell;' />
+			2. Payment methods : The shipowner shall pay all or part of wages to seafarer or other person designated by seafarer by
+			<br style='mso-data-placement:same-cell;' />
+			means of deposit with a financial company, bank, etc.
+		</td>
+	</tr>
 
-	@if(in_array($data->vessel->name, ['M/V KMARIN ATLANTICA', 'M/V KMARIN AZUR'])){
-		<tr>
-			<td style="{{ $bc }} height: 55px;">Payment</td>
-			<td colspan="8">
-				1. Payment date : The shipowner pay seafarer's wage at the end of each calendar month. If the payment date falls on a
-				<br style='mso-data-placement:same-cell;' />
-				holiday, payment will be made on the day before the holiday).
-				<br style='mso-data-placement:same-cell;' />
-				2. Payment methods : The shipowner shall pay all or part of wages to seafarer or other person designated by seafarer by
-				<br style='mso-data-placement:same-cell;' />
-				means of deposit with a financial company, bank, etc.
-			</td>
-		</tr>
-
-		<tr>
-			<td style="{{ $bc }} height: 45px;">Paid Leave</td>
-			<td colspan="8">
-				1. The number of days of paid leave shall be {{ $leave }} days per a month of continuous service onboard.
-				<br style='mso-data-placement:same-cell;' />
-				2. The method which is calculation of leave pay as follows.
-				<br style='mso-data-placement:same-cell;' />
-				ㅤLeave Pay = (Basic wage) / 30 days x {{ $leave }}days
-			</td>
-		</tr>
-	@else	
-		<tr>
-			<td style="{{ $bc }} height: 45px;">Paid Leave</td>
-			<td colspan="8">
-				1. The number of days of paid leave shall be {{ $leave }} days per a month of continuous service onboard.
-				<br style='mso-data-placement:same-cell;' />
-				2. The method which is calculation of leave pay as follows.
-				<br style='mso-data-placement:same-cell;' />
-				ㅤLeave Pay = (Basic wage) / 30 days x {{ $leave }}days
-			</td>
-		</tr>
-
-		<tr>
-			<td style="{{ $bc }} height: 55px;">Payment</td>
-			<td colspan="8">
-				1. Payment date : The shipowner pay seafarer's wage at the end of each calendar month. If the payment date falls on a
-				<br style='mso-data-placement:same-cell;' />
-				holiday, payment will be made on the day before the holiday).
-				<br style='mso-data-placement:same-cell;' />
-				2. Payment methods : The shipowner shall pay all or part of wages to seafarer or other person designated by seafarer by
-				<br style='mso-data-placement:same-cell;' />
-				means of deposit with a financial company, bank, etc.
-			</td>
-		</tr>
-	@endif
+	<tr>
+		<td style="{{ $bc }} height: 45px;">Paid Leave</td>
+		<td colspan="8">
+			1. The number of days of paid leave shall be {{ $leave }} days per a month of continuous service onboard.
+			<br style='mso-data-placement:same-cell;' />
+			2. The method which is calculation of leave pay as follows.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤLeave Pay = (Basic wage) / 30 days x {{ $leave }}days
+		</td>
+	</tr>
 
 	<tr>
 		<td style="{{ $bc }}">Provision</td>
@@ -438,81 +379,61 @@
 		</td>
 	</tr>
 
-	<tr>
-		<td style="{{ $bc }} height: 110px;">Any facts not defined in this agreement</td>
-		<td colspan="8">
-			1. Any facts which are not defined in this agreement, these are complied with the law of flag state, crew's national law,
-			<br style='mso-data-placement:same-cell;' />
-			and a collective bargaining agreement.
-			<br style='mso-data-placement:same-cell;' />
-			2. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or
-			<br style='mso-data-placement:same-cell;' />
-			placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of
-			<br style='mso-data-placement:same-cell;' />
-			seafarer recruitment and placement. (Other than the cost of the passport or other similar personal travel documents.) If
-			<br style='mso-data-placement:same-cell;' />
-			the seafarer found that, the fact should be noticed to the shipowner immediately.
-		</td>
-	</tr>
-
-	@if(in_array($data->vessel->name, ['M/V KMARIN ATLANTICA', 'M/V KMARIN AZUR'])){
+	@if(in_array($data->vessel->name, ['M/V GLOVIS COUNTESS', 'M/V DONG-A METIS', 'M/V DONG-A GLAUCOS'])){
 		<tr>
-			<td colspan="9" style="height: 35px;">
-				In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them are retained
+			<td style="{{ $bc }} height: 110px;">Any facts not defined in this agreement</td>
+			<td colspan="8">
+				1. Any facts which are not defined in this agreement, these are complied with the law of flag state, crew's national law,
 				<br style='mso-data-placement:same-cell;' />
-				by the each party.
+				and a collective bargaining agreement. The parties to this agreement hereby stipulate that the terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic of the Marshall Islands. Any dispute as to the terms and conditions of this agreement shall be resolved in accordance with the Maritime Law and Regulatios of the Republic of the Marshall Island.
 				<br style='mso-data-placement:same-cell;' />
-				And, seafarer has opportunity to review and seek advice on the terms and condition and freely accept them.
+				2. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or
+				<br style='mso-data-placement:same-cell;' />
+				placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of
+				<br style='mso-data-placement:same-cell;' />
+				seafarer recruitment and placement. (Other than the cost of the passport or other similar personal travel documents.) If
+				<br style='mso-data-placement:same-cell;' />
+				the seafarer found that, the fact should be noticed to the shipowner immediately.
 			</td>
-		</tr>
-
-		<tr>
-			<td colspan="4" style="height: 80px;"></td>
-			<td style="height: 80px;"></td>
-			<td colspan="4" style="height: 80px;"></td>
-		</tr>
-
-		<tr>
-			<td colspan="4" style="{{ $center }} vertical-align: top;">for and on behalf of the shipowner of the vessel</td>
-			<td></td>
-			<td colspan="4" style="{{ $center }} vertical-align: top;">Signature of Seafarer</td>
 		</tr>
 	@else
 		<tr>
-			<td colspan="9" style="height: 40px;">
-				In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them are retained
+			<td style="{{ $bc }} height: 110px;">Any facts not defined in this agreement</td>
+			<td colspan="8">
+				1. Any facts which are not defined in this agreement, these are complied with the law of flag state, crew's national law,
 				<br style='mso-data-placement:same-cell;' />
-				by the each party.
+				and a collective bargaining agreement.
 				<br style='mso-data-placement:same-cell;' />
-				And, seafarer has opportunity to review and seek advice on the terms and condition and freely accept them.
+				2. Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or
+				<br style='mso-data-placement:same-cell;' />
+				placement or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of
+				<br style='mso-data-placement:same-cell;' />
+				seafarer recruitment and placement. (Other than the cost of the passport or other similar personal travel documents.) If
+				<br style='mso-data-placement:same-cell;' />
+				the seafarer found that, the fact should be noticed to the shipowner immediately.
 			</td>
-		</tr>
-
-		<tr>
-			<td colspan="4" style="height: 120px;"></td>
-			<td style="height: 120px;"></td>
-			<td colspan="4" style="height: 120px;"></td>
-		</tr>
-
-		<tr>
-			<td colspan="4" style="{{ $center }} vertical-align: top;">for and on behalf of the shipowner of the vessel</td>
-			<td></td>
-			<td colspan="4" style="{{ $center }} vertical-align: top;">Signature of Seafarer</td>
-		</tr>
-
-		<tr>
-			<td colspan="3" rowspan="2">
-				The place where and date when the seafarers' employment agreement is entered
-				<br style='mso-data-placement:same-cell;' />
-				into
-			</td>
-			<td colspan="2" style="{{ $center }}">Place</td>
-			<td colspan="4" style="{{ $center }}">MANILA, PHILIPPINES</td>
-		</tr>
-
-		<tr>
-			<td colspan="2" style="{{ $center }}">Date</td>
-			<td colspan="4" style="{{ $center }}">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
 		</tr>
 	@endif
+
+	<tr>
+		<td colspan="9" style="height: 35px;">
+			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them are retained
+			<br style='mso-data-placement:same-cell;' />
+			by the each party.
+			<br style='mso-data-placement:same-cell;' />
+			And, seafarer has opportunity to review and seek advice on the terms and condition and freely accept them.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="4" style="height: 80px;"></td>
+		<td style="height: 80px;"></td>
+		<td colspan="4" style="height: 80px;"></td>
+	</tr>
+
+	<tr>
+		<td colspan="4" style="{{ $center }} vertical-align: top;">for and on behalf of the shipowner of the vessel</td>
+		<td></td>
+		<td colspan="4" style="{{ $center }} vertical-align: top;">Signature of Seafarer</td>
+	</tr>
 </table>
