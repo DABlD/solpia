@@ -13,7 +13,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
         // CM1
-        $this->cm1 = [6791, 7569, 7169, 6245, 7947, 6517, 4433, 33, 36, 37, 38, 4101, 4627, 3822, 4628, 4629, 2069, 2044, 39, 42, 2725, 8630, 8841, 8828, 8827];
+        $this->cm1 = [6791, 7569, 7169, 6245, 7947, 6517, 4433, 33, 36, 37, 38, 4101, 4627, 3822, 4628, 4629, 2069, 2044, 39, 42, 2725, 8630, 8841, 8828, 8827, 8791];
 
         // CM2
         $this->newFormHMM = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517, 7917, 7998, 8169];
@@ -344,7 +344,11 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getStyle('A1:I' . (62 + $mt))->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A4:I' . (62 + $mt))->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('B21')->getFont()->setSize(8);
+
+                if(in_array($this->applicant->vessel->id, $this->cm1)){
+                    $event->sheet->getDelegate()->getStyle('B20')->getFont()->setSize(8);
+                }
+
                 $event->sheet->getDelegate()->getStyle('A' . (43 + $mt))->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A' . (46 + $mt))->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A' . (52 + $mt))->getFont()->setSize(10);
@@ -624,7 +628,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(5);
 
                     // IF CM1 LIBERIA
-                    if(in_array($this->applicant->vessel->id, $this->cm1)){
+                    if(in_array($this->applicant->vessel->id, $this->cm1) && $this->applicant->vessel->id != 8791){
                         $event->sheet->getDelegate()->getRowDimension(41 + $mt)->setRowHeight(30);
                         $event->sheet->getDelegate()->getRowDimension(44 + $mt)->setRowHeight(30);
                         $event->sheet->getDelegate()->getRowDimension(47 + $mt)->setRowHeight(30);
@@ -642,7 +646,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
 
                     // IF CM1 LIBERIA
-                    if(in_array($this->applicant->vessel->id, $this->cm1)){
+                    if(in_array($this->applicant->vessel->id, $this->cm1) && $this->applicant->vessel->id != 8791){
                         $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                     }
                 }
@@ -677,7 +681,7 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
 
-                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
+                if(in_array($this->applicant->vessel->id, $this->newFormHMM) || $this->applicant->vessel->id == 8791){
                     $cell = "E" . (27 + $mt);
                     $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 
@@ -686,6 +690,20 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
 
                     $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
+
+                    if($this->applicant->vessel->id == 8791){
+                        $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                        $rt->createTextRun("President")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                        $event->sheet->getParent()->getActiveSheet()->getCell("B10")->setValue($rt);
+
+                        $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                        $rt->createTextRun("Company")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                        $event->sheet->getParent()->getActiveSheet()->getCell("B12")->setValue($rt);
+                        
+                        $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                        $rt->createTextRun("Address")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                        $event->sheet->getParent()->getActiveSheet()->getCell("B13")->setValue($rt);
+                    }
                 }
 
 
