@@ -299,10 +299,10 @@
 			<br style="mso-data-placement:same-cell;" />
 			ㅤㅤ(1) Korea : Within 30 days  (2) Panama : Minimum 15 days in advance  
 			<br style="mso-data-placement:same-cell;" />
-			@if(!in_array($data->vessel->id, $newFormHMM))
-			ㅤㅤ(3) Marshall Islands / Liberia / Malta : Minimum 7 days in advance
-			@else
+			@if(in_array($data->vessel->id, $newFormHMM) || $data->vessel->id == 8791)
 			ㅤㅤ(3) Marshall Islands / Liberia / Malta / Isle of Man  : Minimum 7 days in advance
+			@else
+			ㅤㅤ(3) Marshall Islands / Liberia / Malta : Minimum 7 days in advance
 			@endif
 		</td>
 	</tr>
@@ -533,7 +533,7 @@
 			@endif
 			<br style="mso-data-placement:same-cell;" />
 
-			@if(in_array($data->vessel->id, $newFormHMM))
+			@if(in_array($data->vessel->id, $newFormHMM) || $data->vessel->id == 8791)
 				ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours
 					<br style="mso-data-placement:same-cell;" />
 					ㅤㅤㅤin length
