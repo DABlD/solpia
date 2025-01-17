@@ -643,17 +643,29 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                         $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(220);
                     }
+
+                    if($this->applicant->vessel->id == 8791){
+                        $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(65);
+                        $event->sheet->getDelegate()->getRowDimension(41 + $mt)->setRowHeight(5);
+                        $event->sheet->getDelegate()->getRowDimension(44 + $mt)->setRowHeight(5);
+                        $event->sheet->getDelegate()->getRowDimension(47 + $mt)->setRowHeight(5);
+                        $event->sheet->getDelegate()->getRowDimension(50 + $mt)->setRowHeight(5);
+                    }
                 }
 
                 // CM2
                 if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
+                elseif($this->applicant->vessel->id == 8791){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (35 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
                 else{
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
 
                     // IF CM1 LIBERIA
-                    if(in_array($this->applicant->vessel->id, $this->cm1) && $this->applicant->vessel->id != 8791){
+                    // if(in_array($this->applicant->vessel->id, $this->cm1) && $this->applicant->vessel->id != 8791){
+                    if(in_array($this->applicant->vessel->id, $this->cm1)){
                         $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                     }
                 }
