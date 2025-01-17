@@ -333,6 +333,13 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getHeaderFooter()->setEvenHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
                     // $event->sheet->getDelegate()->getHeaderFooter()->setEvenFooter("&LPC-302/2022.01.26/DCN22001");
                 }
+                elseif($this->applicant->vessel->id == 8791){
+                    $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
+                    $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
+
+                    $event->sheet->getDelegate()->getHeaderFooter()->setEvenHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
+                    $event->sheet->getDelegate()->getHeaderFooter()->setEvenFooter("&LPC-302/2022.01.26/DCN22001");
+                }
 
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
@@ -666,13 +673,25 @@ class HMM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $cell = "C" . (24 + $mt);
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 
-                if($this->applicant->rankType == "OFFICER"){
-                    $rt->createTextRun("Fixed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                if($this->applicant->vessel->id == 8791){
+                    if($this->applicant->rankType == "OFFICER"){
+                        $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                        $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                    }
+                    else{
+                        $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                        $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                    }
                 }
                 else{
-                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("Guaranteed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                    if($this->applicant->rankType == "OFFICER"){
+                        $rt->createTextRun("Fixed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                        $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                    }
+                    else{
+                        $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                        $rt->createTextRun("Guaranteed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                    }
                 }
 
 
