@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant){
         $this->applicant     = $applicant;
@@ -279,10 +279,32 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+
+                $line = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
+                $line->setPath(public_path('/images/horizontal_line.png'));
+                $line->setHeight(15);
+
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&I&8Ch.2 / Page &P');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-302/2022.01.26/DCN22001');
+                $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
+
+                // HEADERS FOOTERS
+                // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
+                // $drawing->setPath(public_path('images/horizontal_line.png'));
+                // $drawing->setHeight(2);
+                // $drawing->setWidth(500);
+
+                // $event->sheet->getDelegate()->getHeaderFooter()->setImages([$drawing]);
+
+                // $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L&G &L&8표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&I&8Ch.2 / Page &P");
+                // $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&L&8PC-302/2022.01.26/DCN22001");
+
+                // $event->sheet->getDelegate()->getHeaderFooter()->setEvenHeader("&L&8표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&I&8Ch.2 / Page &P");
+                // $event->sheet->getDelegate()->getHeaderFooter()->setEvenFooter("&L&8PC-302/2022.01.26/DCN22001");
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -327,7 +349,7 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    
+                    'A47:K47'
                 ];
 
                 // HL B
@@ -337,27 +359,27 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    'A6:A19', 
+                    'A6:A19', 'A47:K47'
                 ];
 
                 // HC VC
                 $h[4] = [
-                    'A3:A4', 'A21:A23', 'A25:K28'
+                    'A3:A4', 'A21:A23', 'A25:K28', 'A29:A30', 'A32:K34'
                 ];
 
                 // HL
                 $h[5] = [
-                    'E19'
+                    'E19', 'B34'
                 ];
 
                 // B
                 $h[6] = [
-                    'A3', 'A5', 'A20', 'A24'
+                    'A3', 'A5', 'A20', 'A24', 'A31', 'A35', 'A37', 'A39', 'A41', 'A43'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A1:B4', 'A6:K19', 'B21:K23',
+                    'A1:B4', 'A6:K19', 'B21:K23', 'B29:B30', 'A48:K49'
                 ];
 
                 // UNDERLINE
@@ -370,12 +392,12 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'J7', 'A25:K28', 'B21'
+                    'J7', 'A25:K28', 'B21', 'A32', 'B33'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A6', 'A7', 'E6:E18'
+                    'A6', 'A7', 'E6:E18', 'G47'
                 ];
 
                 foreach($h as $key => $value) {
@@ -415,7 +437,7 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A6:K19', 'A21:K23', 'A25:K28'
+                    'A6:K19', 'A21:K23', 'A25:K30', 'A32:K34', 'A36:K36', 'A38:K38', 'A40:K40', 'A42:K42', 'A44:K44', 'A48:K49'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -465,6 +487,7 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
+                    'A46:C46', 'F46:J46'
                 ]);
 
                 // LBT
@@ -485,17 +508,17 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(19.5);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(16);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(6.5);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(4);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(14.5);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(3.5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6.5);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(4);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6.5);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(16.5);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(8);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(8);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(8.5);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(9.7);
 
                 // ROW RESIZE
                 $rows = [
@@ -504,13 +527,16 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                         1,4 //START ROW, END ROW
                     ],
                     [25,5,28],
+                    [27,31,36],
+                    [18,48,49],
                 ];
 
                 $rows2 = [
                     [
-                        90,
-                        [23]
-                    ]
+                        90, //ROW HEIGHT
+                        [23] //CELLS
+                    ],
+                    [40,[29]], [27,[30,37,39,41,42,43,45,47]], [135,[38]], [145, [40]], [105, [44]], [110,[46]]
                 ];
 
                 foreach($rows as $row){
@@ -526,7 +552,7 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 }
 
                 // PAGE BREAKS
-                $rows = [];
+                $rows = ['A28', 'A44'];
                 foreach($rows as $row){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
@@ -535,7 +561,7 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // HMM PARAHRAPH CELLS
-                $cells = ["B23", 'A25'];
+                $cells = ["B23", 'A25', 'B29:B30', 'A34', 'A36', 'A38', 'A40', 'A42', 'A44', 'A45', 'A48'];
                 foreach($cells as $cell){
                     $event->sheet->getDelegate()->getStyle($cell)->getFont()->setSize(9);
                     $event->sheet->getDelegate()->getStyle($cell)->getFont()->setName('Times New Roman');
@@ -548,6 +574,9 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('B26:K26')->getFont()->setSize(9);
                 $event->sheet->getDelegate()->getStyle('B28:K28')->getFont()->setSize(9);
                 $event->sheet->getDelegate()->getStyle('A25')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A44')->getFont()->setSize(8.7);
+                $event->sheet->getDelegate()->getStyle('A45')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A48')->getFont()->setSize(10);
 
                 // RICH TEXTS
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
@@ -589,27 +618,24 @@ class HMMCM2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Letter Head');
-        $drawing->setDescription('Letter Head');
-        $drawing->setPath(public_path("images/letter_head.jpg"));
-        $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
-        $drawing->setOffsetX(4);
-        $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $drawing->setPath(public_path('images/MLC_SEAL.png'));
+        $drawing->setCoordinates("I46");
+        $drawing->setHeight(130);
+        $drawing->setWidth(130);
+        $drawing->setOffsetX(35);
+        $drawing->setOffsetY(3);
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
+        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing3->setName('mlc_hmm_sig');
+        $drawing3->setDescription('mlc_hmm_sig');
+        $drawing3->setPath(public_path("images/mlc_hmm_sig.jpg"));
+        $drawing3->setOffsetX(2);
+        $drawing3->setOffsetY(2);
+        $drawing3->setCoordinates("F46");
+        $drawing3->setResizeProportional(false);
+        $drawing3->setHeight(120);
+        $drawing3->setWidth(130);
 
-        return [$drawing, $drawing2];
+        return [$drawing, $drawing3];
     }
 }

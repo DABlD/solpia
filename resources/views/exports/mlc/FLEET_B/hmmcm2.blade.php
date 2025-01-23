@@ -232,4 +232,196 @@
 			(USD/Month)
 		</td>
 	</tr>
+
+	<tr>
+		<td>Payday</td>
+		<td colspan="10">
+			All seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid
+			<br style='mso-data-placement:same-cell;' />
+			monthly wages not later than 15 days of the succeeding month from the date of commencement of the agreement until
+			<br style='mso-data-placement:same-cell;' />
+			the date of arrival at point of hire upon termination of their employment.
+		</td>
+	</tr>
+
+	<tr>
+		<td>Payment methods</td>
+		<td colspan="10">
+			Wages should be paid directly to the seafarers` designated bank accounts unless they request otherwise in writing. 
+			<br style='mso-data-placement:same-cell;' />
+			Some allotments should be remitted in due time and directly to the person or persons nominated by the seafarers.
+		</td>
+	</tr>
+
+	{{-- PAID LEAVE --}}
+	<tr>
+		<td colspan="11">4.	Paid Leave</td>
+	</tr>
+
+	<tr>
+		<td rowspan="2">The amount of Paid leave</td>
+		<td colspan="3">Amount</td>
+		<td colspan="7">Method of calculation</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">
+			${{ $data->wage->leave_pay ?? 0 }}
+			<br style='mso-data-placement:same-cell;' />
+			(USD/Month)
+		</td>
+		<td colspan="7">Basic Wage / 30 days X ( 9 ) days</td>
+	</tr>
+
+	<tr>
+		<td>The number of days</td>
+		<td colspan="10">ㅤThe number of days of paid leave shall be ( 9 ) days per 1 month of continuous service.</td>
+	</tr>
+
+	{{-- Health and social security protection benefits --}}
+	<tr>
+		<td colspan="11">5.	Health and social security protection benefits</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			ㅤThe shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity benefit, survivors'
+			<br style='mso-data-placement:same-cell;' />
+			ㅤbenefit, SSS, PhilHealth, and Pag-IBIG to the seafarer.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">6.	Seafarer's entitlement to repatriation</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			ㅤ 1)	The shipowner shall promptly repatriate the seafarer who leaves a ship at the place of which is not the seafarer's country of residence
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ ㅤ or the place at which the seafarer agreed to enter into the engagement as the shipowner's expenses. However, in case where the
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ ㅤ shipowner pay the expense of repatriation according to the request of the seafarer, shipowner does not have any responsibility 
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ ㅤ for the repatriation.
+			<br style='mso-data-placement:same-cell;' />
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ2) Despite above 1, in case of the following particulars, the shipowner can recover the cost of repatriation from the seafarer.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ ㅤ a. When the seafarer leaves a ship without just cause.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ ㅤ b. When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws.
+			<br style='mso-data-placement:same-cell;' />
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ3) The amount of money to be spent by the shipowner pursuant to paragraph (1) shall include transportation, accommodation, meals
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ ㅤ expenses incurred in the repatriation.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">7.	Standard of Hours of Work and Hours of Rest</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			ㅤ1)	Hours of work
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤa. Hours of Ordinary Work : 8 hours in a day and 40 hours in a week.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤb. Over Time Work : Fixed Over Time(103 hours) and Owner’s Guaranteed Overtime.
+			<br style='mso-data-placement:same-cell;' />
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ2)	Hours of rest
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤa. Minimum of 10 hours rest in any 24-hour period and 77 hours in any seven-day period.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤㅤin length.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤc. The interval between consecutive periods of rest shall not exceed 14 hours.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤd. Musters and drills shall be conducted in a manner that minimizes the disturbance of rest periods and does not induce fatigue.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤe. When a seafarer is on call, such as when a machinery space is unattended, the seafarer shall have an adequate compensatory 
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤㅤrest period if the normal period of rest is disturbed by call-outs to work.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">8.	Provision and compliance with Risk assessments</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			ㅤ1)  The Shipowner shall provide the risk assessment table through the ship’s network(EDMS) and make it available for viewing at any time.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ2)  Seafarers shall be aware of the relevant information and check and utilize it frequently.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">9.	Any facts which are not defined in this agreement</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			ㅤAny facts which are not defined in this agreement, these are complied with the law of flag state or applicable collective bargaining
+			<br style='mso-data-placement:same-cell;' />
+			ㅤagreement.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and
+			<br style='mso-data-placement:same-cell;' />
+			ㅤentitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed
+			<br style='mso-data-placement:same-cell;' />
+			ㅤrobbery against ships.
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ※	Additional clause for Marshall Islands flag
+			<br style='mso-data-placement:same-cell;' />
+			ㅤThe terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic
+			<br style='mso-data-placement:same-cell;' />
+			ㅤof the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law
+			<br style='mso-data-placement:same-cell;' />
+			ㅤand Regulations of the Republic of the Marshall Islands.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them
+			<br style='mso-data-placement:same-cell;' />
+			are retained by the each party and the seafarer has opportunity to review on the terms and condition and voluntarily accept them.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="3"></td>
+		<td colspan="2">(signature)</td>
+		<td colspan="5"></td>
+		<td>(signature)</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">(Seafarer)</td>
+		<td colspan="2"></td>
+		<td colspan="5">(For and on behalf of the Shipowner(Beneficial)</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td rowspan="2" colspan="5">
+			ㅤPlace where and date when a seafarer’s employment
+			<br style='mso-data-placement:same-cell;' />
+			ㅤagreement is entered into.
+		</td>
+		<td colspan="3">ㅤPlace</td>
+		<td colspan="3">ㅤManila, Philippines</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">ㅤDate</td>
+		<td colspan="3">ㅤ{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
+	</tr>
 </table>
