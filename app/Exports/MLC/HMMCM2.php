@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($applicant){
+    public function __construct($applicant, $title = "HMM MLC"){
         $this->applicant     = $applicant;
         $this->shipownerA    = [];
         $this->shipownerB    = [];
@@ -32,6 +32,8 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
             $this->shipmanager['address'] = "5th Floor, Busan office Building, Jungang-daero 63, Jung-gu, Busan 600-711, Korea";
         }
+
+        $this->title = $title;
     }
 
     public function view(): View
@@ -273,7 +275,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('HMM MLC', false);
+                $event->sheet->getDelegate()->setTitle($this->title, false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
