@@ -29,6 +29,11 @@
 		}
 	}
 
+	$cleanText = function($text){
+		// return str_replace('&', '&#38;', $text);
+		return str_replace('&', '&#38;', $text);
+	};
+
 	$ssTotal["BULK"] = [0,0];
 	$ssTotal["TANKER"] = [0,0];
 	$ssTotal["CONTAINER"] = [0,0];
@@ -319,7 +324,7 @@
 				}
 
 				if($educ != ""){
-					$educ = $educ->school . ' / ' . $educ->course . ' / ' . $educ->year;
+					$educ = $educ->school . ' / ' . $cleanText($educ->course) . ' / ' . $educ->year;
 				}
 
 				echo $educ;
