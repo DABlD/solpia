@@ -288,6 +288,9 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+
+                //SET FIRST PAGE NUMBER
+                $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 $line = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
