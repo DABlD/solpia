@@ -399,7 +399,7 @@
 	<tr>
 		<td colspan="3">{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}</td>
 		<td colspan="2">(signature)</td>
-		<td colspan="5">Mr. Adulf Kit Jumawan - Crewing Manager</td>
+		<td colspan="5">Ms. Shirley Erasquin - Crewing Manager</td>
 		<td>(signature)</td>
 	</tr>
 

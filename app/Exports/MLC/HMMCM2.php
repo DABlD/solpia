@@ -361,7 +361,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    'A6:A19', 'A47:K47'
+                    'A6:A19', 'A47:K47', 'A46', 'F46'
                 ];
 
                 // HC VC
@@ -399,7 +399,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A6', 'A7', 'E6:E18', 'G47'
+                    'A6', 'A7', 'E6:E18', 'F47', 'A46', 'F46'
                 ];
 
                 foreach($h as $key => $value) {
@@ -619,6 +619,8 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
     public function drawings()
     {
+        $sig = $this->applicant->vessel->fleet == "FLEET B" ? 'images/mlc_hmm_sig.jpg' : 'images/shirley_sig.png';
+
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
         $drawing->setCoordinates("I46");
@@ -630,7 +632,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setName('mlc_hmm_sig');
         $drawing3->setDescription('mlc_hmm_sig');
-        $drawing3->setPath(public_path("images/mlc_hmm_sig.jpg"));
+        $drawing3->setPath(public_path($sig));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
         $drawing3->setCoordinates("F46");
