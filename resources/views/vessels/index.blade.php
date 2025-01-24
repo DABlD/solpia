@@ -2261,6 +2261,9 @@
                         <tr>
                             <td><b>No.</b></td>
                             <td><b>Rank</b></td>
+                            @if(in_array(auth()->user()->fleet, ["FLEET B"]) || auth()->user()->id == 23)
+                                <td><b>SL</b></td>
+                            @endif
                             <td><b>Name</b></td>
                             <td><b>Age</b></td>
                             <td><b>Joining Date</b></td>
@@ -2479,6 +2482,9 @@
                     <tr>
                         <td>${index + 1}</td>
                         <td>${crew.abbr}</td>
+                        @if(in_array(auth()->user()->fleet, ["FLEET B"]) || auth()->user()->id == 23)
+                            <td>${crew.seniority}</td>
+                        @endif
                         <td class="OBC" data-id="${crew.applicant_id}">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
                         <td>${crew.age}</td>
                         <td class="jdate" data-id="${crew.applicant_id}" data-date="${crew.joining_date}">${moment(crew.joining_date).format('DD-MMM-YY')}</td>

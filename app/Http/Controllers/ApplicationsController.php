@@ -1118,6 +1118,7 @@ class ApplicationsController extends Controller
             $temp = $crew->applicant->document_id;
             $crew->covidVaccines = $crew->applicant->document_med_cert->where('type', 'LIKE' ,'%COVID%');
             $crew->age = now()->parse($crew->birthday)->diff(now())->format('%y');
+            $crew->seniority = $crew->applicant->pro_app->seniority;
 
             foreach($temp as $docu){
                 if($docu->type != ""){
