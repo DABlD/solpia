@@ -283,7 +283,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.4);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
@@ -589,7 +589,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // RICH TEXTS
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createText("1. Seafarer/Shipowner/");
+                $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setSize(11);
                 $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
                 $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
                 $event->sheet->getParent()->getActiveSheet()->getCell("A5")->setValue($rt);
