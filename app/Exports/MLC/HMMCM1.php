@@ -8,114 +8,46 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
+// use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
-        // CM1
-        $this->cm1 = [6791, 7569, 7169, 6245, 7947, 6517, 4433, 33, 36, 37, 38, 4101, 4627, 3822, 4628, 4629, 2069, 2044, 39, 42, 2725, 8630, 8841, 8828, 8827, 8791];
-
-        // CM2
-        $this->newFormHMM = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517, 7917, 7998, 8169];
+        $this->applicant     = $applicant;
+        $this->shipownerA    = [];
+        $this->shipownerB    = [];
+        $this->shipmanager   = [];
 
         $array1 = [
-            'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO'
+            "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE", "M/V HMM AQUAMARINE",
+            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM LE HAVRE", "M/V HYUNDAI BRAVE",
+            "M/V HYUNDAI COURAGE", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE", "M/V HMM ALGECIRAS",
+            "M/V HMM COPENHAGEN", "M/V HMM GDANSK", "M/V HMM HAMBURG", "M/V HMM OSLO",
+            "M/V HMM SOUTHAMPTON", "M/V HMM ST. PETERSBURG", "M/V HYUNDAI GRACE", "M/V HYUNDAI UNITY",
+            "M/V HYUNDAI COLOMBO", "M/V HMM VICTORY", "M/V HMM PRIDE", "M/V HMM FOREST", "M/V HMM GREEN",
         ];
 
-        $array2 = [
-            'MT C. GUARDIAN', 'MT PACIFIC M', "MT NEPTUNE M"
-        ];
+        if(in_array($applicant->vessel->name, $array1)){
+            $this->shipowner['company'] = "HMM Company Limited";
+            $this->shipowner['president'] = "KIM KYUNG BAE";
+            $this->shipowner['address'] = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
 
-        $array3 = [
-            'M/V HMM ALGECIRAS', 'M/V HMM OSLO', 'M/V HMM COPENHAGEN', 'M/V HMM GDANSK', 'M/V HMM HAMBURG', 'M/V HMM SOUTHAMPTON'
-        ];
-
-        $array4 = [
-            'M/V HMM AMETHYST'
-        ];
-
-        // CM2
-        $array5 = [
-            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN', 'M/T UNIVERSAL CHALLENGER', 'M/T ORIENTAL AQUAMARINE', 'M/T UNIVERSAL FRONTIER', 'M/T UNIVERSAL INNOVATOR', 'M/V HMM MASTER', 'M/V HYUNDAI PREMIUM'
-        ];
-
-        $array6 = [
-            'M/V BAMBOO STAR', 'M/V OCEAN FLORA', 'M/V HYUNDAI PARAMOUNT'
-        ];
-
-        // minus two;
-        $mt = false;
-
-        // FOR FLEET C
-        if($applicant->vessel->fleet == "FLEET C" && !in_array($applicant->vessel->id, $this->newFormHMM)){
-            $mt = true;
-            $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
-            $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
-        }
-        else //FOR FLEET B
-        {
-            if(in_array($applicant->vessel->name, $array1)){
-                $applicant->shipowner = "HMM Company Limited";
-                $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
-                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-                $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
-            }
-            elseif(in_array($applicant->vessel->name, $array2)){
-                $mt = true;
-                $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
-                $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
-            }
-            elseif(in_array($applicant->vessel->name, $array3)){
-                $applicant->shipowner = "HMM Company Limited";
-                $applicant->sAddress = 'TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA';
-                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-                $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
-            }
-            elseif(in_array($applicant->vessel->name, $array4)){
-                $applicant->shipowner = "HMM Company Limited";
-                $applicant->sAddress = "108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
-                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-                $applicant->cAddress = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
-            }
-            elseif(in_array($applicant->vessel->name, $array5)){
-                $applicant->shipowner = "HMM Co., LTD.";
-                $applicant->sAddress = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
-                $applicant->shipowner2 = "HMM Ocean Service Co., Ltd.";
-                $applicant->sAddress2 = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
-                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-                $applicant->cAddress = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
-            }
-            elseif(in_array($applicant->vessel->name, $array6)){
-                $applicant->shipowner = "HMM Company Limited";
-                $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
-                $applicant->shipowner2 = "HMM Ocean Service Co., Ltd.";
-                $applicant->sAddress2 = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
-                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-                $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
-            }
-            else{
-                // DEFAULT
-                $applicant->shipowner = "HMM Company Limited";
-                $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
-                $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-                $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
-            }
+            $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
+            $this->shipmanager['address'] = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
 
-        $this->applicant    = $applicant;
-        $this->title        = $title;
-        $this->mt           = $mt;
+        $this->title = $title;
     }
 
     public function view(): View
     {
-        $principal = "hmm";
-
+        $principal = "hmmcm1";
         $exportView = str_replace(' ', '_', $this->applicant->vessel->fleet) . '.' . $principal;
-
+        
         return view('exports.mlc.' . $exportView, [
             'data' => $this->applicant,
-            'newFormHMM' => $this->newFormHMM
+            'shipowner' => $this->shipowner,
+            'shipmanager' => $this->shipmanager
         ]);
     }
 
@@ -123,28 +55,28 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     {
         $borderStyle = 
         [
-            [
+            [//0
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                     ],
                 ]
             ],
-            [
+            [//1
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
                     ],
                 ]
             ],
-            [
+            [//2
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
                     ],
                 ]
             ],
-            [
+            [//3
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -160,7 +92,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//4
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
@@ -176,7 +108,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//5
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
@@ -192,7 +124,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//6
                 'borders' => [
                     'top' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -200,14 +132,15 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//7
                 'borders' => [
                     'bottom' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFFFF']
                     ],
                 ]
             ],
-            [
+            [//8
                 'borders' => [
                     'left' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -215,7 +148,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//9
                 'borders' => [
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -223,10 +156,38 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                 ]
             ],
-            [
+            [//10
                 'borders' => [
                     'right' => [
                         'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    ],
+                ]
+            ],
+            [//11
+                'borders' => [
+                    'top' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//12
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//13
+                'borders' => [
+                    'left' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                    ],
+                ]
+            ],
+            [//14
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
                     ],
                 ]
             ],
@@ -237,7 +198,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => '26b36c'
+                        'rgb' => 'bdb9b9'
                     ]
                 ],
             ],
@@ -245,7 +206,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'ced4da'
+                        'rgb' => 'ebf8a4'
                     ]
                 ],
             ]
@@ -280,14 +241,14 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             ],
             [
                 'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
-                ]
-            ],
-            [
-                'alignment' => [
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
+            ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                ]
             ],
             [
                 'font' => [
@@ -301,68 +262,57 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             ],
             [
                 'font' => [
-                    'bold' => true,
-                    'italic' => true
+                    'underline' => true
+                ],
+            ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
                 ],
             ],
         ];
 
-        $title = $this->title;
-        $mt = $this->mt ? -2 : 0;
-
-        // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-        if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
-            $mt += 3;
-        }
-
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $title, $mt) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
-
-
-                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-
-
-                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
-                    $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
-                    // $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
-
-                    $event->sheet->getDelegate()->getHeaderFooter()->setEvenHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
-                    // $event->sheet->getDelegate()->getHeaderFooter()->setEvenFooter("&LPC-302/2022.01.26/DCN22001");
-                }
-                elseif($this->applicant->vessel->id == 8791){
-                    $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
-                    $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LPC-302/2022.01.26/DCN22001");
-
-                    $event->sheet->getDelegate()->getHeaderFooter()->setEvenHeader("&L표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&ICh.2 / Page &P");
-                    $event->sheet->getDelegate()->getHeaderFooter()->setEvenFooter("&LPC-302/2022.01.26/DCN22001");
-                }
-
+                $event->sheet->getDelegate()->setTitle($this->title, false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.4);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
+                $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
-                $event->sheet->getDelegate()->getStyle('A1:I' . (62 + $mt))->getFont()->setName('Times New Roman');
-                $event->sheet->getDelegate()->getStyle('A4:I' . (62 + $mt))->getFont()->setSize(10);
+                //SET FIRST PAGE NUMBER
+                $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
+                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
-                if(in_array($this->applicant->vessel->id, $this->cm1)){
-                    $event->sheet->getDelegate()->getStyle('B20')->getFont()->setSize(8);
-                }
+                $line = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
+                $line->setPath(public_path('/images/horizontal_line.png'));
+                $line->setHeight(15);
 
-                $event->sheet->getDelegate()->getStyle('A' . (43 + $mt))->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('A' . (46 + $mt))->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('A' . (52 + $mt))->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8배승관리(MANNING MANAGEMENT) &R&8APP.4 / Page &P');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2024.08.09/DCN24005');
+                $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+                
+                // SET DEFAULT FONT
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                // CELL COLOR
+                // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
+
+                // TEXT ROTATION
+                // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
 
                 // FUNCTIONS
                 // $osSize = sizeof($this->linedUps);
@@ -390,7 +340,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    'B' . (22 + $mt)
+                    'A42', 'D42'
                 ];
 
                 // HL B
@@ -400,53 +350,46 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                ];
-
-                // HL
-                $h[4] = [
+                    'A16', 'A41:A42', 'D41:D42'
                 ];
 
                 // HC VC
+                $h[4] = [
+                    'A1:A2', 'A4:A14', 'A18', 'A20:A25', 'B20:H23', 'A27:A29', 'B27:H28'
+                ];
+
+                // HL
                 $h[5] = [
+                    'C14'
                 ];
 
                 // B
                 $h[6] = [
+                    'A1', 'A3', 'A15', 'A19', 'A26', 'A30', 'A32', 'A34', 'A36', 'A38'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A1:I' . (21 + $mt),
-                    'A' . (22 + $mt), 'B' . (22 + $mt),
-                    'A' . (23 + $mt) . ':I' . (62 + $mt),
+                    'A4:H14', 'A16:H17', 'B29', 'A43:H44'
                 ];
 
-                // B I
+                // UNDERLINE
                 $h[8] = [
+                    'A9', 'A36:A37'
+                ];
+
+                // JUSTIFY
+                $h[9] = [
                 ];
 
                 $h['wrap'] = [
-                    'A' . (22 + $mt), 'A' . (33 + $mt), 'B' . (27 + $mt), 'C' . (24 + $mt), 'E' . (24 + $mt), 
-                    'E' . (27 + $mt), 'B' . (22 + $mt), 'B' . (30 + $mt), 'B' . (31 + $mt), 'A' . (40 + $mt),
-                    'A' . (43 + $mt), 'A' . (46 + $mt), 'A' . (52 + $mt), 'A' . (54 + $mt), 'A' . (60 + $mt)
+                    'G5', 'B16', 'C20', 'E20', 'B21:H21', 'B22', 'E22', 'B23:H23', 'A27', 'B28'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'F8', 'E' . (58 + $mt), 'C7', 'H8', 'C' . (13 + $mt),
+                    'C4:C13'
                 ];
-
-                // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
-                    array_push($h[5], 'B9');
-                    array_push($h[5], 'B12');
-
-                    array_push($h['stf'], 'D7');
-                    array_push($h['stf'], 'D11');
-                    array_push($h['stf'], 'D14');
-                    array_push($h['stf'], 'D16');
-                    array_push($h['stf'], 'D19');
-                }
 
                 foreach($h as $key => $value) {
                     foreach($value as $col){
@@ -454,6 +397,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                             $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(true);
                         }
                         elseif($key == 'stf'){
+                            $event->sheet->getDelegate()->getStyle($col)->getAlignment()->setWrapText(false);
                             $event->sheet->getDelegate()->getStyle($col)->applyFromArray([
                                 'alignment' => [
                                     'shrinkToFit' => true
@@ -468,7 +412,6 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    
                 ];
 
                 $fills[1] = [
@@ -485,10 +428,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A7:I' . (17 + $mt), 'A' . (20 + $mt) . ':I' . (22 + $mt), 'A' . (24 + $mt) . ':I' . (31 + $mt), 
-                    'A' . (33 + $mt) . ':I' . (36 + $mt), 'A' . (40 + $mt) . ':I' . (40 + $mt), 'A' . (43 + $mt) . ':I' . (43 + $mt),
-                    'A' . (49 + $mt) . ':I' . (49 + $mt),
-                    'A' . (46 + $mt) . ':I' . (46 + $mt), 'A' . (52 + $mt) . ':I' . (52 + $mt), 'A' . (60 + $mt) . ':I' . (61 + $mt)
+                    'A4:H14', 'A16:H18', 'A20:H25', 'A27:H29', 'A43:H44'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -501,6 +441,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
+                    'A31:H31', 'A33:H33', 'A35:H35', 'A37:H37', 'A39:H39'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -511,11 +452,44 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $cells[5] = array_merge([
                 ]);
 
-                // BOTTOM BORDER THIN
-                $cells[7] = array_merge([
-                    'A' . (56 + $mt) . ':C' . (56 + $mt), 'E' . (56 + $mt) . ':H' . (56 + $mt)
+                // TOP REMOVE BORDER
+                $cells[6] = array_merge([
                 ]);
 
+                // BRB
+                $cells[7] = array_merge([
+                ]);
+
+                // LRB
+                $cells[8] = array_merge([
+
+                ]);
+
+                // RRB
+                $cells[9] = array_merge([
+                ]);
+
+                // TRB
+                $cells[10] = array_merge([
+                ]);
+
+                // TBT - TOP BORDER THIN
+                $cells[11] = array_merge([
+                ]);
+
+                // BBT
+                $cells[12] = array_merge([
+                    'A41:B41', 'D41:G41'
+                ]);
+
+                // LBT
+                $cells[13] = array_merge([
+                ]);
+
+                // RBT
+                $cells[14] = array_merge([
+                ]);
+                
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
                         $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
@@ -526,255 +500,142 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(20.5);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(11);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(21);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(19);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(22.5);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(14);
 
                 // ROW RESIZE
-                for($i = 1; $i <= (60 + $mt); $i++){
-                    $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(21);
+                $rows = [
+                    [
+                        24, //ROW HEIGHT
+                        1,32 //START ROW, END ROW
+                    ],
+                    [18,42,44]
+                ];
+
+                $rows2 = [
+                    [
+                        85, //row height
+                        [18] // rows
+                    ],
+                    [35, [24,40]], [24,[34,36,37,38]], [125,[33,35]], [165, [39]], [100,[41]]
+                ];
+
+                foreach($rows as $row){
+                    for($i = $row[1]; $i <= $row[2]; $i++){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight($row[0]);
+                    }
                 }
 
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(17);
-                $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(17);
-                $event->sheet->getDelegate()->getRowDimension(18 + $mt)->setRowHeight(17);
-                $event->sheet->getDelegate()->getRowDimension(22 + $mt)->setRowHeight(110);
-                $event->sheet->getDelegate()->getRowDimension(24 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(25 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(27 + $mt)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(28 + $mt)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(29 + $mt)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(30 + $mt)->setRowHeight(50);
-                $event->sheet->getDelegate()->getRowDimension(31 + $mt)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(33 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(34 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(35 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(36 + $mt)->setRowHeight(35);
+                foreach($rows2 as $row){
+                    foreach($row[1] as $cell){
+                        $event->sheet->getDelegate()->getRowDimension($cell)->setRowHeight($row[0]);
+                    }
+                }
 
-                // TO PAGE 2
-                $event->sheet->getDelegate()->getRowDimension(37 + $mt)->setRowHeight(5);
-                $event->sheet->getDelegate()->getRowDimension(38 + $mt)->setRowHeight(5);
-                // END
-
-                $event->sheet->getDelegate()->getRowDimension(40 + $mt)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(43 + $mt)->setRowHeight(150);
-                $event->sheet->getDelegate()->getRowDimension(46 + $mt)->setRowHeight(160);
+                // PAGE BREAKS
+                $rows = ["A29"];
+                foreach($rows as $row){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
                 
-                $event->sheet->getDelegate()->getRowDimension(49 + $mt)->setRowHeight(46);
-                $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(130);
-                $event->sheet->getDelegate()->getRowDimension(54 + $mt)->setRowHeight(30);
-                $event->sheet->getDelegate()->getRowDimension(55 + $mt)->setRowHeight(120);
-                $event->sheet->getDelegate()->getRowDimension(56 + $mt)->setRowHeight(17);
-                $event->sheet->getDelegate()->getRowDimension(57 + $mt)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(58 + $mt)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(60 + $mt)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(61 + $mt)->setRowHeight(16);
-                $event->sheet->getDelegate()->getRowDimension(62 + $mt)->setRowHeight(16);
+                // SET PRINT AREA
+                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
-                if($mt){
-                    $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(40);
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+
+                // SECTIONS
+                $event->sheet->getDelegate()->getStyle('A15')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A19')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A26')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A30')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A32')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A34')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('A36')->getFont()->setSize(11);
+
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(14);
+                $event->sheet->getDelegate()->getStyle('A40')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A40')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A43')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A43')->getFont()->setName('Times New Roman');
+
+                // HMM PARAHRAPH CELLS SIZE 8
+                $cells = ["B21:H21", "B23:H23", 'B24:B25'];
+                foreach($cells as $cell){
+                    $event->sheet->getDelegate()->getStyle($cell)->getFont()->setSize(8);
+                    $event->sheet->getDelegate()->getStyle($cell)->getFont()->setName('Times New Roman');
                 }
 
-                // IF PACIFIC CHAMP AND AFFINITY CHUCHU
-                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
-                    $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
-                    $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
-                    $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
-                    // $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(8);
-                    $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(9);
-                    $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
-                    $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(19);
-
-                    $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(16);
-                    $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(25);
-                    $event->sheet->getDelegate()->getRowDimension(3)->setRowHeight(8);
-
-                    $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(8);
-                    $event->sheet->getDelegate()->getRowDimension(21)->setRowHeight(1);
-
-                    $event->sheet->getDelegate()->getRowDimension(25)->setRowHeight(100);
-                    $event->sheet->getDelegate()->getRowDimension(28)->setRowHeight(23);
-                    $event->sheet->getDelegate()->getRowDimension(30)->setRowHeight(31);
-                    $event->sheet->getDelegate()->getRowDimension(31)->setRowHeight(23);
-                    $event->sheet->getDelegate()->getRowDimension(34)->setRowHeight(30);
-                    $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(25);
-                    $event->sheet->getDelegate()->getRowDimension(37)->setRowHeight(25);
-                    $event->sheet->getDelegate()->getRowDimension(38)->setRowHeight(25);
-                    $event->sheet->getDelegate()->getRowDimension(39)->setRowHeight(25);
-
-                    $event->sheet->getDelegate()->getRowDimension(40)->setRowHeight(6);
-                    $event->sheet->getDelegate()->getRowDimension(41)->setRowHeight(6);
-
-                    $event->sheet->getDelegate()->getRowDimension(44)->setRowHeight(6);
-                    $event->sheet->getDelegate()->getRowDimension(47)->setRowHeight(6);
-                    $event->sheet->getDelegate()->getRowDimension(50)->setRowHeight(6);
-                    $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(6);
-                    $event->sheet->getDelegate()->getRowDimension(56)->setRowHeight(6);
-                }
-                else{
-                    $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(1);
-                    $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(16.5);
-                    $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(8.5);
-                    $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
-                    // $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(8);
-                    $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(9);
-                    $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(9);
-                    $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(19);
-
-                    $event->sheet->getDelegate()->getRowDimension(41)->setRowHeight(5);
-                    $event->sheet->getDelegate()->getRowDimension(44)->setRowHeight(5);
-                    $event->sheet->getDelegate()->getRowDimension(47)->setRowHeight(5);
-                    $event->sheet->getDelegate()->getRowDimension(50)->setRowHeight(5);
-                    $event->sheet->getDelegate()->getRowDimension(53)->setRowHeight(5);
-
-                    // IF CM1 LIBERIA
-                    if(in_array($this->applicant->vessel->id, $this->cm1) && $this->applicant->vessel->id != 8791){
-                        $event->sheet->getDelegate()->getRowDimension(41 + $mt)->setRowHeight(30);
-                        $event->sheet->getDelegate()->getRowDimension(44 + $mt)->setRowHeight(30);
-                        $event->sheet->getDelegate()->getRowDimension(47 + $mt)->setRowHeight(30);
-                        $event->sheet->getDelegate()->getRowDimension(50 + $mt)->setRowHeight(30);
-
-                        $event->sheet->getDelegate()->getRowDimension(52 + $mt)->setRowHeight(220);
-                    }
-
-                    if($this->applicant->vessel->id == 8791){
-                        $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(65);
-                        $event->sheet->getDelegate()->getRowDimension(41 + $mt)->setRowHeight(5);
-                        $event->sheet->getDelegate()->getRowDimension(44 + $mt)->setRowHeight(5);
-                        $event->sheet->getDelegate()->getRowDimension(47 + $mt)->setRowHeight(5);
-                        $event->sheet->getDelegate()->getRowDimension(50 + $mt)->setRowHeight(5);
-                    }
+                //SIZE 8.5
+                $cells = ['A33', 'A35'];
+                foreach($cells as $cell){
+                    $event->sheet->getDelegate()->getStyle($cell)->getFont()->setSize(8.5);
+                    $event->sheet->getDelegate()->getStyle($cell)->getFont()->setName('Times New Roman');
                 }
 
-                // CM2
-                if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
-                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-                }
-                elseif($this->applicant->vessel->id == 8791){
-                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (35 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-                }
-                else{
-                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (36 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-
-                    // IF CM1 LIBERIA
-                    // if(in_array($this->applicant->vessel->id, $this->cm1) && $this->applicant->vessel->id != 8791){
-                    if(in_array($this->applicant->vessel->id, $this->cm1)){
-                        $event->sheet->getParent()->getActiveSheet()->setBreak('A' . (52 + $mt), \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-                    }
+                //SIZE 9
+                $cells = ["B18", 'A31', 'A37', 'A39'];
+                foreach($cells as $cell){
+                    $event->sheet->getDelegate()->getStyle($cell)->getFont()->setSize(9);
+                    $event->sheet->getDelegate()->getStyle($cell)->getFont()->setName('Times New Roman');
                 }
 
-                $event->sheet->getDelegate()->getStyle('C24')->getFont()->setSize(7);
-                
                 // RICH TEXTS
-                $cell = "A6";
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setSize(11);
+                $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
+                $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                $event->sheet->getParent()->getActiveSheet()->getCell("A3")->setValue($rt);
 
-                $rt->createText("1. Seafarer/Shipowner/");
-                $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(10);
-                $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(10);
-
-                $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
-
-                $cell = "C" . (24 + $mt);
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-
-                if($this->applicant->vessel->id == 8791){
-                    if($this->applicant->rankType == "OFFICER"){
-                        $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                        $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
-                    }
-                    else{
-                        $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
-                        $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                    }
+                if($this->applicant->rankType == "OFFICER"){
+                    $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                    $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
                 }
                 else{
-                    if($this->applicant->rankType == "OFFICER"){
-                        $rt->createTextRun("Fixed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                        $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
-                    }
-                    else{
-                        $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
-                        $rt->createTextRun("Guaranteed")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                    }
+                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                    $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
                 }
-
-
                 $rt->createText(PHP_EOL);
                 $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
+                $event->sheet->getParent()->getActiveSheet()->getCell("C20")->setValue($rt);
 
-                $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
-
-                if(in_array($this->applicant->vessel->id, $this->newFormHMM) || $this->applicant->vessel->id == 8791){
-                    $cell = "E" . (27 + $mt);
-                    $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-
-                    $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
-                    $rt->createText(PHP_EOL);
-                    $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-
-                    $event->sheet->getParent()->getActiveSheet()->getCell($cell)->setValue($rt);
-
-                    if($this->applicant->vessel->id == 8791){
-                        $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                        $rt->createTextRun("President")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                        $event->sheet->getParent()->getActiveSheet()->getCell("B10")->setValue($rt);
-
-                        $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                        $rt->createTextRun("Company")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                        $event->sheet->getParent()->getActiveSheet()->getCell("B12")->setValue($rt);
-                        
-                        $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                        $rt->createTextRun("Address")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                        $event->sheet->getParent()->getActiveSheet()->getCell("B13")->setValue($rt);
-                    }
-                }
-
-
-                if(in_array($this->applicant->vessel->id, $this->cm1)){
-                    $event->sheet->getDelegate()->getPageSetup()->setFitToPage(false);
-                    $event->sheet->getDelegate()->getPageSetup()->setScale(83);
-                }
-
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
+                $rt->createText(PHP_EOL);
+                $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setName("Times New Roman")->setSize(9);
+                $event->sheet->getParent()->getActiveSheet()->getCell("E22")->setValue($rt);
             },
         ];
     }
 
     public function drawings()
     {
-        $mt = $this->mt ? -2 : 0;
-
         $sig = $this->applicant->vessel->fleet == "FLEET B" ? 'images/mlc_hmm_sig.jpg' : 'images/shirley_sig.png';
 
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
-        $drawing->setCoordinates('G' . (55 + $mt));
-        $drawing->setHeight(154);
-        $drawing->setWidth(154);
-        $drawing->setOffsetX(35);
+        $drawing->setCoordinates("F41");
+        $drawing->setHeight(130);
+        $drawing->setWidth(130);
+        $drawing->setOffsetX(50);
         $drawing->setOffsetY(3);
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing3->setName('mlc_hmm_sig');
-        $drawing3->setDescription('mlc_hmm_sig');
         $drawing3->setPath(public_path($sig));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('E' . (55 + $mt));
-        $drawing3->setHeight(140);
-        $drawing3->setWidth(140);
-
-        if(in_array($this->applicant->vessel->id, $this->newFormHMM)){
-            $drawing->setCoordinates('G' . (58 + $mt));
-            $drawing3->setCoordinates('E' . (58 + $mt));
-        }
+        $drawing3->setCoordinates("D41");
+        $drawing3->setResizeProportional(false);
+        $drawing3->setHeight(115);
+        $drawing3->setWidth(130);
 
         return [$drawing, $drawing3];
     }
