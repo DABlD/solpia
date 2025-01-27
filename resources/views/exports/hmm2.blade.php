@@ -301,6 +301,7 @@
 			$cn = str_replace('&', '&#38;', $ss->crew_nationality);
 			$flag = str_replace('&', '&#38;', $ss->flag);
 			$remarks = str_replace('&', '&#38;', $ss->remarks);
+			$principal = str_replace('&', '&#38;', $ss->principal);
 
 			$son = $ss->sign_on;
 			$soff = $ss->sign_off;
@@ -323,7 +324,7 @@
 				<td>$remarks</td>
 				<td>$cn</td>
 				<td>$man</td>
-				<td>$ss->principal</td>
+				<td>$principal</td>
 			";
 		}
 	};
