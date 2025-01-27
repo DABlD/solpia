@@ -579,6 +579,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 $event->sheet->getDelegate()->getStyle('A3')->getFont()->setSize(14);
                 $event->sheet->getDelegate()->getStyle('A5')->getFont()->setSize(11);
+                $event->sheet->getDelegate()->getStyle('J7')->getFont()->setSize(8);
                 $event->sheet->getDelegate()->getStyle('A20')->getFont()->setSize(11);
                 $event->sheet->getDelegate()->getStyle('B26:K26')->getFont()->setSize(9);
                 $event->sheet->getDelegate()->getStyle('B28:K28')->getFont()->setSize(9);
@@ -589,7 +590,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // RICH TEXTS
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setSize(11);
+                $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
                 $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
                 $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
                 $event->sheet->getParent()->getActiveSheet()->getCell("A5")->setValue($rt);
