@@ -1,139 +1,120 @@
-@php
-@endphp
-
 <table>
 	<tr>
 		<td>CHAPTER  2</td>
-		<td colspan="10">외국해원 표준근로계약서</td>
+		<td colspan="7">외국해원 표준근로계약서</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">2.1.2 PHILIPPINE CREW(Non Korea Flag Vessel)</td> {{--  WILL BE EDITED TO RICH TEXT DUE TO CUSTOM UNDERLINE --}}
+		<td colspan="8">2.1  PHILIPPINE CREW(Korea Flag Vessel)</td> {{-- RICH TEXTED --}}
 	</tr>
 
 	<tr>
-		<td colspan="11">Seafarer`s Employment Agreement</td>
+		<td colspan="8">Seafarer`s Employment Agreement</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">The following parties to the SEA agree to fully comply with the terms stated hereinafter.</td>
+		<td colspan="8">The following parties to the SEA agree to fully comply with the terms stated hereinafter.</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">1.	Seafarer/Shipowner/Ship Manager/Agent/Ship</td> // RICH TEXT
+		<td colspan="8">1.	Seafarer/Shipowner/Ship Manager/Agent/Ship</td> {{-- RICH TEXTED --}}
 	</tr>
 
-	{{-- SEAFARER --}}
 	<tr>
 		<td rowspan="2">Seafarer</td>
-		<td colspan="3">Name</td>
-		<td colspan="3">{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}</td>
-		<td colspan="2">Date of Birth</td>
-		<td colspan="2">{{ $data->user->birthday != "" ? $data->user->birthday->format('d-M-Y') : '' }}</td>
+		<td>Name</td>
+		<td colspan="3">
+			{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}
+		</td>
+		<td>Date of Birth</td>
+		<td colspan="2">
+			{{ $data->user->birthday != "" ? $data->user->birthday->format('d-M-Y') : '' }}
+		</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">Capacity</td>
+		<td>Capacity</td>
 		<td colspan="3">{{ $data->position }}</td>
-		<td colspan="2">Birthplace/Nationality</td>
+		<td>Birthplace / Nationality</td>
 		<td colspan="2">{{ $data->birth_place }} / Filipino</td>
 	</tr>
 
 	{{-- SHIPOWNER --}}
 	<tr>
-		<td rowspan="6">Shipowner</td>
-		<td rowspan="3">Beneficial</td>
-		<td colspan="2">Company</td>
-		<td colspan="7">{{ $shipownerA['company'] ?? "-" }}</td>
+		<td rowspan="3">Shipowner</td>
+		<td>Company</td>
+		<td colspan="6">{{ $shipowner['company'] ?? "-" }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="2">President</td>
-		<td colspan="7">{{ $shipownerA['president'] ?? "-" }}</td>
+		<td>President</td>
+		<td colspan="6">{{ $shipowner['president'] ?? "-" }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="2">Address</td>
-		<td colspan="7">{{ $shipownerA['address'] ?? "-" }}</td>
-	</tr>
-
-	<tr>
-		<td rowspan="3">MLC</td>
-		<td colspan="2">Company</td>
-		<td colspan="7">{{ $shipownerB['company'] ?? "-" }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="2">President</td>
-		<td colspan="7">{{ $shipownerB['president'] ?? "-" }}</td>
-	</tr>
-
-	<tr>
-		<td colspan="2">Address</td>
-		<td colspan="7">{{ $shipownerB['address'] ?? "-" }}</td>
+		<td>Address</td>
+		<td colspan="6">{{ $shipowner['address'] ?? "-" }}</td>
 	</tr>
 
 	{{-- SHIP MANAGER --}}
 	<tr>
 		<td rowspan="2">Ship Manager</td>
-		<td colspan="3">Company</td>
-		<td colspan="7">{{ $shipmanager['company'] ?? "-" }}</td>
+		<td>Company</td>
+		<td colspan="6">{{ $shipmanager['company'] ?? "-" }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">Address</td>
-		<td colspan="7">{{ $shipmanager['address'] ?? "-" }}</td>
+		<td>Address</td>
+		<td colspan="6">{{ $shipmanager['address'] ?? "-" }}</td>
 	</tr>
 
 	{{-- AGENT --}}
 	<tr>
 		<td rowspan="2">Agent</td>
-		<td colspan="3">Company</td>
-		<td colspan="7">Solpia Marine &#38; Ship Management, Inc.</td>
+		<td>Company</td>
+		<td colspan="6">Solpia Marine &#38; Ship Management, Inc.</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">Address</td>
-		<td colspan="7">2019 San Marcelino St., Malate Manila, Philippines 1004</td>
+		<td>Address</td>
+		<td colspan="6">2019 San Marcelino St., Malate Manila, Philippines 1004</td>
 	</tr>
 
-	{{-- SHIP --}}
+	{{-- VESSEL DETAILS --}}
 	<tr>
 		<td rowspan="2">Ship</td>
-		<td colspan="3">Ship name</td>
+		<td>Ship name</td>
 		<td colspan="3">{{ $data->vessel->name }}</td>
-		<td colspan="2">G/T</td>
+		<td>G/T</td>
 		<td colspan="2">{{ $data->vessel->gross_tonnage }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">Year Built</td>
+		<td>Year Built</td>
 		<td colspan="3">{{ $data->vessel->year_build }}</td>
-		<td colspan="2">Flag</td>
+		<td>Flag</td>
 		<td colspan="2">{{ $data->vessel->flag }}</td>
 	</tr>
 
-	{{-- END --}}
-
-	{{-- COMMENCEMENT AND TERMINATION --}}
 	<tr>
-		<td colspan="11">2.	Period &#38; Termination of the agreement</td>
+		<td colspan="8">2.	Period &#38; Termination of the agreement</td>
 	</tr>
 
+	{{-- PERIOD --}}
 	<tr>
 		<td rowspan="2">Period</td>
-		<td colspan="3">Date of commencement</td>
-		<td colspan="7">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
+		<td>Date of commencement</td>
+		<td colspan="6">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">Date of termination</td>
-		<td colspan="7">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
+		<td>Date of termination</td>
+		<td colspan="6">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
 		<td>Early termination</td>
-		<td colspan="10">
+		<td colspan="7">
 			1)	Where the shipowner intends to cancel a Seafarers' employment agreement, he/she shall inform the seafarer of
 			<br style='mso-data-placement:same-cell;' />
 			ㅤthe cancellation of the Seafarers' employment agreement in writing with a period of advance notice of not less
@@ -151,29 +132,30 @@
 	</tr>
 
 	{{-- WAGES --}}
+
 	<tr>
-		<td colspan="11">3.	Wages</td>
+		<td colspan="8">3. Wages</td>
 	</tr>
 
 	<tr>
 		<td rowspan="4">
-			Basic pay 
+			Basic pay
 			<br style='mso-data-placement:same-cell;' />
 			&#38; allowance
 		</td>
-		<td colspan="3">Basic wage</td>
-		<td colspan="3">Fixed/Guaranteed Overtime Allowance</td> {{-- RICH TEXTED --}}
+		<td>Basic wage</td>
+		<td colspan="2">Fixed/Guaranteed</td> {{-- RICH TEXTED --}}
 		<td colspan="2">Fixed Supervisor Allowance</td>
 		<td colspan="2">Subsistence Allowance</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">
+		<td>
 			${{ $data->wage->basic ? ($data->wage->basic) : 0 }}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
 		</td>
-		<td colspan="3">
+		<td colspan="2">
 			${{ $data->wage->fot ?? $data->wage->ot ?? 0 }}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
@@ -191,8 +173,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Owner's Guaranteed Overtime Allowance</td>
-		<td colspan="3">Seniority Allowance</td>
+		<td>Owner's Guaranteed Overtime Allowance</td>
+		<td colspan="2">Seniority Allowance</td>
 		<td colspan="2">Provident Fund (Contract Completion Bonus)</td> {{-- RICH TEXTED --}}
 		<td colspan="2">Others</td>
 	</tr>
@@ -211,12 +193,12 @@
 	@endphp
 
 	<tr>
-		<td colspan="3">
+		<td>
 			${{ $data->wage->owner_allow ?? 0}}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
 		</td>
-		<td colspan="3">
+		<td colspan="2">
 			${{ $spay }}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
@@ -235,7 +217,7 @@
 
 	<tr>
 		<td>Payday</td>
-		<td colspan="10">
+		<td colspan="7">
 			All seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid
 			<br style='mso-data-placement:same-cell;' />
 			monthly wages not later than 15 days of the succeeding month from the date of commencement of the agreement until
@@ -246,85 +228,92 @@
 
 	<tr>
 		<td>Payment methods</td>
-		<td colspan="10">
+		<td colspan="7">
 			Wages should be paid directly to the seafarers` designated bank accounts unless they request otherwise in writing. 
 			<br style='mso-data-placement:same-cell;' />
 			Some allotments should be remitted in due time and directly to the person or persons nominated by the seafarers.
 		</td>
 	</tr>
 
-	{{-- PAID LEAVE --}}
+	{{-- 4 --}}
+
 	<tr>
-		<td colspan="11">4.	Paid Leave</td>
+		<td colspan="8">4. Paid leave</td>
 	</tr>
 
 	<tr>
 		<td rowspan="2">The amount of Paid leave</td>
-		<td colspan="3">Amount</td>
-		<td colspan="7">Method of calculation</td>
+		<td>Amount</td>
+		<td colspan="6">Method of calculation</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">
+		<td>
 			${{ $data->wage->leave_pay ?? 0 }}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
 		</td>
-		<td colspan="7">Basic Wage / 30 days X ( 9 ) days</td>
+		<td colspan="6">
+			Basic Wage / 30 days X 9 days
+		</td>
 	</tr>
 
 	<tr>
 		<td>The number of days</td>
-		<td colspan="10">ㅤThe number of days of paid leave shall be ( 9 ) days per 1 month of continuous service.</td>
+		<td colspan="7">
+			ㅤThe number of days of paid leave shall be 9 days per 1 month of continuous service.
+		</td>
 	</tr>
 
-	{{-- Health and social security protection benefits --}}
+	{{-- 5 --}}
 	<tr>
-		<td colspan="11">5.	Health and social security protection benefits</td>
+		<td colspan="8">5.	Health and social security protection benefits</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">
+		<td colspan="8">
 			ㅤThe shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity benefit, survivors'
 			<br style='mso-data-placement:same-cell;' />
 			ㅤbenefit, SSS, PhilHealth, and Pag-IBIG to the seafarer.
 		</td>
 	</tr>
 
+	{{-- 6 --}}
 	<tr>
-		<td colspan="11">6.	Seafarer's entitlement to repatriation</td>
+		<td colspan="8">6.	Seafarer's entitlement to repatriation</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">
-			ㅤ 1)	The shipowner shall promptly repatriate the seafarer who leaves a ship at the place of which is not the seafarer's country of residence
+		<td colspan="8">
+			ㅤ1) The shipowner shall promptly repatriate the seafarer who leaves a ship at the place of which is not the seafarer's country of residence
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ ㅤ or the place at which the seafarer agreed to enter into the engagement as the shipowner's expenses. However, in case where the
+			ㅤㅤor the place at which the seafarer agreed to enter into the engagement as the shipowner's expenses. However, in case where the
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ ㅤ shipowner pay the expense of repatriation according to the request of the seafarer, shipowner does not have any responsibility 
+			ㅤㅤshipowner pay the expense of repatriation according to the request of the seafarer, shipowner does not have any responsibility 
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ ㅤ for the repatriation.
+			ㅤㅤfor the repatriation.
 			<br style='mso-data-placement:same-cell;' />
 			<br style='mso-data-placement:same-cell;' />
 			ㅤ2) Despite above 1, in case of the following particulars, the shipowner can recover the cost of repatriation from the seafarer.
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ ㅤ a. When the seafarer leaves a ship without just cause.
+			ㅤㅤa. When the seafarer leaves a ship without just cause.
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ ㅤ b. When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws.
+			ㅤㅤb. When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws.
 			<br style='mso-data-placement:same-cell;' />
 			<br style='mso-data-placement:same-cell;' />
 			ㅤ3) The amount of money to be spent by the shipowner pursuant to paragraph (1) shall include transportation, accommodation, meals
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ ㅤ expenses incurred in the repatriation.
+			ㅤㅤexpenses incurred in the repatriation.
 		</td>
 	</tr>
 
+	{{-- 7 --}}
 	<tr>
-		<td colspan="11">7.	Standard of Hours of Work and Hours of Rest</td>
+		<td colspan="8">7.	Standard of Hours of Work and Hours of Rest</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">
+		<td colspan="8">
 			ㅤ1)	Hours of work
 			<br style='mso-data-placement:same-cell;' />
 			ㅤㅤa. Hours of Ordinary Work : 8 hours in a day and 40 hours in a week.
@@ -338,7 +327,7 @@
 			<br style='mso-data-placement:same-cell;' />
 			ㅤㅤb. Minimum of 10 hours rest in any 24-hour period may be divided into no more than 2 periods, one of which shall be at least 6 hours
 			<br style='mso-data-placement:same-cell;' />
-			ㅤㅤㅤin length.
+			ㅤㅤㅤ  in length.
 			<br style='mso-data-placement:same-cell;' />
 			ㅤㅤc. The interval between consecutive periods of rest shall not exceed 14 hours.
 			<br style='mso-data-placement:same-cell;' />
@@ -350,24 +339,26 @@
 		</td>
 	</tr>
 
+	{{-- 8 --}}
 	<tr>
-		<td colspan="11">8.	Provision and compliance with Risk assessments</td>
+		<td colspan="8">8.	Provision and compliance with Risk assessments)</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">
-			ㅤ1)  The Shipowner shall provide the risk assessment table through the ship’s network(EDMS) and make it available for viewing at any time.
+		<td colspan="8">
+			ㅤ1)	The Shipowner shall provide the risk assessment table through the ship’s network (EDMS) and make it available for viewing at any time.
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ2)  Seafarers shall be aware of the relevant information and check and utilize it frequently.
+			ㅤ2)	Seafarers shall be aware of the relevant information and check and utilize it frequently.
 		</td>
 	</tr>
 
+	{{-- 9 --}}
 	<tr>
-		<td colspan="11">9.	Any facts which are not defined in this agreement</td>
+		<td colspan="8">9.	Any facts which are not defined in this agreement</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">
+		<td colspan="8">
 			ㅤAny facts which are not defined in this agreement, these are complied with the law of flag state or applicable collective bargaining
 			<br style='mso-data-placement:same-cell;' />
 			ㅤagreement.
@@ -389,7 +380,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="11">
+		<td colspan="8">
 			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them
 			<br style='mso-data-placement:same-cell;' />
 			are retained by the each party and the seafarer has opportunity to review on the terms and condition and voluntarily accept them.
@@ -397,31 +388,31 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}</td>
-		<td colspan="2">(signature)</td>
-		<td colspan="5">Mr. Adulf Kit Jumawan - Crewing Manager</td>
+		<td colspan="2">{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}</td>
+		<td>(signature)</td>
+		<td colspan="4">Mr. Adulf Kit Jumawan - Crewing Manager</td>
 		<td>(signature)</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">(Seafarer)</td>
-		<td colspan="2"></td>
-		<td colspan="5">(For and on behalf of the Shipowner(Beneficial)</td>
+		<td colspan="2">(Seafarer)</td>
+		<td></td>
+		<td colspan="4">(Shipowner or for and on behalf of the shipowner)</td>
 		<td></td>
 	</tr>
 
 	<tr>
-		<td rowspan="2" colspan="5">
+		<td rowspan="2" colspan="3">
 			ㅤPlace where and date when a seafarer’s employment
 			<br style='mso-data-placement:same-cell;' />
 			ㅤagreement is entered into.
 		</td>
-		<td colspan="3">ㅤPlace</td>
+		<td colspan="2">ㅤPlace</td>
 		<td colspan="3">ㅤManila, Philippines</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">ㅤDate</td>
+		<td colspan="2">ㅤDate</td>
 		<td colspan="3">ㅤ{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
 	</tr>
 </table>
