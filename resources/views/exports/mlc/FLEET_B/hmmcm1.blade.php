@@ -11,7 +11,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="8">1.	Seafarer/Shipowner/Ship Manager/Agent/Ship</td> {{-- RICH TEXTED --}}
+		<td colspan="8">1.	Seafarer/Shipowner/Ship Manager/Agent/Ship</td> {{-- RICH TEXTED NO MORE --}}
 	</tr>
 
 	{{-- 1 --}}
@@ -132,7 +132,7 @@
 			&#38; allowance
 		</td>
 		<td>Basic wage</td>
-		<td colspan="2">Fixed/Guaranteed</td> {{-- RICH TEXTED --}}
+		<td colspan="2">Fixed/Guaranteed Overtime Allowance</td> {{-- RICH TEXTED NO MORE --}}
 		<td colspan="2">Fixed Supervisor Allowance</td>
 		<td colspan="2">Subsistence Allowance</td>
 	</tr>
