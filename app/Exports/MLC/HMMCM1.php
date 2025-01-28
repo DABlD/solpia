@@ -296,8 +296,8 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $line->setPath(public_path('/images/horizontal_line.png'));
                 $line->setHeight(15);
 
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8배승관리(MANNING MANAGEMENT) &R&8APP.4 / Page &P');
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2024.08.09/DCN24005');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8MANNING MANAGEMENT &R&8APP.4 / Page &P');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2024.12.20/DCN24008');
                 $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
 
                 // SET PAGE BREAK PREVIEW
@@ -375,7 +375,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // UNDERLINE
                 $h[8] = [
-                    'A9', 'A36:A37'
+                    // 'A9', 'A36:A37'
                 ];
 
                 // JUSTIFY
@@ -523,7 +523,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         85, //row height
                         [18] // rows
                     ],
-                    [35, [24,40]], [24,[34,36,37,38]], [125,[33,35]], [165, [39]], [100,[41]]
+                    [14, [30]],[35, [24,40]], [24,[34,36,37,38]], [125,[33,35]], [180, [39]], [100,[41]]
                 ];
 
                 foreach($rows as $row){
@@ -561,6 +561,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A36')->getFont()->setSize(11);
 
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(14);
+                $event->sheet->getDelegate()->getStyle('A3')->getFont()->setSize(11);
                 $event->sheet->getDelegate()->getStyle('A40')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A40')->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A43')->getFont()->setSize(10);
@@ -588,30 +589,79 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // RICH TEXTS
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
-                $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
-                $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
-                $event->sheet->getParent()->getActiveSheet()->getCell("A3")->setValue($rt);
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                // $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
+                // $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                // $event->sheet->getParent()->getActiveSheet()->getCell("A3")->setValue($rt);
 
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                if($this->applicant->rankType == "OFFICER"){
-                    $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
-                }
-                else{
-                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                }
-                $rt->createText(PHP_EOL);
-                $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
-                $event->sheet->getParent()->getActiveSheet()->getCell("C20")->setValue($rt);
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // if($this->applicant->rankType == "OFFICER"){
+                //     $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                //     $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                // }
+                // else{
+                //     $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                //     $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                // }
+                // $rt->createText(PHP_EOL);
+                // $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
+                // $event->sheet->getParent()->getActiveSheet()->getCell("C20")->setValue($rt);
 
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
                 $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
                 $rt->createText(PHP_EOL);
                 $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setName("Times New Roman")->setSize(9);
                 $event->sheet->getParent()->getActiveSheet()->getCell("E22")->setValue($rt);
+
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $text = "Any facts which are not defined in this agreement, these are complied with the law of flag state or Applicable collective bargaining agreement.";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "entitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "robbery against ships.";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "※   Additional clause for Marshall Islands flag";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "The terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "of the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "and Regulations of the Republic of the Marshall Islands.";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "※   Additional clause for The Republic of Liberia flag";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "1)  Seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ recruitment and placement";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
+                $rt->createText(PHP_EOL);
+                $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
+                $text = "services’ system of protection, to compensate seafarers for monetary loss that they may incur as a result of the failure of the recruitment";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
+                $rt->createText(PHP_EOL);
+                $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
+                $text = "and placement service or the relevant shipowner under the seafarers’ employment agreement to meet its obligations to them.";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "2)  After consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
+                $rt->createText(PHP_EOL);
+                $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
+                $text = "paid to an account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
+
+                $event->sheet->getParent()->getActiveSheet()->getCell("A39")->setValue($rt);
+                $event->sheet->getDelegate()->getStyle('A39')->getAlignment()->setIndent(true);
             },
         ];
     }
