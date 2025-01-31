@@ -109,7 +109,7 @@
 
 	<tr>
 		<td>Date of termination</td>
-		<td colspan="6">{{ now()->parse($data->effective_date)->format('d-M-Y') }}</td>
+		<td colspan="6">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
