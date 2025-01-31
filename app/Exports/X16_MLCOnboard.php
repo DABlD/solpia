@@ -47,19 +47,19 @@ class X16_MLCOnboard implements WithMultipleSheets
 
             $date = $lucs[$applicant->id][0]["joining_date"];
             $months = $lucs[$applicant->id][0]["months"];
-            $extensions = $lucs[$applicant->id][0]["extensions"];
+            // $extensions = $lucs[$applicant->id][0]["extensions"];
 
-            if($extensions){
-                $extensions = json_decode($extensions);
-                $date = now()->parse($date)->add($months, 'months');
+            // if($extensions){
+            //     $extensions = json_decode($extensions);
+            //     $date = now()->parse($date)->add($months, 'months');
 
-                for($i = 0, $j = 1; $i < sizeof($extensions); $i++, $j++){
-                    $months = $extensions[$i];
-                    if($j < sizeof($extensions)){
-                        $date = $date->add($months, 'months');
-                    }
-                }
-            }
+            //     for($i = 0, $j = 1; $i < sizeof($extensions); $i++, $j++){
+            //         $months = $extensions[$i];
+            //         if($j < sizeof($extensions)){
+            //             $date = $date->add($months, 'months');
+            //         }
+            //     }
+            // }
 
             $applicant->date_processed    = now()->toDateString();
             $applicant->effective_date    = $date->toDateString();
