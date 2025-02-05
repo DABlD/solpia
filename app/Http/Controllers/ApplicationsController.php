@@ -1895,9 +1895,9 @@ class ApplicationsController extends Controller
         echo "</tbody></table>";
     }
 
-    public function tempFunc(){
-        $start = '2024-10-10';
-        $end = '2024-11-30';
+    public function tempFunc(Request $req){
+        $start = $req->start;
+        $end = $req->end;
 
         echo $start . ' -> ' . $end . '<br><br>';
 
