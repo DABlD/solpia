@@ -218,7 +218,7 @@
 
 	<tr>
 		<td colspan="14" style="{{ $bold }}">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(The place where and date when seafarer’s employment agreement is entered into)
+			 ㅤ(The place where and date when seafarer’s employment agreement is entered into)
 		</td>
 	</tr>
 
@@ -242,13 +242,13 @@
 
 	<tr>
 		<td colspan="14">
-		 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎*동 계약은 승선을 위한 출국일 혹은 승선일로부터 효력이 발생한다.
+		 ㅤㅤ*동 계약은 승선을 위한 출국일 혹은 승선일로부터 효력이 발생한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-		 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎*This contract will be effective from embarkation date or date of departure for embarkation.
+		 ㅤㅤ*This contract will be effective from embarkation date or date of departure for embarkation.
 		</td>
 	</tr>
 
@@ -266,7 +266,7 @@
 
 	<tr>
 		<td colspan="14" style="{{ $bold }}">
-		 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎(The duty in which the seafarer is to be employed)
+		 ㅤ(The duty in which the seafarer is to be employed)
 		</td>
 	</tr>
 
@@ -286,7 +286,7 @@
 
 	<tr>
 		<td colspan="3">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎*Duration of Contract
+			 ㅤ*Duration of Contract
 		</td>
 		<td colspan="2" style="{{ $blue }} {{ $bold }}">
 			{{ now()->parse($data->effective_date)->format('d-M-Y') }}
@@ -306,19 +306,19 @@
 
 	<tr>
 		<td colspan="14">
-		 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎해지하는 경우에는 30일의 범위에서 예고기간을 서면으로 통보해야 한다.
+		 ㅤㅤ해지하는 경우에는 30일의 범위에서 예고기간을 서면으로 통보해야 한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-		 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(When shipowner terminates the contract early, the required minimum notice period shall be over 30 days and when
+		 ㅤㅤ(When shipowner terminates the contract early, the required minimum notice period shall be over 30 days and when
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-		 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎seafarer terminates the contract early, need to notice within 30 days in advance.)
+		 ㅤㅤseafarer terminates the contract early, need to notice within 30 days in advance.)
 		</td>
 	</tr>
 
@@ -464,13 +464,13 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(The details of Paid Leave, Retirement Allowance, Welfare Allowance, Pay step incentive and Other Allowances are
+			 ㅤㅤ(The details of Paid Leave, Retirement Allowance, Welfare Allowance, Pay step incentive and Other Allowances are
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎applied according to the Collective Bargaining Agreement and/or Rules of Employment.)
+			 ㅤㅤapplied according to the Collective Bargaining Agreement and/or Rules of Employment.)
 		</td>
 	</tr>
 	
@@ -493,19 +493,19 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎임금은 익월 15일에 정기적으로 지급한다. 다만 지급일이 휴일일 경우에는 그 전일에 지급하는 것으로한다.
+			 ㅤㅤ임금은 익월 15일에 정기적으로 지급한다. 다만 지급일이 휴일일 경우에는 그 전일에 지급하는 것으로한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Payment date is 15th of every following month. If the payment date falls on a holiday, payment will be made on the day before
+			 ㅤㅤ(Payment date is 15th of every following month. If the payment date falls on a holiday, payment will be made on the day before
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎the holiday.)
+			 ㅤㅤthe holiday.)
 		</td>
 	</tr>
 
@@ -517,25 +517,25 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎임금은 선원에게 직접 지급하거나 또는 선원의 명의로 된 예금통장에 입금한다.
+			 ㅤㅤ임금은 선원에게 직접 지급하거나 또는 선원의 명의로 된 예금통장에 입금한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎다만, 선원이 희망하는 경우, 선원이 지목한 자에게 일정액을 지급한다.
+			 ㅤㅤ다만, 선원이 희망하는 경우, 선원이 지목한 자에게 일정액을 지급한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Payment will be paid to seafarer or credited to the bank account of seafarer. Some allotments should be remitted
+			 ㅤㅤ(Payment will be paid to seafarer or credited to the bank account of seafarer. Some allotments should be remitted
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎directly to persons nominated by the seafarers.)
+			 ㅤㅤdirectly to persons nominated by the seafarers.)
 		</td>
 	</tr>
 
@@ -555,7 +555,7 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(The number of days of paid leave pursuant to 4.1 shall be 9 days per 1 month of continuous service on board)
+			 ㅤㅤ(The number of days of paid leave pursuant to 4.1 shall be 9 days per 1 month of continuous service on board)
 		</td>
 	</tr>
 
@@ -567,13 +567,13 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎- 유급휴가비 = (통상임금 / 30) X 9 days
+			 ㅤㅤ- 유급휴가비 = (통상임금 / 30) X 9 days
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎- Paid leave = (Monthly Ordinary Wage / 30) X 9 days
+			 ㅤㅤ- Paid leave = (Monthly Ordinary Wage / 30) X 9 days
 		</td>
 	</tr>
 
@@ -607,13 +607,13 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎1) 통상 근로(Hours of Ordinary Work) : 1일 8시간, 주 40시간 (8 Hours in a day and 40 Hours in a week)
+			 ㅤㅤ1) 통상 근로(Hours of Ordinary Work) : 1일 8시간, 주 40시간 (8 Hours in a day and 40 Hours in a week)
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎2) 시간외 근로(Over Time Work) : 고정급 시간외 근로 (Fixed Over Time)
+			 ㅤㅤ2) 시간외 근로(Over Time Work) : 고정급 시간외 근로 (Fixed Over Time)
 		</td>
 	</tr>
 
@@ -625,67 +625,67 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎1) 임의의 24시간중 최소 10시간 이상, 임의의 7일중 77시간 이상의 휴식시간을 제공한다.
+			 ㅤㅤ1) 임의의 24시간중 최소 10시간 이상, 임의의 7일중 77시간 이상의 휴식시간을 제공한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Minimum of 10 hours rest in a 24 hour period and 77 hours in any seven-day period)
+			 ㅤㅤㅤ(Minimum of 10 hours rest in a 24 hour period and 77 hours in any seven-day period)
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎2) 휴식시간은 2회를 초과하지 않도록 분할할 수 있으며 그 중 한번은 최소 6시간이어야 하며 연속적인
+			 ㅤㅤ2) 휴식시간은 2회를 초과하지 않도록 분할할 수 있으며 그 중 한번은 최소 6시간이어야 하며 연속적인
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎휴식시간의 사이의 간격은 14시간을 초과하여서는 아니 된다.
+			 ㅤㅤㅤ휴식시간의 사이의 간격은 14시간을 초과하여서는 아니 된다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Horus of rest may be divided into no more than two periods, one of which shall be at least six hours in length,
+			 ㅤㅤㅤ(Hours of rest may be divided into no more than two periods, one of which shall be at least six hours in length,
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎and the interval between consecutive periods of rest shall not exceed 14 hours.
+			 ㅤㅤㅤand the interval between consecutive periods of rest shall not exceed 14 hours.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎3) 연속적인 휴식시간 사이의 간격은 14시간을 초과하여서는 아니된다.
+			 ㅤㅤ3) 연속적인 휴식시간 사이의 간격은 14시간을 초과하여서는 아니된다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(The interval between consecutive periods of rest shall not exceed 14 hours)
+			 ㅤㅤㅤ(The interval between consecutive periods of rest shall not exceed 14 hours)
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎4) 훈련은 휴식시간에 대한 방해를 최소화하고 피로를 유발하지 아니하는 방식으로 시행한다.
+			 ㅤㅤ4) 훈련은 휴식시간에 대한 방해를 최소화하고 피로를 유발하지 아니하는 방식으로 시행한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Musters and drills and drills shall be conducted in a manner that minimizes the disturbance of rest periods and
+			 ㅤㅤㅤ(Musters and drills and drills shall be conducted in a manner that minimizes the disturbance of rest periods and
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎does not induce fatigue)
+			 ㅤㅤㅤdoes not induce fatigue)
 		</td>
 	</tr>
 
@@ -705,7 +705,7 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎장애 급여, 가족급여 및 유족급여를 선원에게 제공한다.
+			 ㅤㅤ장애 급여, 가족급여 및 유족급여를 선원에게 제공한다.
 		</td>
 	</tr>
 
@@ -743,43 +743,43 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎소유자의 비용으로 선원의 거주지 또는 선원근로계약의 체결지 중 선원이 원하는 곳까지 지체없이
+			 ㅤㅤ소유자의 비용으로 선원의 거주지 또는 선원근로계약의 체결지 중 선원이 원하는 곳까지 지체없이
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎송환해야 한다. 다만, 선원의 요청에 의하여 송환에 필요한 비용을 선원에게 지급할 경우에는 그러하지
+			 ㅤㅤ송환해야 한다. 다만, 선원의 요청에 의하여 송환에 필요한 비용을 선원에게 지급할 경우에는 그러하지
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎아니하다.
+			 ㅤㅤ아니하다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Shipowner shall promptly repatriate the seafarer who leaves a ship at the place of which is not the seafarer's country
+			 ㅤㅤ(Shipowner shall promptly repatriate the seafarer who leaves a ship at the place of which is not the seafarer's country
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎of residence or the place at which the seafarer agreed to enter into the engagement as shipowner's expenses.
+			 ㅤㅤof residence or the place at which the seafarer agreed to enter into the engagement as shipowner's expenses.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎however, in case where shipowner paid the expense of repatriation according shipowner to the request of seafarer,
+			 ㅤㅤhowever, in case where shipowner paid the expense of repatriation according shipowner to the request of seafarer,
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎does not have any responsibility for the repatriation)
+			 ㅤㅤdoes not have any responsibility for the repatriation)
 		</td>
 	</tr>
 
@@ -791,13 +791,13 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎선원에게 청구할 수 있다.
+			 ㅤㅤ선원에게 청구할 수 있다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Despite above 9.1, in case of the following particulars, shipowner can recover the cost of repatriation from seafarer)
+			 ㅤㅤ(Despite above 9.1, in case of the following particulars, shipowner can recover the cost of repatriation from seafarer)
 		</td>
 	</tr>
 
@@ -812,37 +812,37 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎1) 선원이 정당한 사유 없이 임의로 하선한 경우
+			 ㅤㅤ1) 선원이 정당한 사유 없이 임의로 하선한 경우
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(When the seafarer leaves a ship without just reason)
+			 ㅤㅤㅤ(When the seafarer leaves a ship without just reason)
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎2) 선원이 국내법에서 정한 하선 징계를 받고 하선한 경우
+			 ㅤㅤ2) 선원이 국내법에서 정한 하선 징계를 받고 하선한 경우
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws)
+			 ㅤㅤㅤ(When the seafarer leaves a ship according to disciplinary punishment which regulated in national laws)
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎3) 기타 단체협약, 취업규칙 또는 기국법에서 정하는 사유에 해당하는 경우
+			 ㅤㅤ3) 기타 단체협약, 취업규칙 또는 기국법에서 정하는 사유에 해당하는 경우
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(When the reason is conformed to the collective bargaining agreement or rules of employment or the law of flag state)
+			 ㅤㅤㅤ(When the reason is conformed to the collective bargaining agreement or rules of employment or the law of flag state)
 		</td>
 	</tr>
 
@@ -854,25 +854,25 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎경과하였거나, 계약의 중지 또는 해지를 통보한 경우에 관계없이 선원근로계약이 유지되도록 하여야 한다.
+			 ㅤㅤ경과하였거나, 계약의 중지 또는 해지를 통보한 경우에 관계없이 선원근로계약이 유지되도록 하여야 한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Seafarer's employment agrement shall continue to have effect while a seafarer is held captive on or off the ship as a result
+			 ㅤㅤ(Seafarer's employment agrement shall continue to have effect while a seafarer is held captive on or off the ship as a result
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎of acts of piracy, or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either
+			 ㅤㅤof acts of piracy, or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎party has given notice to suspend or terminate it.)
+			 ㅤㅤparty has given notice to suspend or terminate it.)
 		</td>
 	</tr>
 
@@ -884,55 +884,55 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎규정된 바에 따라 어떠한 범위의 일정액을 송금하는 것을 포함하여 선원 근로계약, 관련 단체협약 또는
+			 ㅤㅤ규정된 바에 따라 어떠한 범위의 일정액을 송금하는 것을 포함하여 선원 근로계약, 관련 단체협약 또는
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎기국의 적용가능한 국내법령에 따른 선원의 임금과 권리는 선원이 인질로 잡혀있는 모든 기간과 선원이
+			 ㅤㅤ기국의 적용가능한 국내법령에 따른 선원의 임금과 권리는 선원이 인질로 잡혀있는 모든 기간과 선원이
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎풀려나고 선원이 송환될 때까지 또는 인질로 잡혀있는 동안 사망할 때 까지 유지되어야 한다.
+			 ㅤㅤ풀려나고 선원이 송환될 때까지 또는 인질로 잡혀있는 동안 사망할 때 까지 유지되어야 한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Where a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships, wages and
+			 ㅤㅤ(Where a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships, wages and
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎other entitlements under the seafarers’ employment agreement, relevant collective bargaining agreement or applicable 
+			 ㅤㅤother entitlements under the seafarers’ employment agreement, relevant collective bargaining agreement or applicable 
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎national laws, including the remittance of any allotments as provided in MLC STANDARD A 2.2.4, shall continue to
+			 ㅤㅤnational laws, including the remittance of any allotments as provided in MLC STANDARD A 2.2.4, shall continue to
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎be paid during the entire period of captivity and until the seafarer is released and duly repatriated in accordance or,
+			 ㅤㅤbe paid during the entire period of captivity and until the seafarer is released and duly repatriated in accordance or,
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎where the seafarer dies while in captivity, until the date of death as determined in accordance with applicable national
+			 ㅤㅤwhere the seafarer dies while in captivity, until the date of death as determined in accordance with applicable national
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎laws or regulations.)
+			 ㅤㅤlaws or regulations.)
 		</td>
 	</tr>
 
@@ -944,25 +944,25 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎권리가 소멸할 수 있다. 다만, 선원이 해적 및 무장강도에 의해서 납치된 경우에는 제외된다.
+			 ㅤㅤ권리가 소멸할 수 있다. 다만, 선원이 해적 및 무장강도에 의해서 납치된 경우에는 제외된다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(The entitlement to repatriation may lapse if the seafarers concerned do not claim it within a reasonable period of time
+			 ㅤㅤ(The entitlement to repatriation may lapse if the seafarers concerned do not claim it within a reasonable period of time
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎to be defined by national laws or regulations or collective agreements, except where they are held captive on or off the
+			 ㅤㅤto be defined by national laws or regulations or collective agreements, except where they are held captive on or off the
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ship as a result of acts of piracy or armed robbery against ships.)
+			 ㅤㅤship as a result of acts of piracy or armed robbery against ships.)
 		</td>
 	</tr>
 
@@ -970,20 +970,20 @@
 		<td colspan="14">
 			9.6. 선주는 선원고용계약에 따른 의무를 이행하지 못함으로써 선원이 입을 수 있는 금전적 손실을 보상하며
 			<br style='mso-data-placement:same-cell;' />
-			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			ㅤㅤ
 			이를 선원이 계약 전 알 수 있도록 보장해야 한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			ㅤㅤ
 			(The shipowner shall compensate the crew for any financial losses they may suffer due to the shipowner's failure
 			<br style='mso-data-placement:same-cell;' />
-			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			ㅤㅤ
 			to fulfill obligations under the crew employment contract and ensure that the crew is informed of this before )
 			<br style='mso-data-placement:same-cell;' />
-			‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			ㅤㅤ
 			entering into the contract)
 		</td>
 	</tr>
@@ -996,43 +996,43 @@
 
 	<tr>
 		<td colspan="14" style="{{ $bold }}">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Any facts which are not defined in this contract, these are complied with the law of flag state or the collective
+			 ㅤㅤ(Any facts which are not defined in this contract, these are complied with the law of flag state or the collective
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14" style="{{ $bold }}">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎bargaining agreement or rules of employment)
+			 ㅤㅤbargaining agreement or rules of employment)
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎위 사항의 증거로써, 본 고용 계약서 2통에 각각 서명하고 각자 1부씩 보관하도록 한다.
+			 ㅤㅤㅤ위 사항의 증거로써, 본 고용 계약서 2통에 각각 서명하고 각자 1부씩 보관하도록 한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(In witness whereof, 2 copies of this Contract have been made and mutually signed by either parties thence each one
+			 ㅤㅤㅤ(In witness whereof, 2 copies of this Contract have been made and mutually signed by either parties thence each one
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎of them are retained by the each party.)
+			 ㅤㅤㅤof them are retained by the each party.)
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎선원은 고용계약서를 충분히 검토하고 자문 받을 기회를 제공받았고 자유의사에 의해 서명함.
+			 ㅤㅤㅤ선원은 고용계약서를 충분히 검토하고 자문 받을 기회를 제공받았고 자유의사에 의해 서명함.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Seafarer has opportunity to review and seek advice on the terms and condition and freely accept them.)
+			 ㅤㅤㅤ(Seafarer has opportunity to review and seek advice on the terms and condition and freely accept them.)
 		</td>
 	</tr>
 
