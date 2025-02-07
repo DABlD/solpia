@@ -354,7 +354,11 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle($type ?? 'KOSCO MLC', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&R Page &P/&N');
+
+                //SET FIRST PAGE NUMBER
+                $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
+
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&R Page &P/2');
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LF-SPM-0205 / 2018. 03. 01 Established &CKOSCO &RRev. 1 / 2021.02.01');
 
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.39);
