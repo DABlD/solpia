@@ -345,7 +345,7 @@
 		<td></td>
 		<td colspan="7">1.) 기본급 (B.W) : Basic Wage / Ordinary</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
-			{{ $data->wage->basic ? ($data->wage->basic) : 0 }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->wage->basic ? ($data->wage->basic) : 0 }} ㅤㅤ
 		</td>
 		<td colspan="2" style="{{ $bc }}">USD / Months</td>
 		<td></td>
@@ -367,7 +367,7 @@
 			2.) 고정급 시간외 수당 (F.O.T.) : {{ $temp }} Overtime Allowances
 		</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
-			{{ $data->wage->fot ?? $data->wage->ot }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->wage->fot ?? $data->wage->ot }} ㅤㅤ
 		</td>
 		<td colspan="2" style="{{ $bc }}">USD / Months</td>
 		<td></td>
@@ -380,7 +380,7 @@
 		<td></td>
 		<td colspan="7">3.) SVP (Supervisor Allowance) :</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
-			{{ $data->wage->sup_allow ? ($data->wage->sup_allow) : 0 }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->wage->sup_allow ? ($data->wage->sup_allow) : 0 }} ㅤㅤ
 		</td>
 		<td colspan="2" style="{{ $bc }}">USD / Months</td>
 		<td></td>
@@ -393,7 +393,7 @@
 		<td></td>
 		<td colspan="7">4.) SUB.A (Subsistence Allowance) :</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
-			{{ $data->wage->sub_allow ? ($data->wage->sub_allow) : 0 }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->wage->sub_allow ? ($data->wage->sub_allow) : 0 }} ㅤㅤ
 		</td>
 		<td colspan="2" style="{{ $bc }}">USD / Months</td>
 		<td></td>
@@ -406,7 +406,7 @@
 		<td></td>
 		<td colspan="7">5.)  O.W (Owner's Allowance) :</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
-			{{ $data->wage->owner_allow ? ($data->wage->owner_allow) : 0 }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->wage->owner_allow ? ($data->wage->owner_allow) : 0 }} ㅤㅤ
 		</td>
 		<td colspan="2" style="{{ $bc }}">USD / Months</td>
 		<td></td>
@@ -419,7 +419,7 @@
 		<td></td>
 		<td colspan="7">6.)  R.A. (Retirement Allowance) :</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
-			{{ $data->wage->retire_allow ? ($data->wage->retire_allow) : 0 }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->wage->retire_allow ? ($data->wage->retire_allow) : 0 }} ㅤㅤ
 		</td>
 		<td colspan="2" style="{{ $bc }}">USD / Months</td>
 		<td></td>
@@ -435,7 +435,7 @@
 			@php
 				$total = ($data->wage->basic ?? 0) + ($data->wage->fot ?? 0) + ($data->wage->ot ?? 0) + ($data->wage->sup_allow ?? 0) + ($data->wage->sub_allow ?? 0) + ($data->wage->owner_allow ?? 0) + ($data->wage->retire_allow ?? 0);
 			@endphp
-			{{ $total }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $total }} ㅤㅤ
 		</td>
 		<td colspan="2" style="{{ $bc }}">USD / Months</td>
 		<td></td>
@@ -448,7 +448,7 @@
 		<td></td>
 		<td colspan="7">8.) 유급 휴가비 : Leave pay (9 day/month)</td>
 		<td colspan="3" style="{{ $blue }} text-align: right;">
-			{{ $data->wage->leave_pay ? ($data->wage->leave_pay) : 0 }} ‎‏‏‎ ‎‏‏‎ ‎‏‏‎
+			{{ $data->wage->leave_pay ? ($data->wage->leave_pay) : 0 }} ㅤㅤ
 		</td>
 		<td colspan="2" style="{{ $bc }}">USD / Months</td>
 		<td></td>
@@ -711,19 +711,19 @@
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎(Shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity
+			 ㅤㅤ(Shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎benefit, family benefit and survivors' benefit to the seafarer in accordance with Korean seafarers act or the Collective
+			 ㅤㅤbenefit, family benefit and survivors' benefit to the seafarer in accordance with Korean seafarers act or the Collective
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-			 ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎Bargaining Agreement or Rules of employment.)
+			 ㅤㅤBargaining Agreement or Rules of employment.)
 		</td>
 	</tr>
 
