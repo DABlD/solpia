@@ -94,8 +94,10 @@ class X16_MLCOnboard implements WithMultipleSheets
             // IF HMM
             if($class == "App\Exports\MLC\HMM"){
                 $cm1 = [6791, 7569, 7169, 6245, 7947, 6517, 4433, 33, 36, 37, 38, 4101, 4627, 3822, 4628, 4629, 2069, 2044, 39, 42, 2725, 8630, 8841, 8828, 8827];
-                $cm1p5 = [8791];
-                $cm2 = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517, 7917, 7998, 8169, 8478];
+                $cm1p5 = [8791, 8478];
+                $cm2 = [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517, 7917, 7998, 8169];
+
+                // CHANGE ALSO IN X16, X25
 
                 if(in_array($applicant->vessel->id, $cm1)){
                     array_push($sheets, new MLC\HMMCM1($applicant, $title));
