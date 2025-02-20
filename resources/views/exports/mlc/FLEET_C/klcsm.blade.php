@@ -249,7 +249,7 @@
 
 		$ccb = number_format(str_contains($data->vessel->type, "BUL") ? 80 : 0, 2);
 
-		$total = number_format($basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2 + $ccb - 40, 2);
+		$total = number_format($basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2 + $ccb, 2);
 		$so = number_format($so, 2);
 	@endphp
 
@@ -262,7 +262,7 @@
 		<td style="{{ $bc }}">US$</td>
 		<td colspan="1"></td>
 		<td colspan="3" style="{{ $bc }}">{{ $total }}</td>
-		<td colspan="3" style="{{ $blue }}">After deduction FKSU Membership Fee</td>
+		<td colspan="3" style="{{ $blue }}">Before deduction FKSU Membership Fee</td>
 	</tr>
 
 	<tr>
