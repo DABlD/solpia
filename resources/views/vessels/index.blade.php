@@ -943,7 +943,7 @@
                     data: {
                         cols: ['wages.*', 'r.abbr as rname'],
                         where: ['vessel_id', id],
-                        order: ['r.id', 'asc']
+                        order: ['r.order', 'asc']
                     },
                     success: wages => {
                         showWages(wages, id, vname);
