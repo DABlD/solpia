@@ -249,7 +249,7 @@
 
 		$ccb = number_format(str_contains($data->vessel->type, "BUL") ? 80 : 0, 2);
 
-		$total = number_format($basic + $ot + $lp + $sa + $so + $oa + $ra + $ccb - 40, 2);
+		$total = number_format($basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2 + $ccb - 40, 2);
 		$so = number_format($so, 2);
 	@endphp
 
