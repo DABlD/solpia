@@ -515,7 +515,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setHeight(60);
         $drawing->setWidth(130);
         $drawing->setOffsetX(-60);
-        $drawing->setOffsetY(-20);    
+        $drawing->setOffsetY(-50); 
         $drawing->setCoordinates('L108');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -523,18 +523,19 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setResizeProportional(false);
         $drawing2->setHeight(100);
         $drawing2->setWidth(100);
-        $drawing2->setOffsetX(40);
-        $drawing2->setOffsetY(-40);
-        $drawing2->setCoordinates('L105');
+        // $drawing2->setOffsetX(40);
+        $drawing2->setOffsetY(10);
+        $drawing2->setCoordinates('G106');
 
+        $mlcStamp = $this->applicant->vessel->type == "LNG" ? "images/mlc_klcsm_lng.png" : "images/mlc_klcsm.png";
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing3->setPath(public_path("images/mlc_klcsm.png"));
+        $drawing3->setPath(public_path($mlcStamp));
         $drawing3->setResizeProportional(false);
         $drawing3->setHeight(90);
         $drawing3->setWidth(260);
-        $drawing3->setOffsetX(2);
+        $drawing3->setOffsetX(50);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('G104');
+        $drawing3->setCoordinates('J104');
 
         return [$drawing, $drawing2, $drawing3];
     }
