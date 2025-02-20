@@ -81,7 +81,7 @@
 			@endif --}}
 		</td>
 		<td rowspan="2">Identification number</td>
-		<td rowspan="2" style="{{ $bc }}">101-81-24624</td>
+		<td rowspan="2" style="{{ $bc }}">824-87-01648</td>
 	</tr>
 
 	<tr>
