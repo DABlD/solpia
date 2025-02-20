@@ -244,6 +244,7 @@
 		$sa = ceil($wage->sup_allow ?? 0);
 		$so = ceil($wage->sub_allow ?? 0);
 		$oa = ceil($wage->owner_allow ?? 0);
+		$oa2 = ceil($wage->other_allow ?? 0);
 		$ra = ceil($wage->retire_allow ?? 0);
 
 		$ccb = number_format(str_contains($data->vessel->type, "BUL") ? 80 : 0, 2);
@@ -290,7 +291,7 @@
 		<td colspan="2" style="{{ $red }} {{ $und }}">(Owner's Allowance):</td>
 		<td style="{{ $bc }}">US$</td>
 		<td colspan="1"></td>
-		<td colspan="3" style="{{ $bc }}">{{ number_format($sa + $so + $oa + $ra, 2) }}</td>
+		<td colspan="3" style="{{ $bc }}">{{ number_format($sa + $so + $oa + $ra + $oa2, 2) }}</td>
 		<td colspan="3">Calculation method: OWNER'S DISCRETION</td>
 	</tr>
 
