@@ -421,7 +421,13 @@
 	<tr>
 		<td colspan="6"></td>
 		<td colspan="3">Shipowner:</td>
-		<td colspan="2">KOREA LINE CORPORATION</td>
+		<td colspan="2">
+			@if($data->vessel->type == "LNG")
+				KOREA LINE LNG CORP
+			@else
+				KOREA LINE CORPORATION
+			@endif
+		</td>
 	</tr>
 
 	{{ $fill(70) }}
