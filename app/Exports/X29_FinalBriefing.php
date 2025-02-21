@@ -21,6 +21,7 @@ class X29_FinalBriefing implements FromView, WithEvents, WithDrawings//, ShouldA
         $data->eld = $req['eld'];
         $data->port = $req['port'];
 
+        $this->fn =  $req['fn'] ?? null;
         $this->data     = $data;
         $this->type     = $type;
     }
@@ -248,7 +249,7 @@ class X29_FinalBriefing implements FromView, WithEvents, WithDrawings//, ShouldA
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('FINAL BRIEFING', false);
+                $event->sheet->getDelegate()->setTitle($this->fn ?? 'FINAL BRIEFING', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
