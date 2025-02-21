@@ -5269,6 +5269,7 @@
                     RFSC: 'Shoe and Coverall Request',
                     X25_MLCLinedUp: 'Lined-Up Crew MLC',
                     X16_MLCOnboard: 'Onboard Crew MLC',
+                    X37_LinedUpFinalBriefing: 'Final Briefing',
                     X26_POEALinedUp: 'Lined-Up Crew POEA Contract',
                     X27_POEAOnBoard: 'Onboard Crew POEA Contract',
                     X32_CrewUniform: 'Crew Uniform Order Slip'
@@ -6491,6 +6492,74 @@
             })
         }
 
+        function X37_LinedUpFinalBriefing(id){
+            swal({
+                title: 'Enter details',
+                html: `
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Joining Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="eld" class="swal2-input" placeholder="(Optional)"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Port</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="port" class="form-control" placeholder="(Optional)"/>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '40%',
+                onOpen: () => {
+                    $.ajax({
+                        url: '{{ route('applications.getAllInfo') }}',
+                        data: {
+                            id: $('.linedUp .LUN:first').data('id') // SEARCH ID OF A LINEDUP CREW
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            let date = moment().format('YYYY-MM-DD');
+
+                            if(result.lup){
+                                date = moment(result.lup.joining_date);
+                                date = date.format("YYYY-MM-DD");
+                            }
+                            else{
+                                date = result.pro_app.eld;
+                            }
+
+                            $('#eld').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d',
+                                defaultDate: date
+                            });
+                        }
+                    })
+                },
+            }).then(result => {
+                if(result.value){
+                    let data = {
+                        vid: id,
+                        eld: $('#eld').val(),
+                        port: $('#port').val(),
+                        filename: $('.modal-title span')[0].innerText.substring(4) + ' - Final Briefing Forms'
+                    };
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/X37_LinedUpFinalBriefing?` + $.param(data);
+                }
+            });
+
+
+        }
 
         // MAIN EXPORTS
         function exportData(){
