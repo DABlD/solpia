@@ -18,13 +18,10 @@ class PDFExport
     }
 
     public function Y01_OnsignerDocs(){
-        $applicants = ProcessedApplicant::where([
-            ['status', '=', 'Lined-Up'],
-            ['vessel_id', '=', $this->data->data['id']],
-        ])
-        ->select('applicant_id', 'rank_id', 'order')
-        ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
-        ->get();
+        $applicants = ProcessedApplicant::where('status', '=', 'Lined-Up')->whereIn('applicant_id', $this->data->data['ids'])
+            ->select('applicant_id', 'rank_id', 'order')
+            ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
+            ->get();
 
         foreach($applicants as $applicant){
             $docs = [];
@@ -54,9 +51,9 @@ class PDFExport
     public function Y02_OffsignerDocs(){
         $applicants = LineUpContract::where([
             ['line_up_contracts.status', '=', 'On Board'],
-            ['vessel_id', '=', $this->data->data['id']],
             ['disembarkation_date', '=', null]
         ])
+        ->whereIn('applicant_id', $this->data->data['ids'])
         ->select('applicant_id', 'rank_id', 'order', 'reliever')
         ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
         ->get();
