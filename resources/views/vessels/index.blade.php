@@ -5927,7 +5927,19 @@
                         'zoom': '1.7',
                         'margin': '1px 0 0'
                     });
-                }
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let temp3 = $(".crew-checklist:checked");
+                            
+                            temp3.each((index, value) => {
+                                crews.push($(value).data('id'));
+                            });
+                        resolve()}, 500);
+                    });
+                },
             }).then(result => {
                 if(result.value){
                     let data = {};
