@@ -249,7 +249,13 @@
 
 		$ccb = number_format(str_contains($data->vessel->type, "BUL") ? 80 : 0, 2);
 
-		$total = number_format($basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2 + $ccb, 2);
+		$total = $basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2 + $ccb - 40;
+		if($data->vessel->type == "LNG"){
+			$total += 40;
+		}
+
+		$total = number_format($total, 2);
+
 		$so = number_format($so, 2);
 	@endphp
 
@@ -262,7 +268,11 @@
 		<td style="{{ $bc }}">US$</td>
 		<td colspan="1"></td>
 		<td colspan="3" style="{{ $bc }}">{{ $total }}</td>
-		<td colspan="3" style="{{ $blue }}">Before deduction FKSU Membership Fee</td>
+		@if($data->vessel->type == "LNG")
+			<td colspan="3" style="{{ $blue }}">Before deduction FKSU Membership Fee</td>
+		@else
+			<td colspan="3" style="{{ $blue }}">After deduction FKSU Membership Fee</td>
+		@endif
 	</tr>
 
 	<tr>
