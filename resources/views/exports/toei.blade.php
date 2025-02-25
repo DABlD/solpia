@@ -1185,7 +1185,7 @@
 		</tr>
 
 		// TOEI KOREA VESSELS ADDITIONAL DOCUMENTS
-		@if(in_array($applicant->vessel->id, [5,4610,6141,5563,4927]))
+		@if(isset($applicant->vessel) && in_array($applicant->vessel->id, [5,4610,6141,5563,4927]))
 			{{-- 11.2TH --}}
 			@php 
 				$docu = false;
