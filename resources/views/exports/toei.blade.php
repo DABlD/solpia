@@ -1170,7 +1170,7 @@
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
 
-		{{-- 11TH --}}
+		{{-- 11.1TH --}}
 		@php 
 			$name = 'HAZMAT';
 			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
@@ -1183,6 +1183,63 @@
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
 		</tr>
+
+		// TOEI KOREA VESSELS ADDITIONAL DOCUMENTS
+		@if(in_array($applicant->vessel->id, [5,4610,6141,5563,4927]))
+			{{-- 11.2TH --}}
+			@php 
+				$docu = false;
+				foreach($applicant->document_lc as $doc){
+					if(str_contains($doc->type, "SAFETY OFFICER")){
+						$docu = $doc;
+					}
+				}
+			@endphp
+
+			<tr>
+				<td colspan="4">SHIP SAFETY OFFICER'S COURSE (SSOC)</td>
+				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+			</tr>
+
+			{{-- 11.3TH --}}
+			@php 
+				$docu = false;
+				foreach($applicant->document_lc as $doc){
+					if(str_contains($doc->type, "MCRA") || str_contains($doc->type, "CYBER RISK") || str_contains($doc->type, "CYBER SECURITY")){
+						$docu = $doc;
+					}
+				}
+			@endphp
+
+			<tr>
+				<td colspan="4">MARITIME CYBER RISK AWARENESS AND RISK MANAGEMENT</td>
+				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+			</tr>
+
+			{{-- 11.4TH --}}
+			@php 
+				$docu = false;
+				foreach($applicant->document_lc as $doc){
+					if(str_contains($doc->type, "MHAT") || str_contains($doc->type, "MENTAL HEALTH")){
+						$docu = $doc;
+					}
+				}
+			@endphp
+
+			<tr>
+				<td colspan="4">MENTAL HEALTH AWARENESS TRAINING</td>
+				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
+				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
+			</tr>
+		@endif
 
 		{{-- 12TH --}}
 		@php 
