@@ -164,6 +164,7 @@
 					<option value="FAST RESCUE BOAT - FRB">&nbsp;&nbsp;&nbsp;&nbsp;FAST RESCUE BOAT - FRB</option>
 					<option value="MEDICAL CARE - MECA">&nbsp;&nbsp;&nbsp;&nbsp;MEDICAL CARE - MECA</option>
 					<option value="SHIP SECURITY OFFICER - SSO">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SECURITY OFFICER - SSO</option>
+					<option value="SHIP SAFETY OFFICER">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SAFETY OFFICER - SSO</option>
 					<option value="SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD</option>
 
 				<optgroup label="GALLEY"></optgroup>
