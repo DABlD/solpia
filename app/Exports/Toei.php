@@ -401,6 +401,13 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $temp = 21;
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
+                // TOEI KOREA VESSELS ADDITIONAL DOCUMENTS
+                $tekRows = 0;
+                if(in_array($this->applicant->vessel->id, [5,4610,6141,5563,4927])){
+                    $raoc +=3;
+                    $tekRows +=3;
+                }
+
                 $fleetCRows = 0;
 
                 if($this->applicant->user->fleet == "FLEET C"){
@@ -472,7 +479,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                     }
                 }
 
-                for($i = 0, $row = $rac + 1 + $fleetCRows; $i < $temp; $i++, $row++){
+                for($i = 0, $row = $rac + 1 + $fleetCRows + $tekRows; $i < $temp; $i++, $row++){
                     if($i == 0){
                         array_push($ocRows, "A$row:D$row");
                         array_push($ocRows, "E$row");
