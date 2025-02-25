@@ -107,7 +107,7 @@
 			{{ auth()->user()->fname }} {{ auth()->user()->lname }}
 		</td>
 		<td colspan="3" style="text-decoration: underline; {{ $center }}">
-			HONEY ROSE DE MARA
+			{{-- HONEY ROSE DE MARA --}}
 		</td>
 	</tr>
 
@@ -226,7 +226,7 @@
 			{{ auth()->user()->fname }} {{ auth()->user()->lname }}
 		</td>
 		<td colspan="3" style="text-decoration: underline; {{ $center }}">
-			HONEY ROSE DE MARA
+			{{-- HONEY ROSE DE MARA --}}
 		</td>
 	</tr>
 
