@@ -2376,6 +2376,7 @@
                                     principal: "",
                                     sign_on: applicant.lup.joining_date,
                                     smc: vessel.smc,
+                                    year_build: vessel.year_build,
                                     remarks: "On Board",
                                     file: null
                                 };
@@ -2460,7 +2461,7 @@
                         <td>${ss.vessel_type}</td>
                         <td>${ss.gross_tonnage}</td>
                         <td>${ss.engine_type}</td>
-                        <td>${ss.smc}</td>
+                        <td>${ss.year_build}</td>
                         <td>${ss.flag}</td>
                         <td>${ss.trade}</td>
                         <td>${ss.manning_agent}</td>
