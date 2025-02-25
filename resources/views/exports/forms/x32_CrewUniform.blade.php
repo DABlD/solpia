@@ -35,7 +35,7 @@
 		<td colspan="3">DATE SUBMITTED:</td>
 		<td colspan="2" style="{{ $c }}">{{ now()->toDateString() }}</td>
 		<td colspan="2"></td>
-		<td>REFERENCE NO.:</td>
+		<td>P.O. NO.:</td>
 		<td style="{{ $c }}"></td>
 		<td></td>
 	</tr>
@@ -50,7 +50,7 @@
 			@endif
 		</td>
 		<td colspan="2"></td>
-		<td>P.O. NO.:</td>
+		<td></td>
 		<td style="{{ $c }}"></td>
 		<td></td>
 	</tr>
@@ -143,7 +143,7 @@
 
 	<tr>
 		<td colspan="4" style="text-align: left; font-size: 9px; font-style: italic; height: 40px;">DOC NO: SMAC-PUR-01</td>
-		<td colspan="3" style="text-align: center; font-size: 9px; font-style: italic; height: 40px;">EFFECTIVE DATE: 12 FEB 24</td>
+		<td colspan="3" style="text-align: center; font-size: 9px; font-style: italic; height: 40px;">EFFECTIVE DATE: 12 FEB 2024</td>
 		<td colspan="3" style="text-align: right; font-size: 9px; font-style: italic; height: 40px;">REV NO: 2.0 Feb. 12, 2024</td>
 	</tr>
 
@@ -164,7 +164,7 @@
 		<td colspan="3">DATE SUBMITTED:</td>
 		<td colspan="2" style="{{ $c }}">{{ now()->toDateString() }}</td>
 		<td colspan="2"></td>
-		<td>REFERENCE NO.:</td>
+		<td>P.O. NO.:</td>
 		<td style="{{ $c }}"></td>
 		<td></td>
 	</tr>
@@ -179,7 +179,7 @@
 			@endif
 		</td>
 		<td colspan="2"></td>
-		<td>P.O. NO.:</td>
+		<td></td>
 		<td style="{{ $c }}"></td>
 		<td></td>
 	</tr>
@@ -272,7 +272,7 @@
 
 	<tr>
 		<td colspan="4" style="text-align: left; font-size: 9px; font-style: italic; height: 40px;">DOC NO: SMAC-PUR-01</td>
-		<td colspan="3" style="text-align: center; font-size: 9px; font-style: italic; height: 40px;">EFFECTIVE DATE: 12 FEB 24</td>
+		<td colspan="3" style="text-align: center; font-size: 9px; font-style: italic; height: 40px;">EFFECTIVE DATE: 12 FEB 2024</td>
 		<td colspan="3" style="text-align: right; font-size: 9px; font-style: italic; height: 40px;">REV NO: 2.0 Feb. 12, 2024</td>
 	</tr>
 </table>

@@ -432,11 +432,11 @@ class X32_CrewUniform implements FromView, WithEvents, WithDrawings//, ShouldAut
                 // BBT
                 $cells[12] = array_merge([
                     'D3:E3', 'D4:E4', 'D5:E5', 'D6:E6', 'D7:E7',
-                    'I3', 'I4', 'I7',
+                    'I3', 'I7',
                     'C' . (18 + $size2) . ':D' . (18 + $size2), 'F' . (18 + $size2) . ':H' . (18 + $size2),
                     'A' . (19 + $size2) . ':J' . (19 + $size2),
                     'D22:E22', 'D23:E23', 'D24:E24', 'D25:E25', 'D26:E26',
-                    'I22', 'I23', 'I26',
+                    'I22', 'I26',
                     'C' . (37 + ($size2 * 2)) . ':D' . (37 + ($size2 * 2)), 'F' . (37 + ($size2 * 2)) . ':H' . (37 + ($size2 * 2)),
                 ]);
 
