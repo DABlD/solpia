@@ -85,6 +85,13 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
+			elseif($doc == "SAFETY OFFICER"){
+				foreach(get_object_vars($data->document_lc) as $document){
+				    if(str_contains($document->type, $doc)){
+				    	$docu = $document;
+				    }
+				}
+			}
 			elseif($doc == "ERS WITH ERM"){
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 
