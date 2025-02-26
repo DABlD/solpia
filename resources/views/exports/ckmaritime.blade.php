@@ -494,8 +494,8 @@
 	</tr>
 
 	@php
-		$sb = $data->document_id->{"SEAMAN'S BOOK"} ?? null;
-		$pp = $data->document_id->{"PASSPORT"} ?? null;
+		$sb = isset($data->document_id->{"SEAMAN'S BOOK"}) ? isset($data->document_id->{"SEAMAN'S BOOK"}) : null;
+		$pp = isset($data->document_id->{"PASSPORT"}) ? $data->document_id->{"PASSPORT"} : null;
 	@endphp
 
 	<tr>
