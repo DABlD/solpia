@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Vessel, Principal, AuditTrail};
+use App\Models\{LineUpContract};
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\{VesselsImport, AddVesselDetails, AddVesselWageScale};
 
@@ -177,6 +178,22 @@ class VesselsController extends Controller
 
         Vessel::where('id', $req->id)->update(['particulars' => $name]);
         echo "<script>window.close();</script>";
+    }
+
+    public function exportMonitoring(Request $req){
+        $vessel = Vessel::find($req->id);
+
+        $obcs = LineUpContract::where('vessel_id', $req->id)->where('status', "On Board")->get();
+        $obcs->load('document_id');
+        $obcs->load('document_flag');
+        $obcs->load('document_lc');
+        $obcs->load('document_med_cert');
+        $obcs->load('applicant.user.crew.pro_app');
+
+        $fileName = str_replace("/", "", $vessel->name) . " Document Monitoring";
+        $class = "App\\Exports\\Monitoring\\" . ucfirst($vessel->principal->slug);
+        
+        return Excel::download(new $class($obcs, $vessel), "$fileName.xlsx");
     }
 
     public function add(Request $req){

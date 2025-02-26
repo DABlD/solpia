@@ -225,6 +225,10 @@
         #table td{
             text-align: center;
         }
+
+        .nav-pills a{
+            border-top: 3px solid lightgray !important;
+        }
     </style>
 @endpush
 
@@ -2136,7 +2140,7 @@
                     if(!$('#linedUp').is(':visible')){
                         createModal(result[2],!bul ? $(vessel.target).data('id') : vessel);
                     }
-                    showTables(result[0], result[1], result[3]);
+                    showTables(result[0], result[1], result[3], $(vessel.target).data('id'));
 
                     // CLOSE LOADING
                     swal.close();
@@ -2233,7 +2237,7 @@
             });
         }
 
-        function showTables(onBoard, linedUp, ranks){
+        function showTables(onBoard, linedUp, ranks, vid){
             let table = `
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -2551,6 +2555,24 @@
             $('.tab-pane.linedUp').html(table + "</tbody></table>");
             $('.tab-pane.onBoard').html(table2 + "</table>");
             $('.tab-pane.summary').html(table3 + "</table>");
+            $('.tab-pane.documents').html(
+                `
+                    <div class="row">
+                        <div class="col-md-11">
+                            <span style="color: red; font-size: 24px; font-weight: bold;">Viewing is still under development</span>
+                        </div>
+                        <div class="col-md-1" style="text-align: right;">
+                            <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Export" onclick="exportMonitoring(${vid})">
+                                <span class="fa fa-file"></span> &nbsp;Export
+                            </a>
+                        </div>
+                    </div>
+                `
+            );
+        }
+
+        function exportMonitoring(vid){
+             window.open("{{ route('vessels.exportMonitoring') }}?id=" + vid, '_blank');
         }
 
         function viewInfo(id){
@@ -5224,13 +5246,16 @@
                                     <li role="presentation">
                                         <a href=".summary" role="tab" data-toggle="pill">Summary</a>
                                     </li>
+                                    <li role="presentation">
+                                        <a href=".documents" role="tab" data-toggle="pill">Documents Monitoring</a>
+                                    </li>
                                 </ul>
 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade in linedUp active"></div>
                                     <div role="tabpanel" class="tab-pane fade onBoard"></div>
-                                    <div role="tabpanel" class="tab-pane fade summary"></div>
+                                    <div role="tabpanel" class="tab-pane fade documents"></div>
                                 </div>
                             </div>
 
