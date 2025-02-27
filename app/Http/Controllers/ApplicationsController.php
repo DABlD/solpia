@@ -1895,7 +1895,21 @@ class ApplicationsController extends Controller
         echo "</tbody></table>";
     }
 
-    public function tempFunc(Request $req){
+    public function tempfunc(Request $req){
+
+        $sss = SeaService::where('manning_agent', 'like', "%" . 'SOLPIA' . "%")->where(function($q){
+            $q->where('vessel_name', 'like', "%" . "MARITE" . "%");
+            $q->orWhere('vessel_name', 'like', "%" . "WISTERIA" . "%");
+            $q->orWhere('vessel_name', 'like', "%" . "ALDEBARAN" . "%");
+        })->get();
+
+        foreach($sss as $ss){
+            echo $ss->applicant->user->namefull . ';' . $ss->rank2->abbr . ';' . $ss->vessel_name . ';' . $ss->sign_on . '<br>';
+        }
+
+    }
+
+    public function cejoey(Request $req){
         $start = $req->start;
         $end = $req->end;
 
