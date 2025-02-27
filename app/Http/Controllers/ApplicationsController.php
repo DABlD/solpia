@@ -45,6 +45,19 @@ class ApplicationsController extends Controller
         ]);
     }
 
+    public function index2(Request $req){
+        // $principals = Principal::select('id', 'slug', 'name', 'fleet')->where('active', 1)->get();
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+        // $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
+
+        return $this->_view('index2', [
+            'title' => 'Crew Database',
+            // 'principals' => $principals,
+            'categories' => $ranks->groupBy('category'),
+            // 'vessels' => $vessels
+        ]);
+    }
+
     public function create(){
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $issuers = array_merge(

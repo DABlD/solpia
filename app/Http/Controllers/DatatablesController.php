@@ -173,6 +173,20 @@ class DatatablesController extends Controller
 			if(isset($filters['fRanks'])){
 				$applicants->whereIn('pa.rank_id', $filters['fRanks']);
 			}
+
+			// INIT REMARK FILTER
+			if(isset($filters['remark'])){
+				$applicants->where(function($q){
+					$q->where('applicants.remarks', 'like', '%' . 'WITHDRAW' . '%');
+					$q->orWhere('applicants.remarks', 'like', '%' . 'withdraw' . '%');
+					$q->orWhere('applicants.remarks', 'like', '%' . 'WITHDRAW' . '%');
+					$q->orWhere('applicants.remarks', 'like', '%' . 'NFR' . '%');
+					$q->orWhere('applicants.remarks', 'like', '%' . 'nfr' . '%');
+					$q->orWhere('applicants.remarks', 'like', '%' . 'REHIRE' . '%');
+					$q->orWhere('applicants.remarks', 'like', '%' . 'rehire' . '%');
+					$q->orWhere('applicants.remarks', 'like', '%' . 'Rehire' . '%');
+				});
+			}
 		}
 
     	$tc = $applicants->count();
