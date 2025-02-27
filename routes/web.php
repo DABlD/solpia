@@ -116,6 +116,15 @@ Route::group([
 			->name($name . '.index')
 			->defaults('href', $name);
 
+		// FOR RD
+		Route::get('withdrawn', ucfirst($name) . 'Controller@index2')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-user-times')
+			->defaults('name', 'Withdrawn Crew')
+			->defaults('roles', array('Admin', 'Recruitment Officer'))
+			->name($name . '.index2')
+			->defaults('href', 'withdrawn');
+
 		Route::get($name . '/awardees', ucfirst($name) . 'Controller@awardees')->name($name . '.awardees');
 		Route::get($name . '/get/{user}', ucfirst($name) . 'Controller@get')->name($name . '.get');
 		Route::get($name . '/get2', ucfirst($name) . 'Controller@get2')->name($name . '.get2');

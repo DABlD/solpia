@@ -45,6 +45,19 @@ class ApplicationsController extends Controller
         ]);
     }
 
+    public function index2(Request $req){
+        // $principals = Principal::select('id', 'slug', 'name', 'fleet')->where('active', 1)->get();
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+        // $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
+
+        return $this->_view('index2', [
+            'title' => 'Crew Database',
+            // 'principals' => $principals,
+            'categories' => $ranks->groupBy('category'),
+            // 'vessels' => $vessels
+        ]);
+    }
+
     public function create(){
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         $issuers = array_merge(
@@ -1895,7 +1908,21 @@ class ApplicationsController extends Controller
         echo "</tbody></table>";
     }
 
-    public function tempFunc(Request $req){
+    public function tempfunc(Request $req){
+
+        $sss = SeaService::where('manning_agent', 'like', "%" . 'SOLPIA' . "%")->where(function($q){
+            $q->where('vessel_name', 'like', "%" . "MARITE" . "%");
+            $q->orWhere('vessel_name', 'like', "%" . "WISTERIA" . "%");
+            $q->orWhere('vessel_name', 'like', "%" . "ALDEBARAN" . "%");
+        })->get();
+
+        foreach($sss as $ss){
+            echo $ss->applicant->user->namefull . ';' . $ss->rank2->abbr . ';' . $ss->vessel_name . ';' . $ss->sign_on . '<br>';
+        }
+
+    }
+
+    public function cejoey(Request $req){
         $start = $req->start;
         $end = $req->end;
 
