@@ -198,30 +198,30 @@
 						elseif(in_array("II/4", $regulations) || in_array("III/4", $regulations)){
 							$cocR = $doc;
 						}
-						elseif($doc->type == "GMDSS/GOC"){
-							$goc = $doc;
-						}
-						elseif($doc->type == "NCIII"){
-							$cocG = $doc;
-						}
-						elseif($doc->type == "NCI" && $cocG == null){
-							$cocG = $doc;
-						}
-						elseif($doc->type == "BASIC TRAINING - BT"){
-							$bt = $doc;
-						}
-						elseif($doc->type == "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB"){
-							$pscrb = $doc;
-						}
-						elseif($doc->type == "ADVANCE FIRE FIGHTING - AFF"){
-							$aff = $doc;
-						}
-						elseif($doc->type == "SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD"){
-							$sdsd = $doc;
-						}
-						elseif(str_contains($doc->type, "KML")){
-							$kml = $doc;
-						}
+					}
+					elseif($doc->type == "GMDSS/GOC"){
+						$goc = $doc;
+					}
+					elseif($doc->type == "NCIII"){
+						$cocG = $doc;
+					}
+					elseif($doc->type == "NCI" && $cocG == null){
+						$cocG = $doc;
+					}
+					elseif($doc->type == "BASIC TRAINING - BT"){
+						$bt = $doc;
+					}
+					elseif($doc->type == "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB"){
+						$pscrb = $doc;
+					}
+					elseif($doc->type == "ADVANCE FIRE FIGHTING - AFF"){
+						$aff = $doc;
+					}
+					elseif($doc->type == "SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD"){
+						$sdsd = $doc;
+					}
+					elseif(str_contains($doc->type, "KML")){
+						$kml = $doc;
 					}
 				}
 			@endphp
