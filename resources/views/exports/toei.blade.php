@@ -1197,7 +1197,7 @@
 			@endphp
 
 			<tr>
-				<td colspan="4">SHIP SAFETY OFFICER'S COURSE (SSOC)</td>
+				<td colspan="4">Ship Safety Officer's Course (SSOC)</td>
 				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -1215,7 +1215,7 @@
 			@endphp
 
 			<tr>
-				<td colspan="4">MARITIME CYBER RISK AWARENESS AND RISK MANAGEMENT</td>
+				<td colspan="4">Maritime Cyber Risk Awareness and Risk Management</td>
 				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
@@ -1233,7 +1233,7 @@
 			@endphp
 
 			<tr>
-				<td colspan="4">MENTAL HEALTH AWARENESS TRAINING</td>
+				<td colspan="4">Mental Health Awareness Training</td>
 				<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
