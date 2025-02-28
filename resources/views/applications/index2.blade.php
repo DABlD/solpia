@@ -270,7 +270,7 @@
         // var size = "%%";
         // var owner = "%%";
         // var engine = "%%";
-        var fStatus = "%%";
+        var fStatus = "Vacation";
         var fUsv = "";
         var fFleet = "%%";
 
