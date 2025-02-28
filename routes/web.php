@@ -209,6 +209,7 @@ Route::group([
 		Route::post("$name/updateParticular", ucfirst($name) . 'Controller@updateParticular')->name("$name.updateParticular");
 		Route::get($name . '/add', ucfirst($name) . 'Controller@add')->name($name . '.add');
 		Route::get($name . '/exportMonitoring', ucfirst($name) . 'Controller@exportMonitoring')->name($name . '.exportMonitoring');
+		Route::get($name . '/getOnboardCrew', ucfirst($name) . 'Controller@getOnboardCrew')->name($name . '.getOnboardCrew');
 
 		// Line Up ROUTES
 		$name = "lineUp";
