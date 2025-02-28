@@ -203,7 +203,10 @@
 			$issuer = $type == "med_cert" ? 'clinic' : 'issuer';
 			$issuer = $docu ? $docu->$issuer : 'NOT APPLICABLE';
 
-			if($issuer == "NOT APPLICABLE" && $type == "med_cert"){
+			if($name == "DRUG AND ALCOHOL TEST" || $name == "MEDICAL EXAMINATION"){
+				$issuer = "S.M. LAZO MEDICAL CLINIC, INC";
+			}
+			elseif($issuer == "NOT APPLICABLE" && $type == "med_cert"){
 				$issuer = "REVERTING";
 			}
 		}
