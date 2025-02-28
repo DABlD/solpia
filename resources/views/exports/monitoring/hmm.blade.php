@@ -251,7 +251,7 @@
 				}
 			@endphp
 
-			<td>{{ $kml ? ($kml->expiry_date ? '=DATEVALUE("' . $kml->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			<td></td>
 		</tr>
