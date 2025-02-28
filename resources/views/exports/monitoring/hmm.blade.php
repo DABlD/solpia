@@ -13,7 +13,7 @@
 	<tr>
 		<td></td>
 		<td>DATE:</td>
-		<td>{{ now()->format('m/d/Y') }}</td>
+		<td>{{ now()->format('m/d/y') }}</td>
 		<td colspan="32">
 		</td>
 	</tr>
@@ -85,15 +85,15 @@
 			<td>{{ $vessel->name }}</td>
 			<td>{{ $obc->applicant->user->crew->pro_app->rank->abbr }}</td>
 			<td>{{ $obc->applicant->user->namefull }}</td>
-			<td>{{ isset($obc->applicant->user->birthday) ? $obc->applicant->user->birthday->format('d-M-yy') : "N/A" }}</td>
+			<td>{{ isset($obc->applicant->user->birthday) ? $obc->applicant->user->birthday->format('d-M-y') : "N/A" }}</td>
 			<td>{{ isset($obc->applicant->user->birthday) ? $obc->applicant->user->birthday->age : "N/A" }}</td>
-			<td>{{ $obc->joining_date->format('d-M-yy') }}</td>
+			<td>{{ $obc->joining_date->format('d-M-y') }}</td>
 
 			@php
 				$months = $obc->months + ($obc->extensions ? array_sum(json_decode($obc->extensions)) : 0);
 			@endphp
 			<td>{{ $months }}</td>
-			<td>=DATEVALUE("{{ $obc->joining_date->addMonths($months)->format('m/d/Y') }}")</td>
+			<td>=DATEVALUE("{{ $obc->joining_date->addMonths($months)->format('m/d/y') }}")</td>
 			<td>{{ now()->diffInMonths($obc->joining_date) }}</td>
 
 			{{-- PASSPORT --}}
@@ -106,7 +106,7 @@
 				}
 			@endphp
 			<td>{{ $docu ? $docu->number : "N/A" }}</td>
-			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			{{-- SEAMANS BOOK --}}
 			@php
@@ -118,7 +118,7 @@
 				}
 			@endphp
 			<td>{{ $docu ? $docu->number : "N/A" }}</td>
-			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			{{-- US VISA --}}
 			@php
@@ -129,7 +129,7 @@
 					}
 				}
 			@endphp
-			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			{{-- MCV --}}
 			@php
@@ -141,7 +141,7 @@
 				}
 			@endphp
 			<td>{{ $docu ? $docu->number : "N/A" }}</td>
-			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			{{-- FLAG DOCUMENTS --}}
 			@php
@@ -178,11 +178,11 @@
 			@endphp
 			<td>{{ $vessel->flag ?? "N/A" }}</td>
 			<td>{{ $fRank }}</td>
-			<td>{{ $fBooklet ? ($fBooklet->expiry_date ? '=DATEVALUE("' . $fBooklet->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $fCoc ? ($fCoc->expiry_date ? '=DATEVALUE("' . $fCoc->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $fGoc ? ($fGoc->expiry_date ? '=DATEVALUE("' . $fGoc->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $fSdsdSso ? ($fSdsdSso->expiry_date ? '=DATEVALUE("' . $fSdsdSso->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $fCook ? ($fCook->expiry_date ? '=DATEVALUE("' . $fCook->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $fBooklet ? ($fBooklet->expiry_date ? '=DATEVALUE("' . $fBooklet->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $fCoc ? ($fCoc->expiry_date ? '=DATEVALUE("' . $fCoc->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $fGoc ? ($fGoc->expiry_date ? '=DATEVALUE("' . $fGoc->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $fSdsdSso ? ($fSdsdSso->expiry_date ? '=DATEVALUE("' . $fSdsdSso->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $fCook ? ($fCook->expiry_date ? '=DATEVALUE("' . $fCook->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			{{-- LICENSES --}}
 			@php
@@ -198,42 +198,42 @@
 						elseif(in_array("II/4", $regulations) || in_array("III/4", $regulations)){
 							$cocR = $doc;
 						}
-						elseif($doc->type == "GMDSS/GOC"){
-							$goc = $doc;
-						}
-						elseif($doc->type == "NCIII"){
-							$cocG = $doc;
-						}
-						elseif($doc->type == "NCI" && $cocG == null){
-							$cocG = $doc;
-						}
-						elseif($doc->type == "BASIC TRAINING - BT"){
-							$bt = $doc;
-						}
-						elseif($doc->type == "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB"){
-							$pscrb = $doc;
-						}
-						elseif($doc->type == "ADVANCE FIRE FIGHTING - AFF"){
-							$aff = $doc;
-						}
-						elseif($doc->type == "SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD"){
-							$sdsd = $doc;
-						}
-						elseif(str_contains($doc->type, "KML")){
-							$kml = $doc;
-						}
+					}
+					elseif($doc->type == "GMDSS/GOC"){
+						$goc = $doc;
+					}
+					elseif($doc->type == "NCIII"){
+						$cocG = $doc;
+					}
+					elseif($doc->type == "NCI" && $cocG == null){
+						$cocG = $doc;
+					}
+					elseif($doc->type == "BASIC TRAINING - BT"){
+						$bt = $doc;
+					}
+					elseif($doc->type == "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB"){
+						$pscrb = $doc;
+					}
+					elseif($doc->type == "ADVANCE FIRE FIGHTING - AFF"){
+						$aff = $doc;
+					}
+					elseif($doc->type == "SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD"){
+						$sdsd = $doc;
+					}
+					elseif(str_contains($doc->type, "KML")){
+						$kml = $doc;
 					}
 				}
 			@endphp
-			<td>{{ $oic ? ($oic->expiry_date ? '=DATEVALUE("' . $oic->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $goc ? ($goc->expiry_date ? '=DATEVALUE("' . $goc->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $cocR ? ($cocR->expiry_date ? '=DATEVALUE("' . $cocR->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $cocG ? ($cocG->expiry_date ? '=DATEVALUE("' . $cocG->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $bt ? ($bt->expiry_date ? '=DATEVALUE("' . $bt->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $pscrb ? ($pscrb->expiry_date ? '=DATEVALUE("' . $pscrb->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $aff ? ($aff->expiry_date ? '=DATEVALUE("' . $aff->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $sdsd ?( $sdsd->expiry_date ? '=DATEVALUE("' . $sdsd->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $kml ? ($kml->expiry_date ? '=DATEVALUE("' . $kml->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $oic ? ($oic->expiry_date ? '=DATEVALUE("' . $oic->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $goc ? ($goc->expiry_date ? '=DATEVALUE("' . $goc->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $cocR ? ($cocR->expiry_date ? '=DATEVALUE("' . $cocR->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $cocG ? ($cocG->expiry_date ? '=DATEVALUE("' . $cocG->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $bt ? ($bt->expiry_date ? '=DATEVALUE("' . $bt->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $pscrb ? ($pscrb->expiry_date ? '=DATEVALUE("' . $pscrb->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $aff ? ($aff->expiry_date ? '=DATEVALUE("' . $aff->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $sdsd ?( $sdsd->expiry_date ? '=DATEVALUE("' . $sdsd->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $kml ? ($kml->expiry_date ? '=DATEVALUE("' . $kml->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			@php
 				$docu = null;
@@ -251,7 +251,7 @@
 				}
 			@endphp
 
-			<td>{{ $kml ? ($kml->expiry_date ? '=DATEVALUE("' . $kml->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			<td></td>
 		</tr>

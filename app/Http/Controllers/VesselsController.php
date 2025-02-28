@@ -196,6 +196,19 @@ class VesselsController extends Controller
         return Excel::download(new $class($obcs, $vessel), "$fileName.xlsx");
     }
 
+    public function getOnboardCrew(Request $req){
+        $vessel = Vessel::find($req->id);
+
+        $obcs = LineUpContract::where('vessel_id', $req->id)->where('status', "On Board")->get();
+        $obcs->load('document_id');
+        $obcs->load('document_flag');
+        $obcs->load('document_lc');
+        $obcs->load('document_med_cert');
+        $obcs->load('applicant.user.crew.pro_app.rank');
+        
+        echo json_encode([$obcs, $vessel]);
+    }
+
     public function add(Request $req){
         $res = Vessel::create([
             'principal_id' => $req->principal_id,
