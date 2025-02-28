@@ -274,15 +274,6 @@
         var fUsv = "";
         var fFleet = "%%";
 
-        // INIT DATA FROM SESSION
-        fRanks = "{{ session('fRanks') }}";
-        fMin_age = "{{ session('fMin_age') }}";
-        fMax_age = "{{ session('fMax_age') }}";
-        fFname = "{{ session('fFname') }}";
-        fLname = "{{ session('fLname') }}";
-        fStatus = "{{ session('fStatus') ?? "%%" }}";
-        fFleet = "{{ session('fFleet') ?? "%%" }}";
-
         swal({
             title: 'Loading',
             timer: 1500
@@ -391,12 +382,7 @@
                 tooltip();
             	initializeActions();
             },
-            order: [],
-            @if(session('search'))
-                search: {
-                    search: "{{ session('search') }}"
-                }
-            @endif
+            order: []
             // order: [ [0, 'desc'] ],
         });
         
