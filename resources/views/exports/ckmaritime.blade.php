@@ -502,13 +502,13 @@
 		<td style="{{ $bc }}">SEAMAN'S BOOK</td>
 		<td style="{{ $bc }}">OWN</td>
 		<td colspan="3" style="{{ $bc }}">
-			{{ $sb ? $sb->number : "" }}
+			{{ isset($sb) ? $sb->number : "" }}
 		</td>
 		<td colspan="3" style="{{ $bc }}">
-			{{ $sb ? $sb->issue_date ? $sb->issue_date->format("d/m/Y") : "" : "" }}
+			{{ isset($sb) ? $sb->issue_date ? $sb->issue_date->format("d/m/Y") : "" : "" }}
 		</td>
 		<td colspan="2" style="{{ $bc }}">
-			{{ $sb ? $sb->expiry_date ? $sb->expiry_date->format("d/m/Y") : "" : "" }}
+			{{ isset($sb) ? $sb->expiry_date ? $sb->expiry_date->format("d/m/Y") : "" : "" }}
 		</td>
 		<td colspan="2" style="{{ $bc }}">CHECKED</td>
 	</tr>
