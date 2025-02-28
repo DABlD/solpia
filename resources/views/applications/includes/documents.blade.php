@@ -435,7 +435,7 @@
             	            	<optgroup label="Suggested"></optgroup>
 	            	            	<option value="MICAH">&nbsp;&nbsp;&nbsp;MICAH</option>
 	            	            	<option value="SUPERCARE">&nbsp;&nbsp;&nbsp;SUPERCARE</option>
-	            	            	<option value="SM LAZO">&nbsp;&nbsp;&nbsp;SM LAZO</option>
+	            	            	<option value="S.M. LAZO MEDICAL CLINIC, INC">&nbsp;&nbsp;&nbsp;S.M. LAZO MEDICAL CLINIC, INC</option>
 	            	            	<option value="PHYSICIAN">&nbsp;&nbsp;&nbsp;PHYSICIAN</option>
 	            	            	<option value="HALCION">&nbsp;&nbsp;&nbsp;HALCION</option>
 	            	            	<option value="MMC">&nbsp;&nbsp;&nbsp;MMC</option>
