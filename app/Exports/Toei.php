@@ -405,7 +405,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $tekRows = 0;
                 if(isset($this->applicant->vessel) && in_array($this->applicant->vessel->id, [5,4610,6141,5563,4927])){
                     $raoc +=3;
-                    $tekRows +=3;
+                    $temp +=3;
                 }
 
                 $fleetCRows = 0;
