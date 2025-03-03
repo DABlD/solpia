@@ -1908,7 +1908,7 @@ class ApplicationsController extends Controller
         echo "</tbody></table>";
     }
 
-    public function tempfunc(Request $req){
+    public function tempfunc2(Request $req){
 
         $sss = SeaService::where('manning_agent', 'like', "%" . 'SOLPIA' . "%")->where(function($q){
             $q->where('vessel_name', 'like', "%" . "MARITE" . "%");
@@ -1922,7 +1922,8 @@ class ApplicationsController extends Controller
 
     }
 
-    public function cejoey(Request $req){
+    // CE JOEY
+    public function tempfunc(Request $req){
         $start = $req->start;
         $end = $req->end;
 
