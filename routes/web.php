@@ -121,7 +121,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-user-times')
 			->defaults('name', 'Withdrawn Crew')
-			->defaults('roles', array('Admin', 'Recruitment Officer'))
+			->defaults('roles', array('Admin', 'Recruitment Officer', 'Crewing Officer'))
 			->name($name . '.index2')
 			->defaults('href', 'withdrawn');
 
