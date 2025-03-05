@@ -1,12 +1,12 @@
 let errorColor = "#f76c6b";
 let successColor = "#28a745";
 
-function toDate(timetamp){
-	return moment(timetamp).format('MMM DD, YYYY');
+function toDate(timetamp, format = 'MMM DD, YYYY'){
+	return moment(timetamp).format(format);
 }
 
 function toDateTime(timestamp){
-	return moment(timestamp).format('MMM. DD, YYYY h:mm A');	
+	return moment(timestamp).format('MMM DD, YYYY h:mm A');	
 }
 
 // SWAL
