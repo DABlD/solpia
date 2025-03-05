@@ -501,7 +501,7 @@
 								<td>&nbsp;&nbsp;&nbsp;COC&nbsp;&nbsp;&nbsp;</td>
 								<td>&nbsp;&nbsp;&nbsp;GOC&nbsp;&nbsp;&nbsp;</td>
 								<td>&nbsp;&nbsp;&nbsp;SDSD/SSO&nbsp;&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;&nbsp;COOK&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COOK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 								<td>&nbsp;&nbsp;OIC LICENSE&nbsp;&nbsp;</td>
 								<td>&nbsp;&nbsp;GOC LICENSE&nbsp;&nbsp;</td>
 								<td>&nbsp;&nbsp;COC-RATINGS&nbsp;&nbsp;</td>
