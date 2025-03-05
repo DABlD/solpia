@@ -396,9 +396,9 @@
 							<td>${index+1}</td>
 							<td>${user.crew.pro_app.rank.abbr}</td>
 							<td class="w-25">${user.lname}, ${user.fname}</td>
-							<td>${user.birthday ? toDate(user.birthday, 'DD-MMM-YY') : "-"}</td>
+							<td>${user.birthday ? toDate(user.birthday, 'DD-MMM-YY') : "-"}&nbsp;</td>
 							<td>${user.birthday ? moment().diff(moment(user.birthday), 'years') : "-"}</td>
-							<td>${toDate(obc.joining_date, 'DD-MMM-YY')}</td>
+							<td>${toDate(obc.joining_date, 'DD-MMM-YY')}&nbsp;</td>
 							<td>${months}</td>
 							<td>${toDate(moment(obc.joining_date, 'DD-MMM-YY').add(months, 'months'))}</td>
 							<td>${moment().diff(moment(obc.joining_date), 'months')}</td>
@@ -538,6 +538,27 @@
 				$('#onboardCrewDocuments').append(string);
 				$('.dttr td').css('font-weight', 'bold');
 				$('#documentTable td').css('vertical-align', 'middle');
+
+				$('#onboardCrewDocuments td').each((id, elem) => {
+					if(elem.innerText.length == 9 && !isNaN(Date.parse(elem.innerText))){
+						let diff = moment(elem.innerText).diff(moment(), 'days');
+						let color = null;
+
+						if(diff <= 30){
+							color = "fd6787";
+						}
+						else if(diff <= 60){
+							color = "fff44c";
+						}
+						else if(diff <= 90){
+							color = "288eeb";
+						}
+
+						if(color){
+							$(elem).css('background-color', '#' + color);
+						}
+					}
+				});
 			}
 		})
 	}
