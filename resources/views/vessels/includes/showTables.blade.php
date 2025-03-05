@@ -334,7 +334,7 @@
 	            </div>
 	            <br>
 	            <div class="row">
-	                <div class="col-md-12" id="onboardCrewDocuments" style="overflow-x: scroll; overflow-y: scroll; width: 99%;">
+	                <div class="col-md-12" id="onboardCrewDocuments" style="overflow-x: scroll; overflow-y: scroll; width: 99%; height: 500px;">
 	                </div>
 	            </div>
 	        `
@@ -538,8 +538,40 @@
 				$('#onboardCrewDocuments').append(string);
 				$('.dttr td').css('font-weight', 'bold');
 				$('#documentTable td').css('vertical-align', 'middle');
+				// $('#documentTable tr:nth-child(n+3) td:nth-child(3)').css({
+				// 	position: "sticky",
+				// 	left: "0px",
+				// 	"background-color": "rgba(255,255,255,1)"
+				// 	"background-color": "currentcolor"
+				// });
 
 				$('#onboardCrewDocuments td').each((id, elem) => {
+
+					// FREEZE COLUMN
+					if($(elem).hasClass("w-25")){
+						$(elem).css({
+							position: "sticky",
+							left: "0px",
+							"background-color": $(elem).parent().css('background-color')
+						});
+					}
+
+					// FREEZE ROW
+					if(id >= 16 && id <= 49){
+						$(elem).css({
+							position: "sticky",
+							top: "0px",
+							"background-color": $(elem).parent().css('background-color')
+						});
+
+						// NAME
+						if(id == 18){
+							$(elem).css('z-index', 9999);
+						}
+					}
+
+
+
 					if(elem.innerText.length == 9 && !isNaN(Date.parse(elem.innerText))){
 						let diff = moment(elem.innerText).diff(moment(), 'days');
 						let color = null;
