@@ -395,56 +395,57 @@
 						<tr>
 							<td>${index+1}</td>
 							<td>${user.crew.pro_app.rank.abbr}</td>
-							<td class="w-25">${user.lname}, ${user.fname} ${user.suffix} ${user.mname}</td>
-							<td>${user.birthday ? toDate(user.birthday) : "-"}</td>
+							<td class="w-25">${user.lname}, ${user.fname}</td>
+							<td>${user.birthday ? toDate(user.birthday, 'DD-MMM-YY') : "-"}</td>
 							<td>${user.birthday ? moment().diff(moment(user.birthday), 'years') : "-"}</td>
-							<td>${toDate(obc.joining_date)}</td>
+							<td>${toDate(obc.joining_date, 'DD-MMM-YY')}</td>
 							<td>${months}</td>
-							<td>${toDate(moment(obc.joining_date).add(months, 'months'))}</td>
+							<td>${toDate(moment(obc.joining_date, 'DD-MMM-YY').add(months, 'months'))}</td>
 							<td>${moment().diff(moment(obc.joining_date), 'months')}</td>
 
 							{{-- DOCUMENTS --}}
 							<td>${pp ? pp.number : "N/A"}</td>
-							<td>${pp ? (pp.expiry_date ? toDate(pp.expiry_date) : "UNLIMITED") : "N/A"}</td>
+							<td>${pp ? (pp.expiry_date ? toDate(pp.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 							<td>${sb ? sb.number : "N/A"}</td>
-							<td>${sb ? (sb.expiry_date ? toDate(sb.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${usv ? (usv.expiry_date ? toDate(usv.expiry_date) : "UNLIMITED") : "N/A"}</td>
+							<td>${sb ? (sb.expiry_date ? toDate(sb.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${usv ? (usv.expiry_date ? toDate(usv.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 							<td>${mcv ? mcv.number : "N/A"}</td>
-							<td>${mcv ? (mcv.expiry_date ? toDate(mcv.expiry_date) : "UNLIMITED") : "N/A"}</td>
+							<td>${mcv ? (mcv.expiry_date ? toDate(mcv.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
 							{{-- FLAG --}}
 							<td>${vessel.flag}</td>
 							<td>${fRank ? ranks[fRank].abbr : "N/A"}</td>
-							<td>${fBooklet ? (fBooklet.expiry_date ? toDate(fBooklet.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${fLicense ? (fLicense.expiry_date ? toDate(fLicense.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${fGoc ? (fGoc.expiry_date ? toDate(fGoc.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${fSsoSdsd ? (fSsoSdsd.expiry_date ? toDate(fSsoSdsd.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${fCook ? (fCook.expiry_date ? toDate(fCook.expiry_date) : "UNLIMITED") : "N/A"}</td>
+							<td>${fBooklet ? (fBooklet.expiry_date ? toDate(fBooklet.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${fLicense ? (fLicense.expiry_date ? toDate(fLicense.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${fGoc ? (fGoc.expiry_date ? toDate(fGoc.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${fSsoSdsd ? (fSsoSdsd.expiry_date ? toDate(fSsoSdsd.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${fCook ? (fCook.expiry_date ? toDate(fCook.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
 							{{-- LICENSES --}}
-							<td>${oic ? (oic.expiry_date ? toDate(oic.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${goc ? (goc.expiry_date ? toDate(goc.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${cocR ? (cocR.expiry_date ? toDate(cocR.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${cocG ? (cocG.expiry_date ? toDate(cocG.expiry_date) : "UNLIMITED") : "N/A"}</td>
+							<td>${oic ? (oic.expiry_date ? toDate(oic.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${goc ? (goc.expiry_date ? toDate(goc.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${cocR ? (cocR.expiry_date ? toDate(cocR.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${cocG ? (cocG.expiry_date ? toDate(cocG.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
 							{{-- COP --}}
-							<td>${bt ? (bt.expiry_date ? toDate(bt.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${pscrb ? (pscrb.expiry_date ? toDate(pscrb.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${aff ? (aff.expiry_date ? toDate(aff.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${sdsd ? (sdsd.expiry_date ? toDate(sdsd.expiry_date) : "UNLIMITED") : "N/A"}</td>
-							<td>${kml ? (kml.expiry_date ? toDate(kml.expiry_date) : "UNLIMITED") : "N/A"}</td>
+							<td>${bt ? (bt.expiry_date ? toDate(bt.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${pscrb ? (pscrb.expiry_date ? toDate(pscrb.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${aff ? (aff.expiry_date ? toDate(aff.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${sdsd ? (sdsd.expiry_date ? toDate(sdsd.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${kml ? (kml.expiry_date ? toDate(kml.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
 							{{-- MEDICAL --}}
-							<td>${medical ? (medical.expiry_date ? toDate(medical.expiry_date) : "UNLIMITED") : "N/A"}</td>
+							<td>${medical ? (medical.expiry_date ? toDate(medical.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td></td>
 						</tr>
 					`;
 				});
 
 				string = `
-					<table class="table table-bordered table-striped" style="text-align: center; font-size: 12px;">
+					<table id="documentTable" class="table table-bordered table-striped" style="text-align: center; font-size: 12px;">
 
 						<tbody>
-							<tr>
+							<tr class="dttr">
 								<td></td>
 								<td></td>
 								<td class="w-25"></td>
@@ -463,13 +464,19 @@
 								<td style="background-color: #00B0F0;">REMARKS</td>
 							</tr>
 
-							<tr>
+							<tr class="dttr">
 								<td>NO.</td>
 								<td>RANK</td>
-								<td class="w-25">NAME</td>
-								<td>DATE OF BIRTH</td>
+								<td class="w-25">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>
+									DATE OF 
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BIRTH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
 								<td>AGE</td>
-								<td>DATE OF JOIN</td>
+								<td>
+									DATE OF
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOIN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
 								<td>CONTRACT DURATION</td>
 								<td>DATE OF CONTRACT TERMINATION</td>
 								<td>MONTHS ONBOARD</td>
@@ -477,26 +484,49 @@
 								<td>PASSPORT VALIDITY</td>
 								<td>SIRB NO.</td>
 								<td>SEAMAN'S BOOK VALIDITY</td>
-								<td>US VISA VALIDITY</td>
-								<td>MARITIME CREW VISA PPRT NO.</td>
-								<td>MARIITME CREW VISA EXPIRY</td>
+								<td>&nbsp;&nbsp;US VISA VALIDITY&nbsp;&nbsp;</td>
+								<td>
+									&nbsp;MARITIME&nbsp; 
+									CREW VISA 
+									PPRT NO.
+								</td>
+								<td>
+									&nbsp;MARITIME&nbsp;
+									CREW VISA
+									EXPIRY
+								</td>
 								<td>FLAG</td>
 								<td>RANK</td>
 								<td>BOOKLET</td>
-								<td>COC</td>
-								<td>GOC</td>
-								<td>SDSD/SSO</td>
-								<td>COOK</td>
-								<td>OIC LICENSE</td>
-								<td>GOC LICENSE</td>
-								<td>COC-RATINGS</td>
-								<td>COC-GALLEY</td>
-								<td>COP BT</td>
-								<td>COP PSCRB</td>
-								<td>COP AFF</td>
-								<td>COP SDSD</td>
+								<td>&nbsp;&nbsp;&nbsp;COC&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;GOC&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;SDSD/SSO&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;COOK&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;OIC LICENSE&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;GOC LICENSE&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;COC-RATINGS&nbsp;&nbsp;</td>
+								<td>
+									COC-
+									&nbsp;&nbsp;&nbsp;GALLEY&nbsp;&nbsp;&nbsp;
+								</td>
+								<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									BT
+								</td>
+								<td>
+									COP
+									&nbsp;&nbsp;&nbsp;&nbsp;PSCRB&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td>
+									COP 
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td>
+									COP
+									&nbsp;&nbsp;&nbsp;&nbsp;SDSD&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
 								<td>KML LICENSE</td>
-								<td>MEDICAL</td>
+								<td>&nbsp;MEDICAL&nbsp;</td>
 								<td>FACEBOOK NAME</td>
 							</tr>
 
@@ -506,6 +536,8 @@
 				`;
 
 				$('#onboardCrewDocuments').append(string);
+				$('.dttr td').css('font-weight', 'bold');
+				$('#documentTable td').css('vertical-align', 'middle');
 			}
 		})
 	}
