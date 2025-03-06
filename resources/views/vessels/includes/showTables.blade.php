@@ -370,7 +370,7 @@
 					let fSso = filter(obc.document_flag, 'SSO', vessel.flag);
 					let fSdsd = filter(obc.document_flag, 'SDSD', vessel.flag);
 					let fCook = filter(obc.document_flag, "SHIP'S COOK ENDORSEMENT", vessel.flag);
-					let fRank = fBooklet ? fBooklet.rank_id : fLicense ? fLicense.rank_id : fSdsd ? fSdsd.rank_id : null;
+					let fRank = fBooklet ? fBooklet.rank : fLicense ? fLicense.rank : fSdsd ? fSdsd.rank : null;
 					let fSsoSdsd = fSso ?? fSdsd;
 
 					// LICENSE
