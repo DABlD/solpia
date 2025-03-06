@@ -589,6 +589,7 @@
 
 	function filter(obj, type, flag = null, coc = null){
 		let docu = null;
+		let backup = null;
 
 		obj.forEach(doc => {
 			if(flag){
@@ -625,8 +626,19 @@
 					docu = doc;
 				}
 			}
+
+			if(docu){
+				if(backup == null){
+					backup = docu;
+				}
+				else{
+					if(docu.issue_date > backup.issue_date){
+						backup = docu;
+					}
+				}
+			}
 		});
 
-		return docu;
+		return backup;
 	}
 </script>
