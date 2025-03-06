@@ -510,7 +510,7 @@
 									&nbsp;&nbsp;&nbsp;GALLEY&nbsp;&nbsp;&nbsp;
 								</td>
 								<td>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									BT
 								</td>
 								<td>
@@ -519,7 +519,7 @@
 								</td>
 								<td>
 									COP 
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 								<td>
 									COP
