@@ -391,8 +391,6 @@
 					// MEDICAL
 					let medical = filter(obc.document_med_cert, 'MEDICAL CERTIFICATE');
 
-					console.log(obc.applicant.id, fBooklet);
-
 					string += `
 						<tr>
 							<td>${index+1}</td>

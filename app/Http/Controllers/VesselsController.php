@@ -199,7 +199,13 @@ class VesselsController extends Controller
     public function getOnboardCrew(Request $req){
         $vessel = Vessel::find($req->id);
 
-        $obcs = LineUpContract::where('vessel_id', $req->id)->where('status', "On Board")->get();
+        $obcs = LineUpContract::where('vessel_id', $req->id)
+                            ->where('status', "On Board")
+                            ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
+                            ->select('line_up_contracts.*', 'order')
+                            ->orderBy('order')
+                            ->get();
+
         $obcs->load('document_id');
         $obcs->load('document_flag');
         $obcs->load('document_lc');
