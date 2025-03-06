@@ -391,6 +391,8 @@
 					// MEDICAL
 					let medical = filter(obc.document_med_cert, 'MEDICAL CERTIFICATE');
 
+					console.log(obc.applicant.id, fBooklet);
+
 					string += `
 						<tr>
 							<td>${index+1}</td>
@@ -405,34 +407,34 @@
 
 							{{-- DOCUMENTS --}}
 							<td>${pp ? pp.number : "N/A"}</td>
-							<td>${pp ? (pp.expiry_date ? toDate(pp.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(pp && pp.issue_date != null) ? (pp.expiry_date != null ? toDate(pp.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 							<td>${sb ? sb.number : "N/A"}</td>
-							<td>${sb ? (sb.expiry_date ? toDate(sb.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${usv ? (usv.expiry_date ? toDate(usv.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(sb && sb.issue_date != null) ? (sb.expiry_date != null ? toDate(sb.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(usv && usv.issue_date != null) ? (usv.expiry_date != null ? toDate(usv.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 							<td>${mcv ? mcv.number : "N/A"}</td>
-							<td>${mcv ? (mcv.expiry_date ? toDate(mcv.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(mcv && mcv.issue_date != null) ? (mcv.expiry_date != null ? toDate(mcv.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
 							{{-- FLAG --}}
 							<td>${vessel.flag}</td>
 							<td>${fRank ? ranks[fRank].abbr : "N/A"}</td>
-							<td>${fBooklet ? (fBooklet.expiry_date ? toDate(fBooklet.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${fLicense ? (fLicense.expiry_date ? toDate(fLicense.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${fGoc ? (fGoc.expiry_date ? toDate(fGoc.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${fSsoSdsd ? (fSsoSdsd.expiry_date ? toDate(fSsoSdsd.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${fCook ? (fCook.expiry_date ? toDate(fCook.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(fBooklet && fBooklet.issue_date != null) ? (fBooklet.expiry_date != null ? toDate(fBooklet.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(fLicense && fLicense.issue_date != null) ? (fLicense.expiry_date != null ? toDate(fLicense.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(fGoc && fGoc.issue_date != null) ? (fGoc.expiry_date != null ? toDate(fGoc.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(fSsoSdsd && fSsoSdsd.issue_date != null) ? (fSsoSdsd.expiry_date != null ? toDate(fSsoSdsd.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(fCook && fCook.issue_date != null) ? (fCook.expiry_date != null ? toDate(fCook.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
 							{{-- LICENSES --}}
-							<td>${oic ? (oic.expiry_date ? toDate(oic.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${goc ? (goc.expiry_date ? toDate(goc.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${cocR ? (cocR.expiry_date ? toDate(cocR.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${cocG ? (cocG.expiry_date ? toDate(cocG.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(oic && oic.issue_date != null) ? (oic.expiry_date != null ? toDate(oic.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(goc && goc.issue_date != null) ? (goc.expiry_date != null ? toDate(goc.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(cocR && cocR.issue_date != null) ? (cocR.expiry_date != null ? toDate(cocR.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(cocG && cocG.issue_date != null) ? (cocG.expiry_date != null ? toDate(cocG.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
 							{{-- COP --}}
-							<td>${bt ? (bt.expiry_date ? toDate(bt.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${pscrb ? (pscrb.expiry_date ? toDate(pscrb.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${aff ? (aff.expiry_date ? toDate(aff.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${sdsd ? (sdsd.expiry_date ? toDate(sdsd.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
-							<td>${kml ? (kml.expiry_date ? toDate(kml.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(bt && bt.issue_date != null) ? (bt.expiry_date != null ? toDate(bt.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(pscrb && pscrb.issue_date != null) ? (pscrb.expiry_date != null ? toDate(pscrb.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(aff && aff.issue_date != null) ? (aff.expiry_date != null ? toDate(aff.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(sdsd && sdsd.issue_date != null) ? (sdsd.expiry_date != null ? toDate(sdsd.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+							<td>${(kml && kml.issue_date != null) ? (kml.expiry_date != null ? toDate(kml.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
 							{{-- MEDICAL --}}
 							<td>${medical ? (medical.expiry_date ? toDate(medical.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
@@ -498,13 +500,13 @@
 								<td>FLAG</td>
 								<td>RANK</td>
 								<td>BOOKLET</td>
-								<td>&nbsp;&nbsp;&nbsp;COC&nbsp;&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;&nbsp;GOC&nbsp;&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;&nbsp;SDSD/SSO&nbsp;&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COOK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;OIC LICENSE&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;GOC LICENSE&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;COC-RATINGS&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;SDSD/SSO&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COOK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;OIC LICENSE&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;GOC LICENSE&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;COC-RATINGS&nbsp;&nbsp;&nbsp;&nbsp;</td>
 								<td>
 									COC-
 									&nbsp;&nbsp;&nbsp;GALLEY&nbsp;&nbsp;&nbsp;
@@ -538,12 +540,6 @@
 				$('#onboardCrewDocuments').append(string);
 				$('.dttr td').css('font-weight', 'bold');
 				$('#documentTable td').css('vertical-align', 'middle');
-				// $('#documentTable tr:nth-child(n+3) td:nth-child(3)').css({
-				// 	position: "sticky",
-				// 	left: "0px",
-				// 	"background-color": "rgba(255,255,255,1)"
-				// 	"background-color": "currentcolor"
-				// });
 
 				$('#onboardCrewDocuments td').each((id, elem) => {
 
@@ -569,8 +565,6 @@
 							$(elem).css('z-index', 9999);
 						}
 					}
-
-
 
 					if(elem.innerText.length == 9 && !isNaN(Date.parse(elem.innerText))){
 						let diff = moment(elem.innerText).diff(moment(), 'days');
