@@ -521,7 +521,7 @@
 								</td>
 								<td>
 									COP 
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 								<td>
 									COP
