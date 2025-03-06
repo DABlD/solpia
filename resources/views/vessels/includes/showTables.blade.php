@@ -502,9 +502,18 @@
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;SDSD/SSO&nbsp;&nbsp;&nbsp;&nbsp;</td>
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COOK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;OIC LICENSE&nbsp;&nbsp;&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;GOC LICENSE&nbsp;&nbsp;&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;COC-RATINGS&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>
+									OIC
+									&nbsp;&nbsp;&nbsp;&nbsp;LICENSE&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td>
+									GOC
+									&nbsp;&nbsp;&nbsp;&nbsp;LICENSE&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td>
+									COC-
+									&nbsp;&nbsp;&nbsp;&nbsp;RATINGS&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
 								<td>
 									COC-
 									&nbsp;&nbsp;&nbsp;GALLEY&nbsp;&nbsp;&nbsp;
