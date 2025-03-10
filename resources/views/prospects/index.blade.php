@@ -268,8 +268,8 @@
                             <div class="col-md-3 iInput">
                                 ${checkbox("exp", "Bulk")}
                                 ${checkbox("exp", "Bulk - Handysize")}
-                                ${checkbox("exp", "Bulk - Panamax"}
-                                ${checkbox("exp", "Bulk - Capesize"}
+                                ${checkbox("exp", "Bulk - Panamax")}
+                                ${checkbox("exp", "Bulk - Capesize")}
                                 ${checkbox("exp", "Log Bulk")}
                             </div>
                                 ${checkbox("exp", "Container")}
