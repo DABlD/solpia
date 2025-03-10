@@ -272,6 +272,7 @@
                                 ${checkbox("exp", "Bulk - Capesize")}
                                 ${checkbox("exp", "Log Bulk")}
                             </div>
+                            <div class="col-md-3 iInput">
                                 ${checkbox("exp", "Container")}
                                 ${checkbox("exp", "Gen Cargo")}
                                 ${checkbox("exp", "PCC")}
