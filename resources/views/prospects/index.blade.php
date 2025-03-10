@@ -898,7 +898,7 @@
 
         function filter(){
             swal({
-                width: "650px",
+                width: "900px",
                 confirmButtonText: 'Apply Filter',
                 showCancelButton: true,
                 cancelButtonColor: errorColor,
@@ -933,7 +933,12 @@
                         <div class="col-md-10 iInput">
                             <div class="col-md-3 iInput">
                                 ${checkbox("exp", "Bulk", fExp.includes("Bulk") ? "checked" : "")}
+                                ${checkbox("exp", "Bulk - Handysize", fExp.includes("Bulk - Handysize") ? "checked" : "")}
+                                ${checkbox("exp", "Bulk - Panamax", fExp.includes("Bulk - Panamax") ? "checked" : "")}
+                                ${checkbox("exp", "Bulk - Capesize", fExp.includes("Bulk - Capesize") ? "checked" : "")}
                                 ${checkbox("exp", "Log Bulk", fExp.includes("Log Bulk") ? "checked" : "")}
+                            </div>
+                            <div class="col-md-3 iInput">
                                 ${checkbox("exp", "Container", fExp.includes("Container") ? "checked" : "")}
                                 ${checkbox("exp", "Gen Cargo", fExp.includes("Gen Cargo") ? "checked" : "")}
                                 ${checkbox("exp", "PCC", fExp.includes("PCC") ? "checked" : "")}
@@ -942,20 +947,20 @@
                                 ${checkbox("exp", "MPV", fExp.includes("MPV") ? "checked" : "")}
                                 ${checkbox("exp", "Cement Carrier", fExp.includes("Cement Carrier") ? "checked" : "")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Oil Chem", fExp.includes("Oil Chem") ? "checked" : "")}
                                 ${checkbox("exp", "Product", fExp.includes("Product") ? "checked" : "")}
                                 ${checkbox("exp", "VLCC", fExp.includes("VLCC") ? "checked" : "")}
                                 ${checkbox("exp", "LNG", fExp.includes("LNG") ? "checked" : "")}
                                 ${checkbox("exp", "LPG", fExp.includes("LPG") ? "checked" : "")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Purse Seiner", fExp.includes("Purse Seiner") ? "checked" : "")}
                                 ${checkbox("exp", "Long Line", fExp.includes("Long Line") ? "checked" : "")}
                                 ${checkbox("exp", "Trawl", fExp.includes("Trawl") ? "checked" : "")}
                                 ${checkbox("exp", "Squid Jigger", fExp.includes("Squid Jigger") ? "checked" : "")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Passenger", fExp.includes("Passenger") ? "checked" : "")}
                                 ${checkbox("exp", "Cruise", fExp.includes("Cruise") ? "checked" : "")}
                                 ${checkbox("exp", "Offshore", fExp.includes("Offshore") ? "checked" : "")}
