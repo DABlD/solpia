@@ -267,7 +267,11 @@
                         <div class="col-md-10 iInput">
                             <div class="col-md-3 iInput">
                                 ${checkbox("exp", "Bulk")}
+                                ${checkbox("exp", "Bulk - Handysize"}
+                                ${checkbox("exp", "Bulk - Panamax"}
+                                ${checkbox("exp", "Bulk - Capesize"}
                                 ${checkbox("exp", "Log Bulk")}
+                            </div>
                                 ${checkbox("exp", "Container")}
                                 ${checkbox("exp", "Gen Cargo")}
                                 ${checkbox("exp", "PCC")}
@@ -276,20 +280,20 @@
                                 ${checkbox("exp", "MPV")}
                                 ${checkbox("exp", "Cement Carrier")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Oil Chem")}
                                 ${checkbox("exp", "Product")}
                                 ${checkbox("exp", "VLCC")}
                                 ${checkbox("exp", "LNG")}
                                 ${checkbox("exp", "LPG")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Purse Seiner")}
                                 ${checkbox("exp", "Long Line")}
                                 ${checkbox("exp", "Trawl")}
                                 ${checkbox("exp", "Squid Jigger")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Passenger")}
                                 ${checkbox("exp", "Cruise")}
                                 ${checkbox("exp", "Offshore")}
@@ -306,7 +310,7 @@
                     ${input("usv", "US Visa", null, 2,10)}
                     ${input("remarks", "Remarks", null, 2,10)}
                 `,
-                width: '800px',
+                width: '900px',
                 confirmButtonText: 'Add',
                 showCancelButton: true,
                 cancelButtonColor: errorColor,
@@ -505,7 +509,12 @@
                         <div class="col-md-10 iInput">
                             <div class="col-md-3 iInput">
                                 ${checkbox("exp", "Bulk", exp.includes("Bulk") ? "checked" : "")}
+                                ${checkbox("exp", "Bulk - Handysize", fExp.includes("Bulk - Handysize") ? "checked" : "")}
+                                ${checkbox("exp", "Bulk - Panamax", fExp.includes("Bulk - Panamax") ? "checked" : "")}
+                                ${checkbox("exp", "Bulk - Capesize", fExp.includes("Bulk - Capesize") ? "checked" : "")}
                                 ${checkbox("exp", "Log Bulk", exp.includes("Log Bulk") ? "checked" : "")}
+                            </div>
+                            <div class="col-md-3 iInput">
                                 ${checkbox("exp", "Container", exp.includes("Container") ? "checked" : "")}
                                 ${checkbox("exp", "Gen Cargo", exp.includes("Gen Cargo") ? "checked" : "")}
                                 ${checkbox("exp", "PCC", exp.includes("PCC") ? "checked" : "")}
@@ -514,20 +523,20 @@
                                 ${checkbox("exp", "MPV", exp.includes("MPV") ? "checked" : "")}
                                 ${checkbox("exp", "Cement Carrier", exp.includes("Cement Carrier") ? "checked" : "")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Oil Chem", exp.includes("Oil Chem") ? "checked" : "")}
                                 ${checkbox("exp", "Product", exp.includes("Product") ? "checked" : "")}
                                 ${checkbox("exp", "VLCC", exp.includes("VLCC") ? "checked" : "")}
                                 ${checkbox("exp", "LNG", exp.includes("LNG") ? "checked" : "")}
                                 ${checkbox("exp", "LPG", exp.includes("LPG") ? "checked" : "")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Purse Seiner", exp.includes("Purse Seiner") ? "checked" : "")}
                                 ${checkbox("exp", "Long Line", exp.includes("Long Line") ? "checked" : "")}
                                 ${checkbox("exp", "Trawl", exp.includes("Trawl") ? "checked" : "")}
                                 ${checkbox("exp", "Squid Jigger", exp.includes("Squid Jigger") ? "checked" : "")}
                             </div>
-                            <div class="col-md-3 iInput">
+                            <div class="col-md-2 iInput">
                                 ${checkbox("exp", "Passenger", exp.includes("Offshore") ? "checked" : "")}
                                 ${checkbox("exp", "Cruise", exp.includes("Livestock") ? "checked" : "")}
                                 ${checkbox("exp", "Offshore", exp.includes("Offshore") ? "checked" : "")}
@@ -554,7 +563,7 @@
                         </div>
                     </div></br>
                 `,
-                width: '800px',
+                width: '900px',
                 confirmButtonText: 'Update',
                 showCancelButton: true,
                 cancelButtonColor: errorColor,
