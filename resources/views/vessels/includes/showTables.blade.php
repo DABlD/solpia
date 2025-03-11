@@ -358,38 +358,38 @@
 					let months = Number(obc.months) + Number(obc.extensions ? JSON.parse(obc.extensions).reduce((a,b)=>a+b,0) : 0);
 
 					// IDS
-					let pp = filter(obc.document_id, 'PASSPORT');
-					let sb = filter(obc.document_id, "SEAMAN'S BOOK");
-					let usv = filter(obc.document_id, 'US-VISA');
-					let mcv = filter(obc.document_id, 'MCV');
+					let pp = filterDocs(obc.document_id, 'PASSPORT');
+					let sb = filterDocs(obc.document_id, "SEAMAN'S BOOK");
+					let usv = filterDocs(obc.document_id, 'US-VISA');
+					let mcv = filterDocs(obc.document_id, 'MCV');
 
 					// FLAG
-					let fBooklet = filter(obc.document_flag, 'BOOKLET', vessel.flag);
-					let fLicense = filter(obc.document_flag, 'LICENSE', vessel.flag);
-					let fGoc = filter(obc.document_flag, 'GMDSS/GOC', vessel.flag);
-					let fSso = filter(obc.document_flag, 'SSO', vessel.flag);
-					let fSdsd = filter(obc.document_flag, 'SDSD', vessel.flag);
-					let fCook = filter(obc.document_flag, "SHIP'S COOK ENDORSEMENT", vessel.flag);
+					let fBooklet = filterDocs(obc.document_flag, 'BOOKLET', vessel.flag);
+					let fLicense = filterDocs(obc.document_flag, 'LICENSE', vessel.flag);
+					let fGoc = filterDocs(obc.document_flag, 'GMDSS/GOC', vessel.flag);
+					let fSso = filterDocs(obc.document_flag, 'SSO', vessel.flag);
+					let fSdsd = filterDocs(obc.document_flag, 'SDSD', vessel.flag);
+					let fCook = filterDocs(obc.document_flag, "SHIP'S COOK ENDORSEMENT", vessel.flag);
 					let fRank = fBooklet ? fBooklet.rank : fLicense ? fLicense.rank : fSdsd ? fSdsd.rank : null;
 					let fSsoSdsd = fSso ?? fSdsd;
 
 					// LICENSE
-					let oic = filter(obc.document_lc, 'COC', null, 'OIC');
-					let goc = filter(obc.document_lc, 'GMDSS/GOC');
-					let cocR = filter(obc.document_lc, 'COC', null, 'RATINGS');
-					let cocG = filter(obc.document_lc, 'COC', null, 'GALLEY');
-					let cocG2 = filter(obc.document_lc, 'COC', null, 'GALLEY2');
+					let oic = filterDocs(obc.document_lc, 'COC', null, 'OIC');
+					let goc = filterDocs(obc.document_lc, 'GMDSS/GOC');
+					let cocR = filterDocs(obc.document_lc, 'COC', null, 'RATINGS');
+					let cocG = filterDocs(obc.document_lc, 'COC', null, 'GALLEY');
+					let cocG2 = filterDocs(obc.document_lc, 'COC', null, 'GALLEY2');
 					cocG = cocG ?? cocG2;
 
 					// COP
-					let bt = filter(obc.document_lc, 'BASIC TRAINING - BT');
-					let pscrb = filter(obc.document_lc, 'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB');
-					let aff = filter(obc.document_lc, 'ADVANCE FIRE FIGHTING - AFF');
-					let sdsd = filter(obc.document_lc, 'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD');
-					let kml = filter(obc.document_lc, 'KML');
+					let bt = filterDocs(obc.document_lc, 'BASIC TRAINING - BT');
+					let pscrb = filterDocs(obc.document_lc, 'PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB');
+					let aff = filterDocs(obc.document_lc, 'ADVANCE FIRE FIGHTING - AFF');
+					let sdsd = filterDocs(obc.document_lc, 'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD');
+					let kml = filterDocs(obc.document_lc, 'KML');
 
 					// MEDICAL
-					let medical = filter(obc.document_med_cert, 'MEDICAL CERTIFICATE');
+					let medical = filterDocs(obc.document_med_cert, 'MEDICAL CERTIFICATE');
 
 					string += `
 						<tr>
@@ -596,7 +596,7 @@
 		})
 	}
 
-	function filter(obj, type, flag = null, coc = null){
+	function filterDocs(obj, type, flag = null, coc = null){
 		let docu = null;
 		let backup = null;
 
