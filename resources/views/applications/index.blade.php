@@ -1270,7 +1270,7 @@
                                     @foreach($categories as $category => $ranks)
                                         <optgroup label="{{ $category }}"></optgroup>
                                         @foreach($ranks as $rank)
-                                            <option value="{{ $rank->id }}">
+                                            <option data-abbr="{{ $rank->abbr }}" value="{{ $rank->id }}">
                                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                                 {{ $rank->name }} ({{ $rank->abbr }})
                                             </option>
@@ -1308,6 +1308,12 @@
                                 $('#vessel').on('select2:open', function (e) {
                                     $('.select2-dropdown--below').css('z-index', 1060);
                                 });
+
+                                let rank = $(application.target).closest('tr').find('td:nth-child(3)').text();
+                                console.log(rank);
+                                if(rank != "-"){
+                                    $('#rank').val($(`#rank [data-abbr="${rank}"]`).val()).trigger("change");
+                                }
                             },
                             preConfirm: () => {
                                 if($('#vessel').val() == "" || $('#rank').val() == ""){
