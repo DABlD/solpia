@@ -1235,181 +1235,53 @@
                 let status = $(application.target).data('status');
                 let aRank, aVessel, aPrincipal;
 
-                if(status == "Lined-Up"){
-                    swal({
-                        type: 'info',
-                        title: 'This crew is already Lined-Up',
-                        text: 'Choose action',
-                        confirmButtonText: 'Change Line-Up',
-                        cancelButtonText: 'Remove Line-Up',
-                        showCancelButton: true,
-                        cancelButtonColor: '#f76c6b',
-                        allowOutsideClick: false,
-                    }).then(result => {
-                        if(result.dismiss == 'cancel'){
-                            swal({
-                                type: 'warning',
-                                title: 'Confirmation',
-                                text: "Are you sure you want to remove the crew's Line-Up?",
-                                showCancelButton: true,
-                                cancelButtonColor: '#f76c6b',
-                                allowOutsideClick: false,
-                            }).then(result => {
-                                if(result.value){
-                                    swal.showLoading();
-                                    $.ajax({
-                                        url: '{{ route('lineUp.remove') }}',
-                                        data: {id: id},
-                                        success: result => {
-                                            setTimeout(() => {
-                                                if(result){
-                                                    swal({
-                                                        type: 'success',
-                                                        title: 'Line-Up successfully removed',
-                                                        timer: 800,
-                                                        showConfirmButton: false
-                                                    }).then(() => {
-                                                        table.ajax.reload(null, false);
-                                                    });
-                                                }
-                                                else{
-                                                    swal({
-                                                        type: 'error',
-                                                        title: 'Try Again',
-                                                        timer: 800,
-                                                        showConfirmButton: false
-                                                    });
-                                                }
-                                            }, 500);
-                                        }
-                                    })
-                                }
-                            })
-                            return;
-                        }
-                        else if(result.value){
-                            selectRank();
-                        }
-                    });
-                }
-                else{
-                    selectRank();
-                }
+                let vessels = [];
+                aPrincipal = [];
 
+                swal('Loading Vessels');
+                swal.showLoading();
 
-                function selectRank(){
-                    swal({
-                        title: 'Select Rank',
-                        input: 'select',
-                        allowOutsideClick: false,
-                        showCancelButton: true,
-                        cancelButtonColor: '#f76c6b',
-                        onOpen: () => {
-                            $('.swal2-select').append(`
-                                <option></option>
-                                @foreach($categories as $category => $ranks)
-                                    <optgroup label="{{ $category }}"></optgroup>
-                                    @foreach($ranks as $rank)
-                                        <option value="{{ $rank->id }}">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            {{ $rank->name }} ({{ $rank->abbr }})
-                                        </option>
-                                    @endforeach
-                                @endforeach
-                            `);
+                $.ajax({
+                    url: '{{ route('vessels.get2') }}',
+                    data:{
+                        @if(auth()->user()->fleet != "")
+                            where: ['fleet', '{{ auth()->user()->fleet }}'],
+                        @endif
+                        cols: ['id', 'name', 'principal_id', 'status']
+                    },
+                    dataType: 'json',
+                    success: result => {
+                        result.forEach(a => {
+                            // aPrincipal
+                            if(a.status == "ACTIVE"){
+                                vessels[a.id] = a.name;
+                                aPrincipal[a.id] = a.principal_id;
+                            }
+                        });
 
-                            $('.swal2-select').select2({
-                                placeholder: 'Select Rank',
-                                width: '100%',
-                            });
-
-                            $('.swal2-select').on('select2:open', function (e) {
-                                $('.select2-dropdown--below').css('z-index', 1060);
-                            });
-                        },
-                    }).then(rank => {
-                        if(rank.value){
-                            aRank = rank.value;
-                            selectVessel();
-                        }
-                    });
-                }
-
-                // function selectPrincipal(){
-                //     swal({
-                //         title: 'Select Principal',
-                //         input: 'select',
-                //         inputOptions: {
-                //             '' : '',
-                //             @foreach($principals as $principal)
-                //                 @if($principal->fleet == auth()->user()->fleet || auth()->user()->role == "Admin")
-                //                     '{{ $principal->id }}': '{{ $principal->name }}',
-                //                 @endif
-                //             @endforeach
-                //         },
-                //         allowOutsideClick: false,
-                //         showCancelButton: true,
-                //         cancelButtonColor: '#f76c6b',
-                //         onOpen: () => {
-                //             $('.swal2-select').select2({
-                //                 placeholder: 'Select Principal',
-                //                 width: '100%',
-                //             });
-
-                //             $('.swal2-select').on('select2:open', function (e) {
-                //                 $('.select2-dropdown--below').css('z-index', 1060);
-                //             });
-                //         },
-                //     }).then(principal => {
-                //         if(principal.value){
-                //             aPrincipal = principal.value;
-                //             selectVessel();
-                //         }
-                //     });
-                // }
-
-                function selectVessel(){
-                    let vessels = [];
-                    aPrincipal = [];
-
-                    swal('Loading Vessels');
-                    swal.showLoading();
-
-                    $.ajax({
-                        url: '{{ route('vessels.get2') }}',
-                        data:{
-                            @if(auth()->user()->fleet != "")
-                                where: ['fleet', '{{ auth()->user()->fleet }}'],
-                            @endif
-                            cols: ['id', 'name', 'principal_id', 'status']
-                        },
-                        dataType: 'json',
-                        success: result => {
-                            result.forEach(a => {
-                                // aPrincipal
-                                if(a.status == "ACTIVE"){
-                                    vessels[a.id] = a.name;
-                                    aPrincipal[a.id] = a.principal_id;
-                                }
-                            });
-
-                            setTimeout(() => {
-                                showSelectVessel();
-                            }, 500);
-                        }
-                    });
-
-                    function showSelectVessel(){
                         swal({
-                            title: 'Select Vessel',
                             html: `
                                 <select id="vessel">
-                                    <option value=""></option>
+                                    <option value="">Select Vessel</option>
+                                </select>
+                                <br><br>
+                                <select id="rank">
+                                    <option value="">Select Rank</option>
+                                    @foreach($categories as $category => $ranks)
+                                        <optgroup label="{{ $category }}"></optgroup>
+                                        @foreach($ranks as $rank)
+                                            <option value="{{ $rank->id }}">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                {{ $rank->name }} ({{ $rank->abbr }})
+                                            </option>
+                                        @endforeach
+                                    @endforeach
                                 </select>
                                 <br><br>
                                 <input type="string" id="eld" placeholder="Expected Sign-on Date (optional)" class="form-control">
                                 <br>
                                 <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
+                                <br>
                             `,
                             allowOutsideClick: false,
                             showCancelButton: true,
@@ -1429,19 +1301,24 @@
 
                                 $('#vessel').append(string);
 
-                                $('#vessel').select2({
-                                    placeholder: 'Select Vessel',
-                                    width: '100%',
+                                $('#vessel, #rank').select2({
+                                    width: '100%'
                                 });
 
                                 $('#vessel').on('select2:open', function (e) {
                                     $('.select2-dropdown--below').css('z-index', 1060);
                                 });
                             },
+                            preConfirm: () => {
+                                if($('#vessel').val() == "" || $('#rank').val() == ""){
+                                    swal.showValidationError('Vessel and Rank is required');
+                                }
+                            }
                         }).then(result => {
                             if(result.value){
                                 swal.showLoading();
                                 let vid = $('#vessel').val();
+                                let aRank = $('#rank').val();
 
                                 $.ajax({
                                     url: '{{ route('applications.lineUp') }}',
@@ -1458,7 +1335,7 @@
                                             if(result){
                                                 swal({
                                                     type: 'success',
-                                                    title: 'Applicant Successfully Lined-Up to Principal',
+                                                    title: 'Applicant Successfully Lined-Up',
                                                     timer: 800,
                                                     showConfirmButton: false
                                                 }).then(() => {
@@ -1479,7 +1356,7 @@
                             }
                         });
                     }
-                }
+                });
             });
 
             $('[data-original-title="View Files"]').on('click', application => {
