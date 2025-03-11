@@ -1,6 +1,6 @@
 <table>
 	<tr>
-		<td colspan="10" style="height: 50px;"></td>
+		<td colspan="10" style="height: 70px;"></td>
 	</tr>
 
 	<tr>
@@ -16,7 +16,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="10">CERT NO: SC-2021-317</td>
+		<td colspan="10">CERT NO: SC-{{ now()->format('Y') }}-</td>
 	</tr>
 
 	<tr>
