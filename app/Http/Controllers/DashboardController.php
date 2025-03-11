@@ -331,6 +331,51 @@ class DashboardController extends Controller
         echo json_encode(['names' => $names, 'data' => $data]);
     }
 
+    function initCrewReplacementPlan(){
+        $obcs = LineUpContract::select('vessel_id', 'reliever', 'disembarkation_date')->whereNotNull('reliever')->where('disembarkation_date', null)->get()->groupBy('vessel_id');
+        $lucs = ProcessedApplicant::select('vessel_id', 'status', 'eld')->where('status', 'Lined-Up')->get()->groupBy('vessel_id');
+        $vessels = Vessel::where('status', 'ACTIVE')->pluck('name', 'id');
+
+        // OFFSIGNER
+        $array = [];
+        foreach($obcs as $vid => $obc){
+            if(isset($vessels[$vid])){
+                $array[$vid] = [];
+                $array[$vid]['name'] = $vessels[$vid];
+                $array[$vid]['offsigners'] = sizeof($obc);
+            }
+        }
+
+        // ONSIGNER
+        foreach($lucs as $vid => $luc){
+            if(isset($vessels[$vid])){
+                if(isset($array[$vid])){
+                    if(!sizeof($array[$vid])){
+                        continue;
+                    }
+                }
+                else{
+                    $array[$vid] = [];
+                    $array[$vid]['name'] = $vessels[$vid];
+                    $array[$vid]['offsigners'] = 0;
+                }
+
+                $array[$vid]['onsigners'] = sizeof($luc);
+
+                $dates = [];
+                foreach($luc as $temp){
+                    if($temp->eld){
+                        array_push($dates, $temp->eld);
+                    }
+                }
+
+                $array[$vid]['departure'] = array_unique($dates);
+            }
+        }
+
+        echo json_encode($array);
+    }
+
     function clean(){
         // DB::connection()->enableQueryLog();
         // DB::connection()->getQueryLog();
@@ -345,7 +390,6 @@ class DashboardController extends Controller
 
         echo "Success";
         die;
-
     }
 
     private function _view($view, $data = array()){

@@ -66,6 +66,7 @@ Route::group([
 		Route::get('clean', 'DashboardController@clean');
 		Route::get('getCrewWithExpiredDocs', 'DashboardController@getCrewWithExpiredDocs')->name('dashboard.getCrewWithExpiredDocs');
 		Route::get('report1', 'DashboardController@report1')->name('dashboard.report1');
+		Route::get('initCrewReplacementPlan', 'DashboardController@initCrewReplacementPlan')->name('dashboard.initCrewReplacementPlan');
 
 		// USER ROUTES
 		Route::get('users', 'UsersController@index')

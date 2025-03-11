@@ -130,6 +130,36 @@
         <section class="col-lg-12 connectedSortable">
           <div class="box box-info">
             <div class="box-header">
+              <i class="fa fa-exchange"></i>
+
+              <h3 class="box-title">Crew Replacement Plan</h3>
+            </div>
+            <div class="box-body" style="height: 500px; overflow-y: scroll;">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <td><b>#</b></td>
+                    <td><b>Vessel</b></td>
+                    <td><b>Port</b></td>
+                    <td><b>No. of Onsigners</b></td>
+                    <td><b>No. of Offsigners</b></td>
+                    <td><b>Departure Date</b></td>
+                    <td><b>Date of Arrival</b></td>
+                    <td><b>Details</b></td>
+                  </tr>
+                </thead>
+                <tbody id="crewReplacementPlan" class="tbody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="row">
+        <section class="col-lg-12 connectedSortable">
+          <div class="box box-info">
+            <div class="box-header">
               <i class="fa fa-line-chart"></i>
 
               <h3 class="box-title">On Board And Disembark Reports</h3>
@@ -190,23 +220,23 @@
       font-weight: bold;
     }
 
-    tr td:nth-child(1n+1) {
+    .cwed tr td:nth-child(1n+1) {
       width: 10%;
     }
 
-    tr td:nth-child(2n+2) {
+    .cwed tr td:nth-child(2n+2) {
       width: 30%;
     }
 
-    tr td:nth-child(3n+3) {
+    .cwed tr td:nth-child(3n+3) {
       width: 30%;
     }
 
-    tr td:nth-child(4n+4) {
+    .cwed tr td:nth-child(4n+4) {
       width: 15%;
     }
 
-    tr td:nth-child(5n+5) {
+    .cwed tr td:nth-child(5n+5) {
       width: 15%;
     }
 
@@ -250,6 +280,8 @@
       setTimeout(() => {
         initCrewWithExpiredDocs();
       }, 2000);
+
+      initCrewReplacementPlan();
       initCrewCategory();
       // initReport1();
     });
@@ -447,6 +479,45 @@
           $('.report1.preloader').fadeOut();
         }
       });
+    }
+
+    function initCrewReplacementPlan(){
+      $.ajax({
+        url: "{{ route('dashboard.initCrewReplacementPlan') }}",
+        success: result => {
+          let crpString = "";
+          result = JSON.parse(result);
+
+          Object.entries(result).forEach((vessel, index) => {
+            let dates = "";
+            if(vessel[1].departure){
+              Object.entries(vessel[1].departure).forEach(date => {
+                dates += moment(date[1]).format("MMM DD, YYYY") + '/';
+              });
+            }
+
+            crpString += `
+              <tr>
+                <td>${index+1}</td>
+                <td>${vessel[1].name}</td>
+                <td></td>
+                <td>${vessel[1].offsigners}</td>
+                <td>${vessel[1].onsigners ?? 0}</td>
+                <td>${dates}</td>
+                <td></td>
+                <td>
+                  <a class="btn btn-success btn-search" data-toggle="tooltip" data-original-title="View Info">
+                    <span class="fa fa-search"></span>
+                  </a>
+                </td>
+              </tr>
+            `;
+
+          });
+
+          $('#crewReplacementPlan').append(crpString);
+        }
+      })
     }
   </script>
 @endpush
