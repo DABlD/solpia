@@ -5588,11 +5588,16 @@
 
             temp.each((index, value) => {
                 let temp2 = $(value);
+                let checked = "";
+
+                if(temp2.parent().find(`#table-selectR-${temp2.data('id')}`).val() != ""){
+                    checked = "checked";
+                }
 
                 crewString += `  
                     <div class="row">
                         <div class="col-md-2">
-                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" checked />
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" ${checked} />
                         </div>
                         <div class="col-md-10">
                             <label for="">
