@@ -55,6 +55,7 @@ class X25_MLCLinedUp implements WithMultipleSheets
         }
 
         $this->principal = Principal::find($vessel->principal_id)->name;
+        $this->vessel = $vessel;
         $this->applicants = $applicants;
     }
 
@@ -64,8 +65,15 @@ class X25_MLCLinedUp implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
+        $principal = str_replace(' ', '', $this->principal);
+        $class = "App\Exports\MLC\\" . $principal;
+
+        // FOR KLCSM BULK
+        if(str_contains($this->vessel->type, "BULK")){
+            $class .= "BULK";
+        }
+
         foreach($this->applicants as $applicant){
-            $class = "App\Exports\MLC\\" . $this->principal;
 
             if($applicant->vessel->id == 6005){
                 $class .= "2";
