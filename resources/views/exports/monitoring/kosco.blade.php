@@ -30,11 +30,13 @@
 		<td></td>
 		<td></td>
 		<td></td>
-		<td colspan="7">NATIONAL ID / VISA</td>
+		{{-- <td colspan="7">NATIONAL ID / VISA</td> --}}
+		<td colspan="6">NATIONAL ID / VISA</td>
 		<td colspan="7">FLAG LICENSE</td>
 		<td colspan="4">NATIONAL LICENSE</td>
-		<td colspan="4">COP TRAININGS</td>
-		<td></td>
+		{{-- <td colspan="4">COP TRAININGS</td> --}}
+		<td colspan="3">COP TRAININGS</td>
+		{{-- <td></td> --}}
 		<td>MEDICAL</td>
 		<td>REMARKS</td>
 	</tr>
@@ -53,7 +55,7 @@
 		<td>MONTHS ONBOARD</td>
 		<td>PASSPORT NO.</td>
 		<td>PASSPORT VALIDITY</td>
-		<td>SIRB NO.</td>
+		{{-- <td>SIRB NO.</td> --}}
 		<td>SEAMAN'S BOOK VALIDITY</td>
 		<td>US VISA VALIDITY</td>
 		<td>MARITIME CREW VISA PPRT NO.</td>
@@ -72,8 +74,8 @@
 		<td>COP BT</td>
 		<td>COP PSCRB</td>
 		<td>COP AFF</td>
-		<td>COP SDSD</td>
-		<td>KML LICENSE</td>
+		{{-- <td>COP SDSD</td> --}}
+		{{-- <td>KML LICENSE</td> --}}
 		<td>MEDICAL</td>
 		<td>FACEBOOK NAME</td>
 	</tr>
@@ -117,7 +119,7 @@
 					}
 				}
 			@endphp
-			<td>{{ $docu ? $docu->number : "N/A" }}</td>
+			{{-- <td>{{ $docu ? $docu->number : "N/A" }}</td> --}}
 			<td>{{ $docu ? ($docu->expiry_date ? '=DATEVALUE("' . $docu->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
 
 			{{-- US VISA --}}
@@ -232,8 +234,8 @@
 			<td>{{ $bt ? ($bt->expiry_date ? '=DATEVALUE("' . $bt->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
 			<td>{{ $pscrb ? ($pscrb->expiry_date ? '=DATEVALUE("' . $pscrb->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
 			<td>{{ $aff ? ($aff->expiry_date ? '=DATEVALUE("' . $aff->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $sdsd ?( $sdsd->expiry_date ? '=DATEVALUE("' . $sdsd->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
-			<td>{{ $kml ? ($kml->expiry_date ? '=DATEVALUE("' . $kml->expiry_date->format('m/d/Y') . '")' : "UNLIMITED") : "N/A" }}</td>
+			{{-- <td>{{ $sdsd ?( $sdsd->expiry_date ? '=DATEVALUE("' . $sdsd->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td> --}}
+			{{-- <td>{{ $kml ? ($kml->expiry_date ? '=DATEVALUE("' . $kml->expiry_date->format('m/d/y') . '")' : "UNLIMITED") : "N/A" }}</td> --}}
 
 			@php
 				$docu = null;
