@@ -5419,6 +5419,7 @@
                     WesternOnOff: 'Nitta/TOEI',
                     KoscoOnOff: 'KOSCO',
                     HmmOnOff: 'HMM',
+                    KlcsmOnOff: 'KLCSM',
                 },
             }).then(result => {
                 let data = {};
