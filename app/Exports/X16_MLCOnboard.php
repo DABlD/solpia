@@ -68,6 +68,7 @@ class X16_MLCOnboard implements WithMultipleSheets
         }
 
         $this->principal = Principal::find($vessel->principal_id)->name;
+        $this->vessel = $vessel;
         $this->applicants = $applicants;
     }
 
@@ -77,9 +78,15 @@ class X16_MLCOnboard implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
+        $principal = str_replace(' ', '', $this->principal);
+        $class = "App\Exports\MLC\\" . $principal;
+
+        // FOR KLCSM BULK
+        if(str_contains($this->vessel->type, "BULK")){
+            $class .= "BULK";
+        }
+
         foreach($this->applicants as $applicant){
-            $principal = str_replace(' ', '', $this->principal);
-            $class = "App\Exports\MLC\\" . $principal;
 
             // FOR HMM VESSEL SPECIFIC CADETS AND BOY
             $p1 = in_array($applicant->vessel->id, [4101, 4629, 4627, 3822, 4628, 2069, 4433, 2044, 2725, 8630, 8841]); // ALGECIRAS, OSLO, COPENHAGEN, GDANSK, HAMBURG, SOUTHAMPTON, LE HAVRE, ST PETERSBURG

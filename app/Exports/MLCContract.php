@@ -12,6 +12,8 @@ class MLCContract implements WithMultipleSheets
         $this->applicant    = $applicant;
         $this->type         = $type;
         $this->req          = $req;
+
+        // X16 AND X25 BATCH EXPORT
     }
 
     /**
@@ -66,6 +68,11 @@ class MLCContract implements WithMultipleSheets
 
         if(isset($this->req['itf'])){
             $class .= "_" . $this->req['itf'];
+        }
+
+        // FOR KLCSM BULK
+        if(str_contains($this->applicant->vessel->type, "BULK")){
+            $class .= "BULK";
         }
 
         // IF HMM
