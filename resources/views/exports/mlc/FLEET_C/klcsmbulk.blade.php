@@ -105,7 +105,7 @@
 		<td></td>
 		<td colspan="2">The port of Sailing</td>
 		<td colspan="6">({{ $data->port }})</td>
-		<td colspan="3"></td>
+		<td colspan="3">to the port of destination (NOT FIXED)</td>
 	</tr>
 
 	<tr>
