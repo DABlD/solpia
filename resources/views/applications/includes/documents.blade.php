@@ -834,7 +834,7 @@
         						[1,57]
         					],
         					documents: [
-        						'BTOC', 'ATOT', 'ATCT'
+        						'BTOC', 'ATOT', 'ATCT', 'ATLGT'
         					]
         				}
         			]
@@ -871,7 +871,7 @@
         						[1,57]
         					],
         					documents: [
-        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'BTOC', 'ATOT', 'ATCT'
+        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
         					]
         				},
 	        			{
@@ -893,7 +893,7 @@
         						[1,57]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET', 'PSCRB', 'BTOC', 'ATOT', 'ATCT'
+        						'LICENSE', 'BOOKLET', 'PSCRB', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
         					]
         				}
         			]
@@ -906,7 +906,7 @@
         						[1,57]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET', 'CRA', 'BTOC', 'ATOT', 'ATCT'
+        						'LICENSE', 'BOOKLET', 'CRA', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
         					]
         				},
         				{
@@ -949,7 +949,7 @@
         						[1,57]
         					],
         					documents: [
-        						'LICENSE', 'BTOC', 'ATOT', 'ATCT'
+        						'LICENSE', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
         					]
         				}
         			]
