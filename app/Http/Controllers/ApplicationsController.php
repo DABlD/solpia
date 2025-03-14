@@ -559,7 +559,7 @@ class ApplicationsController extends Controller
                     }
                 }
 
-                // FOR COC ?
+                // FOR COC ? // GET LATEST DOCUMENT OF SAME TYPE
                 if(isset($applicant->$docuType->$temp)){
                     if($data->issue_date > $applicant->$docuType->$temp->issue_date){
                         $applicant->$docuType->$temp = $data;
