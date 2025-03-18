@@ -70,8 +70,10 @@ class MLCContract implements WithMultipleSheets
             $class .= "_" . $this->req['itf'];
         }
 
+        dd($this->applicant);
+
         // FOR KLCSM BULK
-        if(str_contains($this->vessel->type, "BULK") && $principal == "KLCSM"){
+        if(str_contains($this->applicant->vessel->type, "BULK") && $this->applicant->vessel->principal_id == 10){
             $class .= "BULK";
         }
 
