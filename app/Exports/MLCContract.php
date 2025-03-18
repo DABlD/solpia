@@ -71,7 +71,7 @@ class MLCContract implements WithMultipleSheets
         }
 
         // FOR KLCSM BULK
-        if(str_contains($this->applicant->vessel->type, "BULK")){
+        if(str_contains($this->vessel->type, "BULK") && $principal == "KLCSM"){
             $class .= "BULK";
         }
 
