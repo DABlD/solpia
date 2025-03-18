@@ -69,7 +69,7 @@ class X25_MLCLinedUp implements WithMultipleSheets
         $class = "App\Exports\MLC\\" . $principal;
 
         // FOR KLCSM BULK
-        if(str_contains($this->vessel->type, "BULK")){
+        if(str_contains($this->vessel->type, "BULK") && $principal == "KLCSM"){
             $class .= "BULK";
         }
 
