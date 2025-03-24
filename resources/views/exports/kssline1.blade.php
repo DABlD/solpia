@@ -183,7 +183,7 @@
 				$temp = $doc;
 			}
 
-			if(!str_contains($doc->type, "GOC")){
+			if(str_contains($doc->type, "GMDSS") && !str_contains($doc->type, "GOC")){
 				$docu = $doc;
 			}
 		}
@@ -209,7 +209,7 @@
 				$temp = $doc;
 			}
 
-			if(!str_contains($doc->type, "GMDSS")){
+			if(str_contains($doc->type, "GOC") && !str_contains($doc->type, "GMDSS")){
 				$docu = $doc;
 			}
 		}
