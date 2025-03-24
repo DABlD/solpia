@@ -763,6 +763,9 @@
             $('[data-original-title="View Vessel Details"]').on('click', vessel => {
                 $.ajax({
                     url: 'vessels/get/' + $(vessel.target).data('id'),
+                    data: {
+                        status: $(vessel.target).data('status')
+                    },
                     success: vessel => {
                         vessel = JSON.parse(vessel);
                         showVesselDetails(vessel, false);

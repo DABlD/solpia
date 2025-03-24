@@ -60,10 +60,10 @@ class VesselsController extends Controller
     	echo json_encode(
             !$id ?
     		Vessel::where('principal_id', $req->id)
-    			->where('status', 'ACTIVE')
+    			->where('status', $req->status ?? "ACTIVE")
     			->get()
             :
-            Vessel::select('vessels.*')->where('id', $id)->where('status', 'ACTIVE')->with('principal')->first()
+            Vessel::select('vessels.*')->where('id', $id)->where('status', $req->status ?? "ACTIVE")->with('principal')->first()
     	);
     }
 
