@@ -218,7 +218,7 @@
 	@endphp
 	<tr>
 		<td>9</td>
-		<td colspan="3">Proficiency in GMDSS</td>
+		<td colspan="3">General Operator Certificate</td>
 		<td>{{ $docu ? $docu->no : "N/A" }}</td>
 		<td>{{ $docu ? ($docu->issue_date ? $docu->issue_date->format("m/d/Y") : "-") : "N/A" }}</td>
 		<td>{{ $docu ? ($docu->expiry_date ? $docu->expiry_date->format("m/d/Y") : "-") : "N/A" }}</td>
