@@ -610,7 +610,7 @@
 				let regulations = JSON.parse(doc.regulation);
 
 				if(coc == "OIC"){
-					if(doc.type == "COC" && (regulations.includes('II/2') || regulations.includes('III/2'))){
+					if(doc.type == "COC" && (regulations.includes('II/2') || regulations.includes('III/2') || regulations.includes('II/1') || regulations.includes('III/1'))){
 						docu = doc;
 					}
 				}
