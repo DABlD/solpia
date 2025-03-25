@@ -12,9 +12,9 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $type){
+    public function __construct($data, $title){
         $this->data     = $data;
-        $this->type     = $type;
+        $this->title     = $title;
     }
 
     public function view(): View
@@ -252,7 +252,7 @@ class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('MLC Contract', false);
+                $event->sheet->getDelegate()->setTitle($this->title ?? 'MLC Contract', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);
@@ -273,7 +273,7 @@ class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 // SET DEFAULT FONT
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('맑은 고딕');
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(9);
-                
+
                 $event->sheet->getDelegate()->getPageSetup()->setScale(85);
 
                 // CELL COLOR
