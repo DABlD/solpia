@@ -118,8 +118,8 @@ class X16_MLCOnboard implements WithMultipleSheets
             }
             elseif($class == "App\Exports\MLC\KSSLine"){
                 array_push($sheets, new MLC\KSSLine1($applicant, $title));
-                array_push($sheets, new MLC\KSSLine2($applicant, $title));
-                array_push($sheets, new MLC\KSSLine3($applicant, $title));
+                // array_push($sheets, new MLC\KSSLine2($applicant, $title));
+                // array_push($sheets, new MLC\KSSLine3($applicant, $title));
             }
             else{
                 array_push($sheets, new $class($applicant, $applicant->abbr, $title));
