@@ -93,6 +93,11 @@ class MLCContract implements WithMultipleSheets
                 array_push($sheets, new MLC\HMMCM1P5($this->applicant));
             }
         }
+        elseif($class == "App\Exports\MLC\KSSLine"){
+            array_push($sheets, new MLC\KSSLine1($this->applicant, $this->type));
+            array_push($sheets, new MLC\KSSLine2($this->applicant, $this->type));
+            array_push($sheets, new MLC\KSSLine3($this->applicant, $this->type));
+        }
         else{
             array_push($sheets, new $class($this->applicant, $this->type, $this->req));
         }
