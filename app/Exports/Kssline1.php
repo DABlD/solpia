@@ -10,6 +10,8 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
+use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
+
 class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
@@ -251,7 +253,8 @@ class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle('BIODATA', false);
-                $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
+                // $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
+                $event->sheet->getDelegate()->getPageSetup()->setFitToPage(true);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
@@ -529,6 +532,28 @@ class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('I14:I54')->getFont()->setName('돋움');
                 $event->sheet->getDelegate()->getStyle('A53')->getFont()->setSize(8);
                 $event->sheet->getDelegate()->getStyle('A53')->getFont()->setName('돋움');
+
+                $options = [
+                    'option 1',
+                    'option 2',
+                    'option 3',
+                ];
+
+                // set dropdown list for first data row
+                $validation = $event->sheet->getCell("I2")->getDataValidation();
+                $validation->setType(DataValidation::TYPE_LIST );
+                $validation->setErrorStyle(DataValidation::STYLE_INFORMATION );
+                $validation->setAllowBlank(false);
+                $validation->setShowInputMessage(true);
+                $validation->setShowErrorMessage(true);
+                $validation->setShowDropDown(true);
+                $validation->setErrorTitle('Input error');
+                $validation->setError('Value is not in list.');
+                $validation->setPromptTitle('Pick from list');
+                $validation->setPrompt('Please pick a value from the drop-down list.');
+                $validation->setFormula1(sprintf('"%s"',implode(',',$options)));
+
+                $event->sheet->getCell("I2")->setDataValidation(clone $validation);
             },
         ];
     }

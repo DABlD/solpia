@@ -916,7 +916,7 @@
 
 	<tr>
 		<td colspan="8" style="{{ $bold }} {{ $center }}">
-			@if(auth()->user()->id == 6433)
+			@if(auth()->user()->id == 6433 || auth()->user()->id == 8265)
 				Ms. Gladys Anne Frondozo
 			@elseif(auth()->user()->id == 6794)
 				Ms. Monique Balanay
