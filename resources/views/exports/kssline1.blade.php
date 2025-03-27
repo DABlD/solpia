@@ -8,7 +8,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="9">CHECKLIST FOR FOREIGN DECK OFFICER QUALIFICATION(LPG)</td>
+		<td colspan="8">CHECKLIST FOR FOREIGN DECK OFFICER QUALIFICATION(LPG)</td>
+		<td></td>
 	</tr>
 
 	<tr>
