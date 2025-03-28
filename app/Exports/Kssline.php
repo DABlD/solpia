@@ -27,6 +27,9 @@ class Kssline implements WithMultipleSheets
         else if($this->applicant->rank->category == "ENGINE OFFICER"){
             array_push($sheets, new KsslineEO($this->applicant, $this->type . 'eo'));
         }
+        else{
+            array_push($sheets, new KsslineR($this->applicant, $this->type . 'r'));
+        }
         array_push($sheets, new Kssline2($this->applicant, $this->type . '2'));
         
         return $sheets;
