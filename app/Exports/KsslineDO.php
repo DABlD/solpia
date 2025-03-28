@@ -259,14 +259,17 @@ class KsslineDO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.2);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+                
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LKSQ-4124-A / 2019.03.01 / RETENTION : 3 YEARS');
+                $event->sheet->getDelegate()->getHeaderFooter()->setEvenFooter('&LKSQ-4124-A / 2019.03.01 / RETENTION : 3 YEARS');
                 
                 // SET DEFAULT FONT
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('돋움');

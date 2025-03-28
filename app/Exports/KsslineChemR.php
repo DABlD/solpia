@@ -259,8 +259,8 @@ class KsslineChemR implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.2);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
@@ -271,6 +271,9 @@ class KsslineChemR implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
                 // SET DEFAULT FONT
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('돋움');
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(8);
+
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LKSQ-4124-C / 2019.03.01 / RETENTION : 3 YEARS');
+                $event->sheet->getDelegate()->getHeaderFooter()->setEvenFooter('&LKSQ-4124-C / 2019.03.01 / RETENTION : 3 YEARS');
 
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
