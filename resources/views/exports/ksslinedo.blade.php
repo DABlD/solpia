@@ -538,6 +538,8 @@
 		</td>
 	</tr>
 
+	{{-- 2ND PAGE --}}
+
 	<tr>
 		<td colspan="9">** For improvement of job</td>
 	</tr>
@@ -613,12 +615,6 @@
 		</td>
 	</tr>
 
-	<tr>
-		<td colspan="9">
-			** For health
-		</td>
-	</tr>
-
 	@php 
 		$docu = false;
 
@@ -639,6 +635,12 @@
 			C/O compulsory
 			<br style='mso-data-placement:same-cell;' />
 			2/O,3/O voluntary
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="9">
+			** For health
 		</td>
 	</tr>
 

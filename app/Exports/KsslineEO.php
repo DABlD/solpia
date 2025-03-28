@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
 
-class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class KsslineEO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -321,25 +321,25 @@ class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $h[4] = [
                     'A1:A2', 'A6:I7',
                     'A9:A12', 'E9:I12',
-                    'A14:I54'
+                    'A14:I44'
                 ];
 
                 // HL
                 $h[5] = [
                     'E3:E4', 'G3:G4', 'I3:I4', 'F5', 'I5', 
-                    'B14:B36', 'I14:I36', 'A37', 'A41', 'A47', 'A49', 'A53',
-                    'A38:A40', 'A42:A46', 'A48', 'A50:A51',
-                    'I38:I40', 'I42:I46', 'I48', 'I50:I51'
+                    'B14:B27', 'I14:I27', 'A28', 'A32', 'A37', 'A39', 'A43',
+                    'A29:A31', 'A33:A36', 'A38', 'A40:A41',
+                    'I29:I31', 'I33:I36', 'I38', 'I40:I41'
                 ];
 
                 // B
                 $h[6] = [
-                    'A1', 'A2', 'A8', 'A13', 'A37', 'A41', 'A47', 'A49'
+                    'A1', 'A2', 'A8', 'A13', 'A28', 'A32', 'A37', 'A39'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A1:I36'
+                    'A1:I27'
                 ];
 
                 // HR
@@ -357,7 +357,7 @@ class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHRINK TO FIT
                 $h['stf'] = [
                     'C3',
-                    'E14:E36',
+                    'E14:E27',
                 ];
 
                 foreach($h as $key => $value) {
@@ -397,15 +397,15 @@ class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A3:I54'
+                    'A3:I44'
                 ]);
 
                 // ALL BORDER DOTTED
                 $cells[1] = array_merge([
-                    'A9:I12', 'A14:I36',
-                    'A38:I40', 'A42:I46',
-                    'A48:I48', 'A50:I51',
-                    'E53:I54'
+                    'A9:I12', 'A14:I27',
+                    'A29:I31', 'A33:I36',
+                    'A38:I38', 'A40:I41',
+                    'E43:I44'
                 ]);
 
                 // ALL BORDER THICK
@@ -414,7 +414,7 @@ class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
-                    'A3:I54'
+                    'A3:I44'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -487,7 +487,7 @@ class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rows = [
                     [
                         20, //ROW HEIGHT
-                        1,54 //START ROW, END ROW
+                        1,44 //START ROW, END ROW
                     ],
                 ];
 
@@ -528,10 +528,10 @@ class Kssline1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('I14:I54')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('I14:I54')->getFont()->setName('돋움');
-                $event->sheet->getDelegate()->getStyle('A53')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A53')->getFont()->setName('돋움');
+                $event->sheet->getDelegate()->getStyle('I14:I44')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('I14:I44')->getFont()->setName('돋움');
+                $event->sheet->getDelegate()->getStyle('A43')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A43')->getFont()->setName('돋움');
 
                 $options = [
                     'option 1',
