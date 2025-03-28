@@ -252,7 +252,7 @@ class KsslineEO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('BIODATA', false);
+                $event->sheet->getDelegate()->setTitle('ENGINEER OFFICER-LPG', false);
                 // $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToPage(true);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.2);
