@@ -4,7 +4,7 @@
 
 <table>
 	<tr>
-		<td colspan="9">외국 항해사관 승무자격 점검표(LPG)</td>
+		<td colspan="9">외국 기관사관 승무자격 점검표(LPG)</td>
 	</tr>
 
 	<tr>
