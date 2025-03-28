@@ -753,6 +753,11 @@ class ApplicationsController extends Controller
             "M/V ULTRA REGINA"
         ];
 
+        //KSSLINE USE HMM FORMAT
+        if($type == "kssline"){
+            $type = "hmm";
+        }
+
         if(isset($applicant->vessel) && in_array($applicant->vessel->name, $smtech)){
             $type = "smtech";
         }
