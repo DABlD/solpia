@@ -21,7 +21,15 @@ class Kssline implements WithMultipleSheets
     {
         $sheets = [];
 
-        array_push($sheets, new Kssline1($this->applicant, $this->type . '1'));
+        if($this->applicant->rank->category == "DECK OFFICER"){
+            array_push($sheets, new KsslineDO($this->applicant, $this->type . 'do'));
+        }
+        else if($this->applicant->rank->category == "ENGINE OFFICER"){
+            array_push($sheets, new KsslineEO($this->applicant, $this->type . 'eo'));
+        }
+        else{
+            array_push($sheets, new KsslineR($this->applicant, $this->type . 'r'));
+        }
         array_push($sheets, new Kssline2($this->applicant, $this->type . '2'));
         
         return $sheets;
