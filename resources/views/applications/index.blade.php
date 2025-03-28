@@ -3035,6 +3035,21 @@
                                 }
                             })
                         }
+                        else if(result.principal_id == 1922){
+                            swal({
+                                title: 'Select Type',
+                                input: 'select',
+                                inputOptions: {
+                                    kssline: 'LPG',
+                                    ksslineChem: 'Chemical'
+                                }
+                            }).then(result => {
+                                if(result.value){
+                                    type = result.value;
+                                    window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                                }
+                            })
+                        }
                         else{
                             window.location.href = 'applications/export/' + application.data('id');
                         }
@@ -3094,6 +3109,21 @@
                                 inputOptions: {
                                     klcsm: 'Tanker',
                                     klcsmBulk: 'Bulk'
+                                }
+                            }).then(result => {
+                                if(result.value){
+                                    type = result.value;
+                                    window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                                }
+                            })
+                        }
+                        else if(type == "kssline"){
+                            swal({
+                                title: 'Select Type',
+                                input: 'select',
+                                inputOptions: {
+                                    kssline: 'LPG',
+                                    ksslineChem: 'Chemical'
                                 }
                             }).then(result => {
                                 if(result.value){
