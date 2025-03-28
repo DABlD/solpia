@@ -545,6 +545,7 @@
                         X09_InitialDocumentChecklist:   'Document Checklist (Initial)',
                         DocumentChecklist:              'Document Checklist (Final)',
                         DocumentChecklistHmm:           'Document Checklist (HMM)',
+                        KSSLine:                        'Qualification Checklist (KSS Line)',
                         X18_EvaluationSheet:            'Evaluation Sheet - POSSM',
                         X20_DebriefingForm:             'Debriefing Form',
                         X30_POSSMSeaService:            'Sea Service - POSSM',
@@ -555,7 +556,12 @@
                         @endif
                     },
                     showCancelButton: true,
-                    cancelButtonColor: '#f76c6b'
+                    cancelButtonColor: '#f76c6b',
+                    onOpen: () => {
+                        $('.swal2-select').select2({
+                            width: '100%'
+                        });
+                    }
                 }).then(result => {
                     if(result.value){
                         application = $(application.target);
@@ -694,6 +700,9 @@
                         }
                         else if(result.value == "X35_PostMedicalForm"){
                             x35(application.data('id'), result.value);
+                        }
+                        else if(result.value == "KSSLine"){
+                            KSSLineChecklist(application);
                         }
                         else{
                             window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
@@ -3139,6 +3148,22 @@
                     }
                 });
             }
+        }
+
+        function KSSLineChecklist(application){
+            swal({
+                 title: 'Select Type',
+                 input: 'select',
+                 inputOptions: {
+                     kssline: 'LPG',
+                     ksslineChem: 'Chemical'
+                 }
+             }).then(result => {
+                    if(result.value){
+                        type = 'KSSLine';
+                        window.location.href = 'applications/export/' + application.data('id') + '/' + type;
+                    }
+             })
         }
 
         function rlu(aId, vessel_id){

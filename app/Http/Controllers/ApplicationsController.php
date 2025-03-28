@@ -769,7 +769,13 @@ class ApplicationsController extends Controller
 
         // $defaultName = $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . $pname . '.xlsx';
         $rAbbr = isset($applicant->rank) ? str_replace('/', '', $applicant->rank->abbr) : null;
-        $defaultName = $rAbbr . ' ' . $applicant->user->lname . ', ' . $applicant->user->fname . ' - BIODATA.xlsx';
+
+        $fn = $req->fn ?? "BIODATA";
+        $defaultName = $rAbbr . ' ' . $applicant->user->lname . ', ' . $applicant->user->fname . " - $fn.xlsx";
+
+        if($type == "KSSLine"){
+            $fn = "Qualification Checklist";
+        }
 
         return Excel::download(new $class($applicant, $type), $defaultName);
     }
