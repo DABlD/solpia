@@ -65,7 +65,7 @@ class ApplicationsController extends Controller
            DocumentLC::pluck('issuer')->toArray()
         );
                
-    	return $this->_view('create', [
+        return $this->_view('create', [
             'title'         => 'Add Crew',
             'categories'    => $ranks->groupBy('category'),
             'issuers'       => collect($issuers)->unique()->toArray(),
@@ -91,7 +91,7 @@ class ApplicationsController extends Controller
     }
 
     public function getRegulations(){
-        $tempRegulations = DocumentLC::pluck('regulation')->toArray();
+        $tempRegulations = DocumentLC::distinct()->pluck('regulation')->toArray();
         $regulations = array();
 
         foreach($tempRegulations as $tempRegulation){
@@ -166,7 +166,7 @@ class ApplicationsController extends Controller
             DocumentLC::pluck('issuer')->toArray()
         );
 
-        $tempRegulations = DocumentLC::pluck('regulation')->toArray();
+        $tempRegulations = DocumentLC::distinct()->pluck('regulation')->toArray();
         $regulations = array();
 
         foreach($tempRegulations as $tempRegulation){
@@ -277,7 +277,7 @@ class ApplicationsController extends Controller
                 SeaService::create((array)$data);
             }
 
-			if(Vessel::where('imo', $data->imo)->count() == 0){
+            if(Vessel::where('imo', $data->imo)->count() == 0){
             // if(Vessel::where('name', $data->vessel_name)->count() == 0){
                 $principal = Principal::where('name', $data->principal)->get();
                 if($principal->count()){
@@ -291,7 +291,7 @@ class ApplicationsController extends Controller
                         'gross_tonnage' => $data->gross_tonnage,
                         'BHP'           => $data->bhp_kw,
                         'trade'         => $data->trade,
-						'imo'			=> $data->imo
+                        'imo'           => $data->imo
                     ]);
                 }
                 else{
@@ -331,7 +331,7 @@ class ApplicationsController extends Controller
                         'gross_tonnage' => $data->gross_tonnage,
                         'BHP'           => $data->bhp_kw,
                         'trade'         => $data->trade,
-						'imo'			=> $data->imo
+                        'imo'           => $data->imo
                     ]);
                 }
             }
@@ -641,9 +641,9 @@ class ApplicationsController extends Controller
                 $name = $applicant->sea_service->sortByDesc('sign_off')->first()->rank;
                 $applicant->rank = Rank::where('name', $name)->first();
             }
-			elseif($applicant->document_flag->count() || isset($applicant->flagRank)){
-				$applicant->rank = $applicant->flagRank;
-			}
+            elseif($applicant->document_flag->count() || isset($applicant->flagRank)){
+                $applicant->rank = $applicant->flagRank;
+            }
             else{
                 $applicant->rank = null;
             }
@@ -765,7 +765,7 @@ class ApplicationsController extends Controller
         $class = "App\\Exports\\" . ucfirst($type);
 
         Statistic::where('name', 'export')->increment('count');
-		$pname = $type == "western" ? "NITTA_TOEI" : $type;
+        $pname = $type == "western" ? "NITTA_TOEI" : $type;
 
         // $defaultName = $applicant->user->fname . '_' . $applicant->user->lname . ' Application - ' . $pname . '.xlsx';
         $rAbbr = isset($applicant->rank) ? str_replace('/', '', $applicant->rank->abbr) : null;
@@ -1620,7 +1620,7 @@ class ApplicationsController extends Controller
     }
 
     public function get(User $user){
-    	echo json_encode($user);
+        echo json_encode($user);
     }
 
     public function getAddDetails(Applicant $applicant){
@@ -2110,6 +2110,6 @@ class ApplicationsController extends Controller
     }
 
     private function _view($view, $data = array()){
-    	return view('applications.' . $view, $data);
+        return view('applications.' . $view, $data);
     }
 }
