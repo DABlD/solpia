@@ -3513,11 +3513,13 @@
                 success: ranks => {
                     ranks = JSON.parse(ranks);
                     let rankString = "";
+                    let rankArray = [];
 
                     Object.keys(ranks).forEach(category => {
                         rankString += `<optgroup label="${category}"></optgroup>`;
 
                         ranks[category].forEach(rank => {
+                            rankArray[rank.id] = rank.abbr;
                             rankString += `
                                 <option value="${rank.id}">
                                     &nbsp;&nbsp;&nbsp;${rank.name} (${rank.abbr})
@@ -3565,7 +3567,7 @@
                                     disembarkation_date: moment().format("YYYY-MM-DD"),
                                     ed: ed,
                                     type: 'On Board Promotion',
-                                    remark: "On Board Promotion"
+                                    remark: "Promoted as " + rankArray[rank]
                                 },
                                 success: result2 => {
                                     console.log('on board update lineup: ' + result.value);
