@@ -91,7 +91,7 @@ class ApplicationsController extends Controller
     }
 
     public function getRegulations(){
-        $tempRegulations = DocumentLC::pluck('regulation')->toArray();
+        $tempRegulations = DocumentLC::distinct()->pluck('regulation')->toArray();
         $regulations = array();
 
         foreach($tempRegulations as $tempRegulation){
@@ -166,7 +166,7 @@ class ApplicationsController extends Controller
             DocumentLC::pluck('issuer')->toArray()
         );
 
-        $tempRegulations = DocumentLC::pluck('regulation')->toArray();
+        $tempRegulations = DocumentLC::distinct()->pluck('regulation')->toArray();
         $regulations = array();
 
         foreach($tempRegulations as $tempRegulation){
