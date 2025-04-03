@@ -21,10 +21,11 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $array1 = [
             "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE","M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
             "M/V HYUNDAI PARAMOUNT","M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
+            "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
             "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
-            "M/V KRISTIAN OLDENDORFF",
-            "M/V ATLANTIC BONANZA"
         ];
+
+        // FLEET C LAST 1 LINE
 
         if(in_array($applicant->vessel->name, $array1)){
             $this->shipownerA['company'] = "HMM Co., LTD.";
@@ -291,6 +292,10 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
 
+                if($this->applicant->user->fleet == "FLEET C"){
+                    $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(2);
+                }
+
                 //SET FIRST PAGE NUMBER
                 $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
@@ -397,6 +402,10 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $h[8] = [
                     'A3', 'B8:D13', 'A14:D15'
                 ];
+
+                if($this->applicant->user->fleet == "FLEET C"){
+                    $h[8] = [];
+                }
 
                 // JUSTIFY
                 $h[9] = [
@@ -593,13 +602,29 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // RICH TEXTS
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
                 $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
-                $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
+
+
+                if($this->applicant->user->fleet == "FLEET C"){
+                    $rt->createTextRun("Ship Manager")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                }
+                else{
+                    $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
+                }
+
                 $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
                 $event->sheet->getParent()->getActiveSheet()->getCell("A5")->setValue($rt);
 
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
                 $rt->createText("2.1.2 PHILIPPINE CREW");
-                $rt->createTextRun("(Non Korea Flag Vessel)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+
+
+                if($this->applicant->user->fleet == "FLEET C"){
+                    $rt->createTextRun("(Non Korea Flag Vessel)")->getFont()->setName("Times New Roman")->setSize(10);
+                }
+                else{
+                    $rt->createTextRun("(Non Korea Flag Vessel)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                }
+
                 $event->sheet->getParent()->getActiveSheet()->getCell("A2")->setValue($rt);
 
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
@@ -618,7 +643,16 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
                 $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
                 $rt->createText(PHP_EOL);
-                $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(9);
+
+
+
+                if($this->applicant->user->fleet == "FLEET C"){
+                    $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setName("Times New Roman")->setSize(9);
+                }
+                else{
+                    $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(9);
+                }
+
                 $event->sheet->getParent()->getActiveSheet()->getCell("H27")->setValue($rt);
 
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
