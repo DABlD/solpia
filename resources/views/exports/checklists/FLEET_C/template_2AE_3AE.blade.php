@@ -315,8 +315,25 @@
 		{{ $doc("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", "BTOC ENDORSEMENT", 'lc') }}
 		{{ $doc("ADVANCE TRAINING FOR OIL TANKER - ATOT", "ATOT ENDORSEMENT", 'lc') }}
 		{{ $doc("ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT", "ATCT ENDORSEMENT", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("BTOC", "FLAG BTOC ENDORSEMENT", 'flag') }}
+
+		@php
+			$temp = null;
+			if(isset($data->document_med_cert->{'COVID-19 1ST DOSE'})){
+				$temp = 'COVID-19 1ST DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 2ND DOSE'})){
+				$temp = 'COVID-19 2ND DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 3RD DOSE'})){
+				$temp = 'COVID-19 3RD DOSE';
+			}
+			if(isset($data->document_med_cert->{'COVID-19 4TH DOSE'})){
+				$temp = 'COVID-19 4TH DOSE';
+			}
+		@endphp
+
+		{{ $doc($temp, "COVID VACCINE", 'med_cert') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
