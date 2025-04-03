@@ -326,7 +326,7 @@
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
-	@elseif(in_array($data->vessel->principal_id, [256]))
+	@elseif(in_array($data->vessel->principal_id, [256, 1922]))
 		{{ $doc("BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT", "BTOC ENDORSEMENT", 'lc') }}
 		{{ $doc("ADVANCE TRAINING FOR OIL TANKER - ATOT", "ATOT ENDORSEMENT", 'lc') }}
 		{{ $doc("ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT", "ATCT ENDORSEMENT", 'lc') }}
