@@ -5412,7 +5412,7 @@
             })
         }
 
-        function exportOnOff(id){
+        function exportOnOff(id, vname){
             swal({
                 title: 'Choose Format',
                 input: 'select',
@@ -5443,6 +5443,7 @@
                             if(result2.value){
                                 data.to = $('#to').val();
                                 data.port = $('#port').val();
+                                data.vname = vname;
                             }
                             window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}?` + $.param({data: data});
                         });
@@ -5460,6 +5461,7 @@
                             if(result2.value){
                                 data.date = $('#date').val();
                                 data.port = $('#port').val();
+                                data.vname = vname;
                             }
                             window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}?` + $.param({data: data});
                         });

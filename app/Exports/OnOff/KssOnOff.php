@@ -15,13 +15,8 @@ use App\Models\Vessel;
 class KssOnOff implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($linedUps, $onBoards, $type, $data){
-        $vessel = null;
-        foreach(array_merge($linedUps ? $linedUps->toArray() : [], $onBoards ? $onBoards : []) as $crew){
-            if($vessel){
-                break;
-            }
-            $vessel = Vessel::find($crew['vessel_id']);
-        }
+        $vessel = new Vessel();
+        $vessel->name = $data['vname'] ?? "-";
 
         $this->vessel       = $vessel;
         $this->linedUps     = $linedUps;
