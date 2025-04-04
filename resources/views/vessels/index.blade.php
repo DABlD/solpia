@@ -5425,6 +5425,7 @@
                     KoscoOnOff: 'KOSCO',
                     HmmOnOff: 'HMM',
                     KlcsmOnOff: 'KLCSM',
+                    KssOnOff: 'KSS',
                 },
             }).then(result => {
                 let data = {};
@@ -5446,7 +5447,7 @@
                             window.location.href = `{{ route('applications.exportOnOff') }}/${id}/${result.value}?` + $.param({data: data});
                         });
                     }
-                    else if(result.value == "KoscoOnOff"){
+                    else if(["KoscoOnOff", "KssOnOff"].includes(result.value)){
                         swal({
                             title: 'Enter Details',
                             showCancelButton: true,
