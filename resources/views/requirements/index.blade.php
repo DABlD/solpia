@@ -201,6 +201,11 @@
             $('#table').DataTable().ajax.reload();
         });
 
+        $('#fRank').on('change', e => {
+            fRank = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
         $('#fVessel').on('change', e => {
             fVessel = e.target.value;
             $('#table').DataTable().ajax.reload();
@@ -226,8 +231,11 @@
                     })
 
                     $('#fVessel').append(fVesselString);
-                     $('#fVessel').select2({
+                    $('#fVessel').select2({
                         placeholder: 'Select Vessel'
+                    });
+                    $('#fRank').select2({
+                        placeholder: 'Select Rank'
                     });
                 }
             })

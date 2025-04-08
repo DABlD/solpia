@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Requirement, Prospect, Candidate};
+use App\Models\{Requirement, Prospect, Candidate, Rank};
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
@@ -14,8 +14,11 @@ class RequirementController extends Controller
     }
 
     public function index(){
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+
         return $this->_view('index', [
-            'title' => 'Requirements'
+            'title' => 'Requirements',
+            'categories' => $ranks->groupBy('category')
         ]);
     }
 
