@@ -1829,48 +1829,6 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
-        $vessels = Vessel::where('status', "ACTIVE")
-                        ->where('principal_id', 3)
-                        ->get();
-
-        foreach($vessels as $vessel){
-           $vessel->work_hours = 40;
-           $vessel->ot_hours = 103;
-           $vessel->cba_affiliation = "IBF JSU / AMOSUP-IMMAJ";
-           $vessel->classification = "N.K.";
-           $vessel->save();
-
-           echo $vessel->name . ' updated<br>'; 
-        }
-
-        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</br></br>";
-
-        $ids = $vessels->pluck("id");
-        foreach($ids as $id){
-            $temp = Wage::where('vessel_id', $id)->whereIn('rank_id', [9, 15, 24]);
-            $temp2 = $temp->get();
-            $temp->update(['ot_per_hour' => 5.23]);
-            $count = $temp2->count();
-            echo "Updated $count for vid: $id. amount: 5.23 <br>";
-
-            $temp = Wage::where('vessel_id', $id)->whereIn('rank_id', [10, 16, 42, 43, 26]);
-            $temp2 = $temp->get();
-            $temp->update(['ot_per_hour' => 4.75]);
-            $count = $temp2->count();
-            echo "Updated $count for vid: $id. amount: 4.75 <br>";
-
-            $temp = Wage::where('vessel_id', $id)->whereIn('rank_id', [11, 17, 27, 28]);
-            $temp2 = $temp->get();
-            $temp->update(['ot_per_hour' => 3.57]);
-            $count = $temp2->count();
-            echo "Updated $count for vid: $id. amount: 3.57 <br>";
-
-            $temp = Wage::where('vessel_id', $id)->whereIn('rank_id', [14, 19, 28, 40, 41, 44]);
-            $temp2 = $temp->get();
-            $temp->update(['ot_per_hour' => 1.7]);
-            $count = $temp2->count();
-            echo "Updated $count for vid: $id. amount: 1.7 <br>";
-        }
     }
 
     public function testFunc2(){
