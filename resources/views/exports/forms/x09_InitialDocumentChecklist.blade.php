@@ -916,12 +916,12 @@
 
 	<tr>
 		<td colspan="8" style="{{ $bold }} {{ $center }}">
-			@if(auth()->user()->id == 6433 || auth()->user()->id == 8265)
+			@if(auth()->user()->id == 8265)
 				Ms. Gladys Anne Frondozo
-			@elseif(auth()->user()->id == 6794)
+			@elseif(auth()->user()->id == 8311)
 				Ms. Monique Balanay
 			@elseif(auth()->user()->id == 7603)
-				Ms. Jeneva Bianca Santos
+				Ms. Mary Thea Faith Desales
 			@else
 				{{ auth()->user()->fullname }}
 			@endif
