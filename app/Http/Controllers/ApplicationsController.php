@@ -1740,7 +1740,15 @@ class ApplicationsController extends Controller
 
             $luc = LineUpContract::where('applicant_id', $sss->first()->applicant_id)->where('status', 'On Board')->first();
             if($luc){
-                $total += now()->diffInDays($luc->joining_date) / 30;
+                // $total += now()->diffInDays($luc->joining_date) / 30;
+                $total += $luc->months;
+                if($luc->extensions){
+                    $extensions = json_decode($luc->extensions);
+                    foreach($extensions as $ex){
+                        $total += $ex;
+                    }
+                }
+
                 $details[$luc->applicant_id]['last_vessel'] = $luc->vessel;
             }
 
@@ -1829,6 +1837,13 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
+        $users = User::where('role', 'Applicant')->where('fleet', 'FLEET B')->get();
+
+        foreach($users as $user){
+            if(isset($user->crew->pro_app) && $user->crew->pro_app->status == "On Board" && $user->crew->pro_app->vessel->principal_id == 256){
+                echo $user->namefull . ';' . $user->crew->pro_app->rank->abbr . ';' . $user->birthday . ';' . $user->crew->pro_app->updated_at . '<br>';
+            }
+        }
     }
 
     public function testFunc2(){
