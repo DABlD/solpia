@@ -163,8 +163,9 @@
 		";
 	};
 
-	$con = function($display){
+	$con = function($display) use($cleanText){
 		$font = 'font-family: Wingdings 2; font-size: 11px;';
+		$display = $cleanText($display);
 
 		echo "
 			<tr>
