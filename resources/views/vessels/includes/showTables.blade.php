@@ -400,7 +400,7 @@
 							<td>${user.birthday ? moment().diff(moment(user.birthday), 'years') : "-"}</td>
 							<td>${toDate(obc.joining_date, 'DD-MMM-YY')}&nbsp;</td>
 							<td>${months}</td>
-							<td>${toDate(moment(obc.joining_date, 'DD-MMM-YY').add(months, 'months'))}</td>
+							<td>${toDate(moment(obc.joining_date).add(months, 'months'), 'DD-MMM-YY')}</td>
 							<td>${moment().diff(moment(obc.joining_date), 'months')}</td>
 
 							{{-- DOCUMENTS --}}
