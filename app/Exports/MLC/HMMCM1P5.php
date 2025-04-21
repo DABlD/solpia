@@ -19,7 +19,8 @@ class HMMCM1P5 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $this->shipmanager   = [];
 
         $array1 = [
-            "M/V GLOBAL ENTERPRISE","M/V HMM CEBU"
+            "M/V GLOBAL ENTERPRISE","M/V HMM CEBU",
+            'M/V MPV THALIA', 'M/V MPV URANIA'
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
