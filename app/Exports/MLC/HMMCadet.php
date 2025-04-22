@@ -13,64 +13,57 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($applicant, $title = "HMM MLC"){
-        $array1 = [
-            'M/V HMM MIR', 'M/V HYUNDAI BRAVE', 'M/V HYUNDAI FAITH', 'M/V HMM ST. PETERSBURG', 'M/V HMM LE HAVRE', 'M/V HYUNDAI COURAGE', 'M/V HMM RAON', 'M/V HMM GARAM', 'M/V HMM NURI', 'M/V HMM HANBADA', 'M/V HYUNDAI FORCE', 'M/V HYUNDAI UNITY', 'M/V HYUNDAI GRACE', 'M/V HYUNDAI COLOMBO', 'M/V HYUNDAI ANTWERP', 'M/V HYUNDAI ULSAN'
-        ];
-
-        $array2 = [
-            'MT C. GUARDIAN', 'MT UNIVERSAL CHALLENGER', 'MT PACIFIC M', "MT NEPTUNE M"
-        ];
-
-        $array3 = [
-            'M/V HMM ALGECIRAS', 'M/V HMM OSLO', 'M/V HMM COPENHAGEN', 'M/V HMM GDANSK', 'M/V HMM HAMBURG', 'M/V HMM SOUTHAMPTON'
-        ];
-
-        $array4 = [
-            'M/V HMM AMETHYST'
-        ];
-
-        $array5 = [
-            'M/V ATLANTIC AFFINITY', 'M/V PACIFIC CHAMP'
-        ];
-
         // minus two;
         $mt = false;
 
+        $array1 = [
+            "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE", "M/V HMM AQUAMARINE",
+            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM LE HAVRE", "M/V HYUNDAI BRAVE",
+            "M/V HYUNDAI COURAGE", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE", "M/V HMM ALGECIRAS",
+            "M/V HMM COPENHAGEN", "M/V HMM GDANSK", "M/V HMM HAMBURG", "M/V HMM OSLO",
+            "M/V HMM SOUTHAMPTON", "M/V HMM ST. PETERSBURG", "M/V HYUNDAI GRACE", "M/V HYUNDAI UNITY",
+            "M/V HMM COLOMBO", "M/V HMM VICTORY", "M/V HMM PRIDE", "M/V HMM FOREST", "M/V HMM GREEN",
+            'M/V HYUNDAI JAKARTA'
+        ];
+
+        // FLEET C LAST 1 LINE
+        $array2 = [
+            "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE","M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
+            "M/V HYUNDAI PARAMOUNT","M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
+            "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
+            "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
+        ];
+
+        $array3 = [
+            "M/V GLOBAL ENTERPRISE","M/V HMM CEBU",
+            'M/V MPV THALIA', 'M/V MPV URANIA'
+        ];
+
         if(in_array($applicant->vessel->name, $array1)){
             $applicant->shipowner = "HMM Company Limited";
+            $applicant->sPresident = "WON HYOK, CHOI";
             $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
+
             $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
             $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
         elseif(in_array($applicant->vessel->name, $array2)){
-            $mt = true;
-            $applicant->shipowner = 'HMM Ocean Service Co., Ltd.';
-            $applicant->sAddress = '5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA';
+            $applicant->shipowner = "HMM Co., LTD.";
+            $applicant->sPresident = "WON HYOK, CHOI";
+            $applicant->sAddress = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
+
+            $applicant->shipowner2 = "HMM Ocean Service Co., Ltd.";
+            $applicant->sPresident2 = "Kim Gyoubong";
+            $applicant->sAddress2 = "5th Floor, Busan office Building, Jungang-daero 63, Jung-gu, Busan 600-711, Korea";
+
+            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+            $applicant->cAddress = "5th Floor, Busan office Building, Jungang-daero 63, Jung-gu, Busan 600-711, Korea";
         }
         elseif(in_array($applicant->vessel->name, $array3)){
             $applicant->shipowner = "HMM Company Limited";
-            $applicant->sAddress = 'TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA';
-            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-            $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
-        }
-        elseif(in_array($applicant->vessel->name, $array4)){
-            $applicant->shipowner = "HMM Company Limited";
-            $applicant->sAddress = "108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
-            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-            $applicant->cAddress = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
-        }
-        elseif(in_array($applicant->vessel->name, $array5)){
-            $applicant->shipowner = "HMM Co., LTD.";
-            $applicant->sAddress = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
-            $applicant->shipowner2 = "HMM Ocean Service Co., Ltd.";
-            $applicant->sAddress2 = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
-            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-            $applicant->cAddress = "63 JUNGANG-DAERO, JUNG-GU, BUSAN, KOREA";
-        }
-        else{
-            // DEFAULT
-            $applicant->shipowner = "HMM Company Limited";
+            $applicant->sPresident = "WON HYOK, CHOI";
             $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
+
             $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
             $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
