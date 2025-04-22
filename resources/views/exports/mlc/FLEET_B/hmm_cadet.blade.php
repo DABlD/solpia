@@ -19,7 +19,7 @@
 
 	<tr>
 		<td colspan="2">President</td>
-		<td colspan="5">ㅤKIM KYUNG BAE</td>
+		<td colspan="5">ㅤWON HYOK, CHOI</td>
 	</tr>
 
 	<tr>
