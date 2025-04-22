@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class SeaServiceCertificate implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class SeaServiceCertificate implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
