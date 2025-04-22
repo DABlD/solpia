@@ -1748,8 +1748,12 @@
 			<td colspan="3">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname }}</td>
 			<td>Presenter:</td>
 			<td colspan="3">
-				@if(in_array(auth()->user()->id, [4567, 4566]))
+				@if(in_array(auth()->user()->id, [4567, 6794]))
 					LHEA MARQUEZ / ASST. CREWING MANAGER
+				@elseif(in_array(auth()->user()->id, [4935, 4546]))
+					LAURA FERNANDO / ASST. CREWING MANAGER
+				@elseif(in_array(auth()->user()->id, [4566, 5963]))
+					BIANCA SANTOS / ASST. CREWING MANAGER
 				@elseif($applicant->user->fleet == "FLEET C")
 					Shirley Erasquin / CREWING MANAGER
 				@else
