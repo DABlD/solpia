@@ -576,9 +576,10 @@
                                 html: `
                                     <select id="por">
                                         <option value="">Enter purpose of request</option>
-                                        <option value="COC/COP Application">COC/COP Application</option>
-                                        <option value="Loan">Loan</option>
-                                        <option value="Personal">Personal</option>
+                                        <option value="for whatever legal purpose it may serve him best.">Legal Purposes</option>
+                                        <option value="COC/COP Application purposes">COC/COP Application</option>
+                                        <option value="Loan purposes">Loan</option>
+                                        <option value="Personal purposes">Personal</option>
                                     </select>
                                     <br><br>`,
                                 onOpen: () => {

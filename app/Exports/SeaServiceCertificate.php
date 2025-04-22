@@ -295,7 +295,7 @@ class SeaServiceCertificate implements FromView, WithEvents, WithDrawings//, Sho
 
                 // VT
                 $h[1] = [
-                    
+                    'A11'
                 ];
 
                 // HL B
