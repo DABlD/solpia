@@ -78,6 +78,7 @@ Route::group([
 			->defaults('href', 'users');
 
 		Route::get('users/get/{user}', 'UsersController@get')->name('users.get');
+		Route::get('users/get2', 'UsersController@get2')->name('users.get2');
 
 		Route::get('users/create', 'UsersController@create')->name('users.create');
 		Route::post('users/store', 'UsersController@store')->name('users.store');

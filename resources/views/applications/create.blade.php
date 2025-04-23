@@ -242,16 +242,45 @@
             setTimeout(() => {
                 // swal.close();
                 // !$('.is-invalid').is(':visible')? $('#createForm').submit() : '';
-                if(!$('.is-invalid').is(':visible')){
-                    compressAndSubmit();
-                }
-                else{
-                    swal.close();
-                    scrollIndex = 1;
-                    $('html, body').animate({
-                        scrollTop: $($('[id$="Error"]:visible')[0]).offset().top - 100
-                    }, 1000);
-                }
+                let fname = $('[name="fname"]').val();
+                let lname = $('[name="lname"]').val();
+
+                $.ajax({
+                    url: '{{ route('users.get2') }}',
+                    data: {
+                        where: ['fname', fname],
+                        where2: ['lname', lname],
+                    },
+                    success: result => {
+                        result = JSON.parse(result);
+
+                        if(result.length){
+                            swal({
+                                type: "info",
+                                title: "Possible duplicate",
+                                text: "Their is an existing crew with the same name. Are you sure you want to proceed?",
+                                showCancelButton: true,
+                                cancelButtonColor: '#f76c6b',
+                            }).then(result => {
+                                if(result.value){
+                                    compressAndSubmit();
+                                }
+                            })
+                        }
+                        else{
+                            if(!$('.is-invalid').is(':visible')){
+                                compressAndSubmit();
+                            }
+                            else{
+                                swal.close();
+                                scrollIndex = 1;
+                                $('html, body').animate({
+                                    scrollTop: $($('[id$="Error"]:visible')[0]).offset().top - 100
+                                }, 1000);
+                            }
+                        }
+                    }
+                })
             }, 1500)
         });
 
