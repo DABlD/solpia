@@ -254,7 +254,7 @@
                     success: result => {
                         result = JSON.parse(result);
 
-                        if(result.length){
+                        if(result.length && "{{ url()->current() }}".includes("create")){
                             swal({
                                 type: "info",
                                 title: "Possible duplicate",
