@@ -121,7 +121,7 @@
 	{{ $dept("TOEI DIVISION", "Ms. Lhea Marquez(Fleet A)", "Asst Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("TOEI DIVISION", "Ms. Laura Fernando (Fleet B)", "Asst Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("TOEI DIVISION", "Ms. Jeneva Bianca Santos(Fleet C)", "Asst Crewing Manager", "(+ Medical Matters)") }}
-	{{ $dept("FISHING FLEET", "Mr. Ricardo Amparo", "Asst Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("FISHING FLEET", "Mr. Ricardo Amparo", "Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("LIAISON OFFICER", "Mr. Randy Andaya", "", "(Contract)") }}
 	{{ $dept("LIAISON OFFICER (TOEI)", "Mr. Philip Manapul", "", "(Contract)") }}	
 	{{ $dept("DOCUMENTATION OFFICER / SMI", "Ms. Natasha Saguinsin /", "Ms. Merhla De Asis", "(Flag / Visa)") }}
