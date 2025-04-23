@@ -1753,7 +1753,7 @@
 				@elseif(in_array(auth()->user()->id, [4935, 4546]))
 					LAURA FERNANDO / ASST. CREWING MANAGER
 				@elseif(in_array(auth()->user()->id, [4566, 5963]))
-					BIANCA SANTOS / ASST. CREWING MANAGER
+					JENEVA BIANCA SANTOS / ASST. CREWING MANAGER
 				@elseif($applicant->user->fleet == "FLEET C")
 					Shirley Erasquin / CREWING MANAGER
 				@else
