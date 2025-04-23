@@ -85,7 +85,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">employee</td>
+		<td colspan="3">employer</td>
 	</tr>
 
 	{{-- SHIPOWNER END --}}
@@ -324,6 +324,10 @@
 	</tr>
 
 	<tr>
+		<td colspan="12">6. Provision fee: (16,500KRW), Foreign (US$15)</td>
+	</tr>
+
+	<tr>
 		<td colspan="3">&#9316; GOVT. Tax deduction: </td>
 		<td colspan="9" style="{{ $b }}">AS REGULATIONS</td>
 	</tr>
@@ -402,6 +406,10 @@
 	{{ $d1("1) If the seafarers’ employment agreement expires while they are aboard") }}
 	{{ $d1("2) When the seafarers’ employment agreement in terminated by the shipowner or by the seafarer for justified reasons") }}
 	{{ $d1("3) When the seafarers are no longer able to carry out their duties under their employment agreement or cannot be excepted to carry them out in the specific circumstance") }}
+	{{ $d1("8.2. In addition, shall facilitate the prompt repatriation of seafarers, including when they are deemed abandoned within the meaning of following circumstances.") }}
+	{{ $d1("1) Fails to cover the cost of the seafarer’s repatriation") }}
+	{{ $d1("2) Has left the seafarer without the necessary maintenance and support") }}
+	{{ $d1("3) Has otherwise unilaterally severed their ties with the seafarer including failure to pay contractual wages for a period of at least two months.") }}
 
 	{{ $fill() }}
 	{{ $d1("9. Seafarer’s employment agreement shall continue to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to suspend or terminate it.") }}
@@ -427,6 +435,7 @@
 
 	{{ $fill() }}
 	{{ $d1("14. Seafarers signing a seafarers' employment agreement be given an opportunity to examine and seek advice on the agreement before signing, as well as such other facilities as are necessary to ensure that they have freely entered into an agreement with a sufficient understanding of their rights and responsibilities.") }}
+	{{ $d1("In addition, seafarers, prior to or in the process of engagement, shall be informed about their    rights under the seafarers’ recruitment and placement services’ system of protection, to compensate seafarers for monetary loss that they may incur as a result of the failure of the    recruitment and placement service or the relevant shipowner under the seafarers’ employment    agreement to meet its obligations to them.") }}
 	
 	{{ $fill(25) }}
 	<tr>

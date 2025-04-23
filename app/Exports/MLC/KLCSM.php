@@ -287,7 +287,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
-                $event->sheet->getParent()->getActiveSheet()->setBreak('A64', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A65', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
 
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
@@ -353,7 +353,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'L11', 'J13', 'A22', 'A38', 'A48', 'A91', 'A93', 'A95', 'A101'
+                    'L11', 'J13', 'A22', 'A38', 'A48', 'A96', 'A98', 'A100', 'A106', 'A107'
                 ];
 
                 // SHRINK TO FIT
@@ -492,10 +492,11 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(25);
                 $event->sheet->getDelegate()->getRowDimension(38)->setRowHeight(25);
                 $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(91)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(93)->setRowHeight(27);
-                $event->sheet->getDelegate()->getRowDimension(95)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(101)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(96)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(98)->setRowHeight(27);
+                $event->sheet->getDelegate()->getRowDimension(100)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(106)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(107)->setRowHeight(40);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
@@ -516,7 +517,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setWidth(130);
         $drawing->setOffsetX(-60);
         $drawing->setOffsetY(-50); 
-        $drawing->setCoordinates('L108');
+        $drawing->setCoordinates('L114');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setPath(public_path("images/MLC_SEAL.png"));
@@ -525,7 +526,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setWidth(100);
         // $drawing2->setOffsetX(40);
         $drawing2->setOffsetY(10);
-        $drawing2->setCoordinates('G106');
+        $drawing2->setCoordinates('G112');
 
         $mlcStamp = $this->applicant->vessel->type == "LNG" ? "images/mlc_klcsm_lng.png" : "images/mlc_klcsm.png";
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -535,7 +536,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setWidth(260);
         $drawing3->setOffsetX(50);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('J104');
+        $drawing3->setCoordinates('J110');
 
         return [$drawing, $drawing2, $drawing3];
     }
