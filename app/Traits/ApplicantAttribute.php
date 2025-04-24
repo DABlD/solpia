@@ -51,7 +51,8 @@ trait ApplicantAttribute{
                 </a>&nbsp;';
 		}
 
-		if(in_array(auth()->user()->role, ['Admin']) || auth()->user()->fleet == "FLEET B"){
+		// if(in_array(auth()->user()->role, ['Admin']) || auth()->user()->fleet == "FLEET B"){
+		if(auth()->user()->fleet == "FLEET B"){
 			$string .= '<a class="btn btn-default btn-xs" data-toggle="tooltip" title="Seniority Level" onClick="as(' . $this->id . ')">
                     <span class="fa fa-address-card fa-sm"></span>
                 </a>&nbsp;';
