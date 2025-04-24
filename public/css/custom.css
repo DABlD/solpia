@@ -37,6 +37,41 @@
 	text-align: left;
 }
 
-.dataTable tbody tr:hover{
+/*.dataTable tbody tr:hover{
 	background-color: #dadada !important;
+}*/
+
+.dataTable thead tr{
+	background-color: #004aad;
+	color: white;
+}
+
+.btn{
+	background-color: #004aad;
+	color: white;
+}
+
+.dataTable tr:hover{
+	 background-color: #a8cbfa !important;
+}
+
+.sidebar a{
+	font-weight: bolder;
+}
+
+.breadcrumb{
+	font-weight: bold !important;
+}
+
+.sidebar .header{
+	color: grey !important;
+	font-weight: bold;
+}
+
+.content-header h1{
+	font-weight: bold;
+}
+
+.dataTable td, .dataTable th{
+	vertical-align: middle !important;
 }

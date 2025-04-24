@@ -233,6 +233,10 @@
         .w-25{
             width: 25%;
         }
+
+        .btn-sm{
+            font-size: .65em !important;
+        }
     </style>
 @endpush
 

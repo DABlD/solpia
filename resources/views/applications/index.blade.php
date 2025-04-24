@@ -24,7 +24,7 @@
     								<th>Age</th>
     								<th style="width: 100px !important;">Contact</th>
                                     <th>Last/Current Vessel</th>
-                                    <th>Last Sign On/Off</th>
+                                    <th>Date Sign On/Off</th>
                                     @if(auth()->user()->fleet == null || in_array(auth()->user()->id, [5716, 4580, 3616]))
     								    <th>Fleet</th>
                                     @endif
@@ -200,11 +200,6 @@
             position: inherit !important;
         }
 
-        .rlu{
-            background-color: #f76c6b;
-            border-color: #f76c6b;
-        }
-
         table .btn{
             width: 39.22px;
         }
@@ -248,11 +243,6 @@
 
         .btn-xs{
             font-size: .65em !important;
-        }
-
-        .btn-custom1{
-            background-color: #ff9966;
-            color: white;
         }
 	</style>
 @endpush

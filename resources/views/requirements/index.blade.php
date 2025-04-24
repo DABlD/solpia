@@ -19,7 +19,7 @@
                                     <th>#</th>
                                     <th>Vessel</th>
                                     <th>Rank</th>
-                                    <th>Join Date</th>
+                                    <th style="width: 100px;">Join Date</th>
                                     <th>Port</th>
                                     <th>USV</th>
                                     <th>Salary</th>
@@ -148,7 +148,8 @@
                             return `
                                 ${vessel.name}
                                 <br>
-                                <div style="color: orange;">${vessel.type}</div>
+                                {{-- <div style="color: orange;">${vessel.type}</div> --}}
+                                <div style="font-style: italic;">${vessel.type}</div>
                             `;
                         }
                         else{
