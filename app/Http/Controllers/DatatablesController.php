@@ -327,14 +327,17 @@ class DatatablesController extends Controller
 				if($f['flag'] != "%%"){
 					$q->where('flag', 'like', $f['flag']);
 				}
+			});
 
-				// TOEI CAN SEE TOEI VESSELS ON OTHER FLEETS
-				if(auth()->user()->fleet == "TOEI"){
-					$q->orWhere('principal_id', 3);
-					$q->orWhere('principal_id', 9);
-				}
+		// TOEI CAN SEE TOEI VESSELS ON OTHER FLEETS
+		if(auth()->user()->fleet == "TOEI"){
+			$vessels = $vessels->where(function($q) {
+				$q->where('principal_id', 3);
+				$q->orWhere('principal_id', 9);
+			});
+		}
 
-			})->get();
+		$vessels = $vessels->get();
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
 		$principals = Principal::where('active', 1)->pluck('id')->toArray();
