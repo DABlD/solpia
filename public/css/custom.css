@@ -42,17 +42,17 @@
 }*/
 
 .dataTable thead tr{
-	background-color: #004aad;
+	background-color: #4d729f;
 	color: white;
 }
 
 .btn{
-	background-color: #004aad;
+	background-color: #4d729f;
 	color: white;
 }
 
 .dataTable tr:hover{
-	 background-color: #a8cbfa !important;
+	 background-color: #84b5f0 !important;
 }
 
 .sidebar a{
@@ -74,4 +74,8 @@
 
 .dataTable td, .dataTable th{
 	vertical-align: middle !important;
+}
+
+.skin-blue .sidebar a{
+	color: white !important;
 }
