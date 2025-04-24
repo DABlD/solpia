@@ -25,12 +25,12 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <img src="{{ 'images/logo.png' }}" alt="Solpia Logo">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ 'images/logo.png' }}" alt="Solpia Logo" width="100%">
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-family: math;">
                     <b>
-                        <span>{{ config('app.name', 'Laravel') }}</span>
+                        Solpia Marine & Ship Management, Inc.
                             <br>
-                        <center>Crew Management</center>
+                        Crew Management System
                     </b>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

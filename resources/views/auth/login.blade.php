@@ -1,7 +1,9 @@
 @extends('layouts.auth')
 
 @section('content')
-
+<br>
+<br>
+<br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -66,12 +68,44 @@
         </div>
     </div>
 </div>
+
+<div class="container" style="max-width: 100%; margin-top: 100px;">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <div style="color: white; font-family: math; font-weight: bold; font-size: 30px;">
+                <div class="span" style="font-size: 40px;">COMPANY SPIRIT</div>
+                <ul>
+                    <li>Initiative Mind</li>
+                    <li>Quality Work</li>
+                    <li>Honest with Responsibility</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-2"></div>
+        
+        <div class="col-md-4">
+            <div style="color: white; font-family: math; font-weight: bold; font-size: 30px;">
+                <div class="span" style="font-size: 40px;">COMPANY QUALITY POLICY</div>
+                <ul>
+                    <li>Complete</li>
+                    <li>Correct</li>
+                    <li>Practical</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+
 @endsection
 
 @push('after-styles')
     <style>
         body{
-            background-image: url('images/bg.jpg');
+            background-image: url('images/bg2.jpg');
 			background-size: cover;
 			height: 100vh;
         }
@@ -103,8 +137,7 @@
         }
 
         img{
-            width: 130px;
-            height: 130px;
+            width:  200px;
             margin-right: 20px;
         }
 
@@ -126,6 +159,10 @@
 
         .form-group b{
             font-size: 16px;
+        }
+
+        form label{
+            color: white !important;
         }
     </style>
 @endpush
