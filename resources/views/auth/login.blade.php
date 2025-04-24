@@ -111,6 +111,7 @@
     <style>
         body{
             background-image: url('images/bg2.jpg');
+            background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, 0.3)), url('images/bg2.jpg');
 			background-size: cover;
 			height: 100vh;
         }
@@ -126,7 +127,9 @@
         }
 
         .navbar-brand b{
-            color: #f0f1f2;
+            color: #0200ec;
+            font-size: 35px;
+            line-height: 0px;
         }
 
         .navbar-brand b span{
@@ -152,6 +155,7 @@
             border-color: #d0d0d0;
             border: 1px solid rgba(0,0,0,.125);
             border-radius: .25rem;
+            border-top: 3px solid grey;
         }
 
         .align-right{
