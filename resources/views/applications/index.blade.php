@@ -245,6 +245,10 @@
             padding-top: 1px !important;
             padding-bottom: 1px !important;
         }
+
+        .btn-xs{
+            font-size: .625em !important;
+        }
 	</style>
 @endpush
 
@@ -1864,19 +1868,19 @@
                     }
 
                     file = `
-                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, 'ids')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, 'ids')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
@@ -1935,19 +1939,19 @@
                     }
 
                     file = `
-                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.ifile}', 'flags')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.ifile}', 'flags')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
@@ -2006,19 +2010,19 @@
                     }
 
                     file = `
-                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, 'l_cs')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
@@ -2042,7 +2046,7 @@
                         <table class="table table-bordered tss2 table-striped">
                             <thead>
                                 <tr>
-                                    <th>Type</th>
+                                    <th style="width: 500px;">Type</th>
                                     <th>Issuer</th>
                                     <th>No</th>
                                     <th>Issue Date</th>
@@ -2106,19 +2110,19 @@
                     }
 
                     file = `
-                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, 'med_certs')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
@@ -2177,19 +2181,19 @@
                     }
 
                     file = `
-                        <a class="btn btn-success" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, 'meds')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, 'meds')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
@@ -2330,7 +2334,7 @@
                 let actions = "";
                 if(ss.file){
                     actions += `
-                        <a class="btn btn-success" data-toggle="tooltip" title="View" href="${ss.file}" target="_blank">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" href="${ss.file}" target="_blank">
                             <span class="fa fa-search"></span>
                         </a>
                     `;
@@ -2338,7 +2342,7 @@
 
                 if(ss.remarks != "On Board"){
                     actions += `
-                        <a class="btn btn-info" data-toggle="tooltip" title="Upload" onClick="uploadSSfile(${ss.id}, ${ss.applicant_id})">
+                        <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload" onClick="uploadSSfile(${ss.id}, ${ss.applicant_id})">
                             <span class="fa fa-upload"></span>
                         </a>
                     `;
@@ -2422,26 +2426,26 @@
                     let type = evals.type == "Evaluation" ? "eval" : evals.type == "Recommendation" ? "reco" : "comment";
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${evals.id}', ${applicant.id}, 'eval')">
+                        <a class="btn btn-success btn-xs puwy" data-toggle="tooltip" title="View" onClick="viewFile('${evals.id}', ${applicant.id}, 'eval')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${evals.file}" download>
+                        <a class="btn btn-primary btn-xs puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${evals.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete File"  onClick="deleteFile(${evals.id}, ${applicant.id}, 'eval')">
+                        <a class="btn btn-danger btn-xs puwy" data-toggle="tooltip" title="Delete File"  onClick="deleteFile(${evals.id}, ${applicant.id}, 'eval')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
                 else{
                     file += `
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteEval(${evals.id}, ${applicant.id}, 'eval')">
+                        <a class="btn btn-danger btn-xs puwy" data-toggle="tooltip" title="Delete"  onClick="deleteEval(${evals.id}, ${applicant.id}, 'eval')">
                             <span class="fa fa-times">
                         </span></a>
                     `;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${evals.id}, ${applicant.id}, 'eval')">
+                    <a class="btn btn-info btn-xs puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${evals.id}, ${applicant.id}, 'eval')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
@@ -2486,10 +2490,10 @@
             let string1 = `
                 <div class="box box-success" style="font-size: 15px;">
                     <div class="box-header" style="float: right;" data-toggle="tooltip" title="Add">
-                        <a class="btn btn-success" data-toggle="tooltip" title="Add Evaluation" onClick="addEval('Evaluation', ${applicant.id}, 'eval')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="Add Evaluation" onClick="addEval('Evaluation', ${applicant.id}, 'eval')">
                             <i class="fa fa-plus"></i>
                         </a>
-                        <a class="btn btn-info" data-toggle="tooltip" title="Add Recommendation" onClick="addEval('Recommendation', ${applicant.id}, 'eval')">
+                        <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Add Recommendation" onClick="addEval('Recommendation', ${applicant.id}, 'eval')">
                             <i class="fa fa-plus"></i>
                         </a>
                     </div>

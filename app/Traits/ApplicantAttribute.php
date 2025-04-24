@@ -9,11 +9,11 @@ trait ApplicantAttribute{
 		// return '<a class="btn btn-success" data-toggle="tooltip" title="View Applicant" data-id="' . $this->id . '">' .
 		// 	        '<span class="fa fa-search" data-id="' . $this->id . '"></span>' .
 		// 	   '</a>&nbsp;' . 
-		$string = '<a class="btn btn-warning" data-toggle="tooltip" title="Export" data-status2="' . $this->pas . '" data-id="' . $this->id . '">' .
-			        '<span class="fa fa-file-text" data-id="' . $this->id . '" data-status2="' . $this->pas . '"></span>' .
+		$string = '<a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Export" data-status2="' . $this->pas . '" data-id="' . $this->id . '">' .
+			        '<span class="fa fa-file-text fa-sm" data-id="' . $this->id . '" data-status2="' . $this->pas . '"></span>' .
 			   '</a>&nbsp;' .
-			   '<a class="btn btn-primary" data-toggle="tooltip" title="Edit Application" data-id="' . $this->id . '">' .
-			        '<span class="fa fa-pencil" data-id="' . $this->id . '"></span>' .
+			   '<a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Edit Application" data-id="' . $this->id . '">' .
+			        '<span class="fa fa-pencil fa-sm" data-id="' . $this->id . '"></span>' .
 			   '</a>&nbsp;';
 			 //   <a class="btn btn-success" data-toggle="tooltip" title="View Files" data-id="' . $this->id . '">' .
 				//      '<span class="fa fa-file" data-id="' . $this->id . '"></span>' .
@@ -25,14 +25,14 @@ trait ApplicantAttribute{
 		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer', 'Encoder'])){
 			// LINE UP
 			if($this->pas != "Lined-Up" && $this->pas != "On Board"){
-				$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+				$string .= '<a class="btn btn-info btn-xs" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up fa-sm" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
 			if(in_array(auth()->user()->role, ['Admin', 'Encoder'])){
-				$string .= '<a class="btn btn-danger" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-trash" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+				$string .= '<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-trash fa-sm" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
 			if($this->pas == "Lined-Up"){
-				$string .= '<a class="btn btn-danger rlu" data-toggle="tooltip" title="Remove Lineup" onClick="rlu(' . $this->id . ', ' . $this->pa_vid . ')">
-                        <span class="fa fa-times"></span>
+				$string .= '<a class="btn btn-danger btn-xs rlu" data-toggle="tooltip" title="Remove Lineup" onClick="rlu(' . $this->id . ', ' . $this->pa_vid . ')">
+                        <span class="fa fa-times fa-sm"></span>
                     </a>&nbsp;';
 			}
 		}
@@ -43,17 +43,17 @@ trait ApplicantAttribute{
 			// SEARCH
 		}
 
-		$string .= '<a class="btn btn-success btn-search" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+		$string .= '<a class="btn btn-success btn-search btn-xs" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search fa-sm" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 
 		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager'])){
-			$string .= '<a class="btn btn-secondary" data-toggle="tooltip" title="Assign to Fleet" onClick="atf(' . $this->id . ')">
-                    <span class="fa fa-tasks"></span>
+			$string .= '<a class="btn btn-secondary btn-xs" data-toggle="tooltip" title="Assign to Fleet" onClick="atf(' . $this->id . ')">
+                    <span class="fa fa-tasks fa-sm"></span>
                 </a>&nbsp;';
 		}
 
 		if(in_array(auth()->user()->role, ['Admin', 'Encoder', 'Cadet']) || auth()->user()->fleet == "FLEET B"){
-			$string .= '<a class="btn btn-secondary" data-toggle="tooltip" title="Seniority Level" onClick="as(' . $this->id . ')">
-                    <span class="fa fa-address-card"></span>
+			$string .= '<a class="btn btn-secondary btn-xs" data-toggle="tooltip" title="Seniority Level" onClick="as(' . $this->id . ')">
+                    <span class="fa fa-address-card fa-sm"></span>
                 </a>&nbsp;';
 		}
 
