@@ -120,7 +120,7 @@
         }
 
         [data-status="Lined-Up"]{
-            color: orange;
+            color: #050dcf;
         }
 
         [data-status="On Board"]{
