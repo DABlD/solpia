@@ -17,14 +17,14 @@
     						<thead>
     							<tr>
     								<th>#</th>
-    								<th>Status</th>
+    								<th style="width: 170px !important;">Status</th>
                                     <th>Rank</th>
     								<th>Last Name</th>
     								<th>First Name</th>
     								<th>Age</th>
-    								<th>Contact</th>
-                                    <th>Last Vessel</th>
-                                    <th>Last Sign Off</th>
+    								<th style="width: 100px !important;">Contact</th>
+                                    <th>Last/Current Vessel</th>
+                                    <th>Last Sign On/Off</th>
                                     @if(auth()->user()->fleet == null || in_array(auth()->user()->id, [5716, 4580, 3616]))
     								    <th>Fleet</th>
                                     @endif
@@ -325,7 +325,7 @@
                     @endif
                 },
                 { data: 'last_vessel.vessel_name', name: 'last_vessel.vessel_name' },
-                { data: 'last_vessel.sign_off', name: 'last_vessel.sign_off' },
+                { data: 'last_vessel.date', name: 'last_vessel.date' },
                 @if(auth()->user()->fleet == null || in_array(auth()->user()->id, [5716, 4580, 3616]))
                     { data: 'user.fleet', name: 'user.fleet' },
                 @endif
@@ -337,11 +337,16 @@
                 {
                     targets: 1,
                     render: function(status, display, row){
-                        if(status == "Lined-Up" || status == "On Board"){
+                        {{-- if(status == "Lined-Up" || status == "On Board"){ --}}
+                        if(status == "Lined-Up"){
                             status += `<br><b data-status="${status}">${(row.pro_app.vessel) ? row.pro_app.vessel.name : "-"}</b>`;
+                        }
+                        else if(status == "On Board"){
+                            status = `<div style="color: green; font-weight: bold;">${status}</div>`;
                         }
 
                         return status;
+
                     },
                 },
                 {

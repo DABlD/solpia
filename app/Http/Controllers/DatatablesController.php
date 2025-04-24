@@ -201,11 +201,25 @@ class DatatablesController extends Controller
     	foreach($applicants as $applicant){
     		// RANK FILTER
 
+    		$last_vessel = null;
 
-    		$last_vessel = SeaService::where('applicant_id', $applicant->id)->orderBy('sign_off', 'DESC')->first();
+    		if($applicant->pro_app->status == "On Board"){
+    			$temp = $applicant->current_lineup;
+    			$last_vessel = ["vessel_name" => $temp->vessel->name, "date" => $temp->joining_date->toDateString()];
+    		}
+    		else{
+    			$temp = SeaService::where('applicant_id', $applicant->id)->orderBy('sign_off', 'DESC')->first();
+
+    			if($temp){
+    				$last_vessel = ["vessel_name" => $temp->vessel_name, 'date' => $temp->sign_off ? $temp->sign_off->toDateString() : null];
+    			}
+    			else{
+    				$last_vessel = ["vessel_name" => "-", "date" => null];
+    			}
+    		}
+
+    		$applicant->last_vessel = $last_vessel;
     		$latest_flag = DocumentFlag::where('applicant_id', $applicant->id)->orderBy('issue_date', 'DESC')->first();
-
-    		$applicant->last_vessel = $last_vessel ?? ["vessel_name" => "-", "sign_off" => null];
     		$applicant->age = $applicant->user->birthday ? now()->diffInYears($applicant->user->birthday) : $applicant->user->age;
 
     		// SETTING RANK
