@@ -249,6 +249,11 @@
         .btn-xs{
             font-size: .65em !important;
         }
+
+        .btn-custom1{
+            background-color: #ff9966;
+            color: white;
+        }
 	</style>
 @endpush
 
