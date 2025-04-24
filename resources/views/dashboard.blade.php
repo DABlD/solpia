@@ -3,7 +3,7 @@
     <section class="content">
 
       {{-- Boxes --}}
-      <div class="row">
+      <div class="row" style="color: white;">
         <div class="col-lg-3 col-xs-6">
           <div class="small-box bg-aqua">
             <div class="inner">
@@ -11,14 +11,14 @@
 
               <p>Total Crew</p>
             </div>
-            <div class="icon">
+            <div class="icon" style="color: #f3f2ee;">
               <i class="fa fa-users"></i>
             </div>
             {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-green">
+          <div class="small-box" style="background-color: #0077b6;">
             <div class="inner">
               {{-- <h3>53<sup style="font-size: 20px">%</sup></h3> --}}
               <h3>{{ $onBoard }}</h3>
@@ -26,26 +26,26 @@
               <p>On Board Crew</p>
             </div>
             <div class="icon">
-              <i class="fa fa-anchor"></i>
+              <i class="fa fa-anchor" style="color: #f3f2ee;"></i>
             </div>
             {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-yellow">
+          <div class="small-box" style="background-color: #00b4d8;">
             <div class="inner">
               <h3>{{ $linedUp }}</h3>
 
               <p>Lined-Up Crew</p>
             </div>
             <div class="icon">
-              <i class="fa fa-level-up"></i>
+              <i class="fa fa-level-up" style="color: #f3f2ee;"></i>
             </div>
             {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-red">
+          <div class="small-box" style="background-color: #81e3f6;">
             <div class="inner">
               @if(auth()->user()->fleet)
                 <h3>{{ $vessels }}</h3>
@@ -58,7 +58,7 @@
               @endif
             </div>
             <div class="icon">
-              <i class="fa fa-ship"></i>
+              <i class="fa fa-ship" style="color: #f3f2ee;"></i>
             </div>
             {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
           </div>
