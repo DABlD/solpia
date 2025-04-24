@@ -99,6 +99,11 @@
     </div>
 </div>
 
+<footer style="position: absolute; bottom: 0; height: 22px; background-color: rgba(255, 255, 255, 0.5); color: white; width: 100%; border-top: 1px solid #d2d6de;">
+    <div style="vertical-align: middle; text-align: center; color: white; font-weight: bold;">
+        Copyright © - {{ now()->format('Y') }} Solpia Marine and Ship Management, Inc. All rights reserved.
+    </div>
+</footer>
 
 @endsection
 
