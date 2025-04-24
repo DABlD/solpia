@@ -33,13 +33,13 @@ class ApplicationsController extends Controller
     }
 
     public function index(Request $req){
-        // $principals = Principal::select('id', 'slug', 'name', 'fleet')->where('active', 1)->get();
+        $principals = Principal::select('id', 'slug', 'name', 'fleet')->where('active', 1)->get();
         $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
         // $vessels = Vessel::select('id', 'name')->where('status', 'ACTIVE')->get();
 
         return $this->_view('index', [
             'title' => 'Crew Database',
-            // 'principals' => $principals,
+            'principals' => $principals,
             'categories' => $ranks->groupBy('category'),
             // 'vessels' => $vessels
         ]);
