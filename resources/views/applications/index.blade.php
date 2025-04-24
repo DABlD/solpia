@@ -247,7 +247,7 @@
         }
 
         .btn-xs{
-            font-size: .625em !important;
+            font-size: .65em !important;
         }
 	</style>
 @endpush

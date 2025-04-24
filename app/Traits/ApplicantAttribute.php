@@ -46,13 +46,13 @@ trait ApplicantAttribute{
 		$string .= '<a class="btn btn-success btn-search btn-xs" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search fa-sm" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 
 		if(in_array(auth()->user()->role, ['Admin', 'Crewing Manager'])){
-			$string .= '<a class="btn btn-secondary btn-xs" data-toggle="tooltip" title="Assign to Fleet" onClick="atf(' . $this->id . ')">
+			$string .= '<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Assign to Fleet" onClick="atf(' . $this->id . ')">
                     <span class="fa fa-tasks fa-sm"></span>
                 </a>&nbsp;';
 		}
 
-		if(in_array(auth()->user()->role, ['Admin', 'Encoder', 'Cadet']) || auth()->user()->fleet == "FLEET B"){
-			$string .= '<a class="btn btn-secondary btn-xs" data-toggle="tooltip" title="Seniority Level" onClick="as(' . $this->id . ')">
+		if(in_array(auth()->user()->role, ['Admin']) || auth()->user()->fleet == "FLEET B"){
+			$string .= '<a class="btn btn-default btn-xs" data-toggle="tooltip" title="Seniority Level" onClick="as(' . $this->id . ')">
                     <span class="fa fa-address-card fa-sm"></span>
                 </a>&nbsp;';
 		}
