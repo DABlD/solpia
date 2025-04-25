@@ -1,4 +1,4 @@
-<aside class="main-sidebar" style="margin-top: 20px;">
+<aside class="main-sidebar">
 
 	<!-- sidebar: style can be found in sidebar.less -->
 	<section class="sidebar">

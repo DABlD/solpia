@@ -1,13 +1,13 @@
 
   <header class="main-header">
-    <a href="index2.html" class="logo" style="height: 75px;">
+    <a href="index2.html" class="logo">
       <span class="logo-mini">
-        <img src="{{ asset('images/logo.png') }}" alt="Solpia Logo" width="30px" height="30px" style="border: rgba(255,255,255,0.5) 1px solid;">
+        <img src="{{ asset('images/logo.png') }}" alt="Solpia Logo" width="30px" height="30px">
       </span>
       {{-- <span class="logo-lg">{{ env('app_name') }}</span> --}}
       {{-- <span class="logo-lg">Solpia</span> --}}
       <span class="logo-lg">
-        <img src="{{ asset('images/logo.png') }}" alt="Solpia Logo" width="100%" height="70px" style="border: rgba(255,255,255,0.5) 1px solid;">
+        <img src="{{ asset('images/logo.png') }}" alt="Solpia Logo" width="60%" height="50px">
       </span>
     </a>
     <nav class="navbar navbar-static-top">

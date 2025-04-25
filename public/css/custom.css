@@ -95,3 +95,29 @@
 .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a{
 	background: #369589;
 }
+
+.content-wrapper{
+	margin-left: 200px;
+}
+
+/*should be the same with content-wrapper*/
+.main-sidebar{
+	width: 200px;
+}
+
+.sidebar{
+	margin-top: 30px;
+}
+
+.main-header .logo{
+	height: 50px;
+	width: 200px;
+}
+
+.main-header .navbar-static-top, .main-footer{
+	margin-left: 200px;
+}
+
+.main-header .logo img{
+	border: rgba(255,255,255,0.5) 1px solid;
+}
