@@ -37,10 +37,6 @@
 	text-align: left;
 }
 
-/*.dataTable tbody tr:hover{
-	background-color: #dadada !important;
-}*/
-
 .dataTable thead tr{
 	background-color: #4d729f;
 	color: white;
@@ -48,7 +44,19 @@
 
 .btn{
 	background-color: #4d729f;
+	border: #4d729f;
 	color: white;
+}
+
+.btn:hover{
+	background-color: orange;
+	border: orange;
+	color: white;
+}
+
+.btn-danger:hover{
+	background-color: #dd4b39;
+	border-color: #d73925;
 }
 
 .dataTable tr:hover{
