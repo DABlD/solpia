@@ -158,10 +158,10 @@
               </li>
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat" style="color: white;">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                  <a class="btn btn-default btn-flat" style="color: white;" href="{{ route('logout') }}"
                      onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
                       {{ __('Logout') }}
