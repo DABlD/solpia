@@ -87,3 +87,11 @@
 .skin-blue .sidebar a{
 	color: white !important;
 }
+
+.main-sidebar, .skin-blue .main-header .navbar, .skin-blue .main-header .logo{
+	background-color: #4d729f !important;
+}
+
+.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a{
+	background: #369589;
+}
