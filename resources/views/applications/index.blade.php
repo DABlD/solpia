@@ -3160,12 +3160,12 @@
                  title: 'Select Type',
                  input: 'select',
                  inputOptions: {
-                     kssline: 'LPG',
-                     ksslineChem: 'Chemical'
+                    KSSLine: 'LPG',
+                    KSSLineChem: 'Chemical'
                  }
              }).then(result => {
                     if(result.value){
-                        type = 'KSSLine';
+                        type = result.value;
                         window.location.href = 'applications/export/' + application.data('id') + '/' + type;
                     }
              })
