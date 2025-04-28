@@ -592,6 +592,12 @@
 	{{-- 2ND fOUR 4 --}}
 	{{ addS('4. OTHER CERTIFICATES (MARINA/SOLAS/MARPOL/OTHERS') }}
 
+
+	{{-- FILLER --}}
+	<tr>
+		<td colspan="34" style="height: 1px;"></td>
+	</tr>
+
 	<tr>
 		<td colspan="10">Certificate</td>
 		<td colspan="6">Number</td>
