@@ -261,7 +261,7 @@
 
 	<tr>
 		<td colspan="4" style="border-bottom: 1px solid black; white-space: nowrap; text-align: center;">
-			{{ auth()->user()->namefull }}
+			{{ auth()->user()->fullname }}
 		</td>
 		<td colspan="2"></td>
 		<td colspan="3" style="border-bottom: 1px solid black; text-align: center;">
