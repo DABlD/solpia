@@ -252,7 +252,6 @@
                         where2: ['lname', lname],
                     },
                     success: result => {
-                        console.log(result);
                         result = JSON.parse(result);
 
                         if(result.length && "{{ url()->current() }}".includes("create")){
