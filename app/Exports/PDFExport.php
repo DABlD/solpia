@@ -7,14 +7,21 @@ use App\Models\{LineUpContract, ProcessedApplicant, DocumentId, Applicant, Vesse
 
 class PDFExport
 {
-    public function __construct($data, $type, $fileName){
+    public function __construct($data, $type, $fileName, $req = []){
         $this->data = $data;
         $this->type = $type;
         $this->fileName = $fileName;
+        $this->req = $req;
     }
 
     public function getData(){
-        $this->data = $this->{$this->type}($this->data);
+        if(str_contains($this->type, 'MedicalReferral')){
+            $this->data->req = $this->req;
+            $this->data = $this->MedicalReferral();
+        }
+        else{
+            $this->data = $this->{$this->type}($this->data);
+        }
     }
 
     public function Y01_OnsignerDocs(){
@@ -302,6 +309,10 @@ class PDFExport
 
         $applicants = $applicants->sortBy('order');
         return $applicants;
+    }
+
+    public function MedicalReferral(){
+        return $this->data;
     }
 
     public function download(){

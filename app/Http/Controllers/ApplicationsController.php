@@ -1464,7 +1464,7 @@ class ApplicationsController extends Controller
             return Excel::download(new $class($applicant, $type, $req->all()), "$fileName.xlsx");
         }
         else{
-            $pdf = new PDFExport($applicant, $type, $fileName);
+            $pdf = new PDFExport($applicant, $type, $fileName, $req->all());
             $pdf->getData();
             return $pdf->download();
         }

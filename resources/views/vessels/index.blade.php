@@ -16,6 +16,7 @@
                         <table class="table table-hover table-bordered" id="table" style="width: 100%;">
                             <thead>
                                 <tr>
+                                    <th>Hidden</th>
                                     <th>IMO</th>
                                     <th>Vessel Name</th>
                                     <th>Fleet</th>
@@ -277,6 +278,7 @@
                 }
             },
             columns: [
+                { data: 'created_at', name: 'created_at', visible: false },
                 { data: 'imo', name: 'imo' },
                 { data: 'name', name: 'name' },
                 { data: 'fleet', name: 'fleet' },
@@ -291,7 +293,7 @@
             ],
             columnDefs: [
                 {
-                    targets: 6,
+                    targets: 7,
                     render: function(status){
                         let color = status == "ACTIVE" ? '#00a65a' : '#dd4b39';
 
@@ -301,7 +303,7 @@
                     }
                 },
                 {
-                    targets: 7,
+                    targets: 8,
                     width: '115px'
                 },
             ],
@@ -311,7 +313,7 @@
                 tooltip();
                 initializeActions();
             },
-            order: [ [1, 'asc'] ],
+            order: [ [0, 'desc'] ],
         });
         
         $('#table_filter input').unbind();
@@ -3750,7 +3752,7 @@
                         'Y06_EMSDeclaration':  'EMS Declaration',
                         'Y07_TOEIMLCQuestionnaire': "TOEI - MLC Questionnaire",
                     @endif
-                    'DocumentChecklist':             'Final Document Checklist',
+                    'DocumentChecklist':    'Final Document Checklist'
                 },
                 inputPlaceholder: '',
                 showCancelButton: true,

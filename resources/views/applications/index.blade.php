@@ -555,6 +555,7 @@
                         X30_POSSMSeaService:            'Sea Service - POSSM',
                         X34_DocumentDeficiencyNotice:   'Document Deficiency Notice',
                         X35_PostMedicalForm:            'Post Medical Form Request',
+                        MedicalReferral:                'Medical Referral',
                         @if(in_array(auth()->user()->id, [23,4580, 5716, 5007, 6109, 7219]) || auth()->user()->fleet == "FLEET B") // ADMIN / KIT / ABBY / LURIN / ROXAN / RIC / 7219
                             X36_CrewInformation:            'Crew Information - Sir Kit',
                         @endif
@@ -709,12 +710,55 @@
                         else if(result.value == "KSSLine"){
                             KSSLineChecklist(application);
                         }
+                        else if(result.value == "MedicalReferral"){
+                            medicalReferral(application.data('id'), result.value);
+                        }
                         else{
                             window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
                         }
                     }
                 })
 	    	});
+
+            function medicalReferral(id, type){
+                swal({
+                    title: "Select Format",
+                    html: `
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select id="clinic" class="swal2-input">
+                                    <option value="">Select Clinic</option>
+                                    <option value="MCIS">MCIS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select id="flag" class="swal2-input">
+                                    <option value="">Select Flag</option>
+                                    <option value="PANAMA">Panama</option>
+                                    <option value="LIBERIA">Liberia</option>
+                                    <option value="KOREA">Korea</option>
+                                    <option value="MARSHALL ISLANDS">Marshall</option>
+                                    <option value="MALAYSIA">Malaysia</option>
+                                </select>
+                            </div>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b',
+                }).then(result => {
+                    if(result.value){
+                        let data = {};
+                        data.exportType = "pdf";
+                        data.flag = $('#flag').val();
+
+                        type += "_" + $('#clinic').val();
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                    }
+                });
+            }
 
             function x20(id, type){
                 swal({
