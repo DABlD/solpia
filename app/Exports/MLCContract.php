@@ -66,14 +66,15 @@ class MLCContract implements WithMultipleSheets
 
         $class = str_replace(' ', '', $class);
 
+        // FOR KLCSM
         if(isset($this->req['itf'])){
             $class .= "_" . $this->req['itf'];
         }
 
-        // FOR KLCSM BULK
-        if(str_contains($this->applicant->vessel->type, "BULK") && $this->applicant->vessel->principal_id == 10){
+        if((str_contains($this->applicant->vessel->type, "BULK") || str_contains($this->applicant->vessel->type, "LNG")) && $this->applicant->vessel->principal_id == 10){
             $class .= "BULK";
         }
+        // END FOR KLCSM
 
         // IF HMM
         if($class == "App\Exports\MLC\HMM"){

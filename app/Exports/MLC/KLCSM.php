@@ -12,23 +12,47 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($applicant, $title = "HMM MLC"){
-        $onum = [
-            "M/T SM FALCON" => "48922-17",
-            "M/T SM NAVIGATOR" => "50983-19",
+    public function __construct($applicant, $title = "MLC Contract"){
+        $officialNo = null;
+        $shipowner = null;
+        $phoneNumber = null;
+        $address = null;
+        $employer = null;
+        $identification = null;
+
+        $temp = [
+            'M/T SM NAVIGATOR' => "50983-19",
+            'M/T SM FALCON' => "48922-17",
             "M/T SM OSPREY" => "48789-17",
-            "M/T SM VENUS1" => "50738-19",
             "M/T SM VENUS2" => "51157-20",
-            "M/T SM WHITE WHALE1" => "51302-20",
-            "M/T SM WHITE WHALE2" => "51303-20",
+            "M/V CH BELLA" => "JJR-106189",
+            "M/V CH CLARE" => "JJR-102152",
+            "M/V CH DORIS" => "JJR-105192",
+            "M/V CK ANGIE" => "JJR-111063",
+            "M/V CK BLUEBELL" => "JJR-111067",
         ];
 
-        if(isset($applicant->vessel) && isset($onum[$applicant->vessel->name])){
-            $applicant->onum = $onum[$applicant->vessel->name];
+        if(in_array($applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY'])){
+            $shipowner = "KOREA LINE CORPORATION";
+            $phoneNumber = "+82-2-3701-0114";
+            $address = "SM R&D Center 78, Magkjungang 8-ro, Gangseo-gu, Seoul, Korea";
+            $employer = "HAN SU HAN";
+            $identification = "101-81-24624";
         }
-        else{
-            $applicant->onum = "";
+        elseif(in_array($applicant->vessel->name, ["M/V CH BELLA","M/V CH CLARE","M/V CH DORIS","M/V CK ANGIE","M/V CK BLUEBELL"])){
+            $shipowner = "CHANG MYUNG SHIPPING";
+            $phoneNumber = "+82-2-2175-7000";
+            $address = "3F 30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Korea";
+            $employer = "JUNG SUNG HO";
+            $identification = "110-81-36497";
         }
+
+        $applicant->vofficialNo = $temp[$applicant->vessel->name];
+        $applicant->vshipowner = $shipowner;
+        $applicant->vphoneNumber = $phoneNumber;
+        $applicant->vaddress = $address;
+        $applicant->vemployer = $employer;
+        $applicant->videntification = $identification;
 
         if($applicant->pro_app->status != "Lined-Up"){
             $applicant->port = "ONBOARD " . $applicant->vessel->name;
@@ -193,7 +217,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'FFC000'
+                        'rgb' => 'bdb9b9'
                     ]
                 ],
             ],
@@ -254,43 +278,58 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
-            ]
+            ],
+            [
+                'font' => [
+                    'underline' => true
+                ],
+            ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
+                ],
+            ],
         ];
 
-        $title = $this->title;
-
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $title) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
+                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->title), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.4);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.4);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.4);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.3);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
-
-                // DEFAULT FONT AND STYLE FOR WHOLE PAGE
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(9);
-
-                // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
-                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
-                $event->sheet->getParent()->getActiveSheet()->setBreak('A65', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                $line = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
+                $line->setPath(public_path('/images/horizontal_line.png'));
+                $line->setHeight(10);
+
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&LDOC/REV.NO. : MLC-F04/09 &G &R2025.04.09');
+                $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
+                
+                // SET DEFAULT FONT
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(9);
 
                 // CELL COLOR
-                // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('D9:D13')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('K9:K11')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('C16')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('E16')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('C17')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('B25:B27')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('F24:F26')->getFont()->getColor()->setRGB('0000FF');
 
                 // TEXT ROTATION
                 // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
@@ -321,6 +360,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
+                    
                 ];
 
                 // HL B
@@ -330,34 +370,45 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    
+                    'D16', 'C16:C17', 'E16', 'F24:I26'
                 ];
 
                 // HC VC
                 $h[4] = [
-                    'A1'
+                    'A1', 'A3:A13', 'D3:D13', 'K3:K11',
                 ];
 
                 // HL
                 $h[5] = [
-                    'A26:J27'
                 ];
 
                 // B
                 $h[6] = [
+                    'A1', 'D3:D13', 'K3:K11',
+                    'A15', 'A19', 'A22', 'A29', 'A43', 'C16:C17', 'E16', 'B25:B27', 'F24:F26'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A3:L14'
+                    'B11', 'A20'
+                ];
+
+                // UNDERLINE
+                $h[8] = [
+                ];
+
+                // JUSTIFY
+                $h[9] = [
+                    'A20'
                 ];
 
                 $h['wrap'] = [
-                    'L11', 'J13', 'A22', 'A38', 'A48', 'A96', 'A98', 'A100', 'A106', 'A107'
+                    'D9' ,'K11', 'D13', 'A20', 'A28:A49'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'D5'
                 ];
 
                 foreach($h as $key => $value) {
@@ -381,7 +432,6 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'A61:L61'
                 ];
 
                 $fills[1] = [
@@ -398,7 +448,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A3:L14', 'A26:J27'
+                    'A3:K13', 'A25:I26'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -427,7 +477,6 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BRB
                 $cells[7] = array_merge([
-                    'B3:D3', 'B5:D5', 'B7:D7', 'B9:D9', 'B13:I13'
                 ]);
 
                 // LRB
@@ -440,10 +489,6 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ]);
 
                 // TRB
-                $cells[10] = array_merge([
-                ]);
-
-                // TBT - TOP BORDER THIN
                 $cells[10] = array_merge([
                 ]);
 
@@ -473,37 +518,58 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(14);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(2);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(18);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(2);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(2);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(28);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(13);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(22);
 
-                // 'A22', 'A38', 'A48', 'A91', 'A93', 'A99'
                 // ROW RESIZE
-                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(38)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(96)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(98)->setRowHeight(27);
-                $event->sheet->getDelegate()->getRowDimension(100)->setRowHeight(40);
-                $event->sheet->getDelegate()->getRowDimension(106)->setRowHeight(25);
-                $event->sheet->getDelegate()->getRowDimension(107)->setRowHeight(40);
+                $rows = [
+                    // [
+                    //     12, //ROW HEIGHT
+                    //     1,4 //START ROW, END ROW
+                    // ],
+                ];
+
+                $rows2 = [
+                    [
+                        25,
+                        [11,36,38,45,47]
+                    ],
+                    [40,[20]], [5,[35,37]], [60,[1]]
+                ];
+
+                foreach($rows as $row){
+                    for($i = $row[1]; $i <= $row[2]; $i++){
+                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight($row[0]);
+                    }
+                }
+
+                foreach($rows2 as $row){
+                    foreach($row[1] as $cell){
+                        $event->sheet->getDelegate()->getRowDimension($cell)->setRowHeight($row[0]);
+                    }
+                }
+
+                // PAGE BREAKS
+                $rows = [];
+                foreach($rows as $row){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A2:L150')->getFont()->setSize(9);
-                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(20);
+                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
     }
@@ -511,33 +577,14 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setPath(public_path("images/shirley_sig.png"));
+        $drawing->setPath(public_path("images/klcsm_footer.jpg"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(60);
-        $drawing->setWidth(130);
-        $drawing->setOffsetX(-60);
-        $drawing->setOffsetY(-50); 
-        $drawing->setCoordinates('L114');
+        $drawing->setHeight(27);
+        $drawing->setWidth(100);
+        $drawing->setOffsetX(20);
+        $drawing->setOffsetY(100);
+        $drawing->setCoordinates('K50');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setPath(public_path("images/MLC_SEAL.png"));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(100);
-        $drawing2->setWidth(100);
-        // $drawing2->setOffsetX(40);
-        $drawing2->setOffsetY(10);
-        $drawing2->setCoordinates('G112');
-
-        $mlcStamp = $this->applicant->vessel->type == "LNG" ? "images/mlc_klcsm_lng.png" : "images/mlc_klcsm.png";
-        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing3->setPath(public_path($mlcStamp));
-        $drawing3->setResizeProportional(false);
-        $drawing3->setHeight(90);
-        $drawing3->setWidth(260);
-        $drawing3->setOffsetX(50);
-        $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates('J110');
-
-        return [$drawing, $drawing2, $drawing3];
+        return [$drawing];
     }
 }
