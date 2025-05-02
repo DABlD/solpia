@@ -47,7 +47,11 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $identification = "110-81-36497";
         }
 
-        $applicant->vofficialNo = $temp[$applicant->vessel->name];
+        if($applicant->vessel->type == "LNG"){
+            $address = "3F 30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Korea";
+        }
+
+        $applicant->vofficialNo = $temp[$applicant->vessel->name] ?? "-";
         $applicant->vshipowner = $shipowner;
         $applicant->vphoneNumber = $phoneNumber;
         $applicant->vaddress = $address;

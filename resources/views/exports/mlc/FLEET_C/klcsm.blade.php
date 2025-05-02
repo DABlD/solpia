@@ -275,7 +275,13 @@
 		<td>US$</td>
 		<td>{{ $total }}</td>
 		<td></td>
-		<td colspan="5">After deduction FKSU Membership Fee</td>
+		<td colspan="5">
+			@if($data->vessel->type == "LNG")
+				Before deduction FKSU Membership Fee
+			@else
+				After deduction FKSU Membership Fee
+			@endif
+		</td>
 	</tr>
 
 	<tr>
@@ -582,7 +588,13 @@
 		<td colspan="4"></td>
 		<td>Shipowner</td>
 		<td colspan="2"></td>
-		<td colspan="3">KOREA LINE CORPORATION</td>
+		<td colspan="3">
+			@if($data->vessel->type == "LNG")
+				KOREA LINE LNG CORP
+			@else
+				KOREA LINE CORPORATION
+			@endif
+		</td>
 	</tr>
 
 	<tr><td colspan="11" style="height: 72px;"></td></tr>
