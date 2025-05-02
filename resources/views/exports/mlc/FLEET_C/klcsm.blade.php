@@ -497,4 +497,127 @@
 	</tr>
 
 	<tr><td colspan="11" style="height: 100px;"></td></tr>
+
+	{{-- PAGE 3 --}}
+	{{-- PAGE 3 --}}
+	{{-- PAGE 3 --}}
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			Seafarer’s employment agreement shall continue to have effect while a seafarer is held captive on or off the ship as
+			<br style='mso-data-placement:same-cell;' />
+			a result of acts of piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed 
+			<br style='mso-data-placement:same-cell;' />
+			or either party has given notice to suspend or terminate it.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			Shipowner provides medical care, unemployment benefit, old-age benefit, employment injury benefit, invalidity benefit, 
+			<br style='mso-data-placement:same-cell;' />
+			survivors' benefit to the seafarer in accordance with National Law / CBA / Rule of Employment.
+			<br style='mso-data-placement:same-cell;' />
+			And terms not regulated in this contract will follow the one that is more advantageous to both parties comparing the Laws 
+			<br style='mso-data-placement:same-cell;' />
+			of Flag State / CBA / Rule of Employment.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			Before autographing to this contract, the seafarer confirmed that no fees or other charges for recruitment or placement
+			<br style='mso-data-placement:same-cell;' />
+			or for providing employment to seafarers are borne directly or indirectly, in whole or in part, to the agent of seafarer 
+			<br style='mso-data-placement:same-cell;' />
+			recruitment and placement. (other than the cost of the seafarer obtaining the seafarer’s book and a passport or other 
+			<br style='mso-data-placement:same-cell;' />
+			similar personal travel documents.). If the seafarer found that, the fact should be noticed to the shipowner immediately.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			Seafarers signing a seafarers' employment agreement be given an opportunity to examine and seek 'advice on the 
+			<br style='mso-data-placement:same-cell;' />
+			agreement before signing, as well as such other facilities as are necessary to ensure that they have freely entered into 
+			<br style='mso-data-placement:same-cell;' />
+			an agreement with a sufficient understanding of their rights and responsibilities.
+			<br style='mso-data-placement:same-cell;' />
+			In addition, seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ 
+			<br style='mso-data-placement:same-cell;' />
+			recruitment and placement services’ system of protection, to compensate seafarers for monetary loss that they may 
+			<br style='mso-data-placement:same-cell;' />
+			incur as a result of the failure of the recruitment and placement service or the relevant shipowner under the seafarers’ 
+			<br style='mso-data-placement:same-cell;' />
+			employment agreement to meet its obligations to them.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="4">14. The place of conclude contract:</td>
+		<td colspan="7">MANILA, PHILIPPINES</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="4">15. The time of conclude contract (dd/mm/yy)</td>
+		<td colspan="7">{{ now()->format('l, F j, Y') }}</td>
+	</tr>
+
+	<tr><td colspan="11" style="height: 80px;"></td></tr>
+
+	<tr>
+		<td colspan="4"></td>
+		<td>Shipowner</td>
+		<td colspan="2"></td>
+		<td colspan="3">KOREA LINE CORPORATION</td>
+	</tr>
+
+	<tr><td colspan="11" style="height: 72px;"></td></tr>
+
+	<tr>
+		<td colspan="4"></td>
+		<td>Agent</td>
+		<td colspan="3"></td>
+		<td colspan="2">Shirley Erasquin</td>
+	</tr>
+
+	<tr><td colspan="11" style="height: 30px;"></td></tr>
+
+	<tr>
+		<td colspan="4"></td>
+		<td></td>
+		<td colspan="3"></td>
+		<td colspan="2">CREWING MANAGER</td>
+	</tr>
+
+	<tr>
+		<td colspan="5"></td>
+		<td colspan="5">Solpia Marine &#38; Ship Management Inc.</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="4"></td>
+		<td>Seafarer:</td>
+		<td colspan="5">
+			{{ $data->user->namefull }}
+		</td>
+		<td>(signature)</td>
+	</tr>
+
+	<tr><td colspan="11" style="height: 140px;"></td></tr>
 </table>

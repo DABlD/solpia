@@ -289,6 +289,11 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
                 ],
             ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                ],
+            ],
         ];
 
         return [
@@ -334,6 +339,8 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('C60')->getFont()->getColor()->setRGB('FF0000');
                 $event->sheet->getDelegate()->getStyle('I73')->getFont()->getColor()->setRGB('0000FF');
                 $event->sheet->getDelegate()->getStyle('G74')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('E110')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('E112')->getFont()->getColor()->setRGB('0000FF');
 
                 // TEXT ROTATION
                 // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
@@ -375,7 +382,8 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // HC
                 $h[3] = [
                     'D16', 'C16:C17', 'E16', 'F24:I26',
-                    'D56:D62', 'E56:E62', 'I73', 'G74'
+                    'D56:D62', 'E56:E62', 'I73', 'G74',
+                    'E114:J121'
                 ];
 
                 // HC VC
@@ -391,7 +399,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $h[6] = [
                     'A1', 'D3:D13', 'K3:K11',
                     'A15', 'A19', 'A22', 'A29', 'A43', 'C16:C17', 'E16', 'B25:B27', 'F24:F26',
-                    'A51', 'D56:E63', 'A72', 'A87', 'A89'
+                    'A51', 'D56:E63', 'A72', 'A87', 'A89', 'A110:K112', 'F121'
                 ];
 
                 // VC
@@ -409,6 +417,11 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'A20'
                 ];
 
+                // RIGHT
+                $h[10] = [
+                    'H114'
+                ];
+
                 $h['wrap'] = [
                     'D9' ,'K11', 'D13', 'A20', 'A28:A49',
                     'A65:A99',
@@ -416,7 +429,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'D5'
+                    'D5', 'F121'
                 ];
 
                 foreach($h as $key => $value) {
@@ -551,7 +564,8 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         25,
                         [11,36,38,45,47,65,81,83,94,96,99]
                     ],
-                    [40,[20]], [5,[35,37]], [60,[1]]
+                    [40,[20,102]], [5,[35,37]], [60,[1, 108]], [50,[104,106]],
+                    [17,[103,105,107,109,111]]
                 ];
 
                 foreach($rows as $row){
@@ -567,7 +581,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // PAGE BREAKS
-                $rows = [50];
+                $rows = [50, 100];
                 foreach($rows as $row){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
@@ -578,6 +592,26 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(20);
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("10. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
+                $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A102")->getValue());
+                $event->sheet->getParent()->getActiveSheet()->getCell("A102")->setValue($rt);
+
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("11. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
+                $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A104")->getValue());
+                $event->sheet->getParent()->getActiveSheet()->getCell("A104")->setValue($rt);
+
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("12. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
+                $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A106")->getValue());
+                $event->sheet->getParent()->getActiveSheet()->getCell("A106")->setValue($rt);
+
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("13. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
+                $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A108")->getValue());
+                $event->sheet->getParent()->getActiveSheet()->getCell("A108")->setValue($rt);
             },
         ];
     }
@@ -602,6 +636,42 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setOffsetY(100);
         $drawing2->setCoordinates('K100');
 
-        return [$drawing, $drawing2];
+        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing3->setPath(public_path("images/klcsm_footer.jpg"));
+        $drawing3->setResizeProportional(false);
+        $drawing3->setHeight(27);
+        $drawing3->setWidth(100);
+        $drawing3->setOffsetX(20);
+        $drawing3->setOffsetY(150);
+        $drawing3->setCoordinates('K122');
+
+        $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing4->setPath(public_path("images/shirley_sig.png"));
+        $drawing4->setResizeProportional(false);
+        $drawing4->setHeight(60);
+        $drawing4->setWidth(185);
+        $drawing4->setOffsetX(-25);
+        $drawing4->setOffsetY(5);
+        $drawing4->setCoordinates('J117');
+
+        $drawing5 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing5->setPath(public_path("images/MLC_SEAL.png"));
+        $drawing5->setResizeProportional(false);
+        $drawing5->setHeight(100);
+        $drawing5->setWidth(100);
+        $drawing5->setOffsetX(-20);
+        $drawing5->setOffsetY(1);
+        $drawing5->setCoordinates('K117');
+
+        $drawing6 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing6->setPath(public_path("images/mlc_klcsm.png"));
+        $drawing6->setResizeProportional(false);
+        $drawing6->setHeight(95);
+        $drawing6->setWidth(270);
+        $drawing6->setOffsetX(1);
+        $drawing6->setOffsetY(1);
+        $drawing6->setCoordinates('F115');
+
+        return [$drawing, $drawing2, $drawing3, $drawing4, $drawing5, $drawing6];
     }
 }
