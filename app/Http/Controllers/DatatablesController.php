@@ -337,6 +337,14 @@ class DatatablesController extends Controller
 			});
 		}
 
+		// SIR KIT CAN SEE FLEET C HMM. TEMPORARY. MAY 2025
+		if(auth()->user()->fleet == "FLEET B" && $f['fleet'] == "FLEET C"){
+			$vessels = $vessels->where(function($q) {
+				$q->where('principal_id', 256);
+				// $q->orWhere('principal_id', 9);
+			});
+		}
+
 		$vessels = $vessels->get();
 
 		// ADD ATTRIBUTES MANUALLY TO BE SEEN IN THE JSON RESPONSE
