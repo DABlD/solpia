@@ -219,4 +219,282 @@
 	</tr>
 
 	<tr><td colspan="11" style="height: 100px;"></td></tr>
+
+	{{-- PAGE 2 --}}
+	{{-- PAGE 2 --}}
+	{{-- PAGE 2 --}}
+
+	@php
+		$wage = $data->wage;
+		$basic = ceil($wage->basic);
+		// if(!in_array($data->id, [1243, 1422, 1657, 1703, 1730, 1773, 2013, 2672, 2767])){
+		// 	dd($data->id, $basic, $wage);
+		// }
+		// $ot = ceil($basic / 173 * 103 * 1.25);
+		$ot = ceil($wage->fot ?? $wage->ot);
+		$lp = ceil($basic * 9 / 30);
+
+		// allowances
+		$sa = ceil($wage->sup_allow ?? 0);
+		$so = ceil($wage->sub_allow ?? 0);
+		$oa = ceil($wage->owner_allow ?? 0);
+		$oa2 = ceil($wage->other_allow ?? 0);
+		$ra = ceil($wage->retire_allow ?? 0);
+
+		$ccb = number_format(str_contains($data->vessel->type, "BUL") ? 80 : 0, 2);
+
+		$total = $basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2 + $ccb - 40;
+		if($data->vessel->type == "LNG"){
+			$total += 40;
+		}
+
+		$total = number_format($total, 2);
+
+		$so = number_format($so, 2);
+	@endphp
+
+	<tr>
+		<td colspan="11">6. Payment</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td>6.1. Consolidated pay and benefits</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td>1) Consolidated pay</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">&#9312; Monthly total wages:</td>
+		<td></td>
+		<td>US$</td>
+		<td>{{ $total }}</td>
+		<td></td>
+		<td colspan="5">After deduction FKSU Membership Fee</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">&#9313; Basic Wage:</td>
+		<td></td>
+		<td>US$</td>
+		<td>{{ number_format($basic, 2) }}</td>
+		<td></td>
+		<td colspan="5"></td>
+	</tr>
+
+	<tr>
+		<td colspan="11">2) Fixed Overtime Allowances, Other Allowances, deduction and calculation method</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">&#9312; O/T:</td>
+		<td></td>
+		<td>US$</td>
+		<td>{{ number_format($ot, 2) }}</td>
+		<td></td>
+		<td colspan="5">Calculation method: Basic / 173hrs x 1.25 x 103hrs</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">&#9313; Other allowances:</td>
+		<td>(Owner Allowance):</td>
+		<td>US$</td>
+		<td>{{ number_format($sa + $so + $oa + $ra + $oa2, 2) }}</td>
+		<td></td>
+		<td colspan="5">Calculation method: OWNER'S DISCRETION</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">&#9314; Leave pay:</td>
+		<td></td>
+		<td>US$</td>
+		<td>{{ number_format($lp, 2) }}</td>
+		<td></td>
+		<td colspan="5">Calculation method: Basic wage x 9days / 30days</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">&#9315; FKSU Membership Fee:</td>
+		<td>US$</td>
+		<td>40</td>
+		<td></td>
+		<td colspan="5">As IBF FKSU CA (BBCHP) Article 33</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">&#9316; GOVT. Tax deduction:</td>
+		<td colspan="2">As Regulations</td>
+		<td></td>
+		<td colspan="5"></td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			3) Health and social security protection benefits - Shipowner provides medical care, sickness benefit, employment injury benefit, invalidity benefit, family benefit and survivors’ benefit to the seafarer.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			6.2. Payment date:
+		</td>
+
+	<tr>
+		<td colspan="11">
+			Every 15th next month. If the payment date falls on a holiday, payment will be made on the day before the holiday.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			6.3. Payment methods: Payment will be paid to seafarer or credited to the bank account of seafarer.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			7. Paid Leave
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="8">7.1. The shipowner shall provide paid leave to the seafarer who has completed (</td>
+		<td>8</td>
+		<td colspan="2">) months of continuous service on board</td>
+	</tr>
+
+	<tr>
+		<td colspan="6">(services on the vessel in repair or laid up shall be included) within (</td>
+		<td>4</td>
+		<td colspan="4">) months from the time of completion of the service.</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			However, the commencement of paid leave may be extended until the vessel's entry  into port when the vessel is under way.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			7.2 The leave pay should be given to seafarers even though the seafarers could not complete the contract.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			7.3. The number of days of paid leave pursuant to 7.1 and 7.2 shall be (9) days per one month of continuous service on board.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			7.4. In place of the four hours of each week in overtime work, one day of paid leave shall be added to the number of days of paid leave pursuant to 7.3.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			7.5. In the calculation of the number of days of paid leave, the service period on board of less than one month shall be calculated at a rate of days, but a fraction of less than one day shall be one day.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			7.6. The time and place of port granting paid leave shall be decided on the negotiation between the shipowner and the seafarer.
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			8. Daily Provision Fee : US$ 14.0 / Day
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			9. Repatriation
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			9.1. Shipowner shall ensure that seafarers are entitled to repatriation in the following circumstances.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			1) If the seafarers’ employment agreement expires while they are aboard
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			2) When the seafarers’ employment agreement in terminated by the shipowner or by the seafarer for justified reasons
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			3) When the seafarers are no longer able to carry out their duties under their employment agreement or cannot be excepted to carry them out in the specific circumstance
+		</td>
+	</tr>
+
+	<tr><td colspan="11"></td></tr>
+
+	<tr>
+		<td colspan="11">
+			9.2. In addition, shall facilitate the prompt repatriation of seafarers, including when they are deemed abandoned within the meaning of following circumstances.
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			1) Fails to cover the cost of the seafarer’s repatriation
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			2) Has left the seafarer without the necessary maintenance and support
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="11">
+			3) Has otherwise unilaterally severed their ties with the seafarer including failure to pay contractual wages for a period of at least two months.
+		</td>
+	</tr>
+
+	<tr><td colspan="11" style="height: 100px;"></td></tr>
 </table>

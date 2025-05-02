@@ -217,7 +217,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'bdb9b9'
+                        'rgb' => 'FFC000'
                     ]
                 ],
             ],
@@ -298,7 +298,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->title), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.7);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.4);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.4);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.4);
@@ -330,6 +330,10 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('C17')->getFont()->getColor()->setRGB('0000FF');
                 $event->sheet->getDelegate()->getStyle('B25:B27')->getFont()->getColor()->setRGB('0000FF');
                 $event->sheet->getDelegate()->getStyle('F24:F26')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('G56')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('C60')->getFont()->getColor()->setRGB('FF0000');
+                $event->sheet->getDelegate()->getStyle('I73')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('G74')->getFont()->getColor()->setRGB('0000FF');
 
                 // TEXT ROTATION
                 // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
@@ -370,7 +374,8 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    'D16', 'C16:C17', 'E16', 'F24:I26'
+                    'D16', 'C16:C17', 'E16', 'F24:I26',
+                    'D56:D62', 'E56:E62', 'I73', 'G74'
                 ];
 
                 // HC VC
@@ -385,7 +390,8 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // B
                 $h[6] = [
                     'A1', 'D3:D13', 'K3:K11',
-                    'A15', 'A19', 'A22', 'A29', 'A43', 'C16:C17', 'E16', 'B25:B27', 'F24:F26'
+                    'A15', 'A19', 'A22', 'A29', 'A43', 'C16:C17', 'E16', 'B25:B27', 'F24:F26',
+                    'A51', 'D56:E63', 'A72', 'A87', 'A89'
                 ];
 
                 // VC
@@ -395,6 +401,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // UNDERLINE
                 $h[8] = [
+                    'A59:C61'
                 ];
 
                 // JUSTIFY
@@ -403,7 +410,8 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'D9' ,'K11', 'D13', 'A20', 'A28:A49'
+                    'D9' ,'K11', 'D13', 'A20', 'A28:A49',
+                    'A65:A99',
                 ];
 
                 // SHRINK TO FIT
@@ -432,10 +440,10 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
+                    'A62:K62'
                 ];
 
                 $fills[1] = [
-                    
                 ];
 
                 foreach($fills as $key => $value){
@@ -519,13 +527,13 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(4.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(16);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(13);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(4.5);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(4.5);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(4);
                 $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(20);
@@ -541,7 +549,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rows2 = [
                     [
                         25,
-                        [11,36,38,45,47]
+                        [11,36,38,45,47,65,81,83,94,96,99]
                     ],
                     [40,[20]], [5,[35,37]], [60,[1]]
                 ];
@@ -559,7 +567,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // PAGE BREAKS
-                $rows = [];
+                $rows = [50];
                 foreach($rows as $row){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
@@ -585,6 +593,15 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setOffsetY(100);
         $drawing->setCoordinates('K50');
 
-        return [$drawing];
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setPath(public_path("images/klcsm_footer.jpg"));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(27);
+        $drawing2->setWidth(100);
+        $drawing2->setOffsetX(20);
+        $drawing2->setOffsetY(100);
+        $drawing2->setCoordinates('K100');
+
+        return [$drawing, $drawing2];
     }
 }
