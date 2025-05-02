@@ -10,40 +10,63 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-
-class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawings//, ShouldAutoSize
+class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $title){
-        $data->official_no = "-";
-        
-        if($data->vessel->name == "M/V CH BELLA"){
-            $data->official_no = "JJR-106189";
+    public function __construct($applicant, $title = "MLC Contract"){
+        $officialNo = null;
+        $shipowner = null;
+        $phoneNumber = null;
+        $address = null;
+        $employer = null;
+        $identification = null;
+
+        $temp = [
+            'M/T SM NAVIGATOR' => "50983-19",
+            'M/T SM FALCON' => "48922-17",
+            "M/T SM OSPREY" => "48789-17",
+            "M/T SM VENUS2" => "51157-20",
+            "M/V CH BELLA" => "JJR-106189",
+            "M/V CH CLARE" => "JJR-102152",
+            "M/V CH DORIS" => "JJR-105192",
+            "M/V CK ANGIE" => "JJR-111063",
+            "M/V CK BLUEBELL" => "JJR-111067",
+        ];
+
+        if(in_array($applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY'])){
+            $shipowner = "KOREA LINE CORPORATION";
+            $phoneNumber = "+82-2-3701-0114";
+            $address = "SM R&D Center 78, Magkjungang 8-ro, Gangseo-gu, Seoul, Korea";
+            $employer = "HAN SU HAN";
+            $identification = "101-81-24624";
         }
-        elseif($data->vessel->name == "M/V CH CLARE"){
-            $data->official_no = "JJR-102152";
-        }
-        elseif($data->vessel->name == "M/V CH DORIS"){
-            $data->official_no = "JJR-105192";
-        }
-        elseif($data->vessel->name == "M/V CK ANGIE"){
-            $data->official_no = "JJR-111063";
-        }
-        elseif($data->vessel->name == "M/V CK BLUEBELL"){
-            $data->official_no = "JJR-111067";
+        elseif(in_array($applicant->vessel->name, ["M/V CH BELLA","M/V CH CLARE","M/V CH DORIS","M/V CK ANGIE","M/V CK BLUEBELL"])){
+            $shipowner = "CHANG MYUNG SHIPPING";
+            $phoneNumber = "+82-2-2175-7000";
+            $address = "3F 30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Korea";
+            $employer = "JUNG SUNG HO";
+            $identification = "110-81-36497";
         }
 
-        $this->data     = $data;
-        $this->title     = $title;
+        $applicant->vofficialNo = $temp[$applicant->vessel->name];
+        $applicant->vshipowner = $shipowner;
+        $applicant->vphoneNumber = $phoneNumber;
+        $applicant->vaddress = $address;
+        $applicant->vemployer = $employer;
+        $applicant->videntification = $identification;
+
+        if($applicant->pro_app->status != "Lined-Up"){
+            $applicant->port = "ONBOARD " . $applicant->vessel->name;
+        }
+
+        $this->applicant    = $applicant;
+        $this->title        = $title;
     }
 
     public function view(): View
     {
-        $exportView = str_replace(' ', '_', $this->data->vessel->fleet) . '.klcsmbulk';
-        
+        $exportView = str_replace(' ', '_', $this->applicant->vessel->fleet) . '.klcsm';
         return view('exports.mlc.' . $exportView, [
-            'data' => $this->data
+            'data' => $this->applicant,
         ]);
     }
 
@@ -194,7 +217,7 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'BDD7EE'
+                        'rgb' => 'FFC000'
                     ]
                 ],
             ],
@@ -223,8 +246,11 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
                 ]
             ],
             [
+                'font' => [
+                    'bold' => true
+                ],
                 'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ]
             ],
             [
@@ -263,6 +289,11 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
                 ],
             ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                ],
+            ],
         ];
 
         return [
@@ -272,27 +303,44 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->title), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.7);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.4);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.4);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.4);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.3);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
-
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&LDOC/REV.NO.:MLC-FO4/O8 &R2022.10.20');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+
+                $line = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
+                $line->setPath(public_path('/images/horizontal_line.png'));
+                $line->setHeight(10);
+
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&LDOC/REV.NO. : MLC-F04/01 &G &R2025.04.11');
+                $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
                 
                 // SET DEFAULT FONT
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Calibri');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(9);
 
                 // CELL COLOR
-                // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('D9:D13')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('K9:K11')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('C16')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('E16')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('C17')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('B25:B27')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('F24:F26')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('G56')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('C60')->getFont()->getColor()->setRGB('FF0000');
+                $event->sheet->getDelegate()->getStyle('I73')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('G74')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('E110')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('E112')->getFont()->getColor()->setRGB('0000FF');
 
                 // TEXT ROTATION
                 // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
@@ -323,61 +371,65 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
 
                 // VT
                 $h[1] = [
-                    'A148'
+                    
                 ];
 
-                // HR 
+                // HL B
                 $h[2] = [
-                    'A145', 'A148'
+                    
                 ];
 
                 // HC
                 $h[3] = [
-                    'D14:K14', 'E16',
-                    'L133', 'L135',
-                    'F142', 'F144', 'H147'
+                    'D16', 'C16:C17', 'E16', 'F24:I26',
+                    'D56:D62', 'E56:E62', 'I73', 'G74',
+                    'E114:J121'
                 ];
 
                 // HC VC
                 $h[4] = [
-                    'A1:M10', 'B29:M30',
-                    'E63', 'B68:B77', 'C70:C74',
-                    'F68', 'F75', 'E70:E74'
+                    'A1', 'A3:A13', 'D3:D13', 'K3:K11',
                 ];
 
                 // HL
                 $h[5] = [
-                    'A12:A144'
                 ];
 
                 // B
                 $h[6] = [
-                    'A1', 'A3', 'A6',
-                    'A12:B12', 'A18:B18', 'A25:B25', 'A27:B27', 'C32:D32', 'A34:B34', 'C36',
-                    'C39', 'C49', 'B53', 'B63:I63', 'B65', 'C67', 'F68', 'E70:E74', 'F75',
-                    'C81', 'C84', 'B87', 'B104',
-                    'B133:M133', 'B135:M135', 'F142:M142', 'F144:M144', 'H147:M147'
+                    'A1', 'D3:D13', 'K3:K11',
+                    'A15', 'A19', 'A22', 'A29', 'A43', 'C16:C17', 'E16', 'B25:B27', 'F24:F26',
+                    'A51', 'D56:E63', 'A72', 'A87', 'A89', 'A110:K112', 'F121'
                 ];
 
                 // VC
                 $h[7] = [
-                    'C70:M79'
+                    'B11', 'A20'
                 ];
 
                 // UNDERLINE
                 $h[8] = [
+                    'A59:C61'
                 ];
 
                 // JUSTIFY
                 $h[9] = [
+                    'A20'
+                ];
+
+                // RIGHT
+                $h[10] = [
+                    'H114'
                 ];
 
                 $h['wrap'] = [
-                    'A3:M10'
+                    'D9' ,'K11', 'D13', 'A20', 'A28:A49',
+                    'A65:A99',
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'D5', 'F121'
                 ];
 
                 foreach($h as $key => $value) {
@@ -401,11 +453,10 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
 
                 // FILLS
                 $fills[0] = [
-                    'A3', 'A6', 'B29:B30', 'J29:J30'
+                    'A62:K62'
                 ];
 
                 $fills[1] = [
-                    
                 ];
 
                 foreach($fills as $key => $value){
@@ -418,7 +469,7 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A3:M10', 'B29:M30'
+                    'A3:K13', 'A25:I26'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -468,8 +519,6 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
 
                 // BBT
                 $cells[12] = array_merge([
-                    'F68:G68', 'E70:F70', 'E71:F71', 'E72:F72', 'E73:F73', 'E74:F74', 'F75:G75',
-                    'L133:M133', 'L135:M135'
                 ]);
 
                 // LBT
@@ -490,39 +539,33 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(4.3);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3.5);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(5.5);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(7);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(7);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(3.5);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(7);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(3.5);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(3.5);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(23);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(4.5);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(16);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(4.5);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(4.5);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(20);
 
                 // ROW RESIZE
                 $rows = [
-                    [
-                        30, //ROW HEIGHT
-                        3,10 //START ROW, END ROW
-                    ],
-                    [20,68,79]
+                    // [
+                    //     12, //ROW HEIGHT
+                    //     1,4 //START ROW, END ROW
+                    // ],
                 ];
 
                 $rows2 = [
                     [
-                        40,
-                        [1,2]
+                        25,
+                        [11,36,38,45,47,65,81,83,94,96,99]
                     ],
-                    [28,[29,30,132,136,146,149]],
-                    [70,[38,141,143]], //FOOTERS
-                    [150,[80]], //FOOTERS
-                    [90,[131,145]], //FOOTERS
-                    [220,[154]], //FOOTERS
+                    [40,[20,102]], [5,[35,37]], [60,[1, 108]], [50,[104,106]],
+                    [17,[103,105,107,109,111]]
                 ];
 
                 foreach($rows as $row){
@@ -538,7 +581,7 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
                 }
 
                 // PAGE BREAKS
-                $rows = [38, 80, 131];
+                $rows = [50, 100];
                 foreach($rows as $row){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
@@ -548,17 +591,28 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(20);
-                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(13);
-                $event->sheet->getDelegate()->getStyle('A39:M131')->getFont()->setSize(11);
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
-            },
-        ];
-    }
 
-    public function columnFormats(): array
-    {
-        return [
-            'D' => NumberFormat::FORMAT_TEXT,
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("10. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
+                $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A102")->getValue());
+                $event->sheet->getParent()->getActiveSheet()->getCell("A102")->setValue($rt);
+
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("11. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
+                $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A104")->getValue());
+                $event->sheet->getParent()->getActiveSheet()->getCell("A104")->setValue($rt);
+
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("12. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
+                $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A106")->getValue());
+                $event->sheet->getParent()->getActiveSheet()->getCell("A106")->setValue($rt);
+
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                $rt->createTextRun("13. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
+                $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A108")->getValue());
+                $event->sheet->getParent()->getActiveSheet()->getCell("A108")->setValue($rt);
+            },
         ];
     }
 
@@ -567,65 +621,65 @@ class KLCSMBULK implements FromView, WithEvents, WithColumnFormatting, WithDrawi
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path("images/smcmshipping.png"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(30);
-        $drawing->setWidth(150);
-        $drawing->setOffsetX(2);
-        $drawing->setOffsetY(60);
-        $drawing->setCoordinates('M38');
+        $drawing->setHeight(27);
+        $drawing->setWidth(100);
+        $drawing->setOffsetX(20);
+        $drawing->setOffsetY(100);
+        $drawing->setCoordinates('K50');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setPath(public_path("images/smcmshipping.png"));
         $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(30);
-        $drawing2->setWidth(150);
-        $drawing2->setOffsetX(2);
-        $drawing2->setOffsetY(161);
-        $drawing2->setCoordinates('M80');
+        $drawing2->setHeight(27);
+        $drawing2->setWidth(100);
+        $drawing2->setOffsetX(20);
+        $drawing2->setOffsetY(100);
+        $drawing2->setCoordinates('K100');
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setPath(public_path("images/smcmshipping.png"));
         $drawing3->setResizeProportional(false);
-        $drawing3->setHeight(30);
-        $drawing3->setWidth(150);
-        $drawing3->setOffsetX(2);
-        $drawing3->setOffsetY(60);
-        $drawing3->setCoordinates('M131');
+        $drawing3->setHeight(27);
+        $drawing3->setWidth(100);
+        $drawing3->setOffsetX(20);
+        $drawing3->setOffsetY(150);
+        $drawing3->setCoordinates('K122');
 
         $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing4->setPath(public_path("images/changmyungshipping.png"));
+        $drawing4->setPath(public_path("images/shirley_sig.png"));
         $drawing4->setResizeProportional(false);
-        $drawing4->setHeight(90);
-        $drawing4->setWidth(420);
-        $drawing4->setOffsetX(-20);
-        $drawing4->setOffsetY(2);
-        $drawing4->setCoordinates('I143');
+        $drawing4->setHeight(60);
+        $drawing4->setWidth(185);
+        $drawing4->setOffsetX(-25);
+        $drawing4->setOffsetY(5);
+        $drawing4->setCoordinates('J117');
 
         $drawing5 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing5->setPath(public_path("images/MLC_SEAL.png"));
         $drawing5->setResizeProportional(false);
         $drawing5->setHeight(100);
         $drawing5->setWidth(100);
-        $drawing5->setOffsetX(50);
-        $drawing5->setOffsetY(2);
-        $drawing5->setCoordinates('M145');
+        $drawing5->setOffsetX(-20);
+        $drawing5->setOffsetY(1);
+        $drawing5->setCoordinates('K117');
 
         $drawing6 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing6->setPath(public_path("images/shirley_sig.png"));
+        $drawing6->setPath(public_path("images/mlc_klcsm_lng.png"));
         $drawing6->setResizeProportional(false);
-        $drawing6->setHeight(90);
-        $drawing6->setWidth(150);
-        $drawing6->setOffsetX(50);
-        $drawing6->setOffsetY(2);
-        $drawing6->setCoordinates('K145');
+        $drawing6->setHeight(95);
+        $drawing6->setWidth(270);
+        $drawing6->setOffsetX(1);
+        $drawing6->setOffsetY(1);
+        $drawing6->setCoordinates('F115');
 
         $drawing7 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing7->setPath(public_path("images/smcmshipping.png"));
+        $drawing7->setPath(public_path("images/cmshippingsig.png"));
         $drawing7->setResizeProportional(false);
-        $drawing7->setHeight(30);
-        $drawing7->setWidth(150);
-        $drawing7->setOffsetX(2);
-        $drawing7->setOffsetY(10);
-        $drawing7->setCoordinates('M155');
+        $drawing7->setHeight(70);
+        $drawing7->setWidth(160);
+        $drawing7->setOffsetX(-50);
+        $drawing7->setOffsetY(-15);
+        $drawing7->setCoordinates('K115');
 
         return [$drawing, $drawing2, $drawing3, $drawing4, $drawing5, $drawing6, $drawing7];
     }
