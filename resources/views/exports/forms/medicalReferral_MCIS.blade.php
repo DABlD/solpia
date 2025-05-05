@@ -1,3 +1,15 @@
+@php
+	$rank = null;
+
+	if(isset($data->pro_app->rank)){
+		$rank = $data->pro_app->rank->abbr;
+	}
+	else{
+		$temp = $data->document_flag->first();
+		$rank = $temp->rankz->abbr;
+	}
+@endphp
+
 <style>
 	.page_break { page-break-before: always; }
 </style>
@@ -77,7 +89,7 @@
 	<tr>
 		<td></td>
 		<td colspan="2">Position Applied for:</td>
-		<td style="border-bottom: 1px solid black; text-align: center;">{{ isset($data->pro_app->rank) ? $data->pro_app->rank->abbr : "-" }}</td>
+		<td style="border-bottom: 1px solid black; text-align: center;">{{ $rank ?? "-" }}</td>
 		<td style="text-align: right;">Sex:</td>
 		<td style="border-bottom: 1px solid black; text-align: center;">Male</td>
 		<td colspan="2" style="text-align: right;">Civil Status:</td>
@@ -234,7 +246,7 @@
 		<td colspan="3" style="border-bottom: 1px solid black; text-align: center;">{{ now()->format('d-M-Y') }}</td>
 		<td colspan="2"></td>
 		<td colspan="4" style="border-bottom: 1px solid black; text-align: center; white-space: nowrap;">
-			{{ $data->pro_app->rank->abbr }} {{ $data->user->namefull }}
+			{{ $rank ?? "-" }} {{ $data->user->namefull }}
 		</td>
 	</tr>
 
