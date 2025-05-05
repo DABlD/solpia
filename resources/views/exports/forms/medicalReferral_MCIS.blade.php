@@ -11,7 +11,9 @@
 			$rank = $temp->rankz->abbr;
 		}
 		else{
-			$rank = "WPR";
+			if($data->id == 6149){
+				$rank = "WPR";
+			}
 		}
 	}
 @endphp
