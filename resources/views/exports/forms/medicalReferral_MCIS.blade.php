@@ -6,8 +6,13 @@
 	}
 	else{
 		$temp = $data->document_flag->first();
-		dd($temp, $data->document_flag);
-		$rank = $temp->rankz->abbr;
+
+		if($temp){
+			$rank = $temp->rankz->abbr;
+		}
+		else{
+			$rank = "WPR";
+		}
 	}
 @endphp
 
