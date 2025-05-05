@@ -6,6 +6,7 @@
 	}
 	else{
 		$temp = $data->document_flag->first();
+		dd($temp, $data->document_flag);
 		$rank = $temp->rankz->abbr;
 	}
 @endphp
