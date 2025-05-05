@@ -77,7 +77,7 @@
 	<tr>
 		<td></td>
 		<td colspan="2">Position Applied for:</td>
-		<td style="border-bottom: 1px solid black; text-align: center;">{{ $data->pro_app->rank->abbr }}</td>
+		<td style="border-bottom: 1px solid black; text-align: center;">{{ $data->pro_app->rank->abbr ?? "-" }}</td>
 		<td style="text-align: right;">Sex:</td>
 		<td style="border-bottom: 1px solid black; text-align: center;">Male</td>
 		<td colspan="2" style="text-align: right;">Civil Status:</td>
