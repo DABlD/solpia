@@ -338,9 +338,11 @@ class DatatablesController extends Controller
 		}
 
 		// SIR KIT CAN SEE FLEET C HMM. TEMPORARY. MAY 2025
-		if(auth()->user()->fleet == "FLEET B" && $f['fleet'] == "FLEET C"){
-			$vessels = $vessels->where(function($q) {
-				$q->where('principal_id', 256);
+		if(auth()->user()->fleet == "FLEET C"){
+			$vessels = $vessels->where(function($q) use($f) {
+				$q->where('type', 'like', $f['type']);
+				$q->orWhere('type', 'like', 'VLCC');
+				$q->orWhere('type', 'like', 'OIL/CHEM');
 				// $q->orWhere('principal_id', 9);
 			});
 		}
