@@ -25,7 +25,7 @@
     								<th style="width: 100px !important;">Contact</th>
                                     <th>Last/Current Vessel</th>
                                     <th>Date Sign On/Off</th>
-                                    @if(in_array(auth()->user()->fleet, [null, 'FLEET B', 'FLEET C']))
+                                    @if(auth()->user()->fleet == null || in_array(auth()->user()->id, [5716, 4580, 3616]))
     								    <th>Fleet</th>
                                     @endif
                                     <th>Remarks</th>
@@ -316,7 +316,7 @@
                 },
                 { data: 'last_vessel.vessel_name', name: 'last_vessel.vessel_name' },
                 { data: 'last_vessel.date', name: 'last_vessel.date' },
-                @if(in_array(auth()->user()->fleet, [null, 'FLEET B', 'FLEET C']))
+                @if(auth()->user()->fleet == null || in_array(auth()->user()->id, [5716, 4580, 3616]))
                     { data: 'user.fleet', name: 'user.fleet' },
                 @endif
                 { data: 'remarks', name: 'remarks' },
