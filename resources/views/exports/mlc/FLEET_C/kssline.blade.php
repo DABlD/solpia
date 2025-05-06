@@ -120,7 +120,7 @@
 		// if(!in_array($data->id, [1243, 1422, 1657, 1703, 1730, 1773, 2013, 2672, 2767])){
 		// 	dd($data->id, $basic, $wage);
 		// }
-		$ot = ceil($wage->fot ?? $wage->fot ?? 0);
+		$ot = ceil($wage->fot ?? $wage->ot ?? 0);
 		$lp = ceil($wage->leave_pay ?? 0);
 
 		// allowances
@@ -168,7 +168,7 @@
 
 	<tr>
 		<td colspan="3">F) Contract completion bonus</td>
-		<td colspan="2">{{ $ra }}</td>
+		<td colspan="2">{{ $oa2 }}</td>
 		<td colspan="2">US$ / Month</td>
 	</tr>
 
