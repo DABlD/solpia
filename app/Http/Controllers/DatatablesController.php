@@ -112,6 +112,11 @@ class DatatablesController extends Controller
 									if(auth()->user()->fleet == "TOEI"){
 										$q->orWhere('pa.vessel_id', 4927);
 									}
+
+									// FLEET C CAN SEE HMM TANKER CREW
+									if(auth()->user()->fleet == "FLEET C"){
+										$q->orWhereIn('pa.vessel_id', [5842, 5801, 5553, 6072]);
+									}
 								});
 
 		// IF DID NOT USE FILTER AND ONLY SEARCH VALUE
