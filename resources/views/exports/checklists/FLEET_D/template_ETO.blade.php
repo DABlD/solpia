@@ -313,9 +313,9 @@
 	@elseif(in_array($data->vessel->principal_id, [8]))
 		{{ $con("INTERGIS BRIEFING") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("KOSMA TRAINING CERTIFICATE", "KOSMA", 'lc') }}
+		{{ $con("HANJOO MEDICAL HISTORY CHECKLIST") }}
+		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
