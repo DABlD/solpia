@@ -120,6 +120,12 @@ class DatatablesController extends Controller
 										$q->orWhereIn('pa.applicant_id', [1621,6125]);
 										//PANGALIMAN, SANTISTEBAN
 									}
+
+									// FLEET B CAN SEE SOME FLEET C CREW
+									if(auth()->user()->fleet == "FLEET B"){
+										$q->orWhereIn('pa.applicant_id', [4442]);
+										//SENAS
+									}
 								});
 
 		// IF DID NOT USE FILTER AND ONLY SEARCH VALUE
