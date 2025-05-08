@@ -347,7 +347,11 @@
 		<td colspan="8">
 			ㅤAny facts which are not defined in this agreement, these are complied with the law of flag state or Applicable collective bargaining agreement.
 			<br style='mso-data-placement:same-cell;' />
+			@if($data->vessel->id == 39)
+			ㅤ※  As per 2022 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and
+			@else
 			ㅤ※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and
+			@endif
 			<br style='mso-data-placement:same-cell;' />
 			ㅤentitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed
 			<br style='mso-data-placement:same-cell;' />
