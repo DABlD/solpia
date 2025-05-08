@@ -619,7 +619,14 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $text = "Any facts which are not defined in this agreement, these are complied with the law of flag state or Applicable collective bargaining agreement.";
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
                 $rt->createText(PHP_EOL);
-                $text = "※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and";
+
+                if($this->applicant->vessel->id == 39){
+                    $text = "※  As per 2022 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and";
+                }
+                else{
+                    $text = "※  As per 2018 amendments to MLC 2006, Standard A 2.1.7 / A 2.2.7 / Guideline B 2.5.1.8, this agreement including the wage, and";
+                }
+
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
                 $rt->createText(PHP_EOL);
                 $text = "entitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed";
