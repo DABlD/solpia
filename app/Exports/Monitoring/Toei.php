@@ -22,7 +22,7 @@ class Toei implements FromView, WithEvents, WithColumnFormatting//, WithDrawings
 
     public function view(): View
     {
-        return view('exports.monitoring.hmm', [
+        return view('exports.monitoring.toei', [
             'data' => $this->data,
             'vessel' => $this->vessel,
         ]);
@@ -435,39 +435,39 @@ class Toei implements FromView, WithEvents, WithColumnFormatting//, WithDrawings
 
                 // FILLS
                 $fills[0] = [
-                    'A4:H4', 'K4', 'M4', 'O4:P4', 'R4:AJ4',
+                    // 'A4:H4', 'K4', 'M4', 'O4:P4', 'R4:AJ4',
                 ];
 
                 $fills[1] = [
-                    'I4:J4', 'L4', 'N4', 'Q4',
+                    // 'I4:J4', 'L4', 'N4', 'Q4',
                 ];
 
                 $fills[2] = [
-                    'L3:R3'
+                    // 'L3:R3'
                 ];
 
                 $fills[3] = [
-                    'S3:Y3'
+                    // 'S3:Y3'
                 ];
 
                 $fills[4] = [
-                    'Z3:AC3'
+                    // 'Z3:AC3'
                 ];
 
                 $fills[5] = [
-                    'AD3:AG3'
+                    // 'AD3:AG3'
                 ];
 
                 $fills[6] = [
-                    'AH3'
+                    // 'AH3'
                 ];
 
                 $fills[7] = [
-                    'AI3'
+                    // 'AI3'
                 ];
 
                 $fills[8] = [
-                    'AJ3'
+                    // 'AJ3'
                 ];
 
                 foreach($fills as $key => $value){
@@ -629,60 +629,39 @@ class Toei implements FromView, WithEvents, WithColumnFormatting//, WithDrawings
                 $event->sheet->getDelegate()->getStyle('A4:AJ' . (sizeof($this->data) + 4))->getFont()->setName('Arial Narrow');
 
                 // CONDITIONAL FORMATTING
-                $conditional = new \PhpOffice\PhpSpreadsheet\Style\Conditional();
-                $conditional->setConditionType(\PhpOffice\PhpSpreadsheet\Style\Conditional::CONDITION_CELLIS);
-                $conditional->setOperatorType(\PhpOffice\PhpSpreadsheet\Style\Conditional::OPERATOR_EQUAL);
-                $conditional->addCondition('"N/A"');
-                $conditional->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-                $conditional->getStyle()->getFill()->getStartColor()->setARGB("999999");
-                $conditional->getStyle()->getFill()->getEndColor()->setARGB("999999");
+                // $conditional = new \PhpOffice\PhpSpreadsheet\Style\Conditional();
+                // $conditional->setConditionType(\PhpOffice\PhpSpreadsheet\Style\Conditional::CONDITION_CELLIS);
+                // $conditional->setOperatorType(\PhpOffice\PhpSpreadsheet\Style\Conditional::OPERATOR_EQUAL);
+                // $conditional->addCondition('"N/A"');
+                // $conditional->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                // $conditional->getStyle()->getFill()->getStartColor()->setARGB("999999");
+                // $conditional->getStyle()->getFill()->getEndColor()->setARGB("999999");
 
-                $conditionalStyles = $event->sheet->getDelegate()->getStyle('L5:AI' . (sizeof($this->data) + 4))->getConditionalStyles();
-                $conditionalStyles[] = $conditional;
+                // $conditionalStyles = $event->sheet->getDelegate()->getStyle('L5:AI' . (sizeof($this->data) + 4))->getConditionalStyles();
+                // $conditionalStyles[] = $conditional;
 
-                $event->sheet->getDelegate()->getStyle('L5:AJ' . (sizeof($this->data) + 4))->setConditionalStyles($conditionalStyles);
+                // $event->sheet->getDelegate()->getStyle('L5:AJ' . (sizeof($this->data) + 4))->setConditionalStyles($conditionalStyles);
 
-                // CONDITIONAL FORMATTING FOR CONTRACT DURATION
-                $conditional = new \PhpOffice\PhpSpreadsheet\Style\Conditional();
-                $conditional->setConditionType(\PhpOffice\PhpSpreadsheet\Style\Conditional::CONDITION_CELLIS);
-                $conditional->setOperatorType(\PhpOffice\PhpSpreadsheet\Style\Conditional::OPERATOR_LESSTHANOREQUAL);
-                $conditional->addCondition('TODAY()+35');
-                $conditional->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-                $conditional->getStyle()->getFill()->getStartColor()->setARGB("FF5757");
-                $conditional->getStyle()->getFill()->getEndColor()->setARGB("FF5757");
-
-                $conditionalStyles = $event->sheet->getDelegate()->getStyle('J5:J' . (sizeof($this->data) + 4))->getConditionalStyles();
-                $conditionalStyles[] = $conditional;
-
-                $event->sheet->getDelegate()->getStyle('J5:J' . (sizeof($this->data) + 4))->setConditionalStyles($conditionalStyles);
-
-                // CONDITIONAL FORMATTING FOR DATES
+                // CONDITIONAL FOR DATE YELLOW
                 $conditional = new \PhpOffice\PhpSpreadsheet\Style\Conditional();
                 $conditional->setConditionType(\PhpOffice\PhpSpreadsheet\Style\Conditional::CONDITION_CELLIS);
                 $conditional->setOperatorType(\PhpOffice\PhpSpreadsheet\Style\Conditional::OPERATOR_LESSTHANOREQUAL);
-                $conditional->addCondition('TODAY()+365');
+                $conditional->addCondition('TODAY()+45');
                 $conditional->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-                $conditional->getStyle()->getFill()->getStartColor()->setARGB("FF5757");
-                $conditional->getStyle()->getFill()->getEndColor()->setARGB("FF5757");
+                $conditional->getStyle()->getFill()->getStartColor()->setARGB("FF0000");
+                $conditional->getStyle()->getFill()->getEndColor()->setARGB("FF0000");
 
-                $conditionalStyles = $event->sheet->getDelegate()->getStyle('L5:S' . (sizeof($this->data) + 4))->getConditionalStyles();
-                $conditionalStyles[] = $conditional;
+                // CONDITIONAL FORMATTING FOR DATES YELLOW
+                $conditional2 = new \PhpOffice\PhpSpreadsheet\Style\Conditional();
+                $conditional2->setConditionType(\PhpOffice\PhpSpreadsheet\Style\Conditional::CONDITION_CELLIS);
+                $conditional2->setOperatorType(\PhpOffice\PhpSpreadsheet\Style\Conditional::OPERATOR_LESSTHANOREQUAL);
+                $conditional2->addCondition('TODAY()+90');
+                $conditional2->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                $conditional2->getStyle()->getFill()->getStartColor()->setARGB("FFFF00");
+                $conditional2->getStyle()->getFill()->getEndColor()->setARGB("FFFF00");
 
-                $event->sheet->getDelegate()->getStyle('L5:S' . (sizeof($this->data) + 4))->setConditionalStyles($conditionalStyles);
-
-                // CONDITIONAL FORMATTING FOR DATES
-                $conditional = new \PhpOffice\PhpSpreadsheet\Style\Conditional();
-                $conditional->setConditionType(\PhpOffice\PhpSpreadsheet\Style\Conditional::CONDITION_CELLIS);
-                $conditional->setOperatorType(\PhpOffice\PhpSpreadsheet\Style\Conditional::OPERATOR_LESSTHANOREQUAL);
-                $conditional->addCondition('TODAY()+365');
-                $conditional->getStyle()->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-                $conditional->getStyle()->getFill()->getStartColor()->setARGB("FF5757");
-                $conditional->getStyle()->getFill()->getEndColor()->setARGB("FF5757");
-
-                $conditionalStyles = $event->sheet->getDelegate()->getStyle('U5:AI' . (sizeof($this->data) + 4))->getConditionalStyles();
-                $conditionalStyles[] = $conditional;
-
-                $event->sheet->getDelegate()->getStyle('U5:AI' . (sizeof($this->data) + 4))->setConditionalStyles($conditionalStyles);
+                $event->sheet->getDelegate()->getStyle('J5:J' . (sizeof($this->data) + 4))->setConditionalStyles([$conditional, $conditional2]);
+                $event->sheet->getDelegate()->getStyle('L5:AI' . (sizeof($this->data) + 4))->setConditionalStyles([$conditional, $conditional2]);
             },
         ];
     }

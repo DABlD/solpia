@@ -1,5 +1,29 @@
 @php
 	$size = sizeof($data);
+
+	$latestEmbark = null;
+
+	foreach($data as $obc){
+		if($latestEmbark == null){
+			$latestEmbark = $obc->joining_date;
+		}
+		elseif($obc->joining_date > $latestEmbark){
+			$latestEmbark = $obc->joining_date;
+		}
+	}
+
+	$data = $data->sortBy('rank_id');
+	$temp = [];
+
+	foreach(["DECK OFFICER", "ENGINE OFFICER", "DECK RATING", "ENGINE RATING", "GALLEY"] as $category){
+		foreach($data as $obc){
+			if($obc->rank->category == $category){
+				array_push($temp, $obc);
+			}
+		}
+	}
+
+	$data = $temp;
 @endphp
 
 <table>
@@ -84,7 +108,11 @@
 			<td>{{ $vessel->principal->name }}</td>
 			<td>{{ $vessel->name }}</td>
 			<td>{{ $obc->applicant->user->crew->pro_app->rank->abbr }}</td>
-			<td>{{ $obc->applicant->user->namefull }}</td>
+			@if($obc->joining_date == $latestEmbark)
+				<td style="background-color: #BDD7EE;">{{ $obc->applicant->user->namefull }}</td>
+			@else
+				<td>{{ $obc->applicant->user->namefull }}</td>
+			@endif
 			<td>{{ isset($obc->applicant->user->birthday) ? $obc->applicant->user->birthday->format('d-M-y') : "N/A" }}</td>
 			<td>{{ isset($obc->applicant->user->birthday) ? $obc->applicant->user->birthday->age : "N/A" }}</td>
 			<td>{{ $obc->joining_date->format('d-M-y') }}</td>
@@ -256,4 +284,21 @@
 			<td></td>
 		</tr>
 	@endforeach
+
+	<tr>
+		<td colspan="30"></td>
+	</tr>
+
+	<tr>
+		<td colspan="4"></td>
+		<td style="text-align: center;">LEGEND:</td>
+		<td></td>
+		<td colspan="3" style="text-align: center; background-color: #BDD7EE;">LATEST EMBARKED CREW</td>
+		<td></td>
+		<td colspan="3" style="text-align: center; background-color: #C6E0B4;">NEWLY PROMOTED CREW</td>
+		<td></td>
+		<td colspan="3" style="text-align: center; background-color: #FFFF00;">OVERDUE / EXPIRING IN 3 MOS</td>
+		<td></td>
+		<td colspan="3" style="text-align: center; background-color: #FF0000;">OVERDUE / EXPIRING IN 1.5 MOS</td>
+	</tr>
 </table>
