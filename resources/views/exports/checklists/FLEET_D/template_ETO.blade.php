@@ -322,6 +322,18 @@
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
+	@elseif(in_array($data->vessel->principal_id, [5]))
+		{{ $doc("KOSMA TRAINING CERTIFICATE", "KOSMA", 'lc') }}
+		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
 	@elseif(in_array($data->vessel->principal_id, [547]))
 		{{ $con("DLSM BRIEFING") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
