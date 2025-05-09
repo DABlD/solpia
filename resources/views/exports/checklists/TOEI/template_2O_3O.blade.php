@@ -1,5 +1,5 @@
 @php
-	$vFlag = $data->vessel->flag;
+	$vFlag = $data->vessel->flag ?? "-";
 	
 	$checkDate = function($issue, $expiry, $type2){
 		if($type2 == 1){
