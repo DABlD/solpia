@@ -10,40 +10,39 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-
-class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawings//, ShouldAutoSize
+class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $title){
-        $data->official_no = "-";
-        
-        if($data->vessel->name == "M/V CH BELLA"){
-            $data->official_no = "JJR-106189";
+    public function __construct($applicant, $title = "HMM MLC"){
+        $onum = [
+            "M/T SM FALCON" => "48922-17",
+            "M/T SM NAVIGATOR" => "50983-19",
+            "M/T SM OSPREY" => "48789-17",
+            "M/T SM VENUS1" => "50738-19",
+            "M/T SM VENUS2" => "51157-20",
+            "M/T SM WHITE WHALE1" => "51302-20",
+            "M/T SM WHITE WHALE2" => "51303-20",
+        ];
+
+        if(isset($applicant->vessel) && isset($onum[$applicant->vessel->name])){
+            $applicant->onum = $onum[$applicant->vessel->name];
         }
-        elseif($data->vessel->name == "M/V CH CLARE"){
-            $data->official_no = "JJR-102152";
-        }
-        elseif($data->vessel->name == "M/V CH DORIS"){
-            $data->official_no = "JJR-105192";
-        }
-        elseif($data->vessel->name == "M/V CK ANGIE"){
-            $data->official_no = "JJR-111063";
-        }
-        elseif($data->vessel->name == "M/V CK BLUEBELL"){
-            $data->official_no = "JJR-111067";
+        else{
+            $applicant->onum = "";
         }
 
-        $this->data     = $data;
-        $this->title     = $title;
+        if($applicant->pro_app->status != "Lined-Up"){
+            $applicant->port = "ONBOARD " . $applicant->vessel->name;
+        }
+
+        $this->applicant    = $applicant;
+        $this->title        = $title;
     }
 
     public function view(): View
     {
-        $exportView = str_replace(' ', '_', $this->data->vessel->fleet) . '.klcsmlng';
-        
+        $exportView = str_replace(' ', '_', $this->applicant->vessel->fleet) . '.klcsmlng';
         return view('exports.mlc.' . $exportView, [
-            'data' => $this->data
+            'data' => $this->applicant,
         ]);
     }
 
@@ -194,7 +193,7 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'BDD7EE'
+                        'rgb' => 'FFC000'
                     ]
                 ],
             ],
@@ -223,8 +222,11 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
                 ]
             ],
             [
+                'font' => [
+                    'bold' => true
+                ],
                 'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ]
             ],
             [
@@ -252,44 +254,40 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
-            ],
-            [
-                'font' => [
-                    'underline' => true
-                ],
-            ],
-            [
-                'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
-                ],
-            ],
+            ]
         ];
 
+        $title = $this->title;
+
         return [
-            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle) {
+            AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $title) {
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->title), false);
+                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $title), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&LDOC/REV.NO.:MLC-FO4/O8 &R2022.10.20');
+                // DEFAULT FONT AND STYLE FOR WHOLE PAGE
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(9);
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                // $event->sheet->getDelegate()->getStyle('F3')->getFont()->setSize(14);
+                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
-                
-                // SET DEFAULT FONT
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Calibri');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                $event->sheet->getParent()->getActiveSheet()->setBreak('A65', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
 
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
@@ -323,57 +321,39 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
 
                 // VT
                 $h[1] = [
-                    'A148'
                 ];
 
-                // HR 
+                // HL B
                 $h[2] = [
-                    'A145', 'A148'
+                    
                 ];
 
                 // HC
                 $h[3] = [
-                    'D14:K14', 'E16',
-                    'L133', 'L135',
-                    'F142', 'F144', 'H147'
+                    
                 ];
 
                 // HC VC
                 $h[4] = [
-                    'A1:M10', 'B29:M30',
-                    'E63', 'B68:B77', 'C70:C74',
-                    'F68', 'F75', 'E70:E74'
+                    'A1'
                 ];
 
                 // HL
                 $h[5] = [
-                    'A12:A144'
+                    'A26:J27'
                 ];
 
                 // B
                 $h[6] = [
-                    'A1', 'A3', 'A6',
-                    'A12:B12', 'A18:B18', 'A25:B25', 'A27:B27', 'C32:D32', 'A34:B34', 'C36',
-                    'C39', 'C49', 'B53', 'B63:I63', 'B65', 'C67', 'F68', 'E70:E74', 'F75',
-                    'C81', 'C84', 'B87', 'B104',
-                    'B133:M133', 'B135:M135', 'F142:M142', 'F144:M144', 'H147:M147'
                 ];
 
                 // VC
                 $h[7] = [
-                    'C70:M79'
-                ];
-
-                // UNDERLINE
-                $h[8] = [
-                ];
-
-                // JUSTIFY
-                $h[9] = [
+                    'A3:L14'
                 ];
 
                 $h['wrap'] = [
-                    'A3:M10'
+                    'L11', 'J13', 'A22', 'A38', 'A48', 'A96', 'A98', 'A100', 'A106', 'A107'
                 ];
 
                 // SHRINK TO FIT
@@ -401,7 +381,7 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
 
                 // FILLS
                 $fills[0] = [
-                    'A3', 'A6', 'B29:B30', 'J29:J30'
+                    'A61:L61'
                 ];
 
                 $fills[1] = [
@@ -418,7 +398,7 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A3:M10', 'B29:M30'
+                    'A3:L14', 'A26:J27'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -447,6 +427,7 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
 
                 // BRB
                 $cells[7] = array_merge([
+                    'B3:D3', 'B5:D5', 'B7:D7', 'B9:D9', 'B13:I13'
                 ]);
 
                 // LRB
@@ -463,13 +444,15 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
                 ]);
 
                 // TBT - TOP BORDER THIN
+                $cells[10] = array_merge([
+                ]);
+
+                // TBT - TOP BORDER THIN
                 $cells[11] = array_merge([
                 ]);
 
                 // BBT
                 $cells[12] = array_merge([
-                    'F68:G68', 'E70:F70', 'E71:F71', 'E72:F72', 'E73:F73', 'E74:F74', 'F75:G75',
-                    'L133:M133', 'L135:M135'
                 ]);
 
                 // LBT
@@ -490,143 +473,71 @@ class KLCSMLNG implements FromView, WithEvents, WithColumnFormatting, WithDrawin
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(4.3);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3.5);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(5.5);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(7);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(7);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(3.5);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(7);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(3.5);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(3.5);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(23);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(28);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(22);
 
+                // 'A22', 'A38', 'A48', 'A91', 'A93', 'A99'
                 // ROW RESIZE
-                $rows = [
-                    [
-                        30, //ROW HEIGHT
-                        3,10 //START ROW, END ROW
-                    ],
-                    [20,68,79]
-                ];
-
-                $rows2 = [
-                    [
-                        40,
-                        [1,2]
-                    ],
-                    [28,[29,30,132,136,146,149]],
-                    [70,[38,141,143]], //FOOTERS
-                    [150,[80]], //FOOTERS
-                    [90,[131,145]], //FOOTERS
-                    [220,[154]], //FOOTERS
-                ];
-
-                foreach($rows as $row){
-                    for($i = $row[1]; $i <= $row[2]; $i++){
-                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight($row[0]);
-                    }
-                }
-
-                foreach($rows2 as $row){
-                    foreach($row[1] as $cell){
-                        $event->sheet->getDelegate()->getRowDimension($cell)->setRowHeight($row[0]);
-                    }
-                }
-
-                // PAGE BREAKS
-                $rows = [38, 80, 131];
-                foreach($rows as $row){
-                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-                }
+                $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(22)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(38)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(48)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(96)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(98)->setRowHeight(27);
+                $event->sheet->getDelegate()->getRowDimension(100)->setRowHeight(40);
+                $event->sheet->getDelegate()->getRowDimension(106)->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension(107)->setRowHeight(40);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(20);
-                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(13);
-                $event->sheet->getDelegate()->getStyle('A39:M131')->getFont()->setSize(11);
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A2:L150')->getFont()->setSize(9);
+                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
-        ];
-    }
-
-    public function columnFormats(): array
-    {
-        return [
-            'D' => NumberFormat::FORMAT_TEXT,
         ];
     }
 
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setPath(public_path("images/smcmshipping.png"));
+        $drawing->setPath(public_path("images/shirley_sig.png"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(30);
-        $drawing->setWidth(150);
-        $drawing->setOffsetX(2);
-        $drawing->setOffsetY(60);
-        $drawing->setCoordinates('M38');
+        $drawing->setHeight(60);
+        $drawing->setWidth(130);
+        $drawing->setOffsetX(-60);
+        $drawing->setOffsetY(-50); 
+        $drawing->setCoordinates('L114');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setPath(public_path("images/smcmshipping.png"));
+        $drawing2->setPath(public_path("images/MLC_SEAL.png"));
         $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(30);
-        $drawing2->setWidth(150);
-        $drawing2->setOffsetX(2);
-        $drawing2->setOffsetY(161);
-        $drawing2->setCoordinates('M80');
+        $drawing2->setHeight(100);
+        $drawing2->setWidth(100);
+        // $drawing2->setOffsetX(40);
+        $drawing2->setOffsetY(10);
+        $drawing2->setCoordinates('G112');
 
+        $mlcStamp = $this->applicant->vessel->type == "LNG" ? "images/mlc_klcsm_lng.png" : "images/mlc_klcsm.png";
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing3->setPath(public_path("images/smcmshipping.png"));
+        $drawing3->setPath(public_path($mlcStamp));
         $drawing3->setResizeProportional(false);
-        $drawing3->setHeight(30);
-        $drawing3->setWidth(150);
-        $drawing3->setOffsetX(2);
-        $drawing3->setOffsetY(60);
-        $drawing3->setCoordinates('M131');
+        $drawing3->setHeight(90);
+        $drawing3->setWidth(260);
+        $drawing3->setOffsetX(50);
+        $drawing3->setOffsetY(2);
+        $drawing3->setCoordinates('J110');
 
-        $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing4->setPath(public_path("images/changmyungshipping.png"));
-        $drawing4->setResizeProportional(false);
-        $drawing4->setHeight(90);
-        $drawing4->setWidth(420);
-        $drawing4->setOffsetX(-20);
-        $drawing4->setOffsetY(2);
-        $drawing4->setCoordinates('I143');
-
-        $drawing5 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing5->setPath(public_path("images/MLC_SEAL.png"));
-        $drawing5->setResizeProportional(false);
-        $drawing5->setHeight(100);
-        $drawing5->setWidth(100);
-        $drawing5->setOffsetX(50);
-        $drawing5->setOffsetY(2);
-        $drawing5->setCoordinates('M145');
-
-        $drawing6 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing6->setPath(public_path("images/shirley_sig.png"));
-        $drawing6->setResizeProportional(false);
-        $drawing6->setHeight(90);
-        $drawing6->setWidth(150);
-        $drawing6->setOffsetX(50);
-        $drawing6->setOffsetY(2);
-        $drawing6->setCoordinates('K145');
-
-        $drawing7 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing7->setPath(public_path("images/smcmshipping.png"));
-        $drawing7->setResizeProportional(false);
-        $drawing7->setHeight(30);
-        $drawing7->setWidth(150);
-        $drawing7->setOffsetX(2);
-        $drawing7->setOffsetY(10);
-        $drawing7->setCoordinates('M155');
-
-        return [$drawing, $drawing2, $drawing3, $drawing4, $drawing5, $drawing6, $drawing7];
+        return [$drawing, $drawing2, $drawing3];
     }
 }
