@@ -324,12 +324,12 @@
 	</tr>
 
 	<tr>
-		<td colspan="12">6. Provision fee: (16,500KRW), Foreign (US$15)</td>
+		<td colspan="3">&#9316; GOVT. Tax deduction: </td>
+		<td colspan="9" style="{{ $b }}">AS REGULATIONS</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">&#9316; GOVT. Tax deduction: </td>
-		<td colspan="9" style="{{ $b }}">AS REGULATIONS</td>
+		<td colspan="12">&#9317; Provision fee: (16,500KRW), Foreign (US$15)</td>
 	</tr>
 
 	{{ $d1("3) Health and social security protection benefits - Shipowner provides medical care, sickness benefit, employment injury benefit, ") }}
