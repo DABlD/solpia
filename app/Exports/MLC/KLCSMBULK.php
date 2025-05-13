@@ -47,7 +47,7 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $identification = "110-81-36497";
         }
 
-        $applicant->vofficialNo = $temp[$applicant->vessel->name];
+        $applicant->vofficialNo = $temp[$applicant->vessel->name] ?? "-";
         $applicant->vshipowner = $shipowner;
         $applicant->vphoneNumber = $phoneNumber;
         $applicant->vaddress = $address;
