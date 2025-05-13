@@ -392,7 +392,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'A1', 'A3:A13', 'D3:D13', 'K3:K11',
+                    'A1', 'A3:A13', 'D3:D13', 'J3:K11',
                 ];
 
                 // HL

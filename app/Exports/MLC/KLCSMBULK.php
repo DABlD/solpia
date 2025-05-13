@@ -32,7 +32,7 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V CK BLUEBELL" => "JJR-111067",
         ];
 
-        if(in_array($applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY'])){
+        if(in_array($applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY', "M/T SM ALBATROSS", "K. LOTUS", "SM KESTREL", "FUELNG VENOSA"])){
             $shipowner = "KOREA LINE CORPORATION";
             $phoneNumber = "+82-2-3701-0114";
             $address = "SM R&D Center 78, Magkjungang 8-ro, Gangseo-gu, Seoul, Korea";
@@ -388,7 +388,7 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'A1', 'A3:A13', 'D3:D13', 'K3:K11',
+                    'A1', 'A3:A13', 'D3:D13', 'J3:K11',
                 ];
 
                 // HL
