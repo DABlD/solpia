@@ -69,8 +69,13 @@ class X25_MLCLinedUp implements WithMultipleSheets
         $class = "App\Exports\MLC\\" . $principal;
 
         // FOR KLCSM BULK
-        if(str_contains($this->vessel->type, "BULK") && $principal == "KLCSM"){
-            $class .= "BULK";
+        if($this->applicant->vessel->principal_id == 10){
+            if(str_contains($this->applicant->vessel->type, "BULK")){
+                $class .= "BULK";
+            }
+            elseif(str_contains($this->applicant->vessel->type, "LNG")){
+                $class .= "LNG";
+            }
         }
 
         foreach($this->applicants as $applicant){
