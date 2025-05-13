@@ -271,7 +271,7 @@
 	<tr>
 		<td colspan="2" style="white-space: nowrap;">Spell out other Tests:</td>
 		<td colspan="7" style="border-bottom: 1px solid black; text-align: center;">
-			HMM PACKAGE WITH {{ $data->req['flag'] ?? "(FLAG)" }}
+			HMM PACKAGE WITH DAAT {{ $data->req['flag'] ? "AND " . $data->req['flag'] . "(FLAG)" : "" }}
 		</td>
 	</tr>
 
