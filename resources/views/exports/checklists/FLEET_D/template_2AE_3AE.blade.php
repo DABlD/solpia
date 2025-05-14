@@ -310,6 +310,7 @@
 	@elseif(in_array($data->vessel->principal_id, [5]))
 		{{ $doc("KOSMA TRAINING CERTIFICATE", "KOSMA", 'lc') }}
 		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
+		{{-- GNS HARVEST --}}
 		@if($data->vessel->id == 4753)
 			{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
 		@else
