@@ -3115,14 +3115,16 @@
                             'shinko': "SHINKO"
                         @elseif(auth()->user()->fleet == "FLEET C")
                             'hmm': "HMM",
-                            'toei': "TOEI"
+                            'toei': "TOEI",
+                            'ckMaritime': "CK MARITIME",
+                            'kosco': "KOSCO"
                         @elseif(in_array(auth()->user()->id, [22, 4504, 5013, 6011, 5963, 6014, 6080, 5907]))
                             'western': "NITTA/TOEI"
                         @elseif(in_array(auth()->user()->id, [4545, 4861, 4988, 6016]))
                             'shinko': "SHINKO"
                         @elseif(in_array(auth()->user()->id, [4520]))
                             'klcsm': "KLCSM",
-                            'hmm': "HMM"
+                            'hmm': "HMM",
                         @elseif(in_array(auth()->user()->id, [5901])) //SIR GWAK
                             'klcsm': "KLCSM",
                             'hmm': "HMM",

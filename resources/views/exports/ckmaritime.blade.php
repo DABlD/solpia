@@ -397,7 +397,7 @@
 
 	@php
 		$label = null;
-		if($data->pro_app->rank->id == 24){
+		if($data->rank->id == 24){
 			$coc = isset($data->document_lc->NCIII) ? $data->document_lc->NCIII : null;
 			$label = "NCIII";
 		}
