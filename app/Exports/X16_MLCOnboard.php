@@ -81,17 +81,20 @@ class X16_MLCOnboard implements WithMultipleSheets
         $principal = str_replace(' ', '', $this->principal);
         $class = "App\Exports\MLC\\" . $principal;
 
-        // FOR KLCSM BULK
-        if($this->applicant->vessel->principal_id == 10){
-            if(str_contains($this->applicant->vessel->type, "BULK")){
-                $class .= "BULK";
-            }
-            elseif(str_contains($this->applicant->vessel->type, "LNG")){
-                $class .= "LNG";
-            }
-        }
-
         foreach($this->applicants as $applicant){
+            // FOR KLCSM BULK
+            if($applicant->vessel->principal_id == 10){
+                if(str_contains($this->applicant->vessel->type, "BULK")){
+                    $class .= "BULK";
+                }
+                elseif(str_contains($this->applicant->vessel->type, "LNG")){
+                    $class .= "LNG";
+                }
+            }
+
+            if($applicant->vessel->id == 6005){
+                $class .= "2";
+            }
 
             // FOR HMM VESSEL SPECIFIC CADETS AND BOY
             $p1 = in_array($applicant->vessel->id, [4101, 4629, 4627, 3822, 4628, 2069, 4433, 2044, 2725, 8630, 8841]); // ALGECIRAS, OSLO, COPENHAGEN, GDANSK, HAMBURG, SOUTHAMPTON, LE HAVRE, ST PETERSBURG
