@@ -527,6 +527,12 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     [14, [30]],[35, [24,40]], [24,[34,36,37,38]], [125,[33,35]], [180, [39]], [100,[41]]
                 ];
 
+                // HYUNDAI COURAGE
+                if($this->applicant->vessel->id == 36){
+                    array_push($rows2, [40, [40]]);
+                    array_push($rows2, [95, [41]]);
+                }
+
                 foreach($rows as $row){
                     for($i = $row[1]; $i <= $row[2]; $i++){
                         $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight($row[0]);
