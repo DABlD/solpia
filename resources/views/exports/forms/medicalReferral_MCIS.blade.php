@@ -59,7 +59,8 @@
 		<td>
 			Worker:
 		</td>
-		<td colspan="7"></td>
+		<td colspan="3"></td>
+		<td colspan="4" style="text-align: right;">Vessel: {{ isset($data->pro_app->vessel) ? $data->pro_app->vessel->name : "-" }}</td>
 	</tr>
 
 	<tr style="font-family: 'DejaVu Sans, sans-serif; font-size: 12px;';">
