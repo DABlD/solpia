@@ -297,7 +297,7 @@
 		{{ $doc("KOSMA TRAINING CERTIFICATE", "KOSMA", 'lc') }}
 		{{ $con("HANJOO MEDICAL HISTORY CHECKLIST") }}
 		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -306,7 +306,12 @@
 	@elseif(in_array($data->vessel->principal_id, [5]))
 		{{ $doc("KOSMA TRAINING CERTIFICATE", "KOSMA", 'lc') }}
 		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{-- GNS HARVEST --}}
+		@if($data->vessel->id == 4753)
+			{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
+		@else
+			{{ $doc("TEST", "", 'lc') }}
+		@endif
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
