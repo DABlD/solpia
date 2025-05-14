@@ -37,6 +37,10 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $this->shipmanager['address'] = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
 
+        if($applicant->vessel->name == "M/V HYUNDAI COURAGE"){
+            $this->shipowner['president'] = "Wonhyok Choi";
+        }
+
         $this->title = $title;
     }
 
@@ -376,7 +380,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // UNDERLINE
                 $h[8] = [
-                    // 'A9', 'A36:A37'
+                    // 'A9', 'A36:A37',
                 ];
 
                 // JUSTIFY
