@@ -4979,7 +4979,9 @@
                     X37_LinedUpFinalBriefing: 'Final Briefing',
                     X26_POEALinedUp: 'Lined-Up Crew POEA Contract',
                     X27_POEAOnBoard: 'Onboard Crew POEA Contract',
-                    X32_CrewUniform: 'Crew Uniform Order Slip'
+                    X32_CrewUniform: 'Crew Uniform Order Slip',
+                    X32_CrewUniform: 'Crew Uniform Order Slip',
+                    X38_BatchCrewCompetencyChecklist: 'Crew Competency Checklist'
                 },
                 cancelButtonColor: '#f76c6b',
                 width: '300px',
@@ -6080,6 +6082,40 @@
                     window.location.href = `{{ route('applications.exportDocument') }}/1/RequestToProcess?` + $.param(data);
                 }
             })
+        }
+
+        function X38_BatchCrewCompetencyChecklist(vid, name){
+            swal({
+                title: 'Joining Details: ',
+                html: `
+                    <input type="text" id="joining_date" placeholder="Joining Date (optional)" class="form-control">
+                    <br>
+                    <input type="text" id="joining_port" placeholder="Joining Port (optional)" class="form-control">
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                onOpen: () => {
+                    let string = "";
+
+                    $('#joining_date').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    })
+                }
+            }).then(result => {
+                if(result.value){
+                    let data = {
+                        status: 'Lined-Up',
+                        joining_date: $('#joining_date').val(),
+                        joining_port: $('#joining_port').val(),
+                        vid: vid,
+                        filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + " - Crew Competency Checklist"
+                    }
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/X38_BatchCrewCompetencyChecklist?` + $.param(data);
+                }
+            });
         }
 
         function X16_MLCOnboard(vid, name){

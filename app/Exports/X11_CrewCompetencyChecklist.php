@@ -15,7 +15,7 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFormatting//, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $type){
+    public function __construct($data, $type, $req, $title = "필리핀"){
         $data->load('document_flag');
         $data->load('document_id');
         $data->load('document_lc');
@@ -46,6 +46,8 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
         
         $this->data     = $data;
         $this->type     = $type;
+        $this->req     = $req;
+        $this->title     = $title;
     }
 
     public function columnFormats(): array
@@ -278,7 +280,7 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('필리핀', false);
+                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->title), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
