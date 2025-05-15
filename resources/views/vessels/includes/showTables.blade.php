@@ -35,7 +35,7 @@
 	                    @endif
 	                    <td><b>Name</b></td>
 	                    <td><b>Age</b></td>
-	                    <td><b>Joining Date</b></td>
+	                    <td><b>Joining Date /<br>Promotion Date</b></td>
 	                    <td><b>MOB</b></td>
 	                    <td><b>Contract<br>Duration</b></td>
 	                    <td><b>End of<br>Contract</b></td>
@@ -247,6 +247,17 @@
 	        }
 	        let disembarkation_date = moment(crew.joining_date).add(cd2, 'months');
 
+	        let joining_date = null;
+	        let promotion_date = null;
+
+	        if(crew.joining_port == null && crew.beforePromotion){
+	        	joining_date = crew.beforePromotion.joining_date;
+	        	promotion_date = crew.joining_date;
+	        }
+	        else{
+	        	joining_date = crew.joining_date;
+	        }
+
 	        table2 += `
 	            <tr>
 	                <td>${index + 1}</td>
@@ -256,8 +267,8 @@
 	                @endif
 	                <td class="OBC" data-id="${crew.applicant_id}">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
 	                <td>${crew.age}</td>
-	                <td class="jdate" data-id="${crew.applicant_id}" data-date="${crew.joining_date}">${moment(crew.joining_date).format('DD-MMM-YY')}</td>
-	                <td>${moment().diff(moment(crew.joining_date), 'months')}</td>
+	                <td class="jdate" data-id="${crew.applicant_id}" data-date="${joining_date}">${moment(joining_date).format('DD-MMM-YY') + (promotion_date ? " /<br>" + moment(promotion_date).format('DD-MMM-YY') : "")}</td>
+	                <td>${moment().diff(moment(joining_date), 'months') + (promotion_date ? " /<br>" + moment().diff(moment(promotion_date), 'months') : "")}</td>
 	                <td>${cd}</td>
 	                <td class="ddate" data-id="${crew.applicant_id}" data-date="${moment(disembarkation_date).format("YYYY-MM-DD")}">${disembarkation_date.format('DD-MMM-YY')}</td>
 	                <td>${crew.PASSPORT ? moment(crew.PASSPORT).format('DD-MMM-YY') : '-----'}</td>

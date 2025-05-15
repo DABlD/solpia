@@ -1144,6 +1144,15 @@ class ApplicationsController extends Controller
             $crew->age = now()->parse($crew->birthday)->diff(now())->format('%y');
             $crew->seniority = $crew->applicant->pro_app->seniority;
 
+
+            // GET ORIGINAL JOINING IF PROMOTED ONBOARD.
+            if($crew->joining_port == null){
+                $temp2 = LineUpContract::where('disembarkation_date', $crew->joining_date)->where('status', 'On Board Promotion')->first();
+                if($temp2){
+                    $crew->beforePromotion = $temp2;
+                }
+            }
+
             foreach($temp as $docu){
                 if($docu->type != ""){
                     $crew->{$docu->type} = $docu->expiry_date;
