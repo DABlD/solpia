@@ -291,8 +291,8 @@ class HMMCM1V2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $line->setPath(public_path('/images/horizontal_line.png'));
                 $line->setHeight(15);
 
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8배승관리(MANNING MANAGEMENT) &R&8APP.5 / Page');
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2025.04.23/DCN25003');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8배승관리(MANNING MANAGEMENT) &R&8APP.4 / Page &P');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2025.04.23/DCN24008');
                 $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
 
                 // SET PAGE BREAK PREVIEW
@@ -370,7 +370,8 @@ class HMMCM1V2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // UNDERLINE
                 $h[8] = [
-                    'B24', 'A40'
+                    // 'A9', 'A36:A37',
+                    'A40'
                 ];
 
                 // JUSTIFY
@@ -519,8 +520,8 @@ class HMMCM1V2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         85, //row height
                         [18] // rows
                     ],
-                    [14, [30]],[35, [24,25]], [24,[37]], [125,[33,35]], [180, [39]], [100,[41]],
-                    [40,[1,2,3,15,19,40]], [35,[30,32,34,36,38]]
+                    [14, [30]],[35, [24]], [24,[37]], [125,[33,35]], [180, [39]], [100,[41]],
+                    [40,[1,2,3,15,19,40]], [35,[30,32,34,36,38]], [100, [41]]
                 ];
 
                 foreach($rows as $row){
@@ -559,8 +560,6 @@ class HMMCM1V2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(14);
                 $event->sheet->getDelegate()->getStyle('A3')->getFont()->setSize(11);
-                $event->sheet->getDelegate()->getStyle('G20')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('G20')->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A40')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A40')->getFont()->setName('Times New Roman');
                 $event->sheet->getDelegate()->getStyle('A43')->getFont()->setSize(10);
@@ -645,25 +644,19 @@ class HMMCM1V2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $text = "and Regulations of the Republic of the Marshall Islands.";
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
                 $rt->createText(PHP_EOL);
-                $text = "※   Additional clause for The Republic of Liberia flag";
-                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
-                $rt->createText(PHP_EOL);
-                $text = "1)  Seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ recruitment and placement";
+                $text = "Seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ recruitment and placement services’";
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
                 $rt->createText(PHP_EOL);
-                $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
-                $text = "services’ system of protection, to compensate seafarers for monetary loss that they may incur as a result of the failure of the recruitment";
+                $text = "system of protection, to compensate seafarers for monetary loss that they may incur as a result of the failure of the recruitment and placement";
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
                 $rt->createText(PHP_EOL);
-                $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
-                $text = "and placement service or the relevant shipowner under the seafarers’ employment agreement to meet its obligations to them.";
+                $text = "service or the relevant shipowner under the seafarers’ employment agreement to meet its obligations to them.";
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
                 $rt->createText(PHP_EOL);
-                $text = "2)  After consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be";
+                $text = "After consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be paid to an";
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
                 $rt->createText(PHP_EOL);
-                $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
-                $text = "paid to an account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.";
+                $text = "account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.";
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
 
                 $event->sheet->getParent()->getActiveSheet()->getCell("A39")->setValue($rt);

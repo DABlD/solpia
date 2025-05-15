@@ -11,7 +11,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="8">1.	Seafarer/Capacity/Shipowner/Ship Manager/Agent/Ship</td> {{-- RICH TEXTED NO MORE --}}
+		<td colspan="8">1.	Seafarer/Shipowner/Ship Manager/Agent/Ship</td> {{-- RICH TEXTED NO MORE --}}
 	</tr>
 
 	{{-- 1 --}}
@@ -133,12 +133,8 @@
 		</td>
 		<td>Basic wage</td>
 		<td colspan="2">Fixed/Guaranteed Overtime Allowance</td> {{-- RICH TEXTED NO MORE --}}
-		<td colspan="2">Supervisor Allowance</td>
-		<td colspan="2">
-			HMM Guaranteed Ov
-			<br style='mso-data-placement:same-cell;' />
-			ertime Allowance
-		</td>
+		<td colspan="2">Fixed Supervisor Allowance</td>
+		<td colspan="2">Subsistence Allowance</td>
 	</tr>
 
 	<tr>
@@ -158,16 +154,17 @@
 			(USD/Month)
 		</td>
 		<td colspan="2">
-			{{-- ${{ $data->wage->sub_allow ? number_format($data->wage->sub_allow) : 0 }} --}}
-			${{ $data->wage->owner_allow ?? 0}}
+			${{ $data->wage->sub_allow ? number_format($data->wage->sub_allow) : 0 }}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
 		</td>
 	</tr>
 
 	<tr>
-		<td>Seniority Allowance</td>
-		<td colspan="6">Others</td>
+		<td>Owner's Guaranteed Overtime Allowance</td>
+		<td colspan="2">Seniority Allowance</td>
+		<td colspan="2">Provident Fund (Contract Completion Bonus)</td> {{-- RICH TEXTED --}}
+		<td colspan="2">Others</td>
 	</tr>
 
 	@php
@@ -181,24 +178,20 @@
 				$spay = $srpay[$seniority - 2];
 			}
 		}
-
-		$a = $data->wage->retire_allow ?? 0;
-		$b = $data->wage->sub_allow ?? 0;
-		$c = $a + $b;
 	@endphp
 
 	<tr>
 		<td>
+			${{ $data->wage->owner_allow ?? 0}}
+			<br style='mso-data-placement:same-cell;' />
+			(USD/Month)
+		</td>
+		<td colspan="2">
 			${{ $spay }}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
 		</td>
-		<td colspan="6">
-			${{ $c }}
-			<br style='mso-data-placement:same-cell;' />
-			(USD/Month)
-		</td>
-		{{-- <td colspan="2">
+		<td colspan="2">
 			${{ $data->wage->retire_allow ?? 0 }}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
@@ -207,7 +200,7 @@
 			${{ $data->wage->other_allow ?? 0 }}
 			<br style='mso-data-placement:same-cell;' />
 			(USD/Month)
-		</td> --}}
+		</td>
 	</tr>
 
 	<tr>
@@ -224,11 +217,9 @@
 	<tr>
 		<td>Payment methods</td>
 		<td colspan="7">
-			ㅤWages should be paid directly to the seafarers on board or remitted to their designated bank accounts unless they request otherwise
+			ㅤWages should be paid directly to the seafarers` designated bank accounts unless they request otherwise in writing. 
 			<br style='mso-data-placement:same-cell;' />
-			ㅤin writing. Some allotments should be remitted in due time and directly to the person or persons
-			<br style='mso-data-placement:same-cell;' />
-			ㅤnominated by the seafarers.
+			ㅤSome allotments should be remitted in due time and directly to the person or persons nominated by the seafarers.
 		</td>
 	</tr>
 
@@ -269,9 +260,9 @@
 
 	<tr>
 		<td colspan="8">
-			ㅤThe shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity benefit, and survivors'
+			ㅤThe shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity benefit, survivors'
 			<br style='mso-data-placement:same-cell;' />
-			ㅤbenefit to the seafarer.
+			ㅤbenefit, SSS, PhilHealth, and Pag-IBIG to the seafarer.
 		</td>
 	</tr>
 
@@ -390,7 +381,9 @@
 
 	<tr>
 		<td colspan="8">
-			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them are retained by the each party and the seafarer was given sufficient time to review and opportunity to seek advice on the terms and condition and voluntarily accept them.
+			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them
+			are retained by the each party and the seafarer was given sufficient time to review and opportunity to seek advice on the
+			terms and condition and voluntarily accept them.
 		</td>
 	</tr>
 
