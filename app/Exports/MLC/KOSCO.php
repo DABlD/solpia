@@ -608,9 +608,9 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('SIR KIT SIG');
-        $drawing->setDescription('SIR KIT SIG');
-        $drawing->setPath(public_path("images/sir_kit_sig.png"));
+        $drawing->setName('MAAM SHE SIG');
+        $drawing->setDescription('MAAM SHE SIG');
+        $drawing->setPath(public_path("images/shirley_sig.png"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(70);
         $drawing->setWidth(260);

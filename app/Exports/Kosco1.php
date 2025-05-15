@@ -478,9 +478,9 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 		$drawing2->setCoordinates('A1');
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-		$drawing3->setName('Sir Kit Sig');
-		$drawing3->setDescription('Sir Kit Sig');
-        $drawing3->setPath(public_path('images/sir_kit_sig.png'));
+		$drawing3->setName('SHE SIG');
+		$drawing3->setDescription('SHE SIG');
+        $drawing3->setPath(public_path('images/shirley_sig.png'));
         $drawing3->setResizeProportional(false);
         $drawing3->setHeight(50);
         $drawing3->setWidth(170);
