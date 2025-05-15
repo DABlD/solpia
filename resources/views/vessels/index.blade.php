@@ -258,6 +258,12 @@
         let fType = "%%";
         let fStatus = "Active";
 
+        @if(auth()->user()->id == 23)
+        {{-- FOR TEST --}}
+        fFleet = "FLEET B";
+        fType = "VLCC";
+        @endif
+
         function getFilters(){
             return {
                 fleet: fFleet,
@@ -312,6 +318,11 @@
                 // MUST NOT BE INTERCHANGED t-i
                 tooltip();
                 initializeActions();
+
+                @if(auth()->user()->id == 23)
+                {{-- FOR TEST. USE VESSEL ID --}}
+                $('[data-id="5842"][data-original-title="View Crew List"]').click();
+                @endif
             },
             order: [ [0, 'desc'] ],
         });
@@ -2176,7 +2187,8 @@
                             'max-width': '120px'
                         });
 
-                        $('.actions').css('width', '100px');
+                        $('.actions1').css('width', '190px');
+                        $('.actions2').css('width', '150px');
 
                         $('[id^=table-select-]').on('change', e => {
                             let input = $(e.target);

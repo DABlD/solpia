@@ -21,7 +21,7 @@
 	                    @endif
 	                </tr>
 	            </thead>
-	            <tbody>
+	            <tbody style="font-size: 14px;">
 	    `;
 
 	    let table2 = `
@@ -50,7 +50,7 @@
 	                    @endif
 	                </tr>
 	            </thead>
-	            <tbody>
+	            <tbody style="font-size: 14px;">
 	    `;
 
 	    let table3 = `
@@ -99,17 +99,17 @@
 	                <td>${crew.status2}</td>
 	                <td class="remarks">${crew.remarks}</td>
 	                @if(auth()->user()->role != "Principal")
-	                <td class="actions">
-	                    <a class="btn btn-info" data-toggle="tooltip" title="Export Documents" onClick="getContract(${crew.applicant_id})">
+	                <td class="actions1">
+	                    <a class="btn btn-info btn-sm" data-toggle="tooltip" title="Export Documents" onClick="getContract(${crew.applicant_id})">
 	                        <span class="fa fa-file-text"></span>
 	                    </a>
-	                    <a class="btn btn-primary btn-search" data-toggle="tooltip" onClick="viewInfo(${crew.applicant_id})">
+	                    <a class="btn btn-primary btn-search btn-sm" data-toggle="tooltip" onClick="viewInfo(${crew.applicant_id})">
 	                        <span class="fa fa-search" onClick="viewInfo(${crew.applicant_id})"></span>
 	                    </a>
-	                    <a class="btn btn-success" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id}, ${crew.vessel_id})">
+	                    <a class="btn btn-success btn-sm" data-toggle="tooltip" title="On-Board" onClick="onBoard(${crew.applicant_id}, ${crew.vessel_id})">
 	                        <span class="fa fa-ship"></span>
 	                    </a>
-	                    <a class="btn btn-danger" data-toggle="tooltip" title="Remove Lineup" onClick="rlu(${crew.applicant_id}, ${crew.vessel_id})">
+	                    <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Remove Lineup" onClick="rlu(${crew.applicant_id}, ${crew.vessel_id})">
 	                        <span class="fa fa-times"></span>
 	                    </a>
 	                </td>
@@ -267,7 +267,7 @@
 	                <td>${reliever}</td>
 	                <td class="remarks">${crew.remarks}</td>
 	                @if(auth()->user()->role != "Principal")
-	                <td class="actions">
+	                <td class="actions2">
 	                    <a class="btn btn-info btn-sm" data-toggle="tooltip" title="Export Documents" onClick="getContract2(${crew.applicant_id})">
 	                        <span class="fa fa-file-text"></span>
 	                    </a>
@@ -277,7 +277,7 @@
 	                    <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Extend Contract" onClick="extendContract(${crew.applicant_id}, ${crew.vessel_id})">
 	                        <span class="fa fa-calendar-plus-o"></span>
 	                    </a>
-	                    <a class="btn btn-primary btn-search" data-toggle="tooltip" onClick="viewInfo(${crew.applicant_id})">
+	                    <a class="btn btn-primary btn-search btn-sm" data-toggle="tooltip" onClick="viewInfo(${crew.applicant_id})">
 	                        <span class="fa fa-search" onClick="viewInfo(${crew.applicant_id})"></span>
 	                    </a>
 	                    <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Sign off" onClick="offBoard(${crew.applicant_id}, ${crew.vessel_id}, '${disembarkation_date.format('YYYY-MM-DD')}')">
