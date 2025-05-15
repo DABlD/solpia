@@ -524,17 +524,17 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(6.5);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(14.5);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6.5);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(4);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6.5);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(16.5);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(8.5);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(9.7);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(16.2);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10.2);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(6.7);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(4.2);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(14.7);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(6.7);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(4.2);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(6.7);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(16.7);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(8.7);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(9.9);
 
                 // ROW RESIZE
                 $rows = [
@@ -552,7 +552,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         90, //ROW HEIGHT
                         [23] //CELLS
                     ],
-                    [40,[29]], [27,[30,37,39,45,47]], [135,[38]], [145, [40]], [105, [44]], [110,[46]], [25,[41,43]], [35,[42]]
+                    [40,[29]], [27,[30,37,39,45,47]], [135,[38]], [150, [40]], [105, [44]], [110,[46]], [25,[41,43]], [35,[42]]
                 ];
 
                 foreach($rows as $row){
