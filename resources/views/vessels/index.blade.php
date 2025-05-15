@@ -5440,12 +5440,13 @@
                 cancelButtonColor: '#f76c6b',
                 inputOptions: {
                     ShinkoOnOff: 'Default',
-                    ToeiOnOff: 'TOEI',
-                    WesternOnOff: 'Nitta/TOEI',
-                    KoscoOnOff: 'KOSCO',
                     HmmOnOff: 'HMM',
                     KlcsmOnOff: 'KLCSM',
+                    KlcsmBulkOnOff: 'KLCSM BULK',
+                    KoscoOnOff: 'KOSCO',
                     KssOnOff: 'KSS',
+                    WesternOnOff: 'Nitta/TOEI',
+                    ToeiOnOff: 'TOEI',
                 },
             }).then(result => {
                 let data = {};
