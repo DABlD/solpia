@@ -260,8 +260,8 @@
 
         @if(auth()->user()->id == 23)
         {{-- FOR TEST --}}
-        fFleet = "FLEET B";
-        fType = "VLCC";
+        {{-- fFleet = "FLEET B";
+        fType = "VLCC"; --}}
         @endif
 
         function getFilters(){
@@ -321,7 +321,7 @@
 
                 @if(auth()->user()->id == 23)
                 {{-- FOR TEST. USE VESSEL ID --}}
-                $('[data-id="5842"][data-original-title="View Crew List"]').click();
+                {{-- $('[data-id="5842"][data-original-title="View Crew List"]').click(); --}}
                 @endif
             },
             order: [ [0, 'desc'] ],
