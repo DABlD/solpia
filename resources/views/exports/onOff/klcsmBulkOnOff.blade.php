@@ -1,3 +1,13 @@
+@php
+	$vessel = null;
+	if(sizeof($linedUps)){
+		$vessel = $linedUps->first()->vessel->name;
+	}
+	elseif(sizeof($onBoards)){
+		$vessel = $onBoards->first()->vessel->name;
+	}
+@endphp
+
 <table>
 	<tr>
 		<td colspan="10"></td>
@@ -6,16 +16,28 @@
 	<tr>
 		<td>문 서 :</td>
 		<td colspan="9">CM1-25-</td>
+
+		<td></td>
+		<td>DOC' NO.:</td>
+		<td colspan="2">CM1-25-</td>
 	</tr>
 
 	<tr>
 		<td>수 신 : </td>
 		<td colspan="9">CH BELLA호</td>
+
+		<td></td>
+		<td>VSL NAME:</td>
+		<td colspan="2">{{ $vessel }}</td>
 	</tr>
 
 	<tr>
 		<td>발 신 :</td>
 		<td colspan="9">KLCSM㈜ / 해상인사1팀</td>
+
+		<td></td>
+		<td>PLACE:</td>
+		<td colspan="2"></td>
 	</tr>
 
 	<tr>
@@ -60,11 +82,22 @@
 		<td>ISSUED</td>
 		<td rowspan="2">EMBARK DATE</td>
 		<td rowspan="2">REMARK</td>
+
+		<td></td>
+		<td colspan="4">
+			COVID-VACCINATION INFO.
+		</td>
 	</tr>
 
 	<tr>
 		<td>EXPIRE</td>
 		<td>EXPIRE</td>
+
+		<td></td>
+		<td>1ST</td>
+		<td>2ND</td>
+		<td>BOOSTER</td>
+		<td>REMARK</td>
 	</tr>
 
 	@foreach($linedUps as $key => $onSigner)
@@ -104,11 +137,22 @@
 		<td>ISSUED</td>
 		<td rowspan="2">DISEMBARK DATE</td>
 		<td rowspan="2">REMARK</td>
+
+		<td></td>
+		<td colspan="4">
+			COVID-VACCINATION INFO.
+		</td>
 	</tr>
 
 	<tr>
 		<td>EXPIRE</td>
 		<td>EXPIRE</td>
+
+		<td></td>
+		<td>1ST</td>
+		<td>2ND</td>
+		<td>BOOSTER</td>
+		<td>REMARK</td>
 	</tr>
 
 	@foreach($onBoards as $key => $offSigner)

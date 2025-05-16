@@ -166,6 +166,14 @@ class KlcsmBulkOnOff implements FromView, WithEvents, WithDrawings//, ShouldAuto
                     ],
                 ]
             ],
+            [//BORDER WITH COLOR
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => 'FFFF00'],
+                    ],
+                ]
+            ],
         ];
 
         $fillStyle = [
@@ -325,7 +333,8 @@ class KlcsmBulkOnOff implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 $h[4] = [
                     'A12:J' . (13 + $lus),
                     'A' . (16 + $lus) . ':J' . (17 + $lus + $obs),
-                    'A' . (23 + $lus + $obs)
+                    'A' . (23 + $lus + $obs),
+                    'L2:O' . (23 + ($lus + $obs))
                 ];
 
                 // HL
@@ -336,7 +345,8 @@ class KlcsmBulkOnOff implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 $h[6] = [
                     'A10','A11:J13',
                     'A' . (15 + $lus) . ':J' . (17 + $lus),
-                    'A' . (19 + $lus + $obs)
+                    'A' . (19 + $lus + $obs),
+                    'M2:M4'
                 ];
 
                 // VC
@@ -459,6 +469,13 @@ class KlcsmBulkOnOff implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 // RBT
                 $cells[14] = array_merge([
                 ]);
+
+                // BORDER WITH COLOR
+                $cells[15] = array_merge([
+                    'L2:N4',
+                    'L12:O' . (13 + $lus),
+                    'L' . (16 + $lus) . ':O' . (17 + $lus + $obs),
+                ]);
                 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
@@ -480,6 +497,11 @@ class KlcsmBulkOnOff implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(13);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(9.5);
                 $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(12);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(12);
 
                 // ROW RESIZE
                 $rows = [
@@ -516,13 +538,14 @@ class KlcsmBulkOnOff implements FromView, WithEvents, WithDrawings//, ShouldAuto
                 }
                 
                 // SET PRINT AREA
-                // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
+                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:J" . (25 + $lus + $obs));
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
                 $event->sheet->getDelegate()->getStyle('A' . (23 + $lus + $obs))->getFont()->setSize(16);
                 $event->sheet->getDelegate()->getStyle('A' . (20 + $lus + $obs))->getFont()->getColor()->setRGB('0000FF');
                 $event->sheet->getDelegate()->getStyle('A' . (21 + $lus + $obs))->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('L2:L4')->getFont()->getColor()->setRGB('FFFF00');
             },
         ];
     }
