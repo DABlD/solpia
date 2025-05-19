@@ -114,18 +114,18 @@ class DatatablesController extends Controller
 									}
 
 									// FLEET C CAN SEE HMM TANKER CREW
-									if(auth()->user()->fleet == "FLEET C"){
-										$q->orWhereIn('pa.vessel_id', [5842, 5801, 5553, 6072]);
-										$q->orWhereIn('pa.principal_id', [2,873]);
-										$q->orWhereIn('pa.applicant_id', [1621,6125]);
-										//PANGALIMAN, SANTISTEBAN
-									}
+									// if(auth()->user()->fleet == "FLEET C"){
+									// 	$q->orWhereIn('pa.vessel_id', [5842, 5801, 5553, 6072]);
+									// 	$q->orWhereIn('pa.principal_id', [2,873]);
+									// 	$q->orWhereIn('pa.applicant_id', [1621,6125]);
+									// 	//PANGALIMAN, SANTISTEBAN
+									// }
 
 									// FLEET B CAN SEE SOME FLEET C CREW
-									if(auth()->user()->fleet == "FLEET B"){
-										$q->orWhereIn('pa.applicant_id', [4442]);
-										//SENAS
-									}
+									// if(auth()->user()->fleet == "FLEET B"){
+									// 	$q->orWhereIn('pa.applicant_id', [4442]);
+									// 	//SENAS
+									// }
 								});
 
 		// IF DID NOT USE FILTER AND ONLY SEARCH VALUE

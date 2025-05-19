@@ -25,7 +25,7 @@
     								<th style="width: 100px !important;">Contact</th>
                                     <th>Last/Current Vessel</th>
                                     <th>Date Sign On/Off</th>
-                                    @if(in_array(auth()->user()->fleet, [null, 'FLEET B', 'FLEET C']))
+                                    @if(in_array(auth()->user()->fleet, [null]))
     								    <th>Fleet</th>
                                     @endif
                                     <th>Remarks</th>
@@ -316,7 +316,7 @@
                 },
                 { data: 'last_vessel.vessel_name', name: 'last_vessel.vessel_name' },
                 { data: 'last_vessel.date', name: 'last_vessel.date' },
-                @if(in_array(auth()->user()->fleet, [null, 'FLEET B', 'FLEET C']))
+                @if(in_array(auth()->user()->fleet, [null]))
                     { data: 'user.fleet', name: 'user.fleet' },
                 @endif
                 { data: 'remarks', name: 'remarks' },
@@ -357,7 +357,7 @@
                         return last_disembark ? moment(last_disembark).format('MMM DD, YYYY') : "-";
                     },
                 },
-                @if(in_array(auth()->user()->fleet, [null, 'FLEET B', 'FLEET C']))
+                @if(in_array(auth()->user()->fleet, [null]))
                     {
                         targets: 11,
                         className: "w100"
