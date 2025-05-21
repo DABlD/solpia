@@ -1534,6 +1534,8 @@
                                 fillTab7(applicant);
                                 fillTab8(applicant);
                                 fillTab10(applicant);
+
+                                console.log($('.exp_date'));
                             }
                         }).then(() => {
                             $('[type="search"]:first').focus();
@@ -1935,7 +1937,7 @@
                         <td>${id.issuer ?? "-"}</td>
                         <td>${id.number ?? "-"}</td>
                         <td>${id.issue_date != null ? moment(id.issue_date).format("MMM DD, YYYY") : "-"}</td>
-                        <td>${id.expiry_date != null ? moment(id.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td class="exp_date">${id.expiry_date != null ? moment(id.expiry_date).format("MMM DD, YYYY") : "-"}</td>
                         <td>${file}</td>
                     </tr>
                 `;
@@ -2006,7 +2008,7 @@
                         <td>${flag.country ?? "-"}</td>
                         <td>${flag.number ?? "-"}</td>
                         <td>${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "-"}</td>
-                        <td>${flag.expiry_date != null ? moment(flag.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td class="exp_date">${flag.expiry_date != null ? moment(flag.expiry_date).format("MMM DD, YYYY") : "-"}</td>
                         <td>${file}</td>
                     </tr>
                 `;
@@ -2077,7 +2079,7 @@
                         <td>${lc.issuer ?? "-"}</td>
                         <td>${lc.no ?? "-"}</td>
                         <td>${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "-"}</td>
-                        <td>${lc.expiry_date != null ? moment(lc.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td class="exp_date">${lc.expiry_date != null ? moment(lc.expiry_date).format("MMM DD, YYYY") : "-"}</td>
                         <td>${lc.regulation != "[]" ? JSON.parse(lc.regulation) : "-"}</td>
                         <td>${file}</td>
                     </tr>
@@ -2177,7 +2179,7 @@
                         <td>${mc.number ?? "-"}</td>
                         <td>${mc.clinic ?? "-"}</td>
                         <td>${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "-"}</td>
-                        <td>${mc.expiry_date != null ? moment(mc.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td class="exp_date">${mc.expiry_date != null ? moment(mc.expiry_date).format("MMM DD, YYYY") : "-"}</td>
                         <td>${file}</td>
                     </tr>
                 `;

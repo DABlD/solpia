@@ -384,7 +384,7 @@
 			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them
 			<br style='mso-data-placement:same-cell;' />
 			{{-- HYUNDAI COURAGE --}}
-			@if(in_array($data->vessel->id, [33,36,37,38])){
+			@if(in_array($data->vessel->id, [33,36,37,38]))
 				are retained by the each party and the seafarer was given sufficient time to review and opportunity to seek advice on the
 				<br style='mso-data-placement:same-cell;' />
 				terms and condition and voluntarily accept them.
