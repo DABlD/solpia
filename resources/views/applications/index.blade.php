@@ -1538,7 +1538,7 @@
                                 $('.exp_date').each((i, elem) => {
                                     let date = new Date(elem.innerText);
                                     if(!isNaN(date)){
-                                        if(moment(date) < moment()){
+                                        if(moment(date) <= moment()){
                                             $(elem).css('color', 'red');
                                             $(elem).css('font-weight', 'bold');
                                         }
