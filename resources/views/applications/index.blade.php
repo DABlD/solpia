@@ -1535,7 +1535,15 @@
                                 fillTab8(applicant);
                                 fillTab10(applicant);
 
-                                console.log($('.exp_date'));
+                                $('.exp_date').each((i, elem) => {
+                                    let date = new Date(elem.innerText);
+                                    if(!isNaN(date)){
+                                        if(moment(date) < moment()){
+                                            $(elem).css('color', 'red');
+                                            $(elem).css('font-weight', 'bold');
+                                        }
+                                    }
+                                })
                             }
                         }).then(() => {
                             $('[type="search"]:first').focus();
@@ -1952,8 +1960,8 @@
                                     <th>Type</th>
                                     <th>Issuer</th>
                                     <th>No</th>
-                                    <th>Issue Date</th>
-                                    <th>Expiry Date</th>
+                                    <th style="width: 105px;">Issue Date</th>
+                                    <th style="width: 105px;">Expiry Date</th>
                                     <th style="width: 195px;">File</th>
                                 </tr>
                             </thead>
@@ -2023,8 +2031,8 @@
                                     <th>Type</th>
                                     <th>Country</th>
                                     <th>No</th>
-                                    <th>Issue Date</th>
-                                    <th>Expiry Date</th>
+                                    <th style="width: 105px;">Issue Date</th>
+                                    <th style="width: 105px;">Expiry Date</th>
                                     <th style="width: 195px;">File</th>
                                 </tr>
                             </thead>
@@ -2095,8 +2103,8 @@
                                     <th style="width: 500px;">Type</th>
                                     <th>Issuer</th>
                                     <th>No</th>
-                                    <th>Issue Date</th>
-                                    <th>Expiry Date</th>
+                                    <th style="width: 105px;">Issue Date</th>
+                                    <th style="width: 105px;">Expiry Date</th>
                                     <th>Regulation</th>
                                     <th style="width: 195px;">File</th>
                                 </tr>
