@@ -369,6 +369,7 @@ class CkMaritime implements FromView, WithEvents, WithDrawings, WithColumnFormat
                     'I2:I4', 'B6:B10', 'F6', 'I7:I9', 'E7', 'D9', 'G9', 'E10', 'K9',
                     'A13:I13',
                     'A17:K17', 'A18', 'B18:B23', 'A26:K26', 'A27:A30', 'B27', 'B30',
+                    'A34:E36',
                     'A33:K33', 'A39:K39', 'A40:A69', 'A72:K72',
                     'A72:A82', 'A85:F85', 'A85:A87', 'A90:K90'
                 ];
