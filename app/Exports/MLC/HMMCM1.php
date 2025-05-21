@@ -30,15 +30,11 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         if(in_array($applicant->vessel->name, $array1)){
             $this->shipowner['company'] = "HMM Company Limited";
-            $this->shipowner['president'] = "WON HYOK, CHOI";
+            $this->shipowner['president'] = "CHOI WONHYOK";
             $this->shipowner['address'] = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
 
             $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
             $this->shipmanager['address'] = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
-        }
-
-        if(in_array($applicant->vessel->name, ["M/V HYUNDAI COURAGE", "M/V HYUNDAI BRAVE", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE",])){
-            $this->shipowner['president'] = "CHOI WONHYOK";
         }
 
         $this->title = $title;
@@ -528,14 +524,9 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         85, //row height
                         [18] // rows
                     ],
-                    [14, [30]],[35, [24,40]], [24,[34,36,37,38]], [125,[33,35]], [180, [39]], [100,[41]]
+                    [14, [30]],[35, [24,40]], [24,[34,36,37,38]], [125,[33,35]], [180, [39]], [100,[41]],
+                    [40, [40]],[95, [41]]
                 ];
-
-                // HYUNDAI COURAGE, PRIDE, FORCE, FAITH
-                if(in_array($this->applicant->vessel->id, [33,36,37,38])){
-                    array_push($rows2, [40, [40]]);
-                    array_push($rows2, [95, [41]]);
-                }
 
                 foreach($rows as $row){
                     for($i = $row[1]; $i <= $row[2]; $i++){
@@ -658,46 +649,21 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
                 $rt->createText(PHP_EOL);
 
-                // HYUNDAI COURAGE, PRIDE, FORCE, FAITH
-                if(in_array($this->applicant->vessel->id, [33,36,37,38])){
-                    $rt->createText(PHP_EOL);
-                    $text = "Seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ recruitment and placement services’";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $text = "system of protection, to compensate seafarers for monetary loss that they may incur as a result of the failure of the recruitment and placement";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $text = "service or the relevant shipowner under the seafarers’ employment agreement to meet its obligations to them.";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $text = "After consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be paid to an";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $text = "account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
-                }
-                else{
-                    $text = "※   Additional clause for The Republic of Liberia flag";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $text = "1)  Seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ recruitment and placement";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
-                    $text = "services’ system of protection, to compensate seafarers for monetary loss that they may incur as a result of the failure of the recruitment";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
-                    $text = "and placement service or the relevant shipowner under the seafarers’ employment agreement to meet its obligations to them.";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $text = "2)  After consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
-                    $rt->createText(PHP_EOL);
-                    $rt->createTextRun("ㅤ")->getFont()->setName("Times New Roman")->setSize(9);
-                    $text = "paid to an account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.";
-                    $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setUnderline(true)->setSize(9);
-                }
+                $rt->createText(PHP_EOL);
+                $text = "Seafarers, prior to or in the process of engagement, shall be informed about their rights under the seafarers’ recruitment and placement services’";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "system of protection, to compensate seafarers for monetary loss that they may incur as a result of the failure of the recruitment and placement";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "service or the relevant shipowner under the seafarers’ employment agreement to meet its obligations to them.";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "After consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be paid to an";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
+                $rt->createText(PHP_EOL);
+                $text = "account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.";
+                $rt->createTextRun($text)->getFont()->setName("Times New Roman")->setSize(9);
 
                 $event->sheet->getParent()->getActiveSheet()->getCell("A39")->setValue($rt);
                 $event->sheet->getDelegate()->getStyle('A39')->getAlignment()->setIndent(true);
