@@ -83,7 +83,7 @@
 
 	<tr>
 		<td colspan="2" style="{{ $blue }} {{ $center }}">
-			{{ auth()->user()->gender == "Male" ? "Mr" : "Ms." }} {{ auth()->user()->fname }} {{ auth()->user()->lname }}
+			{{ auth()->user()->gender == "Male" ? "Mr." : "Ms." }} {{ auth()->user()->fname }} {{ auth()->user()->lname }}
 		</td>
 		<td></td>
 		<td colspan="3" style="{{ $blue }} {{ $center }}">
