@@ -66,9 +66,10 @@ class X25_MLCLinedUp implements WithMultipleSheets
     {
         $sheets = [];
         $principal = str_replace(' ', '', $this->principal);
-        $class = "App\Exports\MLC\\" . $principal;
 
         foreach($this->applicants as $applicant){
+            $class = "App\Exports\MLC\\" . $principal;
+            
             // FOR KLCSM BULK
             if($applicant->vessel->principal_id == 10){
                 if(str_contains($this->applicant->vessel->type, "BULK")){
