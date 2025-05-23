@@ -563,8 +563,7 @@
 
 	@php
 		$usv = isset($data->document_id->{"US-VISA"}) ? $data->document_id->{"US-VISA"} : null;
-		$kv = isset($data->document_id->{"KOREAN VISA"}) ? $data->document_id->{"KOREAN VISA"} : null;
-		$mv = isset($data->document_id->{"MARSHALL VISA"}) ? $data->document_id->{"MARSHALL VISA"} : null;
+		$sv = isset($data->document_id->{"SCHENGEN VISA"}) ? $data->document_id->{"SCHENGEN VISA"} : null;
 	@endphp
 
 	<tr>
@@ -579,23 +578,23 @@
 	</tr>
 
 	<tr>
-		<td colspan="5" style="{{ $bc }}">US VISA</td>
-		<td colspan="3" style="{{ $bc }}">{{ $usv ? $usv->number : ""}}</td>
-		<td colspan="2" style="{{ $bc }}">{{ $usv ? ($usv->expiry_date ? $usv->expiry_date->format('d/m/Y') : "") : ""  }}</td>
+		<td colspan="5" style="{{ $bc }}">SCHENGEN VISA</td>
+		<td colspan="3" style="{{ $bc }}">{{ $sv ? $sv->number : ""}}</td>
+		<td colspan="2" style="{{ $bc }}">{{ $sv ? ($sv->expiry_date ? $sv->expiry_date->format('d/m/Y') : "") : ""  }}</td>
 		<td colspan="2" style="{{ $bc }}"></td>
 	</tr>
 
 	<tr>
-		<td colspan="5" style="{{ $bc }}">KOREAN VISA</td>
-		<td colspan="3" style="{{ $bc }}">{{ $kv ? $kv->number : ""}}</td>
-		<td colspan="2" style="{{ $bc }}">{{ $kv ? ($kv->expiry_date ? $kv->expiry_date->format('d/m/Y') : "") : ""  }}</td>
+		<td colspan="5" style="{{ $bc }}"></td>
+		<td colspan="3" style="{{ $bc }}"></td>
+		<td colspan="2" style="{{ $bc }}"></td>
 		<td colspan="2" style="{{ $bc }}"></td>
 	</tr>
 
 	<tr>
-		<td colspan="5" style="{{ $bc }}">MARSHALL VISA</td>
-		<td colspan="3" style="{{ $bc }}">{{ $mv ? $mv->number : ""}}</td>
-		<td colspan="2" style="{{ $bc }}">{{ $mv ? ($mv->expiry_date ? $mv->expiry_date->format('d/m/Y') : "") : ""  }}</td>
+		<td colspan="5" style="{{ $bc }}"></td>
+		<td colspan="3" style="{{ $bc }}"></td>
+		<td colspan="2" style="{{ $bc }}"></td>
 		<td colspan="2" style="{{ $bc }}"></td>
 	</tr>
 
