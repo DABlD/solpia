@@ -13,7 +13,8 @@ class LineUpContract extends Model
     	'applicant_id','principal_id','vessel_id',
     	'rank_id','joining_port','joining_date',
     	'months', 'status', 'reliever',
-    	'disembarkation_date', 'disembarkation_port'
+    	'disembarkation_date', 'disembarkation_port',
+        'extensions', 'extensions_days'
     ];
 
     protected $dates = [

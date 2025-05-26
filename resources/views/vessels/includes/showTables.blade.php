@@ -245,7 +245,7 @@
 	                cd2 += parseInt(ext);
 	            });
 	        }
-	        let disembarkation_date = moment(crew.joining_date).add(cd2, 'months');
+	        let disembarkation_date = moment(crew.joining_date).add(cd2, 'months').add(crew.extensions_days, 'days');
 
 	        let joining_date = null;
 	        let promotion_date = null;
@@ -285,7 +285,7 @@
 	                    <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit On Board Details" onClick='eod(${crew.id}, ${crew.vessel_id}, "${crew.joining_date}", ${crew.months}, "${crew.joining_port ?? ""}")'>
 	                        <span class="fa fa-pencil fa-sm"></span>
 	                    </a>
-	                    <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Extend Contract" onClick="extendContract(${crew.applicant_id}, ${crew.vessel_id})">
+	                    <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Extend Contract" onClick="extendContract(${crew.applicant_id}, ${crew.vessel_id}, '${disembarkation_date.format('YYYY-MM-DD')}')">
 	                        <span class="fa fa-calendar-plus-o"></span>
 	                    </a>
 	                    <a class="btn btn-primary btn-search btn-sm" data-toggle="tooltip" onClick="viewInfo(${crew.applicant_id})">
@@ -366,6 +366,8 @@
 				let copLength = 4;
 
 				let isTanker = false;
+
+				console.log(vid, vessel);
 
 				if(['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM'].includes(vessel.type)){
 					isTanker = true;

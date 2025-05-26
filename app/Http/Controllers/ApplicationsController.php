@@ -1324,6 +1324,18 @@ class ApplicationsController extends Controller
             $lup->extensions = json_encode([$req->months]);
         }
 
+        $lup->extensions_days += $req->diff;
+
+        AuditTrail::create([
+            'user_id'   => auth()->user()->id,
+            'action'    => "extended contract of " . $lup->applicant->user->namefull . " by $req->months month/s. Diff $req->diff days",
+            'ip'        => $req->getClientIp(),
+            'hostname'  => gethostname(),
+            'device'    => Browser::deviceFamily(),
+            'browser'   => Browser::browserName(),
+            'platform'  => Browser::platformName()
+        ]);
+
         echo $lup->save();
     }
 

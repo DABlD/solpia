@@ -2164,7 +2164,7 @@
                     if(!$('#linedUp').is(':visible')){
                         createModal(result[2],!bul ? $(vessel.target).data('id') : vessel);
                     }
-                    showTables(result[0], result[1], result[3], $(vessel.target).data('id'));
+                    showTables(result[0], result[1], result[3], !bul ? $(vessel.target).data('id') : vessel);
 
                     // CLOSE LOADING
                     swal.close();
@@ -6276,27 +6276,53 @@
             });
         }
 
-        function extendContract(id, vid){
+        function extendContract(id, vid, disembarkation_date){
             swal({
-                title: 'Months to Extend',
-                input: "number",
-                preConfirm: months => {
+                title: "Enter Details",
+                html: `
+                    <div style="text-align: left;">
+                        <label>Effective Date</label>
+                    </div>
+                    <input type="text" id="ed" class="form-control"><br>
+
+                    <div style="text-align: left;">
+                        <label>Months</label>
+                    </div>
+                    <input type="number" min="1" id="months" class="form-control"><br>
+                `,
+                onOpen: () => {
+                    $('#ed').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                        defaultDate: moment(disembarkation_date).add(1, 'day').format("YYYY-MM-DD")
+                    });
+                },
+                preConfirm: () => {
+                    swal.showLoading();
                     return new Promise(resolve => {
                         setTimeout(() => {
+                            let months = $('#months').val();
+                            let ed = $('#ed').val();
 
-                            if(months == ""){
-                                swal.showValidationError('Input is empty');
+                            if(months == "" || ed == ""){
+                                swal.showValidationError('All fiels required');
                             }
                         resolve()}, 500);
                     });
                 }
             }).then(result => {
                 if(result.value){
+                    let months = $('#months').val();
+                    let ed = $('#ed').val();
+
                     $.ajax({
                         url: '{{ route('applications.extendContract') }}',
                         data: {
                             id: id,
-                            months: result.value
+                            months: months,
+                            ed: ed,
+                            diff: moment(ed).diff(moment(disembarkation_date), 'days')
                         },
                         success: () => {
                             swal({
