@@ -192,6 +192,10 @@ class VesselsController extends Controller
 
         $fileName = str_replace("/", "", $vessel->name) . " Document Monitoring";
         $class = "App\\Exports\\Monitoring\\" . ucfirst($vessel->principal->slug);
+
+        if(in_array($vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM'])){
+            $class .= "Tanker";
+        }
         
         return Excel::download(new $class($obcs, $vessel), "$fileName.xlsx");
     }
