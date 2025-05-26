@@ -363,6 +363,26 @@
 				let obcs = result[0];
 				let vessel = result[1];
 				let string = "";
+				let copLength = 4;
+
+				let isTanker = false;
+
+				if(['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM'].includes(vessel.type)){
+					isTanker = true;
+					copLength = 7;
+				}
+
+				let tankerTitle = `
+					<td>
+						BTOC
+					</td>
+					<td>
+						ATOT
+					</td>
+					<td>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ATCT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</td>
+				`;
 
 				obcs.forEach((obc, index) => {
 					let user = obc.applicant.user;
@@ -398,6 +418,17 @@
 					let aff = filterDocs(obc.document_lc, 'ADVANCE FIRE FIGHTING - AFF');
 					let sdsd = filterDocs(obc.document_lc, 'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD');
 					let kml = filterDocs(obc.document_lc, 'KML');
+
+					// COP TANKER
+					let btoc = filterDocs(obc.document_lc, 'BASIC TRAINING FOR OIL AND CHEMICAL TANKER - BTOCT');
+					let atot = filterDocs(obc.document_lc, 'ADVANCE TRAINING FOR OIL TANKER - ATOT');
+					let atct = filterDocs(obc.document_lc, 'ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT');
+
+					let tankerString1 = `
+						<td>${(btoc && btoc.issue_date != null) ? (btoc.expiry_date != null ? toDate(btoc.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+						<td>${(atot && atot.issue_date != null) ? (atot.expiry_date != null ? toDate(atot.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+						<td>${(atct && atct.issue_date != null) ? (atct.expiry_date != null ? toDate(atct.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
+					`;
 
 					// MEDICAL
 					let medical = filterDocs(obc.document_med_cert, 'MEDICAL CERTIFICATE');
@@ -445,6 +476,8 @@
 							<td>${(sdsd && sdsd.issue_date != null) ? (sdsd.expiry_date != null ? toDate(sdsd.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 							<td>${(kml && kml.issue_date != null) ? (kml.expiry_date != null ? toDate(kml.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 
+							${isTanker ? tankerString1 : ""}
+
 							{{-- MEDICAL --}}
 							<td>${medical ? (medical.expiry_date ? toDate(medical.expiry_date, 'DD-MMM-YY') : "UNLIMITED") : "N/A"}</td>
 							<td></td>
@@ -469,7 +502,7 @@
 								<td colspan="7" style="background-color: #FFC000;">NATIONAL ID / VISA</td>
 								<td colspan="7" style="background-color: #FF99FF;">FLAG LICENSE</td>
 								<td colspan="4" style="background-color: #92D050;">NATIONAL LICENSE</td>
-								<td colspan="4" style="background-color: #F8CBAD;">COP TRAININGS</td>
+								<td colspan="${copLength}" style="background-color: #F8CBAD;">COP TRAININGS</td>
 								<td style="background-color: #BDD7EE;"></td>
 								<td style="background-color: #66FFCC;">MEDICAL</td>
 								<td style="background-color: #00B0F0;">REMARKS</td>
@@ -545,6 +578,9 @@
 									COP
 									&nbsp;&nbsp;&nbsp;&nbsp;SDSD&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
+
+								${isTanker ? tankerTitle : ""}
+
 								<td>KML LICENSE</td>
 								<td>&nbsp;MEDICAL&nbsp;</td>
 								<td>FACEBOOK NAME</td>
