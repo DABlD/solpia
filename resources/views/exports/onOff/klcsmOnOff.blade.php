@@ -18,8 +18,8 @@
 		<td rowspan="2">RANK</td>
 		<td rowspan="2">NAME</td>
 		<td rowspan="2">DOB</td>
-		<td>SEAMAN BOOK</td>
 		<td>PASSPORT</td>
+		<td>SEAMAN BOOK</td>
 		<td rowspan="2">REMARK</td>
 	</tr>
 
