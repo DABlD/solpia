@@ -265,7 +265,13 @@
 	                @if(in_array(auth()->user()->fleet, ["FLEET B"]) || auth()->user()->id == 23)
 	                    <td>${crew.seniority}</td>
 	                @endif
-	                <td class="OBC" data-id="${crew.applicant_id}">${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+	                <td class="OBC" data-id="${crew.applicant_id}">
+	                	${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}
+	                	@if(auth()->user()->id == 23)
+	                		<br>
+	                		${crew.fleet}
+	                	@endif
+	                </td>
 	                <td>${crew.age}</td>
 	                <td class="jdate" data-id="${crew.applicant_id}" data-date="${joining_date}">${moment(joining_date).format('DD-MMM-YY') + (promotion_date ? " /<br>" + moment(promotion_date).format('DD-MMM-YY') : "")}</td>
 	                <td>${moment().diff(moment(joining_date), 'months') + (promotion_date ? " /<br>" + moment().diff(moment(promotion_date), 'months') : "")}</td>

@@ -1130,7 +1130,7 @@ class ApplicationsController extends Controller
                                 ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
                                 ->join('users as u', 'u.id', '=', 'a.user_id')
                                 ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
-                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place', 'r.order')
+                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place', 'r.order', 'u.fleet')
                                 ->get();
 
         $crews = $crews->sortBy('order');
