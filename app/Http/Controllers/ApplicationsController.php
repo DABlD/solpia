@@ -1858,13 +1858,14 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
-        $lucs = LineUpContract::where('status', 'On Board')->where('principal_id', 256)->get();
+        $crews = ProcessedApplicant::where('principal_id', 2)->get();
+        $array = [];
 
-        foreach($lucs as $luc){
-            $usv = DocumentId::where('type', 'US-VISA')->where('applicant_id', $luc->applicant_id)->orderBy('issue_date', 'desc')->first();
-            
-            if($usv == null || $usv->expiry_date < now()->toDateString()){
-                echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . ';' . $luc->joining_date . ';' . $luc->vessel->name . ';' . ($usv ? $usv->expiry_date : "N/A") . '<br>';
+        foreach($crews as $crew){
+            $usv = DocumentId::where('applicant_id', $crew->applicant_id)->where('type', 'US-VISA')->where('issue_date', '>=', '2024-01-01')->first();
+
+            if($usv){
+                echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . ';' . $crew->status . ';' . $crew->vessel->name . ';' . $usv->issue_date . '<br>';
             }
         }
     }

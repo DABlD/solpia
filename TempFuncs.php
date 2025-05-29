@@ -252,3 +252,16 @@ foreach($users as $user){
         echo $user->lname . ';' . $user->fname . ';' . $user->mname . ';' . $user->crew->civil_status . ';' . $user->crew->pro_app->rank->abbr . ';' . $user->birthday . ';' . $user->crew->pro_app->updated_at . '<br>';
     }
 }
+
+
+<!-- FLEET B ALL ONBOARD CREW WITH US VISA -->
+
+$lucs = LineUpContract::where('status', 'On Board')->where('principal_id', 256)->get();
+
+foreach($lucs as $luc){
+    $usv = DocumentId::where('type', 'US-VISA')->where('applicant_id', $luc->applicant_id)->orderBy('issue_date', 'desc')->first();
+    
+    if($usv == null || $usv->expiry_date < now()->toDateString()){
+        echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . ';' . $luc->joining_date . ';' . $luc->vessel->name . ';' . ($usv ? $usv->expiry_date : "N/A") . '<br>';
+    }
+}
