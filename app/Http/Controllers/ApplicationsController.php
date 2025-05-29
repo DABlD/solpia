@@ -1862,7 +1862,7 @@ class ApplicationsController extends Controller
         $array = [];
 
         foreach($crews as $crew){
-            $usv = DocumentId::where('applicant_id', $crew->applicant_id)->where('type', 'US-VISA')->where('issue_date', '>=', '2024-01-01')->first();
+            $usv = DocumentId::where('applicant_id', $crew->applicant_id)->where('type', 'US-VISA')->where('issue_date', '>=', '2024-01-01')->orderBy('issue_date', 'desc')->first();
 
             if($usv){
                 echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . ';' . $crew->status . ';' . $crew->vessel->name . ';' . $usv->issue_date . '<br>';
