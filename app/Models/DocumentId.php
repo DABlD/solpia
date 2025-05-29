@@ -14,4 +14,8 @@ class DocumentId extends Model
     protected $dates = [
         'issue_date', 'expiry_date', 'created_at', 'updated_at', 'deleted_at'
     ];
+
+    public function applicant(){
+        return $this->belongsTo('App\Models\Applicant');
+    }
 }
