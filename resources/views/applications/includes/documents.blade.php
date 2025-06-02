@@ -265,6 +265,8 @@
 					<option value="BTOC ENDORSEMENT">&nbsp;&nbsp;&nbsp;&nbsp;BTOC ENDORSEMENT</option>
 					<option value="ATOT ENDORSEMENT">&nbsp;&nbsp;&nbsp;&nbsp;ATOT ENDORSEMENT</option>
 					<option value="ATCT ENDORSEMENT">&nbsp;&nbsp;&nbsp;&nbsp;ATCT ENDORSEMENT</option>
+					<option value="CARGO BALLAST HANDLING SIMULATOR - CBHS">&nbsp;&nbsp;&nbsp;&nbsp;CARGO BALLAST HANDLING SIMULATOR - CBHS</option>
+					<option value="BALLAST WATER MANAGEMENT">&nbsp;&nbsp;&nbsp;&nbsp;BALLAST WATER MANAGEMENT</option>
 
 				<optgroup label="IN HOUSE CERTIFICATE/SPECIAL TRAINING"></optgroup>
 					<option value="ANTI PIRACY">&nbsp;&nbsp;&nbsp;&nbsp;ANTI PIRACY</option>
