@@ -5447,6 +5447,7 @@
                 inputOptions: {
                     ShinkoOnOff: 'Default',
                     HmmOnOff: 'HMM',
+                    HmmSingapore: 'HMM (Singapore)',
                     KlcsmOnOff: 'KLCSM',
                     KlcsmBulkOnOff: 'KLCSM BULK',
                     KoscoOnOff: 'KOSCO',
