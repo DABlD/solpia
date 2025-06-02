@@ -470,7 +470,8 @@
 
 	{{-- 1st RATING --}}
 	<tr>
-		<td colspan="4">MS. SHIRLEY ERASQUIN</td>
+		{{-- <td colspan="4">MS. SHIRLEY ERASQUIN</td> --}}
+		<td colspan="4">CE ROMANO MARIANO</td>
 		<td rowspan="2"></td>
 		<td colspan="2" rowspan="2"></td>
 		<td colspan="2" rowspan="2"></td>
@@ -481,7 +482,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="4">Crewing Manager</td>
+		{{-- <td colspan="4">Crewing Manager</td> --}}
+		<td colspan="4">President</td>
 	</tr>
 
 	{{-- 2nd RATING --}}

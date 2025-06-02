@@ -475,15 +475,26 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setOffsetY(2);
         $drawing2->setCoordinates('N4');
 
+        // $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        // $drawing3->setName('Avatar');
+        // $drawing3->setDescription('Avatar');
+        // $drawing3->setPath(public_path("images/shirley_sig.png"));
+        // $drawing3->setResizeProportional(false);
+        // $drawing3->setHeight(75);
+        // $drawing3->setWidth(100);
+        // $drawing3->setOffsetX(80);
+        // $drawing3->setOffsetY(2);
+        // $drawing3->setCoordinates('M' . (27 + $add));
+
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setName('Avatar');
         $drawing3->setDescription('Avatar');
-        $drawing3->setPath(public_path("images/shirley_sig.png"));
+        $drawing3->setPath(public_path("images/pres_sig.png"));
         $drawing3->setResizeProportional(false);
-        $drawing3->setHeight(75);
-        $drawing3->setWidth(100);
-        $drawing3->setOffsetX(80);
-        $drawing3->setOffsetY(2);
+        $drawing3->setHeight(100);
+        $drawing3->setWidth(150);
+        $drawing3->setOffsetX(30);
+        $drawing3->setOffsetY(-20);
         $drawing3->setCoordinates('M' . (27 + $add));
 
         return [$drawing, $drawing2, $drawing3];

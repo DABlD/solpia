@@ -330,7 +330,8 @@
 	<tr>
 		<td>Interviewer</td>
 		<td>Rank</td>
-		<td>CREWING MANAGER</td>
+		{{-- <td>CREWING MANAGER</td> --}}
+		<td>PRESIDENT</td>
 		<td colspan="5">Interviewer</td>
 		<td>Rank</td>
 		<td colspan="3">PORT CAPTAIN</td>
@@ -339,7 +340,8 @@
 	<tr>
 		<td>(Sub)</td>
 		<td>Name</td>
-		<td>SHIRLEY ERASQUIN</td>
+		{{-- <td>SHIRLEY ERASQUIN</td> --}}
+		<td>CE ROMANO MARIANO</td>
 		<td colspan="5">(Main)</td>
 		<td>Name</td>
 		<td colspan="3">CAPT. HERNAN D. CASTILLO</td>
