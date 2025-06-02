@@ -872,6 +872,8 @@
 				MR. ADULF KIT JUMAWAN
 			@elseif(auth()->user()->fleet == "FLEET D")
 				MS. THEA GUERRA
+			@elseif(auth()->user()->fleet == "FLEET C")
+				CE ROMANO MARIANO
 			@else
 				@if(auth()->user()->gender == "Male")
 					MR. {{ auth()->user()->fname }} {{ auth()->user()->lname }}
