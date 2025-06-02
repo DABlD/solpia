@@ -207,7 +207,7 @@
 					<option value="RADAR OPERATOR PLOTTING AID">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OPERATOR PLOTTING AID</option>
 					<option value="RADAR OBSERVER COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RADAR OBSERVER COURSE</option>
 					<option value="SSBT WITH BRM">&nbsp;&nbsp;&nbsp;&nbsp;SSBT WITH BRM</option>
-					<option value="SSBT">&nbsp;&nbsp;&nbsp;&nbsp;SSBT</option>
+					<option value="SSBT">&nbsp;&nbsp;&nbsp;&nbsp;SHIP SIMULATOR AND BRIDGE TEAMWORK - SSBT</option>
 					<option value="BRM">&nbsp;&nbsp;&nbsp;&nbsp;BRM</option>
 					<option value="SAFETY OFFICER\'S TRAINING COURSE">&nbsp;&nbsp;&nbsp;&nbsp;SAFETY OFFICER\'S TRAINING COURSE</option>
 					<option value="SRC">&nbsp;&nbsp;&nbsp;&nbsp;SRC</option>
