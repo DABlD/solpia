@@ -37,7 +37,7 @@
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 			}
 		}
-		elseif($doc == "SMS" || $doc == "WELDING"){
+		elseif(in_array($doc, ["SMS","WELDING","BALLAST WATER","SSBT","ERS","CARGO AND BALLAST"])){
 			foreach(get_object_vars($data->document_lc) as $document){
 			    if(str_contains($document->type, $doc)){
 			    	$docu = $document;
@@ -284,13 +284,24 @@
 	</tr>
 
 	<tr>
-		{{ $row("OTHER IN-HOUSE AND  ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎OUTSIDE ‎‏‏‎TRAINING", 5) }}
+		@if(in_array($data->vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM']))
+			{{ $row("OTHER <br> ㅤIN-HOUSE AND <br> ㅤOUTSIDE <br>ㅤTRAINING", 9) }}
+		@else
+			{{ $row("OTHER <br> ㅤIN-HOUSE AND <br> ㅤOUTSIDE <br>ㅤTRAINING", 5) }}
+		@endif
 		{{ $doc("PDOS", "PDOS Certificate", 'lc', 'All Rank') }}
 	</tr>
 	<tr>{{ $doc("Refresher Course", "Refresher Course", 'lc', 'All Rank') }}</tr>
 	<tr>{{ $doc("HMMS", "HMMS", 'lc', 'All Rank') }}</tr>
 	<tr>{{ $doc("SHS", "SHS", 'lc', 'All D. Officer') }}</tr>
 	<tr>{{ $doc("KML", "KOREAN MARITIME LAW", 'lc', ' All D/E Officer for Korea/BBCHP') }}</tr>
+
+	@if(in_array($data->vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM']))
+		<tr>{{ $doc("BALLAST WATER", "Ballast water management training", 'lc', 'All D/E Officer for Korea/BBCHP') }}</tr>
+		<tr>{{ $doc("SSBT", "Ship Simulator & Bridge Teamwork(SSBT)", 'lc', 'All D. officer <br> for TNKR/LNG <br> (Every 5 year)') }}</tr>
+		<tr>{{ $doc("CARGO AND BALLAST HANDLING SIMULATOR - CBHS", "Cargo Ballast Handling Simulator(CBHS) <br>ㅤ(Depending on the boarding type of TNKR vessel)", 'lc', 'All D. officer <br> for TNKR/LNG <br> (Every 5 year)') }}</tr>
+		<tr>{{ $doc("ERS", "Engine Room Management Simulator(ERS)", 'lc', 'All E. officer <br> for TNKR/LNG <br> (Every 5 year)') }}</tr>
+	@endif
 
 	<tr><td colspan="9"></td></tr>
 
