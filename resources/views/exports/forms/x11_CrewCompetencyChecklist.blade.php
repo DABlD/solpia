@@ -37,9 +37,23 @@
 				$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 			}
 		}
-		elseif(in_array($doc, ["SMS","WELDING","BALLAST WATER","SSBT","ERS","CARGO AND BALLAST"])){
+		elseif(in_array($doc, ["WELDING","BALLAST WATER","CARGO AND BALLAST"])){
 			foreach(get_object_vars($data->document_lc) as $document){
 			    if(str_contains($document->type, $doc)){
+			    	$docu = $document;
+			    }
+			}
+		}
+		elseif(in_array($doc, ["SMS","SSBT","ERS"])){ //MATCH TO SPECIFIC WORDS ONLY
+			foreach(get_object_vars($data->document_lc) as $document){
+				if(sizeof(array_intersect(explode(" ", $document->type), [$doc])) > 0){
+			    	$docu = $document;
+			    }
+			}
+		}
+		elseif($doc == "BRM/ERM"){
+			foreach(get_object_vars($data->document_lc) as $document){
+				if(sizeof(array_intersect(explode(" ", $document->type), ["BRM", 'ERM'])) > 0){
 			    	$docu = $document;
 			    }
 			}
@@ -54,14 +68,6 @@
 			    	$docu = $document;
 			    }
 			}
-		}
-		elseif($doc == "BRM/ERM"){
-			foreach(get_object_vars($data->document_lc) as $document){
-			    if(str_contains($document->type, "ERM") || str_contains($document->type, "BRM")){
-			    	$docu = $document;
-			    }
-			}
-
 		}
 		elseif($doc == "COC-TESDA"){
 			foreach(get_object_vars($data->document_lc) as $document){
