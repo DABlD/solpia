@@ -38,8 +38,8 @@
 		<td>{{ $ss ? (isset($ss->sign_on) ? $ss->sign_on->format("m/d/Y") : "") : "" }}</td>
 		<td rowspan="2">=DATEDIF(C{{ $sr }},C{{ $sr+1 }},"Y")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"YM")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"MD")+1</td>
 		<td rowspan="2"></td>
-		<td rowspan="2">{{ $ss->rank2->abbr }}</td>
-		<td rowspan="2">{{ $ss->vessel_type }}</td>
+		<td rowspan="2">{{ $ss ? $ss->rank2->abbr : "" }}</td>
+		<td rowspan="2">{{ $ss ? $ss->vessel_type : "" }}</td>
 		<td rowspan="2">=IF(OR(C{{ $sr }}="",C{{ $sr+1 }}=""),0,DATEDIF(C{{ $sr }},C{{ $sr+1 }},"d")+1)</td>
 		
 		<td></td>
@@ -91,8 +91,8 @@
 		<td>{{ $ss ? (isset($ss->sign_on) ? $ss->sign_on->format("m/d/Y") : "") : "" }}</td>
 		<td rowspan="2">=DATEDIF(C{{ $sr }},C{{ $sr+1 }},"Y")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"YM")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"MD")+1</td>
 		<td rowspan="2"></td>
-		<td rowspan="2">{{ $ss->rank2->abbr }}</td>
-		<td rowspan="2">{{ $ss->vessel_type }}</td>
+		<td rowspan="2">{{ $ss ? $ss->rank2->abbr : "" }}</td>
+		<td rowspan="2">{{ $ss ? $ss->vessel_type : "" }}</td>
 		<td rowspan="2">=IF(OR(C{{ $sr }}="",C{{ $sr+1 }}=""),0,DATEDIF(C{{ $sr }},C{{ $sr+1 }},"d")+1)</td>
 		
 		<td></td>
@@ -132,8 +132,8 @@
 		<td>{{ $ss ? (isset($ss->sign_on) ? $ss->sign_on->format("m/d/Y") : "") : "" }}</td>
 		<td rowspan="2">=DATEDIF(C{{ $sr }},C{{ $sr+1 }},"Y")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"YM")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"MD")+1</td>
 		<td rowspan="2"></td>
-		<td rowspan="2">{{ $ss->rank2->abbr }}</td>
-		<td rowspan="2">{{ $ss->vessel_type }}</td>
+		<td rowspan="2">{{ $ss ? $ss->rank2->abbr : "" }}</td>
+		<td rowspan="2">{{ $ss ? $ss->vessel_type : "" }}</td>
 		<td rowspan="2">=IF(OR(C{{ $sr }}="",C{{ $sr+1 }}=""),0,DATEDIF(C{{ $sr }},C{{ $sr+1 }},"d")+1)</td>
 		
 		<td></td>
