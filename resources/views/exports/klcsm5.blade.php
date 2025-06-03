@@ -342,7 +342,8 @@
 		<td>SHIRLEY ERASQUIN</td>
 		<td colspan="5">(Main)</td>
 		<td>Name</td>
-		<td colspan="3">CAPT. HERNAN D. CASTILLO</td>
+		{{-- <td colspan="3">CAPT. HERNAN D. CASTILLO</td> --}}
+		<td colspan="3">CE ROMANO MARIANO</td>
 	</tr>
 
 	<tr>

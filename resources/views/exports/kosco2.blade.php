@@ -548,7 +548,8 @@
 		<td></td>
 		<td></td>
 		<td colspan="2">Signature:</td>
-		<td colspan="5">CAPT. HERNAN CASTILLO</td>
+		{{-- <td colspan="5">CAPT. HERNAN CASTILLO</td> --}}
+		<td colspan="5">CE ROMANO MARIANO</td>
 		<td></td>
 	</tr>
 	<tr><td colspan="15"></td></tr>

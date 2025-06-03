@@ -456,7 +456,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('Avatar');
         $drawing->setDescription('Avatar');
-        $drawing->setPath(public_path("images/capt_castillo_sig.png"));
+        $drawing->setPath(public_path("images/pres_sig.png"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(115);
         $drawing->setWidth(135);
