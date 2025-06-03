@@ -264,7 +264,7 @@
 
 	<tr>
 		<td colspan="4">
-			{{-- MS. SHIRLEY ERASQUIN --}}
+			MS. SHIRLEY ERASQUIN
 		</td>
 		<td colspan="2" rowspan="2"></td>
 		<td colspan="2" rowspan="2"></td>
@@ -278,7 +278,7 @@
 
 	<tr>
 		<td colspan="4">
-			{{-- Crewing Manager --}}
+			Crewing Manager
 		</td>
 	</tr>
 

@@ -479,17 +479,17 @@ class Kosco2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing6->setOffsetY(-19);
         $drawing6->setCoordinates('D70');
 
-        // $drawing7 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        // $drawing7->setName('unchecked');
-        // $drawing7->setDescription('unchecked');
-        // $drawing7->setPath(public_path('images/shirley_sig.png'));
-        // $drawing7->setResizeProportional(false);
-        // $drawing7->setHeight(70);
-        // $drawing7->setWidth(165);
-        // // $drawing7->setOffsetX(37);
-        // $drawing7->setOffsetY(-35);
-        // $drawing7->setRotation(10);
-        // $drawing7->setCoordinates('K52');
+        $drawing7 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing7->setName('unchecked');
+        $drawing7->setDescription('unchecked');
+        $drawing7->setPath(public_path('images/shirley_sig.png'));
+        $drawing7->setResizeProportional(false);
+        $drawing7->setHeight(70);
+        $drawing7->setWidth(165);
+        // $drawing7->setOffsetX(37);
+        $drawing7->setOffsetY(-35);
+        $drawing7->setRotation(10);
+        $drawing7->setCoordinates('K52');
     
         $drawing8 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing8->setName('unchecked');
@@ -502,18 +502,11 @@ class Kosco2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing8->setOffsetY(-60);
         $drawing8->setCoordinates('K63');
 
-        // return [
-        //     $drawing, $drawing2, 
-        //     $drawing3, $drawing4, 
-        //     $drawing5, $drawing6,
-        //     $drawing7, $drawing8
-        // ];
-
         return [
             $drawing, $drawing2, 
             $drawing3, $drawing4, 
             $drawing5, $drawing6,
-            $drawing8
+            $drawing7, $drawing8
         ];
     }
 }
