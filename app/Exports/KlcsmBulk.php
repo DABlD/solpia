@@ -461,7 +461,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setHeight(115);
         $drawing->setWidth(135);
         $drawing->setOffsetX(30);
-        $drawing->setOffsetY(2);
+        $drawing->setOffsetY(-30);
         $drawing->setCoordinates('M' . (29 + $add));
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();

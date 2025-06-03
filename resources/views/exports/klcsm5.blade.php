@@ -333,7 +333,8 @@
 		<td>CREWING MANAGER</td>
 		<td colspan="5">Interviewer</td>
 		<td>Rank</td>
-		<td colspan="3">PORT CAPTAIN</td>
+		{{-- <td colspan="3">PORT CAPTAIN</td> --}}
+		<td colspan="3">PRESIDENT</td>
 	</tr>
 
 	<tr>
