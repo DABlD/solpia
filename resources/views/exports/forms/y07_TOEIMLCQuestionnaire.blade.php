@@ -222,7 +222,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="10"><span>------------</span>(Date:_______________________, Name of lecturer: Capt. Manfred August Ramos)</td>
+		<td colspan="10"><span>------------</span>(Date:_______________________, Name of lecturer: Capt. Manfred August U. Ramos)</td>
 	</tr>
 
 	<tr><td style="height: 30px;"></td></tr>
