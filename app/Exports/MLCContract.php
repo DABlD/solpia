@@ -43,6 +43,7 @@ class MLCContract implements WithMultipleSheets
         $this->applicant->valid_till        = $this->req['valid_till'];
         $this->applicant->med_date          = $this->req['med_date'];
         $this->applicant->employment_months = $this->req['employment_months'];
+        $this->applicant->signed_date       = now()->toDateString(); //DEFAULT. IF NEED ALTERED. ALTER IN PRINCIPAL MLC CLASS.
         $this->applicant->port = $this->req['port'];
 
         $sheets = [];

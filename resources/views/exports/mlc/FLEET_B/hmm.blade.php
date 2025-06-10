@@ -698,7 +698,13 @@
 
 	<tr>
 		<td colspan="2" style="{{ $center }}">Date</td>
-		<td colspan="3" style="{{ $center }} {{ $color }}">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
+		<td colspan="3" style="{{ $center }} {{ $color }}">
+			@if($data->pro_app->status == "On Board")
+				{{ now()->format('d-M-Y') }}
+			@else
+				{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}
+			@endif
+		</td>
 	</tr>
 
 	<tr>

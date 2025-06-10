@@ -4447,7 +4447,7 @@
                             <h4 class="clabel">Med Cert Issue Date</h4>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" id="med_date" class="swal2-input" placeholder="(Optional)"/>
+                            <input type="text" id="med_date" placeholder="(Optional)"/>
                         </div>
                     </div>
 
@@ -4529,6 +4529,11 @@
                             });
                         }
                     })
+
+                    setTimeout(() => {
+                        $('.col-md-7 .swal2-input').css('margin', '0px');
+                        $('.swal2-content .clabel').css('margin-top', '8px');
+                    },800);
                 },
                 preConfirm: () => {
                     swal.showLoading();
