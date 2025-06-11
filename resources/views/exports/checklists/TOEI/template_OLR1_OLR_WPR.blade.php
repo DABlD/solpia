@@ -312,7 +312,7 @@
 	{{ $section("10. PRINCIPAL / OWNERS REQUIREMENTS", 1) }}
 	@if($data->status == "Vacation" || !isset($data->vessel))
 		@if(in_array($data->rank2->id, [14,19]))
-			{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+			{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 		@else
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
@@ -347,7 +347,7 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			@if(in_array($data->rank2->id, [14,19]))
-				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
@@ -415,7 +415,7 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			@if(in_array($data->rank2->id, [14,19]))
-				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
@@ -477,7 +477,7 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			@if(in_array($data->rank2->id, [14,19]))
-				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
@@ -548,7 +548,7 @@
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 			@if(in_array($data->rank2->id, [14,19]))
-				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
@@ -595,7 +595,7 @@
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 			@if(in_array($data->rank2->id, [14,19]))
-				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
@@ -627,7 +627,7 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			@if(in_array($data->rank2->id, [14,19]))
-				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
@@ -711,7 +711,7 @@
 			{{ $con("QUESTIONNAIRES TO SEAFARERS ON EMPLOYMENMT CONTRACT (P1-2)") }}
 			{{ $con("PCR RESULT") }}
 			@if(in_array($data->rank2->id, [14,19]))
-				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif

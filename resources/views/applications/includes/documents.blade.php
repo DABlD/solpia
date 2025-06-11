@@ -277,6 +277,7 @@
 					<option value="MENTAL HEALTH">&nbsp;&nbsp;&nbsp;&nbsp;Mental Health Awareness</option>
 					<option value="MCRA">&nbsp;&nbsp;&nbsp;&nbsp;MCRA - MARITIME CYBER RISK AWARENESS/MANAGEMENT</option>
 					<option value="GTRB">&nbsp;&nbsp;&nbsp;&nbsp;GTRB - GENERAL TRAINING RECORD BOOK</option>
+					<option value="TRB">&nbsp;&nbsp;&nbsp;&nbsp;CADET TRAINING RECORD BOOK</option>
 					<option value="BASIC MARITIME COMPUTER COURSE">&nbsp;&nbsp;&nbsp;&nbsp;BASIC MARITIME COMPUTER COURSE</option>
 
 				<optgroup label="CONTRACTS"></optgroup>
