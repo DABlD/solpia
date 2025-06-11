@@ -300,7 +300,11 @@
 
 	{{ $section("10. PRINCIPAL / OWNERS REQUIREMENTS", 1) }}
 	@if(!isset($data->vessel))
-		{{ $doc("TEST", "", 'lc') }}
+		@if(in_array($data->rank2->id, [14,19]))
+			{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+		@else
+			{{ $doc("TEST", "", 'lc') }}
+		@endif
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -331,7 +335,11 @@
 			{{ $doc("SMS FAMILIARIZATION", "SMS FAMILIARIZATION", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			@if(in_array($data->rank2->id, [14,19]))
+				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -395,7 +403,11 @@
 		@else
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			@if(in_array($data->rank2->id, [14,19]))
+				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -453,7 +465,11 @@
 			{{ $doc("SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", "SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			@if(in_array($data->rank2->id, [14,19]))
+				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -520,7 +536,11 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
+			@if(in_array($data->rank2->id, [14,19]))
+				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -563,7 +583,11 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
+			@if(in_array($data->rank2->id, [14,19]))
+				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -591,7 +615,11 @@
 		@else
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			@if(in_array($data->rank2->id, [14,19]))
+				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -671,7 +699,11 @@
 			{{ $con("PRE JOINING EMS TRAINING RECORD") }}
 			{{ $con("QUESTIONNAIRES TO SEAFARERS ON EMPLOYMENMT CONTRACT (P1-2)") }}
 			{{ $con("PCR RESULT") }}
-			{{ $doc("TEST", "", 'lc') }}
+			@if(in_array($data->rank2->id, [14,19]))
+				{{ $doc("TRB", "Cadet Training Record Book", 'lc') }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
 	@endif
