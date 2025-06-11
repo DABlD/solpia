@@ -494,7 +494,7 @@
 			{{ $con("HATCH COVER") }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -509,7 +509,7 @@
 			{{ $con("HATCH COVER") }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -519,7 +519,7 @@
 		@else
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -537,7 +537,7 @@
 			{{ $doc("CES TEST", "CES TEST", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -550,7 +550,7 @@
 			{{ $doc("CES TEST", "CES TEST", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -560,7 +560,7 @@
 		@else
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}

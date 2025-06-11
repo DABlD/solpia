@@ -366,7 +366,7 @@
 		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 		{{ $con("MENTAL HEALTH") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -380,7 +380,7 @@
 		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
 		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 		{{ $con("MENTAL HEALTH") }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}

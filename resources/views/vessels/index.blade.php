@@ -4990,6 +4990,7 @@
                     X38_BatchCrewCompetencyChecklist:   'Crew Competency Checklist',
                     X32_CrewUniform:                    'Crew Uniform Order Slip',
                     X37_LinedUpFinalBriefing:           'Final Briefing',
+                    X40_BatchDocumentChecklist:         'Final Document Checklist (Onboard Crew)',
                     X25_MLCLinedUp:                     'Lined-Up Crew MLC',
                     X26_POEALinedUp:                    'Lined-Up Crew POEA Contract',
                     exportOffCovid :                    'Offsigners Covid Vaccines',
@@ -6480,6 +6481,14 @@
             });
 
 
+        }
+
+        function X40_BatchDocumentChecklist(id){
+            let data = {
+                vid: id
+            };
+            
+            window.location.href = `{{ route('applications.exportDocument') }}/1/X40_BatchDocumentChecklist?` + $.param(data);
         }
 
         // MAIN EXPORTS
