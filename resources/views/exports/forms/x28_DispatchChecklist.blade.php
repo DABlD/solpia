@@ -307,6 +307,7 @@
 		<td colspan="13" style="{{ $b }}">E. OTHER REQUIREMENTS (Owner/Vessel Required Trainings, Publication/Briefing Materials, etc.)</td>
 	</tr>
 
+	{{-- SMTECH --}}
 	@if(in_array($data->vessel->id, [4608, 231]))
 		{{ $or("1.) SMTECH Briefing") }}
 		{{ $or("2.) Final Briefing") }}
@@ -324,6 +325,28 @@
 			{{ $or("5.) ") }}
 			{{ $or("6.) ") }}
 		@else
+			{{ $or("4.) ") }}
+			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		@endif
+	{{-- NSSM --}}
+	@elseif(in_array($data->vessel->id, [727]))
+		{{ $or("1.) Final Briefing") }}
+		@if(in_array($data->pro_app->rank_id, [14,19]))
+			{{ $or("2.) Cadet Training Record Book") }}
+			{{ $or("3.) ") }}
+			{{ $or("4.) ") }}
+			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		@elseif(in_array($data->pro_app->rank_id, [1,2,3]))
+			{{ $or("2.) SSOC") }}
+			{{ $or("3.) ") }}
+			{{ $or("4.) ") }}
+			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		@else
+			{{ $or("2.) ") }}
+			{{ $or("3.) ") }}
 			{{ $or("4.) ") }}
 			{{ $or("5.) ") }}
 			{{ $or("6.) ") }}
