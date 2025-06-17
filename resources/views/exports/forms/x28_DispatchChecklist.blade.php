@@ -50,7 +50,7 @@
 		<td style="{{ $b }}">NAME:</td>
 		<td colspan="5" style="{{ $c }}">{{ $data->user->namefull }}</td>
 		<td style="{{ $b }} text-align: right;">RANK:</td>
-		<td colspan="6" style="{{ $c }}">{{ $data->rank }}</td>
+		<td colspan="6" style="{{ $c }}">{{ $data->pro_app->rank->abbr }}</td>
 	</tr>
 
 	<tr>

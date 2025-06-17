@@ -4700,6 +4700,62 @@
             });
         }
 
+        function X41_BatchDispatchChecklist(id, name){
+            let data = {};
+            swal({
+                title: 'Fill all details',
+                html: `
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Tentative Joining Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="eld" class="swal2-input" placeholder="(Optional)"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Port</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="port" class="form-control" placeholder="(Optional)"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Months of employment</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" id="employment_months" class="form-control" />
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '40%',
+                onOpen: () => {
+                    $('#eld').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d'
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    data.vid                = id;
+                    data.eld                = $('#eld').val();
+                    data.employment_months  = $('#employment_months').val();
+                    data.port               = $('#port').val();
+                    data.filename           = name.replace('/', '') + " Dispatch Checklist";
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/X41_BatchDispatchChecklist?` + $.param(data);
+                }
+            });
+        }
+
         function getFinalBriefingData(id, type){
             let data = {};
             swal({
@@ -4991,6 +5047,7 @@
                     X32_CrewUniform:                    'Crew Uniform Order Slip',
                     X37_LinedUpFinalBriefing:           'Final Briefing',
                     X40_BatchDocumentChecklist:         'Final Document Checklist (Onboard Crew)',
+                    X41_BatchDispatchChecklist:         'Line-up/Dispatch Checklist',
                     X25_MLCLinedUp:                     'Lined-Up Crew MLC',
                     X26_POEALinedUp:                    'Lined-Up Crew POEA Contract',
                     exportOffCovid :                    'Offsigners Covid Vaccines',
