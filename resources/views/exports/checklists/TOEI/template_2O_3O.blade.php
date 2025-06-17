@@ -335,17 +335,31 @@
 	{{-- // NSSSM --}}
 	{{-- // ULTRA P, IYO S --}}
 	@elseif(in_array($data->vessel->id, [727, 247]))
-		{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
-		{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
-		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-		{{ $con("MENTAL HEALTH") }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		@if(in_array($data->rank2->id, [3]))
+			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
+			{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
+			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+			{{ $con("MENTAL HEALTH") }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+		@else
+			{{ $doc("SSBT2", "SSBT with BRM (MAGSAYSAY)", 'lc') }}
+			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+			{{ $con("MENTAL HEALTH") }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+		@endif
 	{{-- KITAURA KAIUN --}}
 	{{-- CELEBES CLOVER, GLORIOUS ROSE --}}
 	@elseif(in_array($data->vessel->id, [4751, 5049]))
