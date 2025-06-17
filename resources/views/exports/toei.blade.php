@@ -1519,7 +1519,7 @@
 			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td>BUREAU OF QUARANTINE</td>
+			<td>{{ $docu ? $docu->issuer : "-----" }}</td>
 		</tr>
 
 		@php
