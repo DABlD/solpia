@@ -266,6 +266,11 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
+                // FIT TO ONE PAGE
+                $event->sheet->getDelegate()->getPageSetup()->setFitToPage(TRUE);
+                $event->sheet->getDelegate()->getPageSetup()->setFitToWidth(TRUE);
+                $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(TRUE);
+
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
 
@@ -317,7 +322,7 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
 
                 // HL
                 $h[5] = [
-                    'A41:A45'
+                    'A41:A46'
                 ];
 
                 // B
@@ -372,7 +377,7 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A9:M45'
+                    'A9:M46'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -430,8 +435,8 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
                     'B5:F5', 'H5:M5',
                     'C6:F6', 'K6:M6',
                     'D7:F7', 'J7:M7',
-                    'A51:E51', 'G51:M51',
-                    'A55:E55'
+                    'A52:E52', 'G52:M52',
+                    'A56:E56'
                 ]);
 
                 // LBT

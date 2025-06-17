@@ -9,6 +9,18 @@
 			$excrew = true;
 		}
 	}
+
+	$or = function($text) use ($c){
+		echo "
+			<tr>
+				<td colspan='4'>$text</td>
+				<td style='{{ $c }}'></td>
+				<td colspan='2' style='{{ $c }}'></td>
+				<td colspan='4' style='{{ $c }}'></td>
+				<td colspan='2' style='{{ $c }}'></td>
+			</tr>
+		";
+	}
 @endphp
 
 <table>
@@ -295,45 +307,35 @@
 		<td colspan="13" style="{{ $b }}">E. OTHER REQUIREMENTS (Owner/Vessel Required Trainings, Publication/Briefing Materials, etc.)</td>
 	</tr>
 
-	<tr>
-		<td colspan="4">1. ‎</td>
-		<td style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="4">2. ‎</td>
-		<td style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="4">3. ‎</td>
-		<td style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="4">4. ‎</td>
-		<td style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-	</tr>
-
-	<tr>
-		<td colspan="4">5. ‎</td>
-		<td style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
-		<td colspan="2" style="{{ $c }}"></td>
-	</tr>
+	@if(in_array($data->vessel->id, [4608, 231]))
+		{{ $or("1.) SMTECH Briefing") }}
+		{{ $or("2.) Final Briefing") }}
+		{{ $or("3.) Hazmat and Mental health training") }}
+		@if(in_array($data->pro_app->rank_id, [1]))
+			{{ $or("4.) Hatch cover maintenance training") }}
+			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		@elseif(in_array($data->pro_app->rank_id, [2]))
+			{{ $or("4.) Hatch cover maintenance training") }}
+			{{ $or("5.) Ship Safety Officer Course") }}
+			{{ $or("6.) ") }}
+		@elseif(in_array($data->pro_app->rank_id, [14,19]))
+			{{ $or("4.) Cadet Training Record Book") }}
+			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		@else
+			{{ $or("4.) ") }}
+			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		@endif
+	@else
+		{{ $or("1.) ") }}
+		{{ $or("2.) ") }}
+		{{ $or("3.) ") }}
+		{{ $or("4.) ") }}
+		{{ $or("5.) ") }}
+		{{ $or("6.) ") }}
+	@endif
 
 	<tr>
 		<td colspan="13" style="height: 10px;"></td>
