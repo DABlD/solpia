@@ -476,14 +476,16 @@
 	{{ $doc('HK-VISA', "Chinese / Hong Kong Visa (Type)" ,'id', 1) }}
 	{{ $doc('COC', "Certificate of Competency No / Capacity (Limitations)" ,'lc', 1) }}
 
-	<tr>
+	{{ $doc('GMDSS/GOC', "GOC/ Global Maritime Distress & Safety System (GMDSS)" ,'lc', 1) }}
+
+	{{-- <tr>
 		{{ $doc('COE', "Certificate of Endorsement S'pore (COC) No" ,'lc', 2) }}
 		{{ $doc('GMDSS/GOC', "Certificate of Endorsement Hkg (GOC) No" ,'lc', 3) }}
 	</tr>
 	<tr>
 		{{ $doc('COE', "Certificate of Endorsement S'pore (COC) No" ,'lc', 4) }}
 		{{ $doc('GMDSS/GOC', "Certificate of Endorsement Hkg (GOC) No" ,'lc', 5) }}
-	</tr>
+	</tr> --}}
 
 	<tr><td colspan="12"></td></tr>
 
@@ -536,11 +538,19 @@
 	{{-- 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE 2ND PAGE --}}
 	<tr>
 		<td colspan="11" rowspan="2" style="{{ $center }} font-size: 20px; height: 30px;">SEAFARER APPLICATION FORM</td>
-		<td style="{{ $bold }} height: 30px;">FORM : C - 06</td>
+		<td style="{{ $bold }}">
+			NSM-SMM-07-03
+			<br style='mso-data-placement:same-cell;' />
+			ISSUED: 20.09.2015
+		</td>
 	</tr>
 
 	<tr>
-		<td style="height: 35px;">ISSUED: 02.02.2011</td>
+		<td style="height: 34px;">
+			Rev # 001
+			<br style='mso-data-placement:same-cell;' />
+			Revised: 20.07.2023
+		</td>
 	</tr>
 
 	<tr><td colspan="12" style="height: 5px;"></td></tr>
