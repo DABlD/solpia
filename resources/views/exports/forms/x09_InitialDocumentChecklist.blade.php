@@ -916,7 +916,7 @@
 
 	<tr>
 		<td colspan="8" style="{{ $bold }} {{ $center }}">
-			{{-- @if(auth()->user()->id == 8265)
+			@if(auth()->user()->id == 8265)
 				Ms. Gladys Anne Frondozo
 			@elseif(auth()->user()->id == 8311)
 				Ms. Monique Balanay
@@ -924,16 +924,20 @@
 				Ms. Mary Thea Faith Desales
 			@else
 				{{ auth()->user()->fullname }}
-			@endif --}}
-			
-			{{ auth()->user()->fullname }}
+			@endif
 		</td>
 		<td></td>
 		<td colspan="10" style="{{ $bold }}"></td>
 	</tr>
 
 	<tr>
-		<td colspan="8" style="{{ $bold }} {{ $center }}">{{ auth()->user()->role }}</td>
+		<td colspan="8" style="{{ $bold }} {{ $center }}">
+			@if(auth()->user()->role == "Crewing Manager" && !in_array(auth()->user()->id, [4580,7751,4545,22]))
+				Asst. Crewing Manager
+			@else
+				Crewing Officer
+			@endif
+		</td>
 		<td></td>
 		<td colspan="10" style="{{ $bold }} {{ $center }}">Crewing Manager / ACM</td>
 	</tr>
