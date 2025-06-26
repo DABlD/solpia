@@ -29,10 +29,13 @@
 		}
 	}
 
+	$vFlag = "Panama";
+
 	// SET CREW RANK
 	$crewRank = null;
 	if(isset($applicant->vessel)){
 		$crewRank = $applicant->rank;
+		$vFlag = ucwords(strtolower($applicant->vessel->flag));
 	}
 	else{
 		if($applicant->document_flag->count()){
@@ -47,6 +50,7 @@
 			$crewRank = $applicant->ranks2[$applicant->document_flag->first()->rank]->first();
 		}
 	}
+
 
 	$crewRank = $applicant->rank;
 
@@ -447,7 +451,7 @@
 			$docu2 = false;
 			if(isset($crewRank) && $crewRank->type == "OFFICER"){
 				foreach($applicant->document_flag as $document){
-				    if($document->country == "Panama" && $document->type == "LICENSE"){
+				    if($document->country == $vFlag && $document->type == "LICENSE"){
 				        $docu2 = $document;
 				    }
 				}
@@ -455,7 +459,7 @@
 		@endphp
 	
 		<tr>
-			<td colspan="2">PANAMA</td> 
+			<td colspan="2">{{ $vFlag }}</td> 
 			<td colspan="2">
 				@if(isset($crewRank) && $docu2)
 					@if($hl == 0)
@@ -514,13 +518,13 @@
 			<td>{{ $docu2 ? checkDate2($docu2->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu2 ? checkDate2($docu2->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
-			<td colspan="2">{{ isset($crewRank->type) && $crewRank->type == "OFFICER" ? "PANAMA" : "NOT APPLICABLE" }}</td>
+			<td colspan="2">{{ isset($crewRank->type) && $crewRank->type == "OFFICER" ? $vFlag : "NOT APPLICABLE" }}</td>
 		</tr>
 
 		@php 
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "GMDSS/GOC"){
+			    if($document->country == $vFlag && $document->type == "GMDSS/GOC"){
 			        $docu = $document;
 			    }
 			}
@@ -529,34 +533,34 @@
 		{{-- {{ dd($applicant->document_flag, $docu->number) }} --}}
 	
 		<tr>
-			<td colspan="2">PANAMA GOC</td> 
+			<td colspan="2">{{ $vFlag }} GOC</td> 
 			{{-- <td colspan="2">{{ $applicant->rank->name }}</td> --}}
 			<td colspan="2">{{ $docu ? "GMDSS GENERAL OPERATOR" : "-----" }}</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
-			<td colspan="2">{{ $docu ? 'PANAMA' : 'NOT APPLICABLE' }}</td>
+			<td colspan="2">{{ $docu ? $vFlag : 'NOT APPLICABLE' }}</td>
 		</tr>
 
 		@php 
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "SSO"){
+			    if($document->country == $vFlag && $document->type == "SSO"){
 			        $docu = $document;
 			    }
 			}
 		@endphp
 	
 		<tr>
-			<td colspan="2">PANAMA SSO</td> 
+			<td colspan="2">{{ $vFlag }} SSO</td> 
 			{{-- <td colspan="2">{{ $applicant->rank->name }}</td> --}}
 			<td colspan="2">{{ $docu ? "SHIP SECURITY OFFICER" : "-----" }}</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			{{-- <td colspan="2">{{ $docu ? "Panama" : "-" }}</td> --}}
-			<td colspan="2">{{ $docu ? 'PANAMA' : 'NOT APPLICABLE' }}</td>
+			<td colspan="2">{{ $docu ? $vFlag : 'NOT APPLICABLE' }}</td>
 		</tr>
 
 		@php 
@@ -656,7 +660,7 @@
 		@php
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == "Panama" && $document->type == "BOOKLET"){
+			    if($document->country == $vFlag && $document->type == "BOOKLET"){
 			        $docu = $document;
 			    }
 			}
@@ -729,7 +733,7 @@
 		@endphp
 
 		<tr>
-			<td colspan="2">Seaman's Book(Panama)</td>
+			<td colspan="2">Seaman's Book({{ $vFlag }})</td>
 			{{-- <td colspan="2">{{ $rname }}</td> --}}
 			<td colspan="2">
 				@if(isset($crewRank) && $docu)
@@ -791,7 +795,7 @@
 			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">PANAMA</td>
+			<td colspan="2">{{ $vFlag }}</td>
 		</tr>
 		
 		{{-- 6TH --}}
