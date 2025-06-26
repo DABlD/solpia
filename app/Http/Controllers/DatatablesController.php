@@ -352,21 +352,21 @@ class DatatablesController extends Controller
 		}
 
 		// FLEET C CAN C HMM. TEMPORARY. MAY 2025
-		if(auth()->user()->fleet == "FLEET C"){
-			$vessels = Vessel::join('principals as p', 'p.id', '=', 'vessels.principal_id')
-				->select('vessels.*', 'p.name as pname')
-				->where(function($q) use($f){
-					$q->where('status', 'like', $f['status']);
-					$q->whereIn('vessels.fleet', ['FLEET C', 'FLEET B']);
-					$q->where('flag', 'like', $f['flag']);
-					$q->whereIn('principal_id', [2,10,873,1922]);
-				})
-				->orWhere(function($q) use($f){
-					$q->where('vessels.fleet', 'FLEET B');
-					$q->where('principal_id', 256);
-					$q->whereIn('type', ['VLCC', 'OIL/CHEM']);
-				});
-		}
+		// if(auth()->user()->fleet == "FLEET C"){
+		// 	$vessels = Vessel::join('principals as p', 'p.id', '=', 'vessels.principal_id')
+		// 		->select('vessels.*', 'p.name as pname')
+		// 		->where(function($q) use($f){
+		// 			$q->where('status', 'like', $f['status']);
+		// 			$q->whereIn('vessels.fleet', ['FLEET C', 'FLEET B']);
+		// 			$q->where('flag', 'like', $f['flag']);
+		// 			$q->whereIn('principal_id', [2,10,873,1922]);
+		// 		})
+		// 		->orWhere(function($q) use($f){
+		// 			$q->where('vessels.fleet', 'FLEET B');
+		// 			$q->where('principal_id', 256);
+		// 			$q->whereIn('type', ['VLCC', 'OIL/CHEM']);
+		// 		});
+		// }
 
 		$vessels = $vessels->get();
 
