@@ -112,12 +112,33 @@
 
 	@for($i = 0; $i < (sizeof($data) >= 7 ? sizeof($data) : 7); $i++)
 		@if(isset($data[$i]))
+			@php
+				$ss = $data[$i]->shoe_size;
+
+				if($data[$i]->user->fleet == "FLEET D" && $ss > 100){
+					if($ss == 225) {$ss = 2;}
+					elseif($ss == 230) {$ss = 3;}
+					elseif($ss == 235) {$ss = 4;}
+					elseif($ss == 240) {$ss = 5;}
+					elseif($ss == 245) {$ss = 5.5;}
+					elseif($ss == 250) {$ss = 6;}
+					elseif($ss == 255) {$ss = 7;}
+					elseif($ss == 260) {$ss = 8;}
+					elseif($ss == 265) {$ss = 9;}
+					elseif($ss == 270) {$ss = 10;}
+					elseif($ss == 275) {$ss = 10.5;}
+					elseif($ss == 280) {$ss = 11;}
+					elseif($ss == 285) {$ss = 12;}
+					elseif($ss == 290) {$ss = 13;}
+				}
+			@endphp
+
 			<tr>
 				<td style="{{ $c }}">{{ $i+1 }}</td>
 				<td style="{{ $c }}">{{ $data[$i]->pro_app->rank->abbr }}</td>
 				<td colspan="4" style="{{ $c }}">{{ $data[$i]->user->namefull }}</td>
 				<td colspan="2" style="{{ $c }}">{{ $data[$i]->clothes_size }}/{{ $data[$i]->waistline }}</td>
-				<td colspan="2" style="{{ $c }}">{{ $data[$i]->shoe_size }}</td>
+				<td colspan="2" style="{{ $c }}">{{ $ss }}</td>
 			</tr>
 		@else
 			<tr>
@@ -241,12 +262,33 @@
 
 	@for($i = 0; $i < (sizeof($data) >= 7 ? sizeof($data) : 7); $i++)
 		@if(isset($data[$i]))
+			@php
+				$ss = $data[$i]->shoe_size;
+
+				if($data[$i]->user->fleet == "FLEET D" && $ss > 100){
+					if($ss == 225) {$ss = 2;}
+					elseif($ss == 230) {$ss = 3;}
+					elseif($ss == 235) {$ss = 4;}
+					elseif($ss == 240) {$ss = 5;}
+					elseif($ss == 245) {$ss = 5.5;}
+					elseif($ss == 250) {$ss = 6;}
+					elseif($ss == 255) {$ss = 7;}
+					elseif($ss == 260) {$ss = 8;}
+					elseif($ss == 265) {$ss = 9;}
+					elseif($ss == 270) {$ss = 10;}
+					elseif($ss == 275) {$ss = 10.5;}
+					elseif($ss == 280) {$ss = 11;}
+					elseif($ss == 285) {$ss = 12;}
+					elseif($ss == 290) {$ss = 13;}
+				}
+			@endphp
+
 			<tr>
 				<td style="{{ $c }}">{{ $i+1 }}</td>
 				<td style="{{ $c }}">{{ $data[$i]->pro_app->rank->abbr }}</td>
 				<td colspan="4" style="{{ $c }}">{{ $data[$i]->user->namefull }}</td>
 				<td colspan="2" style="{{ $c }}">{{ $data[$i]->clothes_size }}/{{ $data[$i]->waistline }}</td>
-				<td colspan="2" style="{{ $c }}">{{ $data[$i]->shoe_size }}</td>
+				<td colspan="2" style="{{ $c }}">{{ $ss }}</td>
 			</tr>
 		@else
 			<tr>
