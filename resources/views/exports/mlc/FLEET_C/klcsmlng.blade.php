@@ -46,7 +46,7 @@
 	<tr>
 		<td rowspan="6" style="{{ $c }}">Shipowner</td>
 		<td colspan="3">Name of the</td>
-		<td colspan="6" rowspan="2" style="{{ $bc }}">KOREA LINE LNG CO.,LTD.</td>
+		<td colspan="6" rowspan="2" style="{{ $bc }}">KOREA LINE LNG CO., LTD.</td>
 		<td rowspan="2">Phone number</td>
 		<td style="{{ $bc }}" rowspan="2">82-2-3701-0114</td>
 	</tr>
@@ -442,11 +442,7 @@
 		<td colspan="6"></td>
 		<td colspan="3">Shipowner:</td>
 		<td colspan="2">
-			@if($data->vessel->type == "LNG")
-				KOREA LINE LNG CORP
-			@else
-				KOREA LINE CORPORATION
-			@endif
+			KOREA LINE LNG CO., LTD.
 		</td>
 	</tr>
 

@@ -528,13 +528,13 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setOffsetY(10);
         $drawing2->setCoordinates('G112');
 
-        $mlcStamp = "images/mlc_klcsm.png";
+        $mlcStamp = "images/mlc_klcsm_lng2.png";
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setPath(public_path($mlcStamp));
         $drawing3->setResizeProportional(false);
         $drawing3->setHeight(90);
-        $drawing3->setWidth(260);
-        $drawing3->setOffsetX(50);
+        $drawing3->setWidth(350);
+        $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
         $drawing3->setCoordinates('J110');
 
@@ -547,6 +547,6 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing4->setOffsetY(-40);
         $drawing4->setCoordinates('L110');
 
-        return [$drawing, $drawing2, $drawing3, $drawing4];
+        return [$drawing, $drawing2, $drawing3];
     }
 }
