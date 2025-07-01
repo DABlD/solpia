@@ -64,7 +64,7 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
     public function view(): View
     {
-        $exportView = str_replace(' ', '_', $this->applicant->vessel->fleet) . '.klcsm';
+        $exportView = str_replace(' ', '_', $this->applicant->vessel->fleet) . '.klcsmBulk';
         return view('exports.mlc.' . $exportView, [
             'data' => $this->applicant,
         ]);
