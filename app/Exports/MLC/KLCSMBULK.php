@@ -40,7 +40,7 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $identification = "101-81-24624";
         }
         elseif(in_array($applicant->vessel->name, ["M/V CH BELLA","M/V CH CLARE","M/V CH DORIS","M/V CK ANGIE","M/V CK BLUEBELL"])){
-            $shipowner = "CHANG MYUNG SHIPPING";
+            $shipowner = "CHANG MYUNG SHIPPING CO., LTD.";
             $phoneNumber = "+82-2-2175-7000";
             $address = "3F 30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Korea";
             $employer = "JUNG SUNG HO";
@@ -664,7 +664,7 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing5->setCoordinates('K117');
 
         $drawing6 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing6->setPath(public_path("images/mlc_klcsm_lng.png"));
+        $drawing6->setPath(public_path("images/mlc_klcsm_bulk.png"));
         $drawing6->setResizeProportional(false);
         $drawing6->setHeight(95);
         $drawing6->setWidth(270);

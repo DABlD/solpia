@@ -582,7 +582,7 @@
 		<td colspan="4"></td>
 		<td>Shipowner</td>
 		<td colspan="2"></td>
-		<td colspan="3">CHANG MYUNG SHIPPING</td>
+		<td colspan="3">CHANG MYUNG SHIPPING CO., LTD.</td>
 	</tr>
 
 	<tr><td colspan="11" style="height: 72px;"></td></tr>
