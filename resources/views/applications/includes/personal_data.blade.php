@@ -257,6 +257,7 @@
             <option value="Married">Married</option>
             <option value="Widowed">Widowed</option>
             <option value="Divorced">Divorced</option>
+            <option value="Legally Separated">Legally Separated</option>
         </select>
         <span class="invalid-feedback hidden" role="alert">
             <strong id="civil_statusError"></strong>
