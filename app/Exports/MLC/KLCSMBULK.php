@@ -667,7 +667,7 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing6->setPath(public_path("images/mlc_klcsm_bulk.png"));
         $drawing6->setResizeProportional(false);
         $drawing6->setHeight(95);
-        $drawing6->setWidth(270);
+        $drawing6->setWidth(300);
         $drawing6->setOffsetX(1);
         $drawing6->setOffsetY(1);
         $drawing6->setCoordinates('F115');
