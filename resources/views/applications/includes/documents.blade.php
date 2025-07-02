@@ -751,6 +751,13 @@
         			}
 	        	}
 	        });
+
+	        {{-- AUTO ISSUER SOLPIA FOR MANDATORY IN HOUSE TRAININGS --}}
+	        $('[name^="docu-lctype"]').change(e => {
+	        	if(['PDOS', 'GTRB', 'ANTI PIRACY', 'IN HOUSE TRAINING CERT WITH ISM', 'MCRA'].includes($(e.target).val())){
+        			$(e.target).parent().next().find('select').val("SOLPIA MARINE & SHIP MANAGEMENT, INC.").change();
+	        	}
+        	});
         }
 
         function checkExpiry(e){
