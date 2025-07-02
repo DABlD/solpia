@@ -672,15 +672,15 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing6->setOffsetY(1);
         $drawing6->setCoordinates('F115');
 
-        $drawing7 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing7->setPath(public_path("images/cmshippingsig.png"));
-        $drawing7->setResizeProportional(false);
-        $drawing7->setHeight(70);
-        $drawing7->setWidth(160);
-        $drawing7->setOffsetX(-50);
-        $drawing7->setOffsetY(-15);
-        $drawing7->setCoordinates('K115');
+        // $drawing7 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        // $drawing7->setPath(public_path("images/cmshippingsig.png"));
+        // $drawing7->setResizeProportional(false);
+        // $drawing7->setHeight(70);
+        // $drawing7->setWidth(160);
+        // $drawing7->setOffsetX(-50);
+        // $drawing7->setOffsetY(-15);
+        // $drawing7->setCoordinates('K115');
 
-        return [$drawing, $drawing2, $drawing3, $drawing4, $drawing5, $drawing6, $drawing7];
+        return [$drawing, $drawing2, $drawing3, $drawing4, $drawing5, $drawing6];
     }
 }
