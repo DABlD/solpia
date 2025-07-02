@@ -218,6 +218,9 @@
                             <div class="col-md-2 iInput">
                                 ${radio("source", "Source")}
                             </div>
+                            <div class="col-md-2 iInput">
+                                ${radio("source", "Job Fair")}
+                            </div>
                         </div>
                     </div></br>
 
