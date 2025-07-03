@@ -331,7 +331,14 @@
 			{{ $doc("SMS FAMILIARIZATION", "SMS FAMILIARIZATION", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			
+			{{-- NORD A. TRITON CENTURY --}}
+			@if(in_array($data->vessel->id, [6196,4647]))
+				{{ $con("FINAL BRIEFING") }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
+
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -342,7 +349,14 @@
 			{{ $doc("SMS FAMILIARIZATION", "SMS FAMILIARIZATION", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			{{ $doc("TEST", "", 'lc') }}
+			
+			{{-- NORD A. TRITON CENTURY --}}
+			@if(in_array($data->vessel->id, [6196,4647]))
+				{{ $con("FINAL BRIEFING") }}
+			@else
+				{{ $doc("TEST", "", 'lc') }}
+			@endif
+
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
