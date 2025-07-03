@@ -47,7 +47,7 @@
 
 	<tr>
 		<td colspan="3">* POEA Memorandum Circulars</td>
-		<td colspan="5"></td>
+		<td colspan="5">DMW Department Order No. 03 Series of 2024</td>
 	</tr>
 
 	<tr>
