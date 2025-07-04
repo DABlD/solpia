@@ -415,7 +415,7 @@
 				ADMINISTRATION
 			</td>
 			<td colspan="5" rowspan="3">
-				CONFIRMED BY: Thea Mae D. Guerra 
+				CONFIRMED BY: THEA MAE G. RIO
 				<br>
 				(Crewing Manager)
 			</td>

@@ -116,7 +116,7 @@
 
 	{{ $dept("FLEET B", "Mr. Adulf Kit Jumawan", "Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("FLEET C", "Ms. Shirley Erasquin", "Crewing Manager", "(+ Medical Matters)") }}
-	{{ $dept("FLEET D", "Ms. Thea Mae Guerra", "Crewing Manager", "(+ Medical Matters)") }}
+	{{ $dept("FLEET D", "Ms. Thea Mae G. Rio", "Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("TOEI DIVISION", "Mr. Neil Romano", "Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("TOEI DIVISION", "Ms. Lhea Marquez(Fleet A)", "Asst Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("TOEI DIVISION", "Ms. Laura Fernando (Fleet B)", "Asst Crewing Manager", "(+ Medical Matters)") }}

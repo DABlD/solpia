@@ -742,7 +742,7 @@
 
 	<tr>
 		<td colspan="2" style="{{ $b }}">Reporting To:</td>
-		<td colspan="5" style="{{ $bc }}">MS. THEA MAE D. GUERRA</td>
+		<td colspan="5" style="{{ $bc }}">MS. THEA MAE G. RIO</td>
 		<td colspan="3" style="{{ $b }}">No. of Subordinates:</td>
 		<td colspan="4" style="{{ $bc }}"></td>
 	</tr>

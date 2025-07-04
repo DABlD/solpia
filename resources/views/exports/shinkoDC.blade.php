@@ -429,7 +429,7 @@
 				ADMINISTRATION
 			</td>
 			<td colspan="5" rowspan="3">
-				CONFIRMED BY: Ms. THEA MAE GUERRA
+				CONFIRMED BY: Ms. THEA MAE G. RIO
 				<br>
 				(CREWING MANAGER)
 			</td>

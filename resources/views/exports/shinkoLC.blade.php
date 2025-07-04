@@ -350,7 +350,7 @@
 
 		<tr>
 			<td>Name</td>
-			<td colspan="2">MS. THEA MAE GUERRA</td>
+			<td colspan="2">MS. THEA MAE G. RIO</td>
 			<td>Name</td>
 			<td colspan="3">C/E ROMANO MARIANO</td>
 		</tr>

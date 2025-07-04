@@ -309,7 +309,7 @@
 
 	<tr>
 		<td colspan="4">
-			MS. THEA D. GUERRA
+			MS. THEA MAE G. RIO
 		</td>
 		<td colspan="2" rowspan="2"></td>
 		<td colspan="2" rowspan="2"></td>

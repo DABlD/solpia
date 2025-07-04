@@ -953,7 +953,7 @@
 			@if(auth()->user()->fleet == "FLEET B")
 				MR. ADULF KIT JUMAWAN
 			@elseif(auth()->user()->fleet == "FLEET D")
-				MS. THEA GUERRA
+				MS. THEA MAE G. RIO
 			@else
 				@if(auth()->user()->gender == "Male")
 					MR. {{ auth()->user()->fname }} {{ auth()->user()->lname }}

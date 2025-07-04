@@ -428,7 +428,7 @@
 			@elseif(auth()->user()->fleet == "FLEET c")
 				Ms. Shirley Erasquin
 			@elseif(auth()->user()->fleet == "FLEET D")
-				Ms. Thea Mae Guerra
+				Ms. THEA MAE G. RIO
 			@elseif(auth()->user()->fleet == "FLEET E")
 				Mr. Dennis Quiño
 			@endif
