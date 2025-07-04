@@ -339,7 +339,7 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A39', 'H41', 'F47:F61', 'B47:B61', 'K47:K61', 'E67:H94'
+                    'A39', 'H41', 'F47:F61', 'B47:B61', 'K47:K61', 'E67:H94',
                     'A41'
                 ];
 
