@@ -1,5 +1,5 @@
 @php
-	$latest = $data->sea_service->sortBy('sign_off')->last();
+	$rank = $data->pro_app->rank ?? $data->sea_service->sortBy('sign_off')->last()->rank2;
 @endphp
 
 <table>
@@ -44,7 +44,7 @@
 		
 		<td></td>
 
-		<td>{{ $latest->rank2->abbr }}</td>
+		<td>{{ $rank->abbr }}</td>
 		<td>{{ $data->user->lname }}</td>
 		<td>Filipino</td>
 		<td></td>
@@ -173,8 +173,8 @@
 		<td>{{ $ss ? (isset($ss->sign_on) ? $ss->sign_on->format("m/d/Y") : "") : "" }}</td>
 		<td rowspan="2">=DATEDIF(C{{ $sr }},C{{ $sr+1 }},"Y")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"YM")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"MD")+1</td>
 		<td rowspan="2"></td>
-		<td rowspan="2">{{ $ss->rank2->abbr }}</td>
-		<td rowspan="2">{{ $ss->vessel_type }}</td>
+		<td rowspan="2">{{ $ss ? $ss->rank2->abbr : "" }}</td>
+		<td rowspan="2">{{ $ss ? $ss->vessel_type : "" }}</td>
 		<td rowspan="2">=IF(OR(C{{ $sr }}="",C{{ $sr+1 }}=""),0,DATEDIF(C{{ $sr }},C{{ $sr+1 }},"d")+1)</td>
 		
 		<td></td>
@@ -214,8 +214,8 @@
 		<td>{{ $ss ? (isset($ss->sign_on) ? $ss->sign_on->format("m/d/Y") : "") : "" }}</td>
 		<td rowspan="2">=DATEDIF(C{{ $sr }},C{{ $sr+1 }},"Y")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"YM")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"MD")+1</td>
 		<td rowspan="2"></td>
-		<td rowspan="2">{{ $ss->rank2->abbr }}</td>
-		<td rowspan="2">{{ $ss->vessel_type }}</td>
+		<td rowspan="2">{{ $ss ? $ss->rank2->abbr : "" }}</td>
+		<td rowspan="2">{{ $ss ? $ss->vessel_type : "" }}</td>
 		<td rowspan="2">=IF(OR(C{{ $sr }}="",C{{ $sr+1 }}=""),0,DATEDIF(C{{ $sr }},C{{ $sr+1 }},"d")+1)</td>
 		
 		<td rowspan="2"></td>
@@ -245,8 +245,8 @@
 		<td>{{ $ss ? (isset($ss->sign_on) ? $ss->sign_on->format("m/d/Y") : "") : "" }}</td>
 		<td rowspan="2">=DATEDIF(C{{ $sr }},C{{ $sr+1 }},"Y")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"YM")&#38;"-"&#38;DATEDIF(C{{ $sr }},C{{ $sr+1 }},"MD")+1</td>
 		<td rowspan="2"></td>
-		<td rowspan="2">{{ $ss->rank2->abbr }}</td>
-		<td rowspan="2">{{ $ss->vessel_type }}</td>
+		<td rowspan="2">{{ $ss ? $ss->rank2->abbr : "" }}</td>
+		<td rowspan="2">{{ $ss ? $ss->vessel_type : "" }}</td>
 		<td rowspan="2">=IF(OR(C{{ $sr }}="",C{{ $sr+1 }}=""),0,DATEDIF(C{{ $sr }},C{{ $sr+1 }},"d")+1)</td>
 		
 		<td rowspan="2"></td>
