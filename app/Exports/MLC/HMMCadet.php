@@ -41,7 +41,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         if(in_array($applicant->vessel->name, $array1)){
             $applicant->shipowner = "HMM Company Limited";
-            $applicant->sPresident = "WON HYOK, CHOI";
+            $applicant->sPresident = "CHOI WONHYOK";
             $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
 
             $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
@@ -49,7 +49,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         }
         elseif(in_array($applicant->vessel->name, $array2)){
             $applicant->shipowner = "HMM Co., LTD.";
-            $applicant->sPresident = "WON HYOK, CHOI";
+            $applicant->sPresident = "CHOI WONHYOK";
             $applicant->sAddress = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
 
             $applicant->shipowner2 = "HMM Ocean Service Co., Ltd.";
@@ -61,7 +61,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         }
         elseif(in_array($applicant->vessel->name, $array3)){
             $applicant->shipowner = "HMM Company Limited";
-            $applicant->sPresident = "WON HYOK, CHOI";
+            $applicant->sPresident = "CHOI WONHYOK";
             $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
 
             $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
