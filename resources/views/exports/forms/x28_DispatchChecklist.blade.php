@@ -352,6 +352,15 @@
 			{{ $or("6.) ") }}
 		@endif
 	@else
+	{{-- NORD A. TRITON C. --}}
+	@elseif(in_array($data->vessel->id, [4647, 6196]))
+		{{ $or("1.) Final Briefing") }}
+		{{ $or("2.) ") }}
+		{{ $or("3.) ") }}
+		{{ $or("4.) ") }}
+		{{ $or("5.) ") }}
+		{{ $or("6.) ") }}
+	@else
 		{{ $or("1.) ") }}
 		{{ $or("2.) ") }}
 		{{ $or("3.) ") }}
