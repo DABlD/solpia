@@ -340,14 +340,14 @@
 	</tr>
 
 	<tr>
-		<td colspan="4">Place of Birth</td>
+		<td colspan="4">Place of Birth: {{ $data->birth_place }}</td>
 		<td colspan="3">Date of Birth</td>
 		<td colspan="3">Weight (Kg)</td>
 		<td colspan="2">Height (cm)</td>
 	</tr>
 
 	<tr>
-		<td colspan="4">{{ $data->birth_place }}</td>
+		<td colspan="4">Religion: {{ $data->religion }}</td>
 		<td colspan="3">{{ $data->user->birthday ? $data->user->birthday->format('d-M-Y') : "---" }}</td>
 		<td colspan="3" style="text-align: left;">{{ $data->weight }}</td>
 		<td colspan="2" style="text-align: left;">{{ $data->height }}</td>
@@ -452,14 +452,16 @@
 	{{ $doc('HK-VISA', "Chinese / Hong Kong Visa (Type)" ,'id', 1) }}
 	{{ $doc('COC', "Certificate of Competency No / Capacity (Limitations)" ,'lc', 1) }}
 
-	<tr>
+	{{ $doc('GMDSS/GOC', "GOC/ Global Maritime Distress & Safety System (GMDSS)" ,'lc', 1) }}
+
+	{{-- <tr>
 		{{ $doc('COE', "Certificate of Endorsement S'pore (COC) No" ,'lc', 2) }}
 		{{ $doc('GMDSS/GOC', "Certificate of Endorsement Hkg (GOC) No" ,'lc', 3) }}
 	</tr>
 	<tr>
 		{{ $doc('COE', "Certificate of Endorsement S'pore (COC) No" ,'lc', 4) }}
 		{{ $doc('GMDSS/GOC', "Certificate of Endorsement Hkg (GOC) No" ,'lc', 5) }}
-	</tr>
+	</tr> --}}
 
 	<tr><td colspan="12"></td></tr>
 

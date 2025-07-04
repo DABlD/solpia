@@ -489,6 +489,15 @@ class HarbourLink implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->getRowDimension(93)->setRowHeight(30);
 
                 $event->sheet->getDelegate()->getStyle('B67:B94')->getFont()->setSize('10');
+                
+                $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(0);
+                $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(0);
+
+                // PAGE BREAKS
+                $rows = [61];
+                foreach($rows as $row){
+                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+                }
 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
