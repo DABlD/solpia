@@ -19,11 +19,13 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $array1 = [
             "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE", "M/V HMM AQUAMARINE",
             "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM LE HAVRE", "M/V HYUNDAI BRAVE",
-            "M/V HYUNDAI COURAGE", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE", "M/V HMM ALGECIRAS",
+            "M/V HYUNDAI COURAGE", "M/V HMM ALGECIRAS", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE",
             "M/V HMM COPENHAGEN", "M/V HMM GDANSK", "M/V HMM HAMBURG", "M/V HMM OSLO",
             "M/V HMM SOUTHAMPTON", "M/V HMM ST. PETERSBURG", "M/V HYUNDAI GRACE", "M/V HYUNDAI UNITY",
             "M/V HMM COLOMBO", "M/V HMM VICTORY", "M/V HMM PRIDE", "M/V HMM FOREST", "M/V HMM GREEN",
-            'M/V HYUNDAI JAKARTA'
+            'M/V HYUNDAI JAKARTA',
+            "M/V GLOBAL ENTERPRISE","M/V HMM CEBU",
+            'M/V MPV THALIA', 'M/V MPV URANIA'
         ];
 
         // FLEET C LAST 1 LINE
@@ -32,11 +34,6 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HYUNDAI PARAMOUNT","M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
             "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
             "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
-        ];
-
-        $array3 = [
-            "M/V GLOBAL ENTERPRISE","M/V HMM CEBU",
-            'M/V MPV THALIA', 'M/V MPV URANIA'
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
@@ -58,14 +55,6 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
             $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
             $applicant->cAddress = "5th Floor, Busan office Building, Jungang-daero 63, Jung-gu, Busan 600-711, Korea";
-        }
-        elseif(in_array($applicant->vessel->name, $array3)){
-            $applicant->shipowner = "HMM Company Limited";
-            $applicant->sPresident = "CHOI WONHYOK";
-            $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
-
-            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-            $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
 
         $this->applicant    = $applicant;

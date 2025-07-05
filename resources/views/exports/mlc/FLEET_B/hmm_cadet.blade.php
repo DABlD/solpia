@@ -14,28 +14,28 @@
 	<tr>
 		<td rowspan="3">Shipowner</td>
 		<td colspan="2">Company</td>
-		<td colspan="5">ㅤHMM Company Limited</td>
+		<td colspan="5">{{ $data['shipowner'] }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">President</td>
-		<td colspan="5">ㅤWON HYOK, CHOI</td>
+		<td colspan="5">ㅤ{{ $data['sPresident'] }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">Address</td>
-		<td colspan="5">ㅤ108, Yeoui-daero, Yeongdeungpo-gu, Seoul, Republic of Korea</td>
+		<td colspan="5">ㅤ{{ $data['sAddress'] }}</td>
 	</tr>
 
 	<tr>
 		<td rowspan="2">Ship Manager</td>
 		<td colspan="2">Company</td>
-		<td colspan="5">ㅤHMM Ocean Service Co., Ltd</td>
+		<td colspan="5">ㅤ{{ $data['crewManager'] }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">Address</td>
-		<td colspan="5">ㅤ5th floor, Busan post office building, Jungang-Daero 63, Jung-Gu, Busan, Republic of Korea</td>
+		<td colspan="5">ㅤ{{ $data['cAddress'] }}</td>
 	</tr>
 
 	<tr>
