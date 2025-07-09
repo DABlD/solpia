@@ -46,9 +46,9 @@
 	<tr>
 		<td rowspan="6" style="{{ $c }}">Shipowner</td>
 		<td colspan="3">Name of the</td>
-		<td colspan="6" rowspan="2" style="{{ $bc }}">KOREA LINE LNG CO., LTD.</td>
+		<td colspan="6" rowspan="2" style="{{ $bc }}">{{ $data->vshipowner }}</td>
 		<td rowspan="2">Phone number</td>
-		<td style="{{ $bc }}" rowspan="2">82-2-3701-0114</td>
+		<td style="{{ $bc }}" rowspan="2">{{ $data->vphoneNumber }}</td>
 	</tr>
 
 	<tr>
@@ -58,11 +58,7 @@
 	<tr>
 		<td colspan="3">Location of</td>
 		<td colspan="8" rowspan="2" style="{{ $bc }}">
-			@if($data->vessel->type == "LNG")
-				30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Republic of Korea
-			@else
-				SM R&#38;D Center, 78, Magokjungang8-ro, Gangseo-gu, Seoul, Korea
-			@endif
+			{{ $data->vaddress }}
 		</td>
 	</tr>
 
@@ -73,15 +69,10 @@
 	<tr>
 		<td colspan="3">Name of the</td>
 		<td colspan="6" rowspan="2" style="{{ $bc }}">
-			HAN SU HAN
-			{{-- @if($data->vessel->type == "LNG")
-				HAN SU HAN
-			@else
-				MIN TAE YUN
-			@endif --}}
+			{{ $data->vemployer }}
 		</td>
 		<td rowspan="2">Identification number</td>
-		<td rowspan="2" style="{{ $bc }}">824-87-01648</td>
+		<td rowspan="2" style="{{ $bc }}">{{ $data->videntification }}</td>
 	</tr>
 
 	<tr>

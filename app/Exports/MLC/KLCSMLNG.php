@@ -30,6 +30,28 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->onum = "";
         }
 
+        if(in_array($applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY', "M/T SM ALBATROSS", "SM KESTREL", "FUELNG VENOSA"])){
+            $shipowner = "KOREA LINE CORPORATION";
+            $phoneNumber = "+82-2-3701-0114";
+            $address = "SM R&D Center 78, Magkjungang 8-ro, Gangseo-gu, Seoul, Korea";
+            $employer = "HAN SU HAN";
+            $identification = "101-81-24624";
+        }
+        elseif(in_array($applicant->vessel->name, ["K. LOTUS"])){
+            $shipowner = "KLBV1 S.A.";
+            $phoneNumber = "";
+            $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
+            $employer = "LEE IN KEUN";
+            $identification = "";
+        }
+
+        $applicant->vofficialNo = $temp[$applicant->vessel->name] ?? "-";
+        $applicant->vshipowner = $shipowner;
+        $applicant->vphoneNumber = $phoneNumber;
+        $applicant->vaddress = $address;
+        $applicant->vemployer = $employer;
+        $applicant->videntification = $identification;
+
         if($applicant->pro_app->status != "Lined-Up"){
             $applicant->port = "ONBOARD " . $applicant->vessel->name;
         }
@@ -537,6 +559,10 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
         $drawing3->setCoordinates('J110');
+
+        if(in_array($this->applicant->vessel->name, ["K. LOTUS"])){
+            $drawing3->setPath(public_path("images/mlc_klcsm_klbv1.png"));
+        }
 
         $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing4->setPath(public_path("images/mlc_klcsm_sig.png"));
