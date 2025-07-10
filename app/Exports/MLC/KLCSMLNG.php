@@ -55,6 +55,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $applicant->vaddress = $address;
         $applicant->vemployer = $employer;
         $applicant->videntification = $identification;
+        $applicant->shipowner2 = $shipowner2;
 
         if($applicant->pro_app->status != "Lined-Up"){
             $applicant->port = "ONBOARD " . $applicant->vessel->name;
