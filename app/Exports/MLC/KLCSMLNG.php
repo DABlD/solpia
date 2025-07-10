@@ -39,10 +39,10 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         }
         elseif(in_array($applicant->vessel->name, ["K. LOTUS"])){
             $shipowner = "KLBV1 S.A.";
-            $phoneNumber = "";
+            $phoneNumber = "155691344";
             $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
             $employer = "LEE IN KEUN";
-            $identification = "";
+            $identification = "82-51-661-6100";
         }
 
         $applicant->vofficialNo = $temp[$applicant->vessel->name] ?? "-";
