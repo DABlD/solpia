@@ -433,7 +433,7 @@
 		<td colspan="6"></td>
 		<td colspan="3">Shipowner:</td>
 		<td colspan="2">
-			KOREA LINE LNG CO., LTD.
+			KLBV1 S.A.
 		</td>
 	</tr>
 
