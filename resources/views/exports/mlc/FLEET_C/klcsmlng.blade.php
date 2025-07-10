@@ -433,7 +433,7 @@
 		<td colspan="6"></td>
 		<td colspan="3">Shipowner:</td>
 		<td colspan="2">
-			KLBV1 S.A.
+			{{ $data->shipowner2 }}
 		</td>
 	</tr>
 

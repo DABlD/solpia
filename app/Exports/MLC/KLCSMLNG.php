@@ -36,6 +36,8 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $address = "SM R&D Center 78, Magkjungang 8-ro, Gangseo-gu, Seoul, Korea";
             $employer = "HAN SU HAN";
             $identification = "101-81-24624";
+
+            $shipowner2 = "KOREA LINE LNG CO., LTD.";
         }
         elseif(in_array($applicant->vessel->name, ["K. LOTUS"])){
             $shipowner = "KLBV1 S.A.";
@@ -43,6 +45,8 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
             $employer = "LEE IN KEUN";
             $identification = "155691344";
+            
+            $shipowner2 = "KLBV1 S.A.";
         }
 
         $applicant->vofficialNo = $temp[$applicant->vessel->name] ?? "-";
