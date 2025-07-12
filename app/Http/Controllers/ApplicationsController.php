@@ -1858,14 +1858,50 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
-        $crews = ProcessedApplicant::where('principal_id', 2)->get();
-        $array = [];
+        $users = User::where('fleet', "TOEI")->where('role', 'Applicant')->get();
+        $users->load('crew.sea_service');
+        
+        $mannings = ['SOLPIA', 'SOP', 'SAFEWAY', 'AMETHYST', 'MARINO', 'FAIRVIEW'];
+        $principals = ['TOEI', 'TOIE', 'SMTECH', 'SM TECH', 'KITAURA', 'DOUN KISEN', 'SHOEI', 'SHOIE'];
 
-        foreach($crews as $crew){
-            $usv = DocumentId::where('applicant_id', $crew->applicant_id)->where('type', 'US-VISA')->where('issue_date', '>=', '2024-01-01')->orderBy('issue_date', 'desc')->first();
+        $mixnmatch = function($string, $keywords){
+            foreach($keywords as $keyword){
+                if(str_contains($string, $keyword)){
+                    return true;
+                }
+            }
 
-            if($usv){
-                echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . ';' . $crew->status . ';' . $crew->vessel->name . ';' . $usv->issue_date . '<br>';
+            return false;
+        };
+
+        foreach($users as $user){
+            $sss = isset($user->crew->sea_service) ? $user->crew->sea_service->sortBy('sign_on') : null;
+
+            if(sizeof($sss)){
+                $flag = 1;
+                
+                if($sss[0]['sign_on'] <= "2015-12-31"){
+                    foreach($sss as $ss){
+                        // if($user->id == 905){
+                        //     echo in_array($ss['manning_agent'], [$mannings]) . ' / ' . in_array($ss['principal'], [$principals]) . '<br>';
+                        // }
+
+
+                        if($user->id == 905){
+                            echo ($mixnmatch($ss['manning_agent'], $mannings) ? 1 : 0) . ' / ' . ($mixnmatch($ss['principal'], $principals) ? 1 : 0) . '<br>';
+                        }
+
+                        if(!($mixnmatch($ss['manning_agent'], $mannings) && $mixnmatch($ss['principal'], $principals))){
+                            $flag = 0;
+                            break;
+                        }
+                    }
+
+                    if($flag){
+                        echo $user->id . ' - ' . $user->namefull . '<br>';
+                    }
+                }
+
             }
         }
     }
