@@ -39,7 +39,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
             $shipowner2 = "KOREA LINE LNG CO., LTD.";
         }
-        elseif(in_array($applicant->vessel->name, ["K. LOTUS"])){
+        elseif(in_array($applicant->vessel->name, ["M/T K. LOTUS"])){
             $shipowner = "KLBV1 S.A.";
             $phoneNumber = "82-51-661-6100";
             $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
@@ -565,7 +565,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setOffsetY(2);
         $drawing3->setCoordinates('J110');
 
-        if(in_array($this->applicant->vessel->name, ["K. LOTUS"])){
+        if(in_array($this->applicant->vessel->name, ["M/T K. LOTUS"])){
             $drawing3->setPath(public_path("images/mlc_klcsm_klbv1.png"));
         }
 
