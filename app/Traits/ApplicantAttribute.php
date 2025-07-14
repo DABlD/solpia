@@ -61,6 +61,10 @@ trait ApplicantAttribute{
 		// STATUS SHOULD BE EQUAL TO PRINCIPAL ID SO I USED THIS
 		$status = auth()->user()->pas;
 
+		if(auth()->user()->role == "Recruitment Officer"){
+			$string = '<a class="btn btn-success btn-search btn-xs" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search fa-sm" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+		}
+
 		// if($status > 1){
 		// 	$string .= '<a class="btn btn-info" data-toggle="tooltip" title="Go to Principal" data-id="' . $this->id  . '" data-principal="' . $status . '">' . '<span class="fa fa-arrow-right" data-id="' . $this->id  . '" data-principal="' . $status . '"></span>' . '</a>&nbsp;';
 		// }

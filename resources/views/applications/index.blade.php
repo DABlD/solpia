@@ -244,6 +244,12 @@
         .btn-xs{
             font-size: .65em !important;
         }
+
+        @if(auth()->user()->role == "Recruitment Officer")
+            [title="Download"],[title="Delete"],[title="Upload New File"],[title="Add"]{
+                display: none;
+            }
+        @endif
 	</style>
 @endpush
 
@@ -284,6 +290,10 @@
         fLname = "{{ session('fLname') }}";
         fStatus = "{{ session('fStatus') ?? "%%" }}";
         fFleet = "{{ session('fFleet') ?? "%%" }}";
+
+        @if(auth()->user()->role == "Recruitment Officer")
+            fStatus = "Vacation";
+        @endif
 
         swal({
             title: 'Loading',

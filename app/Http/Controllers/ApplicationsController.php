@@ -29,7 +29,7 @@ use PDF;
 class ApplicationsController extends Controller
 {
     public function __construct(){
-        $this->middleware('permissions:' . 'Admin/Encoder/Principal/Cadet/Crewing Manager/Crewing Officer/Training/Processing');
+        $this->middleware('permissions:' . 'Admin/Encoder/Principal/Cadet/Crewing Manager/Crewing Officer/Training/Processing/Recruitment Officer');
     }
 
     public function index(Request $req){

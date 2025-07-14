@@ -114,7 +114,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-file-text')
 			->defaults('name', 'Crew Database')
-			->defaults('roles', array('Admin', 'Encoder', 'Cadet', 'Crewing Manager', 'Crewing Officer', 'Training', 'Processing'))
+			->defaults('roles', array('Admin', 'Encoder', 'Cadet', 'Crewing Manager', 'Crewing Officer', 'Training', 'Processing', 'Recruitment Officer'))
 			->name($name . '.index')
 			->defaults('href', $name);
 

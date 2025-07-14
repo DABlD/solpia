@@ -2,6 +2,7 @@
 </div>
 
 <div class="pull-right">
+	@if(auth()->user()->role != "Recruitment Officer")
 	<a href="{{ route('applications.index') }}" class="btn btn-info" data-toggle="tooltip" title="View All">
 		<span class="fa fa-list"></span>
 	</a>
@@ -14,4 +15,5 @@
 	<a class="btn btn-success" data-toggle="tooltip" title="Awardees" href="{{ route('applications.awardees') }}">
 		<span class="fa fa-trophy"></span>
 	</a>
+	@endif
 </div>
