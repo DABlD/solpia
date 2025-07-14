@@ -346,9 +346,9 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // VC
                 $h[7] = [
                     'A2:G3',
-                    'A5:G29',
-                    'A31:E32',
-                    'G31:G32'
+                    'A5:G25',
+                    'A27:E28',
+                    'G27:G28'
                 ];
 
                 // UNDERLINE
@@ -365,7 +365,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHRINK TO FIT
                 $h['stf'] = [
                     'B3', 'G3',
-                    'A6:D29'
+                    'A6:D25'
                 ];
 
                 foreach($h as $key => $value) {
@@ -391,7 +391,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $fills[0] = [
                     'A3', 'D3', 'F3',
                     'A5:G5',
-                    'A33:A32'
+                    'A27:A28'
                 ];
 
                 $fills[1] = [
@@ -409,8 +409,8 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
                     'A3:G3',
-                    'A5:G29',
-                    'A31:G32'
+                    'A5:G25',
+                    'A27:G28'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -443,12 +443,12 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // LRB
                 $cells[8] = array_merge([
-
+                    'F27', 'F28'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
-                    'E31:E32'
+                    'E27', 'E28'
                 ]);
 
                 // TRB
@@ -474,8 +474,8 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // DOUBLE BORDER
                 $cells[15] = array_merge([
                     'A3:G3',
-                    'A5:G29',
-                    'A31:G32'
+                    'A5:G25',
+                    'A27:G28'
                 ]);
                 
                 foreach($cells as $key => $value){
@@ -500,7 +500,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rows = [
                     [
                         22, //ROW HEIGHT
-                        1,29 //START ROW, END ROW
+                        1,25 //START ROW, END ROW
                     ],
                 ];
 
@@ -511,11 +511,11 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                     [
                         10,
-                        [4,30]
+                        [4,26]
                     ],
                     [
                         30,
-                        [31,32]
+                        [27,28]
                     ]
                 ];
 

@@ -199,7 +199,7 @@
 
 <table>
 	<tr>
-		<td colspan="7" style="text-align: right; height: 30px;">FORM SP08-06(1/1)/2/24.10.01</td>
+		<td colspan="7" style="text-align: right; height: 30px;">FORM SP08-06(1/1)/3/25.05.20</td>
 	</tr>
 
 	<tr>
@@ -233,18 +233,15 @@
 	{{ $doc("GMDSS/GOC", "GOC/ROC", 'lc') }}
 	{{ $doc("WATCHKEEPING", "Watch-keeping Cert.", 'lc') }}
 	{{ $doc("MEDICAL CARE - MECA", "Medical Care", 'lc') }}
+	{{-- {{ $doc("BOOKLET", "Flagged Seaman’s Book", 'flag') }} --}}
+	{{ $doc("LICENSE", "Flag Endorsement", 'flag') }}
+	{{ $doc("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", "- Survival Craft & Rescue Boat", 'lc') }}
 	{{ $doc("CONSOLIDATED MARPOL", "Maritime Pollution Prevention", 'lc') }}
-	{{ $doc("BOOKLET", "Flagged Seaman’s Book", 'flag') }}
-	{{ $doc("LICENSE", "Flagged License", 'flag') }}
 	{{ $doc("BASIC TRAINING - BT", "Basic Safety Course", 'lc') }}
 	{{ $doc("BASIC TRAINING - BT", "Advanced Safety Course", 'lc') }} // ASK WHAT ADVANCED TRAINING
 	{{ $doc("ADVANCE FIRE FIGHTING - AFF", " - Fire Fighting", 'lc') }}
-	{{ $doc("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", "- Survival Craft & Rescue Boat", 'lc') }}
 	{{ $doc("MEDICAL FIRST AID - MEFA", "- First Aid", 'lc') }}
-	{{ $doc("ARPA TRAINING COURSE", "RADAR - ARPA", 'lc') }}
-	{{ $doc("RADAR", "Radar Simulation", 'lc') }}
-	{{ $doc("RADAR", "Radar Simulation", 'lc') }}
-	{{ $doc("BRM/ERM", "BRTM / ERM", 'lc') }}
+	{{ $doc("BRM/ERM", "BRM / ERM", 'lc') }}
 	{{ $doc("ECDIS", "ECDIS (Generic)", 'lc') }}
 	{{ $doc("ECDIS SPECIFIC", "ECDIS (Specific)", 'lc') }}
 	{{ $doc("SHIP'S COOK ENDORSEMENT", "Ship Cook Training", 'lc') }}
