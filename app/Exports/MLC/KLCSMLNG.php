@@ -30,7 +30,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->onum = "";
         }
 
-        if(in_array($applicant->vessel->name, ["M/T SM KESTREL", "FUELNG VENOSA"])){
+        if(in_array($applicant->vessel->name, ["M/T SM KESTREL", "M/T FUELNG VENOSA"])){
             $shipowner = "KOREA LINE LNG CO., LTD.";
             $phoneNumber = "+82-2-3701-0114";
             $address = "30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Republic of Korea";
