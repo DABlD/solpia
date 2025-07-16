@@ -1888,9 +1888,9 @@ class ApplicationsController extends Controller
                         $criteria1 = ($mixnmatch($ss['manning_agent'], $mannings) || $mixnmatch($ss['principal'], $principals));
                         $criteria2 = ($mixnmatch($ss['manning_agent'], $mannings2) && $mixnmatch($ss['principal'], $principals));
 
-                        if($user->id == 905){
-                            echo ($mixnmatch($ss['manning_agent'], $mannings) ? 1 : 0) . ' / ' . ($mixnmatch($ss['principal'], $principals) ? 1 : 0) . '  -  ' . $ss['manning_agent'] . '/' . $ss['principal'] . ' - ' . $criteria1 . '<br>';
-                        }
+                        // if($user->id == 905){
+                        //     echo ($mixnmatch($ss['manning_agent'], $mannings) ? 1 : 0) . ' / ' . ($mixnmatch($ss['principal'], $principals) ? 1 : 0) . '  -  ' . $ss['manning_agent'] . '/' . $ss['principal'] . ' - ' . $criteria1 . '<br>';
+                        // }
 
                         if(!($criteria1 || $criteria2)){
                             $start = now()->parse($ss['sign_off'])->format('Y');
@@ -1898,7 +1898,7 @@ class ApplicationsController extends Controller
                     }
 
                     if(2025 - $start >= 10){
-                        echo $user->id . ' - ' . $user->namefull . '<br>';
+                        echo $user->namefull . ';' . $start . ';' . (2025 - $start) . ';' . $user->address . ';' . $user->crew->provincial_address . ';' . now()->parse($user->birthday)->age . ';' . $user->contact . ';' . $user->email . '<br>';
                     }
                 }
 
