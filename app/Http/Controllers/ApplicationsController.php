@@ -1877,9 +1877,9 @@ class ApplicationsController extends Controller
         };
 
         foreach($users as $user){
-            $sss = isset($user->crew->sea_service) ? $user->crew->sea_service->sortBy('sign_on') : null;
+            $sss = isset($user->crew->sea_service) ? $user->crew->sea_service->sortBy('sign_on') : [];
 
-            if(sizeof($sss) > 0){
+            if(sizeof($sss)){
                 if($sss[0]['sign_on'] <= "2015-12-31" && $sss[sizeof($sss) - 1]['sign_off'] >= "2023-01-01"){
                     $start = 2015;
 
