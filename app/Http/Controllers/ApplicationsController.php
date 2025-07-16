@@ -1876,28 +1876,36 @@ class ApplicationsController extends Controller
             return false;
         };
 
+        $flag = false;
+
         foreach($users as $user){
             $sss = isset($user->crew->sea_service) ? $user->crew->sea_service->sortBy('sign_on') : [];
 
             if(sizeof($sss)){
                 if($sss[0]['sign_on'] <= "2015-12-31" && $sss[sizeof($sss) - 1]['sign_off'] >= "2023-01-01"){
-                    $start = 2015;
+                    $start = now()->parse($sss[0]['sign_on'])->format('Y');
 
                     foreach($sss as $ss){
 
                         $criteria1 = ($mixnmatch($ss['manning_agent'], $mannings) || $mixnmatch($ss['principal'], $principals));
                         $criteria2 = ($mixnmatch($ss['manning_agent'], $mannings2) && $mixnmatch($ss['principal'], $principals));
 
-                        // if($user->id == 905){
+                        // if($user->id == 176){
                         //     echo ($mixnmatch($ss['manning_agent'], $mannings) ? 1 : 0) . ' / ' . ($mixnmatch($ss['principal'], $principals) ? 1 : 0) . '  -  ' . $ss['manning_agent'] . '/' . $ss['principal'] . ' - ' . $criteria1 . '<br>';
                         // }
 
-                        if(!($criteria1 || $criteria2)){
+                        if($flag){
                             $start = now()->parse($ss['sign_off'])->format('Y');
+                            $flag = false;
                         }
+
+                        if(!($criteria1 || $criteria2)){
+                            $flag = true;
+                        }
+
                     }
 
-                    if(2025 - $start >= 10){
+                    if((2025 - $start) >= 10){
                         echo $user->namefull . ';' . $start . ';' . (2025 - $start) . ';' . $user->address . ';' . $user->crew->provincial_address . ';' . now()->parse($user->birthday)->age . ';' . $user->contact . ';' . $user->email . '<br>';
                     }
                 }
