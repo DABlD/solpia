@@ -1861,8 +1861,10 @@ class ApplicationsController extends Controller
         $users = User::where('fleet', "TOEI")->where('role', 'Applicant')->get();
         $users->load('crew.sea_service');
         
-        $mannings = ['SOLPIA', 'SOP', 'SAFEWAY', 'AMETHYST', 'MARINO', 'FAIRVIEW'];
+        $mannings = ['SAFEWAY', 'AMETHYST', 'MARINO', 'FAIRVIEW'];
+        $mannings2 = ['SOLPIA', 'SOP'];
         $principals = ['TOEI', 'TOIE', 'SMTECH', 'SM TECH', 'KITAURA', 'DOUN KISEN', 'SHOEI', 'SHOIE'];
+
 
         $mixnmatch = function($string, $keywords){
             foreach($keywords as $keyword){
@@ -1878,26 +1880,24 @@ class ApplicationsController extends Controller
             $sss = isset($user->crew->sea_service) ? $user->crew->sea_service->sortBy('sign_on') : null;
 
             if(sizeof($sss)){
-                $flag = 1;
-                
-                if($sss[0]['sign_on'] <= "2015-12-31"){
-                    foreach($sss as $ss){
-                        // if($user->id == 905){
-                        //     echo in_array($ss['manning_agent'], [$mannings]) . ' / ' . in_array($ss['principal'], [$principals]) . '<br>';
-                        // }
+                if($sss[0]['sign_on'] <= "2015-12-31" && $sss[sizeof($sss) - 1]['sign_off'] >= "2023-01-01"){
+                    $start = 2015;
 
+                    foreach($sss as $ss){
+
+                        $criteria1 = ($mixnmatch($ss['manning_agent'], $mannings) || $mixnmatch($ss['principal'], $principals));
+                        $criteria2 = ($mixnmatch($ss['manning_agent'], $mannings2) && $mixnmatch($ss['principal'], $principals));
 
                         if($user->id == 905){
-                            echo ($mixnmatch($ss['manning_agent'], $mannings) ? 1 : 0) . ' / ' . ($mixnmatch($ss['principal'], $principals) ? 1 : 0) . '<br>';
+                            echo ($mixnmatch($ss['manning_agent'], $mannings) ? 1 : 0) . ' / ' . ($mixnmatch($ss['principal'], $principals) ? 1 : 0) . '  -  ' . $ss['manning_agent'] . '/' . $ss['principal'] . ' - ' . $criteria1 . '<br>';
                         }
 
-                        if(!($mixnmatch($ss['manning_agent'], $mannings) && $mixnmatch($ss['principal'], $principals))){
-                            $flag = 0;
-                            break;
+                        if(!($criteria1 || $criteria2)){
+                            $start = now()->parse($ss['sign_off'])->format('Y');
                         }
                     }
 
-                    if($flag){
+                    if(2025 - $start >= 10){
                         echo $user->id . ' - ' . $user->namefull . '<br>';
                     }
                 }
