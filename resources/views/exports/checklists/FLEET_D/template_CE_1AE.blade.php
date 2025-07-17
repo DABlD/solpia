@@ -277,7 +277,7 @@
 	{{ $doc("PDOS", "PRE-DEPARTURE ORIENTATION SEMINAR (PDOS)", 'lc', 2) }}
 	{{ $doc("ANTI PIRACY", "ANTI-PIRACY", 'lc', 2) }}
 	{{ $doc("MCRA", "MARITIME CYBER RISK AWARENESS (MCRA)", 'lc', 2) }}
-	{{ $doc("ISM", "ISM CODE", 'lc', 2) }}
+	{{ $doc("IN HOUSE TRAINING CERT WITH ISM", "ISM CODE", 'lc', 2) }}
 	{{ $doc("GTRB", "GENERAL TRAINING RECORD BOOK", 'lc', 2) }}
 
 	{{ $section("8. TRAVEL DOCUMENTS", 1) }}
