@@ -923,7 +923,7 @@
 			@elseif(auth()->user()->id == 7603)
 				Mr. Arnel Cedenio
 			@else
-				{{ auth()->user()->fullname }}
+				{{ auth()->user()->gender == "Female" ? "Ms." : "Mr." }} {{ auth()->user()->fullname }}
 			@endif
 		</td>
 		<td></td>
@@ -934,6 +934,12 @@
 				Ms. Laura Fernando
 			@elseif(auth()->user()->id == 7603)
 				Ms. Lhea Marquez
+			@elseif(auth()->user()->fleet == "FLEET B")
+				Mr. Adulf Kit Jumawan
+			@elseif(auth()->user()->fleet == "FLEET C")
+				Ms. Shirley Erasquin
+			@elseif(auth()->user()->fleet == "FLEET D")
+				Ms. Thea Mae G. Rio
 			@endif
 		</td>
 	</tr>
