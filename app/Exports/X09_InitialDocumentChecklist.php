@@ -350,7 +350,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings
 
                 // VC
                 $h[7] = [
-                    'A66'
+                    'J66'
                 ];
 
                 $h['wrap'] = [
