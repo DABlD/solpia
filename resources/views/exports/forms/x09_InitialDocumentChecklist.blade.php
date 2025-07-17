@@ -918,16 +918,24 @@
 		<td colspan="8" style="{{ $bold }} {{ $center }}">
 			@if(auth()->user()->id == 8265)
 				Ms. Gladys Anne Frondozo
-			@elseif(auth()->user()->id == 8311)
+			@elseif(auth()->user()->id == 6794)
 				Ms. Monique Balanay
 			@elseif(auth()->user()->id == 7603)
-				Ms. Mary Thea Faith Desales
+				Mr. Arnel Cedenio
 			@else
 				{{ auth()->user()->fullname }}
 			@endif
 		</td>
 		<td></td>
-		<td colspan="10" style="{{ $bold }}"></td>
+		<td colspan="10" style="{{ $bold }}">
+			@if(auth()->user()->id == 8265)
+				Ms. Bianca Santos
+			@elseif(auth()->user()->id == 6794)
+				Ms. Laura Fernando
+			@elseif(auth()->user()->id == 7603)
+				Ms. Lhea Marquez
+			@endif
+		</td>
 	</tr>
 
 	<tr>
