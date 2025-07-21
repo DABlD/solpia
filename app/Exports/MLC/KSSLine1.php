@@ -350,10 +350,11 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // JUSTIFY
                 $h[9] = [
+                    'A39'
                 ];
 
                 $h['wrap'] = [
-                    'B6', 'B8', 'C23', 'A31', 'A33:B37'
+                    'B6', 'B8', 'C23', 'A31', 'A33:B37', 'A39'
                 ];
 
                 // SHRINK TO FIT
@@ -497,7 +498,7 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     [20, [15,18]],
                     [130, [31,36]],
                     [50, [32,38,42]],
-                    [200,[33]],
+                    [193,[33]],
                     [210,[34]],
                     [60,[35]],
                     [23,[23]],

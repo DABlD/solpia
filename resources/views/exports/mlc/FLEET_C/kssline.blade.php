@@ -306,15 +306,17 @@
 	</tr>
 
 	<tr>
-		<td colspan="9">In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them</td>
+		<td colspan="9" rowspan="3">
+			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them
+			are retained by the each party and the seafarer has opportunity to review and seek advice on the terms and condition and
+			voluntarily accept them.
+		</td>
 	</tr>
 
 	<tr>
-		<td colspan="9">are retained by the each party and the seafarer has opportunity to review and seek advice on the terms and condition and</td>
 	</tr>
 
 	<tr>
-		<td colspan="9">voluntarily accept them.</td>
 	</tr>
 
 	<tr>
