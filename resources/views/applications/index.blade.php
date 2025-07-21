@@ -28,7 +28,7 @@
                                     @if(in_array(auth()->user()->fleet, [null]))
     								    <th>Fleet</th>
                                     @endif
-                                    <th style="max-width: 220px !important;">Remarks</th>
+                                    <th>Remarks</th>
                                     <th>Actions</th>
                                     <th>HIDDEN</th>
     							</tr>
@@ -245,6 +245,10 @@
             font-size: .65em !important;
         }
 
+        .remarks-width{
+            max-width: 220px !important;
+        }
+
         @if(auth()->user()->role == "Recruitment Officer")
             [title="Download"],[title="Delete"],[title="Upload New File"],[title="Add"]{
                 display: none;
@@ -329,7 +333,7 @@
                 @if(in_array(auth()->user()->fleet, [null]))
                     { data: 'user.fleet', name: 'user.fleet' },
                 @endif
-                { data: 'remarks', name: 'remarks' },
+                { data: 'remarks', name: 'remarks', className: 'remarks-width'},
                 { data: 'actions', name: 'actions' },
                 { data: 'hidden', name: 'hidden', visible: false },
             ],
