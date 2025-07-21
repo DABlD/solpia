@@ -359,6 +359,7 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'B43'
                 ];
 
                 foreach($h as $key => $value) {
