@@ -9,11 +9,11 @@
 	<a href="{{ route('applications.create') }}" class="btn btn-primary" data-toggle="tooltip" title="Add New Crew">
 		<span class="fa fa-plus"></span>
 	</a>
+	{{-- <a class="btn btn-success" data-toggle="tooltip" title="Awardees" href="{{ route('applications.awardees') }}">
+		<span class="fa fa-trophy"></span>
+	</a> --}}
+	@endif
 	<a class="btn btn-warning" data-toggle="tooltip" title="Filter" onclick="filter()">
 		<span class="fa fa-filter"></span>
 	</a>
-	<a class="btn btn-success" data-toggle="tooltip" title="Awardees" href="{{ route('applications.awardees') }}">
-		<span class="fa fa-trophy"></span>
-	</a>
-	@endif
 </div>

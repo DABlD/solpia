@@ -3399,7 +3399,7 @@
                         </div>
                     </div></br>
 
-                    <div class="row iRow">
+                    <div class="row iRow fStatus">
                         <div class="col-md-2 iLabel">
                             Status
                         </div>
@@ -3442,6 +3442,10 @@
                 `,
                 onOpen: () => {
                     $('.iInput .iInput').css('text-align', 'left');
+
+                    @if(auth()->user()->role == "Recruitment Officer")
+                        $('.fStatus').hide();
+                    @endif
 
                     // let temp = [];
                     // fExp.forEach(exp => {
