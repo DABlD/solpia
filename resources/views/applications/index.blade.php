@@ -28,7 +28,7 @@
                                     @if(in_array(auth()->user()->fleet, [null]))
     								    <th>Fleet</th>
                                     @endif
-                                    <th style="max-width: 220px;">Remarks</th>
+                                    <th style="max-width: 220px !important;">Remarks</th>
                                     <th>Actions</th>
                                     <th>HIDDEN</th>
     							</tr>
