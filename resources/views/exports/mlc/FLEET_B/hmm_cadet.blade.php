@@ -14,7 +14,7 @@
 	<tr>
 		<td rowspan="3">Shipowner</td>
 		<td colspan="2">Company</td>
-		<td colspan="5">{{ $data['shipowner'] }}</td>
+		<td colspan="5">ㅤ{{ $data['shipowner'] }}</td>
 	</tr>
 
 	<tr>

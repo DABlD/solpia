@@ -401,7 +401,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'D8', 'G12',
+                    'D6', 'D8', 'G12',
                     'D15', 'A18',
                     'A38'
                 ];
