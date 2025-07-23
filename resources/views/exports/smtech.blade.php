@@ -595,7 +595,7 @@
 		</tr>
 		
 		{{-- 4TH --}}
-		{{-- @php 
+		@php 
 			$name = "SID";
 			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
 		@endphp
@@ -607,7 +607,7 @@
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">MARINA</td>
-		</tr> --}}
+		</tr>
 		
 		{{-- 5TH --}}
 		@php
@@ -689,6 +689,19 @@
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">PANAMA</td>
 		</tr>
+
+		@php 
+			$name = "New Zealand eTA";
+			$docu = isset($applicant->document_id->{$name}) ? $applicant->document_id->{$name} : false;
+		@endphp
+		<tr>
+			<td colspan="2" style="color: #FF0000;">New Zealand eTA</td>
+			<td colspan="2">-----</td>
+			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
+			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
+			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
+			<td colspan="2">PANAMA</td>
+		</tr>
 		
 		{{-- 6TH --}}
 		@php 
@@ -753,8 +766,8 @@
 
 		{{-- ADDL --}}
 		{{-- IF RANK IS CO --}}
-		{{-- @if($applicant->rank->id == 2) --}}
-			{{-- @php 
+		@if($applicant->rank->id == 2)
+			@php 
 				$docu = false;
 				foreach($applicant->document_lc as $temp){
 					if(str_contains($temp->type, "SAFETY OFFICER")){
@@ -769,26 +782,35 @@
 				<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 				<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 				<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-			</tr> --}}
-		{{-- @endif --}}
+			</tr>
+		@endif
 
 		{{-- ADDLS --}}
-		{{-- <tr>
-			<td colspan="4">SIMS-WEBINAR</td>
+		<tr>
+			<td colspan="4">SIMS-Training ( ME/BWMS/EGCS-SCR)</td>
 			<td>----</td>
 			<td>----</td>
 			<td>----</td>
 			<td colspan="2">SMS INDIA</td>
-		</tr> --}}
+		</tr>
 
 		{{-- ADDLS --}}
-		{{-- <tr>
+		<tr>
 			<td colspan="4">WORKSHOP</td>
 			<td>----</td>
 			<td>----</td>
 			<td>----</td>
 			<td colspan="2">SMTECH</td>
-		</tr> --}}
+		</tr>
+
+		{{-- ADDLS --}}
+		<tr>
+			<td colspan="4">SPECIAL BRIEFING</td>
+			<td>----</td>
+			<td>----</td>
+			<td>----</td>
+			<td colspan="2">SMTECH</td>
+		</tr>
 
 		{{-- 1ST POINT 5 --}}
 		@php 
@@ -947,13 +969,13 @@
 			$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
 		@endphp
 
-		<tr>
+		{{-- <tr>
 			<td colspan="4">Satellite Communication Course</td>
 			<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
+		</tr> --}}
 
 		{{-- 10TH --}}
 		@php 
@@ -1039,13 +1061,13 @@
 			$docu = $ef1; //FEA
 		@endphp
 		{{-- ECDISCISM --}}
-		<tr>
+		{{-- <tr>
 			<td colspan="4">FURUNO ECDIS FEA</td>
 			<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr>
+		</tr> --}}
 
 		@php 
 			$docu = $ef;
@@ -1063,13 +1085,13 @@
 			$docu = $et;
 		@endphp
 		{{-- ECDISCISM --}}
-		{{-- <tr>
+		<tr>
 			<td colspan="4">TOKYO KEIKI</td>
 			<td>{{ $docu ? strtoupper($docu->no) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td colspan="2">{{ $docu ? $docu->issuer : "NOT APPLICABLE" }}</td>
-		</tr> --}}
+		</tr>
 
 		@php 
 			$name = 'ECDIS';
@@ -1111,7 +1133,7 @@
 		@endphp
 
 		<tr>	
-			<td colspan="4">PHYSICAL INSPECTION</td>
+			<td colspan="4">PHYSICAL INSPECTION (PEME)</td>
 			<td>-----</td>
 			<td>-----</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "REVERTING" }}</td>
@@ -1139,42 +1161,42 @@
 			$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
 		@endphp
 
-		{{-- <tr>	
+		<tr>	
 			<td colspan="4">MEASLES, MUMPS, RUBELLA (MMR)</td>
 			<td>YES</td>
 			<td>YES</td>
 			<td>-----</td>
 			<td>-----</td>
 			<td>HEALTH CENTER</td>
-		</tr> --}}
+		</tr>
 
 		@php 
 			$name = 'CHICKEN POX';
 			$docu = isset($applicant->document_med->{$name}) ? $applicant->document_med->{$name} : false;
 		@endphp
 
-		{{-- <tr>	
+		<tr>	
 			<td colspan="4">CHICKEN POX</td>
 			<td>YES</td>
 			<td>YES</td>
 			<td>-----</td>
 			<td>-----</td>
 			<td>HEALTH CENTER</td>
-		</tr> --}}
+		</tr>
 
 		@php 
 			$name = 'POLIO VACCINE (IPV)';
 			$docu = isset($applicant->document_med_cert->{$name}) ? $applicant->document_med_cert->{$name} : false;
 		@endphp
 
-		{{-- <tr>	
+		<tr>	
 			<td colspan="4">POLIO VACCINE (IPV)</td>
 			<td>-----</td>
 			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
 			<td>BUREAU OF QUARANTINE</td>
-		</tr> --}}
+		</tr>
 	
 		<tr>
 			<td colspan="4">6. COVID-19 VACCINATION</td>

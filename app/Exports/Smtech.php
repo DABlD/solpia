@@ -366,7 +366,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // CERTIFICATE ROWS
                 $cRows = array();
-                $temp = 7;
+                $temp = 9;
                 $rac = $ral + 1 + $temp; //Row # AFTER CERTIFICATES
 
                 for($i = 0, $row = $ral + 1; $i < $temp; $i++, $row++){
@@ -406,12 +406,12 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // OTHER CERTIFICATE ROWS
                 $ocRows = array();
-                $temp = 16;
+                $temp = 18;
 
                 // IF RANK IS CO ADD 1 ROW BECAUSE OF SHIP SAFETY OFFICER
-                // if($this->applicant->rank->id == 2){
-                //     $temp += 1;
-                // }
+                if($this->applicant->rank->id == 2){
+                    $temp += 1;
+                }
 
                 $raoc = $rac + 1 + $temp; //Row # AFTER OTHER CERTIFICATES
 
@@ -484,7 +484,7 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
                 // PIYC
                 $piycRows = array(); //WILL BE FILLED AFTER FUNCTIONS
-                $rapiyc = $raoc + 1 + 4; //Row # AFTER PIYC (5 = rows)
+                $rapiyc = $raoc + 1 + 7; //Row # AFTER PIYC (5 = rows)
 
                 // COVID
                 $covidRows = array(); //WILL BE FILLED AFTER FUNCTIONS
