@@ -587,7 +587,7 @@
 
 	<tr>
 		<td colspan="14" style="{{ $bold }}">
-			6. 주부식비 (Daily Provision Fee)  : ₩13,000/Day
+			6. 주부식비 (Daily Provision Fee)  : ₩14,000/Day
 		</td>
 	</tr>
 
