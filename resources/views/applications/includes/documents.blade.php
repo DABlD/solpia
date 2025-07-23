@@ -134,7 +134,7 @@
         	var id_options = "";
         	var idOptions = [
         		'', 'PASSPORT', 'US-VISA', "SEAMAN BOOK", 'MCV', 'JAPANESE VISA', "SEAMANS REGISTRATION CERTIFICATE", "SID",
-        		'KOREAN VISA', 'CHINESE VISA'
+        		'KOREAN VISA', 'CHINESE VISA', 'New Zealand eTA'
         	];
 
         	idOptions.forEach(docu => {
