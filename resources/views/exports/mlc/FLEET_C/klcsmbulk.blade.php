@@ -275,7 +275,8 @@
 		<td>US$</td>
 		<td>{{ $total }}</td>
 		<td></td>
-		<td colspan="5">After deduction FKSU Membership Fee</td>
+		{{-- <td colspan="5">After deduction FKSU Membership Fee</td> --}}
+		<td colspan="5"></td>
 	</tr>
 
 	<tr>
@@ -327,7 +328,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">&#9316; GOVT. Tax deduction:</td>
+		<td colspan="3">&#9315; GOVT. Tax deduction:</td>
 		<td colspan="2">As Regulations</td>
 		<td></td>
 		<td colspan="5"></td>

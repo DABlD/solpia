@@ -612,6 +612,8 @@ class KLCSMBULK implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rt->createTextRun("13. ")->getFont()->setBold(true)->setName('Arial')->setSize(9);
                 $rt->createText($event->sheet->getParent()->getActiveSheet()->getCell("A108")->getValue());
                 $event->sheet->getParent()->getActiveSheet()->getCell("A108")->setValue($rt);
+
+                $event->sheet->getParent()->getActiveSheet()->removeRow(62);
             },
         ];
     }
