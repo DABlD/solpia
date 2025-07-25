@@ -321,8 +321,11 @@
 	}
 @endphp
 
+@if($pp)
 <img src="{{ public_path("files/$data->id/$pp") }}" width="700px" height="500px">
-
 <br>
+@endif
 
+@if($sb)
 <img src="{{ public_path("files/$data->id/$sb") }}" width="700px" height="500px">
+@endif
