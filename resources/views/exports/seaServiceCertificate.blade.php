@@ -32,7 +32,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="10">Ermita, Manila</td>
+		<td colspan="10">Manila</td>
 	</tr>
 
 	<tr>
