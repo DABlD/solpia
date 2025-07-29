@@ -64,7 +64,7 @@
 			Address
 		</td>
 		<td colspan="10" style="{{ $center }}">
-			17th FL. KwanJeong Bldg., 46, 9beon-gil, Chungjang-Daero, Jung-gu Busan 48936, Korea
+			17th FL. KwanJeong Bldg., 46, 9beon-gil, ChungJang-Daero, Jung-gu, Busan 48936, Korea
 		</td>
 	</tr>
 	{{-- END 2ND ROW --}}
