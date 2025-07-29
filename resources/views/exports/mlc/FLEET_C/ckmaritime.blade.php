@@ -1,3 +1,4 @@
+
 @php
 	$bold = "font-weight: bold;";
 	$center = "text-align: center;";
@@ -227,7 +228,7 @@
 			1.1 체결장소(Place)   :
 		</td>
 		<td colspan="11" style="{{ $blue }}">
-			{{ $data->pro_app->status == "On Board" ? "ONBOARD" : "MANILA" }}
+			{{ $data->pro_app->status == "On Board" ? "ONBOARD" : "SOLPIA MANILA OFFICE, PHILIPPINE" }}
 		</td>
 	</tr>
 
@@ -300,25 +301,25 @@
 
 	<tr>
 		<td colspan="14">
-			3.2 선박소유자는 선원과의 선원근로계약을 해지하는 경우에는 30일 이상, 선원이 선박소유자와 근로계약을
+			3.2 선박소유자는 선원과의 선원근로계약을 해지하는 경우에는 30일 이상 서면으로 통보해야 하며, 선원이 
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-		 ㅤㅤ해지하는 경우에는 30일의 범위에서 예고기간을 서면으로 통보해야 한다.
+		 ㅤㅤ선박소유자와 근로계약을 해지하는 경우에는 15일 이상 30일의 범위에서 선박소유자에게 통보하여야 한다.
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-		 ㅤㅤ(When shipowner terminates the contract early, the required minimum notice period shall be over 30 days and when
+		 ㅤㅤ(If shipowner intend to terminates the contract, the shipowner provide the seafarer with a written notice of termination over the
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="14">
-		 ㅤㅤseafarer terminates the contract early, need to notice within 30 days in advance.)
+		 ㅤㅤ30day, seafarer terminate the contract early, need to notice not less than 15day within 30 days in advance.)
 		</td>
 	</tr>
 
