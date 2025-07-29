@@ -23,7 +23,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HMM COPENHAGEN", "M/V HMM GDANSK", "M/V HMM HAMBURG", "M/V HMM OSLO",
             "M/V HMM SOUTHAMPTON", "M/V HMM ST. PETERSBURG", "M/V HYUNDAI GRACE", "M/V HYUNDAI UNITY",
             "M/V HMM COLOMBO", "M/V HMM VICTORY", "M/V HMM PRIDE", "M/V HMM FOREST", "M/V HMM GREEN",
-            'M/V HYUNDAI JAKARTA',
+            'M/V HMM JAKARTA',
             "M/V GLOBAL ENTERPRISE","M/V HMM CEBU",
             'M/V MPV THALIA', 'M/V MPV URANIA'
         ];
