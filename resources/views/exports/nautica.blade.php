@@ -264,17 +264,17 @@
 	<tr>
 		<td colspan="11" rowspan="2" style="{{ $center }} font-size: 24px; height: 29px;">SEAFARER APPLICATION FORM</td>
 		<td style="{{ $bold }} height: 29px;">
-			NSM-SMM-07-03
+			MTT-SMM-07-03
 			<br style='mso-data-placement:same-cell;' />
-			ISSUED: 20.09.2015
+			ISSUED: 01.05.2025
 		</td>
 	</tr>
 
 	<tr>
 		<td style="height: 34px;">
-			Rev # 001
+			Rev # 00-00
 			<br style='mso-data-placement:same-cell;' />
-			Revised: 20.07.2023
+			Revised:
 		</td>
 	</tr>
 
@@ -539,17 +539,17 @@
 	<tr>
 		<td colspan="11" rowspan="2" style="{{ $center }} font-size: 20px; height: 30px;">SEAFARER APPLICATION FORM</td>
 		<td style="{{ $bold }}">
-			NSM-SMM-07-03
+			MTT-SMM-07-03
 			<br style='mso-data-placement:same-cell;' />
-			ISSUED: 20.09.2015
+			ISSUED: 01.05.2025
 		</td>
 	</tr>
 
 	<tr>
 		<td style="height: 34px;">
-			Rev # 001
+			Rev # 00-00
 			<br style='mso-data-placement:same-cell;' />
-			Revised: 20.07.2023
+			Revised: 
 		</td>
 	</tr>
 
