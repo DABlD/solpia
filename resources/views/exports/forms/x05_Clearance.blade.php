@@ -124,7 +124,7 @@
 	{{ $dept("FISHING FLEET", "Mr. Ricardo Amparo", "Crewing Manager", "(+ Medical Matters)") }}
 	{{ $dept("LIAISON OFFICER", "Mr. Randy Andaya", "", "(Contract)") }}
 	{{ $dept("LIAISON OFFICER (TOEI)", "Mr. Philip Manapul", "", "(Contract)") }}	
-	{{ $dept("DOCUMENTATION OFFICER / SMI", "Ms. Natasha Saguinsin /", "Ms. Merhla De Asis", "(Flag / Visa)") }}
+	{{ $dept("DOCUMENTATION OFFICER / SMI", "Ms. Natasha Saguinsin /", "Ms. Daniela M. Diaoan", "(Flag / Visa)") }}
 	{{ $dept("DOCUMENTATION OFFICER / TOEI", "Ms. Yvonne Cruz", "", "", true) }}
 
 	{{-- PAGE 2 SEPARATOR --}}
