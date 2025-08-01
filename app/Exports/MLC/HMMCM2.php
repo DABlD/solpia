@@ -301,7 +301,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $line->setHeight(15);
 
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&I&8Ch.2 / Page &P');
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-302/2022.01.26/DCN22001');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-302/2024.08.09/DCN24005');
                 $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
 
                 // HEADERS FOOTERS
