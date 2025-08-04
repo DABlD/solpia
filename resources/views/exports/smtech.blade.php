@@ -145,6 +145,13 @@
 		</tr>
 
 		<tr>
+			<td></td>
+			<td colspan="4"></td>
+			<td colspan="2" style="color: #0000FF;">Whatsapp ID:</td>
+			<td colspan="2"></td>
+		</tr>
+
+		<tr>
 			<td>Birth Date:</td>
 			<td>{{ $applicant->user->birthday ? $applicant->user->birthday->format('d-M-y') : "" }}</td>
 			<td>Age:</td>
@@ -260,10 +267,10 @@
 		</tr>
 
 		<tr>
+			<td style="color: #0000FF;"></td>
+			<td colspan="4"></td>
 			<td style="color: #0000FF;">Email:</td>
-			<td colspan="4">{{ $applicant->user->email ? $applicant->user->email : '-----' }}</td>
-			<td>Whatsapp ID</td>
-			<td colspan="3"></td>
+			<td colspan="3">{{ $applicant->user->email ? $applicant->user->email : '-----' }}</td>
 		</tr>
 
 		<tr>
