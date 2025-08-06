@@ -28,6 +28,7 @@
                                     <th>Fleet</th>
                                     <th>Status</th>
                                     <th>Date Posted</th>
+                                    <th>Deadline</th>
                                     <th>Prospect</th>
                                     <th>Actions</th>
                                 </tr>
@@ -106,15 +107,16 @@
                 { data: 'fleet'},
                 { data: 'status'},
                 { data: 'created_at'},
+                { data: 'deadline'},
                 { data: 'candidates.length'},
                 { data: 'actions'}
             ],
             columnDefs: [
                 {
-                    targets: [3, 11],
+                    targets: [3,12],
                     className: "text-center",
                     render: date =>{
-                        let temp = date ? moment(date).format('MMM DD, YYYY') : "-";
+                        let temp = date ? moment(date).format('DD-MMM-YY') : "-";
 
                         if(moment(date).diff(moment(), 'days') <= 30){
                             temp = `
@@ -128,17 +130,25 @@
                     }
                 },
                 {
+                    targets: [11],
+                    className: "text-center",
+                    render: date =>{
+                        let temp = date ? moment(date).format('DD-MMM-YY') : "-";
+                        return temp;
+                    }
+                },
+                {
                     targets: 5,
                     render: usv =>{
                         return usv ? "Required" : "---";
                     }
                 },
                 {
-                    targets: 12,
+                    targets: 13,
                     className: "text-center"
                 },
                 {
-                    targets: 13,
+                    targets: 14,
                     width: "60px"
                 },
                 {
@@ -298,6 +308,7 @@
                     </div></br>
                     ${input("salary", "Salary", null, 2,10, 'number', 'min=0')}
                     ${input("max_age", "Max Age", 60, 2,10, 'number', 'min=30 max=65')}
+                    ${input("deadline", "Deadline", null, 2,10)}
                     ${input("remarks", "Remarks", null, 2,10)}
                 `,
                 width: '650px',
@@ -353,7 +364,7 @@
                         }
                     });
 
-                    $('[name="joining_date"]').flatpickr({
+                    $('[name="joining_date"], [name="deadline"]').flatpickr({
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
@@ -411,6 +422,7 @@
                             joining_port: $("[name='joining_port']").val(),
                             salary: $("[name='salary']").val(),
                             max_age: $("[name='max_age']").val(),
+                            deadline: $("[name='deadline']").val(),
                             remarks: $("[name='remarks']").val(),
                             usv: $("[name='usv']:checked").length
                         },
@@ -528,6 +540,7 @@
                     </div></br>
                     ${input("salary", "Salary", data.salary, 2,10, 'number', 'min=0')}
                     ${input("max_age", "Max Age", data.max_age, 2,10, 'number', 'min=30 max=65')}
+                    ${input("deadline", "Deadline", null, 2,10)}
                     ${input("remarks", "Remarks", data.remarks, 2,10)}
                     <div class="row iRow">
                         <div class="col-md-2 iLabel">
@@ -598,7 +611,7 @@
                         }
                     });
 
-                    $('[name="joining_date"]').flatpickr({
+                    $('[name="joining_date"], [name="deadline"]').flatpickr({
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
@@ -665,6 +678,7 @@
                             max_age: $("[name='max_age']").val(),
                             remarks: $("[name='remarks']").val(),
                             status: $("[name='status']").val(),
+                            deadline: $("[name='deadline']").val(),
                             usv: $("[name='usv']:checked").length
                         };
 
@@ -711,6 +725,7 @@
                                 max_age: $("[name='max_age']").val(),
                                 remarks: $("[name='remarks']").val(),
                                 status: $("[name='status']").val(),
+                                deadline: $("[name='deadline']").val(),
                                 usv: $("[name='usv']:checked").length
                             },
                             message: "Success"
