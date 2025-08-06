@@ -159,6 +159,7 @@
                 },
                 {
                     targets: 9,
+                    width: "200px",
                 },
                 {
                     targets: 10,
