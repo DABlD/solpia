@@ -57,6 +57,10 @@
             padding-left: 8px;
             padding-right: 8px;
         }
+
+        table{
+            font-size: 14px;
+        }
     </style>
 @endpush
 
