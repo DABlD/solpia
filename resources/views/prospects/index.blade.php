@@ -163,7 +163,7 @@
                 },
                 {
                     targets: 11,
-                    width: "100px",
+                    width: "140px",
                     render: date => {
                         return toDateTime(date);
                     }
