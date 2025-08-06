@@ -16,6 +16,13 @@ trait RequirementAttribute{
 		    ;
 		}
 
+		if($this->vessel_id){
+			$buttons .= "<a class='btn btn-primary btn-sm shipicon' data-toggle='tooltip' title='View Vessel Details' onclick='vesselDetails($this->vessel_id)'>" .
+		        '<span class="fa fa-ship fa-2xs"></span>' .
+		    '</a>'
+		    ;
+		}
+
 		return $buttons;
 	}
 }
