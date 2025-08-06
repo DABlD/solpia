@@ -152,6 +152,12 @@
                     }
                 },
                 {
+                    targets: 6,
+                    render: salary =>{
+                        return salary ? "$" + parseFloat(salary).toLocaleString() : "---";
+                    }
+                },
+                {
                     targets: 13,
                     className: "text-center"
                 },
