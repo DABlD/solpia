@@ -173,7 +173,7 @@
                                 ${vessel.name}
                                 <br>
                                 {{-- <div style="color: orange;">${vessel.type}</div> --}}
-                                <div style="font-style: italic;">${vessel.type}</div>
+                                <div style="font-style: italic; color: #369589;">${vessel.type}</div>
                             `;
                         }
                         else{
