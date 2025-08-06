@@ -28,7 +28,7 @@
                                     {{-- <th>Last Disembark</th>
                                     <th>Location</th>
                                     <th>Availability</th> --}}
-                                    <th>Remarks</th>
+                                    <th class="remarks-col">Remarks</th>
                                     <th>Status</th>
                                     <th>Updated At</th>
                                     <th>Actions</th>
@@ -175,6 +175,10 @@
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
                 // MUST NOT BE INTERCHANGED t-i
+                setTimeout(() => {
+                    $('.remarks-col').css('width', '200px');
+                    console.log('test');
+                }, 1000);
                 tooltip();
             	// initializeActions();
             },
