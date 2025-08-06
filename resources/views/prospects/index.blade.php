@@ -60,6 +60,10 @@
         table .btn-sm{
             margin-bottom: 3px !important;
         }
+
+        table.dataTable {
+            table-layout: fixed;
+        }
     </style>
 @endpush
 
