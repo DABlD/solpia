@@ -28,10 +28,10 @@
                                     {{-- <th>Last Disembark</th>
                                     <th>Location</th>
                                     <th>Availability</th> --}}
-                                    <th style="width: 330px;">Remarks</th>
+                                    <th>Remarks</th>
                                     <th>Status</th>
                                     <th>Updated At</th>
-                                    <th style="width: 70px;">Actions</th>
+                                    <th>Actions</th>
     							</tr>
     						</thead>
     					</table>
@@ -155,18 +155,23 @@
                 },
                 {
                     targets: 9,
-                    width: "20%"
+                    width: "300px"
                 },
                 {
                     targets: 10,
-                    width: "200px"
+                    width: "60px"
                 },
                 {
                     targets: 11,
+                    width: "100px",
                     render: date => {
                         return toDateTime(date);
                     }
-                }
+                },
+                {
+                    targets: 12,
+                    width: "50px"
+                },
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');
