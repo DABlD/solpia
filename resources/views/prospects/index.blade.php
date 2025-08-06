@@ -61,8 +61,8 @@
             margin-bottom: 3px !important;
         }
 
-        table.dataTable {
-            table-layout: fixed;
+        table{
+            font-size: 14px;
         }
     </style>
 @endpush
@@ -159,23 +159,17 @@
                 },
                 {
                     targets: 9,
-                    width: "300px"
                 },
                 {
                     targets: 10,
-                    width: "60px"
                 },
                 {
                     targets: 11,
-                    width: "140px",
+                    width: "100px",
                     render: date => {
-                        return toDateTime(date);
+                        return toDateTime(date, "DD-MMM-YY h:mm A");
                     }
-                },
-                {
-                    targets: 12,
-                    width: "50px"
-                },
+                }
             ],
             drawCallback: function(){
                 $('#table tbody').append('<div class="preloader"></div>');

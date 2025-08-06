@@ -5,8 +5,8 @@ function toDate(timetamp, format = 'MMM DD, YYYY'){
 	return moment(timetamp).format(format);
 }
 
-function toDateTime(timestamp){
-	return moment(timestamp).format('MMM DD, YYYY h:mm A');	
+function toDateTime(timestamp, format = 'MMM DD, YYYY h:mm A'){
+	return moment(timestamp).format(format);	
 }
 
 // SWAL
