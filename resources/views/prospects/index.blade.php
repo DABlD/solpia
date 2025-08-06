@@ -28,10 +28,10 @@
                                     {{-- <th>Last Disembark</th>
                                     <th>Location</th>
                                     <th>Availability</th> --}}
-                                    <th>Remarks</th>
+                                    <th style="width: 330px;">Remarks</th>
                                     <th>Status</th>
                                     <th>Updated At</th>
-                                    <th>Actions</th>
+                                    <th style="width: 70px;">Actions</th>
     							</tr>
     						</thead>
     					</table>
