@@ -567,6 +567,10 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     }
                 }
 
+                if(in_array($this->applicant->vessel->id,  [7517,7917,7141,9274])){
+                    $event->sheet->getDelegate()->getRowDimension(44)->setRowHeight(60);
+                }
+
                 // PAGE BREAKS
                 $rows = ['A28', 'A44'];
                 foreach($rows as $row){

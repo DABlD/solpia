@@ -377,6 +377,7 @@
 			ㅤentitlement to repatriation continues to have effect while a seafarer is held captive on or off the ship as a result of acts of piracy or armed
 			<br style='mso-data-placement:same-cell;' />
 			ㅤrobbery against ships.
+			@if(!in_array($data->vessel->id, [7517,7917,7141,9274]))
 			<br style='mso-data-placement:same-cell;' />
 			ㅤ※	Additional clause for Marshall Islands flag
 			<br style='mso-data-placement:same-cell;' />
@@ -385,6 +386,7 @@
 			ㅤof the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law
 			<br style='mso-data-placement:same-cell;' />
 			ㅤand Regulations of the Republic of the Marshall Islands.
+			@endif
 		</td>
 	</tr>
 
