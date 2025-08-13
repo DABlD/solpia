@@ -72,10 +72,10 @@ class X25_MLCLinedUp implements WithMultipleSheets
             
             // FOR KLCSM BULK
             if($applicant->vessel->principal_id == 10){
-                if(str_contains($this->applicant->vessel->type, "BULK")){
+                if(str_contains($applicant->vessel->type, "BULK")){
                     $class .= "BULK";
                 }
-                elseif(str_contains($this->applicant->vessel->type, "LNG")){
+                elseif(str_contains($applicant->vessel->type, "LNG")){
                     $class .= "LNG";
                 }
             }
