@@ -241,9 +241,8 @@
 		$oa2 = ceil($wage->other_allow ?? 0);
 		$ra = ceil($wage->retire_allow ?? 0);
 
-		$ccb = number_format(str_contains($data->vessel->type, "BUL") ? 80 : 0, 2);
-
-		$total = $basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2 + $ccb - 40;
+		// $total = $basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2 + $ccb - 40;
+		$total = $basic + $ot + $lp + $sa + $so + $oa + $ra + $oa2;
 		if($data->vessel->type == "LNG"){
 			$total += 40;
 		}
