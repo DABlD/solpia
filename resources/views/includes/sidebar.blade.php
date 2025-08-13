@@ -5,11 +5,11 @@
 
 		<div class="user-panel">
 			<div class="pull-left image">
-				{{-- @if(in_array(auth()->user()->id, [23,5963]))
-					<img src="{{ asset('images/g1.png')}}" class="img-circle" alt="User Image">
-				@else --}}
-					<img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image">
-				{{-- @endif --}}
+				@if(in_array(auth()->user()->id, [23,5963]))
+					<img src="{{ asset('images/g2.png')}}" class="img-circle" alt="User Image" id="avatar">
+				@else
+					<img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image" id="avatar">
+				@endif
 			</div>
 			<div class="pull-left info">
 				<p>{{ auth()->user()->fullname }}</p>
@@ -66,5 +66,13 @@
 				text: 'No system role has been set for this account'
 			});
 		@endif
+
+		const img = document.getElementById('avatar');
+
+        img.addEventListener('click', () => {
+            if (img.requestFullscreen) {
+                img.requestFullscreen();
+            }
+        });
 	</script>
 @endpush
