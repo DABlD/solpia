@@ -940,6 +940,10 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(10);
                 $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(11);
 
+                if($this->applicant->vessel->flag == "LIBERIA"){
+                    $event->sheet->getDelegate()->getRowDimension($ral+7)->setRowHeight(1);
+                }
+
                 $rash3 += 1;
                 $event->sheet->getDelegate()->getStyle("E1:E100")->getFont()->setSize(8.5);
                 $event->sheet->getDelegate()->getStyle("E1:E130")->getFont()->setName('Times New Roman');
