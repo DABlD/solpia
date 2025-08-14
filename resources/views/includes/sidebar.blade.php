@@ -5,7 +5,7 @@
 
 		<div class="user-panel">
 			<div class="pull-left image">
-				@if(in_array(auth()->user()->id, [23,5963]) || auth()->user()->fleet == "TOEI")
+				@if(in_array(auth()->user()->id, [23,5963]))
 					<img src="{{ asset('images/g2.png')}}" class="img-circle" alt="User Image" id="avatar">
 				@else
 					<img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image" id="avatar">
