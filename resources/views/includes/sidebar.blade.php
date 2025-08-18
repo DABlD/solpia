@@ -4,11 +4,12 @@
 	<section class="sidebar">
 
 		<div class="user-panel">
-			<div class="pull-left image">
+			<div class="pull-left image" id="user-avatar">
+				<canvas id="confettiCanvas"></canvas>
 				@if(in_array(auth()->user()->id, [23,5963]))
 					<img src="{{ asset('images/g2.png')}}" class="img-circle" alt="User Image" id="avatar">
 				@else
-					<img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image" id="avatar">
+					<img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image">
 				@endif
 			</div>
 			<div class="pull-left info">
@@ -58,6 +59,8 @@
 </aside>
 
 @push('after-scripts')
+	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
 	<script>
 		@if(Auth::user()->role == "")
 			swal({
@@ -71,8 +74,44 @@
 
         img.addEventListener('click', () => {
             if (img.requestFullscreen) {
-                img.requestFullscreen();
+                document.getElementById("user-avatar").requestFullscreen();
+
+                let confettiCanvas = document.getElementById("confettiCanvas");
+                let myConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: true });
+
+
+
+                for (let i = 1; i < 10; i++) {
+                    setTimeout(() => {
+                    	myConfetti({
+                    		particleCount: 500,
+                    		spread: 360,
+                    		origin: { x:Math.random(), y: Math.random() }
+                    	});
+                    }, i * 500);
+                }
+
+				for (let i = 1; i < 12; i++) {
+				    setTimeout(() => {
+				    	launchBalloons();
+				    }, i * 700);
+				}
             }
         });
+
+		function launchBalloons() {
+			for (let i = 0; i < 10; i++) {
+				let balloon = document.createElement("div");
+				balloon.innerHTML = "🎈";
+				balloon.classList.add("balloon");
+				balloon.style.left = Math.random() * 100 + "vw";
+				balloon.style.fontSize = Math.random() * 30 + 30 + "px";
+				{{-- document.body.appendChild(balloon); --}}
+				{{-- img.appendChild(balloon); --}}
+				$('#user-avatar').append(balloon);
+
+				setTimeout(() => balloon.remove(), 10000);
+			}
+		}
 	</script>
 @endpush

@@ -251,3 +251,52 @@
         margin-right: 200px
     }
 }
+
+/*BIRTHDAY CSS*/
+.balloon {
+  position: absolute;
+  bottom: -50px;
+  z-index: 2147483647; /* 🚀 force it on top */
+  pointer-events: none;
+  animation: floatUp 7s linear forwards;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+#user-avatar {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#user-avatar:fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+#user-avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; /* or cover depending on what you want */
+  display: block !important;
+}
+
+#user-avatar:fullscreen img{
+    max-width: 100% !important;
+}
+
+
+#confettiCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* so clicks pass through */
+  z-index: 999999; /* 🚀 keep it above the image */
+}
