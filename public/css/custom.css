@@ -300,3 +300,19 @@
   pointer-events: none; /* so clicks pass through */
   z-index: 999999; /* 🚀 keep it above the image */
 }
+
+#avatar:not(:fullscreen) {
+  animation: glowPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  from {
+    box-shadow: 0 0 2px 1px rgba(0, 255, 255, 0.7),
+                0 0 4px 3px rgba(0, 200, 255, 0.6),
+                0 0 6px 5px rgba(0, 180, 255, 0.4);
+  }
+  to {
+    box-shadow: 0 0 2px 1px rgba(0, 255, 255, 1),
+                0 0 4px 3px rgba(0, 200, 255, 0.9),
+                0 0 6px 5px rgba(0, 180, 255, 0.8);  }
+}
