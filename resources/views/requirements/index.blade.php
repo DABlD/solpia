@@ -796,6 +796,7 @@
                                 <td>${checkbox2("fm" + can.id, "test", can.medical, can.status)}</td>
                                 <td>${checkbox2("ob" + can.id, "test", can.on_board, can.status)}</td>
                                 <td id="can${can.id}">${can.status}</td>
+                                <td>${toDateTime(can.created_at)}</td>
                                 <td>${file}</td>
                                 <td>
                                     <textarea id="canRemark${can.id}" style="width: 100%; resize: vertical;" cols="40" rows="2" value="${can.remarks}">${can.remarks ?? ""}</textarea>
@@ -808,7 +809,7 @@
                     if(string == ""){
                         string = `
                             <tr>
-                                <td colspan="13">No candidates yet</td>
+                                <td colspan="15">No candidates yet</td>
                             </tr>
                         `;
                     }
@@ -1019,20 +1020,21 @@
                     <table id="candidate_table" class="table table-hover table-bordered">
                         <thead style="background-color: #ffddcc;">
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Age</th>
-                                <th>Initial<br>Interview</th>
-                                <th>Written<br>Assessment</th>
-                                <th>Technical<br>Interview</th>
-                                <th>Endorsed<br>To Crewing</th>
-                                <th>Principals<br>Approval</th>
-                                <th>Ongoing Medical</th>
-                                <th>On<br>Board</th>
-                                <th>Status</th>
-                                <th>Form</th>
-                                <th>Remark</th>
-                                <th>Action</th>
+                                <th style="vertical-align: middle;">ID</th>
+                                <th style="vertical-align: middle;">Name</th>
+                                <th style="vertical-align: middle;">Age</th>
+                                <th style="vertical-align: middle;">Initial<br>Interview</th>
+                                <th style="vertical-align: middle;">Written<br>Assessment</th>
+                                <th style="vertical-align: middle;">Technical<br>Interview</th>
+                                <th style="vertical-align: middle;">Endorsed<br>To Crewing</th>
+                                <th style="vertical-align: middle;">Principals<br>Approval</th>
+                                <th style="vertical-align: middle;">Ongoing<br>Medical</th>
+                                <th style="vertical-align: middle;">On<br>Board</th>
+                                <th style="vertical-align: middle;">Status</th>
+                                <th style="vertical-align: middle;">Endorsed<br>On</th>
+                                <th style="vertical-align: middle;">Form</th>
+                                <th style="vertical-align: middle;">Remark</th>
+                                <th style="vertical-align: middle;">Action</th>
                             </tr>
                         </thead>
                         <tbody style="border: 1px solid black;">
