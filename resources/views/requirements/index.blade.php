@@ -826,7 +826,7 @@
                             let ctr = 0;
                             swal.showLoading();
 
-                            let id = e.target.className.replace(cb, "");
+                            let id2 = e.target.className.replace(cb, "");
                             let isChecked = e.target.checked;
                             let temp = {
                                 ii: "initial_interview",
@@ -839,12 +839,12 @@
                             };
 
                             let data = {};
-                            data["id"] = id;
+                            data["id"] = id2;
                             data[temp[cb]] = isChecked ? 1 : 0;
 
                             if(["ii", "wa", "ti", "ec"].includes(cb)){
                                 ["ii", "wa", "ti", "ec"].forEach(cb2 => {
-                                    if($(`.${cb2}${id}`).is(":checked")){
+                                    if($(`.${cb2}${id2}`).is(":checked")){
                                         ctr++;
                                     }
                                 });
@@ -862,8 +862,8 @@
                             }
 
                             if(data["status"] != undefined){
-                                $(`#can${id}`).html(data["status"]);
-                                disableButtons(id, data["status"]);
+                                $(`#can${id2}`).html(data["status"]);
+                                disableButtons(id2, data["status"]);
                             }
 
                             if(data["status"] == "ON BOARD"){
@@ -876,12 +876,12 @@
                                     },
                                     success: () => {
                                         reload();
-                                        updateCandidate(data);
+                                        updateCandidate(data, id);
                                     }
                                 });
                             }
                             else{
-                                updateCandidate(data);
+                                updateCandidate(data, id);
                             }
                         })
                     });
@@ -889,11 +889,10 @@
                     $(`[id^="canRemark"]`).bind('keyup.DT', e => {
                         if(e.which == 13){
                             let id = e.target.id.replace("canRemark", "");
-                            console.log(e.target.value);
                             updateCandidate({
                                 id: id,
                                 remarks: e.target.value
-                            });
+                            }, id);
                         }
                     });
                 }
@@ -904,7 +903,7 @@
             window.open(`prospectForms/${id}/${file}`);
         }
 
-        function updateCandidate(data){
+        function updateCandidate(data, id){
             data.updated_at = moment().format("YYYY-MM-DD HH:mm:ss");
             $.ajax({
                 url: '{{ route('candidate.update') }}',
@@ -922,6 +921,8 @@
 
                     setTimeout(() => {
                         $('#updateSuccess').remove();
+                        console.log(id);
+                        candidates(id);
                     }, 2000);
                 }
             });
@@ -1203,6 +1204,7 @@
                         },
                         success: () => {
                             ss("Success");
+                            reload();
                             setTimeout(() => {
                                 candidates(rid);
                             }, 1000)
