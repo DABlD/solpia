@@ -128,6 +128,13 @@
 			</td>
 			<td rowspan="2" colspan="4"></td>
 		</tr>
+
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
 	@endforeach
 
 	<tr>
