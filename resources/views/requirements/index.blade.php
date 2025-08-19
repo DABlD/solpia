@@ -905,6 +905,7 @@
         }
 
         function updateCandidate(data){
+            data.updated_at = moment().format("YYYY-MM-DD HH:mm:ss");
             $.ajax({
                 url: '{{ route('candidate.update') }}',
                 type: "POST",
