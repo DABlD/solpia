@@ -463,6 +463,7 @@ class X09_InitialDocumentChecklist implements FromView, WithEvents, WithDrawings
                     'G14:I14', 'P14:S14',
                     'G15:I15', 'P15:S15',
                     'G16:I16', 'P16:S16',
+                               'P17:S17',
                     'G19:I19',
                     'G20:I20',
                     'G22:I22',

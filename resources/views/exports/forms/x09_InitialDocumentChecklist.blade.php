@@ -37,12 +37,14 @@
 					$box = "R";
 				}
 			}
-			elseif($name == "ATOCT"){
+			elseif($name == "ATOT"){
 				if(isset($data->document_lc->{"ADVANCE TRAINING FOR OIL TANKER - ATOT"})){
 					$gNum = $checkExpiry($data->document_lc->{"ADVANCE TRAINING FOR OIL TANKER - ATOT"});
 					$box = "R";
 				}
-				elseif(isset($data->document_lc->{"ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT"})){
+			}
+			elseif($name == "ATCT"){
+				if(isset($data->document_lc->{"ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT"})){
 					$gNum = $checkExpiry($data->document_lc->{"ADVANCE TRAINING FOR CHEMICAL TANKER - ATCT"});
 					$box = "R";
 				}
@@ -448,13 +450,16 @@
 		<td colspan="4">MCV:</td>
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
-		{{ $cd("ATOCT", 'lc', 'COP') }}
-		<td colspan="4">ATOCT</td>
+		{{ $cd("ATOT", 'lc', 'COP') }}
+		<td colspan="4">ATOT</td>
 		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="19"></td>
+		<td colspan="10"></td>
+		{{ $cd("ATCT", 'lc', 'COP') }}
+		<td colspan="4">ATCT</td>
+		<td colspan="4" style="{{ $center }}">{{ $gNum }}</td>
 	</tr>
 
 	<tr>
@@ -484,8 +489,8 @@
 		<td></td>
 		{{ $cd("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", 'lc') }}
 		<td colspan="4">PSCRB</td>
-		{{ $cd("ATOCT", 'lc') }}
-		<td colspan="3">ATOCT</td>
+		{{ $cd("ATOT", 'lc') }}
+		<td colspan="3">ATOT</td>
 	</tr>
 
 	<tr>
@@ -495,8 +500,8 @@
 		<td></td>
 		{{ $cd("ADVANCE FIRE FIGHTING - AFF", 'lc') }}
 		<td colspan="4">ATFF</td>
-		{{ $cd("WELDING", 'lc') }}
-		<td colspan="3">WELDING COURSE</td>
+		{{ $cd("ATCT", 'lc') }}
+		<td colspan="3">ATCT</td>
 	</tr>
 
 	<tr>
@@ -506,7 +511,9 @@
 		<td colspan="3" style="{{ $center }}">{{ $gNum }}</td>
 		<td></td>
 		{{ $cd("MEDICAL FIRST AID - MEFA", 'lc') }}
-		<td colspan="8">MEFA</td>
+		<td colspan="4">MEFA</td>
+		{{ $cd("WELDING", 'lc') }}
+		<td colspan="3">WELDING COURSE</td>
 	</tr>
 
 	<tr>
