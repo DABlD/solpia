@@ -12,7 +12,20 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $title){
+    public function __construct($data, $title = "MLC Contract"){
+        $rid = $data->pro_app->rank->id;
+        $data->otrate = 0;
+
+        if(in_array($rid, [9,30])){ //BSN, /PMN
+            $data->otrate = 5.57;
+        }
+        elseif(in_array($rid, [10,16,24,26,56,25])){ //AB, OILER, CCK, 2CK, AST. CK, CK
+            $data->otrate = 5.07;
+        }
+        elseif(in_array($rid, [11,17,27])){ //OS, WPR, MSM
+            $data->otrate = 3.82;
+        }
+
         $this->data     = $data;
         $this->title     = $title;
     }
@@ -252,7 +265,7 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle($this->title ?? 'MLC Contract', false);
+                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->title), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.3);

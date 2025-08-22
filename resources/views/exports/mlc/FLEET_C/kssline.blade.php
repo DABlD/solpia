@@ -245,8 +245,9 @@
 			<br style='mso-data-placement:same-cell;' />
 			ㅤㅤan adequate compensatory rest period if the normal period of rest is disturbed by call-outs to work
 			<br style='mso-data-placement:same-cell;' />
+			ㅤ5) Shipowner shall pay overtime fee as per rate USD {{ $data->otrate }}/time in case of exceed total working hours.
 			<br style='mso-data-placement:same-cell;' />
-			4. Holiday of seafarers is Saturday and Sunday and Korean legal holiday, worker’s day and designated
+			ㅤ6) Holiday of seafarers is Saturday and Sunday and Korean legal holiday, worker’s day and designated
 			<br style='mso-data-placement:same-cell;' />
 			ㅤday by Company.
 		</td>
