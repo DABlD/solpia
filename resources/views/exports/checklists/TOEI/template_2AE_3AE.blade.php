@@ -596,8 +596,8 @@
 			{{ $doc("TEST", "", 'lc') }}
 		@endif
 	{{-- NITTA KISEN --}}
-	{{-- ANCASH A, ANLANTIC O, ATLANTIC B, NORD S, WECO E--}}
-	@elseif(in_array($data->vessel->id, [7,8,9,4662,4765]))
+	{{-- ANCASH A, ANLANTIC O, ATLANTIC B, NORD S, WECO E, NORD A --}}
+	@elseif(in_array($data->vessel->id, [7,8,9,4662,4765,9540]))
 		@php
 			$temp = null;
 			if(isset($data->document_med_cert->{'COVID-19 1ST DOSE'})){
