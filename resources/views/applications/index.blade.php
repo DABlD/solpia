@@ -566,6 +566,7 @@
                         X34_DocumentDeficiencyNotice:   'Document Deficiency Notice',
                         X18_EvaluationSheet:            'Evaluation Sheet - POSSM',
                         X17_HistoryCheck:               'History Check',
+                        X28_DispatchChecklist:          'Line-up/Dispatch Checklist',
                         MedicalReferral:                'Medical Referral',
                         X35_PostMedicalForm:            'Post Medical Form Request',
                         KSSLine:                        'Qualification Checklist (KSS Line)',
@@ -726,6 +727,9 @@
                         }
                         else if(result.value == "MedicalReferral"){
                             medicalReferral(application.data('id'), result.value);
+                        }
+                        else if(result.value == "X28_DispatchChecklist"){
+                            getDispatchChecklistData(application.data('id'), result.value);
                         }
                         else{
                             window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${result.value}`;
@@ -3358,6 +3362,98 @@
                     })
                 }
             })
+        }
+
+        function getDispatchChecklistData(id, type){
+            let data = {};
+            swal({
+                title: 'Fill all details',
+                html: `
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="clabel">Tentative Joining Date</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="eld" class="swal2-input" placeholder="(Optional)"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Port</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="port" class="form-control" placeholder="(Optional)"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 style="text-align: right;">Months of employment</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="number" id="employment_months" class="form-control" />
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                width: '40%',
+                onOpen: () => {
+                    $.ajax({
+                        url: '{{ route('applications.getAllInfo') }}',
+                        data: {
+                            id: id
+                        },
+                        success: result => {
+                            result = JSON.parse(result);
+                            let date = moment().format('YYYY-MM-DD');
+
+                            if(result.lup){
+                                date = moment(result.lup.joining_date);
+                                months = result.lup.months;
+
+                                if(result.lup.extensions){
+                                    let extensions = JSON.parse(result.lup.extensions);
+                                    date = date.add(result.lup.months, 'months');
+
+                                    for(i = 0, j = 1; i < extensions.length; i++, j++){
+                                        months = extensions[i];
+                                        if(j < extensions.length){
+                                            date = date.add(months, 'months');
+                                        }
+                                    }
+                                }
+                                
+                                date = date.format("YYYY-MM-DD");
+                                $('#employment_months').val(months);
+                            }
+                            else if(result.pro_app.status == "Lined-Up"){
+                                $('#employment_months').val(result.pro_app.mob);
+                            }
+                            else{
+                                date = result.pro_app.eld;
+                            }
+
+                            $('#eld').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d',
+                                defaultDate: date
+                            });
+                        }
+                    })
+                },
+            }).then(result => {
+                if(result.value){
+                    data.eld                = $('#eld').val();
+                    data.employment_months  = $('#employment_months').val();
+                    data.port               = $('#port').val();
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                }
+            });
         }
 
         // FILTER

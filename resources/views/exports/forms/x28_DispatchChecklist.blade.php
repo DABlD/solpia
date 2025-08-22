@@ -20,7 +20,9 @@
 				<td colspan='2' style='{{ $c }}'></td>
 			</tr>
 		";
-	}
+	};
+
+	$rank = isset($data->pro_app->rank) ? $data->pro_app->rank->abbr : $data->rank;
 @endphp
 
 <table>
@@ -50,7 +52,7 @@
 		<td style="{{ $b }}">NAME:</td>
 		<td colspan="5" style="{{ $c }}">{{ $data->user->namefull }}</td>
 		<td style="{{ $b }} text-align: right;">RANK:</td>
-		<td colspan="6" style="{{ $c }}">{{ $data->pro_app->rank->abbr }}</td>
+		<td colspan="6" style="{{ $c }}">{{ $rank }}</td>
 	</tr>
 
 	<tr>
@@ -307,58 +309,60 @@
 		<td colspan="13" style="{{ $b }}">E. OTHER REQUIREMENTS (Owner/Vessel Required Trainings, Publication/Briefing Materials, etc.)</td>
 	</tr>
 
-	{{-- SMTECH --}}
-	@if(in_array($data->vessel->id, [4608, 231]))
-		{{ $or("1.) SMTECH Briefing") }}
-		{{ $or("2.) Final Briefing") }}
-		{{ $or("3.) Hazmat and Mental health training") }}
-		@if(in_array($data->pro_app->rank_id, [1]))
-			{{ $or("4.) Hatch cover maintenance training") }}
-			{{ $or("5.) ") }}
-			{{ $or("6.) ") }}
-		@elseif(in_array($data->pro_app->rank_id, [2]))
-			{{ $or("4.) Hatch cover maintenance training") }}
-			{{ $or("5.) Ship Safety Officer Course") }}
-			{{ $or("6.) ") }}
-		@elseif(in_array($data->pro_app->rank_id, [14,19]))
-			{{ $or("4.) Cadet Training Record Book") }}
-			{{ $or("5.) ") }}
-			{{ $or("6.) ") }}
-		@else
-			{{ $or("4.) ") }}
-			{{ $or("5.) ") }}
-			{{ $or("6.) ") }}
-		@endif
-	{{-- NSSM --}}
-	@elseif(in_array($data->vessel->id, [727]))
-		{{ $or("1.) Final Briefing") }}
-		@if(in_array($data->pro_app->rank_id, [14,19]))
-			{{ $or("2.) Cadet Training Record Book") }}
-			{{ $or("3.) ") }}
-			{{ $or("4.) ") }}
-			{{ $or("5.) ") }}
-			{{ $or("6.) ") }}
-		@elseif(in_array($data->pro_app->rank_id, [1,2,3]))
-			{{ $or("2.) SSOC") }}
-			{{ $or("3.) ") }}
-			{{ $or("4.) ") }}
-			{{ $or("5.) ") }}
-			{{ $or("6.) ") }}
-		@else
+	@if(isset($data->vessel))
+		{{-- SMTECH --}}
+		@if(in_array($data->vessel->id, [4608, 231]))
+			{{ $or("1.) SMTECH Briefing") }}
+			{{ $or("2.) Final Briefing") }}
+			{{ $or("3.) Hazmat and Mental health training") }}
+			@if(in_array($data->pro_app->rank_id, [1]))
+				{{ $or("4.) Hatch cover maintenance training") }}
+				{{ $or("5.) ") }}
+				{{ $or("6.) ") }}
+			@elseif(in_array($data->pro_app->rank_id, [2]))
+				{{ $or("4.) Hatch cover maintenance training") }}
+				{{ $or("5.) Ship Safety Officer Course") }}
+				{{ $or("6.) ") }}
+			@elseif(in_array($data->pro_app->rank_id, [14,19]))
+				{{ $or("4.) Cadet Training Record Book") }}
+				{{ $or("5.) ") }}
+				{{ $or("6.) ") }}
+			@else
+				{{ $or("4.) ") }}
+				{{ $or("5.) ") }}
+				{{ $or("6.) ") }}
+			@endif
+		{{-- NSSM --}}
+		@elseif(in_array($data->vessel->id, [727]))
+			{{ $or("1.) Final Briefing") }}
+			@if(in_array($data->pro_app->rank_id, [14,19]))
+				{{ $or("2.) Cadet Training Record Book") }}
+				{{ $or("3.) ") }}
+				{{ $or("4.) ") }}
+				{{ $or("5.) ") }}
+				{{ $or("6.) ") }}
+			@elseif(in_array($data->pro_app->rank_id, [1,2,3]))
+				{{ $or("2.) SSOC") }}
+				{{ $or("3.) ") }}
+				{{ $or("4.) ") }}
+				{{ $or("5.) ") }}
+				{{ $or("6.) ") }}
+			@else
+				{{ $or("2.) ") }}
+				{{ $or("3.) ") }}
+				{{ $or("4.) ") }}
+				{{ $or("5.) ") }}
+				{{ $or("6.) ") }}
+			@endif
+		{{-- NORD A. TRITON C. --}}
+		@elseif(in_array($data->vessel->id, [4647, 6196]))
+			{{ $or("1.) Final Briefing") }}
 			{{ $or("2.) ") }}
 			{{ $or("3.) ") }}
 			{{ $or("4.) ") }}
 			{{ $or("5.) ") }}
 			{{ $or("6.) ") }}
 		@endif
-	{{-- NORD A. TRITON C. --}}
-	@elseif(in_array($data->vessel->id, [4647, 6196]))
-		{{ $or("1.) Final Briefing") }}
-		{{ $or("2.) ") }}
-		{{ $or("3.) ") }}
-		{{ $or("4.) ") }}
-		{{ $or("5.) ") }}
-		{{ $or("6.) ") }}
 	@else
 		{{ $or("1.) ") }}
 		{{ $or("2.) ") }}
