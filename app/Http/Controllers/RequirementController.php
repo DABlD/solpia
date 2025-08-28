@@ -64,6 +64,7 @@ class RequirementController extends Controller
         $data->remarks = $req->remarks;
         $data->max_age = $req->max_age;
         $data->fleet = $req->fleet;
+        $data->deadline = $req->deadline;
         $data->save();
     }
 
