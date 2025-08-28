@@ -16,14 +16,19 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $rid = $data->pro_app->rank->id;
         $data->otrate = 0;
 
-        if(in_array($rid, [9,30])){ //BSN, /PMN
+        $this->changed = false;
+
+        if(in_array($rid, [9,15,30])){ //BSN, OLR1, PMN
             $data->otrate = 5.57;
+            $this->changed = true;
         }
         elseif(in_array($rid, [10,16,24,26,56,25])){ //AB, OILER, CCK, 2CK, AST. CK, CK
             $data->otrate = 5.07;
+            $this->changed = true;
         }
         elseif(in_array($rid, [11,17,27])){ //OS, WPR, MSM
             $data->otrate = 3.82;
+            $this->changed = true;
         }
 
         $this->data     = $data;
