@@ -22,7 +22,7 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $data->otrate = 5.57;
             $this->changed = true;
         }
-        elseif(in_array($rid, [10,16,24,26,56,25])){ //AB, OILER, CCK, 2CK, AST. CK, CK
+        elseif(in_array($rid, [10,16,26])){ //AB, OILER, 2CK
             $data->otrate = 5.07;
             $this->changed = true;
         }
