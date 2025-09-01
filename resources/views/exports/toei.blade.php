@@ -658,9 +658,14 @@
 		
 		{{-- 5TH --}}
 		@php
+			$vFlag2 = $vFlag;
+			if($applicant->user->fleet == "FLEET D"){
+				$vFlag2 = "PANAMA";
+			}
+
 			$docu = false;
 			foreach($applicant->document_flag as $document){
-			    if($document->country == $vFlag && $document->type == "BOOKLET"){
+			    if($document->country == $vFlag2 && $document->type == "BOOKLET"){
 			        $docu = $document;
 			    }
 			}
@@ -733,7 +738,7 @@
 		@endphp
 
 		<tr>
-			<td colspan="2">Seaman's Book({{ $vFlag }})</td>
+			<td colspan="2">Seaman's Book ({{ ucfirst(strtolower($vFlag2)) }})</td>
 			{{-- <td colspan="2">{{ $rname }}</td> --}}
 			<td colspan="2">
 				@if(isset($crewRank) && $docu)
@@ -795,7 +800,7 @@
 			<td>{{ $docu ? strtoupper($docu->number) : "-----"}}</td>
 			<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "-----" }}</td>
 			<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "-----" }}</td>
-			<td colspan="2">{{ $vFlag }}</td>
+			<td colspan="2">{{ $vFlag2 }}</td>
 		</tr>
 		
 		{{-- 6TH --}}

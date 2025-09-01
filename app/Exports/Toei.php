@@ -940,7 +940,7 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
                 $event->sheet->getDelegate()->getRowDimension(8)->setRowHeight(10);
                 $event->sheet->getDelegate()->getRowDimension(14)->setRowHeight(11);
 
-                if(isset($this->applicant->vessel) && $this->applicant->vessel->flag == "LIBERIA"){
+                if(isset($this->applicant->vessel) && $this->applicant->vessel->flag == "LIBERIA" && $this->applicant->fleet == "FLEET D"){
                     $event->sheet->getDelegate()->getRowDimension($ral+7)->setRowHeight(1);
                 }
 
