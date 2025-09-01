@@ -898,9 +898,9 @@ class Smtech implements FromView, WithEvents, WithDrawings, WithColumnFormatting
 
 
 
-                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 3) . ':I' . ($rac + $temp + 3))->applyFromArray($fillStyle[1]);
-                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[2]);
-                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 5) . ':I' . ($rac + $temp + 5))->applyFromArray($fillStyle[4]);
+                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 2) . ':I' . ($rac + $temp + 2))->applyFromArray($fillStyle[1]);
+                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 3) . ':I' . ($rac + $temp + 3))->applyFromArray($fillStyle[2]);
+                $event->sheet->getDelegate()->getStyle("A" . ($rac + $temp + 4) . ':I' . ($rac + $temp + 4))->applyFromArray($fillStyle[4]);
                 $event->sheet->getDelegate()->getStyle("H" . ($raaow - 1) . ':I' . ($raaow - 1))->applyFromArray($fillStyle[5]);
 
                 $event->sheet->getDelegate()->getStyle("F17:I17")->applyFromArray($fillStyle[3]);
