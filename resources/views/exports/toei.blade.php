@@ -1765,6 +1765,8 @@
 					JENEVA BIANCA SANTOS / ASST. CREWING MANAGER
 				@elseif($applicant->user->fleet == "FLEET C")
 					Shirley Erasquin / CREWING MANAGER
+				@elseif($applicant->user->fleet == "FLEET D")
+					MS. THEA MAE D. GUERRA-RIO / CREWING MANAGER
 				@else
 					NEIL ROMANO / CREWING MANAGER
 				@endif
