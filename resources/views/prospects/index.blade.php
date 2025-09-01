@@ -110,7 +110,7 @@
             columns: [
                 { data: 'id'},
                 { data: 'name'},
-                { data: 'age'},
+                { data: 'birthday'},
                 { data: 'height'},
                 { data: 'contact' },
                 { data: 'rank' },
@@ -141,6 +141,12 @@
                         catch(e){
                             return exp;
                         };
+                    }
+                },
+                {
+                    targets: 2,
+                    render: birthday =>{
+                        return moment().diff(moment(birthday), 'years');
                     }
                 },
                 {
@@ -480,7 +486,7 @@
                     </div></br>
                     ${input("name", "Name", data.name, 2,10)}
                     ${input("birthday", "Birthday", data.birthday, 2,10)}
-                    ${input("age", "Age", data.age, 2,10, 'number')}
+                    ${input("age", "Age", data.birthday ? moment().diff(moment(data.birthday), 'years') : data.age, 2,10, 'number')}
 
                     <div class="row iRow">
                         <div class="col-md-2 iLabel">
