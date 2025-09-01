@@ -317,18 +317,18 @@
 			{{ $or("3.) Hazmat and Mental health training") }}
 			@if(in_array($data->pro_app->rank_id, [1]))
 				{{ $or("4.) Hatch cover maintenance training") }}
-				{{ $or("5.) ") }}
+				{{ $or("5.) Enclosed Space") }}
 				{{ $or("6.) ") }}
 			@elseif(in_array($data->pro_app->rank_id, [2]))
 				{{ $or("4.) Hatch cover maintenance training") }}
 				{{ $or("5.) Ship Safety Officer Course") }}
-				{{ $or("6.) ") }}
+				{{ $or("6.) Enclosed Space") }}
 			@elseif(in_array($data->pro_app->rank_id, [14,19]))
 				{{ $or("4.) Cadet Training Record Book") }}
-				{{ $or("5.) ") }}
+				{{ $or("5.) Enclosed Space") }}
 				{{ $or("6.) ") }}
 			@else
-				{{ $or("4.) ") }}
+				{{ $or("4.) Enclosed Space") }}
 				{{ $or("5.) ") }}
 				{{ $or("6.) ") }}
 			@endif
