@@ -1,4 +1,3 @@
-
 @php
 	$bold = "font-weight: bold;";
 	$center = "text-align: center;";
@@ -228,7 +227,7 @@
 			1.1 체결장소(Place)   :
 		</td>
 		<td colspan="11" style="{{ $blue }}">
-			{{ $data->pro_app->status == "On Board" ? "ONBOARD" : "SOLPIA MANILA OFFICE, PHILIPPINE" }}
+			{{ $data->pro_app->status == "On Board" ? "ONBOARD" : "MANILA, PHILIPPINES" }}
 		</td>
 	</tr>
 
