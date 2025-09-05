@@ -255,7 +255,7 @@
 
 	<tr>
 		<td colspan="2" style="{{ $bc }}">Checked by</td>
-		<td colspan="3"></td>
+		<td colspan="3">MS. CELINE F. VILLANTA</td>
 		<td style="text-align: right;">(Sign)</td>
 		<td rowspan="2">
 			&#x2610; Qualified
@@ -266,7 +266,7 @@
 
 	<tr>
 		<td colspan="2" style="{{ $bc }}">Confirmed by</td>
-		<td colspan="3"></td>
+		<td colspan="3">MS. THEA MAE D. GUERRA</td>
 		<td style="text-align: right;">(Sign)</td>
 	</tr>
 </table>

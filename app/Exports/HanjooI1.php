@@ -559,6 +559,22 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setOffsetY(2);
         $drawing->setCoordinates('A1');
 
-        return $drawing;
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setPath(public_path('images/maam_thea_sig.png'));
+        $drawing2->setHeight(55);
+        // $drawing2->setWidth(170);
+        $drawing2->setOffsetX(30);
+        $drawing2->setOffsetY(-5);
+        $drawing2->setCoordinates('E28');
+
+        $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing3->setPath(public_path('images/celine_sig.png'));
+        $drawing3->setHeight(70);
+        // $drawing3->setWidth(170);
+        $drawing3->setOffsetX(45);
+        $drawing3->setOffsetY(-7);
+        $drawing3->setCoordinates('E27');
+
+        return [$drawing, $drawing2, $drawing3];
     }
 }
