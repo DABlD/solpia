@@ -19,10 +19,13 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $this->shipmanager   = [];
 
         $array1 = [
-            "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE","M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
-            "M/V HYUNDAI PARAMOUNT","M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
-            "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
-            "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
+            // "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE","M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
+            // ,"M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
+            // "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
+            "M/V HYUNDAI PARAMOUNT",                                                                                                    // FLEET B PART OF 1ST BATCH 
+            "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",                 // FLEET C PART OF 1ST BATCH
+
+            "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE",                                                                       // FLEET B PART OF 2ND BATCH
         ];
 
         // FLEET C LAST 1 LINE
@@ -291,6 +294,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+                $event->sheet->getDelegate()->getPageSetup()->setScale(98);
 
                 //SET FIRST PAGE NUMBER
                 $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
@@ -300,8 +304,9 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $line->setPath(public_path('/images/horizontal_line.png'));
                 $line->setHeight(15);
 
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&I&8Ch.2 / Page &P');
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-302/2024.08.09/DCN24005');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8STANDARD SEAFARER’S EMPLOYMENT AGREEMENT &R&I&8Ch.2.2 / Page &P');
+                // $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&I&8Ch.2 / Page &P');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-302/2025.09.10/DCN25005');
                 $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
 
                 // HEADERS FOOTERS
@@ -361,7 +366,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    'A47:K47'
+                    'A48:K48'
                 ];
 
                 // HL B
@@ -371,7 +376,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    'A6:A19', 'A47:K47', 'A46', 'F46'
+                    'A6:A19', 'A48:K48', 'A47', 'F47'
                 ];
 
                 // HC VC
@@ -391,12 +396,12 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A1:B4', 'A6:K19', 'B21:K23', 'B29:B30', 'A48:K49'
+                    'A1:B4', 'A6:K19', 'B21:K23', 'B29:B30', 'A49:K50'
                 ];
 
                 // UNDERLINE
                 $h[8] = [
-                    'A3', 'B8:D13', 'A14:D15'
+                    // 'A3', 'B8:D13', 'A14:D15'
                 ];
 
                 if($this->applicant->user->fleet == "FLEET C"){
@@ -413,7 +418,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A6', 'A7', 'E6:E18', 'F47', 'A46', 'F46'
+                    'A6', 'A7', 'E6:E18', 'F48', 'A47', 'F47'
                 ];
 
                 foreach($h as $key => $value) {
@@ -453,7 +458,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A6:K19', 'A21:K23', 'A25:K30', 'A32:K34', 'A36:K36', 'A38:K38', 'A40:K40', 'A42:K42', 'A44:K44', 'A48:K49'
+                    'A6:K19', 'A21:K23', 'A25:K30', 'A32:K34', 'A36:K36', 'A38:K38', 'A40:K40', 'A42:K42', 'A44:K45', 'A49:K50'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -503,7 +508,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'A46:C46', 'F46:J46'
+                    'A47:C47', 'F47:J47'
                 ]);
 
                 // LBT
@@ -537,14 +542,23 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(9.9);
 
                 // ROW RESIZE
+                // $rows = [
+                //     [
+                //         27, //ROW HEIGHT
+                //         1,4 //START ROW, END ROW
+                //     ],
+                //     [25,5,28],
+                //     [27,31,36],
+                //     [18,48,49],
+                // ];
                 $rows = [
                     [
                         27, //ROW HEIGHT
                         1,4 //START ROW, END ROW
                     ],
                     [25,5,28],
-                    [27,31,36],
-                    [18,48,49],
+                    [27,31,35],
+                    [18,49,50],
                 ];
 
                 $rows2 = [
@@ -552,7 +566,8 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         90, //ROW HEIGHT
                         [23] //CELLS
                     ],
-                    [40,[29]], [27,[30,37,39,45,47]], [135,[38]], [150, [40]], [105, [44]], [110,[46]], [25,[41,43]], [35,[42]]
+                    // [40,[29]], [27,[30,37,39,45,47]], [135,[38]], [150, [40]], [105, [44]], [110,[46]], [25,[41,43]], [35,[42]]
+                    [40,[29,30]], [27,[37,39,48]], [135,[38]], [142, [40]], [140, [45]], [110,[47]], [25,[41,43]], [27,[42]], [65,[36]], [50,[44,46]]
                 ];
 
                 foreach($rows as $row){
@@ -567,12 +582,14 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     }
                 }
 
-                if(in_array($this->applicant->vessel->id,  [7517,7917,7141,9274])){
-                    $event->sheet->getDelegate()->getRowDimension(44)->setRowHeight(60);
+                // "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE"
+                if(in_array($this->applicant->vessel->id, [6829,7998,7108])){
+                    $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(90);
                 }
 
                 // PAGE BREAKS
-                $rows = ['A28', 'A44'];
+                // $rows = ['A28', 'A44'];
+                $rows = [];
                 foreach($rows as $row){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
@@ -581,7 +598,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // HMM PARAHRAPH CELLS
-                $cells = ["B23", 'A25', 'B29:B30', 'A34', 'A36', 'A38', 'A40', 'A42', 'A44', 'A45', 'A48'];
+                $cells = ["B23", 'A25', 'B29:B30', 'A34', 'A36', 'A38', 'A40', 'A42', 'A44', 'A46', 'A49'];
                 foreach($cells as $cell){
                     $event->sheet->getDelegate()->getStyle($cell)->getFont()->setSize(9);
                     $event->sheet->getDelegate()->getStyle($cell)->getFont()->setName('Times New Roman');
@@ -596,66 +613,67 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('B28:K28')->getFont()->setSize(9);
                 $event->sheet->getDelegate()->getStyle('A25')->getFont()->setSize(10);
                 $event->sheet->getDelegate()->getStyle('A44')->getFont()->setSize(8.7);
-                $event->sheet->getDelegate()->getStyle('A45')->getFont()->setSize(10);
-                $event->sheet->getDelegate()->getStyle('A48')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A46')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('A49')->getFont()->setSize(10);
 
                 // RICH TEXTS
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                // REMOVED SEPT 5 2025
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
 
 
-                if($this->applicant->user->fleet == "FLEET C"){
-                    $rt->createTextRun("Ship Manager")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
-                }
-                else{
-                    $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
-                }
+                // if($this->applicant->user->fleet == "FLEET C"){
+                //     $rt->createTextRun("Ship Manager")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                // }
+                // else{
+                //     $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
+                // }
 
-                $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
-                $event->sheet->getParent()->getActiveSheet()->getCell("A5")->setValue($rt);
+                // $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                // $event->sheet->getParent()->getActiveSheet()->getCell("A5")->setValue($rt);
 
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createText("2.1.2 PHILIPPINE CREW");
-
-
-                if($this->applicant->user->fleet == "FLEET C"){
-                    $rt->createTextRun("(Non Korea Flag Vessel)")->getFont()->setName("Times New Roman")->setSize(10);
-                }
-                else{
-                    $rt->createTextRun("(Non Korea Flag Vessel)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                }
-
-                $event->sheet->getParent()->getActiveSheet()->getCell("A2")->setValue($rt);
-
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                if($this->applicant->rankType == "OFFICER"){
-                    $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
-                }
-                else{
-                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                }
-                $rt->createText(PHP_EOL);
-                $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
-                $event->sheet->getParent()->getActiveSheet()->getCell("E25")->setValue($rt);
-
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
-                $rt->createText(PHP_EOL);
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // $rt->createText("2.1.2 PHILIPPINE CREW");
 
 
+                // if($this->applicant->user->fleet == "FLEET C"){
+                //     $rt->createTextRun("(Non Korea Flag Vessel)")->getFont()->setName("Times New Roman")->setSize(10);
+                // }
+                // else{
+                //     $rt->createTextRun("(Non Korea Flag Vessel)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                // }
 
-                if($this->applicant->user->fleet == "FLEET C"){
-                    $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setName("Times New Roman")->setSize(9);
-                }
-                else{
-                    $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(9);
-                }
+                // $event->sheet->getParent()->getActiveSheet()->getCell("A2")->setValue($rt);
 
-                $event->sheet->getParent()->getActiveSheet()->getCell("H27")->setValue($rt);
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // if($this->applicant->rankType == "OFFICER"){
+                //     $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                //     $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                // }
+                // else{
+                //     $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                //     $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                // }
+                // $rt->createText(PHP_EOL);
+                // $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
+                // $event->sheet->getParent()->getActiveSheet()->getCell("E25")->setValue($rt);
 
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
+                // $rt->createText(PHP_EOL);
+
+
+
+                // if($this->applicant->user->fleet == "FLEET C"){
+                //     $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setName("Times New Roman")->setSize(9);
+                // }
+                // else{
+                //     $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(9);
+                // }
+
+                // $event->sheet->getParent()->getActiveSheet()->getCell("H27")->setValue($rt);
+
+                $event->sheet->getDelegate()->getStyle('A45')->getFont()->setSize(9)->setName('Times New Roman');
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
         ];
@@ -667,7 +685,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path('images/MLC_SEAL.png'));
-        $drawing->setCoordinates("I46");
+        $drawing->setCoordinates("I47");
         $drawing->setHeight(130);
         $drawing->setWidth(130);
         $drawing->setOffsetX(35);
@@ -679,7 +697,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setPath(public_path($sig));
         $drawing3->setOffsetX(2);
         $drawing3->setOffsetY(2);
-        $drawing3->setCoordinates("F46");
+        $drawing3->setCoordinates("F47");
         $drawing3->setResizeProportional(false);
         $drawing3->setHeight(120);
         $drawing3->setWidth(130);
