@@ -567,7 +567,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         [23] //CELLS
                     ],
                     // [40,[29]], [27,[30,37,39,45,47]], [135,[38]], [150, [40]], [105, [44]], [110,[46]], [25,[41,43]], [35,[42]]
-                    [40,[29,30]], [27,[37,39,48]], [135,[38]], [142, [40]], [140, [45]], [110,[47]], [25,[41,43]], [27,[42]], [65,[36]], [50,[44,46]]
+                    [40,[29,30]], [27,[37,39,48]], [135,[38]], [142, [40]], [110,[47]], [25,[41,43]], [27,[42]], [65,[36]], [50,[44,46]]
                 ];
 
                 foreach($rows as $row){
@@ -584,7 +584,15 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE"
                 if(in_array($this->applicant->vessel->id, [6829,7998,7108])){
-                    $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(90);
+                    $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(110);
+                }
+                // PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR
+                elseif(in_array($this->applicant->vessel->id, [8169,6072,5842,5801,5553])){
+                    $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(140);
+                }
+                // ULSAN, ANTWERP
+                elseif(in_array($this->applicant->vessel->id, [4637, 4623])){
+                    $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(160);
                 }
 
                 // PAGE BREAKS

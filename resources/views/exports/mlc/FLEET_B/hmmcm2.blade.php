@@ -402,14 +402,27 @@
 			ㅤemployment agreement to meet its obligations to them.
 			<br style='mso-data-placement:same-cell;' />
 
-			{{-- "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE" --}}
+			{{-- IF NOT "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE" --}}
 			@if(!in_array($data->vessel->id, [6829,7998,7108]))
-			<br style='mso-data-placement:same-cell;' />
-			ㅤ※	Additional clause for Liberia flag
-			<br style='mso-data-placement:same-cell;' />
-			ㅤAfter consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be paid to
-			<br style='mso-data-placement:same-cell;' />
-			ㅤan account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.
+				{{-- PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR --}}
+				@if(in_array($data->vessel->id, [8169,6072,5842,5801,5553]))
+				<br style='mso-data-placement:same-cell;' />
+				ㅤ※	Additional clause for Liberia flag
+				<br style='mso-data-placement:same-cell;' />
+				ㅤAfter consultation with the shipowners’ and seafarers’ organizations, the Administration has determined that seafarers’ wages may be paid to
+				<br style='mso-data-placement:same-cell;' />
+				ㅤan account other than the seafarers’ designated bank account, if this is requested in writing by the seafarer.
+				{{-- ULSAN, ANTWERP --}}
+				@elseif(in_array($data->vessel->id, [4637, 4623]))
+				<br style='mso-data-placement:same-cell;' />
+				ㅤ※	Additional clause for Marshall Islands flag
+				<br style='mso-data-placement:same-cell;' />
+				ㅤThe terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic 
+				<br style='mso-data-placement:same-cell;' />
+				ㅤof the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law 
+				<br style='mso-data-placement:same-cell;' />
+				ㅤand Regulations of the Republic of the Marshall Islands.
+				@endif
 			@endif
 		</td>
 	</tr>
