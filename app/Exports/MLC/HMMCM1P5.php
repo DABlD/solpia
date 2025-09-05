@@ -276,21 +276,13 @@ class HMMCM1P5 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->setTitle($this->title, false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.1);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.4);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
-                // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
-
-                // SET PAGE BREAK PREVIEW
-                $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
-                $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
-                
-                // SET DEFAULT FONT
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getPageSetup()->setScale(98);
 
                 //SET FIRST PAGE NUMBER
                 $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
@@ -300,13 +292,18 @@ class HMMCM1P5 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $line->setPath(public_path('/images/horizontal_line.png'));
                 $line->setHeight(15);
 
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&8Ch2.1 / Page &P');
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-302/2024.08.09/DCN24005');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8STANDARD SEAFARER’S EMPLOYMENT AGREEMENT &R&8Ch2.1 / Page &P ');
+                // $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8표준근로계약서(STANDARD SEAFARER’S EMPLOYMENT AGREEMENT) &R&I&8Ch.2 / Page &P');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-302/2025.09.10/DCN25005');
                 $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
+                
+                // SET DEFAULT FONT
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
 
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
@@ -375,7 +372,8 @@ class HMMCM1P5 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // UNDERLINE
                 $h[8] = [
-                    'A3', 'B9', 'A11:B12', 'A38:A39'
+                    // REMOVED SEP 5 2025
+                    // 'A3', 'B9', 'A11:B12', 'A38:A39'
                 ];
 
                 // JUSTIFY
@@ -515,20 +513,20 @@ class HMMCM1P5 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                         27, //ROW HEIGHT
                         1,4 //START ROW, END ROW
                     ],
-                    [25,5,31],
+                    [26,5,31],
                     [18,44,46]
                 ];
 
                 $rows2 = [
                     [
                         25,
-                        [27,32,33,34,36,38,39,40,42]
+                        [32,34,36,38,39,40]
                     ],
                     [
-                        21,
+                        25,
                         [32,34,36,38,40]
                     ],
-                    [80,[20]],[40,[26]],[145,[35,37]],[115,[41]],[70,[43]]
+                    [80,[20]],[40,[26,27]],[145,[35,37]],[140,[41]],[70,[43]],[65,[33,42]]
                 ];
 
                 foreach($rows as $row){
@@ -544,7 +542,7 @@ class HMMCM1P5 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // PAGE BREAKS
-                $rows = [28];
+                $rows = [];
                 foreach($rows as $row){
                     $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 }
@@ -586,31 +584,32 @@ class HMMCM1P5 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getStyle($cell)->getFont()->setName('Times New Roman');
                 }
 
+                // REMOVED SEP 5, 2025
                 // RICH TEXTS
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
-                $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
-                $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
-                $event->sheet->getParent()->getActiveSheet()->getCell("A5")->setValue($rt);
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // $rt->createTextRun("1. Seafarer/Shipowner/")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                // $rt->createTextRun("Ship Manager")->getFont()->setUnderline(true)->setBold(true)->setName("Times New Roman")->setSize(11);
+                // $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
+                // $event->sheet->getParent()->getActiveSheet()->getCell("A5")->setValue($rt);
 
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                if($this->applicant->rankType == "OFFICER"){
-                    $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
-                }
-                else{
-                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                }
-                $rt->createText(PHP_EOL);
-                $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
-                $event->sheet->getParent()->getActiveSheet()->getCell("C22")->setValue($rt);
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // if($this->applicant->rankType == "OFFICER"){
+                //     $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                //     $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                // }
+                // else{
+                //     $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                //     $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                // }
+                // $rt->createText(PHP_EOL);
+                // $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
+                // $event->sheet->getParent()->getActiveSheet()->getCell("C22")->setValue($rt);
 
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
-                $rt->createText(PHP_EOL);
-                $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setName("Times New Roman")->setSize(9);
-                $event->sheet->getParent()->getActiveSheet()->getCell("E24")->setValue($rt);
+                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                // $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
+                // $rt->createText(PHP_EOL);
+                // $rt->createTextRun("(Contract Completion Bonus)")->getFont()->setName("Times New Roman")->setSize(9);
+                // $event->sheet->getParent()->getActiveSheet()->getCell("E24")->setValue($rt);
             },
         ];
     }

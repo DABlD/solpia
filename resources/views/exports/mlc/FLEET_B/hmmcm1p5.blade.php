@@ -1,11 +1,11 @@
 <table>
 	<tr>
 		<td>CHAPTER  2</td>
-		<td colspan="7">외국해원 표준근로계약서</td>
+		<td colspan="7">Seafarer's employment agreement for Foreign Crew</td>
 	</tr>
 
 	<tr>
-		<td colspan="8">2.1  PHILIPPINE CREW(Korea Flag Vessel)</td> {{-- RICH TEXTED --}}
+		<td colspan="8">2.1  NON KOREAN CREW(Korea Flag Vessel)</td> {{-- RICH TEXTED --}}
 	</tr>
 
 	<tr>
@@ -218,18 +218,20 @@
 	<tr>
 		<td>Payday</td>
 		<td colspan="7">
-			All seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid
+			All seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be entitled
 			<br style='mso-data-placement:same-cell;' />
-			monthly wages not later than 15 days of the succeeding month from the date of commencement of the agreement until
+			to payment of their net wages at the end of each calendar month until the date of arrival at point of hire upon
 			<br style='mso-data-placement:same-cell;' />
-			the date of arrival at point of hire upon termination of their employment.
+			termination of of their employment.
 		</td>
 	</tr>
 
 	<tr>
 		<td>Payment methods</td>
 		<td colspan="7">
-			Wages should be paid directly to the seafarers` designated bank accounts unless they request otherwise in writing. 
+			Wages should be paid directly to the seafarers on board or remitted to their designated bank accounts unless they
+			<br style='mso-data-placement:same-cell;' />
+			request otherwise in writing.
 			<br style='mso-data-placement:same-cell;' />
 			Some allotments should be remitted in due time and directly to the person or persons nominated by the seafarers.
 		</td>
@@ -272,9 +274,14 @@
 
 	<tr>
 		<td colspan="8">
-			ㅤThe shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit, invalidity benefit, survivors'
+			ㅤ※ㅤPhilippine Crew : The shipowner provides medical care, sickness benefit, unemployment benefit, employment injury benefit,
 			<br style='mso-data-placement:same-cell;' />
-			ㅤbenefit, SSS, PhilHealth, and Pag-IBIG to the seafarer.
+			ㅤinvalidity benefit, survivors' benefit, SSS, PhilHealth, and Pag-IBIG to the seafarer.
+			<br style='mso-data-placement:same-cell;' />
+			<br style='mso-data-placement:same-cell;' />
+			ㅤ※ㅤMyanmar/Indonesian Crew : The shipowner provides medical care, sickness benefit, unemployment benefit, employment injury 
+			<br style='mso-data-placement:same-cell;' />
+			ㅤbenefit, invalidity benefit, and survivors' benefit to the seafarer.
 		</td>
 	</tr>
 
@@ -369,21 +376,25 @@
 			<br style='mso-data-placement:same-cell;' />
 			ㅤrobbery against ships.
 			<br style='mso-data-placement:same-cell;' />
-			ㅤ※	Additional clause for Marshall Islands flag
 			<br style='mso-data-placement:same-cell;' />
-			ㅤThe terms and conditions laid down herein shall be subject to the applicable provisions of the Maritime Law and Regulations of the Republic
+			ㅤ※  As per 2022 amendments to MLC 2006, Standard A1.4.5(c)(vi), seafarers, prior to or in the process of engagement, shall be informed
 			<br style='mso-data-placement:same-cell;' />
-			ㅤof the Marshall Islands and any dispute as to the terms and conditions of this contract shall be resolved in accordance with the Maritime Law
+			ㅤabout their rights under the seafarers’ recruitment and placement services’ system of protection, to compensate seafarers for monetary loss
 			<br style='mso-data-placement:same-cell;' />
-			ㅤand Regulations of the Republic of the Marshall Islands.
+			ㅤthat they may incur as a result of the failure of the recruitment and placement service or the relevant shipowner under the seafarers’
+			<br style='mso-data-placement:same-cell;' />
+			ㅤemployment agreement to meet its obligations to them.
+			<br style='mso-data-placement:same-cell;' />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="8">
-			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them
+			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them 
 			<br style='mso-data-placement:same-cell;' />
 			are retained by the each party and the seafarer has opportunity to review on the terms and condition and voluntarily accept them.
+			<br style='mso-data-placement:same-cell;' />
+			and condition and voluntarily accept them.
 		</td>
 	</tr>
 
