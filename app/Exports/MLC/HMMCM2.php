@@ -309,6 +309,12 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-302/2025.09.10/DCN25005');
                 $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
 
+
+                // PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA
+                if(in_array($this->applicant->vessel->id, [7517,7141,9274,7917])){
+                    $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('');
+                }
+
                 // HEADERS FOOTERS
                 // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
                 // $drawing->setPath(public_path('images/horizontal_line.png'));
@@ -587,7 +593,8 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(110);
                 }
                 // PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR
-                elseif(in_array($this->applicant->vessel->id, [8169,6072,5842,5801,5553])){
+                // PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA
+                elseif(in_array($this->applicant->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917])){
                     $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(140);
                 }
                 // ULSAN, ANTWERP
