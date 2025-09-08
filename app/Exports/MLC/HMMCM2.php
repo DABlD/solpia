@@ -599,7 +599,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR
                 // PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA
                 elseif(in_array($this->applicant->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917])){
-                    $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(140);
+                    $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(145);
                 }
                 // ULSAN, ANTWERP
                 elseif(in_array($this->applicant->vessel->id, [4637, 4623])){
