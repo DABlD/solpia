@@ -448,7 +448,7 @@
 	<tr>
 		<td colspan="3">(Seafarer)</td>
 		<td colspan="2"></td>
-		<td colspan="5">(For and on behalf of the Shipowner(Beneficial)</td>
+		<td colspan="5">(For and on behalf of the Shipowner(Beneficial))</td>
 		<td></td>
 	</tr>
 
