@@ -222,7 +222,7 @@
 			<br style='mso-data-placement:same-cell;' />
 			to payment of their net wages at the end of each calendar month until the date of arrival at point of hire upon
 			<br style='mso-data-placement:same-cell;' />
-			termination of of their employment.
+			termination of their employment.
 		</td>
 	</tr>
 
