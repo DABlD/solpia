@@ -376,6 +376,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
+                    'A45',
                     'A48:K48'
                 ];
 
