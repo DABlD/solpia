@@ -315,9 +315,9 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
 
                 // PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA
-                if(in_array($this->applicant->vessel->id, [7517,7141,9274,7917])){
-                    $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('');
-                }
+                // if(in_array($this->applicant->vessel->id, [7517,7141,9274,7917])){
+                //     $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('');
+                // }
 
                 // HEADERS FOOTERS
                 // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
@@ -598,8 +598,9 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(110);
                 }
                 // PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR
-                // PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA
-                elseif(in_array($this->applicant->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917])){
+                // PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA // REMOVED ON SEP 8 ACCORDING TO SIR GWAK PRINCIPAL REQUEST TO UNIFY
+                // elseif(in_array($this->applicant->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917])){
+                elseif(in_array($this->applicant->vessel->id, [8169,6072,5842,5801,5553])){
                     $event->sheet->getDelegate()->getRowDimension(45)->setRowHeight(145);
                 }
                 // ULSAN, ANTWERP
