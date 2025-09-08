@@ -668,10 +668,10 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
                 if($this->applicant->rankType == "OFFICER"){
                     $rt->createTextRun("(Fixed)")->getFont()->setName("Times New Roman")->setSize(10);
-                    $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                    $rt->createTextRun("Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
                 }
                 else{
-                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                    $rt->createTextRun("Fixed")->getFont()->setName("Times New Roman")->setSize(10);
                     $rt->createTextRun("(Guaranteed)")->getFont()->setName("Times New Roman")->setSize(10);
                 }
                 $rt->createText(PHP_EOL);

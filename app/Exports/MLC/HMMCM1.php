@@ -597,18 +597,18 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // $rt->createTextRun("/Agent/Ship")->getFont()->setBold(true)->setName("Times New Roman")->setSize(11);
                 // $event->sheet->getParent()->getActiveSheet()->getCell("A3")->setValue($rt);
 
-                // $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                // if($this->applicant->rankType == "OFFICER"){
-                //     $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                //     $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
-                // }
-                // else{
-                //     $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
-                //     $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
-                // }
-                // $rt->createText(PHP_EOL);
-                // $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
-                // $event->sheet->getParent()->getActiveSheet()->getCell("C20")->setValue($rt);
+                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
+                if($this->applicant->rankType == "OFFICER"){
+                    $rt->createTextRun("(Fixed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                    $rt->createTextRun("/Guaranteed")->getFont()->setName("Times New Roman")->setSize(10);
+                }
+                else{
+                    $rt->createTextRun("Fixed/")->getFont()->setName("Times New Roman")->setSize(10);
+                    $rt->createTextRun("(Guaranteed)")->getFont()->setUnderline(true)->setName("Times New Roman")->setSize(10);
+                }
+                $rt->createText(PHP_EOL);
+                $rt->createTextRun("Overtime Allowance")->getFont()->setName("Times New Roman")->setSize(10);
+                $event->sheet->getParent()->getActiveSheet()->getCell("C20")->setValue($rt);
 
                 $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
                 $rt->createTextRun("Provident Fund/")->getFont()->setName("Times New Roman")->setSize(10);
