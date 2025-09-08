@@ -70,34 +70,36 @@
 			});
 		@endif
 
-		const img = document.getElementById('avatar');
+		@if(in_array(Auth::user()->id, [23,5963]))
+			const img = document.getElementById('avatar');
 
-        img.addEventListener('click', () => {
-            if (img.requestFullscreen) {
-                document.getElementById("user-avatar").requestFullscreen();
+	        img.addEventListener('click', () => {
+	            if (img.requestFullscreen) {
+	                document.getElementById("user-avatar").requestFullscreen();
 
-                let confettiCanvas = document.getElementById("confettiCanvas");
-                let myConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: true });
+	                let confettiCanvas = document.getElementById("confettiCanvas");
+	                let myConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: true });
 
 
 
-                for (let i = 1; i < 10; i++) {
-                    setTimeout(() => {
-                    	myConfetti({
-                    		particleCount: 500,
-                    		spread: 360,
-                    		origin: { x:Math.random(), y: Math.random() }
-                    	});
-                    }, i * 500);
-                }
+	                for (let i = 1; i < 10; i++) {
+	                    setTimeout(() => {
+	                    	myConfetti({
+	                    		particleCount: 500,
+	                    		spread: 360,
+	                    		origin: { x:Math.random(), y: Math.random() }
+	                    	});
+	                    }, i * 500);
+	                }
 
-				for (let i = 1; i < 12; i++) {
-				    setTimeout(() => {
-				    	launchBalloons();
-				    }, i * 700);
-				}
-            }
-        });
+					for (let i = 1; i < 12; i++) {
+					    setTimeout(() => {
+					    	launchBalloons();
+					    }, i * 700);
+					}
+	            }
+	        });
+        @endif
 
 		function launchBalloons() {
 			for (let i = 0; i < 10; i++) {
