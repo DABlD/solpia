@@ -234,9 +234,11 @@
 	{{ $doc("WATCHKEEPING", "Watch-keeping Cert.", 'lc') }}
 	{{ $doc("MEDICAL CARE - MECA", "Medical Care", 'lc') }}
 	{{-- {{ $doc("BOOKLET", "Flagged Seaman’s Book", 'flag') }} --}}
-	{{ $doc("LICENSE", "Flag Endorsement", 'flag') }}
-	{{ $doc("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", "- Survival Craft & Rescue Boat", 'lc') }}
-	{{ $doc("CONSOLIDATED MARPOL", "Maritime Pollution Prevention", 'lc') }}
+	{{ $doc("N/A", "Flag Endorsement", 'flag') }}
+	{{ $doc("LICENSE", " - Endorsement", 'flag') }}
+	{{ $doc("WATCHKEEPING", " - Watch-keeping", 'lc') }}
+	{{ $doc("PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB", " - Survival Craft & Rescue Boat", 'lc') }}
+	{{ $doc("CONSOLIDATED MARPOL", " - Maritime Pollution Prevention", 'lc') }}
 	{{ $doc("BASIC TRAINING - BT", "Basic Safety Course", 'lc') }}
 	{{ $doc("BASIC TRAINING - BT", "Advanced Safety Course", 'lc') }} // ASK WHAT ADVANCED TRAINING
 	{{ $doc("ADVANCE FIRE FIGHTING - AFF", " - Fire Fighting", 'lc') }}

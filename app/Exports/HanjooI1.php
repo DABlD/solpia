@@ -346,9 +346,9 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // VC
                 $h[7] = [
                     'A2:G3',
-                    'A5:G25',
-                    'A27:E28',
-                    'G27:G28'
+                    'A5:G27',
+                    'A29:E31',
+                    'G29:G30'
                 ];
 
                 // UNDERLINE
@@ -365,7 +365,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHRINK TO FIT
                 $h['stf'] = [
                     'B3', 'G3',
-                    'A6:D25'
+                    'A6:D27'
                 ];
 
                 foreach($h as $key => $value) {
@@ -391,7 +391,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $fills[0] = [
                     'A3', 'D3', 'F3',
                     'A5:G5',
-                    'A27:A28'
+                    'A29:A30'
                 ];
 
                 $fills[1] = [
@@ -409,8 +409,8 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
                     'A3:G3',
-                    'A5:G25',
-                    'A27:G28'
+                    'A5:G27',
+                    'A29:G30'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -443,12 +443,12 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // LRB
                 $cells[8] = array_merge([
-                    'F27', 'F28'
+                    'F29', 'F30'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
-                    'E27', 'E28'
+                    'E29', 'E30'
                 ]);
 
                 // TRB
@@ -474,8 +474,8 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // DOUBLE BORDER
                 $cells[15] = array_merge([
                     'A3:G3',
-                    'A5:G25',
-                    'A27:G28'
+                    'A5:G27',
+                    'A29:G30'
                 ]);
                 
                 foreach($cells as $key => $value){
@@ -500,7 +500,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $rows = [
                     [
                         22, //ROW HEIGHT
-                        1,25 //START ROW, END ROW
+                        1,27 //START ROW, END ROW
                     ],
                 ];
 
@@ -511,11 +511,11 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     ],
                     [
                         10,
-                        [4,26]
+                        [4,28]
                     ],
                     [
                         30,
-                        [27,28]
+                        [29,30]
                     ]
                 ];
 
@@ -565,7 +565,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         // $drawing2->setWidth(170);
         $drawing2->setOffsetX(30);
         $drawing2->setOffsetY(-5);
-        $drawing2->setCoordinates('E28');
+        $drawing2->setCoordinates('E30');
 
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setPath(public_path('images/celine_sig.png'));
@@ -573,7 +573,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         // $drawing3->setWidth(170);
         $drawing3->setOffsetX(45);
         $drawing3->setOffsetY(-7);
-        $drawing3->setCoordinates('E27');
+        $drawing3->setCoordinates('E29');
 
         return [$drawing, $drawing2, $drawing3];
     }
