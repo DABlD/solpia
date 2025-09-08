@@ -392,7 +392,7 @@
 		<td colspan="8">
 			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them 
 			<br style='mso-data-placement:same-cell;' />
-			are retained by the each party and the seafarer has opportunity to review on the terms and condition and voluntarily accept them.
+			are retained by the each party and the seafarer was given sufficient time to review and opportunity to seek advice on the terms
 			<br style='mso-data-placement:same-cell;' />
 			and condition and voluntarily accept them.
 		</td>
