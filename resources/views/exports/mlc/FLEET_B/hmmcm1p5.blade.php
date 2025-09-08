@@ -256,14 +256,14 @@
 			(USD/Month)
 		</td>
 		<td colspan="6">
-			Basic Wage / 30 days X 9 days
+			Basic Wage / 30 days X ( 9 ) days
 		</td>
 	</tr>
 
 	<tr>
 		<td>The number of days</td>
 		<td colspan="7">
-			ㅤThe number of days of paid leave shall be 9 days per 1 month of continuous service.
+			ㅤThe number of days of paid leave shall be ( 9 ) days per 1 month of continuous service.
 		</td>
 	</tr>
 
