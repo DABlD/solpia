@@ -405,8 +405,8 @@
 			{{-- IF NOT "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE" --}}
 			@if(!in_array($data->vessel->id, [6829,7998,7108]))
 				{{-- PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR --}}
-				{{-- PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA --}} {{-- REMOVED ON SEP 8 ACCORDING TO SIR GWAK PRINCIPAL REQUEST TO UNIFY --}}
-				@if(in_array($data->vessel->id, [8169,6072,5842,5801,5553]))
+				{{-- PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA --}}
+				@if(in_array($data->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917]))
 				<br style='mso-data-placement:same-cell;' />
 				ㅤ※	Additional clause for Liberia flag
 				<br style='mso-data-placement:same-cell;' />
