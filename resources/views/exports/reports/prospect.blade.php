@@ -90,8 +90,8 @@
 					$failed++;
 				}
 
-				if($candidate['status'] == "REJECTED"){
-					$failed++;
+				if($candidate['status'] == "BACK OUT"){
+					$backout++;
 				}
 			}
 
