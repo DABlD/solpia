@@ -611,7 +611,7 @@
 
                     statusString = "";
 
-                    ["AVAILABLE", "ON PROCESS", "PASSED", "FAILED"].forEach(status => {
+                    ["AVAILABLE", "ON PROCESS", "PASSED", "FAILED", "BACK OUT"].forEach(status => {
                         statusString += `
                             <option value="${status}">${status}</option>
                         `;
