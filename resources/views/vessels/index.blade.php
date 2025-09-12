@@ -5567,7 +5567,7 @@
         function exportOnBoard(id, name){
             let data = {};
             data.id = id;
-            data.filename = name.substring(4) + " - Onboard";
+            data.filename = name.replaceAll("/", "") + " - Onboard";
             data.fleet = "{{ auth()->user()->fleet }}";
 
             @if(auth()->user()->fleet == null)
