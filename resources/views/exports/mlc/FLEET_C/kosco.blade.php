@@ -209,7 +209,7 @@
 		<td style="{{ $center }}">Place</td>
 		<td colspan="3">MANILA, PHILIPPINES</td>
 		<td style="{{ $center }}">Date</td>
-		<td colspan="3" style="{{ $center }}">{{ now()->parse($data->effective_date)->subDays(5)->format('d-M-Y') }}</td>
+		<td colspan="3" style="{{ $center }}">{{ now()->parse()->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
