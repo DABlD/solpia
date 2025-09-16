@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Prospect, Candidate, Rank};
+use App\Models\{Prospect, Candidate, Rank, Requirement};
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Reports\Prospect as ProspectReport;
@@ -255,21 +255,17 @@ class ProspectController extends Controller
             }
         }
 
-        // unset($temp1[null]);
-        // unset($temp2[null]);
-        // unset($temp3[null]);
-        // unset($temp4[null]);
-        // unset($temp5[null]);
-
-        // $nsa = array_merge($allSources, $temp1);
-        // $nua = array_merge($allSources, $temp2);
-        // $da = array_merge($allSources, $temp4);
-        // $ua = array_merge($allSources, $temp5);
-        // $bo = array_merge($allSources, $temp3);
-
         $temp6["Percent"] = ($temp6["On time"] / array_sum($temp6)) * 100;
         $temp7["Percent"] = ($temp7["On time"] / array_sum($temp7)) * 100;
         $temp8["Percent"] = ($temp8["On time"] / array_sum($temp8)) * 100;
+
+        // FOR REQUIREMENT/REQUESTS
+
+        $temp9 = [];
+        $requirements = Requirement::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")->get();
+        foreach($requirements as $requirement){
+            isset($temp9[$rankList[$requirement->rank]]) ? $temp9[$rankList[$requirement->rank]]++ : ($temp9[$rankList[$requirement->rank]] = 1);
+        }
 
         dd(
             ["Total number of recruited crew", $applicants],
@@ -278,6 +274,9 @@ class ProspectController extends Controller
             ["Total of disapproved (Rejected status with DISAPPROVED remark)", $temp4],
             ["Total of unfit (Rejected status with UNFIT remark)", $temp5],
             ["Total of backed out/back out (Back out/Backed out remarks)", $temp3],
+            '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
+            'Requested Crew',
+            $temp9,
             '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
             'Timely Submissions',
             ["All", [
