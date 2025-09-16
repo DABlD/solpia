@@ -183,16 +183,27 @@ class ProspectController extends Controller
         // FOR CANDIDATES
         $candidates = Candidate::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")->get();
 
-        $temp1 = [];
-        $temp2 = [];
-        $temp3 = [];
+        $temp1 = []; //SUCCESSFUL APPLICANT
+        $temp2 = []; //UNSUCCESSFUL APPLICANT
+        $temp3 = []; //REJECTED
+        $temp4 = []; //DISAPPROVED BY PRINCIPAL
+        $temp5 = []; //UNFIT PEME
 
         foreach($candidates as $candidate){
             if(in_array($candidate->status, ['FOR APPROVAL', 'FOR MEDICAL', 'PASSED', 'ON BOARD'])){
                 isset($temp1[$candidate->prospect->source]) ? $temp1[$candidate->prospect->source]++ : ($temp1[$candidate->prospect->source] = 1);
             }
             elseif($candidate->status == "REJECTED"){
-                isset($temp2[$candidate->prospect->source]) ? $temp2[$candidate->prospect->source]++ : ($temp2[$candidate->prospect->source] = 1);
+                $remark = strtoupper($candidate->remarks);
+                if(str_contains($remark, 'DECLINE') || str_contains($remark, 'WITHDRAW') || str_contains($remark, 'FAILED')){
+                    isset($temp2[$candidate->prospect->source]) ? $temp2[$candidate->prospect->source]++ : ($temp2[$candidate->prospect->source] = 1);
+                }
+                elseif(str_contains($remark, "DISAPPROVED")){
+                    isset($temp4[$candidate->prospect->source]) ? $temp4[$candidate->prospect->source]++ : ($temp4[$candidate->prospect->source] = 1);
+                }
+                elseif(str_contains($remark, "UNFIT")){
+                    isset($temp5[$candidate->prospect->source]) ? $temp5[$candidate->prospect->source]++ : ($temp5[$candidate->prospect->source] = 1);
+                }
             }
 
             if(str_contains($candidate->prospect->remarks, "BACKED OUT") || 
@@ -207,12 +218,23 @@ class ProspectController extends Controller
         unset($temp1[null]);
         unset($temp2[null]);
         unset($temp3[null]);
+        unset($temp4[null]);
+        unset($temp5[null]);
 
         $nsa = array_merge($allSources, $temp1);
         $nua = array_merge($allSources, $temp2);
+        $da = array_merge($allSources, $temp4);
+        $ua = array_merge($allSources, $temp5);
         $bo = array_merge($allSources, $temp3);
 
-        dd(["Total number of recruited crew", $applicants], ["Total of successfull applicants (For approval, For Medical, Passed, On board)", $nsa], ["Total of unsuccessful", $nua], ["Total of backed out/back out", $bo]);
+        dd(
+            ["Total number of recruited crew", $applicants],
+            ["Total of successful applicants (For approval, For Medical, Passed, On board status)", $nsa],
+            ["Total of unsuccessful (Rejected status with DECLINE, WITHDRAW, FAILED remark)", $nua],
+            ["Total of disapproved (Rejected status with DISAPPROVED remark)", $da],
+            ["Total of unfit (Rejected status with UNFIT remark)", $ua],
+            ["Total of backed out/back out (Back out/Backed out remarks)", $bo]
+        );
 
         // $fileName = "$from - $to Statistic Report";
         // return Excel::download(new StatisticReport($applicants, $candidates), "$fileName.xlsx");
