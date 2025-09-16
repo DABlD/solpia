@@ -56,6 +56,7 @@
 		<td style="{{ $c }}">Name</td>
 		<td style="{{ $c }}">Rank</td>
 		<td style="{{ $c }}">Vessel</td>
+		<td style="{{ $c }}">Joining Date</td>
 		<td style="{{ $c }}">Status</td>
 	</tr>
 
@@ -83,6 +84,7 @@
 		<td style="{{ $c }}">{{ isset($candidates[0]) ? $candidates[0]->prospect->name : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[0]) ? $candidates[0]->prospect->rank : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[0]) ? $candidates[0]->vessel->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[0]) ? $candidates[0]->requirement->joining_date->format('F j, Y') : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[0]) ? $candidates[0]->status : "" }}</td>
 	</tr>
 
@@ -110,6 +112,7 @@
 		<td style="{{ $c }}">{{ isset($candidates[1]) ? $candidates[1]->prospect->name : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[1]) ? $candidates[1]->prospect->rank : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[1]) ? $candidates[1]->vessel->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[1]) ? $candidates[1]->requirement->joining_date->format('F j, Y') : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[1]) ? $candidates[1]->status : "" }}</td>
 	</tr>
 
@@ -137,6 +140,7 @@
 		<td style="{{ $c }}">{{ isset($candidates[2]) ? $candidates[2]->prospect->name : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[2]) ? $candidates[2]->prospect->rank : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[2]) ? $candidates[2]->vessel->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[2]) ? $candidates[2]->requirement->joining_date->format('F j, Y') : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[2]) ? $candidates[2]->status : "" }}</td>
 	</tr>
 
@@ -164,6 +168,7 @@
 		<td style="{{ $c }}">{{ isset($candidates[3]) ? $candidates[3]->prospect->name : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[3]) ? $candidates[3]->prospect->rank : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[3]) ? $candidates[3]->vessel->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[4]) ? $candidates[4]->requirement->joining_date->format('F j, Y') : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[3]) ? $candidates[3]->status : "" }}</td>
 	</tr>
 
@@ -191,6 +196,7 @@
 		<td style="{{ $c }}">{{ isset($candidates[4]) ? $candidates[4]->prospect->name : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[4]) ? $candidates[4]->prospect->rank : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[4]) ? $candidates[4]->vessel->name : "" }}</td>
+		<td style="{{ $c }}">{{ isset($candidates[5]) ? $candidates[5]->requirement->joining_date->format('F j, Y') : "" }}</td>
 		<td style="{{ $c }}">{{ isset($candidates[4]) ? $candidates[4]->status : "" }}</td>
 	</tr>
 
@@ -219,6 +225,7 @@
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->prospect->name : "" }}</td>
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->prospect->rank : "" }}</td>
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->vessel->name : "" }}</td>
+			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->requirement->joining_date->format('F j, Y') : "" }}</td>
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->status : "" }}</td>
 		</tr>
 	@endfor
