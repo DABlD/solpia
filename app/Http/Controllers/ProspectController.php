@@ -189,6 +189,10 @@ class ProspectController extends Controller
         $temp4 = []; //DISAPPROVED BY PRINCIPAL
         $temp5 = []; //UNFIT PEME
 
+        $temp6 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION TOP 4
+        $temp7 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION JUNIOR OFFICERS
+        $temp8 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION RATINGS
+
         foreach($candidates as $candidate){
             if(in_array($candidate->status, ['FOR APPROVAL', 'FOR MEDICAL', 'PASSED', 'ON BOARD'])){
                 isset($temp1[$candidate->prospect->source]) ? $temp1[$candidate->prospect->source]++ : ($temp1[$candidate->prospect->source] = 1);
@@ -213,6 +217,24 @@ class ProspectController extends Controller
 
                 isset($temp3[$candidate->prospect->source]) ? $temp3[$candidate->prospect->source]++ : ($temp3[$candidate->prospect->source] = 1);
             }
+
+            // for timely submission
+            $deadline = $candidate->requirement->deadline ?? $candidate->requirement->joining_date;
+            $key = "No";
+            if($candidate->requirement->date_provided < $deadline){
+                $key = "On time";
+            }
+
+            if(in_array($candidate->requirement->rank, [1,2,5,6])){
+                $temp6[$key]++;
+            }
+            elseif($candidate->requirement->rank2->type == "OFFICER"){
+                $temp7[$key]++;
+            }
+            else{
+                $temp8[$key]++;
+            }
+
         }
 
         unset($temp1[null]);
@@ -227,13 +249,27 @@ class ProspectController extends Controller
         $ua = array_merge($allSources, $temp5);
         $bo = array_merge($allSources, $temp3);
 
+        $temp6["Percent"] = ($temp6["On time"] / array_sum($temp6)) * 100;
+        $temp7["Percent"] = ($temp7["On time"] / array_sum($temp7)) * 100;
+        $temp8["Percent"] = ($temp8["On time"] / array_sum($temp8)) * 100;
+
         dd(
             ["Total number of recruited crew", $applicants],
             ["Total of successful applicants (For approval, For Medical, Passed, On board status)", $nsa],
             ["Total of unsuccessful (Rejected status with DECLINE, WITHDRAW, FAILED remark)", $nua],
             ["Total of disapproved (Rejected status with DISAPPROVED remark)", $da],
             ["Total of unfit (Rejected status with UNFIT remark)", $ua],
-            ["Total of backed out/back out (Back out/Backed out remarks)", $bo]
+            ["Total of backed out/back out (Back out/Backed out remarks)", $bo],
+            '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
+            'Timely Submissions',
+            ["All", [
+                        "On time" => $temp6['On time'] + $temp7['On time'] + $temp8['On time'],
+                        "No" => $temp6['No'] + $temp7['No'] + $temp8['No'],
+                        "Percent" => (($temp6['On time'] + $temp7['On time'] + $temp8['On time']) / ($temp6['On time'] + $temp7['On time'] + $temp8['On time'] + $temp6['No'] + $temp7['No'] + $temp8['No'])) * 100
+                    ]],
+            ["Top 4", $temp6],
+            ["Junior Officers", $temp7],
+            ["Ratings", $temp8]
         );
 
         // $fileName = "$from - $to Statistic Report";
