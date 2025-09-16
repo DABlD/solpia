@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Prospect, Candidate};
+use App\Models\{Prospect, Candidate, Rank};
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Reports\Prospect as ProspectReport;
@@ -163,11 +163,16 @@ class ProspectController extends Controller
     }
 
     public function statisticsReport($from, $to){
-        $results = Prospect::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")
-                        ->select('source', DB::raw('COUNT(*) as total'))
-                        ->groupBy('source')
-                        ->pluck('total', 'source')
-                        ->toArray();
+        $results = Prospect::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")->select('source', 'rank')->get();
+                        // ->select('source', DB::raw('COUNT(*) as total'))
+                        // ->groupBy('source')
+                        // ->pluck('total', 'source')
+                        // ->toArray();
+
+        $rankList = Rank::pluck('name', 'id');
+
+        // MSTR,C/O,2/O,3/O,C/E,1AE,2AE,3AE,ELECT,BSN,PMN,AB,OS,OLR1,OLR,WPR,CCK,2CK,MSM,DCDT,ECDT,DHAND,FTR,GE,RMAN
+        $ranks = [1,2,3,4,5,6,7,8,22,9,30,10,11,15,16,17,24,26,27,14,19,34,21,57,31];
 
         $allSources = [
             "Kalaw" => 0,
@@ -177,8 +182,11 @@ class ProspectController extends Controller
             "Job Fair" => 0,
         ];
 
-        unset($results[null]);
-        $applicants = array_merge($allSources, $results);
+        // unset($results[null]);
+        $applicants = [];
+        foreach($results as $result){
+            isset($applicants[$result->rank][$result->source]) ? $applicants[$result->rank][$result->source]++ : ($applicants[$result->rank][$result->source] = 1);
+        }
 
         // FOR CANDIDATES
         $candidates = Candidate::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")->get();
@@ -189,24 +197,35 @@ class ProspectController extends Controller
         $temp4 = []; //DISAPPROVED BY PRINCIPAL
         $temp5 = []; //UNFIT PEME
 
+        foreach ($ranks as $rank) {
+            $temp1[$rankList[$rank]] = $allSources;
+            $temp2[$rankList[$rank]] = $allSources;
+            $temp3[$rankList[$rank]] = $allSources;
+            $temp4[$rankList[$rank]] = $allSources;
+            $temp5[$rankList[$rank]] = $allSources;
+        }
+
         $temp6 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION TOP 4
         $temp7 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION JUNIOR OFFICERS
         $temp8 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION RATINGS
 
         foreach($candidates as $candidate){
+            $source = $candidate->prospect->source;
+            $rank = $rankList[$candidate->requirement->rank];
+
             if(in_array($candidate->status, ['FOR APPROVAL', 'FOR MEDICAL', 'PASSED', 'ON BOARD'])){
-                isset($temp1[$candidate->prospect->source]) ? $temp1[$candidate->prospect->source]++ : ($temp1[$candidate->prospect->source] = 1);
+                isset($temp1[$rank][$source]) ? $temp1[$rank][$source]++ : ($temp1[$rank][$source] = 1);
             }
             elseif($candidate->status == "REJECTED"){
                 $remark = strtoupper($candidate->remarks);
                 if(str_contains($remark, 'DECLINE') || str_contains($remark, 'WITHDRAW') || str_contains($remark, 'FAILED')){
-                    isset($temp2[$candidate->prospect->source]) ? $temp2[$candidate->prospect->source]++ : ($temp2[$candidate->prospect->source] = 1);
+                    isset($temp2[$rank][$source]) ? $temp2[$rank][$source]++ : ($temp2[$rank][$source] = 1);
                 }
                 elseif(str_contains($remark, "DISAPPROVED")){
-                    isset($temp4[$candidate->prospect->source]) ? $temp4[$candidate->prospect->source]++ : ($temp4[$candidate->prospect->source] = 1);
+                    isset($temp4[$rank][$source]) ? $temp4[$rank][$source]++ : ($temp4[$rank][$source] = 1);
                 }
                 elseif(str_contains($remark, "UNFIT")){
-                    isset($temp5[$candidate->prospect->source]) ? $temp5[$candidate->prospect->source]++ : ($temp5[$candidate->prospect->source] = 1);
+                    isset($temp5[$rank][$source]) ? $temp5[$rank][$source]++ : ($temp5[$rank][$source] = 1);
                 }
             }
 
@@ -215,7 +234,7 @@ class ProspectController extends Controller
                 str_contains($candidate->remarks, "BACKED OUT") || 
                 str_contains($candidate->remarks, "BACK OUT")){
 
-                isset($temp3[$candidate->prospect->source]) ? $temp3[$candidate->prospect->source]++ : ($temp3[$candidate->prospect->source] = 1);
+                isset($temp3[$rank][$source]) ? $temp3[$rank][$source]++ : ($temp3[$rank][$source] = 1);
             }
 
             // for timely submission
@@ -234,20 +253,19 @@ class ProspectController extends Controller
             else{
                 $temp8[$key]++;
             }
-
         }
 
-        unset($temp1[null]);
-        unset($temp2[null]);
-        unset($temp3[null]);
-        unset($temp4[null]);
-        unset($temp5[null]);
+        // unset($temp1[null]);
+        // unset($temp2[null]);
+        // unset($temp3[null]);
+        // unset($temp4[null]);
+        // unset($temp5[null]);
 
-        $nsa = array_merge($allSources, $temp1);
-        $nua = array_merge($allSources, $temp2);
-        $da = array_merge($allSources, $temp4);
-        $ua = array_merge($allSources, $temp5);
-        $bo = array_merge($allSources, $temp3);
+        // $nsa = array_merge($allSources, $temp1);
+        // $nua = array_merge($allSources, $temp2);
+        // $da = array_merge($allSources, $temp4);
+        // $ua = array_merge($allSources, $temp5);
+        // $bo = array_merge($allSources, $temp3);
 
         $temp6["Percent"] = ($temp6["On time"] / array_sum($temp6)) * 100;
         $temp7["Percent"] = ($temp7["On time"] / array_sum($temp7)) * 100;
@@ -255,11 +273,11 @@ class ProspectController extends Controller
 
         dd(
             ["Total number of recruited crew", $applicants],
-            ["Total of successful applicants (For approval, For Medical, Passed, On board status)", $nsa],
-            ["Total of unsuccessful (Rejected status with DECLINE, WITHDRAW, FAILED remark)", $nua],
-            ["Total of disapproved (Rejected status with DISAPPROVED remark)", $da],
-            ["Total of unfit (Rejected status with UNFIT remark)", $ua],
-            ["Total of backed out/back out (Back out/Backed out remarks)", $bo],
+            ["Total of successful applicants (For approval, For Medical, Passed, On board status)", $temp1],
+            ["Total of unsuccessful (Rejected status with DECLINE, WITHDRAW, FAILED remark)", $temp2],
+            ["Total of disapproved (Rejected status with DISAPPROVED remark)", $temp4],
+            ["Total of unfit (Rejected status with UNFIT remark)", $temp5],
+            ["Total of backed out/back out (Back out/Backed out remarks)", $temp3],
             '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
             'Timely Submissions',
             ["All", [
