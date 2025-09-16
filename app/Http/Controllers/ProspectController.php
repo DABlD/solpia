@@ -162,6 +162,62 @@ class ProspectController extends Controller
         return Excel::download(new ProspectReport2($data->toArray(), $from, $to), "$fileName.xlsx");
     }
 
+    public function statisticsReport($from, $to){
+        $results = Prospect::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")
+                        ->select('source', DB::raw('COUNT(*) as total'))
+                        ->groupBy('source')
+                        ->pluck('total', 'source')
+                        ->toArray();
+
+        $allSources = [
+            "Kalaw" => 0,
+            "Online" => 0,
+            "Walk-in" => 0,
+            "Source" => 0,
+            "Job Fair" => 0,
+        ];
+
+        unset($results[null]);
+        $applicants = array_merge($allSources, $results);
+
+        // FOR CANDIDATES
+        $candidates = Candidate::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")->get();
+
+        $temp1 = [];
+        $temp2 = [];
+        $temp3 = [];
+
+        foreach($candidates as $candidate){
+            if(in_array($candidate->status, ['FOR APPROVAL', 'FOR MEDICAL', 'PASSED', 'ON BOARD'])){
+                isset($temp1[$candidate->prospect->source]) ? $temp1[$candidate->prospect->source]++ : ($temp1[$candidate->prospect->source] = 1);
+            }
+            elseif($candidate->status == "REJECTED"){
+                isset($temp2[$candidate->prospect->source]) ? $temp2[$candidate->prospect->source]++ : ($temp2[$candidate->prospect->source] = 1);
+            }
+
+            if(str_contains($candidate->prospect->remarks, "BACKED OUT") || 
+                str_contains($candidate->prospect->remarks, "BACK OUT") || 
+                str_contains($candidate->remarks, "BACKED OUT") || 
+                str_contains($candidate->remarks, "BACK OUT")){
+
+                isset($temp3[$candidate->prospect->source]) ? $temp3[$candidate->prospect->source]++ : ($temp3[$candidate->prospect->source] = 1);
+            }
+        }
+
+        unset($temp1[null]);
+        unset($temp2[null]);
+        unset($temp3[null]);
+
+        $nsa = array_merge($allSources, $temp1);
+        $nua = array_merge($allSources, $temp2);
+        $bo = array_merge($allSources, $temp3);
+
+        dd(["Total number of recruited crew", $applicants], ["Total of successfull applicants (For approval, For Medical, Passed, On board)", $nsa], ["Total of unsuccessful", $nua], ["Total of backed out/back out", $bo]);
+
+        // $fileName = "$from - $to Statistic Report";
+        // return Excel::download(new StatisticReport($applicants, $candidates), "$fileName.xlsx");
+    }
+
     function uploadFile(Request $req){
         $file = $req->file('files');
         $filename = null;

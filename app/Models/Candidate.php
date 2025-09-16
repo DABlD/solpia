@@ -31,7 +31,7 @@ class Candidate extends Model
     }
 
     public function prospect(){
-        return $this->hasOne(Prospect::class, 'id', 'prospect_id');
+        return $this->hasOne(Prospect::class, 'id', 'prospect_id')->withTrashed();
     }
 
     public function applicant(){

@@ -250,6 +250,7 @@ Route::group([
 		Route::get($name . '/report/{from?}/{to?}', ucfirst($name) . 'Controller@report')->name($name . '.report');
 		Route::get($name . '/prospectReport/{from?}/{to?}', ucfirst($name) . 'Controller@prospectReport')->name($name . '.prospectReport');
 		Route::get($name . '/deploymentReport/{year?}', ucfirst($name) . 'Controller@deploymentReport')->name($name . '.deploymentReport');
+		Route::get($name . '/statisticsReport/{from?}/{to?}', ucfirst($name) . 'Controller@statisticsReport')->name($name . '.statisticsReport');
 
 		Route::get($name . '/suggestCandidate', ucfirst($name) . 'Controller@suggestCandidate')->name($name . '.suggestCandidate');
 		Route::post($name . '/import', ucfirst($name) . 'Controller@import')->name($name . '.import');

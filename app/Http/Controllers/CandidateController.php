@@ -77,14 +77,14 @@ class CandidateController extends Controller
         Prospect::where('id', $can->prospect_id)->update(['updated_at' => now()]);
 
         if(isset($req->status)){
-            if($req->status == "FOR APPROVAL"){               
+            if($req->status == "FOR APPROVAL"){
                 Prospect::where('id', $can->prospect_id)->update(["status" => "ENDORSED"]);
                 Requirement::where('id', $can->requirement_id)->update(["date_provided" => now()->toDateString()]);
             }
-            elseif($req->status == "REJECTED"){              
+            elseif($req->status == "REJECTED"){
                 Prospect::where('id', $can->prospect_id)->update(["status" => "AVAILABLE"]);
             }
-            elseif($req->status == "ON BOARD"){              
+            elseif($req->status == "ON BOARD"){
                 Prospect::where('id', $can->prospect_id)->update(["status" => "HIRED"]);
             }
         }

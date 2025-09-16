@@ -848,7 +848,8 @@
                 inputOptions: {
                     report:       'Report',
                     deployment:   'Deployment Report',
-                    prospect:     'Prospect Report'
+                    prospect:     'Prospect Report',
+                    statistics:     'Statistics'
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b'
@@ -922,6 +923,30 @@
                     let from = $('[name="from"]').val();
                     let to = $('[name="to"]').val();
                     window.location.href = `{{ route('prospect.prospectReport') }}/${from}/${to}`;
+                }
+            })
+        }
+
+        function statistics(){
+            swal({
+                title: "Select Range",
+                html: `
+                    ${input("from", "From", moment().subtract(30, 'days').format("YYYY-MM-DD"), 3,9)}
+                    ${input("to", "To", moment().format("YYYY-MM-DD"), 3,9)}
+                `,
+                onOpen: () => {
+                    $('[name="from"], [name="to"]').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    });
+                }
+            }).then(result => {
+                if(result.value){
+                    let from = $('[name="from"]').val();
+                    let to = $('[name="to"]').val();
+                    {{-- window.location.href = `{{ route('prospect.statisticsReport') }}/${from}/${to}`; --}}
+                    window.open(`{{ route('prospect.statisticsReport') }}/${from}/${to}`, "_blank");
                 }
             })
         }
