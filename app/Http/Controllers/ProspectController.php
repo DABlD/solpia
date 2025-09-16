@@ -255,9 +255,9 @@ class ProspectController extends Controller
             }
         }
 
-        $temp6["Percent"] = ($temp6["On time"] / array_sum($temp6)) * 100;
-        $temp7["Percent"] = ($temp7["On time"] / array_sum($temp7)) * 100;
-        $temp8["Percent"] = ($temp8["On time"] / array_sum($temp8)) * 100;
+        $temp6["Percent"] = (array_sum($temp6) ? ($temp6["On time"] / array_sum($temp6)) : 0) * 100;
+        $temp7["Percent"] = (array_sum($temp7) ? ($temp7["On time"] / array_sum($temp7)) : 0) * 100;
+        $temp8["Percent"] = (array_sum($temp8) ? ($temp8["On time"] / array_sum($temp8)) : 0) * 100;
 
         // FOR REQUIREMENT/REQUESTS
 
