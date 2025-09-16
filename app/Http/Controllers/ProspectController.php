@@ -275,8 +275,7 @@ class ProspectController extends Controller
             ["Total of unfit (Rejected status with UNFIT remark)", $temp5],
             ["Total of backed out/back out (Back out/Backed out remarks)", $temp3],
             '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
-            'Requested Crew',
-            $temp9,
+            ['Requested Crew', $temp9],
             '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
             'Timely Submissions',
             ["All", [
