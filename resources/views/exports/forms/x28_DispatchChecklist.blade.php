@@ -59,7 +59,7 @@
 		<td colspan="2" style="{{ $b }}">VESSEL/FLAG:</td>
 		<td colspan="4" style="{{ $c }}">{{ $data->vessel ? $data->vessel->name . " / " . $data->vessel->flag : "-" }}</td>
 		<td colspan="4" style="{{ $b }} text-align: right;">CONTRACT DURATION:</td>
-		<td colspan="3" style="{{ $c }}">{{ $data->employment_months }}</td>
+		<td colspan="3" style="{{ $c }}">{{ $data->employment_months }} +/-1</td>
 	</tr>
 
 	<tr>
