@@ -281,7 +281,7 @@ class ProspectController extends Controller
             ["All", [
                         "On time" => $temp6['On time'] + $temp7['On time'] + $temp8['On time'],
                         "No" => $temp6['No'] + $temp7['No'] + $temp8['No'],
-                        "Percent" => (($temp6['On time'] + $temp7['On time'] + $temp8['On time']) / ($temp6['On time'] + $temp7['On time'] + $temp8['On time'] + $temp6['No'] + $temp7['No'] + $temp8['No'])) * 100
+                        "Percent" => ($temp6['On time'] + $temp7['On time'] + $temp8['On time'] + $temp6['No'] + $temp7['No'] + $temp8['No']) ? (($temp6['On time'] + $temp7['On time'] + $temp8['On time']) / ($temp6['On time'] + $temp7['On time'] + $temp8['On time'] + $temp6['No'] + $temp7['No'] + $temp8['No'])) : 0 * 100
                     ]],
             ["Top 4", $temp6],
             ["Junior Officers", $temp7],
