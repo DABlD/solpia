@@ -261,10 +261,27 @@ class ProspectController extends Controller
 
         // FOR REQUIREMENT/REQUESTS
 
-        $temp9 = [];
+        $temp9 = [
+            "Top 4" => [],
+            "Junior Officer" => [],
+            "Ratings" => []
+        ];
+
         $requirements = Requirement::where('created_at', ">=", $from . " 00:00:00")->where('created_at', "<=", $to . " 23:59:59")->get();
         foreach($requirements as $requirement){
-            isset($temp9[$rankList[$requirement->rank]]) ? $temp9[$rankList[$requirement->rank]]++ : ($temp9[$rankList[$requirement->rank]] = 1);
+            $type = null;
+
+            if(in_array($requirement->rank, [1,2,5,6])){
+                $type = "Top 4";
+            }
+            elseif($requirement->rank2->type == "OFFICER"){
+                $type = "Junior Officer";
+            }
+            else{
+                $type = "Ratings";
+            }
+
+            isset($temp9[$type][$rankList[$requirement->rank]]) ? $temp9[$type][$rankList[$requirement->rank]]++ : ($temp9[$type][$rankList[$requirement->rank]] = 1);
         }
 
         dd(
