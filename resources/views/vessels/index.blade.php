@@ -6931,6 +6931,8 @@
                                         let name = $(e.target).find('option:selected').data('name');
                                         let rank = $(e.target).find('option:selected').data('rank');
 
+                                        console.log(e.target, name, rank);
+
                                         if(id){
                                             $('#crewList').select2('val', 0);
 
@@ -6974,7 +6976,8 @@
                                     let crews = [];
 
                                     $('.proposedCrew').each((i, crew) => {
-                                        crews.push([$(crew).find('.id').val(), $(crew).find('.rank').val()]);
+                                        let id = $(crew).find('.id').val();
+                                        crews.push([id, $(`#pcr${id}`).val()]);
                                     })
 
                                     let data = {};

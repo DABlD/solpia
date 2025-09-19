@@ -98,7 +98,7 @@
 			<td rowspan="2">{{ $crew->user->birthday ? $crew->user->birthday->format('M/d/Y') : '-' }}</td>
 			<td rowspan="2">{{ $crew->user->birthday ? $crew->user->birthday->age : '-' }}</td>
 			<td rowspan="2">{{ $getBmi($crew->height, $crew->weight) }}</td>
-			<td rowspan="2">{{ optional(optional($crew->documents)->firstWhere('type', 'HRIS ID'))->number ?? '-' }}</td>
+			<td rowspan="2">{{ optional(optional($crew->document_id)->firstWhere('type', 'HRIS ID'))->number ?? '-' }}</td>
 			<td rowspan="2">{{ $solpia($crew->sea_service) }}</td>
 			<td rowspan="2"></td>
 			<td rowspan="2">{{ $total($crew->sea_service) }}</td>
