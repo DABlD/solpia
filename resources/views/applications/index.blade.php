@@ -3074,6 +3074,8 @@
         }
 
         function exportBiodata(application){
+            application = $(application);
+            console.log(application);
             let type;
 
             if(["Lined-Up", "On Board"].includes(application.data('status2'))){
@@ -3134,7 +3136,7 @@
                     inputOptions: {
                         '' : '',
                         @foreach($principals as $principal)
-                            @if($principal->fleet == auth()->user()->fleet || auth()->user()->role == "Admin" || auth()->user()->role == "Cadet" || auth()->user()->role == "Encoder" || auth()->user()->role == "Training")
+                            @if($principal->fleet == auth()->user()->fleet || auth()->user()->role == "Admin" || auth()->user()->role == "Cadet" || auth()->user()->role == "Recruitment Officer" || auth()->user()->role == "Training")
                                 '{{ $principal->slug }}': '{{ $principal->name }}',
                             @endif
                         @endforeach

@@ -63,6 +63,9 @@ trait ApplicantAttribute{
 
 		if(auth()->user()->role == "Recruitment Officer"){
 			$string = '<a class="btn btn-success btn-search btn-xs" data-toggle="tooltip" title="View Info" data-id="' . $this->id . '">' . '<span class="fa fa-search fa-sm" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
+			$string .= '<a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Export Biodata" data-status2="' . $this->pas . '" data-id="' . $this->id . '" onClick="exportBiodata(this)">' .
+					        '<span class="fa fa-file-text fa-sm" data-id="' . $this->id . '" data-status2="' . $this->pas . '" onClick="exportBiodata(this)"></span>' .
+					   '</a>&nbsp;';
 		}
 
 		// if($status > 1){
