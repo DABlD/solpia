@@ -26,13 +26,15 @@
 		$ctr = 0;
 
 		foreach($sss as $ss){
-			if($type){
-				if(str_contains($ss->vessel_type, $type)){
+			if(isset($ss->sign_on) && isset($ss->sign_off)){
+				if($type){
+					if(str_contains($ss->vessel_type, $type)){
+						$ctr += $ss->sign_off->diffInMonths($ss->sign_on);
+					}
+				}
+				else{
 					$ctr += $ss->sign_off->diffInMonths($ss->sign_on);
 				}
-			}
-			else{
-				$ctr += $ss->sign_off->diffInMonths($ss->sign_on);
 			}
 		}
 
@@ -96,7 +98,7 @@
 			<td rowspan="2">{{ $crew->user->birthday ? $crew->user->birthday->format('M/d/Y') : '-' }}</td>
 			<td rowspan="2">{{ $crew->user->birthday ? $crew->user->birthday->age : '-' }}</td>
 			<td rowspan="2">{{ $getBmi($crew->height, $crew->weight) }}</td>
-			<td rowspan="2"></td>
+			<td rowspan="2">{{ optional(optional($crew->documents)->firstWhere('type', 'HRIS ID'))->number ?? '-' }}</td>
 			<td rowspan="2">{{ $solpia($crew->sea_service) }}</td>
 			<td rowspan="2"></td>
 			<td rowspan="2">{{ $total($crew->sea_service) }}</td>
