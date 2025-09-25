@@ -96,7 +96,13 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
         elseif($fleet == "FLEET D"){
             $this->data->manager = "THEA MAE G. RIO";
             $this->data->officer = auth()->user()->fullname;
-            $this->data->documentation = "CONCEPTION MONDEJAR";
+
+            if(in_array(auth()->user()->id, [6433, 6635])){ // CELINE AND BIA
+                $this->data->documentation = "PRINCE DEL MUNDO";
+            }
+            else{
+                $this->data->documentation = "CONCEPTION MONDEJAR";
+            }
         }
         elseif($fleet == "TOEI"){
         }
