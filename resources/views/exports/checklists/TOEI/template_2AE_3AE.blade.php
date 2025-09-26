@@ -113,7 +113,7 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($doc == "SAFETY OFFICER"){
+			elseif(in_array($docu, ["SAFETY OFFICER", "HATCH COVER"])){
 				foreach(get_object_vars($data->document_lc) as $document){
 				    if(str_contains($document->type, $doc)){
 				    	$docu = $document;
@@ -485,7 +485,7 @@
 	@elseif(in_array($data->vessel->id, [66,51,231,4608]))
 		{{-- MSTR --}}
 		@if(in_array($data->rank2->id, [1]))
-			{{ $con("HATCH COVER") }}
+			{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
@@ -500,7 +500,7 @@
 		{{-- CO --}}
 		@if(in_array($data->rank2->id, [2]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
-			{{ $con("HATCH COVER") }}
+			{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
