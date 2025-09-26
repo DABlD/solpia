@@ -2,6 +2,10 @@
 	function verifyDate($date){
 		return $date ? $date->format('d-M-y') : '---';
 	}
+
+	$cleanText = function($text){
+		return str_replace('&', '&#38;', $text);
+	};
 @endphp
 
 <table>
@@ -51,7 +55,7 @@
 			<td></td>
 			<td>{{ $loop->iteration }}</td>
 			<td>{{ $crew->abbr }}</td>
-			<td>{{ $crew->lname . ', ' . $crew->fname . ' ' . ($crew->suffix ?? "") . ' ' . $crew->mname }}</td>
+			<td>{{ $cleanText($crew->lname . ', ' . $crew->fname . ' ' . ($crew->suffix ?? "") . ' ' . $crew->mname) }}</td>
 			<td>{{ $crew->age }}</td>
 			<td>{{ $crew->joining_date->format('d-M-y') }}</td>
 			<td>{{ $crew->joining_date->diffInMonths(now()) }}</td>
@@ -60,8 +64,8 @@
 			<td>{{ verifyDate($crew->{"PASSPORT"}) }}</td>
 			<td>{{ verifyDate($crew->{"SEAMAN'S BOOK"}) }}</td>
 			<td>{{ verifyDate($crew->{"US-VISA"}) }}</td>
-			<td>{{ $crew->joining_port }}</td>
-			<td>{{ $crew->reliever }}</td>
+			<td>{{ $cleanText($crew->joining_port) }}</td>
+			<td>{{ $cleanText($crew->reliever) }}</td>
 			<td>
 				@php
 					$remarks = json_decode($crew->remarks);
@@ -69,10 +73,11 @@
 						if($key > 0){
 							echo ', ';
 						}
-						echo $remark;
+						echo $cleanText($remark);
 					}
 				@endphp
 			</td>
 		</tr>
+
 	@endforeach
 </table>
