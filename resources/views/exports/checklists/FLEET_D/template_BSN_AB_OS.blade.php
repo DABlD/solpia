@@ -117,7 +117,7 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
-			elseif($doc == "HATCH COVER"){
+			elseif(in_array($doc, ["HATCH COVER", "HAZMAT"])){
 				foreach(get_object_vars($data->document_lc) as $document){
 				    if(str_contains($document->type, $doc)){
 				    	$docu = $document;
