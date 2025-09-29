@@ -132,6 +132,11 @@ class UsersController extends Controller
             $array = $array->where($req->where2[0], $req->where2[1]);
         }
 
+        // IF HAS WHERE
+        if($req->where3){
+            $array = $array->where($req->where3[0], $req->where3[1]);
+        }
+
         $array = $array->get();
 
         // IF HAS LOAD

@@ -250,6 +250,7 @@
                     data: {
                         where: ['fname', fname],
                         where2: ['lname', lname],
+                        where3: ['role', 'Applicant'],
                     },
                     success: result => {
                         result = JSON.parse(result);
