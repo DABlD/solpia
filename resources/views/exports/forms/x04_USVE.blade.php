@@ -42,9 +42,21 @@
 
 	@php
 		$lastVessel = null;
-		if($data->sea_service->count()){
-			$data->sea_service = $data->sea_service->sortByDesc('sign_off');
-			$lastVessel = $data->sea_service->first();
+
+		if($data->pro_app->status == "On Board"){
+			$lastVessel = new stdClass();
+			$lastVessel->vessel_name = $data->current_lineup->vessel->name;
+			$lastVessel->sign_off = now()->parse($data->current_lineup->disembarkationDate);
+
+			$temp = $data->data;
+			$temp['eld'] = now()->parse($data->current_lineup->joining_date);
+			$data->data = $temp;
+		}
+		else{
+			if($data->sea_service->count()){
+				$data->sea_service = $data->sea_service->sortByDesc('sign_off');
+				$lastVessel = $data->sea_service->first();
+			}
 		}
 	@endphp
 

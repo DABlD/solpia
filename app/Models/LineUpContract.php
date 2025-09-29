@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\LineUpContractAttribute;
+
 class LineUpContract extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, LineUpContractAttribute;
 
     protected $fillable = [
     	'applicant_id','principal_id','vessel_id',
