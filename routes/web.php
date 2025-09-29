@@ -186,6 +186,13 @@ Route::group([
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
 		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
 		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
+
+		// DOCUMENT ROUTES
+		$name = "document";
+
+		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
+		Route::post($name . '/delete', ucfirst($name) . 'Controller@delete')->name($name . '.delete');
 		
 		// Vessels ROUTES
 		$name = "vessels";

@@ -1955,6 +1955,9 @@
                     <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
                         <span class="fa fa-upload">
                     </span></a>
+                    <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${id.id}, ${applicant.id}, 'ids')">
+                        <span class="fa fa-pencil">
+                    </span></a>
                 `;
 
                 temp += `
@@ -2026,6 +2029,9 @@
                     <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
                         <span class="fa fa-upload">
                     </span></a>
+                    <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${flag.id}, ${applicant.id}, 'flags')">
+                        <span class="fa fa-pencil">
+                    </span></a>
                 `;
 
                 temp += `
@@ -2096,6 +2102,9 @@
                 file += `
                     <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
                         <span class="fa fa-upload">
+                    </span></a>
+                    <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${lc.id}, ${applicant.id}, 'l_cs')">
+                        <span class="fa fa-pencil">
                     </span></a>
                 `;
 
@@ -2197,6 +2206,9 @@
                     <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
                         <span class="fa fa-upload">
                     </span></a>
+                    <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${mc.id}, ${applicant.id}, 'med_certs')">
+                        <span class="fa fa-pencil">
+                    </span></a>
                 `;
 
                 temp += `
@@ -2268,6 +2280,9 @@
                     <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
                         <span class="fa fa-upload">
                     </span></a>
+                    {{-- <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${mh.id}, ${applicant.id}, 'meds')">
+                        <span class="fa fa-pencil">
+                    </span></a> --}}
                 `;
 
                 temp += `
@@ -2806,6 +2821,190 @@
                     reloadTab(id, aId, type)
                 }
             });
+        }
+
+        function updateDetails(id, aId, type, document){
+            // ids, flags, l_cs, med_certs, meds
+            
+            const tables = {
+                "ids": "document_ids",
+                "flags": "document_flags",
+                "l_cs": "document_l_cs",
+                "med_certs": "document_med_certs",
+                "meds": "document_meds"
+            };
+
+            $.ajax({
+                url: "{{ route('document.get') }}",
+                data: {
+                    table: tables[type],
+                    where: ['id', id],
+                    first: true
+                },
+                success: result => {
+                    result = JSON.parse(result);
+
+                    let temp = {};
+                    let config = {altInput: true, altFormat: 'F j, Y', dateFormat: 'Y-m-d'};
+
+                    if(type == 'ids'){
+                        swal({
+                            title: "Update Document",
+                            width: "600px",
+                            html: `
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("issuer", "Issuer", result.issuer, 3,9)}
+                                ${input("number", "Number", result.number, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                temp.issuer = $('[name="issuer"]').val();
+                                temp.number = $('[name="number"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+
+                                updateDocument(temp, tables[type]);
+                            }
+                        })
+                    }
+                    else if(type == 'flags'){
+                        swal({
+                            title: "Update Document",
+                            width: "400px",
+                            html: `
+                                ${input("country", "Country", result.country, 3,9, null, 'disabled')}
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("number", "Number", result.number, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                let temp = {};
+
+                                temp.number = $('[name="number"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+
+                                updateDocument(temp, tables[type]);
+                            }
+                        })
+                    }
+                    else if(type == 'l_cs'){
+                        swal({
+                            title: "Update Document",
+                            width: "400px",
+                            html: `
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("issuer", "Issuer", result.issuer, 3,9)}
+                                ${input("no", "Number", result.no, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                let temp = {};
+
+                                temp.issuer = $('[name="issuer"]').val();
+                                temp.no = $('[name="no"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+
+                                updateDocument(temp, tables[type]);
+                            }
+                        })
+                    }
+                    else if(type == 'med_certs'){
+                        swal({
+                            title: "Update Document",
+                            width: "400px",
+                            html: `
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("issuer", "Issuer", result.issuer, 3,9)}
+                                ${input("clinic", "Clinic", result.clinic, 3,9)}
+                                ${input("number", "Number", result.number, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                let temp = {};
+
+                                temp.type = $('[name="type"]').val();
+                                temp.issuer = $('[name="issuer"]').val();
+                                temp.clinic = $('[name="clinic"]').val();
+                                temp.number = $('[name="number"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+
+                                updateDocument(temp, tables[type]);
+                            }
+                        })
+                    }
+                    {{-- else if(type == 'meds'){
+                        swal({
+                            title: "Update Document",
+                            width: "400px",
+                            html: `
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("issuer", "Issuer", result.issuer, 3,9)}
+                                ${input("clinic", "Clinic", result.clinic, 3,9)}
+                                ${input("number", "Number", result.number, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                let temp = {};
+
+                                temp.type = $('[name="type"]').val();
+                                temp.issuer = $('[name="issuer"]').val();
+                                temp.clinic = $('[name="clinic"]').val();
+                                temp.number = $('[name="number"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+                            }
+                        })
+                    } --}}
+                }
+            })
+
+            function updateDocument(data,table){
+                $.ajax({
+                    url: "{{ route("document.update") }}",
+                    type: 'POST',
+                    data: {
+                        table: table,
+                        data: data,
+                        id: id,
+                        updated_at: moment().format("YYYY-MM-DD"),
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: result => {
+                        ss("Successfully updated");
+                        setTimeout(() => {
+                            reloadTab(id, aId, type);
+                        }, 800);
+                    }
+                })
+            }
         }
 
         function reloadTab(id, aId, type){
