@@ -361,6 +361,18 @@ Route::group([
 		Route::get('testFunc', 'ApplicationsController@testFunc')->name('testFunc');
 		Route::get('testFunc2', 'ApplicationsController@testFunc2')->name('testFunc2');
 		Route::get('tempFunc', 'ApplicationsController@tempFunc')->name('tempFunc');
-		
+
+		// APPOINTMENT ROUTES
+		$name = "appointment";
+		Route::get($name, ucfirst($name) . 'Controller@index')
+			->defaults('sidebar', 1)
+			->defaults('icon', 'fa-calendar')
+			->defaults('name', 'Appointments')
+			->defaults('roles', array('Admin'))
+			->name($name . '.index')
+			->defaults('href', $name);
+
+		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
+		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
 	}
 );
