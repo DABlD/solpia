@@ -1960,22 +1960,53 @@ class ApplicationsController extends Controller
         echo "</tbody></table>";
     }
 
-    public function tempfunc2(Request $req){
+    public function tempFunc(){
+        $provinces = ["ABRA","AGUSAN DEL NORTE","AGUSAN DEL SUR","AKLAN","ALBAY","ANTIQUE","APAYAO","AURORA","BASILAN","BATAAN","BATANES","BATANGAS","BENGUET","BILIRAN","BOHOL","BUKIDNON","BULACAN","CAGAYAN","CAMARINES NORTE","CAMARINES SUR","CAMIGUIN","CAPIZ","CATANDUANES","CAVITE","CEBU","COTABATO","DAVAO","DINAGAT ISLANDS","EASTERN SAMAR","GUIMARAS","IFUGAO","ILOCOS NORTE","ILOCOS SUR","ILOILO","ISABELA","KALINGA","LA UNION","LAGUNA","LANAO DEL NORTE","LANAO DEL SUR","LEYTE","MAGUINDANAO","MARINDUQUE","MASBATE","MISAMIS OCCIDENTAL","MISAMIS ORIENTAL","MOUNTAIN PROVINCE","NEGROS OCCIDENTAL","NEGROS ORIENTAL","NORTHERN SAMAR","NUEVA ECIJA","NUEVA VIZCAYA","OCCIDENTAL MINDORO","ORIENTAL MINDORO","PALAWAN","PAMPANGA","PANGASINAN","QUEZON","QUIRINO","RIZAL","ROMBLON","SAMAR","SARANGANI","SIQUIJOR","SORSOGON","SOUTH COTABATO","SOUTHERN LEYTE","SULTAN KUDARAT","SULU","SURIGAO DEL NORTE","SURIGAO DEL SUR","TARLAC","TAWI-TAWI","WESTERN SAMAR","ZAMBALES","ZAMBOANGA DEL NORTE","ZAMBOANGA DEL SUR","ZAMBOANGA SIBUGAY"];
 
-        $sss = SeaService::where('manning_agent', 'like', "%" . 'SOLPIA' . "%")->where(function($q){
-            $q->where('vessel_name', 'like', "%" . "MARITE" . "%");
-            $q->orWhere('vessel_name', 'like', "%" . "WISTERIA" . "%");
-            $q->orWhere('vessel_name', 'like', "%" . "ALDEBARAN" . "%");
-        })->get();
+        $cities = ["CALOOCAN","LAS PIÑAS","MAKATI","MALABON","MANDALUYONG","MANILA","MARIKINA","MUNTINLUPA","NAVOTAS","PARAÑAQUE","PASAY","PASIG","PATEROS","QUEZON CITY","SAN JUAN","TAGUIG","VALENZUELA"];
 
-        foreach($sss as $ss){
-            echo $ss->applicant->user->namefull . ';' . $ss->rank2->abbr . ';' . $ss->vessel_name . ';' . $ss->sign_on . '<br>';
+        $crews = User::where('role', 'Applicant')
+                ->where(function($q){
+
+                    $i1 = "CEBU";
+
+                    $q->where('address', 'like', "%$i1%");
+                    // $q->orWhere('address', 'like', "%$i2%");
+                    // $q->orWhere('address', 'like', "%$i3%");
+                    $q->orWhere('a.provincial_address', 'like', "%$i1%");
+                    // $q->orWhere('a.provincial_address', 'like', "%$i2%");
+                    // $q->orWhere('a.provincial_address', 'like', "%$i3%");
+                })
+                ->whereNull('a.deleted_at')
+                ->where('a.remarks', 'NOT LIKE', '%WITHDRAW%')
+                ->where('a.remarks', 'NOT LIKE', '%WD%')
+                ->join('applicants as a', 'a.user_id', '=', 'users.id')
+                ->select('address', 'fname', 'lname', 'contact', 'fleet', 'users.id', 'a.id as aid', 'a.provincial_address')
+                ->get();
+
+        foreach($crews as $crew){
+            // GET RANK
+            $rank = null;
+            if(isset($crew->crew->pro_app->rank)){
+                $rank = $crew->crew->pro_app->rank->abbr;
+            }
+            else{
+                continue;
+            }
+
+            if($crew->contact == ""){
+                $crew->contact = $crew->crew->provincial_contact;
+            }
+
+            $status = $crew->crew->pro_app->status;
+            $remarks = $crew->crew->remarks;
+
+            echo "$crew->fname $crew->lname ; $crew->fleet ; $rank ; $crew->contact ; $status ; $crew->address ; $crew->provincial_address ; $remarks<br>";
         }
-
     }
 
     // CE JOEY
-    public function tempfunc(Request $req){
+    public function tempfunc2(Request $req){
         $start = $req->start;
         $end = $req->end;
 
