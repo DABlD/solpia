@@ -64,16 +64,11 @@ class AppointmentController extends Controller
     public function store(Request $req){
         $data = new Appointment();
         $data->rank = $req->rank;
-        $data->lname = $req->lname;
-        $data->fname = $req->fname;
+        $data->name = $req->name;
         $data->assigned_vessel = $req->assigned_vessel;
-        $data->sign_on = $req->sign_on;
-        $data->sign_off = $req->sign_off;
-        $data->contact = $req->contact;
-        $data->age = $req->age;
         $data->person_to_visit = $req->person_to_visit;
         $data->purpose_of_visit = $req->purpose_of_visit;
-        $data->recommended_by = $req->recommended_by;
+        $data->status = $req->status;
         $data->remarks = $req->remarks;
         $data->save();
     }

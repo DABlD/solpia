@@ -11,10 +11,8 @@ class Appointment extends Model
     use AppointmentAttribute, SoftDeletes;
 
     protected $fillable = [
-        "rank","lname","fname","assigned_vessel","sign_on",
-        "sign_off","contact","age","person_to_visit",
-        "purpose_of_visit","recommended_by","remarks",
-        "status"
+        "rank","name","assigned_vessel","person_to_visit",
+        "purpose_of_visit","availability","status","remarks"
     ];
 
     protected $dates = [

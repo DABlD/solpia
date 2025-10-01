@@ -17,17 +17,12 @@ class CreateAppointmentsTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('rank');
-            $table->string('lname');
-            $table->string('fname');
+            $table->string('name');
             $table->string('assigned_vessel')->nullable();
-            $table->date('sign_on')->nullable();
-            $table->date('sign_off')->nullable();
-            $table->string('contact')->nullable();
-            $table->string('age')->nullable();
             $table->string('person_to_visit');
             $table->string('purpose_of_visit');
-            $table->string('recommended_by')->nullable();
-            $table->string('status')->default('Pending');
+            $table->string('availability');
+            $table->string('status')->default('Waiting');
             $table->text('remarks')->nullable();
 
             $table->timestamps();
