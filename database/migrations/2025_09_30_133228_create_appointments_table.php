@@ -23,6 +23,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('purpose_of_visit');
             $table->string('availability');
             $table->string('status')->default('Waiting');
+            $table->boolean('read')->default(0);
             $table->text('remarks')->nullable();
 
             $table->timestamps();

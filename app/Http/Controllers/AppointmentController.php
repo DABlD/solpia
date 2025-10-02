@@ -35,6 +35,11 @@ class AppointmentController extends Controller
             $array = $array->where($req->where[0], $req->where[1]);
         }
 
+        // IF HAS WHERE2
+        if($req->where2){
+            $array = $array->where($req->where2[0], $req->where2[1]);
+        }
+
         $array = $array->get();
 
         // IF HAS LOAD
@@ -51,6 +56,10 @@ class AppointmentController extends Controller
 
         foreach($array as $item){
             $item->actions = $item->actions;
+        }
+
+        if(isset($req->read)){
+            Appointment::where('person_to_visit', auth()->user()->id)->update(["read" => 1]);
         }
 
         if(isset($req->columns)){

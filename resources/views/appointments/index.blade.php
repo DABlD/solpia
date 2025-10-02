@@ -147,7 +147,7 @@
                                                 <th>Time</th>
                                                 <th>Waiting time</th>
                                                 <th>Status</th>
-                                                <th>Action</th>
+                                                <th style="width: 200px;">Action</th>
                                               </tr>
                                             </thead>
                                             <tbody>
@@ -525,7 +525,30 @@
             $(document).ready(() => {
             })
 
-            function notif(){
+            function checkNotif(){
+                $.ajax({
+                    url: "{{ route('appointment.get') }}",
+                    data: {
+                        where: ["person_to_visit", {{ auth()->user()->id }}],
+                        where2: ["read", 0],
+                        read: true
+                    },
+                    success: result => {
+                        result = JSON.parse(result);
+
+                        if(result.length){
+                            notif(result.length);
+                        }
+                    }
+                })
+            }
+            checkNotif();
+
+            setInterval(function () {
+                checkNotif();
+            }, 30000);
+
+            function notif(length){
                 if (Notification.permission === "granted") {
                   showNotification();
                 } else if (Notification.permission !== "denied") {
@@ -537,9 +560,9 @@
                 }
 
                 function showNotification() {
-                  new Notification("Hello!", {
-                    body: "You have a new appointment",
-                    icon: "https://placehold.co/100" // optional
+                  new Notification("Appointment Alert!", {
+                    body: `You have ${length} new appointment`,
+                    icon: "images/logo_old.png" // optional
                   });
                 }
             }
