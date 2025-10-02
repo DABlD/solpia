@@ -139,12 +139,14 @@
                                               <tr>
                                                 <th>#</th>
                                                 <th>Rank</th>
-                                                <th>Surname</th>
                                                 <th>Name</th>
-                                                <th>Contact</th>
-                                                <th>Person to Visit</th>
                                                 <th>Purpose of Visit</th>
-                                                <th>Datetime</th>
+                                                <th>Person to Visit</th>
+                                                <th>Availability</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Waiting time</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                               </tr>
                                             </thead>
@@ -184,28 +186,83 @@
                     data: f => {
                         f.fRank = fRank;
                         f.fP2V = fP2V;
+                        f.load = ['user'];
                     }
                 },
                 columns: [
                     { data: 'id'},
                     { data: 'rank'},
-                    { data: 'lname'},
-                    { data: 'fname'},
-                    { data: 'contact'},
-                    { data: 'person_to_visit'},
+                    { data: 'name'},
                     { data: 'purpose_of_visit'},
+                    { data: 'user.fname'},
+                    { data: 'availability'},
                     { data: 'created_at'},
+                    { data: 'created_at'},
+                    { data: 'created_at'},
+                    { data: 'status'},
                     { data: 'actions'}
                 ],
                 columnDefs: [
                     {
-                        targets: 7,
-                        render: date =>{
-                            return date ? moment(date).format('MMM DD, YYYY') : "-";
+                        targets: 4,
+                        render: (a, b, row) =>{
+                            return `${row.user.gender == "Male" ? "Mr." : "Ms."} ${row.user.fname} ${row.user.lname}`;
                         }
                     },
                     {
-                        targets: [0,1,2,3,4,5,6,7],
+                        targets: 5,
+                        render: availability =>{
+                            let colors = {
+                                "Available": "green",
+                                "Out of office": "gray",
+                                "In a meeting": "orange",
+                                "Doing dispatch": "orange",
+                                "Conducting debriefing": "orange"
+                            };
+
+                            return `<span style="color: ${colors[availability]}">${availability}</span>`;
+                        }
+                    },
+                    {
+                        targets: 6,
+                        render: date =>{
+                            return moment(date).format('MMM DD, YYYY');
+                        }
+                    },
+                    {
+                        targets: 7,
+                        render: date =>{
+                            return moment(date).format('hh:mm A');
+                        }
+                    },
+                    {
+                        targets: 8,
+                        render: (date, b, row) =>{
+                            let duration = moment.duration(moment().diff(moment(date)));
+
+                            let hours   = Math.floor(duration.asHours());  // total hours, not just 0–23
+                            let minutes = duration.minutes();
+                            let seconds = duration.seconds();
+
+                            return `<span class="${row.status == "Waiting" ? "running_time" : ""}">
+                                ${String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0")}
+                            </span>`;
+                        }
+                    },
+                    {
+                        targets: 9,
+                        render: status =>{
+                            let style = {
+                                Rejected: "color: red;",
+                                Attended: "color: green;",
+                                Waiting: ""
+                            };
+
+                            return `<span style="${style[status]}">${status}</span>`;
+                        }
+                    },
+                    {
+                        targets: [0,1,2,3,4,5,6,7,8,9,10],
                         className: 'text-center'
                     }
                 ],
@@ -217,6 +274,18 @@
                 },
                 order: [ [0, 'desc'] ],
             });
+
+            setInterval(function () {
+                $('.running_time').each((a,e) => {
+                    let [h, m, s] = e.innerText.split(":").map(Number);
+
+                    s++;
+                    if (s >= 60) { s = 0; m++; }
+                    if (m >= 60) { m = 0; h++; }
+
+                    e.innerText = String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+                });
+            }, 1000);
 
             table.on('draw', () => {
                 setTimeout(() => {
@@ -237,6 +306,7 @@
                     title: "Create Appointment",
                     width: '500px',
                     html: `
+                        <hr>
                         <div class="row iRow">
                             <div class="col-md-4 iLabel">
                                 Rank
@@ -251,24 +321,7 @@
                             </div>
                         </div></br>
 
-                        ${input("lname", "Surname", null, 4,8)}
-                        ${input("fname", "Name", null, 4,8)}
-
-                        <div class="row iRow">
-                            <div class="col-md-4 iLabel">
-                                Person to visit
-                            </div>
-                            <div class="col-md-8 iInput">
-                                <select name="person_to_visit" class="form-control">
-                                    <option value="">Select Staff</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ ucwords(strtolower($user->fname . ' ' . $user->lname)) }}">
-                                            {{ $user->gender == "Male" ? "Mr." : "Ms." }} {{ ucwords(strtolower($user->fname . ' ' . $user->lname)) }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div></br>
+                        ${input("name", "Name", null, 4,8)}
 
                         <div class="row iRow">
                             <div class="col-md-4 iLabel">
@@ -284,35 +337,72 @@
                                     <option value="Debriefing">Debriefing</option>
                                     <option value="Dispatch">Dispatch</option>
                                     <option value="Training">Training</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Sea Service">Sea Service</option>
+                                    <option value="Visit">Visit</option>
                                 </select>
                             </div>
                         </div></br>
 
-                        ${input("assigned_vessel", "Assigned Vessel", null, 4,8)}
-                        ${input("sign_on", "Sign On", null, 4,8)}
-                        ${input("sign_off", "Sign Off", null, 4,8)}
-                        ${input("contact", "Contact", null, 4,8)}
-                        ${input("age", "Age", null, 4,8)}
+                        <div class="row iRow">
+                            <div class="col-md-4 iLabel">
+                                
+                            </div>
+                            <div class="col-md-8 iInput">
+                                <select id="staff_department" class="form-control">
+                                    <option value="">Select Department</option>
+                                    <option value="FLEET-B">Fleet B</option>
+                                    <option value="FLEET-C">Fleet C</option>
+                                    <option value="FLEET-D">Fleet D</option>
+                                    <option value="TOEI">TOEI</option>
+                                    <option value="FISHING">Fishing</option>
+                                    <option value="Processing">Processing</option>
+                                    <option value="Training">Training</option>
+                                    <option value="Accounting">Accounting</option>
+                                    <option value="Recruitment-Officer">Recruitment</option>
+                                </select>
+                            </div>
+                        </div></br>
 
-                        ${input("recommended_by", "Recommended By", null, 4,8)}
+                        <div class="row iRow">
+                            <div class="col-md-4 iLabel">
+                                Person to visit
+                            </div>
+                            <div class="col-md-8 iInput">
+                                <select name="person_to_visit" class="form-control">
+                                    <option value="">Select Staff</option>
+                                    @foreach($users as $user)
+                                        <option class="staff_option {{ str_replace(' ', '-', $user->role) }} {{ str_replace(' ', '-', $user->fleet) }}" value="{{ $user->id }}">
+                                            {{ $user->gender == "Male" ? "Mr." : "Ms." }} {{ ucwords(strtolower($user->fname . ' ' . $user->lname)) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div></br>
+
+                        <br>
+
+                        ${input("assigned_vessel", "Assigned Vessel", null, 4,8)}
+
                         ${input("remarks", "Remarks/Notes", null, 4,8)}
                     `,
                     onOpen: () => {
-                        $('[name="rank"], [name="person_to_visit"]').select2();
+                        {{-- $('[name="rank"], [name="person_to_visit"]').select2(); --}}
+                        $('[name="rank"]').select2();
                         $('[name="purpose_of_visit"]').select2({tags:true});
 
-                        $('[name="sign_on"], [name="sign_off"]').flatpickr({
-                            altInput: true,
-                            altFormat: 'F j, Y',
-                            dateFormat: 'Y-m-d'
+                        $('#staff_department').on('change', e => {
+                            $('.staff_option').hide();
+                            $(`.${e.target.value}`).show();
+                            {{-- $('[name="person_to_visit"]').select2('destroy').select2(); --}}
                         });
                     },
                     preConfirm: () => {
                         swal.showLoading();
                         return new Promise(resolve => {
                             setTimeout(() => {
-                                if($('[name="rank"]').val() == "" || $('[name="lname"]').val() == ""|| $('[name="person_to_visit"]').val() == "" || $('[name="purpose_of_visit"]').val() == ""){
-                                    swal.showValidationError('Rank, Surname, Person to visit, and Purpose is required');
+                                if($('[name="rank"]').val() == "" || $('[name="name"]').val() == "" || $('[name="person_to_visit"]').val() == "" || $('[name="purpose_of_visit"]').val() == ""){
+                                    swal.showValidationError('Rank, Name, Purpose, and Person to visit is required');
                                 }
                             resolve()}, 500);
                         });
@@ -324,26 +414,135 @@
                             type: "POST",
                             data: {
                                 rank: $('[name="rank"]').val(),
-                                lname: $('[name="lname"]').val(),
-                                fname: $('[name="fname"]').val(),
+                                name: $('[name="name"]').val(),
                                 person_to_visit: $('[name="person_to_visit"]').val(),
                                 purpose_of_visit: $('[name="purpose_of_visit"]').val(),
                                 assigned_vessel: $('[name="assigned_vessel"]').val(),
-                                sign_on: $('[name="sign_on"]').val(),
-                                sign_off: $('[name="sign_off"]').val(),
-                                contact: $('[name="contact"]').val(),
-                                age: $('[name="age"]').val(),
-                                recommended_by: $('[name="recommended_by"]').val(),
                                 remarks: $('[name="remarks"]').val(),
                                 _token: $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: result => {
+                                ss("Successfully created appointment");
+                                reload();
                             }
                         })
                     }
                 })
             }
 
+            function view(id){
+                $.ajax({
+                    url: "{{ route('appointment.get') }}",
+                    data: {
+                        where: ["id", id]
+                    },
+                    success: result => {
+                        let appointment = JSON.parse(result)[0];
+
+                        swal({
+                            title: "Appointment Details",
+                            width: '500px',
+                            html: `
+                                <hr>
+
+                                ${input("rank", "Rank", appointment.rank, 4,8, null, 'disabled')}
+                                ${input("name", "Name", appointment.name, 4,8, null, 'disabled')}
+                                ${input("purpose_of_visit", "Purpose of visit", appointment.purpose_of_visit, 4,8, null, 'disabled')}
+                                ${input("person_to_visit", "Person to visit", appointment.person_to_visit, 4,8, null, 'disabled')}
+                                ${input("assigned_vessel", "Assigned Vessel", appointment.assigned_vessel, 4,8, null, 'disabled')}
+                                ${input("created_at", "Created On", moment(appointment.created_at).format('MMM DD, YYYY hh:mm A'), 4,8, null, 'disabled')}
+
+                                <br>
+
+                                ${input("remarks", "Remarks/Notes", appointment.remarks, 4,8)}
+                            `,
+                            confirmButtonText: "Update",
+                            showCancelButton: true
+                        }).then(result => {
+                            if(result.value){
+                                $.ajax({
+                                    url: "{{ route("appointment.update") }}",
+                                    type: "POST",
+                                    data: {
+                                        id: appointment.id,
+                                        rank: $('[name="rank"]').val(),
+                                        name: $('[name="name"]').val(),
+                                        person_to_visit: $('[name="person_to_visit"]').val(),
+                                        purpose_of_visit: $('[name="purpose_of_visit"]').val(),
+                                        assigned_vessel: $('[name="assigned_vessel"]').val(),
+                                        remarks: $('[name="remarks"]').val(),
+                                        _token: $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    success: result => {
+                                        ss("Successfully updated appointment");
+                                        reload();
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+
+            function reject(id){
+                sc("Confirmation", "Are you sure you want to REJECT?", result => {
+                    if(result.value){
+                        swal.showLoading();
+                        update({
+                            url: "{{ route('appointment.update') }}",
+                            data: {
+                                id: id,
+                                status: "Rejected",
+                                _token: $('meta[name="csrf-token"]').attr('content')
+                            },
+                            message: "Success"
+                        }, () => {
+                            reload();
+                        })
+                    }
+                });
+            }
+
+            function attend(id){
+                sc("Confirmation", "Are you sure you want to attend to crew?", result => {
+                    if(result.value){
+                        swal.showLoading();
+                        update({
+                            url: "{{ route('appointment.update') }}",
+                            data: {
+                                id: id,
+                                status: "Attended",
+                                _token: $('meta[name="csrf-token"]').attr('content')
+                            },
+                            message: "Success"
+                        }, () => {
+                            reload();
+                        })
+                    }
+                });
+            }
+
             $(document).ready(() => {
             })
+
+            function notif(){
+                if (Notification.permission === "granted") {
+                  showNotification();
+                } else if (Notification.permission !== "denied") {
+                  Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                      showNotification();
+                    }
+                  });
+                }
+
+                function showNotification() {
+                  new Notification("Hello!", {
+                    body: "You have a new appointment",
+                    icon: "https://placehold.co/100" // optional
+                  });
+                }
+            }
         </script>
     </body>
 </html>

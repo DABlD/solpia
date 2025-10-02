@@ -18,7 +18,7 @@ class AppointmentController extends Controller
         $ranks = Rank::select('name', 'abbr')->get();
         $users = User::whereIn('role', ['Crewing Manager', 'Crewing Officer', 'Processing', 'Training', 'Recruitment Officer'])
                         ->where('status', 1)
-                        ->select('fname', 'lname', 'gender')->get();
+                        ->select('fname', 'lname', 'gender', 'id', 'role', 'fleet')->get();
 
         return $this->_view('index', [
             'title' => 'Appointment',
@@ -68,7 +68,7 @@ class AppointmentController extends Controller
         $data->assigned_vessel = $req->assigned_vessel;
         $data->person_to_visit = $req->person_to_visit;
         $data->purpose_of_visit = $req->purpose_of_visit;
-        $data->status = $req->status;
+        $data->availability = User::find($req->person_to_visit)->availability;
         $data->remarks = $req->remarks;
         $data->save();
     }

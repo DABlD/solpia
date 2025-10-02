@@ -374,5 +374,6 @@ Route::group([
 
 		Route::get($name . '/get', ucfirst($name) . 'Controller@get')->name($name . '.get');
 		Route::post($name . '/store', ucfirst($name) . 'Controller@store')->name($name . '.store');
+		Route::post($name . '/update', ucfirst($name) . 'Controller@update')->name($name . '.update');
 	}
 );

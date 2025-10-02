@@ -3,15 +3,25 @@
 namespace App\Traits;
 
 trait AppointmentAttribute{
-	public function getActionsAttribute(){
-		return 
+	public function getActionsAttribute(){ 
+		$string = "";
 
-		// "<a class='btn btn-primary btn-sm' data-toggle='tooltip' title='Edit' onclick='view($this->id)'>" .
-	    //     '<span class="fa fa-pencil fa-2xs"></span>' .
-	    // '</a>' . "&nbsp;" .
-		// "<a class='btn btn-danger btn-sm' data-toggle='tooltip' title='Remove' onclick='del($this->id)'>" .
-	    //     '<span class="fa fa-times fa-2xs"></span>' .
-	    // '</a>'
-	    ;
+		$string .= "<a class='btn btn-warning btn-sm' data-toggle='tooltip' title='View' onclick='view($this->id)'>" .
+	        '<span class="fa fa-search fa-2xs"></span>' .
+	    '</a>' . "&nbsp;";
+
+	    if($this->status == "Waiting"){
+			$string .= "<a class='btn btn-success btn-sm' data-toggle='tooltip' title='Attend' onclick='attend($this->id)'>" .
+		        '<span class="fa fa-check fa-2xs"></span>' .
+		    '</a>' . "&nbsp;";
+	    }
+
+	    if($this->status == "Waiting"){
+			$string .= "<a class='btn btn-danger btn-sm' data-toggle='tooltip' title='Reject' onclick='reject($this->id)'>" .
+		        '<span class="fa fa-times fa-2xs"></span>' .
+		    '</a>';
+	    }
+
+	    return $string;
 	}
 }

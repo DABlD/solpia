@@ -48,7 +48,7 @@
 	color: white;
 }
 
-.btn:hover{
+.btn-warning:hover{
 	background-color: orange;
 	border: orange;
 	color: white;
