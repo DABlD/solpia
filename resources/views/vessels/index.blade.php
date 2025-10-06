@@ -4015,8 +4015,9 @@
                 title: 'Select Category',
                 input: 'select',
                 inputOptions: {
-                    'X15_Ext_Form':  'Extension',
+                    'X15_Ext_Form1':  'Extension',
                     'X15_Ext_Form2':  'Salary Amendment',
+                    'X15_Ext_Form3':  'CBA Update',
                     'X06_Ext_Prom_Form':  'Extension Promotion'
                 },
                 inputPlaceholder: '',
@@ -4024,7 +4025,15 @@
                 cancelButtonColor: '#f76c6b',
             }).then(result => {
                 if(result.value){
-                    window[result.value.slice(0,3)](id, result.value, result.value.slice(-1) == 2 ? "SALARY AMENDMENT" : "EXTENSION");
+                    let temp = result.value.slice(-1);
+
+                    let choices = {
+                        1: "EXTENSION",
+                        2: "SALARY AMENDMENT",
+                        3: "CBA Update"
+                    };
+
+                    window[result.value.slice(0,3)](id, result.value, choices[temp]);
                 }
             })
         }
@@ -4141,9 +4150,13 @@
                         cd: $('#cd').val()
                     }
 
-                    if(type2 == "SALARY AMENDMENT"){
-                        type = "X15_Ext_Form";
+                    type = "X15_Ext_Form";
+
+                    if(type2 == "Salary Amendment"){
                         data.filename = "X15_Salary_Amendment";
+                    }
+                    else if(type2 == ""){
+                        data.filename = "X15_CBA_Update";
                     }
 
                     window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
