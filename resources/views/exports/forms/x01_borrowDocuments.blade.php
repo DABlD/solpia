@@ -14,7 +14,7 @@
 
 	<tr>
 		<td>DATE:</td>
-		<td colspan="4" style="{{ $center }}">{{ now()->format('F, M d, Y') }}</td>
+		<td colspan="4" style="{{ $center }}">{{ now()->format('M d, Y') }}</td>
 		<td></td>
 		<td colspan="3">
 			AKJ-BRW-2021-
