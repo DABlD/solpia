@@ -254,6 +254,7 @@
 					<option value="BULK CARRIER SHIP INSPECTION TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;BULK CARRIER SHIP INSPECTION TRAINING</option>
 					<option value="BULK CARRIER SHIP INSPECTION TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;BULK CARRIER SHIP INSPECTION TRAINING</option>
 					<option value="ENCLOSED SPACE ENTRY">&nbsp;&nbsp;&nbsp;&nbsp;ENCLOSED SPACE ENTRY</option>
+					<option value="HATCH COVER AND MAINTENANCE">&nbsp;&nbsp;&nbsp;&nbsp;HATCH COVER AND MAINTENANCE</option>
 					<option value="SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;SHIPBOARD HAZARDS SIMULATION AND SITUATIONAL AWARENESS TRAINING</option>
 
 				<optgroup label="TANKER CERTIFICATES"></optgroup>
