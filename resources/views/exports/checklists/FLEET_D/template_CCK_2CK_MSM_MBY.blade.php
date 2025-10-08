@@ -313,7 +313,13 @@
 		{{ $doc("TYPHOID", "TYPHOID", 'med_cert') }}
 		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
 		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+
+		@if($data->vessel->principal_id == 1) //shinko
+			{{ $doc("ENCLOSED SPACE ENTRY", "ENCLOSED SPACE ENTRY", 'lc') }}
+		@else
+			{{ $doc("TEST", "", 'lc') }}
+		@endif
+
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
