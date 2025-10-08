@@ -4018,6 +4018,7 @@
                     'X15_Ext_Form1':  'Extension',
                     'X15_Ext_Form2':  'Salary Amendment',
                     'X15_Ext_Form3':  'CBA Update',
+                    'X15_Ext_Form4':  'Onboard Promotion',
                     'X06_Ext_Prom_Form':  'Extension Promotion'
                 },
                 inputPlaceholder: '',
@@ -4030,7 +4031,8 @@
                     let choices = {
                         1: "EXTENSION",
                         2: "SALARY AMENDMENT",
-                        3: "CBA Update"
+                        3: "CBA Update",
+                        4: "Onboard Promotion"
                     };
 
                     window[result.value.slice(0,3)](id, result.value, choices[temp]);
@@ -4152,11 +4154,14 @@
 
                     type = "X15_Ext_Form";
 
-                    if(type2 == "Salary Amendment"){
+                    if(type2 == "SALARY AMENDMENT"){
                         data.filename = "X15_Salary_Amendment";
                     }
-                    else if(type2 == ""){
+                    else if(type2 == "CBA Update"){
                         data.filename = "X15_CBA_Update";
+                    }
+                    else if(type2 == "Onboard Promotion"){
+                        data.filename = "X15_Onboard_Promotion";
                     }
 
                     window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
