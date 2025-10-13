@@ -394,7 +394,7 @@
 
 				obcs.forEach((obc, index) => {
 					let user = obc.applicant.user;
-					let months = Number(obc.months) + Number(obc.extensions ? JSON.parse(obc.extensions).reduce((a,b)=>a+b,0) : 0);
+					let months = Number(obc.months) + Number(obc.extensions ? JSON.parse(obc.extensions).map(Number).reduce((a,b)=>a+b,0) : 0);
 
 					// IDS
 					let pp = filterDocs(obc.document_id, 'PASSPORT');
