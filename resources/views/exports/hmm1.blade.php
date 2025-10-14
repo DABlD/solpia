@@ -492,7 +492,7 @@
 			@php
 				$reg = json_decode($docu->regulation);
 			@endphp
-			@if(str_starts_with($docu->type, 'COC') && ($reg[0] == "II/1" || $reg[0] == "II/2"))
+			@if(str_starts_with($docu->type, 'COC') && (sizeof($reg) && ($reg[0] == "II/1" || $reg[0] == "II/2")))
 				@php
 					$bool = true;
 				@endphp
@@ -521,7 +521,7 @@
 			@php
 				$reg = json_decode($docu->regulation);
 			@endphp
-			@if(str_starts_with($docu->type, 'COC') && ($reg[0] == "III/1" || $reg[0] == "III/2"))
+			@if(str_starts_with($docu->type, 'COC') && (sizeof($reg) && ($reg[0] == "III/1" || $reg[0] == "III/2")))
 				@php 
 					$bool = true;
 				@endphp
