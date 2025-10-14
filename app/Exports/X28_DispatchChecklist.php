@@ -436,8 +436,8 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
                     'B5:F5', 'H5:M5',
                     'C6:F6', 'K6:M6',
                     'D7:F7', 'J7:M7',
-                    'A52:E52', 'G52:M52',
-                    'A56:E56'
+                    'A52:E52'//, 'G52:M52',
+                    //'A56:E56'
                 ]);
 
                 // LBT
