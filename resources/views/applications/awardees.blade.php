@@ -73,6 +73,7 @@
                                                                 <th>Last Vessel</th>
                                                                 <th>Address</th>
                                                                 <th>Status</th>
+                                                                <th>Last Sign Off</th>
                                                             </tr>
                                                         </thead>
 
@@ -93,6 +94,7 @@
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
                                                                     <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -110,6 +112,7 @@
                                                                 <th>Last Vessel</th>
                                                                 <th>Address</th>
                                                                 <th>Disembarked On</th>
+                                                                <th>Last Sign Off</th>
                                                             </tr>
                                                         </thead>
 
@@ -130,6 +133,7 @@
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
                                                                     <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -186,6 +190,7 @@
                                                                 <th>Last Vessel</th>
                                                                 <th>Address</th>
                                                                 <th>Status</th>
+                                                                <th>Last Sign Off</th>
                                                             </tr>
                                                         </thead>
 
@@ -206,6 +211,7 @@
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
                                                                     <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -222,7 +228,8 @@
                                                                 <th>Years</th>
                                                                 <th>Last Vessel</th>
                                                                 <th>Address</th>
-                                                                <th>Disembarked On</th>
+                                                                <th>Status</th>
+                                                                <th>Last Sign Off</th>
                                                             </tr>
                                                         </thead>
 
@@ -243,6 +250,7 @@
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
                                                                     <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -299,6 +307,7 @@
                                                                 <th>Last Vessel</th>
                                                                 <th>Address</th>
                                                                 <th>Status</th>
+                                                                <th>Last Sign Off</th>
                                                             </tr>
                                                         </thead>
 
@@ -319,6 +328,7 @@
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
                                                                     <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -335,7 +345,8 @@
                                                                 <th>Years</th>
                                                                 <th>Last Vessel</th>
                                                                 <th>Address</th>
-                                                                <th>Disembarked On</th>
+                                                                <th>Status</th>
+                                                                <th>Last Sign Off</th>
                                                             </tr>
                                                         </thead>
 
@@ -356,6 +367,7 @@
                                                                     <td>{{ $awardee['last_vessel']->vessel_name ?? $awardee['last_vessel']->name }}</td>
                                                                     <td>{{ $awardee['address'] }}</td>
                                                                     <td>{{ $awardee['pa_s'] }}</td>
+                                                                    <td>{{ $awardee['last_vessel']->sign_off }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
