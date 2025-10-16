@@ -1709,7 +1709,7 @@ class ApplicationsController extends Controller
         $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet', 'u.address', 'pa.status as pa_s')
                     // ->where('manning_agent', 'LIKE', '%SOLPIA%')
                     // ->where('sea_services.applicant_id', $id)
-                    ->whereNull('u.deleted_at')
+                    ->whereNull('a.deleted_at')
                     ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
                     ->join('users as u', 'u.id', '=', 'a.user_id')
                     ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
