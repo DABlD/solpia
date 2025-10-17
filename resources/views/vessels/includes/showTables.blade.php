@@ -396,6 +396,10 @@
 					let user = obc.applicant.user;
 					let months = Number(obc.months) + Number(obc.extensions ? JSON.parse(obc.extensions).map(Number).reduce((a,b)=>a+b,0) : 0);
 
+					if(index+1 == 3){
+						console.log(obc.document_flag);
+					}
+
 					// IDS
 					let pp = filterDocs(obc.document_id, 'PASSPORT');
 					let sb = filterDocs(obc.document_id, "SEAMAN'S BOOK");
@@ -410,7 +414,7 @@
 					let fSdsd = filterDocs(obc.document_flag, 'SDSD', vessel.flag);
 					let fCook = filterDocs(obc.document_flag, "SHIP'S COOK ENDORSEMENT", vessel.flag);
 					let fRank = fBooklet ? fBooklet.rank : fLicense ? fLicense.rank : fSdsd ? fSdsd.rank : null;
-					let fSsoSdsd = fSso ?? fSdsd;
+					let fSsoSdsd = (fSso && fSso.issue_date != null) ? fSso : fSdsd;
 
 					// LICENSE
 					let oic = filterDocs(obc.document_lc, 'COC', null, 'OIC');
