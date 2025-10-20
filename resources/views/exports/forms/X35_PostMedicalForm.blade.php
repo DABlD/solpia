@@ -44,7 +44,7 @@
 
 	<tr>
 		<td colspan="11" style="{{ $b }}">
-			Date &#38; Place of Disembarkation: {{ $data->current_lineup->disembarkation_port }} / {{ $data->current_lineup->disembarkation_date ? $data->current_lineup->disembarkation_date->format("M j, Y") : "-" }}
+			Date &#38; Place of Disembarkation: {{ $data->current_lineup->disembarkation_port }} / {{ $data->current_lineup->disembarkation_date ? now()->parse($data->current_lineup->disembarkation_date)->format("M j, Y") : "-" }}
 		</td>
 	</tr>
 
