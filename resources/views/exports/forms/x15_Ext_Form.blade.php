@@ -138,9 +138,9 @@
 			{{ isset($uv->expiry_date) ? $uv->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
-			{{ $uv->number ?? '-' }}
+			{{ $yf->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ isset($uv->expiry_date) ? $uv->expiry_date->format('d-M-Y') : '-' }}
+			{{ isset($yf->expiry_date) ? $yf->expiry_date->format('d-M-Y') : '-' }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $mcv->number ?? '-' }}
