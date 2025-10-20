@@ -4019,6 +4019,7 @@
                     'X15_Ext_Form2':  'Salary Amendment',
                     'X15_Ext_Form3':  'CBA Update',
                     'X15_Ext_Form4':  'Onboard Promotion',
+                    'X15_Ext_Form5':  'Vessel Change Name',
                     'X06_Ext_Prom_Form':  'Extension Promotion'
                 },
                 inputPlaceholder: '',
@@ -4032,7 +4033,8 @@
                         1: "EXTENSION",
                         2: "SALARY AMENDMENT",
                         3: "CBA Update",
-                        4: "Onboard Promotion"
+                        4: "Onboard Promotion",
+                        5: "Vessel Change Name",
                     };
 
                     window[result.value.slice(0,3)](id, result.value, choices[temp]);
@@ -4162,6 +4164,9 @@
                     }
                     else if(type2 == "Onboard Promotion"){
                         data.filename = "X15_Onboard_Promotion";
+                    }
+                    else if(type2 == "Vessel Change Name"){
+                        data.filename = "X15_Vessel_Change_Name";
                     }
 
                     window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
