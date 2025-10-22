@@ -230,6 +230,7 @@
 	{{ $doc("COC", "NATIONAL LICENSE (COC/COE)", 'lc', 0, 'II/1') }}
 	{{ $doc("GMDSS/GOC", "GMDSS CERTIFICATE", 'lc', 0, 'IV/2') }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
+{{ $doc("BT-PSSR", "BT-PSSR", 'lc') }}
 	@php
 		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
 		$b = "SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"

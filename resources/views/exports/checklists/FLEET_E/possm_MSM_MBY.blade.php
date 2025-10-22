@@ -203,6 +203,7 @@
 
 	{{ $section("4. CERTIFICATES WITH COP", 0) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
+{{ $doc("BT-PSSR", "BT-PSSR", 'lc') }}
 	{{ $doc("SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD", "SDSD ENDORSEMENT", 'flag') }}
 
 	{{ $section("5. MEDICAL / VACCINATION", 1) }}

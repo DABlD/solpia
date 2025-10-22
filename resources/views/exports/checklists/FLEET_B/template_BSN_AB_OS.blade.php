@@ -238,6 +238,7 @@
 	{{ $doc("COC", "MARINA COP II/4 - NAVIGATIONAL WATCH", 'lc', 1, 'II/4') }}
 	{{ $doc("COE", "MARINA COP II/5 - ABLE SEAFARER DECK", 'lc', 1, 'II/5') }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
+{{ $doc("BT-PSSR", "BT-PSSR", 'lc') }}
 	@php
 		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
 		$b = "SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"

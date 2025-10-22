@@ -248,6 +248,7 @@
 	{{ $doc("NCIII", "NC III - SHIP'S COOK", 'lc', 0) }}
 	{{ $doc("NCI", "NC I - MESSMAN", 'lc', 1) }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
+{{ $doc("BT-PSSR", "BT-PSSR", 'lc') }}
 	@php
 		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
 		$b = "SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"

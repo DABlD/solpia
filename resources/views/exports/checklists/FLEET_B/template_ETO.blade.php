@@ -247,6 +247,7 @@
 	{{ $section("4. NATIONAL LICENSE / COP", 0) }}
 	{{ $doc("COE", "ELECTRO-TECHNICAL OFFICER (CERTIFICATE) - III/6", 'lc', 1, 'III/6') }}
 	{{ $doc("BASIC TRAINING - BT", "BASIC TRAINING (BT)", 'lc') }}
+{{ $doc("BT-PSSR", "BT-PSSR", 'lc') }}
 	@php
 		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
 		$b = "SURVIVAL CRAFT & RESCUE BOAT (PSCRB)"
