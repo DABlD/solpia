@@ -158,6 +158,7 @@
 				<optgroup label="COP"></optgroup>
 
 					<option value="BASIC TRAINING - BT">&nbsp;&nbsp;&nbsp;&nbsp;BASIC TRAINING - BT</option>
+					<option value="BT-PSSR">&nbsp;&nbsp;&nbsp;&nbsp;BT-PSSR</option>
 					<option value="PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB">&nbsp;&nbsp;&nbsp;&nbsp;PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB</option>
 					<option value="ADVANCE FIRE FIGHTING - AFF">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE FIRE FIGHTING - AFF</option>
 					<option value="MEDICAL FIRST AID - MEFA">&nbsp;&nbsp;&nbsp;&nbsp;MEDICAL FIRST AID - MEFA</option>
