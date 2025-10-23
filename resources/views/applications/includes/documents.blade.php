@@ -871,6 +871,16 @@
         						'LICENSE', 'BOOKLET', 'SDSD'
         					]
         				},
+        				@if(auth()->user()->fleet == "FLEET D")
+        				{
+        					range: [
+        						[5,6]
+        					],
+        					documents: [
+        						'SSO'
+        					]
+        				},
+        				@endif
         				{
         					range: [
         						[9,57]
@@ -936,7 +946,26 @@
         						[1,57]
         					],
         					documents: [
-        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD', 'CRA'
+        						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
+        					]
+        				},
+        				@if(auth()->user()->fleet == "FLEET D")
+        				{
+        					range: [
+        						[1,2],
+        						[5,6]
+        					],
+        					documents: [
+        						'SSO'
+        					]
+        				},
+        				@endif
+        				{
+        					range: [
+        						[1,57]
+        					],
+        					documents: [
+        						'CRA'
         					]
         				},
         			]
