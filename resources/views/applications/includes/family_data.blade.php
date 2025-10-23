@@ -54,6 +54,14 @@
                 Daughter
             </a>
             
+            <u><h3><strong>Sibling</strong></h3></u>
+            <div class="Sibling"></div>
+            <span class="SiblingCount fd-count">0</span>
+            <a class="btn btn-success" onclick="addFD('Sibling')">
+                <span class="fa fa-plus"></span>
+                Sibling
+            </a>
+            
             <u><h3><strong>Beneficiary</strong></h3></u>
             <div class="Beneficiary"></div>
             <span class="BeneficiaryCount fd-count">0</span>
