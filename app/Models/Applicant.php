@@ -37,7 +37,7 @@ class Applicant extends Model
     }
 
     public function sea_service(){
-        return $this->hasMany('App\Models\SeaService');
+        return $this->hasMany('App\Models\SeaService')->orderBy('sign_off', 'asc');
     }
 
     public function document_id(){
