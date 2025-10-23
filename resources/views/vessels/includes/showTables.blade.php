@@ -373,8 +373,6 @@
 
 				let isTanker = false;
 
-				console.log(vid, vessel);
-
 				if(['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM'].includes(vessel.type)){
 					isTanker = true;
 					copLength = 7;
@@ -395,10 +393,6 @@
 				obcs.forEach((obc, index) => {
 					let user = obc.applicant.user;
 					let months = Number(obc.months) + Number(obc.extensions ? JSON.parse(obc.extensions).map(Number).reduce((a,b)=>a+b,0) : 0);
-
-					if(index+1 == 3){
-						console.log(obc.document_flag);
-					}
 
 					// IDS
 					let pp = filterDocs(obc.document_id, 'PASSPORT');
@@ -445,6 +439,7 @@
 					// MEDICAL
 					let medical = filterDocs(obc.document_med_cert, 'MEDICAL CERTIFICATE');
 
+					
 					string += `
 						<tr>
 							<td>${index+1}</td>

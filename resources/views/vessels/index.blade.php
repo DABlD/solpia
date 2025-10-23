@@ -867,7 +867,6 @@
                                 value: 'ACTIVE'
                             },
                             success: () => {
-                                console.log();
                                 table.ajax.reload(null, false);
                                 swal({
                                     type: 'success',
@@ -1298,7 +1297,6 @@
                         onOpen: () => {
                             let choices = "";
 
-                            console.log(vessels);
                             vessels.forEach(vessel => {
                                 choices += `<option value="${vessel.id}">${vessel.name} (${vessel.imo})</option>`;
                             });
@@ -5511,7 +5509,6 @@
                                         showConfirmButton: false,
                                         timer: 800
                                     }).then(() => {
-                                        console.log(vessel);
                                         getVesselCrew(vessel, true);
                                         $('[href=".onBoard"]').click();
                                     });
@@ -6953,8 +6950,6 @@
                                         let id = e.target.value;
                                         let name = $(e.target).find('option:selected').data('name');
                                         let rank = $(e.target).find('option:selected').data('rank');
-
-                                        console.log(e.target, name, rank);
 
                                         if(id){
                                             $('#crewList').select2('val', 0);
