@@ -929,7 +929,7 @@
         						[1,57]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET', 'CRA', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
+        						'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'CRA', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
         					]
         				},
         				{
