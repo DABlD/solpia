@@ -2320,7 +2320,8 @@
         }
 
         function fillTab8(applicant){
-            let sss = Object.entries(applicant.sea_service);
+            let sss = Object.entries(applicant.sea_service)
+                .sort(([, a], [, b]) => new Date(b.sign_off) - new Date(a.sign_off));
 
             if(applicant.lup){
                 $.ajax({
