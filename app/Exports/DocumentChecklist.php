@@ -376,7 +376,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // HC VC
                 $h[4] = [
-                    'A2', 'B4:B6', 'G4:G6', 'D8:I75', 'A77:I85', 'E4:E6'
+                    'A2', 'B4:B6', 'G4:G6', 'D8:I76', 'A78:I86', 'E4:E6'
                 ];
 
                 // HL
@@ -389,7 +389,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // VC
                 $h[7] = [
-                    'A9:A75'
+                    'A9:A76'
                 ];
 
                 $h['wrap'] = [
@@ -440,7 +440,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // ALL BORDER DOTTED
                 $cells[1] = array_merge([
-                    'A8:I75'
+                    'A8:I76'
                 ]);
 
                 // ALL BORDER THICK
@@ -449,7 +449,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
-                    'A8:I75'
+                    'A8:I76'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -484,20 +484,20 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 ]);
 
                 if($this->data->user->fleet == "FLEET D"){
-                    array_push($cells[10], 'B78:D78');
-                    array_push($cells[10], 'G78:I78');
-                    array_push($cells[10], 'B81:D81');
-                    array_push($cells[10], 'G81:I81');
-                    array_push($cells[10], 'B84:D84');
-                    array_push($cells[10], 'G84:I84');
-                }
-                else{
-                    array_push($cells[10], 'B77:D77');
-                    array_push($cells[10], 'G77:I77');
                     array_push($cells[10], 'B79:D79');
                     array_push($cells[10], 'G79:I79');
-                    array_push($cells[10], 'B81:D81');
-                    array_push($cells[10], 'G81:I81');
+                    array_push($cells[10], 'B82:D82');
+                    array_push($cells[10], 'G82:I82');
+                    array_push($cells[10], 'B85:D85');
+                    array_push($cells[10], 'G85:I85');
+                }
+                else{
+                    array_push($cells[10], 'B78:D78');
+                    array_push($cells[10], 'G78:I78');
+                    array_push($cells[10], 'B80:D80');
+                    array_push($cells[10], 'G80:I80');
+                    array_push($cells[10], 'B82:D82');
+                    array_push($cells[10], 'G82:I82');
                 }
 
                 foreach($cells as $key => $value){
@@ -523,7 +523,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 // ROW RESIZE
                 $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(50);
 
-                for($i = 4; $i <= 85; $i++){
+                for($i = 4; $i <= 86; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(11);
                 }
                 
@@ -531,13 +531,13 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 $event->sheet->getDelegate()->getStyle('A4:I8')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('A9:D75')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('I9:I75')->getFont()->setSize(7);
-                $event->sheet->getDelegate()->getStyle('A76:I85')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('A9:D76')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('I9:I76')->getFont()->setSize(7);
+                $event->sheet->getDelegate()->getStyle('A77:I86')->getFont()->setSize(7);
                 $event->sheet->getDelegate()->getStyle('A4:I8')->getFont()->setName('Trebuchet MS');
-                $event->sheet->getDelegate()->getStyle('A9:D75')->getFont()->setName('Trebuchet MS');
-                $event->sheet->getDelegate()->getStyle('I9:I75')->getFont()->setName('Trebuchet MS');
-                $event->sheet->getDelegate()->getStyle('A76:I85')->getFont()->setName('Trebuchet MS');
+                $event->sheet->getDelegate()->getStyle('A9:D76')->getFont()->setName('Trebuchet MS');
+                $event->sheet->getDelegate()->getStyle('I9:I76')->getFont()->setName('Trebuchet MS');
+                $event->sheet->getDelegate()->getStyle('A77:I86')->getFont()->setName('Trebuchet MS');
             },
         ];
     }
