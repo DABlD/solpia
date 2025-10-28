@@ -214,7 +214,7 @@
                         render: availability =>{
                             let colors = {
                                 "Available": "green",
-                                "Out of office": "gray",
+                                "Out of office": "red",
                                 "In a meeting": "orange",
                                 "Doing dispatch": "orange",
                                 "Conducting debriefing": "orange"
