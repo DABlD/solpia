@@ -20,7 +20,8 @@ class HMMCM1P5 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $array1 = [
             "M/V GLOBAL ENTERPRISE","M/V HMM CEBU",
-            'M/V MPV THALIA', 'M/V MPV URANIA'
+            'M/V MPV THALIA', 'M/V MPV URANIA',
+            'M/V HMM NARU'
         ];
 
         if(in_array($applicant->vessel->name, $array1)){

@@ -305,6 +305,7 @@
 			$flag = str_replace('&', '&#38;', $ss->flag);
 			$principal = str_replace('&', '&#38;', $ss->principal);
 			$remarks = str_replace('&', '&#38;', $ss->remarks);
+			$vType = str_replace('&', '&#38;', $ss->vessel_type);
 
 			$son = $ss->sign_on;
 			$soff = $ss->sign_off;
@@ -318,7 +319,7 @@
 				<td colspan='2'>$name</td>
 				<td>$ss->gross_tonnage</td>
 				<td>$bhp</td>
-				<td>$ss->vessel_type</td>
+				<td>$vType</td>
 				<td>$vr</td>
 				<td>$eng</td>
 				<td>$on</td>
