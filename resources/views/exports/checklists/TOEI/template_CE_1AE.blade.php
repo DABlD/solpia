@@ -260,7 +260,7 @@
 	{{ $doc("MEDICAL FIRST AID - MEFA", "MEDICAL FIRST AID (MEFA)", 'lc') }}
 	{{ $doc("MEDICAL CARE - MECA", "MEDICAL CARE (MECA)", 'lc') }}
 	{{ $doc("SHIP SECURITY OFFICER - SSO", "SHIP SECURTIY OFFICER (SSO)", 'lc') }}
-	{{ $doc("EMPTY", "", 'lc') }}
+	{{-- {{ $doc("EMPTY", "", 'lc') }} --}}
 
 	{{ $section("5. FLAG DOCUMENTS", 0) }}
 	{{ $doc("BOOKLET", "FLAG BOOKLET", 'flag') }}
@@ -278,7 +278,7 @@
 	{{ $doc("CONSOLIDATED MARPOL", "CONSOLIDATED MARPOL (ANNEX I-VI)", 'lc', 2) }}
 	{{ $doc("ME ENGINE TRAINING", "ME ENGINE TRAINING", 'lc', 2) }}
 	{{ $doc("MARINE ELECTRICAL", "MARINE ELECTRICAL TRAINING", 'lc', 2) }}
-	{{ $doc("EMPTY", "", 'lc', 2) }}
+	{{-- {{ $doc("EMPTY", "", 'lc', 2) }} --}}
 
 	{{ $section("7. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
 	{{ $doc("PDOS", "PRE-DEPARTURE ORIENTATION SEMINAR (PDOS)", 'lc', 2) }}
@@ -658,6 +658,8 @@
 			{{ $con("PRE JOINING EMS TRAINING RECORD") }}
 			{{ $con("QUESTIONNAIRES TO SEAFARERS ON EMPLOYMENMT CONTRACT (P1-2)") }}
 			{{ $con("PCR RESULT") }}
+			{{ $con("CARGO HOLD VENTILATION") }}
+			{{ $con("ECDIS PARALLEL INDEX") }}
 		@else
 			{{ $doc($temp, "COVID VACCINE - 1ST DOSE / 2ND DOSE / BOOSTER", 'med_cert') }}
 			{{ $con("TOEI BRIEFING / JOINING CHECKLIST") }}

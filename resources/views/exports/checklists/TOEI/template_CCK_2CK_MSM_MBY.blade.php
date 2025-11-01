@@ -681,8 +681,8 @@
 			{{ $con("PRE JOINING EMS TRAINING RECORD") }}
 			{{ $con("QUESTIONNAIRES TO SEAFARERS ON EMPLOYMENMT CONTRACT (P1-2)") }}
 			{{ $con("PCR RESULT") }}
-			{{ $doc("TEST", "", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $con("CARGO HOLD VENTILATION") }}
+			{{ $con("ECDIS PARALLEL INDEX") }}
 		@endif
 	@endif
 

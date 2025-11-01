@@ -289,7 +289,7 @@
 	{{ $doc("EMPTY", "", 'lc') }}
 	{{ $doc("EMPTY", "", 'lc') }}
 	{{ $doc("EMPTY", "", 'lc') }}
-	{{ $doc("EMPTY", "", 'lc') }}
+	{{-- {{ $doc("EMPTY", "", 'lc') }} --}}
 
 	{{ $section("7. IN HOUSE CERTIFICATE / SPECIAL TRAINING", 1) }}
 	{{ $doc("PDOS", "PRE-DEPARTURE ORIENTATION SEMINAR (PDOS)", 'lc', 2) }}
@@ -720,10 +720,13 @@
 			{{ $con("PCR RESULT") }}
 			@if(in_array($data->rank2->id, [14,19]))
 				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
+				{{ $con("CARGO HOLD VENTILATION") }}
+				{{ $con("ECDIS PARALLEL INDEX") }}
 			@else
+				{{ $con("CARGO HOLD VENTILATION") }}
+				{{ $con("ECDIS PARALLEL INDEX") }}
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
-			{{ $doc("TEST", "", 'lc') }}
 		@endif
 	@endif
 
