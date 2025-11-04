@@ -27,7 +27,7 @@ trait ApplicantAttribute{
 			if($this->pas != "Lined-Up" && $this->pas != "On Board"){
 				$string .= '<a class="btn btn-info btn-xs" data-toggle="tooltip" title="Line-Up" data-id="' . $this->id . '">' . '<span class="fa fa-arrow-up fa-sm" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
-			if(in_array(auth()->user()->role, ['Admin', 'Encoder'])){
+			if(in_array(auth()->user()->role, ['Admin', 'Encoder', 'Crewing Manager', 'Crewing Officer'])){
 				$string .= '<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete Applicant" data-id="' . $this->id . '">' . '<span class="fa fa-trash fa-sm" data-id="' . $this->id . '"></span>' . '</a>&nbsp;';
 			}
 			if($this->pas == "Lined-Up"){
