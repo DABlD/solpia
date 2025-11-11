@@ -1723,6 +1723,10 @@ class ApplicationsController extends Controller
         foreach($applicants as $sss){
             $sss = $sss->sortByDesc('sign_on');
 
+            if(isset($sss->first()->sign_off) && $sss->first()->sign_off->toDateString() <= now()->subYear(2)->endOfYear()->toDateString()){
+                continue;
+            }
+
             $rname = "-";
 
             if($sss->first()->rank != ""){
@@ -1761,8 +1765,13 @@ class ApplicationsController extends Controller
 
             $luc = LineUpContract::where('applicant_id', $sss->first()->applicant_id)->where('status', 'On Board')->first();
             if($luc){
-                // $total += now()->diffInDays($luc->joining_date) / 30;
-                $total += $luc->months;
+                if(now()->parse($luc->joining_date)->addMonths($luc->months)->toDateString() >= "2025-12-31"){
+                    $total += now()->parse("2025-12-31")->diffInDays($luc->joining_date) / 30;
+                }
+                else{
+                    $total += $luc->months;
+                }
+
                 if($luc->extensions){
                     $extensions = json_decode($luc->extensions);
                     foreach($extensions as $ex){
@@ -2084,7 +2093,6 @@ class ApplicationsController extends Controller
                     echo $lup->lname . ', ' . $lup->fname . ';' . $temp2->rank2->abbr . ';' . $temp2->vessel_name . ';' . $temp2->sign_off . '<br>';
                 }
             }
-
         }
     }
 
