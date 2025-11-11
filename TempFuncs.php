@@ -276,8 +276,9 @@ $applicants = Applicant::select('applicants.id', 'u.fname', 'u.lname', 'u.contac
 
 $applicants->load('sea_service');
 
-$active = 0;
-$inactive = 0;
+$onboard = 0;
+$vacation = 0;
+$linedup = 0;
 
 foreach($applicants as $applicant){
     $seaServices = $applicant->sea_service;
@@ -298,14 +299,19 @@ foreach($applicants as $applicant){
         ->first();
 
     if($ss && ($ss->sign_off ? ($ss->sign_off->toDateString() >= "2024-05-01") : ($ss->sign_on->toDateString() >= "2023-12-01")) && $hasFairview){
-        $active++;
-    }
-    else{
-        $inactive++;
+        if($applicant->pro_app->status == "On Board"){
+            $onboard++;
+        }
+        elseif($applicant->pro_app->status == "Vacation"){
+            $vacation++;
+        }
+        else{
+            $linedup++;
+        }
     }
 }
 
-dd($active, $inactive);
+dd($onboard, $vacation, $linedup);
 
 <!-- active/inactive crew by fleet -->
 DB::enableQueryLog();
