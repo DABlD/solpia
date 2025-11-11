@@ -265,3 +265,77 @@ foreach($lucs as $luc){
         echo $luc->rank->abbr . ';' . $luc->applicant->user->namefull . ';' . $luc->joining_date . ';' . $luc->vessel->name . ';' . ($usv ? $usv->expiry_date : "N/A") . '<br>';
     }
 }
+
+<!-- ACTIVE TOEI CREW THAT HAS RECORD IN FAIRVIEW -->
+DB::enableQueryLog();
+
+$applicants = Applicant::select('applicants.id', 'u.fname', 'u.lname', 'u.contact')
+    ->join('users as u', 'u.id', '=', 'applicants.user_id')
+    ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
+    ->get()->keyBy('id');
+
+$applicants->load('sea_service');
+
+$active = 0;
+$inactive = 0;
+
+foreach($applicants as $applicant){
+    $seaServices = $applicant->sea_service;
+
+    // check if ANY of the records has "FAIRVIEW" in manning_agent
+    $hasFairview = $seaServices->contains(function ($s) {
+        return stripos($s->manning_agent, 'FAIRVIEW') !== false;
+    });
+
+    // get the latest record (sign_off if present, else sign_on)
+    $ss = $seaServices
+        ->filter(function ($s) {
+            return $s->sign_off || $s->sign_on;
+        })
+        ->sortByDesc(function ($s) {
+            return $s->sign_off ?: $s->sign_on;
+        })
+        ->first();
+
+    if($ss && ($ss->sign_off ? ($ss->sign_off->toDateString() >= "2024-05-01") : ($ss->sign_on->toDateString() >= "2023-12-01")) && $hasFairview){
+        $active++;
+    }
+    else{
+        $inactive++;
+    }
+}
+
+dd($active, $inactive);
+
+<!-- active/inactive crew by fleet -->
+DB::enableQueryLog();
+
+$applicants = Applicant::select('applicants.id', 'u.fname', 'u.lname', 'u.contact')
+    ->join('users as u', 'u.id', '=', 'applicants.user_id')
+    ->where('u.fleet', 'LIKE', auth()->user()->fleet ?? "%%")
+    ->get()->keyBy('id');
+
+$applicants->load('sea_service');
+
+$active = 0;
+$inactive = 0;
+
+foreach($applicants as $applicant){
+    $ss = $applicant->sea_service
+        ->filter(function ($s) {
+            return $s->sign_off || $s->sign_on;
+        })
+        ->sortByDesc(function ($s) {
+            return $s->sign_off ?: $s->sign_on;
+        })
+        ->first();
+
+    if($ss && ($ss->sign_off ? ($ss->sign_off->toDateString() >= "2024-05-01") : ($ss->sign_on->toDateString() >= "2023-12-01"))){
+        $active++;
+    }
+    else{
+        $inactive++;
+    }
+}
+
+dd($active, $inactive);
