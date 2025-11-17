@@ -188,12 +188,12 @@
 		$rjpay = [0,20,40,60,80,100];
 
 		$basic = $wage ? $data->wage->basic : 0;
-		$fot = $data->wage ? ($data->wage->fot ?? 0) : 0;
-		$ot = $data->wage ? ($data->wage->ot ?? 0) : 0;
+		$fot = $data->wage ? ($data->wage->fot ?? $data->wage->ot ?? 0) : 0;
+		$oa = $data->wage ? ($data->wage->owner_allow ?? 0) : 0;
 		$lp = $data->wage ? $data->wage->leave_pay : 0;
 		$rj = $rjpay[$count];
 
-		$total = $basic + $fot + $ot + $lp + $spay + $rj;
+		$total = $basic + $fot + $oa + $lp + $spay + $rj;
 	@endphp
 
 	<tr>
@@ -233,7 +233,7 @@
 		<td>${{ $basic }}</td>
 		<td colspan="3">${{ $fot }}</td>
 		<td>${{ $lp }}</td>
-		<td>${{ $ot }}</td>
+		<td>${{ $oa }}</td>
 	</tr>
 
 	<tr>
