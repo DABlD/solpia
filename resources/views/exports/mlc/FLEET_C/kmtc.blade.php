@@ -434,8 +434,16 @@
 	</tr>
 
 	<tr>
-		<td colspan="4">(Seafarer)</td>
+		<td colspan="4">
+			{{ $data->user->namefull }}
+			<br style='mso-data-placement:same-cell;' />
+			<br style='mso-data-placement:same-cell;' />
+			(Seafarer)
+		</td>
 		<td colspan="5">
+			Ms. Shirley Erasquin
+			<br style='mso-data-placement:same-cell;' />
+			<br style='mso-data-placement:same-cell;' />
 			(Ship owner or
 			<br style='mso-data-placement:same-cell;' />
 			for and on behalf of the ship owner of the vessel

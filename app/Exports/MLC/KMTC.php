@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class KMTC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class KMTC implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
         $this->data     = $data;
@@ -367,7 +367,7 @@ class KMTC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     'B29:I31' ,'B32:B34', 'D32', 'B36', 'C38:C39', 'B40',
                     'B45', 'B47', 'B51', 'I16', 'E14',
 
-                    'E5'
+                    'E5', 'I6'
                 ];
 
                 // SHRINK TO FIT
@@ -559,27 +559,14 @@ class KMTC implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('Letter Head');
-        $drawing->setDescription('Letter Head');
-        $drawing->setPath(public_path("images/letter_head.jpg"));
+        $drawing->setPath(public_path("images/shirley_sig.png"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(115);
-        $drawing->setWidth(2200);
+        $drawing->setHeight(75);
+        $drawing->setWidth(100);
         $drawing->setOffsetX(4);
         $drawing->setOffsetY(4);
-        $drawing->setCoordinates('C1');
+        $drawing->setCoordinates('H48');
 
-        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setName('Avatar');
-        $drawing2->setDescription('Avatar');
-        $drawing2->setPath(public_path($this->data->user->avatar));
-        $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(230);
-        $drawing2->setWidth(230);
-        $drawing2->setOffsetX(5);
-        $drawing2->setOffsetY(2);
-        $drawing2->setCoordinates('C3');
-
-        return [$drawing, $drawing2];
+        return [$drawing];
     }
 }
