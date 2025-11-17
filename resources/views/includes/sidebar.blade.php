@@ -14,7 +14,7 @@
 				@endif
 			</div>
 			<div class="pull-left info">
-				<p>{{ auth()->user()->fullname }}</p>
+				<p style="text-wrap: auto;">{{ auth()->user()->fullname }}</p>
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
 		</div>
