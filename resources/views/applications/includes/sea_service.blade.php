@@ -127,6 +127,7 @@
                             <option value="WORLDWIDE">WORLDWIDE</option>
                             <option value="FAR EAST">FAR EAST</option>
                             <option value="MIDDLE EAST">MIDDLE EAST</option>
+                            <option value="SOUTHEAST ASIA">SOUTHEAST ASIA</option>
                             <option value="DOMESTIC">DOMESTIC</option>
                         </select>
 
