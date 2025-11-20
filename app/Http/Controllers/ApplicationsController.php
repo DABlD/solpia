@@ -753,8 +753,8 @@ class ApplicationsController extends Controller
             "M/V ULTRA REGINA"
         ];
 
-        //KSSLINE USE HMM FORMAT
-        if($type == "kssline"){
+        //KSSLINE AND KMTC USE HMM FORMAT BIODATA
+        if($type == "kssline" || $type == "kmtc"){
             $type = "hmm";
         }
 
