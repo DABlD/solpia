@@ -334,16 +334,16 @@ class X07_SeaServiceRequestForm implements FromView, WithEvents, WithDrawings//,
 
                 // VC
                 $h[7] = [
-                    'A1:G17'
+                    'A1:G18'
                 ];
 
                 $h['wrap'] = [
-                    'E8'
+                    'E9'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A12:F13', 'E9'
+                    'A13:F14', 'E10'
                 ];
 
                 foreach($h as $key => $value) {
@@ -436,11 +436,11 @@ class X07_SeaServiceRequestForm implements FromView, WithEvents, WithDrawings//,
 
                 // BBT
                 $cells[12] = array_merge([
-                    'B3:F3', 'B4:F4', 'B5:F5', 'B6:F6',
-                    'C9', 'E9', 'G9', 'C10', 'E10', 'G10',
-                    'A12:B12', 'D12:F12',
-                    'C15:E15',
-                    'C17:E17',
+                    'B3:F3', 'B4:F4', 'B5:F5', 'B6:F6', 'B7:F7',
+                    'C10', 'E10', 'G10', 'C11', 'E11', 'G11',
+                    'A13:B13', 'D13:F13',
+                    'C16:E16',
+                    'C18:E18',
                 ]);
 
                 // LBT
@@ -476,9 +476,10 @@ class X07_SeaServiceRequestForm implements FromView, WithEvents, WithDrawings//,
                 $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(20);
                 $event->sheet->getDelegate()->getRowDimension(5)->setRowHeight(20);
                 $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(20);
+                $event->sheet->getDelegate()->getRowDimension(7)->setRowHeight(20);
 
-                $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(30);
                 $event->sheet->getDelegate()->getRowDimension(10)->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension(11)->setRowHeight(30);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");

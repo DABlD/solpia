@@ -43,6 +43,13 @@
 	</tr>
 
 	<tr>
+		<td>SRN #:</td>
+		<td colspan="6" style="{{ $blue }}">
+			{{-- {{ $data->data['reason'] }} --}}
+		</td>
+	</tr>
+
+	<tr>
 		<td colspan="7" style="height: 40px;"></td>
 	</tr>
 
