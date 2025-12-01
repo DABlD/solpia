@@ -320,8 +320,8 @@
 	@elseif(in_array($data->vessel->principal_id, [5]))
 		{{ $doc("KOSMA TRAINING CERTIFICATE", "KOSMA", 'lc') }}
 		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
-		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
-		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
+		{{ $con("KOREAN LICENSE") }}
+		{{ $con("KOREAN PSCRB") }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
