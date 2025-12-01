@@ -297,18 +297,23 @@
 
 	@if(in_array($data->vessel->principal_id, [1, 3]))
 		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
-		{{ $con("JOINING FINAL BRIEFING") }}
-		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
+		{{ $con("JOINING FINAL BRIEFING") }}
+		
+		{{-- {{ $con("SHINKO INVENTORY") }}
 		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
-		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
+		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }} --}}
 
-		@if($data->vessel->principal_id == 1) //shinko
+		{{-- @if($data->vessel->principal_id == 1) //shinko
 			{{ $doc("ENCLOSED SPACE ENTRY", "ENCLOSED SPACE ENTRY", 'lc') }}
 		@else
 			{{ $doc("TEST", "", 'lc') }}
-		@endif
+		@endif --}}
 
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
