@@ -324,8 +324,14 @@
 		{{ $doc("KOSMA TRAINING CERTIFICATE", "KOSMA", 'lc') }}
 		{{ $con("HANJOO MEDICAL HISTORY CHECKLIST") }}
 		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
-		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
-		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
+
+		{{-- leave as blank lang daw sabi ni ma'am celine --}}
+		{{ $con("KOREAN LICENSE") }}
+		{{ $con("KOREAN PSCRB") }}
+
+		{{-- {{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
+		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }} --}}
+
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}

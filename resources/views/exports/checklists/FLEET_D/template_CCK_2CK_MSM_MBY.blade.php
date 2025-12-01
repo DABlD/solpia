@@ -309,18 +309,13 @@
 	@if(in_array($data->vessel->principal_id, [1, 3]))
 		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 		{{ $con("JOINING FINAL BRIEFING") }}
-		{{ $con("SHINKO INVENTORY") }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
 		{{ $doc("TYPHOID", "TYPHOID", 'med_cert') }}
-		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
-		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
 
-		@if($data->vessel->principal_id == 1) //shinko
-			{{ $doc("ENCLOSED SPACE ENTRY", "ENCLOSED SPACE ENTRY", 'lc') }}
-		@else
-			{{ $doc("TEST", "", 'lc') }}
-		@endif
-
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -330,8 +325,14 @@
 		{{ $doc("KOSMA TRAINING CERTIFICATE", "KOSMA", 'lc') }}
 		{{ $con("HANJOO MEDICAL HISTORY CHECKLIST") }}
 		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
-		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
-		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
+
+		{{-- leave as blank lang daw sabi ni ma'am celine --}}
+		{{ $con("KOREAN LICENSE") }}
+		{{ $con("KOREAN PSCRB") }}
+
+		{{-- {{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
+		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }} --}}
+
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
