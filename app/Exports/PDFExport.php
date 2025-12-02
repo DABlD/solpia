@@ -311,6 +311,14 @@ class PDFExport
         return $applicants;
     }
 
+    public function Y12_Acknowledgement(){
+        $applicants = Applicant::whereIn('id', $this->data['data']['ids'])->get();
+        $applicants->load('user');
+        $applicants->load('line_up_contracts');
+
+        return ['applicants' => $applicants, 'data' => $this->data['data']];
+    }
+
     public function MedicalReferral(){
         return $this->data;
     }
