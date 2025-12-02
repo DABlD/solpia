@@ -12,7 +12,7 @@
 
 	I hereby acknowledge that I have received the attachments provided to me and have been
 	<br>
-	properly reminded by SOLPIA MARINE & SHIP MAANGEMENT, as well as our ship
+	properly reminded by SOLPIA MARINE & SHIP MANAGEMENT, INC., as well as our ship
 	<br>
 	master, regarding the rules and regulations that must be followed during my disembarkation.
 	<br>
