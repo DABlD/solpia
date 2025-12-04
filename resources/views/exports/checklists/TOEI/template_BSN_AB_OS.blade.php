@@ -317,8 +317,8 @@
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 	{{-- //TOEI JAPAN | TOEI KOREA | TAIYO KAIUN --}}
-	{{-- // DIAMOND Q, WEST T, ULTRA C, QUEEN F, MARGUERITE, HAPPINESS B, PACIFIC I, AFRICAN L, CAPE S, HAPPINESS F, GOLD O, SILVER O, CORONA R, LADY M, ULTRA V, ALAM K, CENTURION S, NORVIC C, CMB M, IKAN B, CAMELLIA I, DORIC K, WISTERIA, INDIGO J, EGRET R, NORD A, NORD D,--}}
-	@elseif(in_array($data->vessel->id, [4613, 4615, 938, 4620, 4802, 5587, 61, 5, 6200, 27, 940, 949, 743, 952, 67, 6196, 5563, 6141, 4659, 4626, 4625, 4646, 4648, 4610, 4579, 4647, 4649, 6360, 8858, 9536]))
+	{{-- // DIAMOND Q, WEST T, ULTRA C, QUEEN F, MARGUERITE, HAPPINESS B, PACIFIC I, AFRICAN L, CAPE S, HAPPINESS F, GOLD O, SILVER O, CORONA R, LADY M, ULTRA V, ALAM K, CENTURION S, NORVIC C, IKAN B, WISTERIA, INDIGO J, EGRET R, NORD A, NORD D, NORD ATOLL, OCEAN E--}}
+	@elseif(in_array($data->vessel->id, [4613, 4615, 938, 4620, 4802, 5587, 61, 5, 6200, 27, 940, 949, 743, 952, 67, 6196, 5563, 6141, 4626, 4648, 4610, 4579, 4647, 4649, 6360, 9536]))
 		{{-- CE/1AE --}}
 		@if(in_array($data->rank2->id, [5, 6, 53]))
 			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
@@ -335,20 +335,34 @@
 			{{ $doc("SMS FAMILIARIZATION", "SMS FAMILIARIZATION", 'lc') }}
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
-			
-			{{-- NORD A. TRITON CENTURY --}}
-			@if(in_array($data->vessel->id, [6196,4647]))
-				{{ $con("FINAL BRIEFING") }}
-			@else
-				{{ $doc("TEST", "", 'lc') }}
-			@endif
-
-			@if(in_array($data->rank2->id, [14,19]))
-				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
-			@else
-				{{ $doc("TEST", "", 'lc') }}
-			@endif
 			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+		@endif
+	{{-- SHIKISHIMA --}}
+	{{-- CMB M, CAMELLIA I, DORIC K, ANGEL I--}}
+	@elseif(in_array($data->vessel->id, [4659, 4625, 4646, 8858]))
+		{{-- CE/1AE --}}
+		@if(in_array($data->rank2->id, [5, 6, 53]))
+			{{ $doc("SAFETY OFFICER", "SHIP SAFETY OFFICERS COURSE", 'lc') }}
+			{{ $doc("SMS FAMILIARIZATION", "SMS FAMILIARIZATION", 'lc') }}
+			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+			{{ $con("MENTAL HEALTH") }}
+			{{ $con("DECLARATION OF CREW COMPLIANCE") }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("TEST", "", 'lc') }}
+		@else
+			{{ $doc("SMS FAMILIARIZATION", "SMS FAMILIARIZATION", 'lc') }}
+			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+			{{ $con("MENTAL HEALTH") }}
+			{{ $con("DECLARATION OF CREW COMPLIANCE") }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
