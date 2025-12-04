@@ -1697,14 +1697,14 @@ class ApplicationsController extends Controller
         echo json_encode($applicant);
     }
 
-    public function awardees(){
+    public function awardees(Request $req){
         $array1 = [];
         $array2 = [];
         $array3 = [];
         $details = [];
 
         $id = 3689;
-        $id = 9999;
+        $id = isset($req->id) ? $req->id : 9999;
 
         $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet', 'u.address', 'pa.status as pa_s')
                     // ->where('manning_agent', 'LIKE', '%SOLPIA%')
