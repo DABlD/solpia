@@ -3362,6 +3362,11 @@
                             'ckMaritime': "CK MARITIME",
                             'sinocrew': "SINOCREW",
                             'kosco': "KOSCO"
+                        @elseif(in_array(auth()->user()->id, [8205])) //SIR KANG
+                            'hmm': "HMM",
+                            'kosco': "KOSCO",
+                            'ckMaritime': "CK MARITIME",
+                            'kmtc': "KMTC"
                         @endif
                     },
                     onOpen: () => {
