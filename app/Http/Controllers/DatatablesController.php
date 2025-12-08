@@ -338,12 +338,12 @@ class DatatablesController extends Controller
 				$q->where('type', 'like', $f['type']);
 				$q->where('status', 'like', $f['status']);
 
-				// if($f['principal'] == "%%"){
-				// 	$q->whereNull('principal_id');
-				// }
-				// if($f['type'] == "%%"){
-				// 	$q->whereNull('type');
-				// }
+				if($f['principal'] == "%%"){
+					$q->orWhereNull('principal_id');
+				}
+				if($f['type'] == "%%"){
+					$q->orWhereNull('type');
+				}
 
 				if($f['flag'] != "%%"){
 					$q->where('flag', 'like', $f['flag']);
