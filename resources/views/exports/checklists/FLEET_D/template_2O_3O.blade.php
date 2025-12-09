@@ -287,7 +287,19 @@
 
 	{{ $section("10. PRINCIPAL / OWNERS REQUIREMENTS", 1) }}
 
-	@if(in_array($data->vessel->principal_id, [1, 3]))
+	@if(in_array($data->vessel->principal_id, [1]))
+		{{ $doc("SAFETY OFFICER'S TRAINING COURSE", 'SHIP SAFETY OFFICERS COURSE', 'lc') }}
+		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
+		{{ $con("JOINING FINAL BRIEFING") }}
+		{{ $con("SHINKO INVENTORY") }}
+		{{ $con("MENTAL HEALTH AWARENESS") }}
+		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
+		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("TEST", "", 'lc') }}
+	@elseif(in_array($data->vessel->principal_id, [3]))
 		{{ $doc("SAFETY OFFICER'S TRAINING COURSE", 'SHIP SAFETY OFFICERS COURSE', 'lc') }}
 		{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 		{{ $con("MENTAL HEALTH AWARENESS") }}
