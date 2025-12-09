@@ -319,6 +319,14 @@ class PDFExport
         return ['applicants' => $applicants, 'data' => $this->data['data']];
     }
 
+    public function Y13_DeclarationOfCrewAwareness(){
+        $applicants = Applicant::whereIn('id', $this->data['data']['ids'])->get();
+        $applicants->load('user');
+        $applicants->load('line_up_contracts');
+
+        return ['applicants' => $applicants, 'data' => $this->data['data']];
+    }
+
     public function MedicalReferral(){
         return $this->data;
     }
