@@ -396,7 +396,7 @@ class ApplicationsController extends Controller
         $this->clearData($applicant->document_flag, $req->docu_flag, 'document_flags');
 
         // SAVE DOCUMENT LC
-        $docu_lc = json_decode($req->docu_lc);
+        // $docu_lc = json_decode($req->docu_lc);
         $docu_lc = json_decode(str_replace("'", "", $req->docu_lc));
         foreach($docu_lc as $data){
             $data->type = $data->type == "SAFETY OFFICER TRAINING COURSE" ? "SAFETY OFFICER'S TRAINING COURSE" : $data->type;
