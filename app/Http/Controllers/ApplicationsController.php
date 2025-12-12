@@ -398,7 +398,7 @@ class ApplicationsController extends Controller
         // SAVE DOCUMENT LC
         // $docu_lc = json_decode($req->docu_lc);
 
-        if(auth()->user()->role == "Admin"){
+        if(auth()->user()->id == 8311){
             dd($req->docu_lc);
         }
 
