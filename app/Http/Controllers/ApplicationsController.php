@@ -397,6 +397,7 @@ class ApplicationsController extends Controller
 
         // SAVE DOCUMENT LC
         $docu_lc = json_decode($req->docu_lc);
+        $docu_lc = json_decode(str_replace("'", "", $req->docu_lc));
         foreach($docu_lc as $data){
             $data->type = $data->type == "SAFETY OFFICER TRAINING COURSE" ? "SAFETY OFFICER'S TRAINING COURSE" : $data->type;
             $data->applicant_id = $applicant->id;
@@ -416,7 +417,7 @@ class ApplicationsController extends Controller
         $this->clearData($applicant->document_lc, $req->docu_lc, 'document_l_cs');
 
         // SAVE DOCUMENT MED CERT
-        $docu_med_cert = json_decode($req->docu_med_cert);
+        $docu_med_cert = json_decode(str_replace("'", "", $req->docu_med_cert));
         foreach($docu_med_cert as $data){
             $data->applicant_id = $applicant->id;
             $data->issue_date = $data->issue_date == "" ? null : $data->issue_date;
