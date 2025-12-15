@@ -295,6 +295,8 @@
         fStatus = "{{ session('fStatus') ?? "%%" }}";
         fFleet = "{{ session('fFleet') ?? "%%" }}";
 
+        var gallery = null;
+
         @if(auth()->user()->role == "Recruitment Officer")
             fStatus = "Vacation";
         @endif
@@ -2739,7 +2741,7 @@
                                 });
 
                                 if(i+1 == files.length){
-                                    let gallery = new PhotoSwipe(
+                                    gallery = new PhotoSwipe(
                                         $('.pswp')[0], 
                                         PhotoSwipeUI_Default, 
                                         images, 
@@ -3111,7 +3113,7 @@
                                                 let file = $(e.target);
                                                 
                                                 if(imageFormats.includes(file.data('link').split('.').pop().toUpperCase())){
-                                                    let gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {
+                                                    gallery = new PhotoSwipe($('.pswp')[0], PhotoSwipeUI_Default, items, {
                                                         index: file.data('index') - 1,
                                                         allowPanToNext: true,
                                                         escKey: true,
