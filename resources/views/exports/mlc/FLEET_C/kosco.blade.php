@@ -230,9 +230,7 @@
 			<br style='mso-data-placement:same-cell;' />
 			3. Seafarer or shipowner shall provide minimum notice periods in writings for the early
 			<br style='mso-data-placement:same-cell;' />
-			termination of the seafarer's employment agreement. The minimum notice shall not be less than 30
-			<br style='mso-data-placement:same-cell;' />
-			days.
+			termination of the seafarer's employment agreement. The minimum notice shall not be less than 30 days.
 			<br style='mso-data-placement:same-cell;' />
 			4. Where a seafarer's employment agreement is terminated while a vessel is out at sea, agreement
 			<br style='mso-data-placement:same-cell;' />
@@ -400,7 +398,7 @@
 			<br style='mso-data-placement:same-cell;' />
 			ㅤㅤ2) Where a seafarer leaves a ship after he/she has been disciplined to leave the ship;
 			<br style='mso-data-placement:same-cell;' />
-			ㅤㅤ3) here a seafarer falls under the reasons prescribed by a collective bargaining agreement
+			ㅤㅤ3) Where a seafarer falls under the reasons prescribed by a collective bargaining agreement
 			<br style='mso-data-placement:same-cell;' />
 			4. The maximum period the seafarer can be expected to serve onboard before being entitled to repatriation at
 			<br style='mso-data-placement:same-cell;' />

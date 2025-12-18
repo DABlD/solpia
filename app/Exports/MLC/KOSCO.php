@@ -498,7 +498,7 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
                     'A3:I25',
-                    'A26', 'A28:I31'
+                    'A26:A27', 'A28:I31'
                 ]);
 
                 // ALL BORDER MEDIUM
