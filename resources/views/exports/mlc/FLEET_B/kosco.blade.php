@@ -115,7 +115,7 @@
 	</tr>
 
 	<tr>
-		<td rowspan="2" style="{{ $bc }}">Manning Agency</td>
+		<td rowspan="2" style="{{ $bc }}">Manning Agency (SRPS)</td>
 		<td style="{{ $center }}">Company</td>
 		<td colspan="7">SOLPIA MARINE AND SHIP MANAGEMENT, INC.</td>
 	</tr>
@@ -198,7 +198,7 @@
 	</tr>
 
 	<tr>
-		<td rowspan="2" style="{{ $bc }}">Period</td>
+		<td rowspan="3" style="{{ $bc }}">Period</td>
 		<td style="{{ $center }}">From</td>
 		<td colspan="3">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
 		<td style="{{ $center }}">To</td>
@@ -213,30 +213,40 @@
 	</tr>
 
 	<tr>
-		<td colspan="9" style="height: 150px;">
-			1. The probationary period shall only apply during the first term of employment and shall be 10 weeks. During this period both the
+		<td colspan="8" style="height: 180px;">
+			1. The probationary period shall only apply during the first term of employment and shall be 10 weeks.
 			<br style='mso-data-placement:same-cell;' />
-			seafarer and/or the Company shall be entitled to terminate the employment prior to the expiry of the contract during this period.
+			During this period both the seafarer and/or the Company shall be entitled to terminate the
 			<br style='mso-data-placement:same-cell;' />
-			2. The periods of employment shall be from the date of departure of his residence (or a place where he concluded an employment
+			employment prior to the expiry of the contract during this period.
 			<br style='mso-data-placement:same-cell;' />
-			agreement) to the date of arrival in country of his residence (or a place where he concluded an employment agreement) after terminate
+			2. The periods of employment shall be from the date of departure of his residence (or a place where
 			<br style='mso-data-placement:same-cell;' />
-			the Seafarer's employment agreement, unless terminated for just cause or causes enumerated in this agreement.
+			he concluded an employment agreement) to the date of arrival in country of his residence (or a place
 			<br style='mso-data-placement:same-cell;' />
-			3. Seafarer or shipowner shall provide minimum notice periods in writings for the early termination of the seafarer's employment
+			where he concluded an employment agreement) after terminate the Seafarer's employment agreement,
 			<br style='mso-data-placement:same-cell;' />
-			agreement. The minimum notice shall not be less than 30 days.
+			unless terminated for just cause or causes enumerated in this agreement.
 			<br style='mso-data-placement:same-cell;' />
-			4. Where a seafarer's employment agreement is terminated while a vessel is out at sea, agreement shall be deemed to continue until the
+			3. Seafarer or shipowner shall provide minimum notice periods in writings for the early
 			<br style='mso-data-placement:same-cell;' />
-			ship enters the next port and unloads all cargoes to be unloaded or lands all passengers who are to leave the ship at the port.
+			termination of the seafarer's employment agreement. The minimum notice shall not be less than 30
 			<br style='mso-data-placement:same-cell;' />
-			5. Seafarer's employment agreements shall continue to have effect while seafarer is held captive on or off the ship as a result of acts of
+			days.
 			<br style='mso-data-placement:same-cell;' />
-			piracy or armed robbery against ships, regardless of whether the date fixed for its expiry has passed or either party has given notice to
+			4. Where a seafarer's employment agreement is terminated while a vessel is out at sea, agreement
 			<br style='mso-data-placement:same-cell;' />
-			suspend or terminate it.
+			shall be deemed to continue until the ship enters the next port and unloads all cargoes to be
+			<br style='mso-data-placement:same-cell;' />
+			unloaded or lands all passengers who are to leave the ship at the port.
+			<br style='mso-data-placement:same-cell;' />
+			5. Seafarer's employment agreements shall continue to have effect while seafarer is held
+			<br style='mso-data-placement:same-cell;' />
+			captive on or off the ship as a result of acts of piracy or armed robbery against ships, regardless of
+			<br style='mso-data-placement:same-cell;' />
+			whether the date fixed for its expiry has passed or either party has given notice to suspend or
+			<br style='mso-data-placement:same-cell;' />
+			terminate it.
 		</td>
 	</tr>
 
@@ -280,6 +290,17 @@
 	</tr>
 
 	<tr>
+		<td style="{{ $bc }} height: 45px;">Wages</td>
+		<td colspan="8">
+			1. The calculation of Fixed(Guaranteed) Overtime Allowance is as follows
+			<br style='mso-data-placement:same-cell;' />
+			ㅤㅤFixed(or Guaranteed) Overtime Allowance = A) Basic wage / 173hrs * 1.25 * 103hrs
+			<br style='mso-data-placement:same-cell;' />
+			2. The Overtime rate per hour = B) Fixed(or Guaranteed) Overtime Allowance / 103hrs
+		</td>
+	</tr>
+
+	<tr>
 		<td style="{{ $bc }} height: 55px;">Payment</td>
 		<td colspan="8">
 			1. Payment date : The shipowner pay seafarer's wage at the end of each calendar month. If the payment date falls on a
@@ -304,10 +325,16 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $bc }}">Provision</td>
+		<td rowspan="2" style="{{ $bc }}">Provision</td>
 		<td colspan="2">Costs for food shall be</td>
 		<td colspan="2">({{ $allowance }} US Dollars)</td>
 		<td colspan="4">per person/day excluding shipment cost.</td>
+	</tr>
+
+	<tr>
+		<td colspan="8">
+			2. During the seafarer's employment agreement period, having regard to the number of seafarers on board, their religious requirements and cultural practices, and the duration and nature of the voyage, shipowner shall provide seafarers with adequate, varied, balanced and nutritious meals and drinking water free of charge.
+		</td>
 	</tr>
 
 	<tr>
