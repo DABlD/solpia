@@ -2710,6 +2710,10 @@
 
         function viewFile(id, aId, type){
             let imageFormats = ['JPEG', 'JPG', 'PNG', 'GIF'];
+
+            if (gallery && gallery.isOpen) {
+                return;
+            }
             
             $.ajax({
                 type: 'POST',
