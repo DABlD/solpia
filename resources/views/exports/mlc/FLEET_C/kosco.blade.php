@@ -47,7 +47,7 @@
 	elseif(in_array($v, ['M/V GLOVIS COUNTESS'])){
 		$cba = "IBF FKSU CA(BBCHP)";
 		$allowance = 12;
-		$leave = 10;
+		// $leave = 10;
 	}
 	elseif(in_array($v, ['M/V DONG-A GLAUCOS'])){
 		$cba = "IBF FKSU CA(BBCHP)";
