@@ -4040,7 +4040,39 @@
             })
         }
 
-        function X06(id, type){
+        function contractAmendment2(id){
+            swal({
+                title: 'Select Category',
+                input: 'select',
+                inputOptions: {
+                    'X15_Ext_Form1':  'Extension',
+                    'X15_Ext_Form2':  'Salary Amendment',
+                    'X15_Ext_Form3':  'CBA Update',
+                    'X15_Ext_Form4':  'Onboard Promotion',
+                    'X15_Ext_Form5':  'Vessel Change Name',
+                    'X06_Ext_Prom_Form':  'Extension Promotion'
+                },
+                inputPlaceholder: '',
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+            }).then(result => {
+                if(result.value){
+                    let temp = result.value.slice(-1);
+
+                    let choices = {
+                        1: "EXTENSION",
+                        2: "SALARY AMENDMENT",
+                        3: "CBA Update",
+                        4: "Onboard Promotion",
+                        5: "Vessel Change Name",
+                    };
+
+                    window[result.value.slice(0,3)](id, result.value, choices[temp], true);
+                }
+            })
+        }
+
+        function X06(id, type, choice, batch){
             swal.showLoading();
 
             $.ajax({
@@ -4106,6 +4138,10 @@
                                 cd: $('#cd').val()
                             }
 
+                            if(batch){
+                                type = type + "_Batch";
+                            }
+
                             window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
                         }
                     });
@@ -4113,7 +4149,7 @@
             });
         }
 
-        function X15(id, type, type2){
+        function X15(id, type, type2, batch){
             swal.showLoading();
 
             swal({
@@ -4149,7 +4185,8 @@
                         remarks: $('#remarks').val(),
                         status: "On Board",
                         type2: type2,
-                        cd: $('#cd').val()
+                        cd: $('#cd').val(),
+                        vid: id
                     }
 
                     type = "X15_Ext_Form";
@@ -4167,7 +4204,11 @@
                         data.filename = "X15_Vessel_Change_Name";
                     }
 
-                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                    if(batch){
+                        type = type + "_Batch";
+                    }
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param({data});
                 }
             });
         }
@@ -5065,7 +5106,9 @@
                 input: 'select',
                 inputOptions: {
                     acknowledgement:                    'Acknowledgement of Crew Reminders (Offsigners)',
+                    contractAmendment2:                 'Contract Amendment (Onboard Crew)',
                     X38_BatchCrewCompetencyChecklist:   'Crew Competency Checklist',
+                    X38_BatchCrewCompetencyChecklist2:  'Crew Competency Checklist (Trial)',
                     X32_CrewUniform:                    'Crew Uniform Order Slip',
                     X42_DeclarationOfCrewAwareness:     'Declaration of Crew Awareness',
                     X37_LinedUpFinalBriefing:           'Final Briefing',
@@ -6342,38 +6385,16 @@
             })
         }
 
-        function X38_BatchCrewCompetencyChecklist(vid, name){
-            swal({
-                title: 'Joining Details: ',
-                html: `
-                    <input type="text" id="joining_date" placeholder="Joining Date (optional)" class="form-control">
-                    <br>
-                    <input type="text" id="joining_port" placeholder="Joining Port (optional)" class="form-control">
-                `,
-                showCancelButton: true,
-                cancelButtonColor: '#f76c6b',
-                onOpen: () => {
-                    let string = "";
+        function X38_BatchCrewCompetencyChecklist2(vid, name){
+            let data = {
+                status: 'Lined-Up',
+                joining_date: $('#joining_date').val(),
+                joining_port: $('#joining_port').val(),
+                vid: vid,
+                filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + " - Crew Competency Checklist"
+            }
 
-                    $('#joining_date').flatpickr({
-                        altInput: true,
-                        altFormat: 'F j, Y',
-                        dateFormat: 'Y-m-d',
-                    })
-                }
-            }).then(result => {
-                if(result.value){
-                    let data = {
-                        status: 'Lined-Up',
-                        joining_date: $('#joining_date').val(),
-                        joining_port: $('#joining_port').val(),
-                        vid: vid,
-                        filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + " - Crew Competency Checklist"
-                    }
-
-                    window.location.href = `{{ route('applications.exportDocument') }}/1/X38_BatchCrewCompetencyChecklist?` + $.param(data);
-                }
-            });
+            window.location.href = `{{ route('applications.exportDocument') }}/1/X38_BatchCrewCompetencyChecklist2?` + $.param(data);
         }
 
         function X16_MLCOnboard(vid, name){

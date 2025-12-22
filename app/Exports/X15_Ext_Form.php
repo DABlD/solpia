@@ -97,7 +97,7 @@ class X15_Ext_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
 
     public function view(): View
     {
-        return view('exports.forms.' . lcfirst($this->type), [
+        return view('exports.forms.x15_Ext_Form', [
             'data' => $this->data,
         ]);
     }
@@ -320,7 +320,7 @@ class X15_Ext_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
             ]
         ];
 
-        $type2 = $this->data->data['type2'];
+        $type2 = $this->data['data']['type2'];
 
         return [
             AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $type2) {

@@ -1418,8 +1418,6 @@ class ApplicationsController extends Controller
                     }
                 }
             }
-
-            $folder = "OnBoard\\";
         }
         else{
             $applicant = Applicant::withTrashed()->find($id)->load('user');
