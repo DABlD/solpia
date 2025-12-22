@@ -4208,7 +4208,7 @@
                         type = type + "_Batch";
                     }
 
-                    data.fileName = "Contract Amendment";
+                    data.filename           = name.replace('/', '') + " Contract Amendment";
 
                     window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param({data});
                 }

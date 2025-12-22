@@ -320,7 +320,7 @@ class X15_Ext_Form implements FromView, WithEvents, WithDrawings//, ShouldAutoSi
             ]
         ];
 
-        $type2 = $this->data['data']['type2'];
+        $type2 = $this->data['data']['type3'] ?? $this->data['data']['type2'];
 
         return [
             AfterSheet::class => function(AfterSheet $event) use ($borderStyle, $fillStyle, $headingStyle, $type2) {
