@@ -4208,9 +4208,9 @@
                         type = type + "_Batch";
                     }
 
-                    data.filename           = name.replace('/', '') + " Contract Amendment";
+                    let batchFilename = $('.modal-title span:first')[0].innerText.replace('/', '') + " - Contract Amendment";
 
-                    window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param({data});
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?filename=${batchFilename}&` + $.param({data});
                 }
             });
         }
