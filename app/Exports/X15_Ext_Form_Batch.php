@@ -28,7 +28,7 @@ class X15_Ext_Form_Batch implements WithMultipleSheets
 
         foreach($crews as $crew){
             $temp = $this->data;
-            $temp['data']['type2'] = $crew->current_lineup->rank->abbr;
+            $temp['data']['type2'] = str_replace('/', '', $crew->current_lineup->rank->abbr);
             $crew->data = $temp['data'];
             $crew->vessel = $vessel;
 
