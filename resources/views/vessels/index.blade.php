@@ -4208,6 +4208,8 @@
                         type = type + "_Batch";
                     }
 
+                    data.fileName = "Contract Amendment";
+
                     window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param({data});
                 }
             });
