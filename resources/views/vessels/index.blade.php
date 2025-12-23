@@ -4206,11 +4206,15 @@
 
                     if(batch){
                         type = type + "_Batch";
+                        id = 1;
+                        batchFilename = $('.modal-title span:first')[0].innerText.replace('/', '') + " - Contract Amendment";
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?filename=${batchFilename}&` + $.param({data});
+                    }
+                    else{
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
                     }
 
-                    let batchFilename = $('.modal-title span:first')[0].innerText.replace('/', '') + " - Contract Amendment";
 
-                    window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?filename=${batchFilename}&` + $.param({data});
                 }
             });
         }
