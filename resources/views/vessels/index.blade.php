@@ -5652,6 +5652,7 @@
                 }).then(result => {
                     if(!result.dismiss){
                         data.fleet = result.value;
+                        data.folder = "OnBoard\\";
                         window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel?` + $.param(data);
                     }
                 })
