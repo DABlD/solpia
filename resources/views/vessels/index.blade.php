@@ -5640,6 +5640,7 @@
             data.id = id;
             data.filename = name.replaceAll("/", "") + " - Onboard";
             data.fleet = "{{ auth()->user()->fleet }}";
+            data.folder = "OnBoard\\";
 
             @if(auth()->user()->fleet == null)
                 swal({
@@ -5652,7 +5653,6 @@
                 }).then(result => {
                     if(!result.dismiss){
                         data.fleet = result.value;
-                        data.folder = "OnBoard\\";
                         window.location.href = `{{ route('applications.exportDocument') }}/1/OnBoardVessel?` + $.param(data);
                     }
                 })
