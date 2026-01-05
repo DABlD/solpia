@@ -188,6 +188,7 @@
                 tooltip();
                 // initializeActions();
             },
+            searching: false,
             order: [ [0, 'desc'] ],
         });
 
