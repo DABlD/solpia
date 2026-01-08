@@ -327,6 +327,13 @@ class PDFExport
         return ['applicants' => $applicants, 'data' => $this->data['data']];
     }
 
+    public function Y14_USVE(){
+        // dd($this->data, $this->type, $this->fileName, $this->req);
+        $applicant = $this->data;
+
+        return ['applicant' => $applicant, 'req' => $this->req];
+    }
+
     public function MedicalReferral(){
         return $this->data;
     }

@@ -3758,7 +3758,7 @@
                     'POEAContract':                     'POEA Contract',
                     'X39_QualificationChecklistKSS':    'Qualification Checklist (KSS Line)',
                     'Y07_TOEIMLCQuestionnaire':         'TOEI - MLC Questionnaire',
-                    'X04_USVE':                         'US Visa Endorsement Form',
+                    'Y14_USVE':                         'US Visa Endorsement Form',
                     'WalangLagay':                      'Walang Lagay',
                 },
                 onOpen: () => {
@@ -3816,7 +3816,7 @@
                             EDC(id, fleet, "DocumentChecklist");
                         @endif
                     }
-                    else if(result.value == "X04_USVE"){
+                    else if(result.value == "Y14_USVE"){
                         USVE(id, result.value);
                     }
                     else if(result.value == "X11_CrewCompetencyChecklist"){
@@ -4316,14 +4316,14 @@
                         }
                     }).then(result => {
                         if(result.value){
-                            let data = {
-                                status: 'Lined-Up',
-                                eld: $('#eld').val(),
-                                mob: $('#mob').val(),
-                                chargeTo: $('[name="chargeTo"]:checked').val()
-                            }
+                            let data = {};
+                            data.status = 'Lined-Up';
+                            data.eld = $('#eld').val();
+                            data.mob = $('#mob').val();
+                            data.exportType = "pdf";
+                            data.chargeTo = $('[name="chargeTo"]:checked').val();
 
-                            window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
+                            window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
                         }
                     });
                 }
