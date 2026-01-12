@@ -329,9 +329,13 @@ class PDFExport
 
     public function Y14_USVE(){
         // dd($this->data, $this->type, $this->fileName, $this->req);
-        $applicant = $this->data;
+        $applicants = [$this->data];
 
-        return ['applicant' => $applicant, 'req' => $this->req];
+        if(isset($this->req['data2'])){
+            $applicants = Applicant::whereIn('id', $this->req['data2'])->get();
+        }
+
+        return ['applicants' => $applicants, 'req' => $this->req];
     }
 
     public function MedicalReferral(){

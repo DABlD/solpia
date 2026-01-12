@@ -3758,7 +3758,7 @@
                     'POEAContract':                     'POEA Contract',
                     'X39_QualificationChecklistKSS':    'Qualification Checklist (KSS Line)',
                     'Y07_TOEIMLCQuestionnaire':         'TOEI - MLC Questionnaire',
-                    'Y14_USVE':                         'US Visa Endorsement Form',
+                    'Y14_USVE':                         'US Visa Endorsement Form (New Format)',
                     'WalangLagay':                      'Walang Lagay',
                 },
                 onOpen: () => {
@@ -4270,64 +4270,43 @@
         }
 
         function USVE(id, type){
-            $.ajax({
-                url: '{{ route('applications.get2') }}',
-                data: {
-                    where: ['applicants.id', id],
-                    cols: ['mob', 'eld']
-                },
-                success: result => {
-                    let pro_app = JSON.parse(result)[0];
-                    let vessel = "";
+            let vessel = "";
 
-                    if(pro_app.eld == null){
-                        vessel = `
-                            <br><br>
-                            <input type="string" id="eld" placeholder="Expected Sign-on Date (optional)" class="form-control">
-                            <br>
-                            <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
-                        `;
-                    }
+            swal({
+                title: 'Charge to: ',
+                html: `
+                    <div style="text-align: left;">
+                        <label class="radio-inline" style="font-size: 16px;">
+                            <input type="radio" name="chargeTo" value="1" checked> Seafarer
+                        </label>
+                        <br>
+                        <label class="radio-inline" style="font-size: 16px;">
+                            <input type="radio" name="chargeTo"} value="0"> SMI
+                        </label>
+                        ${vessel}
+                    </div>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: '#f76c6b',
+                onOpen: () => {
+                    let string = "";
 
-                    swal({
-                        title: 'Charge to: ',
-                        html: `
-                            <div style="text-align: left;">
-                                <label class="radio-inline" style="font-size: 16px;">
-                                    <input type="radio" name="chargeTo" value="1" checked> Seafarer
-                                </label>
-                                <br>
-                                <label class="radio-inline" style="font-size: 16px;">
-                                    <input type="radio" name="chargeTo"} value="0"> SMI
-                                </label>
-                                ${vessel}
-                            </div>
-                        `,
-                        showCancelButton: true,
-                        cancelButtonColor: '#f76c6b',
-                        onOpen: () => {
-                            let string = "";
-
-                            $('#eld').flatpickr({
-                                altInput: true,
-                                altFormat: 'F j, Y',
-                                dateFormat: 'Y-m-d',
-                            })
-                        }
-                    }).then(result => {
-                        if(result.value){
-                            let data = {};
-                            data.status = 'Lined-Up';
-                            data.eld = $('#eld').val();
-                            data.mob = $('#mob').val();
-                            data.exportType = "pdf";
-                            data.chargeTo = $('[name="chargeTo"]:checked').val();
-
-                            window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
-                        }
-                    });
+                    $('#eld').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    })
                 }
-            })
+            }).then(result => {
+                if(result.value){
+                    let data = {};
+                    data.status = 'Lined-Up';
+                    data.exportType = "pdf";
+                    data.chargeTo = $('[name="chargeTo"]:checked').val();
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                }
+            });
         }
 
         function CCC(id, type){
@@ -5135,6 +5114,7 @@
                     RTP :                               'Request to Process (Lined-Up Crew)',
                     RTP2 :                              'Request to Process (Onboard Crew)',
                     RFSC:                               'Shoe and Coverall Request',
+                    batchUSVE:                          'US Visa Endorsement Form (New Format)'
                 },
                 cancelButtonColor: '#f76c6b',
                 width: '400px',
@@ -5230,6 +5210,107 @@
                             filename: name
                         });
                     }
+                }
+            })
+        }
+
+        function batchUSVE(id){
+            let crews = [];
+
+            let temp = $('.LUN');
+            let crewString = "";
+
+            temp.each((index, value) => {
+                let temp2 = $(value);
+
+                crewString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${temp2[0].innerText}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            swal({
+                confirmButtonText: 'Submit',
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+                title: 'Select Crew',
+                html: '<br><br>' + crewString,
+                width: '450px',
+                onOpen: () => {
+                    $('#swal2-title').css({
+                        'font-size': '28px',
+                        'color': '#00c0ef'
+                    });
+                    $('#swal2-content .col-md-10').css('text-align', 'left');
+                    $('#swal2-content .col-md-10 label').css({
+                        "font-size": '20px',
+                        "text-align": 'left'
+                    });
+                    $('#swal2-content input[type=checkbox]').css({
+                        'zoom': '1.7',
+                        'margin': '1px 0 0'
+                    });
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let temp3 = $(".crew-checklist:checked");
+                            
+                            temp3.each((index, value) => {
+                                crews.push($(value).data('id'));
+                            });
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    swal({
+                        title: 'Charge to: ',
+                        html: `
+                            <div style="text-align: left;">
+                                <label class="radio-inline" style="font-size: 16px;">
+                                    <input type="radio" name="chargeTo" value="1" checked> Seafarer
+                                </label>
+                                <br>
+                                <label class="radio-inline" style="font-size: 16px;">
+                                    <input type="radio" name="chargeTo"} value="0"> SMI
+                                </label>
+                            </div>
+                        `,
+                        showCancelButton: true,
+                        cancelButtonColor: '#f76c6b',
+                        onOpen: () => {
+                            let string = "";
+
+                            $('#eld').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d',
+                            })
+                        }
+                    }).then(result => {
+                        if(result.value && crews.length){
+                            name = $('.modal-title span:first')[0].innerText.replace('/', '') + " - USV Endorsement Forms";
+                            type = 'Y14_USVE';
+
+                            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param({
+                                data2: crews,
+                                filename: name,
+                                exportType: 'pdf',
+                                chargeTo: $('[name="chargeTo"]:checked').val()
+                            });
+                        }
+                    });
                 }
             })
         }
