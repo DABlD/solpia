@@ -251,7 +251,7 @@
 
 	{{ $header(0) }}
 
-	{{ $rank >= 1 && $rank <= 8 ? $getDocument('COC', 'lc') : isBlank('COC')}}	
+	{{ $getDocument('COC', 'lc') }}	
 	{{ $rank >= 1 && $rank <= 8 ? $getDocument('COE', 'lc') : isBlank('COE')}}	
 	{{ $rank >= 1 && $rank <= 4 ? $getDocument('GMDSS/GOC', 'lc') : isBlank('GOC')}}
 	{{ $rank >= 9 && $rank <= 14 ? $getDocument('COC', 'lc', null, "COP II-4", true) : isBlank('COP II-4')}}	
