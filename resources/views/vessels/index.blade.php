@@ -4281,7 +4281,7 @@
                         </label>
                         <br>
                         <label class="radio-inline" style="font-size: 16px;">
-                            <input type="radio" name="chargeTo"} value="0"> SMI
+                            <input type="radio" name="chargeTo" value="0"> SMI
                         </label>
                         ${vessel}
                     </div>
@@ -5283,7 +5283,7 @@
                                 </label>
                                 <br>
                                 <label class="radio-inline" style="font-size: 16px;">
-                                    <input type="radio" name="chargeTo"} value="0"> SMI
+                                    <input type="radio" name="chargeTo" value="0"> SMI
                                 </label>
                             </div>
                         `,
