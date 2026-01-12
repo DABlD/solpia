@@ -2014,84 +2014,74 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
-        $start = $req->start;
-        $end = $req->end;
+        $users = User::where('role', 'Applicant')->where('fleet', 'FLEET B')->get();
 
-        echo $start . ' -> ' . $end . '<br><br>';
+        $pro['2023'] = [];
+        $pro['2024'] = [];
+        $pro['2025'] = [];
 
-        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
-                            ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
-                            ->join('users as u', 'u.id', '=', 'a.user_id')
-                            ->where('joining_date', '>=', $start)
-                            ->where('joining_date', '<=', $end)
-                            ->where('fleet', '=', 'TOEI')
-                            ->get();
+        $i = 0;
 
-        $lups->load('rank');
-        $lups->load('vessel');
-        $lups->load('applicant.user');
-        $lups->load('applicant.sea_service');
+        foreach($users as $user){
+            $sss = optional($user->crew)->sea_service;
 
-        foreach($lups as $lup){
-            $temp = $lup->applicant->sea_service->sortBy('sign_on');
-            $bool = false;
+            if($sss){
+                $sss = $sss->filter(function ($item) {
+                            return !empty($item->sign_on) && $item->sign_on > '2021-12-31';
+                        })
+                        ->sortBy('sign_on');
+                $last = null;
 
-            if(in_array($lup->rank_id, [14, 19])){
-                $bool = true;
-            }
-            elseif(sizeof($temp)){
-                foreach($temp as $ss){
-                    if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
-                        $bool = true;
+                foreach($sss as $ss){
+                    if($last){
+                        if(isset($ss->rank2) && ($ss->rank2->order <= $last->order) && ($ss->rank2->id != $last->id) && ($ss->rank2->type == "OFFICER")){
+                            $yr = $ss->sign_on->format('Y');
+
+                            if($yr >= 2023){
+                                array_push($pro[$yr], ["last" => $last, "new" => $ss, 'user' => $user]);
+                            }
+                        }
+                    }
+
+                    $last = $ss->rank2;
+                }
+
+                if($last && isset($user->crew->pro_app) && $user->crew->pro_app->status == "On Board"){
+                    $cl = $user->crew->current_lineup;
+
+                    if(($cl->rank->order <= $last->order) && ($cl->rank->id != $last->id) && ($cl->rank->type == "OFFICER")){
+                        $yr = $cl->joining_date->format('Y');
+
+                        $cl->rank2 = $cl->rank;
+                        $cl->sign_on = $cl->joining_date;
+
+                        if($yr >= 2023){
+                            array_push($pro[$yr], ["last" => $last, "new" => $cl, 'user' => $user]);
+                        }
                     }
                 }
-            }
-            else{
-                $bool = true;
-            }
 
-            if($bool){
-                echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->joining_date . '<br>';
+                $i++;
             }
         }
 
-        echo '<br><br><br>';
-        echo '~~~~~~~~~~~~~~~~~~~';
-        echo '<br>';
-
-        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
-                                    ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
-                                    ->join('users as u', 'u.id', '=', 'a.user_id')
-                                    ->where('disembarkation_date', '>=', $start)
-                                    ->where('disembarkation_date', '<=', $end)
-                                    ->where('fleet', '=', 'TOEI')
-                                    ->get();
-
-        $lups->load('rank');
-        $lups->load('vessel');
-        $lups->load('applicant.user');
-        $lups->load('applicant.sea_service');
-
-        foreach($lups as $lup){
-            $temp = $lup->applicant->sea_service->sortBy('sign_on');
-            $bool = false;
-
-            foreach($temp as $ss){
-                if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
-                    $bool = true;
-                }
-            }
-
-            if($bool){
-                if(str_contains($lup->status, "On Board")){
-                    echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->disembarkation_date . '<br>';
-                }
-                else{
-                    $temp2 = $temp->last();
-                    echo $lup->lname . ', ' . $lup->fname . ';' . $temp2->rank2->abbr . ';' . $temp2->vessel_name . ';' . $temp2->sign_off . '<br>';
-                }
-            }
+        foreach($pro['2023'] as $temp){
+            echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
         }
+
+        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
+
+        foreach($pro['2024'] as $temp){
+            echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
+        }
+
+        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
+
+        foreach($pro['2025'] as $temp){
+            echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
+        }
+
+        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
     }
 
     //name, current rank, present vessel, date embarked
