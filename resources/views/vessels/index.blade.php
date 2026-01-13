@@ -3748,6 +3748,7 @@
                     'X01_BorrowDocuments':              'Borrow Documents',
                     'X11_CrewCompetencyChecklist':      'Crew Competency Checklist',
                     'Y06_EMSDeclaration':               'EMS Declaration',
+                    'X42_ShinkoEntryDocs':              'Entry Documents (Shinko)',
                     'X29_FinalBriefing':                'Final Briefing',
                     'DocumentChecklist':                'Final Document Checklist',
                     'X08_KoscoWaiver':                  'Kosco Waiver',
