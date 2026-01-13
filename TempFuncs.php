@@ -350,3 +350,151 @@ foreach($applicants as $applicant){
 }
 
 dd($active, $inactive);
+
+<!-- CHECK ALL CREW PROMOTED TO OFFICER ON SPECIFIED YEARS. REQUESTED BY FLEET B SIR KIT -->
+$users = User::where('role', 'Applicant')->where('fleet', 'FLEET B')->get();
+
+$pro['2023'] = [];
+$pro['2024'] = [];
+$pro['2025'] = [];
+
+$i = 0;
+
+foreach($users as $user){
+    $sss = optional($user->crew)->sea_service;
+
+    if($sss){
+        $sss = $sss->filter(function ($item) {
+                    return !empty($item->sign_on) && $item->sign_on > '2021-12-31';
+                })
+                ->sortBy('sign_on');
+        $last = null;
+
+        foreach($sss as $ss){
+            if($last){
+                if(isset($ss->rank2) && ($ss->rank2->order <= $last->order) && ($ss->rank2->id != $last->id) && ($ss->rank2->type == "OFFICER")){
+                    $yr = $ss->sign_on->format('Y');
+
+                    if($yr >= 2023){
+                        array_push($pro[$yr], ["last" => $last, "new" => $ss, 'user' => $user]);
+                    }
+                }
+            }
+
+            $last = $ss->rank2;
+        }
+
+        if($last && isset($user->crew->pro_app) && $user->crew->pro_app->status == "On Board"){
+            $cl = $user->crew->current_lineup;
+
+            if(($cl->rank->order <= $last->order) && ($cl->rank->id != $last->id) && ($cl->rank->type == "OFFICER")){
+                $yr = $cl->joining_date->format('Y');
+
+                $cl->rank2 = $cl->rank;
+                $cl->sign_on = $cl->joining_date;
+
+                if($yr >= 2023){
+                    array_push($pro[$yr], ["last" => $last, "new" => $cl, 'user' => $user]);
+                }
+            }
+        }
+
+        $i++;
+    }
+}
+
+foreach($pro['2023'] as $temp){
+    echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
+}
+
+echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
+
+foreach($pro['2024'] as $temp){
+    echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
+}
+
+echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
+
+foreach($pro['2025'] as $temp){
+    echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
+}
+
+echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
+
+<!-- GET CREW AGE MAX MIN AND MEDIAN PER FLEET REMOVING WITHDRAWN, NFR AND THE LIKES -->
+$crews = ProcessedApplicant::select('u.birthday', 'u.fname', 'u.lname', 'processed_applicants.rank_id', 'processed_applicants.status', 'u.fleet', 'processed_applicants.applicant_id')
+            ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
+            ->join('users as u', 'u.id', '=', 'a.user_id')
+            ->whereNull('a.deleted_at')
+            ->where('u.fleet', 'TOEI')
+            ->where('a.remarks', 'NOT LIKE', '%WITHDRAW%')
+            ->where('a.remarks', 'NOT LIKE', '%WD%')
+            ->where('a.remarks', 'NOT LIKE', '%POOR%')
+            ->where('a.remarks', 'NOT LIKE', '%P&I%')
+            ->where('a.remarks', 'NOT LIKE', '%NFR%')
+            ->where('a.remarks', 'NOT LIKE', '%AGE%')
+            ->where('a.remarks', 'NOT LIKE', '%PROBLEM%')
+            ->where('a.remarks', 'NOT LIKE', '%COLLISION%')
+            ->get();
+
+$rankList = Rank::pluck('abbr', 'id');
+
+$array = [];
+
+foreach($crews as $crew){
+    if(!isset($array[$crew->status][$crew->rank_id])){
+        $array[$crew->status][$crew->rank_id] = [];
+    }
+
+    if($crew->rank_id){
+        array_push($array[$crew->status][$crew->rank_id], $crew);
+    }
+    else{
+        if($crew->applicant->sea_service->count() && isset($crew->applicant->sea_service->last()->rank2)){
+            $crew->rank_id = $crew->applicant->sea_service->last()->rank2->id;
+
+            if(!isset($array[$crew->status][$crew->rank_id])){
+                $array[$crew->status][$crew->rank_id] = [];
+            }
+
+            array_push($array[$crew->status][$crew->rank_id], $crew);
+        }
+        else{
+            echo $crew->lname . '<br>';
+        }
+    }
+}
+
+echo '<br>';
+
+foreach($array as $status => $ranks){
+    echo "-------------" . $status . "---------------" . '<br>';
+
+    foreach($ranks as $rank => $crews){
+        if($rank){
+            $high = 0;
+            $low = 100;
+
+            foreach($crews as $crew){
+                $age = now()->parse($crew->birthday)->age;
+                if($age > $high){
+                    $high = $age;
+                }
+
+                if($age < $low){
+                    $low = $age;
+                }
+
+                if($age == 63){
+                    dd($crew);
+                }
+            }
+            $median = ($high + $low) / 2;
+            echo "$rankList[$rank];$high;$low;$median<br>";
+        }
+
+        echo "\n\n\n";
+    }
+
+    echo "\n\n\n";
+}

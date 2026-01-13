@@ -2014,74 +2014,61 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
-        $users = User::where('role', 'Applicant')->where('fleet', 'FLEET B')->get();
+        $applicants = SeaService::where('vessel_type', 'LIKE', '%LOG%')
+                        ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
+                        ->join('users as u', 'u.id', '=', 'a.user_id')
+                        ->whereNull('a.deleted_at')
+                        ->where('u.fleet', 'TOEI')
+                        ->where('a.remarks', 'NOT LIKE', '%WITHDRAW%')
+                        ->where('a.remarks', 'NOT LIKE', '%WD%')
+                        ->where('a.remarks', 'NOT LIKE', '%POOR%')
+                        ->where('a.remarks', 'NOT LIKE', '%P&I%')
+                        ->where('a.remarks', 'NOT LIKE', '%NFR%')
+                        ->where('a.remarks', 'NOT LIKE', '%AGE%')
+                        ->where('a.remarks', 'NOT LIKE', '%PROBLEM%')
+                        ->where('a.remarks', 'NOT LIKE', '%COLLISION%')
+                        ->get()
+                        ->groupBy('applicant_id');
 
-        $pro['2023'] = [];
-        $pro['2024'] = [];
-        $pro['2025'] = [];
+        $array = [];
 
-        $i = 0;
+        // IF COUNT ONLY
+        // foreach($applicants as $sss){
+        //     $ss = $sss->sortByDesc('sign_off')->first();
 
-        foreach($users as $user){
-            $sss = optional($user->crew)->sea_service;
+        //     if(!isset($array[$ss->rank])){
+        //         $array[$ss->rank] = 0;
+        //     }
 
-            if($sss){
-                $sss = $sss->filter(function ($item) {
-                            return !empty($item->sign_on) && $item->sign_on > '2021-12-31';
-                        })
-                        ->sortBy('sign_on');
-                $last = null;
+        //     $array[$ss->rank]++;
+        // }
 
-                foreach($sss as $ss){
-                    if($last){
-                        if(isset($ss->rank2) && ($ss->rank2->order <= $last->order) && ($ss->rank2->id != $last->id) && ($ss->rank2->type == "OFFICER")){
-                            $yr = $ss->sign_on->format('Y');
+        // IF WITH CREW NAME
+        foreach($applicants as $sss){
+            $ss = $sss->sortByDesc('sign_off')->first();
 
-                            if($yr >= 2023){
-                                array_push($pro[$yr], ["last" => $last, "new" => $ss, 'user' => $user]);
-                            }
-                        }
-                    }
+            if(!isset($array[$ss->rank])){
+                $array[$ss->rank] = [];
+            }
 
-                    $last = $ss->rank2;
-                }
+            array_push($array[$ss->rank], $ss);
+        }
 
-                if($last && isset($user->crew->pro_app) && $user->crew->pro_app->status == "On Board"){
-                    $cl = $user->crew->current_lineup;
+        $ranks = [
+            "MASTER",
+            "CHIEF OFFICER",
+            "2ND OFFICER",
+            "3RD OFFICER",
+            "BOSUN",
+            "ABLE SEAMAN",
+            "ORDINARY SEAMAN"
+        ];
 
-                    if(($cl->rank->order <= $last->order) && ($cl->rank->id != $last->id) && ($cl->rank->type == "OFFICER")){
-                        $yr = $cl->joining_date->format('Y');
-
-                        $cl->rank2 = $cl->rank;
-                        $cl->sign_on = $cl->joining_date;
-
-                        if($yr >= 2023){
-                            array_push($pro[$yr], ["last" => $last, "new" => $cl, 'user' => $user]);
-                        }
-                    }
-                }
-
-                $i++;
+        foreach($ranks as $rank){
+            foreach($array[$rank] as $crew){
+                echo $crew->rank2->abbr . ';' . $crew->lname . ', ' . $crew->fname . ';' . $crew->sign_off . '<br>';
             }
         }
-
-        foreach($pro['2023'] as $temp){
-            echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
-        }
-
-        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
-
-        foreach($pro['2024'] as $temp){
-            echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
-        }
-
-        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
-
-        foreach($pro['2025'] as $temp){
-            echo $temp['new']->rank2->abbr . ';' . $temp['user']->namefull . ';' . $temp['user']->birthday . ';' . $temp['last']->abbr . ';' . $temp['new']->rank2->abbr . ';' . $temp['new']->sign_on . '<br>';
-        }
-
-        echo "<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>";
     }
 
     //name, current rank, present vessel, date embarked
