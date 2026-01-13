@@ -2014,7 +2014,7 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
-        $applicants = SeaService::where('vessel_type', 'LIKE', '%LOG%')
+        $applicants = SeaService::where('vessel_type', 'LIKE', '%WOOD%')
                         ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
                         ->join('users as u', 'u.id', '=', 'a.user_id')
                         ->whereNull('a.deleted_at')
@@ -2042,6 +2042,8 @@ class ApplicationsController extends Controller
 
         //     $array[$ss->rank]++;
         // }
+
+        // dd($array);
 
         // IF WITH CREW NAME
         foreach($applicants as $sss){
