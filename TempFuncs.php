@@ -498,3 +498,62 @@ foreach($array as $status => $ranks){
 
     echo "\n\n\n";
 }
+
+<!-- GET ALL CREW WITH SPECIFIC VESSEL EXPERIENCE -->
+$applicants = SeaService::where('vessel_type', 'LIKE', '%WOOD%')
+                ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
+                ->join('users as u', 'u.id', '=', 'a.user_id')
+                ->whereNull('a.deleted_at')
+                ->where('u.fleet', 'TOEI')
+                ->where('a.remarks', 'NOT LIKE', '%WITHDRAW%')
+                ->where('a.remarks', 'NOT LIKE', '%WD%')
+                ->where('a.remarks', 'NOT LIKE', '%POOR%')
+                ->where('a.remarks', 'NOT LIKE', '%P&I%')
+                ->where('a.remarks', 'NOT LIKE', '%NFR%')
+                ->where('a.remarks', 'NOT LIKE', '%AGE%')
+                ->where('a.remarks', 'NOT LIKE', '%PROBLEM%')
+                ->where('a.remarks', 'NOT LIKE', '%COLLISION%')
+                ->get()
+                ->groupBy('applicant_id');
+
+$array = [];
+
+// IF COUNT ONLY
+// foreach($applicants as $sss){
+//     $ss = $sss->sortByDesc('sign_off')->first();
+
+//     if(!isset($array[$ss->rank])){
+//         $array[$ss->rank] = 0;
+//     }
+
+//     $array[$ss->rank]++;
+// }
+
+// dd($array);
+
+// IF WITH CREW NAME
+foreach($applicants as $sss){
+    $ss = $sss->sortByDesc('sign_off')->first();
+
+    if(!isset($array[$ss->rank])){
+        $array[$ss->rank] = [];
+    }
+
+    array_push($array[$ss->rank], $ss);
+}
+
+$ranks = [
+    "MASTER",
+    "CHIEF OFFICER",
+    "2ND OFFICER",
+    "3RD OFFICER",
+    "BOSUN",
+    "ABLE SEAMAN",
+    "ORDINARY SEAMAN"
+];
+
+foreach($ranks as $rank){
+    foreach($array[$rank] as $crew){
+        echo $crew->rank2->abbr . ';' . $crew->lname . ', ' . $crew->fname . ';' . $crew->sign_off . '<br>';
+    }
+}

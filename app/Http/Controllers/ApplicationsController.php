@@ -2014,63 +2014,47 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
-        $applicants = SeaService::where('vessel_type', 'LIKE', '%WOOD%')
-                        ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
-                        ->join('users as u', 'u.id', '=', 'a.user_id')
+        $contracts = LineUpContract::where('line_up_contracts.status', 'like', '%On Board%')
+                        ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
                         ->whereNull('a.deleted_at')
-                        ->where('u.fleet', 'TOEI')
-                        ->where('a.remarks', 'NOT LIKE', '%WITHDRAW%')
-                        ->where('a.remarks', 'NOT LIKE', '%WD%')
-                        ->where('a.remarks', 'NOT LIKE', '%POOR%')
-                        ->where('a.remarks', 'NOT LIKE', '%P&I%')
-                        ->where('a.remarks', 'NOT LIKE', '%NFR%')
-                        ->where('a.remarks', 'NOT LIKE', '%AGE%')
-                        ->where('a.remarks', 'NOT LIKE', '%PROBLEM%')
-                        ->where('a.remarks', 'NOT LIKE', '%COLLISION%')
-                        ->get()
-                        ->groupBy('applicant_id');
+                        ->whereNull('disembarkation_date')->get();
 
         $array = [];
 
-        // IF COUNT ONLY
-        // foreach($applicants as $sss){
-        //     $ss = $sss->sortByDesc('sign_off')->first();
+        // IF NUMBER IS NEEDED ONLY
+        $array['Officer'] = 0;
+        $array['Ratings'] = 0;
+        foreach($contracts as $contract){
+            if($contract->rank->type == "OFFICER"){
+                $array['Officer']++;
+            }
+            else{
+                $array['Ratings']++;
+            }
+        }
 
-        //     if(!isset($array[$ss->rank])){
-        //         $array[$ss->rank] = 0;
+        echo "Officer: " . $array['Officer'] . '<br>';
+        echo "Ratings: " . $array['Ratings'];
+
+        // foreach($contracts as $contract){
+        //     if(isset($contract->applicant)){
+        //         $fleet = $contract->applicant->user->fleet;
+                
+        //         if(!isset($array[$fleet])){
+        //             $array[$fleet]['Officer'] = 0;
+        //             $array[$fleet]['Ratings'] = 0;
+        //         }
+
+        //         if($contract->rank->type == "OFFICER"){
+        //             $array[$fleet]['Officer']++;
+        //         }
+        //         else{
+        //             $array[$fleet]['Ratings']++;
+        //         }
         //     }
-
-        //     $array[$ss->rank]++;
         // }
 
         // dd($array);
-
-        // IF WITH CREW NAME
-        foreach($applicants as $sss){
-            $ss = $sss->sortByDesc('sign_off')->first();
-
-            if(!isset($array[$ss->rank])){
-                $array[$ss->rank] = [];
-            }
-
-            array_push($array[$ss->rank], $ss);
-        }
-
-        $ranks = [
-            "MASTER",
-            "CHIEF OFFICER",
-            "2ND OFFICER",
-            "3RD OFFICER",
-            "BOSUN",
-            "ABLE SEAMAN",
-            "ORDINARY SEAMAN"
-        ];
-
-        foreach($ranks as $rank){
-            foreach($array[$rank] as $crew){
-                echo $crew->rank2->abbr . ';' . $crew->lname . ', ' . $crew->fname . ';' . $crew->sign_off . '<br>';
-            }
-        }
     }
 
     //name, current rank, present vessel, date embarked
