@@ -429,6 +429,7 @@
             	            	<option value="COVID-19 5TH DOSE">COVID-19 5TH DOSE</option>
             	            	<option value="COVID-19 6TH DOSE">COVID-19 6TH DOSE</option>
             	            	<option value="BENZENE TEST">BENZENE TEST</option>
+            	            	<option value="METHANOL TEST">METHANOL TEST</option>
             	            </select>
             	            <span class="invalid-feedback hidden" role="alert">
             	                <strong id="${mcType}${count}Error"></strong>
