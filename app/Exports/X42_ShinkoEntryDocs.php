@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 
 class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
-    public function __construct($data, $type){
+    public function __construct($data, $type, $rank = false){
         foreach(['document_id', 'document_flag', 'document_lc', 'document_med', 'document_med_cert' ] as $docuType){
             foreach($data->$docuType as $key => $doc){
                 $name = $doc->type;
@@ -33,6 +33,7 @@ class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, Shoul
 
         $this->data     = $data;
         $this->type     = $type;
+        $this->rank     = $rank;
     }
 
     public function view(): View
@@ -268,7 +269,7 @@ class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, Shoul
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle('SMOP DC-04B', false);
+                $event->sheet->getDelegate()->setTitle($this->rank ?? "SMOP DC-04B", false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
