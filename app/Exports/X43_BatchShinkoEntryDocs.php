@@ -32,7 +32,7 @@ class X43_BatchShinkoEntryDocs implements WithMultipleSheets
                 }
             }
 
-            $applicant->rank = Rank::find($applicant->pro_app->rank_id)->abbr;
+            $applicant->rank = str_replace('/', '', Rank::find($applicant->pro_app->rank_id)->abbr);
             $applicant->vessel = Vessel::find($applicant->pro_app->vessel_id);
             $applicant->data = $data;
         }
