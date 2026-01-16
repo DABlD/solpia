@@ -29,7 +29,7 @@
 
 	<tr>
 		<td>Address</td>
-		<td colspan="7">8th Floor, Daeil Building, 12, Insadong-gil, Jongno-gu, Seoul, Korea</td>
+		<td colspan="7">8th Floor, Daeil Building, #12, Insadong-gil, Jongno-gu, Seoul Republic of Korea</td>
 	</tr>
 
 	<tr>
