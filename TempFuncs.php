@@ -557,3 +557,46 @@ foreach($ranks as $rank){
         echo $crew->rank2->abbr . ';' . $crew->lname . ', ' . $crew->fname . ';' . $crew->sign_off . '<br>';
     }
 }
+
+<!-- GET ALL ONBOARD CREW -->
+$contracts = LineUpContract::where('line_up_contracts.status', 'like', '%On Board%')
+                ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
+                ->whereNull('a.deleted_at')
+                ->whereNull('disembarkation_date')->get();
+
+$array = [];
+
+// IF NUMBER IS NEEDED ONLY
+$array['Officer'] = 0;
+$array['Ratings'] = 0;
+foreach($contracts as $contract){
+    if($contract->rank->type == "OFFICER"){
+        $array['Officer']++;
+    }
+    else{
+        $array['Ratings']++;
+    }
+}
+
+echo "Officer: " . $array['Officer'] . '<br>';
+echo "Ratings: " . $array['Ratings'];
+
+// foreach($contracts as $contract){
+//     if(isset($contract->applicant)){
+//         $fleet = $contract->applicant->user->fleet;
+        
+//         if(!isset($array[$fleet])){
+//             $array[$fleet]['Officer'] = 0;
+//             $array[$fleet]['Ratings'] = 0;
+//         }
+
+//         if($contract->rank->type == "OFFICER"){
+//             $array[$fleet]['Officer']++;
+//         }
+//         else{
+//             $array[$fleet]['Ratings']++;
+//         }
+//     }
+// }
+
+// dd($array);

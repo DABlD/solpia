@@ -2014,47 +2014,28 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
-        $contracts = LineUpContract::where('line_up_contracts.status', 'like', '%On Board%')
-                        ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
-                        ->whereNull('a.deleted_at')
-                        ->whereNull('disembarkation_date')->get();
+        $temp = SeaService::select('applicant_id', 'rank')
+                    ->where('principal', 'like', 'SHOEI')
+                    ->orWhere('principal', 'like', 'SMTECH')
+                    ->orWhere('ship_manager', 'like', 'SHOEI')
+                    ->orWhere('ship_manager', 'like', 'SMTECH')
+                    ->orderByDesc('sign_off')
+                    ->get()
+                    ->groupBy('applicant_id');
 
-        $array = [];
+        $temp2 = LineUpContract::where('vessel_id', 231)->where('status', 'On Board')->get()->groupBy('applicant_id');
 
-        // IF NUMBER IS NEEDED ONLY
-        $array['Officer'] = 0;
-        $array['Ratings'] = 0;
-        foreach($contracts as $contract){
-            if($contract->rank->type == "OFFICER"){
-                $array['Officer']++;
-            }
-            else{
-                $array['Ratings']++;
-            }
+        foreach($temp as $id => $crew){
+            $crew = $crew->first();
+            echo ($crew->rank2->abbr ?? $crew->rank) . ';' . $crew->applicant->user->namefull . '<br>';
         }
 
-        echo "Officer: " . $array['Officer'] . '<br>';
-        echo "Ratings: " . $array['Ratings'];
+        echo '<br>-----------------------------<br>';
 
-        // foreach($contracts as $contract){
-        //     if(isset($contract->applicant)){
-        //         $fleet = $contract->applicant->user->fleet;
-                
-        //         if(!isset($array[$fleet])){
-        //             $array[$fleet]['Officer'] = 0;
-        //             $array[$fleet]['Ratings'] = 0;
-        //         }
-
-        //         if($contract->rank->type == "OFFICER"){
-        //             $array[$fleet]['Officer']++;
-        //         }
-        //         else{
-        //             $array[$fleet]['Ratings']++;
-        //         }
-        //     }
-        // }
-
-        // dd($array);
+        foreach($temp2 as $id => $crew){
+            $crew = $crew->first();
+            echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . '<br>';
+        }
     }
 
     //name, current rank, present vessel, date embarked
