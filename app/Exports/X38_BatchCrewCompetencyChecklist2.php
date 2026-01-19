@@ -102,7 +102,6 @@ class X38_BatchCrewCompetencyChecklist2 implements WithMultipleSheets
             }
         }
 
-        // return $sheets;
-        return [$sheets[0]];
+        return $sheets;
     }
 }
