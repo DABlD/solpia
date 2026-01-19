@@ -1,29 +1,34 @@
 {{-- ☑ --}}
 @php
-	function checkDate2($date, $type){
-		if($date == "UNLIMITED"){
-			return 'UNLIMITED';
-		}
-		elseif($date == "" || $date == null){
-			if($type == "E"){
+
+	if (!function_exists('checkDate2')) {
+		function checkDate2($date, $type){
+			if($date == "UNLIMITED"){
 				return 'UNLIMITED';
 			}
-			else{
-				return '-';
+			elseif($date == "" || $date == null){
+				if($type == "E"){
+					return 'UNLIMITED';
+				}
+				else{
+					return '-';
+				}
 			}
-		}
-		else{
-			// echo $date->format('F j, Y');
-			echo $date->toFormattedDateString();
+			else{
+				// echo $date->format('F j, Y');
+				echo $date->toFormattedDateString();
+			}
 		}
 	}
 
-	function validityCheck($issue, $expiry){
-		if(isset($expiry) && $expiry <= now()->toDateString()){
-			return false;
-		}
+	if (!function_exists('validityCheck')) {
+		function validityCheck($issue, $expiry){
+			if(isset($expiry) && $expiry <= now()->toDateString()){
+				return false;
+			}
 
-		return true;
+			return true;
+		}
 	}
 
 	$flag = $data->vessel->flag;
