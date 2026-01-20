@@ -6628,6 +6628,18 @@
             })
         }
 
+        function X38_BatchCrewCompetencyChecklist(vid, name){
+            let data = {
+                status: 'Lined-Up',
+                joining_date: $('#joining_date').val(),
+                joining_port: $('#joining_port').val(),
+                vid: vid,
+                filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + " - Crew Competency Checklist"
+            }
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/X38_BatchCrewCompetencyChecklist?` + $.param(data);
+        }
+
         function X38_BatchCrewCompetencyChecklist2(vid, name){
             let data = {
                 status: 'Lined-Up',
