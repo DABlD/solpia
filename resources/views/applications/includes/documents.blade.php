@@ -228,6 +228,7 @@
 					<option value="ENGLISH TEST">&nbsp;&nbsp;&nbsp;&nbsp;ENGLISH TEST</option>
 					<option value="HYDRAULICS/PNEUMATICS">&nbsp;&nbsp;&nbsp;&nbsp;HYDRAULICS/PNEUMATICS</option>
 					<option value="MARINE ELECTRICAL">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRICAL</option>
+					<option value="MARINE HIGH VOLTAGE">&nbsp;&nbsp;&nbsp;&nbsp;MARINE HIGH VOLTAGE</option>
 					<option value="MARINE ELECTRO TECH">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRO TECH</option>
 					<option value="MARINE REFRIGERATION/AIRCONDITIONING">&nbsp;&nbsp;&nbsp;&nbsp;MARINE REFRIGERATION/AIRCONDITIONING</option>
 					<option value="RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE">&nbsp;&nbsp;&nbsp;&nbsp;RISK ASSESSMENT / INCIDENT INVESTIGATION COURSE</option>
