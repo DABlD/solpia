@@ -23,7 +23,8 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             // ,"M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
             // "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
             "M/V HYUNDAI PARAMOUNT",                                                                                                    // FLEET B PART OF 1ST BATCH 
-            "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",                 // FLEET C PART OF 1ST BATCH
+            "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
+            "M/T ORIENTAL GREENSTONE"                                                                                                   // FLEET C PART OF 1ST BATCH
 
             "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE",                                                                       // FLEET B PART OF 2ND BATCH
 
