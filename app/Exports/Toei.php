@@ -24,7 +24,13 @@ class Toei implements FromView, WithEvents, WithDrawings, WithColumnFormatting//
 
     public function view(): View
     {
-        return view('exports.' . $this->type, [
+        $view = $this->type;
+
+        if($this->applicant->user->fleet == "FLEET D"){
+            $view .= "_fleetD";
+        }
+
+        return view('exports.' . $view, [
             'applicant' => $this->applicant
         ]);
     }
