@@ -1443,7 +1443,7 @@
 				@if(in_array(auth()->user()->id, [4567, 4566]))
 					LHEA MARQUEZ / ASST. CREWING MANAGER
 				@else
-					NEIL ROMANO / CREWING MANAGER
+					LAURA D. FERNANDO / ASST. CREWING MANAGER
 				@endif
 			</td>
 		</tr>
