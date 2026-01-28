@@ -544,7 +544,7 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("COMPLIANCE TO MARPOL CONFIRMATION", "COMPLIANCE TO MARPOL CONFIRMATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -559,7 +559,7 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("COMPLIANCE TO MARPOL CONFIRMATION", "COMPLIANCE TO MARPOL CONFIRMATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -569,12 +569,12 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
+			{{ $doc("COMPLIANCE TO MARPOL CONFIRMATION", "COMPLIANCE TO MARPOL CONFIRMATION", 'lc') }}
 			@if(in_array($data->rank2->id, [14,19]))
 				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
-			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -591,7 +591,7 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("COMPLIANCE TO MARPOL CONFIRMATION", "COMPLIANCE TO MARPOL CONFIRMATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -606,7 +606,7 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
-			{{ $doc("TEST", "", 'lc') }}
+			{{ $doc("COMPLIANCE TO MARPOL CONFIRMATION", "COMPLIANCE TO MARPOL CONFIRMATION", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
@@ -616,12 +616,12 @@
 			{{ $doc("HAZMAT", "HAZMAT", 'lc') }}
 			{{ $con("MENTAL HEALTH") }}
 			{{ $doc("IT EQUIPMENT SELF DECLARATION", "IT EQUIPMENT SELF DECLARATION", 'lc') }}
+			{{ $doc("COMPLIANCE TO MARPOL CONFIRMATION", "COMPLIANCE TO MARPOL CONFIRMATION", 'lc') }}
 			@if(in_array($data->rank2->id, [14,19]))
 				{{ $doc("TRB", "CADET TRAINING RECORD BOOK", 'lc') }}
 			@else
 				{{ $doc("TEST", "", 'lc') }}
 			@endif
-			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
 			{{ $doc("TEST", "", 'lc') }}
