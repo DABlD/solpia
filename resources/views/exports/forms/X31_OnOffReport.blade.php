@@ -54,7 +54,7 @@
 			<td></td>
 
 			@if(isset($data->off[$i]))
-				<td style="{{ $c }}">{{ $data->off[$i]->disembarkation_date->format('d-M-y') }}</td>
+				<td style="{{ $c }}">{{ now()->parse($data->off[$i]->disembarkation_date)->format('d-M-y') }}</td>
 				<td style="{{ $c }}">{{ $data->off[$i]->rank->abbr }}</td>
 				<td style="{{ $c }}" colspan="2">{{ $data->off[$i]->applicant->user->namefull }}</td>
 			@else
