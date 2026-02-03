@@ -2014,27 +2014,83 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
-        $temp = SeaService::select('applicant_id', 'rank')
-                    ->where('principal', 'like', 'SHOEI')
-                    ->orWhere('principal', 'like', 'SMTECH')
-                    ->orWhere('ship_manager', 'like', 'SHOEI')
-                    ->orWhere('ship_manager', 'like', 'SMTECH')
-                    ->orderByDesc('sign_off')
-                    ->get()
-                    ->groupBy('applicant_id');
+        $start = $req->start;
+        $end = $req->end;
 
-        $temp2 = LineUpContract::where('vessel_id', 231)->where('status', 'On Board')->get()->groupBy('applicant_id');
+        echo $start . ' -> ' . $end . '<br><br>';
 
-        foreach($temp as $id => $crew){
-            $crew = $crew->first();
-            echo ($crew->rank2->abbr ?? $crew->rank) . ';' . $crew->applicant->user->namefull . '<br>';
+        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                            ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                            ->join('users as u', 'u.id', '=', 'a.user_id')
+                            ->where('joining_date', '>=', $start)
+                            ->where('joining_date', '<=', $end)
+                            ->where('fleet', '=', 'TOEI')
+                            ->get();
+
+        $lups->load('rank');
+        $lups->load('vessel');
+        $lups->load('applicant.user');
+        $lups->load('applicant.sea_service');
+
+        foreach($lups as $lup){
+            $temp = $lup->applicant->sea_service->sortBy('sign_on');
+            $bool = false;
+
+            if(in_array($lup->rank_id, [14, 19])){
+                $bool = true;
+            }
+            elseif(sizeof($temp)){
+                foreach($temp as $ss){
+                    if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+                        $bool = true;
+                    }
+                }
+            }
+            else{
+                $bool = true;
+            }
+
+            if($bool){
+                echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->joining_date . '<br>';
+            }
         }
 
-        echo '<br>-----------------------------<br>';
+        echo '<br><br><br>';
+        echo '~~~~~~~~~~~~~~~~~~~';
+        echo '<br>';
 
-        foreach($temp2 as $id => $crew){
-            $crew = $crew->first();
-            echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . '<br>';
+        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                                    ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                                    ->join('users as u', 'u.id', '=', 'a.user_id')
+                                    ->where('disembarkation_date', '>=', $start)
+                                    ->where('disembarkation_date', '<=', $end)
+                                    ->where('fleet', '=', 'TOEI')
+                                    ->get();
+
+        $lups->load('rank');
+        $lups->load('vessel');
+        $lups->load('applicant.user');
+        $lups->load('applicant.sea_service');
+
+        foreach($lups as $lup){
+            $temp = $lup->applicant->sea_service->sortBy('sign_on');
+            $bool = false;
+
+            foreach($temp as $ss){
+                if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+                    $bool = true;
+                }
+            }
+
+            if($bool){
+                if(str_contains($lup->status, "On Board")){
+                    echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->disembarkation_date . '<br>';
+                }
+                else{
+                    $temp2 = $temp->last();
+                    echo $lup->lname . ', ' . $lup->fname . ';' . $temp2->rank2->abbr . ';' . $temp2->vessel_name . ';' . $temp2->sign_off . '<br>';
+                }
+            }
         }
     }
 

@@ -600,3 +600,27 @@ echo "Ratings: " . $array['Ratings'];
 // }
 
 // dd($array);
+
+<!-- GET ALL SHOEI OR SMTECH CREW / CREW PER PRINCIPAL HISTORY -->
+$temp = SeaService::select('applicant_id', 'rank')
+            ->where('principal', 'like', 'SHOEI')
+            ->orWhere('principal', 'like', 'SMTECH')
+            ->orWhere('ship_manager', 'like', 'SHOEI')
+            ->orWhere('ship_manager', 'like', 'SMTECH')
+            ->orderByDesc('sign_off')
+            ->get()
+            ->groupBy('applicant_id');
+
+$temp2 = LineUpContract::where('vessel_id', 231)->where('status', 'On Board')->get()->groupBy('applicant_id');
+
+foreach($temp as $id => $crew){
+    $crew = $crew->first();
+    echo ($crew->rank2->abbr ?? $crew->rank) . ';' . $crew->applicant->user->namefull . '<br>';
+}
+
+echo '<br>-----------------------------<br>';
+
+foreach($temp2 as $id => $crew){
+    $crew = $crew->first();
+    echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . '<br>';
+}
