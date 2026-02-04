@@ -316,8 +316,8 @@ class CkMaritime implements FromView, WithEvents, WithDrawings, WithColumnFormat
                 // HC VC
                 $h[4] = [
                     'A1',
-                    "A90:L" . (90 + ($sss * 2) - 1),
-                    'F73:L82'
+                    "A91:L" . (92 + ($sss * 2) - 1),
+                    'F74:L83'
                 ];
 
                 // HL
@@ -335,14 +335,14 @@ class CkMaritime implements FromView, WithEvents, WithDrawings, WithColumnFormat
                 ];
 
                 $h['wrap'] = [
-                    'A90:L90'
+                    'A91:L91'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
                     'B6:E6',
                     'B9:B10', 'E7:E10',
-                    "A91:L" . (91 + ($sss * 2) - 1)
+                    "A92:L" . (92 + ($sss * 2) - 1)
                 ];
 
                 foreach($h as $key => $value) {
@@ -370,8 +370,8 @@ class CkMaritime implements FromView, WithEvents, WithDrawings, WithColumnFormat
                     'A13:I13',
                     'A17:K17', 'A18', 'B18:B23', 'A26:K26', 'A27:A30', 'B27', 'B30',
                     'A34:E36',
-                    'A33:K33', 'A39:K39', 'A40:A69', 'A72:K72',
-                    'A72:A82', 'A85:F85', 'A85:A87', 'A90:K90'
+                    'A33:K33', 'A39:K39', 'A40:A70', 'A73:K73',
+                    'A73:A83', 'A86:F86', 'A86:A88', 'A91:K91'
                 ];
 
                 $fills[1] = [
@@ -379,8 +379,8 @@ class CkMaritime implements FromView, WithEvents, WithDrawings, WithColumnFormat
                 ];
 
                 if($sss){
-                    array_push($fills[1], "B91:B" . (91 + ($sss * 2) - 1));
-                    array_push($fills[1], "K91:K" . (91 + ($sss * 2) - 1));
+                    array_push($fills[1], "B92:B" . (92 + ($sss * 2) - 1));
+                    array_push($fills[1], "K92:K" . (92 + ($sss * 2) - 1));
                 }
 
                 foreach($fills as $key => $value){
@@ -396,8 +396,8 @@ class CkMaritime implements FromView, WithEvents, WithDrawings, WithColumnFormat
                     'A2:A10', 'I2:L4', 'B6:L10',
                     'A12:L14', 'A17:L23',
                     'A26:L30', 'A33:L36',
-                    'A39:L69', 'A72:L82',
-                    'A85:G87', 'A90:L' . (90 + ($sss * 2))
+                    'A39:L70', 'A73:L83',
+                    'A86:G88', 'A91:L' . (91 + ($sss * 2))
                 ]);
 
                 // ALL BORDER MEDIUM

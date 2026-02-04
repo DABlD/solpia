@@ -614,6 +614,7 @@
 	</tr>
 
 	{{ $doc('BASIC TRAINING - BT', 		'lc', 		null,	'기초안전교육 SFTBT(BST)')}}
+	{{ $doc('BT-PSSR', 					'lc', 		null,	'BT-PSSR')}}
 
 	@php
 		$a = isset($data->document_lc->{"ADVANCE FIRE FIGHTING - AFF"}) ? $data->document_lc->{"ADVANCE FIRE FIGHTING - AFF"} : null;
