@@ -274,6 +274,10 @@
 		$a = "BASIC TRAINING - BT";
 		$b = "BT - Basic Training";
 		$getDocument($a, 'lc', null, $b);
+		
+		$a = "BT-PSSR";
+		$b = "BT-PSSR";
+		$getDocument($a, 'lc', null, $b);
 
 		$a = "PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB";
 		$b = "PCSRB - Proficiency in Survival Craft &#38; Rescue Boat";

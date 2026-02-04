@@ -231,7 +231,7 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('A10')->getFont()->setSize(12);
                 $event->sheet->getDelegate()->getStyle('A20')->getFont()->setSize(12);
 
-                for ($i=23; $i <= 43; $i++) { 
+                for ($i=23; $i <= 48; $i++) { 
                     $event->sheet->getDelegate()->getStyle("B$i")->getFont()->setSize(8);
                 }
                 // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
@@ -287,7 +287,7 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'A1:H43'
+                    'A1:H48'
                 ];
 
                 // HL
@@ -305,12 +305,12 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'B23:B46', 'C21', 'F21'
+                    'B23:B48', 'C21', 'F21'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B1', 'C5:G8', 'C12:G18', 'C23:G46'
+                    'B1', 'C5:G8', 'C12:G18', 'C23:G48'
                 ];
 
                 foreach($h as $key => $value) {
@@ -350,7 +350,7 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A1:C1', 'F1:G1', 'A5:G7', 'A12:G18', 'A23:G47'
+                    'A1:C1', 'F1:G1', 'A5:G7', 'A12:G18', 'A23:G48'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -368,7 +368,7 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'A4:G8', 'A11:G18', 'A21:G47'
+                    'A4:G8', 'A11:G18', 'A21:G48'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -420,7 +420,7 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(18);
                 }
 
-                for ($i = 23; $i <= 46; $i++) { 
+                for ($i = 23; $i <= 48; $i++) { 
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(22);
                 }
 
