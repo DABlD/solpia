@@ -235,8 +235,8 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle('N37')->getFont()->getColor()->setRGB('0000FF');
                 $event->sheet->getDelegate()->getStyle('R37:R40')->getFont()->getColor()->setRGB('0000FF');
                 $event->sheet->getDelegate()->getStyle('V37')->getFont()->getColor()->setRGB('0000FF');
-                $event->sheet->getDelegate()->getStyle('J42:l52')->getFont()->getColor()->setRGB('0000FF');
-                $event->sheet->getDelegate()->getStyle('R42:R52')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('J42:l53')->getFont()->getColor()->setRGB('0000FF');
+                $event->sheet->getDelegate()->getStyle('R42:R53')->getFont()->getColor()->setRGB('0000FF');
                 $event->sheet->getDelegate()->getStyle('U42')->getFont()->getColor()->setRGB('0000FF');
 
                 $event->sheet->getDelegate()->getStyle('A35:A36')->getFont()->getColor()->setRGB('FF0000');
@@ -298,23 +298,23 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[5] = [
-                    'A1:V41', 'A26:V28', 'A29:A36', 'J42:V52'
+                    'A1:V41', 'A26:V28', 'A29:A36', 'J42:V53'
                 ];
 
                 // B
                 $h[6] = [
                     'A3', 'E3:E4', 'P3', 'B13:U13', 'E14:E25', 'I14:I25', 
-                    'A26:V28', 'A29:A36', 'A41:U41', 'E42:E52', 'U42'
+                    'A26:V28', 'A29:A36', 'A41:U41', 'E42:E53', 'U42'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A42:V52'
+                    'A42:V53'
                 ];
 
                 $h['wrap'] = [
                     'E7', 'B11', 'M13', 'N8', 'U14:U25', 'L14:L25', 'I14:I25', 'F14:F25',
-                    'A26:V26', 'A29:A36', 'A41:E52', 'O42:O52', 'J42:J52', 'S14:T25', 'A3'
+                    'A26:V26', 'A29:A36', 'A41:E53', 'O42:O53', 'J42:J53', 'S14:T25', 'A3'
                 ];
 
                 // SHRINK TO FIT
@@ -357,7 +357,7 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BORDERS
                 $cells[0] = array_merge([
-                    'Q1:V2', 'B3:V13', 'E14:E25', 'F14:V25', 'I14:J25', 'K14:K25', 'L14:L25', 'M14:M25', 'N14:O25', 'P14:Q25', 'R14:R25', 'S14:S25', 'T14:T25', 'U14:V25', 'A26:V26', 'A29:V34', 'A37:V52'
+                    'Q1:V2', 'B3:V13', 'E14:E25', 'F14:V25', 'I14:J25', 'K14:K25', 'L14:L25', 'M14:M25', 'N14:O25', 'P14:Q25', 'R14:R25', 'S14:S25', 'T14:T25', 'U14:V25', 'A26:V26', 'A29:V34', 'A37:V53'
                 ]);
 
                 $cells[1] = array_merge([
@@ -369,7 +369,7 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ]);
 
                 $cells[3] = array_merge([
-                    'A1:V52'
+                    'A1:V53'
                 ]);
 
                 foreach($cells as $key => $value){
@@ -443,12 +443,12 @@ class Kosco1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(35)->setRowHeight(16);
                 $event->sheet->getDelegate()->getRowDimension(36)->setRowHeight(16);
 
-                for($i = 38; $i <= 52; $i++){
+                for($i = 38; $i <= 53; $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(24.75);                    
                 }
 
                 // SET PRINT AREA
-                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:V52");
+                $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:V53");
             },
         ];
     }

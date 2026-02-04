@@ -399,7 +399,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="4" rowspan="12">COMPULSARY EDUCATION AND THEIR CERTIFICATES</td>
+		<td colspan="4" rowspan="13">COMPULSARY EDUCATION AND THEIR CERTIFICATES</td>
 		<td colspan="5">Kind</td>
 		<td colspan="2">Certificate No.</td>
 		<td colspan="3">Date of Education</td>
@@ -425,7 +425,7 @@
 		<td colspan="3">{{ $docu ? $checkDate2($docu->issue_date, 'I') : 'N/A' }}</td>
 		<td colspan="3">DECK OFFICER</td>
 		<td colspan="3">{{ $docu ? $checkDate2($docu->expiry_date, 'E') : 'N/A' }}</td>
-		<td colspan="2" rowspan="11">FIT TO WORK</td>
+		<td colspan="2" rowspan="12">FIT TO WORK</td>
 	</tr>
 
 	@php
@@ -479,6 +479,19 @@
 
 	<tr>
 		<td colspan="5">Basic Training (BT)</td>
+		<td colspan="2">{{ $docu ? $docu->no : 'N/A' }}</td>
+		<td colspan="3">{{ $docu ? $checkDate2($docu->issue_date, 'I') : 'N/A' }}</td>
+		<td colspan="3">ALL CREW</td>
+		<td colspan="3">{{ $docu ? $checkDate2($docu->expiry_date, 'E') : 'N/A' }}</td>
+	</tr>
+
+	@php
+		$name = 'BT-PSSR';
+		$docu = isset($applicant->document_lc->{$name}) ? $applicant->document_lc->{$name} : false;
+	@endphp
+
+	<tr>
+		<td colspan="5">BT-PSSR</td>
 		<td colspan="2">{{ $docu ? $docu->no : 'N/A' }}</td>
 		<td colspan="3">{{ $docu ? $checkDate2($docu->issue_date, 'I') : 'N/A' }}</td>
 		<td colspan="3">ALL CREW</td>
