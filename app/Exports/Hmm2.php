@@ -189,9 +189,9 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setOrientation("landscape");
                 $event->sheet->getDelegate()->setTitle('BIODATA', false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
@@ -274,7 +274,7 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // B
                 $h[6] = [
-                    'F3', 'K3', 'X2:Y2', 'K8:K16', 'C10:C' . (39 + $add), 'L' . (37 + $add) . ':W' . (42 + $add), 'K' . (42 + $add)
+                    'F3', 'K3', 'X2:Y2', 'K8:K17', 'C10:C' . (39 + $add), 'L' . (37 + $add) . ':W' . (42 + $add), 'K' . (42 + $add)
                 ];
 
                 // VC
@@ -311,7 +311,7 @@ class Hmm2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'K3', 'F5:F9', 'K3:K8', 'Q3:Q6', 'R3:R4', 'T5:T6', 'U6', 'W5:W6', 'V7', 'C10:C' . (42 + $add), 'E10:E13', 'E20:E21', 'L8:Y9', 'K16:Y18', 'K' . (32 + $add) . ':K' . (37 + $add)
+                    'K3', 'F5:F9', 'K3:K8', 'Q3:Q6', 'R3:R4', 'T5:T6', 'U6', 'W5:W6', 'V7', 'C10:C' . (42 + $add), 'E10:E13', 'E20:E21', 'L8:Y9', 'K17:Y19', 'K' . (32 + $add) . ':K' . (37 + $add)
                 ];
 
                 $fills[1] = [

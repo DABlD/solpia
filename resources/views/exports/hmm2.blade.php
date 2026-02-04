@@ -427,7 +427,7 @@
 	<tr>
 		<td colspan="4">Past Sickness/Operations</td>
 		<td>NIL</td>
-		<td rowspan="8" style="text-decoration: underline;">MARINE TRAINING AND/OR CERTIFICATES</td>
+		<td rowspan="9" style="text-decoration: underline;">MARINE TRAINING AND/OR CERTIFICATES</td>
 		<td colspan="3" rowspan="2">Course</td>
 		<td colspan="2" rowspan="2">Number</td>
 		<td colspan="2" rowspan="2">Period</td>
@@ -461,7 +461,7 @@
 		<td>mm</td>
 
 		{{-- 2 --}}
-		{{ $getDocument('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'lc', 'MARINA', 		'COP PSCRB', '', '5 YEARS')}}
+		{{ $getDocument('BT-PSSR', 'lc', 'MARINA', 		'BT-PSSR', '', '')}}
 	</tr>
 
 	<tr>
@@ -472,7 +472,7 @@
 		<td></td>
 
 		{{-- 3 --}}
-		{{ $getDocument('SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 'lc', 'MARINA', 		'COP SDSD', null, 'UNLIMITED')}}
+		{{ $getDocument('PROFICIENCY IN SURVIVAL CRAFT AND RESCUE BOAT - PSCRB', 'lc', 'MARINA', 		'COP PSCRB', '', '5 YEARS')}}
 	</tr>
 
 	<tr>
@@ -484,7 +484,7 @@
 		<td>Validity</td>
 
 		{{-- 4 --}}
-		{{ $getDocument('MEDICAL CERTIFICATE', 'med_cert', '', 		'MEDICAL EXAMINATION', '', '2 YEARS', null, "2 YEARS")}}
+		{{ $getDocument('SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD', 'lc', 'MARINA', 		'COP SDSD', null, 'UNLIMITED')}}
 	</tr>
 
 	<tr>
@@ -495,7 +495,7 @@
 		@endif
 
 		{{-- 5 --}}
-		{{ $getDocument('DRUG AND ALCOHOL TEST', 'med_cert', '', null, null, "1 YEAR")}}
+		{{ $getDocument('MEDICAL CERTIFICATE', 'med_cert', '', 		'MEDICAL EXAMINATION', '', '2 YEARS', null, "2 YEARS")}}
 	</tr>
 
 	<tr>
@@ -506,7 +506,7 @@
 		@endif
 
 		{{-- 6 --}}
-		{{ $getDocument('YELLOW FEVER', 'med_cert', '', 'YELLOW FEVER', null, 'UNLIMITED')}}
+		{{ $getDocument('DRUG AND ALCOHOL TEST', 'med_cert', '', null, null, "1 YEAR")}}
 	</tr>
 
 	<tr>
@@ -516,6 +516,16 @@
 			{{ isBlank('COC-DECK RATING', 'MARINA') }}
 		@endif
 
+		{{ $getDocument('YELLOW FEVER', 'med_cert', '', 'YELLOW FEVER', null, 'UNLIMITED')}}
+	</tr>
+
+	<tr>
+		@if($rank_category == "ENGINE RATING")
+			{{ $getDocument('COC', 			'lc', 		'MARINA', 		'COC-ENGINE RATING')}}
+		@else
+			{{ isBlank('COC-ENGINE RATING', 'MARINA') }}
+		@endif
+		
 		<td rowspan="2" style="text-decoration: underline;">SEAMAN'S CAREER</td>
 		<td rowspan="3" colspan="2">Name of Vessel</td>
 		<td rowspan="3">G/T</td>
@@ -531,11 +541,7 @@
 	</tr>
 
 	<tr>
-		@if($rank_category == "ENGINE RATING")
-			{{ $getDocument('COC', 			'lc', 		'MARINA', 		'COC-ENGINE RATING')}}
-		@else
-			{{ isBlank('COC-ENGINE RATING', 'MARINA') }}
-		@endif
+		{{ $getDocument('NCI', 			'lc', 		'TESDA', 		'NC1 LICENSE')}}
 		
 		<td rowspan="2">Embark</td>
 		<td rowspan="2">Disembark</td>
@@ -543,15 +549,16 @@
 		<td rowspan="2">Principal</td>
 	</tr>
 
-	<tr>
-		{{ $getDocument('NCI', 			'lc', 		'TESDA', 		'NC1 LICENSE')}}
-		
-		<td>Flag</td>
-	</tr>
-
 	{{-- SEA SERVICE --}}
 	<tr>
 		{{ $getDocument('NCIII', 			'lc', 		'TESDA', 		'NC3 LICENSE')}}
+			
+		<td>Flag</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" rowspan="2">SEAMAN'S BOOK</td>
+		{{ $getDocument("SEAMAN'S BOOK",'id','MARINA', "PHILIPPINES")}}
 		
 		@php 
 			$i = 0;
@@ -562,22 +569,10 @@
 	</tr>
 
 	<tr>
-		<td colspan="2" rowspan="2">SEAMAN'S BOOK</td>
-		{{ $getDocument("SEAMAN'S BOOK",'id','MARINA', "PHILIPPINES")}}
-		
-		@php 
-			$i = 1; 
-			if(isset($data->sea_service[$i])){
-				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
-			}
-		@endphp
-	</tr>
-
-	<tr>
 		{{ $getDocument("US-VISA", 		'id', 		'US EMBASSY', 	'US VISA')}}
 		
 		@php 
-			$i = 2; 
+			$i = 1; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -589,7 +584,7 @@
 		{{ $getDocument('PASSPORT', 'id','DFA')}}
 		
 		@php 
-			$i = 3; 
+			$i = 2; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -600,7 +595,7 @@
 		<td colspan="8" style="text-decoration: underline;">FAMILY BACKGROUND</td>
 		
 		@php 
-			$i = 4; 
+			$i = 3; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -616,7 +611,7 @@
 		<td>Occupation</td>
 		
 		@php 
-			$i = 5; 
+			$i = 4; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -630,7 +625,7 @@
 		{{ isset($data->family_data[$i2]) ? $fd($data->family_data[$i2], $i2) : isBlank2() }}
 		
 		@php 
-			$i = 6; 
+			$i = 5; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -644,7 +639,7 @@
 		{{ isset($data->family_data[$i2]) ? $fd($data->family_data[$i2], $i2) : isBlank2() }}
 		
 		@php 
-			$i = 7; 
+			$i = 6; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -658,7 +653,7 @@
 		{{ isset($data->family_data[$i2]) ? $fd($data->family_data[$i2], $i2) : isBlank2() }}
 		
 		@php 
-			$i = 8; 
+			$i = 7; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -672,7 +667,7 @@
 		{{ isset($data->family_data[$i2]) ? $fd($data->family_data[$i2], $i2) : isBlank2() }}
 		
 		@php 
-			$i = 9; 
+			$i = 8; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -686,7 +681,7 @@
 		{{ isset($data->family_data[$i2]) ? $fd($data->family_data[$i2], $i2) : isBlank2() }}
 		
 		@php 
-			$i = 10; 
+			$i = 9; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
@@ -700,11 +695,17 @@
 		{{ isset($data->family_data[$i2]) ? $fd($data->family_data[$i2], $i2) : isBlank2() }}
 		
 		@php 
-			$i = 11; 
+			$i = 10; 
 			if(isset($data->sea_service[$i])){
 				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
 			}
 		@endphp
+		{{-- @php 
+			$i = 11; 
+			if(isset($data->sea_service[$i])){
+				echo $ss($data->sea_service[$i], $data['ranks'][$data->sea_service[$i]->rank]);
+			}
+		@endphp --}}
 	</tr>
 
 	@if($add > 0)
