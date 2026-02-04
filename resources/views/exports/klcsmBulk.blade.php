@@ -577,7 +577,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="4" rowspan="8">
+		<td colspan="4" rowspan="9">
 			COMPULSORY EDUCATION AND THEIR CERTIFICATES
 		</td>
 		<td colspan="4">Kind</td>
@@ -592,7 +592,7 @@
 			$name = "STCW '95 Endorsement(COP)II/4";
 		@endphp
 		{{ $getDocument('COC', 'lc', $name) }}
-		<td colspan="3" rowspan="7">FOR MEDICAL</td>
+		<td colspan="3" rowspan="8">FOR MEDICAL</td>
 	</tr>
 
 	<tr>
@@ -604,6 +604,10 @@
 
 	<tr>
 		{{ $getDocument('BASIC TRAINING - BT', 'lc', 'Basic Training(BT)') }}
+	</tr>
+
+	<tr>
+		{{ $getDocument('BT-PSSR', 'lc', 'BT-PSSR') }}
 	</tr>
 
 	<tr>

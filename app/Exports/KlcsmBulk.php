@@ -285,7 +285,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'A2:O' . (46 + $add)
+                    'A2:O' . (47 + $add)
                 ];
 
                 // HL
@@ -302,7 +302,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
-                    'L7', 'N14:N' . (25 + $add), 'H14:H' . (25 + $add), 'F14:F' . (25 + $add), 'B11', 'A4', 'A' . (26 + $add) . ':O' . (26 + $add), 'A' . (27 + $add) . ':A' . (32 + $add), 'A' . (38 + $add) . ':O' . (46 + $add)
+                    'L7', 'N14:N' . (25 + $add), 'H14:H' . (25 + $add), 'F14:F' . (25 + $add), 'B11', 'A4', 'A' . (26 + $add) . ':O' . (26 + $add), 'A' . (27 + $add) . ':A' . (32 + $add), 'A' . (38 + $add) . ':O' . (47 + $add)
                 ];
 
                 // SHRINK TO FIT
@@ -347,7 +347,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'B4:O13', 'E14:O' . (25 + $add), 'A' . (25 + $add) . ':O' . (32 + $add), 'A' . (35 + $add) . ':O' . (46 + $add)
+                    'B4:O13', 'E14:O' . (25 + $add), 'A' . (25 + $add) . ':O' . (32 + $add), 'A' . (35 + $add) . ':O' . (47 + $add)
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -401,7 +401,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // FOR THE CHECK
-                // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
+                // $event->sheet->getDelegate()->getStyle('L47')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(3);
@@ -433,7 +433,7 @@ class KlcsmBulk implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(30);
                 }
 
-                for($i = (33 + $add); $i <= (46 + $add); $i++){
+                for($i = (33 + $add); $i <= (47 + $add); $i++){
                     $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight(20);
                 }
 
