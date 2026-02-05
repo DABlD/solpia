@@ -29,11 +29,15 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         // FLEET C LAST 1 LINE
+        // $array2 = [
+        //     "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE","M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
+        //     "M/V HYUNDAI PARAMOUNT","M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
+        //     "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
+        //     "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
+        // ];
         $array2 = [
-            "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE","M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
-            "M/V HYUNDAI PARAMOUNT","M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
-            "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
-            "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
+            "M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V ATLANTIC AFFINITY","M/V OCEAN FLORA",
+            "M/V HYUNDAI PARAMOUNT", "M/V HMM HARMONY", "M/V HMM MASTER", "M/V HMM MIRACLE"
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
@@ -50,7 +54,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
 
             $applicant->shipowner2 = "HMM Ocean Service Co., Ltd.";
-            $applicant->sPresident2 = "Kim Gyoubong";
+            $applicant->sPresident2 = "NAM JAE-IL";
             $applicant->sAddress2 = "5th Floor, Busan office Building, Jungang-daero 63, Jung-gu, Busan 600-711, Korea";
 
             $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
