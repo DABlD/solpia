@@ -379,15 +379,15 @@
 		}
 	@endphp
 	<tr>
-		<td rowspan="6">STCW II &#38; III</td>
+		<td rowspan="4">STCW II &#38; III</td>
 		<td rowspan="2">License (Watch keeping)</td>
 		<td>COP(National)</td>
 		<td rowspan="2">5Y</td>
-		<td rowspan="6">D/E Ratings</td>
+		<td rowspan="4">D/E Ratings</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
-		<td rowspan="6">
+		<td rowspan="4">
 			II/4 (Navigational
 			Watchkeeping Seafarer)
 			<br style='mso-data-placement:same-cell;' />
@@ -408,7 +408,7 @@
 		<td></td>
 	</tr>
 
-	<tr>
+	{{-- <tr>
 		<td>Training Cert</td>
 		<td>Watchkeeping Seafarer</td>
 		<td>-</td>
@@ -417,7 +417,7 @@
 		<td>
 			Y  ▢			N  ▢
 		</td>
-	</tr>
+	</tr> --}}
 
 	@php 
 		$name = 'COC';
@@ -458,7 +458,7 @@
 		<td></td>
 	</tr>
 
-	<tr>
+	{{-- <tr>
 		<td>Training Cert</td>
 		<td>Able Seafarer</td>
 		<td>-</td>
@@ -467,7 +467,7 @@
 		<td>
 			Y  ▢			N  ▢
 		</td>
-	</tr>
+	</tr> --}}
 
 	@php 
 		$name = 'SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD';

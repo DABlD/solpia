@@ -348,9 +348,9 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
                 // HL
                 $h[5] = [
                     'A3',
-                    'B7:B18', 'C19:C34',
-                    'B35:B41', 'A42:A44', 'A47:A48',
-                    'I7:I46'
+                    'B7:B18', 'C19:C32',
+                    'B33:B39', 'A40:A42', 'A45:A46',
+                    'I7:I44'
                 ];
 
                 // B
@@ -377,7 +377,7 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
 
 
                 $h['wrap'] = [
-                    'A4:I62'
+                    'A4:I60'
                 ];
 
                 // SHRINK TO FIT
@@ -386,7 +386,7 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
 
                 // TEXT UP
                 $textUp = [
-                    'A7', 'A14:A34'
+                    'A7', 'A14:A32'
                 ];
 
                 foreach($textUp as $cell){
@@ -430,7 +430,7 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A4:I47'
+                    'A4:I45'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -447,7 +447,7 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'A4:I46'
+                    'A4:I44'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -464,12 +464,12 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
 
                 // LRB
                 $cells[8] = array_merge([
-                    'A47'
+                    'A45'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
-                    'I47'
+                    'I45'
                 ]);
 
                 // TRB
@@ -494,8 +494,8 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
 
                 // BBD
                 $cells[15] = array_merge([
-                    'B7:I17', 'B18:I23', 'B25:I30',
-                    'B32:I33', 'B35:I39', 'A42:I43'
+                    'B7:I17', 'B18:I22', 'B23:I28',
+                    'B30:I31', 'B33:I37', 'A40:I41'
                 ]);
 
                 // BRD
@@ -504,7 +504,7 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
 
                 // BBDOBOL
                 $cells[17] = array_merge([
-                    'A44:I44', 'A6:I6'
+                    'A42:I42', 'A6:I6'
                 ]);
                 
                 foreach($cells as $key => $value){
@@ -531,7 +531,7 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
                 $rows = [
                     [
                         21, //ROW HEIGHT
-                        1,62 //START ROW, END ROW
+                        1,60 //START ROW, END ROW
                     ],
                 ];
 
@@ -564,8 +564,8 @@ class CrewCompetencyChecklistCBRatings implements FromView, WithEvents//, WithDr
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A1:L152')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A1:L152')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Times New Roman');
 
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(16);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(10);
