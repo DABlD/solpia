@@ -654,6 +654,7 @@ class DatatablesController extends Controller
 
 	public function requirements(Request $req){
 		$array = Requirement::where('requirements.fleet', 'like', $req->fleet)
+					->select('requirements.*')
 					->join('vessels as v', 'v.id', '=', 'vessel_id')
 					->where('type', 'LIKE', "%" . $req->vesselType . "%")
 					// ->where('vessel_id', 'like', $req->vessel)
