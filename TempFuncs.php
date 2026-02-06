@@ -624,3 +624,25 @@ foreach($temp2 as $id => $crew){
     $crew = $crew->first();
     echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . '<br>';
 }
+
+<!-- EXPORT HMM CADETS ONBOARD 2022 ONWARDS (DATA FROM SEA SERVICE AND LINEUPCONTRACTS) -->
+$temp = SeaService::whereIn('rank', ['DECK CADET', 'ENGINE CADET'])
+                    ->where(function($q) {
+                        $q->where('principal', 'like', '%HMM%');
+                        $q->orWhere('principal', 'like', "HYUNDAI O%");
+                        $q->orWhere('principal', 'like', "HYUNDAI M%");
+                        $q->orWhere('principal', "HYUNDAI");
+                    })
+                    ->where('sign_on', '>', '2022-01-01')
+                    ->get()->groupBy('applicant_id');
+
+$temp2 = LineUpContract::where('principal_id', 256)->where('status', 'On Board')->whereIn('rank_id', [14,19])->get();
+
+foreach($temp as $ss){
+    $ss = $ss->first();
+    echo $ss->applicant->user->namefull . ';' . $ss->vessel_name . ';' . $ss->sign_on . '<br>';
+}
+
+foreach($temp2 as $ss){
+    echo $ss->applicant->user->namefull . ';' . $ss->vessel->name . ';' . $ss->joining_date . '<br>';
+}
