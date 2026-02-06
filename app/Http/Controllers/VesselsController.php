@@ -106,6 +106,11 @@ class VesselsController extends Controller
             $vessels = $vessels->where($req->where2[0], 'like', $req->where2[1]);
         }
 
+        // IF HAS WHERE3
+        if($req->where3){
+            $vessels = $vessels->where($req->where3[0], 'like', $req->where3[1]);
+        }
+
         // IF HAS WHEREIN
         if($req->whereIn){
             $vessels = $vessels->whereIn($req->whereIn[0], $req->whereIn[1]);

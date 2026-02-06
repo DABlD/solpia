@@ -47,7 +47,33 @@
             </div>
             <div class="col-md-8 iInput">
                 <select id="fVessel" class="form-control">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row" style="display: flex;">
+            <div class="col-md-4 iLabel" style="margin: auto;">
+                Vessel Type
+            </div>
+            <div class="col-md-8 iInput">
+                <select id="fVesselType" class="form-control">
                     <option value="%%">All</option>
+                    <option value="BULK CARRIER">BULK CARRIER</option>
+                    <option value="BULK CARRIER (LOG)">BULK CARRIER (LOG)</option>
+                    <option value="CONTAINER">CONTAINER</option>
+                    <option value="CAR CARRIER">CAR CARRIER</option>
+                    <option value="GENERAL CARGO">GENERAL CARGO</option>
+                    <option value="OIL/CHEM">OIL/CHEM</option>
+                    <option value="PROD. TANKER">PROD. TANKER</option>
+                    <option value="LNG">LNG</option>
+                    <option value="VLCC">VLCC</option>
+                    <option value="WOODCHIP">WOODCHIP</option>
+                    <option value="PURSE SEINER">PURSE SEINER</option>
+                    <option value="LONGLINER">LONGLINER</option>
+                    <option value="TRAWLER">TRAWLER</option>
+                    <option value="SQUID JIGGER">SQUID JIGGER</option>
+                    <option value="LONGLINER (TUNA)">LONGLINER (TUNA)</option>
                 </select>
             </div>
         </div>

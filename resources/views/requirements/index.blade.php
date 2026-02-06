@@ -82,6 +82,7 @@
         var fVessel = "%%";
         var fRank = "%%";
         var fDate = "%%";
+        var fVesselType = "%%";
         var fStatus = "AVAILABLE";
 
         var table = $('#table').DataTable({
@@ -95,6 +96,7 @@
                 data: f => {
                     f.fleet = fleet;
                     f.user_id = user_id;
+                    f.vesselType = fVesselType;
                     f.vessel = fVessel;
                     f.rank = fRank;
                     f.date = fDate;
@@ -237,18 +239,29 @@
             $('#table').DataTable().ajax.reload();
         });
 
+        $('#fVesselType').on('change', e => {
+            fVesselType = e.target.value;
+            getVesselList();
+            $('#table').DataTable().ajax.reload();
+        });
+
         $(document).ready(() => {
+            getVesselList();
+        });
+
+        function getVesselList(){
             $.ajax({
                 url: '{{ route('vessels.get2') }}',
                 data: {
                     cols: "*",
                     where: ['fleet', fleet],
-                    where2: ['status', 'ACTIVE']
+                    where2: ['status', 'ACTIVE'],
+                    where3: ['type', fVesselType]
                 },
                 success: result => {
                     result = JSON.parse(result);
                     
-                    let fVesselString = "";
+                    let fVesselString = '<option value="%%">All</option>';
 
                     result.forEach(vessel => {
                         fVesselString += `
@@ -256,7 +269,7 @@
                         `;
                     })
 
-                    $('#fVessel').append(fVesselString);
+                    $('#fVessel').html(fVesselString);
                     $('#fVessel').select2({
                         placeholder: 'Select Vessel'
                     });
@@ -265,7 +278,7 @@
                     });
                 }
             })
-        });
+        }
 
         function create(){
             swal({

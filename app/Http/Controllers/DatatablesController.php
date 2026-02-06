@@ -653,7 +653,9 @@ class DatatablesController extends Controller
 	}
 
 	public function requirements(Request $req){
-		$array = Requirement::where('fleet', 'like', $req->fleet)
+		$array = Requirement::where('requirements.fleet', 'like', $req->fleet)
+					->join('vessels as v', 'v.id', '=', 'vessel_id')
+					->where('type', 'LIKE', "%" . $req->vesselType . "%")
 					// ->where('vessel_id', 'like', $req->vessel)
 					->where(function($q) use($req){
 					    if($req->vessel == "%%"){
@@ -666,7 +668,7 @@ class DatatablesController extends Controller
 					})
 					->where('rank', 'like', $req->rank)
 					// ->where('joining_date', 'like', $req->date)
-					->where('status', 'like', $req->status);
+					->where('requirements.status', 'like', $req->status);
 
 		if($req->user_id){
 			$array = $array->where('user_id', 'like', $req->user_id);
