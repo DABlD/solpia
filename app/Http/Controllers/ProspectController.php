@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Reports\Prospect as ProspectReport;
 use App\Exports\Reports\Deployment as DeploymentReport;
 use App\Exports\Reports\Prospect2 as ProspectReport2;
+use App\Exports\Reports\Statistics as StatisticReport;
 
 use DB;
 
@@ -284,29 +285,31 @@ class ProspectController extends Controller
             isset($temp9[$type][$rankList[$requirement->rank]]) ? $temp9[$type][$rankList[$requirement->rank]]++ : ($temp9[$type][$rankList[$requirement->rank]] = 1);
         }
 
-        dd(
-            ["Total number of recruited crew", $applicants],
-            ["Total of successful applicants (For approval, For Medical, Passed, On board status)", $temp1],
-            ["Total of unsuccessful (Rejected status with DECLINE, WITHDRAW, FAILED remark)", $temp2],
-            ["Total of disapproved (Rejected status with DISAPPROVED remark)", $temp4],
-            ["Total of unfit (Rejected status with UNFIT remark)", $temp5],
-            ["Total of backed out/back out (Back out/Backed out remarks)", $temp3],
-            '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
-            ['Requested Crew', $temp9],
-            '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
-            'Timely Submissions',
-            ["All", [
-                        "On time" => $temp6['On time'] + $temp7['On time'] + $temp8['On time'],
-                        "No" => $temp6['No'] + $temp7['No'] + $temp8['No'],
-                        "Percent" => ($temp6['On time'] + $temp7['On time'] + $temp8['On time'] + $temp6['No'] + $temp7['No'] + $temp8['No']) ? (($temp6['On time'] + $temp7['On time'] + $temp8['On time']) / ($temp6['On time'] + $temp7['On time'] + $temp8['On time'] + $temp6['No'] + $temp7['No'] + $temp8['No'])) : 0 * 100
-                    ]],
-            ["Top 4", $temp6],
-            ["Junior Officers", $temp7],
-            ["Ratings", $temp8]
-        );
+        // dd(
+        //     ["Total number of recruited crew", $applicants],
+        //     ["Total of successful applicants (For approval, For Medical, Passed, On board status)", $temp1],
+        //     ["Total of unsuccessful (Rejected status with DECLINE, WITHDRAW, FAILED remark)", $temp2],
+        //     ["Total of disapproved (Rejected status with DISAPPROVED remark)", $temp4],
+        //     ["Total of unfit (Rejected status with UNFIT remark)", $temp5],
+        //     ["Total of backed out/back out (Back out/Backed out remarks)", $temp3],
+        //     '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
+        //     ['Requested Crew', $temp9],
+        //     '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
+        //     'Timely Submissions',
+        //     ["All", [
+        //                 "On time" => $temp6['On time'] + $temp7['On time'] + $temp8['On time'],
+        //                 "No" => $temp6['No'] + $temp7['No'] + $temp8['No'],
+        //                 "Percent" => ($temp6['On time'] + $temp7['On time'] + $temp8['On time'] + $temp6['No'] + $temp7['No'] + $temp8['No']) ? (($temp6['On time'] + $temp7['On time'] + $temp8['On time']) / ($temp6['On time'] + $temp7['On time'] + $temp8['On time'] + $temp6['No'] + $temp7['No'] + $temp8['No'])) : 0 * 100
+        //             ]],
+        //     ["Top 4", $temp6],
+        //     ["Junior Officers", $temp7],
+        //     ["Ratings", $temp8]
+        // );
 
-        // $fileName = "$from - $to Statistic Report";
-        // return Excel::download(new StatisticReport($applicants, $candidates), "$fileName.xlsx");
+        $temp = [$applicants, $temp1, $temp2, $temp3, $temp4, $temp5, $temp6, $temp7, $temp8, $temp9];
+
+        $fileName = "$from - $to Statistic Report";
+        return Excel::download(new StatisticReport($temp), "$fileName.xlsx");
     }
 
     function uploadFile(Request $req){
