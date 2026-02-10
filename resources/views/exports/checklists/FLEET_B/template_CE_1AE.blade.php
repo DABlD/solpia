@@ -308,7 +308,7 @@
 		@endphp
 
 		{{ $doc($temp, "COVID VACCINE", 'med_cert') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("KML", "KOREAN MARITIME LAW", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -338,7 +338,7 @@
 		@endphp
 
 		{{ $doc($temp, "COVID VACCINE", 'med_cert') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("KML", "KOREAN MARITIME LAW", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
