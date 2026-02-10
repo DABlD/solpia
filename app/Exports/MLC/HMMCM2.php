@@ -29,26 +29,12 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                                                                                    // FLEET B PART OF 2ND BATCH
 
             "M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",                                                                                  // FLEET B PART OF 3RD BATCH
-
-        ];
-        $array2 = [
             "M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V ATLANTIC AFFINITY","M/V OCEAN FLORA",
             "M/V HYUNDAI PARAMOUNT", "M/V HMM HARMONY", "M/V HMM MASTER", "M/V HMM MIRACLE"
+
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
-            $this->shipownerA['company'] = "HMM Co., LTD.";
-            $this->shipownerA['president'] = "CHOI WONHYOK";
-            $this->shipownerA['address'] = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
-
-            $this->shipownerB['company'] = "HMM Ocean Service Co., Ltd.";
-            $this->shipownerB['president'] = "KIM GYOUBONG";
-            $this->shipownerB['address'] = "5th Floor, Busan office Building, Jungang-daero 63, Jung-gu, Busan 600-711, Korea";
-
-            $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
-            $this->shipmanager['address'] = "5th Floor, Busan office Building, Jungang-daero 63, Jung-gu, Busan 600-711, Korea";
-        }
-        elseif(in_array($applicant->vessel->name, $array2)){
             $this->shipownerA['company'] = "HMM Co., LTD.";
             $this->shipownerA['president'] = "CHOI WONHYOK";
             $this->shipownerA['address'] = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
