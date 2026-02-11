@@ -297,9 +297,9 @@
 
         var gallery = null;
 
-        @if(auth()->user()->role == "Recruitment Officer")
+        {{-- @if(auth()->user()->role == "Recruitment Officer")
             fStatus = "Vacation";
-        @endif
+        @endif --}}
 
         swal({
             title: 'Loading',
@@ -3752,9 +3752,9 @@
                 onOpen: () => {
                     $('.iInput .iInput').css('text-align', 'left');
 
-                    @if(auth()->user()->role == "Recruitment Officer")
+                    {{-- @if(auth()->user()->role == "Recruitment Officer")
                         $('.fStatus').hide();
-                    @endif
+                    @endif --}}
 
                     // let temp = [];
                     // fExp.forEach(exp => {
