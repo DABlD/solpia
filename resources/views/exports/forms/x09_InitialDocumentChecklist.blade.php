@@ -87,7 +87,7 @@
 							continue;
 						}
 
-						if($docu->type != "MARPOL"){
+						if($docu->type != "MARPOL" && str_contains($docu->type, "ANNEX")){
 							$marpol = explode('ANNEX', $docu->type)[1]; //TO GET ONLY THE PART AFTER ANNEX 1-6/I-VI
 
 							$marpols[0] = str_contains($marpol, '1') || str_contains($marpol, 'I') ? 'a' : '';
