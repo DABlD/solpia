@@ -15,6 +15,8 @@
 	                    <td><b>Sbook Exp.</b></td>
 	                    <td><b>US Visa Exp.</b></td>
 	                    <td><b>Status</b></td>
+	                    <td><b>Months</b></td>
+	                    <td><b>Est. Date</b></td>
 	                    <td><b>Remarks</b></td>
 	                    @if(auth()->user()->role != "Principal")
 	                    <td><b>Actions</b></td>
@@ -87,6 +89,8 @@
 	            </select>
 	        `;
 
+	        console.log(crew);
+
 	        table += `
 	            <tr>
 	                <td>${index + 1}</td>
@@ -97,6 +101,8 @@
 	                <td>${crew["SEAMAN'S BOOK"] ? moment(crew["SEAMAN'S BOOK"]).format('MMM DD, YYYY') : '-----'}</td>
 	                <td>${crew["US-VISA"] ? moment(crew["US-VISA"]).format('MMM DD, YYYY') : '-----'}</td>
 	                <td>${crew.status2}</td>
+	                <td>${crew.mob ?? "-"}</td>
+	                <td>${crew.eld ? toDate(crew.eld) : "-"}</td>
 	                <td class="remarks">${crew.remarks}</td>
 	                @if(auth()->user()->role != "Principal")
 	                <td class="actions1">
@@ -357,6 +363,9 @@
 	        `
 	    );
 
+	    $('.modal-body table td').css('text-align', 'center');
+	    $('.modal-body table td').css('vertical-align', 'middle');
+	    $('.OBC').css('text-align', 'left');
 	    displayDocuments(vid, ranks);
 	}
 
