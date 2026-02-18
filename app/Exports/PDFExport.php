@@ -338,6 +338,35 @@ class PDFExport
         return ['applicants' => $applicants, 'req' => $this->req];
     }
 
+    public function X45_BatchKoreanContractAgreement(){
+        $applicants = Applicant::whereIn('id', $this->req['ids'])->get();
+        $applicants->load('pro_app');
+        $applicants->load('document_id');
+
+        foreach ($applicants as $applicant) {
+            foreach(['document_id'] as $docuType){
+                foreach($applicant->$docuType as $key => $doc){
+                    $name = $doc->type;
+                    if(!isset($applicant->$docuType->$name)){
+                        $applicant->$docuType->$name = $doc;
+                    }
+                    else{
+                        $size = 0;
+                        if(is_array($applicant->$docuType->$name)){
+                            $size = sizeof($applicant->$docuType->$name);
+                        }
+                        $name .= $size;
+                        $applicant->$docuType->$name = $doc;
+                    }
+                    $applicant->$docuType->forget($key);
+                }
+            }
+        }
+
+        // dd($this->data, $this->type, $this->fileName, $this->req);
+        return ['applicants' => $applicants, 'req' => $this->req];
+    }
+
     public function MedicalReferral(){
         return $this->data;
     }

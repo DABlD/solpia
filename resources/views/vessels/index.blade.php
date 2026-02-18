@@ -6183,15 +6183,54 @@
                 },
             }).then(result => {
                 if(result.value){
-                    let data = {};
-                    data.ids = crews;
-                    data.filename = name.replace(/[^\w\s]/gi, '') + " - Korean Flag Contract Agreement";
-                    data.vname = name.replace(/[^\w\s]/gi, '');
-                    data.exportType = "pdf";
+                    swal({
+                        title: "Enter Details",
+                        html: `
+                            <div style="text-align: left;">
+                                <label>Effective Date</label>
+                            </div>
+                            <input type="text" id="ed" class="form-control"><br>
 
-                    const type = "X45_BatchKoreanContractAgreement";
+                            <div style="text-align: left;">
+                                <label>Months</label>
+                            </div>
+                            <input type="number" min="1" id="months" class="form-control"><br>
+                        `,
+                        onOpen: () => {
+                            $('#ed').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d'
+                            });
+                        },
+                        preConfirm: () => {
+                            swal.showLoading();
+                            return new Promise(resolve => {
+                                setTimeout(() => {
+                                    let months = $('#months').val();
+                                    let ed = $('#ed').val();
 
-                    window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+                                    if(months == "" || ed == ""){
+                                        swal.showValidationError('All fiels required');
+                                    }
+                                resolve()}, 500);
+                            });
+                        }
+                    }).then(result => {
+                        if(result.value){
+                            let data = {};
+                            data.ids = crews;
+                            data.filename = name.replace(/[^\w\s]/gi, '') + " - Korean Flag Contract Agreement";
+                            data.vname = name.replace(/[^\w\s]/gi, '');
+                            data.months = $('#months').val();
+                            data.ed = $('#ed').val();
+                            {{-- data.exportType = "pdf"; --}}
+
+                            const type = "X45_BatchKoreanContractAgreement";
+
+                            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+                        }
+                    });
                 }
             });
         }
