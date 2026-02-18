@@ -33,4 +33,9 @@ class ProcessedApplicant extends Model
     public function rank(){
     	return $this->belongsTo('App\Models\Rank');
     }
+
+    public function wage(){
+        return $this->hasOne('App\Models\Wage', 'vessel_id', 'vessel_id')
+                    ->where('rank_id', $this->rank_id);
+    }
 }
