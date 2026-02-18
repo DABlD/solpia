@@ -329,6 +329,7 @@ class X44_BatchKoreanContractAgreement implements FromView, WithEvents, WithDraw
 
                 // B
                 $h[6] = [
+                    'J5:J13', 'O12', 'N14', 'E17', 'M17'
                 ];
 
                 // VC
