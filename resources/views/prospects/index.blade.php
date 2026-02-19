@@ -217,24 +217,24 @@
                 html: `
                     <div class="row iRow">
                         <div class="col-md-2 iLabel">
-                            Source
+                            Rank
                         </div>
-                        <div class="col-md-10 iInput" style="margin-top: 5px;">
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Kalaw")}
-                            </div>
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Online")}
-                            </div>
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Walk-in")}
-                            </div>
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Source")}
-                            </div>
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Job Fair")}
-                            </div>
+                        <div class="col-md-10 iInput">
+                            <select name="source" class="form-control">
+                                <option value="">Select One</option>
+                                <option value="Kalaw">Kalaw</option>
+                                <option value="Online">Online</option>
+                                <option value="Walk-In">Walk-In</option>
+                                <option value="Source">Source</option>
+                                <option value="Job Fair">Job Fair</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Website">Website</option>
+                                <option value="Email">Email</option>
+                                <option value="Endorsed by Ex-crew">Endorsed by Ex-crew</option>
+                                <option value="Endorsed by Employee">Endorsed by Employee</option>
+                                <option value="Endorsed by Principal">Endorsed by Principal</option>
+                                <option value="Endorsed by Marine, POEA, etc.">Endorsed by Marine, POEA, etc.</option>
+                            </select>
                         </div>
                     </div></br>
 
@@ -415,7 +415,7 @@
                             usv: $("[name='usv']").val(),
                             remarks: $("[name='remarks']").val(),
                             exp: exp,
-                            source: $('[name="source"]:checked').val()
+                            source: $("[name='source']").val()
                         },
                         success: () => {
                             ss("Success");
@@ -464,24 +464,24 @@
                     ${input("id", "", data.id, 2,10, 'hidden')}
                     <div class="row iRow">
                         <div class="col-md-2 iLabel">
-                            Source
+                            Rank
                         </div>
-                        <div class="col-md-10 iInput" style="margin-top: 5px;">
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Kalaw")}
-                            </div>
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Online")}
-                            </div>
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Walk-in")}
-                            </div>
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Source")}
-                            </div>
-                            <div class="col-md-2 iInput">
-                                ${radio("source", "Job Fair")}
-                            </div>
+                        <div class="col-md-10 iInput">
+                            <select name="source" class="form-control">
+                                <option value="">Select One</option>
+                                <option value="Kalaw">Kalaw</option>
+                                <option value="Online">Online</option>
+                                <option value="Walk-In">Walk-In</option>
+                                <option value="Source">Source</option>
+                                <option value="Job Fair">Job Fair</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Website">Website</option>
+                                <option value="Email">Email</option>
+                                <option value="Endorsed by Ex-crew">Endorsed by Ex-crew</option>
+                                <option value="Endorsed by Employee">Endorsed by Employee</option>
+                                <option value="Endorsed by Principal">Endorsed by Principal</option>
+                                <option value="Endorsed by Marine, POEA, etc.">Endorsed by Marine, POEA, etc.</option>
+                            </select>
                         </div>
                     </div></br>
                     ${input("name", "Name", data.name, 2,10)}
@@ -609,6 +609,8 @@
                         $('[name="rank"]').val(data.rank).change();
                     }
 
+                    $('[name="source"]').val(data.source).change();
+
                     statusString = "";
 
                     ["AVAILABLE", "ON PROCESS", "PASSED", "FAILED", "BACK OUT"].forEach(status => {
@@ -706,7 +708,7 @@
                             remarks: $("[name='remarks']").val(),
                             status: $("[name='status']").val(),
                             exp: JSON.stringify(exp),
-                            source: $('[name="source"]:checked').val(),
+                            source: $("[name='source']").val(),
                         },
                         message: "Success"
                     }, () => {
