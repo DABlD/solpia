@@ -441,8 +441,14 @@
 				Ms. Shirley Erasquin
 			@elseif(auth()->user()->fleet == "FLEET D")
 				Ms. THEA MAE G. RIO
-			@elseif(auth()->user()->fleet == "FLEET E")
-				Mr. Dennis Quiño
+			@elseif(auth()->user()->fleet == "FISHING")
+				Mr. Ricardo Amparo
+			@elseif(in_array(auth()->user()->id, [4566, 5963, 8265]))
+				<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Bianca Santos</td>
+			@elseif(in_array(auth()->user()->id, [4546, 4935, 6794]))
+				<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Laura Fernando</td>
+			@elseif(in_array(auth()->user()->id, [7603, 4567, 8688]))
+				<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Lhea Marquez</td>
 			@endif
 		</td>
 		<td></td>

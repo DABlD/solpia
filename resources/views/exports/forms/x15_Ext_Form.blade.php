@@ -235,12 +235,24 @@
 		<td style="{{ $bottom }} height: 20px;" colspan="5">
 			{{ auth()->user()->gender == "Male" ? "Mr." : "Ms." }} {{ auth()->user()->fname }} {{ auth()->user()->lname }}
 		</td>
-		<td style="{{ $bottom }} height: 20px;" colspan="4"></td>
+		@if(in_array(auth()->user()->id, [4566, 5963, 8265]))
+			<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Bianca Santos</td>
+		@elseif(in_array(auth()->user()->id, [4546, 4935, 6794]))
+			<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Laura Fernando</td>
+		@elseif(in_array(auth()->user()->id, [7603, 4567, 8688]))
+			<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Lhea Marquez</td>
+		@else
+			<td style="{{ $bottom }} height: 20px;" colspan="4"></td>
+		@endif
 	</tr>
 
 	<tr>
 		<td style="{{ $top }} height: 20px;" colspan="5">Crewing Officer</td>
-		<td style="{{ $top }} height: 20px;" colspan="4">Documentation Officer</td>
+		@if(auth()->user()->fleet == "TOEI")
+			<td style="{{ $top }} height: 20px;" colspan="4">Asst. Crewing Manager</td>
+		@else
+			<td style="{{ $top }} height: 20px;" colspan="4">Documentation Officer</td>
+		@endif
 	</tr>
 
 	<tr>
