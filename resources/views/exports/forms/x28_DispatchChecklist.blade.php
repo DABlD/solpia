@@ -444,11 +444,11 @@
 			@elseif(auth()->user()->fleet == "FISHING")
 				Mr. Ricardo Amparo
 			@elseif(in_array(auth()->user()->id, [4566, 5963, 8265]))
-				<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Bianca Santos</td>
+				Ms. Bianca Santos
 			@elseif(in_array(auth()->user()->id, [4546, 4935, 6794]))
-				<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Laura Fernando</td>
+			    Ms. Laura Fernando
 			@elseif(in_array(auth()->user()->id, [7603, 4567, 8688]))
-				<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Lhea Marquez</td>
+				Ms. Lhea Marquez
 			@endif
 		</td>
 		<td></td>
