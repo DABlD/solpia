@@ -124,46 +124,46 @@
 
 	<tr>
 		<td>TOTAL</td>
-		<td>=SUM(B3:B38)</td>
-		<td>=SUM(C3:C38)</td>
-		<td>=SUM(D3:D38)</td>
-		<td>=SUM(E3:E38)</td>
-		<td>=SUM(F3:F38)</td>
+		<td>=SUM(B3:B{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(C3:C{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(D3:D{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(E3:E{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(F3:F{{ sizeof($data[0]) + 2 }})</td>
 		<td></td>
 		<td>TOTAL</td>
-		<td>=SUM(I3:I38)</td>
-		<td>=SUM(J3:J38)</td>
-		<td>=SUM(K3:K38)</td>
-		<td>=SUM(L3:L38)</td>
-		<td>=SUM(M3:M38)</td>
+		<td>=SUM(I3:I{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(J3:J{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(K3:K{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(L3:L{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(M3:M{{ sizeof($data[0]) + 2 }})</td>
 		<td></td>
 		<td>TOTAL</td>
-		<td>=SUM(P3:P38)</td>
-		<td>=SUM(Q3:Q38)</td>
-		<td>=SUM(R3:R38)</td>
-		<td>=SUM(S3:S38)</td>
-		<td>=SUM(T3:T38)</td>
+		<td>=SUM(P3:P{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(Q3:Q{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(R3:R{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(S3:S{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(T3:T{{ sizeof($data[0]) + 2 }})</td>
 		<td></td>
 		<td>TOTAL</td>
-		<td>=SUM(W3:W38)</td>
-		<td>=SUM(X3:X38)</td>
-		<td>=SUM(Y3:Y38)</td>
-		<td>=SUM(Z3:Z38)</td>
-		<td>=SUM(AA3:AA38)</td>
+		<td>=SUM(W3:W{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(X3:X{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(Y3:Y{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(Z3:Z{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AA3:AA{{ sizeof($data[0]) + 2 }})</td>
 		<td></td>
 		<td>TOTAL</td>
-		<td>=SUM(AD3:AD38)</td>
-		<td>=SUM(AE3:AE38)</td>
-		<td>=SUM(AF3:AF38)</td>
-		<td>=SUM(AG3:AG38)</td>
-		<td>=SUM(AH3:AH38)</td>
+		<td>=SUM(AD3:AD{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AE3:AE{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AF3:AF{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AG3:AG{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AH3:AH{{ sizeof($data[0]) + 2 }})</td>
 		<td></td>
 		<td>TOTAL</td>
-		<td>=SUM(AK3:AK38)</td>
-		<td>=SUM(AL3:AL38)</td>
-		<td>=SUM(AM3:AM38)</td>
-		<td>=SUM(AN3:AN38)</td>
-		<td>=SUM(AO3:AO38)</td>
+		<td>=SUM(AK3:AK{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AL3:AL{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AM3:AM{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AN3:AN{{ sizeof($data[0]) + 2 }})</td>
+		<td>=SUM(AO3:AO{{ sizeof($data[0]) + 2 }})</td>
 	</tr>
 
 	<tr></tr>
