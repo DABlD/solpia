@@ -82,10 +82,10 @@ class ProspectController extends Controller
         $query = DB::table($this->table);
         
         if($req->where){
-            $query = $query->where($req->where[0], $req->where[1])->update(array_merge($req->except(['id', '_token', 'where']), ['updated_at' => now()]));
+            $query = $query->where($req->where[0], $req->where[1])->update(array_merge($req->except(['id', '_token', 'where'])));
         }
         else{
-            $query = $query->where('id', $req->id)->update(array_merge($req->except(['id', '_token']), ['updated_at' => now()]));
+            $query = $query->where('id', $req->id)->update(array_merge($req->except(['id', '_token'])));
         }
     }
 
