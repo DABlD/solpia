@@ -1136,7 +1136,10 @@
                 }).then(result => {
                     if(result.value){
                         let temp = [
-                            'Passport', "Seaman's Book", 'Maritime Crew Visa', 'BT', "PSCRB", "AFF", "MECA", "MEFA", 'SDSD', 'COC', 'COE'
+                            'Passport', "Seaman's Book", 'Maritime Crew Visa', 'BT', "PSCRB", "AFF", "MECA", "MEFA"
+                        ];
+                        let temp2 = [
+                            'COC', 'SDSD', 'SID', 'NCIII', 'SSO', 'Yellow Fever', 'Covid Vaccine', 'Polio Vaccine'
                         ];
                         let docString = "";
                         let docs = [];
@@ -1144,13 +1147,26 @@
                         temp.forEach((value, index) => {
                             docString += `  
                                 <div class="row">
-                                    <div class="col-md-4" style="text-align: right;">
-                                        <input type="checkbox" class="crew-checklist" value="${value}"/>
+                                    <div class="col-md-6">
+                                        <div class="col-md-3" style="text-align: right;">
+                                            <input type="checkbox" class="crew-checklist" value="${temp[index]}"/>
+                                        </div>
+                                        <div class="col-md-8" style="text-align: left;">
+                                            <label for="">
+                                                ${temp[index]}
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="col-md-8" style="text-align: left;">
-                                        <label for="">
-                                            ${value}
-                                        </label>
+
+                                    <div class="col-md-6">
+                                        <div class="col-md-3" style="text-align: right;">
+                                            <input type="checkbox" class="crew-checklist" value="${temp2[index] ?? ""}"/>
+                                        </div>
+                                        <div class="col-md-8" style="text-align: left;">
+                                            <label for="">
+                                                ${temp2[index] ?? ""}
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             `;
@@ -1166,10 +1182,14 @@
                             html: '<br><br>' + docString,
                             showCancelButton: true,
                             cancelButtonColor: '#f76c6b',
+                            width: "30%",
                             onOpen: () => {
                                 $('#swal2-content input[type=checkbox]').css({
                                     'zoom': '1.7',
                                     'margin': '1px 0 0'
+                                });
+                                $('#swal2-content label').css({
+                                    'margin-top': '5px'
                                 });
                             },
                             preConfirm: () => {
