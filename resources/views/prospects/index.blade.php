@@ -895,6 +895,8 @@
                 years[start] = start;
             }
 
+            years.reverse();
+
             swal({
                 title: "Select Year",
                 input: 'select',
