@@ -326,7 +326,8 @@
 			(주부식비)
 		</td>
 		<td colspan="6">
-			₩15,000 / day / person (1인당 1일 15,000원)
+			{{-- ₩15,000 / day / person (1인당 1일 15,000원) --}}
+			Follow the employment regulation.
 		</td>
 	</tr>
 
