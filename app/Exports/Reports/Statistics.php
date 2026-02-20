@@ -315,7 +315,7 @@ class Statistics implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // HC VC
                 $h[4] = [
-                    'A1:AO60'
+                    'A1:AO150'
                 ];
 
                 // HL
@@ -343,7 +343,7 @@ class Statistics implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'A1:AO39'
+                    'A1:AO150'
                 ];
 
                 foreach($h as $key => $value) {
@@ -383,12 +383,12 @@ class Statistics implements FromView, WithEvents//, WithDrawings//, ShouldAutoSi
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A1:F39',
-                    'H1:M39',
-                    'O1:T39',
-                    'V1:AA39',
-                    'AC1:AH39',
-                    'AJ1:AO39',
+                    'A1:F' . (sizeof($this->data[0]) + 3),
+                    'H1:M' . (sizeof($this->data[0]) + 3),
+                    'O1:T' . (sizeof($this->data[0]) + 3),
+                    'V1:AA' . (sizeof($this->data[0]) + 3),
+                    'AC1:AH' . (sizeof($this->data[0]) + 3),
+                    'AJ1:AO' . (sizeof($this->data[0]) + 3),
                 ]);
 
                 // ALL BORDER MEDIUM
