@@ -46,7 +46,7 @@
 		if($data->pro_app->status == "On Board"){
 			$lastVessel = new stdClass();
 			$lastVessel->vessel_name = $data->current_lineup->vessel->name;
-			$lastVessel->sign_off = now()->parse($data->current_lineup->disembarkationDate);
+			$lastVessel->sign_off = now()->parse($data->current_lineup->joining_date)->addMonths($data->current_lineup->months)->addDays($data->current_lineup->extensions_days);
 
 			$temp = $data->data;
 			$temp['eld'] = now()->parse($data->current_lineup->joining_date);
