@@ -1145,11 +1145,16 @@ class ApplicationsController extends Controller
             $crew->seniority = $crew->applicant->pro_app->seniority;
 
             // GET ORIGINAL JOINING IF PROMOTED ONBOARD.
-            if($crew->joining_port == null){
-                $temp2 = LineUpContract::where('applicant_id', $crew->applicant->id)->where('status', 'On Board Promotion')->first();
-                if($temp2){
-                    $crew->beforePromotion = $temp2;
-                }
+            // if($crew->joining_port == null){
+            //     $temp2 = LineUpContract::where('applicant_id', $crew->applicant->id)->where('status', 'On Board Promotion')->first();
+            //     if($temp2){
+            //         $crew->beforePromotion = $temp2;
+            //     }
+            // }
+
+            $temp2 = LineUpContract::where('applicant_id', $crew->applicant->id)->where('status', 'On Board Promotion')->first();
+            if($crew->joining_date == $temp2->disembarkation_date && $crew->vessel_id == $temp2->vessel_id && $crew->rank_id != $temp2->rank_id){
+                $crew->beforePromotion = $temp2;
             }
 
             foreach($temp as $docu){

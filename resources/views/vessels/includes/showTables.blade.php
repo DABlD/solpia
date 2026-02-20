@@ -256,7 +256,7 @@
 	        let joining_date = null;
 	        let promotion_date = null;
 
-	        if(crew.joining_port == null && crew.beforePromotion){
+	        if(crew.beforePromotion){
 	        	joining_date = crew.beforePromotion.joining_date;
 	        	promotion_date = crew.joining_date;
 	        }
