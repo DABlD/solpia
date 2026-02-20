@@ -1153,8 +1153,10 @@ class ApplicationsController extends Controller
             // }
 
             $temp2 = LineUpContract::where('applicant_id', $crew->applicant->id)->where('status', 'On Board Promotion')->first();
-            if($crew->joining_date == $temp2->disembarkation_date && $crew->vessel_id == $temp2->vessel_id && $crew->rank_id != $temp2->rank_id){
-                $crew->beforePromotion = $temp2;
+            if($temp2){
+                if($crew->joining_date == $temp2->disembarkation_date && $crew->vessel_id == $temp2->vessel_id && $crew->rank_id != $temp2->rank_id){
+                    $crew->beforePromotion = $temp2;
+                }
             }
 
             foreach($temp as $docu){
