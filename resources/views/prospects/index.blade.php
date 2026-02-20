@@ -886,16 +886,14 @@
         }
 
         function deployment(){
-            let start = 2022;
-            let years = [];
-            let now = parseInt(moment().format('YYYY'));
+            let currentYear = new Date().getFullYear();
+            let startYear = 2022;
 
-            while(start < now){
-                start++;
-                years[start] = start;
+            let years = {};
+
+            for (let y = currentYear; y >= startYear; y--) {
+                years[String(y)] = y;
             }
-
-            years.reverse();
 
             swal({
                 title: "Select Year",

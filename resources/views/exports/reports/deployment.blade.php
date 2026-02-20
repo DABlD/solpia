@@ -224,7 +224,7 @@
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->prospect->source : "" }}</td>
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->prospect->name : "" }}</td>
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->prospect->rank : "" }}</td>
-			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->vessel->name : "" }}</td>
+			<td style="{{ $c }}">{{ isset($candidates[$i]) ? ($candidates[$i]->vessel->name ?? "") : "" }}</td>
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->requirement->joining_date->format('F j, Y') : "" }}</td>
 			<td style="{{ $c }}">{{ isset($candidates[$i]) ? $candidates[$i]->status : "" }}</td>
 		</tr>
