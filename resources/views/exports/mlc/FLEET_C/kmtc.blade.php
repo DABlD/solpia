@@ -327,7 +327,7 @@
 		</td>
 		<td colspan="6">
 			{{-- ₩15,000 / day / person (1인당 1일 15,000원) --}}
-			Follow the employment regulation.
+			Follow the employment regulation. (취업규칙에 따른다.)
 		</td>
 	</tr>
 
