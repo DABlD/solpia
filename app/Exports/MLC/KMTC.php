@@ -568,12 +568,12 @@ class KMTC implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setCoordinates('I48');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setPath(public_path("images/logo.png"));
+        $drawing2->setPath(public_path("images/MLC_SEAL_BLUE.png"));
         $drawing2->setResizeProportional(false);
-        $drawing2->setHeight(50);
-        $drawing2->setWidth(100);
-        $drawing2->setOffsetX(40);
-        $drawing2->setOffsetY(20);
+        $drawing2->setHeight(80);
+        $drawing2->setWidth(80);
+        $drawing2->setOffsetX(60);
+        $drawing2->setOffsetY(15);
         $drawing2->setCoordinates('H48');
 
         return [$drawing, $drawing2];
