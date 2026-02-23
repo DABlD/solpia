@@ -371,7 +371,7 @@
 			<br style='mso-data-placement:same-cell;' />
 			(귀국 공항)
 		</td>
-		<td colspan="6"></td>
+		<td colspan="6">MANILA, PHILIPPINES</td>
 	</tr>
 
 	<tr>

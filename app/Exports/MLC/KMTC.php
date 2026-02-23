@@ -270,7 +270,7 @@ class KMTC implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
 
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&RFor Foreign Crews (외국 선원용)');
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LRev.2024.08.01 (SQMS-PR-03-11-3) &C- &P / 2 - &RKMTC SHIP MANAGEMENT CO.,LTD');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LRev.2026.02.10 (SQMS-PR-03-11-3) &C- &P / 2 - &RKMTC SHIP MANAGEMENT CO.,LTD');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -567,6 +567,15 @@ class KMTC implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setOffsetY(4);
         $drawing->setCoordinates('I48');
 
-        return [$drawing];
+        $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing2->setPath(public_path("images/logo.png"));
+        $drawing2->setResizeProportional(false);
+        $drawing2->setHeight(50);
+        $drawing2->setWidth(100);
+        $drawing2->setOffsetX(40);
+        $drawing2->setOffsetY(20);
+        $drawing2->setCoordinates('H48');
+
+        return [$drawing, $drawing2];
     }
 }
