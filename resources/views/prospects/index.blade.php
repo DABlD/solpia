@@ -482,6 +482,7 @@
                                 <option value="Endorsed by Employee">Endorsed by Employee</option>
                                 <option value="Endorsed by Principal">Endorsed by Principal</option>
                                 <option value="Endorsed by Marine, POEA, etc.">Endorsed by Marine, POEA, etc.</option>
+                                <option value="Transferred Fleet">Transferred Fleet</option>
                             </select>
                         </div>
                     </div></br>
