@@ -298,7 +298,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $line->setHeight(15);
 
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8MANNING MANAGEMENT &R&8APP.4 / Page &P');
-                // $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2024.12.20/DCN24008');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2024.12.20/DCN24008');
                 $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
 
                 // SET PAGE BREAK PREVIEW
