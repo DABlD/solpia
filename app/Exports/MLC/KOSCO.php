@@ -430,7 +430,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // HC VC
                 $h[4] = [
                     'C9:C16',
-                    'B26:I26'
+                    'B26:I26',
+                    'A33:I33'
                 ];
 
                 // HL
