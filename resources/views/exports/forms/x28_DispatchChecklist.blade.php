@@ -408,9 +408,9 @@
 		<td></td>
 		<td colspan="7" style="height: 30px;">
 			@if(auth()->user()->gender == "Male")
-				MR. {{ auth()->user()->fullname2 }} / {{ now()->format('d-M-Y') }}
+				MR. {{ auth()->user()->fullname }} / {{ now()->format('d-M-Y') }}
 			@else
-				MS. {{ auth()->user()->fullname2 }} / {{ now()->format('d-M-Y') }}
+				MS. {{ auth()->user()->fullname }} / {{ now()->format('d-M-Y') }}
 			@endif
 		</td>
 	</tr>
