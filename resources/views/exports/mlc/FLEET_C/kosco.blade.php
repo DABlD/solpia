@@ -434,7 +434,7 @@
 	<tr>
 		<td colspan="4" style="height: 80px;">SHIRLEY T. ERASQUIN</td>
 		<td style="height: 80px;"></td>
-		<td colspan="4" style="height: 80px;"></td>
+		<td colspan="4" style="height: 80px;">{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }} {{ $data->user->mname }}</td>
 	</tr>
 
 	<tr>
