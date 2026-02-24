@@ -358,8 +358,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 //SET FIRST PAGE NUMBER
                 $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
 
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&R Page &P/2');
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LF-SPM-0205 / 2018. 03. 01 Established &CKOSCO &RRev. 1 / 2021.02.01');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&R Page &P/3');
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&LF-E03-27 &CKOSCO &RRev. 1 .1');
 
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.39);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.19);
