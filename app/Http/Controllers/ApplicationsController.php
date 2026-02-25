@@ -1082,111 +1082,141 @@ class ApplicationsController extends Controller
     }
 
     public function getVesselCrew(Request $req, $id = null){
-        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get();
+        $vesselId = $id ?? $req->id;
 
-        $linedUps = ProcessedApplicant::where('processed_applicants.vessel_id', $id ?? $req->id)
-                        ->where('processed_applicants.status', 'Lined-Up')
-                        ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
-                        ->join('users as u', 'u.id', '=', 'a.user_id')
-                        ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
-                        ->select('processed_applicants.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place', 'r.order')
-                        ->get();
+        $ranks = Rank::select('id', 'name', 'abbr', 'category')->get()->keyBy('id');
 
-        // SORT
-        $linedUps = $linedUps->sortBy('order');
-        $linedUps->load('applicant.document_med_cert');
-        $linedUps->load('applicant.document_id');
-        $linedUps->load('applicant.sea_service');
-        // dd($linedUps->toArray());
+        /*
+        |--------------------------------------------------------------------------
+        | LINED UPS
+        |--------------------------------------------------------------------------
+        */
 
-        foreach($linedUps as $linedUp){
-            $temp = $linedUp->applicant->document_id;
-            $linedUp->covidVaccines = $linedUp->applicant->document_med_cert->where('type', 'LIKE' ,'%COVID%');
+        $linedUps = ProcessedApplicant::with([
+                'applicant.document_med_cert',
+                'applicant.document_id',
+                'applicant.sea_service',
+            ])
+            ->where('processed_applicants.vessel_id', $vesselId)
+            ->where('processed_applicants.status', 'Lined-Up')
+            ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
+            ->join('users as u', 'u.id', '=', 'a.user_id')
+            ->join('ranks as r', 'r.id', '=', 'processed_applicants.rank_id')
+            ->select(
+                'processed_applicants.*',
+                'a.user_id',
+                'a.remarks',
+                'u.fname',
+                'u.lname',
+                'u.mname',
+                'u.suffix',
+                'u.birthday',
+                'r.abbr',
+                'a.birth_place',
+                'r.order'
+            )
+            ->orderBy('r.order')
+            ->get();
 
-            $linedUp->age = now()->parse($linedUp->birthday)->diff(now())->format('%y');
-            $linedUp->status2 = "NEW-HIRE";
+        foreach ($linedUps as $linedUp) {
 
-            foreach($temp as $docu){
-                if($docu->type != ""){
-                    $linedUp->{$docu->type} = $docu->expiry_date;
-                    $linedUp->{$docu->type . 'i'} = $docu->issue_date;
-                    $linedUp->{$docu->type . 'n'} = $docu->number;
-                }
-            }
-            
-            $sea_services = $linedUp->applicant->sea_service;
-            foreach($sea_services as $service){
-                if(strpos(strtoupper($service->manning_agent), 'SOLPIA') !== false){
+            $this->attachDocuments($linedUp);
+
+            $linedUp->status2 = 'NEW-HIRE';
+
+            foreach ($linedUp->applicant->sea_service as $service) {
+                if (stripos($service->manning_agent, 'SOLPIA') !== false) {
                     $linedUp->status2 = 'EX-CREW';
+                    break;
                 }
             }
         }
 
-        // END OF LINEDUPS
-        // START OF ONBOARDS
+        /*
+        |--------------------------------------------------------------------------
+        | ON BOARDS
+        |--------------------------------------------------------------------------
+        */
 
-        $crews = LineUpContract::where('vessel_id', $id ?? $req->id)
-                                ->where('line_up_contracts.status','On Board')
-                                ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
-                                ->join('users as u', 'u.id', '=', 'a.user_id')
-                                ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
-                                ->select('line_up_contracts.*', 'a.user_id', 'a.remarks', 'u.fname', 'u.lname', 'u.mname', 'u.suffix', 'u.birthday', 'r.abbr', 'a.birth_place', 'r.order', 'u.fleet')
-                                ->get();
+        $crews = LineUpContract::with([
+                'applicant.document_med_cert',
+                'applicant.document_id',
+                'applicant.pro_app'
+            ])
+            ->where('line_up_contracts.vessel_id', $vesselId)
+            ->where('line_up_contracts.status', 'On Board')
+            ->join('applicants as a', 'a.id', '=', 'line_up_contracts.applicant_id')
+            ->join('users as u', 'u.id', '=', 'a.user_id')
+            ->join('ranks as r', 'r.id', '=', 'line_up_contracts.rank_id')
+            ->select(
+                'line_up_contracts.*',
+                'a.user_id',
+                'a.remarks',
+                'u.fname',
+                'u.lname',
+                'u.mname',
+                'u.suffix',
+                'u.birthday',
+                'r.abbr',
+                'a.birth_place',
+                'r.order',
+                'u.fleet'
+            )
+            ->orderBy('r.order')
+            ->get();
 
-        $crews = $crews->sortBy('order');
-        $crews->load('applicant.document_med_cert');
-        $crews->load('applicant.document_id');
+        // Preload promotions to avoid N+1
+        $promotions = LineUpContract::where('status', 'On Board Promotion')
+            ->get()
+            ->groupBy('applicant_id');
 
-        $onBoards = array();
-        foreach($crews as $crew){
-            $temp = $crew->applicant->document_id;
-            $crew->covidVaccines = $crew->applicant->document_med_cert->where('type', 'LIKE' ,'%COVID%');
-            $crew->age = now()->parse($crew->birthday)->diff(now())->format('%y');
-            $crew->seniority = $crew->applicant->pro_app->seniority;
+        foreach ($crews as $crew) {
 
-            // GET ORIGINAL JOINING IF PROMOTED ONBOARD.
-            // if($crew->joining_port == null){
-            //     $temp2 = LineUpContract::where('applicant_id', $crew->applicant->id)->where('status', 'On Board Promotion')->first();
-            //     if($temp2){
-            //         $crew->beforePromotion = $temp2;
-            //     }
-            // }
+            $this->attachDocuments($crew);
 
-            $temp2 = LineUpContract::where('applicant_id', $crew->applicant->id)->where('status', 'On Board Promotion')->first();
-            if($temp2){
-                if(($crew->joining_date == $temp2->disembarkation_date) && ($crew->vessel_id == $temp2->vessel_id) && ($crew->rank_id != $temp2->rank_id)){
-                    $crew->beforePromotion = $temp2;
+            $crew->seniority = optional($crew->applicant->pro_app)->seniority;
+
+            $promotion = $promotions[$crew->applicant->id][0] ?? null;
+
+            if ($promotion) {
+                if (
+                    $crew->joining_date == $promotion->disembarkation_date &&
+                    $crew->vessel_id == $promotion->vessel_id &&
+                    $crew->rank_id != $promotion->rank_id
+                ) {
+                    $crew->beforePromotion = $promotion;
                 }
             }
+        }
 
-            foreach($temp as $docu){
-                if($docu->type != ""){
-                    $crew->{$docu->type} = $docu->expiry_date;
-                    $crew->{$docu->type . 'i'} = $docu->issue_date;
-                    $crew->{$docu->type . 'n'} = $docu->number;
-                }
+        $vname = Vessel::find($vesselId);
+
+        if ($id) {
+            return [$crews, $linedUps, $vname];
+        }
+
+        return response()->json([
+            $crews,
+            $linedUps,
+            $vname,
+            $ranks
+        ]);
+    }
+
+    private function attachDocuments($model)
+    {
+        $model->covidVaccines = $model->applicant->document_med_cert
+            ->where('type', 'LIKE', '%COVID%');
+
+        $model->age = now()->parse($model->birthday)->age;
+
+        foreach ($model->applicant->document_id as $docu) {
+            if (!empty($docu->type)) {
+                $model->{$docu->type} = $docu->expiry_date;
+                $model->{$docu->type . 'i'} = $docu->issue_date;
+                $model->{$docu->type . 'n'} = $docu->number;
             }
-
-            array_push($onBoards, $crew);
         }
-
-        $vname = Vessel::find($id ?? $req->id);
-
-        $temp = collect();
-        foreach($linedUps as $key => $linedUp){
-            $temp->add($linedUp);
-            $linedUps->pull($key);
-        }
-
-        $linedUps = $temp;
-
-        if($id){
-            return [$onBoards, $linedUps, $vname];
-        }
-        else{
-            echo json_encode([$onBoards, $linedUps, $vname, $ranks->keyBy('id')]);
-        }
-
     }
 
     public function updateStatus($id, $status, $vessel_id = null, Request $req){
