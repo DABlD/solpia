@@ -7276,6 +7276,9 @@
                     exportVessels : 'Vessels',
                     exportCrewChangePlan: 'Crew Change Plan',
                     X31_OnOffReport : 'On/Off Report',
+                    @if(in_array(auth()->user()->id, [23, 5963]))
+                        ECPTCREWLIST: 'ECPT NI GLADYS ANNE'
+                    @endif
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
@@ -7563,6 +7566,10 @@
     </script>
 
     @include('vessels.includes.showTables')
+    
+    @if(in_array(auth()->user()->id, [23, 5963]))
+        @include('vessels.includes.gdx')
+    @endif
 @endpush
 
 {{-- <div class="row proposedCrew" id="pc0">
