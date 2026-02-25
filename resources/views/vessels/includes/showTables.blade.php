@@ -364,7 +364,7 @@
 	    $('.modal-body table td').css('text-align', 'center');
 	    $('.modal-body table td').css('vertical-align', 'middle');
 	    $('.OBC').css('text-align', 'left');
-	    {{-- displayDocuments(vid, ranks); --}}
+	    displayDocuments(vid, ranks);
 	}
 
 	function displayDocuments(vid, ranks){
