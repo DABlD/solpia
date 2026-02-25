@@ -646,3 +646,84 @@ foreach($temp as $ss){
 foreach($temp2 as $ss){
     echo $ss->applicant->user->namefull . ';' . $ss->vessel->name . ';' . $ss->joining_date . '<br>';
 }
+
+<!-- TOEI CREW FROM 2015 TO 2023 -->
+$users = User::where('fleet', "TOEI")->where('role', 'Applicant')->get();
+$users->load('crew.sea_service');
+
+$mannings = ['SAFEWAY', 'AMETHYST', 'MARINO', 'FAIRVIEW'];
+$mannings2 = ['SOLPIA', 'SOP'];
+$principals = ['TOEI', 'TOIE', 'SMTECH', 'SM TECH', 'KITAURA', 'DOUN KISEN', 'SHOEI', 'SHOIE'];
+
+
+$mixnmatch = function($string, $keywords){
+    foreach($keywords as $keyword){
+        if(str_contains($string, $keyword)){
+            return true;
+        }
+    }
+
+    return false;
+};
+
+$flag = false;
+
+foreach($users as $user){
+    $sss = isset($user->crew->sea_service) ? $user->crew->sea_service->sortBy('sign_on') : [];
+
+    if(sizeof($sss)){
+        if($sss[0]['sign_on'] <= "2015-12-31" && $sss[sizeof($sss) - 1]['sign_off'] >= "2023-01-01"){
+            $start = now()->parse($sss[0]['sign_on'])->format('Y');
+
+            foreach($sss as $ss){
+
+                $criteria1 = ($mixnmatch($ss['manning_agent'], $mannings) || $mixnmatch($ss['principal'], $principals));
+                $criteria2 = ($mixnmatch($ss['manning_agent'], $mannings2) && $mixnmatch($ss['principal'], $principals));
+
+                // if($user->id == 176){
+                //     echo ($mixnmatch($ss['manning_agent'], $mannings) ? 1 : 0) . ' / ' . ($mixnmatch($ss['principal'], $principals) ? 1 : 0) . '  -  ' . $ss['manning_agent'] . '/' . $ss['principal'] . ' - ' . $criteria1 . '<br>';
+                // }
+
+                if($flag){
+                    $start = now()->parse($ss['sign_off'])->format('Y');
+                    $flag = false;
+                }
+
+                if(!($criteria1 || $criteria2)){
+                    $flag = true;
+                }
+
+            }
+
+            if((2025 - $start) >= 10){
+                echo $user->namefull . ';' . $start . ';' . (2025 - $start) . ';' . $user->address . ';' . $user->crew->provincial_address . ';' . now()->parse($user->birthday)->age . ';' . $user->contact . ';' . $user->email . '<br>';
+            }
+        }
+
+    }
+}
+
+<!-- ALL WITH HMM CREW HISTORY -->
+
+$temp = SeaService::whereIn('rank', ['DECK CADET', 'ENGINE CADET'])
+                    ->where(function($q) {
+                        $q->where('principal', 'like', '%HMM%');
+                        $q->orWhere('principal', 'like', "HYUNDAI O%");
+                        $q->orWhere('principal', 'like', "HYUNDAI M%");
+                        $q->orWhere('principal', "HYUNDAI");
+                    })
+                    ->where('sign_on', '>', '2022-01-01')
+                    ->get()->groupBy('applicant_id');
+
+$temp2 = LineUpContract::where('principal_id', 256)->where('status', 'On Board')->whereIn('rank_id', [14,19])->get();
+
+foreach($temp as $ss){
+    $ss = $ss->first();
+    echo $ss->applicant->user->namefull . ';' . $ss->vessel_name . ';' . $ss->sign_on . ';' . $ss->sign_off . '<br>';
+}
+
+echo "~~~~~~~~~~~~~<br>";
+
+foreach($temp2 as $ss){
+    echo $ss->applicant->user->namefull . ';' . $ss->vessel->name . ';' . $ss->joining_date . '<br>';
+}

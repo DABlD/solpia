@@ -1871,58 +1871,11 @@ class ApplicationsController extends Controller
     }
 
     public function testFunc(){
-        $users = User::where('fleet', "TOEI")->where('role', 'Applicant')->get();
-        $users->load('crew.sea_service');
-        
-        $mannings = ['SAFEWAY', 'AMETHYST', 'MARINO', 'FAIRVIEW'];
-        $mannings2 = ['SOLPIA', 'SOP'];
-        $principals = ['TOEI', 'TOIE', 'SMTECH', 'SM TECH', 'KITAURA', 'DOUN KISEN', 'SHOEI', 'SHOIE'];
+        $lups = LineUpContract::where('joining_date', ">=", "2025-08-01")->get();
 
-
-        $mixnmatch = function($string, $keywords){
-            foreach($keywords as $keyword){
-                if(str_contains($string, $keyword)){
-                    return true;
-                }
-            }
-
-            return false;
-        };
-
-        $flag = false;
-
-        foreach($users as $user){
-            $sss = isset($user->crew->sea_service) ? $user->crew->sea_service->sortBy('sign_on') : [];
-
-            if(sizeof($sss)){
-                if($sss[0]['sign_on'] <= "2015-12-31" && $sss[sizeof($sss) - 1]['sign_off'] >= "2023-01-01"){
-                    $start = now()->parse($sss[0]['sign_on'])->format('Y');
-
-                    foreach($sss as $ss){
-
-                        $criteria1 = ($mixnmatch($ss['manning_agent'], $mannings) || $mixnmatch($ss['principal'], $principals));
-                        $criteria2 = ($mixnmatch($ss['manning_agent'], $mannings2) && $mixnmatch($ss['principal'], $principals));
-
-                        // if($user->id == 176){
-                        //     echo ($mixnmatch($ss['manning_agent'], $mannings) ? 1 : 0) . ' / ' . ($mixnmatch($ss['principal'], $principals) ? 1 : 0) . '  -  ' . $ss['manning_agent'] . '/' . $ss['principal'] . ' - ' . $criteria1 . '<br>';
-                        // }
-
-                        if($flag){
-                            $start = now()->parse($ss['sign_off'])->format('Y');
-                            $flag = false;
-                        }
-
-                        if(!($criteria1 || $criteria2)){
-                            $flag = true;
-                        }
-
-                    }
-
-                    if((2025 - $start) >= 10){
-                        echo $user->namefull . ';' . $start . ';' . (2025 - $start) . ';' . $user->address . ';' . $user->crew->provincial_address . ';' . now()->parse($user->birthday)->age . ';' . $user->contact . ';' . $user->email . '<br>';
-                    }
-                }
-
+        foreach($lups as $crew){
+            if(!str_contains($crew->applicant->sea_service->sortByDesc('sign_off')->first(), "SOLPIA")){
+                echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . ';' . $crew->joining_date . ';' . $crew->vessel->name . '<br>';
             }
         }
     }
@@ -2020,27 +1973,83 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
-        $temp = SeaService::whereIn('rank', ['DECK CADET', 'ENGINE CADET'])
-                            ->where(function($q) {
-                                $q->where('principal', 'like', '%HMM%');
-                                $q->orWhere('principal', 'like', "HYUNDAI O%");
-                                $q->orWhere('principal', 'like', "HYUNDAI M%");
-                                $q->orWhere('principal', "HYUNDAI");
-                            })
-                            ->where('sign_on', '>', '2022-01-01')
-                            ->get()->groupBy('applicant_id');
+        $start = $req->start;
+        $end = $req->end;
 
-        $temp2 = LineUpContract::where('principal_id', 256)->where('status', 'On Board')->whereIn('rank_id', [14,19])->get();
+        echo $start . ' -> ' . $end . '<br><br>';
 
-        foreach($temp as $ss){
-            $ss = $ss->first();
-            echo $ss->applicant->user->namefull . ';' . $ss->vessel_name . ';' . $ss->sign_on . ';' . $ss->sign_off . '<br>';
+        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                            ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                            ->join('users as u', 'u.id', '=', 'a.user_id')
+                            ->where('joining_date', '>=', $start)
+                            ->where('joining_date', '<=', $end)
+                            ->where('fleet', '=', 'TOEI')
+                            ->get();
+
+        $lups->load('rank');
+        $lups->load('vessel');
+        $lups->load('applicant.user');
+        $lups->load('applicant.sea_service');
+
+        foreach($lups as $lup){
+            $temp = $lup->applicant->sea_service->sortBy('sign_on');
+            $bool = false;
+
+            if(in_array($lup->rank_id, [14, 19])){
+                $bool = true;
+            }
+            elseif(sizeof($temp)){
+                foreach($temp as $ss){
+                    if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+                        $bool = true;
+                    }
+                }
+            }
+            else{
+                $bool = true;
+            }
+
+            if($bool){
+                echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->joining_date . '<br>';
+            }
         }
 
-        echo "~~~~~~~~~~~~~<br>";
+        echo '<br><br><br>';
+        echo '~~~~~~~~~~~~~~~~~~~';
+        echo '<br>';
 
-        foreach($temp2 as $ss){
-            echo $ss->applicant->user->namefull . ';' . $ss->vessel->name . ';' . $ss->joining_date . '<br>';
+        $lups = LineUpContract::select('line_up_contracts.*', 'a.id as aid', 'u.id as uid', 'fname', 'lname', 'fleet')
+                                    ->join('applicants as a', 'line_up_contracts.applicant_id', '=', 'a.id')
+                                    ->join('users as u', 'u.id', '=', 'a.user_id')
+                                    ->where('disembarkation_date', '>=', $start)
+                                    ->where('disembarkation_date', '<=', $end)
+                                    ->where('fleet', '=', 'TOEI')
+                                    ->get();
+
+        $lups->load('rank');
+        $lups->load('vessel');
+        $lups->load('applicant.user');
+        $lups->load('applicant.sea_service');
+
+        foreach($lups as $lup){
+            $temp = $lup->applicant->sea_service->sortBy('sign_on');
+            $bool = false;
+
+            foreach($temp as $ss){
+                if(in_array($ss->rank, ["DECK CADET", "ENGINE CADET"]) && str_contains($ss->manning_agent, "SOLPIA")){
+                    $bool = true;
+                }
+            }
+
+            if($bool){
+                if(str_contains($lup->status, "On Board")){
+                    echo $lup->lname . ', ' . $lup->fname . ';' . $lup->rank->abbr . ';' . $lup->vessel->name . ';' . $lup->disembarkation_date . '<br>';
+                }
+                else{
+                    $temp2 = $temp->last();
+                    echo $lup->lname . ', ' . $lup->fname . ';' . $temp2->rank2->abbr . ';' . $temp2->vessel_name . ';' . $temp2->sign_off . '<br>';
+                }
+            }
         }
     }
 
