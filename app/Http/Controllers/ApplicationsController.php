@@ -1378,8 +1378,8 @@ class ApplicationsController extends Controller
     function exportOnOff($id, $type, Request $req){
         $vesselCrew = $this->getVesselCrew(new Request(), $id);
 
-        $onBoards = array_filter($vesselCrew[0], function($vesselCrew){
-            return $vesselCrew->reliever;
+        $onBoards = $vesselCrew[0]->filter(function($crew) {
+            return $crew->reliever;
         });
 
         $linedUps = $vesselCrew[1];
