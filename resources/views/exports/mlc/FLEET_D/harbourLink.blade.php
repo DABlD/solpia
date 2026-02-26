@@ -138,7 +138,7 @@
 
 	<tr>
 		<td colspan="2">Your total wages will be</td>
-		<td>${{ $data->pro_app->wage ? $data->pro_app->wage->basic : "0" }}</td>
+		<td>${{ $data->pro_app->wage ? number_format($data->pro_app->wage->basic) : "0" }}</td>
 		<td colspan="7">per month inclusive leave paid &#38; overtime with/or formula for</td>
 	</tr>
 
@@ -153,32 +153,32 @@
 	<tr>
 		<td colspan="4">Basic Wage</td>
 		<td>:</td>
-		<td colspan="5">${{ $data->pro_app->wage ? $data->pro_app->wage->basic : "0" }}</td>
+		<td colspan="5">${{ $data->pro_app->wage ? number_format($data->pro_app->wage->basic) : "0" }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="4">Leave Pay</td>
 		<td>:</td>
-		<td colspan="5">${{ $data->pro_app->wage ? $data->pro_app->wage->leave_pay : "0" }}</td>
+		<td colspan="5">${{ $data->pro_app->wage ? number_format($data->pro_app->wage->leave_pay) : "0" }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="4">Fixed Overtime</td>
 		<td>:</td>
-		<td colspan="5">${{ $data->pro_app->wage ? ($data->pro_app->wage->fot ?? $data->pro_app->wage->ot) : "0" }}</td>
+		<td colspan="5">${{ $data->pro_app->wage ? (number_format($data->pro_app->wage->fot) ?? number_format($data->pro_app->wage->ot)) : "0" }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="4">Owner Allowance/Incentive</td>
 		<td>:</td>
-		<td colspan="5">${{ $data->pro_app->wage ? ($data->pro_app->wage->owner_allow ?? "0") : "0" }}</td>
+		<td colspan="5">${{ $data->pro_app->wage ? (number_format($data->pro_app->wage->owner_allow) ?? "0") : "0" }}</td>
 	</tr>
 
 	<tr>
 		<td colspan="2"></td>
 		<td colspan="2">Total</td>
 		<td>:</td>
-		<td colspan="5">${{ $data->pro_app->wage ? $data->pro_app->wage->basic : "0" }}</td>
+		<td colspan="5">${{ $data->pro_app->wage ? number_format($data->pro_app->wage->basic) : "0" }}</td>
 	</tr>
 
 	{{-- PAGE 2 --}}
