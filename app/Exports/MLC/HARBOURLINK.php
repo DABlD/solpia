@@ -267,6 +267,8 @@ class HARBOURLINK implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
+                $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
+
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
