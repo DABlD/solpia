@@ -559,7 +559,8 @@
 		<td></td>
 		<td colspan="4">Place where this Agreement is entered into</td>
 		<td>:</td>
-		<td colspan="4">{{ $data->pro_app->vessel->name }}</td>
+		{{-- <td colspan="4">{{ $data->pro_app->vessel->name }}</td> --}}
+		<td colspan="4">MANILA, PHILIPPINES</td>
 	</tr>
 
 	<tr>
