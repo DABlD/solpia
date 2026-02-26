@@ -1,5 +1,5 @@
 @php
-	// dd($data);
+	dd($data);
 	$pp = null;
 	$sb = null;
 
@@ -38,7 +38,7 @@
 		<td colspan="3">Date / Place Of Birth</td>
 		<td>:</td>
 		<td colspan="6">
-			{{ isset($data->user->birthday) ? $data->user->birthday->format('d F Y') : "-" }} / {{ $data->birth_place }}
+			{{ isset($data->user->birthday) ? strtoupper($data->user->birthday->format('d F Y')) : "-" }} / {{ $data->birth_place }}
 		</td>
 	</tr>
 
@@ -65,7 +65,7 @@
 	<tr>
 		<td colspan="3">Ship Manager</td>
 		<td>:</td>
-		<td colspan="6">HARBOUR-LINK MARINE SERVICES SDB. BHD.S</td>
+		<td colspan="6">HARBOUR-LINK MARINE SERVICES SDB. BHD.</td>
 	</tr>
 
 	<tr>
@@ -110,7 +110,7 @@
 
 	<tr>
 		<td colspan="5">The capacity in which you are initially employed is</td>
-		<td colspan="2">{{ $data->pro_app->rank->abbr }}</td>
+		<td colspan="2">{{ $data->pro_app->rank->name }}</td>
 		<td colspan="3">(rank)</td>
 	</tr>
 
@@ -560,7 +560,13 @@
 		<td colspan="4">Place where this Agreement is entered into</td>
 		<td>:</td>
 		{{-- <td colspan="4">{{ $data->pro_app->vessel->name }}</td> --}}
-		<td colspan="4">MANILA, PHILIPPINES</td>
+		<td colspan="4">
+			@if($data->pro_app->status == "Lined-Up")
+				MANILA, PHILIPPINES
+			@else
+				{{ $data->pro_app->vessel->name }}
+			@endif
+		</td>
 	</tr>
 
 	<tr>
