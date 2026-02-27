@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+// use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class Candidates implements FromView, WithEvents, ShouldAutoSize
+class Candidates implements FromView, WithEvents//, ShouldAutoSize
 {
     public function __construct($data){
         $this->data     = $data;
@@ -315,7 +315,7 @@ class Candidates implements FromView, WithEvents, ShouldAutoSize
 
                 // HC VC
                 $h[4] = [
-                    'A1:F' . (sizeof($this->data)+1)
+                    'A1:G' . (sizeof($this->data)+1)
                 ];
 
                 // HL
@@ -339,10 +339,12 @@ class Candidates implements FromView, WithEvents, ShouldAutoSize
                 ];
 
                 $h['wrap'] = [
+                    'G1:G' . (sizeof($this->data)+1)
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'C1:C' . (sizeof($this->data)+1)
                 ];
 
                 foreach($h as $key => $value) {
@@ -366,7 +368,7 @@ class Candidates implements FromView, WithEvents, ShouldAutoSize
 
                 // FILLS
                 $fills[0] = [
-                    'A1:F1'
+                    'A1:G1'
                 ];
 
                 $fills[1] = [
@@ -452,7 +454,13 @@ class Candidates implements FromView, WithEvents, ShouldAutoSize
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(45);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(23);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(110);
 
                 // ROW RESIZE
                 $rows = [
