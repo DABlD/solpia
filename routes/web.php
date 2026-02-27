@@ -273,6 +273,8 @@ Route::group([
 			->name($name . '.index')
 			->defaults('href', $name);
 
+		Route::get($name . '/export', ucfirst($name) . 'Controller@export')->name($name . '.export');
+
 		// OPENINGS ROUTES
 		$name = "requirement";
 		Route::get($name, ucfirst($name) . 'Controller@index')

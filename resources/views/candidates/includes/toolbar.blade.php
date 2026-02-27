@@ -70,3 +70,9 @@
         </div>
     </div>
 </div>
+
+<div class="pull-right">
+        <a class="btn btn-success" data-toggle="tooltip" title="Export Candidates" onclick="exportTo()">
+            <span class="fa fa-file-text"></span>
+        </a>
+    </div>

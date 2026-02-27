@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Candidate, Requirement, Prospect};
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
 class CandidateController extends Controller
@@ -88,6 +89,32 @@ class CandidateController extends Controller
                 Prospect::where('id', $can->prospect_id)->update(["status" => "HIRED"]);
             }
         }
+    }
+
+    public function export(Request $req){
+        $array = Candidate::where('candidates.status', 'like', $req['data']['status'])
+                    ->where(function($q) use($req){
+                        if($req['data']['vessel'] == "%%"){
+                            $q->where('candidates.vessel_id', 'like', $req['data']['vessel']);
+                            $q->orWhereNull('candidates.vessel_id');
+                        }
+                        else{
+                            $q->where('candidates.vessel_id', 'like', $req['data']['vessel']);
+                        }
+                    })
+                    ->join('prospects as p', 'p.id', '=', 'candidates.prospect_id')
+                    ->join('requirements as r', 'r.id', '=', 'candidates.requirement_id')
+                    ->where('r.rank', 'like', $req['data']['rank'])
+                    ->where('r.fleet', 'like', $req['data']['fleet'])
+                    ->select('candidates.*', 'r.fleet as fleet');
+
+        $array = $array->get();
+
+        $class = "App\\Exports\\Reports\\Candidates";
+
+        $date = now()->format('F j, Y');
+
+        return Excel::download(new $class($array), "Candidates as of $date.xlsx");
     }
 
     private function _view($view, $data = array()){

@@ -247,5 +247,15 @@
                 }
             });
         });
+
+        function exportTo(){
+            let data = {
+                fleet: fleet,
+                vessel: fVessel,
+                rank: fRank,
+                status: fStatus
+            }
+            window.location.href = `{{ route('candidate.export') }}?` + $.param({data});
+        }
     </script>
 @endpush
