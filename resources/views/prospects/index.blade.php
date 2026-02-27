@@ -225,6 +225,8 @@
                                 <option value="Kalaw">Kalaw</option>
                                 <option value="Online">Online</option>
                                 <option value="Walk-in">Walk-in</option>
+                                <option value="Walk-in (Facebook)">Walk-in (Facebook)</option>
+                                <option value="Walk-in (Kalaw)">Walk-in (Kalaw)</option>
                                 <option value="Source">Source</option>
                                 <option value="Job Fair">Job Fair</option>
                                 <option value="Facebook">Facebook</option>
