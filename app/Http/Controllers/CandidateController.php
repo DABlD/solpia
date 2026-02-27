@@ -106,13 +106,14 @@ class CandidateController extends Controller
                     ->join('requirements as r', 'r.id', '=', 'candidates.requirement_id')
                     ->where('r.rank', 'like', $req['data']['rank'])
                     ->where('r.fleet', 'like', $req['data']['fleet'])
+                    ->whereBetween('candidates.created_at', [$req['data']['from'], $req['data']['to']])
                     ->select('candidates.*', 'r.fleet as fleet');
 
         $array = $array->get();
 
         $class = "App\\Exports\\Reports\\Candidates";
 
-        $date = now()->format('F j, Y');
+        $date = now()->parse($req['data']['from'])->format('d-M-y') . ' - ' . now()->parse($req['data']['to'])->format('d-M-y');
 
         return Excel::download(new $class($array), "Candidates as of $date.xlsx");
     }

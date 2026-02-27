@@ -710,6 +710,7 @@ class DatatablesController extends Controller
 					->join('requirements as r', 'r.id', '=', 'candidates.requirement_id')
 					->where('r.rank', 'like', $req->rank)
 					->where('r.fleet', 'like', $req->fleet)
+					->whereBetween('candidates.created_at', [$req->from, $req->to])
 					->select('candidates.*', 'r.fleet as fleet');
 
 		$array = $array->get();

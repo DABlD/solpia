@@ -58,6 +58,7 @@
     <script src="{{ asset('js/datatables.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/flatpickr.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
 @endpush
 
@@ -72,6 +73,8 @@
         var fRank = "%%";
         var fDate = "%%";
         var fStatus = "%%";
+        var fFrom = moment().subtract(30, 'days').format('YYYY-MM-DD');
+        var fTo = moment().format('YYYY-MM-DD');
 
         var table = $('#table').DataTable({
             serverSide: true,
@@ -86,6 +89,8 @@
                     f.vessel = fVessel;
                     f.rank = fRank;
                     f.status = fStatus;
+                    f.from = fFrom;
+                    f.to = fTo;
                     f.load = ['prospect', 'vessel']
                 }
             },
@@ -196,6 +201,16 @@
             $('#table').DataTable().ajax.reload();
         });
 
+        $('#fFrom').on('change', e => {
+            fFrom = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
+        $('#fTo').on('change', e => {
+            fTo = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
         $(document).ready(() => {
             // GET VESSEL FOR FILTER
             $.ajax({
@@ -246,6 +261,21 @@
                     });
                 }
             });
+
+            $('#fFrom').flatpickr({
+                altInput: true,
+                altFormat: 'F j, Y',
+                dateFormat: 'Y-m-d',
+                defaultDate: moment().subtract(30, 'days').format('YYYY-MM-DD')
+            });
+
+            $('#fTo').flatpickr({
+                altInput: true,
+                altFormat: 'F j, Y',
+                dateFormat: 'Y-m-d',
+                defaultDate: moment().format('YYYY-MM-DD'),
+                maxDate: moment().format('YYYY-MM-DD')
+            });
         });
 
         function exportTo(){
@@ -253,7 +283,9 @@
                 fleet: fleet,
                 vessel: fVessel,
                 rank: fRank,
-                status: fStatus
+                status: fStatus,
+                from: fFrom,
+                to: fTo,
             }
             window.location.href = `{{ route('candidate.export') }}?` + $.param({data});
         }

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-6">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
                 Filter by Fleet
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-6">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
                 Filter by Status
@@ -39,12 +39,34 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-2 col-sm-6">
+        <div class="row" style="display: flex;">
+            <div class="col-md-4 iLabel" style="margin: auto;">
+                Date From
+            </div>
+            <div class="col-md-8 iInput">
+                <input type="text" id="fFrom" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 col-sm-6">
+        <div class="row" style="display: flex;">
+            <div class="col-md-4 iLabel" style="margin: auto;">
+                Date To
+            </div>
+            <div class="col-md-8 iInput">
+                <input type="text" id="fTo" class="form-control">
+            </div>
+        </div>
+    </div>
 </div>
 
 <br>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-6">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
                 Filter by Vessel
@@ -57,7 +79,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-6">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
                 Filter by Rank
@@ -72,7 +94,7 @@
 </div>
 
 <div class="pull-right">
-        <a class="btn btn-success" data-toggle="tooltip" title="Export Candidates" onclick="exportTo()">
-            <span class="fa fa-file-text"></span>
-        </a>
-    </div>
+    <a class="btn btn-success" data-toggle="tooltip" title="Export Candidates" onclick="exportTo()">
+        <span class="fa fa-file-text"></span>
+    </a>
+</div>
