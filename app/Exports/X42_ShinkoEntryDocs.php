@@ -33,7 +33,7 @@ class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, Shoul
 
         $this->data     = $data;
         $this->type     = $type;
-        $this->rank     = $rank;
+        $this->rank     = $data->rank;
     }
 
     public function view(): View
