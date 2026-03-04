@@ -21,7 +21,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/T SM VENUS2" => "51157-20",
             "M/T SM WHITE WHALE1" => "51302-20",
             "M/T SM WHITE WHALE2" => "51303-20",
-            "M/T K.FREESIA" => "-"
+            "M/T K.FREESIA" => "54565-23"
         ];
 
         if(isset($applicant->vessel) && isset($onum[$applicant->vessel->name])){
@@ -40,7 +40,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
             $shipowner2 = "KOREA LINE LNG CO., LTD.";
         }
-        elseif(in_array($applicant->vessel->name, ["M/T K. LOTUS", "M/T K.FREESIA"])){
+        elseif(in_array($applicant->vessel->name, ["M/T K. LOTUS"])){
             $shipowner = "KLBV1 S.A.";
             $phoneNumber = "82-51-661-6100";
             $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
@@ -48,6 +48,15 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $identification = "155691344";
 
             $shipowner2 = "KLBV1 S.A.";
+        }
+        elseif(in_array($applicant->vessel->name, ["M/T K.FREESIA"])){
+            $shipowner = "KOREA TONNAGE NO. 103 SHIPPING COMPANY S.A.";
+            $phoneNumber = "82-51-661-6100";
+            $address = "BICSA Financial Center 60th Floor, Balboa Avenue, Panama City, Republic of Panama";
+            $employer = "LEE DONG SU";
+            $identification = "824-87-01648";
+
+            $shipowner2 = "KOREA TONNAGE NO. 103 SHIPPING COMPANY S.A.";
         }
 
         $applicant->vofficialNo = $temp[$applicant->vessel->name] ?? "-";
