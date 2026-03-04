@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $title = "MLC Contract"){
         $rid = $data->pro_app->rank->id;
@@ -263,6 +263,11 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
                 ],
             ],
+            [
+                'alignment' => [
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM,
+                ],
+            ],
         ];
 
         return [
@@ -326,7 +331,7 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    
+                    'A40'
                 ];
 
                 // HL B
@@ -336,13 +341,13 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    'A43:C43','F43:H43', 'F44'
+                    'A46:C46','F46:H46', 'C41:F43'
                 ];
 
                 // HC VC
                 $h[4] = [
                     'A1:A3', 'A6:I14', 'A16:I17', 'A19:I32',
-                    'A33:A37',
+                    'A33:A37', 'C41:F43'
                 ];
 
                 // HL
@@ -353,12 +358,12 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // B
                 $h[6] = [
-                    'A1', 'A43:I44'
+                    'A1', 'B46'
                 ];
 
                 // VC
                 $h[7] = [
-                    'B33:B37', 'A39:I41'
+                    'B33:B37', 'A41:I43'
                 ];
 
                 // UNDERLINE
@@ -368,16 +373,21 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // JUSTIFY
                 $h[9] = [
-                    'A39'
+                    'A40'
+                ];
+
+                // VERTICAL BOTTOM
+                $h[9] = [
+                    // 'A40:C41'
                 ];
 
                 $h['wrap'] = [
-                    'B6', 'B8', 'C23', 'A31', 'A33:B37', 'A39'
+                    'B6', 'B8', 'C23', 'A31', 'A33:B37', 'A38'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B43'
+                    'B44'
                 ];
 
                 foreach($h as $key => $value) {
@@ -468,7 +478,6 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'B43:C43', 'G43:H43'
                 ]);
 
                 // LBT
@@ -516,12 +525,13 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     // ]
                     [20, [15,18]],
                     [130, [31,36]],
-                    [50, [32,38,42]],
+                    [50, [32,38]],
                     [193,[33]],
                     [210,[34]],
-                    [60,[35]],
+                    [60,[35,40]],
                     [23,[23]],
                     [30,[37]],
+                    [36,[38]],
                 ];
 
                 foreach($rows as $row){

@@ -311,11 +311,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="9"></td>
-	</tr>
-
-	<tr>
-		<td colspan="9" rowspan="3">
+		<td colspan="9">
 			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them
 			are retained by the each party and the seafarer has opportunity to review and seek advice on the terms and condition and
 			voluntarily accept them.
@@ -323,6 +319,29 @@
 	</tr>
 
 	<tr>
+		<td colspan="9"></td>
+	</tr>
+
+	<tr>
+		<td colspan="9">Shipowner: KLBV1 S.A.</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">Agent</td>
+		<td colspan="4">Shirley Erasquin</td>
+		<td colspan="3"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2"></td>
+		<td colspan="4">CREWING MANAGER</td>
+		<td colspan="3"></td>
+	</tr>
+
+	<tr>
+		<td colspan="2"></td>
+		<td colspan="4">Solpia Marine &#38; Ship Management Inc.</td>
+		<td colspan="3"></td>
 	</tr>
 
 	<tr>
@@ -333,21 +352,13 @@
 	</tr>
 
 	<tr>
-		<td>Seafarer</td>
-		<td colspan="2">{{ $data->user->namefull }}</td>
-		<td>(signature)</td>
-		<td></td>
-		<td>Shipowner</td>
-		<td colspan="2">Ms. Shirley Erasquin</td>
-		<td>(signature)</td>
-	</tr>
-
-	<tr>
-		<td></td>
+		<td>Seafarer:</td>
+		<td colspan="4">{{ $data->user->namefull }}</td>
+		{{-- <td>(signature)</td> --}}
 		<td colspan="2"></td>
+		{{-- <td>Shipowner</td> --}}
+		<td>(signature)</td>
 		<td></td>
-		<td></td>
-		<td colspan="4">or for and on behalf of the shipowner of the vessel</td>
 	</tr>
 
 </table>
