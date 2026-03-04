@@ -21,6 +21,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/T SM VENUS2" => "51157-20",
             "M/T SM WHITE WHALE1" => "51302-20",
             "M/T SM WHITE WHALE2" => "51303-20",
+            "M/T K.FREESIA" => "-"
         ];
 
         if(isset($applicant->vessel) && isset($onum[$applicant->vessel->name])){
