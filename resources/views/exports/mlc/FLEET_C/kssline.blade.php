@@ -323,7 +323,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="9">Shipowner: KLBV1 S.A.</td>
+		<td colspan="9"></td>
+		{{-- <td colspan="9">Shipowner: KLBV1 S.A.</td> --}}
 	</tr>
 
 	<tr>
