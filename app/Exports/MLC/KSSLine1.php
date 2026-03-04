@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
+class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $title = "MLC Contract"){
         $rid = $data->pro_app->rank->id;
@@ -282,7 +282,7 @@ class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
@@ -530,7 +530,7 @@ class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     [210,[34]],
                     [60,[35,40]],
                     [23,[23]],
-                    [30,[37]],
+                    [30,[37, 44]],
                     [36,[38]],
                 ];
 
@@ -608,12 +608,13 @@ class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setPath(public_path("images/shirley_sig.png"));
+        $drawing->setPath(public_path("images/MLC_SEAL.png"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(60);
-        $drawing->setWidth(130);
-        $drawing->setOffsetY(-30); 
-        $drawing->setCoordinates('G43');
+        $drawing->setHeight(110);
+        $drawing->setWidth(110);
+        $drawing->setOffsetX(40);
+        $drawing->setOffsetY(-30);
+        $drawing->setCoordinates('A42');
 
         // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         // $drawing2->setName('Avatar');
