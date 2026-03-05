@@ -179,7 +179,7 @@
 			@php
 				$suffix = "";
 
-				if($data->req['ext_months']){
+				if(isset($data->req['ext_months'])){
 					$sMonths = $data->req['ext_months'] . " MONTHS ";
 
 					if($data->req['plus'] == "true" && $data->req['minus'] == "true"){
