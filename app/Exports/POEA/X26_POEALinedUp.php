@@ -66,9 +66,9 @@ class X26_POEALinedUp implements WithMultipleSheets
         foreach($this->applicants as $applicant){
             $class = "App\Exports\\" . $this->data['folder'] . $this->data['format'];
 
-            if($applicant->vessel->id == 6005){
-                $class .= "2";
-            }
+            // if($applicant->vessel->id == 6005){
+            //     $class .= "2";
+            // }
 
             array_push($sheets, new $class($applicant, $this->data['format'], $this->data, $applicant->pro_app->rank->abbr));
         }
