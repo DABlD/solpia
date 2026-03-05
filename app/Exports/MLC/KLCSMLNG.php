@@ -35,7 +35,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $shipowner = "KOREA LINE LNG CO., LTD.";
             $phoneNumber = "+82-2-3701-0114";
             $address = "30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Republic of Korea";
-            $employer = "HAN SU HAN";
+            $employer = "LEE DONG SU";
             $identification = "824-87-01648";
 
             $shipowner2 = "KOREA LINE LNG CO., LTD.";
@@ -44,8 +44,9 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $shipowner = "KLBV1 S.A.";
             $phoneNumber = "82-51-661-6100";
             $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
-            $employer = "LEE IN KEUN";
-            $identification = "155691344";
+            $employer = "LEE DONG SU";
+            // $identification = "155691344";
+            $identification = "824-87-01648";
 
             $shipowner2 = "KLBV1 S.A.";
         }
