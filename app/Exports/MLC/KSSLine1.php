@@ -263,11 +263,6 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
                 ],
             ],
-            [
-                'alignment' => [
-                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM,
-                ],
-            ],
         ];
 
         return [
@@ -282,7 +277,7 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.3);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.3);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
@@ -331,7 +326,7 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VT
                 $h[1] = [
-                    'A40'
+                    
                 ];
 
                 // HL B
@@ -341,13 +336,13 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    'A46:C46','F46:H46', 'C41:F43'
+                    'A43:C43','F43:H43', 'F44'
                 ];
 
                 // HC VC
                 $h[4] = [
                     'A1:A3', 'A6:I14', 'A16:I17', 'A19:I32',
-                    'A33:A37', 'C41:F43'
+                    'A33:A37', 'A43:F43'
                 ];
 
                 // HL
@@ -358,12 +353,12 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // B
                 $h[6] = [
-                    'A1', 'B46'
+                    'A1', 'A43:I44'
                 ];
 
                 // VC
                 $h[7] = [
-                    'B33:B37', 'A41:I43'
+                    'B33:B37', 'A39:I41'
                 ];
 
                 // UNDERLINE
@@ -373,21 +368,16 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // JUSTIFY
                 $h[9] = [
-                    'A40'
-                ];
-
-                // VERTICAL BOTTOM
-                $h[9] = [
-                    // 'A40:C41'
+                    'A39'
                 ];
 
                 $h['wrap'] = [
-                    'B6', 'B8', 'C23', 'A31', 'A33:B37', 'A38'
+                    'B6', 'B8', 'C23', 'A31', 'A33:B37', 'A39', 'A43:F43'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'B44'
+                    'B43'
                 ];
 
                 foreach($h as $key => $value) {
@@ -478,6 +468,7 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
+                    'B43:D43', 'F43:I43'
                 ]);
 
                 // LBT
@@ -525,13 +516,13 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                     // ]
                     [20, [15,18]],
                     [130, [31,36]],
-                    [50, [32,38]],
+                    [50, [32,38,42]],
                     [193,[33]],
                     [210,[34]],
-                    [60,[35,40]],
+                    [60,[35]],
                     [23,[23]],
-                    [30,[37, 44]],
-                    [36,[38]],
+                    [30,[37]],
+                    [40,[43]]
                 ];
 
                 foreach($rows as $row){
@@ -610,11 +601,11 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setPath(public_path("images/MLC_SEAL.png"));
         $drawing->setResizeProportional(false);
-        $drawing->setHeight(110);
-        $drawing->setWidth(110);
-        $drawing->setOffsetX(40);
-        $drawing->setOffsetY(-30);
-        $drawing->setCoordinates('A42');
+        $drawing->setHeight(90);
+        $drawing->setWidth(90);
+        // $drawing->setOffsetY(30); 
+        // $drawing->setOffsetX(-30); 
+        $drawing->setCoordinates('F41');
 
         // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         // $drawing2->setName('Avatar');

@@ -192,7 +192,7 @@
 
 	<tr>
 		<td colspan="2">Payment date</td>
-		<td colspan="7">15th of every following month</td>
+		<td colspan="7">15th of following month</td>
 	</tr>
 
 	<tr>
@@ -292,26 +292,30 @@
 	<tr>
 		<td>Health and social security protection benefits</td>
 		<td colspan="8">
-			
+
 		</td>
 	</tr>
 
 	<tr>
 		<td>Repatriation</td>
 		<td colspan="8">
-			
+
 		</td>
 	</tr>
 
 	<tr>
 		<td>Any other business</td>
 		<td colspan="8">
-			
+
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="9">
+		<td colspan="9"></td>
+	</tr>
+
+	<tr>
+		<td colspan="9" rowspan="3">
 			In witness whereof, 2 copies of this agreement have been made and mutually signed by either parties thence each one of them
 			are retained by the each party and the seafarer has opportunity to review and seek advice on the terms and condition and
 			voluntarily accept them.
@@ -319,30 +323,6 @@
 	</tr>
 
 	<tr>
-		<td colspan="9"></td>
-	</tr>
-
-	<tr>
-		<td colspan="9"></td>
-		{{-- <td colspan="9">Shipowner: KLBV1 S.A.</td> --}}
-	</tr>
-
-	<tr>
-		<td colspan="2">Agent</td>
-		<td colspan="4">Shirley Erasquin</td>
-		<td colspan="3"></td>
-	</tr>
-
-	<tr>
-		<td colspan="2"></td>
-		<td colspan="4">CREWING MANAGER</td>
-		<td colspan="3"></td>
-	</tr>
-
-	<tr>
-		<td colspan="2"></td>
-		<td colspan="4">Solpia Marine &#38; Ship Management Inc.</td>
-		<td colspan="3"></td>
 	</tr>
 
 	<tr>
@@ -353,13 +333,21 @@
 	</tr>
 
 	<tr>
-		<td>Seafarer:</td>
-		<td colspan="4">{{ $data->user->namefull }}</td>
-		{{-- <td>(signature)</td> --}}
-		<td colspan="2"></td>
-		{{-- <td>Shipowner</td> --}}
+		<td>Seafarer</td>
+		<td colspan="3">{{ $data->user->namefull }}</td>
 		<td>(signature)</td>
-		<td></td>
+		<td colspan="4">
+			ShipOwner/Agent: Ms. Shirley Erasquin (signature)
+			<br style='mso-data-placement:same-cell;' />
+			CREWING MANAGER
+			<br style='mso-data-placement:same-cell;' />
+			Solpia Marine &#38; Ship Management Inc.
+		</td>
 	</tr>
 
-</table>
+	<tr>
+		<td></td>
+		<td colspan="3"></td>
+		<td></td>
+		<td colspan="4">or for and on behalf of the shipowner of the vessel</td>
+	</tr>
