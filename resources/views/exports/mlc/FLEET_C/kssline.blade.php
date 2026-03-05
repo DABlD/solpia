@@ -192,7 +192,7 @@
 
 	<tr>
 		<td colspan="2">Payment date</td>
-		<td colspan="7">15th of following month</td>
+		<td colspan="7">15th of every following month</td>
 	</tr>
 
 	<tr>
