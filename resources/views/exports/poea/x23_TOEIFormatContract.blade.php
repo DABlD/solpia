@@ -193,7 +193,7 @@
 					}
 				}
 
-				$suffix .= $data->req['suffix'];
+				$suffix .= $data->req['suffix'] ?? "";
 				
 			@endphp
 			{{ $data->req['employment_months'] }} MONTHS ({{ $suffix }})
