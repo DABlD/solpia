@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $title = "MLC Contract"){
         $rid = $data->pro_app->rank->id;
