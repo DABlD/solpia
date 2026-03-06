@@ -140,7 +140,8 @@
 		<td style="{{ $center }} height: 40px;">
 			{{ $yf->number ?? '-' }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ $yf ? $yf->expiry_date->format('d-M-Y') : '-' }}
+			{{-- {{ $yf ? $yf->expiry_date->format('d-M-Y') : '-' }} --}}
+			{{ "-" }}
 		</td>
 		<td style="{{ $center }} height: 40px;">
 			{{ $mcv->number ?? '-' }}
