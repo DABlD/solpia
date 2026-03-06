@@ -336,13 +336,22 @@
 		<td>Seafarer</td>
 		<td colspan="3">{{ $data->user->namefull }}</td>
 		<td>(signature)</td>
-		<td colspan="4">
-			ShipOwner/Agent: Ms. Shirley Erasquin (signature)
-			<br style='mso-data-placement:same-cell;' />
-			CREWING MANAGER
-			<br style='mso-data-placement:same-cell;' />
-			Solpia Marine &#38; Ship Management Inc.
-		</td>
+		@if($data->pro_app->status == "Lined-Up")
+			<td colspan="4">
+				ShipOwner/Agent: Ms. Shirley Erasquin (signature)
+				<br style='mso-data-placement:same-cell;' />
+				CREWING MANAGER
+				<br style='mso-data-placement:same-cell;' />
+				Solpia Marine &#38; Ship Management Inc.
+			</td>
+		@else
+			<td colspan="3">
+				ShipOwner
+			</td>
+			<td>
+				(signature)
+			</td>
+		@endif
 	</tr>
 
 	<tr>

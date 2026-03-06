@@ -537,6 +537,18 @@ class KSSLine1 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                     }
                 }
 
+                // DIFFERENT FORMAT FOR ONBOARD CREW
+                if($this->data->pro_app->status != "Lined-Up"){
+                    $event->sheet->getDelegate()->getRowDimension(43)->setRowHeight(12);
+                    $event->sheet->getDelegate()->getStyle("F43")->applyFromArray(
+                        [
+                            'alignment' => [
+                                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                            ]
+                        ]
+                    );
+                }
+
                 // PAGE BREAKS
                 $rows = [32];
                 foreach($rows as $row){
