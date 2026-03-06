@@ -599,13 +599,13 @@ class KSSLine1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setPath(public_path("images/MLC_SEAL.png"));
+        $drawing->setPath(public_path("images/shirley_sig.png"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(90);
-        $drawing->setWidth(90);
-        // $drawing->setOffsetY(30); 
+        $drawing->setWidth(150);
+        $drawing->setOffsetY(30); 
         // $drawing->setOffsetX(-30); 
-        $drawing->setCoordinates('F41');
+        $drawing->setCoordinates('G41');
 
         // $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         // $drawing2->setName('Avatar');
