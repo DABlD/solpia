@@ -83,6 +83,18 @@ class UsersController extends Controller
 
     public function ajaxUpdate(Request $req){
         echo User::where('id', $req->id)->update([$req->column => $req->value]);
+
+        if($req->column == "fleet"){
+            AuditTrail::create([
+                'user_id'   => auth()->user()->id,
+                'action'    => "updated $user->fname $user->lname fleet from $user->fleet to $req->value",
+                'ip'        => $req->getClientIp(),
+                'hostname'  => gethostname(),
+                'device'    => Browser::deviceFamily(),
+                'browser'   => Browser::browserName(),
+                'platform'  => Browser::platformName()
+            ]);
+        }
     }
 
     // using Applicant ID
