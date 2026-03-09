@@ -82,7 +82,7 @@ class UsersController extends Controller
     }
 
     public function ajaxUpdate(Request $req){
-        $user = User::find(Applicant::find((int)$req->id)->user_id);
+        $user = User::find((int)$req->id);
 
         if($req->column == "fleet"){
             AuditTrail::create([
