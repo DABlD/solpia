@@ -570,6 +570,9 @@
                         X17_HistoryCheck:               'History Check',
                         X28_DispatchChecklist:          'Line-up/Dispatch Checklist',
                         MedicalReferral:                'Medical Referral',
+                        @if(in_array(auth()->user()->id, [23]) || auth()->user()->fleet == "FLEET B")
+                            X46_NewHireEncodingCompletion:  'New Hire Encoding Completion (Fleet B)',
+                        @endif
                         X35_PostMedicalForm:            'Post Medical Form Request',
                         KSSLine:                        'Qualification Checklist (KSS Line)',
                         X07_SeaServiceRequestForm:      'Request for Sea Service Certificate',
@@ -1961,6 +1964,7 @@
                         id.file = id.file;
                     }
 
+                    console.log(id, applicant);
                     file = `
                         <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
                             <span class="fa fa-search">
