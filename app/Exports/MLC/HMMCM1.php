@@ -37,7 +37,13 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $this->shipmanager['address'] = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
 
+        $noFooter = [
+            "M/V HYUNDAI COURAGE", "M/V HYUNDAI BRAVE", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE", "M/V HMM SAGE", "M/V HMM GREEN", "M/V HMM FOREST",
+            "M/V HMM LEAF", "M/V HMM JUNIPER", "M/V HMM COLOMBO", "M/V HMM JAKARTA"
+        ];
+
         $this->title = $title;
+        $this->noFooter = $noFooter;
     }
 
     public function view(): View
@@ -298,8 +304,11 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 $line->setHeight(15);
 
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddHeader('&L&G &L&8MANNING MANAGEMENT &R&8APP.4 / Page &P');
-                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2024.12.20/DCN24008');
-                $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
+
+                if(!in_array($this->data->vessel->id, [$this->noFooter])){
+                    $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&G &L&8PC-305/2024.12.20/DCN24008');
+                    $event->sheet->getDelegate()->getHeaderFooter()->addImage($line);
+                }
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
