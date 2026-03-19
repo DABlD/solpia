@@ -136,7 +136,7 @@
 			1.2 The date when seafarer's employment agreement is entered into :
 		</td>
 		<td colspan="2">
-			{{ $data->effective_date ? now()->parse($data->effective_date)->format('d-M-Y') : "-" }}
+			{{ now()->format('d-M-Y') }}
 		</td>
 		<td></td>
 	</tr>
@@ -660,11 +660,11 @@
 	<tr>
 		<td colspan="2">7.1 Period : From</td>
 		<td colspan="2">
-			{{ $data->effective_date ? now()->parse($data->effective_date)->format('d-m-Y') : "-" }}
+			{{ $data->effective_date ? now()->parse($data->effective_date)->format('d-M-Y') : "-" }}
 		</td>
 		<td>To</td>
 		<td>
-			{{ isset($data->effective_date) && isset($data->employment_months) ? now()->parse($data->effective_date)->addMonths(3)->format('d-m-Y') : "-" }}
+			{{ isset($data->effective_date) && isset($data->employment_months) ? now()->parse($data->effective_date)->addMonths(3)->format('d-M-Y') : "-" }}
 		</td>
 		<td colspan="5"></td>
 	</tr>
@@ -1004,11 +1004,11 @@
 	<tr>
 		<td colspan="6"></td>
 		<td>Date:</td>
-		<td colspan="3">{{ isset($data['date_processed']) ? now()->parse($data['date_processed'])->format('d-M-Y') : "" }}</td>
+		<td colspan="3">{{ now()->format('d-M-Y') }}</td>
 	</tr>
 
 	<tr>
-		<td colspan="11">Seafare Name:</td>
+		<td colspan="11">Seafarer Name:</td>
 	</tr>
 
 	<tr>
@@ -1023,12 +1023,12 @@
 		<td colspan="7">
 			Shipowner(s) or for and on behalf of the shipOwner(s) of the Vessel
 		</td>
-		<td colspan="4">MS. THEA MAE D. RIO</td>
+		<td colspan="4">C/E ROMANO A. MARIANO</td>
 	</tr>
 
 	<tr>
 		<td colspan="7"></td>
-		<td colspan="3">Crewing Manager</td>
+		<td colspan="3">President</td>
 		<td>sign</td>
 	</tr>
 

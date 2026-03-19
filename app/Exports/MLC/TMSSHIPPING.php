@@ -332,7 +332,7 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
                 // B
                 $h[6] = [
-                    'A1:K12', 'F24:F38', 'B91', 'H152'
+                    'A1:K12', 'F24:F38', 'B91', 'H151:H152'
                 ];
 
                 // VC
@@ -358,7 +358,7 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'J12', 'I15:J17'
+                    'G10', 'J12', 'I15:J17'
                 ];
 
                 foreach($h as $key => $value) {
@@ -544,14 +544,14 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
     public function drawings()
     {
-        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setPath(public_path("images/maam_thea_sig.png"));
-        $drawing->setResizeProportional(false);
-        $drawing->setHeight(55);
-        $drawing->setWidth(150);
-        $drawing->setOffsetX(2);
-        $drawing->setOffsetY(15);
-        $drawing->setCoordinates('H152');
+        // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        // $drawing->setPath(public_path("images/maam_thea_sig.png"));
+        // $drawing->setResizeProportional(false);
+        // $drawing->setHeight(55);
+        // $drawing->setWidth(150);
+        // $drawing->setOffsetX(2);
+        // $drawing->setOffsetY(15);
+        // $drawing->setCoordinates('H152');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing2->setPath(public_path("images/MLC_SEAL.png"));
@@ -562,6 +562,6 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
         $drawing2->setOffsetY(10);
         $drawing2->setCoordinates('H154');
 
-        return [$drawing, $drawing2];
+        return [$drawing2];
     }
 }
