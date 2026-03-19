@@ -25,7 +25,8 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HMM COPENHAGEN", "M/V HMM GDANSK", "M/V HMM HAMBURG", "M/V HMM OSLO",
             "M/V HMM SOUTHAMPTON", "M/V HMM ST. PETERSBURG", "M/V HYUNDAI GRACE", "M/V HYUNDAI UNITY",
             "M/V HMM COLOMBO", "M/V HMM VICTORY", "M/V HMM PRIDE", "M/V HMM FOREST", "M/V HMM GREEN", "M/V HMM SAGE",
-            'M/V HMM JAKARTA', 'M/V HMM LEAF', 'M/V HMM TACOMA', 'M/V HMM JUNIPER', 'M/V HMM IVY', 'M/V HMM CLOVER'
+            'M/V HMM JAKARTA', 'M/V HMM LEAF', 'M/V HMM TACOMA', 'M/V HMM JUNIPER', 'M/V HMM IVY', 'M/V HMM CLOVER',
+            "M/V HYUNDAI GOODWILL"
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
