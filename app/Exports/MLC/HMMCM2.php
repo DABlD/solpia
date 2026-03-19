@@ -32,7 +32,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V ATLANTIC AFFINITY","M/V OCEAN FLORA",
             "M/V HMM PARAMOUNT", "M/V HMM HARMONY", "M/V HMM MASTER", "M/V HMM MIRACLE",
 
-            "M/V HMM NARU", "M/V HMM NABI"
+            "M/V HMM NARU", "M/V HMM NABI", "M/V GLOBAL GOLDEN"
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
