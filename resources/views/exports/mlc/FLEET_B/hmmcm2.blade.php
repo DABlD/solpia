@@ -406,7 +406,7 @@
 			@if(!in_array($data->vessel->id, [6829,7998,7108]))
 				{{-- PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR --}}
 				{{-- PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA --}}
-				@if(in_array($data->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917]))
+				@if(in_array($data->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917,9591]))
 				<br style='mso-data-placement:same-cell;' />
 				ㅤ※	Additional clause for Liberia flag
 				<br style='mso-data-placement:same-cell;' />
