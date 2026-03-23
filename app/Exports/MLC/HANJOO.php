@@ -256,6 +256,9 @@ class Hanjoo implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
 
+                $event->sheet->getDelegate()->getPageSetup()->setFirstPageNumber(1);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&8 HANJOO MARITIME CO., LTD &C&8 MLC-02/2/16.08.01 &R&8 PAGE &P/&N');
+
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
 
