@@ -40,7 +40,10 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $noFooter = [
             "M/V HYUNDAI COURAGE", "M/V HYUNDAI BRAVE", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE", "M/V HMM SAGE", "M/V HMM GREEN", "M/V HMM FOREST",
-            "M/V HMM LEAF", "M/V HMM JUNIPER", "M/V HMM COLOMBO", "M/V HMM JAKARTA"
+            "M/V HMM LEAF", "M/V HMM JUNIPER", "M/V HMM COLOMBO", "M/V HMM JAKARTA",
+
+            // MS ABBY
+            "M/V HMM ST. PETERSBURG", "M/V HMM SOUTHAMPTON", "M/V HMM HAMBURG", "M/V HMM GDANSK", "M/V HMM COPENHAGEN", "M/V HMM ALGECIRAS"
         ];
 
         $this->title = $title;
