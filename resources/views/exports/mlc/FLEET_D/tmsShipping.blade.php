@@ -259,12 +259,20 @@
 		<td colspan="3"></td>
 	</tr>
 
+	@php
+		$allowance = 0;
+		$allowance += $wage ? ($wage->other_allow ?? 0) : 0;
+		$allowance += $wage ? ($wage->sup_allow ?? 0) : 0;
+		$allowance += $wage ? ($wage->sub_allow ?? 0) : 0;
+		$allowance += $wage ? ($wage->owner_allow ?? 0) : 0;
+	@endphp
+
 	<tr>
 		<td colspan="2"></td>
 		<td colspan="3">
 			D) Allowance :
 		</td>
-		<td>{{ $wage ? number_format($wage->other_allow, 2) : 0 }}</td>
+		<td>{{ number_format($allowance, 2) }}</td>
 		<td></td>
 		<td>USD / MONTH</td>
 		<td colspan="3"></td>
