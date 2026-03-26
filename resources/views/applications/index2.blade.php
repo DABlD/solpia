@@ -299,7 +299,7 @@
                 { 
                     data: 'user.contact',
                     name: 'user.contact',
-                    visible: false
+                    {{-- visible: false --}}
                 },
                 { data: 'last_vessel.vessel_name', name: 'last_vessel.vessel_name' },
                 { data: 'last_vessel.sign_off', name: 'last_vessel.sign_off' },
