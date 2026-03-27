@@ -850,7 +850,7 @@
         						[1,57]
         					],
         					documents: [
-        						'BTOC', 'ATOT', 'ATCT', 'ATLGT'
+        						'BTOC', 'ATOT', 'ATCT', 'ATLGT', 'BTLGT'
         					]
         				}
         			]
