@@ -261,10 +261,10 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.2);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
