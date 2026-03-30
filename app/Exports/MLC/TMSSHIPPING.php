@@ -287,7 +287,7 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
                 // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
 
                 // FORMAT
-                $event->sheet->getDelegate()->getStyle('F24:F38')->getNumberFormat()->setFormatCode(0.00);
+                $event->sheet->getDelegate()->getStyle('F24:F38')->getNumberFormat()->setFormatCode('0.00');
 
                 // FUNCTIONS
                 // $osSize = sizeof($this->linedUps);
