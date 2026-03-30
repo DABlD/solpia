@@ -9,7 +9,6 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
@@ -17,13 +16,6 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
     public function __construct($data, $title = "MLC Contract"){
         $this->data     = $data;
         $this->title     = $title;
-    }
-
-    public function columnFormats(): array
-    {
-        return [
-            'F' => NumberFormat::FORMAT_NUMBER_00,
-        ];
     }
 
     public function view(): View
@@ -293,6 +285,9 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
 
                 // TEXT ROTATION
                 // $event->sheet->getDelegate()->getStyle('B11')->getAlignment()->setTextRotation(90);
+
+                // FORMAT
+                $event->sheet->getDelegate()->getStyle('F24:F38')->getNumberFormat()->setFormatCode(0.00);
 
                 // FUNCTIONS
                 // $osSize = sizeof($this->linedUps);
