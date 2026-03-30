@@ -22,7 +22,7 @@ class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
     public function columnFormats(): array
     {
         return [
-            'F' => NumberFormat::FORMAT_NUMBER,
+            'F' => NumberFormat::FORMAT_NUMBER_00,
         ];
     }
 
