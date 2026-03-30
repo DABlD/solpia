@@ -9,12 +9,21 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class TMSSHIPPING implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $title = "MLC Contract"){
         $this->data     = $data;
         $this->title     = $title;
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'F' => NumberFormat::FORMAT_NUMBER,
+        ];
     }
 
     public function view(): View
