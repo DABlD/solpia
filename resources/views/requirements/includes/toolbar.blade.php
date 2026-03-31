@@ -102,7 +102,7 @@
 </div>
 
 <div class="pull-right">
-@if(in_array(auth()->user()->role, ["Admin", "Crewing Officer", "Crewing Manager"]))
+@if(in_array(auth()->user()->role, ["Admin", "Crewing Officer", "Crewing Manager", "Recruitment Officer"]))
 	<a class="btn btn-primary" data-toggle="tooltip" title="Add Requirement" onclick="create()">
 		<span class="fa fa-plus"></span>
 	</a>
