@@ -1630,6 +1630,10 @@ class ApplicationsController extends Controller
         //     mkdir(public_path("del\\files\\" . $req->aId));
         // }
 
+        if (!file_exists(public_path("del\\files\\" . $req->aId))) {
+            mkdir(public_path("del\\files\\" . $req->aId), 0755, true);
+        }
+
         foreach (json_decode($files->file) as $file) {
             rename(public_path("files\\" . $req->aId . "\\" . $file), public_path("del\\files\\" . $req->aId . "\\" . time() . '_' . $file));
         }
