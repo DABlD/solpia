@@ -25,7 +25,7 @@
 			<td>{{ $req->id }}</td>
 			<td>{{ isset($req->vessel) ? $req->vessel->name : "---" }}</td>
 			<td>{{ isset($req->vessel) ? $req->vessel->type : "---" }}</td>
-			<td>{{ $req->rank2->abbr }}</td>
+			<td>{{ $req->rank2->abbr ?? "-" }}</td>
 			<td>{{ $req->joining_date->format('Y-m-d') }}</td>
 			<td>{{ $req->joining_port }}</td>
 			<td>{{ $req->usv ? "Required" : "---" }}</td>
