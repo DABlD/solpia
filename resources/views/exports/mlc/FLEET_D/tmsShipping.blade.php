@@ -672,7 +672,7 @@
 		</td>
 		<td>To</td>
 		<td>
-			{{ isset($data->effective_date) && isset($data->employment_months) ? now()->parse($data->effective_date)->addMonths(3)->format('d-M-Y') : "-" }}
+			{{ isset($data->effective_date) && isset($data->employment_months) ? now()->parse($data->effective_date)->addMonths($data->employment_months)->format('d-M-Y') : "-" }}
 		</td>
 		<td colspan="5"></td>
 	</tr>
