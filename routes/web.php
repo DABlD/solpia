@@ -370,7 +370,7 @@ Route::group([
 			->defaults('sidebar', 1)
 			->defaults('icon', 'fa-calendar')
 			->defaults('name', 'Appointments')
-			->defaults('roles', array('Admin'))
+			->defaults('roles', array('Admin', 'Crewing Officer', 'Crewing Manager', 'Processing', 'Training', 'Recruitment Officer', 'Accounting'))
 			->name($name . '.index')
 			->defaults('href', $name);
 
