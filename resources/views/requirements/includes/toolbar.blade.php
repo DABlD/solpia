@@ -110,5 +110,9 @@
     <a class="btn btn-success" data-toggle="tooltip" title="Export Requirements" onclick="exporto()">
         <span class="fa fa-file-text"></span>
     </a>
+@elseif(in_array(auth()->user()->role, ["Recruitment Officer"]))
+    <a class="btn btn-success" data-toggle="tooltip" title="Export Requirements" onclick="exporto()">
+        <span class="fa fa-file-text"></span>
+    </a>
 @endif
 </div>
