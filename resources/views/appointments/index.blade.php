@@ -407,6 +407,9 @@
                             resolve()}, 500);
                         });
                     },
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonColor: errorColor
                 }).then(result => {
                     if(result.value){
                         $.ajax({
