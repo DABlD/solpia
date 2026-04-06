@@ -152,6 +152,10 @@
 		$font = 'font-family: Wingdings 2; font-size: 11px;';
 
 		$left = 'text-align: left !important;';
+
+		if($display == "US-VISA (R C1/D)" && $data->vessel->principal_id == 5){
+			$date = "N/A";
+		}
 		
 		echo "
 			<tr>
