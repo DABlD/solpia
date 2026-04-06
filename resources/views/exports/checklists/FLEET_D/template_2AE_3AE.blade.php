@@ -330,10 +330,14 @@
 		{{ $con("KOREAN LICENSE") }}
 		{{ $con("KOREAN PSCRB") }}
 
-		{{-- {{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
-		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }} --}}
+		{{-- DK INITIO AND GNS HARVEST --}}
+		@if(in_array($data->vessel->id, [19, 4753]))
+			{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
+		@else
+			{{ $doc("TEST", "", 'lc') }}
+		@endif
+		{{-- {{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }} --}}
 
-		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -342,7 +346,15 @@
 		{{ $doc("KML", "KOREAN MARITIME LAW COURSE", 'lc') }}
 		{{ $con("KOREAN LICENSE") }}
 		{{ $con("KOREAN PSCRB") }}
-		{{ $doc("TEST", "", 'lc') }}
+
+		{{-- DK INITIO AND GNS HARVEST --}}
+		@if(in_array($data->vessel->id, [19, 4753]))
+			{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
+		@else
+			{{ $doc("TEST", "", 'lc') }}
+		@endif
+		{{-- {{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }} --}}
+		
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
