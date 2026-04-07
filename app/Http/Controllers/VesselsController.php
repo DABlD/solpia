@@ -108,7 +108,17 @@ class VesselsController extends Controller
 
         // IF HAS WHERE3
         if($req->where3){
-            $vessels = $vessels->where($req->where3[0], 'like', $req->where3[1]);
+
+            if($req->where3[0] == "type"){
+                $vessels = $vessels->where(function($q) use($req){
+                    $q->where($req->where3[0], 'like', $req->where3[1]);
+                    $q->orWhereNull($req->where3[0]);
+                });
+            }
+            else{
+                $vessels = $vessels->where($req->where3[0], 'like', $req->where3[1]);
+            }
+
         }
 
         // IF HAS WHEREIN
