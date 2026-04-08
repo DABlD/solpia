@@ -800,7 +800,10 @@
                         string += `
                             <tr>
                                 <td>${can.id}</td>
-                                <td>${can.prospect.name}</td>
+                                <td>
+                                    ${can.prospect.name}<br>
+                                    <span style="font-style: italic; color: #369589;">Source: ${can.prospect.source}</span>
+                                </td>
                                 <td>${can.prospect.age}</td>
                                 <td>${checkbox2("ii" + can.id, "test", can.initial_interview, can.status)}</td>
                                 <td>${checkbox2("wa" + can.id, "test", can.written_assessment, can.status)}</td>
@@ -1059,7 +1062,7 @@
                     </table>
                 `,
                 onOpen: () => {
-                    $('#candidate_table th, #candidate_table td').css('text-align', 'center');
+                    $('#candidate_table th, #candidate_table td:not(:nth-child(2))').css('text-align', 'center');
                     $('#candidate_table td').css({
                         "border-bottom": "1px solid #c9c9c9",
                         "border-top": "1px solid #c9c9c9"
