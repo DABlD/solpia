@@ -51,8 +51,8 @@
 	<tr>
 		<td colspan="2">Name of Seafarer:</td>
 		<td colspan="3" class="und">{{ $data->user->lname }}, {{ $data->user->fname }} {{ $data->user->suffix }}</td>
-		<td colspan="2">Seaman Book (CDC) No:</td>
-		<td colspan="3" class="und">{{ isset($data->document_id->{"SEAMAN'S BOOK"}) ? $data->document_id->{"SEAMAN'S BOOK"}->number : "---"  }}</td>
+		<td colspan="3">Seaman Book (CDC) No:</td>
+		<td colspan="2" class="und">{{ isset($data->document_id->{"SEAMAN'S BOOK"}) ? $data->document_id->{"SEAMAN'S BOOK"}->number : "---"  }}</td>
 	</tr>
 
 	<tr><td style="height: 30px;"></td></tr>
