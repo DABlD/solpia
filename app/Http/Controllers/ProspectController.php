@@ -170,7 +170,7 @@ class ProspectController extends Controller
                         // ->pluck('total', 'source')
                         // ->toArray();
 
-        $rankList = Rank::pluck('name', 'id');
+        $rankList = Rank::orderBy('order')->pluck('name', 'id');
 
         // MSTR,C/O,2/O,3/O,C/E,1AE,2AE,3AE,ELECT,BSN,PMN,AB,OS,OLR1,OLR,WPR,CCK,2CK,MSM,DCDT,ECDT,DHAND,FTR,GE,RMAN
         $ranks = [1,2,3,4,5,6,7,8,22,9,30,10,11,15,16,17,24,26,27,14,19,34,21,57,31];
@@ -209,12 +209,6 @@ class ProspectController extends Controller
         $temp6 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION TOP 4
         $temp7 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION JUNIOR OFFICERS
         $temp8 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION RATINGS
-
-        foreach($candidates as $candidate){
-            echo $candidate->id . ' - ' . $candidate->requirement->rank . '<br>';
-        }
-
-        die;
 
         foreach($candidates as $candidate){
             $source = $candidate->prospect->source;
@@ -312,10 +306,36 @@ class ProspectController extends Controller
         //     ["Ratings", $temp8]
         // );
 
+        $order = Rank::orderBy('order')->pluck('abbr')->toArray();
+
+        $applicants = $this->manualSort($applicants, $order);
+        $temp1 = $this->manualSort($temp1, $order);
+        $temp2 = $this->manualSort($temp2, $order);
+        $temp3 = $this->manualSort($temp3, $order);
+        $temp4 = $this->manualSort($temp4, $order);
+        $temp5 = $this->manualSort($temp5, $order);
+        $temp6 = $this->manualSort($temp6, $order);
+        $temp7 = $this->manualSort($temp7, $order);
+        $temp8 = $this->manualSort($temp8, $order);
+        $temp9 = $this->manualSort($temp9, $order);
+
         $temp = [$applicants, $temp1, $temp2, $temp3, $temp4, $temp5, $temp6, $temp7, $temp8, $temp9];
 
         $fileName = "$from - $to Statistic Report";
         return Excel::download(new StatisticReport($temp), "$fileName.xlsx");
+    }
+
+    function manualSort($data, $order){
+        uksort($data, function ($a, $b) use ($order) {
+            $positions = array_flip($order);
+
+            $posA = $positions[$a] ?? 9999;
+            $posB = $positions[$b] ?? 9999;
+
+            return $posA <=> $posB;
+        });
+
+        return $data;
     }
 
     function uploadFile(Request $req){
