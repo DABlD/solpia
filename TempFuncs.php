@@ -727,3 +727,21 @@ echo "~~~~~~~~~~~~~<br>";
 foreach($temp2 as $ss){
     echo $ss->applicant->user->namefull . ';' . $ss->vessel->name . ';' . $ss->joining_date . '<br>';
 }
+
+<!-- 3O RANK THAT IS ON WITH VACATION WITH HISTORY WITH HMM  -->
+$crews = ProcessedApplicant::where('status', 'Vacation')->where('rank_id', 4)->get();
+
+foreach($crews as $crew){
+    $hasMatch = SeaService::where('applicant_id', $crew->applicant_id)
+        ->where(function ($q) {
+            $q->where('rank', '3RD OFFICER');
+            $q->where('principal', 'LIKE', '%HMM%')
+              ->orWhere('principal', 'LIKE', '%HYUNDAI O%')
+              ->orWhere('principal', 'LIKE', '%HYUNDAI M%');
+        })
+        ->exists();
+
+    if($hasMatch){
+        echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . ';' . $crew->applicant->user->fleet . '<br>';
+    }
+}
