@@ -2,7 +2,7 @@
     <div class="col-md-3">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
-                Filter by fleet
+                Filter by Fleet
             </div>
             <div class="col-md-8 iInput">
                 <select id="fleet" class="form-control">
@@ -21,6 +21,7 @@
             </div>
         </div>
     </div>
+
     <div class="col-md-3">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
@@ -34,6 +35,28 @@
                     <option value="ON HOLD">ON HOLD</option>
                     <option value="CANCELLED">CANCELLED</option>
                 </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row" style="display: flex;">
+            <div class="col-md-4 iLabel" style="margin: auto;">
+                Date From
+            </div>
+            <div class="col-md-8 iInput">
+                <input type="text" id="fFrom" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row" style="display: flex;">
+            <div class="col-md-4 iLabel" style="margin: auto;">
+                Date To
+            </div>
+            <div class="col-md-8 iInput">
+                <input type="text" id="fTo" class="form-control">
             </div>
         </div>
     </div>

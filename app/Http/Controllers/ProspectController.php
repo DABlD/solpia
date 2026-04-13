@@ -211,6 +211,12 @@ class ProspectController extends Controller
         $temp8 = ["On time" => 0, "No" => 0]; //TIMELY SUBMISSION RATINGS
 
         foreach($candidates as $candidate){
+            echo $candidate->id . ' - ' . $candidate->requirement->rank . '<br>';
+        }
+
+        die;
+
+        foreach($candidates as $candidate){
             $source = $candidate->prospect->source;
             $rank = $rankList[$candidate->requirement->rank];
 

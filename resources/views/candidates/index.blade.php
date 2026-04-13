@@ -287,6 +287,7 @@
                 from: fFrom,
                 to: fTo,
             }
+
             window.location.href = `{{ route('candidate.export') }}?` + $.param({data});
         }
     </script>

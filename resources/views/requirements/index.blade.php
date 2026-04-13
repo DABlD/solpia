@@ -81,7 +81,8 @@
         var user_id = null;
         var fVessel = "%%";
         var fRank = "%%";
-        var fDate = "%%";
+        var fFrom = moment().subtract(30, 'days').format('YYYY-MM-DD');
+        var fTo = moment().format('YYYY-MM-DD');
         var fVesselType = "%%";
         var fStatus = "AVAILABLE";
 
@@ -99,7 +100,8 @@
                     f.vesselType = fVesselType;
                     f.vessel = fVessel;
                     f.rank = fRank;
-                    f.date = fDate;
+                    f.from = fFrom;
+                    f.to = fTo;
                     f.status = fStatus;
                     f.load = ['vessel', 'rank', 'candidates']
                 }
@@ -245,8 +247,33 @@
             $('#table').DataTable().ajax.reload();
         });
 
+        $('#fFrom').on('change', e => {
+            fFrom = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
+        $('#fTo').on('change', e => {
+            fTo = e.target.value;
+            $('#table').DataTable().ajax.reload();
+        });
+
         $(document).ready(() => {
             getVesselList();
+
+            $('#fFrom').flatpickr({
+                altInput: true,
+                altFormat: 'F j, Y',
+                dateFormat: 'Y-m-d',
+                defaultDate: moment().subtract(30, 'days').format('YYYY-MM-DD')
+            });
+
+            $('#fTo').flatpickr({
+                altInput: true,
+                altFormat: 'F j, Y',
+                dateFormat: 'Y-m-d',
+                defaultDate: moment().format('YYYY-MM-DD'),
+                maxDate: moment().format('YYYY-MM-DD')
+            });
         });
 
         function getVesselList(){
@@ -1235,7 +1262,13 @@
         }
 
         function exporto(){
-            window.location.href = `{{ route('requirement.export') }}`;
+            let data  = {
+                rank: fRank,
+                from: fFrom,
+                to: fTo
+            };
+
+            window.location.href = `{{ route('requirement.export') }}?` + $.param({data});
         }
 
         function vesselDetails(vid){
