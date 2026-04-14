@@ -158,6 +158,11 @@ class ProspectController extends Controller
         $from = now()->parse($from)->toFormattedDateString();
         $to = now()->parse($to)->toFormattedDateString();
 
+        foreach($data as $temp){
+            $candidate = $temp->candidates->first();
+            $temp->endorsedTo = ($candidate ? $candidate->vessel->name : null);
+        }
+
         $fileName = "$from - $to Prospects";
 
         return Excel::download(new ProspectReport2($data->toArray(), $from, $to), "$fileName.xlsx");
