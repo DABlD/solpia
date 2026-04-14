@@ -669,8 +669,8 @@ class DatatablesController extends Controller
 					})
 					->where('rank', 'like', $req->rank)
 					// ->where('joining_date', 'like', $req->date)
-					->whereBetween('requirements.created_at', [$req->from, $req->to])
-					->where('requirements.status', 'like', $req->status);
+					->whereBetween('requirements.created_at', [$req->from, $req->to]);
+					// ->where('requirements.status', 'like', $req->status);
 
 		if($req->user_id){
 			$array = $array->where('user_id', 'like', $req->user_id);

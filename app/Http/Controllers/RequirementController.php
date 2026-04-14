@@ -96,8 +96,8 @@ class RequirementController extends Controller
     public function export(Request $req){
         $class = "App\\Exports\\Requirement\\ReqList";
 
-        $reqs = Requirement::whereIn('status', ['AVAILABLE', 'ON HOLD'])
-                        ->where('fleet', 'like', auth()->user()->fleet ?? "%%")
+        // $reqs = Requirement::whereIn('status', ['AVAILABLE', 'ON HOLD'])
+        $reqs = Requirement::where('fleet', 'like', auth()->user()->fleet ?? "%%")
                         ->where('rank', 'like', $req->data['rank'])
                         ->whereBetween('created_at', [$req->data['from'], $req->data['to']])
                         ->get();
