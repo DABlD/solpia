@@ -5095,7 +5095,8 @@
                     contractAmendment2:                 'Contract Amendment (Onboard Crew)',
                     X38_BatchCrewCompetencyChecklist:   'Crew Competency Checklist',
                     X38_BatchCrewCompetencyChecklist2:  'Crew Competency Checklist (Trial)',
-                    X32_CrewUniform:                    'Crew Uniform Order Slip',
+                    X32_CrewUniform:                    'Crew Uniform Order Slip (Lined Up)',
+                    X32_CrewUniform2:                    'Crew Uniform Order Slip (On Board)',
                     {{-- X42_DeclarationOfCrewAwareness:     'Declaration of Crew Awareness', --}}
                     X43_BatchShinkoEntryDocs:           'Entry Documents - Lined Up (Shinko)',
                     X43_BatchShinkoEntryDocs2:          'Entry Documents - On Board (Shinko)',
@@ -7002,7 +7003,73 @@
                 showCancelButton: true,
                 title: 'Select Crew',
                 html: '<br><br>' + crewString,
-                width: '450px',
+                width: '600px',
+                onOpen: () => {
+                    $('#swal2-title').css({
+                        'font-size': '28px',
+                        'color': '#00c0ef'
+                    });
+                    $('#swal2-content .col-md-10').css('text-align', 'left');
+                    $('#swal2-content .col-md-10 label').css({
+                        "font-size": '20px',
+                        "text-align": 'left'
+                    });
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let temp3 = $(".crew-checklist:checked");
+                            
+                            temp3.each((index, value) => {
+                                crews.push($(value).data('id'));
+                            });
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    let data = {
+                        crews: crews,
+                        filename: $('.modal-title span')[0].innerText.substring(4) + ' - Crew Uniform Order Slip',
+                        isApplicant: false
+                    };
+
+                    window.location.href = `{{ route('applications.exportDocument') }}/1/X32_CrewUniform?` + $.param(data);
+                }
+            })
+        }
+
+        function X32_CrewUniform2(id){
+            let crews = [];
+
+            let temp = $('.OBC');
+            let crewString = "";
+
+            temp.each((index, value) => {
+                let temp2 = $(value);
+
+                crewString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${temp2[0].innerText}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            swal({
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+                title: 'Select Crew',
+                html: '<br><br>' + crewString,
+                width: '600px',
                 onOpen: () => {
                     $('#swal2-title').css({
                         'font-size': '28px',
