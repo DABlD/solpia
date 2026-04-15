@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    {{-- <div class="col-md-3">
         <div class="row" style="display: flex;">
             <div class="col-md-4 iLabel" style="margin: auto;">
                 Date From
@@ -59,7 +59,7 @@
                 <input type="text" id="fTo" class="form-control">
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <div class="row" style="margin-top: 3px;">

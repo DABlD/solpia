@@ -81,8 +81,8 @@
         var user_id = null;
         var fVessel = "%%";
         var fRank = "%%";
-        var fFrom = moment().subtract(120, 'days').format('YYYY-MM-DD');
-        var fTo = moment().format('YYYY-MM-DD');
+        var fFrom = "%%";
+        var fTo = "%%";
         var fVesselType = "%%";
         var fStatus = "AVAILABLE";
 
@@ -264,14 +264,12 @@
                 altInput: true,
                 altFormat: 'F j, Y',
                 dateFormat: 'Y-m-d',
-                defaultDate: moment().subtract(120, 'days').format('YYYY-MM-DD')
             });
 
             $('#fTo').flatpickr({
                 altInput: true,
                 altFormat: 'F j, Y',
                 dateFormat: 'Y-m-d',
-                defaultDate: moment().format('YYYY-MM-DD'),
                 maxDate: moment().format('YYYY-MM-DD')
             });
         });
@@ -1262,13 +1260,32 @@
         }
 
         function exporto(){
-            let data  = {
-                rank: fRank,
-                from: fFrom,
-                to: fTo
-            };
+            swal({
+                title: "Select Range",
+                html: `
+                    ${input("from", "From", moment().subtract(30, 'days').format("YYYY-MM-DD"), 3,9)}
+                    ${input("to", "To", moment().format("YYYY-MM-DD"), 3,9)}
+                `,
+                onOpen: () => {
+                    $('[name="from"], [name="to"]').flatpickr({
+                        altInput: true,
+                        altFormat: 'F j, Y',
+                        dateFormat: 'Y-m-d',
+                    });
+                }
+            }).then(result => {
+                if(result.value){
+                    let data  = {
+                        rank: fRank,
+                        from: $('[name="from"]').val(),
+                        to: $('[name="to"]').val()
+                    };
 
-            window.location.href = `{{ route('requirement.export') }}?` + $.param({data});
+                    window.location.href = `{{ route('requirement.export') }}?` + $.param({data});
+                }
+            })
+
+            
         }
 
         function vesselDetails(vid){
