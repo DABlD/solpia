@@ -160,7 +160,7 @@ class ProspectController extends Controller
 
         foreach($data as $temp){
             $candidate = $temp->candidates->first();
-            $temp->endorsedTo = ($candidate ? $candidate->vessel->name : null);
+            $temp->endorsedTo = ($candidate ? ($candidate->vessel ? $candidate->vessel->name : "N/A") : null);
         }
 
         $fileName = "$from - $to Prospects";
