@@ -264,7 +264,7 @@
                 altInput: true,
                 altFormat: 'F j, Y',
                 dateFormat: 'Y-m-d',
-                defaultDate: moment().subtract(30, 'days').format('YYYY-MM-DD')
+                defaultDate: moment().subtract(120, 'days').format('YYYY-MM-DD')
             });
 
             $('#fTo').flatpickr({
