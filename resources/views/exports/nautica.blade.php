@@ -98,22 +98,22 @@
 
 				if(!$docu){
 					$doc = "DECK WATCHKEEPING";
-					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 
 				if(!$docu){
 					$doc = "DECK WATCH";
-					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 
 				if(!$docu){
 					$doc = "ENGINE WATCHKEEPING";
-					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 
 				if(!$docu){
 					$doc = "ENGINE WATCH";
-					$docu = isset($data->{'document_' . $type}->{$docu}) ? $data->{'document_' . $type}->{$docu} : null;
+					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 			}
 			elseif($doc == "GAS TANKER"){
