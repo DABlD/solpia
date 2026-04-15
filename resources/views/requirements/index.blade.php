@@ -81,7 +81,7 @@
         var user_id = null;
         var fVessel = "%%";
         var fRank = "%%";
-        var fFrom = moment().subtract(30, 'days').format('YYYY-MM-DD');
+        var fFrom = moment().subtract(120, 'days').format('YYYY-MM-DD');
         var fTo = moment().format('YYYY-MM-DD');
         var fVesselType = "%%";
         var fStatus = "AVAILABLE";
