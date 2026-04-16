@@ -522,9 +522,9 @@
 			<br style='mso-data-placement:same-cell;' />
 			survivors' benefit to the seafarer in accordance with National Law / CBA / Rule of Employment.
 			<br style='mso-data-placement:same-cell;' />
-			And terms not regulated in this contract will follow the one that is more advantageous to both parties comparing the Laws 
+			In addition, any matters not regulated in this contract shall be follow by whichever is more advantageous to the Seafarer
 			<br style='mso-data-placement:same-cell;' />
-			of Flag State / CBA / Rule of Employment.
+			among the Laws of the Flag State / CBA / Rules of Employment.
 		</td>
 	</tr>
 
