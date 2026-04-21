@@ -802,6 +802,7 @@
                                     <option value="OWN WILL">OWN WILL</option>
                                     <option value="MEDICAL REPAT">MEDICAL REPAT</option>
                                     <option value="VESSEL SOLD">VESSEL SOLD</option>
+                                    <option value="VESSEL TRANSFER">VESSEL TRANSFER</option>
                                 </select>
                             </div>
                         </div>
