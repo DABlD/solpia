@@ -1204,24 +1204,19 @@ class ApplicationsController extends Controller
     }
 
     private function attachDocuments($model)
-    {   
-        $model->covidVaccines = null;
+    {
+        $model->covidVaccines = $model->applicant->document_med_cert
+            ->where('type', 'LIKE', '%COVID%');
+
         $model->age = now()->parse($model->birthday)->age;
 
-        if(isset($model->applicant)){
-            $model->covidVaccines = $model->applicant->document_med_cert
-                ->where('type', 'LIKE', '%COVID%');
-                
-            foreach ($model->applicant->document_id as $docu) {
-                if (!empty($docu->type)) {
-                    $model->{$docu->type} = $docu->expiry_date;
-                    $model->{$docu->type . 'i'} = $docu->issue_date;
-                    $model->{$docu->type . 'n'} = $docu->number;
-                }
+        foreach ($model->applicant->document_id as $docu) {
+            if (!empty($docu->type)) {
+                $model->{$docu->type} = $docu->expiry_date;
+                $model->{$docu->type . 'i'} = $docu->issue_date;
+                $model->{$docu->type . 'n'} = $docu->number;
             }
         }
-
-
     }
 
     public function updateStatus($id, $status, $vessel_id = null, Request $req){
