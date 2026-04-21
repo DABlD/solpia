@@ -1204,9 +1204,13 @@ class ApplicationsController extends Controller
     }
 
     private function attachDocuments($model)
-    {
-        $model->covidVaccines = $model->applicant->document_med_cert
-            ->where('type', 'LIKE', '%COVID%');
+    {   
+        $model->covidVaccines = null;
+
+        if(isset($model->applicant)){
+            $model->covidVaccines = $model->applicant->document_med_cert
+                ->where('type', 'LIKE', '%COVID%');
+        }
 
         $model->age = now()->parse($model->birthday)->age;
 
