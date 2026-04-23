@@ -14,11 +14,8 @@ use App\Models\Rank;
 class X07_SeaServiceRequestForm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
-        $data->load(['sea_service' => function ($query) {
-            $query->orderBy('sign_on', 'desc');
-        }]);
         if(!isset($data->vessel)){
-            $rank = $data->sea_service->first()->rank;
+            $rank = $data->sea_service->sortByDesc('sign_on')->first()->rank;
             if($rank != ""){
                 $data->rank = Rank::where('name', $rank)->first()->abbr;
             }
