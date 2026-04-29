@@ -374,6 +374,6 @@
 
 		$a = "MCV";
 		$b = "MCV";
-		$getDocument($a, 'lc', null, $b, null, 'Australia');
+		$getDocument($a, 'id', null, $b, null);
 	@endphp
 </table>

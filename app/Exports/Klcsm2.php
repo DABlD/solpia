@@ -427,6 +427,8 @@ class Klcsm2 implements FromView, WithEvents//, WithDrawings//, ShouldAutoSize
                 $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(8);
                 $event->sheet->getDelegate()->getRowDimension(9)->setRowHeight(8);
                 $event->sheet->getDelegate()->getRowDimension(19)->setRowHeight(8);
+
+                $event->sheet->getDelegate()->getStyle('C48')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("A1:G43");
