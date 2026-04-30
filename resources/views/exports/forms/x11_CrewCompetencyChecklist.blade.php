@@ -301,9 +301,9 @@
 	<tr>{{ $doc("HMMS", "HMMS", 'lc', 'All Rank') }}</tr>
 	<tr>{{ $doc("SHS", "SHS", 'lc', 'All D. Officer') }}</tr>
 	<tr>{{ $doc("KML", "KOREAN MARITIME LAW", 'lc', ' All D/E Officer for Korea/BBCHP') }}</tr>
+	<tr>{{ $doc("BALLAST WATER", "Ballast water management training", 'lc', 'All D/E Officer for Korea/BBCHP') }}</tr>
 
 	@if(in_array($data->vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM']))
-		<tr>{{ $doc("BALLAST WATER", "Ballast water management training", 'lc', 'All D/E Officer for Korea/BBCHP') }}</tr>
 		<tr>{{ $doc("SSBT", "Ship Simulator & Bridge Teamwork(SSBT)", 'lc', 'All D. officer <br> for TNKR/LNG <br> (Every 5 year)') }}</tr>
 		<tr>{{ $doc("CARGO AND BALLAST HANDLING SIMULATOR - CBHS", "Cargo Ballast Handling Simulator(CBHS) <br>ㅤ(Depending on the boarding type of TNKR vessel)", 'lc', 'All D. officer <br> for TNKR/LNG <br> (Every 5 year)') }}</tr>
 		<tr>{{ $doc("ERS", "Engine Room Management Simulator(ERS)", 'lc', 'All E. officer <br> for TNKR/LNG <br> (Every 5 year)') }}</tr>
@@ -346,5 +346,5 @@
 	</tr>
 
 	<tr><td colspan="9" style="height: 40px;"></td></tr>
-	<tr><td colspan="9" style="height: 40px;">CODE	&lt;305-302B	&gt;/2021.08.27/DCN21008  APRVD A4</td></tr>
+	<tr><td colspan="9" style="height: 40px;">CODE	&lt;305-302B	&gt;/2024.04.09/DCN24003</td></tr>
 </table>

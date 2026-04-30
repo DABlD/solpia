@@ -293,7 +293,7 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
 
                 $tar = 0; //TANKER ADDITIONAL ROWS
                 if(in_array($this->data->vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM'])){
-                    $tar = 4;
+                    $tar = 3;
                 }
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
@@ -340,7 +340,7 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
 
                 // VT
                 $h[1] = [
-                    'A5', 'A' . (67 + $tar)
+                    'A5', 'A' . (68 + $tar)
                 ];
 
                 // HL B
@@ -355,7 +355,7 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
 
                 // HC VC
                 $h[4] = [
-                    'A' . (63 + $tar) . ':I' . (65 + $tar)
+                    'A' . (64 + $tar) . ':I' . (66 + $tar)
                 ];
 
                 // HL
@@ -368,16 +368,16 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
 
                 // VC
                 $h[7] = [
-                    "A1:I4", 'A6:I' . (61 + $tar)
+                    "A1:I4", 'A6:I' . (62 + $tar)
                 ];
 
                 $h['wrap'] = [
-                    'A7:I' . (61 + $tar)
+                    'A7:I' . (62 + $tar)
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
-                    'D8:E' . (61 + $tar)
+                    'D8:E' . (62 + $tar)
                 ];
 
                 foreach($h as $key => $value) {
@@ -417,7 +417,7 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A2:I4', 'A6:I' . (61 + $tar), 'A' . (63 + $tar) . ':I' . (65 + $tar)
+                    'A2:I4', 'A6:I' . (62 + $tar), 'A' . (64 + $tar) . ':I' . (66 + $tar)
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -471,7 +471,7 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
 
                 // BBT
                 $cells[12] = array_merge([
-                    'A' . (66 + $tar) . ':I' . (66 + $tar)
+                    'A' . (67 + $tar) . ':I' . (67 + $tar)
                 ]);
 
                 // LBT
