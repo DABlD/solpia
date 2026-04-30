@@ -3970,6 +3970,7 @@
                     'contract_amendment': "Contract Amendment",
                     'MLCContract':          'MLC Contract',
                     'X20_DebriefingForm':  'Debriefing Form',
+                    'x11_CrewCompetencyChecklist':      'Crew Competency Checklist',
                     @if(in_array(auth()->user()->fleet, ["FLEET A", "TOEI"]) || auth()->user()->role == "Admin")
                         'Y03_LetterOfOathMarpol':  'Letter Of Oath (MARPOL)',
                         'Y04_LetterOfOath':  'Letter Of Oath',
@@ -3991,6 +3992,9 @@
                     }
                     else if(result.value == "contract_amendment"){
                         contractAmendment(id);
+                    }
+                    else if(result.value == "x11_CrewCompetencyChecklist"){
+                        CCC(id, result.value);
                     }
                     else if(result.value.includes("Y0")){
                         let data = {};
