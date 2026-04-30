@@ -292,9 +292,9 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
                 $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 $tar = 0; //TANKER ADDITIONAL ROWS
-                if(in_array($this->data->vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM'])){
+                // if(in_array($this->data->vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM'])){
                     $tar = 3;
-                }
+                // }
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman');
