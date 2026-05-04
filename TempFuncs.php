@@ -745,3 +745,51 @@ foreach($crews as $crew){
         echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . ';' . $crew->applicant->user->fleet . '<br>';
     }
 }
+
+<!-- CREW WITH HISTORY WITH MARLOW -->
+$rows = SeaService::withoutGlobalScopes()
+    ->from('sea_services as s1')
+    ->join(DB::raw("
+        (
+            SELECT applicant_id, MAX(sign_on) as latest_sign_on
+            FROM sea_services
+            WHERE manning_agent LIKE '%MARLOW%'
+            GROUP BY applicant_id
+        ) as s2
+    "), function ($join) {
+        $join->on('s1.applicant_id', '=', 's2.applicant_id')
+             ->on('s1.sign_on', '=', 's2.latest_sign_on');
+    })
+    ->join('applicants as a', 'a.id', '=', 's1.applicant_id')
+    ->whereNull('a.deleted_at')   // only active applicants
+    ->where('s1.manning_agent', 'like', '%MARLOW%')
+    ->select('s1.*')
+    ->get();
+
+
+foreach($rows as $row){
+    $rank = $row->applicant->pro_app->rank->abbr ?? null;
+    $latestSS = $row->applicant->sea_service->sortByDesc('sign_off')->first();
+
+    if($rank == null){
+        $rank = $latestSS->rank2->abbr ?? "-";
+    }
+
+    // echo $rank . ';' . $row->applicant->user->namefull . ';' . ($row->applicant->pro_app->status ?? "*") . ';' . ($row->applicant->user->contact ?? $row->applicant->provincial_contact) . ';' . $latestSS->sign_off . ';' . ($row->applicant->pro_app->vessel->name ?? $latestSS->vessel_name) . ';' . $row->vessel_name . ';' . $row->sign_off . '<br>';
+    echo $row->applicant->user->fleet . '<br>';
+}
+
+die;
+
+<!-- GET PER PRINCIPAL VACATION CREW -->
+$crews = ProcessedApplicant::where('principal_id', 2)->where('processed_applicants.status', 'Vacation')
+            ->join('applicants as a', 'a.id', '=', 'applicant_id')
+            ->whereNull('a.deleted_at')
+            ->select('processed_applicants.*')
+            ->get();
+
+foreach($crews as $crew){
+    $temp = $crew->applicant->sea_service->sortByDesc('sign_off');
+
+    echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . ';' . $temp->first()->vessel_name . ';' . $temp->first()->sign_off . '<br>';
+}
