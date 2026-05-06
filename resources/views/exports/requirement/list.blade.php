@@ -34,7 +34,12 @@
 			<td>{{ $req->status }}</td>
 			<td>{{ $req->created_at->format('Y-m-d') }}</td>
 			<td>{{ $req->fleet }}</td>
-			<td>{{ sizeof($req->candidates) }}</td>
+			{{-- <td>{{ sizeof($req->candidates) }}</td> --}}
+			<td>
+				@foreach($req->candidates as $candidate)
+					{{ $candidate->prospect->name }} - {{ $candidate->on_board ? "Onboard" : "Pending" }}<br>
+				@endforeach
+			</td>
 			<td>{{ $req->remarks }}</td>
 		</tr>
 	@endforeach

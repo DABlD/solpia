@@ -303,7 +303,7 @@ class ReqList implements FromView, WithEvents, ShouldAutoSize//, WithDrawings
 
                 // HC VC
                 $h[4] = [
-                    'A1:L' . ($sod + 1)
+                    'A1:M' . ($sod + 1)
                 ];
 
                 // HL
@@ -346,7 +346,7 @@ class ReqList implements FromView, WithEvents, ShouldAutoSize//, WithDrawings
 
                 // FILLS
                 $fills[0] = [
-                    'A1:L1'
+                    'A1:M1'
                 ];
 
                 $fills[1] = [
@@ -363,7 +363,7 @@ class ReqList implements FromView, WithEvents, ShouldAutoSize//, WithDrawings
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A1:L' . ($sod + 1)
+                    'A1:M' . ($sod + 1)
                 ]);
 
                 // ALL BORDER MEDIUM
