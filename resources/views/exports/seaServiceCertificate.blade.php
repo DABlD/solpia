@@ -46,6 +46,10 @@
 				$smb = $id->number;
 			}
 		}
+
+		if($data->data['oldsb']){
+			$smb .= " and " . $data->data['oldsb'];
+		}
 	@endphp
 
 	<tr>
@@ -156,24 +160,18 @@
 
 	<tr>
 		<td colspan="10" style="font-weight: bold;">
-			@if($data->user->fleet == "TOEI")
-				MR. LEONIL LUIS F. ROMANO
-			@elseif($data->user->fleet == "FLEET B")
-				MR. ADULF KIT JAIME M. JUMAWAN
-			@else
-				C/E ROMANO A. MARIANO
-			@endif
+			{{ $data->data['signatory'] }}
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="10">
-			@if($data->user->fleet == "TOEI")
-				Crewing Manager - TOEI Fleet
-			@elseif($data->user->fleet == "FLEET B")
-				Crewing Manager
-			@else
+			@if($data->data['signatory'] == "C/E Romano A. Mariano")
 				President
+			@elseif($data->data['signatory'] == "C/E Joey M. Del Pilar")
+				Asst. Operations Manager
+			@else
+				Crewing Manager
 			@endif
 		</td>
 	</tr>

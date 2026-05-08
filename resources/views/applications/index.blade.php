@@ -597,42 +597,7 @@
                             walangLagay(application, result);
                         }
                         else if(result.value == "SeaServiceCertificate"){
-                            swal({
-                                html: `
-                                    <select id="por">
-                                        <option value="">Enter purpose of request</option>
-                                        <option value="whatever legal purpose it may serve him best.">Legal Purposes</option>
-                                        <option value="COC/COP Application purposes">COC/COP Application</option>
-                                        <option value="Loan purposes">Loan</option>
-                                        <option value="Personal purposes">Personal</option>
-                                    </select>
-                                    <br><br>`,
-                                onOpen: () => {
-                                    $('#por').select2({
-                                        width: '100%',
-                                        tags: true
-                                    });
-
-                                    $('#por').on('select2:open', () => {
-                                        $('.swal2-container').css('z-index', 1000);
-                                    })
-                                },
-                                preConfirm: () => {
-                                    swal.showLoading();
-                                    return new Promise(resolve => {
-                                        setTimeout(() => {
-                                            if($('#por').val() == ""){
-                                                swal.showValidationError('Reason is required');
-                                            }
-                                        resolve()}, 500);
-                                    });
-                                },
-                            }).then(result => {
-                                if(result.value){
-                                    let type = "SeaServiceCertificate";
-                                    window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${type}?` + $.param({data: {reason: $('#por').val()}});
-                                }
-                            })
+                            seaServiceCertificate(application);
                         }
                         else if(result.value == "DocumentChecklist"){
                             let type = "DocumentChecklist";
@@ -742,6 +707,117 @@
                     }
                 })
 	    	});
+
+            function seaServiceCertificate(application){
+                swal({
+                    title: "Select Details",
+                    html: `
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4 class="iLabel">Purpose of Request</h4>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="por" class="swal2-input">
+                                    <option value="">Required*</option>
+                                    <option value="whatever legal purpose it may serve him best.">Legal Purposes</option>
+                                    <option value="COC/COP Application purposes">COC/COP Application</option>
+                                    <option value="Loan purposes">Loan</option>
+                                    <option value="Personal purposes">Personal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4 class="iLabel">Signatory</h4>
+                            </div>
+                            <div class="col-md-8">
+                                <select id="signatory" class="swal2-input">
+                                    @if(auth()->user()->fleet == "Fleet B")
+                                        <option selected value="Mr. Adulf Kit Jumawan">Mr. Adulf Kit Jumawan</option>
+                                        <option value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
+                                    @elseif(auth()->user()->fleet == "FLEET C")
+                                        <option selected value="Ms. Shirley Erasquin">Ms. Shirley Erasquin</option>
+                                        <option value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
+                                    @elseif(auth()->user()->fleet == "FLEET D")
+                                        <option selected value="Ms. Thea Mae G. Rio">Ms. Thea Mae G. Rio</option>
+                                        <option value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
+                                    @elseif(auth()->user()->fleet == "FISHING")
+                                        <option selected value="Mr. Ricardo Amparo">Mr. Ricardo Amparo</option>
+                                        <option value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
+                                    @elseif(auth()->user()->fleet == "TOEI")
+                                        <option selected value="Mr. Leonil Luis F. Romano">Mr. Leonil Luis F. Romano</option>
+                                        <option value="C/E Joey M. Del Pilar">C/E Joey M. Del Pilar</option>
+                                        <option value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
+                                    @else
+                                        <option selected value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
+                                        <option value="Mr. Adulf Kit Jumawan">Mr. Adulf Kit Jumawan</option>
+                                        <option value="Ms. Shirley Erasquin">Ms. Shirley Erasquin</option>
+                                        <option value="Ms. Thea Mae G. Rio">Ms. Thea Mae G. Rio</option>
+                                        <option value="Mr. Ricardo Amparo">Mr. Ricardo Amparo</option>
+                                        <option value="Mr. Leonil Luis F. Romano">Mr. Leonil Luis F. Romano</option>
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h4 class="iLabel">
+                                    Old Seaman's Book #
+                                    <br>
+                                    (optional if needed to appear in cert)
+                                </h4>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="swal2-input" id="oldsb">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        `,
+                    onOpen: () => {
+                        $('#por, #signatory').select2({
+                            width: '100%',
+                            tags: true
+                        });
+
+                        $('#por').on('select2:open', () => {
+                            $('.swal2-container').css('z-index', 1000);
+                        })
+                    },
+                    width: "500px",
+                    preConfirm: () => {
+                        swal.showLoading();
+                        return new Promise(resolve => {
+                            setTimeout(() => {
+                                if($('#por').val() == ""){
+                                    swal.showValidationError('Reason is required');
+                                }
+                            resolve()}, 500);
+                        });
+                    },
+                }).then(result => {
+                    if(result.value){
+                        let type = "SeaServiceCertificate";
+                        window.location.href = `{{ route('applications.exportDocument') }}/${application.data('id')}/${type}?` + $.param(
+                            {
+                                data: {
+                                    reason: $('#por').val(),
+                                    signatory: $('#signatory').val(),
+                                    oldsb: $('#oldsb').val()
+                                }
+                            }
+                        );
+                    }
+                })
+            }
 
             function medicalReferral(id, type){
                 swal({

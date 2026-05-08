@@ -248,10 +248,8 @@ class SeaServiceCertificate implements FromView, WithEvents, WithDrawings//, Sho
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
 
-                $event->sheet->getParent()->getActiveSheet()->getProtection()->setSheet(true);
-
-
-                $event->sheet->getParent()->getActiveSheet()->getProtection()->setPassword("123456789");
+                // $event->sheet->getParent()->getActiveSheet()->getProtection()->setSheet(true);
+                // $event->sheet->getParent()->getActiveSheet()->getProtection()->setPassword("123456789");
 
                 // DEFAULT FONT AND STYLE FOR WHOLE PAGE
                 $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Tahoma');
