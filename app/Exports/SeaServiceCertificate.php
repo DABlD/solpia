@@ -10,6 +10,8 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
+use App\Models\ExportLogs;
+
 class SeaServiceCertificate implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 {
     public function __construct($data, $type){
@@ -20,6 +22,19 @@ class SeaServiceCertificate implements FromView, WithEvents, WithDrawings//, Sho
         $data->load('document_id');
 
         $data->sea_service = $data->sea_service->sortByDesc('sign_on');
+
+        $year = now()->format('Y');
+        $ctr = ExportLogs::where('type', 'Sea Service Certificate')->where('created_at', 'like', "$year%")->count();
+
+        $temp = new ExportLogs();
+        $temp->user_id  = auth()->user()->id;
+        $temp->rank     = $data->pro_app->rank->abbr;
+        $temp->name     = $data->user->namefull;
+        $temp->cert_no  = "SC-" . $year . '-' . str_pad($ctr+1, 5, '0', STR_PAD_LEFT);
+        $temp->type     = "Sea Service Certificate";
+        $temp->save();
+
+        $data->cert_no = $temp->cert_no;
     }
 
     public function view(): View

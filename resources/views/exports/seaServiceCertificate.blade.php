@@ -16,7 +16,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="10">CERT NO: SC-{{ now()->format('Y') }}-</td>
+		<td colspan="10">CERT NO: {{ $data->cert_no }}</td>
 	</tr>
 
 	<tr>
@@ -42,7 +42,7 @@
 	@php
 		$smb = "";
 		foreach ($data->document_id as $id) {
-			if($id->type == "SEAMAN'S BOOK"){
+			if($id->type == "SEAMAN'S BOOK"){	
 				$smb = $id->number;
 			}
 		}
