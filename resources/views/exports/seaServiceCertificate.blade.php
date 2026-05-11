@@ -186,12 +186,12 @@
 
 	<tr>
 		<td colspan="10" style="font-style: italic; font-size: 8px;">
-			@if($data->user->fleet == "TOEI")
-				MR. LEONIL LUIS F. ROMANO
-			@elseif($data->user->fleet == "FLEET B")
-				MR. ADULF KIT JAIME M. JUMAWAN
+			@if($data->data['signatory'] == "C/E Romano A. Mariano")
+				President
+			@elseif($data->data['signatory'] == "C/E Joey M. Del Pilar")
+				Asst. Operations Manager
 			@else
-				C/E ROMANO A. MARIANO
+				Crewing Manager
 			@endif
 		</td>
 	</tr>
