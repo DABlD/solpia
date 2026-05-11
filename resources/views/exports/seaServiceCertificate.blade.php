@@ -186,13 +186,7 @@
 
 	<tr>
 		<td colspan="10" style="font-style: italic; font-size: 8px;">
-			@if($data->data['signatory'] == "C/E Romano A. Mariano")
-				President
-			@elseif($data->data['signatory'] == "C/E Joey M. Del Pilar")
-				Asst. Operations Manager
-			@else
-				Crewing Manager
-			@endif
+			{{ $data->data['signatory'] }}
 		</td>
 	</tr>
 
