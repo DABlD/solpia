@@ -180,7 +180,11 @@
 		<td colspan="3" style="{{ $center }}">{{ $data->rank }}</td>
 		<td colspan="2" style="{{ $bold }} {{ $center }}">JOINING DATE</td>
 		<td colspan="3" style="{{ $bold }} {{ $center }}">
-			{{ isset($data->data) ? $data->data['joining_date'] : $data->pro_app->joining_date }}
+			@if($data->pro_app->status == "On Board")
+				{{ $data->current_lineup->joining_date }}
+			@else
+				{{ isset($data->data) ? $data->data['joining_date'] : $data->pro_app->joining_date }}
+			@endif
 		</td>
 	</tr>
 
@@ -189,7 +193,11 @@
 		<td colspan="3" style="{{ $center }}"></td>
 		<td colspan="2" style="{{ $bold }} {{ $center }}">JOINING PORT</td>
 		<td colspan="3" style="{{ $bold }} {{ $center }}">
-			{{ isset($data->data) ? $data->data['joining_port'] : $data->pro_app->joining_port }}
+			@if($data->pro_app->status == "On Board")
+				{{ $data->current_lineup->joining_port }}
+			@else
+				{{ isset($data->data) ? $data->data['joining_port'] : $data->pro_app->joining_port }}
+			@endif
 		</td>
 	</tr>
 

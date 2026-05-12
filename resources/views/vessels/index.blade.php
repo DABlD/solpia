@@ -5100,6 +5100,7 @@
                     acknowledgement:                    'Acknowledgement of Crew Reminders (Offsigners)',
                     contractAmendment2:                 'Contract Amendment (Onboard Crew)',
                     X38_BatchCrewCompetencyChecklist:   'Crew Competency Checklist',
+                    X38_BatchCrewCompetencyChecklistOnboard:   'Crew Competency Checklist (Onboard)',
                     X38_BatchCrewCompetencyChecklist2:  'Crew Competency Checklist (Trial)',
                     X32_CrewUniform:                    'Crew Uniform Order Slip (Lined Up)',
                     X32_CrewUniform2:                    'Crew Uniform Order Slip (On Board)',
@@ -6763,6 +6764,18 @@
             }
 
             window.location.href = `{{ route('applications.exportDocument') }}/1/X38_BatchCrewCompetencyChecklist?` + $.param(data);
+        }
+
+        function X38_BatchCrewCompetencyChecklistOnboard(vid, name){
+            let data = {
+                status: 'Lined-Up',
+                joining_date: $('#joining_date').val(),
+                joining_port: $('#joining_port').val(),
+                vid: vid,
+                filename: name.replace(/[^a-zA-Z0-9 ]/g, '') + " - Crew Competency Checklist (Onboard)"
+            }
+
+            window.location.href = `{{ route('applications.exportDocument') }}/1/X38_BatchCrewCompetencyChecklistOnboard?` + $.param(data);
         }
 
         function X38_BatchCrewCompetencyChecklist2(vid, name){

@@ -46,8 +46,8 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
         
         $this->data     = $data;
         $this->type     = $type;
-        $this->req     = $req;
-        $this->title     = $title;
+        $this->req      = $req;
+        $this->title    = $title;
     }
 
     public function columnFormats(): array
