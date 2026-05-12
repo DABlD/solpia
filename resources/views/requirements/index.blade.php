@@ -286,13 +286,17 @@
                 success: result => {
                     result = JSON.parse(result);
                     
-                    let fVesselString = '<option value="%%">All</option>';
+                    let fVesselString = 
+                        `
+                            <option value="%%">All</option>
+                            <option value="0">TBN</option>
+                        `;
 
                     result.forEach(vessel => {
                         fVesselString += `
                             <option value="${vessel.id}">${vessel.name}</option>
                         `;
-                    })
+                    });
 
                     $('#fVessel').html(fVesselString);
                     $('#fVessel').select2({
@@ -333,7 +337,7 @@
                         </div>
                         <div class="col-md-10 iInput">
                             <select name="vessel_id" class="form-control">
-                                <option value="">TBN</option>
+                                <option value="0">TBN</option>
                             </select>
                         </div>
                     </div></br>

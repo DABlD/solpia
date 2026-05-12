@@ -655,8 +655,6 @@ class DatatablesController extends Controller
 	public function requirements(Request $req){
 		$array = Requirement::where('requirements.fleet', 'like', $req->fleet)
 					->select('requirements.*')
-					->join('vessels as v', 'v.id', '=', 'vessel_id')
-					->where('type', 'LIKE', "%" . $req->vesselType . "%")
 					// ->where('vessel_id', 'like', $req->vessel)
 					->where(function($q) use($req){
 					    if($req->vessel == "%%"){
@@ -668,9 +666,14 @@ class DatatablesController extends Controller
 					    }
 					})
 					->where('rank', 'like', $req->rank)
+					->where('requirements.status', 'like', $req->status);
 					// ->where('joining_date', 'like', $req->date)
 					// ->whereBetween('requirements.created_at', [$req->from, $req->to])
-					->where('requirements.status', 'like', $req->status);
+
+		if($req->vesselType != "%%"){
+			$array = $array->join('vessels as v', 'v.id', '=', 'vessel_id')
+					       ->where('type', 'LIKE', "%" . $req->vesselType . "%");
+		}
 
 		if($req->user_id){
 			$array = $array->where('user_id', 'like', $req->user_id);
