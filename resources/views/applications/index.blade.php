@@ -736,7 +736,7 @@
                             </div>
                             <div class="col-md-8">
                                 <select id="signatory" class="swal2-input">
-                                    @if(auth()->user()->fleet == "Fleet B")
+                                    @if(auth()->user()->fleet == "FLEET B")
                                         <option selected value="Mr. Adulf Kit Jumawan">Mr. Adulf Kit Jumawan</option>
                                         <option value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
                                     @elseif(auth()->user()->fleet == "FLEET C")
