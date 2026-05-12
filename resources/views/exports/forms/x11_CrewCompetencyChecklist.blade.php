@@ -290,11 +290,11 @@
 	</tr>
 
 	<tr>
-		@if(in_array($data->vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM']))
+		{{-- @if(in_array($data->vessel->type, ['LNG', 'VLCC', 'PROD. TANKER', 'OIL/CHEM'])) --}}
 			{{ $row("OTHER <br> ㅤIN-HOUSE AND <br> ㅤOUTSIDE <br>ㅤTRAINING", 9) }}
-		@else
-			{{ $row("OTHER <br> ㅤIN-HOUSE AND <br> ㅤOUTSIDE <br>ㅤTRAINING", 5) }}
-		@endif
+		{{-- @else --}}
+			{{-- {{ $row("OTHER <br> ㅤIN-HOUSE AND <br> ㅤOUTSIDE <br>ㅤTRAINING", 5) }} --}}
+		{{-- @endif --}}
 		{{ $doc("PDOS", "PDOS Certificate", 'lc', 'All Rank') }}
 	</tr>
 	<tr>{{ $doc("Refresher Course", "Refresher Course", 'lc', 'All Rank') }}</tr>
