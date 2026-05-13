@@ -38,4 +38,8 @@ class Requirement extends Model
     public function candidates(){
         return $this->hasMany(Candidate::class, 'requirement_id', 'id');
     }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
