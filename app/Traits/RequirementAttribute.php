@@ -9,7 +9,7 @@ trait RequirementAttribute{
 			    '<span class="fa fa-black-tie fa-2xs"></span>' .
 			'</a>' . '&nbsp';
 
-		if(in_array(auth()->user()->role, ["Admin", "Crewing Officer", "Crewing Manager"])){
+		if(in_array(auth()->user()->role, ["Admin", "Crewing Officer", "Crewing Manager", "Recruitment Officer"])){
 			$buttons .= "<a class='btn btn-primary btn-sm' data-toggle='tooltip' title='Edit' onclick='view($this->id)'>" .
 		        '<span class="fa fa-pencil fa-2xs"></span>' .
 		    '</a>'
