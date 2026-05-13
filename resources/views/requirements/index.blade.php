@@ -320,11 +320,11 @@
                             </div>
                             <div class="col-md-10 iInput">
                                 <select name="fleet" class="form-control">
-                                    <option value="FLEET A">FLEET A</option>
+                                    {{-- <option value="FLEET A">FLEET A</option> --}}
                                     <option value="FLEET B">FLEET B</option>
                                     <option value="FLEET C">FLEET C</option>
                                     <option value="FLEET D">FLEET D</option>
-                                    <option value="FLEET E">FLEET E</option>
+                                    {{-- <option value="FLEET E">FLEET E</option> --}}
                                     <option value="TOEI">TOEI</option>
                                     <option value="FISHING">FISHING</option>
                                 </select>
