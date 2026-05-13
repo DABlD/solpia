@@ -569,7 +569,7 @@
                         </div>
                         <div class="col-md-10 iInput">
                             <select name="vessel_id" class="form-control">
-                                <option value="">TBN</option>
+                                <option value="0">TBN</option>
                             </select>
                         </div>
                     </div></br>
