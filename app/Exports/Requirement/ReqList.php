@@ -303,7 +303,7 @@ class ReqList implements FromView, WithEvents, ShouldAutoSize//, WithDrawings
 
                 // HC VC
                 $h[4] = [
-                    'A1:M' . ($sod + 1)
+                    'A1:N' . ($sod + 1)
                 ];
 
                 // HL
@@ -346,7 +346,7 @@ class ReqList implements FromView, WithEvents, ShouldAutoSize//, WithDrawings
 
                 // FILLS
                 $fills[0] = [
-                    'A1:M1'
+                    'A1:N1'
                 ];
 
                 $fills[1] = [
@@ -363,7 +363,7 @@ class ReqList implements FromView, WithEvents, ShouldAutoSize//, WithDrawings
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A1:M' . ($sod + 1)
+                    'A1:N' . ($sod + 1)
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -442,7 +442,7 @@ class ReqList implements FromView, WithEvents, ShouldAutoSize//, WithDrawings
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(13);
                 $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(9);
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(9);
-                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(70);
+                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(70);
 
                 // ROW RESIZE
                 // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);

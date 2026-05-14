@@ -16,6 +16,7 @@
 		<td>Max Age</td>
 		<td>Status</td>
 		<td>Date Posted</td>
+		<td>Deadline</td>
 		<td>Fleet</td>
 		<td>Prospect</td>
 		<td>Remarks</td>
@@ -32,6 +33,7 @@
 			<td>{{ $req->usv ? "Required" : "---" }}</td>
 			<td>{{ $req->max_age }}</td>
 			<td>{{ $req->status }}</td>
+			<td>{{ $req->created_at->format('Y-m-d') }}</td>
 			<td>{{ $req->created_at->format('Y-m-d') }}</td>
 			<td>{{ $req->fleet }}</td>
 			{{-- <td>{{ sizeof($req->candidates) }}</td> --}}
