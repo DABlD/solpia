@@ -168,8 +168,10 @@
 		<td colspan="10">
 			@if($data->data['signatory'] == "C/E Romano A. Mariano")
 				President
-			@elseif($data->data['signatory'] == "C/E Joey M. Del Pilar")
+			@elseif(in_array($data->data['signatory'], ["C/E Joey M. Del Pilar"]))
 				Asst. Operations Manager
+			@elseif(in_array($data->data['signatory'], ["Ms. Shirley Erasquin"]))
+				Operations Manager
 			@else
 				Crewing Manager
 			@endif
