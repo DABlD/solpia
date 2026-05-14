@@ -349,8 +349,8 @@ class CrewCompetencyChecklistTRatings implements FromView, WithEvents//, WithDra
                 $h[5] = [
                     'A3',
                     'B7:B18', 'C19:C32',
-                    'B33:B40', 'B41:B45', 'A47:A49', 'A52:A53',
-                    'I7:I51'
+                    'B33:B40', 'B41:B45', 'A46:A48', 'A51:A52',
+                    'I7:I50'
                 ];
 
                 // B
@@ -430,7 +430,7 @@ class CrewCompetencyChecklistTRatings implements FromView, WithEvents//, WithDra
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A4:I52'
+                    'A4:I51'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -447,7 +447,7 @@ class CrewCompetencyChecklistTRatings implements FromView, WithEvents//, WithDra
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'A4:I51'
+                    'A4:I50'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -464,12 +464,12 @@ class CrewCompetencyChecklistTRatings implements FromView, WithEvents//, WithDra
 
                 // LRB
                 $cells[8] = array_merge([
-                    'A52'
+                    'A51'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
-                    'I52'
+                    'I51'
                 ]);
 
                 // TRB
@@ -504,7 +504,7 @@ class CrewCompetencyChecklistTRatings implements FromView, WithEvents//, WithDra
 
                 // BBDOBOL
                 $cells[17] = array_merge([
-                    'A49:I49', 'A6:I6'
+                    'A48:I48', 'A6:I6'
                 ]);
                 
                 foreach($cells as $key => $value){

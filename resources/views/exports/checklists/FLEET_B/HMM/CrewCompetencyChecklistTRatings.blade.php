@@ -780,7 +780,7 @@
 		$docu = isset($data->document_lc->{$name}) ? $data->document_lc->{$name} : false;
 	@endphp
 	<tr>
-		<td rowspan="6">ETC</td>
+		<td rowspan="5">ETC</td>
 		<td colspan="2">National Certificate (TESDA)</td>
 		<td>5Y</td>
 		<td>Cookery / WPR-WLD</td>
@@ -857,19 +857,6 @@
 		<td>OLR1</td>
 		<td>Y  {{ $docu ? "☑" : "▢" }}</td>
 		<td>N  {{ $docu ? "▢" : "☑" }}</td>
-		<td>
-			Y  ▢			N  ▢
-		</td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td>Managed by HOS</td>
-		<td colspan="2">IMDG CODE on board training (CNTR only)</td>
-		<td>-</td>
-		<td>Deck Ratings</td>
-		<td>Y  ▢</td>
-		<td>N  ▢</td>
 		<td>
 			Y  ▢			N  ▢
 		</td>
