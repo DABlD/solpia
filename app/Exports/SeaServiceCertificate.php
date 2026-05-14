@@ -28,7 +28,7 @@ class SeaServiceCertificate implements FromView, WithEvents, WithDrawings//, Sho
 
         $temp = new ExportLogs();
         $temp->user_id  = auth()->user()->id;
-        $temp->rank     = $data->pro_app->rank->abbr;
+        $temp->rank     = $data->pro_app->rank->abbr ?? $data->sea_service->rank2->abbr;
         $temp->name     = $data->user->namefull;
         $temp->cert_no  = "SC-" . $year . '-' . str_pad($ctr+1, 5, '0', STR_PAD_LEFT);
         $temp->type     = "Sea Service Certificate";
