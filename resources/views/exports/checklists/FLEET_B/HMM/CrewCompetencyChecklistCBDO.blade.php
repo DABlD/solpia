@@ -726,8 +726,8 @@
 	@php
 		$j90 = "▢";
 		$j92 = "▢";
-		$f2 = "▢";
-		$f3 = "▢";
+		$f2  = "▢";
+		$f3  = "▢";
 		$etc = "▢";
 
 		foreach(get_object_vars($data->document_lc) as $doc){

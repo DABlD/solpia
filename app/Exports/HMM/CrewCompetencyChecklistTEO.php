@@ -164,6 +164,27 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
                     ],
                 ]
             ],
+            [//15
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOTTED,
+                    ],
+                ],
+            ],
+            [//16
+                'borders' => [
+                    'right' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOTTED
+                    ],
+                ]
+            ],
+            [//17
+                'borders' => [
+                    'bottom' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DOUBLE
+                    ],
+                ]
+            ],
         ];
 
         $fillStyle = [
@@ -243,6 +264,11 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
                 ],
             ],
+            [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                ],
+            ]
         ];
 
         return [
@@ -252,12 +278,12 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->data->rank), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.1);
                 $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
@@ -316,14 +342,20 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
 
                 // HC VC
                 $h[4] = [
+                    'A1:I62'
                 ];
 
                 // HL
                 $h[5] = [
+                    'A3',
+                    'B7:B18', 'C19:C36',
+                    'B37:B52','A53:A55', 'A58:A59',
+                    'I7:I55'
                 ];
 
                 // B
                 $h[6] = [
+                    'A1:A2'
                 ];
 
                 // VC
@@ -338,12 +370,29 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
                 $h[9] = [
                 ];
 
+                // HR
+                $h[10] = [
+                    'F3'
+                ];
+
+
                 $h['wrap'] = [
+                    'A4:I62'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'C21:C22'
                 ];
+
+                // TEXT UP
+                $textUp = [
+                    'A7', 'A14:A36'
+                ];
+
+                foreach($textUp as $cell){
+                    $event->sheet->getDelegate()->getStyle($cell)->getAlignment()->setTextRotation(90);
+                }
 
                 foreach($h as $key => $value) {
                     foreach($value as $col){
@@ -382,6 +431,7 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
+                    'A4:I58'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -398,6 +448,7 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
+                    'A4:I57'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -414,11 +465,12 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
 
                 // LRB
                 $cells[8] = array_merge([
-
+                    'A58'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
+                    'I58'
                 ]);
 
                 // TRB
@@ -440,6 +492,22 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
                 // RBT
                 $cells[14] = array_merge([
                 ]);
+
+                // BBD
+                $cells[15] = array_merge([
+                    'B7:I17', 
+                    // 'B18:I23', 'B25:I30',
+                    // 'B32:I33', 'B35:I39', 'A42:I43'
+                ]);
+
+                // BRD
+                $cells[16] = array_merge([
+                ]);
+
+                // BBDOBOL
+                $cells[17] = array_merge([
+                    'A55:I55', 'A6:I6'
+                ]);
                 
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
@@ -451,20 +519,28 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
                 // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
 
                 // COLUMN RESIZE
-                // $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(2);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(6.5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(10);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(22);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(20);
 
                 // ROW RESIZE
                 $rows = [
-                    // [
-                    //     12, //ROW HEIGHT
-                    //     1,4 //START ROW, END ROW
-                    // ],
+                    [
+                        19.3, //ROW HEIGHT
+                        1,62 //START ROW, END ROW
+                    ],
                 ];
 
                 $rows2 = [
                     // [
-                    //     40,
-                    //     [11,14,17,20]
+                    //     21,
+                    //     [18,21,29,33,38,40,41,45,48,52,53]
                     // ]
                 ];
 
@@ -490,8 +566,12 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:L160')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A1:L160')->getFont()->setName('Times New Roman');
+
+                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(16);
+                $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(10);
+                $event->sheet->getDelegate()->getStyle('I19')->getFont()->setSize(7);
             },
         ];
     }
