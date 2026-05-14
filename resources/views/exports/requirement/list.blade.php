@@ -34,7 +34,7 @@
 			<td>{{ $req->max_age }}</td>
 			<td>{{ $req->status }}</td>
 			<td>{{ $req->created_at->format('Y-m-d') }}</td>
-			<td>{{ $req->created_at->format('Y-m-d') }}</td>
+			<td>{{ $req->deadline->format('Y-m-d') }}</td>
 			<td>{{ $req->fleet }}</td>
 			{{-- <td>{{ sizeof($req->candidates) }}</td> --}}
 			<td>
