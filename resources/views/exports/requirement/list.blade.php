@@ -2,6 +2,16 @@
 	$b = "font-weight: bold;";
 	$c = "text-align: center;";
 	$bc = "$b $c";
+
+	$steps = [
+	    'initial_interview',
+	    'written_assessment',
+	    'technical_interview',
+	    'endorsed_to_crewing',
+	    'principals_approval',
+	    'medical',
+	    'on_board',
+	];
 @endphp
 
 <table>
@@ -39,10 +49,27 @@
 			{{-- <td>{{ sizeof($req->candidates) }}</td> --}}
 			<td>
 				@foreach($req->candidates as $candidate)
-					{{ $candidate->prospect->name }} - {{ $candidate->on_board ? "Onboard" : "Pending" }}<br>
+					@php
+						$latestStep = "Pending";
+
+					    for ($i = count($steps) - 1; $i >= 0; $i--) {
+
+					        $step = $steps[$i];
+
+					        if ($candidate->$step == 1) {
+					            $latestStep = $step;
+					            break;
+					        }
+					    }
+					@endphp
+
+					&#8226; {{ $candidate->prospect->name }} - {{ $candidate->on_board ? "Onboard" : $latestStep }}<br>
+					{{ $candidate->remark }}<br>
 				@endforeach
 			</td>
-			<td>{{ $req->remarks }}</td>
+			<td>
+				{{ $req->remarks }}
+			</td>
 		</tr>
 	@endforeach
 </table>
