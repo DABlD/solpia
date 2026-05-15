@@ -63,8 +63,11 @@
 					    }
 					@endphp
 
-					&#8226; {{ $candidate->prospect->name }} - {{ $candidate->on_board ? "Onboard" : $latestStep }}<br>
-					{{ $candidate->remark }}<br>
+					&#8226; {{ $candidate->prospect->name }} - {{ $candidate->on_board ? "Onboard" : $latestStep }}
+					@if(!$loop->last)
+						<br>
+					@endif
+					{!! $candidate->remarks ? "<br>" . $candidate->remarks : "" !!}
 				@endforeach
 			</td>
 			<td>
