@@ -318,8 +318,8 @@
 		{{ $doc("DRUG AND ALCOHOL TEST", "PANAMA ADDITIONAL TEST (DRUG & ALCOHOL)", 'lc') }}
 		{{ $doc("HATCH COVER", "HATCH COVER TRAINING", 'lc') }}
 		{{ $doc("TYPHOID", "TYPHOID", 'med_cert') }}
-		{{ $doc("TEST", "", 'lc') }}
-		{{ $doc("TEST", "", 'lc') }}
+		{{ $doc("ENCLOSED SPACE ENTRY", "ENCLOSED SPACE ENTRY", 'lc') }}
+		{{ $doc("CARGO SECURING", "CARGO SECURING", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 	@elseif(in_array($data->vessel->principal_id, [3]))
