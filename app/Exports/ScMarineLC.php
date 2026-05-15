@@ -285,7 +285,7 @@ class ScMarineLC implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('THEA SIG');
         $drawing->setDescription('THEA SIG');
-        $drawing->setPath(public_path("images/maam_thea_sig.png"));
+        $drawing->setPath(public_path("images/maam_thea_sig2.png"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(40);
         $drawing->setWidth(100);

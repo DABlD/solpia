@@ -283,9 +283,9 @@ class ShinkoLC implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setName('maam_thea_sig');
-        $drawing->setDescription('maam_thea_sig');
-        $drawing->setPath(public_path('images/maam_thea_sig.png'));
+        $drawing->setName('maam_thea_sig2');
+        $drawing->setDescription('maam_thea_sig2');
+        $drawing->setPath(public_path('images/maam_thea_sig2.png'));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(35);
         $drawing->setWidth(100);

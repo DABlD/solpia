@@ -836,7 +836,7 @@ class HARBOURLINK implements FromView, WithEvents, WithDrawings//, ShouldAutoSiz
     public function drawings()
     {
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing->setPath(public_path("images/maam_thea_sig.png"));
+        $drawing->setPath(public_path("images/maam_thea_sig2.png"));
         $drawing->setHeight(80);
         $drawing->setWidth(150);
         $drawing->setOffsetX(-30);

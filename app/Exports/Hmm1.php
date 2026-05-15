@@ -469,9 +469,9 @@ class Hmm1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             }
             if(auth()->user()->fleet == "FLEET D"){
                 $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-                $drawing3->setName('maam_thea_sig');
-                $drawing3->setDescription('maam_thea_sig');
-                $drawing3->setPath(public_path('images/maam_thea_sig.png'));
+                $drawing3->setName('maam_thea_sig2');
+                $drawing3->setDescription('maam_thea_sig2');
+                $drawing3->setPath(public_path('images/maam_thea_sig2.png'));
                 $drawing3->setResizeProportional(false);
                 $drawing3->setHeight(132);
                 $drawing3->setWidth(236);

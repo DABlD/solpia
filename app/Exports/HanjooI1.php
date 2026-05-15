@@ -560,7 +560,7 @@ class HanjooI1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setCoordinates('A1');
 
         $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        $drawing2->setPath(public_path('images/maam_thea_sig.png'));
+        $drawing2->setPath(public_path('images/maam_thea_sig2.png'));
         $drawing2->setHeight(55);
         // $drawing2->setWidth(170);
         $drawing2->setOffsetX(30);

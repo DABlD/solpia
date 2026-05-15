@@ -480,7 +480,7 @@ class Dlsm implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setName('Maam Thea Sig');
         $drawing3->setDescription('Maam Thea Sig');
-        $drawing3->setPath(public_path('images/maam_thea_sig.png'));
+        $drawing3->setPath(public_path('images/maam_thea_sig2.png'));
         $drawing3->setResizeProportional(false);
         $drawing3->setHeight(50);
         $drawing3->setWidth(170);
