@@ -301,7 +301,7 @@
     <script src="{{ asset('js/flatpickr.js') }}"></script>
     <script src="{{ asset('js/checklist.js') }}"></script>
     <script src="{{ asset('js/sortable.min.js') }}"></script>
-    
+
     {{-- photoviewer scripts --}}
     <script src="{{ asset('js/photoswipe.js') }}"></script>
     <script src="{{ asset('js/photoswipe-ui-default.js') }}"></script>
@@ -6558,7 +6558,7 @@
                                         images, 
                                         {
                                             allowPanToNext: true,
-                                            escKey: true,
+                                            escKey: false,
                                             arrowKeys: true,
                                             closeOnScroll: false,
                                             tapToClose: false,
