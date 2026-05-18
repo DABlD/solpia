@@ -248,6 +248,7 @@
     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/flatpickr.js') }}"></script>
     <script src="{{ asset('js/checklist.js') }}"></script>
+    <script src="{{ asset('js/sortable.min.js') }}"></script>
 @endpush
 
 @push('after-scripts')
@@ -5786,6 +5787,10 @@
                 html: '<br><br>' + crewString,
                 width: '450px',
                 onOpen: () => {
+                    new Sortable(document.getElementById('swal2-content'), {
+                        animation: 150
+                    });
+
                     $('#swal2-title').css({
                         'font-size': '28px',
                         'color': '#00c0ef'
@@ -5809,16 +5814,60 @@
                     });
                 },
             }).then(result => {
-                if(result.value){
-                    let data = {};
-                    data.ids = crews;
-                    data.filename = name.replace(/[^\w\s]/gi, '') + " - Onsigners PPRT AND SIRB";
-                    data.exportType = "pdf";
+                swal({
+                    cancelButtonColor: '#f76c6b',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    title: 'Select document to export',
+                    html: '<br><br>' + `
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="checkbox" class="docType" data-id="PPRT" checked />
+                            </div>
+                            <div class="col-md-10">
+                                <label for="">
+                                    Passport
+                                </label>
+                            </div>
+                        </div>
 
-                    const type = "Y01_OnsignerDocs";
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="checkbox" class="docType" data-id="SB" checked />
+                            </div>
+                            <div class="col-md-10">
+                                <label for="">
+                                    Seaman's Book
+                                </label>
+                            </div>
+                        </div>
+                    `,
+                    width: '450px',
+                    onOpen: () => {
+                        $('#swal2-title').css({
+                            'font-size': '28px',
+                            'color': '#00c0ef'
+                        });
+                        $('#swal2-content .col-md-10').css('text-align', 'left');
+                        $('#swal2-content .col-md-10 label').css({
+                            "font-size": '20px',
+                            "text-align": 'left'
+                        });
+                    }
+                }).then(result => {
+                    if(result.value){
+                        let data = {};
+                        data.ids = crews;
+                        data.filename = name.replace(/[^\w\s]/gi, '') + " - Onsigners PPRT AND SIRB";
+                        data.exportType = "pdf";
+                        data.pprt = $('[data-id="PPRT"]').is(":checked");
+                        data.sb = $('[data-id="sb"]').is(":checked");
 
-                    window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
-                }
+                        const type = "Y01_OnsignerDocs";
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+                    }
+                });
             })
         }
 
@@ -6302,6 +6351,10 @@
                 allowOutsideClick: false,
                 showCancelButton: true,
                 onOpen: () => {
+                    new Sortable(document.getElementById('swal2-content'), {
+                        animation: 150
+                    });
+
                     $('#swal2-title').css({
                         'font-size': '28px',
                         'color': '#00c0ef'
@@ -6330,14 +6383,61 @@
                 },
             }).then(result => {
                 if(result.value){
-                    let data = {};
-                    data.ids = crews;
-                    data.filename = name.replace(/[^\w\s]/gi, '') + " - Offsigners PPRT AND SIRB";
-                    data.exportType = "pdf";
 
-                    const type = "Y02_OffsignerDocs";
+                    swal({
+                        cancelButtonColor: '#f76c6b',
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        title: 'Select document to export',
+                        html: '<br><br>' + `
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="docType" data-id="PPRT" checked />
+                                </div>
+                                <div class="col-md-10">
+                                    <label for="">
+                                        Passport
+                                    </label>
+                                </div>
+                            </div>
 
-                    window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="docType" data-id="SB" checked />
+                                </div>
+                                <div class="col-md-10">
+                                    <label for="">
+                                        Seaman's Book
+                                    </label>
+                                </div>
+                            </div>
+                        `,
+                        width: '450px',
+                        onOpen: () => {
+                            $('#swal2-title').css({
+                                'font-size': '28px',
+                                'color': '#00c0ef'
+                            });
+                            $('#swal2-content .col-md-10').css('text-align', 'left');
+                            $('#swal2-content .col-md-10 label').css({
+                                "font-size": '20px',
+                                "text-align": 'left'
+                            });
+                        }
+                    }).then(result => {
+                        if(result.value){
+                            let data = {};
+                            data.ids = crews;
+                            data.filename = name.replace(/[^\w\s]/gi, '') + " - Offsigners PPRT AND SIRB";
+                            data.exportType = "pdf";
+                            data.pprt = $('[data-id="PPRT"]').is(":checked");
+                            data.sb = $('[data-id="sb"]').is(":checked");
+
+                            const type = "Y02_OffsignerDocs";
+
+                            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+                        }
+                    })
                 }
             })
 
