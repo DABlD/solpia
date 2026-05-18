@@ -55,8 +55,6 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
-        dd('test');
-
         $applicants = $applicants->sortBy('order');
         return $applicants;
     }
