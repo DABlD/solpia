@@ -55,7 +55,7 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
-        $applicants = $applicants->sortBy('order');
+        $applicants = $applicants;
         return $applicants;
     }
 
@@ -94,7 +94,7 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
-        $applicants = $applicants->sortBy('order');
+        $applicants = $applicants;
         return $applicants;
     }
 
