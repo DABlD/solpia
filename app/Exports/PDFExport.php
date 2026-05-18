@@ -55,7 +55,12 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
-        $applicants = $applicants;
+        $orderMap = array_flip($this->data->data['ids']);
+
+        $applicants = $applicants->sortBy(function ($item) use ($orderMap) {
+            return $orderMap[$item->applicant_id] ?? PHP_INT_MAX;
+        })->values();
+        
         return $applicants;
     }
 
@@ -94,7 +99,12 @@ class PDFExport
             $applicant->docs = $docs;
         }
 
-        $applicants = $applicants;
+        $orderMap = array_flip($this->data->data['ids']);
+
+        $applicants = $applicants->sortBy(function ($item) use ($orderMap) {
+            return $orderMap[$item->applicant_id] ?? PHP_INT_MAX;
+        })->values();
+
         return $applicants;
     }
 
