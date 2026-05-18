@@ -97,9 +97,9 @@
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
 
-    {{-- photoviewer scripts --}}
-    <script src="{{ asset('js/photoswipe.js') }}"></script>
-    <script src="{{ asset('js/photoswipe-ui-default.js') }}"></script>
+    {{-- PHOTO VIWER --}}
+    <link rel="stylesheet" href="{{ asset('css/photoswipe.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/photoswipe-default-skin.css') }}">
 
     <style>
         #table img{
@@ -301,6 +301,10 @@
     <script src="{{ asset('js/flatpickr.js') }}"></script>
     <script src="{{ asset('js/checklist.js') }}"></script>
     <script src="{{ asset('js/sortable.min.js') }}"></script>
+    
+    {{-- photoviewer scripts --}}
+    <script src="{{ asset('js/photoswipe.js') }}"></script>
+    <script src="{{ asset('js/photoswipe-ui-default.js') }}"></script>
 @endpush
 
 @push('after-scripts')
