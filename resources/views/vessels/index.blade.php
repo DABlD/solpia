@@ -5784,7 +5784,14 @@
                 allowOutsideClick: false,
                 showCancelButton: true,
                 title: 'Select Crew',
-                html: '<br><br>' + crewString,
+                html: 
+                    `
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: left;">
+                            <h5 style="color: red;">Note: You can drag the name to change the order they are exported.</h4>
+                        </div>
+                    </div>
+                ` + crewString,
                 width: '450px',
                 onOpen: () => {
                     new Sortable(document.getElementById('swal2-content'), {
@@ -6345,7 +6352,14 @@
 
             swal({
                 title: 'Select Crew',
-                html: '<br><br>' + crewString,
+                html: 
+                    `
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: left;">
+                            <h5 style="color: red;">Note: You can drag the name to change the order they are exported.</h4>
+                        </div>
+                    </div>
+                ` + crewString,
                 width: '450px',
                 cancelButtonColor: '#f76c6b',
                 allowOutsideClick: false,
