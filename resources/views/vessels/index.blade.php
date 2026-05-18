@@ -49,6 +49,10 @@
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
 
+    {{-- photoviewer scripts --}}
+    <script src="{{ asset('js/photoswipe.js') }}"></script>
+    <script src="{{ asset('js/photoswipe-ui-default.js') }}"></script>
+
     <style>
         #table img{
             width: 60px;
@@ -258,6 +262,8 @@
         let fFlag = "%%";
         let fType = "%%";
         let fStatus = "Active";
+
+        var gallery = null;
 
         @if(auth()->user()->id == 23)
         {{-- FOR TEST --}}
