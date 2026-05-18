@@ -5861,7 +5861,7 @@
                         data.filename = name.replace(/[^\w\s]/gi, '') + " - Onsigners PPRT AND SIRB";
                         data.exportType = "pdf";
                         data.pprt = $('[data-id="PPRT"]').is(":checked");
-                        data.sb = $('[data-id="sb"]').is(":checked");
+                        data.sb = $('[data-id="SB"]').is(":checked");
 
                         const type = "Y01_OnsignerDocs";
 
@@ -6431,7 +6431,7 @@
                             data.filename = name.replace(/[^\w\s]/gi, '') + " - Offsigners PPRT AND SIRB";
                             data.exportType = "pdf";
                             data.pprt = $('[data-id="PPRT"]').is(":checked");
-                            data.sb = $('[data-id="sb"]').is(":checked");
+                            data.sb = $('[data-id="SB"]').is(":checked");
 
                             const type = "Y02_OffsignerDocs";
 
