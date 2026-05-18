@@ -6457,6 +6457,66 @@
 
         }
 
+        function viewFile(id, aId, type){
+            let imageFormats = ['JPEG', 'JPG', 'PNG', 'GIF'];
+
+            if (gallery && gallery.isOpen) {
+                return;
+            }
+            
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('applications.getFiles') }}',
+                data: {id: id, type: type},
+                allowEscapeKey: false,
+                success: files => {
+                    let isPDF = (files.includes(".pdf") || files.includes(".PDF")) ? 1 : 0;
+
+                    try{
+                        files = JSON.parse(JSON.parse(files).file);
+                    }catch(e){
+                        files = [JSON.parse(files).file];
+                    }
+
+                    if(isPDF){
+                        window.open(`files/${aId}/${files[0]}`);
+                    }
+                    else{
+                        images = [];
+                        files.forEach((file, i) => {
+                            let img = new Image();
+                            img.src = `files/${aId}/${file}`;
+                            img.onload = () => {
+                                images.push({
+                                    src: img.src,
+                                    w: img.width,
+                                    h: img.height,
+                                });
+
+                                if(i+1 == files.length){
+                                    gallery = new PhotoSwipe(
+                                        $('.pswp')[0], 
+                                        PhotoSwipeUI_Default, 
+                                        images, 
+                                        {
+                                            allowPanToNext: true,
+                                            escKey: true,
+                                            arrowKeys: true,
+                                            closeOnScroll: false,
+                                            tapToClose: false,
+                                            maxSpreadZoom: 6
+                                        }
+                                    );
+
+                                    gallery.init();
+                                }
+                            };
+                        });
+                    }
+                }
+            })
+        }
+
         function exportOffUSV(id, name){
             let data = {};
             data.id = id;
