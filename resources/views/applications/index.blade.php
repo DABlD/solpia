@@ -577,7 +577,8 @@
                         KSSLine:                        'Qualification Checklist (KSS Line)',
                         X07_SeaServiceRequestForm:      'Request for Sea Service Certificate',
                         X30_POSSMSeaService:            'Sea Service - POSSM',
-                        X04_USVE:                       'US Visa Endorsement Form',
+                        {{-- X04_USVE:                       'US Visa Endorsement Form', --}}
+                        Y14_USVE:                       'US Visa Endorsement Form (New Format)',
                         WalangLagay:                    'Walang Lagay',
                     },
                     showCancelButton: true,
@@ -673,7 +674,10 @@
                         else if(result.value == "X01_BorrowDocuments"){
                             FBBD(application.data('id'), result.value);
                         }
-                        else if(result.value == "X04_USVE"){
+                        {{-- else if(result.value == "X04_USVE"){
+                            USVE(application.data('id'), result.value);
+                        } --}}
+                        else if(result.value == "Y14_USVE"){
                             USVE(application.data('id'), result.value);
                         }
                         else if(result.value == "Y05_ClearanceAffidavit"){
@@ -1116,64 +1120,43 @@
             }
 
             function USVE(id, type){
-                $.ajax({
-                    url: '{{ route('applications.get2') }}',
-                    data: {
-                        where: ['applicants.id', id],
-                        cols: ['mob', 'eld']
-                    },
-                    success: result => {
-                        let pro_app = JSON.parse(result)[0];
-                        let vessel = "";
+                let vessel = "";
 
-                        if(pro_app.eld == null){
-                            vessel = `
-                                <br><br>
-                                <input type="string" id="eld" placeholder="Expected Sign-on Date (optional)" class="form-control">
-                                <br>
-                                <input type="number" min="0" id="mob" placeholder="Months on board (optional)" class="form-control">
-                            `;
-                        }
+                swal({
+                    title: 'Charge to: ',
+                    html: `
+                        <div style="text-align: left;">
+                            <label class="radio-inline" style="font-size: 16px;">
+                                <input type="radio" name="chargeTo" value="1" checked> Seafarer
+                            </label>
+                            <br>
+                            <label class="radio-inline" style="font-size: 16px;">
+                                <input type="radio" name="chargeTo" value="0"> SMI
+                            </label>
+                            ${vessel}
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    cancelButtonColor: '#f76c6b',
+                    onOpen: () => {
+                        let string = "";
 
-                        swal({
-                            title: 'Charge to: ',
-                            html: `
-                                <div style="text-align: left;">
-                                    <label class="radio-inline" style="font-size: 16px;">
-                                        <input type="radio" name="chargeTo" value="1" checked> Seafarer
-                                    </label>
-                                    <br>
-                                    <label class="radio-inline" style="font-size: 16px;">
-                                        <input type="radio" name="chargeTo"} value="0"> SMI
-                                    </label>
-                                    ${vessel}
-                                </div>
-                            `,
-                            showCancelButton: true,
-                            cancelButtonColor: '#f76c6b',
-                            onOpen: () => {
-                                let string = "";
-
-                                $('#eld').flatpickr({
-                                    altInput: true,
-                                    altFormat: 'F j, Y',
-                                    dateFormat: 'Y-m-d',
-                                })
-                            }
-                        }).then(result => {
-                            if(result.value){
-                                let data = {
-                                    status: 'Lined-Up',
-                                    eld: $('#eld').val(),
-                                    mob: $('#mob').val(),
-                                    chargeTo: $('[name="chargeTo"]:checked').val()
-                                }
-
-                                window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param({data});
-                            }
-                        });
+                        $('#eld').flatpickr({
+                            altInput: true,
+                            altFormat: 'F j, Y',
+                            dateFormat: 'Y-m-d',
+                        })
                     }
-                })
+                }).then(result => {
+                    if(result.value){
+                        let data = {};
+                        data.status = 'Lined-Up';
+                        data.exportType = "pdf";
+                        data.chargeTo = $('[name="chargeTo"]:checked').val();
+
+                        window.location.href = `{{ route('applications.exportDocument') }}/${id}/${type}?` + $.param(data);
+                    }
+                });
             }
 
             function FBBD(id, type){
