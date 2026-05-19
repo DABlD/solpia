@@ -11,34 +11,36 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 // use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\{ProcessedApplicant};
 
-class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
-{
-    public function __construct($data, $type, $req, $title = "USVE"){
-        $pro_app = ProcessedApplicant::where('applicant_id', $data->id)->first();
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-        if($data->data['eld']){
-            $pro_app->eld = $data->data['eld'];
+class X04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
+{
+    public function __construct($applicant, $type){
+        $pro_app = ProcessedApplicant::where('applicant_id', $applicant->id)->first();
+
+        if($applicant->data['eld']){
+            $pro_app->eld = $applicant->data['eld'];
         }
-        // if($data->data['mob']){
-        //     $pro_app->mob = $data->data['mob'];
-        // }
+        if($applicant->data['mob']){
+            $pro_app->mob = $applicant->data['mob'];
+        }
         $pro_app->save();
 
-        $data->load('document_id');
-        $data->load(['sea_service' => function ($q) {
+        $applicant->load('document_id');
+        $applicant->load(['sea_service' => function ($q) {
             $q->orderBy('sign_off', 'desc');
         }]);
-        $data->pro_app = $pro_app;
+        $applicant->pro_app = $pro_app;
 
-        foreach($data->document_id as $key => $doc){
+        foreach($applicant->document_id as $key => $doc){
             $name = $doc->type;
-            $data->document_id->$name = $doc;
-            $data->document_id->forget($key);
+            $applicant->document_id->$name = $doc;
+            $applicant->document_id->forget($key);
         }
-        
-        $this->data     = $data;
+
+        $this->data     = $applicant;
         $this->type     = $type;
-        $this->title     = $title;
     }
 
     public function view(): View
@@ -256,17 +258,7 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
-            ],
-            [
-                'font' => [
-                    'underline' => true
-                ],
-            ],
-            [
-                'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_JUSTIFY,
-                ],
-            ],
+            ]
         ];
 
         return [
@@ -274,24 +266,30 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // SHEET SETTINGS
                 $size = \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4;
                 $event->sheet->getDelegate()->getPageSetup()->setPaperSize($size);
-                $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->title), false);
+                $event->sheet->getDelegate()->setTitle('USVE', false);
+                $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('&L&IDOC NO: SMOP-USVEF-12 &C&IEFFECTIVE DATE: 18 NOV 2020 &R&IREVISION NO: 2.0 23 May 2023');
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
-                $event->sheet->getDelegate()->getPageMargins()->setTop(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.2);
-                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.2);
-                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.3);
-                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.3);
+                $event->sheet->getDelegate()->getPageMargins()->setTop(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setBottom(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setHeader(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setFooter(0.0);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
+
+                // DEFAULT FONT AND STYLE FOR WHOLE PAGE
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial');
+                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(10);
+
+                $event->sheet->getDelegate()->getStyle('B10:B31')->getNumberFormat()->setFormatCode('@');
+
+                // CUSTOM FONT AND STYLE TO DEFINED CELL
+                // $event->sheet->getDelegate()->getStyle('A1:A2')->getFont()->setName('Arial');
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
                 $event->sheet->getParent()->getActiveSheet()->setSheetView($temp->setView('pageBreakPreview'));
-                
-                // SET DEFAULT FONT
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setName('Arial Narrow');
-                $event->sheet->getParent()->getDefaultStyle()->getFont()->setSize(8);
 
                 // CELL COLOR
                 // $event->sheet->getDelegate()->getStyle('E3:E7')->getFont()->getColor()->setRGB('0000FF');
@@ -320,11 +318,13 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC B
                 $h[0] = [
+                    
                 ];
 
                 // VT
                 $h[1] = [
-                    'A22'
+                    'B11:B18', 'B23:B31',
+                    'C18', 'C31'
                 ];
 
                 // HL B
@@ -334,12 +334,7 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HC
                 $h[3] = [
-                    'A1', 'C30:K31', 'L38', 'A45:R46',
-
-                    'B5:B9', 'B12:B16', 'B19',
-
-                    'E38', 'H38', 'E40', 'J40',
-                    'G42', 'N42'
+                    
                 ];
 
                 // HC VC
@@ -352,31 +347,21 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // B
                 $h[6] = [
-                    'A1', 'A4', 'A11', 'A18', 'A21', 'C31', 'K31', 'A33', 'A46:R46',
-                    'E38', 'H38', 'E40', 'J40'
                 ];
 
                 // VC
                 $h[7] = [
-                    'B5:C9', 'B12:C16', 'B19:C19',
-                ];
-
-                // UNDERLINE
-                $h[8] = [
-                    'A4', 'A11', 'A18', 'A21'
-                ];
-
-                // JUSTIFY
-                $h[9] = [
-                    'A22'
+                    'I3:K3', 'A8',
+                    'A42:L42',
                 ];
 
                 $h['wrap'] = [
-                    'A2', 'C5:C19', 'A22', 'A24', 'C27:C29'
+                    'C11', 'C13', 'C15', 'C18', 'C23', 'C31', 'A37'
                 ];
 
                 // SHRINK TO FIT
                 $h['stf'] = [
+                    'G5:G7', 'I42'
                 ];
 
                 foreach($h as $key => $value) {
@@ -416,7 +401,7 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'B27', 'B29', 'E38', 'H38', 'E40', 'J40', 'G42:J42', 'N42:Q42'
+                    'B50', 'F50',
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -429,6 +414,7 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // OUTSIDE BORDER THIN
                 $cells[3] = array_merge([
+                    'A42:L42'
                 ]);
 
                 // OUTSIDE BORDER MEDIUM
@@ -449,7 +435,6 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // LRB
                 $cells[8] = array_merge([
-
                 ]);
 
                 // RRB
@@ -466,8 +451,11 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // BBT
                 $cells[12] = array_merge([
-                    'C30:G30', 'K30:P30', 'A32:R32', 'P33:R33', 'E35:L35', 'E36:L36', 'E37:L37',
-                    'A45:C45', 'F45:I45', 'M45:R45'
+                    'G5:H5', 'G6:H6', 'G7:H7', 'J5:K5',
+                    'K6', 'K7',
+
+                    'A44:G44', 'J44:K44',
+                    'J48:K48'
                 ]);
 
                 // LBT
@@ -477,7 +465,7 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 // RBT
                 $cells[14] = array_merge([
                 ]);
-                
+
                 foreach($cells as $key => $value){
                     foreach($value as $cell){
                         $event->sheet->getDelegate()->getStyle($cell)->applyFromArray($borderStyle[$key]);
@@ -485,94 +473,36 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
                 }
 
                 // FOR THE CHECK
-                // $event->sheet->getDelegate()->getStyle('L46')->getFont()->setName('Marlett');
+                $event->sheet->getDelegate()->getStyle('A1:L50')->getFont()->setName('Arial');
+                $event->sheet->getDelegate()->getStyle('A1:L50')->getFont()->setSize(10);
 
                 // COLUMN RESIZE
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(3);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(21);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(10);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(12);
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(5.5);
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(5.5);
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(6);
-                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(5);
-                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(16);
-                $event->sheet->getDelegate()->getColumnDimension('Q')->setWidth(8);
-                $event->sheet->getDelegate()->getColumnDimension('R')->setWidth(4);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(7);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(3);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(14);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(14.5);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(6);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(9);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(14.5);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(4);
 
                 // ROW RESIZE
-                $rows = [
-                    [
-                        15, //ROW HEIGHT
-                        33,41 //START ROW, END ROW
-                    ],
-                ];
-
-                $rows2 = [
-                    [
-                        3,
-                        [28,39,41]
-                    ],
-                    [
-                        5,
-                        [3,10,17,20,25,32,43]
-                    ],
-                    [
-                        15,
-                        [26]
-                    ],
-                    [
-                        25,
-                        [1,2,5,9,13,24,27,29,30,44]
-                    ],
-                    [
-                        40,
-                        [6,7,8,12,14,15,16,19,22]
-                    ],
-                    [
-                        85,
-                        [1]
-                    ]
-                ];
-
-                foreach($rows as $row){
-                    for($i = $row[1]; $i <= $row[2]; $i++){
-                        $event->sheet->getDelegate()->getRowDimension($i)->setRowHeight($row[0]);
-                    }
-                }
-
-                foreach($rows2 as $row){
-                    foreach($row[1] as $cell){
-                        $event->sheet->getDelegate()->getRowDimension($cell)->setRowHeight($row[0]);
-                    }
-                }
-
-                // PAGE BREAKS
-                $rows = [];
-                foreach($rows as $row){
-                    $event->sheet->getParent()->getActiveSheet()->setBreak('A' . $row, \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
-                }
+                // $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(90);
                 
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
-
-                $rt = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
-                $rt->createTextRun("I, ")->getFont()->setSize(8)->setName('Arial Narrow');
-                $rt->createTextRun($this->data->user->namefull)->getFont()->setSize(8)->setName('Arial Narrow')->setUnderline(true);
-                $rt->createTextRun(", hereby acknowledge that I have read and fully understood SMI’s Policy on US Visa Application and Processing as stated above. I confirm that I was given the opportunity to ask questions or seek clarifications regarding its contents, and that all my inquiries were properly addressed to my satisfaction.")->getFont()->setName('Arial Narrow')->setSize(8);
-                $event->sheet->getParent()->getActiveSheet()->getCell("A22")->setValue($rt);
-
-                // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(12);
-                // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
             },
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'B' => NumberFormat::FORMAT_TEXT,
         ];
     }
 
@@ -584,7 +514,7 @@ class x04_USVE implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing->setPath(public_path("images/letter_head.jpg"));
         $drawing->setResizeProportional(false);
         $drawing->setHeight(60);
-        $drawing->setWidth(680);
+        $drawing->setWidth(630);
         $drawing->setOffsetX(2);
         $drawing->setOffsetY(2);
         $drawing->setCoordinates('A1');
