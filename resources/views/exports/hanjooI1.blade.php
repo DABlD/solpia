@@ -268,7 +268,7 @@
 
 	<tr>
 		<td colspan="2" style="{{ $bc }}">Confirmed by</td>
-		<td colspan="3">MS. THEA MAE D. GUERRA</td>
+		<td colspan="3">MS. THEA MAE GUERRA-RIO</td>
 		<td style="text-align: right;">(Sign)</td>
 	</tr>
 </table>

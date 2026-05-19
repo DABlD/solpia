@@ -610,7 +610,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="5" style="{{ $bc }}">MS. THEA MAE D. GUERRA - CREWING MANAGER</td>
+		<td colspan="5" style="{{ $bc }}">MS. THEA MAE GUERRA-RIO - CREWING MANAGER</td>
 		<td></td>
 		<td colspan="2" style="{{ $bc }}"></td>
 	</tr>
