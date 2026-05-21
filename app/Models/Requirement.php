@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\RequirementAttribute;
 
 use App\Models\{Vessel, Rank, Candidate};
+use App\User;
 
 class Requirement extends Model
 {
@@ -40,6 +41,6 @@ class Requirement extends Model
     }
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

@@ -16,12 +16,15 @@ trait RequirementAttribute{
 		    ;
 		}
 
-		if($this->user->role == "Recruitment Officer" && auth()->user()->role == "Recruitment Officer"){
-			$buttons .= "<a class='btn btn-primary btn-sm' data-toggle='tooltip' title='Edit' onclick='view($this->id)'>" .
-		        '<span class="fa fa-pencil fa-2xs"></span>' .
-		    '</a>'
-		    ;
+		if($this->user){
+			if($this->user->role == "Recruitment Officer" && auth()->user()->role == "Recruitment Officer"){
+				$buttons .= "<a class='btn btn-primary btn-sm' data-toggle='tooltip' title='Edit' onclick='view($this->id)'>" .
+			        '<span class="fa fa-pencil fa-2xs"></span>' .
+			    '</a>'
+			    ;
+			}
 		}
+
 
 		if($this->vessel_id){
 			$buttons .= "<a class='btn btn-primary btn-sm shipicon' data-toggle='tooltip' title='View Vessel Details' onclick='vesselDetails($this->vessel_id)'>" .
