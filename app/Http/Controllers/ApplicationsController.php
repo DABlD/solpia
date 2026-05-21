@@ -644,6 +644,9 @@ class ApplicationsController extends Controller
             elseif($applicant->document_flag->count() || isset($applicant->flagRank)){
                 $applicant->rank = $applicant->flagRank;
             }
+            elseif(isset($applicant->pro_app->rank)){
+                $applicant->rank = $applicant->pro_app->rank;
+            }
             else{
                 $applicant->rank = null;
             }
