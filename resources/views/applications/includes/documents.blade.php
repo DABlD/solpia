@@ -981,7 +981,7 @@
         						[1,57]
         					],
         					documents: [
-        						'LICENSE', 'BOOKLET', 'MSID', 'COR'
+        						'MSID', 'COR' //'LICENSE', 'BOOKLET', 
         					]
         				}
         			]
