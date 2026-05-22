@@ -131,8 +131,9 @@
 					$docu = isset($data->{'document_' . $type}->{$doc}) ? $data->{'document_' . $type}->{$doc} : null;
 				}
 				else{
+					$country = isset($data->vessel->flag) ? ucwords(strtolower($data->vessel->flag)) : "Panama";;
 					foreach (get_object_vars($data->document_flag) as $flag) {
-						if($flag->country == $flag && $flag->type == $doc){
+						if($flag->country == $country && $flag->type == $doc){
 							$docu = $flag;
 						}
 					}
@@ -589,11 +590,11 @@
 
 	<tr>
 		<td>2</td>
-		{{ $doc('MSID', 'Malaysia Seafarer Card/MSID', 'lc', 6) }}
+		{{ $doc('MSID', 'Malaysia Seafarer Card/MSID', 'lc', 6, 'Malaysia') }}
 	</tr>
 	<tr>
 		<td>3</td>
-		{{ $doc('MCOR', 'Malaysia COR(for Officers only)', 'lc', 7) }}
+		{{ $doc('MCOR', 'Malaysia COR(for Officers only)', 'lc', 6, 'Malaysia') }}
 	</tr>
 	<tr>
 		{{-- COVID --}}
