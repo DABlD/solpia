@@ -559,7 +559,11 @@
 	</tr>
 	<tr>
 		<td>3</td>
-		{{ $doc('COR', 'Malaysia COR(for Officers only)', 'flag', 6, 'Malaysia') }}
+		@if($data->rank->type == "OFFICER")
+			{{ $doc('COR', 'Malaysia COR(for Officers only)', 'flag', 6, 'Malaysia') }}
+		@else
+			{{ $doc('COR', 'Malaysia COR(for Officers only)', 'flag', 7, 'Malaysia') }}
+		@endif
 	</tr>
 	<tr>
 		{{-- COVID --}}
