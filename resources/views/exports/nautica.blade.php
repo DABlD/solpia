@@ -590,11 +590,11 @@
 
 	<tr>
 		<td>2</td>
-		{{ $doc('MSID', 'Malaysia Seafarer Card/MSID', 'lc', 6, 'Malaysia') }}
+		{{ $doc('MSID', 'Malaysia Seafarer Card/MSID', 'flag', 6, 'Malaysia') }}
 	</tr>
 	<tr>
 		<td>3</td>
-		{{ $doc('MCOR', 'Malaysia COR(for Officers only)', 'lc', 6, 'Malaysia') }}
+		{{ $doc('COR', 'Malaysia COR(for Officers only)', 'flag', 6, 'Malaysia') }}
 	</tr>
 	<tr>
 		{{-- COVID --}}
