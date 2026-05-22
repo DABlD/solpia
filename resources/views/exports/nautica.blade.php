@@ -141,7 +141,7 @@
 			}
 		}
 
-		$number = $docu ? $docu->{$type == "id" ? "number" : "no"} : "---";
+		$number = $docu ? $docu->{$type == "lc" ? "no" : "number"} : "---";
 		$issuer = $docu ? $clean($docu->issuer) : "---";
 		$issue = $docu ? $checkDate($docu->issue_date) : "---";
 		$expiry = $docu ? $checkDate($docu->expiry_date) : "---";
