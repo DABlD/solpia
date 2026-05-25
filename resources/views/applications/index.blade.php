@@ -753,9 +753,9 @@
                                         <option selected value="Mr. Ricardo Amparo">Mr. Ricardo Amparo</option>
                                         <option value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
                                     @elseif(auth()->user()->fleet == "TOEI")
-                                        <option selected value="Mr. Leonil Luis F. Romano">Mr. Leonil Luis F. Romano</option>
-                                        <option value="C/E Joey M. Del Pilar">C/E Jose Melchor M. Del Pilar</option>
-                                        <option value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
+                                        <option selected value="Mr. LEONIL LUIS F. ROMANO">Mr. LEONIL LUIS F. ROMANO</option>
+                                        <option value="C/E C/E JOSE MELCHOR M. DEL PILAR">C/E JOSE MELCHOR M. DEL PILAR</option>
+                                        <option value="C/E ROMANO A. MARIANO">C/E ROMANO A. MARIANO</option>
                                     @else
                                         <option selected value="C/E Romano A. Mariano">C/E Romano A. Mariano</option>
                                         <option value="Mr. Adulf Kit Jumawan">Mr. Adulf Kit Jumawan</option>
