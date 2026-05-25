@@ -28,7 +28,7 @@
 			<td rowspan="2">{{ $ctr }}</td>
 			<td rowspan="2">{{ $onSigner->abbr }}</td>
 			<td rowspan="2">{{ str_replace('Ñ', 'N', ($onSigner->lname . ', ' . $onSigner->fname . ' ' . $onSigner->suffix . ' ' . $onSigner->mname)) }}</td>
-			<td rowspan="2">{{ now()->parse($onSigner->birthday)->format('d-m-Y') }}</td>
+			<td rowspan="2">{{ now()->parse($onSigner->birthday)->format('d/m/Y') }}</td>
 			<td>{{ $onSigner->{'PASSPORTn'} ? strtoupper($onSigner->{'PASSPORTn'}) : '-----' }}</td>
 			<td>{{ $onSigner->{"SEAMAN'S BOOKn"} ? strtoupper($onSigner->{"SEAMAN'S BOOKn"}) : '-----' }}</td>
 			<td>{{ $onSigner->{'US-VISAn'} ?? '-----' }}</td>
@@ -36,9 +36,9 @@
 		</tr>
 
 		<tr>
-			<td>{{ $onSigner->{'PASSPORT'} ? $onSigner->{'PASSPORT'}->format('d-m-Y') : '----' }}</td>
-			<td>{{ $onSigner->{"SEAMAN'S BOOK"} ? $onSigner->{"SEAMAN'S BOOK"}->format('d-m-Y') : '-----' }}</td>
-			<td>{{ $onSigner->{'US-VISA'} ? $onSigner->{'US-VISA'}->format('d-m-Y') : '-----'}}</td>
+			<td>{{ $onSigner->{'PASSPORT'} ? $onSigner->{'PASSPORT'}->format('d/m/Y') : '----' }}</td>
+			<td>{{ $onSigner->{"SEAMAN'S BOOK"} ? $onSigner->{"SEAMAN'S BOOK"}->format('d/m/Y') : '-----' }}</td>
+			<td>{{ $onSigner->{'US-VISA'} ? $onSigner->{'US-VISA'}->format('d/m/Y') : '-----'}}</td>
 		</tr>
 		@php
 			$ctr++;
@@ -77,7 +77,7 @@
 			<td rowspan="2">{{ $ctr }}</td>
 			<td rowspan="2">{{ $offSigner->abbr }}</td>
 			<td rowspan="2">{{ str_replace('Ñ', 'N', ($offSigner->lname . ', ' . $offSigner->fname . ' ' . $offSigner->suffix . ' ' . $offSigner->mname)) }}</td>
-			<td rowspan="2">{{ now()->parse($offSigner->birthday)->format('d-m-Y') }}</td>
+			<td rowspan="2">{{ now()->parse($offSigner->birthday)->format('d/m/Y') }}</td>
 			<td>{{ $offSigner->{'PASSPORTn'} ? strtoupper($offSigner->{'PASSPORTn'}) : '-----' }}</td>
 			<td>{{ $offSigner->{"SEAMAN'S BOOKn"} ? strtoupper($offSigner->{"SEAMAN'S BOOKn"}) : '-----' }}</td>
 			<td>{{ $offSigner->{'US-VISAn'} ?? '-----' }}</td>
@@ -85,9 +85,9 @@
 		</tr>
 
 		<tr>
-			<td>{{ $offSigner->{'PASSPORT'} ? $offSigner->{'PASSPORT'}->format('d-m-Y') : '----' }}</td>
-			<td>{{ $offSigner->{"SEAMAN'S BOOK"} ? $offSigner->{"SEAMAN'S BOOK"}->format('d-m-Y') : '-----' }}</td>
-			<td>{{ $offSigner->{'US-VISA'} ? $offSigner->{'US-VISA'}->format('d-m-Y') : '-----'}}</td>
+			<td>{{ $offSigner->{'PASSPORT'} ? $offSigner->{'PASSPORT'}->format('d/m/Y') : '----' }}</td>
+			<td>{{ $offSigner->{"SEAMAN'S BOOK"} ? $offSigner->{"SEAMAN'S BOOK"}->format('d/m/Y') : '-----' }}</td>
+			<td>{{ $offSigner->{'US-VISA'} ? $offSigner->{'US-VISA'}->format('d/m/Y') : '-----'}}</td>
 		</tr>
 		@php
 			$ctr++;
