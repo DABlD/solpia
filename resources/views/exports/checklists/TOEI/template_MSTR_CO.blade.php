@@ -665,7 +665,7 @@
 		<td></td>
 		<td colspan="3" style="font-weight: bold;">DOCUMENTATION ASST. / DATE</td>
 		<td colspan="2"></td>
-		<td colspan="3" style="font-weight: bold;">CREW MANAGER / DATE</td>
+		<td colspan="3" style="font-weight: bold;">ASST. CREWING MANAGER / DATE</td>
 	</tr>
 
 	<tr>
