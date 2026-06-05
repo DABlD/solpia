@@ -1989,7 +1989,7 @@
                                             <th>Birthday</th>
                                             <th>Age</th>
                                             <th>Occupation</th>
-                                            <th>Email</th>
+                                            <th>Contact</th>
                                             <th>Address</th>
                                         </tr>
                                     </thead>
