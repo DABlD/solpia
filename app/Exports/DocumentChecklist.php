@@ -102,7 +102,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 if(in_array(auth()->pro_app->principal_id, [1])){
                     $this->data->officer = "Bianca Isabel Reyes";
                 }
-                else
+                else{
                     $this->data->officer = "Celine Villanta";
                 }
             }
