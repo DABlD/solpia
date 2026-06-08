@@ -95,19 +95,26 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
         }
         elseif($fleet == "FLEET D"){
             $this->data->manager = "THEA MAE G. RIO";
-            $this->data->documentation = auth()->user()->fullname;
+            $this->data->documentation = null;
+            $this->data->officer = null;
 
-            // if(in_array(auth()->user()->id, [6433, 6635, 8315])){ // CELINE, BIA AND CONNIE
             if(in_array(auth()->user()->id, [8315])){ // CONNIE
+                $this->data->documentation = auth()->user()->fullname;
                 if(in_array(auth()->pro_app->principal_id, [1])){
-                    $this->data->officer = "Bianca Isabel Reyes";
+                    $this->data->officer = "BIANCA ISABEL REYES";
                 }
                 else{
-                    $this->data->officer = "Celine Villanta";
+                    $this->data->officer = "CELINE VILLANTA";
                 }
             }
             else{
-                $this->data->documentation = "Angeline Mae Hernandez";
+                if(in_array(auth()->user()->id, [6433, 6635])){ // CELINE, BIA AND CONNIE
+                    $this->data->officer = auth()->user()->fullname;
+                    $this->data->documentation = "CONCEPTION MONDEJAR";
+                }
+                else{
+                    $this->data-> = "ANGELINE MAE HERNANDEZ";
+                }
             }
         }
         elseif($fleet == "TOEI"){
