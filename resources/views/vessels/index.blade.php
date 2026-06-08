@@ -5123,6 +5123,9 @@
                                     <li role="presentation">
                                         <a href=".documents" role="tab" data-toggle="pill">Documents Monitoring</a>
                                     </li>
+                                    <li role="presentation">
+                                        <a href=".obcInfo" role="tab" data-toggle="pill">Onboard Crew Info</a>
+                                    </li>
                                 </ul>
 
                                 <!-- Tab panes -->
@@ -5131,6 +5134,7 @@
                                     <div role="tabpanel" class="tab-pane fade onBoard"></div>
                                     <div role="tabpanel" class="tab-pane fade summary"></div>
                                     <div role="tabpanel" class="tab-pane fade documents"></div>
+                                    <div role="tabpanel" class="tab-pane fade obcInfo"></div>
                                 </div>
                             </div>
 

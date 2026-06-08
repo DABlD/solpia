@@ -1176,6 +1176,7 @@ class ApplicationsController extends Controller
         foreach ($crews as $crew) {
 
             $this->attachDocuments($crew);
+            $crew->load('applicant.user');
 
             $crew->seniority = optional($crew->applicant->pro_app)->seniority;
 

@@ -72,6 +72,22 @@
 	            <tbody>
 	    `;
 
+	    let table4 = `
+	        <table class="table table-bordered custom-striped">
+	            <thead>
+	                <tr>
+	                    <td class="cs1"><b>No.</b></td>
+	                    <td class="cs2"><b>Rank</b></td>
+	                    <td class="cs3"><b>Name</b></td>
+	                    <td class="cs4"><b>Contact</b></td>
+	                    <td class="cs4"><b>Provincial<br>Contact</b></td>
+	                    <td class="cs5"><b>Address</b></td>
+	                    <td class="cs6"><b>Provincial<br>Address</b></td>
+	                </tr>
+	            </thead>
+	            <tbody>
+	    `;
+
 	    // LINE UP TABLE
 	    linedUp.forEach((crew, index) => {
 	        crew.remarks = JSON.parse(crew.remarks);
@@ -310,6 +326,18 @@
 	            </tr>
 	        `;
 
+	        table4 += `
+	        	<tr>
+	        		<td>${index + 1}</td>
+	        		<td>${crew.abbr}</td>
+	        		<td>${crew.lname + ', ' + crew.fname + ' ' + (crew.suffix || "") + ' ' + crew.mname}</td>
+	        		<td>${crew.applicant.user.contact ?? ""}</td>
+	        		<td>${crew.applicant.provincial_contact ?? ""}</td>
+	        		<td>${crew.applicant.user.address}</td>
+	        		<td>${crew.applicant.provincial_address}</td>
+	        	</tr>
+	        `;
+
 	        if(crew.reliever){
 	            table3 += `
 	                <tr>
@@ -341,6 +369,7 @@
 	    $('.tab-pane.linedUp').html(table + "</tbody></table>");
 	    $('.tab-pane.onBoard').html(table2 + "</table>");
 	    $('.tab-pane.summary').html(table3 + "</table>");
+	    $('.tab-pane.obcInfo').html(table4 + "</tbody></table>");
 
 	    $('.tab-pane.documents').html(
 	        `
