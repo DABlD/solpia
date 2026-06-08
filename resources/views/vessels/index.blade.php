@@ -290,6 +290,55 @@
         .btn-sm{
             font-size: .65em !important;
         }
+
+        table .btn{
+            width: 39.22px;
+        }
+
+        .box-body{
+            margin: 0px 0px 0px 10px !important;
+        }
+
+        th{
+            text-align: center;
+        }
+
+        .tss{
+            font-size: 9px;
+        }
+
+        .tss2{
+            font-size: 14px;
+        }
+
+        .tss2 td{
+            vertical-align: middle !important;
+        }
+
+        .modal thead tr, .tss thead tr{
+            background-color: #ffddcc !important;
+        }
+
+        .modal thead tr, .tss2 thead tr{
+            background-color: #ffddcc !important;
+        }
+
+        .custom-striped tr:nth-child(4n+3), .custom-striped tr:nth-child(4n+4) {
+            background-color: #fdeee6;
+        }
+
+        .custom-striped td{
+            padding-top: 1px !important;
+            padding-bottom: 1px !important;
+        }
+
+        .btn-xs{
+            font-size: .65em !important;
+        }
+
+        .remarks-width{
+            max-width: 220px !important;
+        }
     </style>
 @endpush
 
@@ -2332,16 +2381,11 @@
                     swal({
                         width: '90%',
                         animation: false,
+                        position: 'top',
                         html: `
                             <ul class="nav nav-pills" role="tablist" id="infoTabs">
                                 <li role="presentation" class="active">
                                     <a href=".pinfo" role="tab" data-toggle="pill"><u>P</u>ersonal Info</a>
-                                </li>
-                                <li role="presentation">
-                                    <a href=".educbg" role="tab" data-toggle="pill"><u>E</u>ducational Background</a>
-                                </li>
-                                <li role="presentation">
-                                    <a href=".family" role="tab" data-toggle="pill">Famil<u>y</u> Data</a>
                                 </li>
                                 <li role="presentation">
                                     <a href=".ids" role="tab" data-toggle="pill">Document <u>I</u>D</a>
@@ -2369,8 +2413,6 @@
 
                             <div class="tab-content">
                               <div role="tabpanel" class="tab-pane fade in pinfo active">a</div>
-                              <div role="tabpanel" class="tab-pane fade educbg">b</div>
-                              <div role="tabpanel" class="tab-pane fade family">b</div>
                               <div role="tabpanel" class="tab-pane fade ids">c</div>
                               <div role="tabpanel" class="tab-pane fade flags">c</div>
                               <div role="tabpanel" class="tab-pane fade l_cs">c</div>
@@ -2382,14 +2424,12 @@
                         `,
                         onOpen: () => {
                             fillTab1(applicant);
-                            fillTab2(applicant);
                             fillTab3(applicant);
                             fillTab4(applicant);
                             fillTab5(applicant);
                             fillTab6(applicant);
                             fillTab7(applicant);
                             fillTab8(applicant);
-                            fillTab9(applicant); //FAMILY SUPPOSED TO BE 3
                             fillTab10(applicant);
                         }
                     }).then(() => {
@@ -2401,17 +2441,54 @@
 
         // CREW INFO
         function fillTab1(applicant){
+            let ebs = Object.entries(applicant.educational_background);
+            let ebString = ``;
+
+            ebs.forEach(eb => {
+                eb = eb[1];
+                ebString += `
+                    <tr>
+                        <td>${eb.type}</td>
+                        <td>${eb.course}</td>
+                        <td>${eb.year}</td>
+                        <td>${eb.school}</td>
+                        <td>${eb.address}</td>
+                    </tr>
+                `;
+            });
+
+            let fds = Object.entries(applicant.family_data);
+            let fdString = ``;
+
+            fds.forEach(fd => {
+                fd = fd[1];
+                fdString += `
+                    <tr>
+                        <td>${fd.type}</td>
+                        <td>${fd.fname} ${fd.lname}</td>
+                        <td>${fd.birthday ? moment(fd.birthday).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${fd.birthday ? moment().diff(fd.birthday, 'years') : "-"}</td>
+                        <td>${fd.occupation}</td>
+                        <td>${fd.email}</td>
+                        <td>${fd.address}</td>
+                    </tr>
+                `;
+            });
+
             let string = `
                 <div class="box box-success" style="font-size: 15px;">
                     <div class="box-body">
 
                         <div class="row">
-                        <br>
-                            <div class="col-md-2">
-                                <img src="${applicant.user.avatar}" width="200px;" height="200px;">
-                            </div>
                             <br>
+                            <div class="col-md-2" style="text-align: center;">
+                                <img src="${applicant.user.avatar}" width="200px;" height="200px;">
+                                <br>
+                                Date Uploaded: ${moment().subtract(6, 'days').format('MMM DD, YYYY')}
+                            </div>
                         </div>
+
+                        <br>
 
                         <div class="row">
                             <div class="col-md-2">
@@ -2622,65 +2699,62 @@
                             </div>
                         </div>
 
+                        <hr>
+                        <h2 style="text-align: left; font-weight: bold;">
+                            Educational Background
+                        </h2>
 
+                        <div class="row">
+                            <div class='col-md-12'>
+                                <table class="table table-bordered tss2 table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Course</th>
+                                            <th>Year</th>
+                                            <th>School</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        ${ebString != "" ? ebString : "<tr><td colspan='5'>No Recorded Educational Background</td></tr>"}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h2 style="text-align: left; font-weight: bold;">
+                            Family Data
+                        </h2>
+
+                        <div class="row">
+                            <div class='col-md-12'>
+                                <table class="table table-bordered tss2 table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Relation</th>
+                                            <th>Name</th>
+                                            <th>Birthday</th>
+                                            <th>Age</th>
+                                            <th>Occupation</th>
+                                            <th>Contact</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        ${fdString != "" ? fdString : "<tr><td colspan='7'>No Recorded Family Data</td></tr>"}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
 
             $('.pinfo').html(string);
-        }
-
-        function fillTab2(applicant){
-            let ebs = Object.entries(applicant.educational_background);
-            let temp = ``;
-
-            ebs.forEach(eb => {
-                eb = eb[1];
-                temp += `
-                    <h3 style="text-align: left;"><b>${eb.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="course">Course</label>
-                                <input type="text" class="form-control" id="course" value="${eb.course ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="year">Year</label>
-                                <input type="text" class="form-control" id="year" value="${eb.year ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="school">School</label>
-                                <input type="text" class="form-control" id="school" value="${eb.school ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" id="address" value="${eb.address ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            })
-
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Educational Background</b></h2>'}
-                    </div>
-                </div>
-            `;
-
-            $('.educbg').html(string);
         }
 
         function fillTab3(applicant){
@@ -2700,73 +2774,62 @@
                         id.file = id.file;
                     }
 
+                    console.log(id, applicant);
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${id.id}', ${applicant.id},  'ids')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${id.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, 'ids')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${id.id}, ${applicant.id}, 'ids')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${id.id}, ${applicant.id}, 'ids')">
                         <span class="fa fa-upload">
+                    </span></a>
+                    <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${id.id}, ${applicant.id}, 'ids')">
+                        <span class="fa fa-pencil">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${id.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issuer">Issuer</label>
-                                <input type="text" class="form-control" id="issuer" value="${id.issuer ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="number">Number</label>
-                                <input type="text" class="form-control" id="number" value="${id.number ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control" id="issue_date" value="${id.issue_date != null ? moment(id.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${id.expiry_date != null ? moment(id.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${id.type}</td>
+                        <td>${id.issuer ?? "-"}</td>
+                        <td>${id.number ?? "-"}</td>
+                        <td>${id.issue_date != null ? moment(id.issue_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td class="exp_date">${id.expiry_date != null ? moment(id.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Flag Documents</b></h2>'}
+            $('.ids').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Issuer</th>
+                                    <th>No</th>
+                                    <th style="width: 105px;">Issue Date</th>
+                                    <th style="width: 105px;">Expiry Date</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded Travel Documents</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.ids').html(string);
+            `);
         }
 
         function fillTab4(applicant){
@@ -2787,72 +2850,60 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${flag.id}', ${applicant.id}, 'flags')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${flag.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.ifile}', 'flags')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${flag.id}, ${applicant.ifile}', 'flags')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${flag.id}, ${applicant.id}, 'flags')">
                         <span class="fa fa-upload">
+                    </span></a>
+                    <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${flag.id}, ${applicant.id}, 'flags')">
+                        <span class="fa fa-pencil">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${flag.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="country">Country</label>
-                                <input type="text" class="form-control" id="country" value="${flag.country ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="number">Number</label>
-                                <input type="text" class="form-control" id="number" value="${flag.number ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control" id="issue_date" value="${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${flag.expiry_date != null ? moment(flag.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${flag.type}</td>
+                        <td>${flag.country ?? "-"}</td>
+                        <td>${flag.number ?? "-"}</td>
+                        <td>${flag.issue_date != null ? moment(flag.issue_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td class="exp_date">${flag.expiry_date != null ? moment(flag.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Flag Documents</b></h2>'}
+            $('.flags').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Country</th>
+                                    <th>No</th>
+                                    <th style="width: 105px;">Issue Date</th>
+                                    <th style="width: 105px;">Expiry Date</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded Flag Documents</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.flags').html(string);
+            `);
         }
 
         function fillTab5(applicant){
@@ -2873,84 +2924,94 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${lc.id}', ${applicant.id}, 'l_cs')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${lc.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${lc.id}, ${applicant.id}, 'l_cs')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${lc.id}, ${applicant.id}, 'l_cs')">
                         <span class="fa fa-upload">
+                    </span></a>
+                    <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${lc.id}, ${applicant.id}, 'l_cs')">
+                        <span class="fa fa-pencil">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${lc.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="issuer">Issuer</label>
-                                <input type="text" class="form-control" id="issuer" value="${lc.issuer ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="no">Number</label>
-                                <input type="text" class="form-control" id="no" value="${lc.no ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control" id="issue_date" value="${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${lc.expiry_date != null ? moment(lc.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="regulation">Regulation</label>
-                                <input type="text" class="form-control" id="regulation" value="${lc.regulation != "[]" ? JSON.parse(lc.regulation) : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${lc.type}</td>
+                        <td>${lc.issuer ?? "-"}</td>
+                        <td>${lc.no ?? "-"}</td>
+                        <td>${lc.issue_date != null ? moment(lc.issue_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td class="exp_date">${lc.expiry_date != null ? moment(lc.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${lc.regulation != "[]" ? JSON.parse(lc.regulation) : "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Licenses</b></h2>'}
+            $('.l_cs').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 500px;">Type</th>
+                                    <th>Issuer</th>
+                                    <th>No</th>
+                                    <th style="width: 105px;">Issue Date</th>
+                                    <th style="width: 105px;">Expiry Date</th>
+                                    <th>Regulation</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded National Documents</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.l_cs').html(string);
+            `);
         }
 
         function fillTab6(applicant){
-            let mcs = Object.entries(applicant.document_med_cert);
+            let medCerts = applicant.document_med_cert.sort(function(a,b){
+              return new Date(b.created_at) - new Date(a.created_at);
+            });
+
+            let tempMcs = Object.entries(applicant.document_med_cert);
             let temp = ``;
+
+            let mcs = [];
+            let order = ["MEDICAL CERTIFICATE", "FLAG MEDICAL", "DRUG AND ALCOHOL TEST", "YELLOW FEVER", "POLIO VACCINE (IPV)", "POLIO", "COVID"];
+
+            order.forEach(type => {
+                let bool = false;
+                tempMcs.forEach((mc, index) => {
+                    if(mc[1].type == type){
+                        mcs.push(mc);
+                        tempMcs.splice(index, 1);
+                        bool = true;
+                    }
+                    else if(mc[1].type == "COVID"){
+                        if(mc[1].type.contains("COVID")){
+                            mcs.push(mc);
+                            tempMcs.splice(index, 1);
+                            bool = true;
+                        }
+                    }
+                });
+            });
+
+            mcs = mcs.concat(tempMcs);
 
             mcs.forEach(mc => {
                 mc = mc[1];
@@ -2966,72 +3027,60 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${mc.id}', ${applicant.id}, 'med_certs')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mc.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mc.id}, ${applicant.id}, 'med_certs')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mc.id}, ${applicant.id}, 'med_certs')">
                         <span class="fa fa-upload">
+                    </span></a>
+                    <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${mc.id}, ${applicant.id}, 'med_certs')">
+                        <span class="fa fa-pencil">
                     </span></a>
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${mc.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="number">Number</label>
-                                <input type="text" class="form-control" id="number" value="${mc.number ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="clinic">Clinic/Hospital</label>
-                                <input type="text" class="form-control" id="clinic" value="${mc.clinic ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control" id="issue_date" value="${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="expiry_date">Expiry Date</label>
-                                <input type="text" class="form-control" id="expiry_date" value="${mc.expiry_date != null ? moment(mc.expiry_date).format("MMM DD, YYYY") : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${mc.type}</td>
+                        <td>${mc.number ?? "-"}</td>
+                        <td>${mc.clinic ?? "-"}</td>
+                        <td>${mc.issue_date != null ? moment(mc.issue_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td class="exp_date">${mc.expiry_date != null ? moment(mc.expiry_date).format("MMM DD, YYYY") : "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Medical Certificate</b></h2>'}
+            $('.med_certs').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Number</th>
+                                    <th>Clinic/Hospital</th>
+                                    <th>Issue Date</th>
+                                    <th>Expiry Date</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded Medical Certificates</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.med_certs').html(string);
+            `);
         }
 
         function fillTab7(applicant){
@@ -3052,69 +3101,63 @@
                     }
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" onClick="viewFile('${mh.id}', ${applicant.id}, 'meds')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
+                        <a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${mh.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, 'meds')">
+                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"  onClick="deleteFile(${mh.id}, ${applicant.id}, 'meds')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
+                    <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${mh.id}, ${applicant.id}, 'meds')">
                         <span class="fa fa-upload">
                     </span></a>
+                    {{-- <a class="btn btn-warning btn-xs" data-toggle="tooltip" title="Update Details" onClick="updateDetails(${mh.id}, ${applicant.id}, 'meds')">
+                        <span class="fa fa-pencil">
+                    </span></a> --}}
                 `;
 
                 temp += `
-                    <h3 style="text-align: left;"><b>${mh.type}</b></h3>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="with_mv">With Medication/Vaccine</label>
-                                <input type="text" class="form-control" id="with_mv" value="${mh.with_mv == "Yes" ? mh.with_mv : '---'}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="year">Year</label>
-                                <input type="text" class="form-control" id="year" value="${mh.year ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="case_remarks">Remarks</label>
-                                <input type="text" class="form-control" id="case_remarks" value="${mh.case_remarks ?? "---"}" readonly>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                ${file}
-                            </div>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>${mh.type}</td>
+                        <td>${mh.with_mv == "Yes" ? mh.with_mv : '-'}</td>
+                        <td>${mh.year ?? "-"}</td>
+                        <td>${mh.case_remarks ?? "-"}</td>
+                        <td>${file}</td>
+                    </tr>
                 `;
             });
 
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : "<h2><b>NO RECORDED HISTORY</b></h2>"}
+            $('.meds').html(`
+                <div class="row">
+                    <div class='col-md-12'>
+                        <table class="table table-bordered tss2 table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>With Medication?</th>
+                                    <th>Year</th>
+                                    <th>Remarks</th>
+                                    <th style="width: 195px;">File</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                ${temp != "" ? temp : "<tr><td colspan='6'>No Recorded Medical History</td></tr>"}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            `;
-
-            $('.meds').html(string);
+            `);
         }
 
         function fillTab8(applicant){
-            let sss = Object.entries(applicant.sea_service);
+            let sss = Object.entries(applicant.sea_service)
+                .sort(([, a], [, b]) => new Date(b.sign_off) - new Date(a.sign_off));
 
             if(applicant.lup){
                 $.ajax({
@@ -3153,7 +3196,9 @@
                                     manning_agent: vessel.manning_agent,
                                     principal: "",
                                     sign_on: applicant.lup.joining_date,
-                                    remarks: "On Board"
+                                    smc: vessel.smc,
+                                    remarks: "On Board",
+                                    file: null
                                 };
 
                                 sss = [["0", temp]].concat(sss);
@@ -3168,11 +3213,66 @@
             }
         }
 
+        function uploadSSfile(id, aid){
+            swal({
+                title: "Upload Sea Service",
+                html: `
+                    <input id="ssFile" class="form-control" type="file">
+                    <br>
+                `,
+                showCancelButton: true,
+                cancelButtonColor: errorColor,
+                cancelButtonText: 'Cancel',
+                preConfirm: () => {
+                    if($('#ssFile').val() == ""){
+                        swal.showValidationError('Please Select File');
+                    }
+                }
+            }).then(result => {
+                if(result.value){
+                    let formData = new FormData();
+
+                    formData.append('id', id);
+                    formData.append('file', $("#ssFile").prop('files')[0]);
+                    formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                    fetch('{{ route('applications.uploadSSfile') }}', {
+                        method: "POST", 
+                        body: formData
+                    });
+
+                    ss("Success");
+                    setTimeout(() => {
+                        reloadTab(null, aid, "ss");
+                    }, 1500);
+                }
+            })
+        }
+
         function forFillTab8(sss){
             let temp = ``;
 
             sss.forEach((ss, i) => {
                 ss = ss[1];
+
+                let actions = "";
+                if(ss.file){
+                    actions += `
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="View" href="${ss.file}" target="_blank">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    `;
+                }
+
+                if(ss.remarks != "On Board"){
+                    actions += `
+                        <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Upload" onClick="uploadSSfile(${ss.id}, ${ss.applicant_id})">
+                            <span class="fa fa-upload"></span>
+                        </a>
+                    `;
+                }
+
+
                 temp += `
                     <tr>
                         <td>${i+1}</td>
@@ -3189,6 +3289,7 @@
                         <td>${ss.sign_off != null ? moment(ss.sign_off).format("MMM DD, YYYY") : "---"}</td>
                         <td>${moment(ss.sign_off).diff(moment(ss.sign_on), 'months')}</td>
                         <td>${ss.remarks}</td>
+                        <td>${actions}</td>
                     </tr>
                 `;
             });
@@ -3213,6 +3314,7 @@
                                     <th>Off</th>
                                     <th>MOB</th>
                                     <th>Remarks</th>
+                                    <th>Files</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -3224,74 +3326,6 @@
             `;
 
             $('.ss').html(string);
-        }
-
-        function fillTab9(applicant){
-            let fds = Object.entries(applicant.family_data);
-            let temp = ``;
-
-            fds.forEach(fd => {
-                fd = fd[1];
-                temp += `
-                    <h3 style="text-align: left;"><b>${fd.type}</b></h3>
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" value="${fd.fname ?? "-"} ${fd.lname ?? "-"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="birthday">birthday</label>
-                                <input type="text" class="form-control" id="birthday" value="${fd.birthday ? moment(fd.birthday).format('MMM DD, YYYY') : "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="year">Age</label>
-                                <input type="text" class="form-control" id="age" value="${fd.birthday ? moment().diff(fd.birthday, 'years') : fd.age ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="occupation">Occupation</label>
-                                <input type="text" class="form-control" id="occupation" value="${fd.occupation ?? "---"}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="email">Contact</label>
-                                <input type="text" class="form-control" id="email" value="${fd.email ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="school">Address</label>
-                                <input type="text" class="form-control" id="address" value="${fd.address ?? "---"}" readonly>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            })
-
-            let string = `
-                <div class="box box-success" style="font-size: 15px;">
-                    <div class="box-body">
-                        ${temp != "" ? temp : '<h2><b>No Recorded Family Data</b></h2>'}
-                    </div>
-                </div>
-            `;
-
-            $('.family').html(string);
         }
 
         function fillTab10(applicant){
@@ -3316,26 +3350,26 @@
                     let type = evals.type == "Evaluation" ? "eval" : evals.type == "Recommendation" ? "reco" : "comment";
 
                     file = `
-                        <a class="btn btn-success puwy" data-toggle="tooltip" title="View" onClick="viewFile('${evals.id}', ${applicant.id}, 'eval')">
+                        <a class="btn btn-success btn-xs puwy" data-toggle="tooltip" title="View" onClick="viewFile('${evals.id}', ${applicant.id}, 'eval')">
                             <span class="fa fa-search">
                         </span></a>
-                        <a class="btn btn-primary puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${evals.file}" download>
+                        <a class="btn btn-primary btn-xs puwy" data-toggle="tooltip" title="Download" href="files/${applicant.id}/${evals.file}" download>
                             <span class="fa fa-download">
                         </span></a>
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete File"  onClick="deleteFile(${evals.id}, ${applicant.id}, 'eval')">
+                        <a class="btn btn-danger btn-xs puwy" data-toggle="tooltip" title="Delete File"  onClick="deleteFile(${evals.id}, ${applicant.id}, 'eval')">
                             <span class="fa fa-times">
                         </span></a>`;
                 }
                 else{
                     file += `
-                        <a class="btn btn-danger puwy" data-toggle="tooltip" title="Delete"  onClick="deleteEval(${evals.id}, ${applicant.id}, 'eval')">
+                        <a class="btn btn-danger btn-xs puwy" data-toggle="tooltip" title="Delete"  onClick="deleteEval(${evals.id}, ${applicant.id}, 'eval')">
                             <span class="fa fa-times">
                         </span></a>
                     `;
                 }
 
                 file += `
-                    <a class="btn btn-info puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${evals.id}, ${applicant.id}, 'eval')">
+                    <a class="btn btn-info btn-xs puwy" data-toggle="tooltip" title="Upload New File" onClick="uploadFile(${evals.id}, ${applicant.id}, 'eval')">
                         <span class="fa fa-upload">
                     </span></a>
                 `;
@@ -3380,10 +3414,10 @@
             let string1 = `
                 <div class="box box-success" style="font-size: 15px;">
                     <div class="box-header" style="float: right;" data-toggle="tooltip" title="Add">
-                        <a class="btn btn-success" data-toggle="tooltip" title="Add Evaluation" onClick="addEval('Evaluation', ${applicant.id}, 'eval')">
+                        <a class="btn btn-success btn-xs" data-toggle="tooltip" title="Add Evaluation" onClick="addEval('Evaluation', ${applicant.id}, 'eval')">
                             <i class="fa fa-plus"></i>
                         </a>
-                        <a class="btn btn-info" data-toggle="tooltip" title="Add Recommendation" onClick="addEval('Recommendation', ${applicant.id}, 'eval')">
+                        <a class="btn btn-info btn-xs" data-toggle="tooltip" title="Add Recommendation" onClick="addEval('Recommendation', ${applicant.id}, 'eval')">
                             <i class="fa fa-plus"></i>
                         </a>
                     </div>
@@ -3398,6 +3432,190 @@
             `;
 
             $('.eval').html(string1);
+        }
+
+        function updateDetails(id, aId, type, document){
+            // ids, flags, l_cs, med_certs, meds
+            
+            const tables = {
+                "ids": "document_ids",
+                "flags": "document_flags",
+                "l_cs": "document_l_cs",
+                "med_certs": "document_med_certs",
+                "meds": "document_meds"
+            };
+
+            $.ajax({
+                url: "{{ route('document.get') }}",
+                data: {
+                    table: tables[type],
+                    where: ['id', id],
+                    first: true
+                },
+                success: result => {
+                    result = JSON.parse(result);
+
+                    let temp = {};
+                    let config = {altInput: true, altFormat: 'F j, Y', dateFormat: 'Y-m-d'};
+
+                    if(type == 'ids'){
+                        swal({
+                            title: "Update Document",
+                            width: "600px",
+                            html: `
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("issuer", "Issuer", result.issuer, 3,9)}
+                                ${input("number", "Number", result.number, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                temp.issuer = $('[name="issuer"]').val();
+                                temp.number = $('[name="number"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+
+                                updateDocument(temp, tables[type]);
+                            }
+                        })
+                    }
+                    else if(type == 'flags'){
+                        swal({
+                            title: "Update Document",
+                            width: "400px",
+                            html: `
+                                ${input("country", "Country", result.country, 3,9, null, 'disabled')}
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("number", "Number", result.number, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                let temp = {};
+
+                                temp.number = $('[name="number"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+
+                                updateDocument(temp, tables[type]);
+                            }
+                        })
+                    }
+                    else if(type == 'l_cs'){
+                        swal({
+                            title: "Update Document",
+                            width: "400px",
+                            html: `
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("issuer", "Issuer", result.issuer, 3,9)}
+                                ${input("no", "Number", result.no, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                let temp = {};
+
+                                temp.issuer = $('[name="issuer"]').val();
+                                temp.no = $('[name="no"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+
+                                updateDocument(temp, tables[type]);
+                            }
+                        })
+                    }
+                    else if(type == 'med_certs'){
+                        swal({
+                            title: "Update Document",
+                            width: "400px",
+                            html: `
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("issuer", "Issuer", result.issuer, 3,9)}
+                                ${input("clinic", "Clinic", result.clinic, 3,9)}
+                                ${input("number", "Number", result.number, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                let temp = {};
+
+                                temp.type = $('[name="type"]').val();
+                                temp.issuer = $('[name="issuer"]').val();
+                                temp.clinic = $('[name="clinic"]').val();
+                                temp.number = $('[name="number"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+
+                                updateDocument(temp, tables[type]);
+                            }
+                        })
+                    }
+                    {{-- else if(type == 'meds'){
+                        swal({
+                            title: "Update Document",
+                            width: "400px",
+                            html: `
+                                ${input("type", "Type", result.type, 3,9, null, 'disabled')}
+                                ${input("issuer", "Issuer", result.issuer, 3,9)}
+                                ${input("clinic", "Clinic", result.clinic, 3,9)}
+                                ${input("number", "Number", result.number, 3,9)}
+                                ${input("issue_date", "Issue Date", result.issue_date, 3,9)}
+                                ${input("expiry_date", "Expiry Date", result.expiry_date, 3,9)}
+                            `,
+                            onOpen: () => {
+                                $('[name="issue_date"], [name="expiry_date"]').flatpickr(config)
+                            }
+                        }).then(result2 => {
+                            if(result2.value){
+                                let temp = {};
+
+                                temp.type = $('[name="type"]').val();
+                                temp.issuer = $('[name="issuer"]').val();
+                                temp.clinic = $('[name="clinic"]').val();
+                                temp.number = $('[name="number"]').val();
+                                temp.issue_date = $('[name="issue_date"]').val();
+                                temp.expiry_date = $('[name="expiry_date"]').val();
+                            }
+                        })
+                    } --}}
+                }
+            })
+
+            function updateDocument(data,table){
+                $.ajax({
+                    url: "{{ route("document.update") }}",
+                    type: 'POST',
+                    data: {
+                        table: table,
+                        data: data,
+                        id: id,
+                        updated_at: moment().format("YYYY-MM-DD"),
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: result => {
+                        ss("Successfully updated");
+                        setTimeout(() => {
+                            reloadTab(id, aId, type);
+                        }, 800);
+                    }
+                })
+            }
         }
 
         function onBoard(id, vessel_id){
