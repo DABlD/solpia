@@ -99,7 +99,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
             $this->data->officer = null;
 
             if(in_array(auth()->user()->id, [8315])){ // CONNIE
-                $this->data->documentation = auth()->user()->fullname;
+                $this->data->documentation = strtoupper(auth()->user()->fullname);
                 if(in_array(auth()->pro_app->principal_id, [1])){
                     $this->data->officer = "BIANCA ISABEL REYES";
                 }
@@ -108,7 +108,7 @@ class DocumentChecklist implements FromView, WithEvents, WithDrawings//, ShouldA
                 }
             }
             else{
-                $this->data->officer = auth()->user()->fullname;
+                $this->data->officer = strtoupper(auth()->user()->fullname);
 
                 if(in_array(auth()->user()->id, [6433, 6635])){ // CELINE, BIA AND CONNIE
                     $this->data->documentation = "CONCEPTION MONDEJAR";
