@@ -202,7 +202,7 @@ Route::group([
 			->defaults('name', 'Vessels')
 			->defaults('roles', array('Admin', 'Crewing Manager', 'Cadet', 'Encoder', 'Crewing Officer', "Processing", "Training"))
 			// USER ID OF SPECIAL PERMISSION
-			->defaults('sped', array(33, 34, 461, 462, 506, 5))
+			->defaults('sped', array(33, 34, 461, 462, 506, 5, 9273))
 			->name($name . '.index')
 			->defaults('href', $name);
 
@@ -270,6 +270,7 @@ Route::group([
 			->defaults('name', 'Candidates')
 			->defaults('roles', array('Admin', 'Recruitment Officer', 'Crewing Manager', 'Crewing Officer'))
 			->defaults('sped', array(4501))
+			->defaults('sped2', array(9273))
 			->name($name . '.index')
 			->defaults('href', $name);
 
@@ -283,6 +284,7 @@ Route::group([
 			->defaults('name', 'Requirements')
 			->defaults('roles', array('Admin', 'Crewing Manager', 'Crewing Officer', 'Training', 'Recruitment Officer'))
 			->defaults('sped', array(4501))
+			->defaults('sped2', array(9273))
 			->name($name . '.index')
 			->defaults('href', $name);
 			
