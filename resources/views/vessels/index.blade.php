@@ -339,6 +339,19 @@
         .remarks-width{
             max-width: 220px !important;
         }
+
+        .tab-pane.onBoard{
+            overflow-x: scroll; 
+            overflow-y: scroll;
+            height: 500px;
+        }
+
+        .tab-pane.onBoard thead td{
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: #ffddcc !important;
+        }
     </style>
 @endpush
 
