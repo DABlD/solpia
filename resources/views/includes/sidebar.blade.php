@@ -42,8 +42,10 @@
 				{{-- Check if route is a sidebar --}}
 				@if(isset($route->defaults['sidebar']))
 					{{-- Check if route is for current role --}}
-					@if(in_array(Auth::user()->role, $route->defaults['roles']) || (isset($route->defaults['sped']) && in_array(auth()->user()->id, $route->defaults['sped'])))
-						{{-- @if(!in_array(auth()->user()->id, $route->defaults['sped2']))) --}}
+					@if((in_array(Auth::user()->role, $route->defaults['roles']) || (isset($route->defaults['sped']) && in_array(auth()->user()->id, $route->defaults['sped']))))
+						@if((isset($route->defaults['sped2']) && in_array(auth()->user()->id, $route->defaults['sped2'])))
+
+						@else
 							<li class="{{ str_contains(request()->path(), $route->uri) ? 'active' : '' }}">
 								<a href="{{ url($route->defaults['href']) }}"{{ $route->defaults['href'] == "appointment" ? " target=_blank" : "" }}>
 									<i class="fa {{ $route->defaults['icon'] }}"></i> 
@@ -53,7 +55,7 @@
 									</span> --}}
 								</a>
 							</li>
-						{{-- @endif --}}
+						@endif
 					@endif
 				@endif
 			@endforeach

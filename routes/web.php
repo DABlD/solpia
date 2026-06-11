@@ -246,6 +246,7 @@ Route::group([
 			->defaults('name', 'Applicants')
 			->defaults('roles', array('Admin', 'Recruitment Officer'))
 			->defaults('sped', array(4501))
+			->defaults('sped2', array(9273))
 			->name($name . '.index')
 			->defaults('href', $name);
 
