@@ -9,9 +9,9 @@
 				{{-- @if(in_array(auth()->user()->id, [23,5963])) --}}
 				@if(in_array(auth()->user()->id, [23]))
 					<img src="{{ asset('images/g2.png')}}" class="img-circle" alt="User Image" id="avatar">
-				@elseif(in_array(auth()->user()->id, [8315, 6635]))
+				{{-- @elseif(in_array(auth()->user()->id, [8315, 6635]))
 					<img src="{{ asset('images/english_speaking.jpg')}}" class="img-circle" alt="User Image" id="avatar">
-				@else
+				@else --}}
 					<img src="{{ asset(auth()->user()->avatar)}}" class="img-circle" alt="User Image">
 				@endif
 			</div>
@@ -77,7 +77,8 @@
 			});
 		@endif
 
-		@if(in_array(Auth::user()->id, [23,5963, 8315, 6635]))
+		{{-- @if(in_array(Auth::user()->id, [23,5963, 8315, 6635])) --}}
+		@if(in_array(Auth::user()->id, [23,5963]))
 			const img = document.getElementById('avatar');
 
 	        img.addEventListener('click', () => {
