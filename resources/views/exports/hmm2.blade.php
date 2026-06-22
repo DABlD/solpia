@@ -461,7 +461,7 @@
 		<td>mm</td>
 
 		{{-- 2 --}}
-		{{ $getDocument('BT-PSSR', 'lc', 'MARINA', 		'BT-PSSR', '', '')}}
+		{{ $getDocument('BT-PSSR', 'lc', 'MARINA', 		'BT-PSSR', '', '5 YEARS')}}
 	</tr>
 
 	<tr>
