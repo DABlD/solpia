@@ -44,9 +44,9 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $shipowner = "KLBV1 S.A.";
             $phoneNumber = "82-51-661-6100";
             $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
-            $employer = "LEE DONG SU";
-            // $identification = "155691344";
-            $identification = "824-87-01648";
+            $employer = "LEE IN KEUN";
+            $identification = "155691344";
+            // $identification = "824-87-01648";
 
             $shipowner2 = "KLBV1 S.A.";
         }
@@ -576,9 +576,9 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setOffsetY(2);
         $drawing3->setCoordinates('J110');
 
-        // if(in_array($this->applicant->vessel->name, ["M/T K. LOTUS"])){
-        //     $drawing3->setPath(public_path("images/mlc_klcsm_klbv1.png"));
-        // }
+        if(in_array($this->applicant->vessel->name, ["M/T K. LOTUS"])){
+            $drawing3->setPath(public_path("images/mlc_klcsm_klbv1.png"));
+        }
 
         $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing4->setPath(public_path("images/mlc_klcsm_sig.png"));
