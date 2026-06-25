@@ -19,8 +19,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $this->shipmanager   = [];
 
         $array1 = [
-            "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE", "M/V HMM AQUAMARINE",
-            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM LE HAVRE", "M/V HYUNDAI BRAVE",
+            "M/V HMM LE HAVRE", "M/V HYUNDAI BRAVE",
             "M/V HYUNDAI COURAGE", "M/V HMM ALGECIRAS", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE",
             "M/V HMM COPENHAGEN", "M/V HMM GDANSK", "M/V HMM HAMBURG", "M/V HMM OSLO",
             "M/V HMM SOUTHAMPTON", "M/V HMM ST. PETERSBURG", "M/V HYUNDAI GRACE", "M/V HYUNDAI UNITY",
@@ -29,10 +28,24 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HMM GOODWILL"
         ];
 
+        $array2 = [
+            "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", 
+            "M/V HMM GARNET", "M/V HMM SAPPHIRE", "M/V HMM PERIDOT"
+        ];
+
         if(in_array($applicant->vessel->name, $array1)){
             $this->shipowner['company'] = "HMM Company Limited";
             $this->shipowner['president'] = "CHOI WONHYOK";
             $this->shipowner['address'] = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
+
+            $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
+            $this->shipmanager['address'] = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
+        }
+
+        if(in_array($applicant->vessel->name, $array2)){
+            $this->shipowner['company'] = "HMM Company Limited";
+            $this->shipowner['president'] = "CHOI WONHYOK";
+            $this->shipowner['address'] = "244, Jungang-daero, Dong-gu, Busan, Republic of Korea";
 
             $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
             $this->shipmanager['address'] = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
