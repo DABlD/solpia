@@ -405,7 +405,7 @@
 			{{-- IF NOT "M/V HMM HARMONY","M/V HMM MASTER","M/V HMM MIRACLE" --}}
 			@if(!in_array($data->vessel->id, [6829,7998,7108]))
 				{{-- PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR --}}
-				{{-- PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA --}}
+				{{-- PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA, GLOBAL GOLDEN --}}
 				@if(in_array($data->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917,9591]))
 				<br style='mso-data-placement:same-cell;' />
 				ㅤ※	Additional clause for Liberia flag
@@ -449,7 +449,9 @@
 		<td colspan="3">(Seafarer)</td>
 		<td colspan="2"></td>
 		<td colspan="5">
-			@if(in_array($data->vessel->name, ["M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V ATLANTIC AFFINITY","M/V OCEAN FLORA", "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR", "M/V HMM PARAMOUNT", "M/V GLOBAL GOLDEN"]))
+			{{-- PARAMOUNT, ORIENTAL AQUAMARINE, UNIVERSAL CHALLENGER, FRONTIER, INNOVATOR --}}
+			{{-- PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA, GLOBAL GOLDEN --}}
+			@if(in_array($data->vessel->id, [8169,6072,5842,5801,5553,7517,7141,9274,7917,9591]))
 				(For and on behalf of the Shipowner)
 			@else
 				(For and on behalf of the Shipowner(Beneficial))
