@@ -449,7 +449,7 @@
 		<td colspan="3">(Seafarer)</td>
 		<td colspan="2"></td>
 		<td colspan="5">
-			@if(in_array($data->vessel->name, ['M/V GLOBAL GOLDEN']))
+			@if(in_array($data->vessel->name, ["M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V ATLANTIC AFFINITY","M/V OCEAN FLORA", "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR", "M/V HMM PARAMOUNT", "M/V GLOBAL GOLDEN"]))
 				(For and on behalf of the Shipowner)
 			@else
 				(For and on behalf of the Shipowner(Beneficial))

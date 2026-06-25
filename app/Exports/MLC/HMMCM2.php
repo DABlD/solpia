@@ -19,26 +19,33 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $this->shipmanager   = [];
 
         $array1 = [
-            // "M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
-            // ,"M/V ATLANTIC AFFINITY","M/V OCEAN FLORA","M/V PACIFIC CHAMP",
-            // "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
-                                                                                                                // FLEET B PART OF 1ST BATCH 
-            "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
-            "M/T ORIENTAL GREENSTONE",                                                                                                  // FLEET C PART OF 1ST BATCH
+            "M/T ORIENTAL GREENSTONE", "M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
+            "M/V HMM HARMONY", "M/V HMM MASTER", "M/V HMM MIRACLE",
+            "M/V HMM NARU", "M/V HMM NABI"
+        ];
 
-                                                                                   // FLEET B PART OF 2ND BATCH
-
-            "M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",                                                                                  // FLEET B PART OF 3RD BATCH
+        $array2 = [
             "M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V ATLANTIC AFFINITY","M/V OCEAN FLORA",
-            "M/V HMM PARAMOUNT", "M/V HMM HARMONY", "M/V HMM MASTER", "M/V HMM MIRACLE",
-
-            "M/V HMM NARU", "M/V HMM NABI", "M/V GLOBAL GOLDEN"
+            "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
+            "M/V HMM PARAMOUNT", "M/V GLOBAL GOLDEN"
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
             $this->shipownerA['company'] = "HMM Co., LTD.";
             $this->shipownerA['president'] = "CHOI WONHYOK";
             $this->shipownerA['address'] = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
+
+            $this->shipownerB['company'] = "HMM Ocean Service Co., Ltd.";
+            $this->shipownerB['president'] = "NAM JAE-IL";
+            $this->shipownerB['address'] = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
+
+            $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
+            $this->shipmanager['address'] = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
+        }
+        elseif(in_array($applicant->vessel->name, $array2)){
+            $this->shipownerA['company'] = "HMM Co., LTD.";
+            $this->shipownerA['president'] = "CHOI WONHYOK";
+            $this->shipownerA['address'] = "244, Jungang-daero, Dong-gu, Busan, Republic of Korea";
 
             $this->shipownerB['company'] = "HMM Ocean Service Co., Ltd.";
             $this->shipownerB['president'] = "NAM JAE-IL";
