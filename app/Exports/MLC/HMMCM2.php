@@ -323,9 +323,9 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
 
                 // PACIFIC CHAMP, ATLANTIC AFFINITY, BONANZA, OCEAN FLORA
-                // if(in_array($this->applicant->vessel->id, [7517,7141,9274,7917])){
-                //     $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('');
-                // }
+                if(in_array($this->applicant->vessel->id, [7517,7141,9274,7917])){
+                    $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter('');
+                }
 
                 // HEADERS FOOTERS
                 // $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
