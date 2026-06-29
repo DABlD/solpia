@@ -69,7 +69,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="5">For Filipino Ratings</td>
+		<td colspan="5">For Filipino Engineers</td>
 		<td colspan="4">{{ "<Vessel Type : CNTR, BULK>" }}</td>
 	</tr>
 
