@@ -2018,42 +2018,6 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
-        $ranks = Rank::orderBy('order')->get();
-        dd($ranks->pluck('abbr'));
-
-        $report = [];
-
-        $sss = SeaService::where('sign_on', '>=', "2024-01-01")->where('manning_agent', 'LIKE', '%SOLPIA%')->get();
-        $ranks = Rank::pluck('abbr', 'name');
-
-        $bool = true;
-        $curMonth = now()->parse('2025-01-01');
-
-        while ($bool) {
-            if(!isset($report[$curMonth->format('F Y')])){
-                $report[$curMonth->format('F Y')] = [];
-            }
-
-            foreach($sss as $ss){
-                if(isset($ss->sign_off) && $curMonth >= $ss->sign_on->startOfMonth() && $curMonth <= $ss->sign_off->endOfMonth()){
-
-                    if(!isset($report[$curMonth->format('F Y')][$ranks[$ss->rank]])){
-                        $report[$curMonth->format('F Y')][$ranks[$ss->rank]] = 0;
-                    }
-
-                    $report[$curMonth->format('F Y')][$ranks[$ss->rank]]++;
-                }
-            }
-
-            $curMonth = $curMonth->addMonth();
-            if($curMonth >= "2026-01-01"){
-                $bool = false;
-            }
-        }
-
-        dd($report);
-
-        die;
         $start = $req->start;
         $end = $req->end;
 
