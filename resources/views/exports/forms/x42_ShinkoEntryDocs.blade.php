@@ -132,7 +132,7 @@
 				    }
 				}
 			}
-			elseif(in_array($doc, ["HATCH COVER", "HAZMAT", "MENTAL HEALTH"])){
+			elseif(in_array($doc, ["HATCH COVER", "HAZMAT", "MENTAL HEALTH", "CARGO SECURING"])){
 				foreach(get_object_vars($data->document_lc) as $document){
 				    if(str_contains($document->type, $doc)){
 				    	$docu = $document;
@@ -295,6 +295,8 @@
 	{{ $doc("PDOS", "PDOS", 'lc', 2) }}
 	{{ $doc("MENTAL HEALTH", "MENTAL HEALTH AWARENESS", 'lc', 2) }}
 	{{ $doc("HATCH COVER", "HATCH COVER OPERATION AND MAINTENANCE", 'lc', 2) }}
+	{{ $doc("CARGO SECURING", "CARGO SECURING", 'lc', 2) }}
+	{{ $doc("HAZMAT", "HAZMAT", 'lc', 2) }}
 	{{ $doc("ENCLOSED SPACE ENTRY", "ENCLOSED SPACE TRAINING", 'lc') }}
 
 	<tr>

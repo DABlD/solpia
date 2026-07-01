@@ -281,7 +281,7 @@ class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, Shoul
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter("&LDOC NO: SMOP-DC-04B (For Shinko Only) &CEFFECTIVE DATE: 01 SEPT 17 &RREV: 3.0   07/27/22");
-                $event->sheet->getDelegate()->getPageSetup()->setScale(93);
+                $event->sheet->getDelegate()->getPageSetup()->setScale(91);
 
                 // SET PAGE BREAK PREVIEW
                 $temp = new \PhpOffice\PhpSpreadsheet\Worksheet\SheetView;
@@ -334,12 +334,12 @@ class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, Shoul
                 // HC
                 $h[3] = [
                     'A2',
-                    'C6:C57'
+                    'C6:C59'
                 ];
 
                 // HC VC
                 $h[4] = [
-                    'A58:E62'
+                    'A60:E64'
                 ];
 
                 // HL
@@ -350,12 +350,12 @@ class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, Shoul
                 $h[6] = [
                     'A2:E4',
                     'A6:E6', 'A15:E15', 'A43:E43', 'A49:E49',
-                    'A58:E62'
+                    'A60:E64'
                 ];
 
                 // VC
                 $h[7] = [
-                    'A1:E62'
+                    'A1:E64'
                 ];
 
                 // UNDERLINE
@@ -462,7 +462,7 @@ class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, Shoul
 
                 // BBT
                 $cells[12] = array_merge([
-                    'B58', 'E61', 'B61'
+                    'B60', 'E63', 'B63'
                 ]);
 
                 // LBT
@@ -527,13 +527,13 @@ class X42_ShinkoEntryDocs implements FromView, WithEvents, WithDrawings//, Shoul
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(14);
-                $event->sheet->getDelegate()->getStyle('A3:E57')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A3:E57')->getFont()->setName('Calibri');
+                $event->sheet->getDelegate()->getStyle('A3:E59')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A3:E59')->getFont()->setName('Calibri');
 
                 $event->sheet->getDelegate()->getStyle('E7:E14')->getFont()->setName('Wingdings 2');
                 $event->sheet->getDelegate()->getStyle('E16:E42')->getFont()->setName('Wingdings 2');
                 $event->sheet->getDelegate()->getStyle('E44:E48')->getFont()->setName('Wingdings 2');
-                $event->sheet->getDelegate()->getStyle('E50:E57')->getFont()->setName('Wingdings 2');
+                $event->sheet->getDelegate()->getStyle('E50:E59')->getFont()->setName('Wingdings 2');
             },
         ];
     }
