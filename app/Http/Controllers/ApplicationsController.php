@@ -1748,15 +1748,22 @@ class ApplicationsController extends Controller
         $id = 3689;
         $id = isset($req->id) ? $req->id : 9999;
 
+        $fleet = auth()->user()->fleet ?? null;
+
         $applicants = SeaService::select('sea_services.*', 'u.fname', 'u.mname', 'u.lname', 'u.suffix', 'u.fleet', 'u.address', 'pa.status as pa_s')
                     // ->where('manning_agent', 'LIKE', '%SOLPIA%')
                     // ->where('sea_services.applicant_id', $id)
                     ->whereNull('a.deleted_at')
                     ->join('applicants as a', 'a.id', '=', 'sea_services.applicant_id')
                     ->join('users as u', 'u.id', '=', 'a.user_id')
-                    ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
+                    ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id');
                     // ->join('ranks as r', 'r.id', '=', 'pa.rank_id')
-                    ->get()->groupBy('applicant_id');
+        
+        if($fleet){
+            $applicants = $applicants->where('u.fleet', 'like', '%' . $fleet . '%');
+        }
+
+        $applicants = $applicants->get()->groupBy('applicant_id');
 
         $ranks = Rank::pluck('abbr', 'importName');
         $rank2 = Rank::pluck('abbr', 'name');
@@ -1835,13 +1842,13 @@ class ApplicationsController extends Controller
                 }
             }
 
-            if($total >= 48 && $total <= 72){
+            if($total >= 60 && $total <= 72){
                 array_push($array1, $ss->applicant_id);
             }
-            if($total >= 108 && $total <= 132){
+            if($total >= 120 && $total <= 132){
                 array_push($array2, $ss->applicant_id);
             }
-            if($total >= 168){
+            if($total >= 180){
                 array_push($array3, $ss->applicant_id);
             }
 
@@ -2011,6 +2018,42 @@ class ApplicationsController extends Controller
 
     // CE JOEY
     public function tempfunc(Request $req){
+        $ranks = Rank::orderBy('order')->get();
+        dd($ranks->pluck('abbr'));
+
+        $report = [];
+
+        $sss = SeaService::where('sign_on', '>=', "2024-01-01")->where('manning_agent', 'LIKE', '%SOLPIA%')->get();
+        $ranks = Rank::pluck('abbr', 'name');
+
+        $bool = true;
+        $curMonth = now()->parse('2025-01-01');
+
+        while ($bool) {
+            if(!isset($report[$curMonth->format('F Y')])){
+                $report[$curMonth->format('F Y')] = [];
+            }
+
+            foreach($sss as $ss){
+                if(isset($ss->sign_off) && $curMonth >= $ss->sign_on->startOfMonth() && $curMonth <= $ss->sign_off->endOfMonth()){
+
+                    if(!isset($report[$curMonth->format('F Y')][$ranks[$ss->rank]])){
+                        $report[$curMonth->format('F Y')][$ranks[$ss->rank]] = 0;
+                    }
+
+                    $report[$curMonth->format('F Y')][$ranks[$ss->rank]]++;
+                }
+            }
+
+            $curMonth = $curMonth->addMonth();
+            if($curMonth >= "2026-01-01"){
+                $bool = false;
+            }
+        }
+
+        dd($report);
+
+        die;
         $start = $req->start;
         $end = $req->end;
 
