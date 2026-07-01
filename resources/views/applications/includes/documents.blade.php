@@ -221,6 +221,7 @@
 					<option value="ADVANCE SHIPBOARD OPERATION AND MGT">&nbsp;&nbsp;&nbsp;&nbsp;ADVANCE SHIPBOARD OPERATION AND MGT</option>
 					<option value="AUXILIARY MACHINERY SYSTEM">&nbsp;&nbsp;&nbsp;&nbsp;AUXILIARY MACHINERY SYSTEM</option>
 					<option value="CARGO HANDLING">&nbsp;&nbsp;&nbsp;&nbsp;CARGO HANDLING</option>
+					<option value="CARGO SECURING MANUAL FAMILIARIZATION">&nbsp;&nbsp;&nbsp;&nbsp;CARGO SECURING MANUAL FAMILIARIZATION</option>
 					<option value="COLLISION AVOIDANCE">&nbsp;&nbsp;&nbsp;&nbsp;COLLISION AVOIDANCE</option>
 					<option value="CONTROL ENGINEERING">&nbsp;&nbsp;&nbsp;&nbsp;CONTROL ENGINEERING</option>
 					<option value="DANGEROUS FLUID CARGO COURSE">&nbsp;&nbsp;&nbsp;&nbsp;DANGEROUS FLUID CARGO COURSE</option>
