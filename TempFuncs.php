@@ -254,7 +254,7 @@ $users = User::where('role', 'Applicant')->where('fleet', 'FLEET B')->get();
 
 foreach($users as $user){
     if(isset($user->crew->pro_app) && $user->crew->pro_app->status == "On Board" && $user->crew->pro_app->vessel->principal_id == 256){
-        echo $user->lname . ';' . $user->fname . ';' . $user->mname . ';' . $user->crew->civil_status . ';' . $user->crew->pro_app->rank->abbr . ';' . $user->birthday . ';' . $user->crew->pro_app->updated_at . '<br>';
+        echo $user->crew->pro_app->rank->abbr . ';' . $user->lname . ', ' . $user->fname . ' ' . $user->mname . ';' . $user->crew->current_lineup->joining_date . ';' . $user->crew->current_lineup->vessel->name . '<br>';
     }
 }
 
