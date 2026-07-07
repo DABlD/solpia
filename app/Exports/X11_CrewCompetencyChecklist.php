@@ -508,6 +508,7 @@ class X11_CrewCompetencyChecklist implements FromView, WithEvents, WithColumnFor
                 $event->sheet->getDelegate()->getRowDimension(4)->setRowHeight(22);
                 $event->sheet->getDelegate()->getRowDimension(6)->setRowHeight(22);
                 
+                $event->sheet->getDelegate()->getStyle('A1:I' . (68 + $tar))->getFont()->setName('Calibri');
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
             },
