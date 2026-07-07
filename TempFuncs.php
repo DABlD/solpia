@@ -793,3 +793,23 @@ foreach($crews as $crew){
 
     echo $crew->rank->abbr . ';' . $crew->applicant->user->namefull . ';' . $temp->first()->vessel_name . ';' . $temp->first()->sign_off . '<br>';
 }
+
+<!-- GET ALL AB TOEI CREW WITH CONTAINER EXP -->
+$crews = ProcessedApplicant::where('rank_id', 10)
+                        ->join('applicants as a', 'a.id', '=', 'processed_applicants.applicant_id')
+                        ->join('users as u', 'u.id', '=', 'a.user_id')
+                        ->select('processed_applicants.*')
+                        ->where('u.fleet', 'TOEI')
+                        ->get();
+
+foreach($crews as $crew){
+    $hasMatch = SeaService::where('applicant_id', $crew->applicant_id)
+        ->where(function ($q) {
+            $q->where('vessel_type', 'like', 'CONTAINER');
+        })
+        ->exists();
+
+    if($hasMatch){
+        echo $crew->applicant->user->namefull . ';' . $crew->applicant->current_lineup->joining_date . ';' . $crew->applicant->current_lineup->vessel->name . '<br>';
+    }
+}
