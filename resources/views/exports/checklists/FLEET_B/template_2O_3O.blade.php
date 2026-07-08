@@ -281,7 +281,7 @@
 
 	@if(in_array($data->vessel->principal_id, [256]))
 		{{ $con("HMM BRIEFING") }}
-		{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}
+		{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert', 2) }}
 
 		@php
 			$temp = null;
@@ -299,8 +299,8 @@
 			}
 		@endphp
 
-		{{ $doc($temp, "COVID VACCINE", 'med_cert') }}
-		{{ $doc("KML", "KOREAN MARITIME LAW", 'lc') }}
+		{{ $doc($temp, "COVID VACCINE", 'med_cert', 2) }}
+		{{ $doc("KML", "KOREAN MARITIME LAW", 'lc', 2) }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
@@ -311,7 +311,7 @@
 	@elseif(in_array($data->vessel->principal_id, [2]))
 		{{ $con("KOSCO OATH") }}
 		{{ $con("KOSCO INHOUSE TRAINING RECORD") }}
-		{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert') }}
+		{{ $doc("DRUG AND ALCOHOL TEST", "DRUG AND ALCOHOL TEST", 'med_cert', 2) }}
 
 		@php
 			$temp = null;
@@ -329,8 +329,8 @@
 			}
 		@endphp
 
-		{{ $doc($temp, "COVID VACCINE", 'med_cert') }}
-		{{ $doc("KML", "KOREAN MARITIME LAW", 'lc') }}
+		{{ $doc($temp, "COVID VACCINE", 'med_cert', 2) }}
+		{{ $doc("KML", "KOREAN MARITIME LAW", 'lc', 2) }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
 		{{ $doc("TEST", "", 'lc') }}
