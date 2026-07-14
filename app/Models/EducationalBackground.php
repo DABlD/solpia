@@ -17,4 +17,8 @@ class EducationalBackground extends Model
     protected $dates = [
         'created_at', 'updated_at'
     ];
+
+    public function applicant(){
+        return $this->belongsTo('App\Models\Applicant');
+    }
 }
