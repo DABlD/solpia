@@ -848,7 +848,7 @@
 	        			},
         				{
         					range: [
-        						[1,57]
+        						[1,65]
         					],
         					documents: [
         						'BTOC', 'ATOT', 'ATCT', 'ATLGT', 'BTLGT'
@@ -887,7 +887,7 @@
         				@endif
         				{
         					range: [
-        						[9,57]
+        						[9,65]
         					],
         					documents: [
         						'BOOKLET', 'SDSD'
@@ -895,7 +895,7 @@
         				},
         				{
         					range: [
-        						[1,57]
+        						[1,65]
         					],
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
@@ -904,7 +904,7 @@
 	        			{
 	        				range: [
 	        					[24,26],
-	        					[57]
+	        					[65]
 	        				],
 	        				documents: [
 	        					"SHIP'S COOK ENDORSEMENT"
@@ -917,7 +917,7 @@
         			details: [
         				{
         					range: [
-        						[1,57]
+        						[1,65]
         					],
         					documents: [
         						'LICENSE', 'BOOKLET', 'PSCRB', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
@@ -930,7 +930,7 @@
         			details: [
         				{
         					range: [
-        						[1,57]
+        						[1,65]
         					],
         					documents: [
         						'LICENSE', 'BOOKLET', 'GMDSS/GOC', 'CRA', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
@@ -939,7 +939,7 @@
         				{
         					range: [
         						[24,26],
-        						[57]
+        						[65]
         					],
         					documents: [
         						"SHIP'S COOK ENDORSEMENT", 'CRA'
@@ -947,7 +947,7 @@
         				},
         				{
         					range: [
-        						[1,57]
+        						[1,65]
         					],
         					documents: [
         						'BT', 'PSCRB', 'AFF', 'MEFA', 'MECA', 'SDSD'
@@ -966,7 +966,7 @@
         				@endif
         				{
         					range: [
-        						[1,57]
+        						[1,65]
         					],
         					documents: [
         						'CRA'
@@ -979,10 +979,23 @@
         			details: [
         				{
         					range: [
-        						[1,57]
+        						[1,65]
         					],
         					documents: [
         						'MSID', 'COR' //'LICENSE', 'BOOKLET', 
+        					]
+        				}
+        			]
+        		},
+        		{
+        			country: 'Singapore',
+        			details: [
+        				{
+        					range: [
+        						[1,65]
+        					],
+        					documents: [
+        						'LICENSE', 'GOC', 'BTOC', 'ATOT', 'ATCT', 'ATLGT', 'BTLGT'
         					]
         				}
         			]
@@ -992,7 +1005,7 @@
         			details: [
         				{
         					range: [
-        						[1,57]
+        						[1,65]
         					],
         					documents: [
         						'LICENSE', 'BTOC', 'ATOT', 'ATCT', 'ATLGT'
