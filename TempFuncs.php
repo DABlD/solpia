@@ -845,3 +845,11 @@ foreach($temps as $temp){
         echo  ($rank ? $rank->abbr : "-") . ';' . $temp->namefull . ';' . $temp->crew->pro_app->status . '<br>';
     }
 }
+
+<!-- GET ALL CREW FROM CERTAIN SCHOOL -->
+$educs = EducationalBackground::where('school', 'like', "Baliwag%")->get();
+
+foreach($educs as $educ){
+    $rank = $educ->applicant->pro_app->rank;
+    echo ($rank ? $rank->abbr : "-") . ';' . $educ->applicant->user->namefull . ';' . $educ->school . ';' . $educ->applicant->user->fleet . '<br>';
+}
