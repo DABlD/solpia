@@ -813,3 +813,35 @@ foreach($crews as $crew){
         echo $crew->applicant->user->namefull . ';' . $crew->applicant->current_lineup->joining_date . ';' . $crew->applicant->current_lineup->vessel->name . '<br>';
     }
 }
+
+<!-- GET ALL FLEET B RATINGS WITH OIC LICENSE -->
+
+$temps = User::where('fleet', 'FLEET B')
+                ->join('applicants as a', 'a.user_id', '=', 'users.id')
+                ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
+                ->join('ranks as r', 'r.id', '=', 'pa.rank_id')
+                ->whereNull('a.deleted_at')
+                ->where('r.type', 'RATING')
+                ->select('users.*')
+                ->get();
+
+foreach($temps as $temp){
+    if(isset($temp->crew->document_lc)){
+        $hasDocument = $temp->crew->document_lc->contains(function ($doc) {
+            return Str::startsWith($doc->no, [
+                'COICEW',
+                'COICNW',
+                'CCE',
+                'CMM'
+            ]);
+        });
+    }
+
+    if($hasDocument && isset($temp->crew->pro_app)){
+        if($temp->crew->id == 140){
+            dd($temp->namefull);
+        }
+        $rank = $temp->crew->pro_app->rank;
+        echo  ($rank ? $rank->abbr : "-") . ';' . $temp->namefull . ';' . $temp->crew->pro_app->status . '<br>';
+    }
+}

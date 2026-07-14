@@ -26,6 +26,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PDFExport;
 use PDF;
 
+use Illuminate\Support\Str;
+
 class ApplicationsController extends Controller
 {
     public function __construct(){
