@@ -36,7 +36,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $shipowner = "KOREA LINE CORPORATION";
             $phoneNumber = "+82-2-3701-0114";
             $address = "3F 30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Korea";
-            $employer = "LEE DONG SU";
+            $employer = "MIN SANG GI";
             $identification = "101-81-24624";
         }
         elseif(in_array($applicant->vessel->name, ["M/V CH BELLA","M/V CH CLARE","M/V CH DORIS","M/V CK ANGIE","M/V CK BLUEBELL"])){
@@ -672,7 +672,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         if(in_array($this->applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY']))
         {
-            $drawing6->setPath(public_path("images/mlc_klcsm_lng.png"));
+            $drawing6->setPath(public_path("images/mlc_klcsm_new.png"));
         }
         else{
             $drawing6->setPath(public_path("images/mlc_klcsm.png"));
