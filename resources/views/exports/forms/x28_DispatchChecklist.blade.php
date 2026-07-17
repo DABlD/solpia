@@ -10,13 +10,13 @@
 		}
 	}
 
-	$or = function($text) use ($c){
+	$or = function($text, $co = null) use ($c){
 		echo "
 			<tr>
 				<td colspan='4'>$text</td>
 				<td style='{{ $c }}'></td>
 				<td colspan='2' style='{{ $c }}'></td>
-				<td colspan='4' style='{{ $c }}'></td>
+				<td colspan='4' style='{{ $c }}'>$co</td>
 				<td colspan='2' style='{{ $c }}'></td>
 			</tr>
 		";
@@ -89,7 +89,7 @@
 		<td colspan="4">1. Approval of Principal</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->manager ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -97,7 +97,7 @@
 		<td colspan="4">2. Data Privacy Consent</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -105,7 +105,7 @@
 		<td colspan="4">3. Seafarer's Health Assessment Questionnaire</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -113,7 +113,7 @@
 		<td colspan="4">4. PEME Referral</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -121,7 +121,7 @@
 		<td colspan="4">5. Crew Review POEA/MLC Contract</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -129,7 +129,7 @@
 		<td colspan="4">6. Crew Sign POEA/MLC Contract</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -137,7 +137,7 @@
 		<td colspan="4">7. Type Specific ECDIS</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -145,7 +145,7 @@
 		<td colspan="4">8. Uniform (Coverall &#38; Safety Shoes)</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -153,7 +153,7 @@
 		<td colspan="4">9. Onboard Complaint Procedure</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -165,7 +165,7 @@
 		<td colspan="4">1. SEA Processing</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->proc1 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -173,7 +173,7 @@
 		<td colspan="4">2. Flag State Documents</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->proc2 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -181,7 +181,7 @@
 		<td colspan="4">3. SRN / E-Reg</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -189,7 +189,7 @@
 		<td colspan="4">4. SID</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -197,7 +197,7 @@
 		<td colspan="4">5. COC / COP / GOC</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -205,7 +205,7 @@
 		<td colspan="4">6. US Visa</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -213,7 +213,7 @@
 		<td colspan="4">7. Entry/Transit Visa</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -221,7 +221,7 @@
 		<td colspan="4">8. MCV</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->co ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -233,7 +233,7 @@
 		<td colspan="4">1. In-House (PDOS/AP/ISM/MCRA)</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->training ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -241,7 +241,7 @@
 		<td colspan="4">2. KML Training</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->training ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -249,7 +249,7 @@
 		<td colspan="4">3. Special Training</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->training ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -261,7 +261,7 @@
 		<td colspan="4">1. Allotment Form</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc1 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -269,7 +269,7 @@
 		<td colspan="4">2. ATM/Passbook (Photocopy)</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc1 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -277,7 +277,7 @@
 		<td colspan="4">3. SSS ID / E1 (Photocopy)</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc2 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -285,7 +285,7 @@
 		<td colspan="4">4. Philhealth ID (Photocopy)</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc2 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -293,7 +293,7 @@
 		<td colspan="4">5. ID Picture</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc1 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -301,7 +301,7 @@
 		<td colspan="4">6. Cash Advance Form</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}"></td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc3 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -357,6 +357,21 @@
 		{{-- NORD A. TRITON C. --}}
 		@elseif(in_array($data->vessel->id, [4647, 6196]))
 			{{ $or("1.) Final Briefing") }}
+			{{ $or("2.) ") }}
+			{{ $or("3.) ") }}
+			{{ $or("4.) ") }}
+			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		{{-- EVER ORIGIN --}}
+		@elseif(in_array($data->vessel->id, [4927]))
+			{{ $or("1.) SMS Training", $data->co ?? null) }}
+			{{ $or("2.) OWNERS BRIEFING", $data->co ?? null) }}
+			{{ $or("3.) RATINGS BRIEFING", $data->co ?? null) }}
+			{{ $or("4.) ") }}
+			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		@else
+			{{ $or("1.) ") }}
 			{{ $or("2.) ") }}
 			{{ $or("3.) ") }}
 			{{ $or("4.) ") }}
@@ -433,15 +448,15 @@
 
 	<tr>
 		<td colspan="5" style="height: 30px;">
-			@if(auth()->user()->fleet == "FLEET A")
+			@if($data->user->fleet == "FLEET A")
 				Ms. Precian Cervantes
-			@elseif(auth()->user()->fleet == "FLEET B")
+			@elseif($data->user->fleet == "FLEET B")
 				Mr. Adulf Kit Jumawan
-			@elseif(auth()->user()->fleet == "FLEET c")
+			@elseif($data->user->fleet == "FLEET c")
 				Ms. Shirley Erasquin
-			@elseif(auth()->user()->fleet == "FLEET D")
+			@elseif($data->user->fleet == "FLEET D")
 				Ms. THEA MAE G. RIO
-			@elseif(auth()->user()->fleet == "FISHING")
+			@elseif($data->user->fleet == "FISHING")
 				Mr. Ricardo Amparo
 			@elseif(in_array(auth()->user()->id, [4566, 5963, 8265]))
 				Ms. Jeneva Bianca Santos

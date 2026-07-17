@@ -22,6 +22,17 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
         $data->employment_months = $req['employment_months'];
         $data->port = $req['port'];
 
+        if($data->vessel->id == 4927){
+            $data->manager = "Ms. Thea";
+            $data->co = "Ms. Bia";
+            $data->training = "Ms. Grace";
+            $data->proc1 = "Sir Randy / Clark";
+            $data->proc2 = "Ms. Tash";
+            $data->acc1 = "Ms. Marj";
+            $data->acc2 = "Ms. Julia";
+            $data->acc3 = "Ms. Lei";
+        }
+
         $this->data     = $data;
         $this->type     = $type;
         $this->title     = $title;
@@ -181,7 +192,7 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                     'color' => [
-                        'rgb' => 'bdb9b9'
+                        'rgb' => '0070C0'
                     ]
                 ],
             ],
@@ -319,6 +330,7 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
 
                 // HC VC
                 $h[4] = [
+                    'E1:M46'
                 ];
 
                 // HL
@@ -481,12 +493,16 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(14);
                 // $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Arial');
+
+                $event->sheet->getDelegate()->getStyle('H11:H46')->getFont()->getColor()->setRGB("0070C0");
             },
         ];
     }
 
     public function drawings()
     {
+        $drawings = [];
+
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('Letter Head');
         $drawing->setDescription('Letter Head');
@@ -498,6 +514,31 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
         $drawing->setOffsetY(3);
         $drawing->setCoordinates('A1');
 
-        return $drawing;
+        array_push($drawings, $drawing);
+
+        if($this->data->vessel->id == 4927){
+            $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing2->setPath(public_path("images/maam_thea_sig2.png"));
+            $drawing2->setResizeProportional(false);
+            $drawing2->setHeight(120);
+            $drawing2->setWidth(270);
+            $drawing2->setOffsetX(10);
+            $drawing2->setOffsetY(-30);
+            $drawing2->setCoordinates('G10');
+
+            $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing3->setPath(public_path("images/maam_thea_sig2.png"));
+            $drawing3->setResizeProportional(false);
+            $drawing3->setHeight(150);
+            $drawing3->setWidth(290);
+            $drawing3->setOffsetX(-40);
+            $drawing3->setOffsetY(3);
+            $drawing3->setCoordinates('A53');
+
+            array_push($drawings, $drawing2);
+            array_push($drawings, $drawing3);
+        }
+
+        return $drawings;
     }
 }
