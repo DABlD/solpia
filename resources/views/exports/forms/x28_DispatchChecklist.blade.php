@@ -269,7 +269,7 @@
 		<td colspan="4">2. ATM/Passbook (Photocopy)</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}">{{ $data->acc1 ?? "" }}</td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc2 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -277,7 +277,7 @@
 		<td colspan="4">3. SSS ID / E1 (Photocopy)</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}">{{ $data->acc2 ?? "" }}</td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc3 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -285,7 +285,7 @@
 		<td colspan="4">4. Philhealth ID (Photocopy)</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}">{{ $data->acc2 ?? "" }}</td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc4 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -293,7 +293,7 @@
 		<td colspan="4">5. ID Picture</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}">{{ $data->acc1 ?? "" }}</td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc5 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -301,7 +301,7 @@
 		<td colspan="4">6. Cash Advance Form</td>
 		<td style="{{ $c }}"></td>
 		<td colspan="2" style="{{ $c }}"></td>
-		<td colspan="4" style="{{ $c }}">{{ $data->acc3 ?? "" }}</td>
+		<td colspan="4" style="{{ $c }}">{{ $data->acc6 ?? "" }}</td>
 		<td colspan="2" style="{{ $c }}"></td>
 	</tr>
 
@@ -369,6 +369,14 @@
 			{{ $or("3.) RATINGS BRIEFING", $data->co ?? null) }}
 			{{ $or("4.) ") }}
 			{{ $or("5.) ") }}
+			{{ $or("6.) ") }}
+		{{-- SHINKO VESSELS --}}
+		@elseif($data->vessel->principal_id == 1))
+			{{ $or("1.) SHINKO INVENTORY W/ MENTAL HEALTH", $data->co ?? null) }}
+			{{ $or("2.) ENCLOSED SPACE", $data->co ?? null) }}
+			{{ $or("3.) HAZMAT", $data->co ?? null) }}
+			{{ $or("4.) CARGO SECURING", $data->co ?? null) }}
+			{{ $or("5.) HATCH COVER (MSTR&#38;CO", $data->co ?? null) }}
 			{{ $or("6.) ") }}
 		@else
 			{{ $or("1.) ") }}

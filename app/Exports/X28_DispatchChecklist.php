@@ -22,6 +22,7 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
         $data->employment_months = $req['employment_months'];
         $data->port = $req['port'];
 
+        // EVER ORIGIN
         if($data->vessel->id == 4927){
             $data->manager = "Ms. Thea";
             $data->co = "Ms. Bia";
@@ -29,8 +30,24 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
             $data->proc1 = "Sir Randy / Clark";
             $data->proc2 = "Ms. Tash";
             $data->acc1 = "Ms. Marj";
-            $data->acc2 = "Ms. Julia";
-            $data->acc3 = "Ms. Lei";
+            $data->acc2 = "Ms. Marj";
+            $data->acc3 = "Ms. Julia";
+            $data->acc4 = "Ms. Julia";
+            $data->acc5 = "Ms. Marj";
+            $data->acc6 = "Ms. Lei";
+        }
+        elseif($data->vessel->principal_id == 1){ //SHINKO
+            $data->manager = "Ms. Thea";
+            $data->co = "Ms. Bia";
+            $data->training = "Ms. Grace";
+            $data->proc1 = "Sir Randy / Clark";
+            $data->proc2 = "Ms. Tash";
+            $data->acc1 = "Ms. Benilda";
+            $data->acc2 = "Ms. Marj";
+            $data->acc3 = "Ms. Julia";
+            $data->acc4 = "Ms. Julia";
+            $data->acc5 = "Ms. Marj";
+            $data->acc6 = "Ms. Lei";
         }
 
         $this->data     = $data;
@@ -516,7 +533,7 @@ class X28_DispatchChecklist implements FromView, WithEvents, WithDrawings//, Sho
 
         array_push($drawings, $drawing);
 
-        if($this->data->vessel->id == 4927){
+        if($this->data->user->fleet == "FLEET D"){
             $drawing2 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
             $drawing2->setPath(public_path("images/maam_thea_sig2.png"));
             $drawing2->setResizeProportional(false);
