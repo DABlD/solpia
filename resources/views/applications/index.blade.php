@@ -285,6 +285,7 @@
         var fStatus = "%%";
         var fUsv = "";
         var fFleet = "%%";
+        var fVType = null;
 
         // INIT DATA FROM SESSION
         fRanks = "{{ session('fRanks') }}";
@@ -502,7 +503,8 @@
                 // engine: engine,
                 // remark: remark,
                 fStatus: fStatus,
-                fFleet: fFleet
+                fFleet: fFleet,
+                fVType: fVType
             };
         }
 
@@ -3792,6 +3794,32 @@
                         </div>
                     </div></br>
 
+                    <div class="row iRow">
+                        <div class="col-md-2 iLabel">
+                            Vessel Type
+                        </div>
+                        <div class="col-md-10 iInput">
+                            <select name="fVType" class="form-control" data-placeholder="Select Vessel Type" multiple>
+                                <option value="BULK">BULK</option>
+                                <option value="LOG">BULK (LOG)</option>
+                                <option value="CONT">CONTAINER</option>
+                                <option value="WOOD">WOODCHIP</option>
+                                <option value="GEN">GENERAL CARGO</option>
+                                <option value="OIL">OIL TANKER</option>
+                                <option value="CHEM">CHEMICAL TANKER</option>
+                                <option value="PROD">PRODUCT TANKER</option>
+                                <option value="VLCC">VLCC</option>
+                                <option value="LNG">LNG</option>
+                                <option value="LPG">LPG</option>
+                                <option value="MULTI">MPV</option>
+                                <option value="PURSE">PURSEINER</option>
+                                <option value="LONG">LONGLINER</option>
+                                <option value="TRAWL">TRAWL</option>
+                                <option value="SQUID">SQUID JIGGER</option>
+                            </select>
+                        </div>
+                    </div></br>
+
                     <div class="row iRow fStatus">
                         <div class="col-md-2 iLabel">
                             Status
@@ -3871,6 +3899,14 @@
                         $(`[name="usv"]`).click();
                     }
 
+                    $('[name="fVType"]').select2({
+                        placeholder: "Select Type",
+                        tags: true,
+                        multiple: true,
+                        closeOnSelect: false,
+                        scrollAfterSelect: false,
+                    });
+
                     $.ajax({
                         url: "{{ route('rank.get') }}",
                         data: {
@@ -3918,6 +3954,7 @@
                     fStatus = $("[name='status']").val();
                     fFleet = $("[name='fFleet']").val();
                     fUsv = $("[name='usv']:checked").val();
+                    fVType = $("[name='fVType']").val();
                     // fRemarks = $("[name='remarks']").val();
 
                     // let temp = [];
@@ -3941,6 +3978,7 @@
                     fUsv = "";
                     fStatus = "%%";
                     fFleet = "%%";
+                    fVType = null;
                     
                     filter();
                 }

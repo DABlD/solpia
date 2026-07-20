@@ -91,9 +91,9 @@ class DatatablesController extends Controller
 		session(['fStatus' => $req->filters['fStatus']]);
 		session(['fFleet' => $req->filters['fFleet']]);
 
-		DB::enableQueryLog();
+		// DB::enableQueryLog();
 		$applicants = Applicant::select('applicants.*', 'pa.status as pas')
-								->orderBy('created_at', 'DESC')
+								->orderBy('applicants.created_at', 'DESC')
 								->join('users as u', 'u.id', '=', 'applicants.user_id')
 								->join('processed_applicants as pa', 'pa.applicant_id', '=', 'applicants.id')
 								->where('pa.status', 'like', $req->filters['fStatus'])
@@ -186,6 +186,19 @@ class DatatablesController extends Controller
 			// INIT RANK FILTER
 			if(isset($filters['fRanks'])){
 				$applicants->whereIn('pa.rank_id', $filters['fRanks']);
+			}
+
+			// INIT VESSEL TYPE FILTER
+			if(isset($filters['fVType']) && $filters['fVType']){
+				$words = $filters['fVType'];
+
+				$applicants->whereHas('sea_service', function ($q) use ($words) {
+				        $q->where(function ($q) use ($words) {
+				            foreach ($words as $word) {
+				                $q->orWhere('vessel_type', 'LIKE', "%{$word}%");
+				            }
+				        });
+				    });
 			}
 
 			// INIT REMARK FILTER
