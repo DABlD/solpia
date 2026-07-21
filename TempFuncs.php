@@ -853,3 +853,56 @@ foreach($educs as $educ){
     $rank = $educ->applicant->pro_app->rank;
     echo ($rank ? $rank->abbr : "-") . ';' . $educ->applicant->user->namefull . ';' . $educ->school . ';' . $educ->applicant->user->fleet . '<br>';
 }
+
+<!-- ONBOARD CREW GROUP BY RANK AND STATUS-->
+
+$users = User::where('role', 'Applicant')->where('fleet', 'TOEI')
+            ->join('applicants as a', 'a.user_id', '=', 'users.id')
+            ->whereNull('a.deleted_at')
+            ->join('processed_applicants as pa', 'pa.applicant_id', '=', 'a.id')
+            ->select('users.*', 'pa.status', 'pa.rank_id')
+            ->get();
+
+$ranks = Rank::pluck('abbr', 'id');
+
+$keywords = [
+    'WITHDRAW', 'WD'
+    // ,'POOR', 'P&I', 'NFR', 'AGE', 'PROBLEM', 'COLLISION',
+];
+
+foreach($users as $key => $user){
+    if(isset($user->crew->sea_service->last()->sign_off) && $user->crew->sea_service->last()->sign_off->toDateString() <= "2024-06-30"){
+        $users->forget($key);
+    }
+}
+
+$users = $users->reject(function ($user) use ($keywords) {
+    $remarks = json_decode($user->crew->remarks, true) ?? [];
+
+    foreach ($remarks as $remark) {
+        foreach ($keywords as $keyword) {
+            if (stripos($remark, $keyword) !== false) {
+                return true; // remove this user
+            }
+        }
+    }
+
+    return false;
+});
+
+$grouped = $users
+    ->groupBy('rank_id')
+    ->map(function ($usersByRank) {
+        return $usersByRank->groupBy('status');
+    });
+
+foreach($grouped as $key => $group){
+    foreach($group as $key2 => $status){
+        foreach($status as $key3 => $crew){
+            echo ($ranks[$key] ?? "-") . ';' . $crew->namefull . ';' . $crew->status . '<br>';
+        }
+    }
+}
+
+
+die;
