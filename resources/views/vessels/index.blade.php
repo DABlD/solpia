@@ -2295,7 +2295,10 @@
                         $('select').select2({
                             tags: true,
                             class: 'table-select',
-                            disabled: {{ (!in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer']) || !in_array(auth()->user()->id, [8315])) ? 'true' : 'false' }}
+                            disabled: {{ !in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer']) ? 'true' : 'false' }},
+                            @if(in_array(auth()->user()->id, [8315]))
+                            disabled: false
+                            @endif
                             {{-- 8315/CONNIE --}}
                         });
 
