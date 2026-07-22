@@ -927,8 +927,9 @@
 				Ms. Gladys Anne Frondozo
 			@elseif(auth()->user()->id == 6794)
 				Ms. Monique Balanay
-			@elseif(auth()->user()->id == 7603)
-				Mr. Arnel Cedenio
+			{{-- MS HAPPY / MS. ANGEL --}}
+			@elseif(auth()->user()->id == 7603 || auth()->user()->id == 9360)
+				Ms. Daryllyn Igliane
 			@else
 				{{ auth()->user()->gender == "Female" ? "Ms." : "Mr." }} {{ auth()->user()->fullname }}
 			@endif
