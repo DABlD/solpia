@@ -2295,7 +2295,8 @@
                         $('select').select2({
                             tags: true,
                             class: 'table-select',
-                            disabled: {{ !in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer']) ? 'true' : 'false' }}
+                            disabled: {{ (!in_array(auth()->user()->role, ['Admin', 'Crewing Manager', 'Crewing Officer']) || !in_array(auth()->user()->id, [8315])) ? 'true' : 'false' }}
+                            {{-- 8315/CONNIE --}}
                         });
 
                         $('[id^=table-select] + .select2-container').css('width', '100%');
