@@ -842,6 +842,7 @@
                                 <td>${checkbox2("fm" + can.id, "test", can.medical, can.status)}</td>
                                 <td>${checkbox2("ob" + can.id, "test", can.on_board, can.status)}</td>
                                 <td id="can${can.id}">${can.status}</td>
+                                <td>${toDateTime(can.created_at)}</td>
                                 <td>${toDateTime(can.updated_at)}</td>
                                 <td>${file}</td>
                                 <td>
@@ -1079,6 +1080,7 @@
                                 <th style="vertical-align: middle;">Ongoing<br>Medical</th>
                                 <th style="vertical-align: middle;">On<br>Board</th>
                                 <th style="vertical-align: middle;">Status</th>
+                                <th style="vertical-align: middle;">Endorsed<br>On</th>
                                 <th style="vertical-align: middle;">Last<br>Updated</th>
                                 <th style="vertical-align: middle;">Form</th>
                                 <th style="vertical-align: middle;">Remark</th>
