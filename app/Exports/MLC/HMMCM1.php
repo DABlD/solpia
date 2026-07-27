@@ -38,7 +38,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HMM BANGKOK"
         ];
 
-        $array3 = [
+        $array2 = [
             "M/V HYUNDAI BRAVE",
             "M/V HYUNDAI COURAGE",
             "M/V HYUNDAI FAITH",
@@ -54,7 +54,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HMM JADE",
         ];
 
-        $array2 = [
+        $array3 = [
             "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", 
             "M/V HMM GARNET", "M/V HMM SAPPHIRE", "M/V HMM PERIDOT"
         ];
