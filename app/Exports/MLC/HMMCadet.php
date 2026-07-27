@@ -17,17 +17,46 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $mt = false;
 
         $array1 = [
-            "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE", "M/V HMM AQUAMARINE",
-            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM LE HAVRE", "M/V HYUNDAI BRAVE",
-            "M/V HYUNDAI COURAGE", "M/V HMM ALGECIRAS", "M/V HYUNDAI FAITH", "M/V HYUNDAI FORCE",
-            "M/V HMM COPENHAGEN", "M/V HMM GDANSK", "M/V HMM HAMBURG", "M/V HMM OSLO",
-            "M/V HMM SOUTHAMPTON", "M/V HMM ST. PETERSBURG", "M/V HYUNDAI GRACE", "M/V HYUNDAI UNITY",
-            "M/V HMM COLOMBO", "M/V HMM VICTORY", "M/V HMM PRIDE", "M/V HMM FOREST", "M/V HMM GREEN","M/V HMM SAGE","M/V HMM LIME",
+            "M/V HMM LE HAVRE",
+            "M/V HMM ALGECIRAS",
+            "M/V HMM COPENHAGEN",
+            "M/V HMM GDANSK",
+            "M/V HMM HAMBURG",
+            "M/V HMM OSLO",
+            "M/V HMM SOUTHAMPTON",
+            "M/V HMM ST. PETERSBURG",
+            "M/V HYUNDAI GRACE",
+            "M/V HYUNDAI UNITY",
+            "M/V HMM COLOMBO",
+            "M/V HMM VICTORY",
+            "M/V HMM PRIDE",
             'M/V HMM JAKARTA',
-            "M/V GLOBAL ENTERPRISE","M/V HMM CEBU",
-            'M/V MPV THALIA', 'M/V MPV URANIA',
+            'M/V HMM TACOMA',
+            "M/V HMM GOODWILL",
             "M/V HMM BANGKOK"
         ];
+
+        $array2 = [
+            "M/V HYUNDAI BRAVE",
+            "M/V HYUNDAI COURAGE",
+            "M/V HYUNDAI FAITH",
+            "M/V HYUNDAI FORCE",
+            "M/V HMM FOREST",
+            "M/V HMM GREEN",
+            'M/V HMM LEAF',
+            "M/V HMM SAGE",
+            "M/V HMM LIME",
+            'M/V HMM JUNIPER',
+            'M/V HMM IVY',
+            'M/V HMM CLOVER',
+            "M/V HMM JADE",
+        ];
+
+        $array3 = [
+            "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", 
+            "M/V HMM GARNET", "M/V HMM SAPPHIRE", "M/V HMM PERIDOT"
+        ];
+
 
         // FLEET C LAST 1 LINE
         // $array2 = [
@@ -36,7 +65,7 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         //     "M/V KRISTIAN OLDENDORFF","M/V ATLANTIC BONANZA",
         //     "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
         // ];
-        $array2 = [
+        $array4 = [
             "M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V ATLANTIC AFFINITY","M/V OCEAN FLORA",
             "M/V HYUNDAI PARAMOUNT", "M/V HMM HARMONY", "M/V HMM MASTER", "M/V HMM MIRACLE"
         ];
@@ -47,9 +76,25 @@ class HMMCadet implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
 
             $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
-            $applicant->cAddress = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
+            $applicant->cAddress = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
         }
         elseif(in_array($applicant->vessel->name, $array2)){
+            $applicant->shipowner = "HMM Company Limited";
+            $applicant->sPresident = "CHOI WONHYOK";
+            $applicant->sAddress = "244 Jungang-daero, Dong-gu, Busan, Republic of Korea";
+
+            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+            $applicant->cAddress = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
+        }
+        elseif(in_array($applicant->vessel->name, $array3)){
+            $applicant->shipowner = "HMM Company Limited";
+            $applicant->sPresident = "CHOI WONHYOK";
+            $applicant->sAddress = "244, Jungang-daero, Dong-gu, Busan, Republic of Korea";
+
+            $applicant->crewManager = "HMM Ocean Service Co., Ltd.";
+            $applicant->cAddress = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
+        }
+        elseif(in_array($applicant->vessel->name, $array4)){
             $applicant->shipowner = "HMM Co., LTD.";
             $applicant->sPresident = "CHOI WONHYOK";
             $applicant->sAddress = "108, Yeouido-daero, Yeongdeungpo-gu, SEOUL, KOREA";
