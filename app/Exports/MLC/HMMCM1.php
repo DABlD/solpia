@@ -89,7 +89,10 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HMM LEAF", "M/V HMM JUNIPER", "M/V HMM COLOMBO", "M/V HMM JAKARTA", "M/V HMM JADE",
 
             // MS ABBY
-            "M/V HMM ST. PETERSBURG", "M/V HMM SOUTHAMPTON", "M/V HMM HAMBURG", "M/V HMM GDANSK", "M/V HMM COPENHAGEN", "M/V HMM ALGECIRAS"
+            "M/V HMM ST. PETERSBURG", "M/V HMM SOUTHAMPTON", "M/V HMM HAMBURG", "M/V HMM GDANSK", "M/V HMM COPENHAGEN", "M/V HMM ALGECIRAS",
+
+            // july 2026
+            "M/V HMM LIME", 'M/V HMM IVY', 'M/V HMM CLOVER'
         ];
 
         $this->title = $title;
