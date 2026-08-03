@@ -75,7 +75,7 @@
 
 	<tr>
 		<td>Rank</td>
-		<td colspan="2"></td>
+		<td colspan="2">{{ $data->pro_app->rank->abbr }}</td>
 		<td colspan="2">Verification criteria</td>
 		<td colspan="2">Joining Vessel / Joining Date</td>
 		<td>Checked by Vessel</td>
@@ -86,10 +86,10 @@
 
 	<tr>
 		<td rowspan="2">Name</td>
-		<td rowspan="2" colspan="2"></td>
+		<td rowspan="2" colspan="2">{{ $data->user->namefull }}</td>
 		<td rowspan="2">Validity</td>
 		<td rowspan="2">Requirement</td>
-		<td colspan="2"></td>
+		<td colspan="2">{{ $data->pro_app->vessel->name }} / {{ $data->data['joining_date'] ?? ""  }}</td>
 		<td>After Embarkation</td>
 	</tr>
 
