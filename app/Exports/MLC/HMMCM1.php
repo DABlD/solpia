@@ -35,7 +35,9 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             'M/V HMM JAKARTA',
             'M/V HMM TACOMA',
             "M/V HMM GOODWILL",
-            "M/V HMM BANGKOK"
+            "M/V HMM BANGKOK",
+
+            "M/V HMM PERIDOT", "M/V HMM GARNET"
         ];
 
         $array2 = [
@@ -55,8 +57,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array3 = [
-            "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", 
-            "M/V HMM GARNET", "M/V HMM SAPPHIRE", "M/V HMM PERIDOT"
+            "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE"
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
