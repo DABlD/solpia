@@ -60,7 +60,7 @@ class X38_BatchCrewCompetencyChecklist2 implements WithMultipleSheets
             $applicant->data = $this->data;
 
             $type = null;   //VESSELTYPE
-            if(str_contains($applicant->vessel->type, "CONT") || str_contains($applicant->vessel->type, "BULK")){
+            if(str_contains($applicant->vessel->type, "CONT") || str_contains($applicant->vessel->type, "BULK") || str_contains($applicant->vessel->type, "GENERAL CARGO") || str_contains($applicant->vessel->type, "MULTI PURPOSE")){
                 $type = 1;
             }
             else{
