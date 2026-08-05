@@ -113,8 +113,6 @@ class MLCContract implements WithMultipleSheets
             array_push($sheets, new $class($this->applicant, $this->type, $this->req));
         }
 
-        dd($sheets);
-
         return $sheets;
     }
 }
