@@ -55,8 +55,10 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $array3 = [
             "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE",
 
-            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM VICTORY", "M/V HMM PRIDE",
+            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM VICTORY"
         ];
+
+        // "M/V HMM PRIDE" | NASA HMCM1V2
 
         if(in_array($applicant->vessel->name, $array1)){
             $this->shipowner['company'] = "HMM Company Limited";

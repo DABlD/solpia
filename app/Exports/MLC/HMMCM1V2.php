@@ -25,7 +25,7 @@ class HMMCM1V2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         if(in_array($applicant->vessel->name, $array1)){
             $this->shipowner['company'] = "HMM Company Limited";
             $this->shipowner['president'] = "CHOI WONHYOK";
-            $this->shipowner['address'] = "TOWER 1, PARC.1, 108, YEOUI-DAERO, YEONGDEUNGPO-GU, SEOUL, REPUBLIC OF KOREA";
+            $this->shipowner['address'] = "244, Jungang-daero, Dong-gu, Busan, Republic of Korea";
 
             $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
             $this->shipmanager['address'] = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
