@@ -45,20 +45,24 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $shipowner = "KOREA LINE LNG CO., LTD.";
             $phoneNumber = "+82-2-3701-0114";
             $address = "30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Republic of Korea";
-            $employer = "LEE DONG SU";
+            $employer = "MIN SANG GI";
             $identification = "824-87-01648";
 
             $shipowner2 = "KOREA LINE LNG CO., LTD.";
         }
         elseif(in_array($applicant->vessel->name, ["M/T K. LOTUS"])){
-            $shipowner = "KLBV1 S.A.";
-            $phoneNumber = "82-51-661-6100";
-            $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
-            $employer = "LEE IN KEUN";
-            $identification = "155691344";
+            // $shipowner = "KLBV1 S.A.";
+            // $phoneNumber = "82-51-661-6100";
+            // $address = "MMG Tower 23rd Floor, Ave. Del Pacifico and Ave. Paseo del Mar Costa Del Este, Panama City, Panama";
+            $shipowner = "KOREA LINE LNG CO., LTD.";
+            $phoneNumber = "+82-2-3701-0114";
+            $address = "30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Republic of Korea";
+            $employer = "MIN SANG GI";
+            $identification = "824-87-01648";
             // $identification = "824-87-01648";
 
-            $shipowner2 = "KLBV1 S.A.";
+            // $shipowner2 = "KLBV1 S.A.";
+            $shipowner2 = "KOREA LINE LNG CO., LTD.";
         }
         // elseif(in_array($applicant->vessel->name, ["M/T K.FREESIA"])){
         //     $shipowner = "KOREA TONNAGE NO. 103 SHIPPING COMPANY S.A.";
@@ -576,7 +580,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing2->setOffsetY(10);
         $drawing2->setCoordinates('G112');
 
-        $mlcStamp = "images/mlc_klcsm_lng.png";
+        $mlcStamp = "images/mlc_klcsm_lng_new.png";
         $drawing3 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing3->setPath(public_path($mlcStamp));
         $drawing3->setResizeProportional(false);
@@ -586,9 +590,9 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing3->setOffsetY(2);
         $drawing3->setCoordinates('J110');
 
-        if(in_array($this->applicant->vessel->name, ["M/T K. LOTUS"])){
-            $drawing3->setPath(public_path("images/mlc_klcsm_klbv1.png"));
-        }
+        // if(in_array($this->applicant->vessel->name, ["M/T K. LOTUS"])){
+        //     $drawing3->setPath(public_path("images/mlc_klcsm_klbv1.png"));
+        // }
 
         $drawing4 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing4->setPath(public_path("images/mlc_klcsm_sig.png"));
