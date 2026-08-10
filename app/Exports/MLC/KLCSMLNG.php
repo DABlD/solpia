@@ -41,7 +41,7 @@ class KLCSMLNG implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         // CONFIRM NA SI MA'AM SHE NAGBIGAY NG INSTRUCTION TO AVOID CONFUSION DAW.
         // CONFIRM NA SI MA'AM SHE NAGBIGAY NG INSTRUCTION TO AVOID CONFUSION DAW.
 
-        if(in_array($applicant->vessel->name, ["M/T SM KESTREL", "M/T FUELNG VENOSA", "M/T SM BLUEBIRD", "M/T K.FREESIA"])){
+        if(in_array($applicant->vessel->name, ["M/T SM KESTREL", "M/T FUELNG VENOSA", "M/T SM BLUEBIRD", "M/T K.FREESIA", "SM GOLDEN EAGLE"])){
             $shipowner = "KOREA LINE LNG CO., LTD.";
             $phoneNumber = "+82-2-3701-0114";
             $address = "30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Republic of Korea";
