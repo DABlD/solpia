@@ -41,16 +41,19 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HYUNDAI COURAGE",
             "M/V HYUNDAI FAITH",
             "M/V HYUNDAI FORCE",
+            'M/V HMM IVY',
+            'M/V HMM CLOVER',
+
             "M/V HMM FOREST",
             "M/V HMM GREEN",
+            'M/V HMM JUNIPER',
             'M/V HMM LEAF',
             "M/V HMM SAGE",
             "M/V HMM LIME",
-            'M/V HMM JUNIPER',
-            'M/V HMM IVY',
-            'M/V HMM CLOVER',
             "M/V HMM JADE",
         ];
+
+        //8828, 8827, 9539, 9564, 9605, 9617, 9633
 
         $array3 = [
             "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE",
@@ -434,7 +437,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // VC
                 $h[7] = [
-                    'A4:H14', 'A16:H17', 'B29', 'A43:H44'
+                    'A4:H14', 'A16:H17', 'B24', 'B29', 'A43:H44'
                 ];
 
                 // UNDERLINE

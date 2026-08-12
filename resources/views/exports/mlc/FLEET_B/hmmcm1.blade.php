@@ -206,11 +206,17 @@
 	<tr>
 		<td>Payday</td>
 		<td colspan="7">
-			ㅤAll seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid monthly wages
-			<br style='mso-data-placement:same-cell;' />
-			ㅤnot later than 15 days of the succeeding month from the date of commencement of the agreement until the date of arrival at point of
-			<br style='mso-data-placement:same-cell;' />
-			ㅤhire upontermination of their employment.
+			@if(in_array($data->vessel->id, [8828, 8827, 9539, 9564, 9605, 9617, 9633]))
+				ㅤAll seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be entitled to payment
+				<br style='mso-data-placement:same-cell;' />
+				ㅤ of their net wages at the end of each calendar month until the date of arrival at point of hire upon termination of their employment.
+			@else
+				ㅤAll seafarers shall be paid for their work regularly and in full in accordance with this agreement. They shall be paid monthly wages
+				<br style='mso-data-placement:same-cell;' />
+				ㅤnot later than 15 days of the succeeding month from the date of commencement of the agreement until the date of arrival at point of
+				<br style='mso-data-placement:same-cell;' />
+				ㅤhire upontermination of their employment.
+			@endif
 		</td>
 	</tr>
 
