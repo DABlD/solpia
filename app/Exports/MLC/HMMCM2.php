@@ -20,14 +20,16 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
         $array1 = [
             "M/T ORIENTAL GREENSTONE", "M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
-            "M/V HMM HARMONY", "M/V HMM MASTER", "M/V HMM MIRACLE",
-            "M/V HMM NARU", "M/V HMM NABI"
+            "M/V HMM HARMONY", "M/V HMM MASTER",
+            "M/V HMM NARU", "M/V HMM NABI",
         ];
 
         $array2 = [
             "M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V ATLANTIC AFFINITY","M/V OCEAN FLORA",
             "M/T ORIENTAL AQUAMARINE", "M/T UNIVERSAL CHALLENGER", "M/T UNIVERSAL FRONTIER", "M/T UNIVERSAL INNOVATOR",
-            "M/V HMM PARAMOUNT", "M/V GLOBAL GOLDEN"
+            "M/V HMM PARAMOUNT", "M/V GLOBAL GOLDEN",
+
+            "M/V HMM MIRACLE" //from array1
         ];
 
         if(in_array($applicant->vessel->name, $array1)){
