@@ -5396,6 +5396,7 @@
                 input: 'select',
                 inputOptions: {
                     acknowledgement:                    'Acknowledgement of Crew Reminders (Offsigners)',
+                    acknowledgement2:                   'Acknowledgement of PPRT & SIRB for Onsigners (HMM)',
                     contractAmendment2:                 'Contract Amendment (Onboard Crew)',
                     X38_BatchCrewCompetencyChecklist:   'Crew Competency Checklist',
                     X38_BatchCrewCompetencyChecklistOnboard:   'Crew Competency Checklist (Onboard)',
@@ -6206,7 +6207,7 @@
             swal({
                 title: 'Select Crew',
                 html: '<br><br>' + crewString,
-                width: '500px',
+                width: '600px',
                 cancelButtonColor: '#f76c6b',
                 allowOutsideClick: false,
                 showCancelButton: true,
@@ -6248,6 +6249,124 @@
                     const type = "Y12_Acknowledgement";
 
                     window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+                }
+            })
+        }
+
+        {{-- PPRT & SIRB --}}
+        function acknowledgement2(id, name){
+            let crews = [];
+
+            let temp = $('.LUN');
+            let crewString = "";
+
+            temp.each((index, value) => {
+                let temp2 = $(value);
+                let checked = "";
+
+                if(temp2.parent().find(`#table-selectR-${temp2.data('id')}`).val() != ""){
+                    checked = "checked";
+                }
+
+                crewString += `  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="checkbox" class="crew-checklist" data-id="${temp2.data('id')}" ${checked} />
+                        </div>
+                        <div class="col-md-10">
+                            <label for="">
+                                ${temp2[0].innerText}
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+
+            swal({
+                title: 'Select Crew',
+                html: '<br><br>' + crewString,
+                width: '600px',
+                cancelButtonColor: '#f76c6b',
+                allowOutsideClick: false,
+                showCancelButton: true,
+                onOpen: () => {
+                    $('#swal2-title').css({
+                        'font-size': '28px',
+                        'color': '#00c0ef'
+                    });
+                    $('#swal2-content .col-md-10').css('text-align', 'left');
+                    $('#swal2-content .col-md-10 label').css({
+                        "font-size": '20px',
+                        "text-align": 'left'
+                    });
+                    $('#swal2-content input[type=checkbox]').css({
+                        'zoom': '1.7',
+                        'margin': '1px 0 0'
+                    });
+                },
+                preConfirm: () => {
+                    swal.showLoading();
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            let temp3 = $(".crew-checklist:checked");
+                            
+                            temp3.each((index, value) => {
+                                crews.push($(value).data('id'));
+                            });
+                        resolve()}, 500);
+                    });
+                },
+            }).then(result => {
+                if(result.value){
+                    swal({
+                        title: "Enter Details",
+                        html: `
+                            <div style="text-align: left;">
+                                <label>Signed Date</label>
+                            </div>
+                            <input type="text" id="sd" class="form-control"><br>
+
+                            <div style="text-align: left;">
+                                <label>Date of Dispatch</label>
+                            </div>
+                            <input type="text" id="dd" class="form-control"><br>
+                        `,
+                        onOpen: () => {
+                            $('#sd, #dd').flatpickr({
+                                altInput: true,
+                                altFormat: 'F j, Y',
+                                dateFormat: 'Y-m-d'
+                            });
+                        },
+                        preConfirm: () => {
+                            swal.showLoading();
+                            return new Promise(resolve => {
+                                setTimeout(() => {
+                                    let sd = $('#sd').val();
+                                    let dd = $('#dd').val();
+
+                                    if(sd == "" || dd == ""){
+                                        swal.showValidationError('All fiels required');
+                                    }
+                                resolve()}, 500);
+                            });
+                        }
+                    }).then(result2 => {
+                        if(result2.value){
+                            let data = {};
+                            data.ids = crews;
+                            data.filename = name.replace(/[^\w\s]/gi, '') + " - Acknowledgement of PPRT & SIRB";
+                            data.exportType = "pdf";
+                            data.vname = name.replace(/[^\w\s]/gi, '');
+                            data.signed_date = $('#sd').val();
+                            data.dispatch_date = $('#dd').val();
+
+                            const type = "Y15_Acknowledgement2";
+
+                            window.location.href = `{{ route('applications.exportDocument') }}/1/${type}?` + $.param(data);
+                        }
+                    });
+
                 }
             })
         }

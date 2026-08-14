@@ -356,6 +356,12 @@ class PDFExport
         return ['applicants' => $applicants, 'req' => $this->req];
     }
 
+    public function Y15_Acknowledgement2(){
+        $applicants = Applicant::whereIn('id', $this->data->data['ids'])->get();
+
+        return ['applicants' => $applicants, 'data' => $this->req];
+    }
+
     public function X45_BatchKoreanContractAgreement(){
         $applicants = Applicant::whereIn('id', $this->req['ids'])->get();
         $applicants->load('pro_app');
