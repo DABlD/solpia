@@ -286,8 +286,8 @@
 		</td>
 		<td colspan="2"></td>
 		<td colspan="3" style="border-bottom: 1px solid black; text-align: center;">
-			{{-- ROXAN --}}
-			@if(auth()->user()->id == 6109)
+			{{-- ROXAN, ABBY, LJ --}}
+			@if(in_array(auth()->user()->id, [6109, 5716, 5007]))
 				Asst. Crewing Manager
 			@else
 				{{ auth()->user()->role }}
