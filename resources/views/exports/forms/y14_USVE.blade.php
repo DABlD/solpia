@@ -276,7 +276,7 @@
 			<td style="{{ $ds }}">Rank / Position</td>
 			<td>:</td>
 			<td colspan="7" style="{{ $ds }} border-bottom: 1px solid black;">
-				{{ $data['applicant']->pro_app->rank->abbr }}
+				{{ isset($data['applicant']->pro_app) ? $data['applicant']->pro_app->rank->abbr : "-" }}
 			</td>
 		</tr>
 
@@ -285,7 +285,7 @@
 			<td style="{{ $ds }}">Principal</td>
 			<td>:</td>
 			<td colspan="7" style="{{ $ds }} border-bottom: 1px solid black;">
-				{{ $data['applicant']->pro_app->principal->name }}
+				{{ isset($data['applicant']->pro_app) ? $data['applicant']->pro_app->principal->name : "-" }}
 			</td>
 		</tr>
 
