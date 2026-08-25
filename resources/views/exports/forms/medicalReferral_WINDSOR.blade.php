@@ -37,6 +37,11 @@
         margin-bottom: 5px;
         {{-- margin-left: 20px; --}}
     }
+
+    @font-face {
+        font-family: 'DejaVu';
+        src: url("{{ public_path('fonts/DejaVuSans.ttf') }}") format("truetype");
+    }
 </style>
 
 <center>
@@ -234,8 +239,11 @@
 	<span class="ballot-box"></span>
 	 Windsor Medical Package
 	<br>
-	<span class="ballot-box"></span>
+	<span class="ballot-box" style="font-family: 'DejaVu';">✓</span>
 	 Customized Company Package
+	 <span style="font-weight: bold; color: blue;">
+	 	HMM PACKAGE WITH DAAT AND PANAMA(FLAG)
+	 </span>
 	<br>
 </div>
 
@@ -275,11 +283,11 @@
 <table style="width: 100%;">
 	<tr>
 		<td style="width: 25%;">
-			<span class="ballot-box">X</span>
+			<span class="ballot-box"></span>
 			 Others (please specify):
 		</td>
 		<td style="width: 75%; border-bottom: 1px solid black;">
-			HMM PACKAGE WITH DAAT AND PANAMA(FLAG)
+			{{-- HMM PACKAGE WITH DAAT AND PANAMA(FLAG) --}}
 		</td>
 	</tr>
 </table>
@@ -292,7 +300,7 @@
 <table width="70%;">
 	<tr>
 		<td style="width: 33%;">
-			<span class="ballot-box"></span>
+			<span class="ballot-box;" style="font-family: 'DejaVu';">✓</span>
 			 Manning Agency
 		</td>
 		<td style="width: 33%;">

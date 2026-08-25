@@ -81,5 +81,8 @@ return array (
   'notosanskr' => array(
     'normal' => $fontDir . '/notosanskr_normal_29ca1995070b1e9a16400c99a785dc10',
   ),
+  'dejavu' => array(
+    'normal' => $fontDir . '/dejavu_normal_8d5b3164796b79243ec72be5d41df70d',
+  ),
 );
 }; ?>
