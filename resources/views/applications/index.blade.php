@@ -834,6 +834,7 @@
                                 <select id="clinic" class="swal2-input">
                                     <option value="">Select Clinic</option>
                                     <option value="MCIS">MCIS</option>
+                                    <option value="WINDSOR">WINDSOR</option>
                                 </select>
                             </div>
                         </div>
