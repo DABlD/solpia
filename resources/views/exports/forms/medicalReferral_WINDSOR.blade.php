@@ -468,5 +468,5 @@ INSTRUCTIONS TO APPLICANT
 @endif
 
 @if($sbImg)
-<img src="{{ public_path("files/$data->id/$ppImg") }}" width="700px" height="550px">
+<img src="{{ public_path("files/$data->id/$sbImg") }}" width="700px" height="550px">
 @endif
