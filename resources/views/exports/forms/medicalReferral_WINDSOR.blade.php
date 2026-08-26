@@ -56,8 +56,6 @@
 	Telephone Number: (02) 8 8243302
 </center>
 
-<br>
-
 <table style="width: 100%;">
 	<tr>
 		<td></td>
@@ -80,6 +78,8 @@
 			Name of Company/Employer: Solpia Marine &#38; Ship Management, Inc.
 			<br>
 			Country of Destination:
+			<br>
+			Assigned Vessel: {{ $data->pro_app->vessel ? $data->pro_app->vessel->name : "-" }}
 		</td>
 	</tr>
 </table>
@@ -242,7 +242,7 @@
 	<span class="ballot-box" style="font-family: 'DejaVu';">✓</span>
 	 Customized Company Package
 	 <span style="font-weight: bold; color: blue;">
-	 	HMM PACKAGE WITH DAAT AND PANAMA(FLAG)
+	 	HMM PACKAGE WITH DAAT
 	 </span>
 	<br>
 </div>
