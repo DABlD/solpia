@@ -73,13 +73,13 @@
 
 	<tr>
 		<td colspan="2">
-			Date: {{ now()->format('d-M-Y') }}
+			Date: <span style="color: blue; font-weight: bold;">{{ now()->format('d-M-Y') }}</span>
 			<br>
-			Name of Company/Employer: Solpia Marine &#38; Ship Management, Inc.
+			Name of Company/Employer: <span style="color: blue; font-weight: bold;">Solpia Marine &#38; Ship Management, Inc.</span>
 			<br>
 			Country of Destination:
 			<br>
-			Assigned Vessel: {{ $data->pro_app->vessel ? $data->pro_app->vessel->name : "-" }}
+			Assigned Vessel: <span style="color: blue; font-weight: bold;">{{ $data->pro_app->vessel ? $data->pro_app->vessel->name : "-" }}</span>
 		</td>
 	</tr>
 </table>
@@ -95,15 +95,15 @@
 
 	<tr>
 		<td style="width: 8%;">Name:</td>
-		<td style="width: 26%; border-bottom: 1px solid black; text-align: center; font-size: 11px;">{{ $data->user->lname }}</td>
-		<td style="width: 20%; border-bottom: 1px solid black; text-align: center; font-size: 11px;">{{ $data->user->fname }}</td>
-		<td style="width: 26%; border-bottom: 1px solid black; text-align: center; font-size: 11px;">{{ $data->user->mname }}</td>
+		<td style="width: 26%; border-bottom: 1px solid black; text-align: center; font-size: 11px;"><span style="color: blue; font-weight: bold;">{{ $data->user->lname }}</span></td>
+		<td style="width: 20%; border-bottom: 1px solid black; text-align: center; font-size: 11px;"><span style="color: blue; font-weight: bold;">{{ $data->user->fname }}</span></td>
+		<td style="width: 26%; border-bottom: 1px solid black; text-align: center; font-size: 11px;"><span style="color: blue; font-weight: bold;">{{ $data->user->mname }}</span></td>
 		<td style="width: 5%;">Age:</td>
 		<td style="width: 5%; border-bottom: 1px solid black; text-align: center; font-size: 11px;">
-			{{ isset($data->user->birthday) ? $data->user->birthday->age : "-" }}
+			<span style="color: blue; font-weight: bold;">{{ isset($data->user->birthday) ? $data->user->birthday->age : "-" }}</span>
 		</td>
 		<td style="width: 5%;">Sex:</td>
-		<td style="width: 5%; border-bottom: 1px solid black; text-align: center; font-size: 11px;">M</td>
+		<td style="width: 5%; border-bottom: 1px solid black; text-align: center; font-size: 11px;"><span style="color: blue; font-weight: bold;">M</span></td>
 	</tr>
 
 	<tr>
@@ -120,15 +120,15 @@
 	<tr>
 		<td style="width: 13%">Date of Birth:</td>
 		<td style="width: 13%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $data->user->birthday ? $data->user->birthday->format('d-M-Y') : "-" }}
+			<span style="color: blue; font-weight: bold;">{{ $data->user->birthday ? $data->user->birthday->format('d-M-Y') : "-" }}</span>
 		</td>
 		<td style="width: 13%">Place of Birth:</td>
 		<td style="width: 37%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $data->birth_place }}
+			<span style="color: blue; font-weight: bold;">{{ $data->birth_place }}</span>
 		</td>
 		<td style="width: 11%">Civil Status:</td>
 		<td style="width: 3%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $data->civil_status ? $data->civil_status[0] : "-" }}
+			<span style="color: blue; font-weight: bold;">{{ $data->civil_status ? $data->civil_status[0] : "-" }}</span>
 		</td>
 	</tr>
 </table>
@@ -137,15 +137,15 @@
 	<tr>
 		<td style="width: 10%">Nationality:</td>
 		<td style="width: 9%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			FILIPINO
+			<span style="color: blue; font-weight: bold;">FILIPINO</span>
 		</td>
 		<td style="width: 10%">Religion:</td>
 		<td style="width: 20%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $data->religion }}
+			<span style="color: blue; font-weight: bold;">{{ $data->religion }}</span>
 		</td>
 		<td style="width: 15%">Contact No./s:</td>
 		<td style="width: 36%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $data->user->contact }}
+			<span style="color: blue; font-weight: bold;">{{ $data->user->contact }}</span>
 		</td>
 	</tr>
 </table>
@@ -154,7 +154,7 @@
 	<tr>
 		<td style="width: 27%">Permanent Home Address:</td>
 		<td style="width: 73%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $data->provincial_address }}
+			<span style="color: blue; font-weight: bold;">{{ $data->provincial_address }}</span>
 		</td>
 	</tr>
 </table>
@@ -185,11 +185,11 @@
 	<tr>
 		<td style="width: 20%">Position Applied for:</td>
 		<td style="width: 30%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $rank }}
+			<span style="color: blue; font-weight: bold;">{{ $rank }}</span>
 		</td>
 		<td style="width: 20%">Passport Number:</td>
 		<td style="width: 30%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $pp->number }}
+			<span style="color: blue; font-weight: bold;">{{ $pp->number }}</span>
 		</td>
 	</tr>
 </table>
@@ -198,7 +198,7 @@
 	<tr>
 		<td style="width: 50%;">Seaman's Book Number:</td>
 		<td style="width: 50%; font-size: 12px; border-bottom: 1px solid black; text-align: center;">
-			{{ $sb->number }}
+			<span style="color: blue; font-weight: bold;">{{ $sb->number }}</span>
 		</td>
 	</tr>
 </table>
@@ -320,16 +320,18 @@
 <table width="100%;">
 	<tr>
 		<td style="width: 45%; text-align: center; font-size: 14px; border-bottom: 1px solid black;">
-			{{ auth()->user()->fullname }}
+			<span style="color: blue; font-weight: bold;">{{ auth()->user()->fullname }}</span>
 		</td>
 		<td style="width: 20%;"></td>
 		<td style="width: 35%; text-align: center; font-size: 14px; border-bottom: 1px solid black;">
 			{{-- ROXAN, ABBY, LJ --}}
+			<span style="color: blue; font-weight: bold;">
 			@if(in_array(auth()->user()->id, [6109, 5716, 5007]))
 				Asst. Crewing Manager
 			@else
 				{{ auth()->user()->role }}
 			@endif
+			</span>
 		</td>
 	</tr>
 
@@ -424,11 +426,11 @@ INSTRUCTIONS TO APPLICANT
 <table width="100%;">
 	<tr>
 		<td style="width: 45%; text-align: center; font-size: 14px; border-bottom: 1px solid black;">
-			{{ $data->user->fullname }}
+			<span style="color: blue; font-weight: bold;">{{ $data->user->fullname }}</span>
 		</td>
 		<td style="width: 20%;"></td>
 		<td style="width: 35%; text-align: center; font-size: 14px; border-bottom: 1px solid black;">
-			{{ now()->format('d-M-Y') }}
+			<span style="color: blue; font-weight: bold;">{{ now()->format('d-M-Y') }}</span>
 		</td>
 	</tr>
 
