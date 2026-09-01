@@ -65,6 +65,10 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             'M/V GLOVIS COUNTESS'
         ];
 
+        $array14 = [
+            'MV BOKM ZHOUSHAN', 'MV BOKM TUBARAO'
+        ];
+
         if(in_array($applicant->vessel->name, $array1)){
             $applicant->shipowner = "DONG-A TANKER CO., LTD.";
             $applicant->sAddress = "#905, 18, Gwangbok-ro 97beon-gil, Jung-gu, Busan, Republic of Korea";
@@ -117,6 +121,12 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->shipowner = 'KSF GLOBAL NO.36 S.A.';
             $applicant->sAddress = "Trust Company Complex, Ajeltake Road, Ajeltake Island, Majuro, MH96960, Marshall Islands";
         }
+        elseif(in_array($applicant->vessel->name, $array14)){
+            $applicant->shipowner = 'XIANG B28 HK INTERNATIONAL SHIP LEASE CO., LIMITED';
+            $applicant->sAddress = "1/F, Far East Consortium Building, 121 Des Voeux Rd, Central, HONG KONG";
+        }
+
+         
 
         $this->applicant     = $applicant;
         $this->type         = $type;
