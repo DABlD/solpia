@@ -32,7 +32,7 @@
 	elseif(in_array($v, ['M/V KMARIN ULSAN', 'M/V KMARIN MELBOURNE'])){
 		$allowance = 12;
 	}
-	elseif(in_array($v, ['M/V KMARIN AZUR', "M/V BOKM SHANGHAI", 'M/V BOKM NINGBO'])){
+	elseif(in_array($v, ['M/V KMARIN AZUR', "M/V BOKM SHANGHAI", 'M/V BOKM NINGBO', 'MV BOKM ZHOUSHAN', 'MV BOKM TUBARAO'])){
 		// $allowance = 11;
 		$cba = "IBF FKSU/AMOSUP-KSA CBA";
 	}

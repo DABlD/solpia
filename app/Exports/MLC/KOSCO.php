@@ -69,6 +69,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             'MV BOKM ZHOUSHAN', 'MV BOKM TUBARAO'
         ];
 
+        // ALSO REVISE CBA DETAILS IN BLADE FILE
+
         if(in_array($applicant->vessel->name, $array1)){
             $applicant->shipowner = "DONG-A TANKER CO., LTD.";
             $applicant->sAddress = "#905, 18, Gwangbok-ro 97beon-gil, Jung-gu, Busan, Republic of Korea";
