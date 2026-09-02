@@ -4318,6 +4318,7 @@
                     'X15_Ext_Form3':  'CBA Update',
                     'X15_Ext_Form4':  'Onboard Promotion',
                     'X15_Ext_Form5':  'Vessel Change Name',
+                    'X15_Ext_Form6':  'Change Management',
                     'X06_Ext_Prom_Form':  'Extension Promotion'
                 },
                 inputPlaceholder: '',
@@ -4333,6 +4334,7 @@
                         3: "CBA Update",
                         4: "Onboard Promotion",
                         5: "Vessel Change Name",
+                        6: "Change Management",
                     };
 
                     window[result.value.slice(0,3)](id, result.value, choices[temp]);
@@ -4350,6 +4352,7 @@
                     'X15_Ext_Form3':  'CBA Update',
                     'X15_Ext_Form4':  'Onboard Promotion',
                     'X15_Ext_Form5':  'Vessel Change Name',
+                    'X15_Ext_Form6':  'Change Management',
                     'X06_Ext_Prom_Form':  'Extension Promotion'
                 },
                 inputPlaceholder: '',
@@ -4365,6 +4368,7 @@
                         3: "CBA Update",
                         4: "Onboard Promotion",
                         5: "Vessel Change Name",
+                        6: "Change Management",
                     };
 
                     window[result.value.slice(0,3)](id, result.value, choices[temp], true);
