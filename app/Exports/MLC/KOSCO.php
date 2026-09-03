@@ -612,6 +612,10 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 $event->sheet->getParent()->getActiveSheet()->setBreak('A23', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
                 $event->sheet->getParent()->getActiveSheet()->setBreak('A30', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW);
+
+                $event->sheet->getDelegate()->getStyle('B24')->getFont()->setSize(8.5);
+                $event->sheet->getDelegate()->getStyle('B29')->getFont()->setSize(8.5);
+                $event->sheet->getDelegate()->getStyle('B30')->getFont()->setSize(8.5);
                 // SET PRINT AREA
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
             },
