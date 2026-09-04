@@ -172,12 +172,14 @@
 	<tr>
 		<td colspan="3" style="{{ $bold }} height: 45px;">
 			Requested by:
+			<br style='mso-data-placement:same-cell;' />
 			@if(in_array(auth()->user()->id, [5963, 4566]))
 				Gladys Anne Frondozo
 			@endif
 		</td>
 		<td colspan="4" style="{{ $bold }} height: 45px;">
 			Approved by:
+			<br style='mso-data-placement:same-cell;' />
 			@if(in_array(auth()->user()->id, [5963, 4566]))
 				Jeneva Bianca Santos
 			@endif
@@ -357,12 +359,14 @@
 	<tr>
 		<td colspan="3" style="{{ $bold }} height: 45px;">
 			Requested by:
+			<br style='mso-data-placement:same-cell;' />
 			@if(in_array(auth()->user()->id, [5963, 4566]))
 				Gladys Anne Frondozo
 			@endif
 		</td>
 		<td colspan="4" style="{{ $bold }} height: 45px;">
 			Approved by:
+			<br style='mso-data-placement:same-cell;' />
 			@if(in_array(auth()->user()->id, [5963, 4566]))
 				Jeneva Bianca Santos
 			@endif
