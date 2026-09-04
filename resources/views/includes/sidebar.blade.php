@@ -16,7 +16,13 @@
 				@endif
 			</div>
 			<div class="pull-left info">
-				<p style="text-wrap: auto;">{{ auth()->user()->fullname }}</p>
+				<p style="text-wrap: auto;">
+					@if(auth()->user()->id == 5963)
+						Gladys Anne Dy
+					@else
+						{{ auth()->user()->fullname }}
+					@endif
+				</p>
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
 		</div>
