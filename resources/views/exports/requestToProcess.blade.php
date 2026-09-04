@@ -170,8 +170,18 @@
 	{{-- 2ND PART --}}
 
 	<tr>
-		<td colspan="3" style="{{ $bold }} height: 45px;">Requested by:</td>
-		<td colspan="4" style="{{ $bold }} height: 45px;">Approved by:</td>
+		<td colspan="3" style="{{ $bold }} height: 45px;">
+			Requested by:
+			@if(in_array(auth()->user()->id, [5963, 4566]))
+				Gladys Anne Frondozo
+			@endif
+		</td>
+		<td colspan="4" style="{{ $bold }} height: 45px;">
+			Approved by:
+			@if(in_array(auth()->user()->id, [5963, 4566]))
+				Jeneva Bianca Santos
+			@endif
+		</td>
 		<td colspan="4" style="{{ $bold }} height: 45px;">Noted by:</td>
 		<td colspan="4" style="{{ $bold }} height: 45px;">Received by:</td>
 	</tr>
@@ -345,8 +355,18 @@
 	</tr>
 
 	<tr>
-		<td colspan="3" style="{{ $bold }} height: 45px;">Requested by:</td>
-		<td colspan="4" style="{{ $bold }} height: 45px;">Approved by:</td>
+		<td colspan="3" style="{{ $bold }} height: 45px;">
+			Requested by:
+			@if(in_array(auth()->user()->id, [5963, 4566]))
+				Gladys Anne Frondozo
+			@endif
+		</td>
+		<td colspan="4" style="{{ $bold }} height: 45px;">
+			Approved by:
+			@if(in_array(auth()->user()->id, [5963, 4566]))
+				Jeneva Bianca Santos
+			@endif
+		</td>
 		<td colspan="4" style="{{ $bold }} height: 45px;">Noted by:</td>
 		<td colspan="4" style="{{ $bold }} height: 45px;">Received by:</td>
 	</tr>
