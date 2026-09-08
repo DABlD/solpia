@@ -127,7 +127,15 @@
 		<td colspan="3">1.1. from</td>
 		<td style="{{ $bc }} {{ $blue }}">({{ $start->format('d/M/Y') }})</td>
 		<td colspan="2" style="{{ $c }}">to</td>
-		<td colspan="4" style="{{ $bc }} {{ $blue }}">({{ $start->add($data->employment_months, 'months')->format('d/M/Y') }})</td>
+		<td colspan="4" style="{{ $bc }} {{ $blue }}">
+			({{ 
+				now()->parse($data->effective_date)
+				    ->add($data->employment_months + array_sum(json_decode($data->extensions, true) ?? []), 'months')
+				    ->add(array_sum(array_filter((array) $data->extensions_days, function ($d) {
+				        return $d > 1;
+				    })), 'days')->format('d/M/Y')
+			}})
+		</td>
 		<td colspan="2"></td>
 	</tr>
 

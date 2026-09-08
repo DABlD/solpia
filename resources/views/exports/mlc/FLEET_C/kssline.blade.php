@@ -110,7 +110,15 @@
 		<td>From</td>
 		<td colspan="2">{{ now()->parse($data->effective_date)->format('d-M-y') }}</td>
 		<td>To</td>
-		<td colspan="2">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-y') }}</td>
+		<td colspan="2">
+			{{ 
+				now()->parse($data->effective_date)
+				    ->add($data->employment_months + array_sum(json_decode($data->extensions, true) ?? []), 'months')
+				    ->add(array_sum(array_filter((array) $data->extensions_days, function ($d) {
+				        return $d > 1;
+				    })), 'days')->format('d-M-Y')
+			}}
+		</td>
 		<td>({{ $data->employment_months }} Months)</td>
 	</tr>
 

@@ -275,7 +275,15 @@
 
 		<tr>
 			<td colspan="2">Date of termination</td>
-			<td colspan="6" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
+			<td colspan="6" style="{{ $color }}">
+			{{ 
+				now()->parse($data->effective_date)
+				    ->add($data->employment_months + array_sum(json_decode($data->extensions, true) ?? []), 'months')
+				    ->add(array_sum(array_filter((array) $data->extensions_days, function ($d) {
+				        return $d > 1;
+				    })), 'days')->format('d-M-Y')
+			}}
+		</td>
 		</tr>
 	@else
 		<tr>
@@ -286,7 +294,15 @@
 
 		<tr>
 			<td>Date of termination</td>
-			<td colspan="7" style="{{ $color }}">{{ now()->parse($data->effective_date)->add($data->employment_months, 'months')->format('d-M-Y') }}</td>
+			<td colspan="7" style="{{ $color }}">
+			{{ 
+				now()->parse($data->effective_date)
+				    ->add($data->employment_months + array_sum(json_decode($data->extensions, true) ?? []), 'months')
+				    ->add(array_sum(array_filter((array) $data->extensions_days, function ($d) {
+				        return $d > 1;
+				    })), 'days')->format('d-M-Y')
+			}}
+		</td>
 		</tr>
 	@endif
 
