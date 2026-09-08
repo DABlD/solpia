@@ -468,9 +468,9 @@
 				Mr. Ricardo Amparo
 			@elseif(in_array(auth()->user()->id, [4566, 5963, 8265]))
 				Ms. Jeneva Bianca Santos
-			@elseif(in_array(auth()->user()->id, [4546, 4935, 6794]))
+			@elseif(in_array(auth()->user()->id, [4935, 4546, 6794, 9515]))
 			    Ms. Laura Fernando
-			@elseif(in_array(auth()->user()->id, [7603, 4567, 8688]))
+			@elseif(in_array(auth()->user()->id, [4567, 8688, 9360]))
 				Ms. Lhea Marquez
 			@endif
 		</td>

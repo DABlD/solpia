@@ -923,12 +923,12 @@
 
 	<tr>
 		<td colspan="8" style="{{ $bold }} {{ $center }}">
-			@if(auth()->user()->id == 8265)
+			@if(in_array(auth()->user()->id, [4566, 5963, 8265]))
 				Ms. Gladys Anne Frondozo
-			@elseif(auth()->user()->id == 6794)
+			@elseif(in_array(auth()->user()->id, [4935, 4546, 6794, 9515]))
 				Ms. Monique Balanay
 			{{-- MS HAPPY / MS. ANGEL --}}
-			@elseif(auth()->user()->id == 7603 || auth()->user()->id == 9360)
+			@elseif(in_array(auth()->user()->id, [4567, 8688, 9360]))
 				Ms. Daryllyn Igliane
 			@else
 				{{ auth()->user()->gender == "Female" ? "Ms." : "Mr." }} {{ auth()->user()->fullname }}
@@ -936,11 +936,11 @@
 		</td>
 		<td></td>
 		<td colspan="10" style="{{ $bold }}">
-			@if(auth()->user()->id == 8265)
+			@if(in_array(auth()->user()->id, [4566, 5963, 8265]))
 				Ms. Bianca Santos
-			@elseif(auth()->user()->id == 6794)
+			@elseif(in_array(auth()->user()->id, [4935, 4546, 6794, 9515]))
 				Ms. Laura Fernando
-			@elseif(auth()->user()->id == 7603)
+			@elseif(in_array(auth()->user()->id, [4567, 8688, 9360]))
 				Ms. Lhea Marquez
 			@elseif(auth()->user()->fleet == "FLEET B")
 				Mr. Adulf Kit Jumawan

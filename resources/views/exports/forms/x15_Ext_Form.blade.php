@@ -237,9 +237,9 @@
 		</td>
 		@if(in_array(auth()->user()->id, [4566, 5963, 8265]))
 			<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Bianca Santos</td>
-		@elseif(in_array(auth()->user()->id, [4546, 4935, 6794]))
+		@elseif(in_array(auth()->user()->id, [4546, 4935, 6794, 9515]))
 			<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Laura Fernando</td>
-		@elseif(in_array(auth()->user()->id, [7603, 4567, 8688]))
+		@elseif(in_array(auth()->user()->id, [4567, 8688, 9360]))
 			<td style="{{ $bottom }} height: 20px;" colspan="4">Ms. Lhea Marquez</td>
 		@else
 			<td style="{{ $bottom }} height: 20px;" colspan="4"></td>

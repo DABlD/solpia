@@ -1757,11 +1757,11 @@
 			<td colspan="3">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname }}</td>
 			<td>Presenter:</td>
 			<td colspan="3">
-				@if(in_array(auth()->user()->id, [4567, 6794]))
+				@if(in_array(auth()->user()->id, [4567, 8688, 9360]))
 					LHEA MARQUEZ / ASST. CREWING MANAGER
-				@elseif(in_array(auth()->user()->id, [4935, 4546]))
+				@elseif(in_array(auth()->user()->id, [4935, 4546, 6794, 9515]))
 					LAURA FERNANDO / ASST. CREWING MANAGER
-				@elseif(in_array(auth()->user()->id, [4566, 5963]))
+				@elseif(in_array(auth()->user()->id, [4566, 5963, 8265]))
 					JENEVA BIANCA SANTOS / ASST. CREWING MANAGER
 				@elseif($applicant->user->fleet == "FLEET C")
 					Shirley Erasquin / CREWING MANAGER
