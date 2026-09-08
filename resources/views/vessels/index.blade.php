@@ -7532,10 +7532,21 @@
                     </div>
                     <input type="text" id="ed" class="form-control"><br>
 
-                    <div style="text-align: left;">
-                        <label>Months</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="text-align: left;">
+                                <label>Months</label>
+                            </div>
+                            <input type="number" min="1" id="months" class="form-control"><br>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div style="text-align: left;">
+                                <label>Days (Optional)</label>
+                            </div>
+                            <input type="number" id="days" class="form-control"><br>
+                        </div>
                     </div>
-                    <input type="number" min="1" id="months" class="form-control"><br>
                 `,
                 onOpen: () => {
                     $('#ed').flatpickr({
@@ -7549,25 +7560,28 @@
                     swal.showLoading();
                     return new Promise(resolve => {
                         setTimeout(() => {
-                            let months = $('#months').val();
                             let ed = $('#ed').val();
+                            let months = $('#months').val();
+                            let days = $('#days').val();
 
-                            if(months == "" || ed == ""){
-                                swal.showValidationError('All fiels required');
+                            if(ed == "" || (months == "" && days == "")){
+                                swal.showValidationError('Effectivity Date and Extension Duration is required.');
                             }
                         resolve()}, 500);
                     });
                 }
             }).then(result => {
                 if(result.value){
-                    let months = $('#months').val();
                     let ed = $('#ed').val();
+                    let months = $('#months').val();
+                    let days = $('#days').val();
 
                     $.ajax({
                         url: '{{ route('applications.extendContract') }}',
                         data: {
                             id: id,
                             months: months,
+                            days: days,
                             ed: ed,
                             diff: moment(ed).diff(moment(disembarkation_date), 'days')
                         },

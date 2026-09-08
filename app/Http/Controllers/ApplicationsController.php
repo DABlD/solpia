@@ -1355,22 +1355,39 @@ class ApplicationsController extends Controller
             ["disembarkation_date", '=', null],
         ])->first();
 
-        $temp = $lup->extensions;
+        $extensions = $lup->extensions
+            ? json_decode($lup->extensions, true)
+            : [];
 
-        if($temp){
-            $temp = json_decode($temp);
-            array_push($temp, $req->months);
-            $lup->extensions = json_encode($temp);
-        }
-        else{
-            $lup->extensions = json_encode([$req->months]);
+        if (!is_array($extensions)) {
+            $extensions = [];
         }
 
-        $lup->extensions_days += $req->diff;
+        $extensionDays = json_decode($lup->extensions_days, true);
+
+        if (!is_array($extensionDays)) {
+            // Old format: extensions_days was a single number
+            $oldDays = (int) $lup->extensions_days;
+
+            $extensionDays = array_fill(0, count($extensions), 0);
+
+            if (count($extensions) > 0) {
+                $extensionDays[count($extensions) - 1] = $oldDays;
+            }
+        }
+
+        // Append new values
+        $extensions[] = $req->months ?? 0;
+        $extensionDays[] = $req->days ?? $req->diff;
+
+        // Save
+        $lup->extensions = json_encode($extensions);
+        $lup->extensions_days = json_encode($extensionDays);
+        $lup->save();
 
         AuditTrail::create([
             'user_id'   => auth()->user()->id,
-            'action'    => "extended contract of " . $lup->applicant->user->namefull . " by $req->months month/s. Diff $req->diff days",
+            'action'    => "extended contract of " . $lup->applicant->user->namefull . " by $req->months month/s. Diff $req->extensions_days days",
             'ip'        => $req->getClientIp(),
             'hostname'  => gethostname(),
             'device'    => Browser::deviceFamily(),
