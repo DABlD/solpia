@@ -256,16 +256,61 @@
 	            `;
 	        // }
 
+	        {{-- FOR EXTENSIONS --}}
 	        let cd = crew.months;
-	        let cd2 = crew.months;
-	        if(crew.extensions){
-	            let tempExt = JSON.parse(crew.extensions);
-	            tempExt.forEach(ext => {
-	                cd += `+${ext}`;
-	                cd2 += parseInt(ext);
+	        let cd2 = parseInt(crew.months) || 0;
+
+	        let extensionDays = crew.extensions_days;
+
+	        // Parse extension days
+	        if (typeof extensionDays === 'string') {
+	            try {
+	                extensionDays = JSON.parse(extensionDays);
+	            } catch (e) {
+	                extensionDays = parseInt(extensionDays) || 0;
+	            }
+	        }
+
+	        if (!Array.isArray(extensionDays)) {
+	            extensionDays = [parseInt(extensionDays) || 0];
+	        }
+
+	        if (crew.extensions) {
+	            let tempExt = crew.extensions;
+
+	            if (typeof tempExt === 'string') {
+	                tempExt = JSON.parse(tempExt);
+	            }
+
+	            tempExt.forEach((ext, index) => {
+	                let months = parseInt(ext) || 0;
+	                let days = parseInt(extensionDays[index]) || 0;
+
+	                if (months > 0) {
+	                    cd += `+${months}`;
+
+	                    if (days > 1) {
+	                        cd += `m${days}d`;
+	                    }
+	                } else if (days > 1) {
+	                    cd += `+${days}d`;
+	                } else {
+	                    cd += `+0`;
+	                }
+
+	                cd2 += months;
 	            });
 	        }
-	        let disembarkation_date = moment(crew.joining_date).add(cd2, 'months').add(crew.extensions_days, 'days');
+
+	        let totalExtensionDays = extensionDays.reduce(function(total, days) {
+	            return total + (parseInt(days) || 0);
+	        }, 0);
+
+	        let disembarkation_date = moment(crew.joining_date)
+	            .add(cd2, 'months')
+	            .add(totalExtensionDays, 'days');
+
+	        {{-- END FOR EXTENSIONS --}}
 
 	        let joining_date = null;
 	        let promotion_date = null;
