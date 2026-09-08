@@ -90,7 +90,13 @@
 		<td>
 			{{ now()->parse($data['effective_date'])->format('d-M-Y') }}
 			<br style='mso-data-placement:same-cell;' />
-			{{ now()->parse($data['effective_date'])->addMonths($data['employment_months'])->format('d-M-Y') }}
+			{{ 
+				now()->parse($data->effective_date)
+				    ->add($data->employment_months + array_sum(json_decode($data->extensions, true) ?? []), 'months')
+				    ->add(array_sum(array_filter((array) $data->extensions_days, function ($d) {
+				        return $d > 1;
+				    })), 'days')->format('d-M-Y')
+			}}
 		</td>
 		<td colspan="2">Duty</td>
 		<td colspan="2">{{ $data->pro_app->rank->abbr }}</td>
