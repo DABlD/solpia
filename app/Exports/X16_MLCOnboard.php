@@ -15,7 +15,7 @@ class X16_MLCOnboard implements WithMultipleSheets
         $ranks = Rank::get()->groupBy('id');
         $wage = Wage::where('vessel_id', $vessel->id)->get()->groupBy("rank_id");
 
-        $lucs = LineUpContract::where("vessel_id", $vessel->id)->where("status", "On Board")->select("applicant_id", "joining_date", "months", 'vessel_id', 'extensions')->get();
+        $lucs = LineUpContract::where("vessel_id", $vessel->id)->where("status", "On Board")->select("applicant_id", "joining_date", "months", 'vessel_id', 'extensions', 'extensions_days')->get();
         $applicants = Applicant::find($lucs->pluck("applicant_id")->toArray());
 
         $lucs = $lucs->groupBy("applicant_id");
@@ -48,22 +48,33 @@ class X16_MLCOnboard implements WithMultipleSheets
             $date = $lucs[$applicant->id][0]["joining_date"];
             $months = $lucs[$applicant->id][0]["months"];
             $extensions = $lucs[$applicant->id][0]["extensions"];
+            $extensions_days = $lucs[$applicant->id][0]["extensions_days"];
 
             if($extensions){
                 $extensions = json_decode($extensions);
+                $days = json_decode($extensions_days ?: '0');
+                $days = is_array($days) ? $days : [$days];
+
                 $date = now()->parse($date)->add($months, 'months');
 
-                for($i = 0, $j = 1; $i < sizeof($extensions); $i++, $j++){
+                for ($i = 0; $i < count($extensions) - 1; $i++) {
                     $months = $extensions[$i];
-                    if($j < sizeof($extensions)){
-                        $date = $date->add($months, 'months');
+                    $date->add((int) $extensions[$i], 'months');
+
+                    if (isset($days[$i]) && (int) $days[$i] > 1) {
+                        $date->add((int) $days[$i], 'days');
                     }
                 }
             }
 
             $applicant->date_processed    = now()->toDateString();
             $applicant->effective_date    = $date->toDateString();
-            $applicant->employment_months = $months;
+
+            $applicant->employment_months = is_array($extensions) ? end($extensions) : 0;
+
+            $days = json_decode($extensions_days, true);
+            $applicant->extensions_days = is_array($days) ? end($days) : $extensions_days;
+
             $applicant->valid_till        = $date->add($months, "months");
         }
 

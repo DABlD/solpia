@@ -51,6 +51,7 @@ class X25_MLCLinedUp implements WithMultipleSheets
             $applicant->date_processed    = now()->toDateString();
             $applicant->effective_date    = $date->toDateString();
             $applicant->employment_months = $months;
+            $applicant->extensions_days   = 0;
             $applicant->valid_till        = $date->add($months, "months");
         }
 

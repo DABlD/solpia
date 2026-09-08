@@ -4814,17 +4814,29 @@
 
                     <div class="row">
                         <div class="col-md-5">
-                            <h4 style="text-align: right;">Months of employment</h4>
+                            <h4 style="text-align: right;">Duration of employment</h4>
                         </div>
                         <div class="col-md-7">
-                            <input type="number" id="employment_months" class="form-control" />
+                            <div class="col-md-6" style="padding-left: 0px;">
+                                <div style="text-align: left;">
+                                    <label>Months</label>
+                                </div>
+                                <input type="number" id="employment_months" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6" style="padding-left: 0px;">
+                                <div style="text-align: left;">
+                                    <label>Days (Optional)</label>
+                                </div>
+                                <input type="number" id="days" class="form-control"><br>
+                            </div>
                         </div>
                     </div>
                 `,
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
                 width: '40%',
-                onOpen: () => {
+                onBeforeOpen: () => {
                     $('#med_date').flatpickr({
                         altInput: true,
                         altFormat: 'F j, Y',
@@ -4848,28 +4860,33 @@
                             let date = moment().format('YYYY-MM-DD');
 
                             if(result.lup){
+                                {{-- DISPLAY LATEST EXTENSION IF HAVE --}}
                                 date = moment(result.lup.joining_date);
                                 months = result.lup.months;
 
-                                if(result.lup.extensions){
+                                if (result.lup.extensions) {
                                     let extensions = JSON.parse(result.lup.extensions);
+                                    let days = JSON.parse(result.lup.extensions_days || '0');
+                                    days = Array.isArray(days) ? days : [days];
+
                                     date = date.add(result.lup.months, 'months');
 
-                                    for(i = 0, j = 1; i < extensions.length; i++, j++){
+                                    for (i = 0, j = 1; i < extensions.length; i++, j++) {
                                         months = extensions[i];
-                                        if(j < extensions.length){
-                                            date = date.add(months, 'months');
+                                        if (j < extensions.length) {
+                                            date = date.add(parseInt(extensions[i]) || 0, 'months');
+                                            if (parseInt(days[i]) > 1) date = date.add(parseInt(days[i]), 'days');
                                         }
                                     }
                                 }
                                 
                                 date = date.format("YYYY-MM-DD");
                                 $('#employment_months').val(months);
+                                let days = result.lup.extensions_days ? JSON.parse(result.lup.extensions_days) : 0;
+                                $('#days').val(Array.isArray(days) ? days.pop() : days);
                             }
                             else if(result.pro_app.status == "Lined-Up"){
                                 $('#employment_months').val(result.pro_app.mob);
-                            }
-                            else{
                                 date = result.pro_app.eld;
                             }
 
@@ -4908,6 +4925,7 @@
                     data.valid_till         = moment(data.effective_date).add(9, 'months').subtract(1, 'day').format('YYYY-MM-DD');
                     data.med_date           = $('#med_date').val();
                     data.employment_months  = $('#employment_months').val();
+                    data.extensions_days    = $('#days').val();
                     data.port               = $('#port').val();
 
                     if(id == 2692){
