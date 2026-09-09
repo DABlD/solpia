@@ -50,6 +50,8 @@ class X16_MLCOnboard implements WithMultipleSheets
             $extensions = $lucs[$applicant->id][0]["extensions"];
             $extensions_days = $lucs[$applicant->id][0]["extensions_days"];
 
+            $extensionIterationIndex = 0;
+
             if($extensions){
                 $extensions = json_decode($extensions);
                 $days = json_decode($extensions_days ?: '0');
@@ -59,6 +61,7 @@ class X16_MLCOnboard implements WithMultipleSheets
 
                 for ($i = 0; $i < count($extensions) - 1; $i++) {
                     $months = $extensions[$i];
+                    $extensionIterationIndex++;
                     $date->add((int) $extensions[$i], 'months');
 
                     if (isset($days[$i]) && (int) $days[$i] > 1) {
@@ -68,7 +71,7 @@ class X16_MLCOnboard implements WithMultipleSheets
             }
 
             $applicant->date_processed    = now()->toDateString();
-            $applicant->effective_date    = $date->toDateString();
+            $applicant->effective_date    = $date->addDay($extensionIterationIndex)->toDateString();
 
             $applicant->employment_months = is_array($extensions) ? end($extensions) : $months;
 

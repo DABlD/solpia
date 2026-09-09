@@ -259,6 +259,7 @@
 	        {{-- FOR EXTENSIONS --}}
 	        let cd = crew.months;
 	        let cd2 = parseInt(crew.months) || 0;
+	        let extensionIterationIndex = 0;
 
 	        let extensionDays = crew.extensions_days;
 
@@ -299,6 +300,7 @@
 	                }
 
 	                cd2 += months;
+	                extensionIterationIndex++;
 	            });
 	        }
 
@@ -307,6 +309,7 @@
 	        }, 0);
 
 	        let disembarkation_date = moment(crew.joining_date)
+	        	.add(extensionIterationIndex, 'days') //+1 day per extension
 	            .add(cd2, 'months')
 	            .add(totalExtensionDays, 'days');
 

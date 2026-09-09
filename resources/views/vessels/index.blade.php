@@ -4904,6 +4904,7 @@
                                 {{-- DISPLAY LATEST EXTENSION IF HAVE --}}
                                 date = moment(result.lup.joining_date);
                                 months = result.lup.months;
+                                extensionIterationIndex = 0;
 
                                 if (result.lup.extensions) {
                                     let extensions = JSON.parse(result.lup.extensions);
@@ -4914,6 +4915,7 @@
 
                                     for (i = 0, j = 1; i < extensions.length; i++, j++) {
                                         months = extensions[i];
+                                        extensionIterationIndex++;
                                         if (j < extensions.length) {
                                             date = date.add(parseInt(extensions[i]) || 0, 'months');
                                             if (parseInt(days[i]) > 1) date = date.add(parseInt(days[i]), 'days');
@@ -4921,7 +4923,7 @@
                                     }
                                 }
                                 
-                                date = date.format("YYYY-MM-DD");
+                                date = date.add(extensionIterationIndex, 'days').format("YYYY-MM-DD");
                                 $('#employment_months').val(months);
                                 let days = result.lup.extensions_days ? JSON.parse(result.lup.extensions_days) : 0;
                                 $('#days').val(Array.isArray(days) ? days.pop() : days);
