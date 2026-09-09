@@ -4407,7 +4407,27 @@
                             <input type="text" id="doe" class="form-control" placeholder="Date of Effectivity"><br>
                             <input type="text" id="recommended_by" class="form-control" placeholder="Recommended By (optional)"><br>
                             <input type="text" id="remarks" class="form-control" placeholder="Remarks (optional)"><br>
-                            <input type="number" min="1" id="cd" class="form-control" placeholder="Contract Duration (optional)"><br>
+                            
+                            <h5 style="text-align: left;">
+                                <b>
+                                    Contract Duration
+                                </b>
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div style="text-align: left;">
+                                        <label>Months</label>
+                                    </div>
+                                    <input type="number" min="1" id="cd" class="form-control" placeholder="Optional">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div style="text-align: left;">
+                                        <label>Days</label>
+                                    </div>
+                                    <input type="number" id="days" class="form-control" placeholder="Optional">
+                                </div>
+                            </div>
                         `,
                         preConfirm: () => {
                             swal.showLoading();
@@ -4462,7 +4482,27 @@
                     <input type="text" id="doe" class="form-control" placeholder="Date of Effectivity"><br>
                     <input type="text" id="recommended_by" class="form-control" placeholder="Recommended By (optional)"><br>
                     <input type="text" id="remarks" class="form-control" placeholder="Remarks (optional)"><br>
-                    <input type="number" min="1" id="cd" class="form-control" placeholder="Contract Duration (optional)"><br>
+
+                    <h5 style="text-align: left;">
+                        <b>
+                            Contract Duration (Optional)
+                        </b>
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="text-align: left;">
+                                <label>Months</label>
+                            </div>
+                            <input type="number" min="1" id="cd" class="form-control" placeholder="Optional">
+                        </div>
+
+                        <div class="col-md-6">
+                            <div style="text-align: left;">
+                                <label>Days</label>
+                            </div>
+                            <input type="number" id="days" class="form-control" placeholder="Optional">
+                        </div>
+                    </div>
                 `,
                 preConfirm: () => {
                     swal.showLoading();
@@ -4490,6 +4530,7 @@
                         status: "On Board",
                         type2: type2,
                         cd: $('#cd').val(),
+                        days: $('#days').val(),
                         vid: id
                     }
 

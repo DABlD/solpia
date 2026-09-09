@@ -64,7 +64,9 @@
 
 	<tr>
 		<td colspan="2">CONTRACT DURATION</td>
-		<td colspan="3" style="{{ $center }}">{{ $data->data['cd'] }}</td>
+		<td colspan="3" style="{{ $center }}">
+			{{ $duration = ($data->data['cd'] ? $data->data['cd'] . ' MONTHS' : '') . ($data->data['days'] > 0 ? ($data->data['cd'] ? ' ' : '') . $data->data['days'] . ' DAYS' : '') }}
+		</td>
 	</tr>
 
 	<tr>
