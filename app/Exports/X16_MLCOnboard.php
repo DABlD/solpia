@@ -70,7 +70,7 @@ class X16_MLCOnboard implements WithMultipleSheets
             $applicant->date_processed    = now()->toDateString();
             $applicant->effective_date    = $date->toDateString();
 
-            $applicant->employment_months = is_array($extensions) ? end($extensions) : 0;
+            $applicant->employment_months = is_array($extensions) ? end($extensions) : $months;
 
             $days = json_decode($extensions_days, true);
             $applicant->extensions_days = is_array($days) ? end($days) : $extensions_days;
