@@ -303,7 +303,7 @@
 	        }
 
 	        let totalExtensionDays = extensionDays.reduce(function(total, days) {
-	            return total + (parseInt(days) || 0);
+	            return total + (parseInt(days) > 1 ? parseInt(days) : 0);
 	        }, 0);
 
 	        let disembarkation_date = moment(crew.joining_date)
