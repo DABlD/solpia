@@ -109,8 +109,12 @@
 	</tr>
 
 	@php
-		$start = now()->parse($data->pro_app->eld);
-		$end = now()->parse($data->pro_app->eld)->add($data->employment_months, 'months');
+		$start = now()->parse($data->effective_date);
+		$end = now()->parse($data->effective_date)
+				    ->add($data->employment_months + array_sum(json_decode($data->extensions, true) ?? []), 'months')
+				    ->add(array_sum(array_filter((array) $data->extensions_days, function ($d) {
+				        return $d > 1;
+				    })), 'days');
 	@endphp
 	<tr>
 		<td colspan="2" style="{{ $c }}">
