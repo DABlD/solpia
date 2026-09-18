@@ -261,6 +261,13 @@
 	        let cd2 = parseInt(crew.months) || 0;
 	        let extensionIterationIndex = 0;
 
+	        if(cd == 0){
+	        	cd = "";
+	        }
+	        if(crew.days != 0){
+	        	cd += crew.days + "d";
+	        }
+
 	        let extensionDays = crew.extensions_days;
 
 	        // Parse extension days
@@ -311,6 +318,7 @@
 	        let disembarkation_date = moment(crew.joining_date)
 	        	.add(extensionIterationIndex, 'days') //+1 day per extension
 	            .add(cd2, 'months')
+	            .add(crew.days, 'days')
 	            .add(totalExtensionDays, 'days');
 
 	        {{-- END FOR EXTENSIONS --}}
@@ -356,7 +364,7 @@
 	                    <a class="btn btn-info btn-sm" data-toggle="tooltip" title="Export Documents" onClick="getContract2(${crew.applicant_id})">
 	                        <span class="fa fa-file-text"></span>
 	                    </a>
-	                    <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit On Board Details" onClick='eod(${crew.id}, ${crew.vessel_id}, "${crew.joining_date}", ${crew.months}, "${crew.joining_port ?? ""}")'>
+	                    <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Edit On Board Details" onClick='eod(${crew.id}, ${crew.vessel_id}, "${crew.joining_date}", ${crew.months}, ${crew.days}, "${crew.joining_port ?? ""}")'>
 	                        <span class="fa fa-pencil fa-sm"></span>
 	                    </a>
 	                    <a class="btn btn-warning btn-sm" data-toggle="tooltip" title="Extend Contract" onClick="extendContract(${crew.applicant_id}, ${crew.vessel_id}, '${disembarkation_date.format('YYYY-MM-DD')}')">

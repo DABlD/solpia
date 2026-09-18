@@ -3945,35 +3945,39 @@
             });
         }
 
-        function eod(id, vessel_id, joining_date, months, joining_port){
+        function eod(id, vessel_id, joining_date, months, days, joining_port){
             swal({
                 title: 'Edit Details',
-                width: '30%',
+                width: '400px',
                 html: `
-                    <div class="row">
-                        <div class="col-md-5">
-                            <h4 class="clabel">Joining Date</h4>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" id="joining_date" class="swal2-input" placeholder="Select Date"/>
-                        </div>
+                    <div style="text-align: left;">
+                        <label>Joining Date</label>
                     </div>
+                    <input type="text" id="joining_date" style="margin-top: 0px;" class="swal2-input" placeholder="Select Date"/>
 
-                    <div class="row">
-                        <div class="col-md-5">
-                            <h4 class="clabel">Contract Duration</h4>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="number" min="1" id="months" class="form-control" style="margin-top: 10px;" value="${months}" />
-                        </div>
+                    <div style="text-align: left;">
+                        <label>Joining Port</label>
                     </div>
+                    <input type="text" id="joining_port" style="margin-top: 0px;" class="swal2-input" value="${joining_port ?? ""}" />
 
+                    <h5 style="text-align: left;">
+                        <b>
+                            Contract Duration
+                        </b>
+                    </h5>
                     <div class="row">
-                        <div class="col-md-5">
-                            <h4 class="clabel2" style="margin-top: 15px;">Joining Port</h4>
+                        <div class="col-md-6">
+                            <div style="text-align: left;">
+                                <label>Months</label>
+                            </div>
+                            <input type="number" min="1" id="months" class="form-control" placeholder="Optional">
                         </div>
-                        <div class="col-md-7">
-                            <input type="text" id="joining_port" class="swal2-input" value="${joining_port ?? ""}" />
+
+                        <div class="col-md-6">
+                            <div style="text-align: left;">
+                                <label>Days</label>
+                            </div>
+                            <input type="number" id="days" class="form-control" placeholder="Optional">
                         </div>
                     </div>
                     <br>
@@ -3984,7 +3988,10 @@
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
                         defaultDate: moment(joining_date).format("YYYY-MM-DD")
-                    })
+                    });
+
+                    $('#months').val(months);
+                    $('#days').val(days);
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
@@ -3995,9 +4002,10 @@
                         setTimeout(() => {
                             let a = $('#joining_date').val();
                             let b = $('#months').val();
+                            let b2 = $('#days').val();
                             let c = $('#joining_port').val();
 
-                            if(a == "" || b == ""){
+                            if(a == "" || (b == "" && b2 == "")){
                                 swal.showValidationError('Joining Date and Contract Duration is required');
                             }
                         resolve()}, 500);
@@ -4013,6 +4021,7 @@
                             update: {
                                 joining_date: $('#joining_date').val(),
                                 months: $('#months').val(),
+                                days: $('#days').val(),
                                 joining_port: $('#joining_port').val(),
                             }
                         },
