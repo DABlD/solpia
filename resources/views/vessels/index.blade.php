@@ -3639,30 +3639,34 @@
             swal({
                 title: 'Onboarding Details',
                 html: `
-                    <div class="row">
-                        <div class="col-md-5">
-                            <h4 class="clabel">Joining Port</h4>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" id="port" class="swal2-input" />
-                        </div>
+                    <div style="text-align: left;">
+                        <label>Joining Date</label>
                     </div>
+                    <input type="text" id="date" class="swal2-input" placeholder="Select Date"/>
 
-                    <div class="row">
-                        <div class="col-md-5">
-                            <h4 class="clabel">Joining Date</h4>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" id="date" class="swal2-input" placeholder="Select Date"/>
-                        </div>
+                    <div style="text-align: left;">
+                        <label>Joining Port</label>
                     </div>
+                    <input type="text" id="port" class="swal2-input" />
 
+                    <h5 style="text-align: left;">
+                        <b>
+                            Contract Duration
+                        </b>
+                    </h5>
                     <div class="row">
-                        <div class="col-md-5">
-                            <h4 class="clabel2">Months of Contract</h4>
+                        <div class="col-md-6">
+                            <div style="text-align: left;">
+                                <label>Months</label>
+                            </div>
+                            <input type="number" min="1" id="months" class="form-control" placeholder="Optional">
                         </div>
-                        <div class="col-md-7">
-                            <input type="number" min="1" id="months" class="form-control" />
+
+                        <div class="col-md-6">
+                            <div style="text-align: left;">
+                                <label>Days</label>
+                            </div>
+                            <input type="number" id="days" class="form-control" placeholder="Optional">
                         </div>
                     </div>
                     <br>
@@ -3672,7 +3676,9 @@
                         altInput: true,
                         altFormat: 'F j, Y',
                         dateFormat: 'Y-m-d',
-                    })
+                    });
+
+                    $('.swal2-input').css('margin-top', '0px');
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',
@@ -3684,9 +3690,10 @@
                             let a = $('#port').val();
                             let b = $('#date').val();
                             let c = $('#months').val();
+                            let c2 = $('#days').val();
 
-                            if(b == "" || c == ""){
-                                swal.showValidationError('All fields is required');
+                            if(b == "" || (c == "" && c2 == "")){
+                                swal.showValidationError('Date and Contract Duration is required');
                             }
                         resolve()}, 500);
                     });
@@ -3701,6 +3708,7 @@
                             port: $('#port').val(),
                             date: $('#date').val(),
                             months: $('#months').val(),
+                            days: $('#days').val(),
                         },
                         success: vessel => {
                             swal({
@@ -3846,12 +3854,32 @@
                             </div>
                             <input type="text" id="ed" class="form-control"><br>
 
-                            <input type="number" min="1" id="cd" class="form-control" placeholder="Contract Duration"><br>
-
                             <select id="rank_id" class="form-control">
                                 <option value="">Promote To:</option>
                                 ${rankString}
                             </select><br><br>
+
+                            <h5 style="text-align: left;">
+                                <b>
+                                    Contract Duration
+                                </b>
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div style="text-align: left;">
+                                        <label>Months</label>
+                                    </div>
+                                    <input type="number" min="1" id="months" class="form-control" placeholder="Contract Duration"><br>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div style="text-align: left;">
+                                        <label>Days</label>
+                                    </div>
+                                    <input type="number" id="days" class="form-control" placeholder="Optional">
+                                </div>
+                            </div>
+                            <br>
                         `,
                         onOpen: () => {
                             $('#rank_id').select2();
@@ -3864,11 +3892,12 @@
                             })
                         }
                     }).then(result => {
-                        let cd = $('#cd').val();
+                        let months = $('#months').val();
+                        let days = $('#days').val();
                         let rank = $('#rank_id').val();
                         let ed = $('#ed').val();
 
-                        if(result.value && cd != "" && rank != "" && ed != ""){
+                        if(result.value && (months != "" || days != "") != "" && rank != "" && ed != ""){
                             // DISEMBARK
                             $.ajax({
                                 type: 'POST',
@@ -3888,7 +3917,8 @@
                                         url: `{{ route('applications.updateStatus') }}/${applicant_id}/${"On Board"}/${vessel_id}`,
                                         data: {
                                             date: ed,
-                                            months: cd,
+                                            months: months,
+                                            days: days,
                                             rank: rank
                                         },
                                         success: result => {
@@ -3953,12 +3983,12 @@
                     <div style="text-align: left;">
                         <label>Joining Date</label>
                     </div>
-                    <input type="text" id="joining_date" style="margin-top: 0px;" class="swal2-input" placeholder="Select Date"/>
+                    <input type="text" id="joining_date" class="swal2-input" placeholder="Select Date"/>
 
                     <div style="text-align: left;">
                         <label>Joining Port</label>
                     </div>
-                    <input type="text" id="joining_port" style="margin-top: 0px;" class="swal2-input" value="${joining_port ?? ""}" />
+                    <input type="text" id="joining_port" class="swal2-input" value="${joining_port ?? ""}" />
 
                     <h5 style="text-align: left;">
                         <b>
@@ -3992,6 +4022,7 @@
 
                     $('#months').val(months);
                     $('#days').val(days);
+                    $('.swal2-input').css('margin-top', '0px');
                 },
                 showCancelButton: true,
                 cancelButtonColor: '#f76c6b',

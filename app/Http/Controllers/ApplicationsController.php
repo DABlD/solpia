@@ -1242,6 +1242,8 @@ class ApplicationsController extends Controller
                 $temp->months = $req->months;
             }
 
+            $temp->days = $req->days;
+
             LineUpContract::create($temp->toArray());
         }
 
@@ -1286,6 +1288,7 @@ class ApplicationsController extends Controller
         $lin_con->disembarkation_port = $req->disembarkation_port ?? null;
         $lin_con->disembarkation_date = $req->disembarkation_date ?? null;
         $lin_con->months = $req->disembarkation_date ? now()->parse($lin_con->joining_date)->diffInMonths(now()->parse($req->disembarkation_date)) : $lin_con->months;
+        $lin_con->days = $req->days ?? $lin_con->days;
         $lin_con->status = $status;
         $lin_con->save();
 
