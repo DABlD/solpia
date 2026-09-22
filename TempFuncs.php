@@ -906,3 +906,91 @@ foreach($grouped as $key => $group){
 
 
 die;
+
+<!-- RANK PROMOTIONS FOR FLEET B HMM -->
+$rankPromotions = [
+    // 'DECK CADET'   => 'APPRENTICE OFFICER',
+
+    // 'ENGINE CADET'    => 'APPRENTICE ENGINEER',
+    // '4TH ENGINEER' => '3RD ASST. ENGR',
+    // '3RD ENGINEER'  => '2ND ASST. ENGR',
+    // '2ND ENGINEER' => '1ST ASST. ENGR',
+    '1ST ENGINEER' => 'CHIEF ENGINEER'
+
+    // 'DECK CADET'   => '3RD OFFICER',
+    // '3RD OFFICER'  => '2ND OFFICER',
+    // '2ND OFFICER'  => 'CHIEF OFFICER',
+    // 'CHIEF OFFICER' => 'MASTER',
+
+    // 'ENGINE CADET'    => '3RD ASST. ENGR',
+    // '3RD ASST. ENGR'  => '2ND ASST. ENGR',
+    // '2ND ASST. ENGR'  => '1ST ASST. ENGR',
+    // '1ST ASST. ENGR'  => 'CHIEF ENGINEER',
+];
+
+$services = SeaService::orderBy('applicant_id')
+    ->orderBy('sign_on')
+    ->orderBy('id')
+    ->where('sign_on', '>=', '2022-01-01')
+    ->get();
+
+$promotedCrew = collect();
+
+$services
+    ->groupBy('applicant_id')
+    ->each(function ($crewServices, $applicantId) use ($rankPromotions, $promotedCrew) {
+
+        $crewServices = $crewServices->values();
+
+        for ($i = 1; $i < $crewServices->count(); $i++) {
+
+            $previous = $crewServices[$i - 1];
+            $current  = $crewServices[$i];
+
+            // Promotion must have happened from Jan 1, 2023 onwards
+            if ($current->sign_on < '2023-01-01') {
+                continue;
+            }
+
+            // Must be SOLPIA
+            if (stripos($current->manning_agent, 'SOLPIA') === false) {
+                continue;
+            }
+
+            // Must be HMM / HMS / HYUNDAI
+            $principal = strtoupper($current->principal);
+
+            if (
+                strpos($principal, 'HMM') === false &&
+                strpos($principal, 'HMS') === false &&
+                strpos($principal, 'HYUNDAI') === false
+            ) {
+                continue;
+            }
+
+            // Check rank promotion
+            if (
+                isset($rankPromotions[$previous->rank]) &&
+                $rankPromotions[$previous->rank] == $current->rank
+            ) {
+                $lastDisembark = $crewServices
+                    ->filter(function ($service) {
+                        return !empty($service->sign_off);
+                    })
+                    ->sortByDesc('sign_off')
+                    ->first();
+
+                $promotedCrew->push([
+                    'applicant'    => $current->applicant,
+                    'from_rank'    => $previous->rank,
+                    'to_rank'      => $current->rank,
+                    'promotion_on' => $current->sign_on,
+                    'last_disembark' => $lastDisembark ? $lastDisembark->sign_off : null
+                ]);
+            }
+        }
+    });
+
+foreach($promotedCrew as $temp){
+    echo $temp['applicant']->user->namefull . ';' . $temp['from_rank'] . ';' . $temp['to_rank'] . ';' . $temp['promotion_on'] . ';' . $temp['last_disembark'] . ';' . $temp['applicant']->pro_app->status . '<br>';
+}
