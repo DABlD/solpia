@@ -4962,8 +4962,12 @@
                                         }
                                     }
                                 }
+
+                                if(result.user.fleet == "FLEET B"){
+                                    date = date.add(extensionIterationIndex, 'days');
+                                }
                                 
-                                date = date.add(extensionIterationIndex, 'days').format("YYYY-MM-DD");
+                                date = date.format("YYYY-MM-DD");
                                 $('#employment_months').val(months);
                                 let days = result.lup.extensions_days ? JSON.parse(result.lup.extensions_days) : 0;
                                 $('#days').val(Array.isArray(days) ? days.pop() : days);

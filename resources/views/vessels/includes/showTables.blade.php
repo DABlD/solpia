@@ -319,10 +319,13 @@
 	        }, 0);
 
 	        let disembarkation_date = moment(crew.joining_date)
-	        	.add(extensionIterationIndex, 'days') //+1 day per extension
 	            .add(cd2, 'months')
 	            .add(crew.days, 'days')
 	            .add(totalExtensionDays, 'days');
+	        
+	        if(crew.fleet == "FLEET B"){
+	            disembarkation_date = disembarkation_date.add(extensionIterationIndex, 'days') //+1 day per extension
+	        }
 
 	        {{-- END FOR EXTENSIONS --}}
 

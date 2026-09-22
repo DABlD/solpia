@@ -70,8 +70,12 @@ class X16_MLCOnboard implements WithMultipleSheets
                 }
             }
 
+            if($applicant->user->fleet == "FLEET B"){
+                $date = $date->addDay($extensionIterationIndex);
+            }
+
             $applicant->date_processed    = now()->toDateString();
-            $applicant->effective_date    = $date->addDay($extensionIterationIndex)->toDateString();
+            $applicant->effective_date    = $date->toDateString();
 
             $applicant->employment_months = is_array($extensions) ? end($extensions) : $months;
 
