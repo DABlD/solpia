@@ -629,8 +629,8 @@
 							<td>${user.birthday ? toDate(user.birthday, 'DD-MMM-YY') : "-"}&nbsp;</td>
 							<td>${user.birthday ? moment().diff(moment(user.birthday), 'years') : "-"}</td>
 							<td>${toDate(obc.joining_date, 'DD-MMM-YY')}&nbsp;</td>
-							<td>${moment().diff(moment(joining_date), 'months') + (promotion_date ? " /<br>" + moment().diff(moment(promotion_date), 'months') : "")}</td>
 							<td>${cd}</td>
+							<td>${disembarkation_date.format('DD-MMM-YY')}</td>
 							<td>${moment().diff(moment(joining_date), 'months')}</td>
 
 							{{-- DOCUMENTS --}}
