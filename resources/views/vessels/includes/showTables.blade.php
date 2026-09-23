@@ -490,8 +490,6 @@
 
 				obcs.forEach((obc, index) => {
 					let user = obc.applicant.user;
-					let months = Number(obc.months) + Number(obc.extensions ? JSON.parse(obc.extensions).map(Number).reduce((a,b)=>a+b,0) : 0);
-					let days = obc.days;
 
 					// IDS
 					let pp = filterDocs(obc.document_id, 'PASSPORT');
@@ -538,6 +536,90 @@
 					// MEDICAL
 					let medical = filterDocs(obc.document_med_cert, 'MEDICAL CERTIFICATE');
 
+					{{-- FOR EXTENSIONS --}}
+					let cd = obc.months;
+					let cd2 = parseInt(obc.months) || 0;
+					let extensionIterationIndex = 0;
+
+					if(cd == 0){
+						cd = "";
+					}
+					if(obc.days != 0){
+						if(cd != 0){
+							cd += "m";
+						}
+						cd += obc.days + "d";
+					}
+
+					let extensionDays = obc.extensions_days;
+
+					// Parse extension days
+					if (typeof extensionDays === 'string') {
+					    try {
+					        extensionDays = JSON.parse(extensionDays);
+					    } catch (e) {
+					        extensionDays = parseInt(extensionDays) || 0;
+					    }
+					}
+
+					if (!Array.isArray(extensionDays)) {
+					    extensionDays = [parseInt(extensionDays) || 0];
+					}
+
+					if (obc.extensions) {
+					    let tempExt = obc.extensions;
+
+					    if (typeof tempExt === 'string') {
+					        tempExt = JSON.parse(tempExt);
+					    }
+
+					    tempExt.forEach((ext, index) => {
+					        let months = parseInt(ext) || 0;
+					        let days = parseInt(extensionDays[index]) || 0;
+
+					        if (months > 0) {
+					            cd += `+${months}`;
+
+					            if (days > 1) {
+					                cd += `m${days}d`;
+					            }
+					        } else if (days > 1) {
+					            cd += `+${days}d`;
+					        } else {
+					            cd += `+0`;
+					        }
+
+					        cd2 += months;
+					        extensionIterationIndex++;
+					    });
+					}
+
+					let totalExtensionDays = extensionDays.reduce(function(total, days) {
+					    return total + (parseInt(days) > 1 ? parseInt(days) : 0);
+					}, 0);
+
+					let disembarkation_date = moment(obc.joining_date)
+					    .add(cd2, 'months')
+					    .add(obc.days, 'days')
+					    .add(totalExtensionDays, 'days');
+					
+					if(user.fleet == "FLEET B"){
+					    disembarkation_date = disembarkation_date.add(extensionIterationIndex, 'days') //+1 day per extension
+					}
+
+					{{-- END FOR EXTENSIONS --}}
+
+					let joining_date = null;
+					let promotion_date = null;
+
+					if(user.crew.beforePromotion){
+						joining_date = crew.beforePromotion.joining_date;
+						promotion_date = crew.joining_date;
+					}
+					else{
+						joining_date = obc.joining_date;
+					}
+
 					
 					string += `
 						<tr>
@@ -547,9 +629,9 @@
 							<td>${user.birthday ? toDate(user.birthday, 'DD-MMM-YY') : "-"}&nbsp;</td>
 							<td>${user.birthday ? moment().diff(moment(user.birthday), 'years') : "-"}</td>
 							<td>${toDate(obc.joining_date, 'DD-MMM-YY')}&nbsp;</td>
-							<td>${months ? months + (days ? "m" : "") : ""}${days ? days + "d" : ""}</td>
-							<td>${toDate(moment(obc.joining_date).add(months, 'months').add(days, 'days'), 'DD-MMM-YY')}</td>
-							<td>${moment().diff(moment(obc.joining_date), 'months')}</td>
+							<td>${moment().diff(moment(joining_date), 'months') + (promotion_date ? " /<br>" + moment().diff(moment(promotion_date), 'months') : "")}</td>
+							<td>${cd}</td>
+							<td>${moment().diff(moment(joining_date), 'months')}</td>
 
 							{{-- DOCUMENTS --}}
 							<td>${pp ? pp.number : "N/A"}</td>
