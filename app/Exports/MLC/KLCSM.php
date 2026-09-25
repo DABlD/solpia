@@ -21,9 +21,9 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $identification = null;
 
         $temp = [
-            'M/T SM NAVIGATOR' => "50983-19",
-            'M/T SM FALCON' => "48922-17",
-            "M/T SM OSPREY" => "48789-17",
+            'M/T SM NAVIGATOR' => "50983-19-A",
+            'M/T SM FALCON' => "48922-17-B",
+            "M/T SM OSPREY" => "48789-17-B",
             "M/T SM VENUS2" => "51157-20",
             "M/V CH BELLA" => "JJR-106189",
             "M/V CH CLARE" => "JJR-102152",
