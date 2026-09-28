@@ -1706,7 +1706,7 @@
 			<td colspan="3">{{ $applicant->user->lname . ', ' . $applicant->user->fname . ' ' . $applicant->user->suffix . ' ' . $applicant->user->mname }}</td>
 			<td>Presenter:</td>
 			<td colspan="3">
-				@if(in_array(auth()->user()->id, [4567, 8688, 9360]))
+				@if(in_array(auth()->user()->id, [4567, 8688, 9360, 9575]))
 					LHEA MARQUEZ / ASST. CREWING MANAGER
 				@elseif(in_array(auth()->user()->id, [4935, 4546, 6794, 9515]))
 					LAURA FERNANDO / ASST. CREWING MANAGER

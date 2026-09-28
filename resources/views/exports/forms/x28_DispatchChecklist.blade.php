@@ -470,7 +470,7 @@
 				Ms. Jeneva Bianca Santos
 			@elseif(in_array(auth()->user()->id, [4935, 4546, 6794, 9515]))
 			    Ms. Laura Fernando
-			@elseif(in_array(auth()->user()->id, [4567, 8688, 9360]))
+			@elseif(in_array(auth()->user()->id, [4567, 8688, 9360, 9575]))
 				Ms. Lhea Marquez
 			@endif
 		</td>
