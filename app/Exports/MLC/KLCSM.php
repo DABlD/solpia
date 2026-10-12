@@ -30,9 +30,10 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V CH DORIS" => "JJR-105192",
             "M/V CK ANGIE" => "JJR-111063",
             "M/V CK BLUEBELL" => "JJR-111067",
+            "MV SM OCEANUS" => ""
         ];
 
-        if(in_array($applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY'])){
+        if(in_array($applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY', "MV SM OCEANUS"])){
             $shipowner = "KOREA LINE CORPORATION";
             $phoneNumber = "+82-2-3701-0114";
             $address = "30, Sinchonnyeok-ro, Seodaemun-gu, Seoul, Republic of Korea";
