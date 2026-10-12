@@ -337,7 +337,13 @@
 		<td>US$</td>
 		<td>40</td>
 		<td></td>
-		<td colspan="5">As IBF FKSU CA (BBCHP) Article 33</td>
+		<td colspan="5">
+			@if($data->vessel->id == 9739)
+				As IBF FKSU AMOSUP KSA CBA (BBC) Article 33
+			@else
+				As IBF FKSU CA (BBCHP) Article 33
+			@endif
+		</td>
 	</tr>
 
 	<tr>

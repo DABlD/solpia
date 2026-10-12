@@ -671,7 +671,7 @@ class KLCSM implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $drawing6 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
 
 
-        if(in_array($this->applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY']))
+        if(in_array($this->applicant->vessel->name, ['M/T SM NAVIGATOR', 'M/T SM FALCON', 'M/T SM OSPREY', "MV SM OCEANUS"]))
         {
             $drawing6->setPath(public_path("images/mlc_klcsm_new.png"));
         }
