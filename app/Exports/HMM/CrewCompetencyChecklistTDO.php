@@ -279,12 +279,14 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
                 $event->sheet->getDelegate()->setTitle(str_replace('/', '', $this->data->rank), false);
                 $event->sheet->getDelegate()->getPageSetup()->setFitToHeight(0);
                 $event->sheet->getDelegate()->getPageMargins()->setTop(0.1);
-                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setLeft(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setBottom(0.2);
-                $event->sheet->getDelegate()->getPageMargins()->setRight(0.5);
+                $event->sheet->getDelegate()->getPageMargins()->setRight(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setHeader(0.2);
                 $event->sheet->getDelegate()->getPageMargins()->setFooter(0.1);
                 $event->sheet->getDelegate()->getPageSetup()->setHorizontalCentered(true);
+
+                $event->sheet->getDelegate()->getPageSetup()->setScale(65);
                 // $event->sheet->getDelegate()->getPageSetup()->setVerticalCentered(true);
 
                 // SET PAGE BREAK PREVIEW
@@ -342,15 +344,15 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
 
                 // HC VC
                 $h[4] = [
-                    'A1:I62'
+                    'A1:I63'
                 ];
 
                 // HL
                 $h[5] = [
                     'A3',
-                    'B7:B18', 'C19:C36',
-                    'B37:B52','A53:A55', 'A58:A59',
-                    'I7:I55'
+                    'B7:B18', 'C19:C47',
+                    'B48:B58','A59:A61', 'A64:A65',
+                    'I7:I61'
                 ];
 
                 // B
@@ -377,7 +379,7 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
 
 
                 $h['wrap'] = [
-                    'A4:I62'
+                    'A4:I65'
                 ];
 
                 // SHRINK TO FIT
@@ -387,7 +389,7 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
 
                 // TEXT UP
                 $textUp = [
-                    'A7', 'A14:A36'
+                    'A7', 'A14:A47'
                 ];
 
                 foreach($textUp as $cell){
@@ -431,7 +433,7 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
 
                 // ALL BORDER THIN
                 $cells[0] = array_merge([
-                    'A4:I58'
+                    'A4:I64'
                 ]);
 
                 // ALL BORDER MEDIUM
@@ -448,7 +450,7 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'A4:I57'
+                    'A4:I63'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -465,12 +467,12 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
 
                 // LRB
                 $cells[8] = array_merge([
-                    'A58'
+                    'A64'
                 ]);
 
                 // RRB
                 $cells[9] = array_merge([
-                    'I58'
+                    'I64'
                 ]);
 
                 // TRB
@@ -506,7 +508,7 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
 
                 // BBDOBOL
                 $cells[17] = array_merge([
-                    'A55:I55', 'A6:I6'
+                    'A61:I61', 'A6:I6'
                 ]);
                 
                 foreach($cells as $key => $value){
@@ -532,8 +534,8 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
                 // ROW RESIZE
                 $rows = [
                     [
-                        19.3, //ROW HEIGHT
-                        1,62 //START ROW, END ROW
+                        19.2, //ROW HEIGHT
+                        1,65 //START ROW, END ROW
                     ],
                 ];
 
@@ -566,8 +568,8 @@ class CrewCompetencyChecklistTDO implements FromView, WithEvents//, WithDrawings
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A1:L160')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A1:L160')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A1:L165')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A1:L165')->getFont()->setName('Times New Roman');
 
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(16);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(10);

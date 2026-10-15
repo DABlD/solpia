@@ -105,7 +105,7 @@
 	@endphp
 	<tr>
 		<td rowspan="2">SIRB</td>
-		<td colspan="2">Philippine / Myanmar / Indonesia</td>
+		<td colspan="2">Philippine</td>
 		<td>10Y</td>
 		<td rowspan="12">All Ranks</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
@@ -164,7 +164,7 @@
 	@endphp
 	<tr>
 		<td colspan="2">Australia VISA (MCV)</td>
-		<td>-</td>
+		<td>3Y</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -177,11 +177,11 @@
 	@endphp
 	<tr>
 		<td colspan="2">New Zealand VISA (NZeTA)</td>
-		<td>-</td>
+		<td>5Y</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
-		<td></td>
+		<td>Issue at every sign-on</td>
 	</tr>
 
 	@php 
@@ -361,7 +361,7 @@
 		foreach(get_object_vars($data->document_lc) as $key => $doc){
 			$regulations = json_decode($doc->regulation);
 
-			if(in_array($key, ["COC", "COE"]) && (in_array("III/1", $regulations) || in_array("III/2", $regulations))){
+			if(in_array($key, ["COC", "COE"]) && (in_array("II/1", $regulations) || in_array("II/2", $regulations))){
 				if($docu == null){
 					$docu = $doc;
 				}
@@ -372,24 +372,20 @@
 		}
 	@endphp
 	<tr>
-		<td rowspan="4">STCW III</td>
+		<td rowspan="3">STCW II</td>
 		<td rowspan="2">License</td>
 		<td>COC (National)</td>
 		<td rowspan="2">5Y</td>
-		<td rowspan="2">
-			All Engineers
+		<td rowspan="3">
+			MTR &#38;<br>
+			All Officers
 		</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
 		<td rowspan="3">
-			III/1 (2AE, 3AE)<br>
-			III/2 (CE, 1AE)<br>
-			※ MAHIVO training<br>
-			ㅤ- Applicable to ships equipped<br>
-			ㅤwith equipment to generate,<br>
-			ㅤdistribute or transform high<br>
-			ㅤvoltage exceeding 1,000 volts
+			II/1 (3O, 2O)<br>
+			II/2 (CO, MTR)
 		</td>
 	</tr>
 
@@ -401,70 +397,119 @@
 	</tr>
 
 	@php
-		$docu = false;
-
-		foreach(get_object_vars($data->document_lc) as $doc){
-			if(str_contains($doc->type, "MARINE HIGH VOLTAGE")){
-				$docu = $doc;
-			}
-		}
+		$roc = isset($data->document_lc->{"RADAR OBSERVER COURSE"}) ? "☑" : "▢";
+		$rsc = isset($data->document_lc->{"RADAR SIMULATOR COURSE"}) ? "☑" : "▢";
+		$e = isset($data->document_lc->{"ECDIS"}) ? "☑" : "▢";
+		$arpa = isset($data->document_lc->{"ARPA TRAINING COURSE"}) ? "☑" : "▢";
 	@endphp
 	<tr>
-		<td rowspan="2">High Voltage</td>
-		<td>MAHIVO (Operation Lv)</td>
+		<td>Training Cert</td>
+		<td>RADAR/ECDIS/(GENERIC)/ARPA</td>
 		<td>-</td>
-		<td>2AE, 3AE</td>
-		<td>Y {{ $docu ? "☑" : "▢" }}</td>
-		<td>N {{ $docu ? "▢" : "☑" }}</td>
-		<td>Y ▢ N ▢</td>
+		<td>
+			ROCㅤㅤㅤRSC<br>
+			 {{ $roc }}ㅤㅤㅤㅤ{{ $rsc }}
+		</td>
+		<td>
+			ㅤEㅤㅤARPA<br>
+			{{ $e }}ㅤㅤㅤ{{ $arpa }}
+		</td>
+		<td>
+			ROCㅤRSCㅤEㅤARP<br>
+			▢ㅤㅤ▢ㅤ▢ㅤ▢
+		</td>
 	</tr>
 
 	@php
-		$docu = false;
+		$docu = null;
 
 		foreach(get_object_vars($data->document_lc) as $doc){
-			if(str_contains($doc->type, "MARINE HIGH VOLTAGE") && str_contains($doc->type, "Management")){
-				$docu = $doc;
-			}
-		}
-	@endphp
-	<tr>
-		<td>MAHIVO (Management Lv)</td>
-		<td>-</td>
-		<td>CE, 1AE</td>
-		<td>Y {{ $docu ? "☑" : "▢" }}</td>
-		<td>N {{ $docu ? "▢" : "☑" }}</td>
-		<td>Y ▢ N ▢</td>
-	</tr>
-
-	@php
-		$docu = false;
-		$tDocu = false;
-		$name = "SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD";
-
-		foreach(get_object_vars($data->document_lc) as $doc){
-			if($doc->type == $name){
-				if($doc->issuer == "MARINA"){
+			if($doc->type == "GMDSS/GOC"){
+				if($docu && $doc->issue_date > $docu->issue_date){
 					$docu = $doc;
 				}
 				else{
-					$tDocu = $doc;
+					if($doc->issue_date > now()->toDateString()){
+						$docu = $doc;
+					}
 				}
 			}
 		}
 	@endphp
 	<tr>
-		<td rowspan="8">STCW VI</td>
+		<td rowspan="2">STCW IV</td>
 		<td rowspan="2">License</td>
-		<td>DSD (National)</td>
-		<td>-</td>
-		<td rowspan="3">
-			All Engineers
+		<td>GOC (National)</td>
+		<td rowspan="2">5Y</td>
+		<td rowspan="2">
+			MTR &#38;<br>
+			All Officers
 		</td>
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
-		<td rowspan="3">
+		<td rowspan="2">IV/2</td>
+	</tr>
+
+	<tr>
+		<td>Flag</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+
+	@php
+		$docu = null;
+		$tDocu = null;
+		$tDocu2 = null;
+		$name = null;
+		// dd($data->rank); //MSTR
+
+		if($data->rank == "MSTR"){
+			$name = "SHIP SECURITY OFFICER - SSO";
+		}
+		else{
+			$name = "SHIP SECURITY AWARENESS TRAINING & SEAFARERS WITH DESIGNATED SECURITY DUTIES - SDSD";
+		}
+
+		foreach(get_object_vars($data->document_lc) as $doc){
+			if($doc->type == $name){
+				if($doc->issuer != "MARINA"){
+					if($name == "SHIP SECURITY OFFICER - SSO"){
+						$tDocu = $doc;
+					}
+					else{
+						$tDocu2 = $doc;
+					}
+				}
+				else{
+					if($docu && $doc->issue_date > $docu->issue_date){
+						$docu = $doc;
+					}
+					else{
+						if($doc->issue_date > now()->toDateString()){
+							$docu = $doc;
+						}
+					}
+				}
+			}
+		}
+	@endphp
+	<tr>
+		<td rowspan="10">STCW VI</td>
+		<td rowspan="2">License</td>
+		<td>SSO/DSD (National)</td>
+		<td>-</td>
+		<td rowspan="2">
+			MTR (SSO)
+			<br>
+			All Officers (DSD)
+		</td>
+		<td>Y {{ $docu ? "☑" : "▢" }}</td>
+		<td>N {{ $docu ? "▢" : "☑" }}</td>
+		<td>Y ▢ N ▢</td>
+		<td rowspan="4">
+			VI/5 (SSO)<br>
 			VI/6 (DSD)
 		</td>
 	</tr>
@@ -478,11 +523,20 @@
 	</tr>
 
 	<tr>
-		<td rowspan="6">Training Cert</td>
-		<td>Designated Security Duty</td>
-		<td>-</td>
+		<td rowspan="8">Training Cert</td>
+		<td>Ship Security Officer</td>
+		<td rowspan="2">-</td>
+		<td>MTR, CO</td>
 		<td>Y {{ $tDocu ? "☑" : "▢" }}</td>
 		<td>N {{ $tDocu ? "▢" : "☑" }}</td>
+		<td>Y ▢ N ▢</td>
+	</tr>
+
+	<tr>
+		<td>Designated Security Duty</td>
+		<td>All Officers</td>
+		<td>Y {{ $tDocu2 ? "☑" : "▢" }}</td>
+		<td>N {{ $tDocu2 ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
 	</tr>
 
@@ -492,17 +546,35 @@
 	@endphp
 	<tr>
 		<td>Basic Training</td>
-		<td rowspan="3">5Y</td>
-		<td>All Engineers</td>
+		<td rowspan="4">5Y</td>
+		<td rowspan="2">
+			MTR &#38;<br>
+			All Officers
+		</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
-		<td rowspan="5">
+		<td rowspan="6">
 			VI/1 Basic Training<br>
-			VI/2 Survival Craft &#38; Rescue Boat<br>
-			VI/3 Advanced Fire Fighting<br>
+			VI/2 Survival Craft &#38; Rescue Boat
+			VI/3 Advanced Fire Fighting
 			VI/4 Medical First-Aid / Medical Care
+			<br>
+			<br>
+			* 2O, 3O - MECA 5Y<br>
+			(by Refresher course)
 		</td>
+	</tr>
+
+	@php
+		$name = 'BT-PSSR';
+		$docu = isset($data->document_lc->{$name}) ? $data->document_lc->{$name} : false;
+	@endphp
+	<tr>
+		<td>BT-PSSR Updating (If necessary)</td>
+		<td>Y {{ $docu ? "☑" : "▢" }}</td>
+		<td>N {{ $docu ? "▢" : "☑" }}</td>
+		<td>Y ▢ N ▢</td>
 	</tr>
 
 	@php
@@ -523,7 +595,10 @@
 	@endphp
 	<tr>
 		<td>Advanced Fire Fighting</td>
-		<td rowspan="3">All Engineers</td>
+		<td rowspan="2">
+			MTR &#38;<br>
+			All Officers
+		</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -541,12 +616,19 @@
 		<td>Y ▢ N ▢</td>
 	</tr>
 
+	@php
+		$name = 'MEDICAL CARE - MECA';
+		$docu = isset($data->document_lc->{$name}) ? $data->document_lc->{$name} : false;
+	@endphp
 	<tr>
-		<td>BT/SCR/AFF/MF/MC - Flag</td>
-		<td>5Y</td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td>Medical Care</td>
+		<td>-</td>
+		<td>
+			Engaged in the relevant duty
+		</td>
+		<td>Y {{ $docu ? "☑" : "▢" }}</td>
+		<td>N {{ $docu ? "▢" : "☑" }}</td>
+		<td>Y ▢ N ▢</td>
 	</tr>
 
 	@php
@@ -569,7 +651,10 @@
 		<td rowspan="2">IGF Basic</td>
 		<td>COP (National)</td>
 		<td rowspan="4">5Y</td>
-		<td rowspan="6">All Engineers</td>
+		<td rowspan="2">
+			MTR &#38;<br>
+			All Officers
+		</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -589,6 +674,10 @@
 	<tr>
 		<td rowspan="2">IGF Advanced</td>
 		<td>COP (National)</td>
+		<td rowspan="2">
+			MTR &#38;<br>
+			All Officers
+		</td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -605,6 +694,7 @@
 		<td rowspan="2">Training Cert</td>
 		<td>IGF Basic</td>
 		<td rowspan="2">-</td>
+		<td>MTR &#38; All Officers</td>
 		<td>Y {{ $tDocu ? "☑" : "▢" }}</td>
 		<td>N {{ $tDocu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
@@ -612,6 +702,7 @@
 
 	<tr>
 		<td>IGF Advanced</td>
+		<td>MTR</td>
 		<td>Y ▢</td>
 		<td>N ▢</td>
 		<td>Y ▢ N ▢</td>
@@ -652,7 +743,10 @@
 		<td rowspan="4">License</td>
 		<td>BTOC/BTLGT(National)</td>
 		<td rowspan="6">5Y</td>
-		<td rowspan="2">2/E, 3/E</td>
+		<td rowspan="8">
+			MRT &#38;<br>
+			All Officers
+		</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -690,9 +784,6 @@
 	@endphp
 	<tr>
 		<td>ATOT/ALGT (National)</td>
-		<td rowspan="2">
-			C/E, 1/E, G/E
-		</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 	</tr>
@@ -714,10 +805,6 @@
 	<tr>
 		<td rowspan="2">License (Chemical Tanker)</td>
 		<td>ATCT (National)</td>
-		<td rowspan="2">
-			C/E, 1/E
-			(Chemical Tanker)
-		</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 	</tr>
@@ -738,7 +825,6 @@
 		<td rowspan="2">
 			-
 		</td>
-		<td>All Engineers</td>
 		<td>
 			Oil &#38; Chemical<br>
 			{{ $btoc }}
@@ -755,7 +841,6 @@
 	</tr>
 	<tr>
 		<td>Advanced Training for</td>
-		<td>C/E, 1/E</td>
 		<td colspan="2">
 			OilㅤㅤㅤChemicalㅤㅤㅤLiquified Gas
 			<br>
@@ -769,26 +854,36 @@
 	</tr>
 
 	@php 
-		$name = "ERS WITH ERM";
+		$name = "SSBT WITH BRM";
 		$docu = isset($data->document_lc->{$name}) ? $data->document_lc->{$name} : false;
 	@endphp
 	<tr>
-		<td rowspan="3">SIRE</td>
-		<td colspan="2">ERS w/ERM</td>
-		<td rowspan="3">5Y</td>
-		<td>All Engineers</td>
+		<td rowspan="4">SIRE</td>
+		<td colspan="2">SSBT / SHS w/BRM</td>
+		<td rowspan="2">5Y</td>
+		<td rowspan="2">
+			MTR &#38;<br>
+			All Officers
+		</td>
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
-		<td rowspan="3">
-			Oil Major / RightShip
+		<td rowspan="4">
+			SSBT : SIRE 2.0  3.3.1
 			<br>
+			CBHS : SIRE 2.0  3.3.3
 			<br>
-			SIRE 2.0 /  3.3.4 ERS
+			SHS(Specific)
 			<br>
-			SIRE 2.0 / 3.3.3 CBHS
+			 -. SIRE 2.0  3.3.2,  TMSA 5-3-2
 			<br>
-			TMSA 9A-1-1 Safety officer
+			 -. RISQ 2.6
+			<br>
+			 -. C/O to be promoted as a master
+			    or Master to be assigned to new 
+			    type of vessel
+			<br>
+			 Safety officer :  TMSA 9A-1-1
 		</td>
 	</tr>
 
@@ -798,14 +893,18 @@
 	@endphp
 	<tr>
 		<td colspan="2">Cargo &#38; Ballast Handling Simulator</td>
-		<td>
-			G/E
-			<br>
-			(Liquefied Gas Tanker)
-		</td>
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td colspan="2"> SHS (Specific)</td>
+		<td>-</td>
+		<td rowspan="2">MTR, C/O</td>
+		<td></td>
+		<td></td>
 		<td></td>
 	</tr>
 
@@ -813,14 +912,14 @@
 		$docu = false;
 
 		foreach(get_object_vars($data->document_lc) as $doc){
-			if(str_contains($doc->type, "KOSMA")){
+			if(str_contains($doc->type, "SAFETY") || str_contains($doc->type, "RISK")){
 				$docu = $doc;
 			}
 		}
 	@endphp
 	<tr>
 		<td colspan="2">Safety Officer (including risk assessment &#38; accident investigation course)</td>
-		<td>C/E, 1/E</td>
+		<td>5Y</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -831,13 +930,55 @@
 		$docu = isset($data->document_lc->{$name}) ? $data->document_lc->{$name} : false;
 	@endphp
 	<tr>
-		<td rowspan="3">ETC</td>
+		<td rowspan="4">ETC</td>
 		<td colspan="2">Pre-Departure Orientation Seminar</td>
 		<td>every onboard</td>
-		<td rowspan="3">All Engineers</td>
+		<td rowspan="4">
+			MTR &#38;<br>
+			All Officers
+		</td>
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
+		<td></td>
+	</tr>
+
+	@php
+		$j90 = "▢";
+		$j92 = "▢";
+		$f2  = "▢";
+		$f3  = "▢";
+		$etc = "▢";
+
+		foreach(get_object_vars($data->document_lc) as $doc){
+			if(str_contains($doc->type, "JRC 90")){
+				$j90 = "☑";
+			}
+			elseif(str_contains($doc->type, "JRC 92")){
+				$j92 = "☑";
+			}
+			elseif(str_contains($doc->type, "FURUNO 2")){
+				$f2 = "☑";
+			}
+			elseif(str_contains($doc->type, "FURUNO 3")){
+				$f3 = "☑";
+			}
+			else{
+				$etc = "☑";
+			}
+		}
+	@endphp
+	<tr>
+		<td colspan="2">ECDIS TST</td>
+		<td>-</td>
+		<td colspan="2">
+			J90ㅤㅤJ92ㅤㅤF2ㅤㅤF3ㅤㅤetc<br>
+			{{ $j90 }}ㅤㅤ {{ $j92 }}ㅤㅤ{{ $f2 }}ㅤㅤ{{ $f3 }}ㅤㅤ{{ $etc }}
+		</td>
+		<td>
+			J90ㅤJ92ㅤF2ㅤF3ㅤetc<br>
+			▢ㅤ ▢ㅤ▢ㅤ▢ㅤ▢
+		</td>
 		<td></td>
 	</tr>
 
@@ -873,12 +1014,15 @@
 	</tr>
 
 	<tr>
-		<td rowspan="2">
+		<td rowspan="3">
 			Managed by HOS
 		</td>
 		<td colspan="2">Ballast Water Management</td>
 		<td>5Y</td>
-		<td>All Engineers</td>
+		<td>
+			MTR &#38;<br>
+			All Officers
+		</td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -888,11 +1032,24 @@
 	<tr>
 		<td colspan="2">Marine Pollution Prevention Manager</td>
 		<td>5Y</td>
-		<td>C/E, 1/E</td>
+		<td>C/O</td>
 		<td></td>
 		<td></td>
 		<td></td>
 		<td>Korea Maritime Environment management Act</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">Anti Piracy Training</td>
+		<td>5Y</td>
+		<td>
+			MTR, CO<br>
+			(Korean flag/BBCHP)
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Pirate Damage Prevention Act</td>
 	</tr>
 
 	<tr>
@@ -942,6 +1099,6 @@
 	</tr>
 
 	<tr>
-		<td colspan="9">CODE{{ "<305-401A>" }}/2024.04.09/DCN24003 APRVD/A4</td>
+		<td colspan="9">CODE{{ "<305-403A>" }}/2026.09.30/DCN26008 APRVD/A4</td>
 	</tr>
 </table>
