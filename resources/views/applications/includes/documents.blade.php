@@ -230,6 +230,7 @@
 					<option value="HYDRAULICS/PNEUMATICS">&nbsp;&nbsp;&nbsp;&nbsp;HYDRAULICS/PNEUMATICS</option>
 					<option value="MARINE ELECTRICAL">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRICAL</option>
 					<option value="MARINE HIGH VOLTAGE">&nbsp;&nbsp;&nbsp;&nbsp;MARINE HIGH VOLTAGE - MAHIVO</option>
+					<option value="SHIPBOARD ELECTRICAL TRAINING">&nbsp;&nbsp;&nbsp;&nbsp;SHIPBOARD ELECTRICAL TRAINING FOR MARINE ENGINEERS - SETME</option>
 					<option value="MARINE HIGH VOLTAGE (Management Level)">&nbsp;&nbsp;&nbsp;&nbsp;MARINE HIGH VOLTAGE - MAHIVO (Management Level)</option>
 					<option value="MARINE ELECTRO TECH">&nbsp;&nbsp;&nbsp;&nbsp;MARINE ELECTRO TECH</option>
 					<option value="MARINE REFRIGERATION/AIRCONDITIONING">&nbsp;&nbsp;&nbsp;&nbsp;MARINE REFRIGERATION/AIRCONDITIONING</option>
