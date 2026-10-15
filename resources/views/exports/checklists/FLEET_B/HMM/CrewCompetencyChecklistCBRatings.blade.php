@@ -71,7 +71,7 @@
 
 	<tr>
 		<td colspan="5">For Filipino Ratings</td>
-		<td colspan="4">{{ "<Vessel Type : CNTR, BULK>" }}</td>
+		<td colspan="4">{{ "<Vessel Type : CNTR, BULK, PCTC>" }}</td>
 	</tr>
 
 	<tr>
@@ -106,7 +106,7 @@
 	@endphp
 	<tr>
 		<td rowspan="2">SIRB</td>
-		<td colspan="2">Philippine / Myanmar / Indonesia</td>
+		<td colspan="2">Philippine</td>
 		<td>10Y</td>
 		<td rowspan="12">All Ranks</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
@@ -168,7 +168,7 @@
 		<td>-</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
-		<td></td>
+		<td>3Y</td>
 		<td></td>
 	</tr>
 
@@ -181,8 +181,8 @@
 		<td>-</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
-		<td></td>
-		<td></td>
+		<td>5Y</td>
+		<td>Issue at every sign-on</td>
 	</tr>
 
 	@php 
@@ -561,19 +561,37 @@
 	@endphp
 	<tr>
 		<td>Survical Craft &#38; Rescue Boat</td>
-		<td rowspan="2">Engaged in the relevant duty</td>
+		<td>Engaged in the relevant duty</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
 		<td></td>
 	</tr>
 
+	@php
+		$docu = false;
+
+		foreach(get_object_vars($data->document_lc) as $doc){
+			if(str_contains($doc->type, "FORKLIFT")){
+				$docu = $doc;
+			}
+		}
+	@endphp
 	<tr>
-		<td>BT/SCR - Flag</td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td>
+			Forklift Truck Operation &#38;
+			Maintenance Training
+		</td>
+		<td>-</td>
+		<td>
+			BSN, AB
+			(PCTC only)
+		</td>
+		<td>Y  {{ $tDocu ? "☑" : "▢" }}</td>
+		<td>N  {{ $tDocu ? "▢" : "☑" }}</td>
+		<td>
+			Y  ▢			N  ▢
+		</td>
 	</tr>
 
 	@php
@@ -799,7 +817,7 @@
 
 	<tr>
 		<td colspan="9">
-			{{ "CODE<305-401A>/2024.04.09/DCN24003  APRVD/A4" }}
+			<td colspan="9">CODE{{ "<305-403A>" }}/2026.09.30/DCN26008  APRVD/A4</td>
 		</td>
 	</tr>
 </table>

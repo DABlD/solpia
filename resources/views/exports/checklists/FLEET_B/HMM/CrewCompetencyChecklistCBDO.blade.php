@@ -70,7 +70,7 @@
 
 	<tr>
 		<td colspan="5">For Filipino Officers</td>
-		<td colspan="4">{{ "<Vessel Type : CNTR, BULK>" }}</td>
+		<td colspan="4">{{ "<Vessel Type : CNTR, BULK, PCTC>" }}</td>
 	</tr>
 
 	<tr>
@@ -105,7 +105,7 @@
 	@endphp
 	<tr>
 		<td rowspan="2">SIRB</td>
-		<td colspan="2">Philippine / Myanmar / Indonesia</td>
+		<td colspan="2">Philippine</td>
 		<td>10Y</td>
 		<td rowspan="12">All Ranks</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
@@ -128,7 +128,7 @@
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
-		<td>Flag Rule</td>
+		<td>Flag Regulation</td>
 	</tr>
 
 	@php 
@@ -164,7 +164,7 @@
 	@endphp
 	<tr>
 		<td colspan="2">Australia VISA (MCV)</td>
-		<td>-</td>
+		<td>3Y</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -177,11 +177,11 @@
 	@endphp
 	<tr>
 		<td colspan="2">New Zealand VISA (NZeTA)</td>
-		<td>-</td>
+		<td>5Y</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
-		<td></td>
+		<td>Issue at every sign-on</td>
 	</tr>
 
 	@php 
@@ -508,7 +508,7 @@
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
-		<td rowspan="2">
+		<td rowspan="4">
 			VI/5 (SSO)<br>
 			VI/6 (DSD)
 		</td>
@@ -546,8 +546,8 @@
 	@endphp
 	<tr>
 		<td>Basic Training</td>
-		<td rowspan="3">5Y</td>
-		<td>
+		<td rowspan="4">5Y</td>
+		<td rowspan="2">
 			MTR &#38;<br>
 			All Officers
 		</td>
@@ -564,6 +564,17 @@
 			* 2O, 3O - MECA 5Y<br>
 			(by Refresher course)
 		</td>
+	</tr>
+
+	@php
+		$name = 'BT-PSSR';
+		$docu = isset($data->document_lc->{$name}) ? $data->document_lc->{$name} : false;
+	@endphp
+	<tr>
+		<td>BT-PSSR Updating (If necessary)</td>
+		<td>Y {{ $docu ? "☑" : "▢" }}</td>
+		<td>N {{ $docu ? "▢" : "☑" }}</td>
+		<td>Y ▢ N ▢</td>
 	</tr>
 
 	@php
@@ -612,20 +623,12 @@
 	<tr>
 		<td>Medical Care</td>
 		<td>-</td>
-		<td rowspan="2">
+		<td>
 			Engaged in the relevant duty
 		</td>
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
-	</tr>
-
-	<tr>
-		<td>BT/SCR/AFF/MF/MC - Flag</td>
-		<td>5Y</td>
-		<td></td>
-		<td></td>
-		<td></td>
 	</tr>
 
 	@php
@@ -821,7 +824,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="2">Hatch cover(Bulk only)</td>
+		<td colspan="2">Hatch Cover(Bulk only)</td>
 		<td>-</td>
 		<td>MTR, C/O</td>
 		<td></td>
@@ -950,6 +953,6 @@
 	</tr>
 
 	<tr>
-		<td colspan="9">CODE{{ "<305-401A>" }}/2024.04.09/DCN24003 APRVD/A4</td>
+		<td colspan="9">CODE{{ "<305-403A>" }}/2026.09.30/DCN26008  APRVD/A4</td>
 	</tr>
 </table>

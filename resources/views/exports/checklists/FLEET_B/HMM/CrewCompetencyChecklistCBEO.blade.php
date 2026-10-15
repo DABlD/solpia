@@ -70,7 +70,7 @@
 
 	<tr>
 		<td colspan="5">For Filipino Engineers</td>
-		<td colspan="4">{{ "<Vessel Type : CNTR, BULK>" }}</td>
+		<td colspan="4">{{ "<Vessel Type : CNTR, BULK, PCTC>" }}</td>
 	</tr>
 
 	<tr>
@@ -105,7 +105,7 @@
 	@endphp
 	<tr>
 		<td rowspan="2">SIRB</td>
-		<td colspan="2">Philippine / Myanmar / Indonesia</td>
+		<td colspan="2">Philippine</td>
 		<td>10Y</td>
 		<td rowspan="12">All Ranks</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
@@ -164,7 +164,7 @@
 	@endphp
 	<tr>
 		<td colspan="2">Australia VISA (MCV)</td>
-		<td>-</td>
+		<td>3Y</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -177,11 +177,11 @@
 	@endphp
 	<tr>
 		<td colspan="2">New Zealand VISA (NZeTA)</td>
-		<td>-</td>
+		<td>5Y</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
-		<td></td>
+		<td>Issue at every sign-on</td>
 	</tr>
 
 	@php 
@@ -376,7 +376,7 @@
 		<td rowspan="2">License</td>
 		<td>COC (National)</td>
 		<td rowspan="2">5Y</td>
-		<td rowspan="2">
+		<td rowspan="3">
 			All Engineers
 		</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
@@ -411,9 +411,8 @@
 	@endphp
 	<tr>
 		<td rowspan="2">High Voltage</td>
-		<td>MAHIVO (Operation Lv)</td>
+		<td>MAHIVO</td>
 		<td>-</td>
-		<td>2AE, 3AE</td>
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
@@ -423,15 +422,18 @@
 		$docu = false;
 
 		foreach(get_object_vars($data->document_lc) as $doc){
-			if(str_contains($doc->type, "MARINE HIGH VOLTAGE") && str_contains($doc->type, "Management")){
+			if(str_contains($doc->type, "SHIPBOARD ELECTRICAL") || str_contains($doc->type, "SETME")){
 				$docu = $doc;
 			}
 		}
 	@endphp
 	<tr>
-		<td>MAHIVO (Management Lv)</td>
+		<td>SETME (Shipboard Electrical Training)</td>
 		<td>-</td>
-		<td>CE, 1AE</td>
+		<td>
+			All Engineers
+			(MPV)
+		</td>
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
@@ -492,8 +494,8 @@
 	@endphp
 	<tr>
 		<td>Basic Training</td>
-		<td rowspan="3">5Y</td>
-		<td>All Engineers</td>
+		<td rowspan="4">5Y</td>
+		<td rowspan="2">All Engineers</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -503,6 +505,17 @@
 			VI/3 Advanced Fire Fighting<br>
 			VI/4 Medical First-Aid / Medical Care
 		</td>
+	</tr>
+
+	@php
+		$name = 'BT-PSSR';
+		$docu = isset($data->document_lc->{$name}) ? $data->document_lc->{$name} : false;
+	@endphp
+	<tr>
+		<td>BT-PSSR Updating (If necessary)</td>
+		<td>Y {{ $docu ? "☑" : "▢" }}</td>
+		<td>N {{ $docu ? "▢" : "☑" }}</td>
+		<td>Y ▢ N ▢</td>
 	</tr>
 
 	@php
@@ -523,7 +536,7 @@
 	@endphp
 	<tr>
 		<td>Advanced Fire Fighting</td>
-		<td rowspan="3">All Engineers</td>
+		<td rowspan="2">All Engineers</td>
 		<td>{{ $docu ? checkDate2($docu->issue_date, "I") : "" }}</td>
 		<td>{{ $docu ? checkDate2($docu->expiry_date, "E") : "" }}</td>
 		<td></td>
@@ -539,14 +552,6 @@
 		<td>Y {{ $docu ? "☑" : "▢" }}</td>
 		<td>N {{ $docu ? "▢" : "☑" }}</td>
 		<td>Y ▢ N ▢</td>
-	</tr>
-
-	<tr>
-		<td>BT/SCR/AFF/MF/MC - Flag</td>
-		<td>5Y</td>
-		<td></td>
-		<td></td>
-		<td></td>
 	</tr>
 
 	@php
@@ -760,6 +765,6 @@
 	</tr>
 
 	<tr>
-		<td colspan="9">CODE{{ "<305-401A>" }}/2024.04.09/DCN24003 APRVD/A4</td>
+		<td colspan="9">CODE{{ "<305-403A>" }}/2026.09.30/DCN26008  APRVD/A4</td>
 	</tr>
 </table>
