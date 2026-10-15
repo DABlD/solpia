@@ -348,8 +348,8 @@ class CrewCompetencyChecklistTEO implements FromView, WithEvents//, WithDrawings
                 // HL
                 $h[5] = [
                     'A3',
-                    'B7:B18', 'C19:C36',
-                    'B37:B52','A53:A55', 'A58:A59',
+                    'B7:B18', 'C19:C44',
+                    'B45:B52','A53:A55', 'A58:A59',
                     'I7:I55'
                 ];
 

@@ -348,9 +348,9 @@ class CrewCompetencyChecklistTRatings implements FromView, WithEvents//, WithDra
                 // HL
                 $h[5] = [
                     'A3',
-                    'B7:B18', 'C19:C32',
-                    'B33:B40', 'B41:B45', 'A46:A48', 'A51:A52',
-                    'I7:I50'
+                    'B7:B18', 'C19:C39',
+                    'B40:B44', 'A45:A47', 'A50:A52',
+                    'I7:I49'
                 ];
 
                 // B
@@ -447,7 +447,7 @@ class CrewCompetencyChecklistTRatings implements FromView, WithEvents//, WithDra
 
                 // OUTSIDE BORDER MEDIUM
                 $cells[4] = array_merge([
-                    'A4:I50'
+                    'A4:I49'
                 ]);
 
                 // OUTSIDE BORDER THICK
@@ -564,8 +564,8 @@ class CrewCompetencyChecklistTRatings implements FromView, WithEvents//, WithDra
                 // $event->sheet->getDelegate()->getPageSetup()->setPrintArea("C1:Y42");
 
                 // CUSTOM FONT AND STYLE TO DEFINED CELL
-                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setSize(8);
-                $event->sheet->getDelegate()->getStyle('A1:L150')->getFont()->setName('Times New Roman');
+                $event->sheet->getDelegate()->getStyle('A1:L149')->getFont()->setSize(8);
+                $event->sheet->getDelegate()->getStyle('A1:L149')->getFont()->setName('Times New Roman');
 
                 $event->sheet->getDelegate()->getStyle('A1')->getFont()->setSize(16);
                 $event->sheet->getDelegate()->getStyle('A2')->getFont()->setSize(10);
