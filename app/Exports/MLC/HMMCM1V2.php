@@ -28,7 +28,7 @@ class HMMCM1V2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $this->shipowner['address'] = "244, Jungang-daero, Dong-gu, Busan, Republic of Korea";
 
             $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
-            $this->shipmanager['address'] = "5TH FLOOR,BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
+            $this->shipmanager['address'] = "BUSAN POST OFFICE BUILDING,JUNGANG-DAERO 63, JUNG-GU, BUSAN, REBUBLIC OF KOREA";
         }
 
         $this->title = $title;
@@ -355,7 +355,7 @@ class HMMCM1V2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
 
                 // HL
                 $h[5] = [
-                    'C14'
+                    'C14', 'G13'
                 ];
 
                 // B
