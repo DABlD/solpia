@@ -1098,7 +1098,15 @@
 		<td colspan="9">[Note] Master should oblige the duty to the joining crew after the check of his qualification with checklist before relief and shold be seent it to the company if you have any special problem (Kept on board the original copy).</td>
 	</tr>
 
+	@php
+		$code = "305-403A";
+
+		if(in_array($data->vessel->id, [6072, 5801, 5842, 5553, 4623, 4637, 6829, 7108, 7141, 7517, 7917, 7998, 8169, 9274, 9586, 7271, 9608, 9591])){
+			$code = "305-302B";
+		}
+	@endphp
+
 	<tr>
-		<td colspan="9">CODE{{ "<305-403A>" }}/2026.09.30/DCN26008 APRVD/A4</td>
+		<td colspan="9">CODE{{ "<$code>" }}/2026.09.30/DCN26008 APRVD/A4</td>
 	</tr>
 </table>
