@@ -24,7 +24,6 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             "M/V HMM GDANSK",
             "M/V HMM OSLO",
             "M/V HMM SOUTHAMPTON",
-            "M/V HMM ST. PETERSBURG",
             "M/V HYUNDAI GRACE",
             "M/V HYUNDAI UNITY",
             "M/V HMM COLOMBO",
@@ -58,7 +57,7 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $array3 = [
             "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE",
 
-            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM VICTORY"
+            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM VICTORY", "M/V HMM ST. PETERSBURG",
         ];
 
         // "M/V HMM PRIDE" | NASA HMCM1V2
