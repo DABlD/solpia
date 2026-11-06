@@ -38,11 +38,11 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array7 = [
-            'M/V BOKM NINGBO'
+            'M/V BOKM NINGBO', "M/V BOKM SHANGHAI", 'MV BOKM ZHOUSHAN', 'MV BOKM TUBARAO'
         ];
 
         $array8 = [
-            "M/V BOKM SHANGHAI"
+            // "M/V BOKM SHANGHAI"
         ];
 
         $array9 = [
@@ -65,9 +65,9 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             'M/V GLOVIS COUNTESS'
         ];
 
-        $array14 = [
-            'MV BOKM ZHOUSHAN', 'MV BOKM TUBARAO'
-        ];
+        // $array14 = [
+        //     'MV BOKM ZHOUSHAN', 'MV BOKM TUBARAO'
+        // ];
 
         // ALSO REVISE CBA DETAILS IN BLADE FILE
 
@@ -96,12 +96,12 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "19th Floor, Banco General Tower, Aquilino de la Guardia Street, Marbella, Panama city, Panama";
         }
         elseif(in_array($applicant->vessel->name, $array7)){
-            $applicant->shipowner = 'XIANG B32 HK INTERNATIONAL SHIP LEASE CO., LIMITED';
-            $applicant->sAddress = "1st Floor, Far East Consortium Building, 121 Des Voeux Road, Central, Hong Kong";
+            $applicant->shipowner = 'KMARIN NO.51A S.A.';
+            $applicant->sAddress = "80 Broad Street, Monrovia, Liberia";
         }
         elseif(in_array($applicant->vessel->name, $array8)){
-            $applicant->shipowner = 'XIANG B3 HK INTERNATIONAL SHIP LEASE CO., LIMITED';
-            $applicant->sAddress = "18/F, 20 Pedder Street, Central, HONG KONG";
+            // $applicant->shipowner = 'XIANG B3 HK INTERNATIONAL SHIP LEASE CO., LIMITED';
+            // $applicant->sAddress = "18/F, 20 Pedder Street, Central, HONG KONG";
         }
         elseif(in_array($applicant->vessel->name, $array9)){
             $applicant->shipowner = 'KMARIN NO.3A S.A.';
@@ -124,8 +124,8 @@ class KOSCO implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $applicant->sAddress = "Trust Company Complex, Ajeltake Road, Ajeltake Island, Majuro, MH96960, Marshall Islands";
         }
         elseif(in_array($applicant->vessel->name, $array14)){
-            $applicant->shipowner = 'XIANG B28 HK INTERNATIONAL SHIP LEASE CO., LIMITED';
-            $applicant->sAddress = "1/F, Far East Consortium Building, 121 Des Voeux Rd, Central, HONG KONG";
+            // $applicant->shipowner = 'XIANG B28 HK INTERNATIONAL SHIP LEASE CO., LIMITED';
+            // $applicant->sAddress = "1/F, Far East Consortium Building, 121 Des Voeux Rd, Central, HONG KONG";
         }
 
          
