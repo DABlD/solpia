@@ -332,7 +332,11 @@
 
 	<tr>
 		<td rowspan="2" style="{{ $bc }}">Provision</td>
-		<td colspan="2">Costs for food shall be</td>
+		@if(in_array($v, ['M/V BOKM NINGBO', "M/V BOKM SHANGHAI", 'MV BOKM ZHOUSHAN', 'MV BOKM TUBARAO']))
+			<td colspan="2">1. Costs for food shall be</td>
+		@else
+			<td colspan="2">Costs for food shall be</td>
+		@endif
 		<td colspan="2">({{ $allowance }} US Dollars)</td>
 		<td colspan="4">per person/day excluding shipment cost.</td>
 	</tr>
