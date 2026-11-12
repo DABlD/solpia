@@ -34,7 +34,7 @@
 	}
 	elseif(in_array($v, ['M/V KMARIN AZUR', "M/V BOKM SHANGHAI", 'M/V BOKM NINGBO', 'MV BOKM ZHOUSHAN', 'MV BOKM TUBARAO'])){
 		// $allowance = 11;
-		$cba = "IBF FKSU CA(BBCHP)";
+		$cba = "BBCHP";
 	}
 	elseif(in_array($v, ['M/V KMARIN ATLANTICA'])){
 		$allowance = 12;
