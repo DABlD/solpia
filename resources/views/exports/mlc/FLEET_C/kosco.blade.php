@@ -221,7 +221,7 @@
 	</tr>
 
 	<tr>
-		<td colspan="8" style="height: 200px;">
+		<td colspan="8" style="height: 180px;">
 			1. The probationary period shall only apply during the first term of employment and shall be 10 weeks.
 			<br style='mso-data-placement:same-cell;' />
 			During this period both the seafarer and/or the Company shall be entitled to terminate the
@@ -240,11 +240,9 @@
 			<br style='mso-data-placement:same-cell;' />
 			termination of the seafarer's employment agreement. The minimum notice shall not be less than 30 days.
 			<br style='mso-data-placement:same-cell;' />
-			4. Where a seafarer's employment agreement is terminated while a vessel is out at sea, agreement
+			4. Where the seafarer's employment agreement is terminated while a vessel is out at sea, agreement shall be
 			<br style='mso-data-placement:same-cell;' />
-			shall be deemed to continue until the ship enters the next port and unloads all cargoes to be
-			<br style='mso-data-placement:same-cell;' />
-			unloaded or lands all passengers who are to leave the ship at the port.
+			deemed to continue until the vessel enters the next port and unloads all cargoes to be unloaded at the port.
 			<br style='mso-data-placement:same-cell;' />
 			5. Seafarer's employment agreements shall continue to have effect while seafarer is held
 			<br style='mso-data-placement:same-cell;' />
@@ -286,7 +284,7 @@
 	<tr>
 		<td colspan="2">G) Owner's Allowance</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->owner_allow ?? 0 }}</td>
-		<td colspan="2">H) Provident Fund</td>
+		<td colspan="2">H) Completion Bonus</td>
 		<td colspan="2" style="{{ $center }}">${{ $data->wage->other_allow ?? 0 }}</td>
 	</tr>
 
@@ -390,7 +388,7 @@
 	</tr>
 
 	<tr>
-		<td style="{{ $bc }} height: 170px;">Seafarer's entitlement to repatriation</td>
+		<td style="{{ $bc }} height: 150px;">Seafarer's entitlement to repatriation</td>
 		<td colspan="8">
 			1. Where the seafarer leaves at the port which is not a place of his residence nor a place where he concluded the
 			<br style='mso-data-placement:same-cell;' />
@@ -412,11 +410,9 @@
 			<br style='mso-data-placement:same-cell;' />
 			ㅤㅤ3) Where a seafarer falls under the reasons prescribed by a collective bargaining agreement
 			<br style='mso-data-placement:same-cell;' />
-			4. The maximum period the seafarer can be expected to serve onboard before being entitled to repatriation at
+			4. The entitlement to repatriation shall not lapse in the situation that the seafarer is held captive in accordance with a
 			<br style='mso-data-placement:same-cell;' />
-			shipowner's expense is periods of seafarer's employment agreement and the entitlement to repatriation shall not lapse in
-			<br style='mso-data-placement:same-cell;' />
-			the situation that the seafarer is held captive in accordance with a collective bargaining agreement.
+			collective bargaining agreement.
 		</td>
 	</tr>
 
