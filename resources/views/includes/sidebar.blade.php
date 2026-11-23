@@ -83,9 +83,9 @@
 			});
 		@endif
 
-		@if(auth()->user()->id == 22){
+		@if(auth()->user()->id == 22)
 			$('.fa.fa-users').parent().hide();
-		}
+		@endif
 
 		{{-- @if(in_array(Auth::user()->id, [23,5963, 8315, 6635])) --}}
 		@if(in_array(Auth::user()->id, [23,5963]))
