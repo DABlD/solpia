@@ -113,6 +113,11 @@ class DatatablesController extends Controller
 										$q->orWhere('pa.vessel_id', 4927);
 									}
 
+									// TOEI CAN SEE EVER ORIGIN CREW
+									if(auth()->user()->id == 22){
+										$q->orWhere('u.fleet', 'like', "%%");
+									}
+
 									// FLEET C CAN SEE HMM TANKER CREW
 									// if(auth()->user()->fleet == "FLEET C"){
 									// 	$q->orWhereIn('pa.vessel_id', [5842, 5801, 5553, 6072]);
