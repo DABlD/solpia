@@ -6,8 +6,8 @@
 		<div class="user-panel">
 			<div class="pull-left image" id="user-avatar">
 				<canvas id="confettiCanvas"></canvas>
-				@if(in_array(auth()->user()->id, [23,5963]))
-				{{-- @if(in_array(auth()->user()->id, [23])) --}}
+				{{-- @if(in_array(auth()->user()->id, [23,5963])) --}}
+				@if(in_array(auth()->user()->id, [23]))
 					<img src="{{ asset('images/g/9-2.png')}}" class="img-circle" alt="User Image" id="avatar" width="20px" height="50px">
 				{{-- @elseif(in_array(auth()->user()->id, [8315, 6635]))
 					<img src="{{ asset('images/english_speaking.jpg')}}" class="img-circle" alt="User Image" id="avatar"> --}}
