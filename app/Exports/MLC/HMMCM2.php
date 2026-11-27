@@ -19,9 +19,8 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $this->shipmanager   = [];
 
         $array1 = [
-            "M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN",
             "M/V HMM HARMONY", "M/V HMM MASTER",
-            "M/V HMM NARU", "M/V HMM NABI",
+            "M/V HMM NARU"
         ];
 
         $array2 = [
@@ -33,7 +32,7 @@ class HMMCM2 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         ];
 
         $array3 = [
-            "M/V ATLANTIC AFFINITY", "M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V OCEAN FLORA"
+            "M/V ATLANTIC AFFINITY", "M/V ATLANTIC BONANZA", "M/V PACIFIC CHAMP", "M/V OCEAN FLORA", "M/V HYUNDAI ANTWERP","M/V HYUNDAI ULSAN", "M/V HMM NABI"
         ];
 
         if(in_array($applicant->vessel->name, $array1)){

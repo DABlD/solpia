@@ -58,7 +58,11 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
         $array3 = [
             "M/V HMM AQUAMARINE", "M/V HMM DIAMOND", "M/V HMM OPAL", "M/V HMM SAPPHIRE",
 
-            "M/V HMM GARNET", "M/V HMM PERIDOT", "M/V HMM VICTORY", "M/V HMM ST. PETERSBURG",
+            "M/V HMM PERIDOT", "M/V HMM VICTORY", "M/V HMM ST. PETERSBURG",
+        ];
+
+        $array4 = [
+            "M/V HMM GARNET"
         ];
 
         // "M/V HMM PRIDE" | NASA HMCM1V2
@@ -83,6 +87,14 @@ class HMMCM1 implements FromView, WithEvents, WithDrawings//, ShouldAutoSize
             $this->shipowner['company'] = "HMM Company Limited";
             $this->shipowner['president'] = "CHOI WONHYOK";
             $this->shipowner['address'] = "244, Jungang-daero, Dong-gu, Busan, Republic of Korea";
+
+            $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
+            $this->shipmanager['address'] = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
+        }
+        elseif(in_array($applicant->vessel->name, $array4)){
+            $this->shipowner['company'] = "HMM Company Limited";
+            $this->shipowner['president'] = "CHOI WONHYOK";
+            $this->shipowner['address'] = "742, Jungang-daero, Busanjin-gu, Busan, Korea";
 
             $this->shipmanager['company'] = "HMM Ocean Service Co., Ltd.";
             $this->shipmanager['address'] = "63, JUNGANG-DAERO, JUNG-GU, BUSAN, REPUBLIC OF KOREA";
